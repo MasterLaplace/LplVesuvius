@@ -3049,6 +3049,76 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 158 : L'AUTOPSIE DE LA MATIERE DU ROULEAU, ET TROIS APPARIEMENTS
+    # L'IMPOSENT.
+    # (1) Un compte de « memes feuilles » ne voyage JAMAIS sans la PART DU TOUR de ces marches-la :
+    # c'est le fait meme de la tranche, et le compte seul dit le contraire de ce qu'il mesure.
+    # (2) Un compte de TOURS BOUCLES ne voyage jamais sans la DERIVE de ces tours : boucler et
+    # revenir sur la feuille ne tombent pas ensemble, et le premier seul se lirait comme une
+    # reussite.
+    # (3) Et un nombre d'ARRETS ne voyage jamais sans le nombre de marches decidables : « 31 » seul
+    # est un nombre, « 31 sur 31 » est une cause de mort.
+    dq = _source(racine, "de_quoi_meurt_on_sur_la_matiere_du_rouleau.json")
+    if dq.exists():
+        d = json.loads(dq.read_text())
+
+        def dec158(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            ajoute("departs par case de 158", int(d["departs"]), 0, dq.name)
+            ajoute("fenetre du cap de 158", int(d["fenetre"]), 0, dq.name)
+            ajoute("ecrasement de la matiere de 158", d["matiere"]["ecrasement"],
+                   dec158(d["matiere"]["ecrasement"], 4), dq.name)
+            ajoute("amplitude de la matiere de 158", d["matiere"]["amplitude_um"], 0, dq.name)
+            for x in j_.get("le_verdict", []):
+                q = f"du bras « {x['bras']} » sous « {x['instrument']} » de 158"
+                for cle, nom in (("decidables", "marches decidables"),
+                                 ("tours_boucles", "tours boucles"),
+                                 ("memes_feuilles", "marches sur la meme feuille"),
+                                 ("reussites_jointes", "reussites jointes"),
+                                 ("arrets", "marches arretees"),
+                                 ("refus_de_contrainte", "refus de contrainte")):
+                    ajoute(f"{nom} {q}", int(x[cle]), 0, dq.name)
+                for cle, nom in (("part_du_tour_des_memes_feuilles",
+                                  "part du tour des marches sur la meme feuille"),
+                                 ("poses_refusees_mediane", "poses refusees medianes"),
+                                 ("pas_median", "pas medians"),
+                                 ("pas_medians_multiplies_par", "pas medians multiplies par"),
+                                 ("derive_des_tours_boucles", "derive des tours boucles")):
+                    if x.get(cle) is not None:
+                        ajoute(f"{nom} {q}", x[cle], dec158(x[cle], 4), dq.name)
+            # ⚠⚠ Les bornes de la derive ne sont tablees QUE pour les bras qui bouclent : ailleurs
+            # elles n'existent pas, et un zero s'y lirait comme une derive nulle.
+            for x in j_.get("par_instrument", []):
+                for b in x.get("par_bras", []):
+                    if not b.get("decidable") or not b.get("tours_boucles"):
+                        continue
+                    q = f"du bras « {b['bras']} » sous « {x['nom']} » de 158"
+                    for cle, nom in (("derive_min_des_tours_boucles",
+                                      "derive minimale des tours boucles"),
+                                     ("derive_max_des_tours_boucles",
+                                      "derive maximale des tours boucles")):
+                        ajoute(f"{nom} {q}", b[cle], dec158(b[cle], 3), dq.name)
+            for x in j_.get("par_bruit", []):
+                for y in x.get("par_bruit", []):
+                    q = (f"au bruit {y['bruit']:g} sous « {x['nom']} », bras "
+                         f"« {x['bras']} » de 158")
+                    ajoute(f"tours boucles {q}", int(y["tours_boucles"]), 0, dq.name)
+                    ajoute(f"marches decidables {q}", int(y["decidables"]), 0, dq.name)
+            for bras, z in j_.get("le_compte_de_feuilles_recompense_limmobilite", {}).items():
+                q = f"pour le bras « {bras} » de 158"
+                ajoute(f"le plus de marches sur la meme feuille {q}", int(z["ses_feuilles"]), 0,
+                       dq.name)
+                ajoute(f"part du tour du plus de marches sur la meme feuille {q}",
+                       z["sa_part_du_tour"], dec158(z["sa_part_du_tour"], 4), dq.name)
+                ajoute(f"marches sur la meme feuille de celui qui va le plus loin {q}",
+                       int(z["ses_feuilles_a_lui"]), 0, dq.name)
+                ajoute(f"part du tour de celui qui va le plus loin {q}", z["sa_part_a_lui"],
+                       dec158(z["sa_part_a_lui"], 4), dq.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 157 : CE QUE LA SECONDE MACHOIRE ACHETE ENCORE, ET TROIS APPARIEMENTS
     # L'IMPOSENT.
     # (1) Un compte de REUSSITES d'un bras ne voyage jamais sans son compte d'ARRETS : « 128 » seul

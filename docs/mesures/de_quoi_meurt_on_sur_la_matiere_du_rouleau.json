@@ -1,0 +1,704 @@
+{
+ "la_grille": "la_croix_marche_t_elle_le_tour.json",
+ "departs": 12,
+ "tours": 1.0,
+ "fenetre": 32,
+ "bruits": [
+  0.0,
+  8.0,
+  16.0
+ ],
+ "matiere": {
+  "ecrasement": 0.2782,
+  "amplitude_um": 100.0
+ },
+ "juger": {
+  "decidable": true,
+  "par_instrument": [
+   {
+    "nom": "la pince de `144`",
+    "en_croix": false,
+    "rejeter": false,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 36,
+      "decidables": 34,
+      "poses_manquees": 2,
+      "fins": {
+       "la pince ne peut plus avancer": 34
+      },
+      "tours_boucles": 0,
+      "memes_feuilles": 12,
+      "reussites_jointes": 0,
+      "part_du_tour_des_memes_feuilles": 0.0299,
+      "part_du_tour_max_des_memes_feuilles": 0.2472,
+      "part_du_tour_des_autres": 0.1364,
+      "part_du_tour_mediane": 0.0776,
+      "derive_des_tours_boucles": null,
+      "derive_min_des_tours_boucles": null,
+      "derive_max_des_tours_boucles": null,
+      "poses_refusees_mediane": 118.5,
+      "poses_refusees_totales": 4274,
+      "refus_de_contrainte": 0,
+      "pas_median": 478.5,
+      "appuis_rejetes": 0
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 36,
+      "decidables": 31,
+      "poses_manquees": 5,
+      "fins": {
+       "la pince ne peut plus avancer": 31
+      },
+      "tours_boucles": 0,
+      "memes_feuilles": 10,
+      "reussites_jointes": 0,
+      "part_du_tour_des_memes_feuilles": 0.0169,
+      "part_du_tour_max_des_memes_feuilles": 0.3488,
+      "part_du_tour_des_autres": 0.0382,
+      "part_du_tour_mediane": 0.0217,
+      "derive_des_tours_boucles": null,
+      "derive_min_des_tours_boucles": null,
+      "derive_max_des_tours_boucles": null,
+      "poses_refusees_mediane": 21.0,
+      "poses_refusees_totales": 810,
+      "refus_de_contrainte": 0,
+      "pas_median": 42.0,
+      "appuis_rejetes": 0
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 36,
+      "decidables": 31,
+      "poses_manquees": 5,
+      "fins": {
+       "la pince ne peut plus avancer": 31
+      },
+      "tours_boucles": 0,
+      "memes_feuilles": 9,
+      "reussites_jointes": 0,
+      "part_du_tour_des_memes_feuilles": 0.0129,
+      "part_du_tour_max_des_memes_feuilles": 0.3488,
+      "part_du_tour_des_autres": 0.0488,
+      "part_du_tour_mediane": 0.0217,
+      "derive_des_tours_boucles": null,
+      "derive_min_des_tours_boucles": null,
+      "derive_max_des_tours_boucles": null,
+      "poses_refusees_mediane": 21.0,
+      "poses_refusees_totales": 792,
+      "refus_de_contrainte": 1,
+      "pas_median": 42.0,
+      "appuis_rejetes": 0
+     }
+    ]
+   },
+   {
+    "nom": "la croix (`153`)",
+    "en_croix": true,
+    "rejeter": false,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 36,
+      "decidables": 34,
+      "poses_manquees": 2,
+      "fins": {
+       "la pince ne peut plus avancer": 34
+      },
+      "tours_boucles": 0,
+      "memes_feuilles": 11,
+      "reussites_jointes": 0,
+      "part_du_tour_des_memes_feuilles": 0.0162,
+      "part_du_tour_max_des_memes_feuilles": 0.4442,
+      "part_du_tour_des_autres": 0.1084,
+      "part_du_tour_mediane": 0.0784,
+      "derive_des_tours_boucles": null,
+      "derive_min_des_tours_boucles": null,
+      "derive_max_des_tours_boucles": null,
+      "poses_refusees_mediane": 52.5,
+      "poses_refusees_totales": 2400,
+      "refus_de_contrainte": 0,
+      "pas_median": 205.0,
+      "appuis_rejetes": 0
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 36,
+      "decidables": 31,
+      "poses_manquees": 5,
+      "fins": {
+       "la pince ne peut plus avancer": 31
+      },
+      "tours_boucles": 0,
+      "memes_feuilles": 13,
+      "reussites_jointes": 0,
+      "part_du_tour_des_memes_feuilles": 0.0096,
+      "part_du_tour_max_des_memes_feuilles": 0.2061,
+      "part_du_tour_des_autres": 0.0198,
+      "part_du_tour_mediane": 0.0151,
+      "derive_des_tours_boucles": null,
+      "derive_min_des_tours_boucles": null,
+      "derive_max_des_tours_boucles": null,
+      "poses_refusees_mediane": 17.0,
+      "poses_refusees_totales": 653,
+      "refus_de_contrainte": 0,
+      "pas_median": 18.0,
+      "appuis_rejetes": 0
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 36,
+      "decidables": 31,
+      "poses_manquees": 5,
+      "fins": {
+       "la pince ne peut plus avancer": 31
+      },
+      "tours_boucles": 0,
+      "memes_feuilles": 13,
+      "reussites_jointes": 0,
+      "part_du_tour_des_memes_feuilles": 0.0029,
+      "part_du_tour_max_des_memes_feuilles": 0.2061,
+      "part_du_tour_des_autres": 0.0153,
+      "part_du_tour_mediane": 0.0137,
+      "derive_des_tours_boucles": null,
+      "derive_min_des_tours_boucles": null,
+      "derive_max_des_tours_boucles": null,
+      "poses_refusees_mediane": 17.0,
+      "poses_refusees_totales": 636,
+      "refus_de_contrainte": 4,
+      "pas_median": 17.0,
+      "appuis_rejetes": 0
+     }
+    ]
+   },
+   {
+    "nom": "le rejet (`155`)",
+    "en_croix": false,
+    "rejeter": true,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 36,
+      "decidables": 34,
+      "poses_manquees": 2,
+      "fins": {
+       "la pince ne peut plus avancer": 20,
+       "tour bouclé": 13,
+       "plafond de pas": 1
+      },
+      "tours_boucles": 13,
+      "memes_feuilles": 7,
+      "reussites_jointes": 1,
+      "part_du_tour_des_memes_feuilles": 0.0518,
+      "part_du_tour_max_des_memes_feuilles": 1.0049,
+      "part_du_tour_des_autres": 0.6026,
+      "part_du_tour_mediane": 0.4063,
+      "derive_des_tours_boucles": 3.975,
+      "derive_min_des_tours_boucles": 0.214,
+      "derive_max_des_tours_boucles": 12.309,
+      "poses_refusees_mediane": 84.5,
+      "poses_refusees_totales": 4226,
+      "refus_de_contrainte": 0,
+      "pas_median": 986.5,
+      "appuis_rejetes": 5326
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 36,
+      "decidables": 31,
+      "poses_manquees": 5,
+      "fins": {
+       "la pince ne peut plus avancer": 31
+      },
+      "tours_boucles": 0,
+      "memes_feuilles": 6,
+      "reussites_jointes": 0,
+      "part_du_tour_des_memes_feuilles": 0.09,
+      "part_du_tour_max_des_memes_feuilles": 0.3398,
+      "part_du_tour_des_autres": 0.109,
+      "part_du_tour_mediane": 0.109,
+      "derive_des_tours_boucles": null,
+      "derive_min_des_tours_boucles": null,
+      "derive_max_des_tours_boucles": null,
+      "poses_refusees_mediane": 21.0,
+      "poses_refusees_totales": 961,
+      "refus_de_contrainte": 0,
+      "pas_median": 108.0,
+      "appuis_rejetes": 1033
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 36,
+      "decidables": 31,
+      "poses_manquees": 5,
+      "fins": {
+       "la pince ne peut plus avancer": 31
+      },
+      "tours_boucles": 0,
+      "memes_feuilles": 6,
+      "reussites_jointes": 0,
+      "part_du_tour_des_memes_feuilles": 0.09,
+      "part_du_tour_max_des_memes_feuilles": 0.2355,
+      "part_du_tour_des_autres": 0.109,
+      "part_du_tour_mediane": 0.109,
+      "derive_des_tours_boucles": null,
+      "derive_min_des_tours_boucles": null,
+      "derive_max_des_tours_boucles": null,
+      "poses_refusees_mediane": 29.0,
+      "poses_refusees_totales": 1033,
+      "refus_de_contrainte": 17,
+      "pas_median": 108.0,
+      "appuis_rejetes": 1163
+     }
+    ]
+   },
+   {
+    "nom": "la croix et le rejet",
+    "en_croix": true,
+    "rejeter": true,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 36,
+      "decidables": 34,
+      "poses_manquees": 2,
+      "fins": {
+       "la pince ne peut plus avancer": 26,
+       "tour bouclé": 8
+      },
+      "tours_boucles": 8,
+      "memes_feuilles": 9,
+      "reussites_jointes": 1,
+      "part_du_tour_des_memes_feuilles": 0.0865,
+      "part_du_tour_max_des_memes_feuilles": 1.0,
+      "part_du_tour_des_autres": 0.6281,
+      "part_du_tour_mediane": 0.1929,
+      "derive_des_tours_boucles": 6.155,
+      "derive_min_des_tours_boucles": 0.074,
+      "derive_max_des_tours_boucles": 10.034,
+      "poses_refusees_mediane": 85.5,
+      "poses_refusees_totales": 3593,
+      "refus_de_contrainte": 0,
+      "pas_median": 441.5,
+      "appuis_rejetes": 5349
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 36,
+      "decidables": 31,
+      "poses_manquees": 5,
+      "fins": {
+       "la pince ne peut plus avancer": 31
+      },
+      "tours_boucles": 0,
+      "memes_feuilles": 15,
+      "reussites_jointes": 0,
+      "part_du_tour_des_memes_feuilles": 0.025,
+      "part_du_tour_max_des_memes_feuilles": 0.794,
+      "part_du_tour_des_autres": 0.1366,
+      "part_du_tour_mediane": 0.0846,
+      "derive_des_tours_boucles": null,
+      "derive_min_des_tours_boucles": null,
+      "derive_max_des_tours_boucles": null,
+      "poses_refusees_mediane": 27.0,
+      "poses_refusees_totales": 1166,
+      "refus_de_contrainte": 0,
+      "pas_median": 80.0,
+      "appuis_rejetes": 2113
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 36,
+      "decidables": 31,
+      "poses_manquees": 5,
+      "fins": {
+       "la pince ne peut plus avancer": 31
+      },
+      "tours_boucles": 0,
+      "memes_feuilles": 15,
+      "reussites_jointes": 0,
+      "part_du_tour_des_memes_feuilles": 0.0171,
+      "part_du_tour_max_des_memes_feuilles": 0.794,
+      "part_du_tour_des_autres": 0.1396,
+      "part_du_tour_mediane": 0.0941,
+      "derive_des_tours_boucles": null,
+      "derive_min_des_tours_boucles": null,
+      "derive_max_des_tours_boucles": null,
+      "poses_refusees_mediane": 34.0,
+      "poses_refusees_totales": 1175,
+      "refus_de_contrainte": 6,
+      "pas_median": 80.0,
+      "appuis_rejetes": 2111
+     }
+    ]
+   }
+  ],
+  "par_bruit": [
+   {
+    "nom": "la pince de `144`",
+    "en_croix": false,
+    "rejeter": false,
+    "bras": "une machoire",
+    "par_bruit": [
+     {
+      "bruit": 0.0,
+      "decidables": 11,
+      "tours_boucles": 0,
+      "reussites_jointes": 0,
+      "appuis_rejetes": 0
+     },
+     {
+      "bruit": 8.0,
+      "decidables": 12,
+      "tours_boucles": 0,
+      "reussites_jointes": 0,
+      "appuis_rejetes": 0
+     },
+     {
+      "bruit": 16.0,
+      "decidables": 11,
+      "tours_boucles": 0,
+      "reussites_jointes": 0,
+      "appuis_rejetes": 0
+     }
+    ]
+   },
+   {
+    "nom": "la croix (`153`)",
+    "en_croix": true,
+    "rejeter": false,
+    "bras": "une machoire",
+    "par_bruit": [
+     {
+      "bruit": 0.0,
+      "decidables": 11,
+      "tours_boucles": 0,
+      "reussites_jointes": 0,
+      "appuis_rejetes": 0
+     },
+     {
+      "bruit": 8.0,
+      "decidables": 12,
+      "tours_boucles": 0,
+      "reussites_jointes": 0,
+      "appuis_rejetes": 0
+     },
+     {
+      "bruit": 16.0,
+      "decidables": 11,
+      "tours_boucles": 0,
+      "reussites_jointes": 0,
+      "appuis_rejetes": 0
+     }
+    ]
+   },
+   {
+    "nom": "le rejet (`155`)",
+    "en_croix": false,
+    "rejeter": true,
+    "bras": "une machoire",
+    "par_bruit": [
+     {
+      "bruit": 0.0,
+      "decidables": 11,
+      "tours_boucles": 0,
+      "reussites_jointes": 0,
+      "appuis_rejetes": 84
+     },
+     {
+      "bruit": 8.0,
+      "decidables": 12,
+      "tours_boucles": 6,
+      "reussites_jointes": 0,
+      "appuis_rejetes": 2241
+     },
+     {
+      "bruit": 16.0,
+      "decidables": 11,
+      "tours_boucles": 7,
+      "reussites_jointes": 1,
+      "appuis_rejetes": 3001
+     }
+    ]
+   },
+   {
+    "nom": "la croix et le rejet",
+    "en_croix": true,
+    "rejeter": true,
+    "bras": "une machoire",
+    "par_bruit": [
+     {
+      "bruit": 0.0,
+      "decidables": 11,
+      "tours_boucles": 0,
+      "reussites_jointes": 0,
+      "appuis_rejetes": 92
+     },
+     {
+      "bruit": 8.0,
+      "decidables": 12,
+      "tours_boucles": 3,
+      "reussites_jointes": 0,
+      "appuis_rejetes": 1915
+     },
+     {
+      "bruit": 16.0,
+      "decidables": 11,
+      "tours_boucles": 5,
+      "reussites_jointes": 1,
+      "appuis_rejetes": 3342
+     }
+    ]
+   }
+  ],
+  "le_verdict": [
+   {
+    "instrument": "la pince de `144`",
+    "bras": "une machoire",
+    "tours_boucles": 0,
+    "memes_feuilles": 12,
+    "reussites_jointes": 0,
+    "decidables": 34,
+    "part_du_tour_des_memes_feuilles": 0.0299,
+    "arrets": 34,
+    "poses_refusees_mediane": 118.5,
+    "refus_de_contrainte": 0,
+    "pas_median": 478.5,
+    "derive_des_tours_boucles": null,
+    "la_mort_a_change_de_nature": false,
+    "elle_meurt_toujours_darret": true,
+    "pas_medians_multiplies_par": 1.0
+   },
+   {
+    "instrument": "la pince de `144`",
+    "bras": "deux machoires libres",
+    "tours_boucles": 0,
+    "memes_feuilles": 10,
+    "reussites_jointes": 0,
+    "decidables": 31,
+    "part_du_tour_des_memes_feuilles": 0.0169,
+    "arrets": 31,
+    "poses_refusees_mediane": 21.0,
+    "refus_de_contrainte": 0,
+    "pas_median": 42.0,
+    "derive_des_tours_boucles": null,
+    "la_mort_a_change_de_nature": false,
+    "elle_meurt_toujours_darret": true,
+    "pas_medians_multiplies_par": 1.0
+   },
+   {
+    "instrument": "la pince de `144`",
+    "bras": "la pince",
+    "tours_boucles": 0,
+    "memes_feuilles": 9,
+    "reussites_jointes": 0,
+    "decidables": 31,
+    "part_du_tour_des_memes_feuilles": 0.0129,
+    "arrets": 31,
+    "poses_refusees_mediane": 21.0,
+    "refus_de_contrainte": 1,
+    "pas_median": 42.0,
+    "derive_des_tours_boucles": null,
+    "la_mort_a_change_de_nature": false,
+    "elle_meurt_toujours_darret": true,
+    "pas_medians_multiplies_par": 1.0
+   },
+   {
+    "instrument": "la croix (`153`)",
+    "bras": "une machoire",
+    "tours_boucles": 0,
+    "memes_feuilles": 11,
+    "reussites_jointes": 0,
+    "decidables": 34,
+    "part_du_tour_des_memes_feuilles": 0.0162,
+    "arrets": 34,
+    "poses_refusees_mediane": 52.5,
+    "refus_de_contrainte": 0,
+    "pas_median": 205.0,
+    "derive_des_tours_boucles": null,
+    "la_mort_a_change_de_nature": false,
+    "elle_meurt_toujours_darret": true,
+    "pas_medians_multiplies_par": 0.428
+   },
+   {
+    "instrument": "la croix (`153`)",
+    "bras": "deux machoires libres",
+    "tours_boucles": 0,
+    "memes_feuilles": 13,
+    "reussites_jointes": 0,
+    "decidables": 31,
+    "part_du_tour_des_memes_feuilles": 0.0096,
+    "arrets": 31,
+    "poses_refusees_mediane": 17.0,
+    "refus_de_contrainte": 0,
+    "pas_median": 18.0,
+    "derive_des_tours_boucles": null,
+    "la_mort_a_change_de_nature": false,
+    "elle_meurt_toujours_darret": true,
+    "pas_medians_multiplies_par": 0.429
+   },
+   {
+    "instrument": "la croix (`153`)",
+    "bras": "la pince",
+    "tours_boucles": 0,
+    "memes_feuilles": 13,
+    "reussites_jointes": 0,
+    "decidables": 31,
+    "part_du_tour_des_memes_feuilles": 0.0029,
+    "arrets": 31,
+    "poses_refusees_mediane": 17.0,
+    "refus_de_contrainte": 4,
+    "pas_median": 17.0,
+    "derive_des_tours_boucles": null,
+    "la_mort_a_change_de_nature": false,
+    "elle_meurt_toujours_darret": true,
+    "pas_medians_multiplies_par": 0.405
+   },
+   {
+    "instrument": "le rejet (`155`)",
+    "bras": "une machoire",
+    "tours_boucles": 13,
+    "memes_feuilles": 7,
+    "reussites_jointes": 1,
+    "decidables": 34,
+    "part_du_tour_des_memes_feuilles": 0.0518,
+    "arrets": 20,
+    "poses_refusees_mediane": 84.5,
+    "refus_de_contrainte": 0,
+    "pas_median": 986.5,
+    "derive_des_tours_boucles": 3.975,
+    "la_mort_a_change_de_nature": true,
+    "elle_meurt_toujours_darret": false,
+    "pas_medians_multiplies_par": 2.062
+   },
+   {
+    "instrument": "le rejet (`155`)",
+    "bras": "deux machoires libres",
+    "tours_boucles": 0,
+    "memes_feuilles": 6,
+    "reussites_jointes": 0,
+    "decidables": 31,
+    "part_du_tour_des_memes_feuilles": 0.09,
+    "arrets": 31,
+    "poses_refusees_mediane": 21.0,
+    "refus_de_contrainte": 0,
+    "pas_median": 108.0,
+    "derive_des_tours_boucles": null,
+    "la_mort_a_change_de_nature": false,
+    "elle_meurt_toujours_darret": true,
+    "pas_medians_multiplies_par": 2.571
+   },
+   {
+    "instrument": "le rejet (`155`)",
+    "bras": "la pince",
+    "tours_boucles": 0,
+    "memes_feuilles": 6,
+    "reussites_jointes": 0,
+    "decidables": 31,
+    "part_du_tour_des_memes_feuilles": 0.09,
+    "arrets": 31,
+    "poses_refusees_mediane": 29.0,
+    "refus_de_contrainte": 17,
+    "pas_median": 108.0,
+    "derive_des_tours_boucles": null,
+    "la_mort_a_change_de_nature": false,
+    "elle_meurt_toujours_darret": true,
+    "pas_medians_multiplies_par": 2.571
+   },
+   {
+    "instrument": "la croix et le rejet",
+    "bras": "une machoire",
+    "tours_boucles": 8,
+    "memes_feuilles": 9,
+    "reussites_jointes": 1,
+    "decidables": 34,
+    "part_du_tour_des_memes_feuilles": 0.0865,
+    "arrets": 26,
+    "poses_refusees_mediane": 85.5,
+    "refus_de_contrainte": 0,
+    "pas_median": 441.5,
+    "derive_des_tours_boucles": 6.155,
+    "la_mort_a_change_de_nature": true,
+    "elle_meurt_toujours_darret": false,
+    "pas_medians_multiplies_par": 0.923
+   },
+   {
+    "instrument": "la croix et le rejet",
+    "bras": "deux machoires libres",
+    "tours_boucles": 0,
+    "memes_feuilles": 15,
+    "reussites_jointes": 0,
+    "decidables": 31,
+    "part_du_tour_des_memes_feuilles": 0.025,
+    "arrets": 31,
+    "poses_refusees_mediane": 27.0,
+    "refus_de_contrainte": 0,
+    "pas_median": 80.0,
+    "derive_des_tours_boucles": null,
+    "la_mort_a_change_de_nature": false,
+    "elle_meurt_toujours_darret": true,
+    "pas_medians_multiplies_par": 1.905
+   },
+   {
+    "instrument": "la croix et le rejet",
+    "bras": "la pince",
+    "tours_boucles": 0,
+    "memes_feuilles": 15,
+    "reussites_jointes": 0,
+    "decidables": 31,
+    "part_du_tour_des_memes_feuilles": 0.0171,
+    "arrets": 31,
+    "poses_refusees_mediane": 34.0,
+    "refus_de_contrainte": 6,
+    "pas_median": 80.0,
+    "derive_des_tours_boucles": null,
+    "la_mort_a_change_de_nature": false,
+    "elle_meurt_toujours_darret": true,
+    "pas_medians_multiplies_par": 1.905
+   }
+  ],
+  "le_compte_de_feuilles_recompense_limmobilite": {
+   "deux machoires libres": {
+    "plus_de_feuilles": "la croix et le rejet",
+    "ses_feuilles": 15,
+    "sa_part_du_tour": 0.025,
+    "va_le_plus_loin": "le rejet (`155`)",
+    "ses_feuilles_a_lui": 6,
+    "sa_part_a_lui": 0.09,
+    "ce_ne_sont_pas_les_memes": true
+   },
+   "la pince": {
+    "plus_de_feuilles": "la croix et le rejet",
+    "ses_feuilles": 15,
+    "sa_part_du_tour": 0.0171,
+    "va_le_plus_loin": "le rejet (`155`)",
+    "ses_feuilles_a_lui": 6,
+    "sa_part_a_lui": 0.09,
+    "ce_ne_sont_pas_les_memes": true
+   },
+   "une machoire": {
+    "plus_de_feuilles": "la pince de `144`",
+    "ses_feuilles": 12,
+    "sa_part_du_tour": 0.0299,
+    "va_le_plus_loin": "la croix et le rejet",
+    "ses_feuilles_a_lui": 9,
+    "sa_part_a_lui": 0.0865,
+    "ce_ne_sont_pas_les_memes": true
+   }
+  }
+ }
+}

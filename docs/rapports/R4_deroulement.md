@@ -1363,6 +1363,32 @@ dérive de deux feuilles, donc **pas** une réussite au sens de `une_reussite`, 
 ce qui l'empêche encore de remplacer la pince n'est pas un compte de réussites mais une **queue de
 dérive** moitié plus longue.
 
+**`158` · 2026-09-14 · de quoi meurt-on sur la matière du rouleau ?**
+(`de_quoi_meurt_on_sur_la_matiere_du_rouleau.py`, zéro lecture distante et zéro marche)
+`157` mesure que le mur de la matière du rouleau a reculé ×5 à **zéro** réussite inchangé. Un mur qui
+recule sans tomber pose la question que ni `156` ni `157` n'ont posée : de quoi meurt-on
+**maintenant** ? C'est le patron de `149`, appliqué à la seule matière qui compte — la spirale
+écrasée à **0,2782** et froissée à **100 µm**, **12** départs et trois bruits, relue du record de
+`156`. ⭐⭐⭐⭐ **La mort a changé de NATURE pour un seul bras** : une mâchoire **seule** munie du rejet
+y boucle **13** tours sur **34**, et **8** avec la croix, là où **aucun** ne se bouclait depuis
+`142` ; la pince et la paire libre en bouclent **0** sous les quatre instruments. Les vingt et un
+tours sont **tous** aux bruits 8 et 16, **zéro** au bruit 0 — ce qui recoupe `156` : le rejet
+travaille contre le **bruit de lecture** — `R4-F139`. ✗ **Mais ces tours ratent la feuille** : dérive
+médiane **3,975** feuilles sous le rejet (entre **0,214** et **12,309**) et **6,155** sous la croix
+et le rejet, pour **1** seule réussite JOINTE de chaque côté. **Le tour n'est plus le mur : la
+feuille l'est**, et c'est la question du graal déplacée d'un cran — `R4-F140`. ⚠⚠ **Et « revenir sur
+la même feuille » récompense l'IMMOBILITÉ ici** : pour les trois bras, l'instrument qui en compte le
+plus n'est jamais celui dont ces marches vont le plus loin — pour la pince **15** marches à
+**0,0171** de tour contre **6** à **0,09**, et sous la croix seule ses **13** marches « sur la bonne
+feuille » ont parcouru **0,0029** de tour. La tautologie que `142` nommait est devenue un couple de
+nombres, et l'égalité se tranche vers celui qui va le plus loin pour ne pas fabriquer la conclusion
+mesurée — `R4-F138`. ⚠ **La pince, elle, meurt de la même mort** : **31** arrêts sur **31** avant
+comme après, avec **davantage** de poses refusées (médiane **21,0** → **29,0**) tout en marchant
+**2,571** fois plus loin — le rejet y achète de la distance, pas de la survie. Et la croix
+**raccourcit** les marches (**×0,405** pour la pince), quatrième mesure de suite qui va contre elle —
+`R4-F141`. ⚠ Piège payé : un interligne posé redevient faux au **douzième** bras, et les deux
+tableaux de la figure dérivent désormais le leur de la place disponible.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
