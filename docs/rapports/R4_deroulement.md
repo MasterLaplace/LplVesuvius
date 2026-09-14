@@ -1065,6 +1065,27 @@ de `144` est inchangée, mais s'appuyer sur cette coïncidence est ce que ce dé
 demande devient un instrument à deux étages** : diagnostiquer la cause avec la lecture corrigée, qui
 tient jusqu'à bruit 16, et conduire le suiveur avec la mémoire que ce diagnostic désigne.
 
+**`146` · 2026-09-14 · un suiveur n'a rien à quoi se comparer**
+(`un_suiveur_na_rien_a_quoi_se_comparer.py`, zéro lecture distante)
+L'instrument à deux étages que `145` demande suppose un premier étage qui **classe** la matière — donc
+qu'un suiveur qui ne voit que son propre nombre puisse en déduire sur quoi il marche. ⭐⭐⭐⭐ **Les
+quinze lectures que `145` publie se recouvrent** : **7 inversions sur 15**, une matière sans aucune
+cause lisant au moins aussi haut qu'une matière qui en porte une, la pire étant la **spirale nue** à
+bruit 16 à **0,8206** contre la **spirale écrasée** sans bruit à **0,0000** — `R4-F103`. « La lecture
+sépare » est un énoncé sur une GRILLE ; un suiveur n'a pas de grille. ⭐⭐⭐ **Et la seule référence
+absolue qu'il possède ne supplée pas** : l'enroulement `avance / rayon`, qu'il calcule seul, rend
+**39** réussites contre **108** (règle brute) et **97** (corrigée), et ne lit pas plus loin non plus —
+à bruit 16, écart **0,0043** pour une dispersion de **0,0207** — `R4-F104`. ⚠⚠ **Et la mesure corrige
+mon énoncé.** J'avais posé que ce qui excède l'enroulement n'est ni lisible ni voulu : sur la spirale
+**écrasée**, elle lit **0,8107** là où les deux règles de cohérence lisent **0,0000**. L'écrasement
+excède l'enroulement, et c'est pourtant la forme qu'il faut **suivre** — supprimer tout l'excès, c'est
+supprimer la matière — `R4-F105`. ⚠ **Les deux témoins internes sont verts** (114 · 107 · **108** et
+115 · 98 · **97**). ⚠ **Deux pièges payés**, tous deux dans le producteur : un `… or True` qui rendait
+un **verdict** incapable d'échouer, et `0.0 or 1.0` qui vaut `1.0` en Python — un zéro légitime avalé,
+et précisément celui que la règle de l'enroulement doit rendre sur une spirale nue. ⭐⭐ **La demande
+devient étroite et nommée** : séparer ce qui excède l'enroulement de façon **cohérente**, qu'il faut
+suivre, de ce qui l'excède **sans cohérence**, qu'il faut supprimer.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

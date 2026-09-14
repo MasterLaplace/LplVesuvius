@@ -236,7 +236,7 @@ def _ecart_angulaire(avant, apres) -> float:
 
 
 def memoire_adaptee(rotations, fenetre: int, bloc: int = 1,
-                    corrige_le_bruit: bool = False) -> float:
+                    corrige_le_bruit: bool = False, enroulement: float | None = None) -> float:
     """La memoire que la rotation de la normale impose — un enonce, pas un ajustement.
 
     ⭐⭐⭐⭐ CE QUI SEPARE LES DEUX CAUSES EST UNE ECHELLE DE TEMPS, ET ELLE SE LIT SUR LE SIGNE.
@@ -277,6 +277,19 @@ def memoire_adaptee(rotations, fenetre: int, bloc: int = 1,
     r = np.asarray(rotations[-f:], dtype=np.float64)
     if r.size < 2:
         return 0.0
+    if enroulement is not None:
+        # ⭐⭐⭐⭐ LA REFERENCE ABSOLUE QU'UN SUIVEUR POSSEDE. Une coherence ne se lit que par
+        # COMPARAISON, et un suiveur ne voit qu'une matiere : `145` montre qu'une spirale NUE
+        # bruitee rend la meme lecture qu'une spirale a DEUX causes sans bruit, donc aucun seuil
+        # absolu ne peut les separer. L'enroulement, lui, est un absolu que le suiveur CALCULE —
+        # sa normale tourne de `avance / rayon` par pas, et il connait les deux. Ce qui excede
+        # cette rotation-la n'est ni lisible ni voulu, et c'est exactement ce que le cap doit
+        # supprimer.
+        w = abs(float(enroulement))
+        moyenne = float(np.abs(r).mean())
+        if moyenne <= 0.0:
+            return 0.0
+        return float(min(1.0 - min(w / moyenne, 1.0), 1.0 - 1.0 / f))
     k = max(int(bloc), 1)
     if k > 1:
         # ⚠ Les blocs INCOMPLETS sont écartés : un bloc de trois pas parmi quatre porte moins de
@@ -315,7 +328,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            voxel_um: float, deux: bool, contrainte: bool, avance_um: float, axe_yx,
            tours: float = TOURS, pas_max: int = 4000, memoire_du_cap: float = 0.0,
            fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
-           corrige_le_bruit: bool = False) -> dict:
+           corrige_le_bruit: bool = False, enroulement_du_cap: bool = False) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -409,8 +422,14 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         # matiere a rendu, pas ce que le cap precedent en a deja fait. Lire apres melange ferait
         # une boucle qui se confirme elle-meme.
         rotations.append(_ecart_angulaire(etat["normale"], pris["normale"]))
+        # ⚠ L'enroulement est calcule sur le rayon COURANT et l'avance REELLE du pas : les deux
+        # sont a la main du suiveur, et un enroulement pose serait une constante de plus.
+        enr = None
+        if enroulement_du_cap:
+            rho = rayon_um(etat["centre_vx"])
+            enr = (a / rho) if rho > 0.0 else None
         m_ = (memoire_adaptee(rotations, int(fenetre_du_cap), int(bloc_du_cap),
-                              bool(corrige_le_bruit)) if int(fenetre_du_cap) > 0
+                              bool(corrige_le_bruit), enr) if int(fenetre_du_cap) > 0
               else float(memoire_du_cap))
         memoires.append(m_)
         if m_ > 0.0:
@@ -481,7 +500,8 @@ def un_depart(vol, angle_rad: float, rayon_mm: float, voxel_um: float, pas_um: f
 def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: float,
                    voxel_um: float, avance_um: float, axe_yx, tours: float = TOURS,
                    memoire_du_cap: float = 0.0, fenetre_du_cap: int = 0,
-                   bloc_du_cap: int = 1, corrige_le_bruit: bool = False) -> dict:
+                   bloc_du_cap: int = 1, corrige_le_bruit: bool = False,
+                   enroulement_du_cap: bool = False) -> dict:
     """Les trois bras sur le MEME depart — c'est ce qui rend la comparaison lisible."""
     out = {}
     for nom, deux, contrainte in (("une machoire", False, False),
@@ -491,7 +511,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
         out[nom] = suivre(vol, depart_vx, normale0, largeur_um, epaisseur_nominale_um, voxel_um,
                           deux, contrainte, avance_um, axe_yx, tours,
                           memoire_du_cap=memoire_du_cap, fenetre_du_cap=fenetre_du_cap,
-                          bloc_du_cap=bloc_du_cap, corrige_le_bruit=corrige_le_bruit)
+                          bloc_du_cap=bloc_du_cap, corrige_le_bruit=corrige_le_bruit,
+                          enroulement_du_cap=enroulement_du_cap)
     return out
 
 
@@ -528,7 +549,7 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
              rayon_mm: float = RAYON_MM, tours: float = TOURS,
              longueur_donde_um: float = LONGUEUR_DONDE_UM, memoire_du_cap: float = 0.0,
              fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
-             corrige_le_bruit: bool = False) -> dict:
+             corrige_le_bruit: bool = False, enroulement_du_cap: bool = False) -> dict:
     """Les trois bras sur une matiere, un niveau de bruit et une largeur — tous les departs.
 
     ⚠ Les trois bras partent du MEME point a chaque depart : une comparaison dont les bras ne
@@ -547,7 +568,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
         trois = les_trois_bras(vol, depart, n0, largeur_um, pas_um, voxel_um, avance_um,
                                vol.centre_yx_vx, tours, memoire_du_cap=memoire_du_cap,
                                fenetre_du_cap=fenetre_du_cap, bloc_du_cap=bloc_du_cap,
-                               corrige_le_bruit=corrige_le_bruit)
+                               corrige_le_bruit=corrige_le_bruit,
+                               enroulement_du_cap=enroulement_du_cap)
         for b, x in trois.items():
             par_bras[b].append({"depart_deg": round(360.0 * k / int(departs), 1), **x})
     bloc = {"ecrasement": float(ecr), "amplitude_um": float(amp), "bruit": float(bruit),
@@ -555,7 +577,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
             "avance_um": round(avance_um, 1), "nom": _nom(ecr, amp), "departs": int(departs),
             "memoire_du_cap": float(memoire_du_cap),
             "fenetre_du_cap": int(fenetre_du_cap), "bloc_du_cap": int(bloc_du_cap),
-            "corrige_le_bruit": bool(corrige_le_bruit), "bras": {}}
+            "corrige_le_bruit": bool(corrige_le_bruit),
+            "enroulement_du_cap": bool(enroulement_du_cap), "bras": {}}
     for b in BRAS:
         bloc["bras"][b] = {"suivis": par_bras[b], **_resumer_un_bras(par_bras[b], int(departs))}
     return bloc
@@ -1084,6 +1107,25 @@ def verifier() -> int:
     v("la correction ne rend jamais une mémoire négative ni au-delà de sa borne",
       all(0.0 <= memoire_adaptee(list(np.random.default_rng(k).normal(size=32)), 32,
                                  corrige_le_bruit=True) <= 1.0 - 1.0 / 32 for k in range(5)))
+
+    # ---- ⭐⭐ la règle ABSOLUE : ce qui excède l'enroulement
+    w = 0.02
+    v("⭐⭐ une rotation qui vaut EXACTEMENT l'enroulement ne demande aucune mémoire",
+      memoire_adaptee([w] * 16, 16, enroulement=w) == 0.0,
+      "le suiveur tourne comme il doit, il n'y a rien à supprimer")
+    v("⭐⭐ ... une rotation DEUX fois plus grande en demande la moitié",
+      abs(memoire_adaptee([2 * w] * 16, 16, enroulement=w) - 0.5) < 1e-9,
+      f"{memoire_adaptee([2 * w] * 16, 16, enroulement=w)}")
+    v("... et une rotation PLUS PETITE que l'enroulement n'en demande aucune",
+      memoire_adaptee([0.5 * w] * 16, 16, enroulement=w) == 0.0,
+      "la part de l'enroulement ne peut pas dépasser un")
+    v("⭐ une alternance de même amplitude que l'enroulement n'en demande aucune non plus",
+      memoire_adaptee([w, -w] * 8, 16, enroulement=w) == 0.0,
+      "cette règle lit une AMPLITUDE, pas un signe — c'est ce qui la distingue de la cohérence")
+    v("une rotation nulle ne rend rien plutôt qu'une division par zéro",
+      memoire_adaptee([0.0] * 16, 16, enroulement=w) == 0.0)
+    v("la règle absolue respecte la borne de la fenêtre",
+      memoire_adaptee([1000.0 * w] * 8, 8, enroulement=w) == 1.0 - 1.0 / 8)
 
     v("la mémoire lue reste dans [0, 1[",
       all(0.0 <= memoire_adaptee(list(np.random.default_rng(k).normal(size=20)), 8) < 1.0

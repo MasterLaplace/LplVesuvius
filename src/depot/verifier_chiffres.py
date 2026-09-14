@@ -3049,6 +3049,66 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 146 : RIEN A QUOI SE COMPARER, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Une lecture qui INVERSE l'ordre des causes ne voyage jamais sans celle qu'elle inverse :
+    # « 0,8206 » seul est une lecture, a cote de « 0,0000 » il dit qu'aucun seuil ne separe.
+    # (2) Les reussites de l'enroulement ne voyagent jamais sans celles des deux regles qu'il
+    # devait remplacer : 39 seul est un nombre, a cote de 108 et 97 il dit ce qu'il coute.
+    # (3) Et la memoire lue PAR MATIERE est publiee pour les trois regles au meme bruit, sans quoi
+    # « 0,8107 sur l'ecrasee » n'aurait rien a cote de quoi se lire.
+    sc = _source(racine, "un_suiveur_na_rien_a_quoi_se_comparer.json")
+    if sc.exists():
+        d = json.loads(sc.read_text())
+
+        def dec146(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        t_ = j_.get("les_temoins_internes", {})
+        if t_.get("decidable"):
+            for x in t_.get("par_variante", []):
+                for nom in ("une machoire", "deux machoires libres", "la pince"):
+                    if x.get(nom) is not None:
+                        ajoute(f"temoin interne de {nom} de « {x['nom']} » de 146",
+                               x[nom]["ici"], 0, sc.name)
+        o_ = j_.get("les_lectures_se_recouvrent", {})
+        if o_.get("decidable"):
+            for cle, nom in (("lectures", "lectures rangees par 146"),
+                             ("inversions", "inversions des lectures de 146")):
+                if o_.get(cle) is not None:
+                    ajoute(nom, o_[cle], 0, sc.name)
+            p_ = o_.get("la_pire", {})
+            for cle, nom, dec in (("lecture_sans", "la pire lecture sans cause de 146", 4),
+                                  ("lecture_avec", "la lecture avec cause qu'elle inverse de 146", 4),
+                                  ("bruit_sans_cause", "bruit de la pire lecture sans cause de 146", 0),
+                                  ("bruit_avec_cause", "bruit de la lecture qu'elle inverse de 146", 0)):
+                if p_.get(cle) is not None:
+                    ajoute(nom, p_[cle], dec146(p_[cle], dec), sc.name)
+        for x in j_.get("par_variante", []):
+            cle = f"de « {x['nom']} » de 146"
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                if x.get(nom) is not None:
+                    ajoute(f"reussites de {nom} {cle}", x[nom]["reussites"], 0, sc.name)
+            for y in x.get("par_bruit", []):
+                b_ = f"a bruit {y['bruit']} {cle}"
+                for k_, n_ in (("ecart_entre_matieres", "ecart entre matieres"),
+                               ("dispersion_dans_une_matiere", "dispersion dans une matiere")):
+                    ajoute(f"{n_} {b_}", y[k_], dec146(y[k_], 4), sc.name)
+                # ⚠ La memoire par matiere est gardee a TOUS les bruits : le tableau du document
+                # lit le bruit nul, mais la liste triee des quinze lectures les traverse tous.
+                for m in y.get("par_matiere", []):
+                    if m.get("memoire") is not None:
+                        ajoute(f"memoire lue sur {m['nom']} {b_}", m["memoire"],
+                               dec146(m["memoire"], 4), sc.name)
+        e_ = j_.get("la_regle_de_lenroulement", {})
+        if e_.get("reussites_de_la_pince") is not None:
+            ajoute("reussites de la pince sous l'enroulement de 146",
+                   e_["reussites_de_la_pince"], 0, sc.name)
+        for c_ in e_.get("contre", []):
+            ajoute(f"reussites de la pince sous « {c_['nom']} » contre l'enroulement de 146",
+                   c_["reussites_de_la_pince"], 0, sc.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 145 : LIRE SOUS LE BRUIT, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Un ecart entre matieres ne voyage jamais sans la dispersion DANS une matiere : c'est le
     # couple qui dit si la lecture separe encore, et l'un sans l'autre ne decide rien.
