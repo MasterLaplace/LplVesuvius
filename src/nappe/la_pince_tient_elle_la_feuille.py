@@ -228,9 +228,9 @@ def _tangente_du_tour(n) -> np.ndarray:
     return t / max(float(np.linalg.norm(t)), 1e-12)
 
 
-def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: float, voxel_um: float,
-           deux: bool, contrainte: bool, avance_um: float, axe_yx, tours: float = TOURS,
-           pas_max: int = 4000) -> dict:
+def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: float,
+           voxel_um: float, deux: bool, contrainte: bool, avance_um: float, axe_yx,
+           tours: float = TOURS, pas_max: int = 4000, memoire_du_cap: float = 0.0) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -240,6 +240,18 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     ⚠ Le tour se compte sur l'angle CUMULE et signe, jamais sur l'angle absolu : un suiveur qui
     ferait un aller-retour reviendrait a son angle de depart en ayant parcouru deux fois le chemin,
     et un compteur d'angle absolu lui donnerait raison.
+
+    ⭐⭐⭐ LE CAP AGIT SUR LA NORMALE, ET IL NE PEUT PAS AGIR AILLEURS. Dans le plan du tour, la
+    direction perpendiculaire a la normale est UNIQUE au signe pres : une moyenne de deux tangentes
+    reprojetee sur la normale courante rend exactement cette tangente, donc une memoire posee sur la
+    tangente n'aurait aucun effet. Ce qu'un cap peut retenir est l'ORIENTATION — et c'est aussi ce
+    que fait le rouleau physique dont vient l'idee : il a de l'inertie, il ne colle pas a chaque
+    ondulation de la feuille.
+
+    ⚠⚠ LA REGLE EST CELLE DE `marcher`, PAS UNE SECONDE. Moyenne exponentielle de la direction
+    RETENUE, de taux `1 - memoire` ; a memoire nulle la matiere decide seule. Et le chemin du
+    melange n'est pris QUE si la memoire est non nulle, ce qui garantit qu'une memoire nulle rend
+    exactement le suiveur d'avant — jusqu'au bit, normalisation comprise.
     """
     etat = poser(vol, depart_vx, normale0, largeur_um, epaisseur_nominale_um, voxel_um, deux)
     if etat is None:
@@ -295,6 +307,14 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         if pris is None:
             fin = "la pince ne peut plus avancer"
             break
+        if memoire_du_cap > 0.0:
+            melange = ((1.0 - float(memoire_du_cap)) * np.asarray(pris["normale"])
+                       + float(memoire_du_cap) * np.asarray(etat["normale"]))
+            n_ = float(np.linalg.norm(melange))
+            # ⚠ Un melange peut s'annuler si le cap est exactement oppose a la lecture. La lecture
+            # GAGNE alors : inventer une orientation serait pire que d'oublier le cap.
+            if n_ > 1e-9:
+                pris["normale"] = melange / n_
         chemin += a
         th_neuf = angle(pris["centre_vx"])
         d = th_neuf - th
@@ -347,16 +367,18 @@ def un_depart(vol, angle_rad: float, rayon_mm: float, voxel_um: float, pas_um: f
     return depart, vol.normale_locale(depart).reshape(3)
 
 
-def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: float, voxel_um: float,
-                   avance_um: float, axe_yx, tours: float = TOURS) -> dict:
+def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: float,
+                   voxel_um: float, avance_um: float, axe_yx, tours: float = TOURS,
+                   memoire_du_cap: float = 0.0) -> dict:
     """Les trois bras sur le MEME depart — c'est ce qui rend la comparaison lisible."""
     out = {}
     for nom, deux, contrainte in (("une machoire", False, False),
                                   ("deux machoires libres", True, False),
                                   ("la pince", True, True)):
         vol.lectures = 0
-        out[nom] = suivre(vol, depart_vx, normale0, largeur_um, epaisseur_nominale_um, voxel_um, deux,
-                          contrainte, avance_um, axe_yx, tours)
+        out[nom] = suivre(vol, depart_vx, normale0, largeur_um, epaisseur_nominale_um, voxel_um,
+                          deux, contrainte, avance_um, axe_yx, tours,
+                          memoire_du_cap=memoire_du_cap)
     return out
 
 
@@ -391,7 +413,7 @@ def _nom(ecrasement: float, amplitude_um: float) -> str:
 
 def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPARTS,
              rayon_mm: float = RAYON_MM, tours: float = TOURS,
-             longueur_donde_um: float = LONGUEUR_DONDE_UM) -> dict:
+             longueur_donde_um: float = LONGUEUR_DONDE_UM, memoire_du_cap: float = 0.0) -> dict:
     """Les trois bras sur une matiere, un niveau de bruit et une largeur — tous les departs.
 
     ⚠ Les trois bras partent du MEME point a chaque depart : une comparaison dont les bras ne
@@ -408,13 +430,13 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
     for k in range(int(departs)):
         depart, n0 = un_depart(vol, 2.0 * np.pi * k / int(departs), rayon_mm, voxel_um, pas_um)
         trois = les_trois_bras(vol, depart, n0, largeur_um, pas_um, voxel_um, avance_um,
-                               vol.centre_yx_vx, tours)
+                               vol.centre_yx_vx, tours, memoire_du_cap=memoire_du_cap)
         for b, x in trois.items():
             par_bras[b].append({"depart_deg": round(360.0 * k / int(departs), 1), **x})
     bloc = {"ecrasement": float(ecr), "amplitude_um": float(amp), "bruit": float(bruit),
             "largeur_en_pas": float(largeur_en_pas), "largeur_um": round(largeur_um, 1),
             "avance_um": round(avance_um, 1), "nom": _nom(ecr, amp), "departs": int(departs),
-            "bras": {}}
+            "memoire_du_cap": float(memoire_du_cap), "bras": {}}
     for b in BRAS:
         bloc["bras"][b] = {"suivis": par_bras[b], **_resumer_un_bras(par_bras[b], int(departs))}
     return bloc
@@ -432,6 +454,14 @@ def _resumer_un_bras(suivis: list[dict], departs: int) -> dict:
         return out
     der = np.abs([x["derive_en_feuilles"] for x in bons])
     out.update({
+        # ⭐⭐⭐ LA REUSSITE D'UN TRANSFERT, ET ELLE EST JOINTE. Boucler le tour et revenir sur la
+        # meme feuille sont la MEME reussite, et les compter separement laisse passer un suiveur qui
+        # fait le tour en revenant sur une autre feuille. `143` l'a paye : sa barre a ete franchie
+        # par une marche qui bouclait son tour avec une feuille juste sur douze. Un compte JOINT est
+        # aussi la garde anti-tautologie que le couple assurait : un bras qui refuse tout n'a aucune
+        # reussite, puisqu'il ne boucle rien.
+        "reussites": int(sum(1 for x, dd in zip(bons, der, strict=True)
+                             if x.get("tour_boucle") and dd < 0.5)),
         # ⭐⭐ LA QUESTION DU GRAAL, ET ELLE EST EXACTE. « Sur quelle feuille finit-on » se decide a
         # une DEMI-feuille : c'est la ou l'appariement au plus proche bascule, exactement comme le
         # demi-pas qui decide qu'un appui a change d'interstice. Ce n'est pas une tolerance reglee

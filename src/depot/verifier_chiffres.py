@@ -3049,6 +3049,65 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 143 : LE CAP, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Un compte de refus ne voyage jamais sans le compte de cases MARCHEES A L'IDENTIQUE :
+    # « zero refus » seul pourrait vouloir dire que la pince ne marche plus, a cote de « 15 cases
+    # sur 15 identiques » il dit qu'elle marche et qu'elle est devenue un bras libre.
+    # (2) Et les reussites d'une memoire ne voyagent jamais sans les bonnes feuilles ET les tours :
+    # 100 seul se lit comme un maximum, a cote de 110 et 121 il dit ce que le cap a ECHANGE.
+    cap = _source(racine, "la_pince_garde_t_elle_son_cap.json")
+    if cap.exists():
+        d = json.loads(cap.read_text())
+        j_ = d.get("juger", {})
+        u_ = j_.get("un_reglage_unique", {})
+        for x in u_.get("par_memoire", []):
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                y = x.get(nom)
+                if y is None:
+                    continue
+                cle = f"de {nom} a memoire {x['memoire']} de 143"
+                for k_, n_ in (("reussites", "reussites"), ("memes_feuilles", "bonnes feuilles"),
+                               ("tours_boucles", "tours boucles")):
+                    ajoute(f"{n_} {cle}", y[k_], 0, cap.name)
+        for nom in ("une machoire", "deux machoires libres", "la pince"):
+            y = u_.get(nom)
+            if y is None:
+                continue
+            ajoute(f"memoire unique de {nom} de 143", y["memoire_unique"], 2, cap.name)
+            ajoute(f"reussites au mieux par case de {nom} de 143",
+                   y["reussites_au_mieux_par_case"], 0, cap.name)
+            ajoute(f"cout d'un reglage unique de {nom} de 143",
+                   y["ce_que_coute_un_reglage_unique"], 0, cap.name, unites=("réussites",))
+        ct = j_.get("la_contrainte_tire_t_elle", {})
+        for x in ct.get("par_memoire", []):
+            ajoute(f"refus a memoire {x['memoire']} de 143", x["refus"], 0, cap.name,
+                   unites=("refus",))
+            ajoute(f"cases a l'identique a memoire {x['memoire']} de 143",
+                   x["cases_marchees_a_lidentique"], 0, cap.name, unites=("cases", "/ 15"))
+        if ct.get("memoire_ou_la_contrainte_devient_inerte") is not None:
+            ajoute("memoire ou la contrainte devient inerte de 143",
+                   ct["memoire_ou_la_contrainte_devient_inerte"], 2, cap.name)
+        t_ = j_.get("la_case_ou_le_cap_change_le_plus")
+        if t_ is not None:
+            for k_, n_, dd in (("memoire", "memoire de la tete de 143", 2),
+                               ("reussites", "reussites de la tete de 143", 0),
+                               ("sans_cap_reussites", "reussites sans cap de la tete de 143", 0),
+                               ("reussites_gagnees", "reussites gagnees de la tete de 143", 0)):
+                if t_.get(k_) is not None:
+                    ajoute(n_, t_[k_], dd, cap.name)
+            ajoute("amplitude de la tete de 143", t_["amplitude_um"], 1, cap.name, unites=("µm",))
+        b_ = j_.get("la_barre", {})
+        if b_.get("decidable"):
+            for k_, n_ in (("reussites_au_mieux", "reussites au mieux de la barre de 143"),
+                           ("tours_boucles_au_mieux", "tours au mieux de la barre de 143"),
+                           ("memes_feuilles_au_mieux", "feuilles au mieux de la barre de 143")):
+                ajoute(n_, b_[k_], 0, cap.name)
+        for nom in ("une machoire", "deux machoires libres", "la pince"):
+            v_ = j_.get(f"cases_ou_le_cap_sert_{nom}")
+            if v_ is not None:
+                ajoute(f"cases ou le cap sert a {nom} de 143", v_, 0, cap.name,
+                       unites=("cases", "/ 15"))
+
     # ⭐⭐⭐⭐ LA TRANCHE 142 : LA PINCE, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Une derive ne voyage jamais sans le compte de BONNES FEUILLES et sans les tours boucles :
     # « 0,0379 feuille » seul se lit comme un succes, a cote de « 10 sur 12 » et « 11 tours » il dit

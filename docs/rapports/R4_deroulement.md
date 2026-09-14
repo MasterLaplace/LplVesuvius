@@ -984,6 +984,35 @@ manque un interstice poussé plus loin par le froissement ; une dérive de **exa
 par tour est la **coupure angulaire** de la fixture et non un échec ; et un de mes propres contrôles
 était **incapable d'échouer**.
 
+**`143` · 2026-09-14 · le cap et la contrainte ne se complètent pas : ils se remplacent**
+(`la_pince_garde_t_elle_son_cap.py`, zéro lecture distante)
+`139` donne le cap contre ce qui **alterne**, `142` la pince contre ce qui **persiste**, et aucun des
+deux ne passe seul la matière du rouleau : la marche suivante était leur composition. ⭐⭐⭐⭐ **La
+mesure corrige ma prédiction.** Le refus de la pince tombe de **297** à **zéro** quand la mémoire du
+cap monte — 297, 194, 28, 0, 0 — et dès **0,75** la pince marche **exactement** comme un bras libre,
+pas à pas, dans **15 cases sur 15** : un cap suffisant empêche en amont la situation même que le refus
+existe pour attraper — `R4-F94`. ⭐⭐⭐ **Le cap échange de la fidélité contre de la distance** :
+bonnes feuilles **121 → 105**, tours bouclés **93 → 125**, et les réussites — boucler le tour **et**
+revenir sur la même feuille — passent par un maximum (**92 · 96 · 98 · 100 · 95**). L'optimum est
+**0,75** pour les trois bras, et un réglage **unique** n'y coûte que **3** réussites sur **103** —
+`R4-F95`. ⚠⚠ Mais sur la grille entière, **une seule mâchoire munie d'un cap passe devant la pince**,
+**117** contre **100** : neuf des quinze cases portent un froissement, et une pince paie de devoir
+voir ses **deux** interstices. Sur l'écrasement seul à bruit 16 elle garde son avantage, **10**
+réussites contre **1**. Et la barre de `140` n'est franchie par personne : sur la matière écrasée
+**et** froissée à 100 µm, **aucun** bras ne réussit un transfert à aucune mémoire — au mieux **1**
+tour bouclé et **9** bonnes feuilles, jamais ensemble — `R4-F96`. ⚠⚠ **Un piège payé sur cette
+tranche même, et c'est le plus instructif** : ma première barre comptait séparément les tours bouclés
+et les bonnes feuilles, et elle a été déclarée **franchie** par une marche qui bouclait son tour en
+revenant sur une **autre** feuille — une bonne feuille sur douze. Un contrôle satisfait par autre
+chose que ce qu'il demande ne contrôle rien ; une réussite est désormais **jointe**, ce qui rend au
+passage le résultat de `142` plus net encore (une mâchoire réussit **1** transfert sur 12, la pince
+**10**). ⚠ Le cap agit sur la **normale** et ne peut pas agir ailleurs : dans le plan du tour, la
+perpendiculaire à une normale est unique au signe près. ⚠ La mémoire est **balayée**, jamais posée —
+que l'optimum retombe sur le 0,75 de `137` est une convergence, pas une justification. ⭐⭐ **La
+demande devient autre** : non plus composer les deux instruments, mais en construire un qui **lit**
+laquelle des deux causes domine et règle sa mémoire en conséquence, ce que `140` rend possible
+puisque la cohérence du penchant sépare les deux causes et se mesure sur une marche.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
