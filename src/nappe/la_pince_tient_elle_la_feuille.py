@@ -536,7 +536,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
            cap_tournant: str = "", avance_sur_la_lecture: bool = False,
            fenetre_elargie: str = "", pose_sur_la_lecture: bool = False,
-           pose_en_deux_temps: bool = False) -> dict:
+           pose_en_deux_temps: bool = False, en_croix: bool = False,
+           rejeter: bool = False) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -569,8 +570,21 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
 
     ⚠ Les deux modes s'excluent : `memoire_du_cap` sert quand la fenetre est nulle, et `143` reste
     reproductible au bit.
+
+    ⭐⭐⭐⭐ ET LA MARCHE PEUT ENFIN POSER L'INSTRUMENT QUE `153`, `154` ET `155` ONT REPARE.
+    `en_croix` remplace la barre d'appuis par DEUX barres et un plan ajuste — la seule forme qui
+    puisse exprimer une normale sortie du plan du tour, ce que `153` mesure sur la matiere du
+    rouleau et nulle part ailleurs. `rejeter` ecarte les appuis tombes sur un AUTRE interstice,
+    ce que `155` mesure comme le seul reglage qui RAPPROCHE la pose de l'echelle de sa matiere.
+    Les deux etaient dans `poser` depuis `155` et aucune marche ne les avait payes.
+
+    ⚠⚠ ET L'ATTENTE SE DIT AVANT LA MESURE. `149` mesure que la pince meurt d'ARRET et que c'est
+    la POSE qui echoue — vingt et un refus de pose contre zero refus de contrainte — et `150`
+    que la pose tombe a 633 ‰ a l'angle du cap. Une pose plus juste devrait donc faire ARRETER
+    MOINS. « Elle arrete moins » n'est PAS « elle reussit plus », et les deux se comptent a part.
     """
-    etat = poser(vol, depart_vx, normale0, largeur_um, epaisseur_nominale_um, voxel_um, deux)
+    etat = poser(vol, depart_vx, normale0, largeur_um, epaisseur_nominale_um, voxel_um, deux,
+                 en_croix=en_croix, rejeter=rejeter)
     if etat is None:
         return {"decidable": False, "raison": "la pince ne se pose pas au depart"}
     # ⭐⭐⭐ LA FENETRE DE RECHERCHE VIENT DE L'EPAISSEUR QU'ON TIENT, et c'est la seconde chose que
@@ -609,6 +623,11 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     # impose, et elle est GRATUITE — la machoire les a deja lues.
     marges: list[float] = []
     marge = 0.0
+    # ⚠⚠ LES APPUIS REJETES SE COMPTENT SUR LES POSES QUE LA MARCHE GARDE, jamais sur celles
+    # qu'elle a essayees puis refusees : ce sont les seules dont la normale ait decide du pas
+    # suivant. Et c'est un COMPTE, pas une comparaison de normales — `155` a paye qu'une
+    # tolerance sous la reproductibilite de la decomposition compte du bruit comme un effet.
+    rejetes_totaux = 0
     # ⭐⭐⭐ LA DERNIERE NORMALE QUE LA MATIERE A RENDUE, AVANT TOUT MELANGE. Au premier pas elle EST
     # la normale d'etat, puisque rien n'a encore ete melange — donc `pose_sur_la_lecture` ne change
     # rien tant que le cap ne s'est pas engage, et le temoin reste reproductible au bit.
@@ -630,7 +649,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             neuf = poser(vol, cible,
                          derniere_lecture if pose_sur_la_lecture else etat["normale"],
                          largeur_um, fenetre, voxel_um, deux, marge_um=marge,
-                         deux_temps=pose_en_deux_temps)
+                         deux_temps=pose_en_deux_temps, en_croix=en_croix,
+                         rejeter=rejeter)
             if neuf is None:
                 a *= 0.5
                 halts += 1
@@ -656,6 +676,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         # ⚠ La rotation de la normale est mesuree AVANT le melange : le cap doit lire ce que la
         # matiere a rendu, pas ce que le cap precedent en a deja fait. Lire apres melange ferait
         # une boucle qui se confirme elle-meme.
+        rejetes_totaux += int(pris.get("rejetes", 0))
         rotations.append(_ecart_angulaire(etat["normale"], pris["normale"]))
         # ⭐⭐⭐⭐ CE QUE LE PAS AURAIT TRAVERSE SI LES MACHOIRES NE SE RACCROCHAIENT PAS. Le cap
         # incline la normale, donc il incline aussi la TANGENTE le long de laquelle on avance :
@@ -778,6 +799,10 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             "epaisseur_um": (round(etat["epaisseur_um"], 1)
                              if etat.get("epaisseur_um") is not None else None),
             "saut_median_um": (round(float(np.median(ecarts)), 3) if ecarts else None),
+            # ⚠ Le rejet REELLEMENT exerce est publie, pour la raison qui fait publier la
+            # memoire et la marge : une regle annoncee qui n'ecarterait jamais rien serait la
+            # marche d'avant, deguisee.
+            "appuis_rejetes": int(rejetes_totaux),
             "lectures": int(vol.lectures)}
 
 
@@ -803,7 +828,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                    enroulement_du_cap: bool = False, cap_tournant: str = "",
                    avance_sur_la_lecture: bool = False,
                    fenetre_elargie: str = "", pose_sur_la_lecture: bool = False,
-                   pose_en_deux_temps: bool = False) -> dict:
+                   pose_en_deux_temps: bool = False, en_croix: bool = False,
+                   rejeter: bool = False) -> dict:
     """Les trois bras sur le MEME depart — c'est ce qui rend la comparaison lisible."""
     out = {}
     for nom, deux, contrainte in (("une machoire", False, False),
@@ -818,7 +844,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                           avance_sur_la_lecture=avance_sur_la_lecture,
                           fenetre_elargie=fenetre_elargie,
                           pose_sur_la_lecture=pose_sur_la_lecture,
-                          pose_en_deux_temps=pose_en_deux_temps)
+                          pose_en_deux_temps=pose_en_deux_temps, en_croix=en_croix,
+                          rejeter=rejeter)
     return out
 
 
@@ -858,7 +885,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
              corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
              cap_tournant: str = "", avance_sur_la_lecture: bool = False,
              fenetre_elargie: str = "", pose_sur_la_lecture: bool = False,
-             pose_en_deux_temps: bool = False) -> dict:
+             pose_en_deux_temps: bool = False, en_croix: bool = False,
+             rejeter: bool = False) -> dict:
     """Les trois bras sur une matiere, un niveau de bruit et une largeur — tous les departs.
 
     ⚠ Les trois bras partent du MEME point a chaque depart : une comparaison dont les bras ne
@@ -883,7 +911,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
                                avance_sur_la_lecture=avance_sur_la_lecture,
                                fenetre_elargie=fenetre_elargie,
                                pose_sur_la_lecture=pose_sur_la_lecture,
-                               pose_en_deux_temps=pose_en_deux_temps)
+                               pose_en_deux_temps=pose_en_deux_temps,
+                               en_croix=en_croix, rejeter=rejeter)
         for b, x in trois.items():
             par_bras[b].append({"depart_deg": round(360.0 * k / int(departs), 1), **x})
     bloc = {"ecrasement": float(ecr), "amplitude_um": float(amp), "bruit": float(bruit),
@@ -896,7 +925,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
             "cap_tournant": str(cap_tournant),
             "avance_sur_la_lecture": bool(avance_sur_la_lecture),
             "fenetre_elargie": str(fenetre_elargie),
-            "pose_sur_la_lecture": bool(pose_sur_la_lecture), "bras": {}}
+            "pose_sur_la_lecture": bool(pose_sur_la_lecture),
+            "en_croix": bool(en_croix), "rejeter": bool(rejeter), "bras": {}}
     for b in BRAS:
         bloc["bras"][b] = {"suivis": par_bras[b], **_resumer_un_bras(par_bras[b], int(departs))}
     return bloc
@@ -948,6 +978,16 @@ def _resumer_un_bras(suivis: list[dict], departs: int) -> dict:
         "refus_median": round(float(np.median([x["refus"] for x in bons])), 1),
         "pas_median": round(float(np.median([x["pas"] for x in bons])), 1),
         "lectures_medianes": int(np.median([x["lectures"] for x in bons])),
+        # ⚠ Un compte est ENTIER, et il se somme plutot que de se mediane : la population est
+        # bimodale — la plupart des marches n'ecartent rien — donc une mediane y vaut zero et
+        # ne dirait rien. C'est le motif que `155` a paye sur les poses.
+        "appuis_rejetes": int(sum(int(x.get("appuis_rejetes", 0)) for x in bons)),
+        "marches_qui_rejettent": int(sum(1 for x in bons
+                                        if int(x.get("appuis_rejetes", 0)) > 0)),
+        # ⚠ « Elle arrete moins » est un enonce SEPARE de « elle reussit plus », donc il se
+        # compte a part : `149` mesure que la pince meurt d'arret, pas de derive.
+        "arrets": int(sum(1 for x in bons
+                         if x.get("fin") == "la pince ne peut plus avancer")),
     })
     ep = [x["epaisseur_um"] for x in bons if x.get("epaisseur_um") is not None]
     if ep:

@@ -3049,6 +3049,86 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 156 : LA GRILLE AVEC L'INSTRUMENT REPARE, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un compte de REUSSITES ne voyage jamais sans son compte d'ARRETS : « elle arrete moins »
+    # est l'enonce separe que `149` et `150` font attendre, et une seule des deux colonnes se
+    # lirait comme un verdict.
+    # (2) Un GAIN ne voyage jamais sans la PERTE qui lui fait face : une victoire est JOINTE depuis
+    # `147`, donc un solde seul est satisfait par un deplacement.
+    # (3) Et un PRIX ne voyage jamais sans ce qu'il achete : « ×1,9921 » seul est un nombre, a cote
+    # de « +1 reussite » il dit que la moitie chere ne paie pas.
+    cx = _source(racine, "la_croix_marche_t_elle_le_tour.json")
+    if cx.exists():
+        d = json.loads(cx.read_text())
+
+        def dec156(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            g_ = d.get("sur_la_grille", {})
+            ajoute("cases de la grille de 156", len(g_.get("cases", [])), 0, cx.name)
+            ajoute("departs par case de 156", int(g_["departs"]), 0, cx.name)
+            ajoute("fenetre du cap de 156", int(g_["fenetre"]), 0, cx.name)
+            # ⚠⚠ ON N'ENREGISTRE QUE CE QUE LE DOCUMENT PUBLIE : `156` table la PINCE, et les deux
+            # autres bras ne sont publies que par le temoin interne.
+            for x in j_.get("par_variante", []):
+                p_ = x["la pince"]
+                q = f"de l'instrument « {x['nom']} » de 156"
+                for cle, nom in (("reussites", "reussites de la pince"),
+                                 ("arrets", "marches arretees de la pince"),
+                                 ("poses_manquees", "poses refusees au depart de la pince"),
+                                 ("appuis_rejetes", "appuis ecartes par la pince")):
+                    ajoute(f"{nom} {q}", int(p_[cle]), 0, cx.name)
+                if p_.get("lectures_medianes") is not None:
+                    ajoute(f"lectures medianes de la pince {q}", int(p_["lectures_medianes"]), 0,
+                           cx.name)
+                for m in x.get("par_matiere", []):
+                    ajoute(f"reussites de la pince sur {m['nom']} {q}", int(m["la pince"]), 0,
+                           cx.name)
+            d140 = {x["nom"]: x["sur_la_matiere_de_140"] for x in j_.get("par_variante", [])}
+            for nom, bloc140 in d140.items():
+                q = f"sur la matiere de 140, instrument « {nom} » de 156"
+                for cle, mot in (("la pince", "reussites de la pince"),
+                                 ("une machoire", "reussites d'une machoire"),
+                                 ("arrets", "marches arretees"),
+                                 ("appuis_rejetes", "appuis ecartes")):
+                    ajoute(f"{mot} {q}", int(bloc140[cle]), 0, cx.name)
+            for a_ in j_.get("apparie_au_temoin", []):
+                if not a_.get("decidable"):
+                    continue
+                q = f"de l'instrument « {a_['nom']} » contre le temoin de 156"
+                ajoute(f"departs apparies {q}", int(a_["paires"]), 0, cx.name)
+                ajoute(f"reussites gagnees {q}", int(a_["gains"]), 0, cx.name)
+                ajoute(f"reussites perdues {q}", int(a_["pertes"]), 0, cx.name)
+                ajoute(f"solde {q}", int(a_["solde"]), 0, cx.name, signe=True)
+            for ligne in j_.get("le_gain_par_bruit", {}).get("par_bruit", []):
+                for y in ligne.get("par_instrument", []):
+                    q = (f"au bruit {ligne['bruit']:g} de l'instrument « {y['nom']} » de 156")
+                    for cle, mot in (("gains", "reussites gagnees"),
+                                     ("pertes", "reussites perdues"),
+                                     ("paires", "departs apparies"),
+                                     ("arrets_du_temoin", "marches arretees du temoin"),
+                                     ("arrets", "marches arretees")):
+                        if y.get(cle) is not None:
+                            ajoute(f"{mot} {q}", int(y[cle]), 0, cx.name)
+            ver_ = j_.get("le_verdict", {})
+            if ver_.get("decidable"):
+                for y in ver_.get("par_instrument", []):
+                    if y.get("prix") is not None:
+                        ajoute(f"prix en lectures de l'instrument « {y['nom']} » de 156",
+                               y["prix"], dec156(y["prix"], 4), cx.name)
+            t_ = j_.get("le_temoin_interne", {})
+            if t_.get("decidable"):
+                for bras, val in t_.get("par_bras", {}).items():
+                    ajoute(f"reussites du bras « {bras} » du temoin interne de 156",
+                           int(val["ici"]), 0, cx.name)
+                ajoute("marches arretees du temoin interne de 156", int(t_["arrets_ici"]), 0,
+                       cx.name)
+                ajoute("appuis ecartes sans rejet, temoin interne de 156",
+                       int(t_["appuis_rejetes_ici"]), 0, cx.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 155 : LE REJET DES ABERRANTS, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Une erreur de la grille ne voyage jamais sans son COMPTE DE POSES — elargir achete des
     # poses et les paie en justesse, et une seule des deux colonnes se lirait a l'envers.

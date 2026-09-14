@@ -1293,6 +1293,43 @@ degrés, et un aberrant à cinq pour cent peut manquer sur trente-six appuis. �
 graal** : `poser(..., en_croix=True, rejeter=True)` existe et `suivre` ne le passe toujours pas —
 c'est la première fois depuis `142` qu'une **grille** vaut son prix.
 
+**`156` · 2026-09-14 · la croix marche-t-elle le tour ?**
+(`la_croix_marche_t_elle_le_tour.py`, zéro lecture distante)
+La première grille depuis `142` qui paie un instrument **réparé** plutôt qu'un réglage :
+`poser(..., en_croix=True, rejeter=True)` existait depuis `155` et `suivre` ne le passait pas.
+⭐⭐⭐⭐ **Le partage n'est pas celui qu'on attendait : la moitié CHÈRE ne paie pas sur une marche et
+la moitié GRATUITE paie presque tout.** La croix coûte **×1,9921** de lectures médianes (546708
+contre 274434) et rend **+1** réussite — 109 contre 108, **9 gagnées pour 8 perdues**, un pur
+déplacement ; le rejet coûte **×1,0003** (274521) et en rend **+15** — **123**, 19 gagnées pour 4
+perdues ; les deux ensemble rendent **124** pour **×1,9994** — `R4-F130`. ⚠⚠ **La victoire JOINTE de
+`147` n'est PAS acquise** sur la grille entière : **19 gagnées pour 3 perdues** sur **180** départs
+appariés, donc la barre de `144` tient. ⭐⭐⭐ **Mais elle l'est aux bruits 0 et 8**, lus et non
+choisis — **+1 / −0** puis **+7 / −0** — et les trois pertes sont **toutes** au bruit 16, celui où
+`144` mesure que sa propre lecture cesse de séparer les causes (0,0891 contre 0,1197). Les deux
+faits sont co-localisés et publiés comme tels — `R4-F129`. ⭐⭐ **L'attente de `149` et `150`, écrite
+avant la mesure, est confirmée pour le rejet et réfutée pour la croix** : les marches arrêtées
+tombent de **49** à **35** avec le rejet, montent à **50** avec la croix seule, et les poses refusées
+au départ passent de **10** à **11** dès que la croix est employée — une mâchoire en croix a besoin
+de **deux** barres de matière pour se poser — `R4-F131`. ⚠⚠ **Et ce que `155` ne pouvait pas voir :
+le rejet travaille surtout contre le BRUIT DE LECTURE.** `155` recense les aberrants sur des matières
+**sans bruit** ; sur une grille bruitée le rejet seul rend **+0 / −0** au bruit 0, **+6 / −0** au
+bruit 8 et **+13 / −4** au bruit 16. Une lecture bruitée pose un appui sur l'interstice voisin
+exactement comme un froissement, et l'énoncé du rejet ne demande pas **quelle** cause l'y a mis.
+✗ **La barre de `140` reste au sol** : **0** transfert pour la pince sur les trente-six départs de la
+matière du rouleau, **31** arrêts inchangés sous les quatre instruments, et le seul non-zéro de la
+campagne tient à **1** départ d'une mâchoire seule munie du rejet — `R4-F132`. ⚠⚠⚠ **Deux sondes de
+ma batterie ne mordaient pas**, trouvées en cassant le code : la première ne mordait que sur la pose
+de **départ** — un suiveur qui aurait posé la croix au départ puis le segment à chaque pas serait
+passé au vert — et ce qui isole le pas est son **prix** ; la seconde comparait des arrêts que la
+fixture rendait d'accord. ⚠⚠ **Et une fixture entière était trop courte** : à bruit nul la pince ne
+franchit pas le premier pas sur la matière du rouleau, donc toute sonde du rejet y passait au vert
+pour la raison **inverse** de celle qu'elle annonçait. ⭐⭐ **Conséquence pour le graal** : la demande
+change de place et devient étroite — les pertes sont toutes au bruit où la lecture du cap ne sépare
+plus rien, donc la question n'est plus « comment poser plus juste » mais « pourquoi une pose plus
+juste perd-elle trois départs là-bas ». C'est la première fois de la campagne qu'un gain et une perte
+sont séparés par un **paramètre mesuré** plutôt que mélangés dans un total. ⚠ Et la **croix** est un
+chemin **fermé** pour la marche, ce qu'aucune tranche ne pouvait dire avant.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
