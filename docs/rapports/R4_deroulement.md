@@ -952,6 +952,38 @@ aux fixtures, donc le verdict porte sur des grandeurs sans longueur ; et les sta
 calculées sur les angles pleins alors que les angles rangés étaient arrondis, donc les chiffres
 publiés n'étaient pas reproductibles depuis les angles publiés.
 
+**`142` · 2026-09-14 · une pince tient la feuille que la sonde lâche**
+(`la_pince_tient_elle_la_feuille.py`, zéro lecture distante — la vérité est connue parce que la
+mesure est sur fixture)
+L'idée est celle de l'auteur — **deux rouleaux compresseurs** — et trois tranches l'avaient préparée :
+`138` établit qu'il faut **contraindre** le marcheur et non mieux le mesurer, `140` que la correction
+est prévisible depuis l'écrasement, `141` qu'elle n'a **rien à détecter**. Transposée dans le volume,
+une **mâchoire** est un appui large qui repose sur un **interstice**, et une **pince** en a deux, une
+de chaque côté de la même feuille. ⭐⭐⭐⭐ **Sur la spirale à l'écrasement mesuré (0,2782) et à bruit
+16, un tour entier, 12 départs : une sonde à une seule mâchoire finit sur la bonne feuille 2 fois sur
+12, la pince 10 fois sur 12** — et elle boucle **11** tours contre **7**, en **809** pas contre
+**1811** — `R4-F91`. ⭐⭐⭐⭐ **Et les deux ingrédients paient séparément** : la seconde mâchoire
+divise la dérive par **18,178** parce qu'elle **mesure** l'épaisseur (**151,1 µm**) là où une seule ne
+peut que la supposer, et le refus de changer d'interstice la divise par **1,586** de plus, soit
+**28,826** en tout — `R4-F92`. ⭐⭐ **Une mâchoire rend son orientation sans tenseur de structure
+parce qu'elle a une LARGEUR** : **4,358°** d'erreur à bruit 8 pour **219** lectures, contre
+**53,514°** pour un gradient central, et **68921** lectures pour le tenseur qu'emploie `marcher`.
+⚠⚠ **Elle ne gagne pas partout, et c'est la moitié importante** : **5** des **14** cases qui séparent
+quelque chose, les **6** autres étant des témoins où les trois bras réussissent tout. Elle **perd**
+sur les matières froissées, parce qu'elle exige de voir ses **deux** interstices et qu'un froissement
+assez raide lui en cache un ; et sur la matière que `140` retient — écrasée **et** froissée à 100 µm —
+**aucun** bras ne boucle un tour — `R4-F93`. ⭐ Le partage avec le cap se lit alors tout seul : `139`
+mesure que le cap récupère 73 % de l'obliquité d'un froissement et `140` qu'il enlève ce qui
+**alterne** ; la pince tient contre ce qui **persiste**. Les deux instruments ne se remplacent pas.
+⚠ Le verdict est un **couple** — sur quelle feuille on finit *et* jusqu'où on va — sans quoi un bras
+qui refuse tout serait déclaré le meilleur ; et « la même feuille » se décide à une **demi-feuille**,
+là où l'appariement au plus proche bascule, pas à une tolérance réglée. ⚠ Quatre pièges payés sur
+cette tranche : un minimum accepté au **bord** de sa fenêtre fait s'effondrer l'épaisseur et la pince
+se referme sur elle-même ; une fenêtre qui part de zéro au lieu d'être centrée sur l'endroit attendu
+manque un interstice poussé plus loin par le froissement ; une dérive de **exactement 1,0000** feuille
+par tour est la **coupure angulaire** de la fixture et non un échec ; et un de mes propres contrôles
+était **incapable d'échouer**.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

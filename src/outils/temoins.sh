@@ -1424,6 +1424,8 @@ run "ecrasement"             uv run python "$ROOT/src/nappe/lecrasement_explique
 run "figure ecrasement"      uv run python "$ROOT/src/figures/figure_lecrasement_explique_t_il_lobliquite.py" --verifier
 run "queue du penchant"      uv run python "$ROOT/src/nappe/la_queue_du_penchant_est_elle_locale.py" --verifier
 run "figure queue"           uv run python "$ROOT/src/figures/figure_la_queue_du_penchant_est_elle_locale.py" --verifier
+run "la pince"               uv run python "$ROOT/src/nappe/la_pince_tient_elle_la_feuille.py" --verifier
+run "figure pince"           uv run python "$ROOT/src/figures/figure_la_pince_tient_elle_la_feuille.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -3049,6 +3049,89 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 142 : LA PINCE, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Une derive ne voyage jamais sans le compte de BONNES FEUILLES et sans les tours boucles :
+    # « 0,0379 feuille » seul se lit comme un succes, a cote de « 10 sur 12 » et « 11 tours » il dit
+    # que la pince a la fois tient la feuille ET va au bout, ce qu'un bras qui refuse tout ne fait
+    # pas.
+    # (2) Et l'erreur d'une machoire ne voyage jamais sans son COUT en lectures : 4,358° seul se lit
+    # comme une mediocrite, a cote de 219 lectures contre 68921 il dit pourquoi une machoire
+    # remplace un tenseur de structure.
+    pin = _source(racine, "la_pince_tient_elle_la_feuille.json")
+    if pin.exists():
+        d = json.loads(pin.read_text())
+
+        def dec142(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        pr = d.get("le_prix_dune_normale", {})
+        for x in pr.get("par_bruit", []):
+            cle = f"a bruit {x['bruit']} de 142"
+            for k_, n_ in (("machoire", "erreur de la machoire"),
+                           ("gradient au voxel", "erreur du gradient au voxel"),
+                           ("gradient au quart de pas", "erreur du gradient au quart de pas")):
+                if x.get(k_) is not None:
+                    ajoute(f"{n_} {cle}", x[k_]["erreur_mediane_deg"],
+                           dec142(x[k_]["erreur_mediane_deg"], 3), pin.name, unites=("°",))
+        if pr.get("par_bruit"):
+            ajoute("lectures d'une machoire de 142", pr["par_bruit"][0]["machoire"]["lectures"], 0,
+                   pin.name, unites=("lectures",))
+            ajoute("lectures du tenseur de 142",
+                   pr["par_bruit"][0]["tenseur de structure"]["lectures"], 0, pin.name,
+                   unites=("lectures",))
+            ajoute("lectures d'un gradient de 142",
+                   pr["par_bruit"][0]["gradient au voxel"]["lectures"], 0, pin.name,
+                   unites=("lectures",))
+        b_ = d.get("sur_les_matieres", {})
+        # ⚠ Le tableau du §4 publie, par case et par bras, la DERIVE mediane — et c'est le seul
+        # nombre de ce tableau qui porte des decimales, donc le seul qui se cherche sans ambiguite.
+        for c in b_.get("cases", []):
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                x = c.get("bras", {}).get(nom, {})
+                if x.get("derive_mediane") is None:
+                    continue
+                ajoute(f"derive de {nom} sur {c['nom']} a bruit {c['bruit']} de 142",
+                       x["derive_mediane"], dec142(x["derive_mediane"], 4), pin.name)
+        j_ = d.get("juger", {})
+        t_ = j_.get("la_case_qui_separe")
+        if t_ is not None:
+            for k_, n_, dd in (("gain_de_la_seconde_machoire",
+                                "gain de la seconde machoire de 142", 3),
+                               ("gain_de_la_contrainte", "gain de la contrainte de 142", 3),
+                               ("gain_total", "gain total de 142", 3)):
+                if t_.get(k_) is not None:
+                    ajoute(n_, t_[k_], dec142(t_[k_], dd), pin.name)
+        for k_, n_ in (("cases", "cases de 142"),
+                       ("cases_qui_separent", "cases qui separent de 142"),
+                       ("gagne_parmi_celles_qui_separent", "cases gagnees de 142"),
+                       ("cases_ou_personne_ne_derive", "temoins de 142")):
+            if j_.get(k_) is not None:
+                ajoute(n_, j_[k_], 0, pin.name, unites=("cases",))
+        for x in j_.get("par_largeur", []) or []:
+            cle = f"a largeur {x['largeur_um']} de 142"
+            for k_, n_ in (("derive_la_pince", "derive de la pince"),
+                           ("derive_une_machoire", "derive d'une machoire")):
+                if x.get(k_) is not None:
+                    ajoute(f"{n_} {cle}", x[k_], dec142(x[k_], 4), pin.name)
+            ajoute(f"largeur de machoire {x['largeur_en_pas']} de 142", x["largeur_um"],
+                   dec142(x["largeur_um"], 1), pin.name, unites=("µm",))
+        cas = [c for c in b_.get("cases", [])
+               if t_ is not None and c["ecrasement"] == t_["ecrasement"]
+               and c["amplitude_um"] == t_["amplitude_um"] and c["bruit"] == t_["bruit"]]
+        if cas:
+            c = cas[0]
+            ajoute("avance de 142", c["avance_um"], dec142(c["avance_um"], 1), pin.name,
+                   unites=("µm",))
+            ep_ = c["bras"]["la pince"].get("epaisseur_mediane_um")
+            if ep_ is not None:
+                ajoute("epaisseur mesuree de 142", ep_, dec142(ep_, 1), pin.name, unites=("µm",))
+            for nom, n_ in (("une machoire", "pas d'une machoire de 142"),
+                            ("la pince", "pas de la pince de 142")):
+                v_ = c["bras"][nom].get("pas_median")
+                if v_ is not None:
+                    ajoute(n_, v_, 0, pin.name, unites=("pas",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 141 : LA QUEUE, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Une grandeur de FORME du rouleau ne voyage jamais sans la PIRE fixture et sans la part
     # des fixtures qui le depassent : « autocorrelation 0,7912 » seul se lit comme un groupement
