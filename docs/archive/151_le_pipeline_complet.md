@@ -421,14 +421,14 @@ interstice**. ⚠ C'est une règle, pas un seuil : elle ne porte aucune constant
 
 **[F11] Une mâchoire.** Appuis latéraux le long de la tangente, $n \geq 2$ (trois par défaut) :
 
-$$\hat{t} = \frac{\hat{z} \times \hat{n}}{\|\hat{z} \times \hat{n}\|}, \qquad q_j = c + \hat{t}\,u_j, \qquad u_j \in \operatorname{linspace}(-w,\,+w,\,n)$$
+$$\hat{t} = \frac{\hat{z} \times \hat{n}}{\|\hat{z} \times \hat{n}\|}, \qquad q_j = c + \hat{t}\,u_j, \qquad u_j \in \mathrm{linspace}(-w,\,+w,\,n)$$
 
-$$d_j = \operatorname{interstice}(q_j,\;\sigma\hat{n}) \quad \text{[F8] et [F9]}, \qquad P_j = q_j + \sigma\,\hat{n}\,d_j$$
+$$d_j = \mathrm{interstice}(q_j,\;\sigma\hat{n}) \quad \text{[F8] et [F9]}, \qquad P_j = q_j + \sigma\,\hat{n}\,d_j$$
 
 **[F12] L'orientation sans tenseur de structure.** La tangente est la **direction de plus grande
 variance** du nuage d'appuis :
 
-$$\hat{t}\,' = \text{première composante de } \operatorname{SVD}\bigl(P - \bar{P}\bigr), \qquad \hat{n}\,' = \hat{t}\,' \times \hat{z}, \quad \text{orientée par } \hat{n}\,'\cdot\hat{n} > 0$$
+$$\hat{t}\,' = \text{première composante de } \mathrm{SVD}\bigl(P - \bar{P}\bigr), \qquad \hat{n}\,' = \hat{t}\,' \times \hat{z}, \quad \text{orientée par } \hat{n}\,'\cdot\hat{n} > 0$$
 
 ⭐⭐ C'est ici que la pince gagne son orientation **sans rien acheter** : les appuis tombent sur la
 surface de l'interstice, donc la droite qui les joint *est* une tangente. Mesuré **0,0000°** d'écart à
@@ -494,7 +494,7 @@ plancher de 0,1250 (`R4-F100`). ⚠⚠ **Et elle se paie** : la pince tombe de *
 
 **[F18] Le mélange.** Le cap n'est pas une contrainte, c'est une moyenne exponentielle :
 
-$$\hat{n}_t = \operatorname{normalize}\bigl(m\,\hat{n}_{t-1} + (1-m)\,\hat{n}_{\text{lue}}\bigr)$$
+$$\hat{n}_t = \mathrm{normalize}\bigl(m\,\hat{n}_{t-1} + (1-m)\,\hat{n}_{\text{lue}}\bigr)$$
 
 ⚠⚠ **Et c'est par là que tout l'étage `E4` échoue** : le mélange incline la **tangente** le long de
 laquelle on avance, donc une part du pas **traverse** la feuille au lieu de la longer (`R4-F109`).
@@ -610,7 +610,7 @@ son voisin**, même à température zéro (`R1-F05`) — donc les panneaux se ju
 
 **[F33] L'écart apparié.** Ne jamais comparer des médianes quand les cas varient plus que les méthodes :
 
-$$\Delta = \operatorname{médiane}_i\,(a_i - b_i), \qquad \text{IC par retrait d'un cas}$$
+$$\Delta = \text{médiane}_i\,(a_i - b_i), \qquad \text{IC par retrait d'un cas}$$
 
 Mesuré : une différence de médianes donnait $+5{,}6$ µm de gain là où l'écart apparié donne
 $-1{,}2$ µm, IC $[-5{,}2;\,+2{,}5]$ enjambant zéro. ⚠ **Un écart dont le signe ne survit pas au retrait
