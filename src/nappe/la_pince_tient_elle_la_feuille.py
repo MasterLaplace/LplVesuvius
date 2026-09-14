@@ -199,13 +199,39 @@ def une_machoire(vol, centre_vx, normale, sens: float, largeur_um: float, epaiss
 
 
 def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel_um: float,
-          deux: bool, appuis: int = APPUIS, marge_um: float = 0.0) -> dict | None:
+          deux: bool, appuis: int = APPUIS, marge_um: float = 0.0,
+          deux_temps: bool = False) -> dict | None:
     """L'etat d'un bras : une machoire, ou deux et l'epaisseur qu'elles MESURENT.
 
     ⚠⚠ C'est la seule difference de fond entre le premier bras et le second. Avec une machoire, ou
     est la feuille se SUPPOSE — une demi-epaisseur sous l'appui, c'est-a-dire un demi-pas, la valeur
     nominale. Avec deux, elle se MESURE, et le centre est le milieu de ce qu'on tient.
+
+    ⭐⭐⭐⭐ `deux_temps` EST LA TROISIEME SOURCE DE DIRECTION, ET LA SEULE QUE `150` N'AIT PAS
+    FERMEE. Les machoires ont besoin d'une direction DROITE et FRAICHE. Le melange du cap est frais
+    et penche (40,569° sur la matiere du rouleau, ou la pose tombe a 633 ‰) ; la lecture precedente
+    est droite et date d'un quart de periode (96 reussites contre 108). Poser DEUX FOIS n'emprunte
+    ni l'une ni l'autre : la premiere pose sert a LIRE la normale ici et maintenant, la seconde est
+    celle qu'on garde. Aucune constante n'entre — c'est deux appels au lieu d'un.
+
+    ⚠⚠⚠ ET UNE POSE EN DEUX TEMPS NE PEUT PAS REUSSIR PLUS SOUVENT QU'UNE POSE SIMPLE. Le second
+    temps n'a lieu que si le premier a rendu quelque chose, donc sa reussite est une CONJONCTION :
+    `P(deux temps) <= P(un temps)`, par construction et non par mesure. Ce que le second temps peut
+    acheter n'est donc pas un taux de pose — c'est la JUSTESSE de la normale rendue, qui decide de
+    la pose SUIVANTE. Le dire ici evite de mesurer un theoreme.
+
+    ⚠⚠ LE CENTRE NE BOUGE PAS ENTRE LES DEUX TEMPS, et c'est ce qui garde la mesure lisible. Repartir
+    du centre que la premiere pose a trouve changerait DEUX choses a la fois — la direction et le
+    point — et aucune des deux ne serait imputable. Le suiveur n'a pas avance entre les deux temps ;
+    seule sa direction a ete relue.
     """
+    if deux_temps:
+        premier = poser(vol, centre_vx, normale, largeur_um, epaisseur_um, voxel_um, deux,
+                        appuis, marge_um)
+        if premier is None:
+            return None
+        return poser(vol, centre_vx, premier["normale"], largeur_um, epaisseur_um, voxel_um,
+                     deux, appuis, marge_um)
     haut = une_machoire(vol, centre_vx, normale, +1.0, largeur_um, epaisseur_um, voxel_um,
                         appuis, marge_um)
     if haut is None:
@@ -400,7 +426,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
            corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
            cap_tournant: str = "", avance_sur_la_lecture: bool = False,
-           fenetre_elargie: str = "", pose_sur_la_lecture: bool = False) -> dict:
+           fenetre_elargie: str = "", pose_sur_la_lecture: bool = False,
+           pose_en_deux_temps: bool = False) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -493,7 +520,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             # rien d'autre — c'est la moitie que `148` n'avait pas essayee.
             neuf = poser(vol, cible,
                          derniere_lecture if pose_sur_la_lecture else etat["normale"],
-                         largeur_um, fenetre, voxel_um, deux, marge_um=marge)
+                         largeur_um, fenetre, voxel_um, deux, marge_um=marge,
+                         deux_temps=pose_en_deux_temps)
             if neuf is None:
                 a *= 0.5
                 halts += 1
@@ -665,7 +693,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                    bloc_du_cap: int = 1, corrige_le_bruit: bool = False,
                    enroulement_du_cap: bool = False, cap_tournant: str = "",
                    avance_sur_la_lecture: bool = False,
-                   fenetre_elargie: str = "", pose_sur_la_lecture: bool = False) -> dict:
+                   fenetre_elargie: str = "", pose_sur_la_lecture: bool = False,
+                   pose_en_deux_temps: bool = False) -> dict:
     """Les trois bras sur le MEME depart — c'est ce qui rend la comparaison lisible."""
     out = {}
     for nom, deux, contrainte in (("une machoire", False, False),
@@ -679,7 +708,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                           enroulement_du_cap=enroulement_du_cap, cap_tournant=cap_tournant,
                           avance_sur_la_lecture=avance_sur_la_lecture,
                           fenetre_elargie=fenetre_elargie,
-                          pose_sur_la_lecture=pose_sur_la_lecture)
+                          pose_sur_la_lecture=pose_sur_la_lecture,
+                          pose_en_deux_temps=pose_en_deux_temps)
     return out
 
 
@@ -718,7 +748,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
              fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
              corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
              cap_tournant: str = "", avance_sur_la_lecture: bool = False,
-             fenetre_elargie: str = "", pose_sur_la_lecture: bool = False) -> dict:
+             fenetre_elargie: str = "", pose_sur_la_lecture: bool = False,
+             pose_en_deux_temps: bool = False) -> dict:
     """Les trois bras sur une matiere, un niveau de bruit et une largeur — tous les departs.
 
     ⚠ Les trois bras partent du MEME point a chaque depart : une comparaison dont les bras ne
@@ -742,7 +773,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
                                cap_tournant=cap_tournant,
                                avance_sur_la_lecture=avance_sur_la_lecture,
                                fenetre_elargie=fenetre_elargie,
-                               pose_sur_la_lecture=pose_sur_la_lecture)
+                               pose_sur_la_lecture=pose_sur_la_lecture,
+                               pose_en_deux_temps=pose_en_deux_temps)
         for b, x in trois.items():
             par_bras[b].append({"depart_deg": round(360.0 * k / int(departs), 1), **x})
     bloc = {"ecrasement": float(ecr), "amplitude_um": float(amp), "bruit": float(bruit),
@@ -1155,6 +1187,77 @@ def verifier() -> int:
       f"{deux['epaisseur_um']} contre {pas_um}")
     v("... et le centre mesuré est celui du départ",
       float(np.linalg.norm(np.asarray(deux["centre_vx"]) - depart)) * voxel_um < 1.0)
+
+    # ---- ⭐⭐⭐⭐ LA POSE EN DEUX TEMPS (`152`)
+    # ⚠⚠ Le premier controle est un THEOREME, pas une mesure : le second temps n'a lieu que si le
+    # premier a rendu quelque chose. Une pose en deux temps ne peut donc jamais reussir la ou une
+    # pose simple echoue, et l'ecrire ici evite d'aller le « mesurer » sur une grille.
+    from combien_de_pas_la_matiere_porte import (  # noqa: PLC0415
+        VolumeFabriqueEnSpiraleFroissee as _VFF)
+    froissee = _matiere(_VFF, 0.2782, 100.0, 0.0, LONGUEUR_DONDE_UM, RAYON_MM)
+    d_f, n_f = un_depart(froissee, 0.0, RAYON_MM, voxel_um, pas_um)
+    tordue = _tourner(n_f, np.radians(80.0))
+    v("⭐⭐⭐ une pose en deux temps ne peut pas réussir là où une pose simple échoue",
+      not (poser(froissee, d_f, tordue, LARGEUR_DE_REFERENCE * pas_um, pas_um, voxel_um, True)
+           is None
+           and poser(froissee, d_f, tordue, LARGEUR_DE_REFERENCE * pas_um, pas_um, voxel_um, True,
+                     deux_temps=True) is not None),
+      "le second temps est conditionné par le premier, donc c'est une conjonction")
+
+    # ⭐⭐ Le temoin qui MORD : sur une matiere lisse et une normale DEJA juste, le premier temps
+    # rend deja la vraie normale, donc le second n'a rien a corriger et rend le MEME etat au bit.
+    # Une implementation qui perturberait la pose sans raison echouerait ici.
+    un_t = poser(nue, depart, n0, 0.25 * pas_um, pas_um, voxel_um, True)
+    deux_t = poser(nue, depart, n0, 0.25 * pas_um, pas_um, voxel_um, True, deux_temps=True)
+    v("⭐⭐ sur une normale déjà juste, le second temps ne déplace RIEN",
+      un_t is not None and deux_t is not None
+      and _ecart_deg(un_t["normale"], deux_t["normale"]) < 1e-6,
+      f"{_ecart_deg(un_t['normale'], deux_t['normale']):.2e}°" if un_t and deux_t else "aucune pose")
+
+    # ⭐⭐⭐ ... et sur une normale PENCHEE il deplace quelque chose, sinon le mecanisme est vide.
+    penchee = _tourner(n0, np.radians(30.0))
+    p1 = poser(nue, depart, penchee, 0.25 * pas_um, pas_um, voxel_um, True)
+    p2 = poser(nue, depart, penchee, 0.25 * pas_um, pas_um, voxel_um, True, deux_temps=True)
+    v("⭐⭐⭐ ... alors que sur une normale PENCHÉE il la redresse encore",
+      p1 is not None and p2 is not None
+      and _ecart_deg(p2["normale"], n0) < _ecart_deg(p1["normale"], n0),
+      (f"{_ecart_deg(p1['normale'], n0):.4f}° → {_ecart_deg(p2['normale'], n0):.4f}°"
+       if p1 and p2 else "aucune pose"))
+
+    # ⚠⚠⚠ ET LA SONDE QUI MORD SUR LE CENTRE. Sur une spirale nue au depart recale, le centre
+    # trouve EST le depart, donc « repartir du centre trouve » n'y change rien : une sonde posee
+    # la ne peut pas echouer. Elle se pose donc sur la matiere froissee, ou le centre mesure bouge
+    # reellement, et elle verifie que le second temps est celui du MEME centre — apres avoir
+    # verifie que les deux choix different, sans quoi elle ne prouverait toujours rien.
+    d_w, n_w = un_depart(froissee, 0.7, RAYON_MM, voxel_um, pas_um)
+    graine_w = _tourner(n_w, np.radians(20.0))
+    lg_w = LARGEUR_DE_REFERENCE * pas_um
+    en_deux = poser(froissee, d_w, graine_w, lg_w, pas_um, voxel_um, True, deux_temps=True)
+    t1 = poser(froissee, d_w, graine_w, lg_w, pas_um, voxel_um, True)
+    meme_centre = (poser(froissee, d_w, t1["normale"], lg_w, pas_um, voxel_um, True)
+                   if t1 is not None else None)
+    centre_bouge = (poser(froissee, t1["centre_vx"], t1["normale"], lg_w, pas_um, voxel_um, True)
+                    if t1 is not None else None)
+    ecart_des_deux = (float(np.linalg.norm(np.asarray(meme_centre["centre_vx"])
+                                           - np.asarray(centre_bouge["centre_vx"]))) * voxel_um
+                      if meme_centre is not None and centre_bouge is not None else 0.0)
+    v("⭐⭐ ... et les deux choix de centre donnent VRAIMENT deux poses différentes",
+      ecart_des_deux > 1e-6, f"{ecart_des_deux:.4f} µm — sinon la sonde suivante ne prouve rien")
+    v("⭐⭐⭐⭐ le second temps repart du MÊME centre, pas de celui que le premier a trouvé",
+      en_deux is not None and meme_centre is not None
+      and float(np.linalg.norm(np.asarray(en_deux["centre_vx"])
+                               - np.asarray(meme_centre["centre_vx"]))) < 1e-9,
+      "sinon deux choses changeraient à la fois, la direction ET le point")
+
+    # ⚠ Le prix est publiable : deux temps lisent deux fois.
+    nue.lectures = 0
+    poser(nue, depart, penchee, 0.25 * pas_um, pas_um, voxel_um, True)
+    l1 = int(nue.lectures)
+    nue.lectures = 0
+    poser(nue, depart, penchee, 0.25 * pas_um, pas_um, voxel_um, True, deux_temps=True)
+    l2 = int(nue.lectures)
+    v("⚠ et il coûte exactement deux poses, jamais une de plus",
+      l1 > 0 and l2 == 2 * l1, f"{l1} puis {l2} lectures")
 
     # ---- ⭐ le contrôle : sur une matière facile, personne ne dérive
     trois = les_trois_bras(nue, depart, n0, 0.25 * pas_um, pas_um, voxel_um,

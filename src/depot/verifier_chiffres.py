@@ -3049,6 +3049,71 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 152 : LA POSE EN DEUX TEMPS, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un ecart APPARIE ne voyage jamais sans les comptes qui le portent — « +1,188° » seul est
+    # un nombre, a cote de « 6 redressees contre 28 degradees » il dit de quoi il est fait.
+    # (2) Un ECART DU SECOND TEMPS ne voyage jamais sans celui du TROISIEME : c'est le couple qui
+    # nomme le point fixe, et le second seul ne dit pas si la pose itere ou s'arrete.
+    # (3) Et une pose a l'angle du cap ne voyage jamais sans son PRIX — poses perdues et lectures —
+    # parce qu'un mecanisme qui redresserait en coutant le double reste un arbitrage.
+    dt = _source(racine, "la_pose_en_deux_temps.json")
+    if dt.exists():
+        d = json.loads(dt.read_text())
+
+        def dec152(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        r_ = d.get("redresse", {})
+        if r_.get("decidable"):
+            ajoute("poses par case de 152", r_["poses_par_case"], 0, dt.name)
+            ajoute("temps poses de 152", r_["temps"], 0, dt.name)
+            for m in r_.get("par_matiere", []):
+                for x in m.get("par_inclinaison", []):
+                    q = f"sur {m['nom']} a {x['inclinaison_deg']} degres de 152"
+                    # ⚠ Une donnee absente est SAUTEE, jamais lue comme un zero : une case ou
+                    # aucune pose ne se pose ne redresse pas de zero degre, elle ne redresse rien.
+                    if x.get("ecart_apparie_deg") is not None:
+                        ajoute(f"ecart apparie {q}", x["ecart_apparie_deg"],
+                               dec152(x["ecart_apparie_deg"], 3), dt.name)
+                        ajoute(f"poses redressees {q}", x["redressees"], 0, dt.name)
+                        ajoute(f"poses degradees {q}", x["degradees"], 0, dt.name)
+                        ajoute(f"poses appariees {q}", x["appariees"], 0, dt.name)
+                    ajoute(f"poses perdues au second temps {q}", x["perdues_au_second_temps"],
+                           0, dt.name)
+        j_ = d.get("juger", {})
+        for c in j_.get("par_cause", []):
+            q = f"du groupe « {c['cause']} » de 152"
+            ajoute(f"ecart apparie median {q}", c["ecart_apparie_median_deg"],
+                   dec152(c["ecart_apparie_median_deg"], 3), dt.name)
+            ajoute(f"cases qui redressent {q}", c["cases_qui_redressent"], 0, dt.name)
+            ajoute(f"cases qui degradent {q}", c["cases_qui_degradent"], 0, dt.name)
+            ajoute(f"cases {q}", c["cases"], 0, dt.name)
+        dec = j_.get("a_langle_du_cap", {})
+        if dec.get("decidable"):
+            ajoute("inclinaison du cap lue de 148, dans 152", dec["inclinaison_du_cap_deg"],
+                   dec152(dec["inclinaison_du_cap_deg"], 3), dt.name)
+            for cle, nom in (("erreur_un_temps_deg", "ecart a la vraie normale a un temps"),
+                             ("erreur_deux_temps_deg", "ecart a la vraie normale a deux temps"),
+                             ("erreur_trois_temps_deg", "ecart a la vraie normale a trois temps"),
+                             ("ecart_apparie_deg", "ecart apparie du second temps"),
+                             ("le_troisieme_temps_ajoute_deg",
+                              "ecart apparie du troisieme temps")):
+                if dec.get(cle) is not None:
+                    ajoute(f"{nom} a l'angle du cap de 152", dec[cle], dec152(dec[cle], 3),
+                           dt.name)
+            for cle, nom in (("part_un_temps_pour_mille", "poses reussies a un temps"),
+                             ("part_deux_temps_pour_mille", "poses reussies a deux temps"),
+                             ("perdues_au_second_temps", "poses perdues au second temps"),
+                             ("redressees", "poses redressees"), ("degradees", "poses degradees"),
+                             ("appariees", "poses appariees"),
+                             ("lectures_un_temps", "lectures d'une pose a un temps"),
+                             ("lectures_deux_temps", "lectures d'une pose a deux temps")):
+                if dec.get(cle) is not None:
+                    ajoute(f"{nom} a l'angle du cap de 152", int(dec[cle]), 0, dt.name)
+        if j_.get("poses_perdues_au_total") is not None:
+            ajoute("poses perdues au total de 152", int(j_["poses_perdues_au_total"]), 0, dt.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 150 : LA POSE DE TRAVERS, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Une pose PENCHEE ne voyage jamais sans la meme pose a normale DROITE : « 633 ‰ » seul est
     # un nombre, a cote de « 917 ‰ » il dit que l'inclinaison fait echouer.

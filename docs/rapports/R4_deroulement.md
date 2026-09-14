@@ -1183,6 +1183,33 @@ prédiction géométrique était belle et hors sujet (elle décrivait bien la va
 graal** : la chaîne causale des arrêts est complète et chaque maillon est mesuré — il faut aux
 mâchoires une direction **droite et fraîche**, et les deux sources déjà mesurées sont épuisées.
 
+**`152` · 2026-09-14 · poser deux fois converge vers le plan moyen, pas vers la feuille**
+(`la_pose_en_deux_temps.py`, zéro lecture distante)
+`150` laissait une demande précise et aucune réponse : il faut aux mâchoires une direction **droite
+et fraîche**, et les deux sources mesurées sont épuisées. La troisième n'avait jamais été essayée —
+poser une première fois pour **lire** la normale ici et maintenant, une seconde pour s'y tenir, sans
+aucune constante. ⚠⚠⚠ **Et la première chose à dire est un théorème, pas une mesure** : le second
+temps n'a lieu que si le premier a rendu quelque chose, donc une pose en deux temps ne peut pas
+réussir plus souvent qu'une pose simple. Ce qu'elle peut acheter est la **justesse** de la normale,
+et c'est elle qu'on mesure. ⭐⭐⭐⭐ **À l'angle que `148` mesure sur la matière du rouleau, l'écart
+apparié du second temps vaut +1,188° : il DÉGRADE**, avec **6 redressées contre 28 dégradées** sur
+34 appariées, pour **4 poses perdues** (633 → **567 ‰**) et **876 lectures au lieu de 438**.
+⭐⭐⭐ **Et un troisième temps nomme le mécanisme** : il n'ajoute que **+0,001°**, donc la pose atteint
+son **point fixe** dès le second — et ce point fixe est le **plan moyen** de la mâchoire sur sa
+largeur, jamais la normale de la feuille — `R4-F118`. ⭐⭐ **Le partage par cause porte l'énoncé et
+réfute au passage l'hypothèse naturelle** : **0** case sur **14** dégrade quand la matière porte une
+cause au plus (médiane −0,005°), **9** sur **10** quand elle porte les deux (médiane +0,130°) — et
+sur la matière du rouleau le second temps dégrade **déjà à normale droite**, +0,147° à zéro degré,
+donc l'inclinaison du cap n'a rien à voir avec cette panne — `R4-F119`. ⚠⚠ **Une sonde qui ne
+mordait pas, remplacée** : « le second temps repart du même centre » était posé sur une spirale nue
+à un départ recalé, où le centre trouvé **est** le départ — donc elle passait au vert avec le code
+cassé. Reposée sur la matière froissée, où les deux choix donnent des poses distantes de 30,4 µm, et
+elle vérifie d'abord que les deux choix **diffèrent vraiment**. ⭐⭐ **Conséquence pour le graal** :
+les trois endroits où chercher une direction sont épuisés, et la demande change de forme — non plus
+« où trouver une direction droite » mais « qu'est-ce qui rendrait le plan moyen d'une mâchoire égal
+à la normale de la feuille ». C'est une question sur la **géométrie de la mâchoire**, et `150` a déjà
+réfuté la réponse la plus évidente : la largeur n'y change rien. ⚠ Aucune grille n'a été payée.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
