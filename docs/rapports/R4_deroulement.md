@@ -874,6 +874,30 @@ littéralement, est confondue (sur une pile périodique deux jumelles corrèlent
 +0,33, à des écarts sans aucun voxel partagé). ⚠ Le fait ne sépare pas « elles ont marché ailleurs »
 de « elles ont compté autrement le même chemin » : les positions d'arrivée ne sont pas gardées.
 
+**`139` · 2026-09-14 · une inclinaison uniforme est impossible, et un froissement ne suffit pas**
+(`une_inclinaison_uniforme_est_elle_possible.py`, zéro lecture distante)
+`R4-P28` réclamait « une spirale dont la normale soit à un angle FIXE du rayon » pour expliquer le
+**1,186** de `136`. ⭐⭐⭐⭐ **Cette matière n'est pas un rouleau**, et c'est de la géométrie : un
+rouleau croise UNE feuille par tour, or une inclinaison uniforme α en fait croiser `2πρ·sin(α)/s` —
+aux rayons de la campagne et pour les DEUX espacements de `R4-F14`, les 34,06° mesurés en feraient
+croiser **78,52 à 399,53**. L'inclinaison qu'un enroulement autorise vaut **0,0803 à 0,4087°**,
+**83,3 fois** moins, et c'est exactement celle de la spirale d'Archimède (`R4-F16`). Les 34,06° sont
+donc nécessairement un VAGABONDAGE — `R4-F84`. ⭐⭐⭐⭐ **Et le vagabondage ne suffit pas** : sur une
+spirale FROISSÉE dont la normale analytique est vérifiée aux différences finies à **1,1e-05 degré**,
+à l'amplitude qui rend exactement ces 34,09°, le marcheur paie **1,0078** — le rouleau lui coûte
+1,186. Pour atteindre 1,186 il faut **2,31 fois l'espacement** d'amplitude, et là la phase RECULE
+sur **29,2 %** du rayon : les feuilles se croisent, ce n'est plus une pile. Le plus haut rapport
+atteignable sur une matière encore empilée est **1,0228** — `R4-F85`. ⭐⭐ **Au passage, ce que le cap
+récupère est chiffré pour la première fois : 73 %** de l'obliquité que le champ de normales
+imposerait ; il ne suit pas la normale, il la moyenne. Ce qui retourne le verdict d'un cran — le
+champ du rouleau doit être ENCORE plus oblique que les 25,48° que `137` lit sur le chemin.
+⚠⚠ **Ce qui reste est déjà mesuré ailleurs : le rouleau est ÉCRASÉ** (`90`, et `135` qui lit la
+surface extérieure de **16,8 à 29,75 mm** selon le rayon — précisément pourquoi `116` ne trouvait
+pas de frontière RADIALE). Sur une section écrasée, la direction du centre n'est pas la normale de
+la feuille, et l'écart entre les deux est grand, lentement variable, donc COHÉRENT sur une marche —
+ce que `137` mesure (0,925) et qu'un froissement, qui alterne, ne produit pas. La fixture suivante
+est une spirale écrasée, et elle est maintenant nommée par une mesure et non par une intuition.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

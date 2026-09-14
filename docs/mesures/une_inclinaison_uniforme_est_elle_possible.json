@@ -1,0 +1,477 @@
+{
+  "inclinaison_mesuree_deg": 34.06,
+  "espacements_um": [
+    164.0,
+    182.4
+  ],
+  "rayons_mm": [
+    4.07,
+    10.51,
+    18.62
+  ],
+  "linclinaison_uniforme_est_elle_possible": {
+    "decidable": true,
+    "inclinaison_mesuree_deg": 34.06,
+    "lignes": [
+      {
+        "rayon_mm": 4.07,
+        "espacement_um": 164.0,
+        "feuilles_par_tour_a_linclinaison_mesuree": 87.33,
+        "inclinaison_autorisee_deg": 0.3674
+      },
+      {
+        "rayon_mm": 4.07,
+        "espacement_um": 182.4,
+        "feuilles_par_tour_a_linclinaison_mesuree": 78.52,
+        "inclinaison_autorisee_deg": 0.4087
+      },
+      {
+        "rayon_mm": 10.51,
+        "espacement_um": 164.0,
+        "feuilles_par_tour_a_linclinaison_mesuree": 225.51,
+        "inclinaison_autorisee_deg": 0.1423
+      },
+      {
+        "rayon_mm": 10.51,
+        "espacement_um": 182.4,
+        "feuilles_par_tour_a_linclinaison_mesuree": 202.76,
+        "inclinaison_autorisee_deg": 0.1583
+      },
+      {
+        "rayon_mm": 18.62,
+        "espacement_um": 164.0,
+        "feuilles_par_tour_a_linclinaison_mesuree": 399.53,
+        "inclinaison_autorisee_deg": 0.0803
+      },
+      {
+        "rayon_mm": 18.62,
+        "espacement_um": 182.4,
+        "feuilles_par_tour_a_linclinaison_mesuree": 359.23,
+        "inclinaison_autorisee_deg": 0.0893
+      }
+    ],
+    "inclinaison_autorisee_min_deg": 0.0803,
+    "inclinaison_autorisee_max_deg": 0.4087,
+    "feuilles_par_tour_min": 78.52,
+    "feuilles_par_tour_max": 399.53,
+    "combien_de_fois_trop_grande": 83.3,
+    "une_inclinaison_uniforme_est_impossible": true
+  },
+  "sur_la_spirale_froissee": {
+    "rayon_mm": 10.0,
+    "longueur_donde_um": 393.6,
+    "espacement_de_la_fixture_um": 173.0,
+    "pas_max": 40,
+    "departs": 8,
+    "lots": [
+      {
+        "amplitude_um": 0.0,
+        "amplitude_sur_espacement": 0.0,
+        "inclinaison_max_deg": 0.0,
+        "marches": [
+          {
+            "depart_deg": 0.0,
+            "pas": 40,
+            "chemin_um": 6920.0,
+            "etendue_radiale_um": 6920.0,
+            "rapport_mesure": 1.0,
+            "rapport_predit": 1.0,
+            "inclinaison_mediane_deg": 0.12
+          },
+          {
+            "depart_deg": 45.0,
+            "pas": 40,
+            "chemin_um": 6920.0,
+            "etendue_radiale_um": 6920.0,
+            "rapport_mesure": 1.0,
+            "rapport_predit": 1.0,
+            "inclinaison_mediane_deg": 0.12
+          },
+          {
+            "depart_deg": 90.0,
+            "pas": 40,
+            "chemin_um": 6920.0,
+            "etendue_radiale_um": 6920.0,
+            "rapport_mesure": 1.0,
+            "rapport_predit": 1.0,
+            "inclinaison_mediane_deg": 0.12
+          },
+          {
+            "depart_deg": 135.0,
+            "pas": 40,
+            "chemin_um": 6920.0,
+            "etendue_radiale_um": 6920.0,
+            "rapport_mesure": 1.0,
+            "rapport_predit": 1.0,
+            "inclinaison_mediane_deg": 0.12
+          },
+          {
+            "depart_deg": 180.0,
+            "pas": 23,
+            "chemin_um": 3987.7,
+            "etendue_radiale_um": 3987.7,
+            "rapport_mesure": 1.0,
+            "rapport_predit": 1.0,
+            "inclinaison_mediane_deg": 0.13
+          },
+          {
+            "depart_deg": 225.0,
+            "pas": 40,
+            "chemin_um": 6920.0,
+            "etendue_radiale_um": 6920.0,
+            "rapport_mesure": 1.0,
+            "rapport_predit": 1.0,
+            "inclinaison_mediane_deg": 0.12
+          },
+          {
+            "depart_deg": 270.0,
+            "pas": 24,
+            "chemin_um": 4152.0,
+            "etendue_radiale_um": 4152.0,
+            "rapport_mesure": 1.0,
+            "rapport_predit": 1.0,
+            "inclinaison_mediane_deg": 0.13
+          },
+          {
+            "depart_deg": 315.0,
+            "pas": 40,
+            "chemin_um": 6920.0,
+            "etendue_radiale_um": 6920.0,
+            "rapport_mesure": 1.0,
+            "rapport_predit": 1.0,
+            "inclinaison_mediane_deg": 0.12
+          }
+        ],
+        "part_du_rayon_ou_la_phase_recule": 0.0,
+        "et_au_plus": 0.0,
+        "les_feuilles_se_croisent": false,
+        "rapport_mesure_median": 1.0,
+        "rapport_predit_median": 1.0,
+        "inclinaison_mediane_deg": 0.12
+      },
+      {
+        "amplitude_um": 42.4,
+        "amplitude_sur_espacement": 0.25,
+        "inclinaison_max_deg": 34.09,
+        "marches": [
+          {
+            "depart_deg": 0.0,
+            "pas": 40,
+            "chemin_um": 7517.0,
+            "etendue_radiale_um": 7501.6,
+            "rapport_mesure": 1.0021,
+            "rapport_predit": 1.0221,
+            "inclinaison_mediane_deg": 10.4
+          },
+          {
+            "depart_deg": 45.0,
+            "pas": 40,
+            "chemin_um": 6910.6,
+            "etendue_radiale_um": 6860.1,
+            "rapport_mesure": 1.0074,
+            "rapport_predit": 1.0294,
+            "inclinaison_mediane_deg": 12.81
+          },
+          {
+            "depart_deg": 90.0,
+            "pas": 40,
+            "chemin_um": 6954.0,
+            "etendue_radiale_um": 6890.0,
+            "rapport_mesure": 1.0093,
+            "rapport_predit": 1.0283,
+            "inclinaison_mediane_deg": 11.29
+          },
+          {
+            "depart_deg": 135.0,
+            "pas": 40,
+            "chemin_um": 7559.8,
+            "etendue_radiale_um": 7499.9,
+            "rapport_mesure": 1.008,
+            "rapport_predit": 1.0186,
+            "inclinaison_mediane_deg": 8.8
+          },
+          {
+            "depart_deg": 180.0,
+            "pas": 22,
+            "chemin_um": 4108.5,
+            "etendue_radiale_um": 4064.3,
+            "rapport_mesure": 1.0109,
+            "rapport_predit": 1.0248,
+            "inclinaison_mediane_deg": 10.88
+          },
+          {
+            "depart_deg": 225.0,
+            "pas": 40,
+            "chemin_um": 7135.5,
+            "etendue_radiale_um": 7074.7,
+            "rapport_mesure": 1.0086,
+            "rapport_predit": 1.0265,
+            "inclinaison_mediane_deg": 12.44
+          },
+          {
+            "depart_deg": 270.0,
+            "pas": 24,
+            "chemin_um": 4212.3,
+            "etendue_radiale_um": 4183.3,
+            "rapport_mesure": 1.0069,
+            "rapport_predit": 1.0277,
+            "inclinaison_mediane_deg": 11.53
+          },
+          {
+            "depart_deg": 315.0,
+            "pas": 40,
+            "chemin_um": 7490.3,
+            "etendue_radiale_um": 7433.5,
+            "rapport_mesure": 1.0076,
+            "rapport_predit": 1.0148,
+            "inclinaison_mediane_deg": 8.05
+          }
+        ],
+        "part_du_rayon_ou_la_phase_recule": 0.0,
+        "et_au_plus": 0.0,
+        "les_feuilles_se_croisent": false,
+        "rapport_mesure_median": 1.0078,
+        "rapport_predit_median": 1.0256,
+        "inclinaison_mediane_deg": 11.09
+      },
+      {
+        "amplitude_um": 100.0,
+        "amplitude_sur_espacement": 0.58,
+        "inclinaison_max_deg": 57.94,
+        "marches": [
+          {
+            "depart_deg": 0.0,
+            "pas": 40,
+            "chemin_um": 8165.6,
+            "etendue_radiale_um": 7778.2,
+            "rapport_mesure": 1.0498,
+            "rapport_predit": 1.1516,
+            "inclinaison_mediane_deg": 21.34
+          },
+          {
+            "depart_deg": 45.0,
+            "pas": 40,
+            "chemin_um": 7759.0,
+            "etendue_radiale_um": 7637.5,
+            "rapport_mesure": 1.0159,
+            "rapport_predit": 1.1234,
+            "inclinaison_mediane_deg": 24.26
+          },
+          {
+            "depart_deg": 90.0,
+            "pas": 40,
+            "chemin_um": 7395.5,
+            "etendue_radiale_um": 7094.9,
+            "rapport_mesure": 1.0424,
+            "rapport_predit": 1.1499,
+            "inclinaison_mediane_deg": 21.85
+          },
+          {
+            "depart_deg": 135.0,
+            "pas": 40,
+            "chemin_um": 8053.4,
+            "etendue_radiale_um": 7912.3,
+            "rapport_mesure": 1.0178,
+            "rapport_predit": 1.0662,
+            "inclinaison_mediane_deg": 16.5
+          },
+          {
+            "depart_deg": 180.0,
+            "pas": 20,
+            "chemin_um": 4342.3,
+            "etendue_radiale_um": 4049.6,
+            "rapport_mesure": 1.0723,
+            "rapport_predit": 1.1784,
+            "inclinaison_mediane_deg": 23.11
+          },
+          {
+            "depart_deg": 225.0,
+            "pas": 40,
+            "chemin_um": 7464.9,
+            "etendue_radiale_um": 7335.4,
+            "rapport_mesure": 1.0177,
+            "rapport_predit": 1.1324,
+            "inclinaison_mediane_deg": 24.89
+          },
+          {
+            "depart_deg": 270.0,
+            "pas": 23,
+            "chemin_um": 4281.5,
+            "etendue_radiale_um": 4179.4,
+            "rapport_mesure": 1.0244,
+            "rapport_predit": 1.1551,
+            "inclinaison_mediane_deg": 26.01
+          },
+          {
+            "depart_deg": 315.0,
+            "pas": 40,
+            "chemin_um": 8078.8,
+            "etendue_radiale_um": 7911.5,
+            "rapport_mesure": 1.0212,
+            "rapport_predit": 1.102,
+            "inclinaison_mediane_deg": 18.6
+          }
+        ],
+        "part_du_rayon_ou_la_phase_recule": 0.0,
+        "et_au_plus": 0.0,
+        "les_feuilles_se_croisent": false,
+        "rapport_mesure_median": 1.0228,
+        "rapport_predit_median": 1.1412,
+        "inclinaison_mediane_deg": 22.48
+      },
+      {
+        "amplitude_um": 200.0,
+        "amplitude_sur_espacement": 1.16,
+        "inclinaison_max_deg": 72.61,
+        "marches": [
+          {
+            "depart_deg": 0.0,
+            "pas": 40,
+            "chemin_um": 6799.2,
+            "etendue_radiale_um": 6173.8,
+            "rapport_mesure": 1.1013,
+            "rapport_predit": 1.4256,
+            "inclinaison_mediane_deg": 33.91
+          },
+          {
+            "depart_deg": 45.0,
+            "pas": 40,
+            "chemin_um": 7075.6,
+            "etendue_radiale_um": 6447.2,
+            "rapport_mesure": 1.0975,
+            "rapport_predit": 1.57,
+            "inclinaison_mediane_deg": 46.88
+          },
+          {
+            "depart_deg": 90.0,
+            "pas": 40,
+            "chemin_um": 7361.5,
+            "etendue_radiale_um": 6977.6,
+            "rapport_mesure": 1.055,
+            "rapport_predit": 1.4632,
+            "inclinaison_mediane_deg": 41.57
+          },
+          {
+            "depart_deg": 135.0,
+            "pas": 40,
+            "chemin_um": 8044.7,
+            "etendue_radiale_um": 7470.4,
+            "rapport_mesure": 1.0769,
+            "rapport_predit": 1.4171,
+            "inclinaison_mediane_deg": 31.03
+          },
+          {
+            "depart_deg": 225.0,
+            "pas": 40,
+            "chemin_um": 7093.4,
+            "etendue_radiale_um": 6115.0,
+            "rapport_mesure": 1.16,
+            "rapport_predit": 1.5412,
+            "inclinaison_mediane_deg": 46.24
+          },
+          {
+            "depart_deg": 270.0,
+            "pas": 23,
+            "chemin_um": 4671.1,
+            "etendue_radiale_um": 4102.5,
+            "rapport_mesure": 1.1386,
+            "rapport_predit": 1.445,
+            "inclinaison_mediane_deg": 38.98
+          },
+          {
+            "depart_deg": 315.0,
+            "pas": 40,
+            "chemin_um": 7439.3,
+            "etendue_radiale_um": 6283.0,
+            "rapport_mesure": 1.184,
+            "rapport_predit": 1.324,
+            "inclinaison_mediane_deg": 37.18
+          }
+        ],
+        "part_du_rayon_ou_la_phase_recule": 0.09,
+        "et_au_plus": 0.1874,
+        "les_feuilles_se_croisent": true,
+        "rapport_mesure_median": 1.1013,
+        "rapport_predit_median": 1.445,
+        "inclinaison_mediane_deg": 38.98
+      },
+      {
+        "amplitude_um": 400.0,
+        "amplitude_sur_espacement": 2.31,
+        "inclinaison_max_deg": 81.1,
+        "marches": [
+          {
+            "depart_deg": 45.0,
+            "pas": 40,
+            "chemin_um": 7024.0,
+            "etendue_radiale_um": 3781.0,
+            "rapport_mesure": 1.8577,
+            "rapport_predit": 2.1967,
+            "inclinaison_mediane_deg": 62.55
+          },
+          {
+            "depart_deg": 90.0,
+            "pas": 39,
+            "chemin_um": 7984.4,
+            "etendue_radiale_um": 5737.1,
+            "rapport_mesure": 1.3917,
+            "rapport_predit": 1.8907,
+            "inclinaison_mediane_deg": 52.89
+          },
+          {
+            "depart_deg": 135.0,
+            "pas": 40,
+            "chemin_um": 7378.7,
+            "etendue_radiale_um": 6706.0,
+            "rapport_mesure": 1.1003,
+            "rapport_predit": 1.4788,
+            "inclinaison_mediane_deg": 41.37
+          },
+          {
+            "depart_deg": 225.0,
+            "pas": 40,
+            "chemin_um": 7889.3,
+            "etendue_radiale_um": 3765.2,
+            "rapport_mesure": 2.0953,
+            "rapport_predit": 2.2247,
+            "inclinaison_mediane_deg": 60.47
+          },
+          {
+            "depart_deg": 270.0,
+            "pas": 36,
+            "chemin_um": 6747.5,
+            "etendue_radiale_um": 670.7,
+            "rapport_mesure": 10.0607,
+            "rapport_predit": 2.5374,
+            "inclinaison_mediane_deg": 72.25
+          }
+        ],
+        "part_du_rayon_ou_la_phase_recule": 0.2916,
+        "et_au_plus": 0.3268,
+        "les_feuilles_se_croisent": true,
+        "rapport_mesure_median": 1.8577,
+        "rapport_predit_median": 2.1967,
+        "inclinaison_mediane_deg": 60.47
+      }
+    ]
+  },
+  "juger": {
+    "decidable": true,
+    "rapport_du_rouleau": 1.186,
+    "une_inclinaison_uniforme_est_impossible": true,
+    "inclinaison_autorisee_max_deg": 0.4087,
+    "feuilles_par_tour_a_linclinaison_mesuree": 399.53,
+    "amplitude_a_linclinaison_mesuree_um": 42.4,
+    "inclinaison_max_de_ce_lot_deg": 34.09,
+    "rapport_a_linclinaison_mesuree": 1.0078,
+    "rapport_predit_a_linclinaison_mesuree": 1.0256,
+    "amplitude_qui_atteint_le_rouleau_um": 400.0,
+    "amplitude_sur_espacement": 2.31,
+    "part_du_rayon_ou_la_phase_recule": 0.2916,
+    "a_cette_amplitude_les_feuilles_se_croisent": true,
+    "rapport_le_plus_haut_sans_croiser": 1.0228,
+    "a_lamplitude_sans_croiser_um": 100.0,
+    "le_froissement_explique_le_rouleau": false,
+    "part_de_lobliquite_que_le_cap_recupere": 0.734
+  }
+}

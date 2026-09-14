@@ -3049,6 +3049,78 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 139 : L'INCLINAISON UNIFORME, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Le compte de feuilles par tour ne voyage jamais sans l'inclinaison AUTORISEE : « 399
+    # feuilles par tour » seul est un nombre, a cote de « 0,08° autorises » il dit pourquoi une
+    # inclinaison uniforme est impossible.
+    # (2) Et le rapport MESURE ne voyage jamais sans le PREDIT : 1,0078 seul se lit comme un
+    # echec de la fixture, a cote de 1,0256 il dit que le marcheur paie moins que ce qu'il
+    # rencontre, ce qui est le fait de ce fichier.
+    incl = _source(racine, "une_inclinaison_uniforme_est_elle_possible.json")
+    if incl.exists():
+        d = json.loads(incl.read_text())
+
+        def dec139(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        u_ = d.get("linclinaison_uniforme_est_elle_possible", {})
+        if u_.get("decidable"):
+            for x in u_.get("lignes", []):
+                cle = f"a {x['rayon_mm']} mm et {x['espacement_um']} um de 139"
+                ajoute(f"feuilles par tour {cle}", x["feuilles_par_tour_a_linclinaison_mesuree"],
+                       dec139(x["feuilles_par_tour_a_linclinaison_mesuree"], 2), incl.name)
+                ajoute(f"inclinaison autorisee {cle}", x["inclinaison_autorisee_deg"],
+                       dec139(x["inclinaison_autorisee_deg"], 4), incl.name)
+            for k_, n_, dd in (("inclinaison_autorisee_min_deg", "inclinaison autorisee min", 4),
+                               ("inclinaison_autorisee_max_deg", "inclinaison autorisee max", 4),
+                               ("feuilles_par_tour_min", "feuilles par tour min", 2),
+                               ("feuilles_par_tour_max", "feuilles par tour max", 2),
+                               ("combien_de_fois_trop_grande", "combien de fois trop grande", 1)):
+                if u_.get(k_) is not None:
+                    ajoute(f"{n_} de 139", u_[k_], dec139(u_[k_], dd), incl.name)
+        for x in d.get("sur_la_spirale_froissee", {}).get("lots", []):
+            a_ = x["amplitude_um"]
+            for k_, n_, dd in (("amplitude_sur_espacement", "amplitude sur espacement", 2),
+                               ("inclinaison_max_deg", "inclinaison max", 2),
+                               ("inclinaison_mediane_deg", "inclinaison mediane", 2),
+                               ("rapport_mesure_median", "rapport mesure", 4),
+                               ("rapport_predit_median", "rapport predit", 4)):
+                if x.get(k_) is not None:
+                    ajoute(f"{n_} a {a_} um de 139", x[k_], dec139(x[k_], dd), incl.name)
+            # ⚠ La part du rayon ou la phase recule est enregistree EN POUR CENT, avec son unite :
+            # le document la rend ainsi, et `ajoute` porte `unites` exactement pour qu'un nombre
+            # court se cherche avec son contexte. C'est la meme quantite, pas une seconde.
+            if x.get("part_du_rayon_ou_la_phase_recule"):
+                ajoute(f"part du rayon ou la phase recule a {a_} um de 139",
+                       x["part_du_rayon_ou_la_phase_recule"] * 100.0, 1, incl.name,
+                       unites=("%",))
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            for k_, n_, dd in (("rapport_a_linclinaison_mesuree", "rapport a l inclinaison", 4),
+                               ("rapport_predit_a_linclinaison_mesuree",
+                                "rapport predit a l inclinaison", 4),
+                               ("amplitude_sur_espacement", "amplitude sur espacement au rouleau", 2),
+                               ("rapport_le_plus_haut_sans_croiser",
+                                "rapport le plus haut sans croiser", 4),
+                               ("inclinaison_max_de_ce_lot_deg", "inclinaison du lot vise", 2)):
+                if j_.get(k_) is not None:
+                    ajoute(f"{n_} de 139", j_[k_], dec139(j_[k_], dd), incl.name)
+            # ⚠ Les amplitudes sont des MICROMETRES ronds : le document ecrit « 400 µm », pas
+            # « 400,0 ». Elles s'enregistrent donc sans decimale et avec leur unite, qui est ce
+            # qui les rend cherchables — un « 400 » nu ne l'est pas.
+            for k_, n_ in (("amplitude_qui_atteint_le_rouleau_um",
+                            "amplitude qui atteint le rouleau"),
+                           ("a_lamplitude_sans_croiser_um", "amplitude sans croiser"),
+                           ("amplitude_a_linclinaison_mesuree_um",
+                            "amplitude a l inclinaison mesuree")):
+                if j_.get(k_) is not None:
+                    ajoute(f"{n_} de 139", j_[k_], 0, incl.name, unites=("µm",))
+            if j_.get("part_de_lobliquite_que_le_cap_recupere") is not None:
+                ajoute("part de l obliquite que le cap recupere de 139",
+                       j_["part_de_lobliquite_que_le_cap_recupere"] * 100.0, 0, incl.name,
+                       unites=("%",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 138 : LES JUMELLES, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) La derive du ROULEAU ne voyage jamais sans celles des DEUX piles : « 3,045 feuilles » seul
     # est un nombre, entre « 0,255 sur une matiere qui ne distingue pas ses feuilles » et « 0,705

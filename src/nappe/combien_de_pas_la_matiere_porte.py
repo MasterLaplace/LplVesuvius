@@ -880,6 +880,96 @@ class VolumeFabriqueOndulee(VolumeFabrique):
                                           / self.longueur_donde_um)))
 
 
+class VolumeFabriqueEnSpiraleFroissee(VolumeFabriqueEnSpirale):
+    """Une spirale dont la normale VAGABONDE autour du rayon — la fixture que `R4-P28` demande,
+    une fois sa demande corrigee.
+
+    ⭐⭐⭐⭐ ELLE EXISTE PARCE QUE CE QUE LA PORTE DEMANDAIT EST IMPOSSIBLE. `R4-P28` reclame une
+    matiere dont la normale soit a un angle FIXE du rayon. Or un rouleau croise UNE feuille par
+    tour, et une inclinaison uniforme `alpha` en fait croiser `2.pi.rho.sin(alpha)/s` : a 34° et
+    dix millimetres, deux cent quatorze. L'inclinaison uniforme qu'un enroulement autorise est donc
+    de quelques dixiemes de degre, et les trente-quatre mesures localement ne peuvent etre qu'un
+    VAGABONDAGE. C'est lui que cette fixture fabrique, avec une amplitude connue.
+
+    ⭐⭐⭐ ET SA NORMALE EST ANALYTIQUE, ce qui est tout l'interet : le rapport chemin sur etendue
+    radiale qu'un marcheur y paie se PREDIT — c'est `1/<cos(theta)>` sur les normales rencontrees —
+    donc la mesure peut echouer. Sur le rouleau ce rapport vaut 1,186 (`136`) et personne ne peut
+    dire de quoi il est fait.
+
+    ⚠⚠ LE FROISSEMENT EST UNE FONCTION DE LA POSITION DANS L'ESPACE, pas des coordonnees de la
+    feuille, et c'est voulu. Une coordonnee « le long de la feuille » vaut `rho.theta`, qui SAUTE
+    de `2.pi.rho` a la coupure angulaire : un froissement bati dessus serait discontinu sur un
+    demi-plan entier. Des vecteurs d'onde fixes dans l'espace sont continus partout. Ils ne sont
+    pas exactement dans le plan de la feuille, qui tourne — la composante normale module alors
+    l'espacement au lieu d'incliner — mais la fixture n'a pas besoin d'un froissement REALISTE,
+    elle a besoin d'un froissement CONNU.
+
+    ⚠ A amplitude nulle elle EST la spirale d'Archimede, au bit pres : la batterie l'asserte, et
+    c'est ce qui protege tout ce que le depot a mesure sur celle-ci.
+    """
+
+    def __init__(self, pas_um: float, amplitude_um: float = 0.0,
+                 longueur_donde_um: float = 393.6, ondes: int = 3, **kw) -> None:
+        graine = int(kw.get("graine", 3))
+        super().__init__(pas_um, **kw)
+        self.amplitude_um = float(amplitude_um)
+        self.longueur_donde_um = float(longueur_donde_um)
+        if self.longueur_donde_um <= 0.0:
+            raise ValueError("la longueur d'onde doit etre positive")
+        # ⚠ Un generateur A PART, comme `VolumeFabriqueOndulee` : emprunter des tirages au bruit
+        # ferait dependre la geometrie du nombre de lectures faites avant.
+        r = np.random.default_rng(20_011 + graine)
+        v = r.normal(size=(int(ondes), 3))
+        self.vecteurs_donde = v / np.maximum(np.linalg.norm(v, axis=1, keepdims=True), 1e-12)
+        """Les directions d'onde, unitaires, FIXES dans l'espace (z, y, x)."""
+        self.phases_donde = r.uniform(0.0, 2.0 * np.pi, size=int(ondes))
+        self._a_k = self.amplitude_um / max(1, int(ondes))
+
+    def _deplacement_um(self, q_um: np.ndarray) -> np.ndarray:
+        """Le deplacement de la feuille le long de sa normale, en micrometres."""
+        arg = 2.0 * np.pi * (q_um @ self.vecteurs_donde.T) / self.longueur_donde_um
+        return self._a_k * np.sin(arg + self.phases_donde).sum(axis=1)
+
+    def phase(self, p: np.ndarray) -> np.ndarray:
+        # ⚠⚠ LE TERME DE BASE EST CELUI DU PARENT, APPELE ET NON RECOPIE : la batterie exige
+        # l'egalite AU BIT a amplitude nulle, et `(rho - r0)/pas` recalcule differerait au dernier
+        # bit. C'est le defaut que `VolumeFabriqueOndulee` a paye.
+        base = super().phase(p)
+        if self._a_k == 0.0:
+            return base
+        q = np.asarray(p, dtype=np.float64).reshape(-1, 3) * self.voxel_um
+        return base + self._deplacement_um(q) / self.pas_um
+
+    def normale_locale(self, p: np.ndarray) -> np.ndarray:
+        """La direction (z, y, x) perpendiculaire a la feuille — le gradient, analytique.
+
+        ⭐⭐ Le gradient de la phase vaut celui de la spirale plus, pour chaque onde,
+        `A_k.cos(arg).(2.pi/lambda).k` : le premier terme porte l'enroulement, le second incline la
+        feuille d'un angle qui varie d'un point a l'autre. C'est ce vagabondage qui est mesure.
+        """
+        base = super().normale_locale(p)
+        if self._a_k == 0.0:
+            return base
+        q2 = np.asarray(p, dtype=np.float64).reshape(-1, 3)
+        q = q2 * self.voxel_um
+        # ⚠ Le gradient de la PHASE, pas de la normale unitaire : on reconstruit le gradient de
+        # base a partir de la normale du parent et de sa norme connue, `1/(pas.cos(inclinaison))`.
+        rho, _ = self.cylindriques(q2)
+        rho = np.maximum(rho, 1e-9)
+        g_base = base * np.sqrt((1.0 / self.pas_um) ** 2
+                                + (1.0 / (2.0 * np.pi * rho)) ** 2)[:, None]
+        arg = 2.0 * np.pi * (q @ self.vecteurs_donde.T) / self.longueur_donde_um
+        c = np.cos(arg + self.phases_donde) * self._a_k
+        g = g_base + (c * (2.0 * np.pi / self.longueur_donde_um)) @ self.vecteurs_donde \
+            / self.pas_um
+        return g / np.maximum(np.linalg.norm(g, axis=1, keepdims=True), 1e-12)
+
+    def inclinaison_max_deg(self) -> float:
+        """L'inclinaison maximale que le froissement ajoute, en degres."""
+        return float(np.degrees(np.arctan(2.0 * np.pi * self.amplitude_um
+                                          / self.longueur_donde_um)))
+
+
 def plafond_pour_traverser(rayon_min_mm: float, rayon_max_mm: float,
                            espacement_um: float) -> int:
     """Combien de pas il faut pour traverser toute l'etendue radiale d'une campagne.
@@ -1940,6 +2030,40 @@ def verifier() -> int:
       agreger(faux)["resume"]["la_portee_est_censuree"]
       and agreger(faux)["resume"]["bandes_dont_une_cellule_atteint_le_plafond"] == 1)
     v("l'affichage tourne sur ce résultat", afficher(r) == 0)
+
+    # === LA SPIRALE FROISSEE : son contrat avec sa parente, et sa normale ==================
+    # ⚠ Elle est exercee en USAGE par `139` ; ce qui est verifie ICI est ce qui lui appartient en
+    # propre : qu'a amplitude nulle elle EST sa parente, et que la normale qu'elle annonce est bien
+    # le gradient de la phase qu'elle lit. Une fixture qui ment sur sa normale rend fausse toute
+    # prediction batie dessus.
+    kw_sp = {"r0_um": 10000.0, "centre_yx_vx": (6000.0, 6000.0), "forme": (4000, 16000, 16000)}
+    sp_lisse = VolumeFabriqueEnSpirale(C.PAS_UM, **kw_sp)
+    sp_zero = VolumeFabriqueEnSpiraleFroissee(C.PAS_UM, amplitude_um=0.0, **kw_sp)
+    rng_sp = np.random.default_rng(11)
+    pts_sp = np.stack([np.full(200, 2000.0), rng_sp.uniform(4000.0, 8000.0, 200),
+                       rng_sp.uniform(4000.0, 8000.0, 200)], axis=1)
+    v("la spirale froissée à amplitude nulle EST la spirale d'Archimède, au bit",
+      np.array_equal(sp_zero.phase(pts_sp), sp_lisse.phase(pts_sp))
+      and np.array_equal(sp_zero.lire(pts_sp), sp_lisse.lire(pts_sp))
+      and np.array_equal(sp_zero.normale_locale(pts_sp), sp_lisse.normale_locale(pts_sp)))
+    sp_fr = VolumeFabriqueEnSpiraleFroissee(C.PAS_UM, amplitude_um=42.4,
+                                            longueur_donde_um=393.6, **kw_sp)
+    ec_sp = []
+    for p_sp in pts_sp[:40]:
+        g_sp = np.zeros(3)
+        for k_sp in range(3):
+            e_sp = np.zeros(3)
+            e_sp[k_sp] = 0.05
+            g_sp[k_sp] = (float(sp_fr.phase((p_sp + e_sp).reshape(1, 3))[0])
+                          - float(sp_fr.phase((p_sp - e_sp).reshape(1, 3))[0])) / 0.1
+        g_sp = g_sp / np.linalg.norm(g_sp)
+        n_sp = sp_fr.normale_locale(p_sp).reshape(3)
+        ec_sp.append(float(np.degrees(np.arccos(np.clip(abs(float(g_sp @ n_sp)), -1.0, 1.0)))))
+    v("... et sa normale analytique EST le gradient de sa phase",
+      max(ec_sp) < 0.01, f"écart max aux différences finies {max(ec_sp):.6f}°")
+    v("... et une longueur d'onde nulle est refusée",
+      _leve(lambda: VolumeFabriqueEnSpiraleFroissee(C.PAS_UM, amplitude_um=1.0,
+                                                    longueur_donde_um=0.0, **kw_sp), ValueError))
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
