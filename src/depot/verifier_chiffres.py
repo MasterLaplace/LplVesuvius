@@ -3049,6 +3049,70 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 147 : LE CAP QUI TOURNE, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Des reussites ne voyagent jamais sans le SOLDE APPARIE qui dit ce qu'elles ont coute :
+    # « 110 contre 108 » seul est un total, a cote de « 8 gagnees pour 6 perdues » il dit que la
+    # regle DEPLACE au lieu d'ajouter.
+    # (2) Un taux employe ne voyage jamais sans l'ENROULEMENT derive : -0,009910 seul est un
+    # nombre, a cote de 0,009840 il dit que le cap tourne du bon rythme.
+    # (3) Et les reussites par matiere ne voyagent pas sans celles de la spirale NUE : 21 sur un
+    # froissement ne dit rien tant qu'on ne sait pas que la nue rend 36 pour les cinq regles.
+    ct = _source(racine, "un_cap_qui_tourne.json")
+    if ct.exists():
+        d = json.loads(ct.read_text())
+
+        def dec147(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        t_ = j_.get("les_temoins_internes", {})
+        if t_.get("decidable"):
+            for x in t_.get("par_variante", []):
+                for nom in ("une machoire", "deux machoires libres", "la pince"):
+                    if x.get(nom) is not None:
+                        ajoute(f"temoin interne de {nom} de « {x['nom']} » de 147",
+                               x[nom]["ici"], 0, ct.name)
+        e_ = j_.get("le_taux_lu_retrouve_t_il_lenroulement", {})
+        if e_.get("decidable"):
+            # ⚠ En micro-radians ENTIERS : arrondi en radians, l'ecart vaut 7,4e-05 et
+            # `json.dumps` l'ecrit en notation scientifique — introuvable pour la garde qui
+            # cherche « 0,000074 » dans le fichier de resultat.
+            for cle, nom in (("taux_lu_urad", "taux lu sur la spirale nue de 147, en urad"),
+                             ("enroulement_derive_urad", "enroulement derive de 147, en urad"),
+                             ("ecart_urad", "ecart du taux lu a l'enroulement de 147, en urad"),
+                             ("borne_derivee_urad",
+                              "borne derivee de l'excursion du rayon de 147, en urad")):
+                if e_.get(cle) is not None:
+                    ajoute(nom, e_[cle], 0, ct.name)
+        for x in j_.get("apparie_au_statique", []):
+            if not x.get("decidable"):
+                continue
+            cle = f"de « {x['nom']} » de 147"
+            for k_, n_ in (("paires", "departs apparies"), ("gains", "reussites gagnees"),
+                           ("pertes", "reussites perdues"), ("solde", "solde apparie")):
+                ajoute(f"{n_} {cle}", x[k_], 0, ct.name)
+        for x in j_.get("par_variante", []):
+            cle = f"de « {x['nom']} » de 147"
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                if x.get(nom) is None:
+                    continue
+                ajoute(f"reussites de {nom} {cle}", x[nom]["reussites"], 0, ct.name)
+                # ⚠ Un taux ABSENT est saute plutot que lu comme un zero : « ce bras n'a rien
+                # rendu » et « ce cap ne tourne pas » sont deux faits differents.
+                if x[nom].get("taux_median_rad") is not None:
+                    ajoute(f"taux median de {nom} {cle}", abs(x[nom]["taux_median_rad"]),
+                           dec147(x[nom]["taux_median_rad"], 6), ct.name)
+            for m in x.get("par_matiere", []):
+                for nom in ("une machoire", "deux machoires libres", "la pince"):
+                    if m.get(nom) is not None:
+                        ajoute(f"reussites de {nom} sur {m['nom']} {cle}", m[nom], 0, ct.name)
+            for y in x.get("par_bruit", []):
+                b_ = f"a bruit {y['bruit']} {cle}"
+                for k_, n_ in (("ecart_entre_matieres", "ecart entre matieres"),
+                               ("dispersion_dans_une_matiere", "dispersion dans une matiere")):
+                    ajoute(f"{n_} {b_}", y[k_], dec147(y[k_], 4), ct.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 146 : RIEN A QUOI SE COMPARER, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Une lecture qui INVERSE l'ordre des causes ne voyage jamais sans celle qu'elle inverse :
     # « 0,8206 » seul est une lecture, a cote de « 0,0000 » il dit qu'aucun seuil ne separe.

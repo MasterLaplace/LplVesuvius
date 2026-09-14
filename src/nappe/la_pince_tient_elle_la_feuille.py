@@ -235,6 +235,71 @@ def _ecart_angulaire(avant, apres) -> float:
     return float(np.arctan2(a[2] * b[1] - a[1] * b[2], a[1] * b[1] + a[2] * b[2]))
 
 
+def _tourner(normale, phi: float) -> np.ndarray:
+    """Tourner une normale de `phi` radians DANS LE PLAN DU TOUR, au signe de `_ecart_angulaire`.
+
+    ⚠⚠ LE SIGNE EST LA SEULE CHOSE QUI COMPTE ICI, ET IL SE VERIFIE PLUTOT QU'IL NE SE RAISONNE :
+    `_ecart_angulaire(n, _tourner(n, phi))` doit rendre `phi`. Une convention inversee ferait tourner
+    le cap A CONTRESENS — ce qui ne ressemble pas a une faute de signe mais a « le cap tournant
+    marche moins bien », un resultat parfaitement plausible et faux. La batterie l'exige.
+
+    ⚠ La composante d'axe est laissee telle quelle : `_ecart_angulaire` ne lit que le plan du tour,
+    donc la toucher ferait tourner la normale d'un angle que la mesure ne peut pas rendre.
+    """
+    n = np.asarray(normale, dtype=np.float64).astype(np.float64).copy()
+    c, s_ = np.cos(float(phi)), np.sin(float(phi))
+    y, z = float(n[1]), float(n[2])
+    n[1] = y * c + z * s_
+    n[2] = -y * s_ + z * c
+    return n
+
+
+def taux_du_cap(rotations, fenetre: int, enroulement: float, sens: float, regle: str) -> float:
+    """De combien le cap doit TOURNER a ce pas — un enonce, pas un ajustement.
+
+    ⭐⭐⭐⭐ UN CAP QUI NE TOURNE PAS COMBAT L'ENROULEMENT LUI-MEME. La memoire de `143` retient une
+    ORIENTATION fixe : a memoire 0,8 le suiveur garde quatre cinquiemes de la direction precedente,
+    donc il resiste aussi a la rotation que le tour lui IMPOSE — 2π sur un tour entier. C'est
+    exactement l'echange que `143` mesure, fidelite contre distance (feuilles 121 → 105, tours
+    93 → 125), et rien ne disait que cet echange etait une propriete de la matiere plutot qu'un
+    defaut du cap.
+
+    ⭐⭐⭐ TROIS REGLES, ET ELLES ISOLENT LES DEUX INGREDIENTS QUE `146` NOMME :
+    - `enroulement` : le cap tourne de `avance / rayon`, la seule quantite ABSOLUE qu'un suiveur
+      calcule seul. Aucune estimation, donc aucun risque de suivre son propre bruit.
+    - `taux` : le cap tourne de la moyenne des increments lus sur la fenetre — la part COHERENTE de
+      la rotation, celle qui persiste. Sur une spirale nue cette moyenne VAUT l'enroulement ; sur un
+      ecrasement elle vaut davantage ; sur un froissement, dont les increments alternent, elle
+      retombe sur l'enroulement toute seule.
+    - `taux_planche` : les deux ensemble — la moyenne lue, mais jamais moins que l'enroulement, et
+      jamais a contresens de la marche.
+
+    ⚠⚠ CECI N'EST PAS LE PIEGE DE `144`. Retirer la MOYENNE des increments avant d'en lire la
+    coherence detruit la persistance qu'on veut detecter, et la batterie de `144` l'a dit avant la
+    mesure. Ici la moyenne n'est retiree de RIEN : la coherence se lit toujours sur les increments
+    bruts, et la moyenne ne sert qu'a PREDIRE le pas suivant. Lire et predire ne sont pas le meme
+    usage d'une meme quantite.
+
+    ⚠ Le SENS de la marche est a la main du suiveur — c'est le signe de son propre angle parcouru,
+    pas une propriete de la matiere. Une moyenne lue a CONTRESENS du tour ne peut pas etre une
+    rotation que le tour impose, donc `taux_planche` retombe alors sur l'enroulement seul.
+    """
+    f = max(int(fenetre), 2)
+    r = np.asarray(rotations[-f:], dtype=np.float64)
+    if r.size < 2:
+        return 0.0
+    w = abs(float(enroulement))
+    s_ = 1.0 if float(sens) >= 0.0 else -1.0
+    moyenne = float(r.mean())
+    if regle == "enroulement":
+        return s_ * w
+    if regle == "taux":
+        return moyenne
+    if regle == "taux_planche":
+        return s_ * max(abs(moyenne), w) if moyenne * s_ > 0.0 else s_ * w
+    return 0.0
+
+
 def memoire_adaptee(rotations, fenetre: int, bloc: int = 1,
                     corrige_le_bruit: bool = False, enroulement: float | None = None) -> float:
     """La memoire que la rotation de la normale impose — un enonce, pas un ajustement.
@@ -328,7 +393,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            voxel_um: float, deux: bool, contrainte: bool, avance_um: float, axe_yx,
            tours: float = TOURS, pas_max: int = 4000, memoire_du_cap: float = 0.0,
            fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
-           corrige_le_bruit: bool = False, enroulement_du_cap: bool = False) -> dict:
+           corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
+           cap_tournant: str = "") -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -388,6 +454,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     pas, refus, halts, ecarts, phases = 0, 0, 0, [], [phase0]
     rotations: list[float] = []
     memoires: list[float] = []
+    taux_lus: list[float] = []
     fin = "tour bouclé"
     while abs(cumul) < 2.0 * np.pi * float(tours) and pas < int(pas_max):
         a, pris = float(avance_um), None
@@ -424,17 +491,24 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         rotations.append(_ecart_angulaire(etat["normale"], pris["normale"]))
         # ⚠ L'enroulement est calcule sur le rayon COURANT et l'avance REELLE du pas : les deux
         # sont a la main du suiveur, et un enroulement pose serait une constante de plus.
-        enr = None
-        if enroulement_du_cap:
-            rho = rayon_um(etat["centre_vx"])
-            enr = (a / rho) if rho > 0.0 else None
+        rho = rayon_um(etat["centre_vx"])
+        w_ = (a / rho) if rho > 0.0 else 0.0
+        enr = w_ if enroulement_du_cap else None
         m_ = (memoire_adaptee(rotations, int(fenetre_du_cap), int(bloc_du_cap),
                               bool(corrige_le_bruit), enr) if int(fenetre_du_cap) > 0
               else float(memoire_du_cap))
         memoires.append(m_)
+        # ⚠ Le taux n'est calcule que si une regle est demandee : sans elle `cible` EST la normale
+        # precedente, donc le melange est celui d'avant jusqu'au bit, normalisation comprise.
+        taux = (taux_du_cap(rotations, max(int(fenetre_du_cap), 2), w_,
+                            (1.0 if cumul >= 0.0 else -1.0), cap_tournant)
+                if cap_tournant else 0.0)
+        taux_lus.append(taux)
         if m_ > 0.0:
+            cible = (_tourner(etat["normale"], taux) if taux != 0.0
+                     else np.asarray(etat["normale"]))
             melange = ((1.0 - m_) * np.asarray(pris["normale"])
-                       + m_ * np.asarray(etat["normale"]))
+                       + m_ * cible)
             n_ = float(np.linalg.norm(melange))
             # ⚠ Un melange peut s'annuler si le cap est exactement oppose a la lecture. La lecture
             # GAGNE alors : inventer une orientation serait pire que d'oublier le cap.
@@ -469,6 +543,9 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             # ⚠ La memoire REELLEMENT employee est publiee : une regle adaptative qui rendrait la
             # meme valeur partout serait un cap fixe deguise, et seul ce chiffre le dit.
             "memoire_mediane": (round(float(np.median(memoires)), 4) if memoires else None),
+            # ⚠ Le taux REELLEMENT employe est publie pour la meme raison que la memoire : un cap
+            # annonce tournant qui rendrait zero partout serait un cap statique deguise.
+            "taux_median_rad": (round(float(np.median(taux_lus)), 6) if taux_lus else None),
             "memoire_min": (round(float(np.min(memoires)), 4) if memoires else None),
             "memoire_max": (round(float(np.max(memoires)), 4) if memoires else None),
             "chemin_um": round(chemin, 1), "tour_boucle": bool(abs(cumul) >= 2.0 * np.pi * tours),
@@ -501,7 +578,7 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                    voxel_um: float, avance_um: float, axe_yx, tours: float = TOURS,
                    memoire_du_cap: float = 0.0, fenetre_du_cap: int = 0,
                    bloc_du_cap: int = 1, corrige_le_bruit: bool = False,
-                   enroulement_du_cap: bool = False) -> dict:
+                   enroulement_du_cap: bool = False, cap_tournant: str = "") -> dict:
     """Les trois bras sur le MEME depart — c'est ce qui rend la comparaison lisible."""
     out = {}
     for nom, deux, contrainte in (("une machoire", False, False),
@@ -512,7 +589,7 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                           deux, contrainte, avance_um, axe_yx, tours,
                           memoire_du_cap=memoire_du_cap, fenetre_du_cap=fenetre_du_cap,
                           bloc_du_cap=bloc_du_cap, corrige_le_bruit=corrige_le_bruit,
-                          enroulement_du_cap=enroulement_du_cap)
+                          enroulement_du_cap=enroulement_du_cap, cap_tournant=cap_tournant)
     return out
 
 
@@ -549,7 +626,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
              rayon_mm: float = RAYON_MM, tours: float = TOURS,
              longueur_donde_um: float = LONGUEUR_DONDE_UM, memoire_du_cap: float = 0.0,
              fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
-             corrige_le_bruit: bool = False, enroulement_du_cap: bool = False) -> dict:
+             corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
+             cap_tournant: str = "") -> dict:
     """Les trois bras sur une matiere, un niveau de bruit et une largeur — tous les departs.
 
     ⚠ Les trois bras partent du MEME point a chaque depart : une comparaison dont les bras ne
@@ -569,7 +647,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
                                vol.centre_yx_vx, tours, memoire_du_cap=memoire_du_cap,
                                fenetre_du_cap=fenetre_du_cap, bloc_du_cap=bloc_du_cap,
                                corrige_le_bruit=corrige_le_bruit,
-                               enroulement_du_cap=enroulement_du_cap)
+                               enroulement_du_cap=enroulement_du_cap,
+                               cap_tournant=cap_tournant)
         for b, x in trois.items():
             par_bras[b].append({"depart_deg": round(360.0 * k / int(departs), 1), **x})
     bloc = {"ecrasement": float(ecr), "amplitude_um": float(amp), "bruit": float(bruit),
@@ -578,10 +657,24 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
             "memoire_du_cap": float(memoire_du_cap),
             "fenetre_du_cap": int(fenetre_du_cap), "bloc_du_cap": int(bloc_du_cap),
             "corrige_le_bruit": bool(corrige_le_bruit),
-            "enroulement_du_cap": bool(enroulement_du_cap), "bras": {}}
+            "enroulement_du_cap": bool(enroulement_du_cap),
+            "cap_tournant": str(cap_tournant), "bras": {}}
     for b in BRAS:
         bloc["bras"][b] = {"suivis": par_bras[b], **_resumer_un_bras(par_bras[b], int(departs))}
     return bloc
+
+
+def une_reussite(x: dict) -> bool:
+    """Un transfert reussi, et c'est un enonce JOINT — dit UNE fois, pour tous ses lecteurs.
+
+    ⭐⭐⭐ Boucler le tour et revenir sur la meme feuille sont la MEME reussite. `143` l'a paye : sa
+    barre a ete franchie par une marche qui bouclait son tour avec une feuille juste sur douze.
+
+    ⚠ Ce predicat existe pour qu'un comptage APPARIE — le meme depart sous deux regles — n'ait pas
+    a le reecrire. Deux ecritures d'une meme question divergent, et celle-ci decide tout.
+    """
+    return bool(x.get("decidable") and x.get("tour_boucle")
+                and abs(float(x.get("derive_en_feuilles", 1e9))) < 0.5)
 
 
 def _resumer_un_bras(suivis: list[dict], departs: int) -> dict:
@@ -602,8 +695,7 @@ def _resumer_un_bras(suivis: list[dict], departs: int) -> dict:
         # par une marche qui bouclait son tour avec une feuille juste sur douze. Un compte JOINT est
         # aussi la garde anti-tautologie que le couple assurait : un bras qui refuse tout n'a aucune
         # reussite, puisqu'il ne boucle rien.
-        "reussites": int(sum(1 for x, dd in zip(bons, der, strict=True)
-                             if x.get("tour_boucle") and dd < 0.5)),
+        "reussites": int(sum(1 for x in bons if une_reussite(x))),
         # ⭐⭐ LA QUESTION DU GRAAL, ET ELLE EST EXACTE. « Sur quelle feuille finit-on » se decide a
         # une DEMI-feuille : c'est la ou l'appariement au plus proche bascule, exactement comme le
         # demi-pas qui decide qu'un appui a change d'interstice. Ce n'est pas une tolerance reglee
@@ -1130,6 +1222,46 @@ def verifier() -> int:
     v("la mémoire lue reste dans [0, 1[",
       all(0.0 <= memoire_adaptee(list(np.random.default_rng(k).normal(size=20)), 8) < 1.0
           for k in range(5)))
+
+    # ---- ⭐⭐⭐⭐ LE CAP QUI TOURNE, et la sonde de SIGNE qui mord avant tout le reste
+    n0_ = np.array([0.3, 0.8, -0.5])
+    n0_ = n0_ / np.linalg.norm(n0_)
+    v("⭐⭐ tourner puis mesurer rend EXACTEMENT l'angle demandé, signe compris",
+      all(abs(_ecart_angulaire(n0_, _tourner(n0_, phi)) - phi) < 1e-12
+          for phi in (0.01, -0.01, 0.4, -0.4, 1.2, -1.2)),
+      "une convention inversée ferait tourner le cap à contresens, ce qui ressemble à « le cap "
+      "tournant marche moins bien » et non à une faute de signe")
+    v("tourner ne change ni la longueur de la normale ni sa composante d'axe",
+      abs(np.linalg.norm(_tourner(n0_, 0.7)) - np.linalg.norm(n0_)) < 1e-12
+      and abs(_tourner(n0_, 0.7)[0] - n0_[0]) < 1e-12)
+    v("tourner de zéro ne touche rien", np.array_equal(_tourner(n0_, 0.0), n0_))
+
+    v("⭐⭐ sur une spirale NUE les trois règles de taux tombent sur l'enroulement",
+      all(abs(taux_du_cap([w] * 16, 16, w, +1.0, r_) - w) < 1e-12
+          for r_ in ("enroulement", "taux", "taux_planche")),
+      "la moyenne des incréments VAUT l'enroulement quand rien d'autre ne tourne")
+    v("⭐⭐ sur un ÉCRASEMENT, le taux lu suit la rotation en plus, l'enroulement seul l'ignore",
+      abs(taux_du_cap([3.0 * w] * 16, 16, w, +1.0, "taux") - 3.0 * w) < 1e-12
+      and abs(taux_du_cap([3.0 * w] * 16, 16, w, +1.0, "enroulement") - w) < 1e-12,
+      "c'est exactement la forme que `146` mesure comme devant être SUIVIE")
+    v("⭐⭐⭐ sur un FROISSEMENT, le taux lu retombe sur l'enroulement TOUT SEUL",
+      abs(taux_du_cap([w + 20.0 * w, w - 20.0 * w] * 8, 16, w, +1.0, "taux") - w) < 1e-12,
+      "un cap qui tourne au taux moyen ne suit donc pas ce qui alterne — il le lisse")
+    v("le taux planché ne descend jamais sous l'enroulement",
+      abs(taux_du_cap([0.1 * w] * 16, 16, w, +1.0, "taux_planche") - w) < 1e-12
+      and abs(taux_du_cap([0.1 * w] * 16, 16, w, +1.0, "taux") - 0.1 * w) < 1e-12)
+    v("⚠ une moyenne lue à CONTRESENS de la marche ne peut pas être une rotation que le tour "
+      "impose : le taux planché retombe sur l'enroulement",
+      abs(taux_du_cap([-3.0 * w] * 16, 16, w, +1.0, "taux_planche") - w) < 1e-12
+      and abs(taux_du_cap([-3.0 * w] * 16, 16, w, -1.0, "taux_planche") + 3.0 * w) < 1e-12)
+    v("aucune règle nommée, aucun taux", taux_du_cap([w] * 16, 16, w, +1.0, "") == 0.0)
+    v("une fenêtre qui ne porte rien ne prédit rien",
+      taux_du_cap([w], 16, w, +1.0, "taux") == 0.0)
+    v("⚠ la moyenne ne sert qu'à PRÉDIRE, jamais à corriger la cohérence — le piège de `144` "
+      "n'est pas rejoué",
+      memoire_adaptee([w] * 16, 16) == 0.0
+      and abs(taux_du_cap([w] * 16, 16, w, +1.0, "taux") - w) < 1e-12,
+      "la même suite rend une mémoire nulle ET un taux égal à l'enroulement")
 
     # ---- ⭐ ce que coûte une orientation, et la sonde qui mord DANS LES DEUX SENS
     pr = le_prix_dune_normale(poses=12, bruits=(0.0, 8.0))

@@ -1086,6 +1086,31 @@ et précisément celui que la règle de l'enroulement doit rendre sur une spiral
 devient étroite et nommée** : séparer ce qui excède l'enroulement de façon **cohérente**, qu'il faut
 suivre, de ce qui l'excède **sans cohérence**, qu'il faut supprimer.
 
+**`147` · 2026-09-14 · un cap peut tourner à un taux qu'il connaît, jamais à un taux qu'il lit**
+(`un_cap_qui_tourne.py`, zéro lecture distante)
+La mémoire de `143` retient une **orientation fixe** : à mémoire 0,8 le suiveur garde quatre
+cinquièmes de sa direction, donc il résiste aussi aux **2π** que le tour lui impose — un cap statique
+ne lisse pas seulement le froissement, il freine l'enroulement. Trois règles font **tourner** la cible
+du mélange (à l'enroulement, au taux lu, au taux planché), la mémoire de `144` restant inchangée :
+la seule variable est que le cap tourne. ⭐⭐⭐⭐ **Prédire depuis sa propre lecture est franchement
+nuisible** : **89** réussites contre **108**, soit **1 gagnée pour 20 perdues** sur les 180 départs
+appariés ; le taux planché, qui n'est la lecture qu'à moitié, en perd la moitié (4 pour 15) —
+`R4-F106`. ⚠⚠ **Et tourner à ce qu'il connaît ne fait que déplacer** : 110 contre 108, mais
+**8 gagnées pour 6 perdues**. Le mécanisme revendiqué prédisait zéro perte, puisqu'un coût
+systématique enlevé ne se paie nulle part — `R4-F107`. ⭐⭐ **La raison est exacte** : les cinq règles
+rendent **36 sur 36** sur la spirale nue et **0 sur 36** sur la matière de `140`, parce que la mémoire
+de `144` vaut zéro sur les matières lisses. Un cap ne s'engage que là où ça froisse, et l'enroulement
+y est marginal devant ce qu'il combat — `R4-F108`. ⚠ **Les deux témoins internes sont verts**
+(114 · 107 · **108** et 115 · 98 · **97**), ce qui prouve aussi que le module partagé n'a rien déplacé
+de publié. ⚠⚠ **Deux pièges payés, tous deux chez moi.** Mon verdict comparait des **totaux**, donc il
+était satisfait par un **déplacement** — c'est le piège de `143`, et la victoire est devenue jointe :
+plus de réussites **et** aucune perdue. Et ma borne « dérivée » sur l'enroulement l'était sur la
+mauvaise excursion — j'avais oublié que le départ est recalé sur la feuille la plus proche et qu'un
+tour ajoute un pas de feuille, défaut invisible dans une batterie qui marche un vingtième de tour.
+⭐⭐ **Conséquence pour le graal** : l'échange fidélité contre distance que `143` mesure n'est **pas**
+un artefact d'un cap qui refuse de tourner, et la demande de `146` reste entière avec un chemin de
+moins.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

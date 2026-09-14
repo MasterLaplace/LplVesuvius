@@ -1434,6 +1434,8 @@ run "lire sous le bruit"     uv run python "$ROOT/src/nappe/lire_la_cause_sous_l
 run "figure sous le bruit"   uv run python "$ROOT/src/figures/figure_lire_la_cause_sous_le_bruit.py" --verifier
 run "rien a quoi se comparer" uv run python "$ROOT/src/nappe/un_suiveur_na_rien_a_quoi_se_comparer.py" --verifier
 run "figure rien a comparer" uv run python "$ROOT/src/figures/figure_un_suiveur_na_rien_a_quoi_se_comparer.py" --verifier
+run "un cap qui tourne"      uv run python "$ROOT/src/nappe/un_cap_qui_tourne.py" --verifier
+run "figure cap qui tourne"  uv run python "$ROOT/src/figures/figure_un_cap_qui_tourne.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
