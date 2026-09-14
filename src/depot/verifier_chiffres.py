@@ -3049,6 +3049,64 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 140 : L'ECRASEMENT, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Les TROIS grandeurs voyagent ensemble : un rapport seul se lit comme un succes, a cote du
+    # penchant et de la coherence il dit si la matiere explique le rouleau ou seulement un de ses
+    # nombres.
+    # (2) Et la coherence d'une cause SEULE ne voyage jamais sans celle de l'autre : 0,999 seul ne
+    # dit rien, a cote de 0,3925 et de 0,925 il dit que ni l'une ni l'autre n'y arrive.
+    ecr = _source(racine, "lecrasement_explique_t_il_lobliquite.json")
+    if ecr.exists():
+        d = json.loads(ecr.read_text())
+
+        def dec140(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        e_ = d.get("lecrasement_que_la_surface_impose", {})
+        if e_.get("decidable"):
+            for k_, n_, dd in (("rapport_des_axes", "rapport des axes de 140", 3),
+                               ("ecrasement", "ecrasement de 140", 4)):
+                ajoute(n_, e_[k_], dec140(e_[k_], dd), ecr.name)
+        # ⚠ Le tableau du §3 publie, par matiere, le rapport, le predit, le penchant et la
+        # coherence — et rien d'autre par matiere.
+        for x in d.get("sur_la_spirale", {}).get("lots", []):
+            if "rapport_median" not in x:
+                continue
+            cle = f"a e {x['ecrasement']} et A {x['amplitude_um']} de 140"
+            for k_, n_, dd in (("rapport_median", "rapport", 4),
+                               ("rapport_predit_median", "rapport predit", 4),
+                               ("penchant_median", "penchant", 3),
+                               ("coherence_median", "coherence", 4),
+                               ("rapport_des_axes", "axes", 3)):
+                if x.get(k_) is not None:
+                    ajoute(f"{n_} {cle}", x[k_], dec140(x[k_], dd), ecr.name)
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            for x in j_.get("par_lot", []):
+                ajoute(f"pire des trois a e {x['ecrasement']} et A {x['amplitude_um']} de 140",
+                       x["distance_la_pire_des_trois"],
+                       dec140(x["distance_la_pire_des_trois"], 4), ecr.name)
+            for k_, n_, dd in (("le_plus_proche_rapport", "rapport du plus proche de 140", 4),
+                               ("le_plus_proche_penchant", "penchant du plus proche de 140", 3),
+                               ("le_plus_proche_coherence", "coherence du plus proche de 140", 4),
+                               ("le_plus_proche_distance", "distance du plus proche de 140", 4),
+                               ("meilleure_distance_ecrasement_seul",
+                                "meilleure distance ecrasement seul de 140", 4),
+                               ("meilleure_distance_froissement_seul",
+                                "meilleure distance froissement seul de 140", 4),
+                               ("meilleure_distance_les_deux",
+                                "meilleure distance les deux de 140", 4),
+                               ("coherence_ecrasement_seul", "coherence ecrasement seul de 140", 4),
+                               ("coherence_froissement_seul",
+                                "coherence froissement seul de 140", 4)):
+                if j_.get(k_) is not None:
+                    ajoute(n_, j_[k_], dec140(j_[k_], dd), ecr.name)
+            # ⚠ Les amplitudes sont des MICROMETRES ronds : le document ecrit « 100 µm ».
+            if j_.get("le_plus_proche_amplitude_um") is not None:
+                ajoute("amplitude du plus proche de 140", j_["le_plus_proche_amplitude_um"], 0,
+                       ecr.name, unites=("µm",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 139 : L'INCLINAISON UNIFORME, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Le compte de feuilles par tour ne voyage jamais sans l'inclinaison AUTORISEE : « 399
     # feuilles par tour » seul est un nombre, a cote de « 0,08° autorises » il dit pourquoi une

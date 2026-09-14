@@ -898,6 +898,30 @@ la feuille, et l'écart entre les deux est grand, lentement variable, donc COHÉ
 ce que `137` mesure (0,925) et qu'un froissement, qui alterne, ne produit pas. La fixture suivante
 est une spirale écrasée, et elle est maintenant nommée par une mesure et non par une intuition.
 
+**`140` · 2026-09-14 · l'écrasement donne la cohérence, le froissement donne le reste**
+(`lecrasement_explique_t_il_lobliquite.py`, zéro lecture distante)
+`139` avait éliminé les deux explications évidentes du **1,186** ; le candidat restant était déjà au
+dossier — le rouleau est **écrasé**, `135` lisant une surface extérieure de **16,8 à 29,75 mm**, soit
+un rapport des axes de **1,771** et un aplatissement de **0,2782** qui se DÉRIVE et ne s'ajuste pas.
+⭐⭐⭐⭐ **À cet écrasement, plus un froissement de 100 µm, les trois grandeurs du rouleau tombent
+ensemble** : rapport **1,1212**, penchant **24,48°**, cohérence **0,942** contre 1,186 · 25,48° ·
+0,925 — pire des trois écarts **5,5 %**. Aucune cause seule n'y arrive : écrasement seul **0,08**
+mais en DOUBLANT l'aplatissement mesuré, froissement seul **0,5112** — `R4-F87`. ⭐⭐⭐⭐ **Et c'est
+la COHÉRENCE qui les sépare** : un écrasement seul en donne **0,999** (sa normale tourne avec
+l'angle polaire, de période π, donc elle est constante à l'échelle d'une marche), un froissement seul
+**0,3925** (il alterne), et le rouleau vaut 0,925 — `R4-F86`. ⚠ Ça éclaire `139` : le cap y
+récupérait 73 % de l'obliquité d'un froissement, alors que sur un écrasement mesuré et prédit
+coïncident presque — **le cap enlève ce qui alterne, pas ce qui persiste**, donc un dérouleur ne peut
+pas se débarrasser du 1,186 en lissant davantage. ⭐⭐ **La conversion feuilles → rayons est donc
+IRRÉDUCTIBLE, et prévisible depuis une mesure que le dépôt sait déjà faire.** ⚠⚠ Reste la QUEUE : le
+p90 du penchant du rouleau vaut 48,36° là où la fixture reste bien en deçà, donc il subsiste du local
+que ni l'ellipse ni la sinusoïde ne fabriquent. ⚠ Deux fixtures neuves, dont les contrats sont
+assertés par la batterie du module qui les porte : `VolumeFabriqueEnSpiraleEcrasee` (une feuille par
+tour, identique au bit à la spirale ronde à écrasement nul, normale = gradient à **10⁻⁶ degré**) et
+la composition des deux, rendue possible par une correction — la norme du gradient, que le
+froissement empruntait sous forme de formule CIRCULAIRE, est devenue une méthode ; les nombres de
+`139` sont inchangés au bit après ce changement, ce qui était la condition pour le faire.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -723,6 +723,19 @@ class VolumeFabriqueEnSpirale(VolumeFabrique):
         d = np.stack([np.zeros_like(gy), gy, gx], axis=1)
         return d / np.maximum(np.linalg.norm(d, axis=1, keepdims=True), 1e-12)
 
+    def norme_du_gradient(self, p: np.ndarray) -> np.ndarray:
+        """La norme de `grad(phase)` en ces points, par MICROMETRE — c'est-a-dire l'inverse de
+        l'espacement local le long de la normale.
+
+        ⚠⚠ ELLE EST UNE METHODE ET NON UNE FORMULE RECOPIEE, parce qu'une sous-classe peut la
+        rendre fausse. `VolumeFabriqueEnSpiraleFroissee` en a besoin pour ajouter son froissement au
+        gradient de sa base ; tant que la base etait ronde la formule circulaire suffisait, et elle
+        cesse de suffire des que la section est ECRASEE.
+        """
+        rho, _ = self.cylindriques(p)
+        rho = np.maximum(rho, 1e-9)
+        return np.sqrt((1.0 / self.pas_um) ** 2 + (1.0 / (2.0 * np.pi * rho)) ** 2)
+
     def lire(self, points: np.ndarray, fils: int = 1) -> np.ndarray:
         del fils
         q = np.asarray(points, dtype=np.float64).reshape(-1, 3)
@@ -880,7 +893,103 @@ class VolumeFabriqueOndulee(VolumeFabrique):
                                           / self.longueur_donde_um)))
 
 
-class VolumeFabriqueEnSpiraleFroissee(VolumeFabriqueEnSpirale):
+class VolumeFabriqueEnSpiraleEcrasee(VolumeFabriqueEnSpirale):
+    """Une spirale ECRASEE : les feuilles suivent des ellipses au lieu de cercles.
+
+    ⭐⭐⭐⭐ ELLE EXISTE PARCE QUE `139` A ELIMINE LES DEUX AUTRES EXPLICATIONS DU 1,186. Une
+    inclinaison uniforme est impossible sur un objet qui croise une feuille par tour ; un
+    froissement de l'amplitude mesuree ne fait payer que 1,0078, et celle qu'il faudrait replie les
+    feuilles. Ce qui reste est deja mesure ailleurs : le rouleau est ECRASE — `90` le mesure, et
+    `135` lit une surface exterieure qui va de 16,8 a 29,75 mm selon le rayon.
+
+    ⭐⭐⭐ ET UN ECRASEMENT DONNE EXACTEMENT CE QUE LE FROISSEMENT NE DONNAIT PAS : une inclinaison
+    GRANDE et LENTEMENT VARIABLE. Sur une section elliptique, la normale d'une feuille et la
+    direction du centre different d'un angle qui tourne avec l'angle polaire, de periode pi — donc
+    constant a l'echelle d'une marche, ce que `137` mesure (coherence 0,925) et qu'un froissement,
+    qui alterne, ne produit pas.
+
+    ⚠⚠ ELLE CROISE TOUJOURS UNE FEUILLE PAR TOUR, et c'est ce qui en fait un rouleau. La phase est
+    celle de la parente — `(u - r0)/pas - phi/(2pi)` — mais lue dans des coordonnees ELLIPTIQUES :
+    `u` et `phi` sont le rayon et l'angle apres division des deux axes par `1 + e` et `1 - e`. Un
+    tour fait croitre `phi` de `2pi`, donc la phase d'exactement une feuille, comme un rouleau rond.
+
+    ⚠ A ecrasement nul elle EST la spirale d'Archimede, au bit pres : la batterie l'asserte.
+    ⚠ Le parametre est l'APLATISSEMENT `e`, pas le rapport des axes : le rapport vaut
+    `(1 + e)/(1 - e)`, et `90` mesure 1,77, soit `e = 0,2782`.
+    """
+
+    def __init__(self, pas_um: float, ecrasement: float = 0.0, **kw) -> None:
+        super().__init__(pas_um, **kw)
+        self.ecrasement = float(ecrasement)
+        if not -0.95 < self.ecrasement < 0.95:
+            raise ValueError("l'ecrasement doit rester dans ]-0,95 ; 0,95[")
+
+    def _elliptiques(self, p: np.ndarray) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+        """Les coordonnees (y', x') apres ecrasement, en voxels, et leur rayon."""
+        q = np.asarray(p, dtype=np.float64).reshape(-1, 3)
+        yp = (q[:, 1] - self.centre_yx_vx[0]) / (1.0 + self.ecrasement)
+        xp = (q[:, 2] - self.centre_yx_vx[1]) / (1.0 - self.ecrasement)
+        return yp, xp, np.maximum(np.hypot(yp, xp), 1e-12)
+
+    def cylindriques(self, p: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        """Le rayon ELLIPTIQUE en micrometres et l'angle elliptique.
+
+        ⚠⚠ C'EST LE SEUL POINT OU L'ECRASEMENT ENTRE DANS LA PHASE, et c'est voulu : la parente
+        ecrit `phase` et `lire` a partir de `cylindriques` seule, donc les redefinir ici serait deux
+        descriptions d'une meme matiere. La NORMALE, elle, doit etre redefinie — le gradient de la
+        parente suppose des cercles.
+        """
+        if self.ecrasement == 0.0:
+            return super().cylindriques(p)
+        yp, xp, u = self._elliptiques(p)
+        return u * self.voxel_um, np.arctan2(yp, xp)
+
+    def normale_locale(self, p: np.ndarray) -> np.ndarray:
+        """La direction (z, y, x) perpendiculaire a la feuille — le gradient, analytique.
+
+        ⭐⭐ Le gradient de `(u - r0)/pas - phi/(2pi)` en coordonnees ELLIPTIQUES : chaque derivee
+        passe par le facteur de son axe, `1 + e` ou `1 - e`, et c'est ce facteur qui fait que la
+        normale s'ecarte de la direction du centre. Sur un cercle les deux coincident a l'inclinaison
+        de l'enroulement pres ; sur une ellipse elles different de plusieurs dizaines de degres.
+
+        ⚠ Les coordonnees sont en MICROMETRES avant derivation : melanger voxels et micrometres sur
+        des axes differents rendrait une direction fausse d'un facteur `voxel_um`.
+        """
+        if self.ecrasement == 0.0:
+            return super().normale_locale(p)
+        gy, gx = self._gradient_par_voxel(p)
+        d = np.stack([np.zeros_like(gy), gy, gx], axis=1)
+        return d / np.maximum(np.linalg.norm(d, axis=1, keepdims=True), 1e-12)
+
+    def norme_du_gradient(self, p: np.ndarray) -> np.ndarray:
+        """La norme de `grad(phase)` par micrometre, sur une section ELLIPTIQUE.
+
+        ⚠ La formule circulaire de la parente y est fausse : l'espacement le long de la normale
+        varie d'un facteur `((1+e)/(1-e))^2` entre le petit et le grand axe, et une fixture qui
+        annoncerait un espacement constant mentirait sur ce qu'un marcheur y rencontre.
+        """
+        if self.ecrasement == 0.0:
+            return super().norme_du_gradient(p)
+        gy, gx = self._gradient_par_voxel(p)
+        return np.hypot(gy, gx) / self.voxel_um
+
+    def _gradient_par_voxel(self, p: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        """Les deux composantes de `grad(phase)` dans le plan (y, x), PAR VOXEL."""
+        yp, xp, u = self._elliptiques(p)
+        a, b = 1.0 + self.ecrasement, 1.0 - self.ecrasement
+        du_y = (yp / u) / a
+        du_x = (xp / u) / b
+        dphi_y = (xp / (u * u)) / a
+        dphi_x = (-yp / (u * u)) / b
+        return (du_y / self.pas_um * self.voxel_um - dphi_y / (2.0 * np.pi),
+                du_x / self.pas_um * self.voxel_um - dphi_x / (2.0 * np.pi))
+
+    def rapport_des_axes(self) -> float:
+        """Le rapport du grand au petit axe, que `90` mesure a 1,77 sur le vrai rouleau."""
+        return float((1.0 + self.ecrasement) / (1.0 - self.ecrasement))
+
+
+class VolumeFabriqueEnSpiraleFroissee(VolumeFabriqueEnSpiraleEcrasee):
     """Une spirale dont la normale VAGABONDE autour du rayon — la fixture que `R4-P28` demande,
     une fois sa demande corrigee.
 
@@ -954,10 +1063,7 @@ class VolumeFabriqueEnSpiraleFroissee(VolumeFabriqueEnSpirale):
         q = q2 * self.voxel_um
         # ⚠ Le gradient de la PHASE, pas de la normale unitaire : on reconstruit le gradient de
         # base a partir de la normale du parent et de sa norme connue, `1/(pas.cos(inclinaison))`.
-        rho, _ = self.cylindriques(q2)
-        rho = np.maximum(rho, 1e-9)
-        g_base = base * np.sqrt((1.0 / self.pas_um) ** 2
-                                + (1.0 / (2.0 * np.pi * rho)) ** 2)[:, None]
+        g_base = base * self.norme_du_gradient(q2)[:, None]
         arg = 2.0 * np.pi * (q @ self.vecteurs_donde.T) / self.longueur_donde_um
         c = np.cos(arg + self.phases_donde) * self._a_k
         g = g_base + (c * (2.0 * np.pi / self.longueur_donde_um)) @ self.vecteurs_donde \
@@ -2064,6 +2170,57 @@ def verifier() -> int:
     v("... et une longueur d'onde nulle est refusée",
       _leve(lambda: VolumeFabriqueEnSpiraleFroissee(C.PAS_UM, amplitude_um=1.0,
                                                     longueur_donde_um=0.0, **kw_sp), ValueError))
+
+    # === LA SPIRALE ECRASEE, ET LA COMPOSITION DES DEUX ===================================
+    # ⚠⚠ Ce qui est verifie ici est ce que la classe promet : qu'a ecrasement nul elle SOIT la
+    # spirale ronde au bit, que sa normale SOIT le gradient de sa phase, et que la FROISSEE, qui en
+    # herite, puisse etre ecrasee ET froissee sans que l'une des deux geometries ecrase l'autre.
+    sp_ec0 = VolumeFabriqueEnSpiraleEcrasee(C.PAS_UM, ecrasement=0.0, **kw_sp)
+    v("la spirale écrasée à écrasement nul EST la spirale d'Archimède, au bit",
+      np.array_equal(sp_ec0.phase(pts_sp), sp_lisse.phase(pts_sp))
+      and np.array_equal(sp_ec0.lire(pts_sp), sp_lisse.lire(pts_sp))
+      and np.array_equal(sp_ec0.normale_locale(pts_sp), sp_lisse.normale_locale(pts_sp))
+      and np.array_equal(sp_ec0.norme_du_gradient(pts_sp),
+                         sp_lisse.norme_du_gradient(pts_sp)))
+    for e_sp, att in ((0.2782, 1.771), (0.45, 2.636)):
+        vol_e = VolumeFabriqueEnSpiraleEcrasee(C.PAS_UM, ecrasement=e_sp, **kw_sp)
+        v(f"... et à {e_sp} d'écrasement le rapport des axes vaut ce qu'elle annonce",
+          abs(vol_e.rapport_des_axes() - att) < 0.001, f"{vol_e.rapport_des_axes():.3f}")
+    vol_e = VolumeFabriqueEnSpiraleEcrasee(C.PAS_UM, ecrasement=0.2782, **kw_sp)
+    ec_e = []
+    for p_sp in pts_sp[:40]:
+        g_sp = np.zeros(3)
+        for k_sp in range(3):
+            e_v = np.zeros(3)
+            e_v[k_sp] = 0.05
+            g_sp[k_sp] = (float(vol_e.phase((p_sp + e_v).reshape(1, 3))[0])
+                          - float(vol_e.phase((p_sp - e_v).reshape(1, 3))[0])) / 0.1
+        g_sp = g_sp / np.linalg.norm(g_sp)
+        n_sp = vol_e.normale_locale(p_sp).reshape(3)
+        ec_e.append(float(np.degrees(np.arccos(np.clip(abs(float(g_sp @ n_sp)), -1.0, 1.0)))))
+    v("... et sa normale analytique EST le gradient de sa phase",
+      max(ec_e) < 0.01, f"écart max {max(ec_e):.6f}°")
+    # ⚠⚠ LA NORME DU GRADIENT EST CE QUE LA FROISSEE LUI EMPRUNTE : si elle restait circulaire, une
+    # fixture ecrasee ET froissee melangerait un froissement juste a une base fausse.
+    esp_e = 1.0 / vol_e.norme_du_gradient(pts_sp)
+    v("... et l'espacement qu'elle annonce varie avec l'angle, comme une ellipse l'impose",
+      float(esp_e.max() / esp_e.min()) > 1.5,
+      f"{esp_e.min():.1f} à {esp_e.max():.1f} µm")
+    v("⚠ un écrasement hors des bornes est refusé plutôt que deviné",
+      _leve(lambda: VolumeFabriqueEnSpiraleEcrasee(C.PAS_UM, ecrasement=0.99, **kw_sp), ValueError))
+    # ⭐⭐ LA COMPOSITION : une froissee ECRASEE doit differer des deux prises seules.
+    seule_e = VolumeFabriqueEnSpiraleEcrasee(C.PAS_UM, ecrasement=0.2782, **kw_sp)
+    seule_f = VolumeFabriqueEnSpiraleFroissee(C.PAS_UM, amplitude_um=42.4,
+                                              longueur_donde_um=393.6, **kw_sp)
+    deux = VolumeFabriqueEnSpiraleFroissee(C.PAS_UM, amplitude_um=42.4, longueur_donde_um=393.6,
+                                           ecrasement=0.2782, **kw_sp)
+    v("une spirale écrasée ET froissée diffère de chacune des deux prises seule",
+      not np.array_equal(deux.phase(pts_sp), seule_e.phase(pts_sp))
+      and not np.array_equal(deux.phase(pts_sp), seule_f.phase(pts_sp)))
+    v("... et sa phase est EXACTEMENT la somme des deux écarts à la spirale ronde",
+      np.allclose(deux.phase(pts_sp) - sp_lisse.phase(pts_sp),
+                  (seule_e.phase(pts_sp) - sp_lisse.phase(pts_sp))
+                  + (seule_f.phase(pts_sp) - sp_lisse.phase(pts_sp)), atol=1e-9))
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
