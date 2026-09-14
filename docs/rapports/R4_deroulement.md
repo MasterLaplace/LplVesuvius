@@ -1210,6 +1210,31 @@ les trois endroits où chercher une direction sont épuisés, et la demande chan
 à la normale de la feuille ». C'est une question sur la **géométrie de la mâchoire**, et `150` a déjà
 réfuté la réponse la plus évidente : la largeur n'y change rien. ⚠ Aucune grille n'a été payée.
 
+**`153` · 2026-09-14 · la mâchoire est un instrument plan, la matière froissée ne l'est pas**
+(`la_machoire_est_plane_la_matiere_ne_lest_pas.py`, zéro lecture distante)
+`152` laissait la question de la **géométrie de la mâchoire**. Ce document la referme entière, et la
+réponse est structurelle. ⭐⭐⭐⭐ **La vraie normale sort du plan du tour si et seulement si la matière
+froisse** : `|n·z|` vaut **0,0 exactement** sur la spirale nue **et** sur l'écrasée — dont la normale
+penche pourtant de 22,9° sur le rayon — et **0,278624** sur la matière du rouleau, soit **16,178°**
+hors plan en médiane et **51,995°** au pire. Or `une_machoire` rend `n' = t' × z`, donc **zéro**
+composante axiale par construction, ce que la batterie vérifie sur la **sortie** de l'instrument.
+Ce n'est donc pas que la mâchoire estime mal, c'est qu'elle **ne peut pas exprimer** ce qu'il y
+aurait à estimer — `R4-F120`. ⭐⭐⭐ **Les deux réglages qui restaient sont réfutés, chacun avec son piège** :
+la largeur descend à **1,38 µm**, **sous le voxel**, et l'écart ne tombe pas (**24,295°** contre
+22,325° à 86,5 µm) ; le nombre d'appuis monte à dix-sept et l'écart **empire**, **22,624° → 30,845°**
+pour **2482** lectures au lieu de 292 — `R4-F121`. ⚠⚠ **Et ma propre dérivation est réfutée au
+passage** : trois appuis équidistants rendent la sécante d'une sinusoïde, donc le rapport vaut
+exactement `sin(kw)/kw` ; la **forme** est juste et le **niveau** est faux, `sinc` prédisant 0,995 à
+largeur quasi nulle là où la matière rend 0,807. ⭐⭐ **Le remède que ça désigne est mesuré avec sa
+borne** : une mâchoire en **croix**, qui ajuste un plan au lieu d'une droite, récupère **−5,702°** et
+**−5,143°** sur les froissements modérés (médiane **−5,422°**) et **−1,499°** seulement sur la
+matière du rouleau, où c'est **17 mieux contre 15 pire** — un tirage à pile ou face — pour **876**
+lectures au lieu de 438 — `R4-F122`. ⭐⭐ **Conséquence pour le graal** : la famille des réglages de
+mâchoire est close, et la demande devient une **longueur** — sur quelle distance la normale
+reste-t-elle constante à la précision que la pose demande ? ⚠⚠ Et ceci rejoint **`134`, qui n'est
+toujours pas clos** : une composante axiale de la normale **est** un vrillage, et `R4-F79` mesure
+déjà sur le vrai rouleau que le penchant est plus **axial** qu'azimutal (0,334 contre 0,193).
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

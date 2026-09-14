@@ -198,9 +198,64 @@ def une_machoire(vol, centre_vx, normale, sens: float, largeur_um: float, epaiss
             "ecarts_um": [float(x) for x in ecarts]}
 
 
+def une_machoire_en_croix(vol, centre_vx, normale, sens: float, largeur_um: float,
+                          epaisseur_um: float, voxel_um: float, appuis: int = APPUIS,
+                          marge_um: float = 0.0) -> dict | None:
+    """Une machoire a DEUX barres croisees — son nuage porte un PLAN, donc une normale hors du tour.
+
+    ⭐⭐⭐⭐ POURQUOI ELLE EXISTE, ET C'EST UNE PANNE STRUCTURELLE DE `une_machoire`. Celle-ci pose
+    ses appuis le long de `t = z x n`, donc sur UNE droite, et rend `n' = t' x z` — une normale
+    qui est TOUJOURS perpendiculaire a l'axe, par construction. Or `153` mesure que la vraie
+    normale d'une feuille FROISSEE sort du plan du tour : `|n.z|` vaut exactement 0,000000 sur les
+    matieres lisses et 0,227922 sur celle du rouleau. Cette composante-la est donc invisible a une
+    machoire en segment, et aucun reglage ne la rend visible : ni la largeur, ni le nombre
+    d'appuis, ni la facon d'ajuster.
+
+    ⚠⚠ UN NUAGE COLINEAIRE PORTE UNE DIRECTION, PAS UN PLAN. C'est toute la difference : trois
+    points alignes definissent une droite et laissent une famille de plans qui la contiennent, donc
+    le choix du plan doit venir d'ailleurs — et `une_machoire` le prend en imposant `z` dedans. Deux
+    barres croisees suppriment le choix : le nuage n'est plus colineaire, et la normale devient la
+    PLUS PETITE direction de sa decomposition, celle qui n'est portee par aucun appui.
+
+    ⚠ La seconde barre est `n x t`, qui est DANS la feuille et porte l'axe : la prendre selon `z`
+    tout court la ferait sortir de la feuille des que la normale penche, et les appuis chercheraient
+    leur interstice depuis un point qui n'est plus sur la surface.
+    """
+    if int(appuis) < 2:
+        return None
+    n = np.asarray(normale, dtype=np.float64)
+    n = n / max(float(np.linalg.norm(n)), 1e-12)
+    tan = np.cross(Z, n)
+    norme = float(np.linalg.norm(tan))
+    if norme < 1e-9:
+        return None
+    tan = tan / norme
+    pts, ecarts = [], []
+    for axe in (tan, np.cross(n, tan)):
+        for u in np.linspace(-float(largeur_um), float(largeur_um), int(appuis)):
+            q = np.asarray(centre_vx, dtype=np.float64) + axe * (u / voxel_um)
+            d = linterstice(vol, q, sens * n, 0.5 * float(epaisseur_um),
+                            float(epaisseur_um) + 2.0 * abs(float(marge_um)), voxel_um)
+            if d is None:
+                return None
+            pts.append(q + sens * n * (d / voxel_um))
+            ecarts.append(d)
+    P = np.asarray(pts, dtype=np.float64)
+    milieu = P.mean(axis=0)
+    nn = np.linalg.svd(P - milieu, full_matrices=False)[2][-1]
+    norme = float(np.linalg.norm(nn))
+    if norme < 1e-9:
+        return None
+    nn = nn / norme
+    if float(nn @ n) < 0.0:
+        nn = -nn
+    return {"milieu_vx": milieu, "normale": nn, "ecart_um": float(np.median(ecarts)),
+            "ecarts_um": [float(x) for x in ecarts]}
+
+
 def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel_um: float,
           deux: bool, appuis: int = APPUIS, marge_um: float = 0.0,
-          deux_temps: bool = False) -> dict | None:
+          deux_temps: bool = False, en_croix: bool = False) -> dict | None:
     """L'etat d'un bras : une machoire, ou deux et l'epaisseur qu'elles MESURENT.
 
     ⚠⚠ C'est la seule difference de fond entre le premier bras et le second. Avec une machoire, ou
@@ -227,13 +282,17 @@ def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel
     """
     if deux_temps:
         premier = poser(vol, centre_vx, normale, largeur_um, epaisseur_um, voxel_um, deux,
-                        appuis, marge_um)
+                        appuis, marge_um, en_croix=en_croix)
         if premier is None:
             return None
         return poser(vol, centre_vx, premier["normale"], largeur_um, epaisseur_um, voxel_um,
-                     deux, appuis, marge_um)
-    haut = une_machoire(vol, centre_vx, normale, +1.0, largeur_um, epaisseur_um, voxel_um,
-                        appuis, marge_um)
+                     deux, appuis, marge_um, en_croix=en_croix)
+    # ⚠ UN SEUL INGREDIENT CHANGE : la croix ne touche QUE la facon dont une machoire rend son
+    # orientation. Tout le reste — la fenetre, le refus du bord, l'epaisseur mesuree, le centre —
+    # est celui de `142`, sans quoi un gain ne serait imputable a rien.
+    machoire = une_machoire_en_croix if en_croix else une_machoire
+    haut = machoire(vol, centre_vx, normale, +1.0, largeur_um, epaisseur_um, voxel_um,
+                    appuis, marge_um)
     if haut is None:
         return None
     if not deux:
@@ -241,8 +300,8 @@ def poser(vol, centre_vx, normale, largeur_um: float, epaisseur_um: float, voxel
         return {"centre_vx": haut["milieu_vx"] - n * (0.5 * epaisseur_um / voxel_um),
                 "normale": n, "haut": haut, "bas": None,
                 "epaisseur_um": None, "suppose": True}
-    bas = une_machoire(vol, centre_vx, normale, -1.0, largeur_um, epaisseur_um, voxel_um,
-                       appuis, marge_um)
+    bas = machoire(vol, centre_vx, normale, -1.0, largeur_um, epaisseur_um, voxel_um,
+                   appuis, marge_um)
     if bas is None:
         return None
     m = haut["normale"] + bas["normale"]
@@ -1258,6 +1317,47 @@ def verifier() -> int:
     l2 = int(nue.lectures)
     v("⚠ et il coûte exactement deux poses, jamais une de plus",
       l1 > 0 and l2 == 2 * l1, f"{l1} puis {l2} lectures")
+
+    # ---- ⭐⭐⭐⭐ LA MACHOIRE EN CROIX (`153`), et son contrôle structurel
+    # ⚠⚠ L'enonce n'est pas « la croix est meilleure » mais « la croix peut sortir du plan du tour
+    # et le segment ne le peut pas ». C'est une propriete de l'instrument, pas un gain, et elle se
+    # verifie sur la SORTIE : la composante axiale de la normale rendue.
+    d_c, n_c = un_depart(froissee, 1.3, RAYON_MM, voxel_um, pas_um)
+    axial_vrai = abs(float(np.asarray(n_c)[0] / np.linalg.norm(n_c)))
+    v("⭐⭐⭐ sur une matière froissée, la VRAIE normale sort du plan du tour",
+      axial_vrai > 1e-3, f"|n·z| = {axial_vrai:.6f} — sans ça, il n'y a rien à récupérer")
+    seg = une_machoire(froissee, d_c, n_c, +1.0, lg_w, pas_um, voxel_um)
+    cro = une_machoire_en_croix(froissee, d_c, n_c, +1.0, lg_w, pas_um, voxel_um)
+    v("⭐⭐⭐⭐ une mâchoire en SEGMENT n'en rend jamais rien, par construction",
+      seg is not None and abs(float(seg["normale"][0])) < 1e-12,
+      f"|n·z| rendu = {abs(float(seg['normale'][0])):.2e}" if seg else "aucune pose")
+    v("⭐⭐⭐⭐ ... et la CROIX en rend quelque chose",
+      cro is not None and abs(float(cro["normale"][0])) > 1e-3,
+      f"|n·z| rendu = {abs(float(cro['normale'][0])):.6f}" if cro else "aucune pose")
+
+    # ⚠⚠ ET LE CONTROLE QUI EMPECHE L'ENONCE D'ETRE VRAI POUR RIEN : sur une matiere LISSE, la
+    # vraie normale ne sort PAS du plan, donc la croix ne doit rien inventer. Une croix qui
+    # rendrait une composante axiale sur une spirale nue mesurerait son propre bruit.
+    n_plate = une_machoire_en_croix(nue, depart, n0, +1.0, 0.25 * pas_um, pas_um, voxel_um)
+    v("⚠⚠ sur une matière LISSE la croix n'invente aucune composante axiale",
+      n_plate is not None and abs(float(n_plate["normale"][0])) < 1e-6,
+      f"|n·z| = {abs(float(n_plate['normale'][0])):.2e}" if n_plate else "aucune pose")
+    v("... et elle y rend la même normale que le segment",
+      n_plate is not None
+      and _ecart_deg(n_plate["normale"],
+                     une_machoire(nue, depart, n0, +1.0, 0.25 * pas_um, pas_um,
+                                  voxel_um)["normale"]) < 1e-6,
+      "rien à corriger, donc rien de corrigé")
+
+    # ⚠ Le prix : deux barres, donc deux fois les appuis.
+    froissee.lectures = 0
+    une_machoire(froissee, d_c, n_c, +1.0, lg_w, pas_um, voxel_um)
+    ls = int(froissee.lectures)
+    froissee.lectures = 0
+    une_machoire_en_croix(froissee, d_c, n_c, +1.0, lg_w, pas_um, voxel_um)
+    lc = int(froissee.lectures)
+    v("⚠ la croix coûte exactement deux barres d'appuis", ls > 0 and lc == 2 * ls,
+      f"{ls} puis {lc} lectures")
 
     # ---- ⭐ le contrôle : sur une matière facile, personne ne dérive
     trois = les_trois_bras(nue, depart, n0, 0.25 * pas_um, pas_um, voxel_um,

@@ -1444,6 +1444,8 @@ run "la pose de travers"      uv run python "$ROOT/src/nappe/la_pose_cherche_t_e
 run "figure pose de travers" uv run python "$ROOT/src/figures/figure_la_pose_cherche_t_elle_de_travers.py" --verifier
 run "la pose en deux temps"  uv run python "$ROOT/src/nappe/la_pose_en_deux_temps.py" --verifier
 run "figure pose deux temps" uv run python "$ROOT/src/figures/figure_la_pose_en_deux_temps.py" --verifier
+run "la machoire est plane" uv run python "$ROOT/src/nappe/la_machoire_est_plane_la_matiere_ne_lest_pas.py" --verifier
+run "figure machoire plane" uv run python "$ROOT/src/figures/figure_la_machoire_est_plane.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

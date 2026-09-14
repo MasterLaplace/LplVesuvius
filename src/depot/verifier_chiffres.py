@@ -3049,6 +3049,82 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 153 : LA MACHOIRE EST PLANE, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Une composante axiale ne voyage jamais sans le ZERO des matieres lisses — « 0,278624 »
+    # seul est un nombre, a cote de « 0,0 exactement » il dit que c'est le froissement et rien
+    # d'autre.
+    # (2) Une erreur a la plus PETITE largeur ne voyage jamais sans celle a la plus GRANDE : c'est
+    # le couple qui refute la largeur, et une seule des deux se lirait comme un niveau.
+    # (3) Et un ecart APPARIE de la croix ne voyage jamais sans ses COMPTES — 17 contre 15 dit ce
+    # qu'une mediane de −1,499° cache.
+    mp = _source(racine, "la_machoire_est_plane_la_matiere_ne_lest_pas.json")
+    if mp.exists():
+        d = json.loads(mp.read_text())
+
+        def dec153(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        h_ = d.get("hors_plan", {})
+        if h_.get("decidable"):
+            ajoute("poses par case de 153", h_["poses_par_case"], 0, mp.name)
+            for m in h_.get("par_matiere", []):
+                q = f"sur {m['nom']} de 153"
+                for cle, nom in (("axial_median", "composante axiale mediane"),
+                                 ("axial_p90", "composante axiale au p90"),
+                                 ("axial_max", "composante axiale maximale"),
+                                 ("hors_plan_median_deg", "hors plan median"),
+                                 ("hors_plan_max_deg", "hors plan maximal")):
+                    ajoute(f"{nom} {q}", m[cle], dec153(m[cle], 6), mp.name)
+        g_ = d.get("geometrie", {})
+        if g_.get("decidable"):
+            # ⚠⚠ ON N'ENREGISTRE QUE CE QUE LE DOCUMENT PUBLIE. `153` table les deux balayages sur
+            # la seule matiere du rouleau — celle ou la question se pose — et cite les autres par
+            # leur niveau en prose. Recalculer les cinq ferait signaler comme « perimes » des
+            # chiffres qu'aucun document n'a jamais eu l'intention de porter.
+            for m in [x for x in g_.get("par_matiere", []) if x["amplitude_um"] == 100.0]:
+                for x in m.get("par_largeur", []):
+                    q = f"sur {m['nom']} a la largeur {x['largeur_en_pas']} pas de 153"
+                    ajoute(f"largeur en microns {q}", x["largeur_um"],
+                           dec153(x["largeur_um"], 2), mp.name)
+                    # ⚠ Une case sans pose ne rend pas zero degre d'ecart, elle ne rend rien.
+                    if x.get("erreur_mediane_deg") is not None:
+                        ajoute(f"ecart a la vraie normale {q}", x["erreur_mediane_deg"],
+                               dec153(x["erreur_mediane_deg"], 3), mp.name)
+                for x in m.get("par_appuis", []):
+                    q = f"sur {m['nom']} a {x['appuis']} appuis de 153"
+                    if x.get("erreur_mediane_deg") is not None:
+                        ajoute(f"ecart a la vraie normale {q}", x["erreur_mediane_deg"],
+                               dec153(x["erreur_mediane_deg"], 3), mp.name)
+                    if x.get("lectures_medianes") is not None:
+                        ajoute(f"lectures medianes {q}", int(x["lectures_medianes"]), 0, mp.name)
+        c_ = d.get("croix", {})
+        if c_.get("decidable"):
+            for m in c_.get("par_matiere", []):
+                q = f"sur {m['nom']} de 153"
+                for cle, nom in (("erreur_segment_deg", "ecart de la machoire en segment"),
+                                 ("erreur_croix_deg", "ecart de la machoire en croix"),
+                                 ("ecart_apparie_deg", "ecart apparie de la croix")):
+                    if m.get(cle) is not None:
+                        ajoute(f"{nom} {q}", m[cle], dec153(m[cle], 3), mp.name)
+                for cle, nom in (("mieux", "departs ou la croix fait mieux"),
+                                 ("pire", "departs ou la croix fait pire"),
+                                 ("appariees", "departs apparies de la croix")):
+                    if m.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(m[cle]), 0, mp.name)
+                # ⚠ Le prix est le MEME sur les cinq matieres, donc le document le cite une fois :
+                # l'enregistrer cinq fois ferait cinq controles pour un seul enonce.
+                if m["amplitude_um"] == 100.0:
+                    for cle, nom in (("lectures_segment", "lectures d'une pose en segment"),
+                                     ("lectures_croix", "lectures d'une pose en croix")):
+                        if m.get(cle) is not None:
+                            ajoute(f"{nom} {q}", int(m[cle]), 0, mp.name)
+        dur = d.get("juger", {}).get("sur_la_matiere_du_rouleau")
+        if dur and dur.get("gain_median_sur_les_froissements_moderes_deg") is not None:
+            ajoute("gain median de la croix sur les froissements moderes de 153",
+                   dur["gain_median_sur_les_froissements_moderes_deg"],
+                   dec153(dur["gain_median_sur_les_froissements_moderes_deg"], 3), mp.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 152 : LA POSE EN DEUX TEMPS, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un ecart APPARIE ne voyage jamais sans les comptes qui le portent — « +1,188° » seul est
     # un nombre, a cote de « 6 redressees contre 28 degradees » il dit de quoi il est fait.
