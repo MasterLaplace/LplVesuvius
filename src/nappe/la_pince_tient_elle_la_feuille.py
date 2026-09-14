@@ -394,7 +394,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            tours: float = TOURS, pas_max: int = 4000, memoire_du_cap: float = 0.0,
            fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
            corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
-           cap_tournant: str = "") -> dict:
+           cap_tournant: str = "", avance_sur_la_lecture: bool = False) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -455,6 +455,12 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     rotations: list[float] = []
     memoires: list[float] = []
     taux_lus: list[float] = []
+    # ⚠⚠ DEUX DIAGNOSTICS QUE LE SUIVEUR NE VOIT JAMAIS. Ils lisent la VRAIE normale et la VRAIE
+    # phase de la fixture — de quoi mesurer ce que le cap fait au marcheur, jamais de quoi le lui
+    # dire. Et ni `normale_locale` ni `phase` ne comptent une lecture, donc `lectures` reste le
+    # nombre que les tranches precedentes publient.
+    inclinaisons: list[float] = []
+    traversees: list[float] = []
     fin = "tour bouclé"
     while abs(cumul) < 2.0 * np.pi * float(tours) and pas < int(pas_max):
         a, pris = float(avance_um), None
@@ -489,6 +495,18 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         # matiere a rendu, pas ce que le cap precedent en a deja fait. Lire apres melange ferait
         # une boucle qui se confirme elle-meme.
         rotations.append(_ecart_angulaire(etat["normale"], pris["normale"]))
+        # ⭐⭐⭐⭐ CE QUE LE PAS AURAIT TRAVERSE SI LES MACHOIRES NE SE RACCROCHAIENT PAS. Le cap
+        # incline la normale, donc il incline aussi la TANGENTE le long de laquelle on avance :
+        # une part du pas traverse la feuille au lieu de la longer. La mesure est exacte et sans
+        # approximation de gradient — la phase du point vise moins celle du point courant, en
+        # feuilles, deroulee comme partout ailleurs ici.
+        depart_p = np.asarray(etat["centre_vx"], dtype=np.float64)
+        vise = depart_p + np.asarray(tan, dtype=np.float64) * (a / voxel_um)
+        dph = float(vol.phase(vise.reshape(1, 3))[0]) - float(vol.phase(depart_p.reshape(1, 3))[0])
+        traversees.append(float(dph - np.round(dph)))
+        inclinaisons.append(_ecart_deg(
+            etat["normale"],
+            np.asarray(vol.normale_locale(depart_p.reshape(1, 3))).reshape(3)))
         # ⚠ L'enroulement est calcule sur le rayon COURANT et l'avance REELLE du pas : les deux
         # sont a la main du suiveur, et un enroulement pose serait une constante de plus.
         rho = rayon_um(etat["centre_vx"])
@@ -504,6 +522,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
                             (1.0 if cumul >= 0.0 else -1.0), cap_tournant)
                 if cap_tournant else 0.0)
         taux_lus.append(taux)
+        lecture = np.array(pris["normale"], dtype=np.float64)
         if m_ > 0.0:
             cible = (_tourner(etat["normale"], taux) if taux != 0.0
                      else np.asarray(etat["normale"]))
@@ -520,7 +539,11 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         d = (d + np.pi) % (2.0 * np.pi) - np.pi
         cumul += d
         th = th_neuf
-        nouvelle_tan = _tangente_du_tour(pris["normale"])
+        # ⭐⭐⭐ LE CAP GOUVERNE-T-IL AUSSI LA DIRECTION DE MARCHE ? Par defaut oui : la tangente
+        # sort de la normale MELANGEE. `avance_sur_la_lecture` la fait sortir de la normale que la
+        # matiere vient de rendre, sans toucher a ce que les machoires emploient. C'est la seule
+        # chose qui bouge, et elle separe « ce que le cap lisse » de « ou le marcheur va ».
+        nouvelle_tan = _tangente_du_tour(lecture if avance_sur_la_lecture else pris["normale"])
         if float(nouvelle_tan @ tan) < 0.0:
             nouvelle_tan = -nouvelle_tan
         tan, etat = nouvelle_tan, pris
@@ -546,6 +569,15 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             # ⚠ Le taux REELLEMENT employe est publie pour la meme raison que la memoire : un cap
             # annonce tournant qui rendrait zero partout serait un cap statique deguise.
             "taux_median_rad": (round(float(np.median(taux_lus)), 6) if taux_lus else None),
+            # ⚠ En millidegres et en milli-feuilles ENTIERS : arrondis en degres ou en feuilles,
+            # ces nombres tombent sous 1e-4 sur les matieres lisses et `json.dumps` les ecrit alors
+            # en notation scientifique, introuvables dans leur propre record.
+            "inclinaison_mediane_mdeg": (int(round(float(np.median(inclinaisons)) * 1000.0))
+                                         if inclinaisons else None),
+            "traversee_cumulee_mfeuilles": (int(round(float(np.sum(traversees)) * 1000.0))
+                                            if traversees else None),
+            "traversee_absolue_mfeuilles": (int(round(float(np.sum(np.abs(traversees))) * 1000.0))
+                                            if traversees else None),
             "memoire_min": (round(float(np.min(memoires)), 4) if memoires else None),
             "memoire_max": (round(float(np.max(memoires)), 4) if memoires else None),
             "chemin_um": round(chemin, 1), "tour_boucle": bool(abs(cumul) >= 2.0 * np.pi * tours),
@@ -578,7 +610,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                    voxel_um: float, avance_um: float, axe_yx, tours: float = TOURS,
                    memoire_du_cap: float = 0.0, fenetre_du_cap: int = 0,
                    bloc_du_cap: int = 1, corrige_le_bruit: bool = False,
-                   enroulement_du_cap: bool = False, cap_tournant: str = "") -> dict:
+                   enroulement_du_cap: bool = False, cap_tournant: str = "",
+                   avance_sur_la_lecture: bool = False) -> dict:
     """Les trois bras sur le MEME depart — c'est ce qui rend la comparaison lisible."""
     out = {}
     for nom, deux, contrainte in (("une machoire", False, False),
@@ -589,7 +622,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                           deux, contrainte, avance_um, axe_yx, tours,
                           memoire_du_cap=memoire_du_cap, fenetre_du_cap=fenetre_du_cap,
                           bloc_du_cap=bloc_du_cap, corrige_le_bruit=corrige_le_bruit,
-                          enroulement_du_cap=enroulement_du_cap, cap_tournant=cap_tournant)
+                          enroulement_du_cap=enroulement_du_cap, cap_tournant=cap_tournant,
+                          avance_sur_la_lecture=avance_sur_la_lecture)
     return out
 
 
@@ -627,7 +661,7 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
              longueur_donde_um: float = LONGUEUR_DONDE_UM, memoire_du_cap: float = 0.0,
              fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
              corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
-             cap_tournant: str = "") -> dict:
+             cap_tournant: str = "", avance_sur_la_lecture: bool = False) -> dict:
     """Les trois bras sur une matiere, un niveau de bruit et une largeur — tous les departs.
 
     ⚠ Les trois bras partent du MEME point a chaque depart : une comparaison dont les bras ne
@@ -648,7 +682,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
                                fenetre_du_cap=fenetre_du_cap, bloc_du_cap=bloc_du_cap,
                                corrige_le_bruit=corrige_le_bruit,
                                enroulement_du_cap=enroulement_du_cap,
-                               cap_tournant=cap_tournant)
+                               cap_tournant=cap_tournant,
+                               avance_sur_la_lecture=avance_sur_la_lecture)
         for b, x in trois.items():
             par_bras[b].append({"depart_deg": round(360.0 * k / int(departs), 1), **x})
     bloc = {"ecrasement": float(ecr), "amplitude_um": float(amp), "bruit": float(bruit),
@@ -658,7 +693,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
             "fenetre_du_cap": int(fenetre_du_cap), "bloc_du_cap": int(bloc_du_cap),
             "corrige_le_bruit": bool(corrige_le_bruit),
             "enroulement_du_cap": bool(enroulement_du_cap),
-            "cap_tournant": str(cap_tournant), "bras": {}}
+            "cap_tournant": str(cap_tournant),
+            "avance_sur_la_lecture": bool(avance_sur_la_lecture), "bras": {}}
     for b in BRAS:
         bloc["bras"][b] = {"suivis": par_bras[b], **_resumer_un_bras(par_bras[b], int(departs))}
     return bloc

@@ -3049,6 +3049,89 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 148 : AVANCER DE TRAVERS, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Une traversee AVEC cap ne voyage jamais sans celle SANS cap : « 44,271 » seul est un
+    # nombre, a cote de « 27,953 » il dit que le cap fait traverser plus sur cette matiere-la.
+    # (2) Une traversee ne voyage jamais sans la DERIVE : 19,292 feuilles traversees pour 0,052
+    # perdue, c'est ce couple qui dit que les machoires rattrapent.
+    # (3) Et des reussites ne voyagent jamais sans le SOLDE APPARIE, depuis `147`.
+    tv = _source(racine, "la_memoire_fait_elle_avancer_de_travers.json")
+    if tv.exists():
+        d = json.loads(tv.read_text())
+
+        def dec148(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        t_ = j_.get("les_temoins_internes", {})
+        if t_.get("decidable"):
+            for x in t_.get("par_source", []):
+                for nom in ("une machoire", "deux machoires libres", "la pince"):
+                    ici = x.get(nom, {}).get("ici")
+                    if isinstance(ici, dict):
+                        for cle, val in ici.items():
+                            ajoute(f"temoin {cle} de {nom} de « {x['nom']} » de 148", val, 0,
+                                   tv.name)
+                    elif ici is not None:
+                        ajoute(f"temoin interne de {nom} de « {x['nom']} » de 148", ici, 0,
+                               tv.name)
+        c_ = j_.get("le_cap_fait_il_traverser", {})
+        if c_.get("decidable"):
+            for m in c_.get("par_matiere", []):
+                for cle, nom in (("sans_cap_feuilles", "feuilles traversees sans cap"),
+                                 ("avec_cap_feuilles", "feuilles traversees avec cap"),
+                                 ("sans_cap_deg", "inclinaison sans cap"),
+                                 ("avec_cap_deg", "inclinaison avec cap")):
+                    if m.get(cle) is not None:
+                        ajoute(f"{nom} sur {m['nom']} de 148", m[cle], dec148(m[cle], 3), tv.name)
+            for quoi, bloc_ in (("avec cap", c_.get("avec_cap", {})),
+                                ("sans cap", c_.get("sans_cap", {}))):
+                for cle, nom in (("traversee_absolue_feuilles", "feuilles traversees"),
+                                 ("derive_mediane_feuilles", "derive mediane"),
+                                 ("inclinaison_mediane_deg", "inclinaison mediane")):
+                    if bloc_.get(cle) is not None:
+                        ajoute(f"{nom} {quoi} sur la grille de 148", bloc_[cle],
+                               dec148(bloc_[cle], 3), tv.name)
+        a_ = j_.get("avancer_sur_la_lecture_repare", {})
+        if a_.get("decidable"):
+            for cle, nom in (("reussites_du_temoin", "reussites du cap statique de 148"),
+                             ("reussites_de_la_reparation", "reussites de la reparation de 148"),
+                             ("traversee_du_temoin_feuilles",
+                              "feuilles traversees par le cap statique de 148"),
+                             ("traversee_de_la_reparation_feuilles",
+                              "feuilles traversees par la reparation de 148")):
+                if a_.get(cle) is not None:
+                    ajoute(nom, a_[cle], dec148(a_[cle], 3) if isinstance(a_[cle], float) else 0,
+                           tv.name)
+            ap = a_.get("apparie", {})
+            if ap.get("decidable"):
+                for cle, nom in (("paires", "departs apparies de 148"),
+                                 ("gains", "reussites gagnees par la reparation de 148"),
+                                 ("pertes", "reussites perdues par la reparation de 148"),
+                                 ("solde", "solde apparie de la reparation de 148")):
+                    ajoute(nom, ap[cle], 0, tv.name)
+        for x in j_.get("par_variante", []):
+            cle = f"de « {x['nom']} » de 148"
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                if x.get(nom) is None:
+                    continue
+                for k_, n_ in (("reussites", "reussites"), ("memes_feuilles", "bonnes feuilles"),
+                               ("tours_boucles", "tours boucles")):
+                    ajoute(f"{n_} de {nom} {cle}", x[nom][k_], 0, tv.name)
+                # ⚠ Une donnee absente est SAUTEE : un bras qui n'a rien rendu n'a pas traverse
+                # zero feuille.
+                for k_, n_ in (("traversee_absolue_feuilles", "feuilles traversees"),
+                               ("inclinaison_mediane_deg", "inclinaison mediane"),
+                               ("derive_mediane_feuilles", "derive mediane")):
+                    if x[nom].get(k_) is not None:
+                        ajoute(f"{n_} de {nom} {cle}", x[nom][k_], dec148(x[nom][k_], 3),
+                               tv.name)
+            for m in x.get("par_matiere", []):
+                for nom in ("une machoire", "deux machoires libres", "la pince"):
+                    if m.get(nom) is not None:
+                        ajoute(f"reussites de {nom} sur {m['nom']} {cle}", m[nom], 0, tv.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 147 : LE CAP QUI TOURNE, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Des reussites ne voyagent jamais sans le SOLDE APPARIE qui dit ce qu'elles ont coute :
     # « 110 contre 108 » seul est un total, a cote de « 8 gagnees pour 6 perdues » il dit que la

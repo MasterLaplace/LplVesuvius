@@ -1111,6 +1111,31 @@ tour ajoute un pas de feuille, défaut invisible dans une batterie qui marche un
 un artefact d'un cap qui refuse de tourner, et la demande de `146` reste entière avec un chemin de
 moins.
 
+**`148` · 2026-09-14 · un cap ne sait pas distinguer le bruit de la cause, et il supprime les deux**
+(`la_memoire_fait_elle_avancer_de_travers.py`, zéro lecture distante)
+`147` avait éliminé l'explication évidente du coût de la mémoire ; il en restait une, purement
+mécanique. Un cap mélange la normale, donc il incline la **tangente** le long de laquelle on avance :
+une part du pas **traverse** la feuille au lieu de la longer. ⭐⭐⭐⭐ **Le sens de l'effet dépend de
+ce que le cap supprime, et il est unanime sur les cinq matières** : sur les deux **lisses** il fait
+traverser moins (nue **29,118 → 15,44**, écrasée **28,42 → 15,232**), sur les trois **froissées** il
+fait traverser plus (**27,953 → 44,271**, **20,408 → 42,996**, **4,079 → 11,725**) — `R4-F109`.
+⭐⭐⭐ **La raison est exacte** : sur une matière lisse un cap ne supprime que le bruit de lecture,
+qui n'est pas la forme de la feuille ; sur une froissée il supprime aussi sa rotation **réelle**, et
+la tangente cesse de la longer. Sur la matière que `140` retient, la normale employée penche de
+**40,569°** contre 25,686° sans cap. ⭐⭐ **Le raccrochage des mâchoires rattrape presque tout** —
+**19,292** feuilles traversées en chemin pour **0,052** réellement perdue — et une mâchoire seule
+traverse deux fois plus qu'une pince (**37,43** contre 19,292) : la contrainte de `142` se lit dans
+une monnaie neuve — `R4-F110`. ⚠ **Tirer la tangente de la lecture ne répare pas** : 94 réussites
+contre 108, **3 gagnées pour 17 perdues**, et elle traverse davantage — `R4-F111`. ⚠⚠ **Trois pièges
+payés.** Mon verdict comparait la médiane de la **grille entière** (21,942 contre 19,292) et
+concluait « non » : il moyennait **sur l'axe où la différence vit**, et les deux moitiés vont en sens
+contraire. Une **sonde sur un vingtième de tour** disait l'inverse du signe pour la réparation (820
+contre 1575). Et une sonde de figure déplaçait un champ que la bande ne lit plus. ⚠ **Deux témoins
+internes**, dont un gratuit : « sans cap » **est** le bras à mémoire nulle de `143` et retombe sur ses
+neuf nombres (96/110/111 · 90/109/95 · **92/121/93**). ⭐⭐ **Conséquence pour le graal** : le coût de
+la mémoire a une grandeur physique et une cause, et c'est littéralement l'incapacité que `146`
+demande de lever — elle se chiffre désormais en feuilles traversées.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
