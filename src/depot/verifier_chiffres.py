@@ -3049,6 +3049,83 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 150 : LA POSE DE TRAVERS, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Une pose PENCHEE ne voyage jamais sans la meme pose a normale DROITE : « 633 ‰ » seul est
+    # un nombre, a cote de « 917 ‰ » il dit que l'inclinaison fait echouer.
+    # (2) Une pose a la largeur de REFERENCE ne voyage jamais sans celle a la plus ETROITE : c'est
+    # le couple qui refute la largeur.
+    # (3) Et des reussites ne voyagent jamais sans le SOLDE APPARIE, depuis `147`.
+    pt = _source(racine, "la_pose_cherche_t_elle_de_travers.json")
+    if pt.exists():
+        d = json.loads(pt.read_text())
+
+        def dec150(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        t_ = j_.get("les_temoins_internes", {})
+        if t_.get("decidable"):
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                if t_.get(nom) is not None:
+                    ajoute(f"temoin interne de {nom} de 150", t_[nom]["ici"], 0, pt.name)
+        p_ = j_.get("la_pose_resiste_t_elle", {})
+        if p_.get("decidable"):
+            ajoute("poses par case de 150", p_["poses_par_case"], 0, pt.name)
+            for m in p_.get("par_matiere", []):
+                for x in m.get("par_largeur", []):
+                    ajoute(f"poses reussies sur {m['nom']} a la largeur {x['largeur_en_pas']} "
+                           f"de 150, pour mille", x["part_pour_mille"], 0, pt.name)
+                for x in m.get("par_inclinaison", []):
+                    ajoute(f"poses reussies sur {m['nom']} a {x['inclinaison_deg']} degres "
+                           f"de 150, pour mille", x["part_pour_mille"], 0, pt.name)
+        inc = j_.get("linclinaison_est_elle_en_cause", {})
+        c148 = inc.get("ce_que_148_mesure") if inc.get("decidable") else None
+        if c148:
+            ajoute("inclinaison que 148 mesure sur la matiere du rouleau, de 150",
+                   c148["inclinaison_deg"], dec150(c148["inclinaison_deg"], 3), pt.name)
+            for cle, nom in (("pose_a_cet_angle_pour_mille", "poses reussies a cet angle"),
+                             ("pose_a_normale_droite_pour_mille",
+                              "poses reussies a normale droite")):
+                ajoute(f"{nom} de 150, pour mille", c148[cle], 0, pt.name)
+        e_ = j_.get("poser_sur_la_lecture_repare", {})
+        if e_.get("decidable"):
+            for cle, nom in (("reussites_du_temoin", "reussites de la pose sur le melange"),
+                             ("reussites_de_la_reparation", "reussites de la pose sur la lecture"),
+                             ("arretees_du_temoin", "marches arretees de la pose sur le melange"),
+                             ("arretees_de_la_reparation",
+                              "marches arretees de la pose sur la lecture")):
+                if e_.get(cle) is not None:
+                    ajoute(f"{nom} de 150", int(e_[cle]), 0, pt.name)
+            for cle, nom in (("inclinaison_du_temoin_deg", "inclinaison de la pose sur le melange"),
+                             ("inclinaison_de_la_reparation_deg",
+                              "inclinaison de la pose sur la lecture")):
+                if e_.get(cle) is not None:
+                    ajoute(f"{nom} de 150", e_[cle], dec150(e_[cle], 3), pt.name)
+            ap = e_.get("apparie", {})
+            if ap.get("decidable"):
+                for cle, nom in (("paires", "departs apparies"), ("gains", "reussites gagnees"),
+                                 ("pertes", "reussites perdues"), ("solde", "solde apparie")):
+                    ajoute(f"{nom} de 150", ap[cle], 0, pt.name)
+        for x in j_.get("par_variante", []):
+            cle = f"de « {x['nom']} » de 150"
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                if x.get(nom) is None:
+                    continue
+                for k_, n_ in (("reussites", "reussites"), ("arretees", "marches arretees")):
+                    ajoute(f"{n_} de {nom} {cle}", x[nom][k_], 0, pt.name)
+                # ⚠ Une donnee absente est SAUTEE : un bras qui n'a rien rendu ne penche pas de zero.
+                if x[nom].get("inclinaison_mediane_deg") is not None:
+                    ajoute(f"inclinaison mediane de {nom} {cle}",
+                           x[nom]["inclinaison_mediane_deg"],
+                           dec150(x[nom]["inclinaison_mediane_deg"], 3), pt.name)
+            for m in x.get("par_matiere", []):
+                for nom in ("une machoire", "deux machoires libres", "la pince"):
+                    if m.get(nom) is not None:
+                        ajoute(f"reussites de {nom} sur {m['nom']} {cle}", m[nom], 0, pt.name)
+                if m.get("arretees") is not None:
+                    ajoute(f"marches arretees sur {m['nom']} {cle}", m["arretees"], 0, pt.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 149 : L'ARRET, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un compte d'arrets ne voyage jamais sans celui des marches finies sur une AUTRE FEUILLE :
     # « 49 » seul est un nombre, a cote de « 13 » il dit que quatre echecs sur cinq sont d'une

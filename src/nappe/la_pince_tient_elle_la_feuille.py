@@ -400,7 +400,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
            corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
            cap_tournant: str = "", avance_sur_la_lecture: bool = False,
-           fenetre_elargie: str = "") -> dict:
+           fenetre_elargie: str = "", pose_sur_la_lecture: bool = False) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -473,6 +473,10 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     # impose, et elle est GRATUITE — la machoire les a deja lues.
     marges: list[float] = []
     marge = 0.0
+    # ⭐⭐⭐ LA DERNIERE NORMALE QUE LA MATIERE A RENDUE, AVANT TOUT MELANGE. Au premier pas elle EST
+    # la normale d'etat, puisque rien n'a encore ete melange — donc `pose_sur_la_lecture` ne change
+    # rien tant que le cap ne s'est pas engage, et le temoin reste reproductible au bit.
+    derniere_lecture = np.asarray(etat["normale"], dtype=np.float64)
     fin = "tour bouclé"
     while abs(cumul) < 2.0 * np.pi * float(tours) and pas < int(pas_max):
         a, pris = float(avance_um), None
@@ -480,8 +484,16 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
                    else float(epaisseur_nominale_um))
         while a >= voxel_um:
             cible = np.asarray(etat["centre_vx"]) + tan * (a / voxel_um)
-            neuf = poser(vol, cible, etat["normale"], largeur_um, fenetre, voxel_um, deux,
-                         marge_um=marge)
+            # ⭐⭐⭐⭐ SUR QUOI LES MACHOIRES SE POSENT-ELLES ? Par defaut sur la normale MELANGEE,
+            # donc sur ce que le cap a decide. Or `148` mesure que le cap incline cette normale de
+            # plus de quarante degres sur la matiere du rouleau, et une pose le long d'une normale
+            # si inclinee echoue une fois sur deux : la machoire cherche son interstice de travers.
+            # `pose_sur_la_lecture` la fait chercher le long de la derniere normale que la MATIERE a
+            # rendue, sans rien changer a la direction de marche. Le cap gouverne alors la marche et
+            # rien d'autre — c'est la moitie que `148` n'avait pas essayee.
+            neuf = poser(vol, cible,
+                         derniere_lecture if pose_sur_la_lecture else etat["normale"],
+                         largeur_um, fenetre, voxel_um, deux, marge_um=marge)
             if neuf is None:
                 a *= 0.5
                 halts += 1
@@ -536,6 +548,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
                 if cap_tournant else 0.0)
         taux_lus.append(taux)
         lecture = np.array(pris["normale"], dtype=np.float64)
+        derniere_lecture = lecture
         if m_ > 0.0:
             cible = (_tourner(etat["normale"], taux) if taux != 0.0
                      else np.asarray(etat["normale"]))
@@ -652,7 +665,7 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                    bloc_du_cap: int = 1, corrige_le_bruit: bool = False,
                    enroulement_du_cap: bool = False, cap_tournant: str = "",
                    avance_sur_la_lecture: bool = False,
-                   fenetre_elargie: str = "") -> dict:
+                   fenetre_elargie: str = "", pose_sur_la_lecture: bool = False) -> dict:
     """Les trois bras sur le MEME depart — c'est ce qui rend la comparaison lisible."""
     out = {}
     for nom, deux, contrainte in (("une machoire", False, False),
@@ -665,7 +678,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
                           bloc_du_cap=bloc_du_cap, corrige_le_bruit=corrige_le_bruit,
                           enroulement_du_cap=enroulement_du_cap, cap_tournant=cap_tournant,
                           avance_sur_la_lecture=avance_sur_la_lecture,
-                          fenetre_elargie=fenetre_elargie)
+                          fenetre_elargie=fenetre_elargie,
+                          pose_sur_la_lecture=pose_sur_la_lecture)
     return out
 
 
@@ -704,7 +718,7 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
              fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
              corrige_le_bruit: bool = False, enroulement_du_cap: bool = False,
              cap_tournant: str = "", avance_sur_la_lecture: bool = False,
-             fenetre_elargie: str = "") -> dict:
+             fenetre_elargie: str = "", pose_sur_la_lecture: bool = False) -> dict:
     """Les trois bras sur une matiere, un niveau de bruit et une largeur — tous les departs.
 
     ⚠ Les trois bras partent du MEME point a chaque depart : une comparaison dont les bras ne
@@ -727,7 +741,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
                                enroulement_du_cap=enroulement_du_cap,
                                cap_tournant=cap_tournant,
                                avance_sur_la_lecture=avance_sur_la_lecture,
-                               fenetre_elargie=fenetre_elargie)
+                               fenetre_elargie=fenetre_elargie,
+                               pose_sur_la_lecture=pose_sur_la_lecture)
         for b, x in trois.items():
             par_bras[b].append({"depart_deg": round(360.0 * k / int(departs), 1), **x})
     bloc = {"ecrasement": float(ecr), "amplitude_um": float(amp), "bruit": float(bruit),
@@ -739,7 +754,8 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
             "enroulement_du_cap": bool(enroulement_du_cap),
             "cap_tournant": str(cap_tournant),
             "avance_sur_la_lecture": bool(avance_sur_la_lecture),
-            "fenetre_elargie": str(fenetre_elargie), "bras": {}}
+            "fenetre_elargie": str(fenetre_elargie),
+            "pose_sur_la_lecture": bool(pose_sur_la_lecture), "bras": {}}
     for b in BRAS:
         bloc["bras"][b] = {"suivis": par_bras[b], **_resumer_un_bras(par_bras[b], int(departs))}
     return bloc

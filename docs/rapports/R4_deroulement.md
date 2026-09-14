@@ -1161,6 +1161,28 @@ déplacement le long de la marche. Et une **sonde courte** a menti une troisièm
 ⭐⭐ **Conséquence pour le graal** : la fenêtre est centrée sur une **attente**, et c'est l'attente
 qu'il faut corriger, pas sa largeur.
 
+**`150` · 2026-09-14 · la mâchoire n'échoue pas parce qu'elle est large, elle cherche de travers**
+(`la_pose_cherche_t_elle_de_travers.py`, zéro lecture distante)
+`149` laissait un fait et un trou : les marches meurent de refus de POSE, et on ne savait pas
+pourquoi la pose refuse. ⭐⭐ **La mesure ne marche pas, elle POSE** — à un départ recalé sur une
+feuille, pour quelques lectures, donc mille fois moins cher qu'une grille. ⭐⭐⭐ **La largeur est
+réfutée, unanimement** : la pose réussit de **850** à **1000 ‰** à toutes les largeurs et sur les
+cinq matières, **917 ‰** à la largeur de référence sur la matière du rouleau contre **933 ‰** à une
+largeur quatre fois moindre — et `142` avait bien balayé la largeur, mais sur une spirale **écrasée
+sans froissement**, là où elle ne peut rien rencontrer — `R4-F115`. ⭐⭐⭐⭐ **L'inclinaison, elle,
+effondre la pose sur les cinq matières** : à cinquante degrés une spirale **nue** tombe de 1000 à
+**0 ‰**, un froissement de 42,4 µm de 1000 à **100 ‰**, la matière du rouleau de **917** à **300 ‰**.
+⭐⭐ **Et voici le maillon qui manquait** : `148` mesure que le cap incline la normale employée de
+**40,569°** sur cette matière, et la pose n'y réussit plus que **633 ‰** — un pas sur trois échoue,
+chacun divisant l'avance par deux, ce qui est exactement la mort que `149` compte — `R4-F116`.
+⚠⚠ **Et la réparation symétrique de `148` échoue aussi** : poser sur la **lecture** rend **96**
+réussites contre 108, **3 gagnées pour 15 perdues**, et **73** arrêts contre 49 — la lecture a un pas
+d'âge quand l'avance vaut un quart de longueur d'onde — `R4-F117`. ⚠ **Deux pièges payés** : ma
+prédiction géométrique était belle et hors sujet (elle décrivait bien la vague, pas ce qui fait
+échouer une pose), et un balayage existant n'est pas un balayage pertinent. ⭐⭐ **Conséquence pour le
+graal** : la chaîne causale des arrêts est complète et chaque maillon est mesuré — il faut aux
+mâchoires une direction **droite et fraîche**, et les deux sources déjà mesurées sont épuisées.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
