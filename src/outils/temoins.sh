@@ -1452,6 +1452,8 @@ run "rejeter un appui"      uv run python "$ROOT/src/nappe/rejeter_un_appui_qui_
 run "figure rejeter appui"  uv run python "$ROOT/src/figures/figure_rejeter_un_appui_qui_a_saute.py" --verifier
 run "la croix marche le tour" uv run python "$ROOT/src/nappe/la_croix_marche_t_elle_le_tour.py" --verifier
 run "figure croix le tour"  uv run python "$ROOT/src/figures/figure_la_croix_marche_t_elle_le_tour.py" --verifier
+run "ce que la seconde achete" uv run python "$ROOT/src/nappe/ce_que_la_seconde_machoire_achete_encore.py" --verifier
+run "figure seconde machoire" uv run python "$ROOT/src/figures/figure_ce_que_la_seconde_machoire_achete_encore.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

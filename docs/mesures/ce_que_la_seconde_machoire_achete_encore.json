@@ -1,0 +1,706 @@
+{
+ "la_grille": "la_croix_marche_t_elle_le_tour.json",
+ "departs": 12,
+ "tours": 1.0,
+ "fenetre": 32,
+ "cases": 60,
+ "bruits": [
+  0.0,
+  8.0,
+  16.0
+ ],
+ "juger": {
+  "decidable": true,
+  "par_instrument": [
+   {
+    "nom": "la pince de `144`",
+    "en_croix": false,
+    "rejeter": false,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 180,
+      "decidables": 173,
+      "reussites": 114,
+      "arrets": 52,
+      "derive_mediane": 0.0904,
+      "derive_p90": 17.011,
+      "derive_max": 36.685,
+      "lectures_medianes": 142569,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": null,
+      "part_du_tour_mediane": 1.0005
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 180,
+      "decidables": 170,
+      "reussites": 107,
+      "arrets": 48,
+      "derive_mediane": 0.0515,
+      "derive_p90": 2.597,
+      "derive_max": 6.338,
+      "lectures_medianes": 274350,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": 158.65,
+      "part_du_tour_mediane": 1.0004
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 180,
+      "decidables": 170,
+      "reussites": 108,
+      "arrets": 49,
+      "derive_mediane": 0.0515,
+      "derive_p90": 2.908,
+      "derive_max": 24.898,
+      "lectures_medianes": 274434,
+      "refus": 10,
+      "marches_qui_refusent": 8,
+      "epaisseur_mediane_um": 156.65,
+      "part_du_tour_mediane": 1.0004
+     }
+    ],
+    "apparie": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "contre": "la pince",
+      "paires": 180,
+      "gains": 16,
+      "pertes": 10,
+      "solde": 6,
+      "il_ne_perd_rien": false,
+      "matieres_gagnees": [
+       "spirale froissée 42.4 µm",
+       "spirale écrasée",
+       "spirale écrasée et froissée 42.4 µm"
+      ],
+      "matieres_perdues": [
+       "spirale froissée 42.4 µm",
+       "spirale écrasée",
+       "spirale écrasée et froissée 42.4 µm"
+      ]
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "contre": "la pince",
+      "paires": 180,
+      "gains": 0,
+      "pertes": 1,
+      "solde": -1,
+      "il_ne_perd_rien": false,
+      "matieres_gagnees": [],
+      "matieres_perdues": [
+       "spirale écrasée"
+      ]
+     }
+    ]
+   },
+   {
+    "nom": "la croix (`153`)",
+    "en_croix": true,
+    "rejeter": false,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 180,
+      "decidables": 173,
+      "reussites": 108,
+      "arrets": 49,
+      "derive_mediane": 0.0918,
+      "derive_p90": 3.698,
+      "derive_max": 12.182,
+      "lectures_medianes": 284262,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": null,
+      "part_du_tour_mediane": 1.0004
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 180,
+      "decidables": 169,
+      "reussites": 109,
+      "arrets": 49,
+      "derive_mediane": 0.0483,
+      "derive_p90": 1.817,
+      "derive_max": 14.968,
+      "lectures_medianes": 547836,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": 156.5,
+      "part_du_tour_mediane": 1.0005
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 180,
+      "decidables": 169,
+      "reussites": 109,
+      "arrets": 50,
+      "derive_mediane": 0.0483,
+      "derive_p90": 2.024,
+      "derive_max": 14.968,
+      "lectures_medianes": 546708,
+      "refus": 13,
+      "marches_qui_refusent": 9,
+      "epaisseur_mediane_um": 157.9,
+      "part_du_tour_mediane": 1.0005
+     }
+    ],
+    "apparie": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "contre": "la pince",
+      "paires": 180,
+      "gains": 12,
+      "pertes": 13,
+      "solde": -1,
+      "il_ne_perd_rien": false,
+      "matieres_gagnees": [
+       "spirale froissée 42.4 µm",
+       "spirale écrasée",
+       "spirale écrasée et froissée 42.4 µm"
+      ],
+      "matieres_perdues": [
+       "spirale froissée 42.4 µm",
+       "spirale écrasée",
+       "spirale écrasée et froissée 42.4 µm"
+      ]
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "contre": "la pince",
+      "paires": 180,
+      "gains": 0,
+      "pertes": 0,
+      "solde": 0,
+      "il_ne_perd_rien": true,
+      "matieres_gagnees": [],
+      "matieres_perdues": []
+     }
+    ]
+   },
+   {
+    "nom": "le rejet (`155`)",
+    "en_croix": false,
+    "rejeter": true,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 180,
+      "decidables": 173,
+      "reussites": 128,
+      "arrets": 20,
+      "derive_mediane": 0.0808,
+      "derive_p90": 2.929,
+      "derive_max": 24.24,
+      "lectures_medianes": 142788,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": null,
+      "part_du_tour_mediane": 1.0007
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 180,
+      "decidables": 170,
+      "reussites": 123,
+      "arrets": 35,
+      "derive_mediane": 0.0348,
+      "derive_p90": 1.601,
+      "derive_max": 8.114,
+      "lectures_medianes": 274521,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": 161.5,
+      "part_du_tour_mediane": 1.0006
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 180,
+      "decidables": 170,
+      "reussites": 123,
+      "arrets": 35,
+      "derive_mediane": 0.0358,
+      "derive_p90": 1.726,
+      "derive_max": 8.694,
+      "lectures_medianes": 274521,
+      "refus": 20,
+      "marches_qui_refusent": 11,
+      "epaisseur_mediane_um": 162.05,
+      "part_du_tour_mediane": 1.0005
+     }
+    ],
+    "apparie": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "contre": "la pince",
+      "paires": 180,
+      "gains": 13,
+      "pertes": 8,
+      "solde": 5,
+      "il_ne_perd_rien": false,
+      "matieres_gagnees": [
+       "spirale froissée 42.4 µm",
+       "spirale écrasée",
+       "spirale écrasée et froissée 100 µm",
+       "spirale écrasée et froissée 42.4 µm"
+      ],
+      "matieres_perdues": [
+       "spirale écrasée et froissée 42.4 µm"
+      ]
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "contre": "la pince",
+      "paires": 180,
+      "gains": 0,
+      "pertes": 0,
+      "solde": 0,
+      "il_ne_perd_rien": true,
+      "matieres_gagnees": [],
+      "matieres_perdues": []
+     }
+    ]
+   },
+   {
+    "nom": "la croix et le rejet",
+    "en_croix": true,
+    "rejeter": true,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 180,
+      "decidables": 173,
+      "reussites": 128,
+      "arrets": 26,
+      "derive_mediane": 0.0739,
+      "derive_p90": 1.49,
+      "derive_max": 10.034,
+      "lectures_medianes": 285357,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": null,
+      "part_du_tour_mediane": 1.0006
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 180,
+      "decidables": 169,
+      "reussites": 124,
+      "arrets": 37,
+      "derive_mediane": 0.0362,
+      "derive_p90": 1.356,
+      "derive_max": 12.963,
+      "lectures_medianes": 549484,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": 160.5,
+      "part_du_tour_mediane": 1.0005
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 180,
+      "decidables": 169,
+      "reussites": 124,
+      "arrets": 38,
+      "derive_mediane": 0.0362,
+      "derive_p90": 1.266,
+      "derive_max": 12.963,
+      "lectures_medianes": 548700,
+      "refus": 13,
+      "marches_qui_refusent": 9,
+      "epaisseur_mediane_um": 160.5,
+      "part_du_tour_mediane": 1.0005
+     }
+    ],
+    "apparie": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "contre": "la pince",
+      "paires": 180,
+      "gains": 11,
+      "pertes": 7,
+      "solde": 4,
+      "il_ne_perd_rien": false,
+      "matieres_gagnees": [
+       "spirale froissée 42.4 µm",
+       "spirale écrasée",
+       "spirale écrasée et froissée 100 µm",
+       "spirale écrasée et froissée 42.4 µm"
+      ],
+      "matieres_perdues": [
+       "spirale écrasée",
+       "spirale écrasée et froissée 42.4 µm"
+      ]
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "contre": "la pince",
+      "paires": 180,
+      "gains": 0,
+      "pertes": 0,
+      "solde": 0,
+      "il_ne_perd_rien": true,
+      "matieres_gagnees": [],
+      "matieres_perdues": []
+     }
+    ]
+   }
+  ],
+  "sur_la_matiere_du_rouleau": [
+   {
+    "nom": "la pince de `144`",
+    "en_croix": false,
+    "rejeter": false,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 36,
+      "decidables": 34,
+      "reussites": 0,
+      "arrets": 34,
+      "derive_mediane": 1.946,
+      "derive_p90": 21.259,
+      "derive_max": 32.759,
+      "lectures_medianes": 125633,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": null,
+      "part_du_tour_mediane": 0.0776
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 36,
+      "decidables": 31,
+      "reussites": 0,
+      "arrets": 31,
+      "derive_mediane": 0.828,
+      "derive_p90": 3.542,
+      "derive_max": 5.546,
+      "lectures_medianes": 20921,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": 88.8,
+      "part_du_tour_mediane": 0.0217
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 36,
+      "decidables": 31,
+      "reussites": 0,
+      "arrets": 31,
+      "derive_mediane": 0.895,
+      "derive_p90": 4.338,
+      "derive_max": 6.311,
+      "lectures_medianes": 20921,
+      "refus": 1,
+      "marches_qui_refusent": 1,
+      "epaisseur_mediane_um": 87.3,
+      "part_du_tour_mediane": 0.0217
+     }
+    ]
+   },
+   {
+    "nom": "la croix (`153`)",
+    "en_croix": true,
+    "rejeter": false,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 36,
+      "decidables": 34,
+      "reussites": 0,
+      "arrets": 34,
+      "derive_mediane": 1.5547,
+      "derive_p90": 5.591,
+      "derive_max": 10.568,
+      "lectures_medianes": 105558,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": null,
+      "part_du_tour_mediane": 0.0784
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 36,
+      "decidables": 31,
+      "reussites": 0,
+      "arrets": 31,
+      "derive_mediane": 0.6207,
+      "derive_p90": 2.358,
+      "derive_max": 7.618,
+      "lectures_medianes": 23445,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": 117.5,
+      "part_du_tour_mediane": 0.0151
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 36,
+      "decidables": 31,
+      "reussites": 0,
+      "arrets": 31,
+      "derive_mediane": 0.6207,
+      "derive_p90": 2.347,
+      "derive_max": 7.618,
+      "lectures_medianes": 19819,
+      "refus": 4,
+      "marches_qui_refusent": 2,
+      "epaisseur_mediane_um": 124.7,
+      "part_du_tour_mediane": 0.0137
+     }
+    ]
+   },
+   {
+    "nom": "le rejet (`155`)",
+    "en_croix": false,
+    "rejeter": true,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 36,
+      "decidables": 34,
+      "reussites": 1,
+      "arrets": 20,
+      "derive_mediane": 2.7485,
+      "derive_p90": 10.585,
+      "derive_max": 24.24,
+      "lectures_medianes": 228964,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": null,
+      "part_du_tour_mediane": 0.4063
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 36,
+      "decidables": 31,
+      "reussites": 0,
+      "arrets": 31,
+      "derive_mediane": 1.3732,
+      "derive_p90": 6.451,
+      "derive_max": 8.114,
+      "lectures_medianes": 100360,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": 56.2,
+      "part_du_tour_mediane": 0.109
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 36,
+      "decidables": 31,
+      "reussites": 0,
+      "arrets": 31,
+      "derive_mediane": 1.4181,
+      "derive_p90": 6.451,
+      "derive_max": 8.694,
+      "lectures_medianes": 101218,
+      "refus": 17,
+      "marches_qui_refusent": 9,
+      "epaisseur_mediane_um": 54.2,
+      "part_du_tour_mediane": 0.109
+     }
+    ]
+   },
+   {
+    "nom": "la croix et le rejet",
+    "en_croix": true,
+    "rejeter": true,
+    "par_bras": [
+     {
+      "decidable": true,
+      "bras": "une machoire",
+      "marches": 36,
+      "decidables": 34,
+      "reussites": 1,
+      "arrets": 26,
+      "derive_mediane": 1.1976,
+      "derive_p90": 7.748,
+      "derive_max": 10.034,
+      "lectures_medianes": 214875,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": null,
+      "part_du_tour_mediane": 0.1929
+     },
+     {
+      "decidable": true,
+      "bras": "deux machoires libres",
+      "marches": 36,
+      "decidables": 31,
+      "reussites": 0,
+      "arrets": 31,
+      "derive_mediane": 0.5603,
+      "derive_p90": 4.562,
+      "derive_max": 12.963,
+      "lectures_medianes": 112815,
+      "refus": 0,
+      "marches_qui_refusent": 0,
+      "epaisseur_mediane_um": 133.2,
+      "part_du_tour_mediane": 0.0846
+     },
+     {
+      "decidable": true,
+      "bras": "la pince",
+      "marches": 36,
+      "decidables": 31,
+      "reussites": 0,
+      "arrets": 31,
+      "derive_mediane": 0.5603,
+      "derive_p90": 3.478,
+      "derive_max": 12.963,
+      "lectures_medianes": 109386,
+      "refus": 6,
+      "marches_qui_refusent": 5,
+      "epaisseur_mediane_um": 133.2,
+      "part_du_tour_mediane": 0.0941
+     }
+    ]
+   }
+  ],
+  "le_verdict": [
+   {
+    "nom": "la pince de `144`",
+    "en_croix": false,
+    "rejeter": false,
+    "reussites_seule": 114,
+    "reussites_pince": 108,
+    "seule_gagne": 16,
+    "seule_perd": 10,
+    "seule_gagne_jointement": false,
+    "derive_max_seule": 36.685,
+    "derive_max_pince": 24.898,
+    "queue_divisee_seule": 1.0,
+    "queue_divisee_pince": 1.0,
+    "p90_seule": 17.011,
+    "p90_pince": 2.908,
+    "la_seconde_machoire_divise_la_queue_par": 5.85,
+    "p90_divise_seule": 1.0,
+    "p90_divise_pince": 1.0,
+    "lectures_seule": 142569,
+    "lectures_pince": 274434,
+    "reussites_libre": 107,
+    "libre_gagne": 0,
+    "libre_perd": 1,
+    "refus_de_la_pince": 10,
+    "marches_qui_refusent": 8,
+    "la_contrainte_achete_quelque_chose": true
+   },
+   {
+    "nom": "la croix (`153`)",
+    "en_croix": true,
+    "rejeter": false,
+    "reussites_seule": 108,
+    "reussites_pince": 109,
+    "seule_gagne": 12,
+    "seule_perd": 13,
+    "seule_gagne_jointement": false,
+    "derive_max_seule": 12.182,
+    "derive_max_pince": 14.968,
+    "queue_divisee_seule": 3.011,
+    "queue_divisee_pince": 1.663,
+    "p90_seule": 3.698,
+    "p90_pince": 2.024,
+    "la_seconde_machoire_divise_la_queue_par": 1.827,
+    "p90_divise_seule": 4.6,
+    "p90_divise_pince": 1.437,
+    "lectures_seule": 284262,
+    "lectures_pince": 546708,
+    "reussites_libre": 109,
+    "libre_gagne": 0,
+    "libre_perd": 0,
+    "refus_de_la_pince": 13,
+    "marches_qui_refusent": 9,
+    "la_contrainte_achete_quelque_chose": false
+   },
+   {
+    "nom": "le rejet (`155`)",
+    "en_croix": false,
+    "rejeter": true,
+    "reussites_seule": 128,
+    "reussites_pince": 123,
+    "seule_gagne": 13,
+    "seule_perd": 8,
+    "seule_gagne_jointement": false,
+    "derive_max_seule": 24.24,
+    "derive_max_pince": 8.694,
+    "queue_divisee_seule": 1.513,
+    "queue_divisee_pince": 2.864,
+    "p90_seule": 2.929,
+    "p90_pince": 1.726,
+    "la_seconde_machoire_divise_la_queue_par": 1.697,
+    "p90_divise_seule": 5.808,
+    "p90_divise_pince": 1.685,
+    "lectures_seule": 142788,
+    "lectures_pince": 274521,
+    "reussites_libre": 123,
+    "libre_gagne": 0,
+    "libre_perd": 0,
+    "refus_de_la_pince": 20,
+    "marches_qui_refusent": 11,
+    "la_contrainte_achete_quelque_chose": false
+   },
+   {
+    "nom": "la croix et le rejet",
+    "en_croix": true,
+    "rejeter": true,
+    "reussites_seule": 128,
+    "reussites_pince": 124,
+    "seule_gagne": 11,
+    "seule_perd": 7,
+    "seule_gagne_jointement": false,
+    "derive_max_seule": 10.034,
+    "derive_max_pince": 12.963,
+    "queue_divisee_seule": 3.656,
+    "queue_divisee_pince": 1.921,
+    "p90_seule": 1.49,
+    "p90_pince": 1.266,
+    "la_seconde_machoire_divise_la_queue_par": 1.177,
+    "p90_divise_seule": 11.417,
+    "p90_divise_pince": 2.297,
+    "lectures_seule": 285357,
+    "lectures_pince": 548700,
+    "reussites_libre": 124,
+    "libre_gagne": 0,
+    "libre_perd": 0,
+    "refus_de_la_pince": 13,
+    "marches_qui_refusent": 9,
+    "la_contrainte_achete_quelque_chose": false
+   }
+  ]
+ }
+}

@@ -3049,6 +3049,81 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 157 : CE QUE LA SECONDE MACHOIRE ACHETE ENCORE, ET TROIS APPARIEMENTS
+    # L'IMPOSENT.
+    # (1) Un compte de REUSSITES d'un bras ne voyage jamais sans son compte d'ARRETS : « 128 » seul
+    # se lit comme une victoire, a cote de « 20 arrets » il dit de quoi elle est faite.
+    # (2) Un GAIN entre bras ne voyage jamais sans la PERTE qui lui fait face : une victoire est
+    # JOINTE depuis `147`, et c'est exactement le piege que cette tranche desamorce.
+    # (3) Et un p90 de derive ne voyage jamais sans son MAXIMUM : les deux se contredisent sur le
+    # rapport, et c'est cette contradiction meme que `157` publie.
+    sm = _source(racine, "ce_que_la_seconde_machoire_achete_encore.json")
+    if sm.exists():
+        d = json.loads(sm.read_text())
+
+        def dec157(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            ajoute("cases relues de 157", int(d["cases"]), 0, sm.name)
+            ajoute("departs par case de 157", int(d["departs"]), 0, sm.name)
+            ajoute("fenetre du cap de 157", int(d["fenetre"]), 0, sm.name)
+            # ⚠⚠ ON N'ENREGISTRE QUE CE QUE LE DOCUMENT PUBLIE. `157` table les reussites et les
+            # arrets des TROIS bras, mais la derive et le prix des DEUX seuls qu'il compare — la
+            # machoire seule et la pince — et le prix pour le SEUL instrument dont il parle.
+            for x in j_.get("par_instrument", []):
+                for b in x.get("par_bras", []):
+                    if not b.get("decidable"):
+                        continue
+                    q = f"du bras « {b['bras']} » sous « {x['nom']} » de 157"
+                    for cle, nom in (("reussites", "reussites"), ("arrets", "marches arretees")):
+                        ajoute(f"{nom} {q}", int(b[cle]), 0, sm.name)
+                    if b["bras"] == "deux machoires libres":
+                        continue
+                    for cle, nom in (("derive_mediane", "derive mediane"),
+                                     ("derive_p90", "derive au p90"),
+                                     ("derive_max", "derive maximale")):
+                        ajoute(f"{nom} {q}", b[cle], dec157(b[cle], 4), sm.name)
+                    if str(x["nom"]).startswith("le rejet"):
+                        ajoute(f"lectures medianes {q}", int(b["lectures_medianes"]), 0, sm.name)
+            for x in j_.get("le_verdict", []):
+                q = f"sous « {x['nom']} » de 157"
+                for cle, nom in (("seule_gagne", "departs gagnes par la machoire seule"),
+                                 ("seule_perd", "departs perdus par la machoire seule"),
+                                 ("refus_de_la_pince", "refus de la contrainte"),
+                                 ("marches_qui_refusent", "marches ou la contrainte refuse"),
+                                 ("libre_gagne", "departs gagnes par la paire libre"),
+                                 ("libre_perd", "departs perdus par la paire libre")):
+                    if x.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(x[cle]), 0, sm.name)
+                if x.get("la_seconde_machoire_divise_la_queue_par") is not None:
+                    ajoute(f"la seconde machoire divise la queue par {q}",
+                           x["la_seconde_machoire_divise_la_queue_par"],
+                           dec157(x["la_seconde_machoire_divise_la_queue_par"], 3), sm.name)
+                # ⚠ Les quatre rapports de queue ne sont tables QUE sous le rejet : c'est la seule
+                # ligne ou le document met le maximum et le p90 face a face pour montrer qu'ils se
+                # contredisent.
+                if not str(x["nom"]).startswith("le rejet"):
+                    continue
+                for cle, nom in (("queue_divisee_seule",
+                                  "queue maximale de 144 divisee, machoire seule"),
+                                 ("queue_divisee_pince",
+                                  "queue maximale de 144 divisee, pince"),
+                                 ("p90_divise_seule", "queue au p90 de 144 divisee, machoire seule"),
+                                 ("p90_divise_pince", "queue au p90 de 144 divisee, pince")):
+                    if x.get(cle) is not None:
+                        ajoute(f"{nom} {q}", x[cle], dec157(x[cle], 3), sm.name)
+            for x in j_.get("sur_la_matiere_du_rouleau", []):
+                for b in x.get("par_bras", []):
+                    if not b.get("decidable") or b["bras"] == "deux machoires libres":
+                        continue
+                    ajoute(f"part du tour mediane du bras « {b['bras']} » sur la matiere du "
+                           f"rouleau sous « {x['nom']} » de 157",
+                           b["part_du_tour_mediane"], dec157(b["part_du_tour_mediane"], 4),
+                           sm.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 156 : LA GRILLE AVEC L'INSTRUMENT REPARE, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un compte de REUSSITES ne voyage jamais sans son compte d'ARRETS : « elle arrete moins »
     # est l'enonce separe que `149` et `150` font attendre, et une seule des deux colonnes se

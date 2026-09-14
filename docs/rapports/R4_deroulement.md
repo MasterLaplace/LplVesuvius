@@ -1330,6 +1330,39 @@ juste perd-elle trois départs là-bas ». C'est la première fois de la campagn
 sont séparés par un **paramètre mesuré** plutôt que mélangés dans un total. ⚠ Et la **croix** est un
 chemin **fermé** pour la marche, ce qu'aucune tranche ne pouvait dire avant.
 
+**`157` · 2026-09-14 · ce que la seconde mâchoire achète encore**
+(`ce_que_la_seconde_machoire_achete_encore.py`, zéro lecture distante et zéro marche)
+La grille de `156` **relue** : les trois bras y partent du **même point**, donc l'appariement
+**entre bras** est exact — ce que `apparie` de `147` ne savait pas faire, puisqu'il compare le même
+bras sous deux règles. ⭐⭐⭐⭐ **Le total menait, l'appariement dit ce qu'il a coûté** : la mâchoire
+**seule** rend **128** réussites contre 123 pour la pince sous le rejet, mais **13 gagnées pour 8
+perdues**, et sous **aucun** des quatre instruments elle ne bat la pince **jointement** — 16/10,
+12/13, 13/8, 11/7. Elle échange, elle n'ajoute pas ; elle lit en revanche la moitié (**142788**
+lectures médianes contre **274521**) — `R4-F133`. ⭐⭐⭐ **La seconde mâchoire achète encore quelque
+chose, et moins** : mesuré sur la **queue** de la dérive, le rapport passe de **5,85** sous `144`
+(p90 **17,011** feuilles contre **2,908**) à **1,697** sous le rejet (**2,929** contre **1,726**) —
+la première moitié de la décomposition de `142` se resserre d'un facteur trois sans se fermer —
+`R4-F134`. ⭐⭐ **La seconde moitié, elle, est remplacée** : la contrainte gagne **0** et perd **0**
+départ contre une paire libre sous les trois instruments réparés, alors qu'elle refuse **20** fois
+contre **10** sous `144`, où elle achetait **1** réussite. C'est le motif de `143`, où la mémoire du
+cap faisait tomber le refus de **297** à zéro — un mécanisme suffisant en amont rend redondant celui
+qui rattrapait en aval — `R4-F135`. ⭐⭐⭐⭐ **Et sur la matière du rouleau le mur a reculé d'un facteur
+cinq** : la part du tour médiane parcourue passe de **0,0217** à **0,109** pour la pince et de
+**0,0776** à **0,4063** pour la mâchoire seule, à **zéro** réussite inchangé. Un compte nul ne dit
+pas si le mur a bougé ; la part du tour le dit, et c'est le premier mouvement depuis `142` là-bas.
+⚠ La croix y est **pire** que le rejet seul sur les deux bras — troisième mesure de suite qui va
+contre elle — `R4-F136`. ⚠⚠⚠ **Et une de mes conclusions a été réfutée par sa propre vérification** :
+j'avais lu dans le rapport des **maxima** que le rejet profite au bras qui MESURE (×2,864 contre
+×1,513) et j'allais en faire un mécanisme ; le **p90**, ajouté exprès comme compagnon, dit l'inverse
+(×5,808 contre ×1,685). Un maximum est **une seule marche** sur cent soixante-dix, donc ce rapport
+est publié et ne porte **aucun** énoncé — `R4-F137`. ⚠⚠ **Et une fixture écrite au jugé m'a fait
+signaler un achat qui n'existait pas** : j'avais mis en face de la pince une liste dont une marche
+dérive de deux feuilles, donc **pas** une réussite au sens de `une_reussite`, et la contrainte
+« achetait » un départ que ma fixture lui avait donné. Une fixture se **dérive** du prédicat.
+⭐⭐ **Conséquence pour le graal** : un instrument à **une** mâchoire coûte la moitié des lectures, et
+ce qui l'empêche encore de remplacer la pince n'est pas un compte de réussites mais une **queue de
+dérive** moitié plus longue.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
