@@ -235,7 +235,8 @@ def _ecart_angulaire(avant, apres) -> float:
     return float(np.arctan2(a[2] * b[1] - a[1] * b[2], a[1] * b[1] + a[2] * b[2]))
 
 
-def memoire_adaptee(rotations, fenetre: int) -> float:
+def memoire_adaptee(rotations, fenetre: int, bloc: int = 1,
+                    corrige_le_bruit: bool = False) -> float:
     """La memoire que la rotation de la normale impose — un enonce, pas un ajustement.
 
     ⭐⭐⭐⭐ CE QUI SEPARE LES DEUX CAUSES EST UNE ECHELLE DE TEMPS, ET ELLE SE LIT SUR LE SIGNE.
@@ -261,6 +262,14 @@ def memoire_adaptee(rotations, fenetre: int) -> float:
 
     ⚠ Une rotation NULLE n'a rien a arbitrer, donc la memoire est nulle. C'est dit plutot que divise
     par zero.
+
+    ⭐⭐ DEUX FACONS DE LIRE PLUS LOIN QUE LE BRUIT, ET UNE SEULE EST EXACTE. `144` mesure que la
+    lecture cesse de separer les causes des que le bruit couvre la rotation. Le BLOC somme les
+    increments par paquets de `k` : un bruit independant y croit comme la racine de `k` et une cause
+    coherente comme `k`, donc le rapport s'ameliore — mais un froissement de periode `p` pas
+    s'ANNULE dans un bloc de `p`, et il ne reste alors que l'enroulement, qui est coherent : la
+    regle lirait « persistant » sur une matiere froissee. Le bloc est donc borne par la cause
+    elle-meme. La CORRECTION, elle, retranche un plancher qui se calcule exactement.
     """
     f = int(fenetre)
     if f < 2:
@@ -268,10 +277,32 @@ def memoire_adaptee(rotations, fenetre: int) -> float:
     r = np.asarray(rotations[-f:], dtype=np.float64)
     if r.size < 2:
         return 0.0
+    k = max(int(bloc), 1)
+    if k > 1:
+        # ⚠ Les blocs INCOMPLETS sont écartés : un bloc de trois pas parmi quatre porte moins de
+        # bruit qu'un bloc plein, donc le mélanger aux autres fausserait exactement la quantité que
+        # le bloc existe pour redresser.
+        n_ = (r.size // k) * k
+        if n_ < 2 * k:
+            return 0.0
+        r = r[-n_:].reshape(-1, k).sum(axis=1)
+        if r.size < 2:
+            return 0.0
     total = float(np.abs(r).sum())
     if total <= 0.0:
         return 0.0
     c = abs(float(r.sum())) / total
+    if corrige_le_bruit:
+        # ⭐⭐⭐ LE PLANCHER DU BRUIT EST EXACT ET SANS PARAMÈTRE. Pour `n` incréments indépendants de
+        # moyenne nulle, `E|somme| = sigma.racine(2n/pi)` et `E[somme des |.|] = n.sigma.racine(2/pi)`,
+        # donc la coherence attendue d'un bruit PUR vaut exactement `1/racine(n)`. Une coherence qui
+        # vaut ce plancher ne dit rien ; la retrancher et renormaliser rend une lecture qui vaut zero
+        # sur du bruit pur et un sur une rotation parfaite.
+        #
+        # ⚠ C'est le rapport des ESPERANCES, pas l'esperance du rapport — les deux se rejoignent
+        # quand `n` grandit, et c'est dit plutot que tu.
+        plancher = 1.0 / np.sqrt(float(r.size))
+        c = max(0.0, (c - plancher) / max(1.0 - plancher, 1e-12))
     return float(min(1.0 - c, 1.0 - 1.0 / f))
 
 
@@ -283,7 +314,8 @@ def _tangente_du_tour(n) -> np.ndarray:
 def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: float,
            voxel_um: float, deux: bool, contrainte: bool, avance_um: float, axe_yx,
            tours: float = TOURS, pas_max: int = 4000, memoire_du_cap: float = 0.0,
-           fenetre_du_cap: int = 0) -> dict:
+           fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
+           corrige_le_bruit: bool = False) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -377,7 +409,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         # matiere a rendu, pas ce que le cap precedent en a deja fait. Lire apres melange ferait
         # une boucle qui se confirme elle-meme.
         rotations.append(_ecart_angulaire(etat["normale"], pris["normale"]))
-        m_ = (memoire_adaptee(rotations, int(fenetre_du_cap)) if int(fenetre_du_cap) > 0
+        m_ = (memoire_adaptee(rotations, int(fenetre_du_cap), int(bloc_du_cap),
+                              bool(corrige_le_bruit)) if int(fenetre_du_cap) > 0
               else float(memoire_du_cap))
         memoires.append(m_)
         if m_ > 0.0:
@@ -447,7 +480,8 @@ def un_depart(vol, angle_rad: float, rayon_mm: float, voxel_um: float, pas_um: f
 
 def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: float,
                    voxel_um: float, avance_um: float, axe_yx, tours: float = TOURS,
-                   memoire_du_cap: float = 0.0, fenetre_du_cap: int = 0) -> dict:
+                   memoire_du_cap: float = 0.0, fenetre_du_cap: int = 0,
+                   bloc_du_cap: int = 1, corrige_le_bruit: bool = False) -> dict:
     """Les trois bras sur le MEME depart — c'est ce qui rend la comparaison lisible."""
     out = {}
     for nom, deux, contrainte in (("une machoire", False, False),
@@ -456,7 +490,8 @@ def les_trois_bras(vol, depart_vx, normale0, largeur_um: float, epaisseur_nomina
         vol.lectures = 0
         out[nom] = suivre(vol, depart_vx, normale0, largeur_um, epaisseur_nominale_um, voxel_um,
                           deux, contrainte, avance_um, axe_yx, tours,
-                          memoire_du_cap=memoire_du_cap, fenetre_du_cap=fenetre_du_cap)
+                          memoire_du_cap=memoire_du_cap, fenetre_du_cap=fenetre_du_cap,
+                          bloc_du_cap=bloc_du_cap, corrige_le_bruit=corrige_le_bruit)
     return out
 
 
@@ -492,7 +527,8 @@ def _nom(ecrasement: float, amplitude_um: float) -> str:
 def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPARTS,
              rayon_mm: float = RAYON_MM, tours: float = TOURS,
              longueur_donde_um: float = LONGUEUR_DONDE_UM, memoire_du_cap: float = 0.0,
-             fenetre_du_cap: int = 0) -> dict:
+             fenetre_du_cap: int = 0, bloc_du_cap: int = 1,
+             corrige_le_bruit: bool = False) -> dict:
     """Les trois bras sur une matiere, un niveau de bruit et une largeur — tous les departs.
 
     ⚠ Les trois bras partent du MEME point a chaque depart : une comparaison dont les bras ne
@@ -510,14 +546,16 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
         depart, n0 = un_depart(vol, 2.0 * np.pi * k / int(departs), rayon_mm, voxel_um, pas_um)
         trois = les_trois_bras(vol, depart, n0, largeur_um, pas_um, voxel_um, avance_um,
                                vol.centre_yx_vx, tours, memoire_du_cap=memoire_du_cap,
-                               fenetre_du_cap=fenetre_du_cap)
+                               fenetre_du_cap=fenetre_du_cap, bloc_du_cap=bloc_du_cap,
+                               corrige_le_bruit=corrige_le_bruit)
         for b, x in trois.items():
             par_bras[b].append({"depart_deg": round(360.0 * k / int(departs), 1), **x})
     bloc = {"ecrasement": float(ecr), "amplitude_um": float(amp), "bruit": float(bruit),
             "largeur_en_pas": float(largeur_en_pas), "largeur_um": round(largeur_um, 1),
             "avance_um": round(avance_um, 1), "nom": _nom(ecr, amp), "departs": int(departs),
             "memoire_du_cap": float(memoire_du_cap),
-            "fenetre_du_cap": int(fenetre_du_cap), "bras": {}}
+            "fenetre_du_cap": int(fenetre_du_cap), "bloc_du_cap": int(bloc_du_cap),
+            "corrige_le_bruit": bool(corrige_le_bruit), "bras": {}}
     for b in BRAS:
         bloc["bras"][b] = {"suivis": par_bras[b], **_resumer_un_bras(par_bras[b], int(departs))}
     return bloc
@@ -1013,6 +1051,40 @@ def verifier() -> int:
       memoire_adaptee([0.1, 0.2], 1) == 0.0 and memoire_adaptee([0.1], 8) == 0.0)
     v("une rotation nulle ne rend rien non plus, plutôt qu'une division par zéro",
       memoire_adaptee([0.0] * 8, 8) == 0.0)
+    # ---- ⭐⭐ le bloc et la correction du plancher de bruit
+    v("un bloc de un rend exactement la règle d'avant",
+      memoire_adaptee(alterne, 8, bloc=1) == memoire_adaptee(alterne, 8))
+    v("⭐⭐ un bloc qui ATTEINT la période d'une alternance la fait lire COHÉRENTE",
+      memoire_adaptee([0.3, -0.3] * 8, 16, bloc=2) < 0.5 * memoire_adaptee([0.3, -0.3] * 8, 16),
+      "le bloc annule la cause qu'il devait révéler, et c'est ce qui le borne")
+    v("... alors qu'un bloc plus COURT que la période la garde",
+      memoire_adaptee([0.3, 0.3, -0.3, -0.3] * 4, 16, bloc=2)
+      > 0.5 * memoire_adaptee([0.3, 0.3, -0.3, -0.3] * 4, 16),
+      "période de quatre pas, bloc de deux : l'alternance survit")
+    v("un bloc trop grand pour la fenêtre ne rend rien plutôt qu'un bloc unique",
+      memoire_adaptee([0.1] * 8, 8, bloc=8) == 0.0)
+    # ⚠⚠ Le plancher est EXACT : pour n incréments indépendants la cohérence attendue vaut 1/√n.
+    tir = np.random.default_rng(17)
+    planchers = []
+    for _ in range(200):
+        x = tir.normal(size=64)
+        planchers.append(abs(float(x.sum())) / float(np.abs(x).sum()))
+    v("⭐⭐ la cohérence d'un bruit pur vaut bien 1/√n, ce que la correction retranche",
+      abs(float(np.mean(planchers)) - 1.0 / np.sqrt(64)) < 0.02,
+      f"mesuré {float(np.mean(planchers)):.4f} pour un plancher de {1.0 / np.sqrt(64):.4f}")
+    bruit_pur = list(tir.normal(size=32))
+    v("⭐⭐ corrigée, une suite de bruit PUR demande la mémoire maximale",
+      memoire_adaptee(bruit_pur, 32, corrige_le_bruit=True)
+      > memoire_adaptee(bruit_pur, 32),
+      f"{memoire_adaptee(bruit_pur, 32, corrige_le_bruit=True):.4f} contre "
+      f"{memoire_adaptee(bruit_pur, 32):.4f}")
+    v("... et une rotation franche n'en demande toujours aucune",
+      memoire_adaptee([0.37] * 32, 32, corrige_le_bruit=True) == 0.0,
+      "la correction ne déplace pas ce qui est déjà parfaitement cohérent")
+    v("la correction ne rend jamais une mémoire négative ni au-delà de sa borne",
+      all(0.0 <= memoire_adaptee(list(np.random.default_rng(k).normal(size=32)), 32,
+                                 corrige_le_bruit=True) <= 1.0 - 1.0 / 32 for k in range(5)))
+
     v("la mémoire lue reste dans [0, 1[",
       all(0.0 <= memoire_adaptee(list(np.random.default_rng(k).normal(size=20)), 8) < 1.0
           for k in range(5)))

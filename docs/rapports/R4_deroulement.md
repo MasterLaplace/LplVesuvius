@@ -1040,6 +1040,31 @@ mieux sans bruit n'est pas celle qui résiste le mieux au bruit ; et un `min` qu
 listes au lieu des fenêtres. ⭐⭐ **La demande devient** : lire la cause là où le bruit s'annule,
 c'est-à-dire sur davantage de matière, et non changer de règle.
 
+**`145` · 2026-09-14 · lire plus loin et marcher mieux ne sont pas le même réglage**
+(`lire_la_cause_sous_le_bruit.py`, zéro lecture distante)
+`144` laissait la lecture de la cause s'arrêter à bruit 8. ⭐⭐⭐⭐ **Le plancher de bruit d'une
+cohérence se calcule EXACTEMENT** — pour `n` incréments indépendants de moyenne nulle il vaut
+**1/√n**, mesuré sur 200 tirages de 64 incréments — et le retrancher fait séparer les causes à bruit
+**16** : écart entre matières **0,1366** contre une dispersion de **0,1294**, là où la règle brute
+donne **0,0891** contre **0,1197** — `R4-F100`. ⚠⚠ **Mais la pince tombe de 108 réussites à 97.** La
+correction relève la mémoire lue partout — à bruit 16, de **0,7615** à **0,8206** sur la spirale nue
+et de **0,8484** à **0,9547** sur le froissement fort — et `143` mesure que la mémoire échange de la
+fidélité contre de la distance : lire plus loin pousse donc le suiveur dans le régime qui lui coûte
+des réussites. ⭐⭐ **Aucune des cinq variantes n'est à la fois la meilleure lectrice et la meilleure
+marcheuse** — `R4-F101`. ⭐ **Et le bloc n'achète rien** : un froissement de période `p` pas s'annule
+dans un bloc de `p`, la période vaut ici **4 pas**, et « bloc 4 » perd le bruit 8 que la brute tenait.
+Le piège était **nommé avant la mesure**, et un balayage sans son piège ne borne rien — `R4-F102`.
+⚠ **Le témoin interne est vert** : la variante « bloc 1, brut » **est** la règle de `144` et la
+reproduit exactement (114, 107, **108**) ; sans lui, une différence de protocole serait passée pour un
+effet de la correction. ⚠ **Deux pièges payés**, et le second est un vrai défaut trouvé chez `144` :
+ma fixture s'asseyait **exactement sur l'égalité** entre l'écart et la dispersion, donc elle testait
+l'ordre des dernières décimales flottantes et répondait au hasard ; en la corrigeant, j'ai vu que
+`144` comparait un écart calculé sur des médianes **arrondies** à une dispersion calculée sur des
+valeurs **brutes** — sur les vraies données le producteur arrondit des deux côtés, vérifié, la mesure
+de `144` est inchangée, mais s'appuyer sur cette coïncidence est ce que ce dépôt proscrit. ⭐⭐ **La
+demande devient un instrument à deux étages** : diagnostiquer la cause avec la lecture corrigée, qui
+tient jusqu'à bruit 16, et conduire le suiveur avec la mémoire que ce diagnostic désigne.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -76,7 +76,7 @@ def _memoire_lue(case: dict, bras: str = "la pince") -> float | None:
     return round(float(np.median(vals)), 4) if vals else None
 
 
-def le_discriminant(grille: dict, fenetre: int | None = None, bras: str = "la pince") -> dict:
+def le_discriminant(grille: dict, filtre=None, bras: str = "la pince") -> dict:
     """La règle lit-elle la CAUSE, ou autre chose ?
 
     ⭐⭐⭐⭐ C'EST LE CONTRÔLE QUI REND LE FICHIER CAPABLE D'ÉCHOUER. Une règle qui rendrait la même
@@ -84,11 +84,12 @@ def le_discriminant(grille: dict, fenetre: int | None = None, bras: str = "la pi
     à bruit donné, l'ÉCART entre les mémoires lues sur les différentes matières : large, la règle
     sépare les causes ; nul, elle lit quelque chose qui ne dépend pas d'elles.
 
-    ⚠ La comparaison se fait à FENÊTRE FIXÉE : mélanger les fenêtres ferait passer pour un écart
-    entre matières ce qui est un écart entre réglages.
+    ⚠ La comparaison se fait à RÉGLAGE FIXÉ, et c'est à quoi sert `filtre` : mélanger deux réglages
+    ferait passer pour un écart entre matières ce qui est un écart entre réglages. Le filtre est un
+    prédicat sur la case, pour que le même calcul serve à découper par fenêtre ici et par variante
+    ailleurs — écrire deux fois « entre contre dans » serait deux réponses à une même question.
     """
-    cases = [c for c in grille.get("cases", [])
-             if fenetre is None or c["fenetre_du_cap"] == int(fenetre)]
+    cases = [c for c in grille.get("cases", []) if filtre is None or filtre(c)]
     par_bruit: dict = {}
     for c in cases:
         par_bruit.setdefault(c["bruit"], []).append(c)
@@ -102,8 +103,12 @@ def le_discriminant(grille: dict, fenetre: int | None = None, bras: str = "la pi
         # l'écart ENTRE matières dépasse la dispersion DANS une matière. Ma première version
         # comparait l'écart à la moitié de lui-même sans bruit — un seuil choisi, c'est-à-dire le
         # péché nº 1 de ce dépôt.
+        # ⚠⚠ LES DEUX CÔTÉS SONT ARRONDIS AVANT D'ÊTRE COMPARÉS. L'écart entre matières se calcule
+        # sur des médianes arrondies à quatre décimales ; sans le même arrondi ici, une égalité se
+        # tranchait par de la poussière flottante. Sur les vraies données le producteur arrondit
+        # déjà des deux côtés, mais s'appuyer sur cette coïncidence est ce que ce dépôt proscrit.
         dedans = [float(np.max(m) - np.min(m)) for c in cs
-                  if len(m := _memoires_lues(c, bras)) > 1]
+                  if len(m := np.round(_memoires_lues(c, bras), 4)) > 1]
         entre = float(np.max(vals) - np.min(vals))
         dans = float(np.median(dedans)) if dedans else 0.0
         out.append({"bruit": bruit, "matieres": len(vals),
@@ -113,7 +118,7 @@ def le_discriminant(grille: dict, fenetre: int | None = None, bras: str = "la pi
                     "dispersion_dans_une_matiere": round(dans, 4),
                     "la_lecture_separe": bool(entre > dans),
                     "par_matiere": [{"nom": n, "memoire": v} for n, v in lues]})
-    return {"fenetre": fenetre, "bras": bras, "par_bruit": out}
+    return {"bras": bras, "par_bruit": out}
 
 
 def contre_le_fixe(grille: dict, fixe: dict | None) -> dict:
@@ -160,7 +165,8 @@ def juger(grille: dict, fixe: dict | None) -> dict:
     if not grille.get("cases"):
         return {"decidable": False, "raison": "aucune case à juger"}
     contre = contre_le_fixe(grille, fixe)
-    disc = {int(f): le_discriminant(grille, f) for f in grille["fenetres"]}
+    disc = {int(f): le_discriminant(grille, lambda c, f=f: c["fenetre_du_cap"] == int(f))
+            for f in grille["fenetres"]}
     out = {"decidable": True, "contre_le_fixe": contre,
            "le_discriminant": {str(f): d for f, d in disc.items()}}
     # ⭐⭐ Le fait qui décide : jusqu'à quel bruit la lecture sépare-t-elle encore les causes ? On
@@ -300,21 +306,22 @@ def verifier() -> int:
     # ---- ⭐⭐ le discriminant, dans les deux sens
     separe = {"cases": [case(8, 0.0, "A", [0.00, 0.02, 0.01]),
                         case(8, 0.0, "B", [0.70, 0.72, 0.71])], "fenetres": [8]}
-    d = le_discriminant(separe, 8)["par_bruit"][0]
+    d = le_discriminant(separe, lambda c: c["fenetre_du_cap"] == 8)["par_bruit"][0]
     v("⭐⭐ la lecture SÉPARE quand l'écart entre matières dépasse la dispersion dans une",
       d["la_lecture_separe"] is True,
       f"entre {d['ecart_entre_matieres']} contre dans {d['dispersion_dans_une_matiere']}")
     brouille = {"cases": [case(8, 0.0, "A", [0.40, 0.90, 0.65]),
                           case(8, 0.0, "B", [0.42, 0.92, 0.67])], "fenetres": [8]}
-    d2 = le_discriminant(brouille, 8)["par_bruit"][0]
+    d2 = le_discriminant(brouille, lambda c: c["fenetre_du_cap"] == 8)["par_bruit"][0]
     v("⭐⭐ ... et elle NE sépare PAS quand les matières se recouvrent",
       d2["la_lecture_separe"] is False,
       f"entre {d2['ecart_entre_matieres']} contre dans "
       f"{d2['dispersion_dans_une_matiere']} — un cap fixe déguisé passerait ici")
-    v("le discriminant compare à FENÊTRE fixée",
+    v("le discriminant compare à RÉGLAGE fixé, par un filtre sur la case",
       le_discriminant({"cases": [case(4, 0.0, "A", [0.1]), case(8, 0.0, "A", [0.9])],
-                       "fenetres": [4, 8]}, 4)["par_bruit"][0]["memoire_la_plus_haute"] == 0.1,
-      "sinon un écart entre réglages passerait pour un écart entre matières")
+                       "fenetres": [4, 8]},
+                      lambda c: c["fenetre_du_cap"] == 4)["par_bruit"][0]["memoire_la_plus_haute"]
+      == 0.1, "sinon un écart entre réglages passerait pour un écart entre matières")
 
     # ---- le témoin fixe, relu et jamais remarché
     grille = {"cases": [case(8, 0.0, "A", [0.1], r=9), case(16, 0.0, "A", [0.1], r=5)],

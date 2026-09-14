@@ -3049,6 +3049,44 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 145 : LIRE SOUS LE BRUIT, ET DEUX APPARIEMENTS L'IMPOSENT.
+    # (1) Un ecart entre matieres ne voyage jamais sans la dispersion DANS une matiere : c'est le
+    # couple qui dit si la lecture separe encore, et l'un sans l'autre ne decide rien.
+    # (2) Et les reussites d'une variante ne voyagent jamais sans celles de la regle BRUTE : 97
+    # seul est un nombre, a cote de 108 il dit ce que la correction coute.
+    lb = _source(racine, "lire_la_cause_sous_le_bruit.json")
+    if lb.exists():
+        d = json.loads(lb.read_text())
+
+        def dec145(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        t_ = j_.get("le_temoin_interne", {})
+        if t_.get("decidable"):
+            for nom in ("une machoire", "deux machoires libres", "la pince"):
+                if t_.get(nom) is not None:
+                    ajoute(f"temoin interne de {nom} de 145", t_[nom]["ici"], 0, lb.name)
+        for x in j_.get("par_variante", []):
+            cle = f"de « {x['nom']} » de 145"
+            ajoute(f"reussites de la pince {cle}", x["la pince"]["reussites"], 0, lb.name)
+            for y in x.get("par_bruit", []):
+                b_ = f"a bruit {y['bruit']} {cle}"
+                for k_, n_ in (("ecart_entre_matieres", "ecart entre matieres"),
+                               ("dispersion_dans_une_matiere", "dispersion dans une matiere")):
+                    ajoute(f"{n_} {b_}", y[k_], dec145(y[k_], 4), lb.name)
+                # ⚠ La memoire PAR MATIERE n'est publiee que pour les variantes a bloc un, et au
+                # bruit le plus fort : c'est le seul tableau que le document en tire.
+                if x["bloc"] == 1 and y["bruit"] == max(z["bruit"] for z in x["par_bruit"]):
+                    for m in y.get("par_matiere", []):
+                        if m.get("memoire") is not None:
+                            ajoute(f"memoire lue sur {m['nom']} {b_}", m["memoire"],
+                                   dec145(m["memoire"], 4), lb.name)
+        c_ = j_.get("contre_la_regle_brute", {})
+        if c_.get("reussites_de_la_brute") is not None:
+            ajoute("reussites de la regle brute de 145", c_["reussites_de_la_brute"], 0, lb.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 144 : LE CAP LU, ET DEUX APPARIEMENTS L'IMPOSENT.
     # (1) Un ecart entre matieres ne voyage jamais sans la dispersion DANS une matiere : « 0,1284 »
     # seul ne dit rien, a cote de « 0,0881 » il dit que la lecture separe encore.

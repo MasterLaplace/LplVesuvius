@@ -1430,6 +1430,8 @@ run "la pince et son cap"    uv run python "$ROOT/src/nappe/la_pince_garde_t_ell
 run "figure cap de la pince" uv run python "$ROOT/src/figures/figure_la_pince_garde_t_elle_son_cap.py" --verifier
 run "cap qui lit la cause"   uv run python "$ROOT/src/nappe/un_cap_qui_lit_la_cause.py" --verifier
 run "figure cap lu"          uv run python "$ROOT/src/figures/figure_un_cap_qui_lit_la_cause.py" --verifier
+run "lire sous le bruit"     uv run python "$ROOT/src/nappe/lire_la_cause_sous_le_bruit.py" --verifier
+run "figure sous le bruit"   uv run python "$ROOT/src/figures/figure_lire_la_cause_sous_le_bruit.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

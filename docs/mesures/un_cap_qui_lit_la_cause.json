@@ -68027,7 +68027,6 @@
     },
     "le_discriminant": {
       "4": {
-        "fenetre": 4,
         "bras": "la pince",
         "par_bruit": [
           {
@@ -68126,7 +68125,6 @@
         ]
       },
       "8": {
-        "fenetre": 8,
         "bras": "la pince",
         "par_bruit": [
           {
@@ -68225,7 +68223,6 @@
         ]
       },
       "16": {
-        "fenetre": 16,
         "bras": "la pince",
         "par_bruit": [
           {
@@ -68324,7 +68321,6 @@
         ]
       },
       "32": {
-        "fenetre": 32,
         "bras": "la pince",
         "par_bruit": [
           {
@@ -68423,7 +68419,6 @@
         ]
       },
       "64": {
-        "fenetre": 64,
         "bras": "la pince",
         "par_bruit": [
           {
@@ -68522,7 +68517,6 @@
         ]
       },
       "128": {
-        "fenetre": 128,
         "bras": "la pince",
         "par_bruit": [
           {
