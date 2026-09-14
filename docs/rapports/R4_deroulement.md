@@ -1235,6 +1235,35 @@ reste-t-elle constante à la précision que la pose demande ? ⚠⚠ Et ceci rej
 toujours pas clos** : une composante axiale de la normale **est** un vrillage, et `R4-F79` mesure
 déjà sur le vrai rouleau que le penchant est plus **axial** qu'azimutal (0,334 contre 0,193).
 
+**`154` · 2026-09-14 · jusqu'où une mâchoire peut être juste, et où elle y est déjà**
+(`jusquou_une_machoire_peut_elle_etre_juste.py`, zéro lecture distante)
+`153` mesurait la borne de la croix sans l'expliquer : on ne savait pas si elle **échoue** sur la
+matière du rouleau ou si elle **a fini** et que la matière demande davantage. La différence décide de
+la suite. ⭐⭐⭐ **L'échelle se calcule sans une seule lecture** — la variation de la vraie normale sur
+le patch de la mâchoire, par `normale_locale`, à la demi-largeur de **43,25 µm**. ⭐⭐⭐⭐ **Et le
+partage est net** : le **segment** est à **2,18×**, **3,15×** et **3,12×** son échelle sur les trois
+froissées, la **croix** descend à **0,75×** et **0,92×** sur les deux modérées — elle **bat la
+variation qu'elle couvre**, comme sur les lisses (**0,0×** et **0,04×**) — et reste à **2,84×** sur
+celle du rouleau — `R4-F123`. ⚠⚠ Ce rapport n'est **pas** une borne inférieure : pour un patch
+symétrique d'une surface lisse le plan des moindres carrés a la normale du centre au premier ordre,
+donc un instrument peut être plus juste que la variation qu'il couvre — c'est le **point bas des
+matières lisses** qui rend le rapport lisible. ⭐⭐ **Le second axe porte exactement zéro là où la
+matière est lisse** et davantage que le premier là où elle froisse : **4,983°** contre 4,184°,
+**4,328°** contre 3,247°, **9,047°** contre 8,196° — donc une mâchoire en segment est le **mauvais
+instrument** et non un instrument mal réglé — `R4-F124`. ⚠⚠ **Et une troisième formule géométrique
+entre au cimetière à moitié** : `arctan(D/2w)`, où `D` est l'étalement des appuis, rend **4,446°**,
+**3,689°** et **11,968°** contre 9,122°, 10,226° et 25,562° mesurés — l'**ordre** est parfait, le
+**niveau** est faux d'un facteur stable **2,05 / 2,77 / 2,14**, parce qu'avec trois appuis
+l'étalement peut se jouer sur `w` et non `2w` — `R4-F125`. ⭐⭐ **Conséquence pour le graal** : sur
+les matières modérées aucun instrument de cette taille ne peut faire mieux et la seule voie est de
+**rétrécir** ; sur celle du rouleau il reste un **facteur trois à taille égale**, donc un défaut
+encore à trouver qui n'est ni la taille ni la dimension. ⚠⚠ Et les deux contraintes tirent en sens
+opposé — `153` mesure que rétrécir sous le voxel n'y fait pas tomber l'erreur, `R4-F113` que la
+fenêtre y est déjà trop étroite de quinze pour cent — donc la tranche qui les départagera devra les
+mesurer **ensemble**. ⚠⚠⚠ **Deux défauts de ma batterie, corrigés** : un contrôle **faux** (j'avais
+supposé l'échelle nulle sur une matière lisse, or la spirale **courbe**, donc sa normale tourne le
+long de `t̂` même sans froissement) et un contrôle **incapable d'échouer**, retiré plutôt que réparé.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

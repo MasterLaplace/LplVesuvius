@@ -1,0 +1,670 @@
+{
+  "variation": {
+    "decidable": true,
+    "poses_par_case": 40,
+    "demi_largeur_de_reference_um": 43.25,
+    "longueur_donde_um": 393.6,
+    "distances_um": [
+      1.38,
+      5.0,
+      10.81,
+      21.62,
+      43.25,
+      86.5,
+      173.0,
+      393.6
+    ],
+    "par_matiere": [
+      {
+        "nom": "spirale nue",
+        "ecrasement": 0.0,
+        "amplitude_um": 0.0,
+        "poses": 40,
+        "par_distance": [
+          {
+            "distance_um": 1.38,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.008,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 5.0,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.029,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 10.81,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.062,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 21.62,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.124,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 43.25,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.248,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 86.5,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.495,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 173.0,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.991,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 393.6,
+            "sautes": 0,
+            "le_long_de_t_deg": 2.254,
+            "le_long_de_n_croix_t_deg": 0.0
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée",
+        "ecrasement": 0.2782,
+        "amplitude_um": 0.0,
+        "poses": 40,
+        "par_distance": [
+          {
+            "distance_um": 1.38,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.004,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 5.0,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.015,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 10.81,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.032,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 21.62,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.064,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 43.25,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.127,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 86.5,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.255,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 173.0,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.51,
+            "le_long_de_n_croix_t_deg": 0.0
+          },
+          {
+            "distance_um": 393.6,
+            "sautes": 0,
+            "le_long_de_t_deg": 1.16,
+            "le_long_de_n_croix_t_deg": 0.0
+          }
+        ]
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "ecrasement": 0.0,
+        "amplitude_um": 42.4,
+        "poses": 40,
+        "par_distance": [
+          {
+            "distance_um": 1.38,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.138,
+            "le_long_de_n_croix_t_deg": 0.171
+          },
+          {
+            "distance_um": 5.0,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.5,
+            "le_long_de_n_croix_t_deg": 0.624
+          },
+          {
+            "distance_um": 10.81,
+            "sautes": 0,
+            "le_long_de_t_deg": 1.045,
+            "le_long_de_n_croix_t_deg": 1.333
+          },
+          {
+            "distance_um": 21.62,
+            "sautes": 0,
+            "le_long_de_t_deg": 2.112,
+            "le_long_de_n_croix_t_deg": 2.532
+          },
+          {
+            "distance_um": 43.25,
+            "sautes": 0,
+            "le_long_de_t_deg": 4.184,
+            "le_long_de_n_croix_t_deg": 4.983
+          },
+          {
+            "distance_um": 86.5,
+            "sautes": 0,
+            "le_long_de_t_deg": 7.524,
+            "le_long_de_n_croix_t_deg": 9.493
+          },
+          {
+            "distance_um": 173.0,
+            "sautes": 0,
+            "le_long_de_t_deg": 12.923,
+            "le_long_de_n_croix_t_deg": 15.94
+          },
+          {
+            "distance_um": 393.6,
+            "sautes": 0,
+            "le_long_de_t_deg": 12.788,
+            "le_long_de_n_croix_t_deg": 9.379
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "ecrasement": 0.2782,
+        "amplitude_um": 42.4,
+        "poses": 40,
+        "par_distance": [
+          {
+            "distance_um": 1.38,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.098,
+            "le_long_de_n_croix_t_deg": 0.16
+          },
+          {
+            "distance_um": 5.0,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.351,
+            "le_long_de_n_croix_t_deg": 0.566
+          },
+          {
+            "distance_um": 10.81,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.767,
+            "le_long_de_n_croix_t_deg": 1.163
+          },
+          {
+            "distance_um": 21.62,
+            "sautes": 0,
+            "le_long_de_t_deg": 1.566,
+            "le_long_de_n_croix_t_deg": 2.252
+          },
+          {
+            "distance_um": 43.25,
+            "sautes": 0,
+            "le_long_de_t_deg": 3.247,
+            "le_long_de_n_croix_t_deg": 4.328
+          },
+          {
+            "distance_um": 86.5,
+            "sautes": 0,
+            "le_long_de_t_deg": 6.543,
+            "le_long_de_n_croix_t_deg": 7.927
+          },
+          {
+            "distance_um": 173.0,
+            "sautes": 0,
+            "le_long_de_t_deg": 12.216,
+            "le_long_de_n_croix_t_deg": 16.232
+          },
+          {
+            "distance_um": 393.6,
+            "sautes": 0,
+            "le_long_de_t_deg": 11.108,
+            "le_long_de_n_croix_t_deg": 7.499
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "ecrasement": 0.2782,
+        "amplitude_um": 100.0,
+        "poses": 40,
+        "par_distance": [
+          {
+            "distance_um": 1.38,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.226,
+            "le_long_de_n_croix_t_deg": 0.264
+          },
+          {
+            "distance_um": 5.0,
+            "sautes": 0,
+            "le_long_de_t_deg": 0.778,
+            "le_long_de_n_croix_t_deg": 0.958
+          },
+          {
+            "distance_um": 10.81,
+            "sautes": 0,
+            "le_long_de_t_deg": 1.685,
+            "le_long_de_n_croix_t_deg": 2.165
+          },
+          {
+            "distance_um": 21.62,
+            "sautes": 0,
+            "le_long_de_t_deg": 3.73,
+            "le_long_de_n_croix_t_deg": 4.91
+          },
+          {
+            "distance_um": 43.25,
+            "sautes": 0,
+            "le_long_de_t_deg": 8.196,
+            "le_long_de_n_croix_t_deg": 9.047
+          },
+          {
+            "distance_um": 86.5,
+            "sautes": 0,
+            "le_long_de_t_deg": 16.331,
+            "le_long_de_n_croix_t_deg": 17.315
+          },
+          {
+            "distance_um": 173.0,
+            "sautes": 0,
+            "le_long_de_t_deg": 28.318,
+            "le_long_de_n_croix_t_deg": 28.695
+          },
+          {
+            "distance_um": 393.6,
+            "sautes": 0,
+            "le_long_de_t_deg": 25.179,
+            "le_long_de_n_croix_t_deg": 21.418
+          }
+        ]
+      }
+    ]
+  },
+  "etalement": {
+    "decidable": true,
+    "poses_par_case": 40,
+    "largeurs": [
+      0.0625,
+      0.125,
+      0.25,
+      0.375,
+      0.5
+    ],
+    "par_matiere": [
+      {
+        "nom": "spirale nue",
+        "ecrasement": 0.0,
+        "amplitude_um": 0.0,
+        "poses": 40,
+        "par_largeur": [
+          {
+            "largeur_en_pas": 0.0625,
+            "demi_largeur_um": 10.81,
+            "machoires": 40,
+            "refusees": 0,
+            "etalement_um": 0.006,
+            "inclinaison_impliquee_deg": 0.015
+          },
+          {
+            "largeur_en_pas": 0.125,
+            "demi_largeur_um": 21.62,
+            "machoires": 40,
+            "refusees": 0,
+            "etalement_um": 0.023,
+            "inclinaison_impliquee_deg": 0.031
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "demi_largeur_um": 43.25,
+            "machoires": 40,
+            "refusees": 0,
+            "etalement_um": 0.093,
+            "inclinaison_impliquee_deg": 0.061
+          },
+          {
+            "largeur_en_pas": 0.375,
+            "demi_largeur_um": 64.88,
+            "machoires": 40,
+            "refusees": 0,
+            "etalement_um": 0.208,
+            "inclinaison_impliquee_deg": 0.092
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "demi_largeur_um": 86.5,
+            "machoires": 40,
+            "refusees": 0,
+            "etalement_um": 0.371,
+            "inclinaison_impliquee_deg": 0.123
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée",
+        "ecrasement": 0.2782,
+        "amplitude_um": 0.0,
+        "poses": 40,
+        "par_largeur": [
+          {
+            "largeur_en_pas": 0.0625,
+            "demi_largeur_um": 10.81,
+            "machoires": 39,
+            "refusees": 1,
+            "etalement_um": 0.035,
+            "inclinaison_impliquee_deg": 0.093
+          },
+          {
+            "largeur_en_pas": 0.125,
+            "demi_largeur_um": 21.62,
+            "machoires": 39,
+            "refusees": 1,
+            "etalement_um": 0.076,
+            "inclinaison_impliquee_deg": 0.1
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "demi_largeur_um": 43.25,
+            "machoires": 39,
+            "refusees": 1,
+            "etalement_um": 0.161,
+            "inclinaison_impliquee_deg": 0.106
+          },
+          {
+            "largeur_en_pas": 0.375,
+            "demi_largeur_um": 64.88,
+            "machoires": 39,
+            "refusees": 1,
+            "etalement_um": 0.241,
+            "inclinaison_impliquee_deg": 0.106
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "demi_largeur_um": 86.5,
+            "machoires": 39,
+            "refusees": 1,
+            "etalement_um": 0.351,
+            "inclinaison_impliquee_deg": 0.116
+          }
+        ]
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "ecrasement": 0.0,
+        "amplitude_um": 42.4,
+        "poses": 40,
+        "par_largeur": [
+          {
+            "largeur_en_pas": 0.0625,
+            "demi_largeur_um": 10.81,
+            "machoires": 40,
+            "refusees": 0,
+            "etalement_um": 1.637,
+            "inclinaison_impliquee_deg": 4.329
+          },
+          {
+            "largeur_en_pas": 0.125,
+            "demi_largeur_um": 21.62,
+            "machoires": 40,
+            "refusees": 0,
+            "etalement_um": 3.198,
+            "inclinaison_impliquee_deg": 4.228
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "demi_largeur_um": 43.25,
+            "machoires": 40,
+            "refusees": 0,
+            "etalement_um": 6.725,
+            "inclinaison_impliquee_deg": 4.446
+          },
+          {
+            "largeur_en_pas": 0.375,
+            "demi_largeur_um": 64.88,
+            "machoires": 40,
+            "refusees": 0,
+            "etalement_um": 11.716,
+            "inclinaison_impliquee_deg": 5.16
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "demi_largeur_um": 86.5,
+            "machoires": 40,
+            "refusees": 0,
+            "etalement_um": 14.39,
+            "inclinaison_impliquee_deg": 4.755
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "ecrasement": 0.2782,
+        "amplitude_um": 42.4,
+        "poses": 40,
+        "par_largeur": [
+          {
+            "largeur_en_pas": 0.0625,
+            "demi_largeur_um": 10.81,
+            "machoires": 39,
+            "refusees": 1,
+            "etalement_um": 1.353,
+            "inclinaison_impliquee_deg": 3.581
+          },
+          {
+            "largeur_en_pas": 0.125,
+            "demi_largeur_um": 21.62,
+            "machoires": 38,
+            "refusees": 2,
+            "etalement_um": 2.488,
+            "inclinaison_impliquee_deg": 3.292
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "demi_largeur_um": 43.25,
+            "machoires": 37,
+            "refusees": 3,
+            "etalement_um": 5.577,
+            "inclinaison_impliquee_deg": 3.689
+          },
+          {
+            "largeur_en_pas": 0.375,
+            "demi_largeur_um": 64.88,
+            "machoires": 39,
+            "refusees": 1,
+            "etalement_um": 9.197,
+            "inclinaison_impliquee_deg": 4.055
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "demi_largeur_um": 86.5,
+            "machoires": 36,
+            "refusees": 4,
+            "etalement_um": 13.812,
+            "inclinaison_impliquee_deg": 4.565
+          }
+        ]
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "ecrasement": 0.2782,
+        "amplitude_um": 100.0,
+        "poses": 40,
+        "par_largeur": [
+          {
+            "largeur_en_pas": 0.0625,
+            "demi_largeur_um": 10.81,
+            "machoires": 39,
+            "refusees": 1,
+            "etalement_um": 4.373,
+            "inclinaison_impliquee_deg": 11.431
+          },
+          {
+            "largeur_en_pas": 0.125,
+            "demi_largeur_um": 21.62,
+            "machoires": 38,
+            "refusees": 2,
+            "etalement_um": 10.49,
+            "inclinaison_impliquee_deg": 13.634
+          },
+          {
+            "largeur_en_pas": 0.25,
+            "demi_largeur_um": 43.25,
+            "machoires": 35,
+            "refusees": 5,
+            "etalement_um": 18.335,
+            "inclinaison_impliquee_deg": 11.968
+          },
+          {
+            "largeur_en_pas": 0.375,
+            "demi_largeur_um": 64.88,
+            "machoires": 36,
+            "refusees": 4,
+            "etalement_um": 25.29,
+            "inclinaison_impliquee_deg": 11.029
+          },
+          {
+            "largeur_en_pas": 0.5,
+            "demi_largeur_um": 86.5,
+            "machoires": 35,
+            "refusees": 5,
+            "etalement_um": 34.863,
+            "inclinaison_impliquee_deg": 11.394
+          }
+        ]
+      }
+    ]
+  },
+  "juger": {
+    "decidable": true,
+    "demi_largeur_de_reference_um": 43.25,
+    "par_matiere": [
+      {
+        "nom": "spirale nue",
+        "amplitude_um": 0.0,
+        "variation_le_long_de_t_deg": 0.248,
+        "variation_le_long_de_n_croix_t_deg": 0.0,
+        "erreur_du_segment_deg": 0.0,
+        "erreur_de_la_croix_deg": 0.0,
+        "le_segment_au_dessus_de_son_echelle": 0.0,
+        "la_croix_au_dessus_de_son_echelle": 0.0,
+        "echelle_de_la_croix_deg": 0.248
+      },
+      {
+        "nom": "spirale écrasée",
+        "amplitude_um": 0.0,
+        "variation_le_long_de_t_deg": 0.127,
+        "variation_le_long_de_n_croix_t_deg": 0.0,
+        "erreur_du_segment_deg": 0.005,
+        "erreur_de_la_croix_deg": 0.005,
+        "le_segment_au_dessus_de_son_echelle": 0.04,
+        "la_croix_au_dessus_de_son_echelle": 0.04,
+        "echelle_de_la_croix_deg": 0.127
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "amplitude_um": 42.4,
+        "variation_le_long_de_t_deg": 4.184,
+        "variation_le_long_de_n_croix_t_deg": 4.983,
+        "erreur_du_segment_deg": 9.122,
+        "erreur_de_la_croix_deg": 3.725,
+        "le_segment_au_dessus_de_son_echelle": 2.18,
+        "la_croix_au_dessus_de_son_echelle": 0.75,
+        "echelle_de_la_croix_deg": 4.983
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "amplitude_um": 42.4,
+        "variation_le_long_de_t_deg": 3.247,
+        "variation_le_long_de_n_croix_t_deg": 4.328,
+        "erreur_du_segment_deg": 10.226,
+        "erreur_de_la_croix_deg": 3.99,
+        "le_segment_au_dessus_de_son_echelle": 3.15,
+        "la_croix_au_dessus_de_son_echelle": 0.92,
+        "echelle_de_la_croix_deg": 4.328
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "amplitude_um": 100.0,
+        "variation_le_long_de_t_deg": 8.196,
+        "variation_le_long_de_n_croix_t_deg": 9.047,
+        "erreur_du_segment_deg": 25.562,
+        "erreur_de_la_croix_deg": 25.659,
+        "le_segment_au_dessus_de_son_echelle": 3.12,
+        "la_croix_au_dessus_de_son_echelle": 2.84,
+        "echelle_de_la_croix_deg": 9.047
+      }
+    ],
+    "sur_la_matiere_du_rouleau": {
+      "nom": "spirale écrasée et froissée 100 µm",
+      "croix_au_dessus_de_son_echelle": 2.84,
+      "sur_les_froissements_moderes": [
+        0.75,
+        0.92
+      ],
+      "mediane_des_moderes": 0.83,
+      "elle_est_plus_au_dessus_la_bas": true
+    },
+    "le_second_axe_ne_porte_rien_sur_les_lisses": true,
+    "le_second_axe_porte_sur_les_froissees": true,
+    "etalement_a_la_largeur_de_reference": [
+      {
+        "nom": "spirale nue",
+        "amplitude_um": 0.0,
+        "etalement_um": 0.093,
+        "inclinaison_impliquee_deg": 0.061,
+        "erreur_du_segment_deg": 0.0,
+        "rapport": 0.0
+      },
+      {
+        "nom": "spirale écrasée",
+        "amplitude_um": 0.0,
+        "etalement_um": 0.161,
+        "inclinaison_impliquee_deg": 0.106,
+        "erreur_du_segment_deg": 0.005,
+        "rapport": 0.05
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "amplitude_um": 42.4,
+        "etalement_um": 6.725,
+        "inclinaison_impliquee_deg": 4.446,
+        "erreur_du_segment_deg": 9.122,
+        "rapport": 2.05
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "amplitude_um": 42.4,
+        "etalement_um": 5.577,
+        "inclinaison_impliquee_deg": 3.689,
+        "erreur_du_segment_deg": 10.226,
+        "rapport": 2.77
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "amplitude_um": 100.0,
+        "etalement_um": 18.335,
+        "inclinaison_impliquee_deg": 11.968,
+        "erreur_du_segment_deg": 25.562,
+        "rapport": 2.14
+      }
+    ],
+    "letalement_ordonne_sans_donner_le_niveau": true
+  },
+  "plan_lu": true
+}

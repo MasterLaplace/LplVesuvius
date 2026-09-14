@@ -3049,6 +3049,58 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 154 : L'ECHELLE DE LA MATIERE, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un RAPPORT ne voyage jamais sans l'ECHELLE qui le divise — « 2,84 » seul est un nombre, a
+    # cote de « 9,05° de variation » il dit de quoi il est fait.
+    # (2) La variation le long de `t` ne voyage jamais sans celle le long de `n x t` : c'est le
+    # couple qui dit que le second axe porte davantage, et une seule des deux se lirait comme un
+    # niveau.
+    # (3) Et un `arctan(D/2w)` ne voyage jamais sans l'erreur qu'il devait predire, parce que le
+    # RAPPORT des deux est tout ce que cette formule a le droit de revendiquer.
+    ec = _source(racine, "jusquou_une_machoire_peut_elle_etre_juste.json")
+    if ec.exists():
+        d = json.loads(ec.read_text())
+
+        def dec154(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        v_ = d.get("variation", {})
+        if v_.get("decidable"):
+            ajoute("poses par case de 154", v_["poses_par_case"], 0, ec.name)
+            ajoute("demi largeur de reference de 154", v_["demi_largeur_de_reference_um"],
+                   dec154(v_["demi_largeur_de_reference_um"], 2), ec.name)
+        j_ = d.get("juger", {})
+        # ⚠⚠ ON N'ENREGISTRE QUE CE QUE LE DOCUMENT PUBLIE : `154` table la variation A LA
+        # DEMI-LARGEUR pour les cinq matieres, et la courbe entiere n'est que dessinee.
+        for x in j_.get("par_matiere", []):
+            q = f"sur {x['nom']} de 154"
+            for cle, nom in (("variation_le_long_de_t_deg", "variation le long de t"),
+                             ("variation_le_long_de_n_croix_t_deg",
+                              "variation le long de n croix t")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", x[cle], dec154(x[cle], 3), ec.name)
+            # ⚠ Un rapport contre une echelle nulle n'existe pas : il est SAUTE, pas lu comme zero.
+            for cle, nom in (("le_segment_au_dessus_de_son_echelle",
+                              "rapport du segment a son echelle"),
+                             ("la_croix_au_dessus_de_son_echelle",
+                              "rapport de la croix a son echelle")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", x[cle], dec154(x[cle], 2), ec.name)
+        for x in j_.get("etalement_a_la_largeur_de_reference", []):
+            q = f"sur {x['nom']} de 154"
+            ajoute(f"etalement des appuis {q}", x["etalement_um"],
+                   dec154(x["etalement_um"], 3), ec.name)
+            ajoute(f"inclinaison impliquee par l'etalement {q}", x["inclinaison_impliquee_deg"],
+                   dec154(x["inclinaison_impliquee_deg"], 3), ec.name)
+            if x.get("rapport") is not None:
+                ajoute(f"rapport de l'erreur a l'inclinaison impliquee {q}", x["rapport"],
+                       dec154(x["rapport"], 2), ec.name)
+        dur = j_.get("sur_la_matiere_du_rouleau")
+        if dur and dur.get("mediane_des_moderes") is not None:
+            ajoute("mediane des rapports sur les froissements moderes de 154",
+                   dur["mediane_des_moderes"], dec154(dur["mediane_des_moderes"], 2), ec.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 153 : LA MACHOIRE EST PLANE, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Une composante axiale ne voyage jamais sans le ZERO des matieres lisses — « 0,278624 »
     # seul est un nombre, a cote de « 0,0 exactement » il dit que c'est le froissement et rien
