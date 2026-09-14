@@ -1389,6 +1389,39 @@ comme après, avec **davantage** de poses refusées (médiane **21,0** → **29,
 `R4-F141`. ⚠ Piège payé : un interligne posé redevient faux au **douzième** bras, et les deux
 tableaux de la figure dérivent désormais le leur de la place disponible.
 
+**`159` · 2026-09-15 · le déroulage de la phase suppose ce qu'on lui demande**
+(`le_deroulage_suppose_ce_quon_lui_demande.py`, zéro lecture distante)
+⚠⚠⚠ **La question de `158` recevait une réponse fabriquée par l'instrument.** Le déroulage de
+`suivre` fait `d - round(d)`, donc il **borne tout pas à une demi-feuille par construction** : lui
+demander si un pas en franchit davantage, c'est demander à une règle graduée jusqu'à cinquante
+centimètres si quelque chose dépasse cinquante centimètres. Sa propre docstring le disait comme une
+**hypothèse**. ⭐⭐⭐⭐ **L'entier se LIT sur l'angle**, seule coupure de la phase, et il faut l'angle
+**elliptique** de la fixture — l'angle circulaire du compteur de tour serait faux exactement sur la
+matière écrasée. Un arbitre qui échantillonne le chemin entre deux centres jusqu'à ce qu'**aucun
+sous-pas ne soit replié** tranche **2879** litiges sur **2881** pour le déroulage exact, **0** pour
+le replié, **2** non tranchés, sur **44** marches ; le plus grand pas réellement franchi atteint
+**20,937993** feuilles — ce n'est pas l'avance qui borne un pas mais le **recentrage** des mâchoires
+— `R4-F142`. ⭐⭐⭐ **La portée suit la difficulté sans exception** : **0** marche touchée sur **108**
+pour la spirale nue, **7** sur **102**, **22** sur **108**, **43** sur **99**, et **86** sur **96**
+pour celle du rouleau, avec **0**, **107**, **515**, **922** puis **6991** pas repliés à tort. Le
+défaut vit exactement là où vivent les questions ouvertes, et les deux matières à deux causes sont
+touchées **dès le bruit nul** — `R4-F143`. ⭐⭐⭐⭐ **La barre de `144` ne bouge pas** : **108** contre
+**108**, alors que **54** de ses **170** marches sont touchées et **2077** de ses pas repliés à tort.
+La raison est structurelle — un pas replié à tort décale d'une feuille **entière**, donc il fait
+**sortir** de la bande « même feuille » bien plus facilement qu'il n'y fait entrer. ✗ Mais les gains
+du rejet fondent (**123 → 118**) et une mâchoire seule passe **derrière** la pince (**128 → 115**) :
+le total que `157` mettait en avant est **retiré**, et son verdict **joint** en sort confirmé par une
+seconde voie — `R4-F144`. ⚠⚠⚠ **Et mon premier arbitre avait le défaut exact de l'instrument qu'il
+jugeait** : son critère était « deux échantillonnages successifs s'accordent », or deux
+échantillonnages trop grossiers replient le **même** sous-pas, rendent deux fois le **même nombre
+faux** et se déclarent d'accord. Quatre vrais pas l'ont dit, tous dans une même marche, dont les
+parties fractionnaires coïncidaient au millionième et dont seul l'entier différait — de 4, 14, 6 et
+1. Le critère honnête est qu'**aucun sous-pas n'ait été replié**, le plafond est **déclaré**, et un
+pas non tranché ne compte **ni pour l'un ni pour l'autre**. ⭐ **Conséquence pour le graal** : rien
+n'est remplacé — `derive_en_feuilles` reste le nombre de toutes les tranches antérieures et l'exact
+est publié **à côté** — mais la question de `158` reste entière, et l'instrument pour y répondre
+existe désormais.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

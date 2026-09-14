@@ -1456,6 +1456,8 @@ run "ce que la seconde achete" uv run python "$ROOT/src/nappe/ce_que_la_seconde_
 run "figure seconde machoire" uv run python "$ROOT/src/figures/figure_ce_que_la_seconde_machoire_achete_encore.py" --verifier
 run "de quoi on meurt"       uv run python "$ROOT/src/nappe/de_quoi_meurt_on_sur_la_matiere_du_rouleau.py" --verifier
 run "figure de quoi on meurt" uv run python "$ROOT/src/figures/figure_de_quoi_meurt_on_sur_la_matiere_du_rouleau.py" --verifier
+run "le deroulage suppose"   uv run python "$ROOT/src/nappe/le_deroulage_suppose_ce_quon_lui_demande.py" --verifier
+run "figure le deroulage"    uv run python "$ROOT/src/figures/figure_le_deroulage_suppose_ce_quon_lui_demande.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

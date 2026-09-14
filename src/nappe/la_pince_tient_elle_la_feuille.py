@@ -537,7 +537,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            cap_tournant: str = "", avance_sur_la_lecture: bool = False,
            fenetre_elargie: str = "", pose_sur_la_lecture: bool = False,
            pose_en_deux_temps: bool = False, en_croix: bool = False,
-           rejeter: bool = False) -> dict:
+           rejeter: bool = False, derouler_exactement: bool = False,
+           juger_le_deroulage: bool = False) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -578,6 +579,15 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     ce que `155` mesure comme le seul reglage qui RAPPROCHE la pose de l'echelle de sa matiere.
     Les deux etaient dans `poser` depuis `155` et aucune marche ne les avait payes.
 
+    ⚠⚠⚠ ET LE DEROULAGE DE CETTE FONCTION SUPPOSE CE QU'ON VOUDRAIT LUI DEMANDER. `d - round(d)`
+    choisit l'entier qui rend le pas le plus PETIT, donc il replie d'office tout pas franchissant
+    plus d'une demi-feuille — et la question « un pas peut-il en franchir plus ? » recoit alors non
+    par CONSTRUCTION. `derouler_exactement` publie A COTE le deroulage que l'ANGLE dicte, qui ne
+    suppose rien, et le compte des pas ou les deux different. ⚠ Eteint, il ne change RIEN : meme
+    calcul, meme sortie, jusqu'au bit, et `derive_en_feuilles` reste le nombre de toutes les
+    tranches anterieures. `juger_le_deroulage` ajoute l'arbitre, qui coute cher et ne sert qu'a
+    trancher.
+
     ⚠⚠ ET L'ATTENTE SE DIT AVANT LA MESURE. `149` mesure que la pince meurt d'ARRET et que c'est
     la POSE qui echoue — vingt et un refus de pose contre zero refus de contrainte — et `150`
     que la pose tombe a 633 ‰ a l'angle du cap. Une pose plus juste devrait donc faire ARRETER
@@ -608,6 +618,19 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     th, cumul, chemin = angle(etat["centre_vx"]), 0.0, 0.0
     r0 = rayon_um(etat["centre_vx"])
     pas, refus, halts, ecarts, phases = 0, 0, 0, [], [phase0]
+    # ⭐⭐⭐⭐ L'ANGLE QUE LA FIXTURE EMPLOIE DANS SA PHASE, et pas celui du compteur de tour. Sur une
+    # section ECRASEE `cylindriques` rend un angle ELLIPTIQUE, et c'est lui qui porte la coupure de
+    # la phase : reconstruire le deroulage avec l'angle CIRCULAIRE serait faux exactement sur la
+    # matiere qui compte. Il est lu comme `phase` et `normale_locale`, donc ANALYTIQUEMENT et sans
+    # aucune lecture de voxel, et seulement quand on le demande.
+    angles_vrais = ([float(vol.cylindriques(
+        np.asarray(etat["centre_vx"]).reshape(1, 3))[1][0])] if derouler_exactement else [])
+    # ⚠⚠ ET LE CENTRE LUI-MEME, parce qu'un pas n'est PAS borne par l'avance : les machoires
+    # RECENTRENT, et ce recentrage peut deplacer le centre bien plus loin que l'avance ne le fait.
+    # Sans cette serie, « un pas peut-il franchir plus d'une demi-feuille ? » se raisonne au lieu de
+    # se mesurer, et ce depot a paye trois fois qu'un raisonnement y perd contre un instrument.
+    centres = ([np.asarray(etat["centre_vx"], dtype=np.float64).copy()]
+               if derouler_exactement else [])
     rotations: list[float] = []
     memoires: list[float] = []
     taux_lus: list[float] = []
@@ -756,6 +779,10 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             nouvelle_tan = -nouvelle_tan
         tan, etat = nouvelle_tan, pris
         phases.append(float(vol.phase(np.asarray(etat["centre_vx"]).reshape(1, 3))[0]))
+        if derouler_exactement:
+            angles_vrais.append(float(vol.cylindriques(
+                np.asarray(etat["centre_vx"]).reshape(1, 3))[1][0]))
+            centres.append(np.asarray(etat["centre_vx"], dtype=np.float64).copy())
         pas += 1
     else:
         if pas >= int(pas_max):
@@ -803,7 +830,148 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             # memoire et la marge : une regle annoncee qui n'ecarterait jamais rien serait la
             # marche d'avant, deguisee.
             "appuis_rejetes": int(rejetes_totaux),
+            # ⚠ La serie DEROULEE, et jamais la brute : `VolumeFabriqueEnSpirale` saute d'une
+            # feuille en franchissant `theta = ±π`, donc une serie non deroulee ferait voir un saut
+            # de feuille la ou la matiere est identique. C'est le meme `ph` dont les bouts donnent
+            # `derive_en_feuilles`, pas un second calcul.
+            **(_le_deroulage_exact(phases, angles_vrais, centres, voxel_um,
+                                   vol if juger_le_deroulage else None)
+               if derouler_exactement else {}),
             "lectures": int(vol.lectures)}
+
+
+def _le_chemin_du_pas(vol, a, b, echantillons: int) -> tuple[float, int]:
+    """La phase franchie entre deux centres, en ECHANTILLONNANT le segment qui les joint.
+
+    ⭐⭐⭐⭐ C'EST LA SEULE MESURE QUI NE SUPPOSE RIEN. Un deroulage a deux points doit choisir un
+    entier ; un chemin echantillonne assez finement n'a aucun choix a faire, parce que chaque
+    sous-pas change la phase de bien moins d'une demi-feuille et que son entier est alors sans
+    ambiguite. Elle est ANALYTIQUE et ne coute AUCUNE lecture de voxel.
+
+    ⚠⚠ Le segment droit n'est pas la trajectoire exacte du marcheur — il avance puis se recentre —
+    mais aucun chemin court entre deux points voisins ne peut enrouler de `2π`, donc la difference
+    de phase est la meme pour tous. C'est la multivalence en `theta` qui est en jeu, et elle ne se
+    joue qu'a l'echelle du tour.
+    """
+    t = np.linspace(0.0, 1.0, int(echantillons) + 1).reshape(-1, 1)
+    pts = np.asarray(a, dtype=np.float64) + t * (np.asarray(b, dtype=np.float64)
+                                                 - np.asarray(a, dtype=np.float64))
+    f = np.asarray(vol.phase(pts), dtype=np.float64).ravel()
+    d = np.diff(f)
+    # ⚠⚠ ET IL REND AUSSI COMBIEN DE SOUS-PAS ONT DU ETRE REPLIES. Un sous-pas replie est un
+    # sous-pas que cet echantillonnage n'a PAS resolu : tant qu'il en reste, la somme suppose
+    # encore quelque chose, et c'est exactement ce qu'un arbitre n'a pas le droit de faire.
+    return float(np.sum(d - np.round(d))), int(np.count_nonzero(np.round(d)))
+
+
+def _le_pas_mesure(vol, a, b) -> tuple[float, bool]:
+    """La phase franchie par un pas, ECHANTILLONNEE jusqu'a ce que la reponse cesse de bouger.
+
+    ⚠⚠⚠ ET LE CRITERE N'EST PAS « DEUX ECHANTILLONNAGES S'ACCORDENT », QUI EST FAUX. Paye ici :
+    deux echantillonnages trop grossiers replient LE MEME sous-pas, rendent deux fois le meme
+    nombre FAUX et se declarent d'accord. Un arbitre qui se verifie par son propre accord a le
+    defaut exact de l'instrument qu'il juge. Le critere est donc qu'AUCUN sous-pas n'ait eu besoin
+    d'etre replie : une somme dont aucun terme n'a ete choisi ne suppose rien.
+
+    ⚠ Le plafond est DECLARE et son atteinte est RENDUE : un arbitre qui rendrait un nombre sans
+    dire qu'il n'a pas conclu serait pire que pas d'arbitre. Un pas non tranche ne compte alors ni
+    pour l'un ni pour l'autre.
+    """
+    n = 8
+    somme, replis = _le_chemin_du_pas(vol, a, b, n)
+    while replis and n < (1 << 24):
+        n *= 2
+        somme, replis = _le_chemin_du_pas(vol, a, b, n)
+    return somme, not replis
+
+
+def _le_deroulage_exact(phases, angles_vrais, centres=None, voxel_um=1.0, vol=None) -> dict:
+    """Le deroulage que l'ANGLE dicte, contre celui que la demi-feuille SUPPOSE.
+
+    ⚠⚠⚠ LE DEROULAGE DE `suivre` SUPPOSE CE QU'ON VOUDRAIT LUI DEMANDER. `d - round(d)` choisit
+    l'entier qui rend le pas le plus PETIT, donc il replie d'office tout pas qui franchirait plus
+    d'une demi-feuille — et « un pas a-t-il franchi plus d'une demi-feuille ? » devient une question
+    a laquelle sa propre reponse est non, par construction. Sa docstring le dit d'ailleurs comme une
+    HYPOTHESE : « les pas sont petits devant une feuille ».
+
+    ⭐⭐⭐⭐ ET L'HYPOTHESE N'EST PAS GARANTIE PAR LA GEOMETRIE. La phase vaut
+    `(u - r0)/pas + froissement/pas - theta/2pi` : sa SEULE coupure est en `theta`, et le pas
+    angulaire d'une marche vaut l'avance sur le rayon — de l'ordre du centieme de radian, donc
+    parfaitement non ambigu. L'entier a ajouter se LIT donc sur l'angle, il ne se devine pas sur la
+    phase. Les deux ne peuvent differer que la ou un pas franchit reellement plus d'une demi-feuille,
+    et c'est exactement ce qu'on veut compter.
+
+    ⚠ Rien n'est remplace : `derive_en_feuilles` reste le nombre de toutes les tranches anterieures,
+    et l'exact est publie A COTE. Deux reponses a une question ne valent que si l'une des deux est
+    DITE comme la mesure de l'autre.
+    """
+    if len(phases) < 2 or len(angles_vrais) != len(phases):
+        return {}
+    p_ = np.asarray(phases, dtype=np.float64)
+    a_ = np.asarray(angles_vrais, dtype=np.float64)
+    d_brut = np.diff(p_)
+    dth = np.diff(a_)
+    # ⚠ Le meme repliement que le compteur de tour, et pour la meme raison : un pas angulaire est
+    # minuscule devant π, donc son entier est sans ambiguite.
+    dth_u = (dth + np.pi) % (2.0 * np.pi) - np.pi
+    n_angle = np.round((dth - dth_u) / (2.0 * np.pi))
+    d_exact = d_brut + n_angle
+    d_replie = d_brut - np.round(d_brut)
+    # ⚠ Un pas est « replie a tort » quand les deux entiers different : c'est un ENONCE EXACT sur
+    # des entiers, jamais une comparaison de flottants a une tolerance.
+    desaccord = np.round(d_exact - d_replie).astype(np.int64)
+    saut_um = (np.linalg.norm(np.diff(np.asarray(centres, dtype=np.float64), axis=0), axis=1)
+               * float(voxel_um) if centres is not None and len(centres) == len(phases)
+               else None)
+    # ⭐⭐⭐⭐ ET LE JUGE : sur les pas ou les deux deroulages ne disent pas la meme chose, lequel
+    # la MATIERE soutient-elle ? La question ne se raisonne pas — ce depot a paye trois fois qu'une
+    # lecture du code y perde contre un instrument — donc elle se mesure, pas par pas, sur les seuls
+    # pas litigieux.
+    juge = {}
+    if vol is not None and centres is not None and len(centres) == len(phases):
+        litiges = np.nonzero(desaccord)[0]
+        if litiges.size:
+            paires = [_le_pas_mesure(vol, centres[i], centres[i + 1]) for i in litiges]
+            mesures = np.array([m for m, _c in paires], dtype=np.float64)
+            tranches = np.array([c for _m, c in paires], dtype=bool)
+            # ⚠⚠ UN PAS QUE L'ARBITRE N'A PAS TRANCHE NE COMPTE NI POUR L'UN NI POUR L'AUTRE.
+            pour_e = tranches & (np.abs(mesures - d_exact[litiges])
+                                 < np.abs(mesures - d_replie[litiges]))
+            pour_r = tranches & (np.abs(mesures - d_replie[litiges])
+                                 < np.abs(mesures - d_exact[litiges]))
+            juge = {
+                "pas_litigieux": int(litiges.size),
+                "litiges_non_tranches": int(np.count_nonzero(~tranches)),
+                "litiges_que_le_chemin_donne_a_lexact": int(np.count_nonzero(pour_e)),
+                "litiges_que_le_chemin_donne_au_replie": int(np.count_nonzero(pour_r)),
+                "plus_grand_pas_mesure_en_feuilles": round(float(np.max(np.abs(mesures))), 6),
+                # ⚠⚠ LES PAS QUE LE CHEMIN DONNE AU REPLIE SONT NOMMES, PAS SEULEMENT COMPTES. Un
+                # refus sans son etat est un fait sans diagnostic attache, et c'est ce qui a permis
+                # deux analyses fausses ailleurs dans ce depot. Ils sont rares par construction —
+                # les lister ne peut pas grossir le record.
+                "au_replie": [
+                    {"pas": int(litiges[i]), "mesure": round(float(mesures[i]), 6),
+                     # ⚠⚠ ET LA MEME MESURE A UN ECHANTILLONNAGE ECRASANT, parce qu'une
+                     # convergence qui sort trop tot rend deux fois le meme nombre FAUX et se
+                     # declare d'accord avec elle-meme. C'est le seul controle de l'arbitre.
+                     "tranche": bool(tranches[i]),
+                     "exact": round(float(d_exact[litiges[i]]), 6),
+                     "replie": round(float(d_replie[litiges[i]]), 6)}
+                    for i in range(litiges.size) if pour_r[i]]}
+    return {**juge,
+            # ⚠⚠ CE QU'UN PAS DEPLACE REELLEMENT LE CENTRE, en micrometres. C'est lui qui dit si
+            # l'hypothese du deroulage est plausible, et il ne se raisonne pas : l'avance borne la
+            # part TANGENTE du pas, jamais le recentrage des machoires.
+            **({"plus_grand_deplacement_um": round(float(np.max(saut_um)), 2),
+                "deplacement_median_um": round(float(np.median(saut_um)), 2)}
+               if saut_um is not None and saut_um.size else {}),
+            "derive_exacte_en_feuilles": round(float(np.sum(d_exact)), 4),
+            "pas_replies_a_tort": int(np.count_nonzero(desaccord)),
+            "feuilles_repliees_a_tort": round(float(np.sum(desaccord)), 4),
+            # ⚠⚠ Le pas le plus grand que le deroulage EXACT rende : c'est lui qui dit si
+            # l'hypothese « moins d'une demi-feuille » tient, et il ne peut pas etre lu sur la
+            # serie repliee, qui le borne a 0,5 par construction.
+            "plus_grand_pas_en_feuilles": round(float(np.max(np.abs(d_exact))), 6)}
 
 
 def un_depart(vol, angle_rad: float, rayon_mm: float, voxel_um: float, pas_um: float):
@@ -1740,6 +1908,68 @@ def verifier() -> int:
     v("⭐ une mâchoire coûte plus de cent fois moins que le tenseur",
       sans["machoire"]["lectures"] * 100 < sans["tenseur de structure"]["lectures"],
       f"{sans['machoire']['lectures']} contre {sans['tenseur de structure']['lectures']}")
+    print("\n— le déroulage suppose-t-il ce qu'on lui demande ? —")
+    # ⚠⚠⚠ UNE SERIE FABRIQUEE OU UN PAS FRANCHIT VRAIMENT PLUS D'UNE DEMI-FEUILLE. La phase perd
+    # 0,8 feuille en un pas ; l'angle, lui, ne bouge presque pas, donc il ne dicte AUCUN entier.
+    # Le repliement `d - round(d)` rend +0,2 et se trompe d'une feuille entiere.
+    ph_ = [0.0, -0.8, -1.6]
+    an_ = [0.0, 0.01, 0.02]
+    ex = _le_deroulage_exact(ph_, an_)
+    v("⭐⭐⭐⭐ le déroulage EXACT rend le pas que la phase a vraiment franchi",
+      ex["derive_exacte_en_feuilles"] == -1.6 and ex["plus_grand_pas_en_feuilles"] == 0.8,
+      f"{ex['derive_exacte_en_feuilles']} feuilles, plus grand pas "
+      f"{ex['plus_grand_pas_en_feuilles']}")
+    v("⭐⭐⭐ ... et il compte les pas que le repliement a pris à l'envers",
+      ex["pas_replies_a_tort"] == 2 and ex["feuilles_repliees_a_tort"] == -2.0,
+      f"{ex['pas_replies_a_tort']} pas, {ex['feuilles_repliees_a_tort']} feuilles")
+    # ⚠ Et quand l'angle DICTE l'entier — un tour franchi entre deux pas — les deux s'accordent.
+    ok_ = _le_deroulage_exact([0.0, 0.1, 0.2], [0.0, 0.01, 0.02])
+    v("⚠ un pas sous la demi-feuille ne fait AUCUN litige",
+      ok_["pas_replies_a_tort"] == 0
+      and ok_["derive_exacte_en_feuilles"] == round(0.2, 4))
+    v("⚠⚠ ... et sans série d'angles il n'y a pas de déroulage exact du tout, jamais un zéro",
+      _le_deroulage_exact([0.0, 0.1], []) == {})
+    # ⚠⚠ L'ARBITRE : sur la vraie fixture, un segment assez fin retrouve le pas que l'angle dicte.
+    from combien_de_pas_la_matiere_porte import (  # noqa: PLC0415
+        VolumeFabriqueEnSpiraleFroissee as _Spi)
+    nue2 = _matiere(_Spi, 0.0, 0.0, 0.0, LONGUEUR_DONDE_UM, RAYON_MM)
+    cy, cx = nue2.centre_yx_vx
+    r_vx = RAYON_MM * 1000.0 / voxel_um
+    a_ = np.array([2000.0, cy, cx + r_vx])
+    b_ = a_ + np.array([0.0, 0.0, 1.6 * _PAS() / voxel_um])
+    vrai = float(nue2.phase(b_.reshape(1, 3))[0]) - float(nue2.phase(a_.reshape(1, 3))[0])
+    mesure, tranche = _le_pas_mesure(nue2, a_, b_)
+    v("⭐⭐⭐⭐ l'arbitre retrouve un pas de plus d'une feuille, que le repliement écraserait",
+      abs(mesure - vrai) < 1e-9 and abs(mesure) > 1.0 and tranche
+      and abs(abs(vrai - round(vrai)) - abs(mesure)) > 0.5,
+      f"{mesure:.6f} feuille, le repliement dirait {vrai - round(vrai):.6f}")
+    # ⚠⚠ ET UN ECHANTILLONNAGE TROP GROSSIER REPLIE ENCORE : a DEUX sous-pas, chacun franchit 0,8
+    # feuille et se replie, exactement comme le pas entier. C'est pour ca que le nombre se DOUBLE
+    # jusqu'a l'accord plutot que de se poser — un nombre pose serait un seuil, et celui-ci se
+    # verifie lui-meme.
+    v("⚠⚠ le nombre d'échantillons se DOUBLE jusqu'à ce qu'AUCUN sous-pas ne soit replié",
+      _le_chemin_du_pas(nue2, a_, b_, 4096) == (mesure, 0)
+      and _le_chemin_du_pas(nue2, a_, b_, 2)[1] > 0
+      and abs(_le_chemin_du_pas(nue2, a_, b_, 2)[0] - mesure) > 1e-9,
+      f"à deux sous-pas le chemin replie {_le_chemin_du_pas(nue2, a_, b_, 2)[1]} sous-pas "
+      f"et rend {_le_chemin_du_pas(nue2, a_, b_, 2)[0]:.6f}")
+    # ⚠⚠⚠ ET LE CRITERE « DEUX ECHANTILLONNAGES S'ACCORDENT » EST FAUX, paye sur quatre vrais pas :
+    # deux echantillonnages trop grossiers replient LE MEME sous-pas, rendent deux fois le meme
+    # nombre faux, et se declarent d'accord. Ici, a 2 et a 4 sous-pas, la somme est la meme et
+    # FAUSSE — seul le compte de replis le dit.
+    # Douze feuilles en un segment : a 8 sous-pas chacun en franchit 1,5 et se replie a -0,5 ; a
+    # 16 chacun en franchit 0,75 et se replie a -0,25. Les deux somment -4, et les deux ont tort.
+    loin_ = a_ + np.array([0.0, 0.0, 12.0 * _PAS() / voxel_um])
+    vrai_loin = float(nue2.phase(loin_.reshape(1, 3))[0]) - float(nue2.phase(a_.reshape(1, 3))[0])
+    huit_, r8_ = _le_chemin_du_pas(nue2, a_, loin_, 8)
+    seize_, r16_ = _le_chemin_du_pas(nue2, a_, loin_, 16)
+    v("⭐⭐⭐⭐ deux échantillonnages peuvent s'ACCORDER sur un nombre FAUX — seul le compte de "
+      "replis les dénonce",
+      abs(huit_ - seize_) < 1e-9 and abs(huit_ - vrai_loin) > 1.0 and r8_ > 0 and r16_ > 0
+      and abs(_le_pas_mesure(nue2, a_, loin_)[0] - vrai_loin) < 1e-9,
+      f"{huit_:.6f} des deux côtés pour {r8_} et {r16_} replis, alors que le pas vaut "
+      f"{vrai_loin:.6f}")
+
     v("un écart de directions ne regarde pas leur signe",
       abs(_ecart_deg([0.0, 1.0, 0.0], [0.0, -1.0, 0.0])) < 1e-9)
 

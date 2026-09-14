@@ -3049,6 +3049,58 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 159 : LE DEROULAGE SUPPOSE CE QU'ON LUI DEMANDE, ET TROIS APPARIEMENTS
+    # L'IMPOSENT.
+    # (1) Un compte de litiges TRANCHES ne voyage jamais sans le compte de NON TRANCHES : le
+    # plafond de l'arbitre est declare, donc son atteinte doit l'etre aussi.
+    # (2) Un compte de marches TOUCHEES ne voyage jamais sans le nombre de marches DECIDABLES :
+    # « 54 » seul est un nombre, « 54 sur 170 » est une portee.
+    # (3) Et une reussite REPLIEE ne voyage jamais sans la reussite EXACTE : c'est le couple qui
+    # dit ce que la correction deplace, et une moitie seule se lirait comme un niveau.
+    dr = _source(racine, "le_deroulage_suppose_ce_quon_lui_demande.json")
+    if dr.exists():
+        d = json.loads(dr.read_text())
+
+        def dec159(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            a_ = j_.get("larbitre", {})
+            for cle, nom in (("litiges", "pas litigieux"),
+                             ("pour_lexact", "litiges pour le deroulage exact"),
+                             ("pour_le_replie", "litiges pour le deroulage replie"),
+                             ("non_tranches", "litiges non tranches"),
+                             ("marches_arbitrees", "marches arbitrees")):
+                if a_.get(cle) is not None:
+                    ajoute(f"{nom} de 159", int(a_[cle]), 0, dr.name)
+            for x in j_.get("par_regle", []):
+                q = f"de la regle « {x['regle']} » de 159"
+                for cle, nom in (("decidables", "marches decidables"),
+                                 ("marches_touchees", "marches touchees"),
+                                 ("pas_replies_a_tort", "pas replies a tort"),
+                                 ("reussites_repliees", "reussites au deroulage replie"),
+                                 ("reussites_exactes", "reussites au deroulage exact")):
+                    ajoute(f"{nom} {q}", int(x[cle]), 0, dr.name)
+                ajoute(f"ecart des reussites {q}", int(x["la_correction_deplace"]), 0, dr.name,
+                       signe=True)
+                ajoute(f"plus grand pas reel {q}", x["plus_grand_pas_en_feuilles"],
+                       dec159(x["plus_grand_pas_en_feuilles"], 6), dr.name)
+            # ⚠⚠ ON N'ENREGISTRE QUE CE QUE LE DOCUMENT PUBLIE : la portee est tablee matiere par
+            # matiere, TOUTES REGLES CONFONDUES, et jamais case par case.
+            par = {}
+            for c in d.get("portee", {}).get("cases", []):
+                e = par.setdefault(c["nom"], [0, 0, 0])
+                e[0] += int(c["marches_touchees"])
+                e[1] += int(c["decidables"])
+                e[2] += int(c["pas_replies_a_tort"])
+            for nom, (t, dec, ps) in par.items():
+                q = f"sur {nom} de 159"
+                ajoute(f"marches touchees {q}", t, 0, dr.name)
+                ajoute(f"marches decidables {q}", dec, 0, dr.name)
+                ajoute(f"pas replies a tort {q}", ps, 0, dr.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 158 : L'AUTOPSIE DE LA MATIERE DU ROULEAU, ET TROIS APPARIEMENTS
     # L'IMPOSENT.
     # (1) Un compte de « memes feuilles » ne voyage JAMAIS sans la PART DU TOUR de ces marches-la :
