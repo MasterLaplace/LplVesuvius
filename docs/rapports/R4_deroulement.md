@@ -1487,6 +1487,37 @@ dise — c'est **l'œil** qui l'a vu sur la figure de cette tranche, pas la batt
 correctif a été **mesurée avant d'être écrite** : une seule figure du dépôt le franchissait, celle
 de `158`, dont l'interligne et la hauteur de graphe sont désormais **dérivés** du nombre de bras.
 
+**`162` · 2026-09-15 · la pose dit-elle quand elle a sauté ?**
+`161` conclut que les mâchoires s'accrochent au **mauvais interstice à la pose**, et `155` ne traite
+ce défaut qu'au niveau des **appuis**. La porte `R4-P29` demande s'il existe un énoncé **exact**,
+sans seuil, qui refuse une pose entière ; trois sont mis à l'épreuve, tous déjà dans le vocabulaire
+du dépôt. Deux regardent **où le centre est allé** — plus d'une demi-épaisseur nominale, ou plus
+d'une demi-épaisseur au-delà de la médiane des pas de la marche. Le troisième regarde **si la
+mâchoire est d'accord avec elle-même** : ses appuis tiennent-ils le même interstice. ⭐⭐⭐⭐ **La
+pose le dit, et ce n'est pas son déplacement qui le dit.** Sur la pince de `144`, l'étalement des
+appuis voit **0,9196** des changements de feuille contre **0,3264** pour l'absolu et **0,2648** pour
+le relatif ; sur une mâchoire seule avec rejet, **0,3717** contre **0,0352** et **0,0039** —
+`R4-F151`. Ce ne sont pas deux réglages d'un même instrument mais **deux quantités différentes**, et
+une seule porte l'information. ✗ **Mais aucun énoncé ne domine**, sur aucun des deux bras :
+l'étalement paie sa vue d'une précision de **0,397** sur la pince, donc trois refus sur cinq
+seraient à tort — `R4-F152`. La victoire **jointe** que le dépôt exige depuis `147` n'est pas
+acquise, et la mesure le **dit** plutôt que d'élire le moins mauvais. ⭐⭐⭐⭐ **Le cas qui tranche est
+la spirale écrasée** : sur **47888** pas et **89** changements de feuille, les deux énoncés de
+déplacement refusent **zéro** pose — le centre n'y franchit jamais une demi-épaisseur, donc ils
+n'ont pas raté les sauts, ils n'ont **rien tenté** — pendant que la pose se contredit sur
+**0,6517** d'entre eux, et c'est la seule matière où un énoncé domine — `R4-F153`. ⭐⭐⭐ **Le
+contrôle a deux moitiés et il faut les deux** : sur la spirale nue, **0** saut sur **46068** pas ET
+**0** pose refusée sous les trois règles. La première est `R4-F145` ; la seconde est neuve, et sans
+elle une règle pourrait mesurer son propre bruit. ⚠ Pièges payés : un **verdict incapable d'être
+positif**, parce qu'exiger la domination sur *tous* les autres la rendait impossible dès qu'un
+énoncé était inerte — les inertes sont désormais **nommés** et écartés, une abstention n'étant pas
+une égalité ; une **sonde qui ne mordait pas** et qui a révélé que rien n'assertait la fonction
+d'agrégation, celle-là même qui produit les chiffres publiés ; et une **figure qui écrivait deux
+nombres pour une mesure**, `0.920` dans son tableau et `0.9196` dans sa bande, parce qu'elle
+ré-arrondissait ce que le producteur avait déjà arrondi. ⚠⚠ Ce que la tranche laisse est un
+**prix** : on sait que la pose dit qu'elle a sauté et à quel taux, on ne sait pas si refuser à ce
+taux achète des marches ou les tue.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

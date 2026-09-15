@@ -1,0 +1,1655 @@
+{
+ "interrogatoire": {
+  "decidable": true,
+  "cases": [
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7607,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 0.488,
+    "etalement_median_um": 0.865
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7597,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 4.888,
+    "etalement_median_um": 19.093
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7592,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 6.414,
+    "etalement_median_um": 26.587
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 8578,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 0.304,
+    "etalement_median_um": 0.763
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7802,
+    "decidable": true,
+    "absolu": {
+     "sauts": 4,
+     "vus": 0,
+     "manques": 4,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 4,
+     "vus": 0,
+     "manques": 4,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 4,
+     "vus": 3,
+     "manques": 1,
+     "refus_a_tort": 7,
+     "poses_refusees": 10,
+     "rappel": 0.75,
+     "precision": 0.3
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 4.273,
+    "etalement_median_um": 16.758
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 6994,
+    "decidable": true,
+    "absolu": {
+     "sauts": 84,
+     "vus": 0,
+     "manques": 84,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 84,
+     "vus": 0,
+     "manques": 84,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 84,
+     "vus": 54,
+     "manques": 30,
+     "refus_a_tort": 28,
+     "poses_refusees": 82,
+     "rappel": 0.6429,
+     "precision": 0.6585
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 5.681,
+    "etalement_median_um": 23.769
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7596,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 7.002,
+    "etalement_median_um": 14.794
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7441,
+    "decidable": true,
+    "absolu": {
+     "sauts": 80,
+     "vus": 44,
+     "manques": 36,
+     "refus_a_tort": 13,
+     "poses_refusees": 57,
+     "rappel": 0.55,
+     "precision": 0.7719
+    },
+    "relatif": {
+     "sauts": 80,
+     "vus": 35,
+     "manques": 45,
+     "refus_a_tort": 7,
+     "poses_refusees": 42,
+     "rappel": 0.4375,
+     "precision": 0.8333
+    },
+    "etalement": {
+     "sauts": 80,
+     "vus": 78,
+     "manques": 2,
+     "refus_a_tort": 218,
+     "poses_refusees": 296,
+     "rappel": 0.975,
+     "precision": 0.2635
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 8.644,
+    "etalement_median_um": 24.064
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 6933,
+    "decidable": true,
+    "absolu": {
+     "sauts": 248,
+     "vus": 118,
+     "manques": 130,
+     "refus_a_tort": 52,
+     "poses_refusees": 170,
+     "rappel": 0.4758,
+     "precision": 0.6941
+    },
+    "relatif": {
+     "sauts": 248,
+     "vus": 105,
+     "manques": 143,
+     "refus_a_tort": 37,
+     "poses_refusees": 142,
+     "rappel": 0.4234,
+     "precision": 0.7394
+    },
+    "etalement": {
+     "sauts": 248,
+     "vus": 241,
+     "manques": 7,
+     "refus_a_tort": 488,
+     "poses_refusees": 729,
+     "rappel": 0.9718,
+     "precision": 0.3306
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 10.117,
+    "etalement_median_um": 31.658
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 6976,
+    "decidable": true,
+    "absolu": {
+     "sauts": 20,
+     "vus": 7,
+     "manques": 13,
+     "refus_a_tort": 1,
+     "poses_refusees": 8,
+     "rappel": 0.35,
+     "precision": 0.875
+    },
+    "relatif": {
+     "sauts": 20,
+     "vus": 4,
+     "manques": 16,
+     "refus_a_tort": 1,
+     "poses_refusees": 5,
+     "rappel": 0.2,
+     "precision": 0.8
+    },
+    "etalement": {
+     "sauts": 20,
+     "vus": 20,
+     "manques": 0,
+     "refus_a_tort": 8,
+     "poses_refusees": 28,
+     "rappel": 1.0,
+     "precision": 0.7143
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 6.002,
+    "etalement_median_um": 11.605
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 5959,
+    "decidable": true,
+    "absolu": {
+     "sauts": 63,
+     "vus": 3,
+     "manques": 60,
+     "refus_a_tort": 2,
+     "poses_refusees": 5,
+     "rappel": 0.0476,
+     "precision": 0.6
+    },
+    "relatif": {
+     "sauts": 63,
+     "vus": 2,
+     "manques": 61,
+     "refus_a_tort": 1,
+     "poses_refusees": 3,
+     "rappel": 0.0317,
+     "precision": 0.6667
+    },
+    "etalement": {
+     "sauts": 63,
+     "vus": 61,
+     "manques": 2,
+     "refus_a_tort": 99,
+     "poses_refusees": 160,
+     "rappel": 0.9683,
+     "precision": 0.3812
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 7.391,
+    "etalement_median_um": 20.873
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 5457,
+    "decidable": true,
+    "absolu": {
+     "sauts": 559,
+     "vus": 166,
+     "manques": 393,
+     "refus_a_tort": 43,
+     "poses_refusees": 209,
+     "rappel": 0.297,
+     "precision": 0.7943
+    },
+    "relatif": {
+     "sauts": 559,
+     "vus": 141,
+     "manques": 418,
+     "refus_a_tort": 25,
+     "poses_refusees": 166,
+     "rappel": 0.2522,
+     "precision": 0.8494
+    },
+    "etalement": {
+     "sauts": 559,
+     "vus": 501,
+     "manques": 58,
+     "refus_a_tort": 779,
+     "poses_refusees": 1280,
+     "rappel": 0.8962,
+     "precision": 0.3914
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 8.304,
+    "etalement_median_um": 32.29
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 0.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 10,
+    "marches_sans_un_pas": 1,
+    "pas_examines": 915,
+    "decidable": true,
+    "absolu": {
+     "sauts": 188,
+     "vus": 83,
+     "manques": 105,
+     "refus_a_tort": 53,
+     "poses_refusees": 136,
+     "rappel": 0.4415,
+     "precision": 0.6103
+    },
+    "relatif": {
+     "sauts": 188,
+     "vus": 62,
+     "manques": 126,
+     "refus_a_tort": 22,
+     "poses_refusees": 84,
+     "rappel": 0.3298,
+     "precision": 0.7381
+    },
+    "etalement": {
+     "sauts": 188,
+     "vus": 177,
+     "manques": 11,
+     "refus_a_tort": 358,
+     "poses_refusees": 535,
+     "rappel": 0.9415,
+     "precision": 0.3308
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 17.642,
+    "etalement_median_um": 55.928
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 8.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 10,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 1202,
+    "decidable": true,
+    "absolu": {
+     "sauts": 442,
+     "vus": 174,
+     "manques": 268,
+     "refus_a_tort": 64,
+     "poses_refusees": 238,
+     "rappel": 0.3937,
+     "precision": 0.7311
+    },
+    "relatif": {
+     "sauts": 442,
+     "vus": 139,
+     "manques": 303,
+     "refus_a_tort": 40,
+     "poses_refusees": 179,
+     "rappel": 0.3145,
+     "precision": 0.7765
+    },
+    "etalement": {
+     "sauts": 442,
+     "vus": 432,
+     "manques": 10,
+     "refus_a_tort": 494,
+     "poses_refusees": 926,
+     "rappel": 0.9774,
+     "precision": 0.4665
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 13.082,
+    "etalement_median_um": 123.447
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 16.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 10,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 981,
+    "decidable": true,
+    "absolu": {
+     "sauts": 389,
+     "vus": 83,
+     "manques": 306,
+     "refus_a_tort": 52,
+     "poses_refusees": 135,
+     "rappel": 0.2134,
+     "precision": 0.6148
+    },
+    "relatif": {
+     "sauts": 389,
+     "vus": 62,
+     "manques": 327,
+     "refus_a_tort": 33,
+     "poses_refusees": 95,
+     "rappel": 0.1594,
+     "precision": 0.6526
+    },
+    "etalement": {
+     "sauts": 389,
+     "vus": 343,
+     "manques": 46,
+     "refus_a_tort": 422,
+     "poses_refusees": 765,
+     "rappel": 0.8817,
+     "precision": 0.4484
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 9.537,
+    "etalement_median_um": 102.035
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7674,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 0.48,
+    "etalement_median_um": 0.851
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7795,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 6.577,
+    "etalement_median_um": 14.653
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7803,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 8.633,
+    "etalement_median_um": 20.538
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 8645,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 0.3,
+    "etalement_median_um": 0.529
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7925,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 5.813,
+    "etalement_median_um": 12.727
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7944,
+    "decidable": true,
+    "absolu": {
+     "sauts": 1,
+     "vus": 0,
+     "manques": 1,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 1,
+     "vus": 0,
+     "manques": 1,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 1,
+     "vus": 1,
+     "manques": 0,
+     "refus_a_tort": 1,
+     "poses_refusees": 2,
+     "rappel": 1.0,
+     "precision": 0.5
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 7.691,
+    "etalement_median_um": 18.184
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7792,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 9.049,
+    "etalement_median_um": 10.454
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7799,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 10.645,
+    "etalement_median_um": 17.307
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7814,
+    "decidable": true,
+    "absolu": {
+     "sauts": 2,
+     "vus": 0,
+     "manques": 2,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 2,
+     "vus": 0,
+     "manques": 2,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 2,
+     "vus": 1,
+     "manques": 1,
+     "refus_a_tort": 6,
+     "poses_refusees": 7,
+     "rappel": 0.5,
+     "precision": 0.1429
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 11.651,
+    "etalement_median_um": 22.661
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 7977,
+    "decidable": true,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 7.616,
+    "etalement_median_um": 8.59
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 8259,
+    "decidable": true,
+    "absolu": {
+     "sauts": 41,
+     "vus": 0,
+     "manques": 41,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 41,
+     "vus": 0,
+     "manques": 41,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 41,
+     "vus": 27,
+     "manques": 14,
+     "refus_a_tort": 2,
+     "poses_refusees": 29,
+     "rappel": 0.6585,
+     "precision": 0.931
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 8.99,
+    "etalement_median_um": 15.693
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 9528,
+    "decidable": true,
+    "absolu": {
+     "sauts": 130,
+     "vus": 8,
+     "manques": 122,
+     "refus_a_tort": 0,
+     "poses_refusees": 8,
+     "rappel": 0.0615,
+     "precision": 1.0
+    },
+    "relatif": {
+     "sauts": 130,
+     "vus": 3,
+     "manques": 127,
+     "refus_a_tort": 0,
+     "poses_refusees": 3,
+     "rappel": 0.0231,
+     "precision": 1.0
+    },
+    "etalement": {
+     "sauts": 130,
+     "vus": 67,
+     "manques": 63,
+     "refus_a_tort": 34,
+     "poses_refusees": 101,
+     "rappel": 0.5154,
+     "precision": 0.6634
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 10.53,
+    "etalement_median_um": 19.876
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 0.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 1173,
+    "decidable": true,
+    "absolu": {
+     "sauts": 81,
+     "vus": 7,
+     "manques": 74,
+     "refus_a_tort": 3,
+     "poses_refusees": 10,
+     "rappel": 0.0864,
+     "precision": 0.7
+    },
+    "relatif": {
+     "sauts": 81,
+     "vus": 2,
+     "manques": 79,
+     "refus_a_tort": 0,
+     "poses_refusees": 2,
+     "rappel": 0.0247,
+     "precision": 1.0
+    },
+    "etalement": {
+     "sauts": 81,
+     "vus": 33,
+     "manques": 48,
+     "refus_a_tort": 31,
+     "poses_refusees": 64,
+     "rappel": 0.4074,
+     "precision": 0.5156
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 17.455,
+    "etalement_median_um": 20.853
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 8.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 12,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 18223,
+    "decidable": true,
+    "absolu": {
+     "sauts": 2157,
+     "vus": 77,
+     "manques": 2080,
+     "refus_a_tort": 68,
+     "poses_refusees": 145,
+     "rappel": 0.0357,
+     "precision": 0.531
+    },
+    "relatif": {
+     "sauts": 2157,
+     "vus": 9,
+     "manques": 2148,
+     "refus_a_tort": 0,
+     "poses_refusees": 9,
+     "rappel": 0.0042,
+     "precision": 1.0
+    },
+    "etalement": {
+     "sauts": 2157,
+     "vus": 779,
+     "manques": 1378,
+     "refus_a_tort": 869,
+     "poses_refusees": 1648,
+     "rappel": 0.3611,
+     "precision": 0.4727
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 22.797,
+    "etalement_median_um": 26.999
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 16.0,
+    "departs": 12,
+    "marches": 12,
+    "decidables": 11,
+    "marches_sans_un_pas": 0,
+    "pas_examines": 21122,
+    "decidable": true,
+    "absolu": {
+     "sauts": 2952,
+     "vus": 97,
+     "manques": 2855,
+     "refus_a_tort": 51,
+     "poses_refusees": 148,
+     "rappel": 0.0329,
+     "precision": 0.6554
+    },
+    "relatif": {
+     "sauts": 2952,
+     "vus": 7,
+     "manques": 2945,
+     "refus_a_tort": 0,
+     "poses_refusees": 7,
+     "rappel": 0.0024,
+     "precision": 1.0
+    },
+    "etalement": {
+     "sauts": 2952,
+     "vus": 1086,
+     "manques": 1866,
+     "refus_a_tort": 1135,
+     "poses_refusees": 2221,
+     "rappel": 0.3679,
+     "precision": 0.489
+    },
+    "poses_sans_etalement_lisible": 0,
+    "recentrage_median_um": 24.262,
+    "etalement_median_um": 30.676
+   }
+  ],
+  "bras": [
+   "la pince de `144`",
+   "une mâchoire avec rejet"
+  ],
+  "enonces": [
+   "absolu",
+   "relatif",
+   "etalement"
+  ],
+  "bruits": [
+   0.0,
+   8.0,
+   16.0
+  ],
+  "departs": 12
+ },
+ "juger": {
+  "decidable": true,
+  "par_matiere": [
+   {
+    "nom": "spirale nue",
+    "cases": 6,
+    "cases_decidables": 6,
+    "decidables": 72,
+    "pas_examines": 46068,
+    "poses_sans_etalement_lisible": 0,
+    "absolu": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 0,
+     "vus": 0,
+     "manques": 0,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": null,
+     "precision": null
+    },
+    "recentrage_median_um": 5.651,
+    "etalement_median_um": 16.873
+   },
+   {
+    "nom": "spirale écrasée",
+    "cases": 6,
+    "cases_decidables": 6,
+    "decidables": 68,
+    "pas_examines": 47888,
+    "poses_sans_etalement_lisible": 0,
+    "absolu": {
+     "sauts": 89,
+     "vus": 0,
+     "manques": 89,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "relatif": {
+     "sauts": 89,
+     "vus": 0,
+     "manques": 89,
+     "refus_a_tort": 0,
+     "poses_refusees": 0,
+     "rappel": 0.0,
+     "precision": null
+    },
+    "etalement": {
+     "sauts": 89,
+     "vus": 58,
+     "manques": 31,
+     "refus_a_tort": 36,
+     "poses_refusees": 94,
+     "rappel": 0.6517,
+     "precision": 0.617
+    },
+    "recentrage_median_um": 4.977,
+    "etalement_median_um": 14.742
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "decidables": 72,
+    "pas_examines": 45375,
+    "poses_sans_etalement_lisible": 0,
+    "absolu": {
+     "sauts": 330,
+     "vus": 162,
+     "manques": 168,
+     "refus_a_tort": 65,
+     "poses_refusees": 227,
+     "rappel": 0.4909,
+     "precision": 0.7137
+    },
+    "relatif": {
+     "sauts": 330,
+     "vus": 140,
+     "manques": 190,
+     "refus_a_tort": 44,
+     "poses_refusees": 184,
+     "rappel": 0.4242,
+     "precision": 0.7609
+    },
+    "etalement": {
+     "sauts": 330,
+     "vus": 320,
+     "manques": 10,
+     "refus_a_tort": 712,
+     "poses_refusees": 1032,
+     "rappel": 0.9697,
+     "precision": 0.3101
+    },
+    "recentrage_median_um": 9.583,
+    "etalement_median_um": 19.984
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "decidables": 66,
+    "pas_examines": 44156,
+    "poses_sans_etalement_lisible": 0,
+    "absolu": {
+     "sauts": 813,
+     "vus": 184,
+     "manques": 629,
+     "refus_a_tort": 46,
+     "poses_refusees": 230,
+     "rappel": 0.2263,
+     "precision": 0.8
+    },
+    "relatif": {
+     "sauts": 813,
+     "vus": 150,
+     "manques": 663,
+     "refus_a_tort": 27,
+     "poses_refusees": 177,
+     "rappel": 0.1845,
+     "precision": 0.8475
+    },
+    "etalement": {
+     "sauts": 813,
+     "vus": 676,
+     "manques": 137,
+     "refus_a_tort": 922,
+     "poses_refusees": 1598,
+     "rappel": 0.8315,
+     "precision": 0.423
+    },
+    "recentrage_median_um": 7.96,
+    "etalement_median_um": 17.785
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "decidables": 64,
+    "pas_examines": 43616,
+    "poses_sans_etalement_lisible": 0,
+    "absolu": {
+     "sauts": 6209,
+     "vus": 521,
+     "manques": 5688,
+     "refus_a_tort": 291,
+     "poses_refusees": 812,
+     "rappel": 0.0839,
+     "precision": 0.6416
+    },
+    "relatif": {
+     "sauts": 6209,
+     "vus": 281,
+     "manques": 5928,
+     "refus_a_tort": 95,
+     "poses_refusees": 376,
+     "rappel": 0.0453,
+     "precision": 0.7473
+    },
+    "etalement": {
+     "sauts": 6209,
+     "vus": 2850,
+     "manques": 3359,
+     "refus_a_tort": 3309,
+     "poses_refusees": 6159,
+     "rappel": 0.459,
+     "precision": 0.4627
+    },
+    "recentrage_median_um": 17.548,
+    "etalement_median_um": 43.302
+   }
+  ],
+  "par_bras": [
+   {
+    "nom": "la pince de `144`",
+    "cases": 15,
+    "cases_decidables": 15,
+    "decidables": 169,
+    "pas_examines": 89630,
+    "poses_sans_etalement_lisible": 0,
+    "absolu": {
+     "sauts": 2077,
+     "vus": 678,
+     "manques": 1399,
+     "refus_a_tort": 280,
+     "poses_refusees": 958,
+     "rappel": 0.3264,
+     "precision": 0.7077
+    },
+    "relatif": {
+     "sauts": 2077,
+     "vus": 550,
+     "manques": 1527,
+     "refus_a_tort": 166,
+     "poses_refusees": 716,
+     "rappel": 0.2648,
+     "precision": 0.7682
+    },
+    "etalement": {
+     "sauts": 2077,
+     "vus": 1910,
+     "manques": 167,
+     "refus_a_tort": 2901,
+     "poses_refusees": 4811,
+     "rappel": 0.9196,
+     "precision": 0.397
+    },
+    "recentrage_median_um": 7.002,
+    "etalement_median_um": 23.769
+   },
+   {
+    "nom": "une mâchoire avec rejet",
+    "cases": 15,
+    "cases_decidables": 15,
+    "decidables": 173,
+    "pas_examines": 137473,
+    "poses_sans_etalement_lisible": 0,
+    "absolu": {
+     "sauts": 5364,
+     "vus": 189,
+     "manques": 5175,
+     "refus_a_tort": 122,
+     "poses_refusees": 311,
+     "rappel": 0.0352,
+     "precision": 0.6077
+    },
+    "relatif": {
+     "sauts": 5364,
+     "vus": 21,
+     "manques": 5343,
+     "refus_a_tort": 0,
+     "poses_refusees": 21,
+     "rappel": 0.0039,
+     "precision": 1.0
+    },
+    "etalement": {
+     "sauts": 5364,
+     "vus": 1994,
+     "manques": 3370,
+     "refus_a_tort": 2078,
+     "poses_refusees": 4072,
+     "rappel": 0.3717,
+     "precision": 0.4897
+    },
+    "recentrage_median_um": 8.99,
+    "etalement_median_um": 17.307
+   }
+  ],
+  "tout": {
+   "nom": "tout",
+   "cases": 30,
+   "cases_decidables": 30,
+   "decidables": 342,
+   "pas_examines": 227103,
+   "poses_sans_etalement_lisible": 0,
+   "absolu": {
+    "sauts": 7441,
+    "vus": 867,
+    "manques": 6574,
+    "refus_a_tort": 402,
+    "poses_refusees": 1269,
+    "rappel": 0.1165,
+    "precision": 0.6832
+   },
+   "relatif": {
+    "sauts": 7441,
+    "vus": 571,
+    "manques": 6870,
+    "refus_a_tort": 166,
+    "poses_refusees": 737,
+    "rappel": 0.0767,
+    "precision": 0.7748
+   },
+   "etalement": {
+    "sauts": 7441,
+    "vus": 3904,
+    "manques": 3537,
+    "refus_a_tort": 4979,
+    "poses_refusees": 8883,
+    "rappel": 0.5247,
+    "precision": 0.4395
+   },
+   "recentrage_median_um": 7.998,
+   "etalement_median_um": 19.485
+  },
+  "le_controle_de_la_spirale_nue": {
+   "nom": "spirale nue",
+   "sauts": 0,
+   "poses_refusees": {
+    "absolu": 0,
+    "relatif": 0,
+    "etalement": 0
+   },
+   "pas_examines": 46068,
+   "il_est_vide": true
+  },
+  "le_dominant_par_bras": {
+   "la pince de `144`": null,
+   "une mâchoire avec rejet": null
+  },
+  "les_inertes_par_bras": {
+   "la pince de `144`": [],
+   "une mâchoire avec rejet": []
+  },
+  "le_dominant_par_matiere": {
+   "spirale nue": null,
+   "spirale écrasée": "etalement",
+   "spirale froissée 42.4 µm": null,
+   "spirale écrasée et froissée 42.4 µm": null,
+   "spirale écrasée et froissée 100 µm": null
+  },
+  "les_inertes_par_matiere": {
+   "spirale nue": [],
+   "spirale écrasée": [
+    "absolu",
+    "relatif"
+   ],
+   "spirale froissée 42.4 µm": [],
+   "spirale écrasée et froissée 42.4 µm": [],
+   "spirale écrasée et froissée 100 µm": []
+  },
+  "le_meilleur_rappel_par_bras": {
+   "la pince de `144`": "etalement",
+   "une mâchoire avec rejet": "etalement"
+  }
+ }
+}

@@ -1462,6 +1462,8 @@ run "fluage ou sauts"        uv run python "$ROOT/src/nappe/le_fluage_ou_les_sau
 run "figure fluage ou sauts" uv run python "$ROOT/src/figures/figure_le_fluage_ou_les_sauts.py" --verifier
 run "de quoi un pas saute"  uv run python "$ROOT/src/nappe/de_quoi_un_pas_qui_saute_est_il_fait.py" --verifier
 run "figure un pas saute"   uv run python "$ROOT/src/figures/figure_de_quoi_un_pas_qui_saute_est_il_fait.py" --verifier
+run "la pose dit le saut"    uv run python "$ROOT/src/nappe/la_pose_dit_elle_quand_elle_a_saute.py" --verifier
+run "figure la pose dit"     uv run python "$ROOT/src/figures/figure_la_pose_dit_elle_quand_elle_a_saute.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -3049,6 +3049,49 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 162 : LA POSE DIT-ELLE QU'ELLE A SAUTE, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un RAPPEL ne voyage jamais sans sa PRECISION : un rappel seul est satisfait par une regle
+    # qui refuse toutes les poses, donc le publier seul serait publier la moitie qui flatte.
+    # (2) Un compte de sauts VUS ne voyage jamais sans le nombre de sauts : « 1910 » seul est un
+    # nombre, « 1910 sur 2077 » est une portee.
+    # (3) Et un compte de poses REFUSEES du controle ne voyage jamais sans le nombre de pas
+    # examines : c'est le couple qui distingue « la regle se tait » de « rien n'a marche ».
+    pd = _source(racine, "la_pose_dit_elle_quand_elle_a_saute.json")
+    if pd.exists():
+        d = json.loads(pd.read_text())
+
+        def dec162(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            for cle, nom in (("sauts", "sauts du controle"),
+                             ("pas_examines", "pas examines du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 162", int(c_[cle]), 0, pd.name)
+            t_ = j_.get("tout", {})
+            if t_.get("pas_examines") is not None:
+                ajoute("pas examines de 162", int(t_["pas_examines"]), 0, pd.name)
+            # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : il donne les taux par BRAS et par
+            # MATIERE, les comptes de sauts et de poses refusees, et rien d'autre.
+            for groupe in (j_.get("par_bras", []) + j_.get("par_matiere", [])):
+                q = f"sur {groupe['nom']} de 162"
+                if groupe.get("pas_examines") is not None:
+                    ajoute(f"pas examines {q}", int(groupe["pas_examines"]), 0, pd.name)
+                for regle in ("absolu", "relatif", "etalement"):
+                    t = groupe.get(regle)
+                    if not t:
+                        continue
+                    ajoute(f"sauts de l'{regle} {q}", int(t["sauts"]), 0, pd.name)
+                    ajoute(f"sauts vus par l'{regle} {q}", int(t["vus"]), 0, pd.name)
+                    ajoute(f"poses refusees par l'{regle} {q}", int(t["poses_refusees"]), 0,
+                           pd.name)
+                    for cle, nom in (("rappel", "rappel"), ("precision", "precision")):
+                        if t.get(cle) is not None:
+                            ajoute(f"{nom} de l'{regle} {q}", t[cle], dec162(t[cle], 4), pd.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 161 : DE QUOI UN PAS QUI SAUTE EST FAIT, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un compte de marches ou une moitie SEPARE ne voyage jamais sans le nombre de marches
     # APPARIABLES : « 41 » seul est un nombre, « 41 sur 54 » est un partage.

@@ -634,6 +634,12 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     # ⚠ Un repere PAR PAS, donc un de moins que de centres : c'est la direction le long de laquelle
     # le pas a ete fait, pas celle ou il arrive.
     reperes: list = []
+    # ⭐⭐⭐⭐ LA COHERENCE INTERNE DE LA POSE, un nombre par pas. `161` conclut que les machoires
+    # s'accrochent au MAUVAIS INTERSTICE a la pose ; si c'est vrai, leurs appuis doivent se
+    # contredire ENTRE EUX au moment ou ca arrive. C'est une quantite que le marcheur possede
+    # deja — l'etalement des profondeurs de ses propres appuis — et qui ne regarde pas du tout
+    # ou le centre est alle. Deux axes independants, donc deux chances differentes de voir.
+    etalements: list = []
     rotations: list[float] = []
     memoires: list[float] = []
     taux_lus: list[float] = []
@@ -788,6 +794,13 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         if derouler_exactement:
             reperes.append((np.asarray(tan, dtype=np.float64).copy(),
                             np.asarray(etat["normale"], dtype=np.float64).copy()))
+            # ⚠ L'etalement de la pose OU L'ON ARRIVE, jamais de celle d'ou l'on part : c'est
+            # celle-la qu'un rejet refuserait. ⚠ Et une machoire absente ne compte pas comme un
+            # etalement nul — elle ne contribue simplement pas.
+            larges = [max(m["ecarts_um"]) - min(m["ecarts_um"])
+                      for m in (pris.get("haut"), pris.get("bas"))
+                      if m is not None and len(m.get("ecarts_um", ())) > 1]
+            etalements.append(max(larges) if larges else None)
         tan, etat = nouvelle_tan, pris
         phases.append(float(vol.phase(np.asarray(etat["centre_vx"]).reshape(1, 3))[0]))
         if derouler_exactement:
@@ -846,7 +859,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             # de feuille la ou la matiere est identique. C'est le meme `ph` dont les bouts donnent
             # `derive_en_feuilles`, pas un second calcul.
             **(_le_deroulage_exact(phases, angles_vrais, centres, voxel_um,
-                                   vol if juger_le_deroulage else None, reperes)
+                                   vol if juger_le_deroulage else None, reperes,
+                                   epaisseur_nominale_um, etalements)
                if derouler_exactement else {}),
             "lectures": int(vol.lectures)}
 
@@ -896,7 +910,8 @@ def _le_pas_mesure(vol, a, b) -> tuple[float, bool]:
     return somme, not replis
 
 
-def _les_deux_moities_du_pas(centres, reperes, voxel_um, saute) -> dict:
+def _les_deux_moities_du_pas(centres, reperes, voxel_um, saute,
+                             epaisseur_nominale_um=None, etalements=None) -> dict:
     """La part du pas qui AVANCE et celle qui RECENTRE, sur les pas qui sautent et sur les autres.
 
     ⭐⭐⭐⭐ UN PAS A DEUX MOITIES ET UNE SEULE EST BORNEE. L'avance vaut au plus `avance_um` le long
@@ -925,6 +940,54 @@ def _les_deux_moities_du_pas(centres, reperes, voxel_um, saute) -> dict:
     avance = np.abs(np.einsum("ij,ij->i", d, t))
     recentrage = np.abs(np.einsum("ij,ij->i", d, n))
     out = {}
+    # ⭐⭐⭐⭐ CE QUE LE MARCHEUR MESURE CONTRE CE QUE LA FIXTURE SAIT. Un marcheur ne peut pas lire
+    # la phase : il ne connait que le deplacement de son centre. La question de `R4-P29` est donc
+    # exactement celle-ci — ce deplacement, SEUL, suffit-il a voir qu'on vient de changer de
+    # feuille ? Les quatre comptes ci-dessous sont une table de confusion, sans un seul seuil
+    # choisi : « la pose a change d'interstice » veut dire « le centre a bouge de plus d'une DEMI
+    # epaisseur le long de la normale », qui est l'enonce que le depot emploie deja pour dire que
+    # deux appuis ne tiennent pas le meme interstice.
+    # ⚠⚠ ET LA BORNE EST STRICTE, comme celle de la demi-feuille de `160` : un deplacement
+    # d'exactement une demi-epaisseur n'a PAS change d'interstice.
+    if epaisseur_nominale_um is not None:
+        demi = 0.5 * float(epaisseur_nominale_um)
+        # ⭐⭐⭐⭐ DEUX ENONCES EXACTS, ET LE DEPOT LES EMPLOIE DEJA TOUS LES DEUX.
+        # L'ABSOLU est celui de `142`, `155` et `160` contre le NOMINAL : « plus d'une demi
+        # epaisseur ». Le RELATIF est celui que `155` emploie pour un appui aberrant : « plus
+        # d'une demi epaisseur de la MEDIANE de sa machoire » — ici, la mediane des pas de CETTE
+        # marche. Aucun des deux n'est un seuil choisi ; ce sont deux façons de dire « le meme
+        # interstice », l'une contre la geometrie nominale, l'autre contre ce que la marche fait
+        # d'habitude.
+        # ⚠⚠ ET LE RELATIF N'EST PAS CIRCULAIRE : il DETECTE, il ne corrige pas, donc la mediane
+        # qu'il emploie n'est enflee par aucune de ses propres decisions. C'est precisement le
+        # piege que `R4-P29` nomme, et c'est pourquoi il faut le dire ici plutot que l'esperer.
+        # ⚠⚠ Les deux bornes sont STRICTES, comme la demi-feuille de `160`.
+        regles = {"absolu": recentrage > demi}
+        if recentrage.size:
+            regles["relatif"] = recentrage > (float(np.median(recentrage)) + demi)
+        # ⭐⭐⭐⭐ LE TROISIEME ENONCE, ET IL NE REGARDE PAS LE DEPLACEMENT DU TOUT : « les appuis
+        # de cette pose ne tiennent pas le meme interstice », c'est-a-dire que l'etalement de
+        # leurs profondeurs depasse une demi epaisseur. C'est l'enonce de `155`, applique a la
+        # machoire ENTIERE au lieu d'un appui a la fois, et c'est la cohesion interne de la pose
+        # plutot que son mouvement. ⚠ Une pose sans etalement lisible ne refuse RIEN : elle ne
+        # peut pas se contredire, donc elle ne compte pas comme un refus.
+        if etalements is not None and len(etalements) == saute.size:
+            et = np.array([np.nan if e is None else float(e) for e in etalements],
+                          dtype=np.float64)
+            regles["etalement"] = np.where(np.isnan(et), False, et > demi)
+            connus = ~np.isnan(et)
+            out["poses_sans_etalement_lisible"] = int(np.count_nonzero(~connus))
+            out["etalement_median_um"] = (round(float(np.median(et[connus])), 3)
+                                          if np.any(connus) else None)
+        out["pas_examines"] = int(saute.size)
+        out["mediane_du_recentrage_um"] = (round(float(np.median(recentrage)), 3)
+                                           if recentrage.size else None)
+        for regle, change in regles.items():
+            out.update({
+                f"poses_refusees_par_l_{regle}": int(np.count_nonzero(change)),
+                f"sauts_vus_par_l_{regle}": int(np.count_nonzero(saute & change)),
+                f"sauts_manques_par_l_{regle}": int(np.count_nonzero(saute & ~change)),
+                f"refus_a_tort_de_l_{regle}": int(np.count_nonzero(~saute & change))})
     for nom, masque in (("qui_sautent", saute), ("qui_ne_sautent_pas", ~saute)):
         if not np.any(masque):
             continue
@@ -940,7 +1003,7 @@ def _les_deux_moities_du_pas(centres, reperes, voxel_um, saute) -> dict:
 
 
 def _le_deroulage_exact(phases, angles_vrais, centres=None, voxel_um=1.0, vol=None,
-                        reperes=None) -> dict:
+                        reperes=None, epaisseur_nominale_um=None, etalements=None) -> dict:
     """Le deroulage que l'ANGLE dicte, contre celui que la demi-feuille SUPPOSE.
 
     ⚠⚠⚠ LE DEROULAGE DE `suivre` SUPPOSE CE QU'ON VOUDRAIT LUI DEMANDER. `d - round(d)` choisit
@@ -1022,7 +1085,8 @@ def _le_deroulage_exact(phases, angles_vrais, centres=None, voxel_um=1.0, vol=No
     # l'une des deux parts sans l'autre laisserait croire a un reste negligeable.
     saute = np.abs(d_exact) > 0.5
     return {**juge,
-            **(_les_deux_moities_du_pas(centres, reperes, voxel_um, saute)
+            **(_les_deux_moities_du_pas(centres, reperes, voxel_um, saute,
+                                        epaisseur_nominale_um, etalements)
                if centres is not None and reperes else {}),
             "pas_qui_sautent": int(np.count_nonzero(saute)),
             "derive_des_sauts_en_feuilles": round(float(np.sum(d_exact[saute])), 4),
