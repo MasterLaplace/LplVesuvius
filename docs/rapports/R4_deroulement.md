@@ -1422,6 +1422,34 @@ n'est remplacé — `derive_en_feuilles` reste le nombre de toutes les tranches 
 est publié **à côté** — mais la question de `158` reste entière, et l'instrument pour y répondre
 existe désormais.
 
+**`160` · 2026-09-15 · la dérive est-elle un fluage ou des sauts ?**
+(`le_fluage_ou_les_sauts.py`, zéro lecture distante)
+La question de `158`, posable depuis que `159` a réparé le déroulage. L'énoncé n'a **aucun seuil** :
+les feuilles sont espacées d'une épaisseur, donc « ce pas a franchi plus d'une **demi**-feuille » et
+« ce pas a changé de feuille » sont le même énoncé — celui du demi-pas de la contrainte de `142` et
+de la demi-épaisseur du rejet de `155` — et la décomposition est **exacte**, `dérive = sauts +
+fluage` terme à terme. ⭐⭐⭐ **Le contrôle tient** : sur la spirale **nue**, **0** pas saute sur
+**46068** et **72** marches sur **72** n'en font aucun, là où `159` mesure zéro pas replié à tort.
+Une décomposition qui aurait trouvé des sauts là mesurerait son propre bruit — `R4-F145`.
+⭐⭐⭐⭐ **La réponse est que le partage suit la MATIÈRE** : sur **342** marches décidables, **233** ne
+franchissent **aucune** feuille en un pas et les sauts l'emportent dans **87**, le compte croissant
+sans exception — **0** sur 46068, **89** sur 47888, **330** sur 45375, **813** sur 44156, **6209**
+sur 43616 — et les marches sans aucun saut tombant de **72** sur 72 à **6** sur 64 — `R4-F146`.
+⚠⚠ **Le repliement cache la dérive exactement là où ça saute** : les deux dérives **coïncident** sur
+les matières simples (**0,0197** et **0,0264**) et divergent sur les deux à deux causes — **0,2858**
+contre **2,4549**, **1,6717** contre **8,3484**. C'est ce qui avait fait lire les marches de `158`
+comme restant près de leur feuille — `R4-F147`. ⚠⚠⚠ **Conséquence pour le graal, et elle est dure** :
+« corriger le transfert de spire à spire » suppose un transfert **rattrapable**, or sur la matière du
+rouleau c'est **le pas lui-même** qui change de feuille, une fois sur sept. Un correcteur qui
+interviendrait à ce rythme ne serait plus un correcteur mais une **seconde façon de marcher** — donc
+la demande devient « marcher sans changer de feuille » et non « corriger un transfert », et aucune
+tranche de `142` à `159` ne l'a posée sous cette forme. ⚠ Pièges payés : une sonde qui ne mordait pas
+parce que **deux** marches rendent le même verdict par compte et par totaux (il en fallait trois) ;
+un attendu écrit en dur cassé par le remède de la première ; et la mesure qui a **levé** parce qu'une
+marche sans aucun pas n'a pas de décomposition — elle est désormais **sautée et comptée**. ⚠⚠ Et une
+faute d'ordonnancement à moi : la mesure et les sondes-par-cassure lancées **en même temps**, alors
+que les secondes mutent le module que la première importe.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

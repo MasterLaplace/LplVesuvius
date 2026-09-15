@@ -3049,6 +3049,45 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 160 : FLUAGE OU SAUTS, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un compte de pas qui SAUTENT ne voyage jamais sans le nombre de pas MARCHES : « 6209 »
+    # seul est un nombre, « 6209 sur 43616 » est un regime.
+    # (2) Une derive REPLIEE ne voyage jamais sans l'EXACTE : c'est leur ECART qui dit ce que le
+    # repliement cache, et il vaut zero la ou rien ne saute.
+    # (3) Et un compte de marches SANS AUCUN SAUT ne voyage jamais sans le nombre de marches
+    # decidables : c'est le couple qui distingue « rien ne saute » de « rien n'a marche ».
+    fs = _source(racine, "le_fluage_ou_les_sauts.json")
+    if fs.exists():
+        d = json.loads(fs.read_text())
+
+        def dec160(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            for cle, nom in (("marches_ou_les_sauts_lemportent",
+                              "marches ou les sauts l'emportent"),
+                             ("marches_sans_aucun_saut", "marches sans aucun saut"),
+                             ("decidables", "marches decidables")):
+                ajoute(f"{nom} de 160", int(j_[cle]), 0, fs.name)
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            for cle, nom in (("pas_qui_sautent", "pas qui sautent du controle"),
+                             ("marches_sans_aucun_saut", "marches sans saut du controle"),
+                             ("decidables", "marches decidables du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 160", int(c_[cle]), 0, fs.name)
+            for m in j_.get("par_matiere", []):
+                q = f"sur {m['nom']} de 160"
+                for cle, nom in (("decidables", "marches decidables"),
+                                 ("pas_qui_sautent", "pas qui sautent"),
+                                 ("pas_marches", "pas marches"),
+                                 ("marches_sans_aucun_saut", "marches sans aucun saut")):
+                    ajoute(f"{nom} {q}", int(m[cle]), 0, fs.name)
+                for cle, nom in (("derive_repliee_mediane", "derive repliee mediane"),
+                                 ("derive_exacte_mediane", "derive exacte mediane")):
+                    ajoute(f"{nom} {q}", m[cle], dec160(m[cle], 4), fs.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 159 : LE DEROULAGE SUPPOSE CE QU'ON LUI DEMANDE, ET TROIS APPARIEMENTS
     # L'IMPOSENT.
     # (1) Un compte de litiges TRANCHES ne voyage jamais sans le compte de NON TRANCHES : le

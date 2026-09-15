@@ -958,7 +958,18 @@ def _le_deroulage_exact(phases, angles_vrais, centres=None, voxel_um=1.0, vol=No
                      "exact": round(float(d_exact[litiges[i]]), 6),
                      "replie": round(float(d_replie[litiges[i]]), 6)}
                     for i in range(litiges.size) if pour_r[i]]}
+    # ⭐⭐⭐⭐ LA DECOMPOSITION QUE `158` DEMANDAIT ET QUE `159` A RENDUE POSSIBLE : un pas dont la
+    # phase EXACTE franchit plus d'une DEMI-feuille a change de feuille. C'est le meme enonce que le
+    # demi-pas de la contrainte et la demi-epaisseur du rejet, et il n'a aucun seuil — les feuilles
+    # sont espacees d'une epaisseur, donc l'appariement au plus proche bascule exactement la.
+    #
+    # ⚠⚠ ET LA SOMME EST EXACTE, PAS APPROCHEE : `exacte = sauts + fluage`, terme a terme. Publier
+    # l'une des deux parts sans l'autre laisserait croire a un reste negligeable.
+    saute = np.abs(d_exact) > 0.5
     return {**juge,
+            "pas_qui_sautent": int(np.count_nonzero(saute)),
+            "derive_des_sauts_en_feuilles": round(float(np.sum(d_exact[saute])), 4),
+            "derive_du_fluage_en_feuilles": round(float(np.sum(d_exact[~saute])), 4),
             # ⚠⚠ CE QU'UN PAS DEPLACE REELLEMENT LE CENTRE, en micrometres. C'est lui qui dit si
             # l'hypothese du deroulage est plausible, et il ne se raisonne pas : l'avance borne la
             # part TANGENTE du pas, jamais le recentrage des machoires.
@@ -1969,6 +1980,18 @@ def verifier() -> int:
       and abs(_le_pas_mesure(nue2, a_, loin_)[0] - vrai_loin) < 1e-9,
       f"{huit_:.6f} des deux côtés pour {r8_} et {r16_} replis, alors que le pas vaut "
       f"{vrai_loin:.6f}")
+
+    # ⚠⚠ LA DECOMPOSITION EST EXACTE, TERME A TERME : `exacte = sauts + fluage`. Un pas
+    # d'EXACTEMENT une demi-feuille n'a pas change de feuille — la borne est stricte, comme le
+    # demi-pas de la contrainte et la demi-epaisseur du rejet.
+    dec_ = _le_deroulage_exact([0.0, 0.8, 1.1, 2.5], [0.0, 0.01, 0.02, 0.03])
+    v("⭐⭐⭐ la dérive exacte se décompose en SAUTS et FLUAGE, terme à terme",
+      abs(dec_["derive_des_sauts_en_feuilles"] + dec_["derive_du_fluage_en_feuilles"]
+          - dec_["derive_exacte_en_feuilles"]) < 1e-9 and dec_["pas_qui_sautent"] == 2,
+      f"{dec_['derive_des_sauts_en_feuilles']} + {dec_['derive_du_fluage_en_feuilles']} = "
+      f"{dec_['derive_exacte_en_feuilles']} sur {dec_['pas_qui_sautent']} sauts")
+    v("⚠⚠ un pas d'exactement une demi-feuille ne SAUTE pas",
+      _le_deroulage_exact([0.0, 0.5, 1.0], [0.0, 0.01, 0.02])["pas_qui_sautent"] == 0)
 
     v("un écart de directions ne regarde pas leur signe",
       abs(_ecart_deg([0.0, 1.0, 0.0], [0.0, -1.0, 0.0])) < 1e-9)
