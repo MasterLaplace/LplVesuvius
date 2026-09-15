@@ -1518,6 +1518,36 @@ ré-arrondissait ce que le producteur avait déjà arrondi. ⚠⚠ Ce que la tra
 **prix** : on sait que la pose dit qu'elle a sauté et à quel taux, on ne sait pas si refuser à ce
 taux achète des marches ou les tue.
 
+**`163` · 2026-09-15 · le refus arrive-t-il à temps ?**
+`162` conclut qu'aucun énoncé ne domine, parce que la précision de l'étalement tombe à **0,397**.
+⚠⚠⚠ Mais cette précision est calculée sur la marche **entière**, or un refus ne **rallonge** jamais
+rien : il **arrête**, et ne se déclenche qu'**une fois**. Les refus suivants n'arrivent donc jamais,
+la marche étant déjà finie — **un taux peut être calculé sur un axe que la règle ne parcourt pas**,
+ce qui est le cousin de « moyenner sur l'axe où la différence vit » — `R4-F156`. La seule question
+qui décide d'une règle d'arrêt est **où son premier refus tombe**, et cinq cas exhaustifs la
+tranchent sans aucun seuil : à temps, trop tard, **jamais** (la panne silencieuse), arrêtée pour
+rien (la seule perte sèche), intacte. ⭐⭐⭐⭐ **Le refus arrive à temps, et il n'est jamais muet.**
+Sur la pince de `144`, l'étalement arrête **52** des **54** marches qui changent de feuille au plus
+tard **sur** le pas fautif, avec **0** panne silencieuse et un écart médian de **-2** pas, quand les
+deux énoncés de déplacement en laissent **25** et **26** sauter **sans rien dire** et arrivent
+**+7** et **+23** pas trop tard — `R4-F154`. L'écart est **négatif sur toutes les matières qui
+sautent** : la pose se contredit **avant** de changer de feuille, ce qui en fait un **avertissement**
+et non un constat. ⭐⭐⭐⭐ **Et la victoire JOINTE est gagnée sur une vraie matière** : sur la spirale
+**écrasée**, **5** marches arrêtées à temps sur 5, **0** trop tard, **0** muette, **0** marche propre
+perdue, là où les deux autres énoncés sont muets sur les cinq sauts — première fois de la campagne
+qu'une règle d'arrêt tient la victoire jointe hors du contrôle. ✗ **Ailleurs, ce qui la fait tomber
+est le PRIX, pas les arrêts tardifs** : **22** marches propres coupées sur la pince pour une médiane
+de **353** pas, et **16** sur la spirale froissée à 42,4 µm où la règle est pourtant **parfaite** du
+côté des sauts — `R4-F155`. ⚠⚠ Ce qui reste n'est donc plus une mesure mais un **arbitrage** :
+combien de marches saines accepte-t-on de perdre pour n'en livrer aucune fausse ? Et un écart reste
+inexpliqué — la règle coupe trois fois plus de marches saines sur la froissée à 42,4 µm que sur
+celle du rouleau, pourtant plus dure. ⚠ Piège payé : le prédicat de victoire était écrit **deux
+fois**, dans le résumé d'une case et dans le cumul d'un groupe, et c'est une **sonde par cassure**
+qui l'a révélé en butant sur une ancre qui apparaissait deux fois — le symptôme *était* le défaut.
+⚠ Et l'inégalité de « à temps » est **large** : un refus tombant exactement sur le pas fautif arrête
+avant que ce pas ne soit livré, et le sens strict aurait compté « trop tard » un arrêt parfaitement
+placé.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

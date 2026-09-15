@@ -3049,6 +3049,45 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 163 : LE REFUS ARRIVE-T-IL A TEMPS, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un compte « A TEMPS » ne voyage jamais sans le compte de marches qui SAUTENT : « 52 »
+    # seul est un nombre, « 52 sur 54 » est un taux de sauvetage.
+    # (2) Un compte de marches COUPEES POUR RIEN ne voyage jamais sans les pas PERDUS : couper une
+    # marche a son dernier pas et a son dixieme ne coutent pas la meme chose.
+    # (3) Et un ECART MEDIAN ne voyage jamais sans son signe : negatif il dit que la regle AVERTIT,
+    # positif qu'elle CONSTATE, et le publier sans signe confondrait les deux.
+    rt = _source(racine, "le_refus_arrive_t_il_a_temps.json")
+    if rt.exists():
+        d = json.loads(rt.read_text())
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            for cle, nom in (("marches_qui_sautent", "marches qui sautent du controle"),
+                             ("decidables", "marches decidables du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 163", int(c_[cle]), 0, rt.name)
+            # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : il donne les cinq cas par BRAS et,
+            # pour l'etalement seul, par MATIERE, plus les ecarts et les pas perdus.
+            for groupe in (j_.get("par_bras", []) + j_.get("par_matiere", [])):
+                q = f"sur {groupe['nom']} de 163"
+                for cle, nom in (("marches_qui_sautent", "marches qui sautent"),
+                                 ("decidables", "marches decidables")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(groupe[cle]), 0, rt.name)
+                for regle in ("absolu", "relatif", "etalement"):
+                    t = groupe.get(regle)
+                    if not t:
+                        continue
+                    for cle, nom in (("a_temps", "marches arretees a temps"),
+                                     ("trop_tard", "marches arretees trop tard"),
+                                     ("jamais", "marches jamais arretees"),
+                                     ("arretee_pour_rien", "marches coupees pour rien")):
+                        ajoute(f"{nom} par l'{regle} {q}", int(t[cle]), 0, rt.name)
+                    for cle, nom in (("ecart_median", "ecart median"),
+                                     ("pas_perdus_median", "pas perdus medians")):
+                        if t.get(cle) is not None:
+                            ajoute(f"{nom} de l'{regle} {q}", int(t[cle]), 0, rt.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 162 : LA POSE DIT-ELLE QU'ELLE A SAUTE, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un RAPPEL ne voyage jamais sans sa PRECISION : un rappel seul est satisfait par une regle
     # qui refuse toutes les poses, donc le publier seul serait publier la moitie qui flatte.

@@ -980,10 +980,20 @@ def _les_deux_moities_du_pas(centres, reperes, voxel_um, saute,
             out["etalement_median_um"] = (round(float(np.median(et[connus])), 3)
                                           if np.any(connus) else None)
         out["pas_examines"] = int(saute.size)
+        # ⭐⭐⭐⭐ OU CHAQUE CHOSE ARRIVE POUR LA PREMIERE FOIS. Un rappel dit COMBIEN une regle
+        # voit ; il ne dit pas si elle voit A TEMPS. Or un refus ne peut qu'ARRETER la marche,
+        # donc il n'allonge jamais rien : ce qu'il peut acheter, c'est de s'arreter AU bon
+        # endroit, c'est-a-dire de dire ou la sortie cesse d'etre fiable. La comparaison des deux
+        # premiers indices est donc la seule qui reponde a la question du prix.
+        out["premier_saut"] = (int(np.argmax(saute)) if bool(np.any(saute)) else None)
         out["mediane_du_recentrage_um"] = (round(float(np.median(recentrage)), 3)
                                            if recentrage.size else None)
         for regle, change in regles.items():
             out.update({
+                # ⚠⚠ UN PREMIER REFUS ABSENT N'EST PAS UN REFUS AU PAS ZERO : la regle ne s'est
+                # jamais declenchee, et la marche est allee jusqu'au bout sans qu'elle dise rien.
+                f"premier_refus_de_l_{regle}": (int(np.argmax(change))
+                                                if bool(np.any(change)) else None),
                 f"poses_refusees_par_l_{regle}": int(np.count_nonzero(change)),
                 f"sauts_vus_par_l_{regle}": int(np.count_nonzero(saute & change)),
                 f"sauts_manques_par_l_{regle}": int(np.count_nonzero(saute & ~change)),
