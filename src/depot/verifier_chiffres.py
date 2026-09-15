@@ -3087,6 +3087,17 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                      ("pas_perdus_median", "pas perdus medians")):
                         if t.get(cle) is not None:
                             ajoute(f"{nom} de l'{regle} {q}", int(t[cle]), 0, rt.name)
+                    # ⚠⚠⚠ LA PART COUPEE EST LE CHIFFRE QUI CORRIGE UN COMPTE : publier « 16
+                    # contre 5 » sur des populations de 61 et de 6 inverse la conclusion, et ce
+                    # document a paye l'erreur. Elle se verifie donc comme un taux, a quatre
+                    # decimales, et non comme un compte.
+                    # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : il donne la part coupee
+                    # de l'ETALEMENT, parce que c'est son prix qui est en question ; celles des
+                    # deux enonces de deplacement ne sont pas publiees, leur rappel etant si bas
+                    # que leur prix ne decide de rien.
+                    if regle == "etalement" and t.get("part_coupee") is not None:
+                        ajoute(f"part des marches saines coupees par l'{regle} {q}",
+                               t["part_coupee"], 4, rt.name)
 
     # ⭐⭐⭐⭐ LA TRANCHE 162 : LA POSE DIT-ELLE QU'ELLE A SAUTE, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un RAPPEL ne voyage jamais sans sa PRECISION : un rappel seul est satisfait par une regle

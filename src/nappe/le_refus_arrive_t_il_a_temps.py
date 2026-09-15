@@ -92,6 +92,24 @@ def elle_tient(comptes: dict) -> bool:
                 and comptes["arretee_pour_rien"] == 0)
 
 
+def la_part_coupee(comptes: dict) -> float | None:
+    """La part des marches PROPRES que la règle coupe, ou rien s'il n'y en a aucune.
+
+    ⚠⚠⚠ UN COMPTE DE MARCHES COUPÉES NE SE COMPARE PAS D'UNE MATIÈRE À L'AUTRE, et ce dépôt l'a
+    payé : la première version de `163` publiait « 16 coupées sur la froissée à 42,4 µm contre 5
+    sur celle du rouleau, pourtant plus dure » comme un écart INEXPLIQUÉ. Les populations sont de
+    **61** et de **6** marches propres, donc les parts valent 0,2623 et 0,8333 — l'ordre est
+    exactement INVERSE, et il n'y a aucun mystère. C'est le péché du dépôt, comparer des totaux,
+    commis dans la conclusion même d'une tranche qui le cite.
+
+    ⚠⚠ Le dénominateur est le nombre de marches qui N'AURAIENT PAS DÛ être coupées — les propres,
+    c'est-à-dire celles arrêtées pour rien PLUS les intactes. Une marche qui saute n'entre pas :
+    l'arrêter n'est pas une perte.
+    """
+    propres = int(comptes["arretee_pour_rien"]) + int(comptes["intacte"])
+    return round(int(comptes["arretee_pour_rien"]) / propres, 4) if propres else None
+
+
 def le_cas(saut, refus) -> str:
     """Le cas d'UNE marche sous UNE règle — cinq cas exhaustifs et exclusifs.
 
@@ -147,6 +165,7 @@ def _resume(xs: list[dict]) -> dict:
             "ecart_median": (int(statistics.median(ecarts)) if ecarts else None),
             "pas_perdus_median": (int(statistics.median(perdus)) if perdus else None),
             "pas_perdus_total": int(sum(perdus)),
+            "part_coupee": la_part_coupee(comptes),
             "elle_tient": elle_tient(comptes)}
     return out
 
@@ -191,6 +210,9 @@ def _cumuler(cs: list[dict], nom: str) -> dict:
             "ecart_median": (int(statistics.median(ec)) if ec else None),
             "pas_perdus_median": (int(statistics.median(pe)) if pe else None),
             "pas_perdus_total": int(sum(p["pas_perdus_total"] for p in parts)),
+            # ⚠⚠ LA PART SE RECALCULE DES COMPTES CUMULES, jamais en moyennant les parts des
+            # cases : c'est exactement l'erreur que cette fonction existe pour empecher.
+            "part_coupee": la_part_coupee(comptes),
             "elle_tient": elle_tient(comptes)}
     return out
 
@@ -364,6 +386,51 @@ def verifier() -> int:
     v("⭐⭐⭐ ... ni une règle qui coupe une marche propre",
       coupeuse["etalement"]["elle_tient"] is False
       and coupeuse["etalement"]["pas_perdus_total"] == 260)
+
+    print("\n— un compte de marches coupées ne se compare pas d'une matière à l'autre —")
+    # ⚠⚠⚠ LA FIXTURE EST CELLE QUE LA MESURE A RENDUE, et elle montre l'INVERSION : la premiere
+    # version de cette tranche a publie « 16 contre 5, ecart inexplique » en comparant deux
+    # comptes sur des populations de 61 et de 6 marches propres.
+    DOUCE = {"a_temps": 11, "trop_tard": 0, "jamais": 0, "arretee_pour_rien": 16, "intacte": 45}
+    DURE = {"a_temps": 45, "trop_tard": 13, "jamais": 0, "arretee_pour_rien": 5, "intacte": 1}
+    v("⭐⭐⭐⭐ la PART inverse la conclusion que les COMPTES donnaient",
+      DOUCE["arretee_pour_rien"] > DURE["arretee_pour_rien"]
+      and la_part_coupee(DOUCE) < la_part_coupee(DURE),
+      f"{DOUCE['arretee_pour_rien']} contre {DURE['arretee_pour_rien']} en comptes, "
+      f"{la_part_coupee(DOUCE)} contre {la_part_coupee(DURE)} en parts")
+    v("⚠⚠ le dénominateur est les marches PROPRES, jamais toutes les marches",
+      abs(la_part_coupee(DURE) - 5 / 6) < 1e-4
+      and abs(la_part_coupee(DURE) - 5 / sum(DURE.values())) > 1e-3,
+      "une marche qui saute n'entre pas : l'arrêter n'est pas une perte")
+    v("⚠ sans une seule marche propre, la part n'existe pas — elle ne vaut pas zéro",
+      la_part_coupee({**DURE, "arretee_pour_rien": 0, "intacte": 0}) is None)
+    # ⚠⚠ LES DEUX PRODUCTEURS LA PUBLIENT, et il a fallu deux retouches pour ca : `_resume` et
+    # `_cumuler` construisent le meme dictionnaire par deux chemins, donc un champ ajoute a l'un
+    # et pas a l'autre sort d'un groupe et pas de l'autre, en silence.
+    une = _resume([_suivi(300, None, {r: 40 for r in ENONCES}),
+                   _suivi(300, None, {r: None for r in ENONCES})])
+    # ⚠⚠⚠ LIRE AVEC `.get()`, JAMAIS AVEC `[...]` : un contrôle qui LÈVE arrête la batterie et
+    # cache tout ce qui suit, donc il ne peut pas rendre FAUX. Payé ici, et déjà payé dans `157` :
+    # la sonde « le résumé cesse de publier la part » ne mordait pas, parce qu'elle faisait
+    # planter la batterie au lieu de la faire échouer.
+    v("⭐⭐⭐ la part est publiée par le résumé ET par le cumul, jamais par un seul",
+      une["etalement"].get("part_coupee") == 0.5
+      and _cumuler([une], "un")["etalement"].get("part_coupee") == 0.5,
+      f"résumé {une['etalement'].get('part_coupee')}, "
+      f"cumul {_cumuler([une], 'un')['etalement'].get('part_coupee')}")
+    # ⚠⚠⚠ ET LE CUMUL LA RECALCULE DES COMPTES : deux cases de tailles tres differentes le
+    # montrent, parce que la moyenne des deux parts n'est PAS la part du total.
+    grosse = _resume([_suivi(300, None, {r: 40 for r in ENONCES})] * 1
+                     + [_suivi(300, None, {r: None for r in ENONCES})] * 9)
+    cum2 = _cumuler([une, grosse], "deux")
+    v("⭐⭐⭐⭐ ... et le cumul la RECALCULE des comptes, jamais en moyennant deux parts",
+      cum2["etalement"].get("part_coupee") is not None
+      and abs(cum2["etalement"]["part_coupee"] - round(2 / 12, 4)) < 1e-9
+      and abs(cum2["etalement"]["part_coupee"]
+              - statistics.mean([une["etalement"]["part_coupee"],
+                                 grosse["etalement"]["part_coupee"]])) > 1e-3,
+      f"{cum2['etalement']['part_coupee']} et non "
+      f"{round(statistics.mean([une['etalement']['part_coupee'], grosse['etalement']['part_coupee']]), 4)}")
 
     print("\n— le résumé et le cumul somment des COMPTES —")
     v("⚠ une marche qui n'a fait aucun pas est SAUTÉE et comptée",

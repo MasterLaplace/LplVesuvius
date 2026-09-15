@@ -14,7 +14,7 @@
 > ✗ **AILLEURS, C'EST LE PRIX QUI LA FAIT TOMBER, PAS LES ARRÊTS TARDIFS.** Sur la pince, **22**
 > marches propres sont coupées pour rien, perdant une médiane de **353** pas. Sur la spirale
 > froissée à 42,4 µm, l'étalement est **parfait** du côté des sauts — 11 à temps, 0 tard, 0 muette —
-> et coupe pourtant **16** marches saines.
+> et coupe pourtant **0,2623** des marches saines.
 >
 > ⚠⚠⚠ **ET CETTE TRANCHE CORRIGE LA LECTURE DE `162`.** La précision de **0,397** y était calculée
 > sur la marche **entière**. Or un refus ne peut qu'**arrêter** : il ne se déclenche qu'**une
@@ -74,6 +74,11 @@ déplacement se tait 25 et 26 fois sur la pince, l'étalement **jamais**.
 ⚠ La mâchoire seule reste plus faible, comme `162` l'annonçait : le rejet d'appuis de `155` agit
 **avant** et retire précisément ce que l'étalement regarderait.
 
+⚠ **Et le prix se lit par bras, en part et non en compte** : l'étalement coupe **0,1913** des marches
+saines de la pince et **0,0678** de celles de la mâchoire seule. Le second chiffre est plus bas pour
+la même raison que son rappel : la règle y voit moins, donc elle y coupe moins — c'est une moindre
+vue, pas une meilleure retenue.
+
 ## 4. Matière par matière — et où la victoire tient
 
 | matière | marches qui sautent | étalement : à temps · tard · jamais · pour rien | écart | pas perdus (médiane) |
@@ -96,17 +101,30 @@ une seule marche saine.
 contredit **avant** de changer de feuille, pas pendant. C'est ce qui fait d'elle un avertissement et
 non un constat.
 
+⚠⚠⚠ **ET LA PART DES MARCHES SAINES COUPÉES EST MONOTONE AVEC LA DIFFICULTÉ** : **0,0**, **0,0**,
+**0,2623**, **0,2903**, **0,8333**. Un compte brut le cachait — 16 marches coupées sur la froissée à
+42,4 µm contre 5 sur celle du rouleau se lit comme un écart, alors que les populations de marches
+saines valent **61** et **6**. Ce dépôt interdit de comparer des totaux, et la première version de
+ce document l'a fait dans sa propre conclusion.
+
 ## 5. ⚠ Ce que cette tranche laisse, et c'est une question de politique
 
 Sur la spirale froissée à 42,4 µm, l'étalement est **parfait** du côté des sauts et coupe pourtant
-**16** marches saines sur 61. La question n'est donc plus « la pose le dit-elle » — elle le dit —
+**0,2623** des marches saines. La question n'est donc plus « la pose le dit-elle » — elle le dit —
 mais **« combien de marches saines accepte-t-on de perdre pour n'en livrer aucune fausse »**. C'est
 un arbitrage, pas une mesure, et il appartient à ce qu'on veut faire du déroulage : une sortie courte
 et sûre, ou longue et douteuse.
 
-⚠⚠ Et il reste un écart non expliqué : l'étalement coupe **16** marches saines sur la froissée à
-42,4 µm mais seulement **5** sur celle du rouleau, qui est pourtant plus dure. Rien dans cette
-tranche ne dit pourquoi.
+⚠⚠⚠ **Une correction, et elle porte sur ce document.** Sa première version annonçait un « écart non
+expliqué » : 16 marches saines coupées sur la froissée à 42,4 µm contre 5 sur celle du rouleau,
+pourtant plus dure. Les deux populations de marches saines valent **61** et **6**, donc les parts
+sont **0,2623** et **0,8333** et l'ordre est exactement **inverse**. Il n'y a aucun mystère : la part
+coupée croît avec la difficulté, sans exception. C'est le péché du dépôt — comparer des totaux —
+commis dans la conclusion d'une tranche qui le cite trois fois.
+
+⚠⚠ **Et la figure avait raison.** Elle affichait déjà `16/61` et `5/6` ; c'est la prose qui a lu les
+numérateurs sans leurs dénominateurs. Regarder l'image ne suffit pas : il faut lire ce qu'elle
+écrit.
 
 ## 6. Les sondes
 

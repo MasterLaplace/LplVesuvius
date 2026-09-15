@@ -189,8 +189,10 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list]:
     art.rectangle([x0, y0, x0 + pw, y0 + ph], outline=TRAIT, width=1)
     cadres.append((x0, y0, x0 + pw, y0 + ph))
     ecrire(x0, y0 - 24, "le PRIX — les marches propres coupées pour rien", moyen, ENCRE)
-    x_nom, x_barre = x0 + 12, x0 + 128
-    barre_max = pw - 260
+    # ⚠ LA BARRE CEDE LA PLACE AU LIBELLE, pas l'inverse : le libelle porte la PART, qui est le
+    # chiffre que ce panneau existe pour dire.
+    x_nom, x_barre = x0 + 12, x0 + 120
+    barre_max = pw - 330
     pas_bloc2 = max((ph - 72) // max(len(mat), 1), 36)
     for k, g in enumerate(mat):
         t = g.get("etalement")
@@ -205,11 +207,17 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list]:
             art.rectangle([x_barre, yy, x_barre + max(w, 1), yy + 13], fill=CONTRE)
         points.append((x_barre + w, yy + 6))
         pe = t.get("pas_perdus_median")
+        # ⚠⚠ LA PART EST ECRITE A COTE DE LA FRACTION : la fraction seule invite a comparer des
+        # NUMERATEURS d'une matiere a l'autre, ce que ce document a paye.
+        part = t.get("part_coupee")
         ecrire(x_barre + barre_max + 8, yy,
-               f"{t['arretee_pour_rien']}/{propres}" + ("" if pe is None else f"  -{pe} pas"),
+               f"{t['arretee_pour_rien']}/{propres}"
+               + ("" if part is None else f" = {part:g}")
+               + ("" if pe is None else f"  -{pe} pas"),
                0, CONTRE if int(t["arretee_pour_rien"]) else BON)
     ecrire(x0 + 12, y0 + ph - 54,
-           "la barre : la part des marches PROPRES que l'étalement coupe", petit, GRIS)
+           "la barre ET le nombre : la PART des marches propres coupées, jamais leur compte",
+           petit, GRIS)
     ecrire(x0 + 12, y0 + ph - 36,
            "c'est la seule perte SÈCHE : ces marches allaient bien", petit, ENCRE)
     ecrire(x0 + 12, y0 + ph - 18,
@@ -234,8 +242,8 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list]:
            f"{', '.join(_court(n) for n in tient.get('etalement', ()))} — "
            f"arrêtée à temps partout, aucune marche propre perdue.", moyen, BON)
     ecrire(74, y + 90,
-           f"✗  Ailleurs c'est le PRIX qui la fait tomber : {et.get('arretee_pour_rien')} marches "
-           f"propres coupées sur la pince, pas un seul arrêt tardif de plus.", moyen, ALERTE)
+           f"✗  Ailleurs c'est le PRIX qui la fait tomber : {et.get('part_coupee')} des marches "
+           f"propres de la pince coupées pour rien, pas un arrêt tardif de plus.", moyen, ALERTE)
     ecrire(74, y + 110,
            "⚠⚠  Donc la question n'est plus « la pose le dit-elle » mais « combien de marches "
            "saines accepte-t-on de perdre pour n'en livrer aucune fausse ».", moyen, ENCRE)

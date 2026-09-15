@@ -1539,9 +1539,14 @@ qu'une règle d'arrêt tient la victoire jointe hors du contrôle. ✗ **Ailleur
 est le PRIX, pas les arrêts tardifs** : **22** marches propres coupées sur la pince pour une médiane
 de **353** pas, et **16** sur la spirale froissée à 42,4 µm où la règle est pourtant **parfaite** du
 côté des sauts — `R4-F155`. ⚠⚠ Ce qui reste n'est donc plus une mesure mais un **arbitrage** :
-combien de marches saines accepte-t-on de perdre pour n'en livrer aucune fausse ? Et un écart reste
-inexpliqué — la règle coupe trois fois plus de marches saines sur la froissée à 42,4 µm que sur
-celle du rouleau, pourtant plus dure. ⚠ Piège payé : le prédicat de victoire était écrit **deux
+combien de marches saines accepte-t-on de perdre pour n'en livrer aucune fausse ? ⚠⚠⚠ Et une **correction**, portant sur la première
+rédaction de cette entrée : elle annonçait un « écart inexpliqué », la règle coupant 16 marches
+saines sur la froissée à 42,4 µm contre 5 sur celle du rouleau. Les populations valent **61** et
+**6**, donc les parts valent **0,2623** et **0,8333** et l'ordre est **inverse** ; la part coupée est
+**monotone** avec la difficulté (**0,0**, **0,0**, **0,2623**, **0,2903**, **0,8333**) et il n'y a
+aucun mystère. Comparer des totaux est le péché que ce dépôt nomme, commis dans la conclusion
+d'une tranche qui le cite trois fois — et la **figure avait raison**, elle affichait les deux
+fractions. ⚠ Piège payé : le prédicat de victoire était écrit **deux
 fois**, dans le résumé d'une case et dans le cumul d'un groupe, et c'est une **sonde par cassure**
 qui l'a révélé en butant sur une ancre qui apparaissait deux fois — le symptôme *était* le défaut.
 ⚠ Et l'inégalité de « à temps » est **large** : un refus tombant exactement sur le pas fautif arrête
