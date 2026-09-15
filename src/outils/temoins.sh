@@ -1466,6 +1466,8 @@ run "la pose dit le saut"    uv run python "$ROOT/src/nappe/la_pose_dit_elle_qua
 run "figure la pose dit"     uv run python "$ROOT/src/figures/figure_la_pose_dit_elle_quand_elle_a_saute.py" --verifier
 run "le refus a temps"       uv run python "$ROOT/src/nappe/le_refus_arrive_t_il_a_temps.py" --verifier
 run "figure refus a temps"   uv run python "$ROOT/src/figures/figure_le_refus_arrive_t_il_a_temps.py" --verifier
+run "le marcheur qui ecoute" uv run python "$ROOT/src/nappe/ce_quun_marcheur_qui_ecoute_livre.py" --verifier
+run "figure qui ecoute"      uv run python "$ROOT/src/figures/figure_ce_quun_marcheur_qui_ecoute_livre.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -538,7 +538,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            fenetre_elargie: str = "", pose_sur_la_lecture: bool = False,
            pose_en_deux_temps: bool = False, en_croix: bool = False,
            rejeter: bool = False, derouler_exactement: bool = False,
-           juger_le_deroulage: bool = False) -> dict:
+           juger_le_deroulage: bool = False, refuser_la_pose: bool = False) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -665,6 +665,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     # rien tant que le cap ne s'est pas engage, et le temoin reste reproductible au bit.
     derniere_lecture = np.asarray(etat["normale"], dtype=np.float64)
     fin = "tour bouclé"
+    poses_refusees = 0
     while abs(cumul) < 2.0 * np.pi * float(tours) and pas < int(pas_max):
         a, pris = float(avance_um), None
         fenetre = (float(etat["epaisseur_um"]) if etat.get("epaisseur_um") is not None
@@ -709,6 +710,25 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         # matiere a rendu, pas ce que le cap precedent en a deja fait. Lire apres melange ferait
         # une boucle qui se confirme elle-meme.
         rejetes_totaux += int(pris.get("rejetes", 0))
+        # ⭐⭐⭐⭐ LE MARCHEUR ECOUTE-T-IL LA POSE ? `162` mesure que la pose DIT quand elle a
+        # saute — ses appuis cessent de tenir le meme interstice — et `163` que son premier refus
+        # tombe un a deux pas AVANT le saut. Ici, pour la premiere fois, la marche s'ARRETE
+        # dessus. L'enonce est celui de `155`, applique a la machoire ENTIERE : « les appuis de
+        # cette pose ne tiennent pas le meme interstice », c'est-a-dire que l'etalement de leurs
+        # profondeurs depasse une demi epaisseur NOMINALE. Aucun seuil choisi.
+        # ⚠⚠ L'ARRET TOMBE AVANT QUE LE PAS NE SOIT COMPTE : la pose refusee ne rejoint ni le
+        # chemin, ni les phases, ni les centres. Ce que la marche livre exclut donc le pas
+        # fautif, ce qui est tout l'interet de s'arreter la.
+        # ⚠ Une machoire absente ou a un seul appui ne peut pas se contredire : elle ne refuse
+        # rien, et le dire ici evite qu'une pose muette passe pour une pose saine.
+        if refuser_la_pose:
+            larges_ = [max(m["ecarts_um"]) - min(m["ecarts_um"])
+                       for m in (pris.get("haut"), pris.get("bas"))
+                       if m is not None and len(m.get("ecarts_um", ())) > 1]
+            if larges_ and max(larges_) > 0.5 * float(epaisseur_nominale_um):
+                poses_refusees += 1
+                fin = "la pose se contredit"
+                break
         rotations.append(_ecart_angulaire(etat["normale"], pris["normale"]))
         # ⭐⭐⭐⭐ CE QUE LE PAS AURAIT TRAVERSE SI LES MACHOIRES NE SE RACCROCHAIENT PAS. Le cap
         # incline la normale, donc il incline aussi la TANGENTE le long de laquelle on avance :
@@ -844,6 +864,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             "memoire_max": (round(float(np.max(memoires)), 4) if memoires else None),
             "chemin_um": round(chemin, 1), "tour_boucle": bool(abs(cumul) >= 2.0 * np.pi * tours),
             "part_du_tour": round(float(abs(cumul) / (2.0 * np.pi)), 4), "fin": fin,
+            "poses_refusees": int(poses_refusees),
             "derive_en_feuilles": round(float(ph[-1] - ph[0]), 4),
             "derive_max_en_feuilles": round(float(np.max(np.abs(ph - ph[0]))), 4),
             "rayon_gagne_um": round(rayon_um(etat["centre_vx"]) - r0, 1),

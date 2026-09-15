@@ -3049,6 +3049,61 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 164 : CE QU'UN MARCHEUR QUI ECOUTE LIVRE, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un compte de livraisons CONTAMINEES ne voyage jamais sans le nombre de departs : « 54 »
+    # seul est un nombre, « 54 sur 170 » est une part de livrable.
+    # (2) Une longueur UTILISABLE ne voyage jamais sans celle d'AVANT : c'est leur rapport qui dit
+    # ce que l'oreille achete, et une moitie seule se lirait comme un niveau.
+    # (3) Et un rapport par bras ne voyage jamais sans son jumeau HORS CONTROLE : la spirale nue
+    # livre autant des deux cotes, donc elle tire le rapport vers un, et publier le seul rapport
+    # dilue ferait lire un cout la ou il y a surtout un controle.
+    ec = _source(racine, "ce_quun_marcheur_qui_ecoute_livre.json")
+    if ec.exists():
+        d = json.loads(ec.read_text())
+        # ⚠⚠⚠ LES DECIMALES SONT CELLES DU PRODUCTEUR, JAMAIS UN PLAFOND : enregistrer 5,404 avec
+        # quatre decimales imposees rend « 5,4040 », introuvable dans un document qui ecrit le
+        # chiffre tel que la mesure le publie.
+        def dec164(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            for cle, nom in (("livraisons_arretees_sur_la_pose", "marches arretees du controle"),
+                             ("pas_livres_sans", "pas livres sans loreille du controle"),
+                             ("pas_livres_avec", "pas livres avec loreille du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 164", int(c_[cle]), 0, ec.name)
+            # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : du groupe « tout » il ne donne que
+            # les livraisons contaminees et le nombre de departs, jamais les longueurs ni le
+            # rapport global — qui melangeraient des matieres dont les bases varient d'un facteur
+            # quatre cents.
+            for groupe in (j_.get("par_bras", []) + j_.get("par_matiere", [])):
+                q = f"sur {groupe['nom']} de 164"
+                for cle, nom in (("apparies", "departs apparies"),
+                                 ("livraisons_qui_sautent_sans", "livraisons contaminees sans"),
+                                 ("livraisons_qui_sautent_avec", "livraisons contaminees avec"),
+                                 ("pas_utilisables_sans", "pas utilisables sans"),
+                                 ("pas_utilisables_avec", "pas utilisables avec"),
+                                 ("departs_raccourcis_pour_rien", "departs raccourcis pour rien"),
+                                 ("pas_perdus_pour_rien_median", "pas perdus pour rien medians")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(groupe[cle]), 0, ec.name)
+                if groupe.get("ce_que_loreille_achete") is not None:
+                    ajoute(f"ce que loreille achete {q}", groupe["ce_que_loreille_achete"],
+                           dec164(groupe["ce_que_loreille_achete"], 4), ec.name)
+            t_ = j_.get("tout", {})
+            for cle, nom in (("apparies", "departs apparies"),
+                             ("livraisons_qui_sautent_sans", "livraisons contaminees sans"),
+                             ("livraisons_qui_sautent_avec", "livraisons contaminees avec")):
+                if t_.get(cle) is not None:
+                    ajoute(f"{nom} sur toute la grille de 164", int(t_[cle]), 0, ec.name)
+            for bras_, val in (j_.get("ce_que_loreille_achete_par_bras_hors_controle") or {}).items():
+                if val is not None:
+                    ajoute(f"ce que loreille achete hors controle sur {bras_} de 164", val,
+                           dec164(val, 4), ec.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 163 : LE REFUS ARRIVE-T-IL A TEMPS, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un compte « A TEMPS » ne voyage jamais sans le compte de marches qui SAUTENT : « 52 »
     # seul est un nombre, « 52 sur 54 » est un taux de sauvetage.

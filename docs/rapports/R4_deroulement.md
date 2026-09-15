@@ -1553,6 +1553,36 @@ qui l'a révélé en butant sur une ancre qui apparaissait deux fois — le symp
 avant que ce pas ne soit livré, et le sens strict aurait compté « trop tard » un arrêt parfaitement
 placé.
 
+**`164` · 2026-09-15 · ce qu'un marcheur qui écoute livre**
+`162` et `163` mesurent la règle sur des marches qui **n'écoutent pas** : elles lisent des tableaux
+enregistrés. Ici `suivre` prend `refuser_la_pose` et la marche **s'arrête** dessus, pour la première
+fois — la question devient donc celle du **livrable**. ⚠⚠⚠ Et c'est la question du graal sous sa
+forme utile : un marcheur qui n'écoute pas remet une trajectoire dont il **ignore où elle a cessé
+d'être vraie**, donc elle n'est pas à moitié bonne, elle est **inutilisable en entier** faute de
+savoir où la couper. Deux lectures sont publiées — la longueur **brute** et la longueur
+**utilisable**, celle des livraisons dont rien ne dit qu'elles ont sauté. ⭐⭐⭐⭐ **Sur la matière du
+rouleau, l'oreille multiplie la sortie utilisable par 5,404** : de **99** pas à **535**, parce que
+**58** livraisons sur **65** y étaient contaminées. Et le coût y est de **8** pas médians sur cinq
+départs raccourcis pour rien — le gain y est donc presque **gratuit**. Sur la pince les livraisons
+contaminées tombent de **54** à **2** sur 170 départs, et de **109** à **21** sur toute la grille —
+`R4-F157`. ✗ **Mais la longueur en pâtit là où il n'y avait rien à sauver** : **22** départs
+raccourcis pour rien sur la pince, médiane **353** pas, et c'est la froissée à 42,4 µm qui paie
+(**16** marches saines coupées, ×**0,8701**). ⚠⚠⚠ **Un gain acquis par construction n'est pas une
+victoire** : une marche qui écoute est un **préfixe** de celle qui n'écoute pas, donc elle ne peut
+jamais devenir fausse en s'arrêtant, et le compter comme un succès aurait été un contrôle **incapable
+d'échouer**. L'invariant est donc **asserté** — il tient sur les 343 départs — et le seul axe qui
+puisse échouer, la **longueur perdue**, est mesuré à part — `R4-F158`. ⚠⚠ **Et un rapport qui
+contient son propre contrôle est tiré vers un** : la spirale nue livre **46068** pas identiques des
+deux côtés, donc elle pèse au numérateur comme au dénominateur ; le rapport de la pince passe de
+**0,9164** à **0,8781** une fois le contrôle retiré. Il n'est pas ôté de la **mesure**, seulement de
+ce **rapport**. ⚠ Pièges payés, et aucun trouvé par relecture : la **figure affichait une médiane
+sous le mauvais titre** — « 0 marche coupée pour rien, −596 pas » — parce qu'elle portait sur **tous**
+les arrêts, y compris ceux qui **sauvaient** la marche, et ce qu'une marche sauvée abandonne n'est
+pas une perte ; la **seconde moitié du contrôle n'était jamais décisive**, sa fixture déclarant aussi
+un arrêt ; et la **batterie ne vérifiait jamais sur données réelles que la règle arrête**, son seul
+contrôle réel portant sur la spirale nue, où rien ne se déclenche — débrancher l'arrêt n'y changeait
+rien. Les trois ont été trouvés par une sonde qui ne mordait pas ou par l'œil.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
