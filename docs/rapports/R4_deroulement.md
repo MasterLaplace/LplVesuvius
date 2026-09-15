@@ -1450,6 +1450,43 @@ marche sans aucun pas n'a pas de décomposition — elle est désormais **sauté
 faute d'ordonnancement à moi : la mesure et les sondes-par-cassure lancées **en même temps**, alors
 que les secondes mutent le module que la première importe.
 
+**`161` · 2026-09-15 · de quoi un pas qui saute est-il fait ?**
+`160` mesurait **que** des pas sautent et **où**, jamais **de quoi**. Or un pas a deux moitiés et
+**une seule est bornée** : l'avance commandée le long de la tangente vaut au plus un quart de
+longueur d'onde, le recentrage des mâchoires le long de la normale va où l'interstice se trouve.
+⭐⭐⭐⭐ **Pour la pince, c'est le recentrage, et seulement lui.** Sur ses **54** marches appariables,
+la projection tangentielle vaut **98,4 µm des deux côtés**, au micron près, que le pas saute ou non
+— c'est l'avance commandée, donc elle ne peut rien expliquer ; elle est **exactement égale** dans
+**41** marches. La projection normale, elle, passe de **9,925** à **39,789 µm**, elle sépare dans
+**41** marches et le fait **seule** dans **35**, facteur médian **×2,824** contre **×1,0** pour
+l'avance — `R4-F148`. ⭐⭐⭐⭐ **Donc la mâchoire s'accroche au mauvais interstice à la pose** : un pas
+saute quand les mâchoires se raccrochent **loin**, jamais quand elles avancent trop, et `155` ne
+traite ce défaut qu'au niveau des **appuis**, jamais de la **pose entière** — porte **R4-P29**.
+⚠⚠ **Et les deux bras ne disent pas la même chose** : la mâchoire seule avec rejet n'a rien qui
+commande son avance, sa tangente n'est **jamais** exactement égale (**0** sur 54) et rend même
+**149,914 µm** là où l'avance en vaut 98,4 ; ses deux moitiés séparent **ensemble** dans **53**
+marches sur 54 — `R4-F149`. ⚠⚠⚠ **Un verdict global effaçait tout cela** : pris sur les cases
+confondues il répondait « les deux moitiés », un mot porté entièrement par ce second bras, et
+effaçait la réponse de l'instrument **livré**. C'est le péché du dépôt, moyenner sur l'axe où la
+différence vit, remonté d'un étage — non plus dans une statistique mais dans le verdict. Il est
+désormais **par bras**, et le désaccord est publié. ⭐⭐⭐ **Le contrôle tient et il est vide** : sur
+la spirale nue, **0** case appariable et **72** marches sur **72** sans un pas qui saute ; la
+comparaison n'y est pas nulle, elle n'y est pas, et rendre zéro ferait lire « les deux moitiés se
+valent » là où il n'existe aucune des deux populations — `R4-F150`. ⚠ L'énoncé n'a **aucun seuil** :
+ce qui est compté est « la part normale d'un pas qui saute est plus grande que celle d'un pas
+ordinaire », une comparaison exacte entre deux nombres que **la même marche** produit, et un écart
+exactement nul est compté à part — c'est ici le fait central. ⚠ Pièges payés : un **veilleur** qui
+tournait depuis une heure et demie sur un producteur mort et ressemblait à une mesure en cours ;
+**trois chiffres sans producteur** retirés de la doc, deux venus d'une fixture de batterie et un
+d'un script de brouillon — remplacés par la distribution en µm, qui a un producteur ; une fixture
+aux proportions inventées qui ne reproduisait pas l'effondrement du verdict, redimensionnée sur les
+comptes réels avec des attendus **dérivés** d'elle ; et une **collision de clés** où la seconde
+gagnait en silence. ⚠⚠ Enfin, un trou dans une garde partagée : `textes_hors_cadre` ne regardait que
+le bord **droit**, donc une légende posée trop bas traversait le trait du cadre sans que rien ne le
+dise — c'est **l'œil** qui l'a vu sur la figure de cette tranche, pas la batterie. La portée du
+correctif a été **mesurée avant d'être écrite** : une seule figure du dépôt le franchissait, celle
+de `158`, dont l'interligne et la hauteur de graphe sont désormais **dérivés** du nombre de bras.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
@@ -1503,7 +1540,7 @@ d'identité que le pinceau peint » (`75` §A). Au 11 septembre :
 
 ## 8. Les portes ouvertes — `REGISTRE_portes.tsv`
 
-**19 portes** que cette campagne laisse
+**29 portes** que cette campagne laisse
 (`R4-P01` et suivants), classées par prix dans `PORTES_OUVERTES.md`.
 
 ## 9. Sources pour un article

@@ -631,6 +631,9 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     # se mesurer, et ce depot a paye trois fois qu'un raisonnement y perd contre un instrument.
     centres = ([np.asarray(etat["centre_vx"], dtype=np.float64).copy()]
                if derouler_exactement else [])
+    # ⚠ Un repere PAR PAS, donc un de moins que de centres : c'est la direction le long de laquelle
+    # le pas a ete fait, pas celle ou il arrive.
+    reperes: list = []
     rotations: list[float] = []
     memoires: list[float] = []
     taux_lus: list[float] = []
@@ -777,6 +780,14 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
         nouvelle_tan = _tangente_du_tour(lecture if avance_sur_la_lecture else pris["normale"])
         if float(nouvelle_tan @ tan) < 0.0:
             nouvelle_tan = -nouvelle_tan
+        # ⭐⭐⭐⭐ DE QUOI CE PAS EST-IL FAIT ? Un pas a DEUX moities : l'AVANCE le long de la
+        # tangente, bornee par `avance_um`, et le RECENTRAGE des machoires le long de la normale,
+        # qui n'est borne par rien. `159` mesure un deplacement de centre de 219,79 µm la ou
+        # l'avance en vaut 98,4 : la seconde moitie peut donc dominer, et c'est mesurable. Les deux
+        # directions sont celles d'AVANT le pas — celles le long desquelles il a ete fait.
+        if derouler_exactement:
+            reperes.append((np.asarray(tan, dtype=np.float64).copy(),
+                            np.asarray(etat["normale"], dtype=np.float64).copy()))
         tan, etat = nouvelle_tan, pris
         phases.append(float(vol.phase(np.asarray(etat["centre_vx"]).reshape(1, 3))[0]))
         if derouler_exactement:
@@ -835,7 +846,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             # de feuille la ou la matiere est identique. C'est le meme `ph` dont les bouts donnent
             # `derive_en_feuilles`, pas un second calcul.
             **(_le_deroulage_exact(phases, angles_vrais, centres, voxel_um,
-                                   vol if juger_le_deroulage else None)
+                                   vol if juger_le_deroulage else None, reperes)
                if derouler_exactement else {}),
             "lectures": int(vol.lectures)}
 
@@ -885,7 +896,51 @@ def _le_pas_mesure(vol, a, b) -> tuple[float, bool]:
     return somme, not replis
 
 
-def _le_deroulage_exact(phases, angles_vrais, centres=None, voxel_um=1.0, vol=None) -> dict:
+def _les_deux_moities_du_pas(centres, reperes, voxel_um, saute) -> dict:
+    """La part du pas qui AVANCE et celle qui RECENTRE, sur les pas qui sautent et sur les autres.
+
+    ⭐⭐⭐⭐ UN PAS A DEUX MOITIES ET UNE SEULE EST BORNEE. L'avance vaut au plus `avance_um` le long
+    de la tangente ; le recentrage des machoires, lui, n'est borne par rien — il va ou l'interstice
+    se trouve. Si les pas qui SAUTENT recentrent davantage, alors la machoire s'accroche au mauvais
+    interstice A LA POSE, et `155` ne traite ce defaut qu'au niveau des APPUIS.
+
+    ⚠⚠ LA COMPARAISON EST INTERNE A LA MARCHE. Deux medianes prises sur deux marches differentes ne
+    se soustraient pas ; ici les deux populations viennent du MEME suiveur, sur la MEME matiere, et
+    ce qui est publie est leur couple — jamais une difference entre marches.
+
+    ⚠⚠ ET LES DEUX NOMBRES SONT DES PROJECTIONS, PAS « L'AVANCE » ET « LE RECENTRAGE ». Seule
+    l'avance COMMANDEE est bornee par `avance_um` ; la projection du pas sur la tangente ne l'est
+    pas, parce que le recentrage a sa propre composante le long de cette direction. Mesure a
+    l'appui : une machoire seule rend 158 µm sur la tangente la ou l'avance en vaut 98,4. Les
+    nommer « avance » aurait fait lire un depassement impossible.
+
+    ⚠ Et une population vide se DIT : une marche ou rien ne saute n'a pas une projection normale
+    nulle, elle n'en a pas.
+    """
+    if not reperes or len(reperes) != len(centres) - 1:
+        return {}
+    d = np.diff(np.asarray(centres, dtype=np.float64), axis=0) * float(voxel_um)
+    t = np.asarray([r[0] for r in reperes], dtype=np.float64)
+    n = np.asarray([r[1] for r in reperes], dtype=np.float64)
+    avance = np.abs(np.einsum("ij,ij->i", d, t))
+    recentrage = np.abs(np.einsum("ij,ij->i", d, n))
+    out = {}
+    for nom, masque in (("qui_sautent", saute), ("qui_ne_sautent_pas", ~saute)):
+        if not np.any(masque):
+            continue
+        out[f"sur_la_tangente_um_des_pas_{nom}"] = round(float(np.median(avance[masque])), 3)
+        out[f"sur_la_normale_um_des_pas_{nom}"] = round(float(np.median(recentrage[masque])), 3)
+        # ⚠⚠ L'EFFECTIF SE PUBLIE A COTE DE SA MEDIANE — une mediane sans son compte ne dit pas
+        # sur combien de pas elle porte. Et le nom est `effectif_...` et non `pas_qui_sautent`,
+        # qui est DEJA la cle de `_le_deroulage_exact` : deux cles identiques dans un meme
+        # dictionnaire, c'est la seconde qui gagne EN SILENCE, donc deux reponses a une question
+        # dont une seule serait jamais lue.
+        out[f"effectif_des_pas_{nom}"] = int(np.count_nonzero(masque))
+    return out
+
+
+def _le_deroulage_exact(phases, angles_vrais, centres=None, voxel_um=1.0, vol=None,
+                        reperes=None) -> dict:
     """Le deroulage que l'ANGLE dicte, contre celui que la demi-feuille SUPPOSE.
 
     ⚠⚠⚠ LE DEROULAGE DE `suivre` SUPPOSE CE QU'ON VOUDRAIT LUI DEMANDER. `d - round(d)` choisit
@@ -967,6 +1022,8 @@ def _le_deroulage_exact(phases, angles_vrais, centres=None, voxel_um=1.0, vol=No
     # l'une des deux parts sans l'autre laisserait croire a un reste negligeable.
     saute = np.abs(d_exact) > 0.5
     return {**juge,
+            **(_les_deux_moities_du_pas(centres, reperes, voxel_um, saute)
+               if centres is not None and reperes else {}),
             "pas_qui_sautent": int(np.count_nonzero(saute)),
             "derive_des_sauts_en_feuilles": round(float(np.sum(d_exact[saute])), 4),
             "derive_du_fluage_en_feuilles": round(float(np.sum(d_exact[~saute])), 4),

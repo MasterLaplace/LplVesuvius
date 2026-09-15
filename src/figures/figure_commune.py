@@ -158,7 +158,7 @@ def _boite(pose) -> tuple[float, float, float, float] | None:
     return (x + b[0], y + b[1], x + b[2], y + b[3])
 
 
-def textes_hors_cadre(poses, cadres) -> list[tuple[str, int, int]]:
+def textes_hors_cadre(poses, cadres) -> list[tuple[str, str, int, int]]:
     """Les textes DESSINES qui sortent du panneau dans lequel ils sont ecrits.
 
     ⭐⭐⭐ C'EST L'ANGLE MORT QUE `textes_debordants` NOMME DANS SA PROPRE DOCSTRING, et il a
@@ -171,7 +171,16 @@ def textes_hors_cadre(poses, cadres) -> list[tuple[str, int, int]]:
     son point de depart ; un texte qui n'est dans aucun cadre — la prose du bas, un titre — est
     ignore ici, parce que c'est `textes_debordants` qui le couvre contre la toile.
 
-    Rend `(texte, bord droit, bord droit du cadre)`.
+    ⚠⚠⚠ ET LE BAS COMPTE AUTANT QUE LA DROITE. Cette garde n'a longtemps regarde que le bord
+    DROIT, donc une legende posee trop bas traversait le trait du cadre sans que rien ne le dise —
+    seul l'oeil le voyait, et seulement si quelqu'un regardait. La portee du correctif a ete
+    MESUREE avant d'etre ecrite : sur les 163 figures du depot, une seule le faisait.
+
+    ⚠⚠ LE BORD EST NOMME DANS LE RESULTAT. Un depassement par le bas rapporte comme un
+    depassement par la droite envoie chercher sur le mauvais axe, et une garde qui designe mal
+    ce qu'elle a trouve coute plus cher que pas de garde du tout.
+
+    Rend `(texte, bord, valeur, borne)`, ou `bord` vaut `"droite"` ou `"bas"`.
     """
     sortants = []
     for pose in poses:
@@ -182,7 +191,9 @@ def textes_hors_cadre(poses, cadres) -> list[tuple[str, int, int]]:
         for cx0, cy0, cx1, cy1 in cadres:
             if cx0 <= x <= cx1 and cy0 <= y <= cy1:
                 if b[2] > cx1:
-                    sortants.append((pose[2], int(b[2]), int(cx1)))
+                    sortants.append((pose[2], "droite", int(b[2]), int(cx1)))
+                elif b[3] > cy1:
+                    sortants.append((pose[2], "bas", int(b[3]), int(cy1)))
                 break
     return sortants
 
@@ -467,13 +478,24 @@ def verifier() -> int:
     hors_cadre = (300.0, 10.0, "hors de tout cadre", petit)
     sortants = textes_hors_cadre([dedans, dehors, hors_cadre], cadres)
     v("un texte qui sort de son panneau est signale",
-      [t for t, _, _ in sortants] == ["un texte beaucoup trop long pour ce panneau"])
+      [t for t, _, _, _ in sortants] == ["un texte beaucoup trop long pour ce panneau"]
+      and [b for _, b, _, _ in sortants] == ["droite"])
     # ⚠ Le meme texte, mesure contre la TOILE, ne deborde PAS : c'est exactement l'ecart entre
     # les deux gardes, et il doit etre montre plutot qu'affirme.
     v("... alors que la garde de toile le laisse passer",
       not textes_debordants([dehors], 1000))
     v("... et un texte hors de tout cadre est ignore, pas accuse",
-      all(t != "hors de tout cadre" for t, _, _ in sortants))
+      all(t != "hors de tout cadre" for t, _, _, _ in sortants))
+    # ⭐⭐⭐⭐ LE BAS EST UN BORD COMME LA DROITE, et cette garde ne le voyait pas. Un texte court
+    # pose contre le bord bas tient dans la LARGEUR de son panneau et le traverse quand meme ; il
+    # a fallu l'oeil pour le voir sur une figure livree. La sonde est fabriquee, donc elle ne
+    # depend d'aucune figure du jour.
+    trop_bas = (10.0, 94.0, "court", petit)
+    bas = textes_hors_cadre([dedans, trop_bas], cadres)
+    v("un texte pose trop bas traverse le trait du cadre, et il est signale",
+      [(t, b) for t, b, _, _ in bas] == [("court", "bas")])
+    v("... alors que la garde de toile le laisse passer, comme pour la droite",
+      not textes_debordants([trop_bas], 1000))
     # ⚠⚠ Deux lignes empilees a l'interligne usuel ne doivent PAS etre declarees en
     # chevauchement, sinon la garde crie au loup — le defaut que `verifier_chiffres` a paye.
     empilees = [(0.0, 0.0, "premiere ligne", petit), (0.0, 19.0, "seconde ligne", petit)]

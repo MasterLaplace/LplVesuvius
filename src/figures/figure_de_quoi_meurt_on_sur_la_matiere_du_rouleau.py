@@ -132,7 +132,12 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list]:
            for x in ver if x["part_du_tour_des_memes_feuilles"] is not None]
     pmax = max(p for p, _n, _x in pts) or 1.0
     nmax = max(n for _p, n, _x in pts) or 1
-    gx0, gy0, gw, gh = x0 + 56, y0 + 24, pw - 110, ph - 140
+    # ⚠⚠ LA HAUTEUR DU GRAPHE SE DERIVE ELLE AUSSI DU NOMBRE DE BRAS : le bloc de texte
+    # sous l'axe grandit avec eux, donc un graphe de hauteur fixe finit par lui marcher
+    # dessus. Payé ici : remonter le bloc pour qu'il cesse de traverser le bas du cadre
+    # l'a fait recouvrir le libelle de l'axe.
+    gx0, gy0, gw = x0 + 56, y0 + 24, pw - 110
+    gh = ph - 140 - max(len(im) - 1, 0) * 30
     art.line([gx0, gy0 + gh, gx0 + gw, gy0 + gh], fill=TRAIT, width=1)
     art.line([gx0, gy0, gx0, gy0 + gh], fill=TRAIT, width=1)
     for p, n, x in pts:
@@ -150,7 +155,10 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list]:
         ecrire(x0 + 12, int(gy0 + gh - (n / nmax) * gh) - 7, f"{n:>3d}", petit, GRIS)
     ecrire(x0 + 12, gy0 - 16, "marches « même feuille »", petit, GRIS)
     ecrire(gx0, gy0 + gh + 22, "part du tour parcourue par ces marches-là", petit, GRIS)
-    y_ = y0 + ph - 74
+    # ⚠⚠ LE DEPART SE DERIVE DU NOMBRE DE BRAS, il ne se pose pas : ecrit en dur, le bloc
+    # traversait le trait du bas des que le troisieme bras arrivait, et seule la garde du
+    # BAS l'a vu — celle de droite en etait structurellement incapable.
+    y_ = y0 + ph - 34 - max(len(im) - 1, 0) * 30
     for bras, z in sorted(im.items()):
         ecrire(x0 + 12, y_, f"{_bras(bras):>6} : le plus de feuilles « {_bref(z['plus_de_feuilles'])} »"
                             f" {z['ses_feuilles']} à {z['sa_part_du_tour']}", petit,
@@ -175,13 +183,13 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list]:
                f"{_bref(x['instrument']):<14}{_bras(x['bras']):>7}"
                f"{x['arrets']:>6}/{x['decidables']:<3}{x['poses_refusees_mediane']:>8}"
                f"{x['refus_de_contrainte']:>8}{x['pas_median']:>8}", petit, coul)
-    ecrire(x0 + 12, y0 + ph - 44,
+    ecrire(x0 + 12, y0 + ph - 52,
            "ambre : TOUTES les marches décidables meurent d'arrêt · vert : plus toutes", petit,
            GRIS)
-    ecrire(x0 + 12, y0 + ph - 28,
+    ecrire(x0 + 12, y0 + ph - 34,
            "la pose refuse, la contrainte presque jamais — c'est l'énoncé de `149`, toujours vrai",
            petit, ENCRE)
-    ecrire(x0 + 12, y0 + ph - 12,
+    ecrire(x0 + 12, y0 + ph - 16,
            "et le rejet fait marcher la pince 2,571 fois plus loin sans la faire survivre",
            petit, ALERTE)
 

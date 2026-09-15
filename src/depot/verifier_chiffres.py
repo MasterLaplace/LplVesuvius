@@ -3049,6 +3049,79 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 161 : DE QUOI UN PAS QUI SAUTE EST FAIT, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un compte de marches ou une moitie SEPARE ne voyage jamais sans le nombre de marches
+    # APPARIABLES : « 41 » seul est un nombre, « 41 sur 54 » est un partage.
+    # (2) Un facteur median du RECENTRAGE ne voyage jamais sans celui de l'AVANCE : c'est leur
+    # ECART qui porte l'enonce, et le second vaut UN sur le bras livre — donc le publier seul
+    # ferait lire un niveau la ou il y a une comparaison.
+    # (3) Et un compte de cases APPARIABLES du controle ne voyage jamais sans le nombre de marches
+    # SANS un pas qui saute : c'est le couple qui distingue « la comparaison est vide » de « rien
+    # n'a marche ».
+    ps = _source(racine, "de_quoi_un_pas_qui_saute_est_il_fait.json")
+    if ps.exists():
+        d = json.loads(ps.read_text())
+
+        def dec161(v, plafond):
+            s_ = repr(float(v))
+            return min(plafond, len(s_.split(".")[1]) if "." in s_ and "e" not in s_ else plafond)
+
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            for cle, nom in (("marches_appariables", "marches appariables"),
+                             ("seule_la_normale_separe", "marches ou seule la normale separe"),
+                             ("seule_la_tangente_separe", "marches ou seule la tangente separe"),
+                             ("les_deux_separent", "marches ou les deux separent")):
+                if j_.get(cle) is not None:
+                    ajoute(f"{nom} de 161", int(j_[cle]), 0, ps.name)
+            t_ = j_.get("tout", {})
+            for cle, nom in (("decidables", "marches decidables"),
+                             ("marches_sans_pas_qui_sautent", "marches sans un pas qui saute")):
+                if t_.get(cle) is not None:
+                    ajoute(f"{nom} de 161", int(t_[cle]), 0, ps.name)
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            for cle, nom in (("cases_appariables", "cases appariables du controle"),
+                             ("marches_sans_pas_qui_sautent", "marches sans saut du controle"),
+                             ("decidables", "marches decidables du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 161", int(c_[cle]), 0, ps.name)
+            for groupe in (j_.get("par_regle", []) + j_.get("par_matiere", [])):
+                q = f"sur {groupe['nom']} de 161"
+                for cle, nom in (("marches_appariables", "marches appariables"),
+                                 ("la_normale_separe", "marches ou la normale separe"),
+                                 ("la_tangente_separe", "marches ou la tangente separe"),
+                                 ("la_tangente_est_egale", "marches ou la tangente est egale"),
+                                 ("la_normale_separe_a_lenvers",
+                                  "marches ou la normale separe a l'envers"),
+                                 ("seule_la_normale_separe", "marches ou seule la normale separe"),
+                                 ("les_deux_separent", "marches ou les deux separent"),
+                                 ("decidables", "marches decidables"),
+                                 ("marches_sans_pas_qui_sautent",
+                                  "marches sans un pas qui saute")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(groupe[cle]), 0, ps.name)
+                for cle, nom in (("rapport_normal_median", "facteur median du recentrage"),
+                                 ("rapport_tangent_median", "facteur median de l'avance")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", groupe[cle], dec161(groupe[cle], 3), ps.name)
+            # ⚠⚠ LES PROJECTIONS EN µm NE SONT ENREGISTREES QUE LA OU LE DOCUMENT LES PUBLIE :
+            # par BRAS et pour la grille entiere. Le document ne les donne pas par matiere, et
+            # enregistrer ce qu'il ne publie pas ferait crier la garde pour rien.
+            for groupe in (j_.get("par_regle", []) + [dict(t_, nom="la grille entiere")]):
+                if not groupe.get("cases_appariables"):
+                    continue
+                q = f"sur {groupe['nom']} de 161"
+                for cle, nom in (("sur_la_tangente_um_des_pas_qui_sautent",
+                                  "projection tangente des pas qui sautent"),
+                                 ("sur_la_normale_um_des_pas_qui_sautent",
+                                  "projection normale des pas qui sautent"),
+                                 ("sur_la_tangente_um_des_pas_qui_ne_sautent_pas",
+                                  "projection tangente des pas ordinaires"),
+                                 ("sur_la_normale_um_des_pas_qui_ne_sautent_pas",
+                                  "projection normale des pas ordinaires")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", groupe[cle], dec161(groupe[cle], 3), ps.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 160 : FLUAGE OU SAUTS, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un compte de pas qui SAUTENT ne voyage jamais sans le nombre de pas MARCHES : « 6209 »
     # seul est un nombre, « 6209 sur 43616 » est un regime.
