@@ -538,7 +538,8 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            fenetre_elargie: str = "", pose_sur_la_lecture: bool = False,
            pose_en_deux_temps: bool = False, en_croix: bool = False,
            rejeter: bool = False, derouler_exactement: bool = False,
-           juger_le_deroulage: bool = False, refuser_la_pose: bool = False) -> dict:
+           juger_le_deroulage: bool = False, refuser_la_pose: bool = False,
+           reprendre_la_pose: bool = False) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -666,6 +667,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     derniere_lecture = np.asarray(etat["normale"], dtype=np.float64)
     fin = "tour bouclé"
     poses_refusees = 0
+    poses_reprises = 0
     while abs(cumul) < 2.0 * np.pi * float(tours) and pas < int(pas_max):
         a, pris = float(avance_um), None
         fenetre = (float(etat["epaisseur_um"]) if etat.get("epaisseur_um") is not None
@@ -700,6 +702,27 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
                 if saut >= 0.5 * fenetre:
                     a *= 0.5
                     refus += 1
+                    continue
+            # ⭐⭐⭐⭐ SE REPRENDRE PLUTOT QUE S'ARRETER. `164` mesure qu'un marcheur qui s'arrete
+            # sur une pose qui se contredit livre cinq fois plus d'utilisable sur la matiere du
+            # rouleau — mais il s'ARRETE. Or ce depot a deja son idiome pour une pose qui ne va
+            # pas : HALVER L'AVANCE ET REESSAYER, ce que la contrainte fait deux lignes plus
+            # haut. L'hypothese est que les machoires s'accrochent au mauvais interstice PARCE QUE
+            # le pas est alle trop loin ; un pas plus court atterrirait dans le bon.
+            # ⚠⚠ LA BOUCLE S'EPUISE D'ELLE-MEME : `while a >= voxel_um` abandonne quand l'avance
+            # tombe sous le voxel, donc la reprise ne peut pas tourner sans fin. En dessous, le
+            # lecteur ne peut plus exprimer le deplacement.
+            # ⚠ `reprendre_la_pose` et `refuser_la_pose` disent le MEME enonce et agissent a deux
+            # moments : la reprise ESSAIE AILLEURS, le refus ARRETE. Les deux ensemble laissent la
+            # reprise decider la premiere, donc aucune pose acceptee ne se contredit et le refus
+            # ne se declenche jamais — ce n'est pas une contradiction, c'est une redondance.
+            if reprendre_la_pose:
+                larges_ = [max(m["ecarts_um"]) - min(m["ecarts_um"])
+                           for m in (neuf.get("haut"), neuf.get("bas"))
+                           if m is not None and len(m.get("ecarts_um", ())) > 1]
+                if larges_ and max(larges_) > 0.5 * float(epaisseur_nominale_um):
+                    a *= 0.5
+                    poses_reprises += 1
                     continue
             pris = neuf
             break
@@ -865,6 +888,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             "chemin_um": round(chemin, 1), "tour_boucle": bool(abs(cumul) >= 2.0 * np.pi * tours),
             "part_du_tour": round(float(abs(cumul) / (2.0 * np.pi)), 4), "fin": fin,
             "poses_refusees": int(poses_refusees),
+            "poses_reprises": int(poses_reprises),
             "derive_en_feuilles": round(float(ph[-1] - ph[0]), 4),
             "derive_max_en_feuilles": round(float(np.max(np.abs(ph - ph[0]))), 4),
             "rayon_gagne_um": round(rayon_um(etat["centre_vx"]) - r0, 1),

@@ -1583,6 +1583,35 @@ un arrêt ; et la **batterie ne vérifiait jamais sur données réelles que la r
 contrôle réel portant sur la spirale nue, où rien ne se déclenche — débrancher l'arrêt n'y changeait
 rien. Les trois ont été trouvés par une sonde qui ne mordait pas ou par l'œil.
 
+**`165` · 2026-09-16 · se reprendre plutôt que s'arrêter**
+`164` concluait qu'il fallait **s'arrêter** sur une pose qui se contredit, au prix de **22** départs
+raccourcis pour rien. Or ce dépôt a déjà son idiome pour une pose qui ne va pas : **halver l'avance
+et réessayer**, ce que la contrainte de `142` fait depuis toujours. ⭐⭐⭐⭐ **S'arrêter n'était pas la
+bonne réponse.** Sur le bras livré, le marcheur qui se reprend livre **83337** pas utilisables contre
+**72546** au sourd et **66472** à celui qui s'arrête : il bat les **deux**, récupère **50** départs,
+n'en perd **0**, et ramène les livraisons contaminées de **34** à **2** — `R4-F159`. La pose qui se
+contredit disait « pas par là », pas « plus jamais ». ⚠⚠ La victoire est **jointe** et elle pouvait
+échouer : la reprise continue là où l'arrêt s'arrêtait, donc elle peut sauter plus loin, et une
+trajectoire contaminée contre une courte et sûre est une **perte** ; chaque moitié prise seule est
+satisfaite par un marcheur qui ne se reprend **jamais**. ⭐⭐ **Et la tranche sépare deux causes qu'on
+confondait** : quand la contradiction vient d'un **pas allé trop loin**, raccourcir la répare — sur
+les deux froissées à 42,4 µm la contamination de la pince tombe à **zéro** en dépassant le sourd
+(**16397** → **22218**, **12821** → **17453**) ; quand elle vient de **la matière**, aucune longueur
+ne la répare — sur celle du rouleau la pince s'épuise **21** fois sous le voxel et la mâchoire seule
+**27** fois après **954** reprises, pour livrer **64** pas là où s'arrêter en livrait **183** —
+`R4-F160`. ⚠⚠⚠ **Un verdict par matière met les deux bras en commun**, et c'est la leçon de `161`
+repayée : la pince ne perd **aucun** départ pendant que deux matières en affichent **douze** et
+**quinze**, tous venus de l'autre bras. Sans le croisement bras × matière, la victoire de la pince
+sur la matière du rouleau — **44** pas utilisables devenus **382** — serait **invisible**. ⭐⭐⭐ Le
+contrôle est une **identité** et non une absence : sur la spirale nue, **72** départs sur **72** où
+les **trois** marcheurs livrent exactement le même nombre de pas, et **0** reprise. ⚠ Pièges payés :
+**trois** contrôles ne mordaient pas, et les trois répétaient des trous que `164` venait de
+m'apprendre — une moitié de contrôle jamais décisive, une batterie qui ne vérifiait jamais sur
+données réelles que le mécanisme s'exécute, et un contrôle qui ne **séparait pas** une reprise qui
+halve d'une reprise qui se contente d'accepter. ⚠ Et j'ai d'abord fait **importer le module de
+tranche par la garde** — une garde qui importe ce qu'elle garde — avant de publier le croisement
+dans la mesure pour qu'elle le **lise**.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

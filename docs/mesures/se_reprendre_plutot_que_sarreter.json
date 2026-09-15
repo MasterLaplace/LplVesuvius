@@ -1,0 +1,1447 @@
+{
+ "epreuve": {
+  "decidable": true,
+  "cases": [
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7607,
+     "utilisable": 7607,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7607,
+     "utilisable": 7607,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7607,
+     "utilisable": 7607,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7597,
+     "utilisable": 7597,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7597,
+     "utilisable": 7597,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7597,
+     "utilisable": 7597,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7592,
+     "utilisable": 7592,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7592,
+     "utilisable": 7592,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7592,
+     "utilisable": 7592,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 8578,
+     "utilisable": 8578,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 8578,
+     "utilisable": 8578,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 8578,
+     "utilisable": 8578,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 9,
+    "departs_identiques": 9,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 5957,
+     "utilisable": 5957,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 5957,
+     "utilisable": 5957,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 5957,
+     "utilisable": 5957,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 9,
+    "departs_identiques": 9,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 5953,
+     "utilisable": 5953,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 5953,
+     "utilisable": 5953,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 5953,
+     "utilisable": 5953,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7596,
+     "utilisable": 7596,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7596,
+     "utilisable": 7596,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7596,
+     "utilisable": 7596,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 4,
+    "reprises": 22,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 8,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7441,
+     "utilisable": 5658,
+     "contaminees": 3
+    },
+    "sarrete": {
+     "pas": 4124,
+     "utilisable": 4124,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7606,
+     "utilisable": 7606,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 0,
+    "reprises": 97,
+    "reprises_epuisees": 3,
+    "reprise_recupere": 12,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 6933,
+     "utilisable": 3143,
+     "contaminees": 7
+    },
+    "sarrete": {
+     "pas": 1238,
+     "utilisable": 1238,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7016,
+     "utilisable": 7016,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 10,
+    "departs_identiques": 10,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 6948,
+     "utilisable": 6948,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 6948,
+     "utilisable": 6948,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 6948,
+     "utilisable": 6948,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 9,
+    "departs_identiques": 1,
+    "reprises": 20,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 8,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 5942,
+     "utilisable": 3988,
+     "contaminees": 3
+    },
+    "sarrete": {
+     "pas": 2418,
+     "utilisable": 2418,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 6058,
+     "utilisable": 6058,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 7,
+    "departs_identiques": 0,
+    "reprises": 51,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 7,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 3915,
+     "utilisable": 1885,
+     "contaminees": 3
+    },
+    "sarrete": {
+     "pas": 729,
+     "utilisable": 729,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 4447,
+     "utilisable": 4447,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 8,
+    "departs_identiques": 0,
+    "reprises": 118,
+    "reprises_epuisees": 8,
+    "reprise_recupere": 7,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 553,
+     "utilisable": 44,
+     "contaminees": 5
+    },
+    "sarrete": {
+     "pas": 72,
+     "utilisable": 72,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 261,
+     "utilisable": 261,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 8,
+    "departs_identiques": 0,
+    "reprises": 64,
+    "reprises_epuisees": 8,
+    "reprise_recupere": 5,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 1186,
+     "utilisable": 0,
+     "contaminees": 8
+    },
+    "sarrete": {
+     "pas": 52,
+     "utilisable": 46,
+     "contaminees": 1
+    },
+    "se_reprend": {
+     "pas": 106,
+     "utilisable": 79,
+     "contaminees": 1
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 5,
+    "departs_identiques": 0,
+    "reprises": 39,
+    "reprises_epuisees": 5,
+    "reprise_recupere": 3,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 432,
+     "utilisable": 0,
+     "contaminees": 5
+    },
+    "sarrete": {
+     "pas": 19,
+     "utilisable": 17,
+     "contaminees": 1
+    },
+    "se_reprend": {
+     "pas": 73,
+     "utilisable": 42,
+     "contaminees": 1
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7674,
+     "utilisable": 7674,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7674,
+     "utilisable": 7674,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7674,
+     "utilisable": 7674,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7795,
+     "utilisable": 7795,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7795,
+     "utilisable": 7795,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7795,
+     "utilisable": 7795,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7803,
+     "utilisable": 7803,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7803,
+     "utilisable": 7803,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7803,
+     "utilisable": 7803,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 8645,
+     "utilisable": 8645,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 8645,
+     "utilisable": 8645,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 8645,
+     "utilisable": 8645,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 11,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7925,
+     "utilisable": 7925,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7925,
+     "utilisable": 7925,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7925,
+     "utilisable": 7925,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 10,
+    "reprises": 1,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 1,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7944,
+     "utilisable": 7298,
+     "contaminees": 1
+    },
+    "sarrete": {
+     "pas": 7348,
+     "utilisable": 7348,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7936,
+     "utilisable": 7936,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7792,
+     "utilisable": 7792,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7792,
+     "utilisable": 7792,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7792,
+     "utilisable": 7792,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7799,
+     "utilisable": 7799,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7799,
+     "utilisable": 7799,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7799,
+     "utilisable": 7799,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 5,
+    "reprises": 9,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 7,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7814,
+     "utilisable": 7163,
+     "contaminees": 1
+    },
+    "sarrete": {
+     "pas": 5515,
+     "utilisable": 5515,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7816,
+     "utilisable": 7816,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 11,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 7977,
+     "utilisable": 7977,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 7977,
+     "utilisable": 7977,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 7977,
+     "utilisable": 7977,
+     "contaminees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 2,
+    "reprises": 25,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 1,
+    "reprise_perd": 4,
+    "sourd": {
+     "pas": 8259,
+     "utilisable": 0,
+     "contaminees": 11
+    },
+    "sarrete": {
+     "pas": 4134,
+     "utilisable": 759,
+     "contaminees": 6
+    },
+    "se_reprend": {
+     "pas": 8128,
+     "utilisable": 842,
+     "contaminees": 10
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 0,
+    "reprises": 89,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 1,
+    "reprise_perd": 8,
+    "sourd": {
+     "pas": 9528,
+     "utilisable": 0,
+     "contaminees": 11
+    },
+    "sarrete": {
+     "pas": 1297,
+     "utilisable": 1059,
+     "contaminees": 2
+    },
+    "se_reprend": {
+     "pas": 8309,
+     "utilisable": 663,
+     "contaminees": 10
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 10,
+    "departs_identiques": 1,
+    "reprises": 99,
+    "reprises_epuisees": 9,
+    "reprise_recupere": 2,
+    "reprise_perd": 4,
+    "sourd": {
+     "pas": 1172,
+     "utilisable": 55,
+     "contaminees": 7
+    },
+    "sarrete": {
+     "pas": 172,
+     "utilisable": 94,
+     "contaminees": 3
+    },
+    "se_reprend": {
+     "pas": 1060,
+     "utilisable": 57,
+     "contaminees": 7
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 0,
+    "reprises": 422,
+    "reprises_epuisees": 11,
+    "reprise_recupere": 0,
+    "reprise_perd": 6,
+    "sourd": {
+     "pas": 18143,
+     "utilisable": 0,
+     "contaminees": 11
+    },
+    "sarrete": {
+     "pas": 121,
+     "utilisable": 36,
+     "contaminees": 5
+    },
+    "se_reprend": {
+     "pas": 4324,
+     "utilisable": 0,
+     "contaminees": 11
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 9,
+    "departs_identiques": 0,
+    "reprises": 433,
+    "reprises_epuisees": 7,
+    "reprise_recupere": 1,
+    "reprise_perd": 5,
+    "sourd": {
+     "pas": 19060,
+     "utilisable": 0,
+     "contaminees": 9
+    },
+    "sarrete": {
+     "pas": 99,
+     "utilisable": 53,
+     "contaminees": 3
+    },
+    "se_reprend": {
+     "pas": 4172,
+     "utilisable": 7,
+     "contaminees": 8
+    }
+   }
+  ],
+  "bras": [
+   "la pince de `144`",
+   "une mâchoire avec rejet"
+  ],
+  "marcheurs": [
+   "sourd",
+   "sarrete",
+   "se_reprend"
+  ],
+  "bruits": [
+   0.0,
+   8.0,
+   16.0
+  ],
+  "departs": 12
+ },
+ "juger": {
+  "decidable": true,
+  "par_matiere": [
+   {
+    "nom": "spirale nue",
+    "cases": 6,
+    "cases_decidables": 6,
+    "apparies": 72,
+    "departs_identiques": 72,
+    "reprises": 0,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 0,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 46068,
+     "utilisable": 46068,
+     "contaminees": 0
+    },
+    "sarrete": {
+     "pas": 46068,
+     "utilisable": 46068,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 46068,
+     "utilisable": 46068,
+     "contaminees": 0
+    },
+    "la_reprise_lemporte": false
+   },
+   {
+    "nom": "spirale écrasée",
+    "cases": 6,
+    "cases_decidables": 6,
+    "apparies": 64,
+    "departs_identiques": 63,
+    "reprises": 1,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 1,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 45002,
+     "utilisable": 44356,
+     "contaminees": 1
+    },
+    "sarrete": {
+     "pas": 44406,
+     "utilisable": 44406,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 44994,
+     "utilisable": 44994,
+     "contaminees": 0
+    },
+    "la_reprise_lemporte": true
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "apparies": 72,
+    "departs_identiques": 45,
+    "reprises": 128,
+    "reprises_epuisees": 3,
+    "reprise_recupere": 27,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 45375,
+     "utilisable": 39151,
+     "contaminees": 11
+    },
+    "sarrete": {
+     "pas": 34064,
+     "utilisable": 34064,
+     "contaminees": 0
+    },
+    "se_reprend": {
+     "pas": 45625,
+     "utilisable": 45625,
+     "contaminees": 0
+    },
+    "la_reprise_lemporte": true
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "apparies": 59,
+    "departs_identiques": 24,
+    "reprises": 185,
+    "reprises_epuisees": 0,
+    "reprise_recupere": 17,
+    "reprise_perd": 12,
+    "sourd": {
+     "pas": 42569,
+     "utilisable": 20798,
+     "contaminees": 28
+    },
+    "sarrete": {
+     "pas": 23503,
+     "utilisable": 19890,
+     "contaminees": 8
+    },
+    "se_reprend": {
+     "pas": 41867,
+     "utilisable": 26935,
+     "contaminees": 20
+    },
+    "la_reprise_lemporte": false
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "apparies": 51,
+    "departs_identiques": 1,
+    "reprises": 1175,
+    "reprises_epuisees": 48,
+    "reprise_recupere": 18,
+    "reprise_perd": 15,
+    "sourd": {
+     "pas": 40546,
+     "utilisable": 99,
+     "contaminees": 45
+    },
+    "sarrete": {
+     "pas": 535,
+     "utilisable": 318,
+     "contaminees": 13
+    },
+    "se_reprend": {
+     "pas": 9996,
+     "utilisable": 446,
+     "contaminees": 28
+    },
+    "la_reprise_lemporte": false
+   }
+  ],
+  "par_bras": [
+   {
+    "nom": "la pince de `144`",
+    "cases": 15,
+    "cases_decidables": 15,
+    "apparies": 149,
+    "departs_identiques": 93,
+    "reprises": 411,
+    "reprises_epuisees": 24,
+    "reprise_recupere": 50,
+    "reprise_perd": 0,
+    "sourd": {
+     "pas": 84230,
+     "utilisable": 72546,
+     "contaminees": 34
+    },
+    "sarrete": {
+     "pas": 66480,
+     "utilisable": 66472,
+     "contaminees": 2
+    },
+    "se_reprend": {
+     "pas": 83395,
+     "utilisable": 83337,
+     "contaminees": 2
+    },
+    "la_reprise_lemporte": true
+   },
+   {
+    "nom": "une mâchoire avec rejet",
+    "cases": 15,
+    "cases_decidables": 15,
+    "apparies": 169,
+    "departs_identiques": 112,
+    "reprises": 1078,
+    "reprises_epuisees": 27,
+    "reprise_recupere": 13,
+    "reprise_perd": 27,
+    "sourd": {
+     "pas": 135330,
+     "utilisable": 77926,
+     "contaminees": 51
+    },
+    "sarrete": {
+     "pas": 82096,
+     "utilisable": 78274,
+     "contaminees": 19
+    },
+    "se_reprend": {
+     "pas": 105155,
+     "utilisable": 80731,
+     "contaminees": 46
+    },
+    "la_reprise_lemporte": false
+   }
+  ],
+  "tout": {
+   "nom": "tout",
+   "cases": 30,
+   "cases_decidables": 30,
+   "apparies": 318,
+   "departs_identiques": 205,
+   "reprises": 1489,
+   "reprises_epuisees": 51,
+   "reprise_recupere": 63,
+   "reprise_perd": 27,
+   "sourd": {
+    "pas": 219560,
+    "utilisable": 150472,
+    "contaminees": 85
+   },
+   "sarrete": {
+    "pas": 148576,
+    "utilisable": 144746,
+    "contaminees": 21
+   },
+   "se_reprend": {
+    "pas": 188550,
+    "utilisable": 164068,
+    "contaminees": 48
+   },
+   "la_reprise_lemporte": false
+  },
+  "le_controle_de_la_spirale_nue": {
+   "nom": "spirale nue",
+   "departs_identiques": 72,
+   "apparies": 72,
+   "reprises": 0,
+   "il_est_identique": true
+  },
+  "la_reprise_lemporte_par_bras": {
+   "la pince de `144`": true,
+   "une mâchoire avec rejet": false
+  },
+  "matieres_ou_la_reprise_lemporte": [
+   "spirale écrasée",
+   "spirale froissée 42.4 µm"
+  ],
+  "matieres_ou_la_reprise_lemporte_par_bras": {
+   "la pince de `144`": [
+    "spirale froissée 42.4 µm",
+    "spirale écrasée et froissée 42.4 µm",
+    "spirale écrasée et froissée 100 µm"
+   ],
+   "une mâchoire avec rejet": [
+    "spirale écrasée",
+    "spirale froissée 42.4 µm"
+   ]
+  },
+  "par_bras_et_matiere": {
+   "la pince de `144`": [
+    {
+     "nom": "spirale nue",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 36,
+     "departs_identiques": 36,
+     "reprises": 0,
+     "reprises_epuisees": 0,
+     "reprise_recupere": 0,
+     "reprise_perd": 0,
+     "sourd": {
+      "pas": 22796,
+      "utilisable": 22796,
+      "contaminees": 0
+     },
+     "sarrete": {
+      "pas": 22796,
+      "utilisable": 22796,
+      "contaminees": 0
+     },
+     "se_reprend": {
+      "pas": 22796,
+      "utilisable": 22796,
+      "contaminees": 0
+     },
+     "la_reprise_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 30,
+     "departs_identiques": 30,
+     "reprises": 0,
+     "reprises_epuisees": 0,
+     "reprise_recupere": 0,
+     "reprise_perd": 0,
+     "sourd": {
+      "pas": 20488,
+      "utilisable": 20488,
+      "contaminees": 0
+     },
+     "sarrete": {
+      "pas": 20488,
+      "utilisable": 20488,
+      "contaminees": 0
+     },
+     "se_reprend": {
+      "pas": 20488,
+      "utilisable": 20488,
+      "contaminees": 0
+     },
+     "la_reprise_lemporte": false
+    },
+    {
+     "nom": "spirale froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 36,
+     "departs_identiques": 16,
+     "reprises": 119,
+     "reprises_epuisees": 3,
+     "reprise_recupere": 20,
+     "reprise_perd": 0,
+     "sourd": {
+      "pas": 21970,
+      "utilisable": 16397,
+      "contaminees": 10
+     },
+     "sarrete": {
+      "pas": 12958,
+      "utilisable": 12958,
+      "contaminees": 0
+     },
+     "se_reprend": {
+      "pas": 22218,
+      "utilisable": 22218,
+      "contaminees": 0
+     },
+     "la_reprise_lemporte": true
+    },
+    {
+     "nom": "spirale écrasée et froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 26,
+     "departs_identiques": 11,
+     "reprises": 71,
+     "reprises_epuisees": 0,
+     "reprise_recupere": 15,
+     "reprise_perd": 0,
+     "sourd": {
+      "pas": 16805,
+      "utilisable": 12821,
+      "contaminees": 6
+     },
+     "sarrete": {
+      "pas": 10095,
+      "utilisable": 10095,
+      "contaminees": 0
+     },
+     "se_reprend": {
+      "pas": 17453,
+      "utilisable": 17453,
+      "contaminees": 0
+     },
+     "la_reprise_lemporte": true
+    },
+    {
+     "nom": "spirale écrasée et froissée 100 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 21,
+     "departs_identiques": 0,
+     "reprises": 221,
+     "reprises_epuisees": 21,
+     "reprise_recupere": 15,
+     "reprise_perd": 0,
+     "sourd": {
+      "pas": 2171,
+      "utilisable": 44,
+      "contaminees": 18
+     },
+     "sarrete": {
+      "pas": 143,
+      "utilisable": 135,
+      "contaminees": 2
+     },
+     "se_reprend": {
+      "pas": 440,
+      "utilisable": 382,
+      "contaminees": 2
+     },
+     "la_reprise_lemporte": true
+    }
+   ],
+   "une mâchoire avec rejet": [
+    {
+     "nom": "spirale nue",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 36,
+     "departs_identiques": 36,
+     "reprises": 0,
+     "reprises_epuisees": 0,
+     "reprise_recupere": 0,
+     "reprise_perd": 0,
+     "sourd": {
+      "pas": 23272,
+      "utilisable": 23272,
+      "contaminees": 0
+     },
+     "sarrete": {
+      "pas": 23272,
+      "utilisable": 23272,
+      "contaminees": 0
+     },
+     "se_reprend": {
+      "pas": 23272,
+      "utilisable": 23272,
+      "contaminees": 0
+     },
+     "la_reprise_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 34,
+     "departs_identiques": 33,
+     "reprises": 1,
+     "reprises_epuisees": 0,
+     "reprise_recupere": 1,
+     "reprise_perd": 0,
+     "sourd": {
+      "pas": 24514,
+      "utilisable": 23868,
+      "contaminees": 1
+     },
+     "sarrete": {
+      "pas": 23918,
+      "utilisable": 23918,
+      "contaminees": 0
+     },
+     "se_reprend": {
+      "pas": 24506,
+      "utilisable": 24506,
+      "contaminees": 0
+     },
+     "la_reprise_lemporte": true
+    },
+    {
+     "nom": "spirale froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 36,
+     "departs_identiques": 29,
+     "reprises": 9,
+     "reprises_epuisees": 0,
+     "reprise_recupere": 7,
+     "reprise_perd": 0,
+     "sourd": {
+      "pas": 23405,
+      "utilisable": 22754,
+      "contaminees": 1
+     },
+     "sarrete": {
+      "pas": 21106,
+      "utilisable": 21106,
+      "contaminees": 0
+     },
+     "se_reprend": {
+      "pas": 23407,
+      "utilisable": 23407,
+      "contaminees": 0
+     },
+     "la_reprise_lemporte": true
+    },
+    {
+     "nom": "spirale écrasée et froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 33,
+     "departs_identiques": 13,
+     "reprises": 114,
+     "reprises_epuisees": 0,
+     "reprise_recupere": 2,
+     "reprise_perd": 12,
+     "sourd": {
+      "pas": 25764,
+      "utilisable": 7977,
+      "contaminees": 22
+     },
+     "sarrete": {
+      "pas": 13408,
+      "utilisable": 9795,
+      "contaminees": 8
+     },
+     "se_reprend": {
+      "pas": 24414,
+      "utilisable": 9482,
+      "contaminees": 20
+     },
+     "la_reprise_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée et froissée 100 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 30,
+     "departs_identiques": 1,
+     "reprises": 954,
+     "reprises_epuisees": 27,
+     "reprise_recupere": 3,
+     "reprise_perd": 15,
+     "sourd": {
+      "pas": 38375,
+      "utilisable": 55,
+      "contaminees": 27
+     },
+     "sarrete": {
+      "pas": 392,
+      "utilisable": 183,
+      "contaminees": 11
+     },
+     "se_reprend": {
+      "pas": 9556,
+      "utilisable": 64,
+      "contaminees": 26
+     },
+     "la_reprise_lemporte": false
+    }
+   ]
+  }
+ }
+}

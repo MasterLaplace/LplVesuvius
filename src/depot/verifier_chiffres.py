@@ -3049,6 +3049,49 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 165 : SE REPRENDRE PLUTOT QUE S'ARRETER, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un compte de departs RECUPERES ne voyage jamais sans le compte de PERDUS : la victoire
+    # est jointe, et la moitie qui flatte est satisfaite par un marcheur qui ne se reprend jamais.
+    # (2) Une longueur utilisable d'UN marcheur ne voyage jamais sans celles des DEUX autres :
+    # c'est leur comparaison qui porte l'enonce, et une seule se lirait comme un niveau.
+    # (3) Et un compte de REPRISES ne voyage jamais sans celui des EPUISEES : se reprendre mille
+    # fois et s'epuiser n'est pas se reprendre une fois et reussir.
+    sr = _source(racine, "se_reprendre_plutot_que_sarreter.json")
+    if sr.exists():
+        d = json.loads(sr.read_text())
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            for cle, nom in (("departs_identiques", "departs identiques du controle"),
+                             ("apparies", "departs apparies du controle"),
+                             ("reprises", "reprises du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 165", int(c_[cle]), 0, sr.name)
+            # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : il donne les trois livrables par
+            # BRAS et le CROISEMENT bras x matiere, jamais le tableau par matiere seul — qui met
+            # justement les deux bras en commun.
+            groupes = list(j_.get("par_bras", []))
+            for b_, gs in (j_.get("par_bras_et_matiere") or {}).items():
+                for g_ in gs:
+                    groupes.append({**g_, "nom": f"{g_['nom']} du bras {b_}"})
+            for groupe in groupes:
+                q = f"sur {groupe['nom']} de 165"
+                for cle, nom in (("reprise_recupere", "departs recuperes"),
+                                 ("reprise_perd", "departs perdus"),
+                                 ("reprises", "reprises"),
+                                 ("reprises_epuisees", "reprises epuisees")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(groupe[cle]), 0, sr.name)
+                for m_, lisible in (("sourd", "du marcheur sourd"),
+                                    ("sarrete", "de celui qui sarrete"),
+                                    ("se_reprend", "de celui qui se reprend")):
+                    t = groupe.get(m_)
+                    if not t:
+                        continue
+                    ajoute(f"pas utilisables {lisible} {q}", int(t["utilisable"]), 0, sr.name)
+                    ajoute(f"livraisons contaminees {lisible} {q}", int(t["contaminees"]), 0,
+                           sr.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 164 : CE QU'UN MARCHEUR QUI ECOUTE LIVRE, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un compte de livraisons CONTAMINEES ne voyage jamais sans le nombre de departs : « 54 »
     # seul est un nombre, « 54 sur 170 » est une part de livrable.
