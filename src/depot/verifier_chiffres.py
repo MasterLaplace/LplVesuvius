@@ -3049,6 +3049,56 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 166 : REESSAYER AILLEURS, ET TROIS APPARIEMENTS L'IMPOSENT.
+    # (1) Un total de pas UTILISABLES ne voyage jamais sans le nombre de DEPARTS APPARIES : le meme
+    # marcheur rend 87865 ici et 83337 dans `165`, sur 161 et 149 departs — les deux sont justes et
+    # leur RAPPROCHEMENT ne l'est pas.
+    # (2) Un compte de departs RECUPERES ne voyage jamais sans celui des PERDUS : la victoire est
+    # jointe, et la moitie qui flatte est satisfaite par un detour jamais tente.
+    # (3) Et un compte de DETOURS ne voyage jamais sans les EPUISEMENTS : deux mille detours pour
+    # treize epuisements de moins n'est pas la meme chose que deux detours pour treize.
+    ra = _source(racine, "reessayer_ailleurs_plutot_que_plus_court.json")
+    if ra.exists():
+        d = json.loads(ra.read_text())
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            for cle, nom in (("departs_identiques", "departs identiques du controle"),
+                             ("apparies", "departs apparies du controle"),
+                             ("detours", "detours du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 166", int(c_[cle]), 0, ra.name)
+            t_ = j_.get("tout", {})
+            for cle, nom in (("detours", "detours en tout"),
+                             ("detours_du_plus_court", "detours du marcheur qui raccourcit"),
+                             ("epuisees_plus_court", "epuisements en raccourcissant"),
+                             ("epuisees_ailleurs", "epuisements en detournant")):
+                if t_.get(cle) is not None:
+                    ajoute(f"{nom} de 166", int(t_[cle]), 0, ra.name)
+            # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : du tableau par MATIERE il ne donne
+            # que les recuperes, les perdus et les detours — pas les trois livrables, qui y
+            # melangeraient les deux bras.
+            for groupe in (j_.get("par_bras", []) + j_.get("par_matiere", [])):
+                q = f"sur {groupe['nom']} de 166"
+                for cle, nom in (("le_detour_recupere", "departs recuperes"),
+                                 ("le_detour_perd", "departs perdus"),
+                                 ("detours", "detours tentes")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(groupe[cle]), 0, ra.name)
+            for groupe in j_.get("par_bras", []):
+                q = f"sur {groupe['nom']} de 166"
+                if groupe.get("apparies") is not None:
+                    ajoute(f"departs apparies {q}", int(groupe["apparies"]), 0, ra.name)
+                for m_, lisible in (("sourd", "du marcheur sourd"),
+                                    ("plus_court", "de celui qui raccourcit"),
+                                    ("ailleurs", "de celui qui detourne")):
+                    t = groupe.get(m_)
+                    if not t:
+                        continue
+                    ajoute(f"pas utilisables {lisible} {q}", int(t["utilisable"]), 0, ra.name)
+                    ajoute(f"livraisons contaminees {lisible} {q}", int(t["contaminees"]), 0,
+                           ra.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 165 : SE REPRENDRE PLUTOT QUE S'ARRETER, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un compte de departs RECUPERES ne voyage jamais sans le compte de PERDUS : la victoire
     # est jointe, et la moitie qui flatte est satisfaite par un marcheur qui ne se reprend jamais.

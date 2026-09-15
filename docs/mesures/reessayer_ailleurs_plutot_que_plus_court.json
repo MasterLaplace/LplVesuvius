@@ -1,0 +1,1677 @@
+{
+ "epreuve": {
+  "decidable": true,
+  "cases": [
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7607,
+     "utilisable": 7607,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7607,
+     "utilisable": 7607,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7607,
+     "utilisable": 7607,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7597,
+     "utilisable": 7597,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7597,
+     "utilisable": 7597,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7597,
+     "utilisable": 7597,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7592,
+     "utilisable": 7592,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7592,
+     "utilisable": 7592,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7592,
+     "utilisable": 7592,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 8578,
+     "utilisable": 8578,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 8578,
+     "utilisable": 8578,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 8578,
+     "utilisable": 8578,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 10,
+    "departs_identiques": 9,
+    "detours": 2,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 6894,
+     "utilisable": 5957,
+     "contaminees": 1,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 6856,
+     "utilisable": 6856,
+     "contaminees": 0,
+     "raccourcissements": 2
+    },
+    "ailleurs": {
+     "pas": 6856,
+     "utilisable": 6856,
+     "contaminees": 0,
+     "raccourcissements": 2
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 10,
+    "departs_identiques": 9,
+    "detours": 2,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 6077,
+     "utilisable": 5953,
+     "contaminees": 1,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 6851,
+     "utilisable": 6851,
+     "contaminees": 0,
+     "raccourcissements": 2
+    },
+    "ailleurs": {
+     "pas": 6851,
+     "utilisable": 6851,
+     "contaminees": 0,
+     "raccourcissements": 2
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7596,
+     "utilisable": 7596,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7596,
+     "utilisable": 7596,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7596,
+     "utilisable": 7596,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 6,
+    "detours": 22,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 4,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7441,
+     "utilisable": 5658,
+     "contaminees": 3,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7606,
+     "utilisable": 7606,
+     "contaminees": 0,
+     "raccourcissements": 22
+    },
+    "ailleurs": {
+     "pas": 7599,
+     "utilisable": 7599,
+     "contaminees": 0,
+     "raccourcissements": 7
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 0,
+    "detours": 78,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 2,
+    "le_detour_perd": 10,
+    "epuisees_plus_court": 3,
+    "epuisees_ailleurs": 1,
+    "sourd": {
+     "pas": 6933,
+     "utilisable": 3143,
+     "contaminees": 7,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7016,
+     "utilisable": 7016,
+     "contaminees": 0,
+     "raccourcissements": 97
+    },
+    "ailleurs": {
+     "pas": 7200,
+     "utilisable": 7200,
+     "contaminees": 0,
+     "raccourcissements": 21
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 10,
+    "detours": 2,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 6976,
+     "utilisable": 6948,
+     "contaminees": 1,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7781,
+     "utilisable": 7781,
+     "contaminees": 0,
+     "raccourcissements": 2
+    },
+    "ailleurs": {
+     "pas": 7781,
+     "utilisable": 7781,
+     "contaminees": 0,
+     "raccourcissements": 2
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 10,
+    "departs_identiques": 3,
+    "detours": 24,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 3,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 5952,
+     "utilisable": 3988,
+     "contaminees": 4,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 6961,
+     "utilisable": 6961,
+     "contaminees": 0,
+     "raccourcissements": 28
+    },
+    "ailleurs": {
+     "pas": 6954,
+     "utilisable": 6954,
+     "contaminees": 0,
+     "raccourcissements": 9
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 9,
+    "departs_identiques": 0,
+    "detours": 68,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 1,
+    "le_detour_perd": 6,
+    "epuisees_plus_court": 2,
+    "epuisees_ailleurs": 2,
+    "sourd": {
+     "pas": 4077,
+     "utilisable": 1885,
+     "contaminees": 5,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 5316,
+     "utilisable": 5316,
+     "contaminees": 0,
+     "raccourcissements": 79
+    },
+    "ailleurs": {
+     "pas": 5291,
+     "utilisable": 5291,
+     "contaminees": 0,
+     "raccourcissements": 26
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 9,
+    "departs_identiques": 0,
+    "detours": 160,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 4,
+    "le_detour_perd": 5,
+    "epuisees_plus_court": 9,
+    "epuisees_ailleurs": 9,
+    "sourd": {
+     "pas": 694,
+     "utilisable": 44,
+     "contaminees": 6,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 281,
+     "utilisable": 281,
+     "contaminees": 0,
+     "raccourcissements": 135
+    },
+    "ailleurs": {
+     "pas": 375,
+     "utilisable": 92,
+     "contaminees": 4,
+     "raccourcissements": 117
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 10,
+    "departs_identiques": 0,
+    "detours": 145,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 4,
+    "le_detour_perd": 3,
+    "epuisees_plus_court": 10,
+    "epuisees_ailleurs": 10,
+    "sourd": {
+     "pas": 1202,
+     "utilisable": 0,
+     "contaminees": 10,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 157,
+     "utilisable": 130,
+     "contaminees": 1,
+     "raccourcissements": 83
+    },
+    "ailleurs": {
+     "pas": 168,
+     "utilisable": 143,
+     "contaminees": 2,
+     "raccourcissements": 112
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 8,
+    "departs_identiques": 0,
+    "detours": 95,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 3,
+    "le_detour_perd": 3,
+    "epuisees_plus_court": 8,
+    "epuisees_ailleurs": 8,
+    "sourd": {
+     "pas": 904,
+     "utilisable": 0,
+     "contaminees": 8,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 141,
+     "utilisable": 97,
+     "contaminees": 2,
+     "raccourcissements": 84
+    },
+    "ailleurs": {
+     "pas": 121,
+     "utilisable": 97,
+     "contaminees": 2,
+     "raccourcissements": 76
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7674,
+     "utilisable": 7674,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7674,
+     "utilisable": 7674,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7674,
+     "utilisable": 7674,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7795,
+     "utilisable": 7795,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7795,
+     "utilisable": 7795,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7795,
+     "utilisable": 7795,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7803,
+     "utilisable": 7803,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7803,
+     "utilisable": 7803,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7803,
+     "utilisable": 7803,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 8645,
+     "utilisable": 8645,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 8645,
+     "utilisable": 8645,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 8645,
+     "utilisable": 8645,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 11,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7925,
+     "utilisable": 7925,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7925,
+     "utilisable": 7925,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7925,
+     "utilisable": 7925,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 10,
+    "detours": 1,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7944,
+     "utilisable": 7298,
+     "contaminees": 1,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7936,
+     "utilisable": 7936,
+     "contaminees": 0,
+     "raccourcissements": 1
+    },
+    "ailleurs": {
+     "pas": 7936,
+     "utilisable": 7936,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7792,
+     "utilisable": 7792,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7792,
+     "utilisable": 7792,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7792,
+     "utilisable": 7792,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7799,
+     "utilisable": 7799,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7799,
+     "utilisable": 7799,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7799,
+     "utilisable": 7799,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 6,
+    "detours": 8,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 1,
+    "le_detour_perd": 4,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7814,
+     "utilisable": 7163,
+     "contaminees": 1,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7816,
+     "utilisable": 7816,
+     "contaminees": 0,
+     "raccourcissements": 9
+    },
+    "ailleurs": {
+     "pas": 7810,
+     "utilisable": 7810,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 11,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 7977,
+     "utilisable": 7977,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 7977,
+     "utilisable": 7977,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 7977,
+     "utilisable": 7977,
+     "contaminees": 0,
+     "raccourcissements": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 2,
+    "detours": 23,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 3,
+    "le_detour_perd": 1,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 8259,
+     "utilisable": 0,
+     "contaminees": 11,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 8128,
+     "utilisable": 842,
+     "contaminees": 10,
+     "raccourcissements": 25
+    },
+    "ailleurs": {
+     "pas": 8092,
+     "utilisable": 2872,
+     "contaminees": 7,
+     "raccourcissements": 3
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 0,
+    "detours": 84,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 1,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 9528,
+     "utilisable": 0,
+     "contaminees": 11,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 8309,
+     "utilisable": 663,
+     "contaminees": 10,
+     "raccourcissements": 89
+    },
+    "ailleurs": {
+     "pas": 8292,
+     "utilisable": 0,
+     "contaminees": 11,
+     "raccourcissements": 15
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 1,
+    "detours": 140,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 1,
+    "epuisees_plus_court": 11,
+    "epuisees_ailleurs": 11,
+    "sourd": {
+     "pas": 1173,
+     "utilisable": 55,
+     "contaminees": 8,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 1232,
+     "utilisable": 57,
+     "contaminees": 8,
+     "raccourcissements": 119
+    },
+    "ailleurs": {
+     "pas": 2160,
+     "utilisable": 44,
+     "contaminees": 9,
+     "raccourcissements": 28
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 0,
+    "detours": 776,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 12,
+    "epuisees_ailleurs": 7,
+    "sourd": {
+     "pas": 18223,
+     "utilisable": 0,
+     "contaminees": 12,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 4511,
+     "utilisable": 0,
+     "contaminees": 12,
+     "raccourcissements": 454
+    },
+    "ailleurs": {
+     "pas": 10591,
+     "utilisable": 0,
+     "contaminees": 12,
+     "raccourcissements": 160
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 0,
+    "detours": 798,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 1,
+    "epuisees_plus_court": 9,
+    "epuisees_ailleurs": 3,
+    "sourd": {
+     "pas": 21122,
+     "utilisable": 0,
+     "contaminees": 11,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 4659,
+     "utilisable": 7,
+     "contaminees": 10,
+     "raccourcissements": 476
+    },
+    "ailleurs": {
+     "pas": 9851,
+     "utilisable": 0,
+     "contaminees": 11,
+     "raccourcissements": 184
+    }
+   }
+  ],
+  "bras": [
+   "la pince de `144`",
+   "une mâchoire avec rejet"
+  ],
+  "marcheurs": [
+   "sourd",
+   "plus_court",
+   "ailleurs"
+  ],
+  "bruits": [
+   0.0,
+   8.0,
+   16.0
+  ],
+  "departs": 12
+ },
+ "juger": {
+  "decidable": true,
+  "par_matiere": [
+   {
+    "nom": "spirale nue",
+    "cases": 6,
+    "cases_decidables": 6,
+    "apparies": 72,
+    "departs_identiques": 72,
+    "detours": 0,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 46068,
+     "utilisable": 46068,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 46068,
+     "utilisable": 46068,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "ailleurs": {
+     "pas": 46068,
+     "utilisable": 46068,
+     "contaminees": 0,
+     "raccourcissements": 0
+    },
+    "le_detour_lemporte": false
+   },
+   {
+    "nom": "spirale écrasée",
+    "cases": 6,
+    "cases_decidables": 6,
+    "apparies": 66,
+    "departs_identiques": 63,
+    "detours": 5,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 0,
+    "le_detour_perd": 0,
+    "epuisees_plus_court": 0,
+    "epuisees_ailleurs": 0,
+    "sourd": {
+     "pas": 46063,
+     "utilisable": 44356,
+     "contaminees": 3,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 46791,
+     "utilisable": 46791,
+     "contaminees": 0,
+     "raccourcissements": 5
+    },
+    "ailleurs": {
+     "pas": 46791,
+     "utilisable": 46791,
+     "contaminees": 0,
+     "raccourcissements": 4
+    },
+    "le_detour_lemporte": false
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "apparies": 72,
+    "departs_identiques": 48,
+    "detours": 108,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 3,
+    "le_detour_perd": 18,
+    "epuisees_plus_court": 3,
+    "epuisees_ailleurs": 1,
+    "sourd": {
+     "pas": 45375,
+     "utilisable": 39151,
+     "contaminees": 11,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 45625,
+     "utilisable": 45625,
+     "contaminees": 0,
+     "raccourcissements": 128
+    },
+    "ailleurs": {
+     "pas": 45796,
+     "utilisable": 45796,
+     "contaminees": 0,
+     "raccourcissements": 28
+    },
+    "le_detour_lemporte": false
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "apparies": 63,
+    "departs_identiques": 26,
+    "detours": 201,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 4,
+    "le_detour_perd": 11,
+    "epuisees_plus_court": 2,
+    "epuisees_ailleurs": 2,
+    "sourd": {
+     "pas": 42769,
+     "utilisable": 20798,
+     "contaminees": 32,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 44472,
+     "utilisable": 29540,
+     "contaminees": 20,
+     "raccourcissements": 223
+    },
+    "ailleurs": {
+     "pas": 44387,
+     "utilisable": 30875,
+     "contaminees": 18,
+     "raccourcissements": 55
+    },
+    "le_detour_lemporte": false
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "apparies": 61,
+    "departs_identiques": 1,
+    "detours": 2114,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 11,
+    "le_detour_perd": 13,
+    "epuisees_plus_court": 59,
+    "epuisees_ailleurs": 48,
+    "sourd": {
+     "pas": 43318,
+     "utilisable": 99,
+     "contaminees": 55,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 10981,
+     "utilisable": 572,
+     "contaminees": 33,
+     "raccourcissements": 1351
+    },
+    "ailleurs": {
+     "pas": 23266,
+     "utilisable": 376,
+     "contaminees": 40,
+     "raccourcissements": 677
+    },
+    "le_detour_lemporte": false
+   }
+  ],
+  "par_bras": [
+   {
+    "nom": "la pince de `144`",
+    "cases": 15,
+    "cases_decidables": 15,
+    "apparies": 161,
+    "departs_identiques": 97,
+    "detours": 598,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 14,
+    "le_detour_perd": 34,
+    "epuisees_plus_court": 32,
+    "epuisees_ailleurs": 30,
+    "sourd": {
+     "pas": 86120,
+     "utilisable": 72546,
+     "contaminees": 46,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 87936,
+     "utilisable": 87865,
+     "contaminees": 3,
+     "raccourcissements": 534
+    },
+    "ailleurs": {
+     "pas": 88166,
+     "utilisable": 87834,
+     "contaminees": 8,
+     "raccourcissements": 374
+    },
+    "le_detour_lemporte": false
+   },
+   {
+    "nom": "une mâchoire avec rejet",
+    "cases": 15,
+    "cases_decidables": 15,
+    "apparies": 173,
+    "departs_identiques": 113,
+    "detours": 1830,
+    "detours_du_plus_court": 0,
+    "le_detour_recupere": 4,
+    "le_detour_perd": 8,
+    "epuisees_plus_court": 32,
+    "epuisees_ailleurs": 21,
+    "sourd": {
+     "pas": 137473,
+     "utilisable": 77926,
+     "contaminees": 55,
+     "raccourcissements": 0
+    },
+    "plus_court": {
+     "pas": 106001,
+     "utilisable": 80731,
+     "contaminees": 50,
+     "raccourcissements": 1173
+    },
+    "ailleurs": {
+     "pas": 118142,
+     "utilisable": 82072,
+     "contaminees": 50,
+     "raccourcissements": 390
+    },
+    "le_detour_lemporte": false
+   }
+  ],
+  "tout": {
+   "nom": "tout",
+   "cases": 30,
+   "cases_decidables": 30,
+   "apparies": 334,
+   "departs_identiques": 210,
+   "detours": 2428,
+   "detours_du_plus_court": 0,
+   "le_detour_recupere": 18,
+   "le_detour_perd": 42,
+   "epuisees_plus_court": 64,
+   "epuisees_ailleurs": 51,
+   "sourd": {
+    "pas": 223593,
+    "utilisable": 150472,
+    "contaminees": 101,
+    "raccourcissements": 0
+   },
+   "plus_court": {
+    "pas": 193937,
+    "utilisable": 168596,
+    "contaminees": 53,
+    "raccourcissements": 1707
+   },
+   "ailleurs": {
+    "pas": 206308,
+    "utilisable": 169906,
+    "contaminees": 58,
+    "raccourcissements": 764
+   },
+   "le_detour_lemporte": false
+  },
+  "le_controle_de_la_spirale_nue": {
+   "nom": "spirale nue",
+   "departs_identiques": 72,
+   "apparies": 72,
+   "detours": 0,
+   "il_est_identique": true
+  },
+  "le_plus_court_ne_detourne_jamais": true,
+  "le_detour_lemporte_par_bras": {
+   "la pince de `144`": false,
+   "une mâchoire avec rejet": false
+  },
+  "par_bras_et_matiere": {
+   "la pince de `144`": [
+    {
+     "nom": "spirale nue",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 36,
+     "departs_identiques": 36,
+     "detours": 0,
+     "detours_du_plus_court": 0,
+     "le_detour_recupere": 0,
+     "le_detour_perd": 0,
+     "epuisees_plus_court": 0,
+     "epuisees_ailleurs": 0,
+     "sourd": {
+      "pas": 22796,
+      "utilisable": 22796,
+      "contaminees": 0,
+      "raccourcissements": 0
+     },
+     "plus_court": {
+      "pas": 22796,
+      "utilisable": 22796,
+      "contaminees": 0,
+      "raccourcissements": 0
+     },
+     "ailleurs": {
+      "pas": 22796,
+      "utilisable": 22796,
+      "contaminees": 0,
+      "raccourcissements": 0
+     },
+     "le_detour_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 32,
+     "departs_identiques": 30,
+     "detours": 4,
+     "detours_du_plus_court": 0,
+     "le_detour_recupere": 0,
+     "le_detour_perd": 0,
+     "epuisees_plus_court": 0,
+     "epuisees_ailleurs": 0,
+     "sourd": {
+      "pas": 21549,
+      "utilisable": 20488,
+      "contaminees": 2,
+      "raccourcissements": 0
+     },
+     "plus_court": {
+      "pas": 22285,
+      "utilisable": 22285,
+      "contaminees": 0,
+      "raccourcissements": 4
+     },
+     "ailleurs": {
+      "pas": 22285,
+      "utilisable": 22285,
+      "contaminees": 0,
+      "raccourcissements": 4
+     },
+     "le_detour_lemporte": false
+    },
+    {
+     "nom": "spirale froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 36,
+     "departs_identiques": 18,
+     "detours": 100,
+     "detours_du_plus_court": 0,
+     "le_detour_recupere": 2,
+     "le_detour_perd": 14,
+     "epuisees_plus_court": 3,
+     "epuisees_ailleurs": 1,
+     "sourd": {
+      "pas": 21970,
+      "utilisable": 16397,
+      "contaminees": 10,
+      "raccourcissements": 0
+     },
+     "plus_court": {
+      "pas": 22218,
+      "utilisable": 22218,
+      "contaminees": 0,
+      "raccourcissements": 119
+     },
+     "ailleurs": {
+      "pas": 22395,
+      "utilisable": 22395,
+      "contaminees": 0,
+      "raccourcissements": 28
+     },
+     "le_detour_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée et froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 30,
+     "departs_identiques": 13,
+     "detours": 94,
+     "detours_du_plus_court": 0,
+     "le_detour_recupere": 1,
+     "le_detour_perd": 9,
+     "epuisees_plus_court": 2,
+     "epuisees_ailleurs": 2,
+     "sourd": {
+      "pas": 17005,
+      "utilisable": 12821,
+      "contaminees": 10,
+      "raccourcissements": 0
+     },
+     "plus_court": {
+      "pas": 20058,
+      "utilisable": 20058,
+      "contaminees": 0,
+      "raccourcissements": 109
+     },
+     "ailleurs": {
+      "pas": 20026,
+      "utilisable": 20026,
+      "contaminees": 0,
+      "raccourcissements": 37
+     },
+     "le_detour_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée et froissée 100 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 27,
+     "departs_identiques": 0,
+     "detours": 400,
+     "detours_du_plus_court": 0,
+     "le_detour_recupere": 11,
+     "le_detour_perd": 11,
+     "epuisees_plus_court": 27,
+     "epuisees_ailleurs": 27,
+     "sourd": {
+      "pas": 2800,
+      "utilisable": 44,
+      "contaminees": 24,
+      "raccourcissements": 0
+     },
+     "plus_court": {
+      "pas": 579,
+      "utilisable": 508,
+      "contaminees": 3,
+      "raccourcissements": 302
+     },
+     "ailleurs": {
+      "pas": 664,
+      "utilisable": 332,
+      "contaminees": 8,
+      "raccourcissements": 305
+     },
+     "le_detour_lemporte": false
+    }
+   ],
+   "une mâchoire avec rejet": [
+    {
+     "nom": "spirale nue",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 36,
+     "departs_identiques": 36,
+     "detours": 0,
+     "detours_du_plus_court": 0,
+     "le_detour_recupere": 0,
+     "le_detour_perd": 0,
+     "epuisees_plus_court": 0,
+     "epuisees_ailleurs": 0,
+     "sourd": {
+      "pas": 23272,
+      "utilisable": 23272,
+      "contaminees": 0,
+      "raccourcissements": 0
+     },
+     "plus_court": {
+      "pas": 23272,
+      "utilisable": 23272,
+      "contaminees": 0,
+      "raccourcissements": 0
+     },
+     "ailleurs": {
+      "pas": 23272,
+      "utilisable": 23272,
+      "contaminees": 0,
+      "raccourcissements": 0
+     },
+     "le_detour_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 34,
+     "departs_identiques": 33,
+     "detours": 1,
+     "detours_du_plus_court": 0,
+     "le_detour_recupere": 0,
+     "le_detour_perd": 0,
+     "epuisees_plus_court": 0,
+     "epuisees_ailleurs": 0,
+     "sourd": {
+      "pas": 24514,
+      "utilisable": 23868,
+      "contaminees": 1,
+      "raccourcissements": 0
+     },
+     "plus_court": {
+      "pas": 24506,
+      "utilisable": 24506,
+      "contaminees": 0,
+      "raccourcissements": 1
+     },
+     "ailleurs": {
+      "pas": 24506,
+      "utilisable": 24506,
+      "contaminees": 0,
+      "raccourcissements": 0
+     },
+     "le_detour_lemporte": false
+    },
+    {
+     "nom": "spirale froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 36,
+     "departs_identiques": 30,
+     "detours": 8,
+     "detours_du_plus_court": 0,
+     "le_detour_recupere": 1,
+     "le_detour_perd": 4,
+     "epuisees_plus_court": 0,
+     "epuisees_ailleurs": 0,
+     "sourd": {
+      "pas": 23405,
+      "utilisable": 22754,
+      "contaminees": 1,
+      "raccourcissements": 0
+     },
+     "plus_court": {
+      "pas": 23407,
+      "utilisable": 23407,
+      "contaminees": 0,
+      "raccourcissements": 9
+     },
+     "ailleurs": {
+      "pas": 23401,
+      "utilisable": 23401,
+      "contaminees": 0,
+      "raccourcissements": 0
+     },
+     "le_detour_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée et froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 33,
+     "departs_identiques": 13,
+     "detours": 107,
+     "detours_du_plus_court": 0,
+     "le_detour_recupere": 3,
+     "le_detour_perd": 2,
+     "epuisees_plus_court": 0,
+     "epuisees_ailleurs": 0,
+     "sourd": {
+      "pas": 25764,
+      "utilisable": 7977,
+      "contaminees": 22,
+      "raccourcissements": 0
+     },
+     "plus_court": {
+      "pas": 24414,
+      "utilisable": 9482,
+      "contaminees": 20,
+      "raccourcissements": 114
+     },
+     "ailleurs": {
+      "pas": 24361,
+      "utilisable": 10849,
+      "contaminees": 18,
+      "raccourcissements": 18
+     },
+     "le_detour_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée et froissée 100 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "apparies": 34,
+     "departs_identiques": 1,
+     "detours": 1714,
+     "detours_du_plus_court": 0,
+     "le_detour_recupere": 0,
+     "le_detour_perd": 2,
+     "epuisees_plus_court": 32,
+     "epuisees_ailleurs": 21,
+     "sourd": {
+      "pas": 40518,
+      "utilisable": 55,
+      "contaminees": 31,
+      "raccourcissements": 0
+     },
+     "plus_court": {
+      "pas": 10402,
+      "utilisable": 64,
+      "contaminees": 30,
+      "raccourcissements": 1049
+     },
+     "ailleurs": {
+      "pas": 22602,
+      "utilisable": 44,
+      "contaminees": 32,
+      "raccourcissements": 372
+     },
+     "le_detour_lemporte": false
+    }
+   ]
+  },
+  "matieres_ou_le_detour_lemporte_par_bras": {
+   "la pince de `144`": [],
+   "une mâchoire avec rejet": []
+  }
+ }
+}

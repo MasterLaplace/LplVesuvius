@@ -539,7 +539,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
            pose_en_deux_temps: bool = False, en_croix: bool = False,
            rejeter: bool = False, derouler_exactement: bool = False,
            juger_le_deroulage: bool = False, refuser_la_pose: bool = False,
-           reprendre_la_pose: bool = False) -> dict:
+           reprendre_la_pose: bool = False, reprendre_ailleurs: bool = False) -> dict:
     """Suivre une feuille autour de l'axe, et dire sur laquelle on finit.
 
     ⚠⚠ LE REFUS HALVE L'AVANCE PLUTOT QUE D'ABANDONNER, et il s'arrete quand l'avance tombe sous le
@@ -668,8 +668,12 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     fin = "tour bouclé"
     poses_refusees = 0
     poses_reprises = 0
+    poses_reprises_ailleurs = 0
     while abs(cumul) < 2.0 * np.pi * float(tours) and pas < int(pas_max):
         a, pris = float(avance_um), None
+        # ⚠ REMIS A CHAQUE PAS : « l'autre normale a deja ete essayee » est un fait sur la
+        # tentative en cours, jamais sur la marche.
+        essaye_lautre = False
         fenetre = (float(etat["epaisseur_um"]) if etat.get("epaisseur_um") is not None
                    else float(epaisseur_nominale_um))
         while a >= voxel_um:
@@ -681,8 +685,16 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             # `pose_sur_la_lecture` la fait chercher le long de la derniere normale que la MATIERE a
             # rendue, sans rien changer a la direction de marche. Le cap gouverne alors la marche et
             # rien d'autre — c'est la moitie que `148` n'avait pas essayee.
-            neuf = poser(vol, cible,
-                         derniere_lecture if pose_sur_la_lecture else etat["normale"],
+            # ⭐⭐⭐⭐ REESSAYER AILLEURS, PAS SEULEMENT PLUS COURT. `165` mesure que raccourcir
+            # repare une contradiction venue d'un pas trop long, et s'EPUISE sur la matiere du
+            # rouleau. Or `148` mesure que le cap y incline la normale de plus de quarante degres :
+            # la machoire y cherche son interstice DE TRAVERS, et aucune longueur de pas ne corrige
+            # une direction. L'autre normale est celle que le mode n'emploie PAS — ce que la
+            # matiere vient de rendre quand le cap gouverne, et l'inverse sinon. Deux directions
+            # exactes, aucun angle choisi.
+            base_n = derniere_lecture if pose_sur_la_lecture else etat["normale"]
+            autre_n = etat["normale"] if pose_sur_la_lecture else derniere_lecture
+            neuf = poser(vol, cible, autre_n if essaye_lautre else base_n,
                          largeur_um, fenetre, voxel_um, deux, marge_um=marge,
                          deux_temps=pose_en_deux_temps, en_croix=en_croix,
                          rejeter=rejeter)
@@ -716,12 +728,20 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             # moments : la reprise ESSAIE AILLEURS, le refus ARRETE. Les deux ensemble laissent la
             # reprise decider la premiere, donc aucune pose acceptee ne se contredit et le refus
             # ne se declenche jamais — ce n'est pas une contradiction, c'est une redondance.
-            if reprendre_la_pose:
+            if reprendre_la_pose or reprendre_ailleurs:
                 larges_ = [max(m["ecarts_um"]) - min(m["ecarts_um"])
                            for m in (neuf.get("haut"), neuf.get("bas"))
                            if m is not None and len(m.get("ecarts_um", ())) > 1]
                 if larges_ and max(larges_) > 0.5 * float(epaisseur_nominale_um):
+                    # ⭐ L'ORDRE EST DELIBERE : d'abord l'AUTRE DIRECTION au MEME pas, seulement
+                    # ensuite raccourcir. Raccourcir d'abord jetterait de la longueur pour un
+                    # defaut qui n'en vient pas, et `165` mesure que ce defaut existe.
+                    if reprendre_ailleurs and not essaye_lautre:
+                        essaye_lautre = True
+                        poses_reprises_ailleurs += 1
+                        continue
                     a *= 0.5
+                    essaye_lautre = False
                     poses_reprises += 1
                     continue
             pris = neuf
@@ -889,6 +909,7 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             "part_du_tour": round(float(abs(cumul) / (2.0 * np.pi)), 4), "fin": fin,
             "poses_refusees": int(poses_refusees),
             "poses_reprises": int(poses_reprises),
+            "poses_reprises_ailleurs": int(poses_reprises_ailleurs),
             "derive_en_feuilles": round(float(ph[-1] - ph[0]), 4),
             "derive_max_en_feuilles": round(float(np.max(np.abs(ph - ph[0]))), 4),
             "rayon_gagne_um": round(rayon_um(etat["centre_vx"]) - r0, 1),
@@ -1285,6 +1306,29 @@ def une_case(matiere, bruit: float, largeur_en_pas: float, departs: int = DEPART
     for b in BRAS:
         bloc["bras"][b] = {"suivis": par_bras[b], **_resumer_un_bras(par_bras[b], int(departs))}
     return bloc
+
+
+def ce_que_vaut_une_livraison(x: dict) -> int | None:
+    """Les pas qu'une livraison vaut — ZERO si quelque chose dit qu'elle a saute.
+
+    ⭐⭐⭐⭐ C'EST L'ENONCE DE `164`, ET IL NE DOIT EXISTER QU'UNE FOIS. Une trajectoire dont on
+    ignore ou elle a cesse d'etre vraie n'est pas a moitie bonne : rien ne dit ou la couper, donc
+    elle est inutilisable EN ENTIER. `165` l'employait deja ; toute tranche qui compare des
+    livrables doit employer le MEME, sinon deux tranches mesurent deux choses sous un seul nom.
+
+    ⚠⚠ « Ne vaut rien » n'est pas « est fausse partout » : c'est « rien ne permet d'en garder une
+    part ». La distinction compte, parce qu'un marcheur qui saurait ou couper en garderait le
+    debut — et c'est exactement ce que l'arret de `163` lui donne.
+
+    ⚠ Une marche qui ne publie pas son compte de sauts ne PRETEND rien : elle rend `None`, jamais
+    zero. Une absence de decompte n'est pas une absence de saut.
+    """
+    if not x.get("decidable") or x.get("pas") is None:
+        return None
+    saute = x.get("pas_qui_sautent")
+    if saute is None:
+        return None
+    return int(x["pas"]) if int(saute) == 0 else 0
 
 
 def une_reussite(x: dict) -> bool:

@@ -43,8 +43,8 @@ sys.path.insert(0, str(RACINE / "src" / "commun"))
 
 from la_pince_tient_elle_la_feuille import (AVANCE_EN_LONGUEUR_DONDE,  # noqa: E402
                                             LARGEUR_DE_REFERENCE, LONGUEUR_DONDE_UM, MATIERES,
-                                            RAYON_MM, _matiere, _nom, _PAS, _VOXEL, suivre,
-                                            un_depart)
+                                            RAYON_MM, _matiere, _nom, _PAS, _VOXEL,
+                                            ce_que_vaut_une_livraison, suivre, un_depart)
 
 BRUITS = (0.0, 8.0, 16.0)
 DEPARTS = 12
@@ -72,18 +72,10 @@ def _marcher(vol, k, departs, pas_um, voxel_um, avance_um, bras, kw):
                   rejeter=rejeter, derouler_exactement=True, **kw)
 
 
-def utilisable(x: dict) -> int | None:
-    """Les pas qu'une livraison vaut, ou rien si elle n'est pas décidable.
-
-    ⚠⚠ UNE LIVRAISON CONTAMINÉE VAUT ZÉRO, pas la moitié : rien ne dit où la couper. C'est
-    l'énoncé de `164`, et il est repris ici mot pour mot plutôt que réinventé.
-    """
-    if not x.get("decidable") or x.get("pas") is None:
-        return None
-    saute = x.get("pas_qui_sautent")
-    if saute is None:
-        return None
-    return int(x["pas"]) if int(saute) == 0 else 0
+# ⭐⭐⭐⭐ CE QU'UNE LIVRAISON VAUT EST DIT UNE SEULE FOIS, dans le module partage, a cote du
+# predicat joint de `147`. Il etait ecrit ici ; `166` en avait besoin, et deux definitions sous un
+# seul nom auraient laisse deux tranches mesurer deux choses.
+utilisable = ce_que_vaut_une_livraison
 
 
 def _apparier(marches: dict) -> dict | None:

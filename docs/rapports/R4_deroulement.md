@@ -1612,6 +1612,36 @@ halve d'une reprise qui se contente d'accepter. ⚠ Et j'ai d'abord fait **impor
 tranche par la garde** — une garde qui importe ce qu'elle garde — avant de publier le croisement
 dans la mesure pour qu'elle le **lise**.
 
+**`166` · 2026-09-16 · réessayer ailleurs plutôt que plus court**
+`165` laissait qu'une pose refusée est réessayée au **même endroit**, plus court, et qu'elle
+pourrait l'être **ailleurs**. Deux faits établis le désignaient : `148` mesure que le cap incline la
+normale de plus de quarante degrés sur la matière du rouleau, `165` que raccourcir s'y **épuise** —
+si la mâchoire cherche de travers, aucune longueur de pas ne corrige une direction. ⚠ L'autre
+direction n'était pas à choisir : `suivre` connaît **déjà** les deux normales, celle du cap et celle
+de la matière, donc aucun angle n'a été réglé. ✗ **L'hypothèse est RÉFUTÉE.** Sur le bras livré, le
+détour récupère **14** départs et en **perd 34** pour **598** tentés, et porte les livraisons
+contaminées de **3** à **8** ; la victoire jointe n'est gagnée sur **aucun** bras et sur **aucune**
+matière, et sur chacune de celles qui se contredisent le détour perd plus qu'il ne récupère —
+`R4-F161`. ⭐⭐⭐⭐ **Ce que cela établit borne toute la ligne `162`–`165` : l'accord interne de la pose
+est une bonne ALARME et une mauvaise BOUSSOLE.** Elle dit **quand** on se trompe, jamais **où**
+aller. Le mécanisme découle d'un fait déjà mesuré : `162` publie une précision de **0,397**, donc
+l'accord des mâchoires est **nécessaire** et jamais **suffisant** — une direction où elles
+s'accordent peut être un **faux** accord, et le détour la cherche précisément. ⚠ Le mur ne recule
+qu'à peine et le recul se paie : **51** épuisements en détournant contre **64** en raccourcissant,
+pour **2428** détours tentés. ⚠⚠⚠ **Et un piège de lecture est nommé** : le même marcheur — celui qui
+raccourcit — livre **87865** pas utilisables ici sur **161** départs appariés et **83337** dans `165`
+sur **149**, parce qu'un départ n'est apparié que si les **trois** marcheurs y sont décidables et que
+le troisième n'est pas le même. Les deux tranches sont chacune valides, **mais leurs totaux ne se
+comparent pas entre eux** ; la population est donc écrite à côté de chaque total — `R4-F162`. Le
+signe qui l'a révélé est un total **identique** (72546 pas du marcheur sourd) accompagné d'un compte
+**différent** (34 livraisons contaminées contre 46) : la population avait bougé sans que la mesure
+bouge. ⚠ Piège payé, et il est à ma charge : j'avais écrit un contrôle nommé « le détour garde le
+**même** pas » qui comparait les raccourcissements — et la **mesure** a montré que la cassure rend ce
+compte plus **bas** encore (11 → 5 sain, 11 → **0** cassé), donc l'assertion passait des **deux**
+côtés. Son libellé revendiquait ce qu'elle ne prouvait pas. La limite est désormais **nommée** : une
+batterie de bout en bout ne peut pas distinguer un détour pris à pleine avance d'un détour pris à
+demi-avance, seule la comparaison de deux versions du code les sépare, et une batterie n'en a qu'une.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
