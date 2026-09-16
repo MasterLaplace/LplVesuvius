@@ -669,11 +669,22 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     poses_refusees = 0
     poses_reprises = 0
     poses_reprises_ailleurs = 0
+    # ⭐⭐⭐⭐ DE QUOI EST FAITE LA CONTRADICTION QUE RIEN NE REPARE ? `166` mesure que ni la
+    # longueur ni la direction ne la reparent, et `153` mesure que sur la matiere du rouleau la
+    # VRAIE normale SORT DU PLAN DU TOUR (|n·z| = 0,278624) alors qu'une machoire rend `n' = t'×z`,
+    # donc une composante axiale NULLE PAR CONSTRUCTION : elle ne PEUT PAS exprimer ce qu'il y
+    # aurait a estimer. L'hypothese est que la contradiction irreparable est exactement celle-la.
+    # ⚠ La quantite est ANALYTIQUE et gratuite : `normale_locale` ne coute aucune lecture.
+    hors_plan_repares: list[float] = []
+    hors_plan_epuises: list[float] = []
     while abs(cumul) < 2.0 * np.pi * float(tours) and pas < int(pas_max):
         a, pris = float(avance_um), None
         # ⚠ REMIS A CHAQUE PAS : « l'autre normale a deja ete essayee » est un fait sur la
         # tentative en cours, jamais sur la marche.
         essaye_lautre = False
+        # ⚠ Un tampon PAR PAS : on ne sait qu'a la fin du pas si ses contradictions ont ete
+        # reparees ou si elles l'ont epuise.
+        hors_plan_du_pas: list[float] = []
         fenetre = (float(etat["epaisseur_um"]) if etat.get("epaisseur_um") is not None
                    else float(epaisseur_nominale_um))
         while a >= voxel_um:
@@ -736,6 +747,10 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
                     # ⭐ L'ORDRE EST DELIBERE : d'abord l'AUTRE DIRECTION au MEME pas, seulement
                     # ensuite raccourcir. Raccourcir d'abord jetterait de la longueur pour un
                     # defaut qui n'en vient pas, et `165` mesure que ce defaut existe.
+                    if derouler_exactement:
+                        vraie_ = np.asarray(vol.normale_locale(
+                            np.asarray(cible).reshape(1, 3))).reshape(3)
+                        hors_plan_du_pas.append(abs(float(vraie_ @ Z)))
                     if reprendre_ailleurs and not essaye_lautre:
                         essaye_lautre = True
                         poses_reprises_ailleurs += 1
@@ -746,6 +761,9 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
                     continue
             pris = neuf
             break
+        # ⚠⚠ LE TAMPON SE VIDE SELON L'ISSUE DU PAS, jamais avant : une contradiction n'est
+        # « reparee » que si le pas a fini par aboutir.
+        (hors_plan_repares if pris is not None else hors_plan_epuises).extend(hors_plan_du_pas)
         if pris is None:
             fin = "la pince ne peut plus avancer"
             break
@@ -910,6 +928,14 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
             "poses_refusees": int(poses_refusees),
             "poses_reprises": int(poses_reprises),
             "poses_reprises_ailleurs": int(poses_reprises_ailleurs),
+            # ⚠⚠ DEUX POPULATIONS VIDES SE DISENT, elles ne rendent pas zero : une marche sans
+            # contradiction n'a pas une part hors plan nulle, elle n'en a pas.
+            "hors_plan_des_contradictions_reparees": (
+                round(float(np.median(hors_plan_repares)), 6) if hors_plan_repares else None),
+            "hors_plan_des_contradictions_epuisees": (
+                round(float(np.median(hors_plan_epuises)), 6) if hors_plan_epuises else None),
+            "contradictions_reparees": int(len(hors_plan_repares)),
+            "contradictions_epuisees": int(len(hors_plan_epuises)),
             "derive_en_feuilles": round(float(ph[-1] - ph[0]), 4),
             "derive_max_en_feuilles": round(float(np.max(np.abs(ph - ph[0]))), 4),
             "rayon_gagne_um": round(rayon_um(etat["centre_vx"]) - r0, 1),

@@ -3049,6 +3049,85 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 167 : DE QUOI EST FAITE LA CONTRADICTION QUE RIEN NE REPARE.
+    # (1) Un COMPTE apparie ne voyage jamais sans les TROIS reponses : « sort davantage », « a
+    # egalite » et « sort moins ». La revendication est une victoire JOINTE, donc la moitie qui
+    # flatte est satisfaite par une grille ou rien ne contredit parce que rien n'a ete apparie.
+    # (2) Un NIVEAU hors plan ne voyage jamais sans le compte apparie de son groupe : mis en
+    # commun, les deux bras pointent en sens CONTRAIRE, donc un niveau seul se lit comme un
+    # verdict qu'il ne porte pas.
+    # (3) Et une PART epuisee ne voyage jamais sans les contradictions RENCONTREES : c'est
+    # exactement le piege que `166` a paye, comparer des totaux sur des populations inegales.
+    cr = _source(racine, "la_contradiction_que_rien_ne_repare.json")
+    if cr.exists():
+        d = json.loads(cr.read_text())
+        j_ = d.get("juger", {})
+        if j_.get("decidable"):
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            for cle, nom in (("contradictions_reparees", "contradictions reparees du controle"),
+                             ("contradictions_epuisees", "contradictions epuisees du controle"),
+                             ("marches_appariables", "marches appariables du controle"),
+                             ("decidables", "departs decidables du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 167", int(c_[cle]), 0, cr.name)
+            t_ = j_.get("tout", {})
+            for cle, nom in (("decidables", "departs decidables en tout"),
+                             ("marches_appariables", "marches appariees en tout"),
+                             ("contradictions_rencontrees", "contradictions rencontrees en tout"),
+                             ("contradictions_epuisees", "contradictions epuisees en tout")):
+                if t_.get(cle) is not None:
+                    ajoute(f"{nom} de 167", int(t_[cle]), 0, cr.name)
+            if t_.get("part_des_contradictions_epuisees") is not None:
+                ajoute("part epuisee en tout de 167",
+                       float(t_["part_des_contradictions_epuisees"]), 6, cr.name)
+            # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : du tableau par MATIERE il ne donne
+            # que les marches appariees et le triple, jamais les niveaux — qui y melangeraient
+            # les deux bras, ce que la tranche refuse precisement de faire.
+            for groupe in j_.get("par_matiere", []):
+                q = f"sur {groupe['nom']} de 167"
+                if groupe.get("marches_appariables") is not None:
+                    ajoute(f"marches appariees {q}", int(groupe["marches_appariables"]), 0,
+                           cr.name)
+                for cle, nom in (("lepuisee_sort_davantage", "marches ou elle sort davantage"),
+                                 ("elles_sont_egales", "marches a egalite exacte"),
+                                 ("lepuisee_sort_moins", "marches ou elle sort moins")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(groupe[cle]), 0, cr.name)
+            # ⭐⭐⭐ LE CROISEMENT bras x matiere est publie pour la MATIERE DU ROULEAU seule, parce
+            # que c'est la seule que le document donne — et la seule ou `153` predisait l'effet.
+            croisement = [dict(g_, nom=f"{g_['nom']} sur {b_}")
+                          for b_, gs in (j_.get("par_bras_et_matiere") or {}).items()
+                          for g_ in gs
+                          if g_.get("nom") == "spirale écrasée et froissée 100 µm"]
+            for groupe in list(j_.get("par_bras", [])) + croisement:
+                q = f"sur {groupe['nom']} de 167"
+                if groupe.get("marches_appariables") is not None:
+                    ajoute(f"marches appariees {q}", int(groupe["marches_appariables"]), 0,
+                           cr.name)
+                for cle, nom in (("lepuisee_sort_davantage", "marches ou elle sort davantage"),
+                                 ("elles_sont_egales", "marches a egalite exacte"),
+                                 ("lepuisee_sort_moins", "marches ou elle sort moins")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(groupe[cle]), 0, cr.name)
+                for cle, nom in (("hors_plan_reparees", "hors plan des reparees"),
+                                 ("hors_plan_epuisees", "hors plan des epuisees")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", float(groupe[cle]), 6, cr.name)
+            # ⚠⚠ LA PART ET LES COMPTES QU'ELLE RAPPORTE NE SONT PUBLIES QUE PAR BRAS : le
+            # document ne donne pas le croisement en parts, et l'y enregistrer exigerait un
+            # chiffre qu'il n'ecrit pas. ⚠ Une part comme 0,069 59 s'ecrirait d'ailleurs COMPLETEE
+            # a six decimales, ce que le depot interdit — un chiffre publie s'ecrit comme son
+            # producteur le rend.
+            for groupe in j_.get("par_bras", []):
+                q = f"sur {groupe['nom']} de 167"
+                for cle, nom in (("contradictions_rencontrees", "contradictions rencontrees"),
+                                 ("contradictions_epuisees", "contradictions epuisees")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(groupe[cle]), 0, cr.name)
+                if groupe.get("part_des_contradictions_epuisees") is not None:
+                    ajoute(f"part epuisee {q}",
+                           float(groupe["part_des_contradictions_epuisees"]), 6, cr.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 166 : REESSAYER AILLEURS, ET TROIS APPARIEMENTS L'IMPOSENT.
     # (1) Un total de pas UTILISABLES ne voyage jamais sans le nombre de DEPARTS APPARIES : le meme
     # marcheur rend 87865 ici et 83337 dans `165`, sur 161 et 149 departs — les deux sont justes et

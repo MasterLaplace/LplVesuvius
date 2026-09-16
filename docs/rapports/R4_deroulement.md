@@ -1642,6 +1642,47 @@ côtés. Son libellé revendiquait ce qu'elle ne prouvait pas. La limite est dé
 batterie de bout en bout ne peut pas distinguer un détour pris à pleine avance d'un détour pris à
 demi-avance, seule la comparaison de deux versions du code les sépare, et une batterie n'en a qu'une.
 
+**`167` · 2026-09-16 · de quoi est faite la contradiction que rien ne répare**
+`166` s'était terminée sur un objet nommé et non caractérisé : il existe une contradiction que ni la
+longueur ni la direction ne réparent. La campagne avait exactement **un** candidat, et il est vieux
+de quatorze tranches — `153` (`R4-F120`) mesure que sur la matière du rouleau la **vraie** normale
+sort du plan du tour (**0,278624**, soit **16,178°**) tandis que `une_machoire` rend une normale dont
+la composante axiale est **nulle par construction** : l'instrument ne peut pas **exprimer** ce qu'il
+lui faudrait estimer. ⚠⚠ La quantité est **analytique et gratuite** — `normale_locale` ne coûte
+aucune lecture, donc ce que la fixture *sait* est comparé à ce que le marcheur *fait* sans rien
+dépenser pour le savoir. ✗ **L'HYPOTHÈSE EST RÉFUTÉE.** Sur le bras livré, **12** marches appariées
+disent que la contradiction irréparable sort davantage du plan et **15** disent le contraire, sur
+**27** ; sur la mâchoire seule **13** contre **12**, sur **25**. Et elle est réfutée **là précisément
+où `153` la prédisait** : sur la matière du rouleau la pince rend **11** contre **11**, à égalité
+exacte sur **22** appariées, et la mâchoire seule **13** contre **12** sur **25** — `R4-F163`.
+⭐⭐⭐⭐ **Ce que cela retire est un candidat, et il était le dernier nommé.** ⚠⚠⚠ **L'appariement est
+DANS la marche, et c'est le seul disponible** : une marche qui s'épuise porte les **deux**
+populations — celles qu'elle a réparées, et celle qui l'a arrêtée — et **52** marches sur **343**
+départs décidables en portent deux ; les autres n'en portent qu'une et sont publiées **à part**.
+⚠⚠ **Le niveau et le compte se lisent dans cet ordre, jamais l'inverse** : mis en commun sur les bras
+entiers, les deux médianes pointent en sens **contraire** d'un bras à l'autre (**0,248538** contre
+**0,125963** sur la pince, **0,220929** contre **0,240944** sur la mâchoire), donc un niveau seul
+conclurait deux choses opposées selon le bras choisi. ⭐⭐⭐ **Ce qu'elle établit tout de même**, et
+c'est neuf : la pince échoue à réparer **0,309859** des contradictions qu'elle rencontre contre
+**0,062234** pour la mâchoire seule, sur **1741** rencontrées en tout — `R4-F164`. ⚠⚠ Le compte brut
+dirait l'inverse, et c'est le piège que `R4-F162` venait de nommer : la mâchoire seule rencontre
+**deux fois plus** de contradictions (**1173** contre **568**) et en épuise **moins de la moitié**
+en compte (**73** contre **176**). La **part** est la seule forme sous laquelle deux bras se
+comparent. ⭐ Le contrôle tient et il est **vide** : sur la spirale nue, **0** contradiction réparée,
+**0** épuisée, **0** marche appariable sur **72** départs décidables. ⚠⚠⚠ **Un contrôle de la
+batterie a été RETIRÉ parce qu'il encodait la conclusion** — il assertait que sur la matière du
+rouleau « l'épuisée sort davantage », et il **passait**, sur la seule case de quatre départs qu'il
+exerçait. Une batterie qui affirme la direction que la grille doit trancher n'est pas un contrôle,
+c'est la réponse écrite dans l'instrument ; il est remplacé par l'invariant qu'il devait tenir, à
+savoir que la comparaison est **rendue** et la partition des marches appariées **complète**.
+⚠⚠ **Et l'œil a trouvé ce que la batterie ne voyait pas** : dans la figure, les deux barres de la
+pince **débordaient de leur graphe et recouvraient leurs propres nombres**, parce que l'échelle était
+dérivée des valeurs **par bras** alors que les valeurs dessinées sont celles du **croisement**, plus
+grandes. Les textes étaient à leur place, dans leur cadre, et illisibles — `textes_hors_cadre` et
+`textes_qui_se_recouvrent` sont aveugles à un **rectangle** qui sort. La figure enregistre désormais
+chaque barre avec le bord droit de son graphe, et le contrôle neuf a été vérifié en reprenant
+l'échelle sur la mauvaise population, qui le fait échouer sur les deux barres exactes.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
