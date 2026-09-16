@@ -1056,24 +1056,117 @@ class VolumeFabriqueEnSpiraleFroissee(VolumeFabriqueEnSpiraleEcrasee):
         `A_k.cos(arg).(2.pi/lambda).k` : le premier terme porte l'enroulement, le second incline la
         feuille d'un angle qui varie d'un point a l'autre. C'est ce vagabondage qui est mesure.
         """
-        base = super().normale_locale(p)
+        # ⚠⚠ A AMPLITUDE NULLE ON REND LA NORMALE DU PARENT TELLE QUELLE, sans passer par le
+        # gradient : multiplier par une norme puis rediviser par elle differerait au dernier bit,
+        # et la batterie exige l'egalite AU BIT.
         if self._a_k == 0.0:
-            return base
+            return super().normale_locale(p)
+        g = self.gradient_de_la_phase(p)
+        return g / np.maximum(np.linalg.norm(g, axis=1, keepdims=True), 1e-12)
+
+    def gradient_de_la_phase(self, p: np.ndarray) -> np.ndarray:
+        """Le gradient NON NORMALISE de la phase, en (z, y, x), par micrometre.
+
+        ⭐⭐⭐⭐ IL EST EXTRAIT PLUTOT QUE RECOPIE, et c'est ce qui permet a une sous-classe d'AJOUTER
+        un terme au lieu de reecrire la formule. `normale_locale` ne fait plus que le normaliser :
+        une matiere qui incline la feuille autrement — un vrillage, par exemple — n'a qu'a ajouter
+        sa composante ici.
+
+        ⚠ Le gradient de BASE est reconstruit a partir de la normale du parent et de sa norme
+        connue : c'est le gradient de la phase, pas la normale unitaire.
+        """
         q2 = np.asarray(p, dtype=np.float64).reshape(-1, 3)
+        g_base = (super().normale_locale(q2)
+                  * self.norme_du_gradient(q2)[:, None])
+        if self._a_k == 0.0:
+            return g_base
         q = q2 * self.voxel_um
-        # ⚠ Le gradient de la PHASE, pas de la normale unitaire : on reconstruit le gradient de
-        # base a partir de la normale du parent et de sa norme connue, `1/(pas.cos(inclinaison))`.
-        g_base = base * self.norme_du_gradient(q2)[:, None]
         arg = 2.0 * np.pi * (q @ self.vecteurs_donde.T) / self.longueur_donde_um
         c = np.cos(arg + self.phases_donde) * self._a_k
-        g = g_base + (c * (2.0 * np.pi / self.longueur_donde_um)) @ self.vecteurs_donde \
+        return g_base + (c * (2.0 * np.pi / self.longueur_donde_um)) @ self.vecteurs_donde \
             / self.pas_um
-        return g / np.maximum(np.linalg.norm(g, axis=1, keepdims=True), 1e-12)
 
     def inclinaison_max_deg(self) -> float:
         """L'inclinaison maximale que le froissement ajoute, en degres."""
         return float(np.degrees(np.arctan(2.0 * np.pi * self.amplitude_um
                                           / self.longueur_donde_um)))
+
+
+class VolumeFabriqueEnSpiraleVrillee(VolumeFabriqueEnSpiraleFroissee):
+    """Une spirale ENROULEE DE TRAVERS : la feuille derive le long de l'axe en s'enroulant.
+
+    ⭐⭐⭐⭐ ELLE EXISTE PARCE QUE `169` A MESURE QU'IL MANQUAIT UN COIN. Le depot sait fabriquer un
+    penchant AZIMUTAL ET SUIVI — l'ecrasement, qui rend une coherence de 0,999 et zero marche
+    axiale sur vingt — et un penchant AXIAL ET NON SUIVI — le froissement, quatorze marches axiales
+    sur vingt pour une coherence de 0,453. Le vrai rouleau demande les DEUX A LA FOIS : axial et
+    suivi. Aucun melange des deux causes ne le donne, parce qu'elles tirent en sens opposes.
+
+    ⭐⭐⭐ ET LA CAUSE EST PHYSIQUE, PAS UN PARAMETRE DE PLUS. Un rouleau enroule bien droit a des
+    sections identiques le long de son axe ; un rouleau enroule DE TRAVERS — comme un ruban adhesif
+    qui derive pendant qu'on le bobine — a des sections qui tournent lentement. Sa feuille est un
+    helicoide, et sa normale sort du plan du tour d'une quantite CONSTANTE, toujours du meme cote.
+    C'est exactement ce qu'un froissement ne fait pas : lui l'en fait sortir en ALTERNANT.
+
+    ⚠⚠ ELLE CROISE TOUJOURS UNE FEUILLE PAR TOUR, donc elle reste un rouleau. Le terme ajoute ne
+    depend que de `z` : a `z` fixe, un tour fait croitre la phase d'exactement une feuille, comme
+    la parente. Le vrillage ne change pas combien de feuilles on traverse en tournant, il change
+    OU se trouve la feuille quand on se deplace le long de l'axe.
+
+    ⚠ LE PARAMETRE EST SANS DIMENSION : c'est le deplacement RADIAL de la feuille par unite de
+    deplacement AXIAL, en micrometres par micrometre. A 0,01, avancer d'un millimetre le long de
+    l'axe deplace la feuille de dix micrometres vers l'exterieur.
+
+    ⚠ La reference est `z = 0` : la matiere y est exactement celle de la parente, et le vrillage
+    s'accumule a partir de la. Un volume centre ailleurs se decale d'une constante, donc d'une
+    fraction de feuille — ce qui ne change rien a ce qu'un marcheur rencontre.
+
+    ⚠ A vrillage nul elle EST la spirale froissee, au bit pres : la batterie l'asserte, et c'est ce
+    qui protege tout ce que le depot a mesure sur celle-ci.
+    """
+
+    def __init__(self, pas_um: float, vrillage: float = 0.0, **kw) -> None:
+        super().__init__(pas_um, **kw)
+        self.vrillage = float(vrillage)
+        """Le deplacement radial de la feuille par unite de deplacement axial, sans dimension."""
+
+    def phase(self, p: np.ndarray) -> np.ndarray:
+        # ⚠⚠ LE TERME DE BASE EST CELUI DU PARENT, APPELE ET NON RECOPIE : la batterie exige
+        # l'egalite AU BIT a vrillage nul.
+        base = super().phase(p)
+        if self.vrillage == 0.0:
+            return base
+        q = np.asarray(p, dtype=np.float64).reshape(-1, 3)
+        return base - self.vrillage * (q[:, 0] * self.voxel_um) / self.pas_um
+
+    def gradient_de_la_phase(self, p: np.ndarray) -> np.ndarray:
+        """Le gradient du parent, plus la composante AXIALE que le vrillage ajoute.
+
+        ⭐⭐⭐⭐ ELLE EST CONSTANTE, et c'est tout le point. Le froissement ajoute un terme qui
+        oscille avec la position, donc il incline la feuille tantot d'un cote tantot de l'autre ;
+        le vrillage en ajoute un qui ne depend de RIEN. Une normale dont la composante axiale ne
+        change pas de signe est une normale qui penche toujours du meme cote.
+        """
+        g = super().gradient_de_la_phase(p)
+        if self.vrillage == 0.0:
+            return g
+        g = g.copy()
+        g[:, 0] = g[:, 0] - self.vrillage / self.pas_um
+        return g
+
+    def normale_locale(self, p: np.ndarray) -> np.ndarray:
+        if self.vrillage == 0.0:
+            return super().normale_locale(p)
+        g = self.gradient_de_la_phase(p)
+        return g / np.maximum(np.linalg.norm(g, axis=1, keepdims=True), 1e-12)
+
+    def hors_du_plan_du_tour(self) -> float:
+        """La part de la normale qui sort du plan du tour, loin de l'axe et sans froissement.
+
+        ⚠ C'est une BORNE et elle le dit : le froissement et l'ecrasement modulent le gradient dans
+        le plan, donc la part reelle varie d'un point a l'autre. Cette valeur est celle qu'une
+        spirale ronde non froissee rendrait, et elle sert a poser un vrillage plutot qu'a le lire.
+        """
+        return float(abs(self.vrillage) / np.hypot(1.0, self.vrillage))
 
 
 def plafond_pour_traverser(rayon_min_mm: float, rayon_max_mm: float,
@@ -2170,6 +2263,71 @@ def verifier() -> int:
     v("... et une longueur d'onde nulle est refusée",
       _leve(lambda: VolumeFabriqueEnSpiraleFroissee(C.PAS_UM, amplitude_um=1.0,
                                                     longueur_donde_um=0.0, **kw_sp), ValueError))
+
+    # === LE VRILLAGE, ET CE QUI LE SEPARE DU FROISSEMENT ==================================
+    # ⭐⭐⭐⭐ CE QUE CETTE FIXTURE PROMET EST UNE PERSISTANCE, PAS UNE GRANDEUR. `169` mesure que le
+    # froissement fait sortir la normale du plan du tour en ALTERNANT, et l'ecrasement ne l'en fait
+    # pas sortir du tout. Le vrillage doit l'en faire sortir TOUJOURS DU MEME COTE, et c'est ce que
+    # ce bloc verifie plutot que de l'affirmer.
+    vr_zero = VolumeFabriqueEnSpiraleVrillee(C.PAS_UM, vrillage=0.0, amplitude_um=42.4,
+                                             longueur_donde_um=393.6, **kw_sp)
+    v("la spirale vrillée à vrillage nul EST la spirale froissée, au bit",
+      np.array_equal(vr_zero.phase(pts_sp), sp_fr.phase(pts_sp))
+      and np.array_equal(vr_zero.lire(pts_sp), sp_fr.lire(pts_sp))
+      and np.array_equal(vr_zero.normale_locale(pts_sp), sp_fr.normale_locale(pts_sp)))
+    vr = VolumeFabriqueEnSpiraleVrillee(C.PAS_UM, vrillage=0.05, amplitude_um=42.4,
+                                        longueur_donde_um=393.6, **kw_sp)
+    ec_vr = []
+    for p_vr in pts_sp[:40]:
+        g_vr = np.zeros(3)
+        for k_vr in range(3):
+            e_vr = np.zeros(3)
+            e_vr[k_vr] = 0.05
+            g_vr[k_vr] = (float(vr.phase((p_vr + e_vr).reshape(1, 3))[0])
+                          - float(vr.phase((p_vr - e_vr).reshape(1, 3))[0])) / 0.1
+        g_vr = g_vr / np.linalg.norm(g_vr)
+        n_vr = vr.normale_locale(p_vr).reshape(3)
+        ec_vr.append(float(np.degrees(np.arccos(np.clip(abs(float(g_vr @ n_vr)), -1.0, 1.0)))))
+    v("... et sa normale analytique EST le gradient de sa phase",
+      max(ec_vr) < 0.01, f"écart max aux différences finies {max(ec_vr):.6f}°")
+    # ⭐⭐⭐⭐ LE CONTRASTE QUI JUSTIFIE LA CLASSE : la composante axiale du VRILLAGE garde son signe
+    # partout, celle du FROISSEMENT en change. Une fixture qui rendrait la meme part hors plan que
+    # le froissement en alternant comme lui n'apporterait rien.
+    # ⚠⚠⚠ LE CONTRASTE SE MESURE SANS FROISSEMENT, ET LA RAISON EST UN CHIFFRE. A l'amplitude que
+    # le depot calibre, le terme axial du froissement vaut `A.2.pi/lambda` = 0,677 par pas contre
+    # 0,05 pour un vrillage de cinq centiemes : il est TREIZE FOIS plus grand. Melanger les deux
+    # ici mesurerait le froissement et l'appellerait vrillage.
+    vr_pur = VolumeFabriqueEnSpiraleVrillee(C.PAS_UM, vrillage=0.05, amplitude_um=0.0, **kw_sp)
+    z_vr = vr_pur.normale_locale(pts_sp)[:, 0]
+    z_fr = sp_fr.normale_locale(pts_sp)[:, 0]
+    v("⭐⭐⭐⭐ la part axiale du VRILLAGE garde son signe partout",
+      bool(np.all(z_vr < 0.0)) or bool(np.all(z_vr > 0.0)),
+      f"{int((z_vr > 0).sum())} positives sur {len(z_vr)}")
+    v("⭐⭐⭐⭐ ... là où celle du FROISSEMENT change de signe",
+      bool((z_fr > 0).any() and (z_fr < 0).any()),
+      f"{int((z_fr > 0).sum())} positives sur {len(z_fr)} — c'est ce qu'il ALTERNE qui manque")
+    # ⚠⚠ ET SUR UNE MATIERE FROISSEE, CE QUE LE VRILLAGE FAIT EST DEPLACER LA MOYENNE, jamais
+    # supprimer l'alternance : le froissement reste treize fois plus grand. Le dire est la seule
+    # facon de ne pas promettre ce que la fixture ne fait pas.
+    v("⚠⚠ sur une matière froissée il DÉPLACE la moyenne, il ne supprime pas l'alternance",
+      float(vr.normale_locale(pts_sp)[:, 0].mean()) < float(z_fr.mean())
+      and bool((vr.normale_locale(pts_sp)[:, 0] > 0).any()),
+      f"moyenne {float(vr.normale_locale(pts_sp)[:, 0].mean()):.4f} contre "
+      f"{float(z_fr.mean()):.4f} sans vrillage")
+    # ⚠⚠ ET ELLE RESTE UN ROULEAU : a z fixe, un tour fait croitre la phase d'exactement une
+    # feuille. Un vrillage qui changerait ce compte ne serait plus un enroulement. Mesure sans
+    # froissement, qui module la phase et brouillerait le compte.
+    ang_vr = np.linspace(0.0, 2.0 * np.pi, 9)[:-1]
+    r_vr = 3000.0 / C.VOXEL_FIN_UM
+    tour = np.stack([np.full(8, 2000.0), 6000.0 + r_vr * np.sin(ang_vr),
+                     6000.0 + r_vr * np.cos(ang_vr)], axis=1)
+    ph_vr = vr_pur.phase(tour)
+    v("⚠⚠ à z fixe, un tour de la vrillée croise EXACTEMENT une feuille",
+      abs(float(ph_vr.max() - ph_vr.min()) - 7.0 / 8.0) < 1e-9,
+      f"{float(ph_vr.max() - ph_vr.min()):.6f} feuille sur sept huitièmes de tour")
+    v("⚠ la part hors plan annoncée est celle d'une spirale ronde non froissée",
+      abs(vr.hors_du_plan_du_tour() - 0.05 / np.hypot(1.0, 0.05)) < 1e-12,
+      f"{vr.hors_du_plan_du_tour():.6f} — une BORNE, que le froissement module")
 
     # === LA SPIRALE ECRASEE, ET LA COMPOSITION DES DEUX ===================================
     # ⚠⚠ Ce qui est verifie ici est ce que la classe promet : qu'a ecrasement nul elle SOIT la

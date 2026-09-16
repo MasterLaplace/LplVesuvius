@@ -1754,6 +1754,38 @@ le verdict d'assise s'accorde avec la **mesure** et non avec le drapeau du modul
 version lisait le drapeau, donc le figer à `True` la faisait passer ; et la comparaison est
 **refusée** sans découpage par cap.
 
+**`170` · 2026-09-16 · le vrillage paie-t-il le coin qui manque**
+`169` mesure que les deux causes du dépôt **tirent en sens opposés** — l'écrasement penche
+azimutalement et suit parfaitement, le froissement penche axialement et ne suit pas — et que le
+rouleau demande un penchant **axial ET suivi** qu'aucun mélange ne donne. ⭐⭐⭐ **Le coin manquant a
+été CONSTRUIT** : `VolumeFabriqueEnSpiraleVrillee`, un enroulement **de travers** où la feuille
+dérive le long de l'axe en s'enroulant, donc un hélicoïde dont la normale sort du plan du tour d'une
+quantité **constante**. ⚠ Sa part axiale garde son **signe sur 200 points sur 200**, là où celle du
+froissement en change, et à `z` fixe un tour croise toujours **exactement une** feuille — c'est
+encore un rouleau. ⚠⚠⚠ La méthode est celle de `134` : le vrillage est **posé par bissection sur la
+part axiale du rouleau**, sans regarder les trois autres grandeurs, qui sont **lues ensuite**.
+✗ **NON, SUR LES DEUX MOITIÉS.** Le vrillage **0,51885** touche sa cible **au millième** (**0,335**
+pour **0,334**) et la matière penche **toujours azimutalement**, parce que sa part azimutale ne
+bouge pas — **0,345** sans vrillage, **0,346** avec. Et il **éloigne** des trois grandeurs de
+`R4-F87` : la pire des trois passe de **0,0742** à **0,0993** — `R4-F170`. ⚠⚠ La distance est la
+**pire des trois, jamais leur moyenne**, et ce cas montre pourquoi : le vrillage **rapproche** le
+rapport (**0,0684 → 0,0288**) en **éloignant** les deux autres. ⚠⚠ Le bracket de la bissection est
+**lu** sur l'échelle et jamais supposé : la part axiale n'est **pas monotone** tant que le
+froissement domine — il vaut **treize fois** un vrillage de cinq centièmes — et le balayage le
+montre, **0,147** puis **0,132** puis **0,171**. ⭐⭐⭐⭐ **ET CELA RETOURNE LA QUESTION POSÉE DEPUIS
+`169`** : ce qui manque à la fixture n'est pas une cause absente, c'est un **EXCÈS**. Le rouleau rend
+**0,193** de part azimutale quand la matière calibrée en rend **0,345**, presque le double, et cela
+vient de l'**écrasement** — qu'aucune cause **ajoutée** ne diminue. Il faut pousser le vrillage à
+**0,6** pour que l'azimutal descende, et le penchant y est déjà à **31,40°** pour **25,48°** sur le
+rouleau : il n'existe **aucun** réglage où les deux parts tombent ensemble — `R4-F171`.
+⚠⚠ Et l'excès n'est pas une erreur de calibration évidente : l'écrasement **0,2782** vient du rapport
+des axes **1,77** que `90` mesure sur le vrai rouleau. Ce qui est en cause est l'**effet** de cet
+écrasement sur la marche, pas sa quantité. ⭐ Le contrôle tient et il est vide : sur la spirale nue,
+part axiale **0,0** et glissement **0,0 µm** sur **10** marches.
+⚠ Au passage, le gradient non normalisé de la phase a été **extrait** du parent
+(`gradient_de_la_phase`) plutôt que recopié, pour qu'une sous-classe puisse y **ajouter** un terme ;
+la batterie des fixtures passe de **112** à **119** et aucun témoin n'a bougé.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

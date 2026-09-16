@@ -3049,6 +3049,80 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 170 : LE VRILLAGE PAIE-T-IL LE COIN QUI MANQUE.
+    # (1) Une part AXIALE ne voyage jamais sans son AZIMUTALE : c'est parce que la seconde NE BOUGE
+    # PAS que la calibration touche sa cible sans donner le cote.
+    # (2) Un PRIX ne voyage jamais sans celui de la matiere SANS vrillage : un prix qui n'est
+    # compare a rien n'est pas un prix.
+    # (3) Et une distance ne voyage jamais sans le NOM de la grandeur la plus mal reproduite :
+    # c'est la pire des trois, jamais leur moyenne, et laquelle change le remede.
+    vp = _source(racine, "le_vrillage_paie_t_il_le_coin_qui_manque.json")
+    if vp.exists():
+        d = json.loads(vp.read_text())
+        j_ = d.get("juger", {})
+
+        def _dec170(x) -> int:
+            t = repr(float(x))
+            return len(t.split(".")[1]) if "." in t else 0
+
+        if j_.get("decidable"):
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            if c_.get("decidables") is not None:
+                ajoute("marches du controle de 170", int(c_["decidables"]), 0, vp.name)
+            for cle, nom in (("axial_median", "part axiale du controle"),
+                             ("glissement_axial_median_um", "glissement axial du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 170", float(c_[cle]), _dec170(c_[cle]), vp.name)
+            for cote, lisible in (("sans_vrillage", "sans vrillage"),
+                                  ("avec_vrillage", "avec vrillage")):
+                m_ = j_.get(cote) or {}
+                # ⚠⚠ LE VRILLAGE EST PRIS DANS `la_pose`, PAS DANS LA MESURE : le producteur y
+                # publie l'ARRONDI a cinq decimales, et c'est lui que le document ecrit. Enregistrer
+                # la valeur brute de la bissection exigerait un chiffre que personne ne publie.
+                for cle, nom in (("axial", "part axiale"), ("azimutal", "part azimutale"),
+                                 ("coherence", "coherence"), ("rapport", "rapport"),
+                                 ("penchant_deg", "penchant")):
+                    if m_.get(cle) is not None:
+                        ajoute(f"{nom} {lisible} de 170", float(m_[cle]), _dec170(m_[cle]),
+                               vp.name)
+                if m_.get("marches_axiales") is not None:
+                    ajoute(f"marches axiales {lisible} de 170", int(m_["marches_axiales"]), 0,
+                           vp.name)
+                dd = j_.get(f"distance_{cote}") or {}
+                if dd.get("distance") is not None:
+                    ajoute(f"pire ecart au rouleau {lisible} de 170", float(dd["distance"]),
+                           _dec170(dd["distance"]), vp.name)
+                for cle, v_ in (dd.get("par_grandeur") or {}).items():
+                    ajoute(f"ecart de {cle} {lisible} de 170", float(v_), _dec170(v_), vp.name)
+            pose_ = j_.get("la_pose") or {}
+            if pose_.get("vrillage") is not None:
+                ajoute("vrillage pose de 170", float(pose_["vrillage"]),
+                       _dec170(pose_["vrillage"]), vp.name)
+            if pose_.get("cible_axiale") is not None:
+                ajoute("cible axiale de la pose de 170", float(pose_["cible_axiale"]),
+                       _dec170(pose_["cible_axiale"]), vp.name)
+            ro_ = j_.get("le_rouleau") or {}
+            for cle, nom in (("axial", "part axiale du rouleau"),
+                             ("azimutal", "part azimutale du rouleau"),
+                             ("rapport", "rapport du rouleau"),
+                             ("penchant_deg", "penchant du rouleau"),
+                             ("coherence", "coherence du rouleau")):
+                if ro_.get(cle) is not None:
+                    ajoute(f"{nom} de 170", float(ro_[cle]), _dec170(ro_[cle]), vp.name)
+            # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : il donne le balayage ENTIER, avec
+            # ses six colonnes, parce que c'est lui qui montre que l'azimutal ne descend qu'apres.
+            for m_ in ((d.get("enquete") or {}).get("balayage") or []):
+                if not m_.get("decidable"):
+                    continue
+                q = f"a vrillage {m_['vrillage']} de 170"
+                for cle, nom in (("axial", "part axiale"), ("azimutal", "part azimutale"),
+                                 ("coherence", "coherence"), ("rapport", "rapport"),
+                                 ("penchant_deg", "penchant")):
+                    if m_.get(cle) is not None:
+                        ajoute(f"{nom} {q}", float(m_[cle]), _dec170(m_[cle]), vp.name)
+                if m_.get("marches_axiales") is not None:
+                    ajoute(f"marches axiales {q}", int(m_["marches_axiales"]), 0, vp.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 169 : LA FIXTURE PENCHE-T-ELLE DU MEME COTE QUE LE ROULEAU.
     # (1) Une part axiale ne voyage jamais sans son AZIMUTALE : c'est leur comparaison qui porte
     # l'enonce, et une seule se lirait comme un niveau.

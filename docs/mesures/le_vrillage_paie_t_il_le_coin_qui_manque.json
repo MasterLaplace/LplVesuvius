@@ -1,0 +1,260 @@
+{
+ "enquete": {
+  "decidable": true,
+  "echelle": [
+   0.0,
+   0.05,
+   0.15,
+   0.3,
+   0.45,
+   0.6,
+   0.8,
+   1.0
+  ],
+  "balayage": [
+   {
+    "vrillage": 0.0,
+    "decidable": true,
+    "departs": 10,
+    "decidables": 10,
+    "axial": 0.147,
+    "azimutal": 0.345,
+    "coherence": 0.958,
+    "glissement_axial_um": 28.2,
+    "penchant_deg": 23.59,
+    "rapport": 1.1049,
+    "marches_axiales": 2,
+    "pire_assise_en_feuilles": 0.013362
+   },
+   {
+    "vrillage": 0.05,
+    "decidable": true,
+    "departs": 10,
+    "decidables": 10,
+    "axial": 0.132,
+    "azimutal": 0.381,
+    "coherence": 0.962,
+    "glissement_axial_um": 23.9,
+    "penchant_deg": 25.02,
+    "rapport": 1.118,
+    "marches_axiales": 2,
+    "pire_assise_en_feuilles": 0.011317
+   },
+   {
+    "vrillage": 0.15,
+    "decidable": true,
+    "departs": 10,
+    "decidables": 10,
+    "axial": 0.171,
+    "azimutal": 0.358,
+    "coherence": 0.948,
+    "glissement_axial_um": 27.1,
+    "penchant_deg": 25.26,
+    "rapport": 1.1123,
+    "marches_axiales": 2,
+    "pire_assise_en_feuilles": 0.013632
+   },
+   {
+    "vrillage": 0.3,
+    "decidable": true,
+    "departs": 10,
+    "decidables": 10,
+    "axial": 0.28,
+    "azimutal": 0.349,
+    "coherence": 0.974,
+    "glissement_axial_um": 39.2,
+    "penchant_deg": 27.44,
+    "rapport": 1.1349,
+    "marches_axiales": 2,
+    "pire_assise_en_feuilles": 0.012043
+   },
+   {
+    "vrillage": 0.45,
+    "decidable": true,
+    "departs": 10,
+    "decidables": 10,
+    "axial": 0.293,
+    "azimutal": 0.351,
+    "coherence": 0.972,
+    "glissement_axial_um": 40.0,
+    "penchant_deg": 28.56,
+    "rapport": 1.1559,
+    "marches_axiales": 3,
+    "pire_assise_en_feuilles": 0.012245
+   },
+   {
+    "vrillage": 0.6,
+    "decidable": true,
+    "departs": 10,
+    "decidables": 10,
+    "axial": 0.407,
+    "azimutal": 0.365,
+    "coherence": 0.986,
+    "glissement_axial_um": 56.0,
+    "penchant_deg": 31.4,
+    "rapport": 1.1909,
+    "marches_axiales": 7,
+    "pire_assise_en_feuilles": 0.011484
+   },
+   {
+    "vrillage": 0.8,
+    "decidable": true,
+    "departs": 10,
+    "decidables": 10,
+    "axial": 0.514,
+    "azimutal": 0.328,
+    "coherence": 0.99,
+    "glissement_axial_um": 62.8,
+    "penchant_deg": 37.25,
+    "rapport": 1.2726,
+    "marches_axiales": 9,
+    "pire_assise_en_feuilles": 0.013862
+   },
+   {
+    "vrillage": 1.0,
+    "decidable": true,
+    "departs": 10,
+    "decidables": 10,
+    "axial": 0.603,
+    "azimutal": 0.286,
+    "coherence": 0.99,
+    "glissement_axial_um": 79.4,
+    "penchant_deg": 42.17,
+    "rapport": 1.3753,
+    "marches_axiales": 10,
+    "pire_assise_en_feuilles": 0.011245
+   }
+  ],
+  "le_controle_de_la_spirale_nue": {
+   "nom": "spirale nue",
+   "decidables": 10,
+   "glissement_axial_median_um": 0.0,
+   "axial_median": 0.0,
+   "il_ne_penche_pas": true
+  },
+  "la_pose": {
+   "decidable": true,
+   "vrillage": 0.51885,
+   "bracket": [
+    0.5185546875,
+    0.5191406249999999
+   ],
+   "cible_axiale": 0.334,
+   "tours": 8,
+   "pose_vrillage": 0.51884765625,
+   "pose_decidable": true,
+   "pose_departs": 10,
+   "pose_decidables": 10,
+   "pose_axial": 0.335,
+   "pose_azimutal": 0.346,
+   "pose_coherence": 0.979,
+   "pose_glissement_axial_um": 46.5,
+   "pose_penchant_deg": 28.01,
+   "pose_rapport": 1.1519,
+   "pose_marches_axiales": 5,
+   "pose_pire_assise_en_feuilles": 0.011577
+  },
+  "departs": 10,
+  "rayon_mm": 10.0,
+  "memoire_du_cap": 0.75,
+  "pas_max": 40,
+  "matiere": {
+   "ecrasement": 0.2782,
+   "amplitude_um": 100.0
+  }
+ },
+ "juger": {
+  "decidable": true,
+  "le_rouleau": {
+   "sources": [
+    "le_chemin_penche_t_il_ou_serpente_t_il.json",
+    "lecrasement_explique_t_il_lobliquite.json"
+   ],
+   "memoire_du_cap": 0.75,
+   "axial": 0.334,
+   "azimutal": 0.193,
+   "glissement_axial_um": 43.2,
+   "rapport": 1.186,
+   "penchant_deg": 25.48,
+   "coherence": 0.925
+  },
+  "sans_vrillage": {
+   "vrillage": 0.0,
+   "decidable": true,
+   "departs": 10,
+   "decidables": 10,
+   "axial": 0.147,
+   "azimutal": 0.345,
+   "coherence": 0.958,
+   "glissement_axial_um": 28.2,
+   "penchant_deg": 23.59,
+   "rapport": 1.1049,
+   "marches_axiales": 2,
+   "pire_assise_en_feuilles": 0.013362
+  },
+  "avec_vrillage": {
+   "vrillage": 0.51884765625,
+   "decidable": true,
+   "departs": 10,
+   "decidables": 10,
+   "axial": 0.335,
+   "azimutal": 0.346,
+   "coherence": 0.979,
+   "glissement_axial_um": 46.5,
+   "penchant_deg": 28.01,
+   "rapport": 1.1519,
+   "marches_axiales": 5,
+   "pire_assise_en_feuilles": 0.011577
+  },
+  "distance_sans_vrillage": {
+   "par_grandeur": {
+    "rapport": 0.0684,
+    "penchant_deg": 0.0742,
+    "coherence": 0.0357
+   },
+   "la_pire": "penchant_deg",
+   "distance": 0.0742
+  },
+  "distance_avec_vrillage": {
+   "par_grandeur": {
+    "rapport": 0.0288,
+    "penchant_deg": 0.0993,
+    "coherence": 0.0584
+   },
+   "la_pire": "penchant_deg",
+   "distance": 0.0993
+  },
+  "le_controle_de_la_spirale_nue": {
+   "nom": "spirale nue",
+   "decidables": 10,
+   "glissement_axial_median_um": 0.0,
+   "axial_median": 0.0,
+   "il_ne_penche_pas": true
+  },
+  "la_pose": {
+   "decidable": true,
+   "vrillage": 0.51885,
+   "bracket": [
+    0.5185546875,
+    0.5191406249999999
+   ],
+   "cible_axiale": 0.334,
+   "tours": 8,
+   "pose_vrillage": 0.51884765625,
+   "pose_decidable": true,
+   "pose_departs": 10,
+   "pose_decidables": 10,
+   "pose_axial": 0.335,
+   "pose_azimutal": 0.346,
+   "pose_coherence": 0.979,
+   "pose_glissement_axial_um": 46.5,
+   "pose_penchant_deg": 28.01,
+   "pose_rapport": 1.1519,
+   "pose_marches_axiales": 5,
+   "pose_pire_assise_en_feuilles": 0.011577
+  },
+  "il_donne_le_cote": false,
+  "il_neloigne_pas_des_trois": false,
+  "il_paie_ce_quil_donne": false
+ }
+}

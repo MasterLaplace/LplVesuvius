@@ -1478,6 +1478,8 @@ run "la croix qui ecoute"   uv run python "$ROOT/src/nappe/la_croix_paie_t_elle_
 run "figure croix ecoute"   uv run python "$ROOT/src/figures/figure_la_croix_paie_t_elle_quand_on_ecoute.py" --verifier
 run "le cote du penchant"   uv run python "$ROOT/src/nappe/la_fixture_penche_t_elle_du_meme_cote.py" --verifier
 run "figure cote penchant"  uv run python "$ROOT/src/figures/figure_la_fixture_penche_t_elle_du_meme_cote.py" --verifier
+run "le vrillage"           uv run python "$ROOT/src/nappe/le_vrillage_paie_t_il_le_coin_qui_manque.py" --verifier
+run "figure vrillage"       uv run python "$ROOT/src/figures/figure_le_vrillage_paie_t_il_le_coin_qui_manque.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
