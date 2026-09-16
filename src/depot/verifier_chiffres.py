@@ -3123,6 +3123,74 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if m_.get("marches_axiales") is not None:
                     ajoute(f"marches axiales {q}", int(m_["marches_axiales"]), 0, vp.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 174 : LA COUPE CHERCHEE TROUVE-T-ELLE LA FRONTIERE.
+    # (1) Une COUPE ne voyage jamais sans la FRONTIERE qu'elle vise : « coupe 8 » ne dit rien,
+    # « 8 pour 37 » dit tout, et c'est leur ecart qui refute.
+    # (2) Un reel ne voyage jamais sans le MAXIMUM de ses permutations : c'est le contrôle, et le
+    # reel seul se lirait comme une reussite.
+    # (3) Et un compte de la relecture ne voyage jamais sans la colonne SUR LA FRONTIERE : les deux
+    # ensemble disent qu'un douze sur douze peut etre vide.
+    # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE.
+    cc = _source(racine, "la_coupe_cherchee_trouve_t_elle_la_frontiere.json")
+    if cc.exists():
+        d = json.loads(cc.read_text())
+
+        def _dec174(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        ot = d.get("ou_tombe_la_coupe") or {}
+        for cle, nom in (("couches", "couches de la marche"), ("frontiere", "frontiere")):
+            if ot.get(cle) is not None:
+                ajoute(f"{nom} de 174", int(ot[cle]), 0, cc.name)
+        for rec, x in (ot.get("par_recette") or {}).items():
+            if not x.get("decidable"):
+                continue
+            q = f"de la coupe {rec} de 174"
+            for cle, nom in (("coupe", "position"), ("ecart_a_la_frontiere", "ecart")):
+                ajoute(f"{nom} {q}", int(x[cle]), 0, cc.name)
+            for cle, nom in (("bascule_deg", "bascule"), ("temoin_deg", "temoin")):
+                ajoute(f"{nom} {q}", float(x[cle]), _dec174(x[cle]), cc.name, unites=("°",))
+            for cle, nom in (("resultante_avant", "resultante avant"),
+                             ("resultante_apres", "resultante apres"),
+                             ("part_atteinte", "part atteinte")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(x[cle]), _dec174(x[cle]), cc.name)
+        me = d.get("le_melange") or {}
+        if me.get("permutations") is not None:
+            ajoute("permutations de 174", int(me["permutations"]), 0, cc.name)
+        for bloc, nom in (("la_meilleure_coupe", "l ecart maximise"),
+                          ("la_coupe_ajustee", "l ajustement")):
+            b = me.get(bloc) or {}
+            for cle, lisible in (("bascule_reelle_deg", "reel"), ("part_atteinte", "reel"),
+                                 ("bascule_maximale_des_permutations_deg", "maximum des permutations"),
+                                 ("part_maximale_des_permutations", "maximum des permutations")):
+                if b.get(cle) is not None:
+                    ajoute(f"{lisible} de {nom} de 174", float(b[cle]), _dec174(b[cle]), cc.name)
+        for nom, x in ((d.get("les_trois_matieres") or {}).get("par_matiere") or {}).items():
+            if not x.get("decidable"):
+                continue
+            q = f"de la {nom} de 174"
+            ajoute(f"coupe {q}", int(x["coupe"]), 0, cc.name)
+            for cle, lisible in (("bascule_deg", "bascule"), ("temoin_deg", "temoin")):
+                ajoute(f"{lisible} {q}", float(x[cle]), _dec174(x[cle]), cc.name, unites=("°",))
+            ajoute(f"part atteinte {q}", float(x["part_atteinte"]),
+                   _dec174(x["part_atteinte"]), cc.name)
+        jo = ((d.get("les_trois_matieres") or {}).get("le_temoin_a_la_jonction") or {})
+        for cle, nom in (("dun_seul_cote_deg", "temoin a la jonction d un seul cote"),
+                         ("des_deux_cotes_deg", "temoin a la jonction des deux cotes")):
+            if jo.get(cle) is not None:
+                ajoute(f"{nom} de 174", float(jo[cle]), _dec174(jo[cle]), cc.name, unites=("°",))
+        rl = d.get("la_relecture_de_173") or {}
+        for x in (rl.get("lignes") or []):
+            q = f"a {x['demande_en_feuilles']} feuille de 174"
+            ajoute(f"decalages lus {q}", int(x["lus"]), 0, cc.name)
+            for cle in ("aveugle", "meilleure", "ajustee", "sur_la_frontiere"):
+                ajoute(f"{cle.replace('_', ' ')} {q}", int(x[cle]), 0, cc.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 173 : QUELLE FENETRE LIT UNE BASCULE.
     # (1) Un compte de decalages ne voyage jamais sans le TOTAL essaye : « 8 » ne dit rien, « 8 sur
     # 12 » dit tout, et la difference entre les deux recettes se lit sur le rapport.

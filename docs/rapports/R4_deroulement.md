@@ -1912,6 +1912,49 @@ rouleau serait la faute que cette tranche corrige chez une autre.
 la bande lisait le **verdict** là où le panneau lisait la **campagne** : deux chemins vers un même
 nombre, repliés sur la même source.
 
+**`174` · 2026-09-16 · la coupe cherchée trouve-t-elle la frontière**
+`R4-P30` demandait de poser la coupe cherchée de `173` sur le vrai rouleau, **en exigeant qu'elle
+porte son propre contrôle**. Le contrôle a réfuté l'instrument avant qu'il n'atteigne la matière.
+✗ **`la_meilleure_coupe` maximise l'ÉCART, donc elle choisit la coupe la plus DÉSÉQUILIBRÉE.** Sur
+une marche de **109** couches dont la frontière est **construite** à la couche **37**, elle coupe à
+la couche **8** — écart **29** — et rend pourtant **90,0°** : les huit premières couches sont pures,
+donc leur moyenne est franche, et tout le reste est un mélange presque équilibré dont la résultante
+vaut **0,089**, c'est-à-dire une moyenne **sans direction** mais parfaitement définie. L'écart à une
+direction arbitraire est arbitrairement grand — `R4-F179`. ⚠⚠⚠ Et le contrôle par permutation ne la
+rattrape pas : mélanger conserve le **multiensemble** des angles, donc une part pure et un mélange
+restent trouvables, et l'écart réel **90,0°** égale le maximum de **19** permutations.
+⭐⭐⭐⭐ **La réparation a deux pièces et aucune n'est un seuil.** Une moyenne sans **résultante**
+n'est pas une direction — c'est l'avertissement que `fiber_orientation` porte couche par couche,
+posé un étage plus haut, et la borne se **dérive** : `n` directions tirées au hasard rendent de
+l'ordre de **1/√n**. Et la coupe s'obtient en **ajustant deux segments**, celle qui rend la
+résultante TOTALE la plus grande, au lieu de maximiser l'écart. Elle tombe alors sur **37 pour 37**,
+résultantes **1,0** et **1,0**, part atteinte **1,0** contre **0,321** au mélange ; du bruit est
+**refusé** — `R4-F180`.
+⭐⭐⭐⭐ **Et le douze sur douze de `173` était juste et VIDE.** Relue sur la même fixture et aux
+mêmes douze décalages, sa recette est bien fiable à **0,75 · 1 · 1,25 · 1,5 · 2 · 3** feuilles —
+mais avec la troisième condition, que la coupe tombe sur la **frontière** que la fixture connaît, la
+liste « fiables **et** sur la frontière » est **VIDE**, et la recette réparée n'est fiable qu'à
+**0,75** feuille — `R4-F181`. ⚠ Ce qui de `173` reste debout est la moitié qui ne dépend d'aucune
+maximisation : la coupe **aveugle** n'atteint jamais douze sur douze. `R4-F177` et `R4-F178` passent
+donc au statut **borné**, pas rétracté.
+⚠⚠⚠ **Une sonde est passée au vert, deuxième tranche de suite**, et pour la même raison : rien
+n'exigeait que le témoin lise le **second** côté, parce que les matières disponibles disaient la
+même chose des deux. La matière qui manquait est une **marche suivie d'une dérive** — première part
+homogène, seconde qui tourne — où le témoin d'un seul côté rend **0,0°** et déclare une marche
+propre là où celui des deux côtés rend **60,845°**. ⚠⚠ Et la fixture elle-même a dû être corrigée
+avant de servir : une première version posait la frontière à la couche **54**, exactement là où la
+coupe **aveugle** coupe une fenêtre de 109 couches — une fixture complaisante donne raison à la
+recette qu'elle met à l'épreuve.
+⚠⚠ **La limite est DITE plutôt que tue** : une **dérive** n'est pas séparée d'une marche par un
+verdict — témoin **0,0°** contre **43,287°** — et le prétendre serait choisir un seuil.
+⚠⚠ **Rien n'a été posé sur le vrai rouleau, délibérément.** Le réseau répond, un chunk arrive en une
+seconde, et la profondeur du volume de surface **est** de 109 couches — donc la fenêtre de la
+campagne n'était pas un choix. C'est précisément pour ça qu'il fallait le contrôle d'abord : on ne
+pointe pas un instrument qui n'est fiable qu'à une longueur sur huit.
+⚠ La figure a payé une classe de défaut déjà connue sous une autre forme : un trait pointillé
+traversait un libellé, et `textes_qui_se_recouvrent` ne voit que du texte contre du texte — la leçon
+de la barre qui débordait dans `167`. Chaque trait est désormais **enregistré avec son étendue**.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

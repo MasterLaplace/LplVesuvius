@@ -1,0 +1,221 @@
+{
+  "couches": 109,
+  "frontiere": 37,
+  "permutations": 19,
+  "graine": 20260916,
+  "ou_tombe_la_coupe": {
+    "decidable": true,
+    "couches": 109,
+    "frontiere": 37,
+    "par_recette": {
+      "aveugle": {
+        "decidable": true,
+        "coupe": 54,
+        "ecart_a_la_frontiere": 17,
+        "elle_tombe_sur_la_frontiere": false,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0
+      },
+      "meilleure": {
+        "decidable": true,
+        "coupe": 8,
+        "ecart_a_la_frontiere": 29,
+        "elle_tombe_sur_la_frontiere": false,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0
+      },
+      "ajustee": {
+        "decidable": true,
+        "coupe": 37,
+        "ecart_a_la_frontiere": 0,
+        "elle_tombe_sur_la_frontiere": true,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "resultante_avant": 1.0,
+        "resultante_apres": 1.0,
+        "part_atteinte": 1.0
+      }
+    }
+  },
+  "le_melange": {
+    "decidable": true,
+    "permutations": 19,
+    "la_meilleure_coupe": {
+      "bascule_reelle_deg": 90.0,
+      "permutations_lues": 19,
+      "permutations_refusees": 0,
+      "bascule_mediane_des_permutations_deg": 70.0,
+      "bascule_maximale_des_permutations_deg": 90.0,
+      "elle_depasse_toutes_les_permutations": false
+    },
+    "la_coupe_ajustee": {
+      "part_atteinte": 1.0,
+      "permutations_lues": 18,
+      "permutations_refusees": 1,
+      "part_mediane_des_permutations": 0.321,
+      "part_maximale_des_permutations": 0.321,
+      "elle_depasse_toutes_les_permutations": true
+    }
+  },
+  "les_trois_matieres": {
+    "decidable": true,
+    "par_matiere": {
+      "marche": {
+        "decidable": true,
+        "coupe": 37,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "part_atteinte": 1.0,
+        "resultante_avant": 1.0,
+        "resultante_apres": 1.0,
+        "la_bascule_depasse_le_temoin": true
+      },
+      "derive": {
+        "decidable": true,
+        "coupe": 54,
+        "bascule_deg": 85.787,
+        "temoin_deg": 43.287,
+        "part_atteinte": 0.666,
+        "resultante_avant": 0.672,
+        "resultante_apres": 0.661,
+        "la_bascule_depasse_le_temoin": true
+      },
+      "marche_puis_derive": {
+        "decidable": true,
+        "coupe": 88,
+        "bascule_deg": 35.562,
+        "temoin_deg": 40.669,
+        "part_atteinte": 0.618,
+        "resultante_avant": 0.542,
+        "resultante_apres": 0.937,
+        "la_bascule_depasse_le_temoin": false
+      },
+      "bruit": {
+        "decidable": false,
+        "raison": "aucune coupe lisible"
+      }
+    },
+    "le_temoin_a_la_jonction": {
+      "coupe": 37,
+      "dun_seul_cote_deg": 0.0,
+      "des_deux_cotes_deg": 60.845,
+      "le_second_cote_est_lu": true
+    },
+    "le_bruit_est_refuse": true,
+    "la_marche_tombe_sur_sa_frontiere": true,
+    "la_derive_nest_pas_separee_par_un_verdict": true
+  },
+  "la_relecture_de_173": {
+    "decidable": true,
+    "lignes": [
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "aveugle": 4,
+        "meilleure": 7,
+        "ajustee": 3,
+        "sur_la_frontiere": 0,
+        "lus": 12
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "aveugle": 9,
+        "meilleure": 10,
+        "ajustee": 7,
+        "sur_la_frontiere": 3,
+        "lus": 12
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "aveugle": 8,
+        "meilleure": 12,
+        "ajustee": 12,
+        "sur_la_frontiere": 6,
+        "lus": 12
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "aveugle": 8,
+        "meilleure": 12,
+        "ajustee": 10,
+        "sur_la_frontiere": 4,
+        "lus": 12
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "aveugle": 6,
+        "meilleure": 12,
+        "ajustee": 4,
+        "sur_la_frontiere": 1,
+        "lus": 12
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "aveugle": 4,
+        "meilleure": 12,
+        "ajustee": 2,
+        "sur_la_frontiere": 0,
+        "lus": 12
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "aveugle": 0,
+        "meilleure": 12,
+        "ajustee": 11,
+        "sur_la_frontiere": 4,
+        "lus": 12
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "aveugle": 8,
+        "meilleure": 12,
+        "ajustee": 6,
+        "sur_la_frontiere": 3,
+        "lus": 12
+      }
+    ],
+    "decalages": 12,
+    "fiables": {
+      "aveugle": [],
+      "meilleure": [
+        0.75,
+        1.0,
+        1.25,
+        1.5,
+        2.0,
+        3.0
+      ],
+      "ajustee": [
+        0.75
+      ]
+    },
+    "fiables_sur_la_frontiere": []
+  },
+  "le_verdict": {
+    "decidable": true,
+    "la_meilleure_coupe_tombe_sur_la_frontiere": false,
+    "la_coupe_ajustee_tombe_sur_la_frontiere": true,
+    "ecart_a_la_frontiere_de_la_meilleure": 29,
+    "lecart_survit_au_melange": true,
+    "lajustement_ne_survit_pas_au_melange": true,
+    "le_bruit_est_refuse": true,
+    "la_derive_nest_pas_separee_par_un_verdict": true,
+    "longueurs_fiables_de_173": [
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      2.0,
+      3.0
+    ],
+    "longueurs_fiables_sur_la_frontiere": [],
+    "la_meilleure_coupe_est_refutee": true
+  }
+}
