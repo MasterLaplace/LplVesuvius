@@ -3123,6 +3123,60 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if m_.get("marches_axiales") is not None:
                     ajoute(f"marches axiales {q}", int(m_["marches_axiales"]), 0, vp.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 173 : QUELLE FENETRE LIT UNE BASCULE.
+    # (1) Un compte de decalages ne voyage jamais sans le TOTAL essaye : « 8 » ne dit rien, « 8 sur
+    # 12 » dit tout, et la difference entre les deux recettes se lit sur le rapport.
+    # (2) Une recette ne voyage jamais sans l'AUTRE a la meme longueur : le resultat est leur
+    # contraste, et une seule ferait lire soit que l'instrument ne peut pas, soit que la campagne
+    # avait raison.
+    # (3) Et la fenetre de la campagne ne voyage jamais sans sa longueur EN FEUILLES : un nombre de
+    # couches ne veut rien dire sans le pas et le voxel.
+    # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : le module mesure douze decalages ligne par
+    # ligne, le document n'en publie que les comptes.
+    fen = _source(racine, "quelle_fenetre_lit_une_bascule.json")
+    if fen.exists():
+        d = json.loads(fen.read_text())
+
+        def _dec173(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for x in ((d.get("les_longueurs") or {}).get("lignes") or []):
+            q = f"a {x['demande_en_feuilles']} feuille de 173"
+            ajoute(f"couches {q}", int(x["couches"]), 0, fen.name)
+            for r, b in (x.get("par_recette") or {}).items():
+                ajoute(f"decalages lus par la coupe {r} {q}", int(b["decalages_lus"]), 0, fen.name)
+                ajoute(f"decalages qui lisent la bascule par la coupe {r} {q}",
+                       int(b["lisent_la_bascule"]), 0, fen.name)
+        ca_ = d.get("la_campagne") or {}
+        for cle, nom in (("couches_de_la_campagne", "couches de la campagne"),
+                         ("segments_lus", "segments lus")):
+            if ca_.get(cle) is not None:
+                ajoute(f"{nom} de 173", int(ca_[cle]), 0, fen.name)
+        for cle, nom, unite in (("epaisseur_um", "epaisseur de la fenetre de la campagne", "µm"),
+                                ("en_feuilles", "fenetre de la campagne en feuilles", "feuille")):
+            if ca_.get(cle) is not None:
+                ajoute(f"{nom} de 173", float(ca_[cle]), _dec173(ca_[cle]), fen.name,
+                       unites=(unite,))
+        camp = (ca_.get("sur_une_matiere_qui_bascule") or {}).get("par_recette") or {}
+        for r, b in camp.items():
+            ajoute(f"decalages qui lisent la bascule par la coupe {r} sur la campagne de 173",
+                   int(b["lisent_la_bascule"]), 0, fen.name)
+            ajoute(f"decalages lus par la coupe {r} sur la campagne de 173",
+                   int(b["decalages_lus"]), 0, fen.name)
+        ct_ = d.get("le_contraste") or {}
+        for x in (ct_.get("lignes") or []):
+            q = f"a contraste {x['contraste']} de 173"
+            for r, b in (x.get("par_recette") or {}).items():
+                ajoute(f"decalages qui lisent la bascule par la coupe {r} {q}",
+                       int(b["lisent_la_bascule"]), 0, fen.name)
+                ajoute(f"decalages lus par la coupe {r} {q}", int(b["decalages_lus"]), 0, fen.name)
+        if ct_.get("couches") is not None:
+            ajoute("couches du balayage du contraste de 173", int(ct_["couches"]), 0, fen.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 172 : L'ANGLE PUBLIE EST-IL CELUI DES FIBRES.
     # (1) Un angle RENDU ne voyage jamais sans les CRETES dont il est l'ecart : c'est leur
     # comparaison qui porte l'enonce, et l'angle seul se lirait comme une orientation.

@@ -1869,6 +1869,49 @@ tout texte dessiné. ⚠ Et `R4-P11` n'est **pas** touchée : elle porte sur le 
 publié de `PHerc0139`, à **19,2** et **38,4** µm par cellule, pas sur la texture d'un volume à
 **2,4** µm.
 
+**`173` · 2026-09-16 · quelle fenêtre lit une bascule**
+`14` §3 laissait **trois** explications non départagées à l'absence de bascule recto/verso sur le
+vrai rouleau : le contraste entre plis trop faible, la fenêtre mal centrée, ou la fenêtre plus courte
+qu'une épaisseur de feuille. Aucune n'est tranchable sur une matière dont on ignore la réponse ;
+`172` a construit celle où on la connaît. ⭐⭐⭐⭐ **Aucune des trois n'est la bonne : le défaut est la
+COUPE AVEUGLE.** Sur une matière dont la bascule est construite, la recette de `14` — couper la
+fenêtre en deux **au milieu** et comparer — n'atteint **12/12** décalages à **aucune** des huit
+longueurs essayées, et son meilleur cas vaut **8/12** ; sur sa propre fenêtre elle lit **2/12**.
+La **même** fenêtre la lit **12/12** en **cherchant** sa coupe, et la meilleure coupe est fiable à
+**six** longueurs sur huit, de **0,75** à **3** feuilles — `R4-F177`.
+⭐ **Les trois causes sont chiffrées et écartées** : le contraste tient jusqu'à **0,02**, vingt-cinq
+fois moins que le réglage de référence ; la longueur suffit dès **0,75** feuille et celle de la
+campagne en vaut **1,512** ; le centrage est bien l'endroit où ça se joue, mais le défaut n'est pas
+que la fenêtre soit mal posée — c'est qu'on ne cherche pas — `R4-F178`.
+⚠⚠⚠ **L'énoncé n'a aucun seuil et le contrôle est APPARIÉ.** On lit deux écarts avec le **même**
+estimateur — celui de `fiber_orientation.survey`, plancher de cohérence compris : la **bascule**
+entre les deux parts, le **témoin** entre les deux moitiés de la première. Et à chaque décalage la
+même fenêtre est lue sur une matière à **deux** plis et sur une matière à **un** pli, tout étant
+égal par ailleurs ; la bascule médiane à un pli vaut **0,0** partout. ⚠⚠ Il faut les **deux**
+contrôles : le témoin demande si la recette voit une différence là où il n'y en a pas DANS la
+matière, l'apparié si elle en voit une sur une matière qui n'en a pas DU TOUT — une recette qui
+maximise passe le premier et peut échouer le second. ⚠⚠ Et « fiable » veut dire **à tous les
+décalages**, parce que la phase de la fenêtre dans la feuille n'est pas connue sur données réelles :
+une majorité serait une loterie qu'on aurait eu la chance de gagner.
+⚠⚠⚠ **Une sonde est PASSÉE au vert la première fois, et c'est la leçon de la tranche.** Neutraliser
+le contrôle apparié — lire la matière à deux plis des deux côtés — laissait la batterie verte :
+**une vérification incapable d'échouer**, parce que rien n'exigeait que les deux matières soient
+réellement deux. Réparée par un compte **structurel** qui ne juge rien,
+`decalages_ou_les_deux_matieres_different` ; après correction la sonde tombe à **0/4**.
+⚠⚠ **Et une borne se vérifie par sa PROPRIÉTÉ, pas par un recompte** : ma première assertion sur le
+nombre de coupes essayées recalculait l'arithmétique du code — une seconde définition, libre d'en
+diverger, et fausse du premier coup. Remplacée par la règle elle-même.
+⭐⭐⭐⭐ **Ce que cela ouvre** : la bascule recto/verso n'est **pas réfutée** sur le vrai rouleau, elle
+n'y a **pas été mesurée** — porte **`R4-P30`**. ⚠⚠ La portée est étroite et dite : seule la bascule
+**en profondeur** dépend de la coupe aveugle — `bascule_mediane_deg`, `part_bascule_sup_45`, la
+corrélation bascule × croisements — et la campagne **spatiale** de `14` §8, qui repose sur le
+désaccord entre fenêtres voisines, est **intacte**. ⚠⚠ Et rien ici ne dit qu'un vrai papyrus
+bascule : la fixture répond sur l'**instrument**, et prendre sa réponse pour une propriété du
+rouleau serait la faute que cette tranche corrige chez une autre.
+⚠ La figure a repayé `⭐` hors police pour la deuxième tranche de suite, et une sonde y a montré que
+la bande lisait le **verdict** là où le panneau lisait la **campagne** : deux chemins vers un même
+nombre, repliés sur la même source.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

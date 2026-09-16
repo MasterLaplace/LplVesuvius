@@ -189,24 +189,39 @@ def sur_la_fixture_a_deux_plis(pas_um: float, voxel_um: float, couches: int = 12
     return out
 
 
-def _bascule_dune_courbe(courbe, plancher: float = 0.15) -> float | None:
-    """La bascule en profondeur d'UNE courbe, par la recette de `fiber_orientation.survey`.
+def ecart_entre_deux_tranches(courbe, debut_a: int, fin_a: int, debut_b: int, fin_b: int,
+                              plancher: float = 0.15, minimum: int = 4) -> float | None:
+    """L'écart d'orientation entre deux tranches d'une courbe, par la recette du producteur.
 
-    ⚠⚠ C'EST LA MEME RECETTE, PAS UNE SECONDE. Le plancher de cohérence, le découpage en deux
-    moitiés, la moyenne en angle double et l'écart modulo 180° sont ceux du producteur ; en écrire
-    une variante ici ferait comparer deux définitions au lieu de deux lectures d'une seule.
+    ⭐ UNE SEULE DÉFINITION DE « L'ÉCART ENTRE DEUX PARTS », employée pour les moitiés d'une fenêtre
+    comme pour les quarts d'une seule moitié. Deux fonctions seraient deux réponses à la même
+    question, libres de diverger sur le plancher de cohérence ou sur la moyenne en angle double —
+    et c'est précisément leur comparaison qui porte l'énoncé de `173`.
+
+    ⚠⚠ LE PLANCHER, LE DECOUPAGE, LA MOYENNE EN ANGLE DOUBLE ET L'ECART MODULO 180° SONT CEUX DE
+    `fiber_orientation.survey`. En écrire une variante ferait comparer deux définitions au lieu de
+    deux lectures d'une seule.
+
+    ⚠ Rend `None` quand une tranche n'a pas assez de couches texturées : un écart calculé sur du
+    bruit est un angle aléatoire mais parfaitement défini, donc indiscernable d'une mesure.
     """
     a = np.asarray([x[0] for x in courbe], dtype=float)
     c = np.asarray([x[1] for x in courbe], dtype=float)
-    if a.size < 8:
-        return None
     fort = c > plancher
-    moitie = a.size // 2
-    haut, bas = fort[:moitie], fort[moitie:]
-    if haut.sum() < 4 or bas.sum() < 4:
+    ta, tb = fort[debut_a:fin_a], fort[debut_b:fin_b]
+    if ta.sum() < minimum or tb.sum() < minimum:
         return None
-    return float(angular_gap(circular_mean(a[:moitie][haut], c[:moitie][haut]),
-                             circular_mean(a[moitie:][bas], c[moitie:][bas])))
+    return float(angular_gap(
+        circular_mean(a[debut_a:fin_a][ta], c[debut_a:fin_a][ta]),
+        circular_mean(a[debut_b:fin_b][tb], c[debut_b:fin_b][tb])))
+
+
+def _bascule_dune_courbe(courbe, plancher: float = 0.15) -> float | None:
+    """La bascule en profondeur d'UNE courbe : l'écart entre ses deux MOITIÉS."""
+    n = len(courbe)
+    if n < 8:
+        return None
+    return ecart_entre_deux_tranches(courbe, 0, n // 2, n // 2, n, plancher)
 
 
 def ce_quun_quart_de_tour_atteint(campagnes=LES_CAMPAGNES, racine: Path = MESURES) -> dict:
