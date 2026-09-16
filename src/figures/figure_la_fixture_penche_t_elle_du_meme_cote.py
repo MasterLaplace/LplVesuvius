@@ -33,6 +33,8 @@ BANDE = (236, 234, 228)
 ALERTE = (176, 92, 42)
 BON = (60, 110, 90)
 CONTRE = (92, 108, 150)
+AMBRE_PALE = (214, 160, 128)
+ARDOISE_PALE = (152, 164, 200)
 
 
 def _fr(x, n: int = 3) -> str:
@@ -58,8 +60,16 @@ def lire(chemin: Path) -> dict:
     if j.get("le_controle_de_la_spirale_nue", {}).get("il_ne_penche_pas") is None:
         raise ValueError(f"{chemin} : le contrôle de la spirale nue est absent")
     cp = j.get("la_comparaison_au_rouleau")
-    if not cp or cp.get("le_cote_saccorde") is None or cp.get("le_suivi_saccorde") is None:
+    if not cp or not cp.get("par_cap"):
         raise ValueError(f"{chemin} : la comparaison au rouleau est absente")
+    # ⚠⚠⚠ ET ELLE DOIT ETRE FAITE CAP PAR CAP : le rouleau penche AZIMUTALEMENT sans cap et
+    # AXIALEMENT avec, donc une comparaison agregee sur les deux rend un verdict qui n'est celui
+    # d'aucun des deux. La premiere version de cette tranche l'a paye.
+    if cp.get("le_cote_saccorde_partout") is None:
+        raise ValueError(f"{chemin} : le verdict joint sur les caps est absent")
+    for c in cp["par_cap"]:
+        if c.get("memoire_du_cap") is None or c.get("le_cote_saccorde") is None:
+            raise ValueError(f"{chemin} : un cap sans verdict")
     return d
 
 
@@ -84,12 +94,22 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
         poses.append((x, y, texte, f))
 
     j = d["juger"]
-    mat, c, cp = j["par_matiere"], j["le_controle_de_la_spirale_nue"], j["la_comparaison_au_rouleau"]
-    pa, pz = cp["part_axiale"], cp["part_azimutale"]
-    gl, co = cp["glissement_axial_um"], cp["coherence"]
+    mat = j["par_matiere"]
+    c = j["le_controle_de_la_spirale_nue"]
+    cp = j["la_comparaison_au_rouleau"]
+    caps = sorted(cp["par_cap"], key=lambda x: x["memoire_du_cap"])
+    # ⚠ Le cap de la campagne est celui que `165` emploie : c'est lui que la bande commente.
+    capitale = max(caps, key=lambda x: x["memoire_du_cap"])
+    gl, co = capitale["glissement_axial_um"], capitale["coherence"]
 
-    ecrire(28, 20, "La fixture penche-t-elle du même côté que le rouleau ? — non, "
-                   "et elle ne le suit pas non plus", gros, ENCRE)
+    def AMBRE_OU(i):
+        return ALERTE if i == 0 else AMBRE_PALE
+
+    def ARDOISE_OU(i):
+        return CONTRE if i == 0 else ARDOISE_PALE
+
+    ecrire(28, 20, "La fixture penche-t-elle du même côté que le rouleau ? — oui, "
+                   "aux deux caps, mais elle ne le SUIT pas", gros, ENCRE)
     ecrire(28, 46, "`R4-F87` calibre la fixture sur le rapport, le penchant et la cohérence, à "
                    "5,5 % — la DIRECTION de ce penchant n'en fait pas partie", petit, GRIS)
 
@@ -120,35 +140,42 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
            "rien dire, et un glissement y mesurerait le MARCHEUR plutôt que", petit, GRIS)
     ecrire(x0 + 14, y0 + ph - 26, "la matière.", petit, GRIS)
 
-    # ---- panneau 2 : la comparaison qui decide
+    # ---- panneau 2 : la comparaison qui decide, CAP PAR CAP
     x0, y0, pw, ph = 712, 122, 592, 256
     art.rectangle([x0, y0, x0 + pw, y0 + ph], outline=TRAIT, width=1)
     cadres.append((x0, y0, x0 + pw, y0 + ph))
-    ecrire(x0, y0 - 24, "la comparaison qui décide — les deux parts", moyen, ENCRE)
-    x_barre = x0 + 132
-    barre_max = pw - 240
-    vmax = max(pa["la_fixture"], pa["le_rouleau"], pz["la_fixture"], pz["le_rouleau"]) or 1.0
-    for k, (qui, cle) in enumerate((("la fixture calibrée", "la_fixture"),
-                                    ("le VRAI rouleau", "le_rouleau"))):
-        base = y0 + 30 + k * 86
-        ecrire(x0 + 12, base - 18, qui, petit, ENCRE)
-        for i, (lib, src, coul) in enumerate((("part axiale", pa, ALERTE),
-                                              ("part azimutale", pz, CONTRE))):
-            yy = base + i * 22
-            val = float(src[cle])
-            w = (val / vmax) * barre_max
-            ecrire(x0 + 12, yy - 1, lib, 0, GRIS)
-            art.rectangle([x_barre, yy, x_barre + max(w, 1), yy + 14], fill=coul)
-            points.append((x_barre + w, yy + 7))
-            barres.append((x_barre + w, x_barre + barre_max))
-            ecrire(x_barre + barre_max + 8, yy - 1, _fr(val), 0, coul)
-        gagne = "axiale" if src and float(pa[cle]) > float(pz[cle]) else "azimutale"
-        ecrire(x0 + 12, base + 46, f"penche {gagne}", 0,
-               BON if gagne == "axiale" else ALERTE)
+    ecrire(x0, y0 - 24, "la comparaison qui décide — CAP PAR CAP", moyen, ENCRE)
+    x_barre = x0 + 150
+    barre_max = pw - 262
+    vmax = max(max(c["part_axiale"]["la_fixture"], c["part_axiale"]["le_rouleau"],
+                   c["part_azimutale"]["la_fixture"], c["part_azimutale"]["le_rouleau"])
+               for c in caps) or 1.0
+    for k, cc in enumerate(caps):
+        base = y0 + 26 + k * 104
+        sens = "AXIALEMENT" if cc["le_rouleau_penche_axialement"] else "azimutalement"
+        marque = "★" if cc["le_cote_saccorde"] else "✗"
+        ecrire(x0 + 12, base,
+               f"{marque}  cap {_fr(cc['memoire_du_cap'], 2)} — les deux penchent {sens}",
+               petit, BON if cc["le_cote_saccorde"] else ALERTE)
+        for i, (qui, cle) in enumerate((("la fixture", "la_fixture"),
+                                        ("le rouleau", "le_rouleau"))):
+            yy = base + 22 + i * 19
+            ax = float(cc["part_axiale"][cle])
+            az = float(cc["part_azimutale"][cle])
+            wz = (ax / vmax) * barre_max
+            wp = (az / vmax) * barre_max
+            ecrire(x0 + 12, yy - 1, qui, 0, GRIS)
+            art.rectangle([x_barre, yy, x_barre + max(wz, 1), yy + 7], fill=AMBRE_OU(i))
+            art.rectangle([x_barre, yy + 8, x_barre + max(wp, 1), yy + 15], fill=ARDOISE_OU(i))
+            points.append((x_barre + wz, yy + 4))
+            points.append((x_barre + wp, yy + 11))
+            barres.append((x_barre + wz, x_barre + barre_max))
+            barres.append((x_barre + wp, x_barre + barre_max))
+            ecrire(x_barre + barre_max + 8, yy + 1, f"{_fr(ax)} / {_fr(az)}", 0, ENCRE)
     ecrire(x0 + 12, y0 + ph - 38,
-           f"{'★' if cp['le_cote_saccorde'] else '✗'}  le côté ne s'accorde PAS : le rouleau "
-           f"penche axialement,", petit, ALERTE)
-    ecrire(x0 + 12, y0 + ph - 20, "la fixture azimutalement", petit, ALERTE)
+           "ambre : part axiale · ardoise : part azimutale", petit, GRIS)
+    ecrire(x0 + 12, y0 + ph - 20,
+           "la fixture SUIT le renversement du rouleau d'un cap à l'autre", petit, BON)
 
     # ---- panneau 3 : matiere par matiere
     x0, y0, pw, ph = 56, 444, 620, 300
@@ -178,17 +205,18 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
                f"sur {g['decidables']}", 0,
                BON if g["elle_penche_axialement"] else GRIS)
     ecrire(x0 + 12, y0 + ph - 56,
-           "⚠⚠ Sur la matière calibrée le compte est un PARTAGE, pas un sens :", petit, ALERTE)
+           "⚠⚠⚠ CES COMPTES MÊLENT LES DEUX CAPS, et le cap RENVERSE le sens :", petit, ALERTE)
     ecrire(x0 + 12, y0 + ph - 38,
-           "rien de systématique n'y penche d'un côté plutôt que de l'autre,", petit, GRIS)
+           "le 3 contre 3 de la matière calibrée n'est donc PAS un partage, c'est", petit, GRIS)
     ecrire(x0 + 12, y0 + ph - 20,
-           "là où le rouleau, lui, penche toujours du même.", petit, GRIS)
+           "un mélange. Le verdict se lit dans le panneau d'à côté, cap par cap.", petit, GRIS)
 
     # ---- panneau 4 : le suivi
     x0, y0, pw, ph = 712, 444, 592, 300
     art.rectangle([x0, y0, x0 + pw, y0 + ph], outline=TRAIT, width=1)
     cadres.append((x0, y0, x0 + pw, y0 + ph))
-    ecrire(x0, y0 - 24, "le SUIVI — glisser autant n'est pas glisser pareil", moyen, ENCRE)
+    ecrire(x0, y0 - 24, f"le SUIVI, au cap {_fr(capitale['memoire_du_cap'], 2)} — glisser "
+                          f"autant n'est pas glisser pareil", moyen, ENCRE)
     x_barre = x0 + 132
     barre_max = pw - 250
     for k, (lib, src, n, unite) in enumerate(
@@ -207,7 +235,7 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
             barres.append((x_barre + w, x_barre + barre_max))
             ecrire(x_barre + barre_max + 8, yy - 1, f"{_fr(val, n)}{unite}", 0, coul)
     ecrire(x0 + 12, y0 + ph - 74,
-           f"{'★' if cp['le_suivi_saccorde'] else '✗'}  le suivi ne s'accorde PAS non plus",
+           f"{'★' if cp['le_suivi_saccorde_partout'] else '✗'}  le suivi ne s'accorde à AUCUN cap",
            petit, ALERTE)
     ecrire(x0 + 12, y0 + ph - 56,
            "La cohérence est le déplacement tangentiel NET divisé par le chemin", petit, GRIS)
@@ -220,20 +248,29 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
     y = 772
     art.rectangle([56, y, L - 56, y + 130], fill=BANDE)
     cadres.append((56, y, L - 56, y + 130))
+    c0 = caps[0]
     ecrire(74, y + 12,
-           f"✗  Le côté ne s'accorde pas : la fixture calibrée rend {_fr(pa['la_fixture'])} de "
-           f"part axiale contre {_fr(pz['la_fixture'])} d'azimutale, quand le rouleau rend "
-           f"{_fr(pa['le_rouleau'])} contre {_fr(pz['le_rouleau'])}.", moyen, ALERTE)
-    ecrire(74, y + 38,
-           f"✗  Et le suivi non plus : cohérence {_fr(co['la_fixture'])} contre "
-           f"{_fr(co['le_rouleau'])}. La fixture glisse AUTANT ({_fr(gl['la_fixture'], 1)} µm "
-           f"contre {_fr(gl['le_rouleau'], 1)}) sans glisser du même côté.", moyen, ALERTE)
-    ecrire(74, y + 64,
-           "★★★★  Ce que cela BORNE : toute conclusion tirée de la fixture sur le comportement "
-           "AXIAL du rouleau, et `168` en particulier.", moyen, ENCRE)
-    ecrire(74, y + 90,
-           "★★★  Et ce que cela n'ôte pas : `R4-F87` calibre trois autres grandeurs à 5,5 %, et "
-           "une pose qui se contredit se contredit vraiment sur cette matière.", moyen, BON)
+           f"★  Le côté s'accorde aux DEUX caps : sans cap les deux penchent azimutalement "
+           f"({_fr(c0['part_axiale']['la_fixture'])} contre "
+           f"{_fr(c0['part_azimutale']['la_fixture'])} sur la fixture, "
+           f"{_fr(c0['part_axiale']['le_rouleau'])} contre "
+           f"{_fr(c0['part_azimutale']['le_rouleau'])} sur le rouleau),", moyen, BON)
+    ecrire(74, y + 34,
+           f"     avec cap les deux penchent axialement "
+           f"({_fr(capitale['part_axiale']['la_fixture'])} contre "
+           f"{_fr(capitale['part_azimutale']['la_fixture'])} ; "
+           f"{_fr(capitale['part_axiale']['le_rouleau'])} contre "
+           f"{_fr(capitale['part_azimutale']['le_rouleau'])}). La fixture SUIT le renversement.",
+           moyen, BON)
+    ecrire(74, y + 60,
+           f"✗  Le suivi ne s'accorde à aucun des deux : cohérence "
+           f"{_fr(c0['coherence']['la_fixture'])} contre "
+           f"{_fr(c0['coherence']['le_rouleau'])} sans cap, "
+           f"{_fr(co['la_fixture'])} contre {_fr(co['le_rouleau'])} avec.", moyen, ALERTE)
+    ecrire(74, y + 86,
+           f"★★★★  Elle glisse AUTANT — {_fr(gl['la_fixture'], 1)} µm contre "
+           f"{_fr(gl['le_rouleau'], 1)} avec cap — sans glisser toujours du même côté. "
+           f"Les grandeurs y sont, la PERSISTANCE non.", moyen, ENCRE)
     ecrire(74, y + 110,
            f"★  Le contrôle tient : ni la spirale nue ni l'écrasement seul ne glissent "
            f"({_fr(c['glissement_axial_median_um'], 1)} µm), donc l'instrument ne mesure pas "
@@ -285,18 +322,21 @@ def verifier(json_path: Path, sortie: Path) -> int:
     # nom. Les deux cotes doivent bouger SEPAREMENT, sinon la figure peut afficher l'un pour
     # l'autre sans que rien n'echoue.
     faux = copy.deepcopy(d)
-    faux["juger"]["la_comparaison_au_rouleau"]["part_axiale"]["la_fixture"] = 0.424
+    for _c in faux["juger"]["la_comparaison_au_rouleau"]["par_cap"]:
+        _c["part_axiale"]["la_fixture"] = 0.424
     _c, p2, _cd, _pt, _b = dessiner(faux, sortie)
     v("⭐⭐⭐⭐ la part axiale de la FIXTURE est LUE sous son propre nom",
       any("0,424" in t for _x, _y, t, _f in p2) and not any("0,424" in t for t in tous))
     faux2 = copy.deepcopy(d)
-    faux2["juger"]["la_comparaison_au_rouleau"]["part_axiale"]["le_rouleau"] = 0.313
+    for _c in faux2["juger"]["la_comparaison_au_rouleau"]["par_cap"]:
+        _c["part_axiale"]["le_rouleau"] = 0.313
     _c, p3, _cd, _pt, _b = dessiner(faux2, sortie)
     v("⭐⭐⭐⭐ ... et celle du ROULEAU sous le sien, séparément",
       any("0,313" in t for _x, _y, t, _f in p3) and not any("0,313" in t for t in tous),
       "un nombre juste sous un mauvais nom est pire qu'un nombre absent")
     faux3 = copy.deepcopy(d)
-    faux3["juger"]["la_comparaison_au_rouleau"]["coherence"]["la_fixture"] = 0.515
+    for _c in faux3["juger"]["la_comparaison_au_rouleau"]["par_cap"]:
+        _c["coherence"]["la_fixture"] = 0.515
     _c, p4, _cd, _pt, _b = dessiner(faux3, sortie)
     v("⭐⭐⭐ la cohérence de la fixture est LUE, et c'est elle qui porte le SUIVI",
       any("0,515" in t for _x, _y, t, _f in p4))
@@ -335,6 +375,11 @@ def verifier(json_path: Path, sortie: Path) -> int:
     v("⚠⚠⚠ une mesure sans la COMPARAISON au rouleau est REFUSÉE",
       refuse(lambda x: x["juger"].update(la_comparaison_au_rouleau=None)),
       "une figure qui ne montrerait que la fixture ne comparerait rien")
+    # ⚠⚠⚠ ET UNE COMPARAISON QUI MELANGE LES CAPS EST REFUSEE : c'est le defaut que cette tranche
+    # a publie une fois, et il ne se voit pas dans les nombres — seulement dans leur DECOUPAGE.
+    v("⚠⚠⚠ une comparaison sans le verdict CAP PAR CAP est REFUSÉE",
+      refuse(lambda x: x["juger"]["la_comparaison_au_rouleau"].pop("le_cote_saccorde_partout")),
+      "le rouleau change de sens d'un cap à l'autre, donc un verdict agrégé n'est celui d'aucun")
 
     dessiner(d, sortie)
     print(f"\n{'ALL PASS' if not echecs else '⛔ ECHEC'} ({echecs} failures, {faits} checks)")

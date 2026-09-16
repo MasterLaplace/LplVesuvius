@@ -3076,17 +3076,24 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                              ("glissement_axial_median_um", "glissement axial du controle")):
                 if c_.get(cle) is not None:
                     ajoute(f"{nom} de 169", float(c_[cle]), _dec169(c_[cle]), fp.name)
+            # ⚠⚠⚠ LA COMPARAISON EST PUBLIEE CAP PAR CAP, et c'est le fond de la tranche : le cap
+            # RENVERSE le sens du penchant du rouleau, donc un chiffre sans son cap ne dit rien.
             cp = j_.get("la_comparaison_au_rouleau") or {}
-            for grandeur, nom in (("part_axiale", "part axiale"),
-                                  ("part_azimutale", "part azimutale"),
-                                  ("glissement_axial_um", "glissement axial"),
-                                  ("coherence", "coherence")):
-                paire = cp.get(grandeur) or {}
-                for cote, lisible in (("la_fixture", "de la fixture calibree"),
-                                      ("le_rouleau", "du vrai rouleau")):
-                    if paire.get(cote) is not None:
-                        ajoute(f"{nom} {lisible} de 169", float(paire[cote]),
-                               _dec169(paire[cote]), fp.name)
+            for c_ in (cp.get("par_cap") or []):
+                cap = c_.get("memoire_du_cap")
+                q = f"a cap {cap} de 169"
+                if c_.get("marches") is not None:
+                    ajoute(f"marches de la fixture {q}", int(c_["marches"]), 0, fp.name)
+                for grandeur, nom in (("part_axiale", "part axiale"),
+                                      ("part_azimutale", "part azimutale"),
+                                      ("glissement_axial_um", "glissement axial"),
+                                      ("coherence", "coherence")):
+                    paire = c_.get(grandeur) or {}
+                    for cote, lisible in (("la_fixture", "de la fixture calibree"),
+                                          ("le_rouleau", "du vrai rouleau")):
+                        if paire.get(cote) is not None:
+                            ajoute(f"{nom} {lisible} {q}", float(paire[cote]),
+                                   _dec169(paire[cote]), fp.name)
             # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : il donne le tableau par MATIERE en
             # entier, jamais les croisements par rayon ni par cap.
             for groupe in j_.get("par_matiere", []):

@@ -60,7 +60,13 @@ LA_SPIRALE_NUE = (0.0, 0.0)
 
 
 def ce_que_le_rouleau_a_rendu(chemin: Path = LA_COURSE_DU_ROULEAU) -> dict | None:
-    """Les quatre grandeurs du VRAI rouleau, relues et jamais recalculées.
+    """Les quatre grandeurs du VRAI rouleau, PAR CAP, relues et jamais recalculées.
+
+    ⚠⚠⚠ LE CAP CHANGE LE SENS DU PENCHANT, ET C'EST MESURE. `R4-F79` publie les deux courses :
+    AVEC cap le rouleau rend 0,334 d'axial contre 0,193 d'azimutal, donc il penche AXIALEMENT ;
+    SANS cap il rend 0,348 contre 0,405, donc AZIMUTALEMENT. Comparer une fixture a UNE de ces
+    deux courses seulement, ou pire a un melange des deux, compare deux choses differentes — c'est
+    moyenner sur l'axe ou vit la difference, et cette tranche l'a paye une fois.
 
     ⚠⚠ Rend `None` si la mesure est absente, et l'appelant doit alors REFUSER de conclure : une
     comparaison dont un côté manque n'est pas une comparaison à moitié faite, c'est une affirmation
@@ -72,13 +78,19 @@ def ce_que_le_rouleau_a_rendu(chemin: Path = LA_COURSE_DU_ROULEAU) -> dict | Non
     courses = d.get("par_course") or []
     if not courses:
         return None
-    f = (courses[0] or {}).get("la_forme_du_penchant") or {}
     besoin = ("axial_absolu_median", "azimutal_absolu_median",
               "glissement_axial_median_um", "coherence_mediane")
-    if any(f.get(k) is None for k in besoin):
+    par_cap = {}
+    for c in courses:
+        f = (c or {}).get("la_forme_du_penchant") or {}
+        cap = c.get("memoire_du_cap")
+        if cap is None or any(f.get(k) is None for k in besoin):
+            continue
+        par_cap[float(cap)] = {"memoire_du_cap": float(cap),
+                               **{k: float(f[k]) for k in besoin}}
+    if not par_cap:
         return None
-    return {"source": chemin.name, "nom": str(courses[0].get("nom", "le rouleau")),
-            **{k: float(f[k]) for k in besoin}}
+    return {"source": chemin.name, "par_cap": par_cap}
 
 
 def le_cote_dune_marche(p: dict) -> dict | None:
@@ -188,32 +200,51 @@ def juger(d: dict, rouleau: dict | None) -> dict:
     controle["il_ne_penche_pas"] = bool(
         nue is not None and nue["decidables"] > 0
         and controle["glissement_axial_median_um"] == 0.0)
-    # ⭐⭐⭐⭐ LA MATIERE DU ROULEAU EST CELLE QUE `R4-F87` A CALIBREE : c'est la seule dont la
-    # comparaison au vrai rouleau ait un sens, et c'est celle sur laquelle `161`-`168` tournent.
-    la_calibree = next((m for m in mat if m["nom"] == _nom(*MATIERES[-1])), None)
-    comparaison = None
-    if la_calibree and la_calibree.get("decidable"):
-        comparaison = {
-            "nom": la_calibree["nom"], "le_rouleau": rouleau,
-            "le_cote_saccorde": bool(la_calibree["elle_penche_axialement"]
-                                     and rouleau["axial_absolu_median"]
-                                     > rouleau["azimutal_absolu_median"]),
-            # ⚠⚠ CHAQUE GRANDEUR PORTE SES DEUX COTES SOUS LEURS PROPRES NOMS. Une premiere
-            # version affichait le chiffre du ROULEAU sous l'etiquette « fixture » : un nombre
-            # juste sous un mauvais nom est pire qu'un nombre absent.
-            "part_axiale": {"la_fixture": la_calibree["axial_median"],
-                            "le_rouleau": rouleau["axial_absolu_median"]},
-            "part_azimutale": {"la_fixture": la_calibree["azimutal_median"],
-                               "le_rouleau": rouleau["azimutal_absolu_median"]},
-            "glissement_axial_um": {"la_fixture": la_calibree["glissement_axial_median_um"],
-                                    "le_rouleau": rouleau["glissement_axial_median_um"]},
-            "coherence": {"la_fixture": la_calibree["coherence_median"],
-                          "le_rouleau": rouleau["coherence_mediane"]}}
-        # ⚠⚠ « LE MEME COTE » ET « LE MEME SUIVI » SONT DEUX ENONCES, et les melanger ferait
-        # passer une matiere qui glisse autant mais pas toujours du meme cote pour une matiere
-        # qui reproduit le rouleau.
-        comparaison["le_suivi_saccorde"] = bool(
-            la_calibree["coherence_median"] >= rouleau["coherence_mediane"])
+    # ⭐⭐⭐⭐ LA COMPARAISON SE FAIT CAP PAR CAP, ET LA PREMIERE VERSION DE CETTE TRANCHE NE LE
+    # FAISAIT PAS. `R4-F79` publie DEUX courses du rouleau : avec cap il penche AXIALEMENT
+    # (0,334 contre 0,193), sans cap AZIMUTALEMENT (0,348 contre 0,405). Une fixture agregee sur
+    # les deux caps melange deux regimes que la mesure separe, et rend un verdict qui n'est celui
+    # d'aucun des deux — c'est moyenner sur l'axe ou vit la difference, et cette tranche l'a paye.
+    la_calibree = _nom(*MATIERES[-1])
+    comparaisons = []
+    for cap, r_ in sorted((rouleau.get("par_cap") or {}).items()):
+        g = _cumuler([c for c in d["cases"]
+                      if c["nom"] == la_calibree and float(c["memoire_du_cap"]) == float(cap)],
+                     f"{la_calibree} à cap {cap}")
+        if not g.get("decidable"):
+            continue
+        # ⚠⚠ LE COTE SE COMPARE COMME UN SENS, jamais comme deux niveaux : ce qui doit s'accorder
+        # est la REPONSE a « l'axial depasse-t-il l'azimutal », pas la valeur de l'axial.
+        fix_axial = bool(g["axial_median"] > g["azimutal_median"])
+        rou_axial = bool(r_["axial_absolu_median"] > r_["azimutal_absolu_median"])
+        comparaisons.append({
+            "memoire_du_cap": float(cap), "nom": g["nom"],
+            "marches": g["decidables"],
+            "part_axiale": {"la_fixture": g["axial_median"],
+                            "le_rouleau": r_["axial_absolu_median"]},
+            "part_azimutale": {"la_fixture": g["azimutal_median"],
+                               "le_rouleau": r_["azimutal_absolu_median"]},
+            "glissement_axial_um": {"la_fixture": g["glissement_axial_median_um"],
+                                    "le_rouleau": r_["glissement_axial_median_um"]},
+            "coherence": {"la_fixture": g["coherence_median"],
+                          "le_rouleau": r_["coherence_mediane"]},
+            "la_fixture_penche_axialement": fix_axial,
+            "le_rouleau_penche_axialement": rou_axial,
+            "le_cote_saccorde": bool(fix_axial == rou_axial),
+            # ⚠⚠ « LE MEME COTE » ET « LE MEME SUIVI » SONT DEUX ENONCES, et les melanger ferait
+            # passer une matiere qui glisse autant sans glisser du meme cote pour une matiere qui
+            # reproduit le rouleau.
+            "le_suivi_saccorde": bool(g["coherence_median"] >= r_["coherence_mediane"])})
+    # ⭐⭐⭐⭐ LE VERDICT EST JOINT SUR LES CAPS : le cote s'accorde quand il s'accorde a CHAQUE cap
+    # mesure. Un accord a un seul cap serait satisfait par une fixture qui tombe juste une fois
+    # sur deux, et le rouleau change de sens d'un cap a l'autre — donc l'accord doit SUIVRE ce
+    # changement, ce qu'une coincidence ne fait pas.
+    comparaison = {"source": rouleau.get("source"), "par_cap": comparaisons,
+                   "caps_compares": len(comparaisons),
+                   "le_cote_saccorde_partout": bool(
+                       comparaisons and all(c["le_cote_saccorde"] for c in comparaisons)),
+                   "le_suivi_saccorde_partout": bool(
+                       comparaisons and all(c["le_suivi_saccorde"] for c in comparaisons))}
     return {"decidable": True, "par_matiere": mat,
             "par_rayon": _croiser(d, "rayon_mm"), "par_cap": _croiser(d, "memoire_du_cap"),
             "tout": _cumuler(d["cases"], "tout"),
@@ -269,19 +300,26 @@ def afficher(r: dict) -> None:
                   f"{g['parts_egales']:>3}")
     cp = j["la_comparaison_au_rouleau"]
     print("\n★★★★ la fixture calibrée penche-t-elle du même CÔTÉ que le vrai rouleau ?")
-    if cp is None:
+    if not cp or not cp.get("par_cap"):
         print("      — la comparaison est indécidable")
         return
-    r_ = cp["le_rouleau"]
-    pa, pz = cp["part_axiale"], cp["part_azimutale"]
-    print(f"      le côté  : {'OUI' if cp['le_cote_saccorde'] else 'non'} — "
-          f"fixture {pa['la_fixture']} axial contre {pz['la_fixture']} azimutal ; "
-          f"rouleau {pa['le_rouleau']} contre {pz['le_rouleau']} ({r_['source']})")
-    g_ = cp["glissement_axial_um"]
-    print(f"      le glissement axial : {g_['la_fixture']} µm contre {g_['le_rouleau']} µm")
-    k_ = cp["coherence"]
-    print(f"      le suivi : {'OUI' if cp['le_suivi_saccorde'] else 'non'} — cohérence "
-          f"{k_['la_fixture']} contre {k_['le_rouleau']} sur le rouleau")
+    print(f"   {'':>12} | {'la fixture (axial / azimutal)':>30} | "
+          f"{'le rouleau':>22} | {'côté':>6} | {'cohérence':>19} | {'suivi':>6}")
+    for c in cp["par_cap"]:
+        pa, pz, k_, g_ = (c["part_axiale"], c["part_azimutale"], c["coherence"],
+                          c["glissement_axial_um"])
+        cote = "★ OUI" if c["le_cote_saccorde"] else "✗ non"
+        suivi = "★ OUI" if c["le_suivi_saccorde"] else "✗ non"
+        print(f"   cap {c['memoire_du_cap']:<8} | {pa['la_fixture']:>13.3f} / "
+              f"{pz['la_fixture']:<14.3f} | {pa['le_rouleau']:>9.3f} / "
+              f"{pz['le_rouleau']:<10.3f} | {cote:>6} | "
+              f"{k_['la_fixture']:>8.3f} / {k_['le_rouleau']:<8.3f} | {suivi:>6}")
+        print(f"   {'':>12} | glissement axial {g_['la_fixture']:>6.1f} µm contre "
+              f"{g_['le_rouleau']:.1f} µm sur le rouleau")
+    print(f"\n      le côté s'accorde à CHAQUE cap : "
+          f"{'OUI' if cp['le_cote_saccorde_partout'] else 'non'}")
+    print(f"      le suivi s'accorde à CHAQUE cap : "
+          f"{'OUI' if cp['le_suivi_saccorde_partout'] else 'non'}")
 
 
 def _marche(axial: float, azimutal: float, gliss: float = 10.0, coh: float = 0.5,
@@ -339,44 +377,53 @@ def verifier() -> int:
       _cumuler([_case("m", None)], "m")["elle_penche_axialement"] is False,
       "rien à comparer n'est pas un penchant")
 
-    print("\n— la comparaison EXIGE les deux côtés —")
-    d_ = {"decidable": True, "rayons_mm": [10.0], "caps": [0.0], "pas_max": 20,
+    print("\n— la comparaison EXIGE les deux côtés, ET CAP PAR CAP —")
+    d_ = {"decidable": True, "rayons_mm": [10.0], "caps": [0.0, 0.75], "pas_max": 20,
           "cases": [_case(_nom(*LA_SPIRALE_NUE), _marche(0.0, 0.002, gliss=0.0, coh=1.0)),
-                    _case(_nom(*MATIERES[-1]), _marche(0.19, 0.148, gliss=43.7, coh=0.548))]}
+                    _case(_nom(*MATIERES[-1]), _marche(0.318, 0.340, gliss=55.0, coh=0.332),
+                          cap=0.0),
+                    _case(_nom(*MATIERES[-1]), _marche(0.190, 0.117, gliss=44.7, coh=0.696),
+                          cap=0.75)]}
     v("⚠⚠⚠ sans la course du rouleau, le jugement REFUSE de conclure",
       juger(d_, None)["decidable"] is False,
       "une comparaison dont un côté manque n'est pas une comparaison à moitié faite")
-    faux_rouleau = {"source": "x", "nom": "y", "axial_absolu_median": 0.334,
-                    "azimutal_absolu_median": 0.193, "glissement_axial_median_um": 43.2,
-                    "coherence_mediane": 0.925}
+    # ⚠⚠⚠ LE ROULEAU CHANGE DE SENS D'UN CAP A L'AUTRE, et c'est la mesure qui le dit : avec cap
+    # il penche AXIALEMENT, sans cap AZIMUTALEMENT. Une fixture qui suit ce changement s'accorde
+    # pour une raison ; une qui tombe juste a un seul cap tombe juste par coincidence.
+    faux_rouleau = {"source": "x", "par_cap": {
+        0.75: {"memoire_du_cap": 0.75, "axial_absolu_median": 0.334,
+               "azimutal_absolu_median": 0.193, "glissement_axial_median_um": 43.2,
+               "coherence_mediane": 0.925},
+        0.0: {"memoire_du_cap": 0.0, "axial_absolu_median": 0.348,
+              "azimutal_absolu_median": 0.405, "glissement_axial_median_um": 57.5,
+              "coherence_mediane": 0.719}}}
     j = juger(d_, faux_rouleau)
     cp = j["la_comparaison_au_rouleau"]
-    v("⭐⭐⭐⭐ le CÔTÉ et le SUIVI sont deux énoncés, jamais mêlés",
-      cp["le_cote_saccorde"] is True and cp["le_suivi_saccorde"] is False,
-      "une matière qui glisse autant sans glisser du même côté n'est pas la même matière")
-    hautement = juger(d_, {**faux_rouleau, "coherence_mediane": 0.4})
-    v("⭐⭐⭐ ... et le suivi s'accorde quand la cohérence y est",
-      hautement["la_comparaison_au_rouleau"]["le_suivi_saccorde"] is True)
-    # ⚠⚠⚠ UN NOMBRE JUSTE SOUS UN MAUVAIS NOM EST PIRE QU'UN NOMBRE ABSENT, et la batterie
-    # passait des DEUX cotes avant ce controle : `afficher` imprimait la part du ROULEAU sous
-    # l'etiquette « fixture ». Ce qui l'attrape n'est pas de relire le code, c'est de changer la
-    # valeur de la FIXTURE et d'exiger que la sortie change.
-    autre = juger({**d_, "cases": [d_["cases"][0],
+    v("⭐⭐⭐⭐ la comparaison est faite CAP PAR CAP, jamais sur leur mélange",
+      cp["caps_compares"] == 2
+      and sorted(c["memoire_du_cap"] for c in cp["par_cap"]) == [0.0, 0.75],
+      "mélanger deux régimes rend un verdict qui n'est celui d'aucun des deux")
+    v("⭐⭐⭐⭐ le côté s'accorde quand la fixture SUIT le changement de sens du rouleau",
+      cp["le_cote_saccorde_partout"] is True
+      and [c["le_rouleau_penche_axialement"] for c in cp["par_cap"]] == [False, True],
+      "le rouleau penche azimutalement sans cap et axialement avec")
+    tombe = juger({**d_, "cases": [d_["cases"][0], d_["cases"][1],
                                    _case(_nom(*MATIERES[-1]),
-                                         _marche(0.717, 0.148, gliss=43.7, coh=0.548))]},
-                  faux_rouleau)
-    t1, t2 = io.StringIO(), io.StringIO()
-    with contextlib.redirect_stdout(t1):
-        afficher({"juger": j, "enquete": d_})
-    with contextlib.redirect_stdout(t2):
-        afficher({"juger": autre, "enquete": d_})
-    v("⭐⭐⭐⭐ la part de la FIXTURE est celle qui est écrite sous son nom",
-      "0.717" in t2.getvalue() and "0.717" not in t1.getvalue()
-      and autre["la_comparaison_au_rouleau"]["part_axiale"]["la_fixture"] == 0.717,
-      "un nombre juste sous un mauvais nom est pire qu'un nombre absent")
+                                         _marche(0.117, 0.190, gliss=44.7, coh=0.696),
+                                         cap=0.75)]}, faux_rouleau)
+    v("⭐⭐⭐⭐ ... et il TOMBE dès qu'un seul cap ne suit pas",
+      tombe["la_comparaison_au_rouleau"]["le_cote_saccorde_partout"] is False,
+      "un accord à un seul cap serait satisfait par une coïncidence")
+    v("⭐⭐⭐⭐ le CÔTÉ et le SUIVI sont deux énoncés, jamais mêlés",
+      cp["le_cote_saccorde_partout"] is True and cp["le_suivi_saccorde_partout"] is False,
+      "une matière qui glisse autant sans glisser du même côté n'est pas la même matière")
+    hautement = juger(d_, {"source": "x", "par_cap": {
+        k: {**v_, "coherence_mediane": 0.2} for k, v_ in faux_rouleau["par_cap"].items()}})
+    v("⭐⭐⭐ ... et le suivi s'accorde quand la cohérence y est",
+      hautement["la_comparaison_au_rouleau"]["le_suivi_saccorde_partout"] is True)
     v("⚠ les chiffres du rouleau sont RELUS, jamais recalculés",
-      cp["le_rouleau"]["glissement_axial_median_um"] == 43.2
-      and cp["glissement_axial_um"]["le_rouleau"] == 43.2)
+      cp["par_cap"][1]["part_axiale"]["le_rouleau"] == 0.334
+      and cp["par_cap"][0]["part_axiale"]["le_rouleau"] == 0.348)
     v("⚠⚠ une course absente rend None, elle ne rend pas des zéros",
       ce_que_le_rouleau_a_rendu(RACINE / "docs" / "mesures" / "_absente_169.json") is None)
 

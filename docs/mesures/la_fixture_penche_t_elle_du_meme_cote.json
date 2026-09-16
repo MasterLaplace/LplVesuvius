@@ -706,33 +706,62 @@
    "il_ne_penche_pas": true
   },
   "la_comparaison_au_rouleau": {
-   "nom": "spirale écrasée et froissée 100 µm",
-   "le_rouleau": {
-    "source": "le_chemin_penche_t_il_ou_serpente_t_il.json",
-    "nom": "le rouleau",
-    "axial_absolu_median": 0.334,
-    "azimutal_absolu_median": 0.193,
-    "glissement_axial_median_um": 43.2,
-    "coherence_mediane": 0.925
-   },
-   "le_cote_saccorde": false,
-   "part_axiale": {
-    "la_fixture": 0.222,
-    "le_rouleau": 0.334
-   },
-   "part_azimutale": {
-    "la_fixture": 0.235,
-    "le_rouleau": 0.193
-   },
-   "glissement_axial_um": {
-    "la_fixture": 50.5,
-    "le_rouleau": 43.2
-   },
-   "coherence": {
-    "la_fixture": 0.558,
-    "le_rouleau": 0.925
-   },
-   "le_suivi_saccorde": false
+   "source": "le_chemin_penche_t_il_ou_serpente_t_il.json",
+   "par_cap": [
+    {
+     "memoire_du_cap": 0.0,
+     "nom": "spirale écrasée et froissée 100 µm à cap 0.0",
+     "marches": 3,
+     "part_axiale": {
+      "la_fixture": 0.318,
+      "le_rouleau": 0.348
+     },
+     "part_azimutale": {
+      "la_fixture": 0.34,
+      "le_rouleau": 0.405
+     },
+     "glissement_axial_um": {
+      "la_fixture": 65.8,
+      "le_rouleau": 57.5
+     },
+     "coherence": {
+      "la_fixture": 0.332,
+      "le_rouleau": 0.719
+     },
+     "la_fixture_penche_axialement": false,
+     "le_rouleau_penche_axialement": false,
+     "le_cote_saccorde": true,
+     "le_suivi_saccorde": false
+    },
+    {
+     "memoire_du_cap": 0.75,
+     "nom": "spirale écrasée et froissée 100 µm à cap 0.75",
+     "marches": 3,
+     "part_axiale": {
+      "la_fixture": 0.19,
+      "le_rouleau": 0.334
+     },
+     "part_azimutale": {
+      "la_fixture": 0.117,
+      "le_rouleau": 0.193
+     },
+     "glissement_axial_um": {
+      "la_fixture": 44.7,
+      "le_rouleau": 43.2
+     },
+     "coherence": {
+      "la_fixture": 0.696,
+      "le_rouleau": 0.925
+     },
+     "la_fixture_penche_axialement": true,
+     "le_rouleau_penche_axialement": true,
+     "le_cote_saccorde": true,
+     "le_suivi_saccorde": false
+    }
+   ],
+   "caps_compares": 2,
+   "le_cote_saccorde_partout": true,
+   "le_suivi_saccorde_partout": false
   },
   "matieres_qui_penchent_axialement": []
  }
