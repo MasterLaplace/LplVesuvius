@@ -1,0 +1,2728 @@
+{
+  "voxel_um": 2.4,
+  "pas_um": 173.0,
+  "couches_par_pli": 36.0,
+  "la_grille": {
+    "decidable": true,
+    "cellules": [
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 0.0,
+        "frontieres": [],
+        "combien_de_frontieres": 0,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 9,
+        "part_atteinte": 1.0,
+        "bascule_deg": 0.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 14.417,
+        "frontieres": [],
+        "combien_de_frontieres": 0,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 8,
+        "part_atteinte": 1.0,
+        "bascule_deg": 0.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 28.833,
+        "frontieres": [],
+        "combien_de_frontieres": 0,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 8,
+        "part_atteinte": 1.0,
+        "bascule_deg": 0.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 43.25,
+        "frontieres": [],
+        "combien_de_frontieres": 0,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 8,
+        "part_atteinte": 1.0,
+        "bascule_deg": 0.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 57.667,
+        "frontieres": [
+          13
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 72.083,
+        "frontieres": [
+          7
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 86.5,
+        "frontieres": [],
+        "combien_de_frontieres": 0,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 8,
+        "part_atteinte": 1.0,
+        "bascule_deg": 0.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 100.917,
+        "frontieres": [],
+        "combien_de_frontieres": 0,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 8,
+        "part_atteinte": 1.0,
+        "bascule_deg": 0.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 115.333,
+        "frontieres": [],
+        "combien_de_frontieres": 0,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 8,
+        "part_atteinte": 1.0,
+        "bascule_deg": 0.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 129.75,
+        "frontieres": [],
+        "combien_de_frontieres": 0,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 8,
+        "part_atteinte": 1.0,
+        "bascule_deg": 0.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 144.167,
+        "frontieres": [
+          13
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": false
+      },
+      {
+        "demande_en_feuilles": 0.25,
+        "couches": 18,
+        "decalage_um": 158.583,
+        "frontieres": [
+          7
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 8,
+        "part_atteinte": 0.889,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 0.0,
+        "frontieres": [],
+        "combien_de_frontieres": 0,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 9,
+        "part_atteinte": 1.0,
+        "bascule_deg": 0.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 14.417,
+        "frontieres": [
+          31
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 22,
+        "part_atteinte": 0.722,
+        "bascule_deg": 0.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 28.833,
+        "frontieres": [
+          25
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          25
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 25,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 43.25,
+        "frontieres": [
+          19
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          19
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 19,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 57.667,
+        "frontieres": [
+          13
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          13
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 13,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 72.083,
+        "frontieres": [
+          7
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 19,
+        "part_atteinte": 0.611,
+        "bascule_deg": 0.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 86.5,
+        "frontieres": [],
+        "combien_de_frontieres": 0,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 9,
+        "part_atteinte": 1.0,
+        "bascule_deg": 0.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 100.917,
+        "frontieres": [
+          31
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 22,
+        "part_atteinte": 0.722,
+        "bascule_deg": 0.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 115.333,
+        "frontieres": [
+          25
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          25
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 25,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 129.75,
+        "frontieres": [
+          19
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          19
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 19,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 144.167,
+        "frontieres": [
+          13
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          13
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 13,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.5,
+        "couches": 36,
+        "decalage_um": 158.583,
+        "frontieres": [
+          7
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [],
+        "combien_datteignables": 0,
+        "lisible": true,
+        "coupe": 8,
+        "part_atteinte": 0.944,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": null,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 0.0,
+        "frontieres": [
+          37
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          37
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 37,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 14.417,
+        "frontieres": [
+          31
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          31
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 31,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 28.833,
+        "frontieres": [
+          25
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          25
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 25,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 43.25,
+        "frontieres": [
+          19
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          19
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 19,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 57.667,
+        "frontieres": [
+          13,
+          49
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          13
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 13,
+        "part_atteinte": 0.815,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 72.083,
+        "frontieres": [
+          7,
+          43
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          43
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 43,
+        "part_atteinte": 0.741,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 86.5,
+        "frontieres": [
+          37
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          37
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 37,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 100.917,
+        "frontieres": [
+          31
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          31
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 31,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 115.333,
+        "frontieres": [
+          25
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          25
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 25,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 129.75,
+        "frontieres": [
+          19
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          19
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 19,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 144.167,
+        "frontieres": [
+          13,
+          49
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          13
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 13,
+        "part_atteinte": 0.815,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 0.75,
+        "couches": 54,
+        "decalage_um": 158.583,
+        "frontieres": [
+          7,
+          43
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          43
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 43,
+        "part_atteinte": 0.741,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 0.0,
+        "frontieres": [
+          37
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          37
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 37,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 14.417,
+        "frontieres": [
+          31,
+          67
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          31
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 31,
+        "part_atteinte": 0.861,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 28.833,
+        "frontieres": [
+          25,
+          61
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          25,
+          61
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 17,
+        "part_atteinte": 0.472,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 8,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 43.25,
+        "frontieres": [
+          19,
+          55
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          19,
+          55
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 19,
+        "part_atteinte": 0.528,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 57.667,
+        "frontieres": [
+          13,
+          49
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          13,
+          49
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 13,
+        "part_atteinte": 0.361,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 72.083,
+        "frontieres": [
+          7,
+          43
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          43
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 43,
+        "part_atteinte": 0.806,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 86.5,
+        "frontieres": [
+          37
+        ],
+        "combien_de_frontieres": 1,
+        "frontieres_atteignables": [
+          37
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 37,
+        "part_atteinte": 1.0,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 100.917,
+        "frontieres": [
+          31,
+          67
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          31
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 31,
+        "part_atteinte": 0.861,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 115.333,
+        "frontieres": [
+          25,
+          61
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          25,
+          61
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 17,
+        "part_atteinte": 0.472,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 8,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 129.75,
+        "frontieres": [
+          19,
+          55
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          19,
+          55
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 19,
+        "part_atteinte": 0.528,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 144.167,
+        "frontieres": [
+          13,
+          49
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          13,
+          49
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 13,
+        "part_atteinte": 0.361,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.0,
+        "couches": 72,
+        "decalage_um": 158.583,
+        "frontieres": [
+          7,
+          43
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          43
+        ],
+        "combien_datteignables": 1,
+        "lisible": true,
+        "coupe": 43,
+        "part_atteinte": 0.806,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 0.0,
+        "frontieres": [
+          37,
+          73
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          37,
+          73
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 37,
+        "part_atteinte": 0.622,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 14.417,
+        "frontieres": [
+          31,
+          67
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          31,
+          67
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 31,
+        "part_atteinte": 0.489,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 28.833,
+        "frontieres": [
+          25,
+          61
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          25,
+          61
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 61,
+        "part_atteinte": 0.444,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 43.25,
+        "frontieres": [
+          19,
+          55
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          19,
+          55
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 55,
+        "part_atteinte": 0.578,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 57.667,
+        "frontieres": [
+          13,
+          49,
+          85
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          13,
+          49
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 43,
+        "part_atteinte": 0.467,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 6,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 72.083,
+        "frontieres": [
+          7,
+          43,
+          79
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          43,
+          79
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 62,
+        "part_atteinte": 0.178,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 17,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 86.5,
+        "frontieres": [
+          37,
+          73
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          37,
+          73
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 37,
+        "part_atteinte": 0.622,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 100.917,
+        "frontieres": [
+          31,
+          67
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          31,
+          67
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 31,
+        "part_atteinte": 0.489,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 115.333,
+        "frontieres": [
+          25,
+          61
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          25,
+          61
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 61,
+        "part_atteinte": 0.444,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 129.75,
+        "frontieres": [
+          19,
+          55
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          19,
+          55
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 55,
+        "part_atteinte": 0.578,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 144.167,
+        "frontieres": [
+          13,
+          49,
+          85
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          13,
+          49
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 43,
+        "part_atteinte": 0.467,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 6,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.25,
+        "couches": 90,
+        "decalage_um": 158.583,
+        "frontieres": [
+          7,
+          43,
+          79
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          43,
+          79
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 62,
+        "part_atteinte": 0.178,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 17,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 0.0,
+        "frontieres": [
+          37,
+          73
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          37,
+          73
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 26,
+        "part_atteinte": 0.333,
+        "bascule_deg": 0.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 11,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 14.417,
+        "frontieres": [
+          31,
+          67,
+          103
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          31,
+          67
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 16,
+        "part_atteinte": 0.241,
+        "bascule_deg": 0.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 15,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 28.833,
+        "frontieres": [
+          25,
+          61,
+          97
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          25,
+          61,
+          97
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 25,
+        "part_atteinte": 0.333,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 43.25,
+        "frontieres": [
+          19,
+          55,
+          91
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          19,
+          55,
+          91
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 19,
+        "part_atteinte": 0.333,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 57.667,
+        "frontieres": [
+          13,
+          49,
+          85
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          13,
+          49,
+          85
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 85,
+        "part_atteinte": 0.333,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 72.083,
+        "frontieres": [
+          7,
+          43,
+          79
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          43,
+          79
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 96,
+        "part_atteinte": 0.204,
+        "bascule_deg": 0.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 17,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 86.5,
+        "frontieres": [
+          37,
+          73
+        ],
+        "combien_de_frontieres": 2,
+        "frontieres_atteignables": [
+          37,
+          73
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 27,
+        "part_atteinte": 0.333,
+        "bascule_deg": 0.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 10,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 100.917,
+        "frontieres": [
+          31,
+          67,
+          103
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          31,
+          67
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 16,
+        "part_atteinte": 0.241,
+        "bascule_deg": 0.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 15,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 115.333,
+        "frontieres": [
+          25,
+          61,
+          97
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          25,
+          61,
+          97
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 25,
+        "part_atteinte": 0.333,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 129.75,
+        "frontieres": [
+          19,
+          55,
+          91
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          19,
+          55,
+          91
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 91,
+        "part_atteinte": 0.333,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 144.167,
+        "frontieres": [
+          13,
+          49,
+          85
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          13,
+          49,
+          85
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 85,
+        "part_atteinte": 0.333,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 1.5,
+        "couches": 108,
+        "decalage_um": 158.583,
+        "frontieres": [
+          7,
+          43,
+          79
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          43,
+          79
+        ],
+        "combien_datteignables": 2,
+        "lisible": true,
+        "coupe": 8,
+        "part_atteinte": 0.315,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 35,
+        "la_coupe_tombe_sur_une_frontiere": false,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 0.0,
+        "frontieres": [
+          37,
+          73,
+          109
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          37,
+          73,
+          109
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 37,
+        "part_atteinte": 0.5,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 14.417,
+        "frontieres": [
+          31,
+          67,
+          103,
+          139
+        ],
+        "combien_de_frontieres": 4,
+        "frontieres_atteignables": [
+          31,
+          67,
+          103
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 31,
+        "part_atteinte": 0.431,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 28.833,
+        "frontieres": [
+          25,
+          61,
+          97,
+          133
+        ],
+        "combien_de_frontieres": 4,
+        "frontieres_atteignables": [
+          25,
+          61,
+          97,
+          133
+        ],
+        "combien_datteignables": 4,
+        "lisible": true,
+        "coupe": 25,
+        "part_atteinte": 0.347,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 43.25,
+        "frontieres": [
+          19,
+          55,
+          91,
+          127
+        ],
+        "combien_de_frontieres": 4,
+        "frontieres_atteignables": [
+          19,
+          55,
+          91,
+          127
+        ],
+        "combien_datteignables": 4,
+        "lisible": true,
+        "coupe": 19,
+        "part_atteinte": 0.264,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 57.667,
+        "frontieres": [
+          13,
+          49,
+          85,
+          121
+        ],
+        "combien_de_frontieres": 4,
+        "frontieres_atteignables": [
+          13,
+          49,
+          85,
+          121
+        ],
+        "combien_datteignables": 4,
+        "lisible": true,
+        "coupe": 121,
+        "part_atteinte": 0.319,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 72.083,
+        "frontieres": [
+          7,
+          43,
+          79,
+          115
+        ],
+        "combien_de_frontieres": 4,
+        "frontieres_atteignables": [
+          43,
+          79,
+          115
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 115,
+        "part_atteinte": 0.403,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 86.5,
+        "frontieres": [
+          37,
+          73,
+          109
+        ],
+        "combien_de_frontieres": 3,
+        "frontieres_atteignables": [
+          37,
+          73,
+          109
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 109,
+        "part_atteinte": 0.5,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 100.917,
+        "frontieres": [
+          31,
+          67,
+          103,
+          139
+        ],
+        "combien_de_frontieres": 4,
+        "frontieres_atteignables": [
+          31,
+          67,
+          103
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 103,
+        "part_atteinte": 0.431,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 115.333,
+        "frontieres": [
+          25,
+          61,
+          97,
+          133
+        ],
+        "combien_de_frontieres": 4,
+        "frontieres_atteignables": [
+          25,
+          61,
+          97,
+          133
+        ],
+        "combien_datteignables": 4,
+        "lisible": true,
+        "coupe": 25,
+        "part_atteinte": 0.347,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 129.75,
+        "frontieres": [
+          19,
+          55,
+          91,
+          127
+        ],
+        "combien_de_frontieres": 4,
+        "frontieres_atteignables": [
+          19,
+          55,
+          91,
+          127
+        ],
+        "combien_datteignables": 4,
+        "lisible": true,
+        "coupe": 91,
+        "part_atteinte": 0.264,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 144.167,
+        "frontieres": [
+          13,
+          49,
+          85,
+          121
+        ],
+        "combien_de_frontieres": 4,
+        "frontieres_atteignables": [
+          13,
+          49,
+          85,
+          121
+        ],
+        "combien_datteignables": 4,
+        "lisible": true,
+        "coupe": 121,
+        "part_atteinte": 0.319,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 2.0,
+        "couches": 144,
+        "decalage_um": 158.583,
+        "frontieres": [
+          7,
+          43,
+          79,
+          115
+        ],
+        "combien_de_frontieres": 4,
+        "frontieres_atteignables": [
+          43,
+          79,
+          115
+        ],
+        "combien_datteignables": 3,
+        "lisible": true,
+        "coupe": 115,
+        "part_atteinte": 0.403,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 0.0,
+        "frontieres": [
+          37,
+          73,
+          109,
+          145,
+          181
+        ],
+        "combien_de_frontieres": 5,
+        "frontieres_atteignables": [
+          37,
+          73,
+          109,
+          145,
+          181
+        ],
+        "combien_datteignables": 5,
+        "lisible": true,
+        "coupe": 37,
+        "part_atteinte": 0.333,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 14.417,
+        "frontieres": [
+          31,
+          67,
+          103,
+          139,
+          175,
+          211
+        ],
+        "combien_de_frontieres": 6,
+        "frontieres_atteignables": [
+          31,
+          67,
+          103,
+          139,
+          175
+        ],
+        "combien_datteignables": 5,
+        "lisible": true,
+        "coupe": 31,
+        "part_atteinte": 0.287,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 28.833,
+        "frontieres": [
+          25,
+          61,
+          97,
+          133,
+          169,
+          205
+        ],
+        "combien_de_frontieres": 6,
+        "frontieres_atteignables": [
+          25,
+          61,
+          97,
+          133,
+          169,
+          205
+        ],
+        "combien_datteignables": 6,
+        "lisible": false
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 43.25,
+        "frontieres": [
+          19,
+          55,
+          91,
+          127,
+          163,
+          199
+        ],
+        "combien_de_frontieres": 6,
+        "frontieres_atteignables": [
+          19,
+          55,
+          91,
+          127,
+          163,
+          199
+        ],
+        "combien_datteignables": 6,
+        "lisible": true,
+        "coupe": 91,
+        "part_atteinte": 0.176,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 57.667,
+        "frontieres": [
+          13,
+          49,
+          85,
+          121,
+          157,
+          193
+        ],
+        "combien_de_frontieres": 6,
+        "frontieres_atteignables": [
+          13,
+          49,
+          85,
+          121,
+          157,
+          193
+        ],
+        "combien_datteignables": 6,
+        "lisible": false
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 72.083,
+        "frontieres": [
+          7,
+          43,
+          79,
+          115,
+          151,
+          187
+        ],
+        "combien_de_frontieres": 6,
+        "frontieres_atteignables": [
+          43,
+          79,
+          115,
+          151,
+          187
+        ],
+        "combien_datteignables": 5,
+        "lisible": true,
+        "coupe": 43,
+        "part_atteinte": 0.269,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 86.5,
+        "frontieres": [
+          37,
+          73,
+          109,
+          145,
+          181
+        ],
+        "combien_de_frontieres": 5,
+        "frontieres_atteignables": [
+          37,
+          73,
+          109,
+          145,
+          181
+        ],
+        "combien_datteignables": 5,
+        "lisible": true,
+        "coupe": 181,
+        "part_atteinte": 0.333,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 100.917,
+        "frontieres": [
+          31,
+          67,
+          103,
+          139,
+          175,
+          211
+        ],
+        "combien_de_frontieres": 6,
+        "frontieres_atteignables": [
+          31,
+          67,
+          103,
+          139,
+          175
+        ],
+        "combien_datteignables": 5,
+        "lisible": true,
+        "coupe": 175,
+        "part_atteinte": 0.287,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 115.333,
+        "frontieres": [
+          25,
+          61,
+          97,
+          133,
+          169,
+          205
+        ],
+        "combien_de_frontieres": 6,
+        "frontieres_atteignables": [
+          25,
+          61,
+          97,
+          133,
+          169,
+          205
+        ],
+        "combien_datteignables": 6,
+        "lisible": false
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 129.75,
+        "frontieres": [
+          19,
+          55,
+          91,
+          127,
+          163,
+          199
+        ],
+        "combien_de_frontieres": 6,
+        "frontieres_atteignables": [
+          19,
+          55,
+          91,
+          127,
+          163,
+          199
+        ],
+        "combien_datteignables": 6,
+        "lisible": true,
+        "coupe": 163,
+        "part_atteinte": 0.176,
+        "bascule_deg": 90.0,
+        "temoin_deg": 90.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": false,
+        "elle_lit_une_frontiere": false
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 144.167,
+        "frontieres": [
+          13,
+          49,
+          85,
+          121,
+          157,
+          193
+        ],
+        "combien_de_frontieres": 6,
+        "frontieres_atteignables": [
+          13,
+          49,
+          85,
+          121,
+          157,
+          193
+        ],
+        "combien_datteignables": 6,
+        "lisible": false
+      },
+      {
+        "demande_en_feuilles": 3.0,
+        "couches": 216,
+        "decalage_um": 158.583,
+        "frontieres": [
+          7,
+          43,
+          79,
+          115,
+          151,
+          187
+        ],
+        "combien_de_frontieres": 6,
+        "frontieres_atteignables": [
+          43,
+          79,
+          115,
+          151,
+          187
+        ],
+        "combien_datteignables": 5,
+        "lisible": true,
+        "coupe": 43,
+        "part_atteinte": 0.269,
+        "bascule_deg": 90.0,
+        "temoin_deg": 0.0,
+        "ecart_a_la_frontiere_la_plus_proche": 0,
+        "la_coupe_tombe_sur_une_frontiere": true,
+        "la_bascule_depasse_le_temoin": true,
+        "elle_lit_une_frontiere": true
+      }
+    ],
+    "longueurs": [
+      0.25,
+      0.5,
+      0.75,
+      1.0,
+      1.25,
+      1.5,
+      2.0,
+      3.0
+    ],
+    "decalages": 12
+  },
+  "la_relation": {
+    "decidable": true,
+    "lignes": [
+      {
+        "frontieres": 0,
+        "cellules": 10,
+        "illisibles": 0,
+        "lisibles": 10,
+        "part_mediane": 1.0,
+        "part_minimale": 1.0,
+        "coupes_sur_une_frontiere": 0,
+        "toutes_les_parts_valent_un": true
+      },
+      {
+        "frontieres": 1,
+        "cellules": 16,
+        "illisibles": 0,
+        "lisibles": 16,
+        "part_mediane": 1.0,
+        "part_minimale": 1.0,
+        "coupes_sur_une_frontiere": 16,
+        "toutes_les_parts_valent_un": true
+      },
+      {
+        "frontieres": 2,
+        "cellules": 16,
+        "illisibles": 0,
+        "lisibles": 16,
+        "part_mediane": 0.48,
+        "part_minimale": 0.333,
+        "coupes_sur_une_frontiere": 12,
+        "toutes_les_parts_valent_un": false
+      },
+      {
+        "frontieres": 3,
+        "cellules": 8,
+        "illisibles": 0,
+        "lisibles": 8,
+        "part_mediane": 0.333,
+        "part_minimale": 0.333,
+        "coupes_sur_une_frontiere": 8,
+        "toutes_les_parts_valent_un": false
+      },
+      {
+        "frontieres": 4,
+        "cellules": 6,
+        "illisibles": 0,
+        "lisibles": 6,
+        "part_mediane": 0.319,
+        "part_minimale": 0.264,
+        "coupes_sur_une_frontiere": 6,
+        "toutes_les_parts_valent_un": false
+      },
+      {
+        "frontieres": 5,
+        "cellules": 2,
+        "illisibles": 0,
+        "lisibles": 2,
+        "part_mediane": 0.333,
+        "part_minimale": 0.333,
+        "coupes_sur_une_frontiere": 2,
+        "toutes_les_parts_valent_un": false
+      },
+      {
+        "frontieres": 6,
+        "cellules": 6,
+        "illisibles": 4,
+        "lisibles": 2,
+        "part_mediane": 0.176,
+        "part_minimale": 0.176,
+        "coupes_sur_une_frontiere": 2,
+        "toutes_les_parts_valent_un": false
+      }
+    ],
+    "cellules_ecartees_car_une_frontiere_est_hors_datteinte": 32,
+    "jusqua_une_frontiere_la_part_vaut_un": true,
+    "au_dela_elle_decroche": true,
+    "part_mediane_a_une_frontiere": 1.0,
+    "part_mediane_a_deux_frontieres": 0.48
+  },
+  "sans_frontiere": {
+    "decidable": true,
+    "cellules": 15,
+    "part_mediane": 1.0,
+    "bascule_mediane_deg": 0.0,
+    "combien_lisent_une_frontiere": 0,
+    "aucune_ne_lit_de_frontiere": true
+  },
+  "ou_tombe_la_coupe": {
+    "decidable": true,
+    "cellules": 24,
+    "coupes_sur_la_frontiere": 24,
+    "ecart_median": 0.0,
+    "elle_tombe_toujours_dessus": true
+  },
+  "la_fenetre_utile": {
+    "decidable": true,
+    "lignes": [
+      {
+        "couches": 16,
+        "epaisseur_um": 38.4,
+        "en_plis": 0.444,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 0,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 12,
+        "illisibles": 3,
+        "lisent_une_frontiere": 0,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 18,
+        "epaisseur_um": 43.2,
+        "en_plis": 0.499,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 0,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 12,
+        "illisibles": 3,
+        "lisent_une_frontiere": 0,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 20,
+        "epaisseur_um": 48.0,
+        "en_plis": 0.555,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 0,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 12,
+        "illisibles": 2,
+        "lisent_une_frontiere": 0,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 22,
+        "epaisseur_um": 52.8,
+        "en_plis": 0.61,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 2,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 10,
+        "illisibles": 3,
+        "lisent_une_frontiere": 2,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 24,
+        "epaisseur_um": 57.6,
+        "en_plis": 0.666,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 2,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 10,
+        "illisibles": 1,
+        "lisent_une_frontiere": 2,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 26,
+        "epaisseur_um": 62.4,
+        "en_plis": 0.721,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 2,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 10,
+        "illisibles": 2,
+        "lisent_une_frontiere": 2,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 28,
+        "epaisseur_um": 67.2,
+        "en_plis": 0.777,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 4,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 8,
+        "illisibles": 0,
+        "lisent_une_frontiere": 4,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 30,
+        "epaisseur_um": 72.0,
+        "en_plis": 0.832,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 4,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 8,
+        "illisibles": 0,
+        "lisent_une_frontiere": 4,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 32,
+        "epaisseur_um": 76.8,
+        "en_plis": 0.888,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 4,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 8,
+        "illisibles": 0,
+        "lisent_une_frontiere": 4,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 34,
+        "epaisseur_um": 81.6,
+        "en_plis": 0.943,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 6,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 6,
+        "illisibles": 0,
+        "lisent_une_frontiere": 6,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 36,
+        "epaisseur_um": 86.4,
+        "en_plis": 0.999,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 6,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 6,
+        "illisibles": 0,
+        "lisent_une_frontiere": 6,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 38,
+        "epaisseur_um": 91.2,
+        "en_plis": 1.054,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 6,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 6,
+        "illisibles": 0,
+        "lisent_une_frontiere": 6,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 40,
+        "epaisseur_um": 96.0,
+        "en_plis": 1.11,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 8,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 4,
+        "illisibles": 0,
+        "lisent_une_frontiere": 8,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 42,
+        "epaisseur_um": 100.8,
+        "en_plis": 1.165,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 8,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 4,
+        "illisibles": 0,
+        "lisent_une_frontiere": 8,
+        "elle_est_utile": false
+      },
+      {
+        "couches": 44,
+        "epaisseur_um": 105.6,
+        "en_plis": 1.221,
+        "decalages": 12,
+        "avec_une_seule_frontiere": 8,
+        "avec_plusieurs": 0,
+        "sans_frontiere": 4,
+        "illisibles": 0,
+        "lisent_une_frontiere": 8,
+        "elle_est_utile": false
+      }
+    ],
+    "longueurs_utiles": [],
+    "la_plus_courte_utile": null,
+    "la_plus_longue_utile": null
+  },
+  "le_recouvrement": {
+    "decidable": true,
+    "lignes": [
+      {
+        "couches": 16,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 19.2,
+        "decalages_lus": 0,
+        "elles_lisent_partout": false
+      },
+      {
+        "couches": 18,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 21.6,
+        "decalages_lus": 2,
+        "elles_lisent_partout": false
+      },
+      {
+        "couches": 20,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 24.0,
+        "decalages_lus": 2,
+        "elles_lisent_partout": false
+      },
+      {
+        "couches": 22,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 26.4,
+        "decalages_lus": 6,
+        "elles_lisent_partout": false
+      },
+      {
+        "couches": 24,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 28.8,
+        "decalages_lus": 4,
+        "elles_lisent_partout": false
+      },
+      {
+        "couches": 26,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 31.2,
+        "decalages_lus": 6,
+        "elles_lisent_partout": false
+      },
+      {
+        "couches": 28,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 33.6,
+        "decalages_lus": 8,
+        "elles_lisent_partout": false
+      },
+      {
+        "couches": 30,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 36.0,
+        "decalages_lus": 10,
+        "elles_lisent_partout": false
+      },
+      {
+        "couches": 32,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 38.4,
+        "decalages_lus": 10,
+        "elles_lisent_partout": false
+      },
+      {
+        "couches": 34,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 40.8,
+        "decalages_lus": 12,
+        "elles_lisent_partout": true
+      },
+      {
+        "couches": 36,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 43.2,
+        "decalages_lus": 12,
+        "elles_lisent_partout": true
+      },
+      {
+        "couches": 38,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 45.6,
+        "decalages_lus": 12,
+        "elles_lisent_partout": true
+      },
+      {
+        "couches": 40,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 48.0,
+        "decalages_lus": 12,
+        "elles_lisent_partout": true
+      },
+      {
+        "couches": 42,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 50.4,
+        "decalages_lus": 12,
+        "elles_lisent_partout": true
+      },
+      {
+        "couches": 44,
+        "decalages": 12,
+        "decalage_de_la_seconde_um": 52.8,
+        "decalages_lus": 12,
+        "elles_lisent_partout": true
+      }
+    ],
+    "longueurs_qui_couvrent": [
+      34,
+      36,
+      38,
+      40,
+      42,
+      44
+    ],
+    "la_plus_courte_qui_couvre": 34
+  },
+  "la_campagne": {
+    "decidable": true,
+    "couches": 109,
+    "epaisseur_um": 261.6,
+    "en_feuilles": 1.512,
+    "en_plis": 3.024,
+    "decalages": 12,
+    "frontieres_minimum": 2,
+    "frontieres_maximum": 3,
+    "part_mediane": 0.339,
+    "lisent_une_frontiere": 2,
+    "elle_porte_plus_dune_frontiere": true
+  },
+  "le_verdict": {
+    "decidable": true,
+    "jusqua_une_frontiere_la_part_vaut_un": true,
+    "au_dela_elle_decroche": true,
+    "part_mediane_a_une_frontiere": 1.0,
+    "part_mediane_a_deux_frontieres": 0.48,
+    "une_fenetre_sans_frontiere_rend_une_part_de_un": true,
+    "et_elle_ne_lit_pourtant_aucune_frontiere": true,
+    "longueurs_utiles": [],
+    "longueurs_qui_couvrent_a_deux_fenetres": [
+      34,
+      36,
+      38,
+      40,
+      42,
+      44
+    ],
+    "la_plus_courte_qui_couvre": 34,
+    "la_fenetre_de_la_campagne_en_plis": 3.024,
+    "frontieres_de_la_campagne": [
+      2,
+      3
+    ],
+    "la_campagne_porte_plus_dune_frontiere": true,
+    "la_coupe_tombe_toujours_sur_la_frontiere_unique": true,
+    "cellules_sur_une_frontiere_unique": 24,
+    "un_ajustement_decrit_une_frontiere": true
+  }
+}

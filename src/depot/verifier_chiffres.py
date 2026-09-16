@@ -3123,6 +3123,85 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if m_.get("marches_axiales") is not None:
                     ajoute(f"marches axiales {q}", int(m_["marches_axiales"]), 0, vp.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 175 : UN AJUSTEMENT DECRIT UNE FRONTIERE.
+    # (1) Une part atteinte ne voyage jamais sans le NOMBRE DE FRONTIERES de sa fenetre : c'est leur
+    # relation qui porte l'enonce, et la part seule se lirait comme une qualite.
+    # (2) Une fenetre en couches ne voyage jamais sans sa mesure EN PLIS : c'est le rapport a
+    # l'epaisseur qui decide, et un nombre de couches ne veut rien dire sans le pas et le voxel.
+    # (3) Et une lecture a une fenetre ne voyage jamais sans celle a DEUX : la premiere refute, la
+    # seconde repare, et l'une sans l'autre ferait lire soit que rien ne marche, soit qu'il n'y
+    # avait pas de probleme.
+    aj = _source(racine, "un_ajustement_decrit_une_frontiere.json")
+    if aj.exists():
+        d = json.loads(aj.read_text())
+
+        def _dec175(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("voxel_um", "voxel"), ("pas_um", "pas"),
+                         ("couches_par_pli", "couches par pli")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 175", float(d[cle]), _dec175(d[cle]), aj.name)
+        rel = d.get("la_relation") or {}
+        for x in (rel.get("lignes") or []):
+            q = f"a {x['frontieres']} frontieres de 175"
+            for cle, nom in (("cellules", "cellules"), ("coupes_sur_une_frontiere", "coupes"),
+                             ("lisibles", "lisibles")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(x[cle]), 0, aj.name)
+            for cle, nom in (("part_mediane", "part mediane"),
+                             ("part_minimale", "part minimale")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(x[cle]), _dec175(x[cle]), aj.name)
+        if rel.get("cellules_ecartees_car_une_frontiere_est_hors_datteinte") is not None:
+            ajoute("cellules ecartees de 175",
+                   int(rel["cellules_ecartees_car_une_frontiere_est_hors_datteinte"]), 0, aj.name)
+        vi = d.get("sans_frontiere") or {}
+        for cle, nom in (("cellules", "cellules sans frontiere"),
+                         ("combien_lisent_une_frontiere", "sans frontiere qui lisent")):
+            if vi.get(cle) is not None:
+                ajoute(f"{nom} de 175", int(vi[cle]), 0, aj.name)
+        for cle, nom in (("part_mediane", "part mediane sans frontiere"),
+                         ("bascule_mediane_deg", "bascule mediane sans frontiere")):
+            if vi.get(cle) is not None:
+                ajoute(f"{nom} de 175", float(vi[cle]), _dec175(vi[cle]), aj.name)
+        for x in ((d.get("la_fenetre_utile") or {}).get("lignes") or []):
+            q = f"a {x['couches']} couches de 175"
+            ajoute(f"decalages qui lisent, une fenetre, {q}", int(x["lisent_une_frontiere"]), 0,
+                   aj.name)
+            ajoute(f"decalages essayes {q}", int(x["decalages"]), 0, aj.name)
+            ajoute(f"couches {q}", int(x["couches"]), 0, aj.name)
+            ajoute(f"en plis {q}", float(x["en_plis"]), _dec175(x["en_plis"]), aj.name)
+        for x in ((d.get("le_recouvrement") or {}).get("lignes") or []):
+            ajoute(f"decalages qui lisent, deux fenetres, a {x['couches']} couches de 175",
+                   int(x["decalages_lus"]), 0, aj.name)
+        ca_ = d.get("la_campagne") or {}
+        for cle, nom in (("couches", "couches de la campagne"),
+                         ("frontieres_minimum", "frontieres minimum de la campagne"),
+                         ("frontieres_maximum", "frontieres maximum de la campagne"),
+                         ("lisent_une_frontiere", "decalages qui lisent, la campagne"),
+                         ("decalages", "decalages de la campagne")):
+            if ca_.get(cle) is not None:
+                ajoute(f"{nom} de 175", int(ca_[cle]), 0, aj.name)
+        for cle, nom, unite in (("epaisseur_um", "epaisseur de la campagne", "µm"),
+                                ("en_feuilles", "campagne en feuilles", "feuille"),
+                                ("en_plis", "campagne en plis", "pli"),
+                                ("part_mediane", "part mediane de la campagne", "")):
+            if ca_.get(cle) is not None:
+                ajoute(f"{nom} de 175", float(ca_[cle]), _dec175(ca_[cle]), aj.name,
+                       unites=((unite,) if unite else ()))
+        ve = d.get("le_verdict") or {}
+        if ve.get("la_plus_courte_qui_couvre") is not None:
+            ajoute("la plus courte longueur qui couvre de 175",
+                   int(ve["la_plus_courte_qui_couvre"]), 0, aj.name)
+        if ve.get("cellules_sur_une_frontiere_unique") is not None:
+            ajoute("cellules a une frontiere unique de 175",
+                   int(ve["cellules_sur_une_frontiere_unique"]), 0, aj.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 174 : LA COUPE CHERCHEE TROUVE-T-ELLE LA FRONTIERE.
     # (1) Une COUPE ne voyage jamais sans la FRONTIERE qu'elle vise : « coupe 8 » ne dit rien,
     # « 8 pour 37 » dit tout, et c'est leur ecart qui refute.

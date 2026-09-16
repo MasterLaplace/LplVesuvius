@@ -1488,6 +1488,8 @@ run "quelle fenetre"        uv run python "$ROOT/src/nappe/quelle_fenetre_lit_un
 run "figure quelle fenetre" uv run python "$ROOT/src/figures/figure_quelle_fenetre_lit_une_bascule.py" --verifier
 run "la coupe cherchee"    uv run python "$ROOT/src/nappe/la_coupe_cherchee_trouve_t_elle_la_frontiere.py" --verifier
 run "figure coupe cherchee" uv run python "$ROOT/src/figures/figure_la_coupe_cherchee_trouve_t_elle_la_frontiere.py" --verifier
+run "un ajustement"         uv run python "$ROOT/src/nappe/un_ajustement_decrit_une_frontiere.py" --verifier
+run "figure un ajustement"  uv run python "$ROOT/src/figures/figure_un_ajustement_decrit_une_frontiere.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

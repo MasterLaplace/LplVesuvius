@@ -1955,6 +1955,44 @@ pointe pas un instrument qui n'est fiable qu'à une longueur sur huit.
 traversait un libellé, et `textes_qui_se_recouvrent` ne voit que du texte contre du texte — la leçon
 de la barre qui débordait dans `167`. Chaque trait est désormais **enregistré avec son étendue**.
 
+**`175` · 2026-09-17 · un ajustement décrit une frontière**
+`R4-P30` demandait pourquoi la recette réparée de `174` décroche à sept longueurs sur huit, et la
+porte nommait une piste : le profil d'intensité de la feuille abaisserait la cohérence près d'un
+interstice. ✗ **Réfutée d'entrée** : la cohérence vaut **1,000 partout** sur cette fixture, et
+**zéro** couche tombe sous le plancher.
+⭐⭐⭐⭐ **La cause est structurelle et elle est dans le nom : un ajustement en DEUX segments décrit
+UNE frontière.** Restreinte aux fenêtres dont toutes les frontières sont atteignables, la part
+atteinte vaut **1** — médiane ET minimum — jusqu'à une frontière, puis **0,48** à deux, **0,333** à
+trois et **0,176** à six. Et quand la fenêtre porte exactement une frontière atteignable, la coupe
+tombe dessus **24 fois sur 24** — `R4-F182`. ⚠⚠⚠ La borne d'atteignabilité se **dérive** : le témoin
+exige quatre couches dans chaque moitié de chaque part, donc une coupe vaut au moins **8** et au plus
+**couches − 8** ; compter une frontière hors d'atteinte comme un échec ferait lire une contrainte de
+**fenêtre** comme un défaut d'**instrument**, et **32** cellules sont écartées pour cette raison.
+⚠⚠ **Et une part atteinte de un ne suffit pas** : une fenêtre SANS frontière en rend une aussi, sur
+**15** cellules, avec une bascule de **0°**. Ce qui sépare « trouvée » de « rien à trouver » est la
+bascule, et une fenêtre homogène est exactement ce qu'un **pli** est.
+⭐⭐⭐⭐ **La fenêtre de la campagne porte deux à trois frontières** : ses **109** couches font
+**261,6 µm**, soit **1,512** feuille et **3,024 PLIS**, sa part atteinte médiane vaut **0,339** et
+elle ne lit qu'à **2** décalages sur **12**. Elle est trop **LONGUE** pour ce modèle — l'inverse
+exact de l'explication nº 3 que `14` §3 laissait ouverte, qui la disait plus **courte** qu'une
+épaisseur de feuille — `R4-F183`.
+⭐ **Et le remède est mesuré, pas espéré** : sur quinze longueurs de **16** à **44** couches, la liste
+des longueurs utiles est **VIDE**, parce qu'à chacune certains décalages portent une frontière trop
+près d'un bord. **Deux** fenêtres décalées d'une **demi-longueur** lisent **12/12** décalages dès
+**34** couches, contre **6/12** pour une seule — `R4-F184`. ⚠ Le décalage est **dérivé** : une
+demi-longueur est la seule valeur qui envoie le bord d'une fenêtre au centre de la suivante.
+⚠⚠⚠ **Trois sondes sur quatre sont passées au VERT la première fois**, et pour la même raison à
+chaque fois : la condition qu'elles couvrent **ne retirait rien** sur les cellules assertées. Une
+condition qui n'écarte jamais rien est une condition que rien ne teste. Les contrôles ajoutés sont
+**structurels** — la condition de bascule écarte réellement des cellules, une coupe à plus d'une
+couche ne compte pas, le décrochage tombe dès qu'un seul groupe tient encore un — et ⚠⚠ **deux
+d'entre eux ont dû être refaits parce qu'ils RECOPIAIENT la logique du code** au lieu de l'exercer,
+donc une seconde définition libre d'en diverger.
+⚠⚠ Et la mesure a **refusé ma première formulation** : à une frontière la part valait un en médiane
+mais **0,611** au minimum. La raison était l'atteignabilité, et l'écrire a rendu la relation exacte.
+⚠ Ce qui reste à faire est concret : découper les **109** couches en fenêtres d'un **pli** avec
+recouvrement d'une demi-fenêtre, et porter le contrôle apparié que `R4-P30` exige déjà.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
