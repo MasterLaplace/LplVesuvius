@@ -1474,6 +1474,8 @@ run "reessayer ailleurs"     uv run python "$ROOT/src/nappe/reessayer_ailleurs_p
 run "figure ailleurs"        uv run python "$ROOT/src/figures/figure_reessayer_ailleurs_plutot_que_plus_court.py" --verifier
 run "la contradiction"      uv run python "$ROOT/src/nappe/la_contradiction_que_rien_ne_repare.py" --verifier
 run "figure contradiction"  uv run python "$ROOT/src/figures/figure_la_contradiction_que_rien_ne_repare.py" --verifier
+run "la croix qui ecoute"   uv run python "$ROOT/src/nappe/la_croix_paie_t_elle_quand_on_ecoute.py" --verifier
+run "figure croix ecoute"   uv run python "$ROOT/src/figures/figure_la_croix_paie_t_elle_quand_on_ecoute.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

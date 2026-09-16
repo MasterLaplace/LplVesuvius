@@ -1,0 +1,1600 @@
+{
+ "enquete": {
+  "decidable": true,
+  "cases": [
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 11,
+    "la_croix_recupere": 1,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 7607,
+     "utilisable": 7607,
+     "contaminee": 0,
+     "lectures": 3337122,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7608,
+     "utilisable": 7608,
+     "contaminee": 0,
+     "lectures": 6675120,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 11,
+    "la_croix_recupere": 1,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 7597,
+     "utilisable": 7597,
+     "contaminee": 0,
+     "lectures": 3319164,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7598,
+     "utilisable": 7598,
+     "contaminee": 0,
+     "lectures": 6645840,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 8,
+    "la_croix_recupere": 2,
+    "la_croix_perd": 2,
+    "en segment": {
+     "pas": 7592,
+     "utilisable": 7592,
+     "contaminee": 0,
+     "lectures": 3318438,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7592,
+     "utilisable": 7592,
+     "contaminee": 0,
+     "lectures": 6642528,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "la_croix_recupere": 0,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 8578,
+     "utilisable": 8578,
+     "contaminee": 0,
+     "lectures": 3390672,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 8578,
+     "utilisable": 8578,
+     "contaminee": 0,
+     "lectures": 6781272,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 10,
+    "departs_identiques": 9,
+    "la_croix_recupere": 1,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 6856,
+     "utilisable": 6856,
+     "contaminee": 0,
+     "lectures": 2713158,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 2,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 6857,
+     "utilisable": 6857,
+     "contaminee": 0,
+     "lectures": 5434485,
+     "poses_impossibles": 1,
+     "contradictions_reparees": 2,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 10,
+    "departs_identiques": 7,
+    "la_croix_recupere": 2,
+    "la_croix_perd": 1,
+    "en segment": {
+     "pas": 6851,
+     "utilisable": 6851,
+     "contaminee": 0,
+     "lectures": 2715408,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 2,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 6852,
+     "utilisable": 6852,
+     "contaminee": 0,
+     "lectures": 5440860,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 3,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "la_croix_recupere": 0,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 7596,
+     "utilisable": 7596,
+     "contaminee": 0,
+     "lectures": 3289656,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7596,
+     "utilisable": 7596,
+     "contaminee": 0,
+     "lectures": 6566652,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 3,
+    "la_croix_recupere": 5,
+    "la_croix_perd": 4,
+    "en segment": {
+     "pas": 7606,
+     "utilisable": 7606,
+     "contaminee": 0,
+     "lectures": 3316040,
+     "poses_impossibles": 14,
+     "contradictions_reparees": 22,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7608,
+     "utilisable": 7608,
+     "contaminee": 0,
+     "lectures": 6639770,
+     "poses_impossibles": 21,
+     "contradictions_reparees": 24,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 0,
+    "la_croix_recupere": 9,
+    "la_croix_perd": 3,
+    "en segment": {
+     "pas": 7016,
+     "utilisable": 7016,
+     "contaminee": 0,
+     "lectures": 3121002,
+     "poses_impossibles": 49,
+     "contradictions_reparees": 81,
+     "contradictions_epuisees": 16
+    },
+    "en croix": {
+     "pas": 7560,
+     "utilisable": 7560,
+     "contaminee": 0,
+     "lectures": 6714150,
+     "poses_impossibles": 68,
+     "contradictions_reparees": 96,
+     "contradictions_epuisees": 4
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 11,
+    "la_croix_recupere": 0,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 7781,
+     "utilisable": 7781,
+     "contaminee": 0,
+     "lectures": 3070626,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 2,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7781,
+     "utilisable": 7781,
+     "contaminee": 0,
+     "lectures": 6123097,
+     "poses_impossibles": 2,
+     "contradictions_reparees": 1,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 10,
+    "departs_identiques": 2,
+    "la_croix_recupere": 6,
+    "la_croix_perd": 2,
+    "en segment": {
+     "pas": 6961,
+     "utilisable": 6961,
+     "contaminee": 0,
+     "lectures": 2769121,
+     "poses_impossibles": 16,
+     "contradictions_reparees": 28,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 6066,
+     "utilisable": 6066,
+     "contaminee": 0,
+     "lectures": 4825235,
+     "poses_impossibles": 21,
+     "contradictions_reparees": 28,
+     "contradictions_epuisees": 2
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 9,
+    "departs_identiques": 0,
+    "la_croix_recupere": 4,
+    "la_croix_perd": 5,
+    "en segment": {
+     "pas": 5316,
+     "utilisable": 5316,
+     "contaminee": 0,
+     "lectures": 2168412,
+     "poses_impossibles": 40,
+     "contradictions_reparees": 70,
+     "contradictions_epuisees": 9
+    },
+    "en croix": {
+     "pas": 4798,
+     "utilisable": 3989,
+     "contaminee": 1,
+     "lectures": 3906475,
+     "poses_impossibles": 47,
+     "contradictions_reparees": 83,
+     "contradictions_epuisees": 14
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 8,
+    "departs_identiques": 0,
+    "la_croix_recupere": 3,
+    "la_croix_perd": 5,
+    "en segment": {
+     "pas": 273,
+     "utilisable": 273,
+     "contaminee": 0,
+     "lectures": 229515,
+     "poses_impossibles": 111,
+     "contradictions_reparees": 94,
+     "contradictions_epuisees": 36
+    },
+    "en croix": {
+     "pas": 139,
+     "utilisable": 139,
+     "contaminee": 0,
+     "lectures": 261949,
+     "poses_impossibles": 66,
+     "contradictions_reparees": 76,
+     "contradictions_epuisees": 38
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 9,
+    "departs_identiques": 0,
+    "la_croix_recupere": 4,
+    "la_croix_perd": 5,
+    "en segment": {
+     "pas": 132,
+     "utilisable": 105,
+     "contaminee": 1,
+     "lectures": 110557,
+     "poses_impossibles": 45,
+     "contradictions_reparees": 44,
+     "contradictions_epuisees": 33
+    },
+    "en croix": {
+     "pas": 89,
+     "utilisable": 89,
+     "contaminee": 0,
+     "lectures": 165576,
+     "poses_impossibles": 36,
+     "contradictions_reparees": 35,
+     "contradictions_epuisees": 43
+    }
+   },
+   {
+    "bras": "la pince de `144`",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 7,
+    "departs_identiques": 0,
+    "la_croix_recupere": 3,
+    "la_croix_perd": 4,
+    "en segment": {
+     "pas": 128,
+     "utilisable": 84,
+     "contaminee": 2,
+     "lectures": 97406,
+     "poses_impossibles": 54,
+     "contradictions_reparees": 40,
+     "contradictions_epuisees": 32
+    },
+    "en croix": {
+     "pas": 43,
+     "utilisable": 43,
+     "contaminee": 0,
+     "lectures": 103473,
+     "poses_impossibles": 19,
+     "contradictions_reparees": 25,
+     "contradictions_epuisees": 32
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "la_croix_recupere": 0,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 7674,
+     "utilisable": 7674,
+     "contaminee": 0,
+     "lectures": 1683234,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7674,
+     "utilisable": 7674,
+     "contaminee": 0,
+     "lectures": 3366468,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 7,
+    "la_croix_recupere": 2,
+    "la_croix_perd": 3,
+    "en segment": {
+     "pas": 7795,
+     "utilisable": 7795,
+     "contaminee": 0,
+     "lectures": 1709733,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7794,
+     "utilisable": 7794,
+     "contaminee": 0,
+     "lectures": 3419028,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 5,
+    "la_croix_recupere": 7,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 7803,
+     "utilisable": 7803,
+     "contaminee": 0,
+     "lectures": 1711704,
+     "poses_impossibles": 1,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7813,
+     "utilisable": 7813,
+     "contaminee": 0,
+     "lectures": 3427569,
+     "poses_impossibles": 1,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 12,
+    "la_croix_recupere": 0,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 8645,
+     "utilisable": 8645,
+     "contaminee": 0,
+     "lectures": 1895883,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 8645,
+     "utilisable": 8645,
+     "contaminee": 0,
+     "lectures": 3791766,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 5,
+    "la_croix_recupere": 4,
+    "la_croix_perd": 2,
+    "en segment": {
+     "pas": 7925,
+     "utilisable": 7925,
+     "contaminee": 0,
+     "lectures": 1737984,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7927,
+     "utilisable": 7927,
+     "contaminee": 0,
+     "lectures": 3476844,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 3,
+    "la_croix_recupere": 7,
+    "la_croix_perd": 1,
+    "en segment": {
+     "pas": 7936,
+     "utilisable": 7936,
+     "contaminee": 0,
+     "lectures": 1741999,
+     "poses_impossibles": 7,
+     "contradictions_reparees": 1,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7961,
+     "utilisable": 7115,
+     "contaminee": 1,
+     "lectures": 3497795,
+     "poses_impossibles": 20,
+     "contradictions_reparees": 3,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 6,
+    "la_croix_recupere": 6,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 7792,
+     "utilisable": 7792,
+     "contaminee": 0,
+     "lectures": 1709076,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7798,
+     "utilisable": 7798,
+     "contaminee": 0,
+     "lectures": 3420780,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 4,
+    "la_croix_recupere": 7,
+    "la_croix_perd": 1,
+    "en segment": {
+     "pas": 7799,
+     "utilisable": 7799,
+     "contaminee": 0,
+     "lectures": 1710609,
+     "poses_impossibles": 0,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7807,
+     "utilisable": 7807,
+     "contaminee": 0,
+     "lectures": 3425379,
+     "poses_impossibles": 1,
+     "contradictions_reparees": 1,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 3,
+    "la_croix_recupere": 6,
+    "la_croix_perd": 3,
+    "en segment": {
+     "pas": 7816,
+     "utilisable": 7816,
+     "contaminee": 0,
+     "lectures": 1718201,
+     "poses_impossibles": 10,
+     "contradictions_reparees": 9,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7823,
+     "utilisable": 7823,
+     "contaminee": 0,
+     "lectures": 3440709,
+     "poses_impossibles": 22,
+     "contradictions_reparees": 8,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 6,
+    "la_croix_recupere": 3,
+    "la_croix_perd": 2,
+    "en segment": {
+     "pas": 7977,
+     "utilisable": 7977,
+     "contaminee": 0,
+     "lectures": 1754263,
+     "poses_impossibles": 23,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7978,
+     "utilisable": 7978,
+     "contaminee": 0,
+     "lectures": 3505971,
+     "poses_impossibles": 24,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 0,
+    "la_croix_recupere": 5,
+    "la_croix_perd": 1,
+    "en segment": {
+     "pas": 8128,
+     "utilisable": 842,
+     "contaminee": 10,
+     "lectures": 1806896,
+     "poses_impossibles": 109,
+     "contradictions_reparees": 25,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 8084,
+     "utilisable": 3801,
+     "contaminee": 6,
+     "lectures": 3591016,
+     "poses_impossibles": 135,
+     "contradictions_reparees": 23,
+     "contradictions_epuisees": 0
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 0,
+    "la_croix_recupere": 2,
+    "la_croix_perd": 1,
+    "en segment": {
+     "pas": 8309,
+     "utilisable": 663,
+     "contaminee": 10,
+     "lectures": 1870625,
+     "poses_impossibles": 174,
+     "contradictions_reparees": 89,
+     "contradictions_epuisees": 0
+    },
+    "en croix": {
+     "pas": 7836,
+     "utilisable": 1490,
+     "contaminee": 9,
+     "lectures": 3580139,
+     "poses_impossibles": 315,
+     "contradictions_reparees": 140,
+     "contradictions_epuisees": 6
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 0.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 10,
+    "departs_identiques": 0,
+    "la_croix_recupere": 2,
+    "la_croix_perd": 1,
+    "en segment": {
+     "pas": 1231,
+     "utilisable": 56,
+     "contaminee": 8,
+     "lectures": 335435,
+     "poses_impossibles": 213,
+     "contradictions_reparees": 108,
+     "contradictions_epuisees": 11
+    },
+    "en croix": {
+     "pas": 783,
+     "utilisable": 80,
+     "contaminee": 7,
+     "lectures": 449242,
+     "poses_impossibles": 168,
+     "contradictions_reparees": 144,
+     "contradictions_epuisees": 8
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 8.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 12,
+    "departs_identiques": 0,
+    "la_croix_recupere": 1,
+    "la_croix_perd": 0,
+    "en segment": {
+     "pas": 4511,
+     "utilisable": 0,
+     "contaminee": 12,
+     "lectures": 1170044,
+     "poses_impossibles": 511,
+     "contradictions_reparees": 413,
+     "contradictions_epuisees": 41
+    },
+    "en croix": {
+     "pas": 1079,
+     "utilisable": 4,
+     "contaminee": 11,
+     "lectures": 621084,
+     "poses_impossibles": 224,
+     "contradictions_reparees": 167,
+     "contradictions_epuisees": 44
+    }
+   },
+   {
+    "bras": "une mâchoire avec rejet",
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "bruit": 16.0,
+    "decidable": true,
+    "departs": 12,
+    "apparies": 11,
+    "departs_identiques": 0,
+    "la_croix_recupere": 0,
+    "la_croix_perd": 1,
+    "en segment": {
+     "pas": 4659,
+     "utilisable": 7,
+     "contaminee": 10,
+     "lectures": 1200193,
+     "poses_impossibles": 474,
+     "contradictions_reparees": 455,
+     "contradictions_epuisees": 21
+    },
+    "en croix": {
+     "pas": 1340,
+     "utilisable": 0,
+     "contaminee": 11,
+     "lectures": 806869,
+     "poses_impossibles": 252,
+     "contradictions_reparees": 329,
+     "contradictions_epuisees": 31
+    }
+   }
+  ],
+  "bras": [
+   "la pince de `144`",
+   "une mâchoire avec rejet"
+  ],
+  "marcheurs": [
+   "en segment",
+   "en croix"
+  ],
+  "bruits": [
+   0.0,
+   8.0,
+   16.0
+  ],
+  "departs": 12
+ },
+ "juger": {
+  "decidable": true,
+  "par_matiere": [
+   {
+    "nom": "spirale nue",
+    "cases": 6,
+    "cases_decidables": 6,
+    "departs": 72,
+    "apparies": 72,
+    "departs_identiques": 54,
+    "la_croix_recupere": 13,
+    "la_croix_perd": 5,
+    "en segment": {
+     "pas": 46068,
+     "utilisable": 46068,
+     "contaminee": 0,
+     "lectures": 15079395,
+     "poses_impossibles": 1,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0,
+     "lectures_par_pas": 327.329,
+     "poses_impossibles_par_pas": 0.0
+    },
+    "en croix": {
+     "pas": 46079,
+     "utilisable": 46079,
+     "contaminee": 0,
+     "lectures": 30176553,
+     "poses_impossibles": 1,
+     "contradictions_reparees": 0,
+     "contradictions_epuisees": 0,
+     "lectures_par_pas": 654.887,
+     "poses_impossibles_par_pas": 0.0
+    },
+    "surcout_de_la_croix": 2.0007,
+    "la_croix_lemporte": false
+   },
+   {
+    "nom": "spirale écrasée",
+    "cases": 6,
+    "cases_decidables": 6,
+    "departs": 72,
+    "apparies": 66,
+    "departs_identiques": 48,
+    "la_croix_recupere": 14,
+    "la_croix_perd": 4,
+    "en segment": {
+     "pas": 46791,
+     "utilisable": 46791,
+     "contaminee": 0,
+     "lectures": 14195104,
+     "poses_impossibles": 7,
+     "contradictions_reparees": 5,
+     "contradictions_epuisees": 0,
+     "lectures_par_pas": 303.373,
+     "poses_impossibles_par_pas": 0.0001
+    },
+    "en croix": {
+     "pas": 46820,
+     "utilisable": 45974,
+     "contaminee": 1,
+     "lectures": 28423022,
+     "poses_impossibles": 21,
+     "contradictions_reparees": 8,
+     "contradictions_epuisees": 0,
+     "lectures_par_pas": 607.07,
+     "poses_impossibles_par_pas": 0.0004
+    },
+    "surcout_de_la_croix": 2.0011,
+    "la_croix_lemporte": false
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "departs": 72,
+    "apparies": 72,
+    "departs_identiques": 28,
+    "la_croix_recupere": 33,
+    "la_croix_perd": 11,
+    "en segment": {
+     "pas": 45625,
+     "utilisable": 45625,
+     "contaminee": 0,
+     "lectures": 14864584,
+     "poses_impossibles": 73,
+     "contradictions_reparees": 112,
+     "contradictions_epuisees": 16,
+     "lectures_par_pas": 325.799,
+     "poses_impossibles_par_pas": 0.0016
+    },
+    "en croix": {
+     "pas": 46192,
+     "utilisable": 46192,
+     "contaminee": 0,
+     "lectures": 30207440,
+     "poses_impossibles": 112,
+     "contradictions_reparees": 129,
+     "contradictions_epuisees": 4,
+     "lectures_par_pas": 653.954,
+     "poses_impossibles_par_pas": 0.0024
+    },
+    "surcout_de_la_croix": 2.0072,
+    "la_croix_lemporte": false
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "departs": 72,
+    "apparies": 63,
+    "departs_identiques": 19,
+    "la_croix_recupere": 20,
+    "la_croix_perd": 11,
+    "en segment": {
+     "pas": 44472,
+     "utilisable": 29540,
+     "contaminee": 20,
+     "lectures": 13439943,
+     "poses_impossibles": 362,
+     "contradictions_reparees": 214,
+     "contradictions_epuisees": 9,
+     "lectures_par_pas": 302.211,
+     "poses_impossibles_par_pas": 0.0081
+    },
+    "en croix": {
+     "pas": 42543,
+     "utilisable": 31105,
+     "contaminee": 16,
+     "lectures": 25531933,
+     "poses_impossibles": 544,
+     "contradictions_reparees": 275,
+     "contradictions_epuisees": 22,
+     "lectures_par_pas": 600.144,
+     "poses_impossibles_par_pas": 0.0128
+    },
+    "surcout_de_la_croix": 1.9858,
+    "la_croix_lemporte": false
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "cases": 6,
+    "cases_decidables": 6,
+    "departs": 72,
+    "apparies": 57,
+    "departs_identiques": 0,
+    "la_croix_recupere": 13,
+    "la_croix_perd": 16,
+    "en segment": {
+     "pas": 10934,
+     "utilisable": 525,
+     "contaminee": 33,
+     "lectures": 3143150,
+     "poses_impossibles": 1408,
+     "contradictions_reparees": 1154,
+     "contradictions_epuisees": 174,
+     "lectures_par_pas": 287.466,
+     "poses_impossibles_par_pas": 0.1288
+    },
+    "en croix": {
+     "pas": 3473,
+     "utilisable": 355,
+     "contaminee": 29,
+     "lectures": 2408193,
+     "poses_impossibles": 765,
+     "contradictions_reparees": 776,
+     "contradictions_epuisees": 196,
+     "lectures_par_pas": 693.404,
+     "poses_impossibles_par_pas": 0.2203
+    },
+    "surcout_de_la_croix": 2.4121,
+    "la_croix_lemporte": false
+   }
+  ],
+  "par_bras": [
+   {
+    "nom": "la pince de `144`",
+    "cases": 15,
+    "cases_decidables": 15,
+    "departs": 180,
+    "apparies": 158,
+    "departs_identiques": 86,
+    "la_croix_recupere": 41,
+    "la_croix_perd": 31,
+    "en segment": {
+     "pas": 87890,
+     "utilisable": 87819,
+     "contaminee": 3,
+     "lectures": 36966297,
+     "poses_impossibles": 329,
+     "contradictions_reparees": 385,
+     "contradictions_epuisees": 126,
+     "lectures_par_pas": 420.597,
+     "poses_impossibles_par_pas": 0.0037
+    },
+    "en croix": {
+     "pas": 86765,
+     "utilisable": 85956,
+     "contaminee": 1,
+     "lectures": 72926482,
+     "poses_impossibles": 281,
+     "contradictions_reparees": 373,
+     "contradictions_epuisees": 133,
+     "lectures_par_pas": 840.506,
+     "poses_impossibles_par_pas": 0.0032
+    },
+    "surcout_de_la_croix": 1.9984,
+    "la_croix_lemporte": false
+   },
+   {
+    "nom": "une mâchoire avec rejet",
+    "cases": 15,
+    "cases_decidables": 15,
+    "departs": 180,
+    "apparies": 172,
+    "departs_identiques": 63,
+    "la_croix_recupere": 52,
+    "la_croix_perd": 16,
+    "en segment": {
+     "pas": 106000,
+     "utilisable": 80730,
+     "contaminee": 50,
+     "lectures": 23755879,
+     "poses_impossibles": 1522,
+     "contradictions_reparees": 1100,
+     "contradictions_epuisees": 73,
+     "lectures_par_pas": 224.112,
+     "poses_impossibles_par_pas": 0.0144
+    },
+    "en croix": {
+     "pas": 98342,
+     "utilisable": 83749,
+     "contaminee": 45,
+     "lectures": 43820659,
+     "poses_impossibles": 1162,
+     "contradictions_reparees": 815,
+     "contradictions_epuisees": 89,
+     "lectures_par_pas": 445.595,
+     "poses_impossibles_par_pas": 0.0118
+    },
+    "surcout_de_la_croix": 1.9883,
+    "la_croix_lemporte": false
+   }
+  ],
+  "tout": {
+   "nom": "tout",
+   "cases": 30,
+   "cases_decidables": 30,
+   "departs": 360,
+   "apparies": 330,
+   "departs_identiques": 149,
+   "la_croix_recupere": 93,
+   "la_croix_perd": 47,
+   "en segment": {
+    "pas": 193890,
+    "utilisable": 168549,
+    "contaminee": 53,
+    "lectures": 60722176,
+    "poses_impossibles": 1851,
+    "contradictions_reparees": 1485,
+    "contradictions_epuisees": 199,
+    "lectures_par_pas": 313.178,
+    "poses_impossibles_par_pas": 0.0095
+   },
+   "en croix": {
+    "pas": 185107,
+    "utilisable": 169705,
+    "contaminee": 46,
+    "lectures": 116747141,
+    "poses_impossibles": 1443,
+    "contradictions_reparees": 1188,
+    "contradictions_epuisees": 222,
+    "lectures_par_pas": 630.701,
+    "poses_impossibles_par_pas": 0.0078
+   },
+   "surcout_de_la_croix": 2.0139,
+   "la_croix_lemporte": false
+  },
+  "le_controle_de_la_spirale_nue": {
+   "nom": "spirale nue",
+   "bruit": 0.0,
+   "apparies": 24,
+   "departs_identiques": 23,
+   "surcout_de_la_croix": 2.0,
+   "contaminees": 0,
+   "poses_impossibles": 0,
+   "sous_un_lecteur_bruite": {
+    "apparies": 48,
+    "poses_impossibles": 2,
+    "surcout_de_la_croix": 2.001
+   },
+   "il_est_propre": true,
+   "le_surcout_y_est_exactement_double": true
+  },
+  "la_croix_lemporte_par_bras": {
+   "la pince de `144`": false,
+   "une mâchoire avec rejet": false
+  },
+  "par_bras_et_matiere": {
+   "la pince de `144`": [
+    {
+     "nom": "spirale nue",
+     "cases": 3,
+     "cases_decidables": 3,
+     "departs": 36,
+     "apparies": 36,
+     "departs_identiques": 30,
+     "la_croix_recupere": 4,
+     "la_croix_perd": 2,
+     "en segment": {
+      "pas": 22796,
+      "utilisable": 22796,
+      "contaminee": 0,
+      "lectures": 9974724,
+      "poses_impossibles": 0,
+      "contradictions_reparees": 0,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 437.565,
+      "poses_impossibles_par_pas": 0.0
+     },
+     "en croix": {
+      "pas": 22798,
+      "utilisable": 22798,
+      "contaminee": 0,
+      "lectures": 19963488,
+      "poses_impossibles": 0,
+      "contradictions_reparees": 0,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 875.668,
+      "poses_impossibles_par_pas": 0.0
+     },
+     "surcout_de_la_croix": 2.0012,
+     "la_croix_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée",
+     "cases": 3,
+     "cases_decidables": 3,
+     "departs": 36,
+     "apparies": 32,
+     "departs_identiques": 28,
+     "la_croix_recupere": 3,
+     "la_croix_perd": 1,
+     "en segment": {
+      "pas": 22285,
+      "utilisable": 22285,
+      "contaminee": 0,
+      "lectures": 8819238,
+      "poses_impossibles": 0,
+      "contradictions_reparees": 4,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 395.748,
+      "poses_impossibles_par_pas": 0.0
+     },
+     "en croix": {
+      "pas": 22287,
+      "utilisable": 22287,
+      "contaminee": 0,
+      "lectures": 17656617,
+      "poses_impossibles": 1,
+      "contradictions_reparees": 5,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 792.238,
+      "poses_impossibles_par_pas": 0.0
+     },
+     "surcout_de_la_croix": 2.0019,
+     "la_croix_lemporte": false
+    },
+    {
+     "nom": "spirale froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "departs": 36,
+     "apparies": 36,
+     "departs_identiques": 15,
+     "la_croix_recupere": 14,
+     "la_croix_perd": 7,
+     "en segment": {
+      "pas": 22218,
+      "utilisable": 22218,
+      "contaminee": 0,
+      "lectures": 9726698,
+      "poses_impossibles": 63,
+      "contradictions_reparees": 103,
+      "contradictions_epuisees": 16,
+      "lectures_par_pas": 437.785,
+      "poses_impossibles_par_pas": 0.0028
+     },
+     "en croix": {
+      "pas": 22764,
+      "utilisable": 22764,
+      "contaminee": 0,
+      "lectures": 19920572,
+      "poses_impossibles": 89,
+      "contradictions_reparees": 120,
+      "contradictions_epuisees": 4,
+      "lectures_par_pas": 875.091,
+      "poses_impossibles_par_pas": 0.0039
+     },
+     "surcout_de_la_croix": 1.9989,
+     "la_croix_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée et froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "departs": 36,
+     "apparies": 30,
+     "departs_identiques": 13,
+     "la_croix_recupere": 10,
+     "la_croix_perd": 7,
+     "en segment": {
+      "pas": 20058,
+      "utilisable": 20058,
+      "contaminee": 0,
+      "lectures": 8008159,
+      "poses_impossibles": 56,
+      "contradictions_reparees": 100,
+      "contradictions_epuisees": 9,
+      "lectures_par_pas": 399.25,
+      "poses_impossibles_par_pas": 0.0028
+     },
+     "en croix": {
+      "pas": 18645,
+      "utilisable": 17836,
+      "contaminee": 1,
+      "lectures": 14854807,
+      "poses_impossibles": 70,
+      "contradictions_reparees": 112,
+      "contradictions_epuisees": 16,
+      "lectures_par_pas": 796.718,
+      "poses_impossibles_par_pas": 0.0038
+     },
+     "surcout_de_la_croix": 1.9955,
+     "la_croix_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée et froissée 100 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "departs": 36,
+     "apparies": 24,
+     "departs_identiques": 0,
+     "la_croix_recupere": 10,
+     "la_croix_perd": 14,
+     "en segment": {
+      "pas": 533,
+      "utilisable": 462,
+      "contaminee": 3,
+      "lectures": 437478,
+      "poses_impossibles": 210,
+      "contradictions_reparees": 178,
+      "contradictions_epuisees": 101,
+      "lectures_par_pas": 820.784,
+      "poses_impossibles_par_pas": 0.394
+     },
+     "en croix": {
+      "pas": 271,
+      "utilisable": 271,
+      "contaminee": 0,
+      "lectures": 530998,
+      "poses_impossibles": 121,
+      "contradictions_reparees": 136,
+      "contradictions_epuisees": 113,
+      "lectures_par_pas": 1959.402,
+      "poses_impossibles_par_pas": 0.4465
+     },
+     "surcout_de_la_croix": 2.3872,
+     "la_croix_lemporte": false
+    }
+   ],
+   "une mâchoire avec rejet": [
+    {
+     "nom": "spirale nue",
+     "cases": 3,
+     "cases_decidables": 3,
+     "departs": 36,
+     "apparies": 36,
+     "departs_identiques": 24,
+     "la_croix_recupere": 9,
+     "la_croix_perd": 3,
+     "en segment": {
+      "pas": 23272,
+      "utilisable": 23272,
+      "contaminee": 0,
+      "lectures": 5104671,
+      "poses_impossibles": 1,
+      "contradictions_reparees": 0,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 219.348,
+      "poses_impossibles_par_pas": 0.0
+     },
+     "en croix": {
+      "pas": 23281,
+      "utilisable": 23281,
+      "contaminee": 0,
+      "lectures": 10213065,
+      "poses_impossibles": 1,
+      "contradictions_reparees": 0,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 438.687,
+      "poses_impossibles_par_pas": 0.0
+     },
+     "surcout_de_la_croix": 2.0,
+     "la_croix_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée",
+     "cases": 3,
+     "cases_decidables": 3,
+     "departs": 36,
+     "apparies": 34,
+     "departs_identiques": 20,
+     "la_croix_recupere": 11,
+     "la_croix_perd": 3,
+     "en segment": {
+      "pas": 24506,
+      "utilisable": 24506,
+      "contaminee": 0,
+      "lectures": 5375866,
+      "poses_impossibles": 7,
+      "contradictions_reparees": 1,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 219.369,
+      "poses_impossibles_par_pas": 0.0003
+     },
+     "en croix": {
+      "pas": 24533,
+      "utilisable": 23687,
+      "contaminee": 1,
+      "lectures": 10766405,
+      "poses_impossibles": 20,
+      "contradictions_reparees": 3,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 438.854,
+      "poses_impossibles_par_pas": 0.0008
+     },
+     "surcout_de_la_croix": 2.0005,
+     "la_croix_lemporte": false
+    },
+    {
+     "nom": "spirale froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "departs": 36,
+     "apparies": 36,
+     "departs_identiques": 13,
+     "la_croix_recupere": 19,
+     "la_croix_perd": 4,
+     "en segment": {
+      "pas": 23407,
+      "utilisable": 23407,
+      "contaminee": 0,
+      "lectures": 5137886,
+      "poses_impossibles": 10,
+      "contradictions_reparees": 9,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 219.502,
+      "poses_impossibles_par_pas": 0.0004
+     },
+     "en croix": {
+      "pas": 23428,
+      "utilisable": 23428,
+      "contaminee": 0,
+      "lectures": 10286868,
+      "poses_impossibles": 23,
+      "contradictions_reparees": 9,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 439.084,
+      "poses_impossibles_par_pas": 0.001
+     },
+     "surcout_de_la_croix": 2.0004,
+     "la_croix_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée et froissée 42.4 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "departs": 36,
+     "apparies": 33,
+     "departs_identiques": 6,
+     "la_croix_recupere": 10,
+     "la_croix_perd": 4,
+     "en segment": {
+      "pas": 24414,
+      "utilisable": 9482,
+      "contaminee": 20,
+      "lectures": 5431784,
+      "poses_impossibles": 306,
+      "contradictions_reparees": 114,
+      "contradictions_epuisees": 0,
+      "lectures_par_pas": 222.486,
+      "poses_impossibles_par_pas": 0.0125
+     },
+     "en croix": {
+      "pas": 23898,
+      "utilisable": 13269,
+      "contaminee": 15,
+      "lectures": 10677126,
+      "poses_impossibles": 474,
+      "contradictions_reparees": 163,
+      "contradictions_epuisees": 6,
+      "lectures_par_pas": 446.779,
+      "poses_impossibles_par_pas": 0.0198
+     },
+     "surcout_de_la_croix": 2.0081,
+     "la_croix_lemporte": false
+    },
+    {
+     "nom": "spirale écrasée et froissée 100 µm",
+     "cases": 3,
+     "cases_decidables": 3,
+     "departs": 36,
+     "apparies": 33,
+     "departs_identiques": 0,
+     "la_croix_recupere": 3,
+     "la_croix_perd": 2,
+     "en segment": {
+      "pas": 10401,
+      "utilisable": 63,
+      "contaminee": 30,
+      "lectures": 2705672,
+      "poses_impossibles": 1198,
+      "contradictions_reparees": 976,
+      "contradictions_epuisees": 73,
+      "lectures_par_pas": 260.136,
+      "poses_impossibles_par_pas": 0.1152
+     },
+     "en croix": {
+      "pas": 3202,
+      "utilisable": 84,
+      "contaminee": 29,
+      "lectures": 1877195,
+      "poses_impossibles": 644,
+      "contradictions_reparees": 640,
+      "contradictions_epuisees": 83,
+      "lectures_par_pas": 586.257,
+      "poses_impossibles_par_pas": 0.2011
+     },
+     "surcout_de_la_croix": 2.2537,
+     "la_croix_lemporte": false
+    }
+   ]
+  },
+  "matieres_ou_la_croix_lemporte_par_bras": {
+   "la pince de `144`": [],
+   "une mâchoire avec rejet": []
+  }
+ }
+}

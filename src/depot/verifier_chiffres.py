@@ -3049,6 +3049,82 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 168 : LA CROIX PAIE-T-ELLE QUAND LE MARCHEUR ECOUTE.
+    # (1) Un COUT ne voyage jamais sans les PAS sur lesquels il est pris : une croix qui meurt tot
+    # lit moins en TOTAL, donc un total ferait passer une marche ecourtee pour une marche econome.
+    # C'est `R4-F162`, et cette tranche le paie DEUX fois — les lectures et les poses impossibles.
+    # (2) Un compte de departs RECUPERES ne voyage jamais sans celui des PERDUS : la victoire est
+    # jointe, et sur la machoire seule un total dirait que la croix gagne alors qu'elle perd 16.
+    # (3) Et le CONTROLE ne voyage pas sans son BRUIT : « spirale nue » et « rien ne va de travers »
+    # cessent d'etre le meme enonce des que le lecteur bruite.
+    # ⚠⚠ LES DECIMALES SONT CELLES DU PRODUCTEUR, JAMAIS COMPLETEES : ce bloc les derive de la
+    # valeur elle-meme, parce qu'un surcout vaut 2,0 ici et 2,4121 la.
+    cx = _source(racine, "la_croix_paie_t_elle_quand_on_ecoute.json")
+    if cx.exists():
+        d = json.loads(cx.read_text())
+        j_ = d.get("juger", {})
+
+        def _dec(x) -> int:
+            t = repr(float(x))
+            return len(t.split(".")[1]) if "." in t else 0
+
+        if j_.get("decidable"):
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            for cle, nom in (("apparies", "departs apparies du controle"),
+                             ("departs_identiques", "departs identiques du controle"),
+                             ("contaminees", "livraisons contaminees du controle"),
+                             ("poses_impossibles", "poses impossibles du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 168", int(c_[cle]), 0, cx.name)
+            if c_.get("surcout_de_la_croix") is not None:
+                ajoute("surcout du controle de 168", float(c_["surcout_de_la_croix"]),
+                       _dec(c_["surcout_de_la_croix"]), cx.name)
+            b_ = c_.get("sous_un_lecteur_bruite") or {}
+            for cle, nom in (("apparies", "departs apparies sous un lecteur bruite"),
+                             ("poses_impossibles", "poses impossibles sous un lecteur bruite")):
+                if b_.get(cle) is not None:
+                    ajoute(f"{nom} de 168", int(b_[cle]), 0, cx.name)
+            if b_.get("surcout_de_la_croix") is not None:
+                ajoute("surcout sous un lecteur bruite de 168",
+                       float(b_["surcout_de_la_croix"]), _dec(b_["surcout_de_la_croix"]),
+                       cx.name)
+            t_ = j_.get("tout", {})
+            for m_, lisible in (("en segment", "en segment"), ("en croix", "en croix")):
+                g_ = t_.get(m_) or {}
+                for cle, nom in (("poses_impossibles", "poses impossibles"),
+                                 ("pas", "pas marches")):
+                    if g_.get(cle) is not None:
+                        ajoute(f"{nom} {lisible} en tout de 168", int(g_[cle]), 0, cx.name)
+                if g_.get("poses_impossibles_par_pas") is not None:
+                    ajoute(f"poses impossibles par pas {lisible} de 168",
+                           float(g_["poses_impossibles_par_pas"]),
+                           _dec(g_["poses_impossibles_par_pas"]), cx.name)
+            # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : du tableau par MATIERE il donne les
+            # deux livrables, le couple recupere/perd et le surcout, jamais les lectures par pas —
+            # qui n'y sont publiees que par BRAS.
+            for groupe in j_.get("par_bras", []) + j_.get("par_matiere", []):
+                q = f"sur {groupe['nom']} de 168"
+                for cle, nom in (("apparies", "departs apparies"),
+                                 ("la_croix_recupere", "departs recuperes par la croix"),
+                                 ("la_croix_perd", "departs perdus par la croix")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(groupe[cle]), 0, cx.name)
+                for m_, lisible in (("en segment", "en segment"), ("en croix", "en croix")):
+                    g_ = groupe.get(m_) or {}
+                    if g_.get("utilisable") is not None:
+                        ajoute(f"pas utilisables {lisible} {q}", int(g_["utilisable"]), 0,
+                               cx.name)
+                if groupe.get("surcout_de_la_croix") is not None:
+                    ajoute(f"surcout de la croix {q}", float(groupe["surcout_de_la_croix"]),
+                           _dec(groupe["surcout_de_la_croix"]), cx.name)
+            for groupe in j_.get("par_bras", []):
+                q = f"sur {groupe['nom']} de 168"
+                for m_, lisible in (("en segment", "en segment"), ("en croix", "en croix")):
+                    g_ = groupe.get(m_) or {}
+                    if g_.get("lectures_par_pas") is not None:
+                        ajoute(f"lectures par pas {lisible} {q}", float(g_["lectures_par_pas"]),
+                               _dec(g_["lectures_par_pas"]), cx.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 167 : DE QUOI EST FAITE LA CONTRADICTION QUE RIEN NE REPARE.
     # (1) Un COMPTE apparie ne voyage jamais sans les TROIS reponses : « sort davantage », « a
     # egalite » et « sort moins ». La revendication est une victoire JOINTE, donc la moitie qui

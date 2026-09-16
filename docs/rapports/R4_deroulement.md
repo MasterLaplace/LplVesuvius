@@ -1683,6 +1683,41 @@ grandes. Les textes étaient à leur place, dans leur cadre, et illisibles — `
 chaque barre avec le bord droit de son graphe, et le contrôle neuf a été vérifié en reprenant
 l'échelle sur la mauvaise population, qui le fait échouer sur les deux barres exactes.
 
+**`168` · 2026-09-16 · la croix paie-t-elle quand le marcheur écoute**
+`156` avait jugé la mâchoire **en croix** sur une grille et l'avait trouvée neutre — **×1,9921** de
+lectures pour **+1** réussite. Ce jugement était juste et il portait sur un marcheur **sourd** :
+écouter la pose, la refuser, se reprendre, tout cela est arrivé entre `162` et `165`. Et il y avait
+une raison précise de redemander : `153` (`R4-F120`) mesure que `une_machoire` rend une normale dont
+la composante axiale est **nulle par construction**, là où la croix pose ses appuis sur **deux**
+barres et peut donc sortir du plan du tour. `167` avait réfuté cette piste par l'**observation** ;
+ceci est l'**intervention**. ✗ **NON, ET ELLE COÛTE LE DOUBLE.** Sur le bras livré la croix livre
+**85956** pas utilisables contre **87819** au segment, récupère **41** départs et en **perd 31**,
+pour **×1,9984** de lectures par pas ; la victoire jointe n'est gagnée sur **aucun** bras et sur
+**aucune** matière — `R4-F165`. Et elle est pire **là précisément où elle devait aider** : sur la
+matière du rouleau elle livre **355** pas contre **525**, récupère **13** et en **perd 16**, et son
+surcoût monte à **×2,4121**, le seul qui dépasse le double. ⚠⚠ **Sur la mâchoire seule un total
+dirait qu'elle gagne** (**83749** contre **80730**) : la victoire jointe refuse, parce que **16**
+départs y livrent moins. ⭐⭐⭐ **ET UNE EXPLICATION DU DÉPÔT EST RÉFUTÉE** : `156` écrivait qu'une
+croix « a besoin de deux barres de matière pour se poser, donc elle refuse plus souvent ». Mesuré
+par pas, elle se pose **mieux** — **0,0078** pose impossible en croix contre **0,0095** en segment,
+sur **185107** et **193890** pas — `R4-F166`. ⚠⚠⚠ **Et le même piège est payé DEUX fois dans la même
+grille** : les lectures d'abord, les poses impossibles ensuite. **1443** poses impossibles contre
+**1851** se lit « la croix se pose mieux », mais elle marche aussi moins ; ici la normalisation ne
+renverse pas le classement, et rien ne le garantissait. ⚠⚠ **LE CONTRÔLE DU DÉPÔT SE RESSERRE, et
+c'est la mesure qui l'a imposé** : mon premier jet contrôlait sur « la spirale nue » comme toute la
+chaîne depuis `142`, et la grille a rendu **2** poses impossibles et **×2,001** là où j'attendais
+zéro et exactement deux. La ligne agrège les **trois** bruits, et à bruit 8 ou 16 une lecture bruitée
+empêche une pose de trouver son interstice sur une matière parfaitement lisse : « spirale nue » et
+« rien ne va de travers » cessent d'être le même énoncé — `R4-F167`. À **bruit zéro** les deux
+contrôles sont exacts : **0** livraison contaminée, **0** pose impossible sur **24** départs, et la
+croix y lit **exactement** le double, **×2,0**. ⚠⚠ **Et un second contrôle à moi exigeait
+l'impossible** : que les deux marcheurs livrent exactement la même chose. **23** départs sur **24** y
+marchent le même nombre de pas, le vingt-quatrième diffère d'**un** pas sur **633**, les deux
+bouclant proprement le tour — les deux mâchoires atteignent la même normale par deux routes
+**numériques** différentes, donc elles ne peuvent pas s'accorder au dernier bit. Un contrôle qui
+exige l'impossible n'est pas un contrôle ; le compte des départs identiques est publié à côté, comme
+une mesure et non comme un verdict.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
