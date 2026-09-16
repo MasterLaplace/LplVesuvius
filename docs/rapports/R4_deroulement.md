@@ -1993,6 +1993,45 @@ mais **0,611** au minimum. La raison était l'atteignabilité, et l'écrire a re
 ⚠ Ce qui reste à faire est concret : découper les **109** couches en fenêtres d'un **pli** avec
 recouvrement d'une demi-fenêtre, et porter le contrôle apparié que `R4-P30` exige déjà.
 
+**`176` · 2026-09-17 · la recette posée sur le rouleau**
+`172`–`175` ont construit une recette dont le domaine de validité est **connu** ; `R4-P30` demandait
+de la poser sur la vraie matière. C'est la première mesure de la chaîne des fibres sur le rouleau, et
+les deux réglages y sont **dérivés** : la largeur est celle d'un pli — **36** couches pour un pas de
+173 µm à 2,4 µm — et le pas est la **demi-largeur**.
+⭐⭐⭐⭐ **IL Y A DE L'ORDRE EN PROFONDEUR, ET LE MÉLANGE LE DÉTRUIT.** Sur **22** chunks lus de
+**3** segments, **21** dépassent **toutes** leurs **19** permutations, quand le hasard en donnerait
+**1,1**. La part atteinte médiane vaut **0,993** sur le rouleau contre **0,857** au mélange, et
+**16** chunks lisent quelque chose — `R4-F185`. ⚠⚠⚠ Le contrôle est apparié au sens le plus fort :
+mélanger les couches du MÊME chunk détruit l'ordre en profondeur et **rien d'autre**, et la
+comparaison porte sur la **part atteinte**, jamais sur l'écart, parce que `174` mesure que l'écart
+survit au mélange. ⚠⚠ La statistique est la **meilleure fenêtre** du chunk et le mélange passe par
+les **mêmes** fenêtres : c'est ce qui contrôle la multiplicité.
+✗ **MAIS CE N'EST PAS UNE BASCULE RECTO/VERSO.** La bascule médiane du rouleau vaut **6,862°** là où
+la **même** recette rend **90,0°** sur une matière dont la bascule est construite — soit **×0,076**,
+treize fois moins — et le témoin médian vaut **5,54°**, donc la bascule le dépasse à peine —
+`R4-F186`. ⭐ Et l'étalon dit aussi que **la recette peut répondre** : elle rend le quart de tour à
+**12** décalages sur **12**. Ce qui manque au rouleau n'est pas l'instrument. ⚠⚠ La limite héritée de
+`174` mord ici et elle est **dite** : une **dérive** n'est pas séparée d'une marche par un verdict, et
+un ordre de 6,862° à côté d'un témoin de 5,54° peut être une rotation lente. ⚠ Cela recoupe la
+conclusion de `14` §3, mais pour une meilleure raison : `14` concluait avec une recette qui ne
+pouvait pas répondre.
+⚠⚠⚠ **ET UN DÉFAUT DE `174` A ÉTÉ TROUVÉ EN CHEMIN** : `la_paire_ajustee` compare les valeurs **non
+arrondies**, donc sur une fenêtre **homogène** — où la bascule et le témoin valent tous deux zéro —
+un reste de virgule flottante de **1e-15** tranche en faveur de la bascule, et le module publie
+« bascule 0,0 · témoin 0,0 · dépasse True ». Un booléen qui **contredit les deux nombres imprimés à
+côté de lui** — `R4-F187`. ⚠⚠ La valeur n'est **pas** corrigée dans `174`, délibérément : `174` et
+`175` publient des comptes qui en dérivent, et les tourner réparerait un défaut en déplaçant des
+mesures déjà écrites — c'est le précédent de `172` avec `orientation_profile`. La comparaison réparée
+vit dans `la_bascule_est_lisible` et lit les nombres **publiés**. ⭐ Mesuré, ce que la correction
+déplace : la fenêtre de la campagne de `175` lit **0** décalage sur 12 et non **2**, donc `R4-F181` et
+`R4-F183` passent au statut **borné**.
+⚠⚠ Et un **second** défaut au passage : choisir la meilleure fenêtre sur la seule part atteinte
+retient une fenêtre **homogène**, puisque `175` mesure qu'une fenêtre sans frontière rend une part de
+un. Le choix se fait désormais parmi celles qui **lisent**.
+⚠ Les chunks viennent d'un treillis **régulier** et **16** sur 25 par segment sont refusés comme
+absents : un segment est une bande dans un volume rectangulaire, et les choisir ferait mesurer le
+choix.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

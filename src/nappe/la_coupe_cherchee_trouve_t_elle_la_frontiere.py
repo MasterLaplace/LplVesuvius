@@ -131,6 +131,14 @@ def la_paire_ajustee(courbe, coupe: int) -> dict | None:
         if u is None or w is None:
             return None
         temoins.append(float(angular_gap(u["angle_deg"], w["angle_deg"])))
+    # ⚠⚠⚠ CE BOOLEEN PEUT CONTREDIRE LES DEUX NOMBRES IMPRIMES A COTE DE LUI, ET `176` LE MESURE.
+    # Il compare les valeurs NON ARRONDIES : sur une fenetre homogene la bascule et le temoin valent
+    # tous deux zero, et un reste de virgule flottante de l'ordre de 1e-15 tranche en faveur de la
+    # bascule. Le module publie alors « bascule 0,0 · temoin 0,0 · depasse True ».
+    # ⚠⚠ LA VALEUR N'EST PAS CORRIGEE ICI, DELIBEREMENT : `174` et `175` publient des comptes qui en
+    # derivent, et les tourner reparerait un defaut en deplacant des mesures deja ecrites. La
+    # comparaison reparee vit dans `la_recette_posee_sur_le_rouleau.la_bascule_est_lisible`, qui
+    # lit les nombres PUBLIES.
     return {"coupe": int(coupe), "couches": n,
             "bascule_deg": round(float(angular_gap(a["angle_deg"], b["angle_deg"])), 3),
             "temoin_deg": round(float(max(temoins)), 3),

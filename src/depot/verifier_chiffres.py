@@ -3123,6 +3123,77 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if m_.get("marches_axiales") is not None:
                     ajoute(f"marches axiales {q}", int(m_["marches_axiales"]), 0, vp.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 176 : LA RECETTE POSEE SUR LE ROULEAU.
+    # (1) Un compte de chunks qui depassent leurs permutations ne voyage jamais sans le compte
+    # ATTENDU PAR HASARD : « vingt et un » ne dit rien, « vingt et un contre 1,1 » dit tout.
+    # (2) Une bascule du rouleau ne voyage jamais sans celle de l'ETALON : sans echelle, six degres
+    # se liraient comme un resultat.
+    # (3) Et une part atteinte ne voyage jamais sans celle du MELANGE : c'est leur ecart qui dit
+    # qu'il y a de l'ordre, et la part seule se lirait comme une qualite d'ajustement.
+    rec = _source(racine, "la_recette_posee_sur_le_rouleau.json")
+    if rec.exists():
+        d = json.loads(rec.read_text())
+
+        def _dec176(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("largeur_en_couches", "largeur en couches"),
+                         ("permutations", "permutations")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 176", int(d[cle]), 0, rec.name)
+        for s_ in (d.get("les_segments") or []):
+            if not s_.get("decidable"):
+                continue
+            q = f"du segment {s_['segment']} de 176"
+            for cle, nom in (("chunks_lus", "chunks lus"),
+                             ("chunks_du_treillis", "chunks du treillis"),
+                             ("lisent_quelque_chose", "chunks qui lisent"),
+                             ("fenetres", "fenetres")):
+                if s_.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(s_[cle]), 0, rec.name)
+            for cle, nom in (("part_mediane", "part mediane"),
+                             ("part_mediane_des_permutations", "part mediane des permutations")):
+                if s_.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(s_[cle]), _dec176(s_[cle]), rec.name)
+            if s_.get("bascule_mediane_deg") is not None:
+                ajoute(f"bascule mediane {q}", float(s_["bascule_mediane_deg"]),
+                       _dec176(s_["bascule_mediane_deg"]), rec.name, unites=("°",))
+        fx_ = d.get("la_fixture") or {}
+        for cle, nom in (("cellules", "cellules de l etalon"),
+                         ("lisibles", "cellules lisibles de l etalon"),
+                         ("lisent_quelque_chose", "cellules qui lisent de l etalon")):
+            if fx_.get(cle) is not None:
+                ajoute(f"{nom} de 176", int(fx_[cle]), 0, rec.name)
+        for cle, nom, unite in (("part_mediane", "part atteinte de l etalon", ""),
+                                ("bascule_mediane_deg", "bascule de l etalon", "°"),
+                                ("temoin_median_deg", "temoin de l etalon", "°")):
+            if fx_.get(cle) is not None:
+                ajoute(f"{nom} de 176", float(fx_[cle]), _dec176(fx_[cle]), rec.name,
+                       unites=((unite,) if unite else ()))
+        v_ = d.get("le_verdict") or {}
+        for cle, nom in (("chunks_lus", "chunks lus"), ("segments", "segments"),
+                         ("permutations", "permutations du verdict"),
+                         ("depassent_toutes_les_permutations", "chunks qui depassent"),
+                         ("depassent_le_temoin", "chunks qui depassent le temoin"),
+                         ("lisent_quelque_chose", "chunks qui lisent")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 176", int(v_[cle]), 0, rec.name)
+        for cle, nom, unite in (
+                ("chunks_attendus_par_hasard", "chunks attendus par hasard", ""),
+                ("part_mediane_du_rouleau", "part mediane du rouleau", ""),
+                ("part_mediane_des_permutations", "part mediane des permutations", ""),
+                ("bascule_mediane_du_rouleau_deg", "bascule mediane du rouleau", "°"),
+                ("bascule_mediane_de_la_fixture_deg", "bascule mediane de l etalon", "°"),
+                ("le_rouleau_vaut_la_fixture_fois", "le rouleau vaut l etalon fois", ""),
+                ("temoin_median_du_rouleau_deg", "temoin median du rouleau", "°")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
+                       unites=((unite,) if unite else ()))
+
     # ⭐⭐⭐⭐ LA TRANCHE 175 : UN AJUSTEMENT DECRIT UNE FRONTIERE.
     # (1) Une part atteinte ne voyage jamais sans le NOMBRE DE FRONTIERES de sa fenetre : c'est leur
     # relation qui porte l'enonce, et la part seule se lirait comme une qualite.
