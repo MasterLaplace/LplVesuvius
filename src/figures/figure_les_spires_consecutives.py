@@ -69,7 +69,7 @@ def le_trou_de_la_marche() -> dict | None:
     pire = max(hors, key=lambda b: b["ecart_au_pas_um"])
     return {"bras": pire["bras"], "de": pire["de"], "vers": pire["vers"],
             "ecart_um": pire["ecart_um"], "feuilles": pire["ecart_um"] / d["demi_feuille_um"] / 2,
-            "autorise": d["bras_au_pas_nominal"], "bras": pire["bras"],
+            "autorise": d["bras_au_pas_nominal"],
             "communs": d["bras_communs"]}
 
 

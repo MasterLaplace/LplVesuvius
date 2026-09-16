@@ -249,7 +249,8 @@ def par_variante(grille: dict) -> dict:
             bloc[nom] = {
                 "reussites": int(sum(c["bras"][nom].get("reussites") or 0 for c in cases)),
                 "arretees": _compte_arrets(cases, nom),
-                "poses_refusees_medianes": _med(cases, nom, "poses_refusees", 1),
+                # ⚠⚠ cle source `poses_impossibles`, nom publie inchange : cf. `168`.
+                "poses_refusees_medianes": _med(cases, nom, "poses_impossibles", 1),
                 "inclinaison_mediane_deg": (
                     None if _med(cases, nom, "inclinaison_mediane_mdeg", 1) is None
                     else round(_med(cases, nom, "inclinaison_mediane_mdeg", 1) / 1000.0, 3))}
@@ -477,7 +478,7 @@ def verifier() -> int:
     # ---- la grille et le verdict apparié
     def suivi(deg, boucle, derive):
         return {"decidable": True, "depart_deg": float(deg), "tour_boucle": boucle,
-                "derive_en_feuilles": derive, "poses_refusees": 0 if boucle else 20,
+                "derive_en_feuilles": derive, "poses_impossibles": 0 if boucle else 20,
                 "inclinaison_mediane_mdeg": 9000, "memoire_mediane": 0.5}
 
     def case(lec, nom, etats):

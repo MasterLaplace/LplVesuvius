@@ -902,7 +902,12 @@ def suivre(vol, depart_vx, normale0, largeur_um: float, epaisseur_nominale_um: f
     if ph.size > 1:
         d = np.diff(ph)
         ph = ph[0] + np.concatenate(([0.0], np.cumsum(d - np.round(d))))
-    return {"decidable": True, "pas": pas, "refus": refus, "poses_refusees": halts,
+    # ⚠⚠⚠ DEUX CHOSES DIFFERENTES NE PARTAGENT PAS UN NOM. `halts` compte les pas ou la machoire
+    # n'a PAS PU SE POSER — aucun appui n'a trouve son interstice — tandis que `poses_refusees`,
+    # plus bas, compte les poses qui se sont POSEES et se contredisent. Les deux ont porte le nom
+    # `poses_refusees` du 15 septembre (`164`) au 16 : la cle etait ecrite DEUX FOIS dans ce meme
+    # dictionnaire et Python garde la seconde, donc ce compte-ci n'etait plus publie du tout.
+    return {"decidable": True, "pas": pas, "refus": refus, "poses_impossibles": halts,
             # ⚠ La memoire REELLEMENT employee est publiee : une regle adaptative qui rendrait la
             # meme valeur partout serait un cap fixe deguise, et seul ce chiffre le dit.
             "memoire_mediane": (round(float(np.median(memoires)), 4) if memoires else None),

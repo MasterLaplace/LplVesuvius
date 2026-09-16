@@ -63,6 +63,17 @@ def _sur_la_matiere(grille: dict, filtre, bruit: float | None = None) -> list[di
             and (bruit is None or abs(float(c["bruit"]) - float(bruit)) < 1e-12)]
 
 
+def _impossibles(x: dict) -> int:
+    """Les pas où la mâchoire n'a PAS PU se poser, sous les deux noms qu'a portés ce compte.
+
+    ⚠⚠ `suivre` l'a publié sous `poses_refusees` jusqu'au renommage de `168`, qui lui donne son
+    nom propre parce qu'un SECOND genre de refus — la pose qui se contredit — portait le même
+    depuis `164`, dans le même dictionnaire, et le gagnait en silence.
+    """
+    v = x.get("poses_impossibles")
+    return int(v if v is not None else x["poses_refusees"])
+
+
 def _med(xs, n=4):
     return round(float(statistics.median(xs)), n) if xs else None
 
@@ -108,8 +119,14 @@ def lautopsie(grille: dict, filtre, bras: str, bruit: float | None = None) -> di
             "derive_min_des_tours_boucles": round(min(der_b), 3) if der_b else None,
             "derive_max_des_tours_boucles": round(max(der_b), 3) if der_b else None,
             # ⚠ De quoi on meurt : la pose, ou la contrainte ? C'est la question de `149`.
-            "poses_refusees_mediane": _med([int(x["poses_refusees"]) for x in dec], 1),
-            "poses_refusees_totales": int(sum(int(x["poses_refusees"]) for x in dec)),
+            # ⚠⚠⚠ CE MODULE NE MARCHE PAS : il relit la grille STOCKEE de `156`, qui est anterieure
+            # au renommage de `168` et porte donc `poses_refusees` avec l'ANCIEN sens — les pas ou
+            # la machoire n'a PAS PU SE POSER. Une grille fraichement marchee porterait
+            # `poses_impossibles`. Les deux noms sont acceptes ICI et nulle part ailleurs, parce
+            # qu'ils designent la MEME quantite de part et d'autre d'un renommage date, et le nom
+            # publie ne bouge pas puisque ses chiffres le sont deja.
+            "poses_refusees_mediane": _med([_impossibles(x) for x in dec], 1),
+            "poses_refusees_totales": int(sum(_impossibles(x) for x in dec)),
             "refus_de_contrainte": int(sum(int(x["refus"]) for x in dec)),
             "pas_median": _med([int(x["pas"]) for x in dec], 1),
             "appuis_rejetes": int(sum(int(x.get("appuis_rejetes", 0)) for x in dec))}
@@ -288,7 +305,7 @@ def _suivi(depart_deg: float, boucle: bool, derive: float, part: float,
     """Un suivi FACTICE, pour éprouver l'autopsie sans marcher."""
     return {"depart_deg": float(depart_deg), "decidable": True, "tour_boucle": bool(boucle),
             "derive_en_feuilles": float(derive), "part_du_tour": float(part),
-            "fin": str(fin), "poses_refusees": int(poses_refusees), "refus": int(refus),
+            "fin": str(fin), "poses_impossibles": int(poses_refusees), "refus": int(refus),
             "pas": int(pas), "lectures": 1000, "appuis_rejetes": int(rejetes),
             "epaisseur_um": 156.0}
 

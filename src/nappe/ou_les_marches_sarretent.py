@@ -72,7 +72,7 @@ def ou_les_marches_sarretent(precedent: dict | None, bras: str = "la pince") -> 
     c'est un problème d'identité, celui que `142` à `148` traitent — ou elle ne boucle pas du tout,
     parce qu'elle s'est ARRÊTÉE. Les compter séparément est la seule façon de savoir lequel domine.
 
-    ⚠ Et la cause d'un arrêt se lit dans les mêmes suivis : `poses_refusees` compte les fois où la
+    ⚠ Et la cause d'un arrêt se lit dans les mêmes suivis : `poses_impossibles` compte les fois où la
     mâchoire n'a trouvé aucun interstice encadré, `refus` les fois où la contrainte de `142` a
     refusé le saut. Ce sont deux mécanismes différents, et les publier ensemble dirait « ça
     s'arrête » sans dire de quoi.
@@ -105,7 +105,7 @@ def ou_les_marches_sarretent(precedent: dict | None, bras: str = "la pince") -> 
                 par_matiere[cle][0] += 1
 
     def med(xs, cle, dec=3):
-        v = [x[cle] for x in xs if x.get(cle) is not None]
+        v = [_lire(x, cle) for x in xs if _lire(x, cle) is not None]
         return round(float(statistics.median(v)), dec) if v else None
 
     return {"decidable": True, "bras": bras, "source": "`148`, cap statique de `144`",
@@ -116,18 +116,18 @@ def ou_les_marches_sarretent(precedent: dict | None, bras: str = "la pince") -> 
             "les_arrets_dominent": bool(len(arrets) > len(mauvaises)),
             "une_marche_arretee": {
                 "part_du_tour_atteinte": med(arrets, "part_du_tour", 4),
-                "poses_refusees": med(arrets, "poses_refusees", 1),
+                "poses_refusees": med(arrets, "poses_impossibles", 1),
                 "refus_de_contrainte": med(arrets, "refus", 1),
                 "pas": med(arrets, "pas", 1)},
             "une_marche_bouclee": {
                 "part_du_tour_atteinte": med(bouclees, "part_du_tour", 4),
-                "poses_refusees": med(bouclees, "poses_refusees", 1),
+                "poses_refusees": med(bouclees, "poses_impossibles", 1),
                 "refus_de_contrainte": med(bouclees, "refus", 1),
                 "pas": med(bouclees, "pas", 1)},
             # ⚠ « C'est la pose qui échoue » est un ÉNONCÉ, pas une impression : les refus de pose
             # d'une marche arrêtée dépassent ses refus de contrainte.
             "cest_la_pose_qui_echoue": bool(
-                (med(arrets, "poses_refusees", 1) or 0.0)
+                (med(arrets, "poses_impossibles", 1) or 0.0)
                 > (med(arrets, "refus", 1) or 0.0)),
             "par_matiere": [{"nom": n, "arretees": v[0], "marches": v[1]}
                             for n, v in sorted(par_matiere.items())]}
@@ -215,9 +215,22 @@ def _compte(cases, bras: str, quoi: str) -> int:
     return n
 
 
+# ⚠⚠⚠ CE COMPTE A PORTE DEUX NOMS, ET UN SEUL ENDROIT LE SAIT. `suivre` publiait les pas ou la
+# machoire n'a PAS PU SE POSER sous `poses_refusees` ; `164` a donne ce meme nom a un SECOND genre
+# de refus — la pose qui se contredit — dans le meme dictionnaire, ou Python garde la seconde cle.
+# `168` rend son nom propre au premier. Les mesures STOCKEES anterieures portent l'ancien nom avec
+# l'ancien sens, donc les deux se lisent ici, et nulle part ailleurs.
+_AUTRE_NOM = {"poses_impossibles": "poses_refusees"}
+
+
+def _lire(x: dict, cle: str):
+    v = x.get(cle)
+    return v if v is not None else x.get(_AUTRE_NOM.get(cle, cle))
+
+
 def _med(cases, bras: str, cle: str, dec: int = 3):
-    xs = [x[cle] for c in cases for x in c["bras"][bras]["suivis"]
-          if x.get("decidable") and x.get(cle) is not None]
+    xs = [_lire(x, cle) for c in cases for x in c["bras"][bras]["suivis"]
+          if x.get("decidable") and _lire(x, cle) is not None]
     return round(float(statistics.median(xs)), dec) if xs else None
 
 
@@ -238,7 +251,7 @@ def par_variante(grille: dict) -> dict:
                 "arretees": _compte(cases, nom, "arretees"),
                 "sur_une_autre_feuille": _compte(cases, nom, "autre_feuille"),
                 "part_du_tour_mediane": _med(cases, nom, "part_du_tour", 4),
-                "poses_refusees_medianes": _med(cases, nom, "poses_refusees", 1),
+                "poses_refusees_medianes": _med(cases, nom, "poses_impossibles", 1),
                 "marge_mediane_um": _med(cases, nom, "marge_mediane_um", 3)}
         bloc["par_matiere"] = [
             {"nom": nom,
@@ -441,7 +454,7 @@ def verifier() -> int:
     # ---- ⭐⭐⭐⭐ de quoi les marches meurent : arrêt ou mauvaise feuille
     def suivi(deg, fin, part, halts, refus, boucle, derive):
         return {"decidable": True, "depart_deg": float(deg), "fin": fin, "part_du_tour": part,
-                "poses_refusees": halts, "refus": refus, "pas": 100, "tour_boucle": boucle,
+                "poses_impossibles": halts, "refus": refus, "pas": 100, "tour_boucle": boucle,
                 "derive_en_feuilles": derive, "marge_mediane_um": 0.0}
 
     def case148(nom, suivis):
@@ -504,7 +517,7 @@ def verifier() -> int:
     def suiviG(deg, boucle, derive, marge):
         return {"decidable": True, "depart_deg": float(deg), "tour_boucle": boucle,
                 "derive_en_feuilles": derive, "part_du_tour": 1.0 if boucle else 0.06,
-                "poses_refusees": 0 if boucle else 20, "marge_mediane_um": marge,
+                "poses_impossibles": 0 if boucle else 20, "marge_mediane_um": marge,
                 "memoire_mediane": 0.5}
 
     def caseG(el, nom, etats, marge):

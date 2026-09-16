@@ -335,12 +335,61 @@ def cohesion(modules: list[Path]) -> dict:
     }
 
 
+def cles_repetees_du_texte(texte: str, nom_du_module: str) -> list[dict]:
+    """Le detecteur lui-meme, sur du TEXTE — donc sondable sans ecrire un fichier."""
+    import ast  # noqa: PLC0415
+    import collections  # noqa: PLC0415
+
+    try:
+        arbre = ast.parse(texte, filename=nom_du_module)
+    except SyntaxError:
+        return []
+    out = []
+    for n in ast.walk(arbre):
+        if not isinstance(n, ast.Dict):
+            continue
+        noms = [k.value for k in n.keys
+                if isinstance(k, ast.Constant) and isinstance(k.value, str)]
+        for cle, combien in collections.Counter(noms).items():
+            if combien > 1:
+                out.append({"module": nom_du_module, "ligne": int(n.lineno),
+                            "cle": str(cle), "fois": int(combien)})
+    return out
+
+
+def cles_repetees(modules: list[Path]) -> dict:
+    """Les dictionnaires ecrits avec DEUX FOIS la meme cle — Python garde la seconde, en silence.
+
+    ⚠⚠⚠ POURQUOI CETTE MESURE EXISTE, ET ELLE A UNE DATE. Du 15 au 16 septembre 2026, `suivre`
+    rendait un dictionnaire portant `poses_refusees` DEUX FOIS : une fois pour les pas ou la
+    machoire n'a pas pu se poser, une fois pour les poses qui se contredisent. La seconde gagnait,
+    donc le premier compte n'etait plus publie DU TOUT, et trois modules anterieurs lisaient ce nom
+    en attendant l'ancien sens. Rien n'echouait : un nom stable avait change de sens.
+
+    ⚠⚠ CE DEFAUT EST INVISIBLE APRES COUP. Une fois le dictionnaire construit, Python a deja
+    efface la premiere valeur : aucune verification sur l'OBJET ne peut le voir. Il ne se trouve
+    qu'a la SOURCE, ce qui est exactement ce que cette fonction lit.
+
+    ⚠ Une repetition dont les deux valeurs sont IDENTIQUES est inoffensive, et elle est comptee
+    quand meme : c'est la meme faute d'ecriture, et la prochaine main qui en changera une seule
+    fera la dangereuse.
+    """
+    trouvees = []
+    for f in modules:
+        try:
+            texte = f.read_text(encoding="utf-8")
+        except UnicodeDecodeError:
+            continue
+        trouvees += cles_repetees_du_texte(texte, str(f.relative_to(RACINE)))
+    return {"combien": len(trouvees), "ou": trouvees}
+
+
 def mesurer() -> dict:
     mods = sous_src()
     return {"modules_du_depot": len(mods), "graphe": graphe(mods),
             "duplication": duplication(mods), "retrouvabilite": retrouvabilite(mods),
             "surface": surface(mods), "cohesion": cohesion(mods),
-            "hors_arbre": hors_arbre()}
+            "cles_repetees": cles_repetees(mods), "hors_arbre": hors_arbre()}
 
 
 def verifier() -> int:
@@ -455,6 +504,24 @@ def verifier() -> int:
       isinstance(co["dossiers_sous_le_hasard"], list)
       and co["rapport_min"] is not None,
       f"min ×{co['rapport_min']} — {co['dossiers_sous_le_hasard']}")
+
+    # --- les cles ecrites deux fois ------------------------------------------------------------
+    # ⚠⚠⚠ CE DEFAUT NE SE VOIT QU'A LA SOURCE. Python garde la SECONDE valeur d'une cle repetee,
+    # donc une fois le dictionnaire construit la premiere a disparu et aucune verification sur
+    # l'objet ne peut la retrouver. Il a coute, du 15 au 16 septembre 2026, un compte qui a cesse
+    # d'etre publie sans que rien n'echoue, pendant que trois modules lisaient encore son nom.
+    cr = r["cles_repetees"]
+    v("aucun dictionnaire du dépôt n'écrit deux fois la même clé",
+      cr["combien"] == 0, str(cr["ou"][:3]))
+    # ⚠⚠ ET LE DETECTEUR DOIT MORDRE : un controle a zero est aussi ce que rend un detecteur qui
+    # ne regarde rien. La sonde est une source FABRIQUEE, donc elle n'ecrit aucun fichier.
+    sonde = cles_repetees_du_texte(
+        "def f():\n    return {'a': 1, 'b': 2, 'a': 3}\n", "sonde")
+    v("... et le détecteur le VOIT quand on lui en donne une",
+      len(sonde) == 1 and sonde[0]["cle"] == "a" and sonde[0]["fois"] == 2,
+      str(sonde))
+    v("... et il ne crie pas sur un dictionnaire sain",
+      not cles_repetees_du_texte("def f():\n    return {'a': 1, 'b': 2}\n", "sonde"))
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0
