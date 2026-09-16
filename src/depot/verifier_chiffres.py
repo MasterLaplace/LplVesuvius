@@ -3076,6 +3076,15 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                              ("glissement_axial_median_um", "glissement axial du controle")):
                 if c_.get(cle) is not None:
                     ajoute(f"{nom} de 169", float(c_[cle]), _dec169(c_[cle]), fp.name)
+            # ⚠⚠⚠ L'ASSISE EST PUBLIEE, DONC GARDEE : c'est elle qui a fait publier deux verdicts
+            # faux quand elle n'etait pas verifiee, et sa borne est DERIVEE du voxel.
+            a_ = c_.get("assise") or {}
+            for cle, nom in (("pire_ecart_en_feuilles", "pire ecart du depart a la feuille"),
+                             ("ce_quun_voxel_exprime_en_feuilles", "ce qu'un voxel exprime")):
+                if a_.get(cle) is not None:
+                    ajoute(f"{nom} de 169", float(a_[cle]), _dec169(a_[cle]), fp.name)
+            if a_.get("departs_mesures") is not None:
+                ajoute("departs mesures de 169", int(a_["departs_mesures"]), 0, fp.name)
             # ⚠⚠⚠ LA COMPARAISON EST PUBLIEE CAP PAR CAP, et c'est le fond de la tranche : le cap
             # RENVERSE le sens du penchant du rouleau, donc un chiffre sans son cap ne dit rien.
             cp = j_.get("la_comparaison_au_rouleau") or {}

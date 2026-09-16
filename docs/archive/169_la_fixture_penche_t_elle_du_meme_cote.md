@@ -1,30 +1,25 @@
 # 169 — La fixture penche-t-elle du même côté que le rouleau ?
 
-> ⭐⭐⭐⭐ **OUI, AUX DEUX CAPS — ET ELLE SUIT LE RENVERSEMENT.** Le rouleau ne penche pas du même côté
-> selon que le marcheur porte un cap ou non : **sans cap** il penche **azimutalement** (**0,348**
-> d'axial contre **0,405**), **avec cap** il penche **axialement** (**0,334** contre **0,193**). La
-> fixture calibrée fait **la même chose aux deux** : **0,318** contre **0,34** sans cap, **0,19**
-> contre **0,117** avec.
+> ⭐⭐⭐⭐ **ELLE LE SUIT AUSSI BIEN, ET ELLE NE RENVERSE PAS AVEC LUI.** La cohérence — la persistance
+> du penchant **dans** une marche — s'accorde aux **deux** caps : **0,758** contre **0,719** sans
+> cap, **0,958** contre **0,925** avec. Le **côté**, lui, ne s'accorde qu'au cap zéro : le cap fait
+> basculer le rouleau vers l'**axial** (**0,334** contre **0,193**) et la fixture reste
+> **azimutale** (**0,147** contre **0,345**).
 >
-> ⭐⭐⭐ **ET SON GLISSEMENT AXIAL COLLE AUX DEUX** : **65,8 µm** par pas contre **57,5** sans cap,
-> **44,7 µm** contre **43,2** avec.
+> ⭐⭐⭐⭐ **ET LE MÉCANISME EST LISIBLE, CAUSE PAR CAUSE.** L'**écrasement seul** penche
+> **azimutalement** (**0,0** d'axial contre **0,343**) et suit **parfaitement** (**0,999**), sur
+> **0** marche axiale sur 20. Le **froissement seul** penche **axialement** (**0,091** contre
+> **0,061**) sur **14** marches sur 20 — et ne suit **pas** (**0,453**). **Les deux causes du dépôt
+> tirent en sens opposés**, et le rouleau demande un penchant **axial ET cohérent** qu'aucun mélange
+> des deux ne produit.
 >
-> ✗ **CE QU'ELLE NE REPRODUIT PAS EST LE SUIVI, ET À AUCUN DES DEUX CAPS.** Cohérence **0,332**
-> contre **0,719** sans cap, **0,696** contre **0,925** avec. Elle glisse autant, dans le bon sens,
-> et pas toujours du même côté.
+> ⭐ **LE CONTRÔLE TIENT, ET IL EN PORTE DEUX.** Ni la spirale nue ni l'écrasement seul ne glissent
+> le long de l'axe : **0,0 µm**. Le glissement axial vient donc du **froissement** — **16,9 µm** à
+> 42,4 d'amplitude, **33,0 µm** à 100.
 >
-> ⭐⭐⭐⭐ **C'EST `134` UNE SECONDE FOIS, PAR UN AUTRE CHEMIN.** `134` mesure qu'un froissement propre
-> à chaque feuille fait virer **autant** que le rouleau mais **alterne deux fois plus** — rectitude
-> **0,9642** contre **0,8563**. Cinq tranches plus loin, la même forme : **les grandeurs y sont, la
-> persistance non.** Ce qu'aucune fixture du dépôt ne fabrique est un penchant **suivi**.
->
-> ⭐ **LE CONTRÔLE TIENT, ET IL EN PORTE DEUX.** Ni la spirale nue ni l'**écrasement seul** ne
-> glissent le long de l'axe : **0,0 µm** dans les deux cas. Le glissement axial ne vient donc pas de
-> l'aplatissement, il vient du **froissement**, et il croît avec lui — **19,6**, **24,6**,
-> **50,5 µm**.
->
-> ⚠⚠⚠ **ET LA PREMIÈRE VERSION DE CETTE TRANCHE A PUBLIÉ LE CONTRAIRE, PARCE QU'ELLE AGRÉGEAIT SUR
-> LE CAP.** Le §6 raconte comment, et pourquoi la mesure portait déjà la réponse.
+> ⚠⚠⚠ **ET CETTE TRANCHE A ÉTÉ PUBLIÉE FAUSSE DEUX FOIS AVANT CELLE-CI.** Deux défauts de mesure
+> distincts, tous deux à ma charge, racontés au §6 — et c'est une contradiction entre deux nombres
+> déjà publiés qui les a fait sortir.
 
 ## 1. Pourquoi ce fichier, et un fait établi le désignait
 
@@ -40,124 +35,115 @@ qui a produit `R4-F79`, publie exactement ces deux parts.
 
 ## 2. Comment la comparaison est faite sans être truquée
 
-⚠⚠ **Le même instrument et le même marcheur, deux matières.** La décomposition est `penchant()`,
-celle de `R4-F79`, et le marcheur est `marcher`, celui de `100` — jamais `suivre`. Employer un autre
-marcheur comparerait deux instruments en croyant comparer deux matières.
+⚠⚠ **Le même instrument, le même marcheur, le même échantillonnage.** La décomposition est
+`penchant()`, celle de `R4-F79` ; le marcheur est `marcher`, celui de `100` ; et les départs
+tournent **autour de la spirale** — dix angles à dix millimètres — comme ceux de `R4-F87`. Trois
+choses à tenir égales, et le §6 dit ce qu'il en coûte d'en manquer une.
 
 ⚠⚠⚠ **Et CAP PAR CAP, jamais sur leur mélange.** `R4-F79` publie **deux** courses du rouleau, et
-elles ne disent pas la même chose : le cap **renverse** le sens du penchant. Comparer une fixture à
-une seule de ces courses, ou à un mélange des deux, compare deux choses différentes.
+elles ne disent pas la même chose : le cap **renverse** le sens du penchant.
 
-⚠⚠ **Les chiffres du vrai rouleau sont RELUS, jamais recalculés.** Ils sont publiés et leur course
-coûte des heures ; le module les relit dans la mesure stockée et **refuse de conclure** si elle est
-absente.
+⚠⚠ **Le départ est assis SUR une feuille, et c'est vérifié.** Le recalage est une **recherche de
+racine** bornée, pas un décalage : la phase n'est linéaire le long du rayon que sur une spirale
+ronde. La borne est **dérivée** — un départ est sur sa feuille quand son reste de phase passe sous
+ce qu'**un voxel** exprime, **0,013873** feuille. Mesuré sur les **100** départs : pire écart
+**0,013362**.
 
-⚠ **Deux questions, deux énoncés exacts, aucun seuil.** Le **côté** : la part axiale dépasse-t-elle
-l'azimutale ? — et ce qui doit s'accorder est la **réponse**, pas la valeur. Le **suivi** : la
-cohérence, c'est-à-dire le déplacement tangentiel **net** divisé par le chemin tangentiel
-**parcouru**.
+⚠ **Et le départ se fait le long de la NORMALE**, jamais du rayon : sur la matière du rouleau elle
+en est à 28–32°, et partir de travers coûte au marcheur ses premiers pas — donc précisément la
+cohérence qu'on mesure.
+
+⚠ **Les chiffres du vrai rouleau sont RELUS**, jamais recalculés, et le jugement **refuse de
+conclure** si la mesure est absente.
 
 ## 3. ⭐⭐⭐⭐ La réponse, cap par cap
 
-![La fixture suit le renversement du rouleau d'un cap à l'autre, et sa cohérence reste sous la sienne aux deux](../images/169_la_fixture_penche_t_elle_du_meme_cote.png)
+![La fixture suit aussi bien que le rouleau mais ne bascule pas vers l'axial sous le cap](../images/169_la_fixture_penche_t_elle_du_meme_cote.png)
 
 | cap | | part axiale | part azimutale | penche | glissement | cohérence |
 |---|---|---|---|---|---|---|
-| **0,0** | la fixture | 0,318 | **0,34** | azimutalement | 65,8 µm | **0,332** |
+| **0,0** | la fixture | 0,209 | **0,308** | azimutalement | 34,8 µm | **0,758** |
 | **0,0** | le rouleau | 0,348 | **0,405** | azimutalement | 57,5 µm | 0,719 |
-| **0,75** | la fixture | **0,19** | 0,117 | axialement | 44,7 µm | **0,696** |
-| **0,75** | le rouleau | **0,334** | 0,193 | axialement | 43,2 µm | 0,925 |
+| **0,75** | la fixture | 0,147 | **0,345** | **azimutalement** | 28,2 µm | **0,958** |
+| **0,75** | le rouleau | **0,334** | 0,193 | **axialement** | 43,2 µm | 0,925 |
 
-⭐⭐⭐⭐ **Le côté s'accorde aux deux, et c'est plus qu'un accord : c'est un SUIVI de renversement.**
-Une fixture qui pencherait d'un côté par construction tomberait juste à un cap et raterait l'autre.
-Celle-ci change de sens quand le rouleau change de sens.
+⭐⭐⭐ **Le suivi s'accorde aux deux, et la fixture est même un peu plus persistante que le rouleau.**
+C'est ce que `R4-F87` avait calibré, et cette tranche le retrouve par un autre chemin.
 
-✗ **Le suivi ne s'accorde à aucun des deux**, et toujours dans la même direction : la fixture est
-**moins** cohérente que le rouleau, de **0,387** sans cap et de **0,229** avec.
+✗ **Le côté ne s'accorde qu'au cap zéro.** Ce qui manque n'est pas un penchant, c'est un
+**renversement** : le cap fait basculer le rouleau vers l'axial, et la fixture n'y bascule pas.
 
-## 4. ⭐⭐⭐ Le glissement axial vient du froissement, pas de l'écrasement
+## 4. ⭐⭐⭐⭐ Les deux causes tirent en sens opposés
+
+| matière | marches | axial | azimutal | glissement | cohérence | axial / azimutal |
+|---|---|---|---|---|---|---|
+| spirale nue | 20 | 0,0 | 0,002 | **0,0 µm** | 1,0 | 0 / 20 |
+| spirale écrasée | 20 | **0,0** | **0,343** | **0,0 µm** | **0,999** | **0 / 20** |
+| spirale froissée 42.4 µm | 20 | **0,091** | **0,061** | 16,9 µm | **0,453** | **14 / 6** |
+| spirale écrasée et froissée 42.4 µm | 20 | 0,096 | 0,349 | 12,8 µm | 0,96 | 4 / 16 |
+| spirale écrasée et froissée 100 µm | 20 | 0,206 | 0,334 | **33,0 µm** | 0,868 | 4 / 16 |
+
+⭐ **L'écrasement donne la persistance et le mauvais côté ; le froissement donne le bon côté et pas
+la persistance.** Mélangés, l'écrasement l'emporte sur la direction et le froissement coûte un peu
+de cohérence. Le rouleau demande les **deux** ensemble, et c'est cela qu'aucune matière du dépôt ne
+fabrique.
+
+⚠ Sur la spirale nue et sur l'écrasée, la ligne « 0 / 20 » ne dit pas qu'elles penchent
+azimutalement **par choix** : leur part axiale vaut exactement **0,0**. C'est pourquoi le contrôle
+exige une **absence de glissement** et non un sens.
+
+## 5. ⭐⭐⭐ Le glissement axial vient du froissement, pas de l'écrasement
 
 C'est le second contrôle, et il est exact : l'**écrasement seul** rend **0,0 µm** de glissement
-axial, exactement comme la spirale nue. Aplatir une spirale ne fait donc pas glisser le marcheur le
-long de l'axe — c'est le froissement qui le fait, et la quantité croît avec son amplitude.
+axial, exactement comme la spirale nue. Aplatir une spirale ne fait pas glisser le marcheur le long
+de l'axe — c'est le froissement qui le fait, et la quantité croît avec son amplitude : **16,9 µm**
+à 42,4, **33,0 µm** à 100.
 
-| matière | marches | axial | azimutal | glissement axial | cohérence |
-|---|---|---|---|---|---|
-| spirale nue | 6 | 0,0 | 0,002 | **0,0 µm** | 1,0 |
-| spirale écrasée | 6 | 0,0 | 0,009 | **0,0 µm** | 1,0 |
-| spirale froissée 42.4 µm | 6 | 0,117 | 0,084 | 19,6 µm | 0,627 |
-| spirale écrasée et froissée 42.4 µm | 6 | 0,116 | 0,126 | 24,6 µm | 0,659 |
-| spirale écrasée et froissée 100 µm | 6 | 0,222 | 0,235 | **50,5 µm** | 0,558 |
+## 6. ⚠⚠⚠ Deux défauts de mesure, et ce qui les a fait sortir
 
-⚠⚠⚠ **Ce tableau MÊLE LES DEUX CAPS**, et le cap renverse le sens : la ligne de la matière calibrée
-n'est donc **pas** un verdict, c'est un mélange. Il est publié pour ce qu'il montre — que le
-glissement naît du froissement et croît avec lui, ce qui est vrai à tout cap — et le verdict se lit
-au §3.
+Cette tranche a publié **deux verdicts faux** avant celui-ci, et les deux venaient d'un défaut de
+**protocole**, jamais d'un défaut de définition.
 
-⚠ Sur la spirale nue et sur l'écrasée les deux parts valent quasiment zéro : c'est pourquoi le
-contrôle exige une **absence de glissement** et non un sens.
+**Le premier : le verdict agrégeait les deux caps.** La fixture était comparée à la seule course
+**capée** du rouleau pendant que son propre chiffre venait d'une médiane sur **cap 0 et cap 0,75
+ensemble**. Or le cap **renverse** le sens : une médiane des deux régimes n'est le chiffre d'aucun.
+⚠⚠ La mesure portait déjà la réponse — le module publiait un tableau `par_cap` et la figure le
+dessinait. C'est **moyenner sur l'axe où vit la différence**, sur un axe que j'avais moi-même mesuré
+et affiché.
 
-## 5. ⭐⭐⭐⭐ Ce que cela dit, et c'est `134` une seconde fois
+**Le second : le marcheur ne partait pas sur une feuille, et pas dans la bonne direction.** Le
+recalage était un décalage d'un **quart de pas**, recette écrite pour une spirale **ronde** ; sur
+une section **écrasée** la phase se lit en coordonnées elliptiques. Mesuré : les départs tombaient à
+**0,28 à 0,49 feuille** de la feuille la plus proche — pratiquement **entre deux feuilles**. Et le
+départ se faisait le long du **rayon**, quand la normale y est à **28–32°**.
 
-`134` a mesuré qu'un froissement propre à chaque feuille fait virer le marcheur **autant** que le
-rouleau — **14,72°** par pas — mais que les virages **alternent deux fois plus** (cosinus
-**−0,4624** contre **−0,2061**) et que la rectitude reste à **0,9642** contre **0,8563**.
+**Et un troisième, d'échantillonnage** : trois rayons à **un seul angle**. Sur une section écrasée
+l'obliquité **tourne avec l'angle polaire**, de période π, donc le côté dépend de l'endroit où l'on
+part. À un seul angle la cohérence rend **0,69** ; à dix angles, **0,958**. Même matière, deux
+échantillonnages, deux réponses.
 
-⭐ Cinq tranches plus loin, par un instrument différent et sur une autre quantité, la même forme :
-la fixture **glisse autant** et **ne suit pas**. Deux mesures indépendantes disent que ce qui manque
-aux fixtures du dépôt n'est pas une **grandeur** mais une **persistance**.
+⭐⭐⭐⭐ **Ce qui les a fait sortir n'est pas une relecture, c'est une contradiction entre deux nombres
+déjà publiés** : `R4-F87` publie une cohérence de **0,942** sur cette matière et cette tranche en
+publiait **0,558**. Les définitions se sont révélées **identiques, ligne pour ligne** — donc la
+différence ne pouvait venir que du **protocole**. Elle en venait, aux trois niveaux.
 
-⚠ Ce que cela ne borne PAS : la chaîne `161`–`168` n'exploite pas la persistance du penchant, elle
-exploite le fait qu'une pose se contredise — et cette propriété-là est bien sur cette matière.
+⚠ **Trois contrôles neufs le gardent désormais**, et les trois mordent : le départ tombe **sur** une
+feuille, sous une borne **dérivée du voxel** ; le verdict d'assise **s'accorde avec la mesure** (une
+première version lisait le drapeau du module, donc le figer à `True` la faisait passer) ; et la
+comparaison est **refusée** sans découpage par cap.
 
-## 6. ⚠⚠⚠ Ce que la première version de cette tranche a publié de faux
+## 7. Ce que cette tranche laisse
 
-Elle a conclu que la fixture penche **azimutalement** là où le rouleau penche **axialement**, et que
-le côté ne s'accorde **pas**. C'était faux, et l'erreur est d'une seule sorte : **le verdict
-agrégeait les deux caps**.
-
-- La fixture y était comparée à la **seule** course capée du rouleau — `courses[0]` — pendant que son
-  propre chiffre venait d'une médiane sur **cap 0 et cap 0,75 ensemble**.
-- Or le cap **renverse** le sens : à cap 0 la fixture rend 0,318 contre 0,34, à cap 0,75 **0,19
-  contre 0,117**. La médiane des six cases tombe à 0,222 contre 0,235, qui n'est le chiffre
-  d'aucun des deux régimes.
-- Le compte « 3 axial contre 3 azimutal » que j'avais lu comme *« rien de systématique »* était en
-  fait **1 sur 3 à cap 0 et 2 sur 3 à cap 0,75** : deux régimes, pas un partage.
-
-⚠⚠ **La mesure portait déjà la réponse, et je suis passé à côté.** Le module publiait un tableau
-`par_cap`, la figure le dessinait, et il annonçait **0,698** de cohérence à cap 0 contre **0,911** à
-cap 0,75 — un écart qui criait que le cap n'est pas un détail d'agrégation. C'est **moyenner sur
-l'axe où vit la différence**, le péché que ce dépôt nomme depuis `161`, commis sur un axe que
-j'avais moi-même mesuré et affiché.
-
-⭐ Ce qui l'a attrapé : en cherchant une cause au désaccord entre les **deux** cohérences publiées
-sur la même matière — **0,942** dans `R4-F87` et **0,558** ici — j'ai trouvé que les définitions sont
-**identiques**, donc que la différence devait venir du **protocole**. Elle en venait.
-
-⚠ Le module **refuse désormais** une comparaison sans verdict cap par cap, et la figure aussi.
-
-## 7. Les sondes
-
-⚠ Six sondes, toutes vérifiées **en cassant le code** : le nombre du **rouleau** affiché sous
-l'étiquette **fixture** ; l'énoncé qui **moyenne** au lieu de compter ; le côté et le suivi
-**confondus** ; conclure **sans** la course du rouleau ; un accord obtenu à **un seul** cap ; et une
-comparaison qui **mêle** les caps.
-
-⚠⚠⚠ **Et un défaut de ce module a été trouvé par une sonde, pas par une relecture.** `afficher`
-imprimait la part du **rouleau** sous l'étiquette **fixture**, et la batterie passait **des deux
-côtés** — aucun contrôle n'attrape un nombre juste sous un mauvais nom. Ce qui l'attrape n'est pas de
-relire : c'est de changer la valeur de la fixture et d'**exiger que la sortie change**.
-
-## 8. Ce que cette tranche laisse
-
-- **`R4-P27` se resserre**, et pas là où je l'avais d'abord écrit : ce que les fixtures ne savent pas
-  fabriquer n'est ni la grandeur du penchant ni son sens — c'est sa **persistance**.
-- ⚠ **`134` (le vrillage) se rouvre avec une raison mesurée deux fois** : le rouleau penche de façon
-  **suivie**, et aucune fixture du dépôt ne fabrique ce suivi.
+- **`R4-P27` se resserre, et pas là où je l'avais écrit deux fois** : ce qui manque aux fixtures
+  n'est ni la persistance du penchant — elles l'ont — ni sa grandeur, c'est qu'aucune ne penche
+  **axialement ET de façon suivie**. Les deux causes du dépôt se le disputent.
+- ⚠ **`134` (le vrillage) se rouvre avec une cause nommée** : il faudrait une matière dont la
+  normale sorte du plan du tour **toujours du même côté**, là où le froissement l'en fait sortir en
+  **alternant**.
 - ⚠ **Ce qui reste ouvert ailleurs est intact** : `167` mesure que la pince échoue à réparer
   **0,309859** des contradictions qu'elle rencontre, et rien ne dit de quoi elles sont faites.
 
-## 9. Reproduire
+## 8. Reproduire
 
 ```
 uv run python src/nappe/la_fixture_penche_t_elle_du_meme_cote.py --verifier

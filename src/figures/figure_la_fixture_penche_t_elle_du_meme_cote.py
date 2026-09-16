@@ -108,8 +108,8 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
     def ARDOISE_OU(i):
         return CONTRE if i == 0 else ARDOISE_PALE
 
-    ecrire(28, 20, "La fixture penche-t-elle du même côté que le rouleau ? — oui, "
-                   "aux deux caps, mais elle ne le SUIT pas", gros, ENCRE)
+    ecrire(28, 20, "La fixture penche-t-elle du même côté que le rouleau ? — elle le SUIT "
+                   "aussi bien, et ne RENVERSE pas avec lui", gros, ENCRE)
     ecrire(28, 46, "`R4-F87` calibre la fixture sur le rapport, le penchant et la cohérence, à "
                    "5,5 % — la DIRECTION de ce penchant n'en fait pas partie", petit, GRIS)
 
@@ -152,10 +152,17 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
                for c in caps) or 1.0
     for k, cc in enumerate(caps):
         base = y0 + 26 + k * 104
-        sens = "AXIALEMENT" if cc["le_rouleau_penche_axialement"] else "azimutalement"
+        # ⚠⚠ CHAQUE COTE EST NOMME SEPAREMENT : une premiere version ecrivait « les deux penchent
+        # AXIALEMENT » a cote d'un ✗, parce qu'elle lisait le sens du ROULEAU et le donnait aux
+        # deux. Un libelle qui se contredit lui-meme est pire qu'un libelle absent.
+        def _sens(axial):
+            return "AXIALEMENT" if axial else "azimutalement"
         marque = "★" if cc["le_cote_saccorde"] else "✗"
-        ecrire(x0 + 12, base,
-               f"{marque}  cap {_fr(cc['memoire_du_cap'], 2)} — les deux penchent {sens}",
+        dit = (f"les deux penchent {_sens(cc['le_rouleau_penche_axialement'])}"
+               if cc["le_cote_saccorde"]
+               else f"le rouleau {_sens(cc['le_rouleau_penche_axialement'])}, la fixture "
+                    f"{_sens(cc['la_fixture_penche_axialement'])}")
+        ecrire(x0 + 12, base, f"{marque}  cap {_fr(cc['memoire_du_cap'], 2)} — {dit}",
                petit, BON if cc["le_cote_saccorde"] else ALERTE)
         for i, (qui, cle) in enumerate((("la fixture", "la_fixture"),
                                         ("le rouleau", "le_rouleau"))):
@@ -175,14 +182,14 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
     ecrire(x0 + 12, y0 + ph - 38,
            "ambre : part axiale · ardoise : part azimutale", petit, GRIS)
     ecrire(x0 + 12, y0 + ph - 20,
-           "la fixture SUIT le renversement du rouleau d'un cap à l'autre", petit, BON)
+           "le cap fait BASCULER le rouleau vers l'axial ; la fixture ne bascule pas",
+           petit, ALERTE)
 
     # ---- panneau 3 : matiere par matiere
     x0, y0, pw, ph = 56, 444, 620, 300
     art.rectangle([x0, y0, x0 + pw, y0 + ph], outline=TRAIT, width=1)
     cadres.append((x0, y0, x0 + pw, y0 + ph))
-    ecrire(x0, y0 - 24, "le glissement axial naît du froissement, et croît avec lui",
-           moyen, ENCRE)
+    ecrire(x0, y0 - 24, "les deux causes tirent en SENS OPPOSÉS", moyen, ENCRE)
     x_nom, x_b = x0 + 12, x0 + 150
     b_max = pw - 260
     gmax = max(m["glissement_axial_median_um"] for m in mat if m.get("decidable")) or 1.0
@@ -205,11 +212,11 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
                f"sur {g['decidables']}", 0,
                BON if g["elle_penche_axialement"] else GRIS)
     ecrire(x0 + 12, y0 + ph - 56,
-           "⚠⚠⚠ CES COMPTES MÊLENT LES DEUX CAPS, et le cap RENVERSE le sens :", petit, ALERTE)
+           "⚠⚠ L'ÉCRASEMENT penche AZIMUTALEMENT et suit parfaitement (0,999) ;", petit, ALERTE)
     ecrire(x0 + 12, y0 + ph - 38,
-           "le 3 contre 3 de la matière calibrée n'est donc PAS un partage, c'est", petit, GRIS)
+           "le FROISSEMENT penche axialement (14 marches sur 20) et ne suit pas", petit, GRIS)
     ecrire(x0 + 12, y0 + ph - 20,
-           "un mélange. Le verdict se lit dans le panneau d'à côté, cap par cap.", petit, GRIS)
+           "(0,453). Le rouleau demande les DEUX, et aucun mélange ne les donne.", petit, GRIS)
 
     # ---- panneau 4 : le suivi
     x0, y0, pw, ph = 712, 444, 592, 300
@@ -235,8 +242,8 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
             barres.append((x_barre + w, x_barre + barre_max))
             ecrire(x_barre + barre_max + 8, yy - 1, f"{_fr(val, n)}{unite}", 0, coul)
     ecrire(x0 + 12, y0 + ph - 74,
-           f"{'★' if cp['le_suivi_saccorde_partout'] else '✗'}  le suivi ne s'accorde à AUCUN cap",
-           petit, ALERTE)
+           f"{'★' if cp['le_suivi_saccorde_partout'] else '✗'}  le suivi s'accorde aux DEUX caps",
+           petit, BON if cp["le_suivi_saccorde_partout"] else ALERTE)
     ecrire(x0 + 12, y0 + ph - 56,
            "La cohérence est le déplacement tangentiel NET divisé par le chemin", petit, GRIS)
     ecrire(x0 + 12, y0 + ph - 40,
@@ -250,27 +257,23 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
     cadres.append((56, y, L - 56, y + 130))
     c0 = caps[0]
     ecrire(74, y + 12,
-           f"★  Le côté s'accorde aux DEUX caps : sans cap les deux penchent azimutalement "
-           f"({_fr(c0['part_axiale']['la_fixture'])} contre "
-           f"{_fr(c0['part_azimutale']['la_fixture'])} sur la fixture, "
-           f"{_fr(c0['part_axiale']['le_rouleau'])} contre "
-           f"{_fr(c0['part_azimutale']['le_rouleau'])} sur le rouleau),", moyen, BON)
-    ecrire(74, y + 34,
-           f"     avec cap les deux penchent axialement "
-           f"({_fr(capitale['part_axiale']['la_fixture'])} contre "
-           f"{_fr(capitale['part_azimutale']['la_fixture'])} ; "
-           f"{_fr(capitale['part_axiale']['le_rouleau'])} contre "
-           f"{_fr(capitale['part_azimutale']['le_rouleau'])}). La fixture SUIT le renversement.",
-           moyen, BON)
-    ecrire(74, y + 60,
-           f"✗  Le suivi ne s'accorde à aucun des deux : cohérence "
+           f"★  Le SUIVI s'accorde aux deux caps : cohérence "
            f"{_fr(c0['coherence']['la_fixture'])} contre "
-           f"{_fr(c0['coherence']['le_rouleau'])} sans cap, "
-           f"{_fr(co['la_fixture'])} contre {_fr(co['le_rouleau'])} avec.", moyen, ALERTE)
+           f"{_fr(c0['coherence']['le_rouleau'])} sans cap, {_fr(co['la_fixture'])} contre "
+           f"{_fr(co['le_rouleau'])} avec. La fixture est aussi persistante que le rouleau.",
+           moyen, BON)
+    ecrire(74, y + 38,
+           f"✗  Le CÔTÉ ne s'accorde qu'au cap 0 : le cap fait basculer le rouleau vers l'axial "
+           f"({_fr(capitale['part_axiale']['le_rouleau'])} contre "
+           f"{_fr(capitale['part_azimutale']['le_rouleau'])}), la fixture reste azimutale "
+           f"({_fr(capitale['part_axiale']['la_fixture'])} contre "
+           f"{_fr(capitale['part_azimutale']['la_fixture'])}).", moyen, ALERTE)
+    ecrire(74, y + 64,
+           "★★★★  Le mécanisme est lisible : l'ÉCRASEMENT penche azimutalement et suit "
+           "parfaitement, le FROISSEMENT penche axialement et ne suit pas.", moyen, ENCRE)
     ecrire(74, y + 86,
-           f"★★★★  Elle glisse AUTANT — {_fr(gl['la_fixture'], 1)} µm contre "
-           f"{_fr(gl['le_rouleau'], 1)} avec cap — sans glisser toujours du même côté. "
-           f"Les grandeurs y sont, la PERSISTANCE non.", moyen, ENCRE)
+           "         Les deux causes du dépôt tirent en sens opposés, et le rouleau demande un "
+           "penchant AXIAL et COHÉRENT, qu'aucun mélange des deux ne produit.", moyen, ENCRE)
     ecrire(74, y + 110,
            f"★  Le contrôle tient : ni la spirale nue ni l'écrasement seul ne glissent "
            f"({_fr(c['glissement_axial_median_um'], 1)} µm), donc l'instrument ne mesure pas "

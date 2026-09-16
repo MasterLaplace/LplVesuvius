@@ -1719,39 +1719,40 @@ exige l'impossible n'est pas un contrôle ; le compte des départs identiques es
 une mesure et non comme un verdict.
 
 **`169` · 2026-09-16 · la fixture penche-t-elle du même côté que le rouleau**
-`R4-F87` établit que l'écrasement mesuré **plus** un froissement approche le rouleau à **5,5 %** sur
-**trois** grandeurs : le rapport des axes, le penchant et la cohérence. ⭐⭐⭐⭐ **La DIRECTION de ce
-penchant n'en fait pas partie** — or `R4-F79` mesure sur le vrai rouleau un penchant plus **axial**
-qu'azimutal et un glissement de **43,2 µm** par pas le long de la longueur du rouleau. Toute la
-chaîne `161`–`168` tourne sur cette fixture, et personne n'avait vérifié qu'elle penche du même côté.
-⚠⚠⚠ **ET LA COMPARAISON SE FAIT CAP PAR CAP, parce que le cap RENVERSE le sens** : `R4-F79` publie
-deux courses, et sans cap le rouleau penche **azimutalement** (**0,348** contre **0,405**) quand avec
-cap il penche **axialement** (**0,334** contre **0,193**). ⭐⭐⭐⭐ **OUI, AUX DEUX CAPS, ET LA FIXTURE
-SUIT LE RENVERSEMENT** : **0,318** contre **0,34** sans cap, **0,19** contre **0,117** avec. Une
-fixture qui pencherait d'un côté par construction tomberait juste à un cap et raterait l'autre.
-⭐⭐⭐ Son glissement axial colle aux deux : **65,8 µm** contre **57,5**, et **44,7 µm** contre
-**43,2**. ✗ **Ce qu'elle ne reproduit à AUCUN des deux caps est le SUIVI** : cohérence **0,332**
-contre **0,719** sans cap, **0,696** contre **0,925** avec — `R4-F168`. ⭐⭐⭐⭐ **C'est `134` une
-seconde fois, par un autre chemin** : `134` mesure qu'un froissement propre à chaque feuille fait
-virer **autant** que le rouleau mais **alterne deux fois plus** (rectitude 0,9642 contre 0,8563).
-Deux mesures indépendantes, cinq tranches d'écart, un autre instrument, une autre quantité, la même
-forme — **les grandeurs y sont, la persistance non.** ⭐⭐⭐ **Second contrôle, exact** :
-l'**écrasement seul** rend **0,0 µm** de glissement axial, comme la spirale nue ; le glissement vient
-du **froissement** et croît avec lui — **19,6**, **24,6**, **50,5 µm** — `R4-F169`.
-⚠⚠⚠ **ET LA PREMIÈRE VERSION DE CETTE TRANCHE A PUBLIÉ LE CONTRAIRE, C'EST À MA CHARGE, ET L'ERREUR
-EST D'UNE SEULE SORTE : LE VERDICT AGRÉGEAIT LES DEUX CAPS.** La fixture y était comparée à la seule
-course **capée** du rouleau pendant que son propre chiffre venait d'une médiane sur **cap 0 et
-cap 0,75 ensemble**, laquelle tombe à **0,222 contre 0,235** — le chiffre d'aucun des deux régimes.
-Le « 3 axial contre 3 azimutal » que j'avais lu comme « rien de systématique » était en fait **1 sur
-3 à cap 0 et 2 sur 3 à cap 0,75** : deux régimes, pas un partage. ⚠⚠ **La mesure portait déjà la
-réponse** — le module publiait un tableau `par_cap`, la figure le dessinait, et il annonçait
-**0,698** de cohérence à cap 0 contre **0,911** à cap 0,75. C'est **moyenner sur l'axe où vit la
-différence**, commis sur un axe que j'avais moi-même mesuré et affiché. ⭐ Ce qui l'a attrapé : le
-désaccord entre les **deux** cohérences publiées sur la même matière — **0,942** dans `R4-F87` et
-**0,558** ici — dont les définitions se sont révélées **identiques**, donc la différence venait du
-**protocole**. Le module et la figure **refusent** désormais une comparaison sans verdict cap par cap.
-⚠ Et un second défaut, trouvé par une sonde : `afficher` imprimait la part du **rouleau** sous
-l'étiquette **fixture**, et la batterie passait **des deux côtés**.
+`R4-F87` calibre la fixture sur **trois** grandeurs du rouleau à **5,5 %** — le rapport, le penchant,
+la cohérence — et ⭐⭐⭐⭐ **la DIRECTION de ce penchant n'en fait pas partie**, alors que `R4-F79`
+mesure sur le vrai rouleau un penchant plus **axial** qu'azimutal. Toute la chaîne `161`–`168` tourne
+sur cette fixture. ⚠⚠ La comparaison se fait **cap par cap** (le cap **renverse** le sens : sans cap
+le rouleau penche azimutalement, avec cap axialement), avec le **même** instrument, le **même**
+marcheur et le **même** échantillonnage que `R4-F87` — dix départs autour de la spirale à dix
+millimètres. ⭐⭐⭐⭐ **ELLE LE SUIT AUSSI BIEN, ET ELLE NE RENVERSE PAS AVEC LUI** : la cohérence
+s'accorde aux **deux** caps (**0,758** contre **0,719** sans cap, **0,958** contre **0,925** avec),
+mais le côté ne s'accorde qu'au cap zéro — le cap bascule le rouleau vers l'**axial** (**0,334**
+contre **0,193**) et la fixture reste **azimutale** (**0,147** contre **0,345**) — `R4-F168`.
+⭐⭐⭐⭐ **Et le mécanisme est lisible, cause par cause** : l'**écrasement seul** penche
+**azimutalement** (**0,0** contre **0,343**) et suit **parfaitement** (**0,999**), sur **0** marche
+axiale sur 20 ; le **froissement seul** penche **axialement** sur **14** marches sur 20 et ne suit
+**pas** (**0,453**). Les deux causes du dépôt **tirent en sens opposés**, et le rouleau demande un
+penchant **axial ET cohérent** qu'aucun mélange des deux ne produit. ⭐⭐⭐ **Second contrôle, exact** :
+l'écrasement seul rend **0,0 µm** de glissement axial comme la spirale nue ; le glissement vient du
+**froissement** et croît avec lui — **16,9 µm** à 42,4, **33,0 µm** à 100 — `R4-F169`.
+⚠⚠⚠ **ET CETTE TRANCHE A ÉTÉ PUBLIÉE FAUSSE DEUX FOIS, TOUJOURS POUR UN DÉFAUT DE PROTOCOLE ET
+JAMAIS DE DÉFINITION.** (1) Le verdict **agrégeait les deux caps** alors que le cap renverse le sens,
+sur un axe que le module publiait et que la figure dessinait — **moyenner sur l'axe où vit la
+différence**. (2) Le marcheur ne partait **pas sur une feuille** : le recalage était un décalage d'un
+quart de pas, recette écrite pour une spirale **ronde**, et sur une section **écrasée** les départs
+tombaient à **0,28 à 0,49 feuille** de la feuille la plus proche ; il partait en plus le long du
+**rayon** quand la normale y est à **28–32°**. (3) Et l'échantillonnage prenait trois rayons à **un
+seul angle**, alors que sur une section écrasée l'obliquité **tourne avec l'angle polaire** : à un
+angle la cohérence rend **0,69**, à dix elle rend **0,958**. ⭐⭐⭐⭐ **Ce qui les a fait sortir n'est
+pas une relecture mais une contradiction entre deux nombres DÉJÀ PUBLIÉS** — `R4-F87` donne
+**0,942** de cohérence sur cette matière quand la tranche en publiait **0,558** — dont les
+définitions se sont révélées **identiques ligne pour ligne**, donc la différence ne pouvait venir que
+du protocole. ⚠ Trois contrôles neufs le gardent et les trois mordent : le départ tombe **sur** une
+feuille sous une borne **dérivée du voxel** (**0,013362** contre **0,013873** sur **100** départs) ;
+le verdict d'assise s'accorde avec la **mesure** et non avec le drapeau du module — une première
+version lisait le drapeau, donc le figer à `True` la faisait passer ; et la comparaison est
+**refusée** sans découpage par cap.
 
 ## 4. Le tableau des statuts
 

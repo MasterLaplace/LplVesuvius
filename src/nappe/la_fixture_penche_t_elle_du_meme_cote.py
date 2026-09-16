@@ -46,12 +46,19 @@ RACINE = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(RACINE / "src" / "nappe"))
 sys.path.insert(0, str(RACINE / "src" / "commun"))
 
-from la_pince_tient_elle_la_feuille import LONGUEUR_DONDE_UM, MATIERES, _nom  # noqa: E402
+from la_pince_tient_elle_la_feuille import (LONGUEUR_DONDE_UM, MATIERES,  # noqa: E402
+                                            _nom, _PAS, _VOXEL)
 from le_chemin_penche_t_il_ou_serpente_t_il import (_barres,  # noqa: E402
                                                     _marcher_et_pencher)
 
 LA_COURSE_DU_ROULEAU = RACINE / "docs" / "mesures" / "le_chemin_penche_t_il_ou_serpente_t_il.json"
-RAYONS_MM = (6.0, 10.0, 14.0)
+RAYON_MM = 10.0
+# ⚠⚠⚠ LES DEPARTS TOURNENT AUTOUR DE LA SPIRALE, ET C'EST L'ECHANTILLONNAGE DE `R4-F87`. Une
+# premiere version prenait TROIS rayons a un SEUL angle, et ne pouvait donc pas voir que sur une
+# section ECRASEE l'obliquite tourne avec l'angle polaire, de periode pi : le cote y depend de
+# l'endroit ou l'on part. Mesure : a un seul angle la coherence tombe a 0,69, a dix angles elle
+# rend 0,958 — le meme materiau, deux echantillonnages, deux reponses.
+DEPARTS = 10
 CAPS = (0.0, 0.75)
 PAS_MAX = 40
 CENTRE_YX_VX = (6000.0, 6000.0)
@@ -123,8 +130,8 @@ def _resume(cas: list[dict | None]) -> dict:
                 float(statistics.median([c["glissement_axial_um"] for c in dec])), 1)}
 
 
-def lenquete(matieres=MATIERES, rayons_mm=RAYONS_MM, caps=CAPS,
-             pas_max: int = PAS_MAX) -> dict:
+def lenquete(matieres=MATIERES, departs: int = DEPARTS, caps=CAPS,
+             pas_max: int = PAS_MAX, rayon_mm: float = RAYON_MM) -> dict:
     from combien_de_pas_la_matiere_porte import (  # noqa: PLC0415
         VolumeFabriqueEnSpiraleFroissee)
 
@@ -132,27 +139,46 @@ def lenquete(matieres=MATIERES, rayons_mm=RAYONS_MM, caps=CAPS,
     C = barres[-1]
     cases = []
     for ecr, amp in matieres:
-        for r_mm in rayons_mm:
-            # ⚠ Le depart est recale sur une phase ENTIERE : sur l'axe +y l'angle vaut pi/2, donc
-            # la phase y vaut -1/4 et le rayon de reference est decale d'un quart de pas. Une
-            # cellule qui tombe entre deux feuilles ne correspond a aucune polarite du gabarit, et
-            # l'instrument mesurerait alors sa propre erreur de mise en place.
-            vol = VolumeFabriqueEnSpiraleFroissee(
-                C.PAS_UM, r0_um=r_mm * 1000.0 - 0.25 * C.PAS_UM, centre_yx_vx=CENTRE_YX_VX,
-                forme=FORME, ecrasement=float(ecr), amplitude_um=float(amp),
-                longueur_donde_um=LONGUEUR_DONDE_UM)
-            r_vx = r_mm * 1000.0 / C.VOXEL_FIN_UM
-            depart = np.array([2000.0, CENTRE_YX_VX[0] + r_vx, CENTRE_YX_VX[1]])
-            radial = np.array([0.0, 1.0, 0.0])
-            axe = depart - radial * r_vx
+        vol = VolumeFabriqueEnSpiraleFroissee(
+            C.PAS_UM, r0_um=rayon_mm * 1000.0 - 0.25 * C.PAS_UM, centre_yx_vx=CENTRE_YX_VX,
+            forme=FORME, ecrasement=float(ecr), amplitude_um=float(amp),
+            longueur_donde_um=LONGUEUR_DONDE_UM)
+        r_vx = rayon_mm * 1000.0 / C.VOXEL_FIN_UM
+        for k in range(int(departs)):
+            a = 2.0 * np.pi * k / int(departs)
+            radial = np.array([0.0, np.sin(a), np.cos(a)])
+            p0 = np.array([2000.0, CENTRE_YX_VX[0] + r_vx * np.sin(a),
+                           CENTRE_YX_VX[1] + r_vx * np.cos(a)])
+            # ⚠⚠⚠ LE RECALAGE EST UNE RECHERCHE DE RACINE, pas un decalage. La phase n'est lineaire
+            # le long du rayon que sur une spirale RONDE ; des que la section est ecrasee et la
+            # feuille froissee, un seul pas laisse 0,026 feuille de reste — deux fois ce qu'un
+            # voxel exprime. Une cellule qui tombe entre deux feuilles ne correspond a aucune
+            # polarite du gabarit, et l'instrument mesure alors sa propre erreur de mise en place —
+            # le defaut que la fixture de `100` a paye, et que cette tranche a paye aussi.
+            depart = p0.copy()
+            cible = round(float(vol.phase(p0.reshape(1, 3))[0]))
+            for _ in range(24):
+                ph = float(vol.phase(depart.reshape(1, 3))[0])
+                if abs(ph - cible) < _VOXEL() / _PAS():
+                    break
+                depart = depart + radial * ((cible - ph) * vol.pas_um / C.VOXEL_FIN_UM)
+            # ⚠⚠ ET LE DEPART SE FAIT LE LONG DE LA NORMALE, jamais du rayon : sur la matiere du
+            # rouleau la normale est a 28-32° du rayon, et partir de travers coute au marcheur ses
+            # premiers pas — donc precisement la coherence qu'on mesure.
+            n0 = np.asarray(vol.normale_locale(depart)).reshape(3)
+            axe = np.array([depart[0], CENTRE_YX_VX[0], CENTRE_YX_VX[1]])
+            ph2 = float(vol.phase(depart.reshape(1, 3))[0])
+            ecart_assise = round(abs(ph2 - round(ph2)), 6)
             for cap in caps:
-                p = _marcher_et_pencher(vol, depart, radial, axe, barres, pas_max, float(cap))
+                p = _marcher_et_pencher(vol, depart, n0, axe, barres, pas_max, float(cap))
                 cases.append({"nom": _nom(ecr, amp), "ecrasement": float(ecr),
-                              "amplitude_um": float(amp), "rayon_mm": float(r_mm),
+                              "amplitude_um": float(amp), "rayon_mm": float(rayon_mm),
+                              "angle_du_depart_deg": round(float(np.degrees(a)), 1),
                               "memoire_du_cap": float(cap),
+                              "ecart_du_depart_en_feuilles": ecart_assise,
                               "marche": le_cote_dune_marche(p)})
-    return {"decidable": bool(cases), "cases": cases,
-            "rayons_mm": [float(r) for r in rayons_mm], "caps": [float(c) for c in caps],
+    return {"decidable": bool(cases), "cases": cases, "rayon_mm": float(rayon_mm),
+            "departs": int(departs), "caps": [float(c) for c in caps],
             "pas_max": int(pas_max)}
 
 
@@ -197,6 +223,19 @@ def juger(d: dict, rouleau: dict | None) -> dict:
                 "glissement_axial_median_um": (nue["glissement_axial_median_um"]
                                                if nue else None),
                 "decidables": nue["decidables"] if nue else None}
+    # ⭐⭐⭐⭐ LE CONTROLE QUI MANQUAIT, ET SON ABSENCE A COUTE UNE PUBLICATION FAUSSE : le marcheur
+    # part-il SUR une feuille ? La borne est DERIVEE et non choisie — un depart est sur sa feuille
+    # quand son reste de phase est plus petit que ce qu'UN VOXEL peut exprimer, c'est-a-dire
+    # `voxel / pas`. En dessous, le lecteur ne peut pas distinguer ce depart de la feuille elle-meme.
+    ecarts = [c.get("ecart_du_depart_en_feuilles") for c in d["cases"]
+              if c.get("ecart_du_depart_en_feuilles") is not None]
+    borne = _VOXEL() / _PAS()
+    controle["assise"] = {
+        "pire_ecart_en_feuilles": (round(max(ecarts), 6) if ecarts else None),
+        "ce_quun_voxel_exprime_en_feuilles": round(borne, 6),
+        "departs_mesures": len(ecarts)}
+    controle["assise"]["ils_partent_sur_une_feuille"] = bool(
+        ecarts and max(ecarts) < borne)
     controle["il_ne_penche_pas"] = bool(
         nue is not None and nue["decidables"] > 0
         and controle["glissement_axial_median_um"] == 0.0)
@@ -246,7 +285,8 @@ def juger(d: dict, rouleau: dict | None) -> dict:
                    "le_suivi_saccorde_partout": bool(
                        comparaisons and all(c["le_suivi_saccorde"] for c in comparaisons))}
     return {"decidable": True, "par_matiere": mat,
-            "par_rayon": _croiser(d, "rayon_mm"), "par_cap": _croiser(d, "memoire_du_cap"),
+            "par_angle": _croiser(d, "angle_du_depart_deg"),
+            "par_cap": _croiser(d, "memoire_du_cap"),
             "tout": _cumuler(d["cases"], "tout"),
             "le_controle_de_la_spirale_nue": controle,
             "la_comparaison_au_rouleau": comparaison,
@@ -254,9 +294,9 @@ def juger(d: dict, rouleau: dict | None) -> dict:
                                                  if m["elle_penche_axialement"]]}
 
 
-def mesurer(matieres=MATIERES, rayons_mm=RAYONS_MM, caps=CAPS, pas_max: int = PAS_MAX,
+def mesurer(matieres=MATIERES, departs: int = DEPARTS, caps=CAPS, pas_max: int = PAS_MAX,
             course: Path = LA_COURSE_DU_ROULEAU) -> dict:
-    d = lenquete(matieres, rayons_mm, caps, pas_max)
+    d = lenquete(matieres, departs, caps, pas_max)
     return {"enquete": d, "juger": juger(d, ce_que_le_rouleau_a_rendu(course))}
 
 
@@ -283,8 +323,7 @@ def afficher(r: dict) -> None:
     print(f"{marque} contrôle — sur la spirale NUE il n'y a PAS de penchant : glissement axial "
           f"{c['glissement_axial_median_um']} µm, parts {c['axial_median']} et "
           f"{c['azimutal_median']} sur {c['decidables']} marches")
-    for titre, groupes in (("par matière", j["par_matiere"]), ("par rayon", j["par_rayon"]),
-                           ("par cap", j["par_cap"])):
+    for titre, groupes in (("par matière", j["par_matiere"]), ("par cap", j["par_cap"])):
         print(f"\n   — {titre} —")
         print(f"   {'':>22} | {'marches':>7} | {'axial':>7} | {'azimutal':>8} | "
               f"{'gliss. µm':>9} | {'cohér.':>7} | {'axial/azim/=':>13}")
@@ -331,9 +370,9 @@ def _marche(axial: float, azimutal: float, gliss: float = 10.0, coh: float = 0.5
                                 "coherence_tangentielle": coh})
 
 
-def _case(nom: str, m: dict | None, rayon: float = 10.0, cap: float = 0.0) -> dict:
-    return {"nom": nom, "ecrasement": 0.0, "amplitude_um": 0.0, "rayon_mm": rayon,
-            "memoire_du_cap": cap, "marche": m}
+def _case(nom: str, m: dict | None, angle: float = 0.0, cap: float = 0.0) -> dict:
+    return {"nom": nom, "ecrasement": 0.0, "amplitude_um": 0.0, "rayon_mm": RAYON_MM,
+            "angle_du_depart_deg": angle, "memoire_du_cap": cap, "marche": m}
 
 
 def verifier() -> int:
@@ -378,7 +417,8 @@ def verifier() -> int:
       "rien à comparer n'est pas un penchant")
 
     print("\n— la comparaison EXIGE les deux côtés, ET CAP PAR CAP —")
-    d_ = {"decidable": True, "rayons_mm": [10.0], "caps": [0.0, 0.75], "pas_max": 20,
+    d_ = {"decidable": True, "rayon_mm": 10.0, "departs": 1, "caps": [0.0, 0.75],
+          "pas_max": 20,
           "cases": [_case(_nom(*LA_SPIRALE_NUE), _marche(0.0, 0.002, gliss=0.0, coh=1.0)),
                     _case(_nom(*MATIERES[-1]), _marche(0.318, 0.340, gliss=55.0, coh=0.332),
                           cap=0.0),
@@ -438,7 +478,7 @@ def verifier() -> int:
       "un glissement sur une matière sans penchant mesurerait le marcheur")
 
     print("\n— `mesurer`, `reagreger`, `afficher` —")
-    petite = mesurer(matieres=(LA_SPIRALE_NUE, MATIERES[-1]), rayons_mm=(10.0,), caps=(0.75,),
+    petite = mesurer(matieres=(LA_SPIRALE_NUE, MATIERES[-1]), departs=2, caps=(0.75,),
                      pas_max=12)
     jp = petite["juger"]
     v("⭐⭐⭐⭐ sur la spirale NUE la mesure réelle ne trouve AUCUN glissement",
@@ -447,6 +487,25 @@ def verifier() -> int:
     # ⚠⚠⚠ ET SUR LA MATIERE CALIBREE LES DEUX PARTS DOIVENT EXISTER REELLEMENT. Sans ce controle
     # la batterie ne verifierait jamais sur donnees reelles que le marcheur avance.
     cal = next(m for m in jp["par_matiere"] if m["nom"] == _nom(*MATIERES[-1]))
+    # ⚠⚠⚠ LE CONTROLE QUI MANQUAIT. La premiere version de cette tranche partait d'un point situe
+    # a 0,28-0,49 feuille de la feuille la plus proche sur TOUTES les matieres ecrasees, parce
+    # qu'elle avait copie un recalage ecrit pour une spirale RONDE. Les nombres qui en sortaient
+    # etaient parfaitement plausibles, et faux.
+    a_ = jp["le_controle_de_la_spirale_nue"]["assise"]
+    # ⚠⚠⚠ L'ASSERTION PORTE SUR LES NOMBRES, PAS SUR LE VERDICT DU MODULE. Une premiere version
+    # lisait `ils_partent_sur_une_feuille`, donc figer ce drapeau a `True` la faisait passer : une
+    # verification qui ne peut pas echouer. Ce qui est exige ici est que le pire ecart MESURE soit
+    # sous la borne, et que le drapeau soit d'accord avec lui.
+    v("⭐⭐⭐⭐ sur données réelles, le marcheur part SUR une feuille",
+      a_["pire_ecart_en_feuilles"] is not None
+      and a_["pire_ecart_en_feuilles"] < a_["ce_quun_voxel_exprime_en_feuilles"]
+      and a_["ils_partent_sur_une_feuille"] is True,
+      f"pire écart {a_['pire_ecart_en_feuilles']} feuille contre "
+      f"{a_['ce_quun_voxel_exprime_en_feuilles']} qu'un voxel exprime, sur "
+      f"{a_['departs_mesures']} départs")
+    v("⭐⭐⭐ ... et la borne est DÉRIVÉE du voxel, jamais choisie",
+      a_["ce_quun_voxel_exprime_en_feuilles"] == round(_VOXEL() / _PAS(), 6),
+      "en dessous, le lecteur ne distingue pas ce départ de la feuille elle-même")
     v("⭐⭐⭐⭐ sur la matière calibrée, le marcheur avance et les deux parts existent",
       cal["decidable"] and cal["decidables"] > 0 and cal["glissement_axial_median_um"] > 0.0,
       f"{cal['decidables']} marches, {cal['axial_median']} axial contre "
