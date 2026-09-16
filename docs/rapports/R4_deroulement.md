@@ -1718,6 +1718,35 @@ bouclant proprement le tour — les deux mâchoires atteignent la même normale 
 exige l'impossible n'est pas un contrôle ; le compte des départs identiques est publié à côté, comme
 une mesure et non comme un verdict.
 
+**`169` · 2026-09-16 · la fixture penche-t-elle du même côté que le rouleau**
+`R4-F87` établit que l'écrasement mesuré **plus** un froissement approche le rouleau à **5,5 %** sur
+**trois** grandeurs : le rapport des axes, le penchant et la cohérence. ⭐⭐⭐⭐ **La DIRECTION de ce
+penchant n'en fait pas partie** — or `R4-F79` mesure sur le vrai rouleau que le penchant est plus
+**axial** qu'azimutal (**0,334** contre **0,193**) et que le marcheur glisse de **43,2 µm** le long
+de la longueur du rouleau à chaque pas. Toute la chaîne `161`–`168` tourne sur cette fixture, et
+personne n'avait vérifié qu'elle penche du même côté. ⚠⚠ La mesure existait déjà : `penchant()`, la
+fonction qui a produit `R4-F79`, publie exactement ces deux parts, et le bras fixture de son module
+ne publiait qu'une cohérence. ✗ **NON, ET ELLE NE LE SUIT PAS NON PLUS.** Sur la matière calibrée la
+fixture rend **0,222** de part axiale contre **0,235** d'azimutale — elle penche **azimutalement** —
+et le compte des marches est **3 contre 3**, donc rien de systématique ; sa cohérence vaut **0,558**
+contre **0,925** — `R4-F168`. ⚠⚠ **Elle glisse pourtant AUTANT** : **50,5 µm** par pas contre
+**43,2**. Glisser autant n'est pas glisser pareil, et c'est exactement la distinction que la
+cohérence existe pour mesurer. ⭐⭐⭐ **Second contrôle, exact** : l'**écrasement seul** rend **0,0 µm**
+de glissement axial, comme la spirale nue — le glissement ne vient donc pas de l'aplatissement mais
+du **froissement**, et il croît avec lui : **19,6**, **24,6**, **50,5 µm** — `R4-F169`. ⭐⭐⭐⭐ **CE QUE
+CELA BORNE** : toute conclusion tirée de la fixture sur le comportement **axial** du rouleau, et
+`168` en particulier — la mâchoire en croix y a été réfutée sur une matière qui ne penche pas
+axialement, donc sur une matière qui n'a pas le défaut pour lequel la croix existe. ⭐⭐⭐ **Et ce que
+cela n'ôte pas** : `R4-F87` calibre trois autres grandeurs à 5,5 %, et la propriété que `161`–`167`
+exploitent est ailleurs — une pose qui se contredit se contredit vraiment sur cette matière. Ce qui
+est borné est la lecture **axiale**, pas la lecture de la **contradiction**. ⚠⚠⚠ **Et un défaut de ce
+module a été trouvé par une sonde, pas par une relecture** : `afficher` imprimait la part du
+**rouleau** sous l'étiquette **fixture**, et la batterie passait **des deux côtés** — aucun contrôle
+n'attrape un nombre juste sous un mauvais nom. Ce qui l'attrape est de changer la valeur de la
+fixture et d'**exiger que la sortie change** ; le contrôle existe désormais dans le module et dans la
+figure. ⚠ Les chiffres du vrai rouleau sont **relus** dans la mesure stockée et jamais recalculés, et
+le jugement **refuse de conclure** si elle est absente.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

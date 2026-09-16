@@ -3049,6 +3049,63 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if pl.get(cle) is not None:
                     ajoute(nom, pl[cle], dec, cap.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 169 : LA FIXTURE PENCHE-T-ELLE DU MEME COTE QUE LE ROULEAU.
+    # (1) Une part axiale ne voyage jamais sans son AZIMUTALE : c'est leur comparaison qui porte
+    # l'enonce, et une seule se lirait comme un niveau.
+    # (2) Une part de la FIXTURE ne voyage jamais sans celle du ROULEAU : c'est une comparaison
+    # entre deux matieres, et un seul cote en ferait une affirmation sur une matiere.
+    # (3) Et un GLISSEMENT ne voyage jamais sans la COHERENCE : glisser autant n'est pas glisser
+    # pareil, et c'est toute la tranche.
+    # ⚠⚠ LES DECIMALES SONT CELLES DU PRODUCTEUR, JAMAIS COMPLETEES : elles sont derivees de la
+    # valeur, parce qu'une part vaut 0,0 ici et 0,222 la.
+    fp = _source(racine, "la_fixture_penche_t_elle_du_meme_cote.json")
+    if fp.exists():
+        d = json.loads(fp.read_text())
+        j_ = d.get("juger", {})
+
+        def _dec169(x) -> int:
+            t = repr(float(x))
+            return len(t.split(".")[1]) if "." in t else 0
+
+        if j_.get("decidable"):
+            c_ = j_.get("le_controle_de_la_spirale_nue", {})
+            if c_.get("decidables") is not None:
+                ajoute("marches du controle de 169", int(c_["decidables"]), 0, fp.name)
+            for cle, nom in (("axial_median", "part axiale du controle"),
+                             ("azimutal_median", "part azimutale du controle"),
+                             ("glissement_axial_median_um", "glissement axial du controle")):
+                if c_.get(cle) is not None:
+                    ajoute(f"{nom} de 169", float(c_[cle]), _dec169(c_[cle]), fp.name)
+            cp = j_.get("la_comparaison_au_rouleau") or {}
+            for grandeur, nom in (("part_axiale", "part axiale"),
+                                  ("part_azimutale", "part azimutale"),
+                                  ("glissement_axial_um", "glissement axial"),
+                                  ("coherence", "coherence")):
+                paire = cp.get(grandeur) or {}
+                for cote, lisible in (("la_fixture", "de la fixture calibree"),
+                                      ("le_rouleau", "du vrai rouleau")):
+                    if paire.get(cote) is not None:
+                        ajoute(f"{nom} {lisible} de 169", float(paire[cote]),
+                               _dec169(paire[cote]), fp.name)
+            # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : il donne le tableau par MATIERE en
+            # entier, jamais les croisements par rayon ni par cap.
+            for groupe in j_.get("par_matiere", []):
+                if not groupe.get("decidable"):
+                    continue
+                q = f"sur {groupe['nom']} de 169"
+                for cle, nom in (("decidables", "marches"),
+                                 ("penchent_axialement", "marches qui penchent axialement"),
+                                 ("penchent_azimutalement",
+                                  "marches qui penchent azimutalement")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", int(groupe[cle]), 0, fp.name)
+                for cle, nom in (("axial_median", "part axiale"),
+                                 ("azimutal_median", "part azimutale"),
+                                 ("glissement_axial_median_um", "glissement axial"),
+                                 ("coherence_median", "coherence")):
+                    if groupe.get(cle) is not None:
+                        ajoute(f"{nom} {q}", float(groupe[cle]), _dec169(groupe[cle]), fp.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 168 : LA CROIX PAIE-T-ELLE QUAND LE MARCHEUR ECOUTE.
     # (1) Un COUT ne voyage jamais sans les PAS sur lesquels il est pris : une croix qui meurt tot
     # lit moins en TOTAL, donc un total ferait passer une marche ecourtee pour une marche econome.

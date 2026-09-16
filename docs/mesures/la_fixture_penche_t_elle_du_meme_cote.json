@@ -1,0 +1,739 @@
+{
+ "enquete": {
+  "decidable": true,
+  "cases": [
+   {
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "rayon_mm": 6.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.003,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "rayon_mm": 6.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.003,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "rayon_mm": 10.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.002,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "rayon_mm": 10.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.002,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "rayon_mm": 14.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.002,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale nue",
+    "ecrasement": 0.0,
+    "amplitude_um": 0.0,
+    "rayon_mm": 14.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.002,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "rayon_mm": 6.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.023,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "rayon_mm": 6.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.014,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "rayon_mm": 10.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.01,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "rayon_mm": 10.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.008,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "rayon_mm": 14.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.006,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée",
+    "ecrasement": 0.2782,
+    "amplitude_um": 0.0,
+    "rayon_mm": 14.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.0,
+     "azimutal": 0.005,
+     "glissement_axial_um": 0.0,
+     "coherence": 1.0,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "rayon_mm": 6.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.117,
+     "azimutal": 0.082,
+     "glissement_axial_um": 20.9,
+     "coherence": 0.629,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "rayon_mm": 6.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.134,
+     "azimutal": 0.059,
+     "glissement_axial_um": 22.2,
+     "coherence": 0.902,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "rayon_mm": 10.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.116,
+     "azimutal": 0.117,
+     "glissement_axial_um": 18.8,
+     "coherence": 0.561,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "rayon_mm": 10.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.123,
+     "azimutal": 0.061,
+     "glissement_axial_um": 20.4,
+     "coherence": 0.583,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "rayon_mm": 14.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.111,
+     "azimutal": 0.094,
+     "glissement_axial_um": 18.4,
+     "coherence": 0.624,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "ecrasement": 0.0,
+    "amplitude_um": 42.4,
+    "rayon_mm": 14.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.061,
+     "azimutal": 0.087,
+     "glissement_axial_um": 11.1,
+     "coherence": 0.775,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "rayon_mm": 6.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.145,
+     "azimutal": 0.125,
+     "glissement_axial_um": 31.4,
+     "coherence": 0.621,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "rayon_mm": 6.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.087,
+     "azimutal": 0.147,
+     "glissement_axial_um": 17.9,
+     "coherence": 0.94,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "rayon_mm": 10.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.186,
+     "azimutal": 0.137,
+     "glissement_axial_um": 41.9,
+     "coherence": 0.698,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "rayon_mm": 10.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.071,
+     "azimutal": 0.076,
+     "glissement_axial_um": 15.9,
+     "coherence": 0.52,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "rayon_mm": 14.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.191,
+     "azimutal": 0.126,
+     "glissement_axial_um": 42.7,
+     "coherence": 0.789,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 42.4,
+    "rayon_mm": 14.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.085,
+     "azimutal": 0.083,
+     "glissement_axial_um": 17.9,
+     "coherence": 0.565,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "rayon_mm": 6.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.318,
+     "azimutal": 0.291,
+     "glissement_axial_um": 65.8,
+     "coherence": 0.332,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "rayon_mm": 6.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.17,
+     "azimutal": 0.179,
+     "glissement_axial_um": 36.0,
+     "coherence": 0.67,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "rayon_mm": 10.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.248,
+     "azimutal": 0.34,
+     "glissement_axial_um": 55.0,
+     "coherence": 0.447,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "rayon_mm": 10.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.19,
+     "azimutal": 0.117,
+     "glissement_axial_um": 44.7,
+     "coherence": 0.696,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "rayon_mm": 14.0,
+    "memoire_du_cap": 0.0,
+    "marche": {
+     "pas": 40,
+     "axial": 0.396,
+     "azimutal": 0.451,
+     "glissement_axial_um": 80.9,
+     "coherence": 0.142,
+     "penche_axialement": false,
+     "penche_azimutalement": true,
+     "les_deux_parts_sont_egales": false
+    }
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "ecrasement": 0.2782,
+    "amplitude_um": 100.0,
+    "rayon_mm": 14.0,
+    "memoire_du_cap": 0.75,
+    "marche": {
+     "pas": 40,
+     "axial": 0.195,
+     "azimutal": 0.106,
+     "glissement_axial_um": 45.9,
+     "coherence": 0.911,
+     "penche_axialement": true,
+     "penche_azimutalement": false,
+     "les_deux_parts_sont_egales": false
+    }
+   }
+  ],
+  "rayons_mm": [
+   6.0,
+   10.0,
+   14.0
+  ],
+  "caps": [
+   0.0,
+   0.75
+  ],
+  "pas_max": 40
+ },
+ "juger": {
+  "decidable": true,
+  "par_matiere": [
+   {
+    "nom": "spirale nue",
+    "cases": 6,
+    "decidable": true,
+    "marches": 6,
+    "decidables": 6,
+    "penchent_axialement": 0,
+    "penchent_azimutalement": 6,
+    "parts_egales": 0,
+    "axial_median": 0.0,
+    "azimutal_median": 0.002,
+    "coherence_median": 1.0,
+    "glissement_axial_median_um": 0.0,
+    "elle_penche_axialement": false
+   },
+   {
+    "nom": "spirale écrasée",
+    "cases": 6,
+    "decidable": true,
+    "marches": 6,
+    "decidables": 6,
+    "penchent_axialement": 0,
+    "penchent_azimutalement": 6,
+    "parts_egales": 0,
+    "axial_median": 0.0,
+    "azimutal_median": 0.009,
+    "coherence_median": 1.0,
+    "glissement_axial_median_um": 0.0,
+    "elle_penche_axialement": false
+   },
+   {
+    "nom": "spirale froissée 42.4 µm",
+    "cases": 6,
+    "decidable": true,
+    "marches": 6,
+    "decidables": 6,
+    "penchent_axialement": 4,
+    "penchent_azimutalement": 2,
+    "parts_egales": 0,
+    "axial_median": 0.117,
+    "azimutal_median": 0.084,
+    "coherence_median": 0.627,
+    "glissement_axial_median_um": 19.6,
+    "elle_penche_axialement": false
+   },
+   {
+    "nom": "spirale écrasée et froissée 42.4 µm",
+    "cases": 6,
+    "decidable": true,
+    "marches": 6,
+    "decidables": 6,
+    "penchent_axialement": 4,
+    "penchent_azimutalement": 2,
+    "parts_egales": 0,
+    "axial_median": 0.116,
+    "azimutal_median": 0.126,
+    "coherence_median": 0.659,
+    "glissement_axial_median_um": 24.6,
+    "elle_penche_axialement": false
+   },
+   {
+    "nom": "spirale écrasée et froissée 100 µm",
+    "cases": 6,
+    "decidable": true,
+    "marches": 6,
+    "decidables": 6,
+    "penchent_axialement": 3,
+    "penchent_azimutalement": 3,
+    "parts_egales": 0,
+    "axial_median": 0.222,
+    "azimutal_median": 0.235,
+    "coherence_median": 0.558,
+    "glissement_axial_median_um": 50.5,
+    "elle_penche_axialement": false
+   }
+  ],
+  "par_rayon": [
+   {
+    "nom": "rayon_mm 6.0",
+    "cases": 10,
+    "decidable": true,
+    "marches": 10,
+    "decidables": 10,
+    "penchent_axialement": 4,
+    "penchent_azimutalement": 6,
+    "parts_egales": 0,
+    "axial_median": 0.102,
+    "azimutal_median": 0.071,
+    "coherence_median": 0.921,
+    "glissement_axial_median_um": 19.4,
+    "elle_penche_axialement": false
+   },
+   {
+    "nom": "rayon_mm 10.0",
+    "cases": 10,
+    "decidable": true,
+    "marches": 10,
+    "decidables": 10,
+    "penchent_axialement": 3,
+    "penchent_azimutalement": 7,
+    "parts_egales": 0,
+    "axial_median": 0.093,
+    "azimutal_median": 0.069,
+    "coherence_median": 0.697,
+    "glissement_axial_median_um": 17.4,
+    "elle_penche_axialement": false
+   },
+   {
+    "nom": "rayon_mm 14.0",
+    "cases": 10,
+    "decidable": true,
+    "marches": 10,
+    "decidables": 10,
+    "penchent_axialement": 4,
+    "penchent_azimutalement": 6,
+    "parts_egales": 0,
+    "axial_median": 0.073,
+    "azimutal_median": 0.085,
+    "coherence_median": 0.85,
+    "glissement_axial_median_um": 14.5,
+    "elle_penche_axialement": false
+   }
+  ],
+  "par_cap": [
+   {
+    "nom": "memoire_du_cap 0.0",
+    "cases": 15,
+    "decidable": true,
+    "marches": 15,
+    "decidables": 15,
+    "penchent_axialement": 6,
+    "penchent_azimutalement": 9,
+    "parts_egales": 0,
+    "axial_median": 0.116,
+    "azimutal_median": 0.094,
+    "coherence_median": 0.698,
+    "glissement_axial_median_um": 18.8,
+    "elle_penche_axialement": false
+   },
+   {
+    "nom": "memoire_du_cap 0.75",
+    "cases": 15,
+    "decidable": true,
+    "marches": 15,
+    "decidables": 15,
+    "penchent_axialement": 5,
+    "penchent_azimutalement": 10,
+    "parts_egales": 0,
+    "axial_median": 0.071,
+    "azimutal_median": 0.061,
+    "coherence_median": 0.911,
+    "glissement_axial_median_um": 15.9,
+    "elle_penche_axialement": false
+   }
+  ],
+  "tout": {
+   "nom": "tout",
+   "cases": 30,
+   "decidable": true,
+   "marches": 30,
+   "decidables": 30,
+   "penchent_axialement": 11,
+   "penchent_azimutalement": 19,
+   "parts_egales": 0,
+   "axial_median": 0.086,
+   "azimutal_median": 0.079,
+   "coherence_median": 0.846,
+   "glissement_axial_median_um": 17.9,
+   "elle_penche_axialement": false
+  },
+  "le_controle_de_la_spirale_nue": {
+   "nom": "spirale nue",
+   "axial_median": 0.0,
+   "azimutal_median": 0.002,
+   "glissement_axial_median_um": 0.0,
+   "decidables": 6,
+   "il_ne_penche_pas": true
+  },
+  "la_comparaison_au_rouleau": {
+   "nom": "spirale écrasée et froissée 100 µm",
+   "le_rouleau": {
+    "source": "le_chemin_penche_t_il_ou_serpente_t_il.json",
+    "nom": "le rouleau",
+    "axial_absolu_median": 0.334,
+    "azimutal_absolu_median": 0.193,
+    "glissement_axial_median_um": 43.2,
+    "coherence_mediane": 0.925
+   },
+   "le_cote_saccorde": false,
+   "part_axiale": {
+    "la_fixture": 0.222,
+    "le_rouleau": 0.334
+   },
+   "part_azimutale": {
+    "la_fixture": 0.235,
+    "le_rouleau": 0.193
+   },
+   "glissement_axial_um": {
+    "la_fixture": 50.5,
+    "le_rouleau": 43.2
+   },
+   "coherence": {
+    "la_fixture": 0.558,
+    "le_rouleau": 0.925
+   },
+   "le_suivi_saccorde": false
+  },
+  "matieres_qui_penchent_axialement": []
+ }
+}
