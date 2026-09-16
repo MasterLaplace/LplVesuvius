@@ -3123,6 +3123,83 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if m_.get("marches_axiales") is not None:
                     ajoute(f"marches axiales {q}", int(m_["marches_axiales"]), 0, vp.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 172 : L'ANGLE PUBLIE EST-IL CELUI DES FIBRES.
+    # (1) Un angle RENDU ne voyage jamais sans les CRETES dont il est l'ecart : c'est leur
+    # comparaison qui porte l'enonce, et l'angle seul se lirait comme une orientation.
+    # (2) Un ecart AVANT conversion ne voyage jamais sans celui d'APRES : c'est le couple qui dit
+    # que le nom est faux et que la conversion repare.
+    # (3) Et un compte d'angles absolus ne voyage jamais sans le compte de bascules INCHANGEES :
+    # l'un dit ce qui est atteint, l'autre ce qui ne l'est pas, et l'un sans l'autre ferait lire
+    # soit qu'il n'y a rien a reprendre, soit qu'il faut refaire les campagnes.
+    # ⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE : le module mesure les six obliques une par
+    # une, le document n'en publie que l'intervalle.
+    fib = _source(racine, "langle_publie_est_il_celui_des_fibres.json")
+    if fib.exists():
+        d = json.loads(fib.read_text())
+
+        def _dec172(x) -> int:
+            """Les decimales DU PRODUCTEUR, et zero quand la valeur est entiere.
+
+            ⚠⚠ Un angle qui sort EXACT — 45, 90, 135 — est ecrit « 135° » par le document, pas
+            « 135,0° ». Exiger la decimale serait la COMPLETER, ce que la regle du depot interdit
+            dans l'autre sens et qui reviendrait ici a demander au document d'ecrire un chiffre que
+            la mesure n'a pas.
+            """
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for x in ((d.get("le_motif") or {}).get("lignes") or []):
+            q = f"a cretes {x['cretes_deg']} de 172"
+            for cle, nom in (("angle_rendu_deg", "angle rendu"),
+                             ("ecart_aux_cretes_deg", "ecart aux cretes"),
+                             ("les_fibres_lues_deg", "fibres lues")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(x[cle]), _dec172(x[cle]), fib.name, unites=("°",))
+        ob = d.get("les_obliques") or {}
+        for cle, nom in (("ecart_min_deg", "plus petit ecart des obliques"),
+                         ("ecart_max_deg", "plus grand ecart des obliques")):
+            if ob.get(cle) is not None:
+                ajoute(f"{nom} de 172", float(ob[cle]), _dec172(ob[cle]), fib.name, unites=("°",))
+        fx = d.get("la_fixture") or {}
+        for x in (fx.get("par_pli") or []):
+            q = f"du pli {x['pli']} de 172"
+            for cle, nom in (("angle_attendu_deg", "angle attendu"),
+                             ("angle_rendu_deg", "angle rendu"),
+                             ("ecart_a_lattendu_deg", "ecart a l attendu"),
+                             ("les_fibres_lues_deg", "fibres lues"),
+                             ("ecart_des_fibres_a_lattendu_deg",
+                              "ecart des fibres a l attendu")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(x[cle]), _dec172(x[cle]), fib.name, unites=("°",))
+        for cle, nom in (("ecart_entre_les_plis_deg", "ecart entre les plis"),
+                         ("ecart_entre_les_plis_apres_conversion_deg",
+                          "ecart entre les plis apres conversion")):
+            if fx.get(cle) is not None:
+                ajoute(f"{nom} de 172", float(fx[cle]), _dec172(fx[cle]), fib.name, unites=("°",))
+        po = d.get("la_portee") or {}
+        for x in (po.get("fichiers") or []):
+            if not x.get("present"):
+                continue
+            for cle, nom in (("segments", "segments"), ("courbes", "courbes"),
+                             ("angles_absolus", "angles absolus")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} de {x['fichier']} de 172", int(x[cle]), 0, fib.name)
+        for cle, nom in (("segments", "segments"), ("courbes", "courbes"),
+                         ("angles_absolus_publies", "angles absolus publies"),
+                         ("bascules_relues", "bascules relues"),
+                         ("bascules_inchangees", "bascules inchangees")):
+            if po.get(cle) is not None:
+                ajoute(f"{nom} de 172", int(po[cle]), 0, fib.name)
+        inv = d.get("linvariance") or {}
+        if inv.get("paires") is not None:
+            ajoute("paires tirees de 172", int(inv["paires"]), 0, fib.name)
+        if inv.get("pire_ecart_apres_le_quart_de_tour") is not None:
+            ajoute("pire ecart apres le quart de tour de 172",
+                   float(inv["pire_ecart_apres_le_quart_de_tour"]), 0, fib.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 171 : LE CAP AGIT-IL SUR LES DEUX AXES.
     # (1) Un rapport du cap ne voyage jamais sans l'AUTRE LECTURE du meme rapport : c'est l'ecart
     # entre la lecture appariee et celle qui ne l'est pas qui est le resultat, et une seule des

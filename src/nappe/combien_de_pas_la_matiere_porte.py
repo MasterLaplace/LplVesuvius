@@ -1169,6 +1169,92 @@ class VolumeFabriqueEnSpiraleVrillee(VolumeFabriqueEnSpiraleFroissee):
         return float(abs(self.vrillage) / np.hypot(1.0, self.vrillage))
 
 
+class VolumeFabriqueAFibres(VolumeFabrique):
+    """Une pile dont chaque feuille est faite de DEUX PLIS aux fibres perpendiculaires.
+
+    ⭐⭐⭐⭐ POURQUOI ELLE EXISTE. `14` §3 mesure sur le vrai rouleau, a 2,4 µm, que l'orientation
+    dominante NE BASCULE PAS en traversant une feuille — elle reste entre 90 et 97° sur 109
+    couches — et il laisse TROIS explications non departagees : le contraste entre les deux plis
+    trop faible, la fenetre mal centree sur la feuille, ou la fenetre plus courte qu'une epaisseur
+    de feuille. Aucune ne peut etre tranchee sur une matiere dont on ignore la reponse. Ici la
+    reponse est CHOISIE, donc l'instrument peut ECHOUER et on voit a quoi.
+
+    ⚠⚠ CE QU'ELLE NE PROUVE PAS, ET IL FAUT L'ECRIRE : qu'un vrai papyrus ait cette structure a
+    cette echelle. Elle repond a « si la matiere l'avait, l'instrument la verrait-il, et sous
+    quelles conditions », ce qui est une question sur l'INSTRUMENT. Prendre sa reponse pour une
+    propriete du rouleau serait lire une fixture comme une mesure.
+
+    ⚠ Les fibres d'un pli sont des CRETES paralleles : la matiere varie donc le long de la
+    perpendiculaire aux fibres et pas le long des fibres. C'est cette convention qui fait que le
+    tenseur de structure rend l'angle DES FIBRES et non son complement, et la batterie le verifie
+    plutot que de l'affirmer.
+
+    ⚠⚠ `plis_par_feuille=1` est le CONTROLE VIDE de toute cette famille : une feuille d'un seul
+    pli n'a aucune bascule a lire, donc un instrument qui en rapporterait une mesurerait sa propre
+    fenetre.
+    """
+
+    def __init__(self, pas_um: float, longueur_de_fibre_um: float = 30.0,
+                 contraste_des_fibres: float = 0.5, angle_du_premier_pli_deg: float = 0.0,
+                 plis_par_feuille: int = 2, feuilles_independantes: bool = False,
+                 graine_des_feuilles: int = 7, **kw) -> None:
+        super().__init__(pas_um, **kw)
+        self.longueur_de_fibre_um = float(longueur_de_fibre_um)
+        self.contraste_des_fibres = float(contraste_des_fibres)
+        self.angle_du_premier_pli_deg = float(angle_du_premier_pli_deg)
+        self.plis_par_feuille = int(plis_par_feuille)
+        self.feuilles_independantes = bool(feuilles_independantes)
+        # ⚠ Une TABLE d'angles, indexee par le numero de feuille modulo sa longueur : un voxel
+        # rend ainsi toujours la meme valeur, comme le bruit porte par la matiere. Une suite
+        # LINEAIRE (feuille x 37°) aurait ete reproductible aussi, et elle aurait donne au
+        # detecteur une regularite a exploiter que le vrai papyrus n'a pas.
+        self._angles = np.random.default_rng(int(graine_des_feuilles)).uniform(0.0, 180.0, 4096)
+        n = self.normale
+        a = np.array([1.0, 0.0, 0.0])
+        if abs(float(n @ a)) > 0.9:
+            a = np.array([0.0, 1.0, 0.0])
+        e1 = np.cross(n, a)
+        self.e1 = e1 / np.linalg.norm(e1)
+        self.e2 = np.cross(n, self.e1)
+
+    def numero_de_feuille(self, p: np.ndarray) -> np.ndarray:
+        """Le numero de la feuille sous ces points, et le rang du pli dedans."""
+        proj = self._projection_um(p) / self.pas_um
+        feuille = np.floor(proj)
+        return feuille, (proj - feuille)
+
+    def angle_du_pli_deg(self, feuille: np.ndarray, dans_la_feuille: np.ndarray) -> np.ndarray:
+        """L'angle des fibres, en degres modulo 180 — la reponse que l'instrument doit retrouver.
+
+        ⚠ Les plis se partagent l'epaisseur en parts EGALES et leurs angles sont equirepartis sur
+        180° : deux plis font donc 90° d'ecart, ce qui est l'enonce de `14` §1.
+        """
+        base = (self._angles[np.asarray(feuille, dtype=np.int64) % self._angles.size]
+                if self.feuilles_independantes else self.angle_du_premier_pli_deg)
+        rang = np.floor(np.clip(dans_la_feuille, 0.0, 1.0 - 1e-12) * self.plis_par_feuille)
+        return (base + rang * (180.0 / self.plis_par_feuille)) % 180.0
+
+    def lire(self, points: np.ndarray, fils: int = 1) -> np.ndarray:
+        del fils
+        p = np.asarray(points, dtype=np.float64).reshape(-1, 3)
+        self.lectures += len(p)
+        proj = self._projection_um(p)
+        v = 100.0 + 40.0 * np.cos(2 * np.pi * proj / self.pas_um)
+        if self.contraste_des_fibres:
+            feuille = np.floor(proj / self.pas_um)
+            th = np.deg2rad(self.angle_du_pli_deg(feuille, proj / self.pas_um - feuille))
+            q = p * self.voxel_um
+            u, w = q @ self.e1, q @ self.e2
+            # ⚠ La modulation porte sur la PERPENDICULAIRE aux fibres : une crete court LE LONG
+            # d'une fibre, donc c'est en travers que la matiere varie.
+            s = -np.sin(th) * u + np.cos(th) * w
+            v = v + self.contraste_des_fibres * 40.0 * np.cos(
+                2 * np.pi * s / self.longueur_de_fibre_um)
+        if self.bruit:
+            v = v + self._tirage(p)
+        return v
+
+
 def plafond_pour_traverser(rayon_min_mm: float, rayon_max_mm: float,
                            espacement_um: float) -> int:
     """Combien de pas il faut pour traverser toute l'etendue radiale d'une campagne.
@@ -2379,6 +2465,60 @@ def verifier() -> int:
       np.allclose(deux.phase(pts_sp) - sp_lisse.phase(pts_sp),
                   (seule_e.phase(pts_sp) - sp_lisse.phase(pts_sp))
                   + (seule_f.phase(pts_sp) - sp_lisse.phase(pts_sp)), atol=1e-9))
+
+    # ---- ⭐⭐⭐⭐ LA PILE A DEUX PLIS : la direction des fibres est CHOISIE, donc elle peut etre
+    # ratee. Ces controles portent sur la FIXTURE ; ce que l'instrument en lit est mesure par
+    # `langle_publie_est_il_celui_des_fibres`.
+    import combien_dinterstices_traverses as C0  # noqa: PLC0415
+    pts_fb = np.array([[2000.0 + i * 0.7, 2000.0 + i * 1.3, 2000.0 + i * 0.9]
+                       for i in range(64)])
+    nue = VolumeFabrique(C0.PAS_UM, forme=(4000, 4000, 4000))
+    sans = VolumeFabriqueAFibres(C0.PAS_UM, contraste_des_fibres=0.0, forme=(4000, 4000, 4000))
+    # ⚠⚠ L'AJOUT DOIT ETRE ADDITIF : a contraste nul la pile a fibres EST la pile de base, sinon
+    # toute mesure faite dessus melangerait la texture et un changement de geometrie.
+    v("⚠⚠ à contraste nul, la pile à fibres rend EXACTEMENT la pile de base",
+      np.allclose(sans.lire(pts_fb), nue.lire(pts_fb), atol=0.0))
+    avec = VolumeFabriqueAFibres(C0.PAS_UM, contraste_des_fibres=0.5, longueur_de_fibre_um=30.0,
+                                 forme=(4000, 4000, 4000))
+    v("... et un contraste non nul, lui, change la lecture",
+      not np.allclose(avec.lire(pts_fb), nue.lire(pts_fb), atol=1e-9))
+    # ⚠ Un voxel rend toujours la meme valeur : la lecon de `VolumeFabrique` vaut aussi ici.
+    v("un voxel rend toujours la même valeur, quel que soit l'ordre des lectures",
+      np.allclose(avec.lire(pts_fb), avec.lire(pts_fb[::-1])[::-1], atol=0.0))
+    # ⭐⭐⭐⭐ LA CONVENTION QUI DECIDE : une crete court LE LONG d'une fibre, donc la matiere est
+    # CONSTANTE le long des fibres et oscille EN TRAVERS. Une fixture montee a l'envers ferait lire
+    # a l'instrument la perpendiculaire de ce qu'elle croit porter, et la tranche `172` mesurerait
+    # alors le montage au lieu de la formule.
+    th_fb = np.deg2rad(37.0)
+    droit = VolumeFabriqueAFibres(C0.PAS_UM, contraste_des_fibres=0.5, longueur_de_fibre_um=30.0,
+                                  angle_du_premier_pli_deg=37.0, plis_par_feuille=1,
+                                  forme=(4000, 4000, 4000))
+    centre_fb = np.array([2000.0, 2000.0, 2000.0])
+    le_long = np.cos(th_fb) * droit.e1 + np.sin(th_fb) * droit.e2
+    en_travers = -np.sin(th_fb) * droit.e1 + np.cos(th_fb) * droit.e2
+    pas_fb = np.arange(-20, 21)[:, None] * (droit.longueur_de_fibre_um / 4.0 / droit.voxel_um)
+    v("⭐⭐⭐⭐ la matière est CONSTANTE le long des fibres et oscille EN TRAVERS",
+      float(np.ptp(droit.lire(centre_fb + pas_fb * le_long))) < 1e-9
+      and float(np.ptp(droit.lire(centre_fb + pas_fb * en_travers))) > 10.0,
+      f"le long {float(np.ptp(droit.lire(centre_fb + pas_fb * le_long))):.2e}, "
+      f"en travers {float(np.ptp(droit.lire(centre_fb + pas_fb * en_travers))):.1f}")
+    # ⚠⚠ Les deux plis sont a un quart de tour, et c'est l'enonce de `14` §1.
+    f_fb = np.zeros(4)
+    v("⚠⚠ les deux plis d'une feuille sont à 90° l'un de l'autre",
+      abs(float(avec.angle_du_pli_deg(f_fb, np.array([0.1, 0.4, 0.6, 0.9]))[0]
+                - avec.angle_du_pli_deg(f_fb, np.array([0.1, 0.4, 0.6, 0.9]))[2]) % 180.0
+          - 90.0) < 1e-9)
+    # ⚠ Le CONTROLE VIDE de la famille : un seul pli n'a aucune bascule a lire.
+    v("⚠ contrôle vide : à un seul pli, l'angle ne change pas dans l'épaisseur",
+      float(np.ptp(droit.angle_du_pli_deg(f_fb, np.array([0.05, 0.3, 0.7, 0.95])))) == 0.0)
+    indep = VolumeFabriqueAFibres(C0.PAS_UM, contraste_des_fibres=0.5,
+                                  feuilles_independantes=True, plis_par_feuille=1,
+                                  forme=(4000, 4000, 4000))
+    a0 = indep.angle_du_pli_deg(np.array([3.0, 3.0]), np.array([0.2, 0.8]))
+    a1 = indep.angle_du_pli_deg(np.array([4.0, 4.0]), np.array([0.2, 0.8]))
+    v("⚠ des feuilles indépendantes ne partagent pas leur direction, et chacune garde la sienne",
+      float(a0[0]) == float(a0[1]) and float(a0[0]) != float(a1[0]),
+      f"feuille 3 : {float(a0[0]):.2f}°, feuille 4 : {float(a1[0]):.2f}°")
 
     print(f"{'ALL PASS' if echecs == 0 else 'FAILURES'} ({echecs} failures, {controles} checks)")
     return 1 if echecs else 0

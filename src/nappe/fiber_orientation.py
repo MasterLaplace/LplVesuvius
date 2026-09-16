@@ -14,9 +14,23 @@ C'est un discriminant que l'encre ne peut pas donner, et il ne demande ni verite
 terrain, ni modele, ni juge.
 
 **Le tenseur de structure**, et pourquoi lui. On cherche la direction le long de
-laquelle l'image varie le MOINS. La covariance des gradients la donne en forme close :
+laquelle l'image varie le MOINS, parce que c'est celle des fibres. La covariance
+des gradients la donne en forme close, A UN QUART DE TOUR PRES :
 
     J = [[<gx²>, <gx·gy>], [<gx·gy>, <gy²>]]     θ = ½·atan2(2·<gx·gy>, <gx²> − <gy²>)
+
+⚠⚠⚠ CE θ EST CELUI DU PLUS GRAND VECTEUR PROPRE, DONC LA DIRECTION DU GRADIENT :
+la perpendiculaire aux fibres, et non les fibres. Mesure : sur un motif dont les
+cretes sont choisies a 0, 45, 90 et 135 degres, `orientation_profile` rend
+exactement 90 degres de plus (`172`). Les fibres sont a
+`langle_publie_est_il_celui_des_fibres.direction_des_fibres_deg(θ)`.
+
+⚠⚠ LA VALEUR RENDUE N'EST PAS CORRIGEE, ET C'EST DELIBERE : les courbes publiees
+par les campagnes portent ce θ, et le tourner ici deplacerait 10791 angles deja
+publies pour reparer un NOM. Tout ce que les campagnes publient d'AUTRE est un
+ECART — desaccord entre voisins, bascule en profondeur, parts au-dela d'un angle —
+et un ecart est invariant par un decalage constant, ce que `172` mesure plutot que
+de l'affirmer.
 
 ⚠ **Une orientation est modulo 180°, pas 360°** : une fibre n'a pas de sens. Moyenner
 des angles bruts ferait de 179° et 1° une moyenne de 90°, soit exactement la
@@ -50,7 +64,15 @@ from zarr_depth import BUCKET, array_meta, chunk_key, decode, get  # noqa: E402
 
 
 def orientation_profile(block: np.ndarray) -> tuple:
-    """Angle dominant (degres, modulo 180) et coherence, couche par couche."""
+    """Angle du GRADIENT dominant (degres, modulo 180) et coherence, couche par couche.
+
+    ⚠⚠⚠ CE N'EST PAS LA DIRECTION DES FIBRES mais sa PERPENDICULAIRE — voir l'en-tete du
+    fichier. Le nom historique est garde parce que les campagnes publient cette valeur ;
+    la conversion vit dans `langle_publie_est_il_celui_des_fibres`.
+
+    ⚠ L'angle se compte depuis l'axe 2 du bloc vers l'axe 1, parce que `gx` derive sur
+    l'axe 2 et `gy` sur l'axe 1.
+    """
     patch = block.astype(np.float32)
     gy = patch[:, 2:, 1:-1] - patch[:, :-2, 1:-1]
     gx = patch[:, 1:-1, 2:] - patch[:, 1:-1, :-2]

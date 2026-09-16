@@ -1825,6 +1825,50 @@ laissant une virgule pendante : aucun contrôle de texte ne voit ça, la ligne c
 parfaitement dans son cadre. C'est l'œil qui l'a trouvée, et le contrôle ajouté exige désormais que
 **chaque** cas nommé par le verdict soit écrit **en entier**.
 
+**`172` · 2026-09-16 · l'angle publié est-il celui des fibres**
+En préparant l'alarme des fibres — *l'orientation bascule-t-elle au franchissement d'une feuille ?* —
+j'ai posé le tenseur de structure sur un motif dont la direction des crêtes était **choisie**, avant
+de bâtir quoi que ce soit dessus. ✗ **Il rend un quart de tour de trop.** Aux quatre directions qu'un
+réseau carré porte exactement — 0, 45, 90, 135 degrés — `orientation_profile` rend **90°** de plus,
+et aucune direction rendue ne tombe sur ses crêtes. La forme close `½·atan2(2·Jxy, Jxx − Jyy)` est
+l'angle du **plus grand** vecteur propre du tenseur de structure, donc la direction du **gradient** :
+la perpendiculaire à la texture — `R4-F175`. ⚠⚠⚠ Or l'en-tête de `fiber_orientation.py` écrivait
+« la direction le long de laquelle l'image varie le **MOINS** », et `14` répète cette lecture en
+publiant des angles **absolus**. C'est **un nombre juste sous un mauvais nom**, le péché que ce dépôt
+nomme depuis `169`, et il était publié.
+⚠⚠ **Le motif ne doit RIEN à la fixture, et c'est la sonde qui le prouve** : si le décalage venait de
+la convention d'axes du volume, un motif construit à part le montrerait à zéro — et la sonde qui
+module **le long** des crêtes au lieu d'en travers fait bien tomber quatre contrôles. ⚠ Les quatre
+directions sont choisies là où la grille ne discrétise pas ; les obliques sont mesurées **à côté**,
+où l'écart vaut **88,645** à **91,355** degrés, pour que la discrétisation soit **visible** plutôt
+qu'évitée.
+⭐⭐⭐⭐ **La fixture à deux plis porte les deux moitiés du résultat d'un coup.**
+`VolumeFabriqueAFibres` est une pile dont chaque feuille est faite de deux plis aux fibres
+perpendiculaires — l'énoncé de `14` §1 — et dont la direction est **choisie**, donc l'instrument peut
+échouer. L'écart à l'attendu passe de **89,47°** à **0,53°** par la conversion, sur les **deux**
+plis ; et l'**écart entre les deux plis** vaut **90°** avant comme après. C'est exactement ce qui
+fait qu'un nom peut être faux sans qu'aucun écart publié ne bouge.
+⭐⭐⭐⭐ **Et aucun n'en bouge, mesuré plutôt qu'argumenté.** Sur les **99** courbes des trois
+campagnes stockées, la bascule en profondeur relue par la recette **du producteur** est identique
+avant et après le quart de tour : **99 sur 99**. Sur **360** paires d'angles tirées, le pire écart
+après rotation vaut **0**, et la moyenne en angle double tourne **du même quart** — `R4-F176`.
+⚠⚠ Il faut les **deux** propriétés : sans l'invariance toutes les dispersions publiées bougeraient,
+sans l'équivariance les angles moyens se mélangeraient. ✗ **Ce qui est atteint se compte** : les
+campagnes publient **10791** angles absolus — **1308**, **8720** et **763** — sous le nom d'une
+orientation de fibres, et ils décrivent sa perpendiculaire.
+⭐ **La valeur rendue n'est PAS corrigée, délibérément** : la tourner réparerait un **nom** en
+déplaçant des **nombres** déjà publiés. `direction_des_fibres_deg` nomme la conversion une fois, et
+l'en-tête cesse de mentir. ⚠⚠ Les **conclusions** de `14` tiennent — pas de bascule en profondeur,
+pas de corrélation entre voisins — parce que ce sont des **écarts** ; ce qui y est à relire est la
+**description** : une orientation lue à 90–97° veut dire des fibres à **0–7°**.
+⚠ Au passage, la fixture porte ses **sept** contrôles propres — à contraste nul elle rend
+**exactement** la pile de base, la matière est **constante le long** des fibres et **oscille en
+travers**, un seul pli ne bascule pas — et la batterie des fixtures passe de **119** à **126**.
+⚠⚠ La figure a repayé une règle du dépôt : `⭐` n'est pas dans la police déployée, il faut `★` dans
+tout texte dessiné. ⚠ Et `R4-P11` n'est **pas** touchée : elle porte sur le champ de **prédiction**
+publié de `PHerc0139`, à **19,2** et **38,4** µm par cellule, pas sur la texture d'un volume à
+**2,4** µm.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

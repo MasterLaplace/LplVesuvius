@@ -1,0 +1,190 @@
+{
+  "le_motif": {
+    "decidable": true,
+    "lignes": [
+      {
+        "cretes_deg": 0.0,
+        "angle_rendu_deg": 90.0,
+        "ecart_aux_cretes_deg": 90.0,
+        "coherence": 1.0,
+        "les_fibres_lues_deg": 0.0,
+        "la_conversion_retombe_sur_les_cretes": true
+      },
+      {
+        "cretes_deg": 45.0,
+        "angle_rendu_deg": 135.0,
+        "ecart_aux_cretes_deg": 90.0,
+        "coherence": 1.0,
+        "les_fibres_lues_deg": 45.0,
+        "la_conversion_retombe_sur_les_cretes": true
+      },
+      {
+        "cretes_deg": 90.0,
+        "angle_rendu_deg": 180.0,
+        "ecart_aux_cretes_deg": 90.0,
+        "coherence": 1.0,
+        "les_fibres_lues_deg": 90.0,
+        "la_conversion_retombe_sur_les_cretes": true
+      },
+      {
+        "cretes_deg": 135.0,
+        "angle_rendu_deg": 45.0,
+        "ecart_aux_cretes_deg": 90.0,
+        "coherence": 1.0,
+        "les_fibres_lues_deg": 135.0,
+        "la_conversion_retombe_sur_les_cretes": true
+      }
+    ],
+    "cote": 96,
+    "periode": 8.0,
+    "directions": 4,
+    "ecart_median_deg": 90.0,
+    "ecart_min_deg": 90.0,
+    "ecart_max_deg": 90.0,
+    "toutes_a_un_quart_de_tour": true,
+    "aucune_sur_les_cretes": true,
+    "la_conversion_retombe_partout": true
+  },
+  "les_obliques": {
+    "decidable": true,
+    "lignes": [
+      {
+        "cretes_deg": 15.0,
+        "angle_rendu_deg": 106.355,
+        "ecart_aux_cretes_deg": 91.355,
+        "coherence": 1.0,
+        "les_fibres_lues_deg": 16.355,
+        "la_conversion_retombe_sur_les_cretes": false
+      },
+      {
+        "cretes_deg": 30.0,
+        "angle_rendu_deg": 121.319,
+        "ecart_aux_cretes_deg": 91.319,
+        "coherence": 1.0,
+        "les_fibres_lues_deg": 31.319,
+        "la_conversion_retombe_sur_les_cretes": false
+      },
+      {
+        "cretes_deg": 60.0,
+        "angle_rendu_deg": 148.681,
+        "ecart_aux_cretes_deg": 88.681,
+        "coherence": 1.0,
+        "les_fibres_lues_deg": 58.681,
+        "la_conversion_retombe_sur_les_cretes": false
+      },
+      {
+        "cretes_deg": 75.0,
+        "angle_rendu_deg": 163.645,
+        "ecart_aux_cretes_deg": 88.645,
+        "coherence": 1.0,
+        "les_fibres_lues_deg": 73.645,
+        "la_conversion_retombe_sur_les_cretes": false
+      },
+      {
+        "cretes_deg": 105.0,
+        "angle_rendu_deg": 16.355,
+        "ecart_aux_cretes_deg": 91.355,
+        "coherence": 1.0,
+        "les_fibres_lues_deg": 106.355,
+        "la_conversion_retombe_sur_les_cretes": false
+      },
+      {
+        "cretes_deg": 120.0,
+        "angle_rendu_deg": 31.319,
+        "ecart_aux_cretes_deg": 91.319,
+        "coherence": 1.0,
+        "les_fibres_lues_deg": 121.319,
+        "la_conversion_retombe_sur_les_cretes": false
+      }
+    ],
+    "cote": 96,
+    "periode": 8.0,
+    "directions": 6,
+    "ecart_median_deg": 91.319,
+    "ecart_min_deg": 88.645,
+    "ecart_max_deg": 91.355,
+    "toutes_a_un_quart_de_tour": false,
+    "aucune_sur_les_cretes": true,
+    "la_conversion_retombe_partout": false
+  },
+  "la_fixture": {
+    "decidable": true,
+    "couches": 128,
+    "cote": 64,
+    "voxel_um": 2.4,
+    "angle_du_premier_pli_deg": 30.0,
+    "par_pli": [
+      {
+        "pli": 0,
+        "couches": 72,
+        "angle_attendu_deg": 30.0,
+        "angle_rendu_deg": 120.53,
+        "ecart_a_lattendu_deg": 89.47,
+        "les_fibres_lues_deg": 30.53,
+        "ecart_des_fibres_a_lattendu_deg": 0.53
+      },
+      {
+        "pli": 1,
+        "couches": 56,
+        "angle_attendu_deg": 120.0,
+        "angle_rendu_deg": 30.53,
+        "ecart_a_lattendu_deg": 89.47,
+        "les_fibres_lues_deg": 120.53,
+        "ecart_des_fibres_a_lattendu_deg": 0.53
+      }
+    ],
+    "ecart_entre_les_plis_deg": 90.0,
+    "ecart_entre_les_plis_apres_conversion_deg": 90.0,
+    "lecart_ne_bouge_pas": true
+  },
+  "la_portee": {
+    "decidable": true,
+    "fichiers": [
+      {
+        "fichier": "fibres_scroll1.json",
+        "present": true,
+        "segments": 12,
+        "courbes": 12,
+        "angles_absolus": 1308
+      },
+      {
+        "fichier": "fibres_corpus.json",
+        "present": true,
+        "segments": 80,
+        "courbes": 80,
+        "angles_absolus": 8720
+      },
+      {
+        "fichier": "fibres_1667.json",
+        "present": true,
+        "segments": 7,
+        "courbes": 7,
+        "angles_absolus": 763
+      }
+    ],
+    "segments": 99,
+    "courbes": 99,
+    "angles_absolus_publies": 10791,
+    "bascules_relues": 99,
+    "bascules_inchangees": 99,
+    "la_bascule_ne_bouge_jamais": true
+  },
+  "linvariance": {
+    "decidable": true,
+    "paires": 360,
+    "pire_ecart_apres_le_quart_de_tour": 0.0,
+    "lecart_est_invariant": true,
+    "moyenne_avant_deg": 33.92836,
+    "moyenne_apres_deg": 123.92836,
+    "la_moyenne_tourne_du_meme_quart": true
+  },
+  "le_verdict": {
+    "decidable": true,
+    "la_formule_rend_la_perpendiculaire": true,
+    "la_conversion_retombe_sur_les_fibres": true,
+    "la_fixture_le_confirme": true,
+    "aucun_ecart_publie_ne_bouge": true,
+    "angles_absolus_a_relire": 10791,
+    "un_nombre_juste_sous_un_nom_faux": true
+  }
+}
