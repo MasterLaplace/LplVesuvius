@@ -1480,6 +1480,8 @@ run "le cote du penchant"   uv run python "$ROOT/src/nappe/la_fixture_penche_t_e
 run "figure cote penchant"  uv run python "$ROOT/src/figures/figure_la_fixture_penche_t_elle_du_meme_cote.py" --verifier
 run "le vrillage"           uv run python "$ROOT/src/nappe/le_vrillage_paie_t_il_le_coin_qui_manque.py" --verifier
 run "figure vrillage"       uv run python "$ROOT/src/figures/figure_le_vrillage_paie_t_il_le_coin_qui_manque.py" --verifier
+run "le cap et les axes"    uv run python "$ROOT/src/nappe/le_cap_agit_il_sur_les_deux_axes.py" --verifier
+run "figure cap et axes"    uv run python "$ROOT/src/figures/figure_le_cap_agit_il_sur_les_deux_axes.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

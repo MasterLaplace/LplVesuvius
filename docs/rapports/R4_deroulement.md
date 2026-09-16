@@ -1786,6 +1786,45 @@ part axiale **0,0** et glissement **0,0 µm** sur **10** marches.
 (`gradient_de_la_phase`) plutôt que recopié, pour qu'une sous-classe puisse y **ajouter** un terme ;
 la batterie des fixtures passe de **112** à **119** et aucun témoin n'a bougé.
 
+**`171` · 2026-09-16 · le cap agit-il sur les deux axes**
+`170` laisse `R4-P27` sous la forme *pourquoi un écrasement calibré sur le vrai rapport des axes
+fait-il marcher **deux fois trop** azimutalement ?* ⭐⭐⭐⭐ **La prémisse tombe, et deux nombres déjà
+publiés le disaient** : **sans** cap la fixture rend **0,308** de part azimutale là où le rouleau en
+rend **0,405**, soit **×0,76** — elle est **en dessous**. Une matière qui marcherait structurellement
+trop azimutalement le ferait aux **deux** caps. Ce qui est en cause n'est donc pas l'écrasement mais
+le **cap**. ⚠⚠⚠ **Et la comparaison des deux caps du rouleau porte sur deux populations inégales** :
+la course sans cap a **9** bandes, celle avec cap en a **13**. Le défaut est **réparable** — les neuf
+sont **incluses** dans les treize — et la réparation change la réponse : appariée, le cap
+**MULTIPLIE** la part axiale par **1,037** au lieu de la diviser par **0,96**, et la part azimutale
+ne tombe pas à **0,193** mais à **0,284** — `R4-F172`. ⭐⭐⭐⭐ Le « deux fois trop » vaut donc
+**×1,788** dans la lecture publiée et **×1,215** apparié : plus de la moitié de l'écart à expliquer
+était un **artefact de population** — `R4-F173`. ⚠ Le verdict de `169` — le rouleau penche
+axialement au cap 0,75 — **survit**, mais sa marge fond de **0,141** à **0,077**.
+⚠⚠ **Les deux lectures sont publiées côte à côte, jamais une seule** : la seule appariée effacerait
+le défaut, la seule non appariée le reconduirait. La fixture, elle, est appariée **par
+construction** — chacun de ses **10** départs est marché aux **deux** caps — et c'est exactement
+pourquoi le défaut n'avait aucune raison d'être vu depuis elle.
+⭐⭐⭐⭐ **La cohérence publiée jusqu'ici MOYENNE sur l'axe où la différence vit.** C'est la norme
+d'une **somme de vecteurs**, donc une marche dont la part axiale tient son signe et dont l'azimutale
+alterne rend le **même nombre** que son miroir. `coherence_dun_axe` pose la même idée sur **un** axe
+et se range **à côté**, jamais à la place ; la part azimutale s'y somme en **scalaire**, parce que
+son repère tourne avec la marche. ⚠⚠ Un axe qui ne porte rien rend `None` — ni un, ni zéro — sous une
+borne **dérivée** de ce qu'un voxel exprime, et c'est ce qui rend le contrôle de la spirale nue
+**vide** plutôt que faux. ✗ **Le mécanisme qu'on attendrait d'une mémoire de cap est réfuté** : elle
+ne devrait pouvoir retirer que ce qui **alterne**, donc mordre l'axe le **moins** cohérent ; sur le
+rouleau apparié l'axe le moins cohérent est l'**axial** (**0,736** contre **0,849**) et l'axe réduit
+est l'**azimutal**. Sur **4** cas posables le lien tient **une** fois — `R4-F174`. ⭐ Sur le rouleau
+le cap rend les **deux** axes plus cohérents (**0,736 → 0,999** et **0,849 → 1,0**) pendant qu'il ne
+réduit que l'azimutal : il ne filtre pas une alternance, il rend la marche plus droite.
+⚠⚠ **Et une de mes propres assertions a été réfutée par sa sonde** : j'avais écrit que deux marches
+**miroir** rendent la même cohérence tangentielle, en dérivant une tolérance d'un arc — faux, parce
+que l'axe qui alterne est le **z fixe** dans une marche et le repère azimutal **qui tourne** dans
+l'autre. L'assertion a été remplacée par une comparaison d'**écarts**, qui ne suppose aucune
+symétrie. ⚠⚠ La figure, elle, a payé une liste **tronquée** qui perdait sa troisième matière en
+laissant une virgule pendante : aucun contrôle de texte ne voit ça, la ligne coupée tenant
+parfaitement dans son cadre. C'est l'œil qui l'a trouvée, et le contrôle ajouté exige désormais que
+**chaque** cas nommé par le verdict soit écrit **en entier**.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

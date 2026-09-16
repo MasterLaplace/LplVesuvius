@@ -1,0 +1,508 @@
+{
+  "le_rouleau": {
+    "decidable": true,
+    "sources": {
+      "0.75": "la_course_a_cap.json",
+      "0.0": "la_re_course_large.json"
+    },
+    "bandes_par_cap": {
+      "0.0": 9,
+      "0.75": 13
+    },
+    "bandes_communes": 9,
+    "la_plus_courte_est_incluse": true,
+    "toutes_les_bandes": {
+      "sans_cap": {
+        "decidable": true,
+        "marches": 9,
+        "decidables": 9,
+        "axial_median": 0.348,
+        "azimutal_median": 0.405,
+        "coherence_median": 0.719,
+        "coherence_axiale_mediane": 0.736,
+        "marches_ou_l_axial_ne_porte_rien": 0,
+        "coherence_azimutale_mediane": 0.849,
+        "marches_ou_l_azimutal_ne_porte_rien": 0
+      },
+      "avec_cap": {
+        "decidable": true,
+        "marches": 13,
+        "decidables": 13,
+        "axial_median": 0.334,
+        "azimutal_median": 0.193,
+        "coherence_median": 0.925,
+        "coherence_axiale_mediane": 0.993,
+        "marches_ou_l_axial_ne_porte_rien": 0,
+        "coherence_azimutale_mediane": 0.96,
+        "marches_ou_l_azimutal_ne_porte_rien": 0
+      },
+      "effet": {
+        "decidable": true,
+        "part_axiale_sans_cap": 0.348,
+        "part_axiale_avec_cap": 0.334,
+        "le_cap_multiplie_l_axial_par": 0.96,
+        "coherence_axiale_sans_cap": 0.736,
+        "coherence_axiale_avec_cap": 0.993,
+        "part_azimutale_sans_cap": 0.405,
+        "part_azimutale_avec_cap": 0.193,
+        "le_cap_multiplie_l_azimutal_par": 0.477,
+        "coherence_azimutale_sans_cap": 0.849,
+        "coherence_azimutale_avec_cap": 0.96,
+        "coherence_tangentielle_sans_cap": 0.719,
+        "coherence_tangentielle_avec_cap": 0.925,
+        "lecart_entre_les_parts_sans_cap": 0.057,
+        "lecart_entre_les_parts_avec_cap": 0.141
+      },
+      "lien": {
+        "decidable": true,
+        "coherences_sans_cap": {
+          "axial": 0.736,
+          "azimutal": 0.849
+        },
+        "rapports": {
+          "axial": 0.96,
+          "azimutal": 0.477
+        },
+        "laxe_le_moins_coherent_sans_cap": "axial",
+        "laxe_que_le_cap_reduit_le_plus": "azimutal",
+        "le_cap_retire_ce_qui_alterne": false
+      }
+    },
+    "bandes_appariees": {
+      "sans_cap": {
+        "decidable": true,
+        "marches": 9,
+        "decidables": 9,
+        "axial_median": 0.348,
+        "azimutal_median": 0.405,
+        "coherence_median": 0.719,
+        "coherence_axiale_mediane": 0.736,
+        "marches_ou_l_axial_ne_porte_rien": 0,
+        "coherence_azimutale_mediane": 0.849,
+        "marches_ou_l_azimutal_ne_porte_rien": 0
+      },
+      "avec_cap": {
+        "decidable": true,
+        "marches": 9,
+        "decidables": 9,
+        "axial_median": 0.361,
+        "azimutal_median": 0.284,
+        "coherence_median": 0.925,
+        "coherence_axiale_mediane": 0.999,
+        "marches_ou_l_axial_ne_porte_rien": 0,
+        "coherence_azimutale_mediane": 1.0,
+        "marches_ou_l_azimutal_ne_porte_rien": 0
+      },
+      "effet": {
+        "decidable": true,
+        "part_axiale_sans_cap": 0.348,
+        "part_axiale_avec_cap": 0.361,
+        "le_cap_multiplie_l_axial_par": 1.037,
+        "coherence_axiale_sans_cap": 0.736,
+        "coherence_axiale_avec_cap": 0.999,
+        "part_azimutale_sans_cap": 0.405,
+        "part_azimutale_avec_cap": 0.284,
+        "le_cap_multiplie_l_azimutal_par": 0.701,
+        "coherence_azimutale_sans_cap": 0.849,
+        "coherence_azimutale_avec_cap": 1.0,
+        "coherence_tangentielle_sans_cap": 0.719,
+        "coherence_tangentielle_avec_cap": 0.925,
+        "lecart_entre_les_parts_sans_cap": 0.057,
+        "lecart_entre_les_parts_avec_cap": 0.077
+      },
+      "lien": {
+        "decidable": true,
+        "coherences_sans_cap": {
+          "axial": 0.736,
+          "azimutal": 0.849
+        },
+        "rapports": {
+          "axial": 1.037,
+          "azimutal": 0.701
+        },
+        "laxe_le_moins_coherent_sans_cap": "axial",
+        "laxe_que_le_cap_reduit_le_plus": "azimutal",
+        "le_cap_retire_ce_qui_alterne": false
+      }
+    },
+    "lappariement_change_la_reponse": {
+      "axial": {
+        "sans_appariement": 0.96,
+        "apparie": 1.037,
+        "le_cap_change_de_sens": true
+      },
+      "azimutal": {
+        "sans_appariement": 0.477,
+        "apparie": 0.701,
+        "le_cap_change_de_sens": false
+      }
+    }
+  },
+  "la_fixture": {
+    "decidable": true,
+    "caps": [
+      0.0,
+      0.75
+    ],
+    "par_matiere": [
+      {
+        "nom": "spirale nue",
+        "departs_apparies": 10,
+        "departs_sans_cap": 10,
+        "departs_avec_cap": 10,
+        "lappariement_est_exact": true,
+        "sans_cap": {
+          "decidable": true,
+          "marches": 10,
+          "decidables": 10,
+          "axial_median": 0.0,
+          "azimutal_median": 0.002,
+          "coherence_median": 1.0,
+          "coherence_axiale_mediane": null,
+          "marches_ou_l_axial_ne_porte_rien": 10,
+          "coherence_azimutale_mediane": 1.0,
+          "marches_ou_l_azimutal_ne_porte_rien": 0
+        },
+        "avec_cap": {
+          "decidable": true,
+          "marches": 10,
+          "decidables": 10,
+          "axial_median": 0.0,
+          "azimutal_median": 0.002,
+          "coherence_median": 1.0,
+          "coherence_axiale_mediane": null,
+          "marches_ou_l_axial_ne_porte_rien": 10,
+          "coherence_azimutale_mediane": 1.0,
+          "marches_ou_l_azimutal_ne_porte_rien": 0
+        },
+        "effet": {
+          "decidable": true,
+          "part_axiale_sans_cap": 0.0,
+          "part_axiale_avec_cap": 0.0,
+          "le_cap_multiplie_l_axial_par": null,
+          "coherence_axiale_sans_cap": null,
+          "coherence_axiale_avec_cap": null,
+          "part_azimutale_sans_cap": 0.002,
+          "part_azimutale_avec_cap": 0.002,
+          "le_cap_multiplie_l_azimutal_par": 1.0,
+          "coherence_azimutale_sans_cap": 1.0,
+          "coherence_azimutale_avec_cap": 1.0,
+          "coherence_tangentielle_sans_cap": 1.0,
+          "coherence_tangentielle_avec_cap": 1.0,
+          "lecart_entre_les_parts_sans_cap": 0.002,
+          "lecart_entre_les_parts_avec_cap": 0.002
+        },
+        "lien": {
+          "decidable": false,
+          "raison": "un axe ne porte rien",
+          "coherences_sans_cap": {
+            "axial": null,
+            "azimutal": 1.0
+          },
+          "rapports": {
+            "axial": null,
+            "azimutal": 1.0
+          }
+        }
+      },
+      {
+        "nom": "spirale écrasée",
+        "departs_apparies": 10,
+        "departs_sans_cap": 10,
+        "departs_avec_cap": 10,
+        "lappariement_est_exact": true,
+        "sans_cap": {
+          "decidable": true,
+          "marches": 10,
+          "decidables": 10,
+          "axial_median": 0.0,
+          "azimutal_median": 0.345,
+          "coherence_median": 0.999,
+          "coherence_axiale_mediane": null,
+          "marches_ou_l_axial_ne_porte_rien": 10,
+          "coherence_azimutale_mediane": 1.0,
+          "marches_ou_l_azimutal_ne_porte_rien": 0
+        },
+        "avec_cap": {
+          "decidable": true,
+          "marches": 10,
+          "decidables": 10,
+          "axial_median": 0.0,
+          "azimutal_median": 0.339,
+          "coherence_median": 0.999,
+          "coherence_axiale_mediane": null,
+          "marches_ou_l_axial_ne_porte_rien": 10,
+          "coherence_azimutale_mediane": 1.0,
+          "marches_ou_l_azimutal_ne_porte_rien": 0
+        },
+        "effet": {
+          "decidable": true,
+          "part_axiale_sans_cap": 0.0,
+          "part_axiale_avec_cap": 0.0,
+          "le_cap_multiplie_l_axial_par": null,
+          "coherence_axiale_sans_cap": null,
+          "coherence_axiale_avec_cap": null,
+          "part_azimutale_sans_cap": 0.345,
+          "part_azimutale_avec_cap": 0.339,
+          "le_cap_multiplie_l_azimutal_par": 0.983,
+          "coherence_azimutale_sans_cap": 1.0,
+          "coherence_azimutale_avec_cap": 1.0,
+          "coherence_tangentielle_sans_cap": 0.999,
+          "coherence_tangentielle_avec_cap": 0.999,
+          "lecart_entre_les_parts_sans_cap": 0.345,
+          "lecart_entre_les_parts_avec_cap": 0.339
+        },
+        "lien": {
+          "decidable": false,
+          "raison": "un axe ne porte rien",
+          "coherences_sans_cap": {
+            "axial": null,
+            "azimutal": 1.0
+          },
+          "rapports": {
+            "axial": null,
+            "azimutal": 0.983
+          }
+        }
+      },
+      {
+        "nom": "spirale froissée 42.4 µm",
+        "departs_apparies": 10,
+        "departs_sans_cap": 10,
+        "departs_avec_cap": 10,
+        "lappariement_est_exact": true,
+        "sans_cap": {
+          "decidable": true,
+          "marches": 10,
+          "decidables": 10,
+          "axial_median": 0.131,
+          "azimutal_median": 0.098,
+          "coherence_median": 0.467,
+          "coherence_axiale_mediane": 0.816,
+          "marches_ou_l_axial_ne_porte_rien": 0,
+          "coherence_azimutale_mediane": 0.149,
+          "marches_ou_l_azimutal_ne_porte_rien": 0
+        },
+        "avec_cap": {
+          "decidable": true,
+          "marches": 10,
+          "decidables": 10,
+          "axial_median": 0.048,
+          "azimutal_median": 0.04,
+          "coherence_median": 0.427,
+          "coherence_axiale_mediane": 0.451,
+          "marches_ou_l_axial_ne_porte_rien": 0,
+          "coherence_azimutale_mediane": 0.225,
+          "marches_ou_l_azimutal_ne_porte_rien": 0
+        },
+        "effet": {
+          "decidable": true,
+          "part_axiale_sans_cap": 0.131,
+          "part_axiale_avec_cap": 0.048,
+          "le_cap_multiplie_l_axial_par": 0.366,
+          "coherence_axiale_sans_cap": 0.816,
+          "coherence_axiale_avec_cap": 0.451,
+          "part_azimutale_sans_cap": 0.098,
+          "part_azimutale_avec_cap": 0.04,
+          "le_cap_multiplie_l_azimutal_par": 0.408,
+          "coherence_azimutale_sans_cap": 0.149,
+          "coherence_azimutale_avec_cap": 0.225,
+          "coherence_tangentielle_sans_cap": 0.467,
+          "coherence_tangentielle_avec_cap": 0.427,
+          "lecart_entre_les_parts_sans_cap": 0.033,
+          "lecart_entre_les_parts_avec_cap": 0.008
+        },
+        "lien": {
+          "decidable": true,
+          "coherences_sans_cap": {
+            "axial": 0.816,
+            "azimutal": 0.149
+          },
+          "rapports": {
+            "axial": 0.366,
+            "azimutal": 0.408
+          },
+          "laxe_le_moins_coherent_sans_cap": "azimutal",
+          "laxe_que_le_cap_reduit_le_plus": "axial",
+          "le_cap_retire_ce_qui_alterne": false
+        }
+      },
+      {
+        "nom": "spirale écrasée et froissée 42.4 µm",
+        "departs_apparies": 10,
+        "departs_sans_cap": 10,
+        "departs_avec_cap": 10,
+        "lappariement_est_exact": true,
+        "sans_cap": {
+          "decidable": true,
+          "marches": 10,
+          "decidables": 10,
+          "axial_median": 0.1,
+          "azimutal_median": 0.346,
+          "coherence_median": 0.95,
+          "coherence_axiale_mediane": 0.442,
+          "marches_ou_l_axial_ne_porte_rien": 0,
+          "coherence_azimutale_mediane": 1.0,
+          "marches_ou_l_azimutal_ne_porte_rien": 0
+        },
+        "avec_cap": {
+          "decidable": true,
+          "marches": 10,
+          "decidables": 10,
+          "axial_median": 0.048,
+          "azimutal_median": 0.349,
+          "coherence_median": 0.986,
+          "coherence_axiale_mediane": 0.466,
+          "marches_ou_l_axial_ne_porte_rien": 0,
+          "coherence_azimutale_mediane": 1.0,
+          "marches_ou_l_azimutal_ne_porte_rien": 0
+        },
+        "effet": {
+          "decidable": true,
+          "part_axiale_sans_cap": 0.1,
+          "part_axiale_avec_cap": 0.048,
+          "le_cap_multiplie_l_axial_par": 0.48,
+          "coherence_axiale_sans_cap": 0.442,
+          "coherence_axiale_avec_cap": 0.466,
+          "part_azimutale_sans_cap": 0.346,
+          "part_azimutale_avec_cap": 0.349,
+          "le_cap_multiplie_l_azimutal_par": 1.009,
+          "coherence_azimutale_sans_cap": 1.0,
+          "coherence_azimutale_avec_cap": 1.0,
+          "coherence_tangentielle_sans_cap": 0.95,
+          "coherence_tangentielle_avec_cap": 0.986,
+          "lecart_entre_les_parts_sans_cap": 0.246,
+          "lecart_entre_les_parts_avec_cap": 0.301
+        },
+        "lien": {
+          "decidable": true,
+          "coherences_sans_cap": {
+            "axial": 0.442,
+            "azimutal": 1.0
+          },
+          "rapports": {
+            "axial": 0.48,
+            "azimutal": 1.009
+          },
+          "laxe_le_moins_coherent_sans_cap": "axial",
+          "laxe_que_le_cap_reduit_le_plus": "axial",
+          "le_cap_retire_ce_qui_alterne": true
+        }
+      },
+      {
+        "nom": "spirale écrasée et froissée 100 µm",
+        "departs_apparies": 10,
+        "departs_sans_cap": 10,
+        "departs_avec_cap": 10,
+        "lappariement_est_exact": true,
+        "sans_cap": {
+          "decidable": true,
+          "marches": 10,
+          "decidables": 10,
+          "axial_median": 0.209,
+          "azimutal_median": 0.308,
+          "coherence_median": 0.758,
+          "coherence_axiale_mediane": 0.887,
+          "marches_ou_l_axial_ne_porte_rien": 0,
+          "coherence_azimutale_mediane": 0.808,
+          "marches_ou_l_azimutal_ne_porte_rien": 0
+        },
+        "avec_cap": {
+          "decidable": true,
+          "marches": 10,
+          "decidables": 10,
+          "axial_median": 0.147,
+          "azimutal_median": 0.345,
+          "coherence_median": 0.958,
+          "coherence_axiale_mediane": 0.772,
+          "marches_ou_l_axial_ne_porte_rien": 0,
+          "coherence_azimutale_mediane": 1.0,
+          "marches_ou_l_azimutal_ne_porte_rien": 0
+        },
+        "effet": {
+          "decidable": true,
+          "part_axiale_sans_cap": 0.209,
+          "part_axiale_avec_cap": 0.147,
+          "le_cap_multiplie_l_axial_par": 0.703,
+          "coherence_axiale_sans_cap": 0.887,
+          "coherence_axiale_avec_cap": 0.772,
+          "part_azimutale_sans_cap": 0.308,
+          "part_azimutale_avec_cap": 0.345,
+          "le_cap_multiplie_l_azimutal_par": 1.12,
+          "coherence_azimutale_sans_cap": 0.808,
+          "coherence_azimutale_avec_cap": 1.0,
+          "coherence_tangentielle_sans_cap": 0.758,
+          "coherence_tangentielle_avec_cap": 0.958,
+          "lecart_entre_les_parts_sans_cap": 0.099,
+          "lecart_entre_les_parts_avec_cap": 0.198
+        },
+        "lien": {
+          "decidable": true,
+          "coherences_sans_cap": {
+            "axial": 0.887,
+            "azimutal": 0.808
+          },
+          "rapports": {
+            "axial": 0.703,
+            "azimutal": 1.12
+          },
+          "laxe_le_moins_coherent_sans_cap": "azimutal",
+          "laxe_que_le_cap_reduit_le_plus": "axial",
+          "le_cap_retire_ce_qui_alterne": false
+        }
+      }
+    ],
+    "la_matiere_du_rouleau": "spirale écrasée et froissée 100 µm",
+    "departs": 10,
+    "pas_max": 40,
+    "rayon_mm": 10.0
+  },
+  "lecart_a_la_fixture": {
+    "decidable": true,
+    "la_matiere": "spirale écrasée et froissée 100 µm",
+    "toutes_les_bandes_sans_cap": {
+      "la_fixture": 0.308,
+      "le_rouleau": 0.405,
+      "la_fixture_vaut_le_rouleau_fois": 0.76
+    },
+    "toutes_les_bandes_avec_cap": {
+      "la_fixture": 0.345,
+      "le_rouleau": 0.193,
+      "la_fixture_vaut_le_rouleau_fois": 1.788
+    },
+    "bandes_appariees_sans_cap": {
+      "la_fixture": 0.308,
+      "le_rouleau": 0.405,
+      "la_fixture_vaut_le_rouleau_fois": 0.76
+    },
+    "bandes_appariees_avec_cap": {
+      "la_fixture": 0.345,
+      "le_rouleau": 0.284,
+      "la_fixture_vaut_le_rouleau_fois": 1.215
+    }
+  },
+  "le_verdict": {
+    "decidable": true,
+    "cas_posables": 4,
+    "cas_examines": 6,
+    "ou_le_lien_tient": [
+      "spirale écrasée et froissée 42.4 µm"
+    ],
+    "ou_le_lien_ne_tient_pas": [
+      "le rouleau, bandes appariées",
+      "spirale froissée 42.4 µm",
+      "spirale écrasée et froissée 100 µm"
+    ],
+    "le_cap_retire_ce_qui_alterne": false,
+    "pourquoi_les_autres_ne_sont_pas_posables": [
+      {
+        "nom": "spirale nue",
+        "raison": "un axe ne porte rien"
+      },
+      {
+        "nom": "spirale écrasée",
+        "raison": "un axe ne porte rien"
+      }
+    ]
+  }
+}

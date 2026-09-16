@@ -111,6 +111,12 @@ def le_cote_dune_marche(p: dict) -> dict | None:
     return {"pas": int(p["pas"]), "axial": float(a), "azimutal": float(z),
             "glissement_axial_um": float(p.get("glissement_axial_median_um") or 0.0),
             "coherence": float(p.get("coherence_tangentielle") or 0.0),
+            # ⚠⚠ LES DEUX COHERENCES PAR AXE SONT PORTEES A COTE, JAMAIS A LA PLACE. La cohérence
+            # tangentielle est la norme d'une somme de vecteurs : elle rend le même nombre pour une
+            # marche dont la part axiale tient son signe et dont l'azimutale alterne, et pour son
+            # miroir. Elles valent `None` quand l'axe ne porte rien — la spirale nue est ce cas.
+            "coherence_axiale": p.get("coherence_axiale"),
+            "coherence_azimutale": p.get("coherence_azimutale"),
             # ⚠⚠ UN ECART EXACTEMENT NUL N'EST NI L'UN NI L'AUTRE : l'enonce du depot depuis `161`.
             "penche_axialement": bool(a > z), "penche_azimutalement": bool(a < z),
             "les_deux_parts_sont_egales": bool(a == z)}

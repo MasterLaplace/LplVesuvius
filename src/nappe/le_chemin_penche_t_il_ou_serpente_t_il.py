@@ -99,6 +99,23 @@ def laxe_du_rouleau_est_il_le_z(courses) -> dict:
             "laxe_du_rouleau_est_le_z_du_volume": bool(a.max() < 1.0)}
 
 
+def coherence_dun_axe(net_um: float, parcouru_um: float, voxel_um: float) -> float | None:
+    """Le déplacement NET d'un axe divisé par le chemin PARCOURU sur ce même axe.
+
+    ⭐ Un chemin qui dérive toujours du même côté de cet axe rend un ; un chemin qui oblique
+    alternativement rend zéro. C'est la même idée que la cohérence tangentielle, posée sur UN axe
+    au lieu des deux ensemble — et c'est cette séparation qui rend comparables deux matières dont
+    les rôles des axes sont échangés.
+
+    ⚠⚠ REND `None` QUAND L'AXE NE PORTE RIEN, jamais zéro et jamais un. La borne se DERIVE : un axe
+    dont le chemin parcouru tient sous ce qu'un voxel exprime n'a pas de direction lisible, et lui
+    attribuer une cohérence ferait lire du bruit de quantification comme une dérive.
+    """
+    if parcouru_um < voxel_um:
+        return None
+    return round(abs(net_um) / parcouru_um, 3)
+
+
 def penchant(depart_zyx, axe_zyx, etapes, voxel_um: float = VOXEL_UM) -> dict:
     """Pas par pas : l'angle au rayon, la part axiale, la part azimutale — et la cohérence.
 
@@ -107,6 +124,22 @@ def penchant(depart_zyx, axe_zyx, etapes, voxel_um: float = VOXEL_UM) -> dict:
     un chemin qui penche toujours du même côté rend un ; un chemin qui oblique alternativement de
     part et d'autre rend zéro. Deux marches d'angle médian identique peuvent donc rendre l'une et
     l'autre, ce que la batterie vérifie plutôt que de l'affirmer.
+
+    ⭐⭐⭐⭐ ET LA COHERENCE SE DECOMPOSE PAR AXE, PARCE QU'ELLE MELANGE DEUX CHOSES. La cohérence
+    tangentielle est la norme d'une somme de vecteurs : un chemin dont la part axiale ne change
+    jamais de signe et dont la part azimutale alterne rend le même nombre qu'un chemin où les rôles
+    sont échangés. Or c'est exactement l'axe sur lequel deux matières peuvent différer, et moyenner
+    dessus est le péché capital de ce dépôt. Les deux cohérences par axe sont donc rendues À CÔTÉ,
+    jamais à la place — chacune est le déplacement NET de cet axe divisé par le chemin PARCOURU sur
+    ce même axe, donc bornée entre zéro et un.
+
+    ⚠⚠ LA PART AZIMUTALE SE SOMME EN SCALAIRE, JAMAIS EN VECTEUR. `phi_hat` tourne avec la marche :
+    additionner des vecteurs azimutaux replierait la rotation du repère dans la réponse, et un
+    chemin qui dérive toujours dans le même sens autour du rouleau paraîtrait alterner.
+
+    ⚠⚠ UN AXE QUI NE PORTE RIEN N'A PAS DE COHERENCE — ni un, ni zéro. Le seuil n'est pas choisi,
+    il se DERIVE : l'axe ne porte rien quand son chemin parcouru tombe sous ce qu'UN VOXEL exprime.
+    En dessous, `None` est rendu, et l'appelant doit refuser de conclure.
 
     ⚠ Le repère est cylindrique autour de l'axe du rouleau : `rho` est la distance à la DROITE
     passant par l'axe de la bande et parallèle au z du volume, jamais au point lui-même. Le rayon
@@ -117,6 +150,8 @@ def penchant(depart_zyx, axe_zyx, etapes, voxel_um: float = VOXEL_UM) -> dict:
     th, axial, azimutal, rayons, avances, glissements = [], [], [], [], [], []
     tangent_net = np.zeros(3)
     tangent_parcouru = 0.0
+    axial_net_um = azimutal_net_um = 0.0
+    axial_parcouru_um = azimutal_parcouru_um = 0.0
     for e in etapes:
         d = np.asarray(e["direction"], dtype=float)
         d = d / max(float(np.linalg.norm(d)), 1e-12)
@@ -139,6 +174,10 @@ def penchant(depart_zyx, axe_zyx, etapes, voxel_um: float = VOXEL_UM) -> dict:
         t = d - cr * rho_hat
         tangent_net = tangent_net + t * av
         tangent_parcouru += float(np.linalg.norm(t)) * av
+        axial_net_um += axial[-1] * av
+        azimutal_net_um += azimutal[-1] * av
+        axial_parcouru_um += abs(axial[-1]) * av
+        azimutal_parcouru_um += abs(azimutal[-1]) * av
         p = p + d * (av / voxel_um)
     if not th:
         return {"decidable": False, "pourquoi": "aucun pas"}
@@ -157,6 +196,11 @@ def penchant(depart_zyx, axe_zyx, etapes, voxel_um: float = VOXEL_UM) -> dict:
             "azimutal_absolu_median": round(float(np.median(np.abs(azimutal))), 3),
             "coherence_tangentielle": round(
                 float(np.linalg.norm(tangent_net) / max(tangent_parcouru, 1e-12)), 3),
+            "coherence_axiale": coherence_dun_axe(axial_net_um, axial_parcouru_um, voxel_um),
+            "coherence_azimutale": coherence_dun_axe(azimutal_net_um, azimutal_parcouru_um,
+                                                     voxel_um),
+            "chemin_axial_um": round(axial_parcouru_um, 1),
+            "chemin_azimutal_um": round(azimutal_parcouru_um, 1),
             "chemin_um": round(float(avances.sum()), 1),
             "rayon_depart_um": round(rayons[0], 1),
             "etendue_cylindrique_um": round(float(np.linalg.norm(u_cyl)) * voxel_um - rayons[0], 1),
@@ -675,6 +719,53 @@ def verifier() -> int:
     c = penchant(dep, axe, longs + courts)
     v("sonde : la cohérence est pondérée par l'avance, pas comptée par pas",
       c["coherence_tangentielle"] > 0.7, f"coh {c['coherence_tangentielle']}")
+
+    # ---- ⭐⭐⭐⭐ la cohérence tangentielle MOYENNE sur l'axe où la différence vit
+    # Deux marches MIROIR : l'une garde son signe axial et alterne en azimut, l'autre l'inverse.
+    # Les deux parts valent sin(30°)/sqrt(2) chacune, donc la geometrie est symetrique et la
+    # coherence TANGENTIELLE doit rendre le meme nombre. Si les deux coherences PAR AXE ne se
+    # renversaient pas, la decomposition n'apporterait rien.
+    demi = np.sin(np.radians(th)) / np.sqrt(2.0)
+    base = np.cos(np.radians(th)) * rad
+    ax_tient = [base + demi * z + (1 if i % 2 else -1) * demi * phi for i in range(12)]
+    az_tient = [base + (1 if i % 2 else -1) * demi * z + demi * phi for i in range(12)]
+    _, _, ea = _course_fabriquee(ax_tient)
+    _, _, eb = _course_fabriquee(az_tient)
+    ca, cb = penchant(dep, axe, ea), penchant(dep, axe, eb)
+    # ⚠⚠ LE MIROIR N'EST PAS EXACT, ET LA SONDE L'A DIT : l'axe qui alterne est le z FIXE dans une
+    # marche et le `phi_hat` QUI TOURNE dans l'autre, donc les deux geometries ne sont pas la meme
+    # a une rotation pres. Ce qui se compare est donc l'ECART que chaque grandeur met entre les
+    # deux marches, jamais leur egalite — et aucun seuil n'entre : les trois ecarts sont mesures.
+    ecart_tangentiel = abs(ca["coherence_tangentielle"] - cb["coherence_tangentielle"])
+    ecart_axial = abs(ca["coherence_axiale"] - cb["coherence_axiale"])
+    ecart_azimutal = abs(ca["coherence_azimutale"] - cb["coherence_azimutale"])
+    v("⭐⭐⭐⭐ les deux cohérences PAR AXE se renversent entre deux marches miroir",
+      ca["coherence_axiale"] > cb["coherence_axiale"]
+      and ca["coherence_azimutale"] < cb["coherence_azimutale"],
+      f"axiale {ca['coherence_axiale']}/{cb['coherence_axiale']} · "
+      f"azimutale {ca['coherence_azimutale']}/{cb['coherence_azimutale']}")
+    v("... et la cohérence TANGENTIELLE les sépare MOINS que chacun des deux axes",
+      ecart_tangentiel < ecart_axial and ecart_tangentiel < ecart_azimutal,
+      f"tangentielle {ecart_tangentiel:.3f} contre axiale {ecart_axial:.3f} et "
+      f"azimutale {ecart_azimutal:.3f}")
+    # ⚠⚠ Un axe qui ne porte rien n'a PAS de coherence. Une marche purement radiale ne porte ni
+    # l'un ni l'autre, et rendre zero la ferait lire comme un serpentement parfait.
+    pr = penchant(dep, axe, pas)
+    v("⚠⚠ un axe qui ne porte rien rend `None`, jamais zéro",
+      pr["coherence_axiale"] is None and pr["coherence_azimutale"] is None,
+      f"axiale {pr['coherence_axiale']}, azimutale {pr['coherence_azimutale']}")
+    pz = penchant(dep, axe, pax)
+    v("... et une marche purement axiale rend UN sur son axe et `None` sur l'autre",
+      pz["coherence_axiale"] == 1.0 and pz["coherence_azimutale"] is None,
+      f"axiale {pz['coherence_axiale']}, azimutale {pz['coherence_azimutale']}")
+    # ⚠⚠ LA BORNE SE DERIVE, ET LA SONDE LE VERIFIE DES DEUX COTES : un voxel exprime 2,4 µm, donc
+    # deux pas dont la part axiale parcourt 2,08 µm sont muets et 2,77 µm ne le sont plus.
+    sous = penchant(dep, axe, _course_fabriquee([rad + 0.006 * z] * 2)[2])
+    sur = penchant(dep, axe, _course_fabriquee([rad + 0.008 * z] * 2)[2])
+    v("sonde de la borne : sous un voxel de chemin l'axe est muet, au-dessus il parle",
+      sous["coherence_axiale"] is None and sur["coherence_axiale"] is not None,
+      f"{sous['chemin_axial_um']} µm muet, {sur['chemin_axial_um']} µm lu "
+      f"({sur['coherence_axiale']}) · un voxel = {VOXEL_UM} µm")
 
     # ---- axial contre azimutal
     d_ax = np.cos(np.radians(th)) * rad + np.sin(np.radians(th)) * z

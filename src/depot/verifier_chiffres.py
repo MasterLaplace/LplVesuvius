@@ -3123,6 +3123,98 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 if m_.get("marches_axiales") is not None:
                     ajoute(f"marches axiales {q}", int(m_["marches_axiales"]), 0, vp.name)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 171 : LE CAP AGIT-IL SUR LES DEUX AXES.
+    # (1) Un rapport du cap ne voyage jamais sans l'AUTRE LECTURE du meme rapport : c'est l'ecart
+    # entre la lecture appariee et celle qui ne l'est pas qui est le resultat, et une seule des
+    # deux reconduirait le defaut que cette tranche existe pour montrer.
+    # (2) Une part ne voyage jamais sans le nombre de BANDES sur lequel elle est prise : comparer
+    # des totaux sur des populations inegales est le peche capital de ce depot.
+    # (3) Et une COHERENCE PAR AXE ne voyage jamais sans l'autre axe : c'est leur ORDRE qui teste
+    # le mecanisme, jamais l'une des deux seule.
+    # ⚠⚠⚠ N'ENREGISTRER QUE CE QUE LE DOCUMENT PUBLIE. Le module mesure davantage : les coherences
+    # de la lecture NON appariee, les parts des matieres dont le lien n'est pas posable, la marge
+    # SANS cap. Le document ne les ecrit pas, donc les enregistrer rendrait ce controle rouge pour
+    # des chiffres que personne n'a publies — et le reparer voudrait dire ajouter des faits au
+    # document pour satisfaire une garde, ce qui est exactement l'inverse de son metier.
+    # ⚠⚠ LES DECIMALES SONT CELLES DU PRODUCTEUR, JAMAIS COMPLETEES.
+    cap2 = _source(racine, "le_cap_agit_il_sur_les_deux_axes.json")
+    if cap2.exists():
+        d = json.loads(cap2.read_text())
+
+        def _dec171(x) -> int:
+            t = repr(float(x))
+            return len(t.split(".")[1]) if "." in t else 0
+
+        ro_ = d.get("le_rouleau") or {}
+        if ro_.get("decidable"):
+            for cap_, n_ in sorted((ro_.get("bandes_par_cap") or {}).items()):
+                ajoute(f"bandes du rouleau a cap {cap_} de 171", int(n_), 0, cap2.name)
+            if ro_.get("bandes_communes") is not None:
+                ajoute("bandes communes du rouleau de 171", int(ro_["bandes_communes"]), 0,
+                       cap2.name)
+            for etiquette in ("toutes_les_bandes", "bandes_appariees"):
+                lisible = etiquette.replace("_", " ")
+                e_ = (ro_.get(etiquette) or {}).get("effet") or {}
+                if not e_.get("decidable"):
+                    continue
+                for cle, nom in (
+                        ("part_axiale_sans_cap", "part axiale du rouleau sans cap"),
+                        ("part_axiale_avec_cap", "part axiale du rouleau avec cap"),
+                        ("part_azimutale_sans_cap", "part azimutale du rouleau sans cap"),
+                        ("part_azimutale_avec_cap", "part azimutale du rouleau avec cap"),
+                        ("le_cap_multiplie_l_axial_par", "le cap multiplie l axial du rouleau"),
+                        ("le_cap_multiplie_l_azimutal_par",
+                         "le cap multiplie l azimutal du rouleau"),
+                        ("lecart_entre_les_parts_avec_cap",
+                         "marge du verdict du rouleau avec cap")):
+                    if e_.get(cle) is not None:
+                        ajoute(f"{nom} sur {lisible} de 171", float(e_[cle]),
+                               _dec171(e_[cle]), cap2.name)
+            # ⚠ Les quatre coherences publiees sont celles de la lecture APPARIEE, parce que c'est
+            # la seule sur laquelle le document conclut.
+            e_ = (ro_.get("bandes_appariees") or {}).get("effet") or {}
+            for cle, nom in (("coherence_axiale_sans_cap", "coherence axiale du rouleau sans cap"),
+                             ("coherence_axiale_avec_cap", "coherence axiale du rouleau avec cap"),
+                             ("coherence_azimutale_sans_cap",
+                              "coherence azimutale du rouleau sans cap"),
+                             ("coherence_azimutale_avec_cap",
+                              "coherence azimutale du rouleau avec cap")):
+                if e_.get(cle) is not None:
+                    ajoute(f"{nom} sur bandes appariees de 171", float(e_[cle]),
+                           _dec171(e_[cle]), cap2.name)
+        # ⚠ Le document ne tabule que les cas POSABLES : une matiere dont un axe ne porte rien n'y
+        # a ni rapport ni coherence a lire.
+        for m_ in ((d.get("la_fixture") or {}).get("par_matiere") or []):
+            e_ = m_.get("effet") or {}
+            if not (e_.get("decidable") and (m_.get("lien") or {}).get("decidable")):
+                continue
+            q = f"de la {m_['nom']} de 171"
+            for cle, nom in (("le_cap_multiplie_l_axial_par", "le cap multiplie l axial"),
+                             ("le_cap_multiplie_l_azimutal_par", "le cap multiplie l azimutal"),
+                             ("coherence_axiale_sans_cap", "coherence axiale sans cap"),
+                             ("coherence_azimutale_sans_cap", "coherence azimutale sans cap")):
+                if e_.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(e_[cle]), _dec171(e_[cle]), cap2.name)
+        ec_ = d.get("lecart_a_la_fixture") or {}
+        if ec_.get("decidable"):
+            for cle, bloc in ec_.items():
+                if not isinstance(bloc, dict):
+                    continue
+                lisible = cle.replace("_", " ")
+                for sous, nom in (("la_fixture", "part azimutale de la fixture"),
+                                  ("le_rouleau", "part azimutale du rouleau"),
+                                  ("la_fixture_vaut_le_rouleau_fois",
+                                   "la fixture vaut le rouleau fois")):
+                    if bloc.get(sous) is not None:
+                        ajoute(f"{nom}, {lisible} de 171", float(bloc[sous]),
+                               _dec171(bloc[sous]), cap2.name)
+        v_ = d.get("le_verdict") or {}
+        if v_.get("cas_posables") is not None:
+            ajoute("cas posables de 171", int(v_["cas_posables"]), 0, cap2.name)
+            ajoute("cas examines de 171", int(v_["cas_examines"]), 0, cap2.name)
+            ajoute("cas ou le lien tient de 171", int(len(v_.get("ou_le_lien_tient") or [])), 0,
+                   cap2.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 169 : LA FIXTURE PENCHE-T-ELLE DU MEME COTE QUE LE ROULEAU.
     # (1) Une part axiale ne voyage jamais sans son AZIMUTALE : c'est leur comparaison qui porte
     # l'enonce, et une seule se lirait comme un niveau.
