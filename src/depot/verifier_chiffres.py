@@ -3194,6 +3194,80 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 184 : UNE SUITE DE CREUX SE RECALE-T-ELLE ?
+    # (1) Une part de voisins RECALES ne voyage jamais sans celle des non-voisins RECALES : le
+    # recalage triple les deux, et une moitie seule se lirait comme un gain.
+    # (2) Ni sans le compte de paires qui depassent LEUR PROPRE TIRAGE : c'est lui qui dit que le
+    # gain vient de la liberte de decaler, et il vaut zero.
+    # (3) Et l'etalon ne voyage jamais sans son compte de decalages retrouves : un recalage qui ne
+    # recale pas rendrait du bruit sous un nom qui promet autre chose.
+    sr = _source(racine, "une_suite_de_creux_se_recale_t_elle.json")
+    if sr.exists():
+        d = json.loads(sr.read_text())
+
+        def _dec184(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("creux_cherches_par_chunk", "creux cherches par chunk"),
+                         ("plage_de_decalage", "plage de decalage"),
+                         ("cote_du_treillis", "cote du treillis"),
+                         ("permutations", "tirages par paire"), ("couches", "couches")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 184", int(d[cle]), 0, sr.name)
+        if d.get("recouvrement_um_de_179") is not None:
+            ajoute("recouvrement relu de 179 de 184", float(d["recouvrement_um_de_179"]),
+                   _dec184(d["recouvrement_um_de_179"]), sr.name, unites=("µm",))
+        for s in (d.get("les_segments") or []):
+            if not s.get("decidable"):
+                continue
+            q = f"du segment {s['segment']} de 184"
+            for cle, nom in (("amas_lus", "amas lus"), ("chunks_lus", "chunks lus"),
+                             ("paires_adjacentes", "paires adjacentes"),
+                             ("paires_qui_depassent_le_hasard",
+                              "paires qui depassent le hasard")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(s[cle]), 0, sr.name)
+            for cle, nom in (("part_moyenne_des_voisins", "part moyenne des voisins recales"),
+                             ("decalage_median", "decalage median")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(s[cle]), _dec184(s[cle]), sr.name)
+            loin = s.get("les_non_voisins") or {}
+            if loin.get("part_moyenne") is not None:
+                ajoute(f"part moyenne des non voisins recales {q}", float(loin["part_moyenne"]),
+                       _dec184(loin["part_moyenne"]), sr.name)
+        for x in ((d.get("la_fixture") or {}).get("lignes") or []):
+            q = f"a decalage pose {x['decalage_pose']} de 184"
+            for cle, nom in (("decalage_pose", "decalage pose"), ("cellules", "cellules"),
+                             ("retrouve", "decalages retrouves")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(x[cle]), 0, sr.name)
+            if x.get("part_mediane") is not None:
+                ajoute(f"part mediane {q}", float(x["part_mediane"]),
+                       _dec184(x["part_mediane"]), sr.name)
+        v_ = d.get("le_verdict") or {}
+        for cle, nom in (("amas_lus", "amas lus"), ("chunks_lus", "chunks lus"),
+                         ("paires_adjacentes", "paires adjacentes"),
+                         ("paires_qui_depassent_le_hasard", "paires qui depassent le hasard"),
+                         ("decalages_retrouves_sur_la_fixture",
+                          "decalages retrouves sur la fixture"),
+                         ("cellules_de_la_fixture", "cellules de la fixture")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 184", int(v_[cle]), 0, sr.name)
+        for cle, nom in (("part_des_voisins_recales", "part des voisins recales"),
+                         ("part_des_non_voisins_recales", "part des non voisins recales"),
+                         ("part_des_voisins_sans_recalage_de_183",
+                          "part des voisins sans recalage relue de 183"),
+                         ("ce_quil_ajoute_fois", "ce qu il ajoute fois"),
+                         ("decalage_median", "decalage median"),
+                         ("part_de_la_fixture", "part de la fixture"),
+                         ("part_des_paires_qui_depassent", "part des paires qui depassent")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 184", float(v_[cle]), _dec184(v_[cle]), sr.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 183 : UN CREUX SE RETROUVE-T-IL A COTE ?
     # (1) Une part chez le VOISIN ne voyage jamais sans celle chez un NON-VOISIN : deux chunks
     # quelconques partagent des creux par hasard, et une part seule se lirait comme un resultat.

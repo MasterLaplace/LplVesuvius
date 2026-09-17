@@ -2310,6 +2310,38 @@ qu'un par un. Une suite de creux peut être retrouvable là où aucun de ses mem
 une question de **motif** et non de position, et elle se contrôle par la même permutation, appliquée
 cette fois à l'**ordre** des creux dans la suite.
 
+**`184` · 2026-09-17 · une suite de creux se recale-t-elle ?**
+`183` a mesuré qu'un creux **seul** ne suffit pas. `R4-P33` nommait ce qui restait : les prendre
+**ensemble**. ⭐⭐⭐⭐ Et il y a une raison physique — deux chunks voisins ne sont pas à la même
+profondeur dans la feuille, donc tout l'empilement de l'un peut être **décalé**. Chercher ce décalage
+**est** l'opération du transfert de spire à spire.
+⚠⚠⚠ **La liberté de décaler se paie**, comme `179` a payé la largeur et `181` le rang : le non-voisin
+subit **exactement** la même recherche sur la même plage, et chaque paire est en plus comparée à
+**ses propres** creux tirés au hasard, en même nombre et recalés pareil. La plage est **dérivée** —
+un demi-pli, au-delà duquel un décalage devient un aliasing.
+⚠⚠⚠ **Deux défauts trouvés par la mesure.** Les égalités se tranchaient par le plus petit décalage,
+donc un décalage de trois était absorbé par un décalage **nul** puisque la tolérance vaut quatre : le
+recalage n'aurait pas retrouvé un décalage plus petit que sa propre tolérance. Et le **signe**
+attendu de l'étalon était pris à l'envers — l'étalon rendait **4/16**, et c'est une sonde qui l'a dit.
+⭐ **LE RECALAGE RECALE** : **16/16** décalages construits retrouvés, des deux signes et nul compris,
+correspondance **1**. Et il **triple** la correspondance des voisins sur le rouleau — **0,2222**
+(`183`) → **0,6667**, soit **3,0005** fois — `R4-F207`.
+✗ **MAIS IL PORTE LES NON-VOISINS À 0,6319, ET AUCUNE DES 99 PAIRES NE DÉPASSE SON PROPRE TIRAGE** —
+`R4-F208`. Le gain vient donc de la **liberté de décaler** et non de la matière. ⚠⚠⚠ Un creux
+**unique** se recale **toujours** — un seul point se met en face de n'importe quel autre point de la
+plage — donc le recalage ne crée pas d'information, il en consomme.
+⚠ Trois sondes sont passées au **vert** et ont été réparées : le contrôle par tirage n'était pas
+vérifié comme recalant (« sa part médiane est non nulle » est vrai des deux côtés), le cas
+d'**égalité** manquait, et ma première réparation comparait des **médianes** que la quantification
+rend égales — le piège de `182`, une fois de plus.
+⭐ `R4-P33` **se ferme sur cette famille d'observables** : ni un creux seul, ni une suite recalée ne
+transfèrent une spire. Ce que la chaîne `179`–`184` a gagné reste acquis et il est grand — le creux
+**existe**, il est plus profond qu'une frontière construite, il tombe là où l'orientation change le
+plus, il tient au bruit **16**, et ce n'est ni un interstice ni un empilement périodique. Ce qui
+manque est sa **continuité latérale**. ⭐ Et ce qui n'a jamais été mesuré reste ce que `14` §8 nomme :
+la continuité **le long d'une ligne**, en **suivant un individu** — l'objection de `128` tenant
+toujours, une fréquence donne une phase et pas une identité.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
