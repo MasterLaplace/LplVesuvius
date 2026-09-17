@@ -3194,6 +3194,71 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 178 : PLUS DE PROFONDEUR, OU PLUS DE DISCERNEMENT ?
+    # (1) Un plancher ne voyage jamais sans la LARGEUR qui le rend : c'est leur relation qui est le
+    # resultat, et un plancher seul se lirait comme une propriete du juge.
+    # (2) Un plancher ne voyage jamais sans ce que la MEME largeur fait d'un empilement : c'est un
+    # echange, et une moitie seule se lirait comme un gain.
+    # (3) Et le plus bas des planchers ne voyage jamais sans son rapport a la bascule du rouleau :
+    # « vingt-deux degres » ne dit rien, « trois fois la bascule » dit tout.
+    pd = _source(racine, "plus_de_profondeur_ou_plus_de_discernement.json")
+    if pd.exists():
+        d = json.loads(pd.read_text())
+
+        def _dec178(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("pli_en_couches", "pli en couches"), ("couches", "couches"),
+                         ("permutations", "permutations"),
+                         ("graines_par_cellule", "graines par cellule")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 178", int(d[cle]), 0, pd.name)
+        for k in (d.get("frontieres_de_pli") or []):
+            ajoute(f"frontiere de pli de 178 ({k})", int(k), 0, pd.name)
+        if d.get("le_quart_de_tour_deg") is not None:
+            ajoute("le quart de tour de 178", float(d["le_quart_de_tour_deg"]),
+                   _dec178(d["le_quart_de_tour_deg"]), pd.name, unites=("°",))
+        for b in (d.get("les_barreaux") or []):
+            q = f"a {b['en_plis']} pli(s) de 178"
+            ajoute(f"largeur en couches {q}", int(b["largeur"]), 0, pd.name)
+            pl = b.get("plancher") or {}
+            if pl.get("le_plus_petit_tour_tenu_deg") is not None:
+                ajoute(f"plancher tenu {q}", float(pl["le_plus_petit_tour_tenu_deg"]),
+                       _dec178(pl["le_plus_petit_tour_tenu_deg"]), pd.name, unites=("°",))
+            for c in (pl.get("cellules") or []):
+                w = f"a {c['tour_deg']}° et {c['dispersion_deg']}° {q}"
+                for cle, nom in (("marches_justes", "marches justes"),
+                                 ("derives_justes", "derives justes")):
+                    if c.get(cle) is not None:
+                        ajoute(f"{nom} {w}", int(c[cle]), 0, pd.name)
+            es = b.get("escalier") or {}
+            for cle, nom in (("lectures", "lectures d escalier"),
+                             ("lus_marche", "escaliers lus marche"),
+                             ("lus_derive", "escaliers lus derive"),
+                             ("sans_verdict", "escaliers sans verdict"),
+                             ("frontieres", "frontieres de l escalier")):
+                if es.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(es[cle]), 0, pd.name)
+        v_ = d.get("le_verdict") or {}
+        for cle, nom in (("a_la_largeur", "largeur du plancher le plus bas"),
+                         ("la_plus_large_qui_tient_lempilement",
+                          "la plus large qui tient l empilement")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 178", int(v_[cle]), 0, pd.name)
+        for cle, nom, unite in (
+                ("le_plancher_le_plus_bas_deg", "plancher le plus bas", "°"),
+                ("il_vaut_le_quart_de_tour_fois", "il vaut le quart de tour fois", ""),
+                ("le_plancher_le_plus_bas_vaut_la_bascule_fois",
+                 "le plancher le plus bas vaut la bascule fois", ""),
+                ("la_bascule_du_rouleau_deg", "bascule du rouleau relue", "°")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 178", float(v_[cle]), _dec178(v_[cle]), pd.name,
+                       unites=((unite,) if unite else ()))
+
     # ⭐⭐⭐⭐ LA TRANCHE 177 : LA PROFONDEUR TOURNE-T-ELLE, OU BASCULE-T-ELLE ?
     # (1) Un excedent ne voyage jamais sans la part et le MELANGE dont il est la difference :
     # l'excedent seul se lirait comme une qualite d'ajustement, alors qu'il est un ecart.

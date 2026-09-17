@@ -2070,6 +2070,38 @@ garde de figure ne voit ça.
 `175` a mesuré qu'un ajustement en deux segments ne décrit qu'une frontière, mais un ajustement
 affine n'a pas cette limite, et rien n'a mesuré ce qu'il rend sur les **109** couches entières.
 
+**`178` · 2026-09-17 · plus de profondeur, ou plus de discernement ?**
+`R4-P31` nommait la voie la moins chère pour abaisser le plancher de `177` : la fenêtre fait un
+**pli** uniquement parce qu'un ajustement en deux segments ne décrit qu'une frontière (`175`), et un
+ajustement **affine** n'a pas cette limite. Sur une fenêtre plus large, le tour **accumulé** est plus
+grand. Cette tranche l'essaie, aux trois largeurs dérivées — un pli, deux, trois.
+⭐⭐⭐⭐ **LE PLANCHER DESCEND, ET D'UN CRAN PAR PLI** : **90°** à **36** couches, **45°** à **72**,
+**22,5°** à **108** — ce dernier valant **0,25** fois le quart de tour — `R4-F191`. ⚠⚠ L'échelle des
+largeurs est dérivée du pli, et trois plis est à un dixième près la profondeur entière du volume.
+Rien d'autre ne bouge entre les barreaux, sinon la comparaison cesserait d'en être une.
+✗ **MAIS UN EMPILEMENT Y DEVIENT UNE ROTATION, ET AU MÊME CRAN.** Un escalier de plis — orientation
+constante par morceaux, sauts aux frontières, **même** tour total — est lu comme un empilement
+**306** fois sur **400** à un pli, puis comme une rotation **212** fois à deux et **226** à trois —
+`R4-F192`. ⚠⚠⚠ Les deux moitiés sont la **même** quantité, le tour accumulé : l'abaisser demande de
+traverser des frontières de pli, et un rouleau n'est pas une matière qui tourne, c'est un
+**empilement** — `175` mesure que les 109 couches en portent **3,024 plis**. Aucune largeur ne donne
+les deux, et la seule où un empilement reste lisible a un plancher de **90°** pour une bascule de
+**6,862°**.
+⚠⚠⚠ **ET UNE SECONDE BORNE TIENT MÊME EN ACCEPTANT DE PERDRE LA DISTINCTION** : le plancher le plus
+bas atteignable sur ce volume vaut **3,2789** fois cette bascule — `R4-F193`. Les deux bornes sont de
+natures différentes et aucune ne rachète l'autre : l'une dit que la largeur qui suffirait ne
+distingue plus rien, l'autre que cette largeur n'existe pas dans le volume.
+⚠⚠ **Ce n'est pas un zéro, et la mesure l'a imposé** : ma première rédaction exigeait qu'à un pli un
+empilement ne soit **jamais** lu comme une rotation, et la sonde a répondu **1 fois sur 7**. Ce qui
+se mesure est le **sens** de la lecture dominante.
+⚠⚠ **Une frontière qui ne laisse pas de segment n'en est pas une**, et la borne se dérive de
+l'estimateur : `174` refuse une tranche de moins de **quatre** couches, donc un saut à la couche 108
+d'un volume qui en a 109 n'est pas une frontière. Sans cette règle la campagne en rendait **trois**
+au lieu de deux, ce qu'une sonde a montré et non une relecture.
+⭐ `R4-P31` **se resserre** au lieu de se fermer, et la question change de forme : ce n'est plus un
+plancher à faire descendre, c'est un énoncé qui sépare un empilement d'une rotation **sans** passer
+par le tour accumulé — donc qui lise autre chose que l'orientation moyenne par couche.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
