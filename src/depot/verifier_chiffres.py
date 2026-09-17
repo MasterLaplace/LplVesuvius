@@ -3194,6 +3194,79 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 185 : JUSQU'OU SUIT-ON UNE FIBRE ?
+    # (1) Une longueur suivie ne voyage jamais sans ses DEUX controles — en travers et sur du
+    # melange — sinon elle se lirait comme une propriete de la matiere alors qu'elle peut etre la
+    # mecanique du suiveur.
+    # (2) Ni sans ce que rend l'ETALON : un suiveur qui ne suit pas rendrait la meme longueur.
+    # (3) Et elle ne voyage jamais sans le PAS ENTRE DEUX FEUILLES : « quatre-vingt-quatre
+    # micrometres » ne dit rien sans « pour cent soixante-treize ».
+    sf = _source(racine, "jusquou_suit_on_une_fibre.json")
+    if sf.exists():
+        d = json.loads(sf.read_text())
+
+        def _dec185(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("departs_par_couche", "departs par couche"),
+                         ("couches_par_chunk", "couches par chunk"),
+                         ("cote_du_treillis", "cote du treillis"),
+                         ("plafond_de_pas", "plafond de pas")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 185", int(d[cle]), 0, sf.name)
+        for cle, nom, unite in (("voxel_um", "voxel", "µm"), ("pas_um", "pas entre deux feuilles",
+                                                              "µm")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 185", float(d[cle]), _dec185(d[cle]), sf.name, unites=(unite,))
+        for s in (d.get("les_segments") or []):
+            if not s.get("decidable"):
+                continue
+            q = f"du segment {s['segment']} de 185"
+            for cle, nom in (("chunks_lus", "chunks lus"), ("couches_lues", "couches lues")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(s[cle]), 0, sf.name)
+            for cle, nom in (("le_long", "pas le long"), ("en_travers", "pas en travers"),
+                             ("melangee", "pas sur du melange"),
+                             ("le_long_maximal", "pas le long au maximum")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(s[cle]), _dec185(s[cle]), sf.name)
+        et = d.get("letalon") or {}
+        for cle, nom in (("le_long", "pas le long"), ("en_travers", "pas en travers"),
+                         ("melangee", "pas sur du melange")):
+            if et.get(cle) is not None:
+                ajoute(f"{nom} de l etalon de 185", float(et[cle]), _dec185(et[cle]), sf.name)
+        for ligne in (et.get("lignes") or []):
+            q = f"a {ligne['angle_des_cretes_deg']} degres de l etalon de 185"
+            ajoute(f"angle des cretes {q}", float(ligne["angle_des_cretes_deg"]),
+                   _dec185(ligne["angle_des_cretes_deg"]), sf.name, unites=("°",))
+            for cle, nom in (("le_long", "pas le long"), ("en_travers", "pas en travers"),
+                             ("melangee", "pas sur du melange")):
+                val = (ligne.get(cle) or {}).get("pas_median")
+                if val is not None:
+                    ajoute(f"{nom} {q}", float(val), _dec185(val), sf.name)
+        v_ = d.get("le_verdict") or {}
+        for cle, nom in (("chunks_lus", "chunks lus"), ("couches_lues", "couches lues")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 185", int(v_[cle]), 0, sf.name)
+        for cle, nom, unite in (
+                ("le_long_en_pas", "pas le long", ""),
+                ("en_travers_en_pas", "pas en travers", ""),
+                ("melangee_en_pas", "pas sur du melange", ""),
+                ("le_long_en_um", "longueur suivie", "µm"),
+                ("le_pas_entre_deux_feuilles_um", "pas entre deux feuilles", "µm"),
+                ("il_vaut_le_pas_entre_deux_feuilles_fois",
+                 "il vaut le pas entre deux feuilles fois", ""),
+                ("le_long_de_letalon", "pas le long de l etalon", ""),
+                ("en_travers_de_letalon", "pas en travers de l etalon", ""),
+                ("melangee_de_letalon", "pas sur du melange de l etalon", "")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 185", float(v_[cle]), _dec185(v_[cle]), sf.name,
+                       unites=((unite,) if unite else ()))
+
     # ⭐⭐⭐⭐ LA TRANCHE 184 : UNE SUITE DE CREUX SE RECALE-T-ELLE ?
     # (1) Une part de voisins RECALES ne voyage jamais sans celle des non-voisins RECALES : le
     # recalage triple les deux, et une moitie seule se lirait comme un gain.

@@ -1508,6 +1508,8 @@ run "creux a cote"        uv run python "$ROOT/src/nappe/un_creux_se_retrouve_t_
 run "figure creux a cote" uv run python "$ROOT/src/figures/figure_un_creux_se_retrouve_t_il_a_cote.py" --verifier
 run "suite recalee"       uv run python "$ROOT/src/nappe/une_suite_de_creux_se_recale_t_elle.py" --verifier
 run "figure recalage"     uv run python "$ROOT/src/figures/figure_une_suite_de_creux_se_recale_t_elle.py" --verifier
+run "suivre une fibre"    uv run python "$ROOT/src/nappe/jusquou_suit_on_une_fibre.py" --verifier
+run "figure fibre"        uv run python "$ROOT/src/figures/figure_jusquou_suit_on_une_fibre.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

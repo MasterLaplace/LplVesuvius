@@ -2342,6 +2342,39 @@ manque est sa **continuité latérale**. ⭐ Et ce qui n'a jamais été mesuré 
 la continuité **le long d'une ligne**, en **suivant un individu** — l'objection de `128` tenant
 toujours, une fréquence donne une phase et pas une identité.
 
+**`185` · 2026-09-17 · jusqu'où suit-on une fibre ?**
+⭐⭐⭐⭐ **Le critère du prix est enfin mesuré.** Le Grand Prize fait de la continuité des fibres LE
+critère visuel, `14` §8 nomme la bonne forme depuis le début — la continuité **le long d'une ligne** —
+et **rien** ne l'avait mesurée. `184` venant de fermer la voie des creux, c'est la piste qui restait.
+⚠⚠⚠ **L'objection de `128` décide de la forme** : une fréquence donne une phase, pas une identité,
+donc un spectre ou une autocorrélation rendraient la même chose sur deux morceaux qui ne sont pas la
+même fibre. Ce qui vaut est de **suivre un individu** — partir d'une crête et compter jusqu'où on
+tient.
+⚠⚠⚠ **Et le premier critère d'arrêt était VACANT en travers.** Il testait la maximalité locale dans
+la perpendiculaire au **déplacement** : en marchant en travers, cette perpendiculaire court **le
+long** d'une crête, où tout est plat, donc le test était satisfait partout — le suiveur allait aussi
+loin en travers que le long, et l'étalon l'a montré nu. Le critère réparé est indépendant de la
+direction : la plus longue suite de pas restés au-dessus de la **médiane de l'image**, donc un
+plancher lu sur la matière et non choisi.
+⭐ **LE SUIVEUR SUIT** : **74** pas le long de crêtes construites contre **7** en travers et **18,5**
+sur la même image mélangée, et ça tient à 0°, 30° et 90° — `R4-F209`.
+⭐ **ET LE ROULEAU PORTE DES CRÊTES SUIVABLES** : **35,0** pas le long contre **23,5** en travers et
+**16,0** sur du mélange, sur 27 chunks et 162 couches.
+✗ **MAIS ÇA FAIT 84,0 µm POUR UN PAS DE FEUILLE DE 173 µm**, soit **0,4855** fois — `R4-F210`.
+**On ne franchit pas une feuille**, donc suivre une fibre ne garantit pas, aujourd'hui, qu'on ne saute
+pas de feuille. ⚠ La plus longue crête suivie atteint pourtant **109** pas : certaines fibres y
+arrivent, la médiane non.
+⚠⚠ Deux limites dites : la marche est **gloutonne** — le plus brillant des trois voisins à chaque pas
+— donc la longueur mesurée est une borne **inférieure** ; et l'angle publié par `orientation_profile`
+étant la **perpendiculaire** aux fibres (`172`), le convertir n'est pas un détail — suivre l'angle
+brut inverserait exactement les deux lectures comparées.
+⚠ Une sonde est passée au **vert** : la conversion était vérifiée sur la fonction mais jamais au
+**site d'appel**. Elle l'est maintenant, sur un bloc dont la direction des fibres est construite.
+⭐ `R4-P34` **s'ouvre** : une matière mieux résolue rendrait-elle la fibre suivable sur une feuille
+entière ? Le voxel vaut **2,4** µm et une fibre en fait quatre à huit ; les volumes à **1,129** µm
+existent et le dépôt les recense. ⚠⚠ La comparaison devra se faire **en micromètres et non en pas** :
+un voxel deux fois plus fin double mécaniquement le nombre de pas sans rien ajouter.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
