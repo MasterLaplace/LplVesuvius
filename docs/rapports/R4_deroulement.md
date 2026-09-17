@@ -2416,6 +2416,40 @@ franchissent déjà au voxel de la campagne (contre **0,042** au voxel fin) et l
 fibres-là suffisent-elles à transférer une spire »** — sont-elles assez nombreuses, assez réparties, et
 se retrouvent-elles **de part et d'autre** d'une frontière.
 
+**`187` · 2026-09-18 · un ruban qui saute perd-il sa fibre ?**
+⭐⭐⭐⭐ **`R4-P35` était mal posée, et la tranche la redresse.** Elle demandait si la minorité qui
+franchit ANCRE un transfert. ⚠⚠⚠ Une fibre ne le peut pas : elle appartient à une feuille et s'arrête
+avec elle, donc elle n'a rien à dire de l'autre côté. Ce que le prix demande est l'inverse — *« and
+not jumping between sheets »* — et la continuité d'une fibre est le **TÉMOIN** qu'on n'a PAS sauté,
+c'est-à-dire exactement ce que l'humain surveille au transfert. `185` ne le mesurait que par
+**procuration**, en comparant une longueur à une distance.
+⭐ **Le RUBAN est l'objet qui manquait** : la marche de `185` dont la profondeur monte d'un bout à
+l'autre, donc qui lit la matière comme une segmentation la lit.
+⚠⚠⚠ **Et le contrôle qui décide est le ruban qui dérive SANS traverser** : les deux groupes ont la
+MÊME montée, seule la profondeur de départ change, et c'est la matière qui décide lequel traverse.
+Sans lui, un témoin qui pénalise n'importe quel mouvement passerait pour un détecteur de saut.
+⭐ **LE TÉMOIN VOIT LE SAUT** : sur des frontières POSÉES il les voit aux **12** décalages sur **12**,
+**7,75** pas perdus contre **0** en mélangeant l'ordre des couches, et un recouvrement l'adoucit —
+**9,5** au rasoir contre **6** à 45,6 µm. Le ruban plat atteint **22** pas, celui qui dérive sans
+traverser **22** aussi, celui qui traverse **12,5** — `R4-F214`.
+✗ **ET SUR LE ROULEAU IL NE TROUVE RIEN** : sur **16** chunks le saut coûte **0** pas, autant que le
+mélange, et il reste **0,9766** de la longueur suivable quand on traverse.
+⭐⭐⭐⭐ **MAIS LE CONTRASTE EST EXACTEMENT INVERSÉ, ET C'EST LE RÉSULTAT** — `R4-F215`. Dériver de
+seize couches coûte **6,625** pas, soit **15,9** µm sur un ruban qui en atteint **21,75** à plat, là
+où la matière construite n'en fait perdre **0**. **La fibre du rouleau témoigne d'un MOUVEMENT EN
+PROFONDEUR, pas d'un changement de feuille.** ⚠⚠ Deux causes que la tranche ne sépare pas et qu'elle
+nomme : ou le creux de `180` n'est pas une frontière d'orientation, ou la texture ne persiste pas
+d'une couche à l'autre — la seconde s'accorde avec `182` et `181`.
+⚠⚠⚠ **Deux défauts payés, et aucun trouvé en relisant** — `R4-F216`. Le plafond du ruban valait celui
+de `185`, **146** pas, alors qu'une fibre n'en survit qu'une vingtaine : la traversée arrivait après
+la mort de la crête et le témoin était **aveugle par construction**, ce que seul l'étalon a montré.
+Puis le plancher était la médiane du BLOC, or une matière empilée porte un profil de densité en
+profondeur : les longueurs déclinaient continûment avec la couche de départ, sans aucune marche à la
+frontière. Il a fallu un **instrument** pour le trancher, après deux hypothèses fausses.
+⭐ `R4-P36` **s'ouvre** : jusqu'où une surface peut-elle dériver avant que la matière cesse de se lire
+— `un_ruban` prend déjà la montée en argument, donc il suffit d'en faire une échelle, et le mélange
+de l'ordre des couches est le contrôle déjà écrit.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3194,6 +3194,116 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 187 : UN RUBAN QUI SAUTE PERD-IL SA FIBRE ?
+    # (1) Ce que le SAUT coute ne voyage jamais sans ce que la DERIVE coute : les deux ne disent pas
+    # la meme chose, et c'est leur INVERSION entre la matiere construite et le rouleau qui est le
+    # resultat. Publier l'un seul ferait lire « le saut ne coute rien » comme « rien ne coute ».
+    # (2) Ni sans le NUL — le melange de l'ORDRE des couches — parce qu'un cout sans son nul se lit
+    # comme un resultat alors que decouper deux groupes rapporte deja quelque chose.
+    # (3) Ni sans ce que rend l'ETALON : un temoin qui ne voit pas une frontiere POSEE ne dit rien du
+    # rouleau, et une premiere version etait AVEUGLE PAR CONSTRUCTION.
+    # (4) Et une pente ne voyage jamais sans son plafond : une fibre ne temoigne que d'une traversee
+    # arrivee dans SA propre longueur, donc la pente n'a de sens qu'avec la longueur qui la borne.
+    sr7 = _source(racine, "un_ruban_qui_saute_perd_il_sa_fibre.json")
+    if sr7.exists():
+        d = json.loads(sr7.read_text())
+
+        def _dec187(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("departs_par_couche", "departs par couche"),
+                         ("cote_du_treillis", "cote du treillis"),
+                         ("plafond_de_pas", "plafond de pas")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 187", int(d[cle]), 0, sr7.name)
+        if d.get("voxel_um") is not None:
+            ajoute("voxel de 187", float(d["voxel_um"]), _dec187(d["voxel_um"]), sr7.name,
+                   unites=("µm",))
+        et = d.get("letalon") or {}
+        for cle, nom in (("decalages_ou_le_saut_coute", "decalages ou le saut coute"),
+                         ("decalages_lisibles", "decalages lisibles"),
+                         ("montee_mediane", "montee de l etalon"),
+                         ("plafond_du_ruban_median", "plafond du ruban de l etalon")):
+            if et.get(cle) is not None:
+                ajoute(f"{nom} de 187", int(et[cle]), 0, sr7.name)
+        for cle, nom in (("cout_median_du_saut", "cout du saut de l etalon"),
+                         ("cout_median_du_nul", "nul de l etalon"),
+                         ("cout_median_de_la_derive", "cout de la derive de l etalon"),
+                         ("pas_a_plat_median", "pas a plat de l etalon"),
+                         ("pente_mediane", "pente de l etalon")):
+            if et.get(cle) is not None:
+                ajoute(f"{nom} de 187", float(et[cle]), _dec187(et[cle]), sr7.name)
+        for x in (et.get("par_recouvrement") or []):
+            q = f"au recouvrement {x['recouvrement_um']} de 187"
+            ajoute(f"recouvrement {q}", float(x["recouvrement_um"]),
+                   _dec187(x["recouvrement_um"]), sr7.name, unites=("µm",))
+            for cle, nom in (("decalages_ou_le_saut_coute", "decalages ou le saut coute"),
+                             ("decalages_lisibles", "decalages lisibles")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(x[cle]), 0, sr7.name)
+            for cle, nom in (("cout_median", "cout du saut"), ("nul_median", "nul")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(x[cle]), _dec187(x[cle]), sr7.name)
+        # ⚠ Les lignes de l'etalon portent les trois lectures ; elles sont identiques a un
+        # recouvrement donne, donc une seule par recouvrement suffit a ce que le document cite.
+        vus = set()
+        for x in (et.get("lignes") or []):
+            if not x.get("decidable") or x["recouvrement_um"] in vus:
+                continue
+            vus.add(x["recouvrement_um"])
+            q = f"au recouvrement {x['recouvrement_um']} de 187"
+            for cle, nom in (("pas_en_traversant", "pas en traversant"),
+                             ("pas_en_restant", "pas en restant"),
+                             ("pas_a_plat", "pas a plat")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(x[cle]), _dec187(x[cle]), sr7.name)
+        for sg in (d.get("les_segments") or []):
+            if not sg.get("decidable"):
+                continue
+            q = f"du segment {sg['segment']} de 187"
+            if sg.get("chunks_lus") is not None:
+                ajoute(f"chunks lus {q}", int(sg["chunks_lus"]), 0, sr7.name)
+            for cle, nom in (("pas_a_plat", "pas a plat"),
+                             ("pas_en_restant", "pas en restant"),
+                             ("pas_en_traversant", "pas en traversant"),
+                             ("cout_median_du_saut", "cout du saut"),
+                             ("cout_median_de_la_derive", "cout de la derive"),
+                             ("cout_median_du_nul", "nul")):
+                if sg.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(sg[cle]), _dec187(sg[cle]), sr7.name)
+        v7 = d.get("le_verdict") or {}
+        for cle, nom in (("chunks_lus", "chunks lus"), ("segments", "segments"),
+                         ("montee_mediane", "montee"),
+                         ("plafond_du_ruban_median", "plafond du ruban"),
+                         ("chunks_ou_le_saut_coute", "chunks ou le saut coute"),
+                         ("chunks_ou_le_nul_coute", "chunks ou le nul coute")):
+            if v7.get(cle) is not None:
+                ajoute(f"{nom} de 187", int(v7[cle]), 0, sr7.name)
+        for cle, nom, unite in (
+                ("pas_a_plat", "pas a plat", ""),
+                ("pas_en_restant", "pas en restant", ""),
+                ("pas_en_traversant", "pas en traversant", ""),
+                ("en_restant_um", "longueur en restant", "µm"),
+                ("en_traversant_um", "longueur en traversant", "µm"),
+                ("ce_que_le_saut_coute", "ce que le saut coute", ""),
+                ("ce_que_le_saut_coute_um", "ce que le saut coute en um", "µm"),
+                ("ce_que_la_derive_coute", "ce que la derive coute", ""),
+                ("ce_que_la_derive_coute_um", "ce que la derive coute en um", "µm"),
+                ("ce_que_le_nul_rend", "ce que le nul rend", ""),
+                ("il_en_reste_la_part", "il en reste la part", ""),
+                ("pente_mediane", "pente", ""),
+                ("le_cout_de_letalon", "cout de l etalon", ""),
+                ("le_nul_de_letalon", "nul de l etalon", ""),
+                ("la_derive_de_letalon", "derive de l etalon", ""),
+                ("pas_a_plat_de_letalon", "pas a plat de l etalon", "")):
+            if v7.get(cle) is not None:
+                ajoute(f"{nom} de 187", float(v7[cle]), _dec187(v7[cle]), sr7.name,
+                       unites=((unite,) if unite else ()))
+
     # ⭐⭐⭐⭐ LA TRANCHE 186 : SUIT-ON PLUS LOIN QUAND LE VOXEL EST PLUS FIN ?
     # (1) Une longueur du rouleau ne voyage jamais sans son UNITE : cette tranche ne publie que des
     # micrometres, parce qu'un voxel deux fois plus fin double le nombre de PAS sans rien ajouter et

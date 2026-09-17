@@ -1512,6 +1512,8 @@ run "suivre une fibre"    uv run python "$ROOT/src/nappe/jusquou_suit_on_une_fib
 run "figure fibre"        uv run python "$ROOT/src/figures/figure_jusquou_suit_on_une_fibre.py" --verifier
 run "voxel plus fin"     uv run python "$ROOT/src/nappe/suit_on_plus_loin_quand_le_voxel_est_plus_fin.py" --verifier
 run "figure voxel fin"   uv run python "$ROOT/src/figures/figure_suit_on_plus_loin_quand_le_voxel_est_plus_fin.py" --verifier
+run "ruban qui saute"    uv run python "$ROOT/src/nappe/un_ruban_qui_saute_perd_il_sa_fibre.py" --verifier
+run "figure ruban"       uv run python "$ROOT/src/figures/figure_un_ruban_qui_saute_perd_il_sa_fibre.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

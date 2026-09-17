@@ -93,6 +93,27 @@ def courbe_de_la_fixture(couches: int, decalage_um: float, contraste: float, pli
     seules frontières d'orientation sont aux frontières de FEUILLE — un pas de `pas_um` et non de
     `pas_um / plis`. C'est l'analogue de l'interstice, et c'est ce que `181` oppose au pli.
     """
+    bloc = bloc_de_la_fixture(couches, decalage_um, contraste, plis, voxel_um, pas_um, cote,
+                              transition_um, bruit, feuilles_independantes)
+    ang, coh = orientation_profile(bloc)
+    return [[float(x), float(y)] for x, y in zip(ang, coh)]
+
+
+def bloc_de_la_fixture(couches: int, decalage_um: float, contraste: float, plis: int,
+                       voxel_um: float, pas_um: float, cote: int = COTE,
+                       transition_um: float = 0.0, bruit: float = 0.0,
+                       feuilles_independantes: bool = False) -> np.ndarray:
+    """La MATIERE elle-meme, avant qu'aucun estimateur ne la lise.
+
+    ⚠⚠ ELLE EST SORTIE DE `courbe_de_la_fixture` ET NON RECOPIEE. Une seconde ecriture du volume
+    serait une seconde definition de la fixture, libre de diverger sur le recalage, sur l'ordre des
+    axes ou sur le pas d'echantillonnage — et toutes les tranches qui comparent leurs chiffres a
+    ceux d'une autre liraient alors deux matieres sous un seul nom. C'est la raison pour laquelle
+    `179` a deja sorti `modulation_des_fibres` de `lire`.
+
+    ⚠ Le depart est recale sur un debut de feuille puis decale, comme il l'a toujours ete : le
+    contrat de `courbe_de_la_fixture` est inchange, et les batteries anterieures le verifient.
+    """
     vol = _volume(contraste, plis, voxel_um, pas_um, transition_um, bruit,
                   feuilles_independantes)
     centre = np.array([2000.0, 2000.0, 2000.0])
@@ -104,8 +125,7 @@ def courbe_de_la_fixture(couches: int, decalage_um: float, contraste: float, pli
     D, I, J = np.meshgrid(d, a, a, indexing="ij")
     pts = (base[None, None, None, :] + D[..., None] * vol.normale
            + I[..., None] * vol.e2 + J[..., None] * vol.e1)
-    ang, coh = orientation_profile(vol.lire(pts.reshape(-1, 3)).reshape(int(couches), cote, cote))
-    return [[float(x), float(y)] for x, y in zip(ang, coh)]
+    return vol.lire(pts.reshape(-1, 3)).reshape(int(couches), cote, cote)
 
 
 def la_paire(courbe, coupe: int | None = None) -> dict:
