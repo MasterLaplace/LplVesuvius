@@ -1500,6 +1500,8 @@ run "coherence creuse"    uv run python "$ROOT/src/nappe/la_coherence_creuse_t_e
 run "figure creux"        uv run python "$ROOT/src/figures/figure_la_coherence_creuse_t_elle_a_la_frontiere.py" --verifier
 run "le rouleau creuse"   uv run python "$ROOT/src/nappe/le_rouleau_creuse_t_il.py" --verifier
 run "figure rouleau creux" uv run python "$ROOT/src/figures/figure_le_rouleau_creuse_t_il.py" --verifier
+run "de quoi une frontiere" uv run python "$ROOT/src/nappe/de_quoi_une_frontiere_est_elle_faite.py" --verifier
+run "figure frontiere"    uv run python "$ROOT/src/figures/figure_de_quoi_une_frontiere_est_elle_faite.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

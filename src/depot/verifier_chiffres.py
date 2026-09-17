@@ -3194,6 +3194,87 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 181 : DE QUOI UNE FRONTIERE EST-ELLE FAITE ?
+    # (1) Un espacement mesure ne voyage jamais sans les DEUX espacements que la matiere peut
+    # porter : « vingt-trois couches » ne dit rien sans « trente-six » et « soixante-douze ».
+    # (2) Et il ne voyage jamais sans ce que rendent les DEUX etalons : c'est leur separation qui
+    # decide si la lecture du rouleau veut dire quelque chose, et une premiere version l'avait a
+    # faux.
+    # (3) Un compte de chunks qui designent un pli ne voyage jamais sans celui qui designent une
+    # feuille : une moitie seule se lirait comme une certitude.
+    dqf = _source(racine, "de_quoi_une_frontiere_est_elle_faite.json")
+    if dqf.exists():
+        d = json.loads(dqf.read_text())
+
+        def _dec181(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("creux_par_chunk", "creux par chunk"),
+                         ("cote_du_treillis", "cote du treillis"),
+                         ("permutations", "permutations"), ("couches", "couches")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 181", int(d[cle]), 0, dqf.name)
+        for cle, nom, unite in (("recouvrement_um_de_179", "recouvrement relu de 179", "µm"),
+                                ("bruit_apparie_de_180", "bruit apparie relu de 180", "")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 181", float(d[cle]), _dec181(d[cle]), dqf.name,
+                       unites=((unite,) if unite else ()))
+        for s in (d.get("les_segments") or []):
+            if not s.get("decidable"):
+                continue
+            q = f"du segment {s['segment']} de 181"
+            for cle, nom in (("chunks_lus", "chunks lus"),
+                             ("chunks_du_treillis", "chunks du treillis"),
+                             ("creux_retenus", "creux retenus"),
+                             ("chunks_a_deux_creux_ou_plus", "chunks a deux creux ou plus"),
+                             ("designent_un_pli", "chunks qui designent un pli"),
+                             ("designent_une_feuille", "chunks qui designent une feuille")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(s[cle]), 0, dqf.name)
+            if s.get("espacement_median") is not None:
+                ajoute(f"espacement median {q}", float(s["espacement_median"]),
+                       _dec181(s["espacement_median"]), dqf.name)
+        for e in (d.get("les_etalons") or []):
+            q = ("de l etalon aux feuilles de 181" if e["feuilles_independantes"]
+                 else "de l etalon aux plis de 181")
+            for cle, nom in (("cellules", "cellules"),
+                             ("creux_retenus", "creux retenus"),
+                             ("cellules_a_deux_creux_ou_plus", "cellules a deux creux ou plus"),
+                             ("designent_un_pli", "cellules qui designent un pli"),
+                             ("designent_une_feuille", "cellules qui designent une feuille")):
+                if e.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(e[cle]), 0, dqf.name)
+            if e.get("espacement_median") is not None:
+                ajoute(f"espacement median {q}", float(e["espacement_median"]),
+                       _dec181(e["espacement_median"]), dqf.name)
+        deux = d.get("les_deux_espacements") or {}
+        for cle, nom in (("un_pli", "un pli en couches"), ("une_feuille", "une feuille en couches")):
+            if deux.get(cle) is not None:
+                ajoute(f"{nom} de 181", int(deux[cle]), 0, dqf.name)
+        v_ = d.get("le_verdict") or {}
+        for cle, nom in (("chunks_lus", "chunks lus"), ("creux_retenus", "creux retenus"),
+                         ("chunks_a_deux_creux_ou_plus", "chunks a deux creux ou plus"),
+                         ("espacements_mesures", "espacements mesures"),
+                         ("chunks_qui_designent_un_pli", "chunks qui designent un pli"),
+                         ("chunks_qui_designent_une_feuille",
+                          "chunks qui designent une feuille"),
+                         ("cellules_aux_plis_qui_designent_un_pli",
+                          "cellules aux plis qui designent un pli"),
+                         ("cellules_aux_feuilles_qui_designent_une_feuille",
+                          "cellules aux feuilles qui designent une feuille"),
+                         ("cellules_de_letalon", "cellules de l etalon")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 181", int(v_[cle]), 0, dqf.name)
+        for cle, nom in (("espacement_median_du_rouleau", "espacement median du rouleau"),
+                         ("espacement_median_aux_plis", "espacement median aux plis"),
+                         ("espacement_median_aux_feuilles", "espacement median aux feuilles")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 181", float(v_[cle]), _dec181(v_[cle]), dqf.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 180 : LE ROULEAU CREUSE-T-IL ?
     # (1) Un compte de chunks qui creusent ne voyage jamais sans le compte ATTENDU PAR HASARD :
     # « vingt-sept sur vingt-sept » ne dit rien sans « un virgule trente-cinq ».

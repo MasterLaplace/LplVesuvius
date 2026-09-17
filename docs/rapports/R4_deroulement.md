@@ -2210,6 +2210,44 @@ interstice, `175` mesurant **3,024 plis** sur 109 couches — et la mesure deman
 **plusieurs** creux par chunk, avec la liberté correspondante payée comme `179` a payé celle de la
 largeur.
 
+**`181` · 2026-09-17 · de quoi une frontière est-elle faite ?**
+`180` avait laissé trois causes possibles pour un creux du rouleau, seul l'interstice **vide** étant
+écarté. Ce qui les sépare est l'**espacement**, dérivé : une frontière de pli tous les `pas/2`, un
+interstice tous les `pas`, soit **36** couches contre **72**. Il fallait donc un lecteur qui rende
+**plusieurs** creux par chunk.
+⚠⚠⚠ **La liberté d'en chercher plusieurs se paie comme `179` a payé celle de la largeur** : chaque
+mélange subit la **même** recherche séquentielle et le rang `k` se compare au rang `k`, parce qu'un
+second creux est déjà moins profond par construction — le comparer au premier des mélanges le
+déclarerait toujours perdant.
+⚠⚠⚠ **Et la première version a FAIT ÉCHOUER SON PROPRE CONTRÔLE.** La bande d'exclusion valait la
+largeur du creux, donc deux creux à **quatre** couches passaient tous les deux : l'étalon dont les
+frontières sont aux feuilles rendait un espacement de **4** au lieu de 72 et se rangeait du côté du
+pli. Rien n'a été publié sur la matière tant que ce contrôle était rouge, précédent de `174`. La
+règle réparée se dérive de `178` et de `174` : deux frontières ne séparent deux segments que s'il
+reste `COUCHES_MINIMALES` couches **entre** elles.
+⭐⭐⭐⭐ **LES DEUX ÉTALONS SE SÉPARENT ALORS** : **38,0** couches et **12**/12 du côté du pli pour
+une matière dont les frontières sont aux plis, **72,0** couches pour une matière dont elles sont aux
+feuilles. **Et le rouleau se range du côté du PLI** : **20** chunks sur **27** contre **2** du côté
+de la feuille — `R4-F201`. Ses frontières ne sont donc pas les interstices entre feuilles, et la
+cause qui restait la plus probable après `180` est écartée.
+✗ **MAIS L'ESPACEMENT MÉDIAN VAUT 23,5 COUCHES**, plus court qu'un pli (**36**) : le rouleau porte
+**plus** de frontières qu'un empilement régulier n'en prédit — `R4-F202`. **59** creux retenus,
+**22** chunks sur 27 en portent au moins deux, **32** espacements mesurés. Rien ici ne dit lesquelles
+sont en trop : une frontière de pli, une fissure et une sous-structure de la feuille creusent toutes.
+⚠⚠ **La fenêtre de la campagne est courte pour cette question**, et la mesure le dit plutôt que de le
+lisser : 109 couches valent **1,512** feuille, donc une fenêtre ne porte deux frontières de feuille
+que **4** fois sur 12, et l'étalon qui représente l'interstice est le moins bien mesuré des deux.
+⚠ Une sonde est passée au **vert** et a été réparée : le mécanisme du **rang** n'était exercé par
+rien, les matières assertées faisant perdre le second creux de toute façon. Et ma première réparation
+était fausse — elle exigeait que les **médianes** des mélanges décroissent, et la mesure les rend
+**égales** : avec une cohérence à deux valeurs la profondeur est quantifiée. Ce qui décroît vraiment
+est le **maximum** par rang, par construction.
+⭐ `R4-P33` **se resserre** : ce n'est pas un interstice, c'est espacé comme un pli, et c'est plus
+serré qu'un pli. La question devient **d'où viennent les frontières en trop**, et sa forme est
+dérivée — 23,5 pour 36 fait à peu près deux tiers. Séparer une sous-structure régulière d'un mélange
+de vraies frontières et de fissures demande de mesurer si les espacements sont **groupés** ou
+**étalés**.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

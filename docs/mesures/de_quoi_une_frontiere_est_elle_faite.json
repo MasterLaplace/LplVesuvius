@@ -1,0 +1,2311 @@
+{
+  "creux_par_chunk": 3,
+  "cote_du_treillis": 5,
+  "permutations": 19,
+  "graine": 20260921,
+  "decalages": 12,
+  "couches": 109,
+  "les_deux_espacements": {
+    "un_pli": 36,
+    "une_feuille": 72
+  },
+  "recouvrement_um_de_179": 45.6,
+  "bruit_apparie_de_180": 16.0,
+  "les_segments": [
+    {
+      "decidable": true,
+      "segment": "20230702185753",
+      "chunks_du_treillis": 25,
+      "chunks_lus": 9,
+      "refuses": {
+        "absent": 16
+      },
+      "creux_retenus": 21,
+      "chunks_a_deux_creux_ou_plus": 7,
+      "espacements": [
+        9,
+        10,
+        13,
+        18,
+        22,
+        27,
+        29,
+        41,
+        47,
+        50,
+        68,
+        77
+      ],
+      "espacement_median": 28.0,
+      "designent_un_pli": 6,
+      "designent_une_feuille": 1,
+      "lignes": [
+        {
+          "chunk": [
+            98,
+            71
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9313,
+            "couche": 28
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 4,
+              "largeur": 3,
+              "profondeur": 0.8075,
+              "profondeur_mediane_des_melanges": 0.6385,
+              "profondeur_maximale_des_melanges": 0.7662,
+              "excedent": 0.169,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 33,
+              "largeur": 3,
+              "profondeur": 0.7652,
+              "profondeur_mediane_des_melanges": 0.5902,
+              "profondeur_maximale_des_melanges": 0.6859,
+              "excedent": 0.175,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 83,
+              "largeur": 3,
+              "profondeur": 0.6208,
+              "profondeur_mediane_des_melanges": 0.5509,
+              "profondeur_maximale_des_melanges": 0.6059,
+              "excedent": 0.0699,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 3,
+          "couches_retenues": [
+            4,
+            33,
+            83
+          ],
+          "espacements": [
+            29,
+            50
+          ],
+          "designe": "un_pli",
+          "espacement_median": 39.5,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 3,
+              "couches_a_droite": 103,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 97.238,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 32,
+              "couches_a_droite": 74,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 87.401,
+              "angle_a_droite_deg": 101.663,
+              "ecart_deg": 14.262
+            },
+            {
+              "couches_a_gauche": 82,
+              "couches_a_droite": 24,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 93.626,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 1
+        },
+        {
+          "chunk": [
+            98,
+            142
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.898,
+            "couche": 74
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 74,
+              "largeur": 3,
+              "profondeur": 0.8543,
+              "profondeur_mediane_des_melanges": 0.6734,
+              "profondeur_maximale_des_melanges": 0.7849,
+              "excedent": 0.1809,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 96,
+              "largeur": 3,
+              "profondeur": 0.6907,
+              "profondeur_mediane_des_melanges": 0.6016,
+              "profondeur_maximale_des_melanges": 0.6794,
+              "excedent": 0.0891,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 6,
+              "largeur": 3,
+              "profondeur": 0.6692,
+              "profondeur_mediane_des_melanges": 0.57,
+              "profondeur_maximale_des_melanges": 0.6453,
+              "excedent": 0.0992,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 3,
+          "couches_retenues": [
+            6,
+            74,
+            96
+          ],
+          "espacements": [
+            68,
+            22
+          ],
+          "designe": "un_pli",
+          "espacement_median": 45.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 73,
+              "couches_a_droite": 33,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 89.684,
+              "angle_a_droite_deg": 62.321,
+              "ecart_deg": 27.363
+            },
+            {
+              "couches_a_gauche": 95,
+              "couches_a_droite": 11,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": false,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": 87.253,
+              "angle_a_droite_deg": null,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 5,
+              "couches_a_droite": 101,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 86.916,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 1
+        },
+        {
+          "chunk": [
+            98,
+            213
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9795,
+            "couche": 64
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 65,
+              "largeur": 3,
+              "profondeur": 0.9114,
+              "profondeur_mediane_des_melanges": 0.6831,
+              "profondeur_maximale_des_melanges": 0.7821,
+              "excedent": 0.2283,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 18,
+              "largeur": 3,
+              "profondeur": 0.7347,
+              "profondeur_mediane_des_melanges": 0.5822,
+              "profondeur_maximale_des_melanges": 0.6837,
+              "excedent": 0.1525,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 83,
+              "largeur": 3,
+              "profondeur": 0.6748,
+              "profondeur_mediane_des_melanges": 0.5416,
+              "profondeur_maximale_des_melanges": 0.5883,
+              "excedent": 0.1332,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 3,
+          "couches_retenues": [
+            18,
+            65,
+            83
+          ],
+          "espacements": [
+            47,
+            18
+          ],
+          "designe": "un_pli",
+          "espacement_median": 32.5,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 64,
+              "couches_a_droite": 42,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 62.961,
+              "angle_a_droite_deg": 98.42,
+              "ecart_deg": 35.459
+            },
+            {
+              "couches_a_gauche": 17,
+              "couches_a_droite": 89,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 1.071,
+              "angle_a_droite_deg": 86.066,
+              "ecart_deg": 84.995
+            },
+            {
+              "couches_a_gauche": 82,
+              "couches_a_droite": 24,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 62.932,
+              "angle_a_droite_deg": 98.521,
+              "ecart_deg": 35.59
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 3
+        },
+        {
+          "chunk": [
+            197,
+            71
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9851,
+            "couche": 31
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 31,
+              "largeur": 3,
+              "profondeur": 0.9397,
+              "profondeur_mediane_des_melanges": 0.8461,
+              "profondeur_maximale_des_melanges": 0.8886,
+              "excedent": 0.0936,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 44,
+              "largeur": 3,
+              "profondeur": 0.9021,
+              "profondeur_mediane_des_melanges": 0.8127,
+              "profondeur_maximale_des_melanges": 0.8704,
+              "excedent": 0.0894,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 4,
+              "largeur": 3,
+              "profondeur": 0.8438,
+              "profondeur_mediane_des_melanges": 0.7107,
+              "profondeur_maximale_des_melanges": 0.8287,
+              "excedent": 0.1331,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 3,
+          "couches_retenues": [
+            4,
+            31,
+            44
+          ],
+          "espacements": [
+            27,
+            13
+          ],
+          "designe": "un_pli",
+          "espacement_median": 20.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 30,
+              "couches_a_droite": 76,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 106.559,
+              "angle_a_droite_deg": 102.753,
+              "ecart_deg": 3.806
+            },
+            {
+              "couches_a_gauche": 43,
+              "couches_a_droite": 63,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 106.559,
+              "angle_a_droite_deg": 102.753,
+              "ecart_deg": 3.806
+            },
+            {
+              "couches_a_gauche": 3,
+              "couches_a_droite": 103,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 103.344,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 2
+        },
+        {
+          "chunk": [
+            197,
+            142
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.8715,
+            "couche": 85
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 85,
+              "largeur": 3,
+              "profondeur": 0.8298,
+              "profondeur_mediane_des_melanges": 0.6589,
+              "profondeur_maximale_des_melanges": 0.758,
+              "excedent": 0.1709,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 52,
+              "largeur": 3,
+              "profondeur": 0.6161,
+              "profondeur_mediane_des_melanges": 0.6026,
+              "profondeur_maximale_des_melanges": 0.7227,
+              "excedent": 0.0135,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 3,
+              "couche": 104,
+              "largeur": 3,
+              "profondeur": 0.5748,
+              "profondeur_mediane_des_melanges": 0.5354,
+              "profondeur_maximale_des_melanges": 0.6124,
+              "excedent": 0.0394,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 1,
+          "couches_retenues": [
+            85
+          ],
+          "espacements": [],
+          "designe": null,
+          "espacement_median": null,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 84,
+              "couches_a_droite": 22,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 46.678,
+              "angle_a_droite_deg": 175.002,
+              "ecart_deg": 51.676
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 1
+        },
+        {
+          "chunk": [
+            197,
+            213
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.7344,
+            "couche": 8
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 85,
+              "largeur": 3,
+              "profondeur": 0.6305,
+              "profondeur_mediane_des_melanges": 0.5581,
+              "profondeur_maximale_des_melanges": 0.624,
+              "excedent": 0.0724,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 8,
+              "largeur": 3,
+              "profondeur": 0.6124,
+              "profondeur_mediane_des_melanges": 0.5165,
+              "profondeur_maximale_des_melanges": 0.5663,
+              "excedent": 0.0959,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 99,
+              "largeur": 3,
+              "profondeur": 0.5325,
+              "profondeur_mediane_des_melanges": 0.4769,
+              "profondeur_maximale_des_melanges": 0.5592,
+              "excedent": 0.0556,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            8,
+            85
+          ],
+          "espacements": [
+            77
+          ],
+          "designe": "une_feuille",
+          "espacement_median": 77.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 84,
+              "couches_a_droite": 22,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": false,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": 93.82,
+              "angle_a_droite_deg": null,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 7,
+              "couches_a_droite": 99,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 93.82,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 0
+        },
+        {
+          "chunk": [
+            296,
+            71
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.8707,
+            "couche": 31
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 40,
+              "largeur": 3,
+              "profondeur": 0.8443,
+              "profondeur_mediane_des_melanges": 0.6884,
+              "profondeur_maximale_des_melanges": 0.85,
+              "excedent": 0.1559,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 2,
+              "couche": 31,
+              "largeur": 3,
+              "profondeur": 0.8126,
+              "profondeur_mediane_des_melanges": 0.6407,
+              "profondeur_maximale_des_melanges": 0.752,
+              "excedent": 0.1719,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 21,
+              "largeur": 3,
+              "profondeur": 0.7308,
+              "profondeur_mediane_des_melanges": 0.6143,
+              "profondeur_maximale_des_melanges": 0.6865,
+              "excedent": 0.1165,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            21,
+            31
+          ],
+          "espacements": [
+            10
+          ],
+          "designe": "un_pli",
+          "espacement_median": 10.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 30,
+              "couches_a_droite": 76,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 54.278,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 20,
+              "couches_a_droite": 86,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 54.278,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 0
+        },
+        {
+          "chunk": [
+            296,
+            142
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9297,
+            "couche": 89
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 39,
+              "largeur": 3,
+              "profondeur": 0.7949,
+              "profondeur_mediane_des_melanges": 0.6572,
+              "profondeur_maximale_des_melanges": 0.7811,
+              "excedent": 0.1377,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 89,
+              "largeur": 3,
+              "profondeur": 0.789,
+              "profondeur_mediane_des_melanges": 0.5806,
+              "profondeur_maximale_des_melanges": 0.7314,
+              "excedent": 0.2084,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 48,
+              "largeur": 7,
+              "profondeur": 0.6254,
+              "profondeur_mediane_des_melanges": 0.5318,
+              "profondeur_maximale_des_melanges": 0.6025,
+              "excedent": 0.0936,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 3,
+          "couches_retenues": [
+            39,
+            48,
+            89
+          ],
+          "espacements": [
+            9,
+            41
+          ],
+          "designe": "un_pli",
+          "espacement_median": 25.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 38,
+              "couches_a_droite": 68,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 178.982,
+              "angle_a_droite_deg": 158.59,
+              "ecart_deg": 20.392
+            },
+            {
+              "couches_a_gauche": 88,
+              "couches_a_droite": 18,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 174.396,
+              "angle_a_droite_deg": 97.198,
+              "ecart_deg": 77.198
+            },
+            {
+              "couches_a_gauche": 45,
+              "couches_a_droite": 57,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 178.982,
+              "angle_a_droite_deg": 158.59,
+              "ecart_deg": 20.392
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 3
+        },
+        {
+          "chunk": [
+            296,
+            213
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.963,
+            "couche": 3
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 4,
+              "largeur": 3,
+              "profondeur": 0.9443,
+              "profondeur_mediane_des_melanges": 0.7505,
+              "profondeur_maximale_des_melanges": 0.9,
+              "excedent": 0.1938,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 66,
+              "largeur": 3,
+              "profondeur": 0.7655,
+              "profondeur_mediane_des_melanges": 0.6357,
+              "profondeur_maximale_des_melanges": 0.7964,
+              "excedent": 0.1298,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 3,
+              "couche": 48,
+              "largeur": 3,
+              "profondeur": 0.6982,
+              "profondeur_mediane_des_melanges": 0.5478,
+              "profondeur_maximale_des_melanges": 0.7033,
+              "excedent": 0.1504,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 1,
+          "couches_retenues": [
+            4
+          ],
+          "espacements": [],
+          "designe": null,
+          "espacement_median": null,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 3,
+              "couches_a_droite": 103,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 179.905,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 0
+        }
+      ]
+    },
+    {
+      "decidable": true,
+      "segment": "20230929220926",
+      "chunks_du_treillis": 25,
+      "chunks_lus": 9,
+      "refuses": {
+        "absent": 16
+      },
+      "creux_retenus": 18,
+      "chunks_a_deux_creux_ou_plus": 7,
+      "espacements": [
+        9,
+        9,
+        9,
+        14,
+        15,
+        15,
+        28,
+        40,
+        42
+      ],
+      "espacement_median": 15.0,
+      "designent_un_pli": 7,
+      "designent_une_feuille": 0,
+      "lignes": [
+        {
+          "chunk": [
+            62,
+            148
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9049,
+            "couche": 73
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 31,
+              "largeur": 3,
+              "profondeur": 0.7654,
+              "profondeur_mediane_des_melanges": 0.6061,
+              "profondeur_maximale_des_melanges": 0.7364,
+              "excedent": 0.1593,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 46,
+              "largeur": 3,
+              "profondeur": 0.758,
+              "profondeur_mediane_des_melanges": 0.5347,
+              "profondeur_maximale_des_melanges": 0.6308,
+              "excedent": 0.2233,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 74,
+              "largeur": 3,
+              "profondeur": 0.7285,
+              "profondeur_mediane_des_melanges": 0.4887,
+              "profondeur_maximale_des_melanges": 0.62,
+              "excedent": 0.2398,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 3,
+          "couches_retenues": [
+            31,
+            46,
+            74
+          ],
+          "espacements": [
+            15,
+            28
+          ],
+          "designe": "un_pli",
+          "espacement_median": 21.5,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 30,
+              "couches_a_droite": 76,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": false,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": 94.828,
+              "angle_a_droite_deg": null,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 45,
+              "couches_a_droite": 61,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": false,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": 94.828,
+              "angle_a_droite_deg": null,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 73,
+              "couches_a_droite": 33,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 103.239,
+              "angle_a_droite_deg": 83.482,
+              "ecart_deg": 19.756
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 1
+        },
+        {
+          "chunk": [
+            62,
+            296
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.8953,
+            "couche": 50
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 50,
+              "largeur": 3,
+              "profondeur": 0.8549,
+              "profondeur_mediane_des_melanges": 0.661,
+              "profondeur_maximale_des_melanges": 0.7677,
+              "excedent": 0.1939,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 10,
+              "largeur": 3,
+              "profondeur": 0.7667,
+              "profondeur_mediane_des_melanges": 0.5724,
+              "profondeur_maximale_des_melanges": 0.7461,
+              "excedent": 0.1943,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 19,
+              "largeur": 7,
+              "profondeur": 0.5049,
+              "profondeur_mediane_des_melanges": 0.5316,
+              "profondeur_maximale_des_melanges": 0.5938,
+              "excedent": -0.0267,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            10,
+            50
+          ],
+          "espacements": [
+            40
+          ],
+          "designe": "un_pli",
+          "espacement_median": 40.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 49,
+              "couches_a_droite": 57,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 112.0,
+              "angle_a_droite_deg": 83.854,
+              "ecart_deg": 28.146
+            },
+            {
+              "couches_a_gauche": 9,
+              "couches_a_droite": 97,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 77.261,
+              "angle_a_droite_deg": 89.419,
+              "ecart_deg": 12.158
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 2
+        },
+        {
+          "chunk": [
+            62,
+            444
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9126,
+            "couche": 40
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 40,
+              "largeur": 3,
+              "profondeur": 0.8339,
+              "profondeur_mediane_des_melanges": 0.6227,
+              "profondeur_maximale_des_melanges": 0.8503,
+              "excedent": 0.2112,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 2,
+              "couche": 79,
+              "largeur": 3,
+              "profondeur": 0.8044,
+              "profondeur_mediane_des_melanges": 0.5461,
+              "profondeur_maximale_des_melanges": 0.6511,
+              "excedent": 0.2583,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 70,
+              "largeur": 3,
+              "profondeur": 0.6697,
+              "profondeur_mediane_des_melanges": 0.4938,
+              "profondeur_maximale_des_melanges": 0.6278,
+              "excedent": 0.1759,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            70,
+            79
+          ],
+          "espacements": [
+            9
+          ],
+          "designe": "un_pli",
+          "espacement_median": 9.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 78,
+              "couches_a_droite": 28,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 87.471,
+              "angle_a_droite_deg": 99.636,
+              "ecart_deg": 12.165
+            },
+            {
+              "couches_a_gauche": 69,
+              "couches_a_droite": 37,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 87.471,
+              "angle_a_droite_deg": 99.636,
+              "ecart_deg": 12.165
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 2
+        },
+        {
+          "chunk": [
+            125,
+            148
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.7634,
+            "couche": 42
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 42,
+              "largeur": 3,
+              "profondeur": 0.739,
+              "profondeur_mediane_des_melanges": 0.6335,
+              "profondeur_maximale_des_melanges": 0.7128,
+              "excedent": 0.1055,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 28,
+              "largeur": 3,
+              "profondeur": 0.7373,
+              "profondeur_mediane_des_melanges": 0.5631,
+              "profondeur_maximale_des_melanges": 0.6632,
+              "excedent": 0.1742,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 61,
+              "largeur": 3,
+              "profondeur": 0.5706,
+              "profondeur_mediane_des_melanges": 0.5204,
+              "profondeur_maximale_des_melanges": 0.5797,
+              "excedent": 0.0502,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            28,
+            42
+          ],
+          "espacements": [
+            14
+          ],
+          "designe": "un_pli",
+          "espacement_median": 14.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 41,
+              "couches_a_droite": 65,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 78.82,
+              "angle_a_droite_deg": 104.635,
+              "ecart_deg": 25.815
+            },
+            {
+              "couches_a_gauche": 27,
+              "couches_a_droite": 79,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 78.82,
+              "angle_a_droite_deg": 104.635,
+              "ecart_deg": 25.815
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 2
+        },
+        {
+          "chunk": [
+            125,
+            296
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9886,
+            "couche": 25
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 26,
+              "largeur": 3,
+              "profondeur": 0.9686,
+              "profondeur_mediane_des_melanges": 0.7355,
+              "profondeur_maximale_des_melanges": 0.9113,
+              "excedent": 0.2331,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 15,
+              "largeur": 3,
+              "profondeur": 0.7842,
+              "profondeur_mediane_des_melanges": 0.6751,
+              "profondeur_maximale_des_melanges": 0.8568,
+              "excedent": 0.1091,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 3,
+              "couche": 6,
+              "largeur": 3,
+              "profondeur": 0.6112,
+              "profondeur_mediane_des_melanges": 0.573,
+              "profondeur_maximale_des_melanges": 0.7253,
+              "excedent": 0.0382,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 1,
+          "couches_retenues": [
+            26
+          ],
+          "espacements": [],
+          "designe": null,
+          "espacement_median": null,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 25,
+              "couches_a_droite": 81,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 75.325,
+              "angle_a_droite_deg": 18.304,
+              "ecart_deg": 57.02
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 1
+        },
+        {
+          "chunk": [
+            125,
+            444
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9356,
+            "couche": 28
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 27,
+              "largeur": 3,
+              "profondeur": 0.9227,
+              "profondeur_mediane_des_melanges": 0.7434,
+              "profondeur_maximale_des_melanges": 0.8338,
+              "excedent": 0.1793,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 69,
+              "largeur": 3,
+              "profondeur": 0.8462,
+              "profondeur_mediane_des_melanges": 0.6892,
+              "profondeur_maximale_des_melanges": 0.7817,
+              "excedent": 0.157,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 4,
+              "largeur": 5,
+              "profondeur": 0.6792,
+              "profondeur_mediane_des_melanges": 0.6492,
+              "profondeur_maximale_des_melanges": 0.7542,
+              "excedent": 0.03,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            27,
+            69
+          ],
+          "espacements": [
+            42
+          ],
+          "designe": "un_pli",
+          "espacement_median": 42.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 26,
+              "couches_a_droite": 80,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 87.609,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 68,
+              "couches_a_droite": 38,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 94.92,
+              "angle_a_droite_deg": 85.108,
+              "ecart_deg": 9.812
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 1
+        },
+        {
+          "chunk": [
+            187,
+            148
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.8813,
+            "couche": 60
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 61,
+              "largeur": 3,
+              "profondeur": 0.8212,
+              "profondeur_mediane_des_melanges": 0.622,
+              "profondeur_maximale_des_melanges": 0.7868,
+              "excedent": 0.1992,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 34,
+              "largeur": 3,
+              "profondeur": 0.5144,
+              "profondeur_mediane_des_melanges": 0.5466,
+              "profondeur_maximale_des_melanges": 0.6164,
+              "excedent": -0.0322,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 3,
+              "couche": 103,
+              "largeur": 3,
+              "profondeur": 0.4621,
+              "profondeur_mediane_des_melanges": 0.4863,
+              "profondeur_maximale_des_melanges": 0.5581,
+              "excedent": -0.0242,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 1,
+          "couches_retenues": [
+            61
+          ],
+          "espacements": [],
+          "designe": null,
+          "espacement_median": null,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 60,
+              "couches_a_droite": 46,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 120.176,
+              "angle_a_droite_deg": 84.741,
+              "ecart_deg": 35.435
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 1
+        },
+        {
+          "chunk": [
+            187,
+            296
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.8935,
+            "couche": 27
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 28,
+              "largeur": 3,
+              "profondeur": 0.855,
+              "profondeur_mediane_des_melanges": 0.7066,
+              "profondeur_maximale_des_melanges": 0.7806,
+              "excedent": 0.1484,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 4,
+              "largeur": 3,
+              "profondeur": 0.7567,
+              "profondeur_mediane_des_melanges": 0.672,
+              "profondeur_maximale_des_melanges": 0.7318,
+              "excedent": 0.0847,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 19,
+              "largeur": 3,
+              "profondeur": 0.721,
+              "profondeur_mediane_des_melanges": 0.624,
+              "profondeur_maximale_des_melanges": 0.6834,
+              "excedent": 0.097,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 3,
+          "couches_retenues": [
+            4,
+            19,
+            28
+          ],
+          "espacements": [
+            15,
+            9
+          ],
+          "designe": "un_pli",
+          "espacement_median": 12.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 27,
+              "couches_a_droite": 79,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 12.32,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 3,
+              "couches_a_droite": 103,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 12.32,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 18,
+              "couches_a_droite": 88,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 12.32,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 0
+        },
+        {
+          "chunk": [
+            187,
+            444
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9429,
+            "couche": 32
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 33,
+              "largeur": 3,
+              "profondeur": 0.9084,
+              "profondeur_mediane_des_melanges": 0.6638,
+              "profondeur_maximale_des_melanges": 0.8756,
+              "excedent": 0.2446,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 24,
+              "largeur": 3,
+              "profondeur": 0.8065,
+              "profondeur_mediane_des_melanges": 0.6316,
+              "profondeur_maximale_des_melanges": 0.7349,
+              "excedent": 0.1749,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 104,
+              "largeur": 3,
+              "profondeur": 0.5313,
+              "profondeur_mediane_des_melanges": 0.4963,
+              "profondeur_maximale_des_melanges": 0.6483,
+              "excedent": 0.035,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            24,
+            33
+          ],
+          "espacements": [
+            9
+          ],
+          "designe": "un_pli",
+          "espacement_median": 9.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 32,
+              "couches_a_droite": 74,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 170.343,
+              "angle_a_droite_deg": 4.91,
+              "ecart_deg": 14.567
+            },
+            {
+              "couches_a_gauche": 23,
+              "couches_a_droite": 83,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 170.343,
+              "angle_a_droite_deg": 4.91,
+              "ecart_deg": 14.567
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 2
+        }
+      ]
+    },
+    {
+      "decidable": true,
+      "segment": "20231005123336",
+      "chunks_du_treillis": 25,
+      "chunks_lus": 9,
+      "refuses": {
+        "absent": 16
+      },
+      "creux_retenus": 20,
+      "chunks_a_deux_creux_ou_plus": 8,
+      "espacements": [
+        12,
+        15,
+        17,
+        19,
+        21,
+        25,
+        31,
+        42,
+        47,
+        70,
+        98
+      ],
+      "espacement_median": 25.0,
+      "designent_un_pli": 7,
+      "designent_une_feuille": 1,
+      "lignes": [
+        {
+          "chunk": [
+            68,
+            189
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9894,
+            "couche": 93
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 94,
+              "largeur": 3,
+              "profondeur": 0.9533,
+              "profondeur_mediane_des_melanges": 0.9036,
+              "profondeur_maximale_des_melanges": 0.968,
+              "excedent": 0.0497,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 2,
+              "couche": 104,
+              "largeur": 5,
+              "profondeur": 0.9327,
+              "profondeur_mediane_des_melanges": 0.8531,
+              "profondeur_maximale_des_melanges": 0.9325,
+              "excedent": 0.0796,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 6,
+              "largeur": 3,
+              "profondeur": 0.9219,
+              "profondeur_mediane_des_melanges": 0.7856,
+              "profondeur_maximale_des_melanges": 0.8899,
+              "excedent": 0.1363,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            6,
+            104
+          ],
+          "espacements": [
+            98
+          ],
+          "designe": "une_feuille",
+          "espacement_median": 98.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 102,
+              "couches_a_droite": 2,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": false,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": 87.336,
+              "angle_a_droite_deg": null,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 5,
+              "couches_a_droite": 101,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 88.275,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 0
+        },
+        {
+          "chunk": [
+            68,
+            379
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.917,
+            "couche": 11
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 42,
+              "largeur": 3,
+              "profondeur": 0.8348,
+              "profondeur_mediane_des_melanges": 0.6348,
+              "profondeur_maximale_des_melanges": 0.7902,
+              "excedent": 0.2,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 11,
+              "largeur": 3,
+              "profondeur": 0.8216,
+              "profondeur_mediane_des_melanges": 0.5409,
+              "profondeur_maximale_des_melanges": 0.6202,
+              "excedent": 0.2807,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 103,
+              "largeur": 3,
+              "profondeur": 0.5079,
+              "profondeur_mediane_des_melanges": 0.4584,
+              "profondeur_maximale_des_melanges": 0.5744,
+              "excedent": 0.0495,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            11,
+            42
+          ],
+          "espacements": [
+            31
+          ],
+          "designe": "un_pli",
+          "espacement_median": 31.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 41,
+              "couches_a_droite": 65,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 1.777,
+              "angle_a_droite_deg": 88.813,
+              "ecart_deg": 87.036
+            },
+            {
+              "couches_a_gauche": 10,
+              "couches_a_droite": 96,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 178.677,
+              "angle_a_droite_deg": 86.798,
+              "ecart_deg": 88.121
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 2
+        },
+        {
+          "chunk": [
+            68,
+            569
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9208,
+            "couche": 63
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 62,
+              "largeur": 3,
+              "profondeur": 0.8567,
+              "profondeur_mediane_des_melanges": 0.6711,
+              "profondeur_maximale_des_melanges": 0.8106,
+              "excedent": 0.1856,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 41,
+              "largeur": 3,
+              "profondeur": 0.8087,
+              "profondeur_mediane_des_melanges": 0.5847,
+              "profondeur_maximale_des_melanges": 0.7072,
+              "excedent": 0.224,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 104,
+              "largeur": 3,
+              "profondeur": 0.5949,
+              "profondeur_mediane_des_melanges": 0.5209,
+              "profondeur_maximale_des_melanges": 0.5805,
+              "excedent": 0.074,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 3,
+          "couches_retenues": [
+            41,
+            62,
+            104
+          ],
+          "espacements": [
+            21,
+            42
+          ],
+          "designe": "un_pli",
+          "espacement_median": 31.5,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 61,
+              "couches_a_droite": 45,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 105.366,
+              "angle_a_droite_deg": 10.7,
+              "ecart_deg": 85.334
+            },
+            {
+              "couches_a_gauche": 40,
+              "couches_a_droite": 66,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": false,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": 108.653,
+              "angle_a_droite_deg": null,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 103,
+              "couches_a_droite": 3,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": false,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": 107.76,
+              "angle_a_droite_deg": null,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 1
+        },
+        {
+          "chunk": [
+            136,
+            189
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9717,
+            "couche": 103
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 93,
+              "largeur": 3,
+              "profondeur": 0.9278,
+              "profondeur_mediane_des_melanges": 0.8841,
+              "profondeur_maximale_des_melanges": 0.9329,
+              "excedent": 0.0437,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 2,
+              "couche": 78,
+              "largeur": 3,
+              "profondeur": 0.9056,
+              "profondeur_mediane_des_melanges": 0.8584,
+              "profondeur_maximale_des_melanges": 0.8896,
+              "excedent": 0.0472,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 103,
+              "largeur": 3,
+              "profondeur": 0.8967,
+              "profondeur_mediane_des_melanges": 0.8499,
+              "profondeur_maximale_des_melanges": 0.8768,
+              "excedent": 0.0468,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            78,
+            103
+          ],
+          "espacements": [
+            25
+          ],
+          "designe": "un_pli",
+          "espacement_median": 25.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 77,
+              "couches_a_droite": 29,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": false,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": 87.737,
+              "angle_a_droite_deg": null,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 102,
+              "couches_a_droite": 4,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": false,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": 87.737,
+              "angle_a_droite_deg": null,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 0
+        },
+        {
+          "chunk": [
+            136,
+            379
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.8697,
+            "couche": 65
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 65,
+              "largeur": 3,
+              "profondeur": 0.789,
+              "profondeur_mediane_des_melanges": 0.5837,
+              "profondeur_maximale_des_melanges": 0.6833,
+              "excedent": 0.2053,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 46,
+              "largeur": 3,
+              "profondeur": 0.6508,
+              "profondeur_mediane_des_melanges": 0.4876,
+              "profondeur_maximale_des_melanges": 0.5899,
+              "excedent": 0.1632,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 82,
+              "largeur": 3,
+              "profondeur": 0.618,
+              "profondeur_mediane_des_melanges": 0.4425,
+              "profondeur_maximale_des_melanges": 0.5196,
+              "excedent": 0.1755,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 3,
+          "couches_retenues": [
+            46,
+            65,
+            82
+          ],
+          "espacements": [
+            19,
+            17
+          ],
+          "designe": "un_pli",
+          "espacement_median": 18.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 64,
+              "couches_a_droite": 42,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 79.778,
+              "angle_a_droite_deg": 94.316,
+              "ecart_deg": 14.539
+            },
+            {
+              "couches_a_gauche": 45,
+              "couches_a_droite": 61,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 84.579,
+              "angle_a_droite_deg": 101.521,
+              "ecart_deg": 16.941
+            },
+            {
+              "couches_a_gauche": 81,
+              "couches_a_droite": 25,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 80.396,
+              "angle_a_droite_deg": 97.013,
+              "ecart_deg": 16.617
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 3
+        },
+        {
+          "chunk": [
+            136,
+            569
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9682,
+            "couche": 19
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 30,
+              "largeur": 3,
+              "profondeur": 0.9268,
+              "profondeur_mediane_des_melanges": 0.8702,
+              "profondeur_maximale_des_melanges": 0.9293,
+              "excedent": 0.0566,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 2,
+              "couche": 18,
+              "largeur": 3,
+              "profondeur": 0.9262,
+              "profondeur_mediane_des_melanges": 0.8319,
+              "profondeur_maximale_des_melanges": 0.8878,
+              "excedent": 0.0943,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 6,
+              "largeur": 3,
+              "profondeur": 0.898,
+              "profondeur_mediane_des_melanges": 0.7894,
+              "profondeur_maximale_des_melanges": 0.8436,
+              "excedent": 0.1086,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            6,
+            18
+          ],
+          "espacements": [
+            12
+          ],
+          "designe": "un_pli",
+          "espacement_median": 12.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 17,
+              "couches_a_droite": 89,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 173.839,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 5,
+              "couches_a_droite": 101,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 173.839,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 0
+        },
+        {
+          "chunk": [
+            204,
+            189
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9058,
+            "couche": 63
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 63,
+              "largeur": 3,
+              "profondeur": 0.8111,
+              "profondeur_mediane_des_melanges": 0.7331,
+              "profondeur_maximale_des_melanges": 0.822,
+              "excedent": 0.078,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 2,
+              "couche": 73,
+              "largeur": 3,
+              "profondeur": 0.7885,
+              "profondeur_mediane_des_melanges": 0.6454,
+              "profondeur_maximale_des_melanges": 0.7911,
+              "excedent": 0.1431,
+              "depasse_tous_les_melanges": false
+            },
+            {
+              "rang": 3,
+              "couche": 29,
+              "largeur": 3,
+              "profondeur": 0.7538,
+              "profondeur_mediane_des_melanges": 0.5859,
+              "profondeur_maximale_des_melanges": 0.6925,
+              "excedent": 0.1679,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 1,
+          "couches_retenues": [
+            29
+          ],
+          "espacements": [],
+          "designe": null,
+          "espacement_median": null,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 28,
+              "couches_a_droite": 78,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 4.389,
+              "angle_a_droite_deg": 1.935,
+              "ecart_deg": 2.454
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 1
+        },
+        {
+          "chunk": [
+            204,
+            379
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.6601,
+            "couche": 31
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 31,
+              "largeur": 3,
+              "profondeur": 0.6288,
+              "profondeur_mediane_des_melanges": 0.4982,
+              "profondeur_maximale_des_melanges": 0.599,
+              "excedent": 0.1306,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 16,
+              "largeur": 3,
+              "profondeur": 0.5948,
+              "profondeur_mediane_des_melanges": 0.4481,
+              "profondeur_maximale_des_melanges": 0.5028,
+              "excedent": 0.1467,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 101,
+              "largeur": 3,
+              "profondeur": 0.557,
+              "profondeur_mediane_des_melanges": 0.4211,
+              "profondeur_maximale_des_melanges": 0.4854,
+              "excedent": 0.1359,
+              "depasse_tous_les_melanges": true
+            }
+          ],
+          "creux_retenus": 3,
+          "couches_retenues": [
+            16,
+            31,
+            101
+          ],
+          "espacements": [
+            15,
+            70
+          ],
+          "designe": "un_pli",
+          "espacement_median": 42.5,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 30,
+              "couches_a_droite": 76,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 30.372,
+              "angle_a_droite_deg": 85.999,
+              "ecart_deg": 55.628
+            },
+            {
+              "couches_a_gauche": 15,
+              "couches_a_droite": 91,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 17.807,
+              "angle_a_droite_deg": 83.879,
+              "ecart_deg": 66.072
+            },
+            {
+              "couches_a_gauche": 100,
+              "couches_a_droite": 6,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": true,
+              "angle_a_gauche_deg": 80.232,
+              "angle_a_droite_deg": 97.691,
+              "ecart_deg": 17.458
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 3
+        },
+        {
+          "chunk": [
+            204,
+            569
+          ],
+          "decidable": true,
+          "le_nul": {
+            "profondeur": 0.9674,
+            "couche": 93
+          },
+          "permutations": 19,
+          "creux": [
+            {
+              "rang": 1,
+              "couche": 46,
+              "largeur": 3,
+              "profondeur": 0.8833,
+              "profondeur_mediane_des_melanges": 0.786,
+              "profondeur_maximale_des_melanges": 0.8672,
+              "excedent": 0.0973,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 2,
+              "couche": 93,
+              "largeur": 3,
+              "profondeur": 0.8308,
+              "profondeur_mediane_des_melanges": 0.6941,
+              "profondeur_maximale_des_melanges": 0.8218,
+              "excedent": 0.1367,
+              "depasse_tous_les_melanges": true
+            },
+            {
+              "rang": 3,
+              "couche": 24,
+              "largeur": 3,
+              "profondeur": 0.6532,
+              "profondeur_mediane_des_melanges": 0.5845,
+              "profondeur_maximale_des_melanges": 0.6817,
+              "excedent": 0.0687,
+              "depasse_tous_les_melanges": false
+            }
+          ],
+          "creux_retenus": 2,
+          "couches_retenues": [
+            46,
+            93
+          ],
+          "espacements": [
+            47
+          ],
+          "designe": "un_pli",
+          "espacement_median": 47.0,
+          "ce_que_les_creux_separent": [
+            {
+              "couches_a_gauche": 45,
+              "couches_a_droite": 61,
+              "gauche_est_dirigee": false,
+              "droite_est_dirigee": true,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": null,
+              "angle_a_droite_deg": 6.193,
+              "ecart_deg": null
+            },
+            {
+              "couches_a_gauche": 92,
+              "couches_a_droite": 14,
+              "gauche_est_dirigee": true,
+              "droite_est_dirigee": false,
+              "les_deux_cotes_sont_diriges": false,
+              "angle_a_gauche_deg": 7.214,
+              "angle_a_droite_deg": null,
+              "ecart_deg": null
+            }
+          ],
+          "creux_a_deux_cotes_diriges": 0
+        }
+      ]
+    }
+  ],
+  "les_etalons": [
+    {
+      "plis": 2,
+      "feuilles_independantes": false,
+      "bruit": 16.0,
+      "cellules": 12,
+      "lisibles": 12,
+      "creux_retenus": 31,
+      "cellules_a_deux_creux_ou_plus": 12,
+      "espacements": [
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        34,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38,
+        38
+      ],
+      "espacement_median": 38.0,
+      "designent_un_pli": 12,
+      "designent_une_feuille": 0
+    },
+    {
+      "plis": 1,
+      "feuilles_independantes": true,
+      "bruit": 16.0,
+      "cellules": 12,
+      "lisibles": 12,
+      "creux_retenus": 15,
+      "cellules_a_deux_creux_ou_plus": 4,
+      "espacements": [
+        72,
+        72,
+        72,
+        72
+      ],
+      "espacement_median": 72.0,
+      "designent_un_pli": 0,
+      "designent_une_feuille": 4
+    }
+  ],
+  "le_verdict": {
+    "decidable": true,
+    "segments": 3,
+    "chunks_lus": 27,
+    "permutations": 19,
+    "un_pli_en_couches": 36,
+    "une_feuille_en_couches": 72,
+    "creux_retenus": 59,
+    "chunks_a_deux_creux_ou_plus": 22,
+    "espacements_mesures": 32,
+    "espacement_median_du_rouleau": 23.5,
+    "espacement_median_aux_plis": 38.0,
+    "espacement_median_aux_feuilles": 72.0,
+    "chunks_qui_designent_un_pli": 20,
+    "chunks_qui_designent_une_feuille": 2,
+    "cellules_aux_plis_qui_designent_un_pli": 12,
+    "cellules_aux_feuilles_qui_designent_une_feuille": 4,
+    "cellules_de_letalon": 12,
+    "les_deux_etalons_se_separent": true,
+    "le_rouleau_designe": "un_pli",
+    "assez_de_creux_pour_un_espacement": true
+  }
+}

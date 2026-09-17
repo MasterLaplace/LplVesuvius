@@ -63,30 +63,38 @@ COUCHES_DE_LA_CAMPAGNE = 109
 
 
 def _volume(contraste: float, plis: int, voxel_um: float, pas_um: float,
-            transition_um: float = 0.0, bruit: float = 0.0):
+            transition_um: float = 0.0, bruit: float = 0.0,
+            feuilles_independantes: bool = False):
     from combien_de_pas_la_matiere_porte import VolumeFabriqueAFibres  # noqa: PLC0415
 
     return VolumeFabriqueAFibres(
         pas_um, longueur_de_fibre_um=LONGUEUR_DE_FIBRE_UM, contraste_des_fibres=float(contraste),
         angle_du_premier_pli_deg=ANGLE_DU_PREMIER_PLI_DEG, plis_par_feuille=int(plis),
         transition_um=float(transition_um), bruit=float(bruit),
+        feuilles_independantes=bool(feuilles_independantes),
         voxel_um=voxel_um, forme=(4000, 4000, 4000))
 
 
 def courbe_de_la_fixture(couches: int, decalage_um: float, contraste: float, plis: int,
                          voxel_um: float, pas_um: float, cote: int = COTE,
-                         transition_um: float = 0.0, bruit: float = 0.0) -> list:
+                         transition_um: float = 0.0, bruit: float = 0.0,
+                         feuilles_independantes: bool = False) -> list:
     """La courbe (angle, cohérence) d'une fenêtre posée à un DÉCALAGE choisi dans la feuille.
 
     ⚠⚠ LE DÉPART EST RECALÉ SUR UN DÉBUT DE FEUILLE PUIS DÉCALÉ, jamais posé au hasard : sans le
     recalage, « décalage zéro » voudrait dire « là où le centre du volume est tombé », donc le
     balayage mesurerait un décalage inconnu plus le sien.
 
-    ⚠ `transition_um` et `bruit` valent zéro par défaut, donc toute campagne antérieure lit la
-    matière qu'elle a toujours lue : ce sont les deux axes que `179` balaye, et les ajouter avec
-    une valeur non nulle par défaut aurait déplacé en silence ce que `173` et `177` publient.
+    ⚠ `transition_um`, `bruit` et `feuilles_independantes` valent leur valeur neutre par défaut,
+    donc toute campagne antérieure lit la matière qu'elle a toujours lue : les ajouter avec une
+    valeur active par défaut aurait déplacé en silence ce que `173`, `177` et `179` publient.
+
+    ⚠⚠ `feuilles_independantes` donne à chaque FEUILLE un angle tiré, donc une matière dont les
+    seules frontières d'orientation sont aux frontières de FEUILLE — un pas de `pas_um` et non de
+    `pas_um / plis`. C'est l'analogue de l'interstice, et c'est ce que `181` oppose au pli.
     """
-    vol = _volume(contraste, plis, voxel_um, pas_um, transition_um, bruit)
+    vol = _volume(contraste, plis, voxel_um, pas_um, transition_um, bruit,
+                  feuilles_independantes)
     centre = np.array([2000.0, 2000.0, 2000.0])
     proj0 = float(centre @ vol.normale) * vol.voxel_um
     recale = (np.floor(proj0 / vol.pas_um) * vol.pas_um + float(decalage_um) - proj0)
