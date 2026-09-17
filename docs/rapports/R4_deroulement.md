@@ -2450,6 +2450,42 @@ frontière. Il a fallu un **instrument** pour le trancher, après deux hypothès
 — `un_ruban` prend déjà la montée en argument, donc il suffit d'en faire une échelle, et le mélange
 de l'ordre des couches est le contrôle déjà écrit.
 
+**`188` · 2026-09-18 · jusqu'où une surface peut-elle dériver ?**
+⭐⭐⭐⭐ **La première réponse POSITIVE depuis `182`.** `187` avait rendu un nombre que rien n'avait
+mesuré — une dérive de seize couches coûte **6,625** pas de longueur suivable — et la question qui
+suit est une longueur : à quelle profondeur la matière cesse-t-elle de se lire ? On fait de la montée
+du ruban une **échelle** (**0, 1, 2, 4, 8, 16, 32, 64, 73** couches) et l'on cherche le **croisement**
+de la vraie matière avec ses couches **mélangées**. Ce n'est pas un seuil : c'est le croisement de
+deux courbes mesurées, et il a une unité.
+⭐ **L'ÉTALON ORDONNE SES PORTÉES** — `R4-F218`. Le même quart de tour étalé sur **4**, **16** puis
+**64** couches rend des portées de **4** couches, **8** couches, puis au-delà de l'échelle ; une
+matière qui ne tourne pas — **0** °/couche — ne se sépare **jamais** de son mélange. L'instrument lit
+donc la matière et non sa propre échelle.
+⚠⚠⚠ **Et cet étalon a dû être refait** : une première version faisait varier le nombre de **plis** de
+`VolumeFabriqueAFibres` en croyant faire varier l'espacement des frontières, or ce volume étale un
+**demi-tour par feuille** quel que soit son nombre de plis — huit plis et deux plis tournent à la
+**même vitesse** et les trois matières ont rendu la même chose. Ce qui gouverne la portée n'est pas
+l'espacement mais la **vitesse**.
+⭐⭐⭐⭐ **ET LE ROULEAU PORTE AU-DELÀ DE TOUTE L'ÉCHELLE** — `R4-F217`. Sur **27** chunks, l'excédent
+culmine à **10** pas à **8** couches (**19,2** µm) et reste **positif** jusqu'au dernier barreau, à
+**175,2** µm — soit **1,0127** fois le pas entre deux feuilles. Les trois segments s'accordent, chacun
+sur **9** chunks. **L'ordre en profondeur du rouleau porte de l'information plus loin qu'un transfert
+n'en demande.**
+⚠⚠⚠ **Deux défauts payés, aucun trouvé en relisant** — `R4-F219`. Chercher le croisement depuis le
+**premier** barreau rendait une portée d'**une** couche à une matière qui tourne lentement, parce
+qu'un excédent nul par quantification au tout début arrêtait la recherche : il se cherche **après le
+sommet**. Et l'échelle s'arrêtait à **64** couches (**153,6** µm) alors qu'on la compare à **173** :
+l'énoncé « la portée franchit-elle un pas entre deux feuilles » était une **vérification incapable de
+réussir**, le pendant exact d'une vérification incapable d'échouer. Le pas lui-même est devenu le
+dernier barreau, arrondi vers le haut.
+⚠⚠ **Ce que ça ne dit pas** : que ce soit la **même feuille**. Le mélange détruit l'**ordre** des
+couches, donc l'excédent mesure que cet ordre porte de l'information — ce qu'une **périodicité de
+l'empilement** produirait tout autant. ⚠ Et la longueur suivable tombe de **22** pas à plat à **8** au
+dernier barreau : ce qui survit à la dérive est l'**avance** sur le hasard, pas la longueur.
+⭐ `R4-P37` **s'ouvre**, et sa forme est dans la courbe elle-même : une périodicité ferait **remonter**
+l'excédent au voisinage d'un multiple du pas, une continuité le ferait décroître partout. L'échelle
+actuelle s'arrête juste après le premier pas et ne peut pas voir cette remontée.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

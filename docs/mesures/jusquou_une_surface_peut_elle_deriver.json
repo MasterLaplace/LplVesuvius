@@ -1,0 +1,2840 @@
+{
+  "departs_par_couche": 24,
+  "cote_du_treillis": 5,
+  "plafond_de_pas": 146,
+  "voxel_um": 2.4,
+  "pas_um": 173.0,
+  "graine": 20260928,
+  "montees": [
+    0,
+    1,
+    2,
+    4,
+    8,
+    16,
+    32,
+    64,
+    73
+  ],
+  "plancher_de_coherence": 0.15,
+  "letalon": {
+    "couches_dun_quart_de_tour": [
+      4,
+      16,
+      64
+    ],
+    "lignes": [
+      {
+        "matiere": "un quart de tour sur 4 couches",
+        "couches_dun_quart_de_tour": 4,
+        "degres_par_couche": 22.5,
+        "decidable": true,
+        "plafond_du_ruban": 28,
+        "barreaux": [
+          {
+            "montee": 0,
+            "rubans": 2616,
+            "pas_median": 28.0,
+            "pas_median_melange": 28.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 1,
+            "rubans": 5184,
+            "pas_median": 17.0,
+            "pas_median_melange": 15.0,
+            "excedent": 2.0
+          },
+          {
+            "montee": 2,
+            "rubans": 5136,
+            "pas_median": 19.0,
+            "pas_median_melange": 14.0,
+            "excedent": 5.0
+          },
+          {
+            "montee": 4,
+            "rubans": 5040,
+            "pas_median": 11.0,
+            "pas_median_melange": 12.0,
+            "excedent": -1.0
+          },
+          {
+            "montee": 8,
+            "rubans": 4848,
+            "pas_median": 8.0,
+            "pas_median_melange": 9.0,
+            "excedent": -1.0
+          },
+          {
+            "montee": 16,
+            "rubans": 4464,
+            "pas_median": 6.0,
+            "pas_median_melange": 7.0,
+            "excedent": -1.0
+          },
+          {
+            "montee": 32,
+            "rubans": 3696,
+            "pas_median": 5.0,
+            "pas_median_melange": 6.0,
+            "excedent": -1.0
+          },
+          {
+            "montee": 64,
+            "rubans": 2160,
+            "pas_median": 5.0,
+            "pas_median_melange": 5.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 73,
+            "rubans": 1728,
+            "pas_median": 6.0,
+            "pas_median_melange": 5.0,
+            "excedent": 1.0
+          }
+        ],
+        "portee_en_couches": 4,
+        "au_dela_de_lechelle": false,
+        "excedent_a_la_portee": -1.0,
+        "excedent_maximal": 5.0,
+        "sommet_en_couches": 2,
+        "dernier_barreau": 73
+      },
+      {
+        "matiere": "un quart de tour sur 16 couches",
+        "couches_dun_quart_de_tour": 16,
+        "degres_par_couche": 5.625,
+        "decidable": true,
+        "plafond_du_ruban": 29,
+        "barreaux": [
+          {
+            "montee": 0,
+            "rubans": 2616,
+            "pas_median": 29.0,
+            "pas_median_melange": 29.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 1,
+            "rubans": 5184,
+            "pas_median": 14.0,
+            "pas_median_melange": 14.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 2,
+            "rubans": 5136,
+            "pas_median": 21.0,
+            "pas_median_melange": 13.0,
+            "excedent": 8.0
+          },
+          {
+            "montee": 4,
+            "rubans": 5040,
+            "pas_median": 17.5,
+            "pas_median_melange": 11.0,
+            "excedent": 6.5
+          },
+          {
+            "montee": 8,
+            "rubans": 4848,
+            "pas_median": 9.0,
+            "pas_median_melange": 9.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 16,
+            "rubans": 4464,
+            "pas_median": 5.0,
+            "pas_median_melange": 7.0,
+            "excedent": -2.0
+          },
+          {
+            "montee": 32,
+            "rubans": 3696,
+            "pas_median": 5.0,
+            "pas_median_melange": 5.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 64,
+            "rubans": 2160,
+            "pas_median": 5.0,
+            "pas_median_melange": 5.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 73,
+            "rubans": 1728,
+            "pas_median": 5.0,
+            "pas_median_melange": 5.0,
+            "excedent": 0.0
+          }
+        ],
+        "portee_en_couches": 8,
+        "au_dela_de_lechelle": false,
+        "excedent_a_la_portee": 0.0,
+        "excedent_maximal": 8.0,
+        "sommet_en_couches": 2,
+        "dernier_barreau": 73
+      },
+      {
+        "matiere": "un quart de tour sur 64 couches",
+        "couches_dun_quart_de_tour": 64,
+        "degres_par_couche": 1.4062,
+        "decidable": true,
+        "plafond_du_ruban": 29,
+        "barreaux": [
+          {
+            "montee": 0,
+            "rubans": 2616,
+            "pas_median": 29.0,
+            "pas_median_melange": 29.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 1,
+            "rubans": 5184,
+            "pas_median": 29.0,
+            "pas_median_melange": 14.0,
+            "excedent": 15.0
+          },
+          {
+            "montee": 2,
+            "rubans": 5136,
+            "pas_median": 29.0,
+            "pas_median_melange": 13.0,
+            "excedent": 16.0
+          },
+          {
+            "montee": 4,
+            "rubans": 5040,
+            "pas_median": 29.0,
+            "pas_median_melange": 11.0,
+            "excedent": 18.0
+          },
+          {
+            "montee": 8,
+            "rubans": 4848,
+            "pas_median": 29.0,
+            "pas_median_melange": 9.0,
+            "excedent": 20.0
+          },
+          {
+            "montee": 16,
+            "rubans": 4464,
+            "pas_median": 24.0,
+            "pas_median_melange": 7.0,
+            "excedent": 17.0
+          },
+          {
+            "montee": 32,
+            "rubans": 3696,
+            "pas_median": 13.0,
+            "pas_median_melange": 5.0,
+            "excedent": 8.0
+          },
+          {
+            "montee": 64,
+            "rubans": 2160,
+            "pas_median": 7.0,
+            "pas_median_melange": 5.0,
+            "excedent": 2.0
+          },
+          {
+            "montee": 73,
+            "rubans": 1728,
+            "pas_median": 7.0,
+            "pas_median_melange": 5.0,
+            "excedent": 2.0
+          }
+        ],
+        "portee_en_couches": null,
+        "au_dela_de_lechelle": true,
+        "excedent_a_la_portee": null,
+        "excedent_maximal": 20.0,
+        "sommet_en_couches": 8,
+        "excedent_au_dernier_barreau": 2.0,
+        "dernier_barreau": 73
+      },
+      {
+        "matiere": "aucune rotation",
+        "couches_dun_quart_de_tour": 0,
+        "degres_par_couche": 0.0,
+        "decidable": false,
+        "plafond_du_ruban": 37,
+        "barreaux": [
+          {
+            "montee": 0,
+            "rubans": 2616,
+            "pas_median": 34.5,
+            "pas_median_melange": 34.5,
+            "excedent": 0.0
+          },
+          {
+            "montee": 1,
+            "rubans": 5184,
+            "pas_median": 34.5,
+            "pas_median_melange": 34.5,
+            "excedent": 0.0
+          },
+          {
+            "montee": 2,
+            "rubans": 5136,
+            "pas_median": 34.5,
+            "pas_median_melange": 34.5,
+            "excedent": 0.0
+          },
+          {
+            "montee": 4,
+            "rubans": 5040,
+            "pas_median": 34.5,
+            "pas_median_melange": 34.5,
+            "excedent": 0.0
+          },
+          {
+            "montee": 8,
+            "rubans": 4848,
+            "pas_median": 34.5,
+            "pas_median_melange": 34.5,
+            "excedent": 0.0
+          },
+          {
+            "montee": 16,
+            "rubans": 4464,
+            "pas_median": 34.5,
+            "pas_median_melange": 34.5,
+            "excedent": 0.0
+          },
+          {
+            "montee": 32,
+            "rubans": 3696,
+            "pas_median": 34.5,
+            "pas_median_melange": 34.5,
+            "excedent": 0.0
+          },
+          {
+            "montee": 64,
+            "rubans": 2160,
+            "pas_median": 34.5,
+            "pas_median_melange": 34.5,
+            "excedent": 0.0
+          },
+          {
+            "montee": 73,
+            "rubans": 1728,
+            "pas_median": 34.5,
+            "pas_median_melange": 34.5,
+            "excedent": 0.0
+          }
+        ],
+        "raison": "la matière et son mélange ne se séparent jamais",
+        "excedent_maximal": 0.0,
+        "dernier_barreau": 73
+      }
+    ],
+    "matieres_lues": 3,
+    "portees_lues": [
+      4,
+      8,
+      null,
+      null
+    ],
+    "rangs": [
+      0,
+      0,
+      1,
+      2
+    ],
+    "la_portee_croit_avec_la_lenteur": true,
+    "la_matiere_qui_ne_tourne_pas_ne_se_separe_jamais": true,
+    "la_portee_la_plus_courte": 4,
+    "la_portee_la_plus_longue": 8
+  },
+  "les_segments": [
+    {
+      "decidable": true,
+      "segment": "20230702185753",
+      "chunks_lus": 9,
+      "refuses": {
+        "absent": 16
+      },
+      "courbe": [
+        {
+          "montee": 0,
+          "pas_median": 21.0,
+          "pas_median_melange": 21.0,
+          "excedent": 0.0
+        },
+        {
+          "montee": 1,
+          "pas_median": 20.0,
+          "pas_median_melange": 16.0,
+          "excedent": 4.0
+        },
+        {
+          "montee": 2,
+          "pas_median": 20.0,
+          "pas_median_melange": 13.0,
+          "excedent": 7.0
+        },
+        {
+          "montee": 4,
+          "pas_median": 20.0,
+          "pas_median_melange": 12.0,
+          "excedent": 8.0
+        },
+        {
+          "montee": 8,
+          "pas_median": 18.0,
+          "pas_median_melange": 9.0,
+          "excedent": 9.0
+        },
+        {
+          "montee": 16,
+          "pas_median": 15.0,
+          "pas_median_melange": 7.0,
+          "excedent": 8.0
+        },
+        {
+          "montee": 32,
+          "pas_median": 12.0,
+          "pas_median_melange": 5.0,
+          "excedent": 7.0
+        },
+        {
+          "montee": 64,
+          "pas_median": 9.0,
+          "pas_median_melange": 5.0,
+          "excedent": 4.0
+        },
+        {
+          "montee": 73,
+          "pas_median": 8.0,
+          "pas_median_melange": 5.0,
+          "excedent": 3.0
+        }
+      ],
+      "plafond_du_ruban_median": 32,
+      "portee_mediane_en_couches": null,
+      "chunks_sans_portee": 9,
+      "portee_en_couches": null,
+      "au_dela_de_lechelle": true,
+      "excedent_a_la_portee": null,
+      "excedent_maximal": 9.0,
+      "sommet_en_couches": 8,
+      "excedent_au_dernier_barreau": 3.0,
+      "dernier_barreau": 73,
+      "chunks": [
+        {
+          "chunk": [
+            98,
+            71
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 31,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 912,
+              "pas_median": 21.0,
+              "pas_median_melange": 21.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 1800,
+              "pas_median": 20.0,
+              "pas_median_melange": 15.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 2,
+              "rubans": 1776,
+              "pas_median": 20.0,
+              "pas_median_melange": 13.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 4,
+              "rubans": 1728,
+              "pas_median": 20.0,
+              "pas_median_melange": 11.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 8,
+              "rubans": 1632,
+              "pas_median": 18.0,
+              "pas_median_melange": 9.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 16,
+              "rubans": 1440,
+              "pas_median": 15.0,
+              "pas_median_melange": 6.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1224,
+              "pas_median": 12.0,
+              "pas_median_melange": 5.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 64,
+              "rubans": 768,
+              "pas_median": 9.0,
+              "pas_median_melange": 5.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 73,
+              "rubans": 648,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 9.0,
+          "sommet_en_couches": 4,
+          "excedent_au_dernier_barreau": 3.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            98,
+            142
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 34,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1344,
+              "pas_median": 27.0,
+              "pas_median_melange": 27.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2640,
+              "pas_median": 26.0,
+              "pas_median_melange": 17.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2592,
+              "pas_median": 25.0,
+              "pas_median_melange": 15.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2544,
+              "pas_median": 23.0,
+              "pas_median_melange": 13.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2544,
+              "pas_median": 19.0,
+              "pas_median_melange": 10.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2544,
+              "pas_median": 15.0,
+              "pas_median_melange": 7.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2160,
+              "pas_median": 12.0,
+              "pas_median_melange": 5.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 64,
+              "rubans": 888,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 73,
+              "rubans": 624,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 10.0,
+          "sommet_en_couches": 2,
+          "excedent_au_dernier_barreau": 3.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            98,
+            213
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 29,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1512,
+              "pas_median": 19.0,
+              "pas_median_melange": 19.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2976,
+              "pas_median": 19.0,
+              "pas_median_melange": 14.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2928,
+              "pas_median": 19.0,
+              "pas_median_melange": 11.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2832,
+              "pas_median": 18.0,
+              "pas_median_melange": 10.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2640,
+              "pas_median": 17.0,
+              "pas_median_melange": 9.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2352,
+              "pas_median": 14.0,
+              "pas_median_melange": 6.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2184,
+              "pas_median": 10.0,
+              "pas_median_melange": 5.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1200,
+              "pas_median": 7.0,
+              "pas_median_melange": 4.5,
+              "excedent": 2.5
+            },
+            {
+              "montee": 73,
+              "rubans": 960,
+              "pas_median": 6.0,
+              "pas_median_melange": 5.0,
+              "excedent": 1.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 8.0,
+          "sommet_en_couches": 2,
+          "excedent_au_dernier_barreau": 1.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            197,
+            71
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 38,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1488,
+              "pas_median": 25.0,
+              "pas_median_melange": 25.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2952,
+              "pas_median": 24.0,
+              "pas_median_melange": 19.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2928,
+              "pas_median": 24.0,
+              "pas_median_melange": 17.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2880,
+              "pas_median": 23.0,
+              "pas_median_melange": 14.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2784,
+              "pas_median": 21.0,
+              "pas_median_melange": 11.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2496,
+              "pas_median": 18.0,
+              "pas_median_melange": 8.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1896,
+              "pas_median": 13.0,
+              "pas_median_melange": 6.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1392,
+              "pas_median": 9.0,
+              "pas_median_melange": 5.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1176,
+              "pas_median": 9.0,
+              "pas_median_melange": 5.0,
+              "excedent": 4.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 10.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 4.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            197,
+            142
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 39,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1320,
+              "pas_median": 27.0,
+              "pas_median_melange": 27.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2616,
+              "pas_median": 27.0,
+              "pas_median_melange": 19.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2592,
+              "pas_median": 27.0,
+              "pas_median_melange": 17.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2544,
+              "pas_median": 26.0,
+              "pas_median_melange": 14.0,
+              "excedent": 12.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2424,
+              "pas_median": 25.0,
+              "pas_median_melange": 12.0,
+              "excedent": 13.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2160,
+              "pas_median": 20.0,
+              "pas_median_melange": 8.0,
+              "excedent": 12.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1728,
+              "pas_median": 15.0,
+              "pas_median_melange": 5.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1224,
+              "pas_median": 11.0,
+              "pas_median_melange": 5.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1008,
+              "pas_median": 11.0,
+              "pas_median_melange": 5.0,
+              "excedent": 6.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 13.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 6.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            197,
+            213
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 30,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1128,
+              "pas_median": 19.0,
+              "pas_median_melange": 19.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2256,
+              "pas_median": 19.0,
+              "pas_median_melange": 15.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2256,
+              "pas_median": 19.0,
+              "pas_median_melange": 12.5,
+              "excedent": 6.5
+            },
+            {
+              "montee": 4,
+              "rubans": 2256,
+              "pas_median": 19.0,
+              "pas_median_melange": 11.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2256,
+              "pas_median": 17.5,
+              "pas_median_melange": 9.0,
+              "excedent": 8.5
+            },
+            {
+              "montee": 16,
+              "rubans": 2136,
+              "pas_median": 15.0,
+              "pas_median_melange": 6.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2088,
+              "pas_median": 12.0,
+              "pas_median_melange": 5.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 64,
+              "rubans": 672,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 73,
+              "rubans": 240,
+              "pas_median": 7.0,
+              "pas_median_melange": 5.0,
+              "excedent": 2.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 9.0,
+          "sommet_en_couches": 16,
+          "excedent_au_dernier_barreau": 2.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            296,
+            71
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 32,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1128,
+              "pas_median": 21.5,
+              "pas_median_melange": 21.5,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2208,
+              "pas_median": 21.5,
+              "pas_median_melange": 16.0,
+              "excedent": 5.5
+            },
+            {
+              "montee": 2,
+              "rubans": 2160,
+              "pas_median": 22.0,
+              "pas_median_melange": 13.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2112,
+              "pas_median": 21.0,
+              "pas_median_melange": 12.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2016,
+              "pas_median": 19.0,
+              "pas_median_melange": 9.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 16,
+              "rubans": 1824,
+              "pas_median": 16.0,
+              "pas_median_melange": 7.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1728,
+              "pas_median": 12.0,
+              "pas_median_melange": 5.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 64,
+              "rubans": 768,
+              "pas_median": 9.0,
+              "pas_median_melange": 5.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 73,
+              "rubans": 552,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 10.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 3.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            296,
+            142
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 32,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1272,
+              "pas_median": 21.0,
+              "pas_median_melange": 21.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2496,
+              "pas_median": 20.0,
+              "pas_median_melange": 16.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2472,
+              "pas_median": 20.0,
+              "pas_median_melange": 13.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2472,
+              "pas_median": 19.5,
+              "pas_median_melange": 12.0,
+              "excedent": 7.5
+            },
+            {
+              "montee": 8,
+              "rubans": 2376,
+              "pas_median": 18.0,
+              "pas_median_melange": 9.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2040,
+              "pas_median": 15.0,
+              "pas_median_melange": 7.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1704,
+              "pas_median": 12.0,
+              "pas_median_melange": 5.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1128,
+              "pas_median": 9.0,
+              "pas_median_melange": 5.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 73,
+              "rubans": 912,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 9.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 3.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            296,
+            213
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 30,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1488,
+              "pas_median": 18.0,
+              "pas_median_melange": 18.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2952,
+              "pas_median": 17.0,
+              "pas_median_melange": 15.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2928,
+              "pas_median": 17.0,
+              "pas_median_melange": 12.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2880,
+              "pas_median": 17.0,
+              "pas_median_melange": 11.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2784,
+              "pas_median": 16.0,
+              "pas_median_melange": 9.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2616,
+              "pas_median": 14.0,
+              "pas_median_melange": 6.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1968,
+              "pas_median": 11.0,
+              "pas_median_melange": 4.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1464,
+              "pas_median": 8.0,
+              "pas_median_melange": 4.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1152,
+              "pas_median": 7.0,
+              "pas_median_melange": 4.0,
+              "excedent": 3.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 8.0,
+          "sommet_en_couches": 16,
+          "excedent_au_dernier_barreau": 3.0,
+          "dernier_barreau": 73
+        }
+      ]
+    },
+    {
+      "decidable": true,
+      "segment": "20230929220926",
+      "chunks_lus": 9,
+      "refuses": {
+        "absent": 16
+      },
+      "courbe": [
+        {
+          "montee": 0,
+          "pas_median": 22.0,
+          "pas_median_melange": 22.0,
+          "excedent": 0.0
+        },
+        {
+          "montee": 1,
+          "pas_median": 21.0,
+          "pas_median_melange": 16.0,
+          "excedent": 5.0
+        },
+        {
+          "montee": 2,
+          "pas_median": 21.0,
+          "pas_median_melange": 15.0,
+          "excedent": 6.0
+        },
+        {
+          "montee": 4,
+          "pas_median": 20.0,
+          "pas_median_melange": 12.0,
+          "excedent": 8.0
+        },
+        {
+          "montee": 8,
+          "pas_median": 19.0,
+          "pas_median_melange": 9.0,
+          "excedent": 10.0
+        },
+        {
+          "montee": 16,
+          "pas_median": 15.0,
+          "pas_median_melange": 7.0,
+          "excedent": 8.0
+        },
+        {
+          "montee": 32,
+          "pas_median": 12.0,
+          "pas_median_melange": 5.0,
+          "excedent": 7.0
+        },
+        {
+          "montee": 64,
+          "pas_median": 8.0,
+          "pas_median_melange": 5.0,
+          "excedent": 3.0
+        },
+        {
+          "montee": 73,
+          "pas_median": 7.0,
+          "pas_median_melange": 5.0,
+          "excedent": 2.0
+        }
+      ],
+      "plafond_du_ruban_median": 32,
+      "portee_mediane_en_couches": null,
+      "chunks_sans_portee": 9,
+      "portee_en_couches": null,
+      "au_dela_de_lechelle": true,
+      "excedent_a_la_portee": null,
+      "excedent_maximal": 10.0,
+      "sommet_en_couches": 8,
+      "excedent_au_dernier_barreau": 2.0,
+      "dernier_barreau": 73,
+      "chunks": [
+        {
+          "chunk": [
+            62,
+            148
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 32,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1008,
+              "pas_median": 22.0,
+              "pas_median_melange": 22.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 1992,
+              "pas_median": 21.0,
+              "pas_median_melange": 16.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 2,
+              "rubans": 1968,
+              "pas_median": 21.0,
+              "pas_median_melange": 15.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 4,
+              "rubans": 1920,
+              "pas_median": 20.0,
+              "pas_median_melange": 12.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 8,
+              "rubans": 1752,
+              "pas_median": 19.0,
+              "pas_median_melange": 9.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 16,
+              "rubans": 1488,
+              "pas_median": 15.0,
+              "pas_median_melange": 7.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1248,
+              "pas_median": 12.0,
+              "pas_median_melange": 5.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 64,
+              "rubans": 936,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 73,
+              "rubans": 768,
+              "pas_median": 7.0,
+              "pas_median_melange": 5.0,
+              "excedent": 2.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 10.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 2.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            62,
+            296
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 38,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1536,
+              "pas_median": 26.0,
+              "pas_median_melange": 26.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 3048,
+              "pas_median": 25.5,
+              "pas_median_melange": 19.0,
+              "excedent": 6.5
+            },
+            {
+              "montee": 2,
+              "rubans": 3048,
+              "pas_median": 26.0,
+              "pas_median_melange": 17.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 4,
+              "rubans": 3048,
+              "pas_median": 24.0,
+              "pas_median_melange": 14.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2928,
+              "pas_median": 23.0,
+              "pas_median_melange": 11.0,
+              "excedent": 12.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2760,
+              "pas_median": 19.0,
+              "pas_median_melange": 8.0,
+              "excedent": 11.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2256,
+              "pas_median": 14.0,
+              "pas_median_melange": 6.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1344,
+              "pas_median": 10.0,
+              "pas_median_melange": 5.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1008,
+              "pas_median": 10.0,
+              "pas_median_melange": 5.0,
+              "excedent": 5.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 12.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 5.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            62,
+            444
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 26,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1200,
+              "pas_median": 15.0,
+              "pas_median_melange": 15.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2400,
+              "pas_median": 14.0,
+              "pas_median_melange": 13.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2400,
+              "pas_median": 14.0,
+              "pas_median_melange": 11.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2376,
+              "pas_median": 14.0,
+              "pas_median_melange": 10.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2280,
+              "pas_median": 13.5,
+              "pas_median_melange": 8.0,
+              "excedent": 5.5
+            },
+            {
+              "montee": 16,
+              "rubans": 2064,
+              "pas_median": 11.0,
+              "pas_median_melange": 5.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1512,
+              "pas_median": 10.0,
+              "pas_median_melange": 4.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 64,
+              "rubans": 936,
+              "pas_median": 8.0,
+              "pas_median_melange": 4.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 73,
+              "rubans": 936,
+              "pas_median": 7.0,
+              "pas_median_melange": 4.0,
+              "excedent": 3.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 6.0,
+          "sommet_en_couches": 16,
+          "excedent_au_dernier_barreau": 3.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            125,
+            148
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 47,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1320,
+              "pas_median": 33.0,
+              "pas_median_melange": 33.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2592,
+              "pas_median": 32.0,
+              "pas_median_melange": 23.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2544,
+              "pas_median": 32.0,
+              "pas_median_melange": 22.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2448,
+              "pas_median": 31.0,
+              "pas_median_melange": 17.0,
+              "excedent": 14.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2256,
+              "pas_median": 29.0,
+              "pas_median_melange": 14.0,
+              "excedent": 15.0
+            },
+            {
+              "montee": 16,
+              "rubans": 1920,
+              "pas_median": 24.0,
+              "pas_median_melange": 10.0,
+              "excedent": 14.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1584,
+              "pas_median": 19.0,
+              "pas_median_melange": 7.0,
+              "excedent": 12.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1224,
+              "pas_median": 14.0,
+              "pas_median_melange": 5.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1152,
+              "pas_median": 13.0,
+              "pas_median_melange": 5.0,
+              "excedent": 8.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 15.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 8.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            125,
+            296
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 26,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 2088,
+              "pas_median": 13.0,
+              "pas_median_melange": 13.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 4128,
+              "pas_median": 13.0,
+              "pas_median_melange": 12.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 2,
+              "rubans": 4080,
+              "pas_median": 13.0,
+              "pas_median_melange": 10.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 4,
+              "rubans": 3984,
+              "pas_median": 13.0,
+              "pas_median_melange": 9.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 8,
+              "rubans": 3840,
+              "pas_median": 13.0,
+              "pas_median_melange": 8.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 16,
+              "rubans": 3552,
+              "pas_median": 12.0,
+              "pas_median_melange": 5.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 32,
+              "rubans": 3168,
+              "pas_median": 10.0,
+              "pas_median_melange": 5.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1632,
+              "pas_median": 7.0,
+              "pas_median_melange": 5.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1200,
+              "pas_median": 7.0,
+              "pas_median_melange": 4.0,
+              "excedent": 3.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 7.0,
+          "sommet_en_couches": 16,
+          "excedent_au_dernier_barreau": 3.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            125,
+            444
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 32,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1344,
+              "pas_median": 21.0,
+              "pas_median_melange": 21.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2664,
+              "pas_median": 21.0,
+              "pas_median_melange": 16.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2640,
+              "pas_median": 21.0,
+              "pas_median_melange": 14.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2592,
+              "pas_median": 19.0,
+              "pas_median_melange": 12.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2496,
+              "pas_median": 17.0,
+              "pas_median_melange": 9.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2232,
+              "pas_median": 14.0,
+              "pas_median_melange": 7.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1848,
+              "pas_median": 12.0,
+              "pas_median_melange": 5.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 64,
+              "rubans": 984,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 73,
+              "rubans": 888,
+              "pas_median": 7.0,
+              "pas_median_melange": 5.0,
+              "excedent": 2.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 8.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 2.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            187,
+            148
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 36,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1608,
+              "pas_median": 24.0,
+              "pas_median_melange": 24.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 3216,
+              "pas_median": 24.0,
+              "pas_median_melange": 18.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 2,
+              "rubans": 3216,
+              "pas_median": 24.0,
+              "pas_median_melange": 16.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 4,
+              "rubans": 3216,
+              "pas_median": 23.0,
+              "pas_median_melange": 13.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 8,
+              "rubans": 3144,
+              "pas_median": 21.0,
+              "pas_median_melange": 11.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2760,
+              "pas_median": 17.0,
+              "pas_median_melange": 7.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2040,
+              "pas_median": 14.0,
+              "pas_median_melange": 5.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1440,
+              "pas_median": 11.0,
+              "pas_median_melange": 5.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1272,
+              "pas_median": 10.0,
+              "pas_median_melange": 5.0,
+              "excedent": 5.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 10.0,
+          "sommet_en_couches": 4,
+          "excedent_au_dernier_barreau": 5.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            187,
+            296
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 38,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 960,
+              "pas_median": 29.0,
+              "pas_median_melange": 29.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 1920,
+              "pas_median": 29.0,
+              "pas_median_melange": 19.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 2,
+              "rubans": 1920,
+              "pas_median": 29.0,
+              "pas_median_melange": 18.0,
+              "excedent": 11.0
+            },
+            {
+              "montee": 4,
+              "rubans": 1920,
+              "pas_median": 29.0,
+              "pas_median_melange": 14.0,
+              "excedent": 15.0
+            },
+            {
+              "montee": 8,
+              "rubans": 1848,
+              "pas_median": 26.0,
+              "pas_median_melange": 12.0,
+              "excedent": 14.0
+            },
+            {
+              "montee": 16,
+              "rubans": 1656,
+              "pas_median": 20.0,
+              "pas_median_melange": 9.0,
+              "excedent": 11.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1320,
+              "pas_median": 14.0,
+              "pas_median_melange": 6.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 64,
+              "rubans": 816,
+              "pas_median": 10.0,
+              "pas_median_melange": 5.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 73,
+              "rubans": 600,
+              "pas_median": 10.0,
+              "pas_median_melange": 5.0,
+              "excedent": 5.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 15.0,
+          "sommet_en_couches": 4,
+          "excedent_au_dernier_barreau": 5.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            187,
+            444
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 25,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1632,
+              "pas_median": 15.0,
+              "pas_median_melange": 15.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 3240,
+              "pas_median": 15.0,
+              "pas_median_melange": 12.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 2,
+              "rubans": 3216,
+              "pas_median": 15.0,
+              "pas_median_melange": 10.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 4,
+              "rubans": 3168,
+              "pas_median": 14.0,
+              "pas_median_melange": 9.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 8,
+              "rubans": 3120,
+              "pas_median": 13.0,
+              "pas_median_melange": 7.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2808,
+              "pas_median": 11.0,
+              "pas_median_melange": 6.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2424,
+              "pas_median": 9.0,
+              "pas_median_melange": 4.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1200,
+              "pas_median": 7.0,
+              "pas_median_melange": 4.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 73,
+              "rubans": 936,
+              "pas_median": 7.0,
+              "pas_median_melange": 4.0,
+              "excedent": 3.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 6.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 3.0,
+          "dernier_barreau": 73
+        }
+      ]
+    },
+    {
+      "decidable": true,
+      "segment": "20231005123336",
+      "chunks_lus": 9,
+      "refuses": {
+        "absent": 16
+      },
+      "courbe": [
+        {
+          "montee": 0,
+          "pas_median": 23.0,
+          "pas_median_melange": 23.0,
+          "excedent": 0.0
+        },
+        {
+          "montee": 1,
+          "pas_median": 23.0,
+          "pas_median_melange": 17.0,
+          "excedent": 6.0
+        },
+        {
+          "montee": 2,
+          "pas_median": 23.0,
+          "pas_median_melange": 14.0,
+          "excedent": 9.0
+        },
+        {
+          "montee": 4,
+          "pas_median": 22.0,
+          "pas_median_melange": 12.0,
+          "excedent": 10.0
+        },
+        {
+          "montee": 8,
+          "pas_median": 20.0,
+          "pas_median_melange": 10.0,
+          "excedent": 10.0
+        },
+        {
+          "montee": 16,
+          "pas_median": 17.0,
+          "pas_median_melange": 7.0,
+          "excedent": 10.0
+        },
+        {
+          "montee": 32,
+          "pas_median": 13.0,
+          "pas_median_melange": 5.0,
+          "excedent": 8.0
+        },
+        {
+          "montee": 64,
+          "pas_median": 9.0,
+          "pas_median_melange": 5.0,
+          "excedent": 4.0
+        },
+        {
+          "montee": 73,
+          "pas_median": 8.0,
+          "pas_median_melange": 5.0,
+          "excedent": 3.0
+        }
+      ],
+      "plafond_du_ruban_median": 34,
+      "portee_mediane_en_couches": null,
+      "chunks_sans_portee": 9,
+      "portee_en_couches": null,
+      "au_dela_de_lechelle": true,
+      "excedent_a_la_portee": null,
+      "excedent_maximal": 10.0,
+      "sommet_en_couches": 4,
+      "excedent_au_dernier_barreau": 3.0,
+      "dernier_barreau": 73,
+      "chunks": [
+        {
+          "chunk": [
+            68,
+            189
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 37,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1368,
+              "pas_median": 23.0,
+              "pas_median_melange": 23.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2712,
+              "pas_median": 23.0,
+              "pas_median_melange": 18.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2688,
+              "pas_median": 23.5,
+              "pas_median_melange": 15.0,
+              "excedent": 8.5
+            },
+            {
+              "montee": 4,
+              "rubans": 2664,
+              "pas_median": 23.0,
+              "pas_median_melange": 13.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2664,
+              "pas_median": 22.0,
+              "pas_median_melange": 11.0,
+              "excedent": 11.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2568,
+              "pas_median": 21.0,
+              "pas_median_melange": 8.0,
+              "excedent": 13.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2184,
+              "pas_median": 16.0,
+              "pas_median_melange": 6.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 64,
+              "rubans": 912,
+              "pas_median": 11.0,
+              "pas_median_melange": 5.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 73,
+              "rubans": 648,
+              "pas_median": 10.0,
+              "pas_median_melange": 6.0,
+              "excedent": 4.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 13.0,
+          "sommet_en_couches": 16,
+          "excedent_au_dernier_barreau": 4.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            68,
+            379
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 30,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1704,
+              "pas_median": 19.0,
+              "pas_median_melange": 19.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 3384,
+              "pas_median": 19.0,
+              "pas_median_melange": 15.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 2,
+              "rubans": 3360,
+              "pas_median": 19.0,
+              "pas_median_melange": 13.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 4,
+              "rubans": 3312,
+              "pas_median": 18.0,
+              "pas_median_melange": 11.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 8,
+              "rubans": 3216,
+              "pas_median": 16.0,
+              "pas_median_melange": 9.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 16,
+              "rubans": 3120,
+              "pas_median": 15.0,
+              "pas_median_melange": 7.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2520,
+              "pas_median": 11.0,
+              "pas_median_melange": 5.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1272,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1056,
+              "pas_median": 7.0,
+              "pas_median_melange": 5.0,
+              "excedent": 2.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 8.0,
+          "sommet_en_couches": 16,
+          "excedent_au_dernier_barreau": 2.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            68,
+            569
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 40,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1896,
+              "pas_median": 27.0,
+              "pas_median_melange": 27.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 3744,
+              "pas_median": 27.0,
+              "pas_median_melange": 20.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 2,
+              "rubans": 3696,
+              "pas_median": 27.0,
+              "pas_median_melange": 16.0,
+              "excedent": 11.0
+            },
+            {
+              "montee": 4,
+              "rubans": 3648,
+              "pas_median": 26.0,
+              "pas_median_melange": 14.0,
+              "excedent": 12.0
+            },
+            {
+              "montee": 8,
+              "rubans": 3552,
+              "pas_median": 24.0,
+              "pas_median_melange": 11.0,
+              "excedent": 13.0
+            },
+            {
+              "montee": 16,
+              "rubans": 3312,
+              "pas_median": 21.0,
+              "pas_median_melange": 8.0,
+              "excedent": 13.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2544,
+              "pas_median": 15.0,
+              "pas_median_melange": 5.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1536,
+              "pas_median": 10.0,
+              "pas_median_melange": 5.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1416,
+              "pas_median": 9.0,
+              "pas_median_melange": 5.0,
+              "excedent": 4.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 13.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 4.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            136,
+            189
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 24,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1008,
+              "pas_median": 18.0,
+              "pas_median_melange": 18.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2016,
+              "pas_median": 17.0,
+              "pas_median_melange": 12.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2016,
+              "pas_median": 17.0,
+              "pas_median_melange": 10.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2016,
+              "pas_median": 16.0,
+              "pas_median_melange": 9.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2016,
+              "pas_median": 15.0,
+              "pas_median_melange": 7.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 16,
+              "rubans": 1944,
+              "pas_median": 12.0,
+              "pas_median_melange": 6.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1584,
+              "pas_median": 9.0,
+              "pas_median_melange": 5.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 64,
+              "rubans": 744,
+              "pas_median": 7.0,
+              "pas_median_melange": 5.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 73,
+              "rubans": 528,
+              "pas_median": 7.0,
+              "pas_median_melange": 5.0,
+              "excedent": 2.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 8.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 2.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            136,
+            379
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 44,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1656,
+              "pas_median": 28.0,
+              "pas_median_melange": 28.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 3264,
+              "pas_median": 28.0,
+              "pas_median_melange": 22.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 2,
+              "rubans": 3216,
+              "pas_median": 28.0,
+              "pas_median_melange": 18.5,
+              "excedent": 9.5
+            },
+            {
+              "montee": 4,
+              "rubans": 3120,
+              "pas_median": 28.0,
+              "pas_median_melange": 16.0,
+              "excedent": 12.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2928,
+              "pas_median": 25.0,
+              "pas_median_melange": 13.0,
+              "excedent": 12.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2688,
+              "pas_median": 22.0,
+              "pas_median_melange": 10.0,
+              "excedent": 12.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2400,
+              "pas_median": 17.0,
+              "pas_median_melange": 7.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1344,
+              "pas_median": 12.0,
+              "pas_median_melange": 5.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1032,
+              "pas_median": 11.0,
+              "pas_median_melange": 5.0,
+              "excedent": 6.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 12.0,
+          "sommet_en_couches": 4,
+          "excedent_au_dernier_barreau": 6.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            136,
+            569
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 34,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1296,
+              "pas_median": 23.0,
+              "pas_median_melange": 23.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 2568,
+              "pas_median": 23.0,
+              "pas_median_melange": 17.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 2,
+              "rubans": 2544,
+              "pas_median": 23.0,
+              "pas_median_melange": 14.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 4,
+              "rubans": 2496,
+              "pas_median": 22.0,
+              "pas_median_melange": 12.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 8,
+              "rubans": 2400,
+              "pas_median": 20.0,
+              "pas_median_melange": 10.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 16,
+              "rubans": 2208,
+              "pas_median": 17.0,
+              "pas_median_melange": 7.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1872,
+              "pas_median": 13.0,
+              "pas_median_melange": 5.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 64,
+              "rubans": 840,
+              "pas_median": 9.0,
+              "pas_median_melange": 5.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 73,
+              "rubans": 720,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 10.0,
+          "sommet_en_couches": 4,
+          "excedent_au_dernier_barreau": 3.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            204,
+            189
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 30,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 960,
+              "pas_median": 23.0,
+              "pas_median_melange": 23.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 1872,
+              "pas_median": 22.0,
+              "pas_median_melange": 15.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 2,
+              "rubans": 1824,
+              "pas_median": 22.0,
+              "pas_median_melange": 13.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 4,
+              "rubans": 1800,
+              "pas_median": 21.0,
+              "pas_median_melange": 11.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 8,
+              "rubans": 1752,
+              "pas_median": 18.0,
+              "pas_median_melange": 9.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 16,
+              "rubans": 1560,
+              "pas_median": 14.0,
+              "pas_median_melange": 6.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 32,
+              "rubans": 1080,
+              "pas_median": 11.0,
+              "pas_median_melange": 4.5,
+              "excedent": 6.5
+            },
+            {
+              "montee": 64,
+              "rubans": 864,
+              "pas_median": 8.0,
+              "pas_median_melange": 4.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 73,
+              "rubans": 840,
+              "pas_median": 7.0,
+              "pas_median_melange": 4.0,
+              "excedent": 3.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 10.0,
+          "sommet_en_couches": 4,
+          "excedent_au_dernier_barreau": 3.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            204,
+            379
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 35,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 2280,
+              "pas_median": 25.0,
+              "pas_median_melange": 25.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 4512,
+              "pas_median": 24.0,
+              "pas_median_melange": 17.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 2,
+              "rubans": 4464,
+              "pas_median": 24.0,
+              "pas_median_melange": 15.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 4,
+              "rubans": 4368,
+              "pas_median": 24.0,
+              "pas_median_melange": 13.0,
+              "excedent": 11.0
+            },
+            {
+              "montee": 8,
+              "rubans": 4224,
+              "pas_median": 22.0,
+              "pas_median_melange": 10.0,
+              "excedent": 12.0
+            },
+            {
+              "montee": 16,
+              "rubans": 3888,
+              "pas_median": 18.0,
+              "pas_median_melange": 7.0,
+              "excedent": 11.0
+            },
+            {
+              "montee": 32,
+              "rubans": 3264,
+              "pas_median": 14.0,
+              "pas_median_melange": 5.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1872,
+              "pas_median": 10.0,
+              "pas_median_melange": 5.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1440,
+              "pas_median": 10.0,
+              "pas_median_melange": 4.0,
+              "excedent": 6.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 12.0,
+          "sommet_en_couches": 8,
+          "excedent_au_dernier_barreau": 6.0,
+          "dernier_barreau": 73
+        },
+        {
+          "chunk": [
+            204,
+            569
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 30,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 1680,
+              "pas_median": 21.0,
+              "pas_median_melange": 21.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 1,
+              "rubans": 3360,
+              "pas_median": 20.0,
+              "pas_median_melange": 15.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 2,
+              "rubans": 3360,
+              "pas_median": 21.0,
+              "pas_median_melange": 13.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 4,
+              "rubans": 3360,
+              "pas_median": 19.0,
+              "pas_median_melange": 11.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 8,
+              "rubans": 3240,
+              "pas_median": 17.0,
+              "pas_median_melange": 9.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 16,
+              "rubans": 3024,
+              "pas_median": 14.0,
+              "pas_median_melange": 6.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 32,
+              "rubans": 2352,
+              "pas_median": 11.0,
+              "pas_median_melange": 5.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 64,
+              "rubans": 1512,
+              "pas_median": 8.0,
+              "pas_median_melange": 5.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 73,
+              "rubans": 1152,
+              "pas_median": 7.0,
+              "pas_median_melange": 5.0,
+              "excedent": 2.0
+            }
+          ],
+          "portee_en_couches": null,
+          "au_dela_de_lechelle": true,
+          "excedent_a_la_portee": null,
+          "excedent_maximal": 8.0,
+          "sommet_en_couches": 2,
+          "excedent_au_dernier_barreau": 2.0,
+          "dernier_barreau": 73
+        }
+      ]
+    }
+  ],
+  "le_verdict": {
+    "decidable": true,
+    "segments": 3,
+    "chunks_lus": 27,
+    "courbe": [
+      {
+        "montee": 0,
+        "montee_um": 0.0,
+        "pas_median": 22.0,
+        "pas_median_melange": 22.0,
+        "excedent": 0.0
+      },
+      {
+        "montee": 1,
+        "montee_um": 2.4,
+        "pas_median": 21.0,
+        "pas_median_melange": 16.0,
+        "excedent": 5.0
+      },
+      {
+        "montee": 2,
+        "montee_um": 4.8,
+        "pas_median": 21.0,
+        "pas_median_melange": 14.0,
+        "excedent": 7.0
+      },
+      {
+        "montee": 4,
+        "montee_um": 9.6,
+        "pas_median": 20.0,
+        "pas_median_melange": 12.0,
+        "excedent": 8.0
+      },
+      {
+        "montee": 8,
+        "montee_um": 19.2,
+        "pas_median": 19.0,
+        "pas_median_melange": 9.0,
+        "excedent": 10.0
+      },
+      {
+        "montee": 16,
+        "montee_um": 38.4,
+        "pas_median": 15.0,
+        "pas_median_melange": 7.0,
+        "excedent": 8.0
+      },
+      {
+        "montee": 32,
+        "montee_um": 76.8,
+        "pas_median": 12.0,
+        "pas_median_melange": 5.0,
+        "excedent": 7.0
+      },
+      {
+        "montee": 64,
+        "montee_um": 153.6,
+        "pas_median": 9.0,
+        "pas_median_melange": 5.0,
+        "excedent": 4.0
+      },
+      {
+        "montee": 73,
+        "montee_um": 175.2,
+        "pas_median": 8.0,
+        "pas_median_melange": 5.0,
+        "excedent": 3.0
+      }
+    ],
+    "portee_en_couches": null,
+    "au_dela_de_lechelle": true,
+    "excedent_a_la_portee": null,
+    "excedent_maximal": 10.0,
+    "sommet_en_couches": 8,
+    "excedent_au_dernier_barreau": 3.0,
+    "dernier_barreau": 73,
+    "portee_um": null,
+    "portee_minimale_um": 175.2,
+    "le_pas_entre_deux_feuilles_um": 173.0,
+    "elle_vaut_le_pas_entre_deux_feuilles_fois": 1.0127,
+    "plafond_du_ruban_median": 32,
+    "portee_mediane_des_chunks": null,
+    "la_portee_la_plus_courte_de_letalon": 4,
+    "la_portee_la_plus_longue_de_letalon": 8,
+    "portees_de_letalon": [
+      4,
+      8,
+      null,
+      null
+    ],
+    "letalon_ordonne_les_portees": true,
+    "la_portee_se_lit_sur_le_rouleau": false,
+    "elle_franchit_un_pas_entre_deux_feuilles": true
+  }
+}

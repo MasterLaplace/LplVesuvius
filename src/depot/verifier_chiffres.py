@@ -3194,6 +3194,82 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 188 : JUSQU'OU UNE SURFACE PEUT-ELLE DERIVER ?
+    # (1) Une longueur de la vraie matiere ne voyage jamais sans celle de ses couches MELANGEES :
+    # l'excedent est toute la mesure, et une longueur brute qui decroit ne dirait que « le ruban
+    # derive ».
+    # (2) Ni sans la PORTEE, qui est le croisement des deux courbes — et quand elle sort de
+    # l'echelle elle se publie comme une BORNE, jamais comme une inconnue.
+    # (3) Et une portee ne voyage jamais sans ce que rend l'ETALON : un instrument qui rendrait la
+    # meme portee a des matieres de vitesses differentes mesurerait sa propre echelle.
+    sd8 = _source(racine, "jusquou_une_surface_peut_elle_deriver.json")
+    if sd8.exists():
+        d = json.loads(sd8.read_text())
+
+        def _dec188(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("departs_par_couche", "departs par couche"),
+                         ("cote_du_treillis", "cote du treillis"),
+                         ("plafond_de_pas", "plafond de pas")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 188", int(d[cle]), 0, sd8.name)
+        if d.get("voxel_um") is not None:
+            ajoute("voxel de 188", float(d["voxel_um"]), _dec188(d["voxel_um"]), sd8.name,
+                   unites=("µm",))
+        for k, m in enumerate(d.get("montees") or []):
+            ajoute(f"barreau {k} de l echelle de 188", int(m), 0, sd8.name)
+        for x in ((d.get("letalon") or {}).get("lignes") or []):
+            q = f"de la matiere a {x.get('degres_par_couche')} degres par couche de 188"
+            if x.get("degres_par_couche") is not None:
+                ajoute(f"vitesse {q}", float(x["degres_par_couche"]),
+                       _dec188(x["degres_par_couche"]), sd8.name, unites=("°/couche",))
+            if x.get("portee_en_couches") is not None:
+                ajoute(f"portee {q}", int(x["portee_en_couches"]), 0, sd8.name)
+            if x.get("excedent_maximal") is not None:
+                ajoute(f"excedent maximal {q}", float(x["excedent_maximal"]),
+                       _dec188(x["excedent_maximal"]), sd8.name)
+        for sg in (d.get("les_segments") or []):
+            if not sg.get("decidable"):
+                continue
+            q = f"du segment {sg['segment']} de 188"
+            if sg.get("chunks_lus") is not None:
+                ajoute(f"chunks lus {q}", int(sg["chunks_lus"]), 0, sd8.name)
+            if sg.get("excedent_maximal") is not None:
+                ajoute(f"excedent maximal {q}", float(sg["excedent_maximal"]),
+                       _dec188(sg["excedent_maximal"]), sd8.name)
+        v8 = d.get("le_verdict") or {}
+        for b in (v8.get("courbe") or []):
+            q = f"a la montee {b['montee']} de 188"
+            for cle, nom, unite in (("montee_um", "montee", "µm"),
+                                    ("pas_median", "pas de la vraie matiere", ""),
+                                    ("pas_median_melange", "pas des couches melangees", ""),
+                                    ("excedent", "excedent", "")):
+                if b.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(b[cle]), _dec188(b[cle]), sd8.name,
+                           unites=((unite,) if unite else ()))
+        for cle, nom in (("segments", "segments"), ("chunks_lus", "chunks lus"),
+                         ("plafond_du_ruban_median", "plafond du ruban"),
+                         ("sommet_en_couches", "sommet en couches"),
+                         ("la_portee_la_plus_courte_de_letalon", "portee la plus courte de l etalon"),
+                         ("la_portee_la_plus_longue_de_letalon",
+                          "portee la plus longue de l etalon")):
+            if v8.get(cle) is not None:
+                ajoute(f"{nom} de 188", int(v8[cle]), 0, sd8.name)
+        for cle, nom, unite in (
+                ("portee_minimale_um", "portee minimale", "µm"),
+                ("excedent_maximal", "excedent maximal", ""),
+                ("elle_vaut_le_pas_entre_deux_feuilles_fois",
+                 "elle vaut le pas entre deux feuilles fois", ""),
+                ("le_pas_entre_deux_feuilles_um", "pas entre deux feuilles", "µm")):
+            if v8.get(cle) is not None:
+                ajoute(f"{nom} de 188", float(v8[cle]), _dec188(v8[cle]), sd8.name,
+                       unites=((unite,) if unite else ()))
+
     # ⭐⭐⭐⭐ LA TRANCHE 187 : UN RUBAN QUI SAUTE PERD-IL SA FIBRE ?
     # (1) Ce que le SAUT coute ne voyage jamais sans ce que la DERIVE coute : les deux ne disent pas
     # la meme chose, et c'est leur INVERSION entre la matiere construite et le rouleau qui est le

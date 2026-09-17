@@ -92,16 +92,28 @@ def un_ruban(bloc: np.ndarray, departs, couche_de_depart: int, angle_deg: float,
 
     ⚠ La profondeur est arrondie à la couche : un ruban lit la matière telle qu'elle est
     échantillonnée, pas une interpolation qu'aucun voxel ne porte.
+
+    ⭐ `couche_de_depart` ET `angle_deg` ACCEPTENT UN TABLEAU, un par départ, et c'est ce qui permet
+    de marcher des rubans partis de PROFONDEURS DIFFÉRENTES dans un seul passage. Un second suiveur
+    écrit pour ça aurait été une seconde définition de la marche, libre de diverger ; ici c'est la
+    même, et la batterie vérifie que la forme en tableau rend EXACTEMENT ce que rend la forme
+    scalaire.
     """
     couches, h, w = bloc.shape
     planchers = (np.full(couches, float(plancher), dtype=float) if plancher is not None
                  else np.median(bloc.reshape(couches, -1), axis=1).astype(float))
-    th = np.radians(float(angle_deg))
-    ux, uy = float(np.cos(th)), float(np.sin(th))
-    px, py = -uy, ux
     n = len(departs)
     if n == 0 or int(plafond) <= 0:
         return []
+    ang = np.asarray(angle_deg, dtype=float)
+    kd = np.asarray(couche_de_depart, dtype=float)
+    if ang.ndim == 0:
+        ang = np.full(n, float(ang))
+    if kd.ndim == 0:
+        kd = np.full(n, float(kd))
+    th = np.radians(ang)
+    ux, uy = np.cos(th), np.sin(th)
+    px, py = -uy, ux
     idx = np.arange(n)
     y = np.array([float(d[0]) for d in departs])
     x = np.array([float(d[1]) for d in departs])
@@ -110,19 +122,21 @@ def un_ruban(bloc: np.ndarray, departs, couche_de_depart: int, angle_deg: float,
     meilleure = np.zeros(n, dtype=np.int64)
     ecarts = np.array([-1.0, 0.0, 1.0])
     for t in range(1, int(plafond) + 1):
-        k = int(round(float(couche_de_depart) + float(montee) * t / float(plafond)))
-        k = min(max(k, 0), couches - 1)
+        k = np.clip(np.rint(kd + float(montee) * t / float(plafond)).astype(np.int64),
+                    0, couches - 1)
         ny, nx = y + uy, x + ux
-        cy = np.rint(ny[None, :] + ecarts[:, None] * py).astype(np.int64)
-        cx = np.rint(nx[None, :] + ecarts[:, None] * px).astype(np.int64)
+        cy = np.rint(ny[None, :] + ecarts[:, None] * py[None, :]).astype(np.int64)
+        cx = np.rint(nx[None, :] + ecarts[:, None] * px[None, :]).astype(np.int64)
         dedans = (cy >= 0) & (cy < h) & (cx >= 0) & (cx < w)
-        val = np.where(dedans, bloc[k][np.clip(cy, 0, h - 1), np.clip(cx, 0, w - 1)], -np.inf)
+        val = np.where(dedans,
+                       bloc[np.broadcast_to(k, (3, n)), np.clip(cy, 0, h - 1),
+                            np.clip(cx, 0, w - 1)], -np.inf)
         meilleur = np.argmax(val, axis=0)
         v = val[meilleur, idx]
         vivant = vivant & np.isfinite(v)
         y = np.where(vivant, cy[meilleur, idx].astype(float), y)
         x = np.where(vivant, cx[meilleur, idx].astype(float), x)
-        au_dessus = vivant & (v > float(planchers[k]))
+        au_dessus = vivant & (v > planchers[k])
         suite = np.where(au_dessus, suite + 1, 0)
         meilleure = np.maximum(meilleure, suite)
     return [int(m) for m in meilleure]
