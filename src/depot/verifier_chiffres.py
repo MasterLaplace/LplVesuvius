@@ -3194,6 +3194,122 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 186 : SUIT-ON PLUS LOIN QUAND LE VOXEL EST PLUS FIN ?
+    # (1) Une longueur du rouleau ne voyage jamais sans son UNITE : cette tranche ne publie que des
+    # micrometres, parce qu'un voxel deux fois plus fin double le nombre de PAS sans rien ajouter et
+    # qu'un lecteur prendrait un changement d'unite pour un gain.
+    # (2) Un gain apparie ne voyage jamais sans la FINESSE DU VOXEL : « 1,0613 fois » ne dit rien
+    # sans « pendant que le voxel devient 2,1258 fois plus fin ».
+    # (3) Ni sans l'INVARIANCE : une longueur mesuree par un suiveur qui compte sa propre resolution
+    # n'est pas une longueur de la matiere, et c'est l'ecart entre resolutions sur des cretes
+    # construites qui le dit, compare a la marche de l'echelle.
+    # (4) Et une longueur « au mieux » ne voyage jamais sans ce que la meme regle rend sur du
+    # MELANGE : l'optimum exact suit 127,2 µm de bruit pur, donc sa longueur brute ne prouve rien.
+    sv = _source(racine, "suit_on_plus_loin_quand_le_voxel_est_plus_fin.json")
+    if sv.exists():
+        d = json.loads(sv.read_text())
+
+        def _dec186(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        if d.get("champ_commun_um") is not None:
+            ajoute("champ commun de 186", float(d["champ_commun_um"]),
+                   _dec186(d["champ_commun_um"]), sv.name, unites=("µm",))
+        v_ = d.get("le_verdict") or {}
+        inv = v_.get("linvariance") or {}
+        for cle, nom in (("voxel_fin_um", "voxel fin"), ("voxel_grossier_um", "voxel grossier"),
+                         ("marche_de_lechelle_um", "marche de l echelle")):
+            val = v_.get(cle, inv.get(cle))
+            if val is not None:
+                ajoute(f"{nom} de 186", float(val), _dec186(val), sv.name, unites=("µm",))
+        if inv.get("ecart_maximal_entre_resolutions_um") is not None:
+            ajoute("ecart maximal entre resolutions de 186",
+                   float(inv["ecart_maximal_entre_resolutions_um"]),
+                   _dec186(inv["ecart_maximal_entre_resolutions_um"]), sv.name, unites=("µm",))
+        for k, val in enumerate(inv.get("echelle_construite_um") or []):
+            ajoute(f"barreau {k} de l echelle construite de 186", float(val), _dec186(val),
+                   sv.name, unites=("µm",))
+        for k, val in enumerate(inv.get("ecarts_par_barreau_glouton_um") or []):
+            if val is not None:
+                ajoute(f"ecart du barreau {k} de 186", float(val), _dec186(val), sv.name,
+                       unites=("µm",))
+        for vx, etiquette in ((v_.get("voxel_grossier_um"), "grossier"),
+                              (v_.get("voxel_fin_um"), "fin")):
+            et = (d.get("les_etalons") or {}).get(str(vx)) or {}
+            for k, b in enumerate(et.get("barreaux") or []):
+                if b.get("le_long_glouton_um") is not None:
+                    ajoute(f"barreau {k} lu au voxel {etiquette} de 186",
+                           float(b["le_long_glouton_um"]), _dec186(b["le_long_glouton_um"]),
+                           sv.name, unites=("µm",))
+        for x in (v_.get("les_segments_apparies") or []):
+            q = f"du segment {x['segment']} de 186"
+            for cle, nom in (("um_grossier", "longueur au voxel grossier"),
+                             ("um_fin", "longueur au voxel fin")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(x[cle]), _dec186(x[cle]), sv.name, unites=("µm",))
+            if x.get("gain_um") is not None:
+                ajoute(f"gain apparie {q}", float(x["gain_um"]), _dec186(x["gain_um"]), sv.name,
+                       signe=True, unites=("µm",))
+            if x.get("gain_fois") is not None:
+                ajoute(f"gain apparie en fois {q}", float(x["gain_fois"]),
+                       _dec186(x["gain_fois"]), sv.name)
+        for cle, nom in (("segments_apparies", "segments apparies"),
+                         ("segments_ou_la_longueur_croit", "segments ou la longueur croit"),
+                         ("chunks_fin", "champs au voxel fin"),
+                         ("chunks_grossier", "champs au voxel grossier")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 186", int(v_[cle]), 0, sv.name)
+        for cle, nom, unite in (
+                ("le_gain_apparie_um", "gain apparie median", "µm"),
+                ("le_meilleur_gain_apparie_fois", "meilleur gain apparie en fois", ""),
+                ("le_voxel_est_plus_fin_fois", "le voxel est plus fin fois", ""),
+                ("le_gain_glouton_fois", "gain des medianes en fois", ""),
+                ("le_long_glouton_um_grossier", "longueur le long au voxel grossier", "µm"),
+                ("le_long_glouton_um_fin", "longueur le long au voxel fin", "µm"),
+                ("en_travers_glouton_um_fin", "longueur en travers au voxel fin", "µm"),
+                ("melangee_glouton_um_fin", "longueur sur du melange au voxel fin", "µm"),
+                ("melangee_glouton_um_grossier", "longueur sur du melange au voxel grossier", "µm"),
+                ("le_long_au_mieux_um_grossier", "longueur au mieux au voxel grossier", "µm"),
+                ("le_long_au_mieux_um_fin", "longueur au mieux au voxel fin", "µm"),
+                ("melangee_au_mieux_um_grossier", "melange au mieux au voxel grossier", "µm"),
+                ("melangee_au_mieux_um_fin", "melange au mieux au voxel fin", "µm"),
+                ("lexcedent_sur_le_melange_glouton_um_grossier",
+                 "excedent sur le melange au voxel grossier", "µm"),
+                ("lexcedent_sur_le_melange_glouton_um_fin",
+                 "excedent sur le melange au voxel fin", "µm"),
+                ("lexcedent_sur_le_melange_au_mieux_um_grossier",
+                 "excedent au mieux au voxel grossier", "µm"),
+                ("lexcedent_sur_le_melange_au_mieux_um_fin",
+                 "excedent au mieux au voxel fin", "µm"),
+                ("ce_que_lexactitude_achete_um", "ce que l exactitude achete", "µm"),
+                ("le_long_glouton_um_maximal_grossier",
+                 "longueur maximale au voxel grossier", "µm"),
+                ("le_long_glouton_um_maximal_fin", "longueur maximale au voxel fin", "µm"),
+                ("part_qui_franchit_glouton_grossier",
+                 "part qui franchit une feuille au voxel grossier", ""),
+                ("part_qui_franchit_glouton_fin",
+                 "part qui franchit une feuille au voxel fin", ""),
+                ("part_vide_fin", "part de vide au voxel fin", ""),
+                ("part_vide_grossier", "part de vide au voxel grossier", ""),
+                ("le_pas_entre_deux_feuilles_um", "pas entre deux feuilles", "µm")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 186", float(v_[cle]), _dec186(v_[cle]), sv.name,
+                       unites=((unite,) if unite else ()))
+        for s_ in (d.get("les_segments") or {}).get(str(v_.get("voxel_fin_um")), []):
+            if s_.get("decidable"):
+                for cle, nom in (("cote_en_voxels", "cote en voxels au voxel fin"),
+                                 ("chunks_par_cote", "chunks par cote au voxel fin")):
+                    if s_.get(cle) is not None:
+                        ajoute(f"{nom} de 186", int(s_[cle]), 0, sv.name)
+                if s_.get("chunk_du_depot"):
+                    ajoute("cote du chunk du depot de 186", int(s_["chunk_du_depot"][1]), 0,
+                           sv.name)
+                break
+
     # ⭐⭐⭐⭐ LA TRANCHE 185 : JUSQU'OU SUIT-ON UNE FIBRE ?
     # (1) Une longueur suivie ne voyage jamais sans ses DEUX controles — en travers et sur du
     # melange — sinon elle se lirait comme une propriete de la matiere alors qu'elle peut etre la

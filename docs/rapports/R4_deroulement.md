@@ -2375,6 +2375,47 @@ entière ? Le voxel vaut **2,4** µm et une fibre en fait quatre à huit ; les v
 existent et le dépôt les recense. ⚠⚠ La comparaison devra se faire **en micromètres et non en pas** :
 un voxel deux fois plus fin double mécaniquement le nombre de pas sans rien ajouter.
 
+**`186` · 2026-09-17 · suit-on plus loin quand le voxel est plus fin ?**
+⭐⭐⭐⭐ **`R4-P34` est répondue, par la négative : la résolution n'est pas ce qui manque.** Dans le
+**même** champ de **307,2** µm et sur les **3** segments qui portent les deux résolutions, la longueur
+suivable passe de **75,0** à **62,095** µm, de **89,4** à **70,28** et de **98,4** à **104,433** quand
+le voxel passe de **2,4** à **1,129** µm. Médiane des gains appariés **−12,905** µm, **1** segment sur
+**3** croît, meilleur gain **1,0613** fois **pendant que le voxel devient 2,1258 fois plus fin** —
+`R4-F212`. Aucun segment ne voit la longueur suivre la résolution.
+⚠⚠⚠ **Et la comparaison ne pouvait se faire qu'en micromètres** : un voxel deux fois plus fin double
+mécaniquement le nombre de pas sans rien ajouter, donc publier des pas ferait lire un **changement
+d'unité** comme un gain.
+⚠⚠ **La fenêtre devait être la même des deux côtés.** Un chunk du dépôt fait **128** voxels de côté
+aux deux résolutions, donc **307,2** µm à 2,4 µm mais **moins qu'un pas entre deux feuilles** à 1,129.
+La fenêtre fine est une **mosaïque** de **3 × 3** chunks rognée à **272** voxels, et chacun de ses
+chunks doit porter de la matière — la règle même que la résolution grossière applique à son chunk
+unique. Contrôle publié : la part de vide vaut **0,001** côté fin contre **0** côté grossier, donc le
+recul n'est pas un trou.
+⭐⭐⭐⭐ **Le contrôle qui décide est une invariance construite** — `R4-F211`. Sur des crêtes dont la
+**longueur physique** est posée (**43,25**, **86,5**, **173,0** µm, échelle dérivée du pas entre deux
+feuilles), le suiveur rend **43,2**, **80,4**, **103,2** µm à 2,4 et **42,902**, **79,03**, **104,997**
+à 1,129 : écarts **0,298**, **1,37**, **1,797** µm pour une marche d'échelle de **43,25**. Il distingue
+donc **mieux deux longueurs qu'il ne distingue deux résolutions** — il mesure la MATIÈRE. Sans ce
+contrôle, un gain du rouleau serait indiscernable d'un changement d'unité, et rien n'aurait été
+publiable : c'est le précédent de `181`.
+⚠⚠ **Et ce n'est pas l'instrument qui a échoué** : au voxel fin le rouleau porte encore des crêtes
+suivables, **70,28** µm le long contre **46,853** en travers et **24,556** sur du mélange, et
+l'excédent sur le mélange ne recule que de **51,6** à **45,724** µm.
+⭐⭐⭐⭐ **La seconde limite de `185` n'en était pas une** — `R4-F213`. L'optimum **exact**, qui lève
+la marche gloutonne par programmation dynamique sans aucune largeur à choisir, suit **134,4** µm au
+voxel de la campagne contre **127,2** sur la même image **mélangée** : excédent **7,2** µm contre
+**51,6** pour la marche gloutonne, et **−35,281** µm au voxel fin. **Optimiser trouve toujours quelque
+chose** — la leçon de `179` sur une autre matière — et la **restriction gloutonne EST ce qui rend la
+lecture spécifique**.
+⚠ **Trois segments ne tranchent pas un signe**, ils tranchent une **magnitude** ; et les deux volumes
+d'un même segment ne couvrent pas la même étendue physique, donc les deux résolutions lisent le même
+**segment** et non le même carré de papyrus.
+⭐ `R4-P35` **s'ouvre** : la médiane ne franchit pas une feuille, mais **0,229** des départs la
+franchissent déjà au voxel de la campagne (contre **0,042** au voxel fin) et le maximum atteint
+**262,8** µm pour un pas de **173**. La question n'est plus « comment suivre plus loin » mais **« ces
+fibres-là suffisent-elles à transférer une spire »** — sont-elles assez nombreuses, assez réparties, et
+se retrouvent-elles **de part et d'autre** d'une frontière.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

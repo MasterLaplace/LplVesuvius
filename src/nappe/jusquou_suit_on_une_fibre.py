@@ -456,14 +456,16 @@ def verifier() -> int:
     vide = juger([{"decidable": False, "segment": "x"}], bon, vx, pas, plafond)
     v("aucun segment lisible rend un verdict indécidable", not vide["decidable"])
 
+    # ⚠⚠ LA SORTIE REND LE COMPTE D'ÉCHECS, PAS UN LITTÉRAL : un `return 0` après le verdict jette
+    # ce que la batterie vient de compter.
     nom = "jusquou_suit_on_une_fibre.py"
     if echecs:
         print(f"{nom}   {len(echecs)} ÉCHECS sur {faits}")
         for e_ in echecs:
             print(f"   ✗ {e_}")
-        return 1
-    print(f"{nom:<46} ALL PASS (0 failures, {faits} checks)")
-    return 0
+    else:
+        print(f"{nom:<46} ALL PASS (0 failures, {faits} checks)")
+    return len(echecs)
 
 
 def main() -> int:
