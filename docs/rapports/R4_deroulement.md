@@ -2248,6 +2248,37 @@ dérivée — 23,5 pour 36 fait à peu près deux tiers. Séparer une sous-struc
 de vraies frontières et de fissures demande de mesurer si les espacements sont **groupés** ou
 **étalés**.
 
+**`182` · 2026-09-17 · la feuille a-t-elle trois plis ?**
+`181` laissait un chiffre qui nommait lui-même une hypothèse : **23,5** couches d'espacement pour un
+pli de **36**, or une feuille de **trois** plis en donnerait **24,028**. `14` §1 en décrit deux ; si
+le rouleau en portait trois, l'excès cesserait d'être inexpliqué.
+⚠⚠⚠ **Le plafond de creux par chunk était faux, et la mesure l'a montré nu.** À trois creux, la
+matière à **quatre** plis — qui porte une frontière toutes les **18** couches — rendait un espacement
+de **53** : le lecteur ne voit que les trois plus profondes, qui ne sont pas voisines, donc il mesure
+des **multiples** du vrai pas. Le plafond se dérive du pas le plus fin de l'échelle, soit **7**.
+⚠⚠ Et le nombre de creux surnuméraires du mélange se dérive des **espacements**, pas des comptes :
+ceux-ci sont plafonnés, donc leur différence l'est aussi, et une première version rendait **un** seul
+creux en trop — l'étalon censé représenter un mélange étalait alors **moins** qu'un empilement
+régulier.
+⭐⭐⭐⭐ **LE LECTEUR RÉPARÉ EST JUSTE** : chaque étalon relit le pas qu'il porte — **36,042** lu
+**36**, **24,028** lu **25**, **18,021** lu **18** — avec un étalement relatif sous **0,08**, et les
+deux formes construites **se séparent** : régulier **0,0556**, mélangé **0,2059** — `R4-F203`.
+✗ **LA FEUILLE N'A PAS TROIS PLIS, ET PAS QUATRE NON PLUS.** Le rouleau étale **0,5**, plusieurs fois
+au-dessus de **tout** empilement régulier, et au-dessus du mélange construit — `R4-F204`. Son
+espacement médian de **20,0** tombe près de quatre plis, et cette désignation n'a aucune valeur quand
+la distribution est aussi étalée.
+⚠⚠ **Ce que cette tranche établit est une NÉGATION, et elle est double** : à cette échelle la
+profondeur du rouleau n'est **périodique à aucun pas**, et ce n'est pas non plus un empilement
+régulier plus quelques fissures. Ce qu'elle ne dit pas est ce qu'elle **est**.
+⚠ Une sonde est passée au **vert** et a été réparée : la dérivation des creux surnuméraires n'était
+exercée par rien, la batterie fabriquant son propre mélange. Ce qu'une constante ne peut pas faire
+est **croître** quand l'espacement se resserre.
+⭐ `R4-P33` change de nature : la question n'est plus « quel pas », elle est de savoir si des
+frontières **irrégulières** peuvent encore servir de **repères** pour le déroulage. Un repère n'a pas
+besoin d'être périodique ; il a besoin d'être **retrouvable d'une spire à la suivante** — donc c'est
+une question sur la correspondance **latérale** des creux, et non plus sur leur espacement en
+profondeur.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

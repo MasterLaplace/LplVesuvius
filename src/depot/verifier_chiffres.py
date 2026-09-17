@@ -3194,6 +3194,94 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 182 : LA FEUILLE A-T-ELLE TROIS PLIS ?
+    # (1) Un espacement LU ne voyage jamais sans l'espacement CONSTRUIT de la meme matiere : c'est
+    # leur egalite qui dit que le lecteur est juste, et un espacement lu seul se lirait comme une
+    # propriete de la matiere.
+    # (2) Un etalement ne voyage jamais sans celui des DEUX formes construites : c'est entre elles
+    # que le rouleau se place, et un etalement seul n'a pas d'echelle.
+    # (3) Et l'espacement median du rouleau ne voyage jamais sans son etalement : une mediane ne dit
+    # rien quand la distribution est etalee, et la publier seule ferait lire une designation de
+    # nombre de plis comme un resultat.
+    tp = _source(racine, "la_feuille_a_t_elle_trois_plis.json")
+    if tp.exists():
+        d = json.loads(tp.read_text())
+
+        def _dec182(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("creux_cherches_par_chunk", "creux cherches par chunk"),
+                         ("cote_du_treillis", "cote du treillis"),
+                         ("permutations", "permutations"), ("couches", "couches"),
+                         ("largeur_de_180", "largeur relue de 180")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 182", int(d[cle]), 0, tp.name)
+        for p in (d.get("plis_balayes") or []):
+            ajoute(f"pli balaye de 182 ({p})", int(p), 0, tp.name)
+        for cle, nom in (("bruit_apparie_de_180", "bruit relu de 180"),
+                         ("espacement_median_de_181", "espacement median relu de 181"),
+                         ("profondeur_de_180", "profondeur relue de 180")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 182", float(d[cle]), _dec182(d[cle]), tp.name)
+        for s in (d.get("les_segments") or []):
+            if not s.get("decidable"):
+                continue
+            q = f"du segment {s['segment']} de 182"
+            for cle, nom in (("chunks_lus", "chunks lus"), ("creux_retenus", "creux retenus"),
+                             ("mesures", "espacements mesures")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(s[cle]), 0, tp.name)
+            for cle, nom in (("mediane", "espacement median"),
+                             ("etalement", "etalement"),
+                             ("etalement_relatif", "etalement relatif")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(s[cle]), _dec182(s[cle]), tp.name)
+        for e in (d.get("les_etalons") or []):
+            q = f"de l etalon a {e['plis']} plis de 182"
+            for cle, nom in (("mesures", "espacements mesures"),
+                             ("creux_retenus", "creux retenus")):
+                if e.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(e[cle]), 0, tp.name)
+            for cle, nom in (("espacement_construit", "espacement construit"),
+                             ("mediane", "espacement lu"), ("etalement", "etalement"),
+                             ("etalement_relatif", "etalement relatif")):
+                if e.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(e[cle]), _dec182(e[cle]), tp.name)
+        me = d.get("le_melange") or {}
+        for cle, nom in (("surnumeraires", "creux surnumeraires"),
+                         ("mesures", "espacements mesures"),
+                         ("creux_retenus", "creux retenus")):
+            if me.get(cle) is not None:
+                ajoute(f"{nom} du melange de 182", int(me[cle]), 0, tp.name)
+        for cle, nom in (("mediane", "espacement median"), ("etalement", "etalement"),
+                         ("etalement_relatif", "etalement relatif")):
+            if me.get(cle) is not None:
+                ajoute(f"{nom} du melange de 182", float(me[cle]), _dec182(me[cle]), tp.name)
+        v_ = d.get("le_verdict") or {}
+        for cle, nom in (("chunks_lus", "chunks lus"), ("creux_retenus", "creux retenus"),
+                         ("espacements_mesures", "espacements mesures"),
+                         ("les_plis_qui_correspondent", "les plis qui correspondent"),
+                         ("surnumeraires_du_melange", "creux surnumeraires du melange")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 182", int(v_[cle]), 0, tp.name)
+        for cle, nom in (("espacement_median_du_rouleau", "espacement median du rouleau"),
+                         ("etalement_du_rouleau", "etalement du rouleau"),
+                         ("etalement_relatif_du_rouleau", "etalement relatif du rouleau"),
+                         ("espacement_construit_a_ce_pli", "espacement construit a ce pli"),
+                         ("espacement_lu_a_ce_pli", "espacement lu a ce pli"),
+                         ("etalement_relatif_a_ce_pli", "etalement relatif a ce pli"),
+                         ("espacement_construit_a_deux_plis",
+                          "espacement construit a deux plis"),
+                         ("etalement_relatif_a_deux_plis", "etalement relatif a deux plis"),
+                         ("espacement_median_du_melange", "espacement median du melange"),
+                         ("etalement_relatif_du_melange", "etalement relatif du melange")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 182", float(v_[cle]), _dec182(v_[cle]), tp.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 181 : DE QUOI UNE FRONTIERE EST-ELLE FAITE ?
     # (1) Un espacement mesure ne voyage jamais sans les DEUX espacements que la matiere peut
     # porter : « vingt-trois couches » ne dit rien sans « trente-six » et « soixante-douze ».
