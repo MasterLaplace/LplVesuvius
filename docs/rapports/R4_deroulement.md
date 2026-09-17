@@ -2102,6 +2102,67 @@ au lieu de deux, ce qu'une sonde a montré et non une relecture.
 plancher à faire descendre, c'est un énoncé qui sépare un empilement d'une rotation **sans** passer
 par le tour accumulé — donc qui lise autre chose que l'orientation moyenne par couche.
 
+**`179` · 2026-09-17 · la cohérence creuse-t-elle à la frontière ?**
+`R4-P31` resserrée nommait l'énoncé qui manquait : séparer un empilement d'une rotation **sans**
+passer par le tour accumulé. Le seul observable déjà produit par le même chemin et que rien
+n'exploitait est la **cohérence** par couche — `orientation_profile` la rend depuis le début et toute
+la chaîne ne s'en sert que comme d'un **poids**. À une frontière de pli deux feuilles de directions
+différentes se recouvrent, donc la cohérence **creuse** ; une rotation régulière ne creuse nulle
+part.
+⚠⚠⚠ **LA PRÉMISSE ÉTAIT FAUSSE SUR LA MATIÈRE QUE LE DÉPÔT LISAIT**, et c'est la première mesure :
+le tenseur de structure est calculé **dans** le plan d'une couche, donc aucune couche ne contient
+deux plis et la cohérence vaut **1,0000** partout, aux frontières comme ailleurs. Le recouvrement est
+devenu un paramètre de la fixture (`transition_um`, **nul** par défaut, moyenne de boîte bornée par
+l'épaisseur d'un pli) : la matière de toutes les campagnes antérieures est inchangée et les batteries
+touchées restent vertes.
+⭐⭐⭐⭐ **LE CREUX EXISTE ET TOMBE SUR LA FRONTIÈRE, À UN PRIX MESURÉ** : aux **12** décalages dès
+que les deux plis se recouvrent sur **45,6** µm — encadré entre **43,2** et **45,6** µm, tolérance le
+voxel — soit **19** voxels ou **0,5278** fois l'épaisseur d'un pli, pour une profondeur de **0,7166**
+sur **5** couches et un écart médian de **0** couche — `R4-F194`. ⚠⚠ Un barreau d'échelle n'est pas
+une borne : l'échelle double, donc la borne est bissectée avec une tolérance **dérivée** du pas
+d'échantillonnage.
+⭐ **ET IL TIENT AU BRUIT 16 DE `156`** — 12/12 aux bruits 0, 8 et 16 — là où `156` perd trois
+marches ; le bruit abaisse la cohérence partout donc il ne détruit pas le **rapport** dedans/dehors.
+⚠⚠ Le **contrôle vide** est la moitié de l'énoncé : une feuille d'un seul pli ne creuse à **aucun**
+recouvrement — `R4-F195`.
+⭐⭐⭐⭐ **UN CREUX D'UNE SEULE COUCHE NE PEUT PORTER AUCUN EXCÉDENT, ET C'EST UN THÉORÈME** : sa
+profondeur ne dépend que du multiensemble des cohérences, donc une permutation la laisse
+**exactement** inchangée. C'est le **nul** de cet estimateur, pendant exact de l'ajustement constant
+de `177`, et une première version qui le laissait concourir n'a rien trouvé nulle part. Ce qui
+distingue une frontière d'une couche faible est la **contiguïté**. ⚠⚠⚠ Mais la **largeur** est une
+seconde liberté, et elle n'était pas payée — trois chances à un sur vingt au lieu d'une, mesuré à
+**0,075** contre une garantie de **0,05**. Réparé par une statistique de **famille**, exacte, et la
+règle réfutée est portée comme **contrôle nommé** par le code livré : **0,025** contre **0,075** sur
+**80** tirages — `R4-F196`.
+⭐⭐⭐⭐ **L'ÉCHANGE DE `178` EST LEVÉ SUR MATIÈRE BRUITÉE.** Un escalier grossier et un escalier si
+fin que l'instrument ne peut plus y voir de marche (**73** plis) portent le **même** tour total,
+**272,185°** — les angles des plis étant équirépartis sur 180°, le nombre de plis s'annule, donc
+c'est une identité et non un réglage. Aux trois largeurs de `178` croisées avec l'échelle de bruit,
+le tour seul rend les deux lectures à **1** case sur **9** et les deux lecteurs ensemble à **4** ;
+sur matière bruitée le tour seul n'en rend **aucune** — `R4-F197`. ⚠⚠⚠ **Et ça coûte la seule case
+que le tour seul tenait** : sans bruit un escalier fin porte **9** faux creux contre **0** bruité,
+parce que ses micro-creux sont parfaitement contigus et que la permutation n'a pas d'échelle — la
+spécificité du lecteur **suppose un fond incohérent**. Les deux sens sont publiés : ne publier que
+les cases gagnées ferait lire un échange comme un gain, reproche exact de `178` à la voie
+précédente.
+⚠⚠⚠ **Une première version de cet échange était une fixture complaisante** : elle construisait un
+creux aux frontières d'un escalier et aucun sur une dérive, donc le lecteur les séparait **par
+construction**. C'est le passage au chemin physique — deux matières de la même famille, même tour
+total — qui a rendu la mesure capable de dire quelque chose.
+⚠⚠⚠ **Cinq sondes sont passées au vert et ont été réparées**, cinquième costume du piège nº 1 : le
+nul n'était exercé que par des matières dont le minimum est loin des bords, la règle payée n'était
+lue que par son champ propre et jamais par le **chemin** du verdict, la règle jointe n'était exercée
+par rien, la liste des frontières attendues était absorbée par un `min`, et le rasoir était contrôlé
+par « aucun creux » au lieu de « cohérence **constante** » — forcer le mélange à recouvrement nul
+rendait des valeurs que le lecteur refusait aussi.
+⚠⚠ Ce que ce lecteur ne fait pas : il ne classe pas deux formes. Il répond « il y a une frontière
+ici » ou « rien », et une rotation comme du bruit lui rendent tous deux « rien ». C'est `177` qui
+sait dire qu'une matière **tourne**, et c'est leur lecture **jointe** qui est mise à l'épreuve.
+⭐ `R4-P31` **se resserre encore** — l'énoncé existe et lève l'échange, sous condition — et `R4-P32`
+**s'ouvre** : la cohérence du **vrai** volume creuse-t-elle, et à quelle profondeur ? Le chemin est
+celui de `176` et la comparaison est bornée par **0,7166**, ce que la fixture rend à la borne. Rien
+n'est pointé sur la matière avant cette mesure, précédent de `174`.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

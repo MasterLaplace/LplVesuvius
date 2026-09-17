@@ -1197,13 +1197,32 @@ class VolumeFabriqueAFibres(VolumeFabrique):
     def __init__(self, pas_um: float, longueur_de_fibre_um: float = 30.0,
                  contraste_des_fibres: float = 0.5, angle_du_premier_pli_deg: float = 0.0,
                  plis_par_feuille: int = 2, feuilles_independantes: bool = False,
-                 graine_des_feuilles: int = 7, **kw) -> None:
+                 graine_des_feuilles: int = 7, transition_um: float = 0.0, **kw) -> None:
         super().__init__(pas_um, **kw)
         self.longueur_de_fibre_um = float(longueur_de_fibre_um)
         self.contraste_des_fibres = float(contraste_des_fibres)
         self.angle_du_premier_pli_deg = float(angle_du_premier_pli_deg)
         self.plis_par_feuille = int(plis_par_feuille)
         self.feuilles_independantes = bool(feuilles_independantes)
+        self.transition_um = float(transition_um)
+        """L'epaisseur sur laquelle deux plis voisins SE RECOUVRENT, en micrometres.
+
+        ⭐⭐⭐⭐ ZERO EST LE DEFAUT ET C'EST LA MATIERE QUE TOUT LE DEPOT A LUE JUSQU'ICI : une
+        frontiere de rasoir, ou aucune couche ne contient deux directions. `179` mesure ce que
+        cette frontiere rend a la coherence, et la reponse est RIEN — un rasoir ne creuse pas.
+
+        ⚠⚠ LE MODELE EST UNE MOYENNE DE BOITE, PAS UN FONDU CHOISI : la lecture d'un point est
+        la moyenne de la modulation sur la tranche d'epaisseur `transition_um` centree sur lui.
+        C'est exactement ce qu'un recouvrement physique ou un flou d'instrument font, donc le
+        parametre a une unite et une signification, pas un reglage.
+
+        ⚠ Il est BORNE par l'epaisseur d'un pli : au-dela, une tranche contiendrait deux
+        frontieres et la moyenne a deux termes ne serait plus la bonne. Un refus plutot qu'un
+        resultat faux."""
+        if self.transition_um < 0.0:
+            raise ValueError("une transition ne peut pas etre negative")
+        if self.transition_um >= self.pas_um / max(1, self.plis_par_feuille):
+            raise ValueError("une transition plus epaisse qu'un pli contiendrait deux frontieres")
         # ⚠ Une TABLE d'angles, indexee par le numero de feuille modulo sa longueur : un voxel
         # rend ainsi toujours la meme valeur, comme le bruit porte par la matiere. Une suite
         # LINEAIRE (feuille x 37°) aurait ete reproductible aussi, et elle aurait donne au
@@ -1234,6 +1253,22 @@ class VolumeFabriqueAFibres(VolumeFabrique):
         rang = np.floor(np.clip(dans_la_feuille, 0.0, 1.0 - 1e-12) * self.plis_par_feuille)
         return (base + rang * (180.0 / self.plis_par_feuille)) % 180.0
 
+    def modulation_des_fibres(self, proj: np.ndarray, u: np.ndarray,
+                             w: np.ndarray) -> np.ndarray:
+        """La modulation portee par les fibres du pli qui occupe cette profondeur.
+
+        ⚠ Elle porte sur la PERPENDICULAIRE aux fibres : une crete court LE LONG d'une fibre,
+        donc c'est en travers que la matiere varie.
+
+        ⚠⚠ Elle est SORTIE de `lire` pour que la transition l'appelle DEUX FOIS a deux
+        profondeurs, et non pour ranger : deux ecritures de la modulation seraient deux
+        definitions libres de diverger sur la convention d'angle.
+        """
+        feuille = np.floor(proj / self.pas_um)
+        th = np.deg2rad(self.angle_du_pli_deg(feuille, proj / self.pas_um - feuille))
+        s = -np.sin(th) * u + np.cos(th) * w
+        return np.cos(2 * np.pi * s / self.longueur_de_fibre_um)
+
     def lire(self, points: np.ndarray, fils: int = 1) -> np.ndarray:
         del fils
         p = np.asarray(points, dtype=np.float64).reshape(-1, 3)
@@ -1241,15 +1276,24 @@ class VolumeFabriqueAFibres(VolumeFabrique):
         proj = self._projection_um(p)
         v = 100.0 + 40.0 * np.cos(2 * np.pi * proj / self.pas_um)
         if self.contraste_des_fibres:
-            feuille = np.floor(proj / self.pas_um)
-            th = np.deg2rad(self.angle_du_pli_deg(feuille, proj / self.pas_um - feuille))
             q = p * self.voxel_um
             u, w = q @ self.e1, q @ self.e2
-            # ⚠ La modulation porte sur la PERPENDICULAIRE aux fibres : une crete court LE LONG
-            # d'une fibre, donc c'est en travers que la matiere varie.
-            s = -np.sin(th) * u + np.cos(th) * w
-            v = v + self.contraste_des_fibres * 40.0 * np.cos(
-                2 * np.pi * s / self.longueur_de_fibre_um)
+            if self.transition_um <= 0.0:
+                m = self.modulation_des_fibres(proj, u, w)
+            else:
+                # ⚠⚠ MOYENNE DE BOITE EXACTE, PAS UN ECHANTILLONNAGE. La tranche
+                # [proj − h, proj + h] contient au plus UNE frontiere (le constructeur le
+                # garantit), donc la moyenne a exactement deux termes et leur poids est la part
+                # de la tranche de chaque cote. Quand la frontiere est dehors, le clip rend un
+                # poids entier et les deux termes sont le meme pli : la lecture est celle du
+                # rasoir, sans discontinuite a l'entree de la bande.
+                h = 0.5 * self.transition_um
+                epaisseur = self.pas_um / self.plis_par_feuille
+                b = np.round(proj / epaisseur) * epaisseur
+                part = np.clip((b - (proj - h)) / (2.0 * h), 0.0, 1.0)
+                m = (part * self.modulation_des_fibres(proj - h, u, w)
+                     + (1.0 - part) * self.modulation_des_fibres(proj + h, u, w))
+            v = v + self.contraste_des_fibres * 40.0 * m
         if self.bruit:
             v = v + self._tirage(p)
         return v

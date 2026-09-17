@@ -3194,6 +3194,105 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 179 : LA COHERENCE CREUSE-T-ELLE A LA FRONTIERE ?
+    # (1) Une profondeur de creux ne voyage jamais sans le RECOUVREMENT qui la rend : le rasoir en
+    # rend AUCUNE, donc une profondeur seule se lirait comme une propriete de la frontiere alors
+    # qu'elle est une propriete du recouvrement.
+    # (2) Un recouvrement ne voyage jamais sans son rapport a l'EPAISSEUR D'UN PLI : « quarante-cinq
+    # micrometres » ne dit rien, « un demi-pli » dit si la matiere peut le fournir.
+    # (3) Un taux de fausses frontieres ne voyage jamais sans celui de la REGLE REFUTEE et sans la
+    # garantie de la permutation : c'est leur ecart qui dit ce que payer la largeur achete.
+    # (4) Et une case gagnee par la lecture jointe ne voyage jamais sans la case PERDUE : une moitie
+    # seule se lirait comme un gain, ce qui est le reproche que `178` adresse a la voie precedente.
+    cc = _source(racine, "la_coherence_creuse_t_elle_a_la_frontiere.json")
+    if cc.exists():
+        d = json.loads(cc.read_text())
+
+        def _dec179(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("couches", "couches"), ("pli_en_couches", "pli en couches"),
+                         ("decalages", "decalages"), ("permutations", "permutations"),
+                         ("plis_fins", "plis de la matiere fine"),
+                         ("tirages_de_bruit", "tirages de bruit")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 179", int(d[cle]), 0, cc.name)
+        if d.get("voxel_um") is not None:
+            ajoute("voxel de 179", float(d["voxel_um"]), _dec179(d["voxel_um"]), cc.name,
+                   unites=("µm",))
+        if d.get("tour_porte_deg") is not None:
+            ajoute("tour porte par la fenetre de 179", float(d["tour_porte_deg"]),
+                   _dec179(d["tour_porte_deg"]), cc.name, unites=("°",))
+        for w in (d.get("largeurs_du_creux") or []):
+            ajoute(f"largeur de creux balayee de 179 ({w})", int(w), 0, cc.name)
+        vides = {x["transition_um"]: x for x in
+                 ((d.get("le_pli_unique") or {}).get("lignes") or [])}
+        for x in ((d.get("la_fixture") or {}).get("lignes") or []):
+            q = f"a {x['transition_um']} µm de 179"
+            ajoute(f"recouvrement en micrometres de 179 ({x['transition_um']})",
+                   float(x["transition_um"]), _dec179(x["transition_um"]), cc.name, unites=("µm",))
+            ajoute(f"recouvrement en couches {q}", float(x["transition_en_couches"]),
+                   _dec179(x["transition_en_couches"]), cc.name)
+            ajoute(f"creux sur une frontiere {q}", int(x["creux_sur_une_frontiere"]), 0, cc.name)
+            if x.get("profondeur_mediane") is not None:
+                ajoute(f"profondeur mediane du creux {q}", float(x["profondeur_mediane"]),
+                       _dec179(x["profondeur_mediane"]), cc.name)
+            if x.get("largeur_mediane") is not None:
+                ajoute(f"largeur mediane du creux {q}", int(x["largeur_mediane"]), 0, cc.name)
+            w = vides.get(x["transition_um"])
+            if w is not None:
+                ajoute(f"creux trouves a un seul pli {q}", int(w["creux_trouves"]), 0, cc.name)
+        for x in ((d.get("le_domaine") or {}).get("lignes") or []):
+            q = f"au bruit {x['bruit']} de 179"
+            ajoute(f"bruit de 179 ({x['bruit']})", float(x["bruit"]), _dec179(x["bruit"]), cc.name)
+            ajoute(f"creux sur une frontiere {q}", int(x["creux_sur_une_frontiere"]), 0, cc.name)
+            if x.get("profondeur_mediane") is not None:
+                ajoute(f"profondeur mediane du creux {q}", float(x["profondeur_mediane"]),
+                       _dec179(x["profondeur_mediane"]), cc.name)
+        b_ = d.get("le_bruit") or {}
+        for cle, nom in (("taux_mesure", "taux sur du bruit en payant la largeur"),
+                         ("taux_sans_payer_la_largeur", "taux sans payer la largeur"),
+                         ("ce_que_la_permutation_garantit",
+                          "ce que la permutation garantit")):
+            if b_.get(cle) is not None:
+                ajoute(f"{nom} de 179", float(b_[cle]), _dec179(b_[cle]), cc.name)
+        for x in (d.get("lechange") or []):
+            q = f"a {x['largeur']} couches et bruit {x['bruit']} de 179"
+            ajoute(f"lectures par matiere {q}", int(x["lectures_par_matiere"]), 0, cc.name)
+            for cle, nom in (("empilement_par_le_tour", "empilements lus par le tour seul"),
+                             ("rotation_par_le_tour", "rotations lues par le tour seul"),
+                             ("empilement_par_les_deux", "empilements lus par les deux"),
+                             ("rotation_par_les_deux", "rotations lues par les deux")):
+                ajoute(f"{nom} {q}", int(x[cle]), 0, cc.name)
+        v_ = d.get("le_verdict") or {}
+        for cle, nom in (("largeur_du_creux_a_la_borne", "largeur du creux a la borne"),
+                         ("ecart_median_a_la_borne", "ecart median a la borne"),
+                         ("faux_creux_sur_un_escalier_fin_sans_bruit",
+                          "faux creux sur un escalier fin sans bruit"),
+                         ("faux_creux_sur_un_escalier_fin_bruite",
+                          "faux creux sur un escalier fin bruite")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 179", int(v_[cle]), 0, cc.name)
+        if v_.get("cellules_gagnees_par_le_creux") is not None:
+            ajoute("cellules gagnees par le creux de 179",
+                   len(v_["cellules_gagnees_par_le_creux"]), 0, cc.name)
+        for cle, nom, unite in (
+                ("le_recouvrement_juste_suffisant_um", "recouvrement juste suffisant", "µm"),
+                ("il_vaut_le_pli_fois", "il vaut le pli fois", ""),
+                ("il_vaut_le_voxel_fois", "il vaut le voxel fois", ""),
+                ("profondeur_du_creux_a_la_borne", "profondeur du creux a la borne", ""),
+                ("le_plus_grand_bruit_tenu", "le plus grand bruit tenu", "")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 179", float(v_[cle]), _dec179(v_[cle]), cc.name,
+                       unites=((unite,) if unite else ()))
+        for k, borne in enumerate(v_.get("encadre_entre_um") or []):
+            ajoute(f"borne {'basse' if k == 0 else 'haute'} de l encadrement de 179",
+                   float(borne), _dec179(borne), cc.name, unites=("µm",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 178 : PLUS DE PROFONDEUR, OU PLUS DE DISCERNEMENT ?
     # (1) Un plancher ne voyage jamais sans la LARGEUR qui le rend : c'est leur relation qui est le
     # resultat, et un plancher seul se lirait comme une propriete du juge.

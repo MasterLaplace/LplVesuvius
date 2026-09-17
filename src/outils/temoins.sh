@@ -1496,6 +1496,8 @@ run "profondeur tourne"   uv run python "$ROOT/src/nappe/la_profondeur_tourne_t_
 run "figure profondeur"   uv run python "$ROOT/src/figures/figure_la_profondeur_tourne_t_elle_ou_bascule_t_elle.py" --verifier
 run "profondeur ou discernement" uv run python "$ROOT/src/nappe/plus_de_profondeur_ou_plus_de_discernement.py" --verifier
 run "figure discernement" uv run python "$ROOT/src/figures/figure_plus_de_profondeur_ou_plus_de_discernement.py" --verifier
+run "coherence creuse"    uv run python "$ROOT/src/nappe/la_coherence_creuse_t_elle_a_la_frontiere.py" --verifier
+run "figure creux"        uv run python "$ROOT/src/figures/figure_la_coherence_creuse_t_elle_a_la_frontiere.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

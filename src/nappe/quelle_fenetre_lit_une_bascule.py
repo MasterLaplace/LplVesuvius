@@ -62,24 +62,31 @@ CONTRASTES = (0.0, 0.02, 0.05, 0.1, 0.2, 0.5)
 COUCHES_DE_LA_CAMPAGNE = 109
 
 
-def _volume(contraste: float, plis: int, voxel_um: float, pas_um: float):
+def _volume(contraste: float, plis: int, voxel_um: float, pas_um: float,
+            transition_um: float = 0.0, bruit: float = 0.0):
     from combien_de_pas_la_matiere_porte import VolumeFabriqueAFibres  # noqa: PLC0415
 
     return VolumeFabriqueAFibres(
         pas_um, longueur_de_fibre_um=LONGUEUR_DE_FIBRE_UM, contraste_des_fibres=float(contraste),
         angle_du_premier_pli_deg=ANGLE_DU_PREMIER_PLI_DEG, plis_par_feuille=int(plis),
+        transition_um=float(transition_um), bruit=float(bruit),
         voxel_um=voxel_um, forme=(4000, 4000, 4000))
 
 
 def courbe_de_la_fixture(couches: int, decalage_um: float, contraste: float, plis: int,
-                         voxel_um: float, pas_um: float, cote: int = COTE) -> list:
+                         voxel_um: float, pas_um: float, cote: int = COTE,
+                         transition_um: float = 0.0, bruit: float = 0.0) -> list:
     """La courbe (angle, cohérence) d'une fenêtre posée à un DÉCALAGE choisi dans la feuille.
 
     ⚠⚠ LE DÉPART EST RECALÉ SUR UN DÉBUT DE FEUILLE PUIS DÉCALÉ, jamais posé au hasard : sans le
     recalage, « décalage zéro » voudrait dire « là où le centre du volume est tombé », donc le
     balayage mesurerait un décalage inconnu plus le sien.
+
+    ⚠ `transition_um` et `bruit` valent zéro par défaut, donc toute campagne antérieure lit la
+    matière qu'elle a toujours lue : ce sont les deux axes que `179` balaye, et les ajouter avec
+    une valeur non nulle par défaut aurait déplacé en silence ce que `173` et `177` publient.
     """
-    vol = _volume(contraste, plis, voxel_um, pas_um)
+    vol = _volume(contraste, plis, voxel_um, pas_um, transition_um, bruit)
     centre = np.array([2000.0, 2000.0, 2000.0])
     proj0 = float(centre @ vol.normale) * vol.voxel_um
     recale = (np.floor(proj0 / vol.pas_um) * vol.pas_um + float(decalage_um) - proj0)
