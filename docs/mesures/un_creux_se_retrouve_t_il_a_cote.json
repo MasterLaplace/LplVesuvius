@@ -1,0 +1,2539 @@
+{
+  "creux_cherches_par_chunk": 7,
+  "cote_du_treillis": 5,
+  "tirages_de_non_voisins": 19,
+  "permutations": 19,
+  "graine": 20260923,
+  "couches": 109,
+  "recouvrement_um_de_179": 45.6,
+  "bruit_apparie_de_180": 16.0,
+  "les_segments": [
+    {
+      "decidable": true,
+      "segment": "20230702185753",
+      "amas_lus": 9,
+      "chunks_lus": 36,
+      "paires_adjacentes": 36,
+      "part_moyenne_des_voisins": 0.1643,
+      "part_maximale_des_voisins": 1.0,
+      "paires_qui_se_correspondent": 11,
+      "part_mediane_des_voisins": 0.0,
+      "ecart_median_des_voisins": 1.0,
+      "les_non_voisins": {
+        "decidable": true,
+        "tirages": 684,
+        "part_mediane": 0.0,
+        "part_moyenne": 0.1374,
+        "part_maximale": 1.0,
+        "tirages_qui_se_correspondent": 179
+      },
+      "amas": [
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                98,
+                71
+              ],
+              "b": [
+                98,
+                72
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                98,
+                71
+              ],
+              "b": [
+                99,
+                71
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                98,
+                72
+              ],
+              "b": [
+                99,
+                72
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                99,
+                71
+              ],
+              "b": [
+                99,
+                72
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "98,71": [
+              4,
+              33,
+              83
+            ],
+            "98,72": [
+              19,
+              50,
+              87
+            ],
+            "99,71": [
+              97
+            ],
+            "99,72": [
+              66,
+              104
+            ]
+          },
+          "largeurs": {
+            "98,71": 3,
+            "98,72": 3,
+            "99,71": 3,
+            "99,72": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                98,
+                142
+              ],
+              "b": [
+                98,
+                143
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                98,
+                142
+              ],
+              "b": [
+                99,
+                142
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 3,
+              "apparies": 1,
+              "part": 0.3333,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                98,
+                143
+              ],
+              "b": [
+                99,
+                143
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                99,
+                142
+              ],
+              "b": [
+                99,
+                143
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "98,142": [
+              74,
+              96,
+              6
+            ],
+            "98,143": [
+              77,
+              16
+            ],
+            "99,142": [
+              75,
+              102,
+              20
+            ],
+            "99,143": [
+              93,
+              17
+            ]
+          },
+          "largeurs": {
+            "98,142": 3,
+            "98,143": 3,
+            "99,142": 3,
+            "99,143": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                98,
+                213
+              ],
+              "b": [
+                98,
+                214
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 0.0
+            },
+            {
+              "a": [
+                98,
+                213
+              ],
+              "b": [
+                99,
+                213
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                98,
+                214
+              ],
+              "b": [
+                99,
+                214
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                99,
+                213
+              ],
+              "b": [
+                99,
+                214
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "98,213": [
+              65,
+              18,
+              83
+            ],
+            "98,214": [
+              83,
+              12
+            ],
+            "99,213": [
+              43,
+              22
+            ],
+            "99,214": [
+              47,
+              37
+            ]
+          },
+          "largeurs": {
+            "98,213": 3,
+            "98,214": 3,
+            "99,213": 3,
+            "99,214": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                197,
+                71
+              ],
+              "b": [
+                197,
+                72
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 2,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 0.0
+            },
+            {
+              "a": [
+                197,
+                71
+              ],
+              "b": [
+                198,
+                71
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                197,
+                72
+              ],
+              "b": [
+                198,
+                72
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                198,
+                71
+              ],
+              "b": [
+                198,
+                72
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "197,71": [
+              31,
+              44,
+              4,
+              53
+            ],
+            "197,72": [
+              44,
+              34
+            ],
+            "198,71": [
+              65,
+              74
+            ],
+            "198,72": [
+              4,
+              18,
+              82
+            ]
+          },
+          "largeurs": {
+            "197,71": 3,
+            "197,72": 3,
+            "198,71": 3,
+            "198,72": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                197,
+                142
+              ],
+              "b": [
+                197,
+                143
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                197,
+                142
+              ],
+              "b": [
+                198,
+                142
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                197,
+                143
+              ],
+              "b": [
+                198,
+                143
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 4,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 2.0
+            },
+            {
+              "a": [
+                198,
+                142
+              ],
+              "b": [
+                198,
+                143
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 4,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "197,142": [
+              85
+            ],
+            "197,143": [
+              20,
+              34
+            ],
+            "198,142": [
+              101,
+              29
+            ],
+            "198,143": [
+              93,
+              65,
+              53,
+              22
+            ]
+          },
+          "largeurs": {
+            "197,142": 3,
+            "197,143": 3,
+            "198,142": 3,
+            "198,143": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                197,
+                213
+              ],
+              "b": [
+                197,
+                214
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 1,
+              "apparies": 1,
+              "part": 1.0,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                197,
+                213
+              ],
+              "b": [
+                198,
+                213
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 1,
+              "apparies": 1,
+              "part": 1.0,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                197,
+                214
+              ],
+              "b": [
+                198,
+                214
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                198,
+                213
+              ],
+              "b": [
+                198,
+                214
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "197,213": [
+              85,
+              8,
+              25
+            ],
+            "197,214": [
+              7
+            ],
+            "198,213": [
+              24
+            ],
+            "198,214": [
+              91,
+              103,
+              32
+            ]
+          },
+          "largeurs": {
+            "197,213": 3,
+            "197,214": 3,
+            "198,213": 3,
+            "198,214": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                296,
+                71
+              ],
+              "b": [
+                296,
+                72
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 4,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                296,
+                71
+              ],
+              "b": [
+                297,
+                71
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 3,
+              "apparies": 1,
+              "part": 0.3333,
+              "ecart_median": 2.0
+            },
+            {
+              "a": [
+                296,
+                72
+              ],
+              "b": [
+                297,
+                72
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 4,
+              "apparies": 1,
+              "part": 0.25,
+              "ecart_median": 2.0
+            },
+            {
+              "a": [
+                297,
+                71
+              ],
+              "b": [
+                297,
+                72
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 4,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "296,71": [
+              31,
+              21,
+              4
+            ],
+            "296,72": [
+              80,
+              89,
+              39,
+              52
+            ],
+            "297,71": [
+              29,
+              79,
+              38
+            ],
+            "297,72": [
+              86,
+              54,
+              44,
+              35
+            ]
+          },
+          "largeurs": {
+            "296,71": 3,
+            "296,72": 3,
+            "297,71": 3,
+            "297,72": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                296,
+                142
+              ],
+              "b": [
+                296,
+                143
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 4,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 0.0
+            },
+            {
+              "a": [
+                296,
+                142
+              ],
+              "b": [
+                297,
+                142
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                296,
+                143
+              ],
+              "b": [
+                297,
+                143
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                297,
+                142
+              ],
+              "b": [
+                297,
+                143
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 2.0
+            }
+          ],
+          "creux": {
+            "296,142": [
+              39,
+              89
+            ],
+            "296,143": [
+              89,
+              9,
+              48,
+              64
+            ],
+            "297,142": [
+              50,
+              77
+            ],
+            "297,143": [
+              79,
+              12,
+              101
+            ]
+          },
+          "largeurs": {
+            "296,142": 3,
+            "296,143": 3,
+            "297,142": 3,
+            "297,143": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                296,
+                213
+              ],
+              "b": [
+                296,
+                214
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                296,
+                213
+              ],
+              "b": [
+                297,
+                213
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                296,
+                214
+              ],
+              "b": [
+                297,
+                214
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                297,
+                213
+              ],
+              "b": [
+                297,
+                214
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "296,213": [
+              4,
+              96,
+              57
+            ],
+            "296,214": [
+              28
+            ],
+            "297,213": [
+              22,
+              37
+            ],
+            "297,214": [
+              86
+            ]
+          },
+          "largeurs": {
+            "296,213": 3,
+            "296,214": 3,
+            "297,213": 3,
+            "297,214": 3
+          }
+        }
+      ]
+    },
+    {
+      "decidable": true,
+      "segment": "20230929220926",
+      "amas_lus": 10,
+      "chunks_lus": 32,
+      "paires_adjacentes": 27,
+      "part_moyenne_des_voisins": 0.2222,
+      "part_maximale_des_voisins": 1.0,
+      "paires_qui_se_correspondent": 9,
+      "part_mediane_des_voisins": 0.0,
+      "ecart_median_des_voisins": 1.0,
+      "les_non_voisins": {
+        "decidable": true,
+        "tirages": 608,
+        "part_mediane": 0.0,
+        "part_moyenne": 0.1649,
+        "part_maximale": 1.0,
+        "tirages_qui_se_correspondent": 171
+      },
+      "amas": [
+        {
+          "chunks_lus": 3,
+          "paires_adjacentes": 2,
+          "paires": [
+            {
+              "a": [
+                62,
+                148
+              ],
+              "b": [
+                62,
+                149
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 4,
+              "apparies": 1,
+              "part": 0.3333,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                62,
+                148
+              ],
+              "b": [
+                63,
+                148
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "62,148": [
+              31,
+              46,
+              74
+            ],
+            "62,149": [
+              13,
+              34,
+              73,
+              56
+            ],
+            "63,148": [
+              92,
+              43
+            ]
+          },
+          "largeurs": {
+            "62,148": 3,
+            "62,149": 3,
+            "63,148": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                62,
+                296
+              ],
+              "b": [
+                62,
+                297
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                62,
+                296
+              ],
+              "b": [
+                63,
+                296
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                62,
+                297
+              ],
+              "b": [
+                63,
+                297
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 7,
+              "apparies": 2,
+              "part": 1.0,
+              "ecart_median": 1.5
+            },
+            {
+              "a": [
+                63,
+                296
+              ],
+              "b": [
+                63,
+                297
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 7,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 2.0
+            }
+          ],
+          "creux": {
+            "62,296": [
+              50,
+              10
+            ],
+            "62,297": [
+              45,
+              70
+            ],
+            "63,296": [
+              41,
+              80
+            ],
+            "63,297": [
+              63,
+              46,
+              104,
+              24,
+              72,
+              34,
+              82
+            ]
+          },
+          "largeurs": {
+            "62,296": 3,
+            "62,297": 3,
+            "63,296": 3,
+            "63,297": 3
+          }
+        },
+        {
+          "chunks_lus": 2,
+          "paires_adjacentes": 1,
+          "paires": [
+            {
+              "a": [
+                62,
+                444
+              ],
+              "b": [
+                62,
+                445
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 5,
+              "apparies": 1,
+              "part": 0.3333,
+              "ecart_median": 0.0
+            }
+          ],
+          "creux": {
+            "62,444": [
+              79,
+              70,
+              60
+            ],
+            "62,445": [
+              17,
+              70,
+              92,
+              4,
+              39
+            ]
+          },
+          "largeurs": {
+            "62,444": 3,
+            "62,445": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                125,
+                148
+              ],
+              "b": [
+                125,
+                149
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 4,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                125,
+                148
+              ],
+              "b": [
+                126,
+                148
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                125,
+                149
+              ],
+              "b": [
+                126,
+                149
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                126,
+                148
+              ],
+              "b": [
+                126,
+                149
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 3,
+              "apparies": 1,
+              "part": 0.3333,
+              "ecart_median": 1.0
+            }
+          ],
+          "creux": {
+            "125,148": [
+              42,
+              28
+            ],
+            "125,149": [
+              13,
+              43,
+              64,
+              52
+            ],
+            "126,148": [
+              86,
+              35,
+              58
+            ],
+            "126,149": [
+              57,
+              47,
+              97
+            ]
+          },
+          "largeurs": {
+            "125,148": 3,
+            "125,149": 3,
+            "126,148": 3,
+            "126,149": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                125,
+                296
+              ],
+              "b": [
+                125,
+                297
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                125,
+                296
+              ],
+              "b": [
+                126,
+                296
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 2,
+              "apparies": 1,
+              "part": 1.0,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                125,
+                297
+              ],
+              "b": [
+                126,
+                297
+              ],
+              "tolerance": 3,
+              "creux_a": 1,
+              "creux_b": 4,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                126,
+                296
+              ],
+              "b": [
+                126,
+                297
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 4,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "125,296": [
+              26
+            ],
+            "125,297": [
+              71
+            ],
+            "126,296": [
+              25,
+              16
+            ],
+            "126,297": [
+              34,
+              52,
+              66,
+              4
+            ]
+          },
+          "largeurs": {
+            "125,296": 3,
+            "125,297": 5,
+            "126,296": 3,
+            "126,297": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                125,
+                444
+              ],
+              "b": [
+                125,
+                445
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                125,
+                444
+              ],
+              "b": [
+                126,
+                444
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                125,
+                445
+              ],
+              "b": [
+                126,
+                445
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                126,
+                444
+              ],
+              "b": [
+                126,
+                445
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "125,444": [
+              27,
+              69
+            ],
+            "125,445": [
+              80,
+              44
+            ],
+            "126,444": [
+              79,
+              31,
+              64
+            ],
+            "126,445": [
+              50
+            ]
+          },
+          "largeurs": {
+            "125,444": 3,
+            "125,445": 3,
+            "126,444": 3,
+            "126,445": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                187,
+                148
+              ],
+              "b": [
+                187,
+                149
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 2,
+              "apparies": 1,
+              "part": 1.0,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                187,
+                148
+              ],
+              "b": [
+                188,
+                148
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                187,
+                149
+              ],
+              "b": [
+                188,
+                149
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                188,
+                148
+              ],
+              "b": [
+                188,
+                149
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "187,148": [
+              61
+            ],
+            "187,149": [
+              10,
+              62
+            ],
+            "188,148": [
+              16,
+              31,
+              4
+            ],
+            "188,149": [
+              51,
+              37
+            ]
+          },
+          "largeurs": {
+            "187,148": 3,
+            "187,149": 3,
+            "188,148": 3,
+            "188,149": 3
+          }
+        },
+        {
+          "chunks_lus": 3,
+          "paires_adjacentes": 2,
+          "paires": [
+            {
+              "a": [
+                187,
+                296
+              ],
+              "b": [
+                187,
+                297
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 4,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                187,
+                297
+              ],
+              "b": [
+                188,
+                297
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 1,
+              "apparies": 1,
+              "part": 1.0,
+              "ecart_median": 1.0
+            }
+          ],
+          "creux": {
+            "187,296": [
+              28,
+              4,
+              19
+            ],
+            "187,297": [
+              42,
+              103,
+              8,
+              94
+            ],
+            "188,297": [
+              93
+            ]
+          },
+          "largeurs": {
+            "187,296": 3,
+            "187,297": 3,
+            "188,297": 3
+          }
+        },
+        {
+          "chunks_lus": 2,
+          "paires_adjacentes": 1,
+          "paires": [
+            {
+              "a": [
+                187,
+                444
+              ],
+              "b": [
+                188,
+                444
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "187,444": [
+              33,
+              24
+            ],
+            "188,444": [
+              8
+            ]
+          },
+          "largeurs": {
+            "187,444": 3,
+            "188,444": 3
+          }
+        },
+        {
+          "chunks_lus": 2,
+          "paires_adjacentes": 1,
+          "paires": [
+            {
+              "a": [
+                249,
+                444
+              ],
+              "b": [
+                249,
+                445
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "249,444": [
+              83,
+              55,
+              42,
+              30
+            ],
+            "249,445": [
+              47
+            ]
+          },
+          "largeurs": {
+            "249,444": 3,
+            "249,445": 3
+          }
+        }
+      ]
+    },
+    {
+      "decidable": true,
+      "segment": "20231005123336",
+      "amas_lus": 9,
+      "chunks_lus": 36,
+      "paires_adjacentes": 36,
+      "part_moyenne_des_voisins": 0.2523,
+      "part_maximale_des_voisins": 1.0,
+      "paires_qui_se_correspondent": 15,
+      "part_mediane_des_voisins": 0.0,
+      "ecart_median_des_voisins": 1.5,
+      "les_non_voisins": {
+        "decidable": true,
+        "tirages": 684,
+        "part_mediane": 0.0,
+        "part_moyenne": 0.1384,
+        "part_maximale": 1.0,
+        "tirages_qui_se_correspondent": 181
+      },
+      "amas": [
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                68,
+                189
+              ],
+              "b": [
+                68,
+                190
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 1,
+              "apparies": 1,
+              "part": 1.0,
+              "ecart_median": 2.0
+            },
+            {
+              "a": [
+                68,
+                189
+              ],
+              "b": [
+                69,
+                189
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                68,
+                190
+              ],
+              "b": [
+                69,
+                190
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                69,
+                189
+              ],
+              "b": [
+                69,
+                190
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 0.0
+            }
+          ],
+          "creux": {
+            "68,189": [
+              94,
+              104,
+              6
+            ],
+            "68,190": [
+              102
+            ],
+            "69,189": [
+              34,
+              86
+            ],
+            "69,190": [
+              86,
+              72,
+              26
+            ]
+          },
+          "largeurs": {
+            "68,189": 3,
+            "68,190": 3,
+            "69,189": 3,
+            "69,190": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                68,
+                379
+              ],
+              "b": [
+                68,
+                380
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                68,
+                379
+              ],
+              "b": [
+                69,
+                379
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 0.0
+            },
+            {
+              "a": [
+                68,
+                380
+              ],
+              "b": [
+                69,
+                380
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                69,
+                379
+              ],
+              "b": [
+                69,
+                380
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "68,379": [
+              42,
+              11
+            ],
+            "68,380": [
+              100,
+              23
+            ],
+            "69,379": [
+              78,
+              42
+            ],
+            "69,380": [
+              81,
+              7,
+              56
+            ]
+          },
+          "largeurs": {
+            "68,379": 3,
+            "68,380": 3,
+            "69,379": 3,
+            "69,380": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                68,
+                569
+              ],
+              "b": [
+                68,
+                570
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                68,
+                569
+              ],
+              "b": [
+                69,
+                569
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                68,
+                570
+              ],
+              "b": [
+                69,
+                570
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                69,
+                569
+              ],
+              "b": [
+                69,
+                570
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "68,569": [
+              62,
+              41,
+              104
+            ],
+            "68,570": [
+              44,
+              93
+            ],
+            "69,569": [
+              38,
+              12
+            ],
+            "69,570": [
+              41,
+              23,
+              50
+            ]
+          },
+          "largeurs": {
+            "68,569": 3,
+            "68,570": 3,
+            "69,569": 3,
+            "69,570": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                136,
+                189
+              ],
+              "b": [
+                136,
+                190
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 4,
+              "apparies": 2,
+              "part": 1.0,
+              "ecart_median": 1.5
+            },
+            {
+              "a": [
+                136,
+                189
+              ],
+              "b": [
+                137,
+                189
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                136,
+                190
+              ],
+              "b": [
+                137,
+                190
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 2,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                137,
+                189
+              ],
+              "b": [
+                137,
+                190
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "136,189": [
+              78,
+              103
+            ],
+            "136,190": [
+              64,
+              89,
+              76,
+              102
+            ],
+            "137,189": [
+              20,
+              97,
+              29
+            ],
+            "137,190": [
+              70,
+              90
+            ]
+          },
+          "largeurs": {
+            "136,189": 3,
+            "136,190": 3,
+            "137,189": 3,
+            "137,190": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                136,
+                379
+              ],
+              "b": [
+                136,
+                380
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 4,
+              "apparies": 1,
+              "part": 0.25,
+              "ecart_median": 2.0
+            },
+            {
+              "a": [
+                136,
+                379
+              ],
+              "b": [
+                137,
+                379
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 2,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                136,
+                380
+              ],
+              "b": [
+                137,
+                380
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 1,
+              "apparies": 1,
+              "part": 1.0,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                137,
+                379
+              ],
+              "b": [
+                137,
+                380
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "136,379": [
+              65,
+              46,
+              82,
+              25
+            ],
+            "136,380": [
+              72,
+              32,
+              59,
+              84
+            ],
+            "137,379": [
+              62,
+              47
+            ],
+            "137,380": [
+              58
+            ]
+          },
+          "largeurs": {
+            "136,379": 3,
+            "136,380": 3,
+            "137,379": 3,
+            "137,380": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                136,
+                569
+              ],
+              "b": [
+                136,
+                570
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 1,
+              "apparies": 1,
+              "part": 1.0,
+              "ecart_median": 2.0
+            },
+            {
+              "a": [
+                136,
+                569
+              ],
+              "b": [
+                137,
+                569
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 1,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                136,
+                570
+              ],
+              "b": [
+                137,
+                570
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                137,
+                569
+              ],
+              "b": [
+                137,
+                570
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "136,569": [
+              18,
+              6
+            ],
+            "136,570": [
+              8
+            ],
+            "137,569": [
+              15
+            ],
+            "137,570": [
+              37,
+              28,
+              91
+            ]
+          },
+          "largeurs": {
+            "136,569": 3,
+            "136,570": 3,
+            "137,569": 3,
+            "137,570": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                204,
+                189
+              ],
+              "b": [
+                204,
+                190
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                204,
+                189
+              ],
+              "b": [
+                205,
+                189
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                204,
+                190
+              ],
+              "b": [
+                205,
+                190
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                205,
+                189
+              ],
+              "b": [
+                205,
+                190
+              ],
+              "tolerance": 2,
+              "creux_a": 3,
+              "creux_b": 2,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "204,189": [
+              29,
+              46
+            ],
+            "204,190": [
+              4,
+              47
+            ],
+            "205,189": [
+              96,
+              85,
+              14
+            ],
+            "205,190": [
+              88,
+              52
+            ]
+          },
+          "largeurs": {
+            "204,189": 3,
+            "204,190": 3,
+            "205,189": 3,
+            "205,190": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                204,
+                379
+              ],
+              "b": [
+                204,
+                380
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 2,
+              "apparies": 1,
+              "part": 0.5,
+              "ecart_median": 2.0
+            },
+            {
+              "a": [
+                204,
+                379
+              ],
+              "b": [
+                205,
+                379
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 4,
+              "apparies": 1,
+              "part": 0.25,
+              "ecart_median": 1.0
+            },
+            {
+              "a": [
+                204,
+                380
+              ],
+              "b": [
+                205,
+                380
+              ],
+              "tolerance": 2,
+              "creux_a": 2,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                205,
+                379
+              ],
+              "b": [
+                205,
+                380
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            }
+          ],
+          "creux": {
+            "204,379": [
+              31,
+              16,
+              101,
+              58
+            ],
+            "204,380": [
+              14,
+              48
+            ],
+            "205,379": [
+              40,
+              76,
+              57,
+              104
+            ],
+            "205,380": [
+              101,
+              37,
+              23
+            ]
+          },
+          "largeurs": {
+            "204,379": 3,
+            "204,380": 3,
+            "205,379": 3,
+            "205,380": 3
+          }
+        },
+        {
+          "chunks_lus": 4,
+          "paires_adjacentes": 4,
+          "paires": [
+            {
+              "a": [
+                204,
+                569
+              ],
+              "b": [
+                204,
+                570
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 1,
+              "apparies": 1,
+              "part": 1.0,
+              "ecart_median": 2.0
+            },
+            {
+              "a": [
+                204,
+                569
+              ],
+              "b": [
+                205,
+                569
+              ],
+              "tolerance": 2,
+              "creux_a": 4,
+              "creux_b": 6,
+              "apparies": 1,
+              "part": 0.25,
+              "ecart_median": 2.0
+            },
+            {
+              "a": [
+                204,
+                570
+              ],
+              "b": [
+                205,
+                570
+              ],
+              "tolerance": 2,
+              "creux_a": 1,
+              "creux_b": 3,
+              "apparies": 0,
+              "part": 0.0,
+              "ecart_median": null
+            },
+            {
+              "a": [
+                205,
+                569
+              ],
+              "b": [
+                205,
+                570
+              ],
+              "tolerance": 2,
+              "creux_a": 6,
+              "creux_b": 3,
+              "apparies": 1,
+              "part": 0.3333,
+              "ecart_median": 2.0
+            }
+          ],
+          "creux": {
+            "204,569": [
+              46,
+              93,
+              55,
+              104
+            ],
+            "204,570": [
+              53
+            ],
+            "205,569": [
+              97,
+              30,
+              12,
+              21,
+              53,
+              74
+            ],
+            "205,570": [
+              19,
+              103,
+              66
+            ]
+          },
+          "largeurs": {
+            "204,569": 3,
+            "204,570": 3,
+            "205,569": 3,
+            "205,570": 3
+          }
+        }
+      ]
+    }
+  ],
+  "la_fixture": {
+    "cellules": 6,
+    "part_mediane_de_la_meme_matiere": 1.0,
+    "part_mediane_de_matieres_differentes": 0.0
+  },
+  "le_verdict": {
+    "decidable": true,
+    "segments": 3,
+    "amas_lus": 28,
+    "chunks_lus": 104,
+    "paires_adjacentes": 99,
+    "part_des_voisins": 0.2222,
+    "part_des_non_voisins": 0.1384,
+    "part_mediane_des_voisins": 0.0,
+    "paires_qui_se_correspondent": 35,
+    "ecart_median_des_voisins": 1.0,
+    "part_de_la_meme_matiere": 1.0,
+    "part_de_matieres_differentes": 0.0,
+    "les_deux_bornes_se_separent": true,
+    "un_creux_se_retrouve_a_cote": true,
+    "le_rouleau_vaut_la_meme_matiere_fois": 0.2222
+  }
+}

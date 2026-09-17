@@ -2279,6 +2279,37 @@ besoin d'être périodique ; il a besoin d'être **retrouvable d'une spire à la
 une question sur la correspondance **latérale** des creux, et non plus sur leur espacement en
 profondeur.
 
+**`183` · 2026-09-17 · un creux se retrouve-t-il à côté ?**
+`182` a établi que la profondeur du rouleau n'est périodique à aucun pas. ⭐⭐⭐⭐ **C'est là que la
+question du graal reprend la main** : ce qui remplace l'humain au transfert de spire à spire est un
+**repère**, et un repère n'a pas besoin d'être périodique — il a besoin d'être **retrouvable**. C'est
+une question sur la correspondance **latérale**, et rien dans toute la chaîne `172`–`182` ne l'avait
+posée : tout y a été lu chunk par chunk, en profondeur.
+⚠⚠ Il faut donc de **vrais voisins** : le treillis de `176` sépare ses chunks de dizaines de
+positions, donc chacun n'est voisin de rien — défaut que `fiber_orientation.survey` avait déjà dû
+réparer. On prend des **amas** de deux par deux chunks adjacents, un par position de ce treillis.
+⚠⚠⚠ **Le contrôle apparié est le NON-VOISIN** : deux chunks quelconques partagent des creux par
+hasard, donc sans lui « les voisins se correspondent » serait de l'arithmétique. Il est tiré parmi
+les chunks des **autres** amas — même loi de profondeurs, même densité, seul le voisinage change.
+⚠⚠⚠ **Et une première version avait ses deux bornes ÉGALES** : la fenêtre « matière différente »
+était décalée d'une demi-feuille, ce qui remet les frontières de pli aux **mêmes** couches. Un tiers
+de pli les déplace de douze couches, trois fois la tolérance. Les bornes rendent maintenant **1** et
+**0**.
+⭐ **UN CREUX SE RETROUVE CHEZ LE VOISIN PLUS SOUVENT QUE PAR HASARD** : **0,2222** contre
+**0,1384**, et quand il se retrouve il est à **1** couche près — le signal est rare mais **précis**
+— `R4-F205`.
+✗ **MAIS C'EST 0,2222 FOIS SEULEMENT CE QUE LA MÊME MATIÈRE REND**, et **64** paires adjacentes sur
+**99** ne partagent **aucun** creux — `R4-F206`. Un creux pris **seul** ne suffit donc pas à
+transférer une spire à la suivante, et c'est le fait qui décide.
+⚠ Trois sondes sont passées au **vert** et ont été réparées : quatre positions dupliquées fabriquent
+elles aussi « quatre paires adjacentes » (il faut exiger un **carré** de positions distinctes), le
+contrôle des non-voisins n'était exercé par rien, et le cas d'**égalité** manquait — un « plus grand
+ou égal » passait parce que le cas asserté était strictement plus petit.
+⭐ `R4-P33` se resserre sur ce que la mesure nomme elle-même : prendre les creux **ensemble** plutôt
+qu'un par un. Une suite de creux peut être retrouvable là où aucun de ses membres ne l'est — c'est
+une question de **motif** et non de position, et elle se contrôle par la même permutation, appliquée
+cette fois à l'**ordre** des creux dans la suite.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

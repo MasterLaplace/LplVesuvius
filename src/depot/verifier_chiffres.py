@@ -3194,6 +3194,69 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 183 : UN CREUX SE RETROUVE-T-IL A COTE ?
+    # (1) Une part chez le VOISIN ne voyage jamais sans celle chez un NON-VOISIN : deux chunks
+    # quelconques partagent des creux par hasard, et une part seule se lirait comme un resultat.
+    # (2) Et aucune des deux ne voyage sans les DEUX BORNES construites : c'est entre elles que le
+    # rouleau se place, et une premiere version les avait egales.
+    # (3) Un compte de paires qui se correspondent ne voyage jamais sans le compte TOTAL : « trente
+    # -cinq paires » ne dit rien sans « sur quatre-vingt-dix-neuf ».
+    ca = _source(racine, "un_creux_se_retrouve_t_il_a_cote.json")
+    if ca.exists():
+        d = json.loads(ca.read_text())
+
+        def _dec183(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("creux_cherches_par_chunk", "creux cherches par chunk"),
+                         ("cote_du_treillis", "cote du treillis"),
+                         ("tirages_de_non_voisins", "tirages de non voisins"),
+                         ("permutations", "permutations"), ("couches", "couches")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 183", int(d[cle]), 0, ca.name)
+        for s in (d.get("les_segments") or []):
+            if not s.get("decidable"):
+                continue
+            q = f"du segment {s['segment']} de 183"
+            for cle, nom in (("amas_lus", "amas lus"), ("chunks_lus", "chunks lus"),
+                             ("paires_adjacentes", "paires adjacentes"),
+                             ("paires_qui_se_correspondent", "paires qui se correspondent")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(s[cle]), 0, ca.name)
+            for cle, nom in (("part_moyenne_des_voisins", "part moyenne des voisins"),
+                             ("ecart_median_des_voisins", "ecart median des voisins")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(s[cle]), _dec183(s[cle]), ca.name)
+            loin = s.get("les_non_voisins") or {}
+            if loin.get("part_moyenne") is not None:
+                ajoute(f"part moyenne des non voisins {q}", float(loin["part_moyenne"]),
+                       _dec183(loin["part_moyenne"]), ca.name)
+        fx = d.get("la_fixture") or {}
+        for cle, nom in (("part_mediane_de_la_meme_matiere", "part de la meme matiere"),
+                         ("part_mediane_de_matieres_differentes",
+                          "part de matieres differentes")):
+            if fx.get(cle) is not None:
+                ajoute(f"{nom} de 183", float(fx[cle]), _dec183(fx[cle]), ca.name)
+        v_ = d.get("le_verdict") or {}
+        for cle, nom in (("amas_lus", "amas lus"), ("chunks_lus", "chunks lus"),
+                         ("paires_adjacentes", "paires adjacentes"),
+                         ("paires_qui_se_correspondent", "paires qui se correspondent")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 183", int(v_[cle]), 0, ca.name)
+        for cle, nom in (("part_des_voisins", "part des voisins"),
+                         ("part_des_non_voisins", "part des non voisins"),
+                         ("ecart_median_des_voisins", "ecart median des voisins"),
+                         ("part_de_la_meme_matiere", "part de la meme matiere"),
+                         ("part_de_matieres_differentes", "part de matieres differentes"),
+                         ("le_rouleau_vaut_la_meme_matiere_fois",
+                          "le rouleau vaut la meme matiere fois")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 183", float(v_[cle]), _dec183(v_[cle]), ca.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 182 : LA FEUILLE A-T-ELLE TROIS PLIS ?
     # (1) Un espacement LU ne voyage jamais sans l'espacement CONSTRUIT de la meme matiere : c'est
     # leur egalite qui dit que le lecteur est juste, et un espacement lu seul se lirait comme une
