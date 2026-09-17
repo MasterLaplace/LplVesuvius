@@ -2032,6 +2032,44 @@ un. Le choix se fait désormais parmi celles qui **lisent**.
 absents : un segment est une bande dans un volume rectangulaire, et les choisir ferait mesurer le
 choix.
 
+**`177` · 2026-09-17 · la profondeur tourne-t-elle, ou bascule-t-elle ?**
+`176` laisse ouvert ce que l'ordre en profondeur du rouleau **est**, et `174` dit pourquoi : une
+**dérive** n'est pas séparée d'une **marche** par un verdict. Cette tranche construit le troisième
+énoncé — un ajustement **affine**, une rotation par couche, contre l'ajustement en deux segments de
+`174`, tous deux lus par le **même** estimateur.
+⭐⭐⭐⭐ **LE TROISIÈME ÉNONCÉ EXISTE ET IL SÉPARE.** Une marche et une dérive qui portent le **même**
+tour total sont départagées sur les trois matières construites — marche, dérive, rien sur du bruit —
+et l'étalon à deux plis est jugé marche à **12** décalages sur **12**, excédents **0,612** contre
+**0,365** — `R4-F188`. ⚠⚠⚠ Les deux ajustements sont des **extensions** d'un même nul et aucun ne
+peut faire moins que lui, donc comparer deux parts **brutes** ne dirait que laquelle des deux
+libertés est la plus large : c'est la **permutation** qui paie la liberté, et exactement, puisque le
+nul est invariant par permutation. ⚠⚠ Et la fenêtre est désignée **par le nul**, jamais par un
+candidat — une première version, où chaque ajustement prenait sa meilleure fenêtre, jugeait
+« dérive » une marche construite, les deux retenant une fenêtre **homogène** où tous deux atteignent
+un (`175`).
+✗ **MAIS SON DOMAINE S'ARRÊTE AU QUART DE TOUR.** Sur une échelle de tours dérivée croisée avec des
+dispersions dérivées du témoin du rouleau, la seule ligne entièrement tenue est **90°**, et la
+bascule de **6,862°** que `176` a mesurée vaut **0,0762** fois ce plancher : à cette case la bonne
+forme est rendue **9** fois sur **20** pour une marche et **1** fois sur **20** pour une dérive —
+`R4-F189`. ⚠⚠⚠ **Donc cette tranche ne pointe PAS le juge sur la matière**, précédent de `174` : un
+verdict rendu hors du domaine mesuré n'est pas un verdict faible, c'est un nombre sans garantie sous
+un nom qui en promet une. ⚠⚠ La panne n'est pas monotone et le tableau le dit plutôt que de le
+lisser : à **11,25°** sans dispersion la dérive est lue juste **0** fois sur 20, à **6,862°** sans
+dispersion **20** fois.
+⚠⚠⚠ **ET LA PANNE A UN SENS : LE JUGE LIT UNE DÉRIVE COMME UNE MARCHE** — `R4-F190`. Une lecture
+« il y a de l'ordre, et c'est une marche de six degrés » est donc exactement ce qu'il rendrait sur
+une **rotation lente**. La négation de `176` tient ; ce qui ne tient pas est d'en déduire que la
+matière fait une marche. ⭐ La règle **brute** est portée comme contrôle nommé, comme `174` mesure
+côte à côte la recette réfutée et la réparée : **663** verdicts justes par l'excédent contre **583**
+par la part brute, **133** désaccords. Sans ce contrôle, l'excédent serait une précaution que rien
+ne mesure — une sonde qui le remplaçait par la part brute repassait **au vert**.
+⚠⚠ Un défaut de figure trouvé en **regardant** l'image : `_fr(90, 0)` rendait « 9 », le zéro des
+dizaines rogné comme s'il était décimal, et l'axe affichait un angle dix fois trop petit. Aucune
+garde de figure ne voit ça.
+⭐ `R4-P31` s'ouvre, et elle nomme la voie la moins chère : la fenêtre fait ici un **pli** parce que
+`175` a mesuré qu'un ajustement en deux segments ne décrit qu'une frontière, mais un ajustement
+affine n'a pas cette limite, et rien n'a mesuré ce qu'il rend sur les **109** couches entières.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

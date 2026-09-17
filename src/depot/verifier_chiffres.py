@@ -3194,6 +3194,98 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 177 : LA PROFONDEUR TOURNE-T-ELLE, OU BASCULE-T-ELLE ?
+    # (1) Un excedent ne voyage jamais sans la part et le MELANGE dont il est la difference :
+    # l'excedent seul se lirait comme une qualite d'ajustement, alors qu'il est un ecart.
+    # (2) Un plancher de domaine ne voyage jamais sans le RAPPORT de la bascule du rouleau a ce
+    # plancher : « quatre-vingt-dix degres » ne dit rien, « la bascule vaut 0,0762 fois » dit tout.
+    # (3) Et un compte de verdicts justes ne voyage jamais sans le compte de l'autre REGLE : c'est
+    # leur ecart qui dit ce que l'excedent achete, et un compte seul se lirait comme une reussite.
+    pr = _source(racine, "la_profondeur_tourne_t_elle_ou_bascule_t_elle.json")
+    if pr.exists():
+        d = json.loads(pr.read_text())
+
+        def _dec177(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("largeur_en_couches", "largeur en couches"),
+                         ("couches", "couches"), ("frontiere", "frontiere construite"),
+                         ("permutations", "permutations")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 177", int(d[cle]), 0, pr.name)
+        for cle, nom in (("le_quart_de_tour_deg", "le quart de tour"),
+                         ("etendue_de_la_derive_deg", "etendue de la derive construite")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 177", float(d[cle]), _dec177(d[cle]), pr.name, unites=("°",))
+        for ligne in ((d.get("les_matieres") or {}).get("lignes") or []):
+            q = f"de {ligne['matiere']} de 177"
+            if ligne.get("part_constante") is not None:
+                ajoute(f"part du nul {q}", float(ligne["part_constante"]),
+                       _dec177(ligne["part_constante"]), pr.name)
+            for cle, nom in (("la_marche", "marche"), ("la_derive", "derive")):
+                lu = ligne.get(cle) or {}
+                for champ, quoi in (("part_atteinte", "part atteinte"),
+                                    ("part_mediane_des_melanges", "part des melanges"),
+                                    ("excedent", "excedent")):
+                    if lu.get(champ) is not None:
+                        ajoute(f"{quoi} de l ajustement {nom} {q}", float(lu[champ]),
+                               _dec177(lu[champ]), pr.name)
+                if cle == "la_derive" and lu.get("rotation_deg_par_couche") is not None:
+                    ajoute(f"rotation lue {q}", float(lu["rotation_deg_par_couche"]),
+                           _dec177(lu["rotation_deg_par_couche"]), pr.name, unites=("°",))
+        fx_ = d.get("la_fixture") or {}
+        for cle, nom in (("cellules", "cellules de l etalon"),
+                         ("marches", "cellules de l etalon jugees marche"),
+                         ("derives", "cellules de l etalon jugees derive")):
+            if fx_.get(cle) is not None:
+                ajoute(f"{nom} de 177", int(fx_[cle]), 0, pr.name)
+        for cle, nom in (("excedent_median_de_la_marche", "excedent marche de l etalon"),
+                         ("excedent_median_de_la_derive", "excedent derive de l etalon")):
+            if fx_.get(cle) is not None:
+                ajoute(f"{nom} de 177", float(fx_[cle]), _dec177(fx_[cle]), pr.name)
+        dom_ = d.get("le_domaine") or {}
+        if dom_.get("graines_par_cellule") is not None:
+            ajoute("graines par cellule de 177", int(dom_["graines_par_cellule"]), 0, pr.name)
+        for t in (dom_.get("tours") or []):
+            ajoute(f"tour de l echelle de 177 ({t})", float(t), _dec177(t), pr.name,
+                   unites=("°",))
+        for x in (dom_.get("dispersions") or []):
+            ajoute(f"dispersion de l echelle de 177 ({x})", float(x), _dec177(x), pr.name,
+                   unites=("°",))
+        for c in (dom_.get("cellules") or []):
+            q = f"a {c['tour_deg']}° et {c['dispersion_deg']}° de 177"
+            for cle, nom in (("marches_justes", "marches justes"),
+                             ("derives_justes", "derives justes")):
+                if c.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(c[cle]), 0, pr.name)
+        v_ = d.get("le_verdict") or {}
+        for cle, nom in (("graines_par_cellule", "graines par cellule du verdict"),
+                         ("marches_justes_au_tour_du_rouleau",
+                          "marches justes au tour du rouleau"),
+                         ("derives_justes_au_tour_du_rouleau",
+                          "derives justes au tour du rouleau"),
+                         ("verdicts_justes_par_lexcedent", "verdicts justes par l excedent"),
+                         ("verdicts_justes_par_les_parts_brutes",
+                          "verdicts justes par la part brute"),
+                         ("verdicts_ou_les_deux_regles_different",
+                          "verdicts ou les deux regles different")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 177", int(v_[cle]), 0, pr.name)
+        for cle, nom, unite in (
+                ("le_plus_petit_tour_tenu_deg", "plus petit tour tenu", "°"),
+                ("il_vaut_le_quart_de_tour_fois", "il vaut le quart de tour fois", ""),
+                ("la_bascule_du_rouleau_deg", "bascule du rouleau relue", "°"),
+                ("le_temoin_du_rouleau_deg", "temoin du rouleau relu", "°"),
+                ("la_bascule_du_rouleau_vaut_le_plancher_fois",
+                 "la bascule vaut le plancher fois", "")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 177", float(v_[cle]), _dec177(v_[cle]), pr.name,
+                       unites=((unite,) if unite else ()))
+
     # ⭐⭐⭐⭐ LA TRANCHE 175 : UN AJUSTEMENT DECRIT UNE FRONTIERE.
     # (1) Une part atteinte ne voyage jamais sans le NOMBRE DE FRONTIERES de sa fenetre : c'est leur
     # relation qui porte l'enonce, et la part seule se lirait comme une qualite.

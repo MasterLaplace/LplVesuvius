@@ -1492,6 +1492,8 @@ run "un ajustement"         uv run python "$ROOT/src/nappe/un_ajustement_decrit_
 run "figure un ajustement"  uv run python "$ROOT/src/figures/figure_un_ajustement_decrit_une_frontiere.py" --verifier
 run "la recette posee"     uv run python "$ROOT/src/nappe/la_recette_posee_sur_le_rouleau.py" --verifier
 run "figure recette posee" uv run python "$ROOT/src/figures/figure_la_recette_posee_sur_le_rouleau.py" --verifier
+run "profondeur tourne"   uv run python "$ROOT/src/nappe/la_profondeur_tourne_t_elle_ou_bascule_t_elle.py" --verifier
+run "figure profondeur"   uv run python "$ROOT/src/figures/figure_la_profondeur_tourne_t_elle_ou_bascule_t_elle.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
