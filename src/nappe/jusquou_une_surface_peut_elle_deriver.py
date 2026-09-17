@@ -133,7 +133,8 @@ def les_departs_par_couche(bloc: np.ndarray, coherences, combien: int,
 
 
 def un_barreau(bloc: np.ndarray, angles, coherences, montee: int, departs_par_couche: dict,
-               plafond: int, plancher_de_coherence: float = PLANCHER_DE_COHERENCE) -> dict:
+               plafond: int, plancher_de_coherence: float = PLANCHER_DE_COHERENCE,
+               profondeurs_par_signe: dict | None = None) -> dict:
     """Un barreau de l'échelle : tous les rubans de cette montée, marchés en UN passage.
 
     ⚠⚠ LES DEUX SENS DE MONTÉE SONT LUS. Une segmentation dérive vers l'intérieur comme vers
@@ -143,12 +144,22 @@ def un_barreau(bloc: np.ndarray, angles, coherences, montee: int, departs_par_co
 
     ⚠⚠ L'ANGLE EST CELUI DE LA COUCHE DE DÉPART, tenu fixe le long du ruban : c'est ce qu'un pipeline
     connaît, et c'est la règle de `187`.
+
+    ⭐ `profondeurs_par_signe` IMPOSE LE MÊME JEU DE DÉPARTS À TOUS LES BARREAUX, et c'est ce qui rend
+    une COURBE comparable d'un barreau à l'autre. Sans lui, une montée qui approche la hauteur du bloc
+    n'a plus que quelques profondeurs admissibles, donc la forme de la courbe mêlerait ce que la
+    matière porte et ce que l'échantillon a rétréci. Absent, le comportement est celui de `188` :
+    chaque barreau prend ce qu'il peut.
     """
     lus: list[int] = []
     for signe in (1, -1):
         m = int(signe) * int(montee)
+        impose = (profondeurs_par_signe or {}).get(int(signe))
+        admissibles = (les_profondeurs_de_depart(coherences, m, plancher_de_coherence)
+                       if impose is None
+                       else [int(k) for k in impose if 0 <= int(k) + m < len(coherences)])
         departs, kk, aa = [], [], []
-        for k in les_profondeurs_de_depart(coherences, m, plancher_de_coherence):
+        for k in admissibles:
             d = departs_par_couche.get(int(k))
             if not d:
                 continue

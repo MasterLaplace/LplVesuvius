@@ -2486,6 +2486,42 @@ dernier barreau : ce qui survit à la dérive est l'**avance** sur le hasard, pa
 l'excédent au voisinage d'un multiple du pas, une continuité le ferait décroître partout. L'échelle
 actuelle s'arrête juste après le premier pas et ne peut pas voir cette remontée.
 
+**`189` · 2026-09-18 · l'empilement se répète-t-il, ou est-ce la même feuille ?**
+⚠⚠⚠ **Un ruban ne pouvait pas répondre, et c'est une erreur de CONCEPTION qu'une sonde a trouvée.**
+Un ruban d'écart `m` ne saute pas `m` couches : il **traverse tout ce qu'il y a entre**, donc sa crête
+meurt dans la matière intermédiaire et le fait que les deux bouts se ressemblent n'y change rien — une
+périodicité ne peut PAS produire de remontée dans cette statistique-là. Une matière construite pour se
+répéter exactement l'a montré.
+⭐⭐⭐⭐ **Ce qu'il faut est un TRANSFERT** : les départs et la direction des fibres d'une couche,
+portés dans une couche située `m` plus loin, à plat, sans rien lire entre les deux. C'est exactement la
+question du pipeline — si ma surface se trompe de `m` couches, la lecture de la fibre tient-elle
+encore ? ⚠⚠ L'angle reste celui de la couche **source**, et rien ne l'exerçait : une sonde est passée
+au **vert**, et le contrôle qui la répare compare le transfert à la lecture **en travers**.
+⭐ **L'ÉTALON SÉPARE SES DEUX FACES** — `R4-F222`. Une matière dont chaque feuille copie la précédente
+chute de **22** à **9** puis revient à **22** : remontée **13** depuis un creux à **32** couches, et
+elle **commence à 72** — le pas. Une matière qui tourne d'un quart de tour sur tout le bloc décroît de
+**30** à **6** sans revenir.
+⚠⚠⚠ **Et il a fallu DEUX réparations, l'étalon étant rouge sur ses deux faces avant elles.** Un
+critère de **maximum local strict** déclarait « pas de bosse » sur une matière construite pour en avoir
+une, parce qu'une périodicité de plis rend un **plateau** de retour et non un pic. Puis la règle
+suivante — « la valeur au pas dépasse le creux » — **ne testait pas son propre énoncé** : un frisson de
+médiane la satisfait n'importe où. La règle réparée prend le **maximum d'après le creux** et regarde à
+quel barreau il est atteint **pour la première fois**.
+✗ **L'EMPILEMENT DU ROULEAU NE SE RÉPÈTE PAS AU PAS D'UNE FEUILLE** — `R4-F220`. Sur **27** chunks, la
+remontée maximale vaut **2** et commence à **48** couches, pas à **72** ; le mélange en remonte **0**
+au même barreau. **L'information que `188` mesurait n'est donc pas « une spire ressemble à la
+suivante ».**
+⭐⭐⭐⭐ **ET CE QUI PORTE EST LA CONTIGUÏTÉ** — `R4-F221`. La règle de `188` appliquée au transfert
+rend une portée de **16** couches, soit **38,4** µm, quand un **chemin** porte au moins **175,2** µm :
+**4,5625** fois plus loin. Deux couches voisines se ressemblent et cette ressemblance **chaîne** le
+long d'un parcours ; deux couches éloignées sont aussi étrangères que deux tirées au hasard.
+⭐ **C'est la première BORNE SUR LE PAS D'UN DÉROULAGE que la chaîne rende** : une surface qui se pose
+en profondeur doit y avancer par pas contigus de moins de **38,4** µm.
+⭐ `R4-P38` **s'ouvre** : une surface qui avance par pas de moins de 38,4 µm, en choisissant à chaque
+pas la couche voisine où le transfert est le meilleur, dérive-t-elle vers la feuille ou s'en
+écarte-t-elle ? ⚠⚠⚠ Le piège de `184` est écrit d'avance — une marche qui CHOISIT se donne une
+liberté, et cette liberté se paie contre une marche qui choisit au hasard parmi les mêmes voisines.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

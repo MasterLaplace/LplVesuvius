@@ -1,0 +1,4517 @@
+{
+  "departs_par_couche": 24,
+  "cote_du_treillis": 5,
+  "plafond_de_pas": 146,
+  "voxel_um": 2.4,
+  "pas_um": 173.0,
+  "graine": 20260929,
+  "sommet_relu_de_188": 8,
+  "montees": [
+    0,
+    8,
+    16,
+    24,
+    32,
+    40,
+    48,
+    56,
+    64,
+    72,
+    80,
+    88
+  ],
+  "le_pas_en_couches": 72,
+  "plancher_de_coherence": 0.15,
+  "letalon": {
+    "lignes": [
+      {
+        "matiere": "chaque feuille copie la précédente",
+        "attendu": "se répète",
+        "decidable": true,
+        "plafond_du_ruban": 22,
+        "profondeurs_montantes": 21,
+        "profondeurs_descendantes": 21,
+        "lectures_par_barreau": 1008,
+        "le_meme_jeu_a_tous_les_barreaux": true,
+        "barreaux": [
+          {
+            "montee": 0,
+            "rubans": 504,
+            "rubans_melanges": 504,
+            "pas_median": 22.0,
+            "pas_median_melange": 22.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 8,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 22.0,
+            "pas_median_melange": 11.0,
+            "excedent": 11.0
+          },
+          {
+            "montee": 16,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 22.0,
+            "pas_median_melange": 15.0,
+            "excedent": 7.0
+          },
+          {
+            "montee": 24,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 13.0,
+            "pas_median_melange": 10.0,
+            "excedent": 3.0
+          },
+          {
+            "montee": 32,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 9.0,
+            "pas_median_melange": 9.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 40,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 9.0,
+            "pas_median_melange": 10.0,
+            "excedent": -1.0
+          },
+          {
+            "montee": 48,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 9.0,
+            "pas_median_melange": 9.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 56,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 9.0,
+            "pas_median_melange": 9.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 64,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 13.0,
+            "pas_median_melange": 10.0,
+            "excedent": 3.0
+          },
+          {
+            "montee": 72,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 22.0,
+            "pas_median_melange": 13.0,
+            "excedent": 9.0
+          },
+          {
+            "montee": 80,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 22.0,
+            "pas_median_melange": 10.0,
+            "excedent": 12.0
+          },
+          {
+            "montee": 88,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 22.0,
+            "pas_median_melange": 16.0,
+            "excedent": 6.0
+          }
+        ],
+        "lexcedent": {
+          "decidable": true,
+          "montee_lue": 72,
+          "au_pas": 22.0,
+          "le_creux": 9.0,
+          "le_creux_en_couches": 32,
+          "la_remontee_maximale": 13.0,
+          "elle_commence_a": 72,
+          "la_bosse": 13.0,
+          "il_y_a_une_bosse": true,
+          "sommet_de_la_courbe_en_couches": 0,
+          "elle_decroit_partout": false
+        },
+        "le_melange": {
+          "decidable": true,
+          "montee_lue": 72,
+          "au_pas": 13.0,
+          "le_creux": 9.0,
+          "le_creux_en_couches": 32,
+          "la_remontee_maximale": 7.0,
+          "elle_commence_a": 88,
+          "la_bosse": 4.0,
+          "il_y_a_une_bosse": false,
+          "sommet_de_la_courbe_en_couches": 0,
+          "elle_decroit_partout": false
+        },
+        "lempilement_se_repete": true,
+        "la_texture_decroit_partout": false
+      },
+      {
+        "matiere": "un quart de tour sur tout le bloc",
+        "attendu": "décroît partout",
+        "decidable": true,
+        "plafond_du_ruban": 30,
+        "profondeurs_montantes": 21,
+        "profondeurs_descendantes": 21,
+        "lectures_par_barreau": 1008,
+        "le_meme_jeu_a_tous_les_barreaux": true,
+        "barreaux": [
+          {
+            "montee": 0,
+            "rubans": 504,
+            "rubans_melanges": 504,
+            "pas_median": 30.0,
+            "pas_median_melange": 30.0,
+            "excedent": 0.0
+          },
+          {
+            "montee": 8,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 28.0,
+            "pas_median_melange": 20.0,
+            "excedent": 8.0
+          },
+          {
+            "montee": 16,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 26.0,
+            "pas_median_melange": 17.0,
+            "excedent": 9.0
+          },
+          {
+            "montee": 24,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 24.0,
+            "pas_median_melange": 19.0,
+            "excedent": 5.0
+          },
+          {
+            "montee": 32,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 21.0,
+            "pas_median_melange": 16.0,
+            "excedent": 5.0
+          },
+          {
+            "montee": 40,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 18.0,
+            "pas_median_melange": 17.0,
+            "excedent": 1.0
+          },
+          {
+            "montee": 48,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 14.0,
+            "pas_median_melange": 18.0,
+            "excedent": -4.0
+          },
+          {
+            "montee": 56,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 11.0,
+            "pas_median_melange": 21.0,
+            "excedent": -10.0
+          },
+          {
+            "montee": 64,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 9.0,
+            "pas_median_melange": 23.5,
+            "excedent": -14.5
+          },
+          {
+            "montee": 72,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 8.0,
+            "pas_median_melange": 17.0,
+            "excedent": -9.0
+          },
+          {
+            "montee": 80,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 7.0,
+            "pas_median_melange": 12.0,
+            "excedent": -5.0
+          },
+          {
+            "montee": 88,
+            "rubans": 1008,
+            "rubans_melanges": 1008,
+            "pas_median": 6.0,
+            "pas_median_melange": 18.0,
+            "excedent": -12.0
+          }
+        ],
+        "lexcedent": {
+          "decidable": true,
+          "montee_lue": 72,
+          "au_pas": 8.0,
+          "le_creux": 9.0,
+          "le_creux_en_couches": 64,
+          "la_remontee_maximale": -1.0,
+          "elle_commence_a": 72,
+          "la_bosse": -1.0,
+          "il_y_a_une_bosse": false,
+          "sommet_de_la_courbe_en_couches": 0,
+          "elle_decroit_partout": true
+        },
+        "le_melange": {
+          "decidable": true,
+          "montee_lue": 72,
+          "au_pas": 17.0,
+          "le_creux": 16.0,
+          "le_creux_en_couches": 32,
+          "la_remontee_maximale": 7.5,
+          "elle_commence_a": 64,
+          "la_bosse": 1.0,
+          "il_y_a_une_bosse": true,
+          "sommet_de_la_courbe_en_couches": 0,
+          "elle_decroit_partout": false
+        },
+        "lempilement_se_repete": false,
+        "la_texture_decroit_partout": true
+      }
+    ],
+    "la_periodique_se_repete": true,
+    "la_continue_decroit_partout": true,
+    "letalon_separe_les_deux": true
+  },
+  "les_segments": [
+    {
+      "decidable": true,
+      "segment": "20230702185753",
+      "chunks_lus": 9,
+      "refuses": {
+        "absent": 16
+      },
+      "courbe": [
+        {
+          "montee": 0,
+          "pas_median": 22.0,
+          "pas_median_melange": 20.0,
+          "excedent": 2.0
+        },
+        {
+          "montee": 8,
+          "pas_median": 19.0,
+          "pas_median_melange": 15.0,
+          "excedent": 4.0
+        },
+        {
+          "montee": 16,
+          "pas_median": 16.5,
+          "pas_median_melange": 15.0,
+          "excedent": 1.5
+        },
+        {
+          "montee": 24,
+          "pas_median": 17.0,
+          "pas_median_melange": 16.0,
+          "excedent": 1.0
+        },
+        {
+          "montee": 32,
+          "pas_median": 15.0,
+          "pas_median_melange": 17.0,
+          "excedent": -2.0
+        },
+        {
+          "montee": 40,
+          "pas_median": 15.0,
+          "pas_median_melange": 17.0,
+          "excedent": -2.0
+        },
+        {
+          "montee": 48,
+          "pas_median": 15.0,
+          "pas_median_melange": 16.0,
+          "excedent": -1.0
+        },
+        {
+          "montee": 56,
+          "pas_median": 17.0,
+          "pas_median_melange": 15.0,
+          "excedent": 2.0
+        },
+        {
+          "montee": 64,
+          "pas_median": 16.0,
+          "pas_median_melange": 16.0,
+          "excedent": 0.0
+        },
+        {
+          "montee": 72,
+          "pas_median": 16.0,
+          "pas_median_melange": 16.0,
+          "excedent": 0.0
+        },
+        {
+          "montee": 80,
+          "pas_median": 14.0,
+          "pas_median_melange": 15.0,
+          "excedent": -1.0
+        },
+        {
+          "montee": 88,
+          "pas_median": 16.5,
+          "pas_median_melange": 15.0,
+          "excedent": 1.5
+        }
+      ],
+      "chunks_qui_se_repetent": 1,
+      "chunks_qui_decroissent_partout": 0,
+      "lexcedent": {
+        "decidable": true,
+        "montee_lue": 72,
+        "au_pas": 16.0,
+        "le_creux": 15.0,
+        "le_creux_en_couches": 32,
+        "la_remontee_maximale": 2.0,
+        "elle_commence_a": 56,
+        "la_bosse": 1.0,
+        "il_y_a_une_bosse": false,
+        "sommet_de_la_courbe_en_couches": 0,
+        "elle_decroit_partout": false
+      },
+      "le_melange": {
+        "decidable": true,
+        "montee_lue": 72,
+        "au_pas": 16.0,
+        "le_creux": 15.0,
+        "le_creux_en_couches": 8,
+        "la_remontee_maximale": 2.0,
+        "elle_commence_a": 32,
+        "la_bosse": 1.0,
+        "il_y_a_une_bosse": false,
+        "sommet_de_la_courbe_en_couches": 0,
+        "elle_decroit_partout": false
+      },
+      "lempilement_se_repete": false,
+      "la_texture_decroit_partout": false,
+      "chunks": [
+        {
+          "chunk": [
+            98,
+            71
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 31,
+          "profondeurs_montantes": 4,
+          "profondeurs_descendantes": 17,
+          "lectures_par_barreau": 504,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 96,
+              "rubans_melanges": 216,
+              "pas_median": 16.5,
+              "pas_median_melange": 22.0,
+              "excedent": -5.5
+            },
+            {
+              "montee": 8,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 16.0,
+              "pas_median_melange": 15.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 16,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 16.5,
+              "pas_median_melange": 15.0,
+              "excedent": 1.5
+            },
+            {
+              "montee": 24,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 17.0,
+              "pas_median_melange": 15.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 32,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 18.0,
+              "pas_median_melange": 15.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 40,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 16.0,
+              "pas_median_melange": 14.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 48,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 15.0,
+              "pas_median_melange": 17.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 56,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 14.0,
+              "pas_median_melange": 15.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 64,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 15.0,
+              "pas_median_melange": 15.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 72,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 17.0,
+              "pas_median_melange": 15.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 80,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 14.0,
+              "pas_median_melange": 13.5,
+              "excedent": 0.5
+            },
+            {
+              "montee": 88,
+              "rubans": 504,
+              "rubans_melanges": 456,
+              "pas_median": 13.0,
+              "pas_median_melange": 15.0,
+              "excedent": -2.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 17.0,
+            "le_creux": 14.0,
+            "le_creux_en_couches": 56,
+            "la_remontee_maximale": 3.0,
+            "elle_commence_a": 72,
+            "la_bosse": 3.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 32,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 15.0,
+            "le_creux": 14.0,
+            "le_creux_en_couches": 40,
+            "la_remontee_maximale": 3.0,
+            "elle_commence_a": 48,
+            "la_bosse": 1.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": true,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            98,
+            142
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 34,
+          "profondeurs_montantes": 3,
+          "profondeurs_descendantes": 4,
+          "lectures_par_barreau": 168,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 72,
+              "rubans_melanges": 96,
+              "pas_median": 19.5,
+              "pas_median_melange": 23.0,
+              "excedent": -3.5
+            },
+            {
+              "montee": 8,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 16.5,
+              "pas_median_melange": 16.0,
+              "excedent": 0.5
+            },
+            {
+              "montee": 16,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 15.0,
+              "pas_median_melange": 20.0,
+              "excedent": -5.0
+            },
+            {
+              "montee": 24,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 18.0,
+              "pas_median_melange": 21.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 32,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 14.0,
+              "pas_median_melange": 18.0,
+              "excedent": -4.0
+            },
+            {
+              "montee": 40,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 14.0,
+              "pas_median_melange": 17.5,
+              "excedent": -3.5
+            },
+            {
+              "montee": 48,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 14.5,
+              "pas_median_melange": 17.0,
+              "excedent": -2.5
+            },
+            {
+              "montee": 56,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 18.0,
+              "pas_median_melange": 19.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 64,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 17.0,
+              "pas_median_melange": 18.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 72,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 13.0,
+              "pas_median_melange": 16.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 80,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 13.0,
+              "pas_median_melange": 16.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 88,
+              "rubans": 168,
+              "rubans_melanges": 312,
+              "pas_median": 17.0,
+              "pas_median_melange": 20.0,
+              "excedent": -3.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 13.0,
+            "le_creux": 14.0,
+            "le_creux_en_couches": 32,
+            "la_remontee_maximale": 4.0,
+            "elle_commence_a": 56,
+            "la_bosse": -1.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 16.0,
+            "le_creux": 16.0,
+            "le_creux_en_couches": 8,
+            "la_remontee_maximale": 5.0,
+            "elle_commence_a": 24,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            98,
+            213
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 29,
+          "profondeurs_montantes": 12,
+          "profondeurs_descendantes": 16,
+          "lectures_par_barreau": 672,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 288,
+              "rubans_melanges": 264,
+              "pas_median": 22.0,
+              "pas_median_melange": 18.5,
+              "excedent": 3.5
+            },
+            {
+              "montee": 8,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 15.0,
+              "pas_median_melange": 12.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 16,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 12.0,
+              "pas_median_melange": 12.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 24,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 11.0,
+              "pas_median_melange": 14.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 32,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 14.0,
+              "pas_median_melange": 14.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 40,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 13.0,
+              "pas_median_melange": 12.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 48,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 14.0,
+              "pas_median_melange": 15.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 56,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 14.0,
+              "pas_median_melange": 13.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 64,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 14.0,
+              "pas_median_melange": 13.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 72,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 13.0,
+              "pas_median_melange": 14.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 80,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 11.0,
+              "pas_median_melange": 12.5,
+              "excedent": -1.5
+            },
+            {
+              "montee": 88,
+              "rubans": 672,
+              "rubans_melanges": 552,
+              "pas_median": 11.0,
+              "pas_median_melange": 12.0,
+              "excedent": -1.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 13.0,
+            "le_creux": 11.0,
+            "le_creux_en_couches": 24,
+            "la_remontee_maximale": 3.0,
+            "elle_commence_a": 32,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 14.0,
+            "le_creux": 12.0,
+            "le_creux_en_couches": 8,
+            "la_remontee_maximale": 3.0,
+            "elle_commence_a": 48,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            197,
+            71
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 38,
+          "profondeurs_montantes": 9,
+          "profondeurs_descendantes": 21,
+          "lectures_par_barreau": 720,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 216,
+              "rubans_melanges": 336,
+              "pas_median": 24.5,
+              "pas_median_melange": 27.0,
+              "excedent": -2.5
+            },
+            {
+              "montee": 8,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 21.0,
+              "pas_median_melange": 21.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 16,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 24.0,
+              "pas_median_melange": 21.5,
+              "excedent": 2.5
+            },
+            {
+              "montee": 24,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 23.0,
+              "pas_median_melange": 22.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 32,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 24.0,
+              "pas_median_melange": 21.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 40,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 24.0,
+              "pas_median_melange": 20.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 48,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 21.5,
+              "pas_median_melange": 21.0,
+              "excedent": 0.5
+            },
+            {
+              "montee": 56,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 23.0,
+              "pas_median_melange": 21.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 64,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 20.0,
+              "pas_median_melange": 22.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 72,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 19.0,
+              "pas_median_melange": 20.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 80,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 20.5,
+              "pas_median_melange": 20.0,
+              "excedent": 0.5
+            },
+            {
+              "montee": 88,
+              "rubans": 720,
+              "rubans_melanges": 648,
+              "pas_median": 20.0,
+              "pas_median_melange": 21.0,
+              "excedent": -1.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 19.0,
+            "le_creux": 20.0,
+            "le_creux_en_couches": 64,
+            "la_remontee_maximale": 0.5,
+            "elle_commence_a": 80,
+            "la_bosse": -1.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 20.0,
+            "le_creux": 20.0,
+            "le_creux_en_couches": 40,
+            "la_remontee_maximale": 2.0,
+            "elle_commence_a": 64,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            197,
+            142
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 39,
+          "profondeurs_montantes": 21,
+          "profondeurs_descendantes": 4,
+          "lectures_par_barreau": 600,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 504,
+              "rubans_melanges": 288,
+              "pas_median": 27.0,
+              "pas_median_melange": 26.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 8,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 24.0,
+              "pas_median_melange": 20.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 16,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 18.5,
+              "pas_median_melange": 20.0,
+              "excedent": -1.5
+            },
+            {
+              "montee": 24,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 18.0,
+              "pas_median_melange": 20.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 32,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 21.0,
+              "pas_median_melange": 20.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 40,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 24.0,
+              "pas_median_melange": 22.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 48,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 24.0,
+              "pas_median_melange": 20.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 56,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 19.0,
+              "pas_median_melange": 21.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 64,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 18.0,
+              "pas_median_melange": 19.5,
+              "excedent": -1.5
+            },
+            {
+              "montee": 72,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 18.0,
+              "pas_median_melange": 22.0,
+              "excedent": -4.0
+            },
+            {
+              "montee": 80,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 19.0,
+              "pas_median_melange": 22.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 88,
+              "rubans": 600,
+              "rubans_melanges": 480,
+              "pas_median": 21.0,
+              "pas_median_melange": 20.0,
+              "excedent": 1.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 18.0,
+            "le_creux": 18.0,
+            "le_creux_en_couches": 24,
+            "la_remontee_maximale": 6.0,
+            "elle_commence_a": 40,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 22.0,
+            "le_creux": 19.5,
+            "le_creux_en_couches": 64,
+            "la_remontee_maximale": 2.5,
+            "elle_commence_a": 72,
+            "la_bosse": 2.5,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            197,
+            213
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 30,
+          "profondeurs_montantes": 7,
+          "profondeurs_descendantes": 0,
+          "lectures_par_barreau": 168,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 168,
+              "rubans_melanges": 216,
+              "pas_median": 23.5,
+              "pas_median_melange": 16.0,
+              "excedent": 7.5
+            },
+            {
+              "montee": 8,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 19.0,
+              "pas_median_melange": 14.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 16,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 18.0,
+              "pas_median_melange": 14.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 24,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 16.0,
+              "pas_median_melange": 14.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 32,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 14.0,
+              "pas_median_melange": 15.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 40,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 13.0,
+              "pas_median_melange": 17.0,
+              "excedent": -4.0
+            },
+            {
+              "montee": 48,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 10.0,
+              "pas_median_melange": 13.5,
+              "excedent": -3.5
+            },
+            {
+              "montee": 56,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 11.0,
+              "pas_median_melange": 15.0,
+              "excedent": -4.0
+            },
+            {
+              "montee": 64,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 14.0,
+              "pas_median_melange": 14.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 72,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 12.0,
+              "pas_median_melange": 16.0,
+              "excedent": -4.0
+            },
+            {
+              "montee": 80,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 13.0,
+              "pas_median_melange": 14.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 88,
+              "rubans": 168,
+              "rubans_melanges": 360,
+              "pas_median": 16.5,
+              "pas_median_melange": 14.0,
+              "excedent": 2.5
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 12.0,
+            "le_creux": 10.0,
+            "le_creux_en_couches": 48,
+            "la_remontee_maximale": 6.5,
+            "elle_commence_a": 88,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 16.0,
+            "le_creux": 13.5,
+            "le_creux_en_couches": 48,
+            "la_remontee_maximale": 2.5,
+            "elle_commence_a": 72,
+            "la_bosse": 2.5,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 40,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            296,
+            71
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 32,
+          "profondeurs_montantes": 2,
+          "profondeurs_descendantes": 18,
+          "lectures_par_barreau": 480,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 48,
+              "rubans_melanges": 240,
+              "pas_median": 31.5,
+              "pas_median_melange": 18.0,
+              "excedent": 13.5
+            },
+            {
+              "montee": 8,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 23.0,
+              "pas_median_melange": 17.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 16,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 16.0,
+              "pas_median_melange": 16.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 24,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 15.0,
+              "pas_median_melange": 17.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 32,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 15.5,
+              "pas_median_melange": 18.0,
+              "excedent": -2.5
+            },
+            {
+              "montee": 40,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 15.0,
+              "pas_median_melange": 14.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 48,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 15.0,
+              "pas_median_melange": 15.5,
+              "excedent": -0.5
+            },
+            {
+              "montee": 56,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 17.0,
+              "pas_median_melange": 15.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 64,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 16.0,
+              "pas_median_melange": 16.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 72,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 16.5,
+              "pas_median_melange": 16.0,
+              "excedent": 0.5
+            },
+            {
+              "montee": 80,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 20.0,
+              "pas_median_melange": 16.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 88,
+              "rubans": 480,
+              "rubans_melanges": 456,
+              "pas_median": 22.0,
+              "pas_median_melange": 18.0,
+              "excedent": 4.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 16.5,
+            "le_creux": 15.0,
+            "le_creux_en_couches": 24,
+            "la_remontee_maximale": 7.0,
+            "elle_commence_a": 88,
+            "la_bosse": 1.5,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 16.0,
+            "le_creux": 14.0,
+            "le_creux_en_couches": 40,
+            "la_remontee_maximale": 4.0,
+            "elle_commence_a": 88,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            296,
+            142
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 32,
+          "profondeurs_montantes": 16,
+          "profondeurs_descendantes": 10,
+          "lectures_par_barreau": 624,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 384,
+              "rubans_melanges": 384,
+              "pas_median": 22.0,
+              "pas_median_melange": 20.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 8,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 21.0,
+              "pas_median_melange": 15.0,
+              "excedent": 6.0
+            },
+            {
+              "montee": 16,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 19.0,
+              "pas_median_melange": 15.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 24,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 17.0,
+              "pas_median_melange": 16.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 32,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 15.0,
+              "pas_median_melange": 17.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 40,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 15.5,
+              "pas_median_melange": 17.0,
+              "excedent": -1.5
+            },
+            {
+              "montee": 48,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 17.5,
+              "pas_median_melange": 15.0,
+              "excedent": 2.5
+            },
+            {
+              "montee": 56,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 17.0,
+              "pas_median_melange": 17.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 64,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 15.0,
+              "pas_median_melange": 18.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 72,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 16.0,
+              "pas_median_melange": 15.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 80,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 15.0,
+              "pas_median_melange": 15.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 88,
+              "rubans": 624,
+              "rubans_melanges": 600,
+              "pas_median": 16.0,
+              "pas_median_melange": 15.0,
+              "excedent": 1.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 16.0,
+            "le_creux": 15.0,
+            "le_creux_en_couches": 32,
+            "la_remontee_maximale": 2.5,
+            "elle_commence_a": 48,
+            "la_bosse": 1.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 15.0,
+            "le_creux": 15.0,
+            "le_creux_en_couches": 8,
+            "la_remontee_maximale": 3.0,
+            "elle_commence_a": 64,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            296,
+            213
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 30,
+          "profondeurs_montantes": 7,
+          "profondeurs_descendantes": 17,
+          "lectures_par_barreau": 576,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 168,
+              "rubans_melanges": 216,
+              "pas_median": 13.0,
+              "pas_median_melange": 18.0,
+              "excedent": -5.0
+            },
+            {
+              "montee": 8,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 15.0,
+              "pas_median_melange": 14.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 16,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 14.0,
+              "pas_median_melange": 13.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 24,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 13.0,
+              "pas_median_melange": 14.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 32,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 13.0,
+              "pas_median_melange": 15.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 40,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 14.0,
+              "pas_median_melange": 13.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 48,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 14.0,
+              "pas_median_melange": 16.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 56,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 15.0,
+              "pas_median_melange": 14.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 64,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 17.0,
+              "pas_median_melange": 14.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 72,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 14.0,
+              "pas_median_melange": 15.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 80,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 13.0,
+              "pas_median_melange": 14.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 88,
+              "rubans": 576,
+              "rubans_melanges": 552,
+              "pas_median": 14.0,
+              "pas_median_melange": 15.0,
+              "excedent": -1.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 14.0,
+            "le_creux": 13.0,
+            "le_creux_en_couches": 24,
+            "la_remontee_maximale": 4.0,
+            "elle_commence_a": 64,
+            "la_bosse": 1.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 64,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 15.0,
+            "le_creux": 13.0,
+            "le_creux_en_couches": 16,
+            "la_remontee_maximale": 3.0,
+            "elle_commence_a": 48,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        }
+      ]
+    },
+    {
+      "decidable": true,
+      "segment": "20230929220926",
+      "chunks_lus": 9,
+      "refuses": {
+        "absent": 16
+      },
+      "courbe": [
+        {
+          "montee": 0,
+          "pas_median": 18.5,
+          "pas_median_melange": 22.0,
+          "excedent": -3.5
+        },
+        {
+          "montee": 8,
+          "pas_median": 19.0,
+          "pas_median_melange": 18.0,
+          "excedent": 1.0
+        },
+        {
+          "montee": 16,
+          "pas_median": 17.0,
+          "pas_median_melange": 18.0,
+          "excedent": -1.0
+        },
+        {
+          "montee": 24,
+          "pas_median": 12.0,
+          "pas_median_melange": 19.0,
+          "excedent": -7.0
+        },
+        {
+          "montee": 32,
+          "pas_median": 14.0,
+          "pas_median_melange": 17.0,
+          "excedent": -3.0
+        },
+        {
+          "montee": 40,
+          "pas_median": 15.0,
+          "pas_median_melange": 17.0,
+          "excedent": -2.0
+        },
+        {
+          "montee": 48,
+          "pas_median": 17.0,
+          "pas_median_melange": 17.0,
+          "excedent": 0.0
+        },
+        {
+          "montee": 56,
+          "pas_median": 16.0,
+          "pas_median_melange": 17.0,
+          "excedent": -1.0
+        },
+        {
+          "montee": 64,
+          "pas_median": 16.0,
+          "pas_median_melange": 15.5,
+          "excedent": 0.5
+        },
+        {
+          "montee": 72,
+          "pas_median": 19.0,
+          "pas_median_melange": 17.0,
+          "excedent": 2.0
+        },
+        {
+          "montee": 80,
+          "pas_median": 20.0,
+          "pas_median_melange": 17.0,
+          "excedent": 3.0
+        },
+        {
+          "montee": 88,
+          "pas_median": 19.0,
+          "pas_median_melange": 18.0,
+          "excedent": 1.0
+        }
+      ],
+      "chunks_qui_se_repetent": 4,
+      "chunks_qui_decroissent_partout": 0,
+      "lexcedent": {
+        "decidable": true,
+        "montee_lue": 72,
+        "au_pas": 19.0,
+        "le_creux": 12.0,
+        "le_creux_en_couches": 24,
+        "la_remontee_maximale": 8.0,
+        "elle_commence_a": 80,
+        "la_bosse": 7.0,
+        "il_y_a_une_bosse": true,
+        "sommet_de_la_courbe_en_couches": 80,
+        "elle_decroit_partout": false
+      },
+      "le_melange": {
+        "decidable": true,
+        "montee_lue": 72,
+        "au_pas": 17.0,
+        "le_creux": 15.5,
+        "le_creux_en_couches": 64,
+        "la_remontee_maximale": 2.5,
+        "elle_commence_a": 88,
+        "la_bosse": 1.5,
+        "il_y_a_une_bosse": false,
+        "sommet_de_la_courbe_en_couches": 0,
+        "elle_decroit_partout": false
+      },
+      "lempilement_se_repete": true,
+      "la_texture_decroit_partout": false,
+      "chunks": [
+        {
+          "chunk": [
+            62,
+            148
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 32,
+          "profondeurs_montantes": 16,
+          "profondeurs_descendantes": 12,
+          "lectures_par_barreau": 672,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 384,
+              "rubans_melanges": 288,
+              "pas_median": 26.0,
+              "pas_median_melange": 22.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 8,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 16.0,
+              "pas_median_melange": 18.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 16,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 17.0,
+              "pas_median_melange": 19.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 24,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 16.5,
+              "pas_median_melange": 19.0,
+              "excedent": -2.5
+            },
+            {
+              "montee": 32,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 14.0,
+              "pas_median_melange": 17.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 40,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 15.0,
+              "pas_median_melange": 17.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 48,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 17.0,
+              "pas_median_melange": 17.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 56,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 18.0,
+              "pas_median_melange": 17.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 64,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 14.0,
+              "pas_median_melange": 15.5,
+              "excedent": -1.5
+            },
+            {
+              "montee": 72,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 19.0,
+              "pas_median_melange": 17.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 80,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 20.0,
+              "pas_median_melange": 17.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 88,
+              "rubans": 672,
+              "rubans_melanges": 432,
+              "pas_median": 19.0,
+              "pas_median_melange": 18.0,
+              "excedent": 1.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 19.0,
+            "le_creux": 14.0,
+            "le_creux_en_couches": 32,
+            "la_remontee_maximale": 6.0,
+            "elle_commence_a": 80,
+            "la_bosse": 5.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 17.0,
+            "le_creux": 15.5,
+            "le_creux_en_couches": 64,
+            "la_remontee_maximale": 2.5,
+            "elle_commence_a": 88,
+            "la_bosse": 1.5,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": true,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            62,
+            296
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 38,
+          "profondeurs_montantes": 4,
+          "profondeurs_descendantes": 14,
+          "lectures_par_barreau": 432,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 96,
+              "rubans_melanges": 288,
+              "pas_median": 19.5,
+              "pas_median_melange": 30.0,
+              "excedent": -10.5
+            },
+            {
+              "montee": 8,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 19.5,
+              "pas_median_melange": 20.0,
+              "excedent": -0.5
+            },
+            {
+              "montee": 16,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 17.5,
+              "pas_median_melange": 20.0,
+              "excedent": -2.5
+            },
+            {
+              "montee": 24,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 21.0,
+              "pas_median_melange": 20.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 32,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 23.0,
+              "pas_median_melange": 22.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 40,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 23.5,
+              "pas_median_melange": 20.5,
+              "excedent": 3.0
+            },
+            {
+              "montee": 48,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 20.0,
+              "pas_median_melange": 20.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 56,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 18.0,
+              "pas_median_melange": 20.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 64,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 17.0,
+              "pas_median_melange": 20.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 72,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 21.0,
+              "pas_median_melange": 20.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 80,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 23.0,
+              "pas_median_melange": 18.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 88,
+              "rubans": 432,
+              "rubans_melanges": 624,
+              "pas_median": 23.0,
+              "pas_median_melange": 21.0,
+              "excedent": 2.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 21.0,
+            "le_creux": 17.0,
+            "le_creux_en_couches": 64,
+            "la_remontee_maximale": 6.0,
+            "elle_commence_a": 80,
+            "la_bosse": 4.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 40,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 20.0,
+            "le_creux": 20.0,
+            "le_creux_en_couches": 8,
+            "la_remontee_maximale": 2.0,
+            "elle_commence_a": 32,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": true,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            62,
+            444
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 26,
+          "profondeurs_montantes": 8,
+          "profondeurs_descendantes": 16,
+          "lectures_par_barreau": 576,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 192,
+              "rubans_melanges": 168,
+              "pas_median": 17.5,
+              "pas_median_melange": 17.0,
+              "excedent": 0.5
+            },
+            {
+              "montee": 8,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 13.0,
+              "pas_median_melange": 13.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 16,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 14.0,
+              "pas_median_melange": 13.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 24,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 12.0,
+              "pas_median_melange": 13.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 32,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 13.0,
+              "pas_median_melange": 12.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 40,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 13.0,
+              "pas_median_melange": 13.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 48,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 13.0,
+              "pas_median_melange": 12.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 56,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 13.0,
+              "pas_median_melange": 13.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 64,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 13.0,
+              "pas_median_melange": 12.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 72,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 12.0,
+              "pas_median_melange": 13.5,
+              "excedent": -1.5
+            },
+            {
+              "montee": 80,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 11.0,
+              "pas_median_melange": 13.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 88,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 15.5,
+              "pas_median_melange": 13.5,
+              "excedent": 2.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 12.0,
+            "le_creux": 12.0,
+            "le_creux_en_couches": 24,
+            "la_remontee_maximale": 3.5,
+            "elle_commence_a": 88,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 13.5,
+            "le_creux": 12.0,
+            "le_creux_en_couches": 32,
+            "la_remontee_maximale": 1.5,
+            "elle_commence_a": 72,
+            "la_bosse": 1.5,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            125,
+            148
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 47,
+          "profondeurs_montantes": 14,
+          "profondeurs_descendantes": 21,
+          "lectures_par_barreau": 840,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 336,
+              "rubans_melanges": 336,
+              "pas_median": 32.0,
+              "pas_median_melange": 33.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 8,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 26.0,
+              "pas_median_melange": 24.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 16,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 23.0,
+              "pas_median_melange": 23.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 24,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 24.0,
+              "pas_median_melange": 24.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 32,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 23.0,
+              "pas_median_melange": 24.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 40,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 23.0,
+              "pas_median_melange": 23.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 48,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 23.0,
+              "pas_median_melange": 22.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 56,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 23.0,
+              "pas_median_melange": 24.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 64,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 21.0,
+              "pas_median_melange": 24.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 72,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 19.0,
+              "pas_median_melange": 24.0,
+              "excedent": -5.0
+            },
+            {
+              "montee": 80,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 20.0,
+              "pas_median_melange": 22.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 88,
+              "rubans": 840,
+              "rubans_melanges": 648,
+              "pas_median": 20.0,
+              "pas_median_melange": 23.0,
+              "excedent": -3.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 19.0,
+            "le_creux": 21.0,
+            "le_creux_en_couches": 64,
+            "la_remontee_maximale": -1.0,
+            "elle_commence_a": 80,
+            "la_bosse": -2.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 24.0,
+            "le_creux": 22.0,
+            "le_creux_en_couches": 48,
+            "la_remontee_maximale": 2.0,
+            "elle_commence_a": 56,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            125,
+            296
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 26,
+          "profondeurs_montantes": 10,
+          "profondeurs_descendantes": 21,
+          "lectures_par_barreau": 744,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 240,
+              "rubans_melanges": 384,
+              "pas_median": 17.0,
+              "pas_median_melange": 15.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 8,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 14.0,
+              "pas_median_melange": 11.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 16,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 12.0,
+              "pas_median_melange": 11.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 24,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 11.0,
+              "pas_median_melange": 12.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 32,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 11.0,
+              "pas_median_melange": 12.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 40,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 12.0,
+              "pas_median_melange": 12.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 48,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 11.0,
+              "pas_median_melange": 12.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 56,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 11.0,
+              "pas_median_melange": 12.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 64,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 11.0,
+              "pas_median_melange": 11.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 72,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 13.0,
+              "pas_median_melange": 11.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 80,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 13.0,
+              "pas_median_melange": 12.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 88,
+              "rubans": 744,
+              "rubans_melanges": 768,
+              "pas_median": 12.0,
+              "pas_median_melange": 12.0,
+              "excedent": 0.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 13.0,
+            "le_creux": 11.0,
+            "le_creux_en_couches": 24,
+            "la_remontee_maximale": 2.0,
+            "elle_commence_a": 72,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 11.0,
+            "le_creux": 11.0,
+            "le_creux_en_couches": 8,
+            "la_remontee_maximale": 1.0,
+            "elle_commence_a": 24,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": true,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            125,
+            444
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 32,
+          "profondeurs_montantes": 3,
+          "profondeurs_descendantes": 21,
+          "lectures_par_barreau": 576,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 72,
+              "rubans_melanges": 144,
+              "pas_median": 14.5,
+              "pas_median_melange": 19.0,
+              "excedent": -4.5
+            },
+            {
+              "montee": 8,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 19.0,
+              "pas_median_melange": 16.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 16,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 18.0,
+              "pas_median_melange": 14.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 24,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 12.0,
+              "pas_median_melange": 14.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 32,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 13.0,
+              "pas_median_melange": 16.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 40,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 12.0,
+              "pas_median_melange": 15.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 48,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 14.0,
+              "pas_median_melange": 15.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 56,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 16.0,
+              "pas_median_melange": 14.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 64,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 16.0,
+              "pas_median_melange": 14.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 72,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 14.0,
+              "pas_median_melange": 15.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 80,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 13.0,
+              "pas_median_melange": 15.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 88,
+              "rubans": 576,
+              "rubans_melanges": 456,
+              "pas_median": 13.0,
+              "pas_median_melange": 14.0,
+              "excedent": -1.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 14.0,
+            "le_creux": 12.0,
+            "le_creux_en_couches": 24,
+            "la_remontee_maximale": 4.0,
+            "elle_commence_a": 56,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 8,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 15.0,
+            "le_creux": 14.0,
+            "le_creux_en_couches": 16,
+            "la_remontee_maximale": 2.0,
+            "elle_commence_a": 32,
+            "la_bosse": 1.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            187,
+            148
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 36,
+          "profondeurs_montantes": 15,
+          "profondeurs_descendantes": 14,
+          "lectures_par_barreau": 696,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 360,
+              "rubans_melanges": 312,
+              "pas_median": 26.5,
+              "pas_median_melange": 27.0,
+              "excedent": -0.5
+            },
+            {
+              "montee": 8,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 19.0,
+              "pas_median_melange": 19.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 16,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 17.0,
+              "pas_median_melange": 18.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 24,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 23.0,
+              "pas_median_melange": 20.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 32,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 22.0,
+              "pas_median_melange": 19.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 40,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 17.5,
+              "pas_median_melange": 18.0,
+              "excedent": -0.5
+            },
+            {
+              "montee": 48,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 17.0,
+              "pas_median_melange": 19.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 56,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 18.0,
+              "pas_median_melange": 18.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 64,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 21.0,
+              "pas_median_melange": 22.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 72,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 21.0,
+              "pas_median_melange": 20.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 80,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 20.0,
+              "pas_median_melange": 21.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 88,
+              "rubans": 696,
+              "rubans_melanges": 696,
+              "pas_median": 20.0,
+              "pas_median_melange": 21.0,
+              "excedent": -1.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 21.0,
+            "le_creux": 17.0,
+            "le_creux_en_couches": 16,
+            "la_remontee_maximale": 6.0,
+            "elle_commence_a": 24,
+            "la_bosse": 4.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 20.0,
+            "le_creux": 18.0,
+            "le_creux_en_couches": 16,
+            "la_remontee_maximale": 4.0,
+            "elle_commence_a": 64,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            187,
+            296
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 38,
+          "profondeurs_montantes": 0,
+          "profondeurs_descendantes": 16,
+          "lectures_par_barreau": 384,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 0,
+              "rubans_melanges": 96,
+              "pas_median": null,
+              "pas_median_melange": 26.5,
+              "excedent": null
+            },
+            {
+              "montee": 8,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 30.0,
+              "pas_median_melange": 21.5,
+              "excedent": 8.5
+            },
+            {
+              "montee": 16,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 21.0,
+              "pas_median_melange": 19.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 24,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 11.0,
+              "pas_median_melange": 25.0,
+              "excedent": -14.0
+            },
+            {
+              "montee": 32,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 14.0,
+              "pas_median_melange": 20.0,
+              "excedent": -6.0
+            },
+            {
+              "montee": 40,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 16.0,
+              "pas_median_melange": 18.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 48,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 20.0,
+              "pas_median_melange": 20.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 56,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 16.0,
+              "pas_median_melange": 20.5,
+              "excedent": -4.5
+            },
+            {
+              "montee": 64,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 18.0,
+              "pas_median_melange": 19.5,
+              "excedent": -1.5
+            },
+            {
+              "montee": 72,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 19.0,
+              "pas_median_melange": 18.5,
+              "excedent": 0.5
+            },
+            {
+              "montee": 80,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 21.0,
+              "pas_median_melange": 20.5,
+              "excedent": 0.5
+            },
+            {
+              "montee": 88,
+              "rubans": 384,
+              "rubans_melanges": 336,
+              "pas_median": 20.0,
+              "pas_median_melange": 25.0,
+              "excedent": -5.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 19.0,
+            "le_creux": 11.0,
+            "le_creux_en_couches": 24,
+            "la_remontee_maximale": 10.0,
+            "elle_commence_a": 80,
+            "la_bosse": 8.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 8,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 18.5,
+            "le_creux": 18.0,
+            "le_creux_en_couches": 40,
+            "la_remontee_maximale": 7.0,
+            "elle_commence_a": 88,
+            "la_bosse": 0.5,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": true,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            187,
+            444
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 25,
+          "profondeurs_montantes": 11,
+          "profondeurs_descendantes": 13,
+          "lectures_par_barreau": 576,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 264,
+              "rubans_melanges": 360,
+              "pas_median": 13.5,
+              "pas_median_melange": 13.0,
+              "excedent": 0.5
+            },
+            {
+              "montee": 8,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 12.5,
+              "pas_median_melange": 12.0,
+              "excedent": 0.5
+            },
+            {
+              "montee": 16,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 11.0,
+              "pas_median_melange": 13.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 24,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 12.0,
+              "pas_median_melange": 12.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 32,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 12.5,
+              "pas_median_melange": 12.0,
+              "excedent": 0.5
+            },
+            {
+              "montee": 40,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 12.0,
+              "pas_median_melange": 11.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 48,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 12.0,
+              "pas_median_melange": 12.5,
+              "excedent": -0.5
+            },
+            {
+              "montee": 56,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 13.0,
+              "pas_median_melange": 11.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 64,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 12.0,
+              "pas_median_melange": 12.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 72,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 10.5,
+              "pas_median_melange": 12.0,
+              "excedent": -1.5
+            },
+            {
+              "montee": 80,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 13.0,
+              "pas_median_melange": 11.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 88,
+              "rubans": 576,
+              "rubans_melanges": 720,
+              "pas_median": 12.0,
+              "pas_median_melange": 12.0,
+              "excedent": 0.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 10.5,
+            "le_creux": 11.0,
+            "le_creux_en_couches": 16,
+            "la_remontee_maximale": 2.0,
+            "elle_commence_a": 56,
+            "la_bosse": -0.5,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 12.0,
+            "le_creux": 11.0,
+            "le_creux_en_couches": 40,
+            "la_remontee_maximale": 1.5,
+            "elle_commence_a": 48,
+            "la_bosse": 1.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        }
+      ]
+    },
+    {
+      "decidable": true,
+      "segment": "20231005123336",
+      "chunks_lus": 9,
+      "refuses": {
+        "absent": 16
+      },
+      "courbe": [
+        {
+          "montee": 0,
+          "pas_median": 21.25,
+          "pas_median_melange": 22.0,
+          "excedent": -0.75
+        },
+        {
+          "montee": 8,
+          "pas_median": 22.0,
+          "pas_median_melange": 17.0,
+          "excedent": 5.0
+        },
+        {
+          "montee": 16,
+          "pas_median": 17.0,
+          "pas_median_melange": 17.0,
+          "excedent": 0.0
+        },
+        {
+          "montee": 24,
+          "pas_median": 17.0,
+          "pas_median_melange": 18.0,
+          "excedent": -1.0
+        },
+        {
+          "montee": 32,
+          "pas_median": 18.0,
+          "pas_median_melange": 17.0,
+          "excedent": 1.0
+        },
+        {
+          "montee": 40,
+          "pas_median": 17.0,
+          "pas_median_melange": 16.0,
+          "excedent": 1.0
+        },
+        {
+          "montee": 48,
+          "pas_median": 18.0,
+          "pas_median_melange": 15.0,
+          "excedent": 3.0
+        },
+        {
+          "montee": 56,
+          "pas_median": 17.0,
+          "pas_median_melange": 16.0,
+          "excedent": 1.0
+        },
+        {
+          "montee": 64,
+          "pas_median": 13.0,
+          "pas_median_melange": 18.0,
+          "excedent": -5.0
+        },
+        {
+          "montee": 72,
+          "pas_median": 16.0,
+          "pas_median_melange": 16.0,
+          "excedent": 0.0
+        },
+        {
+          "montee": 80,
+          "pas_median": 14.0,
+          "pas_median_melange": 15.0,
+          "excedent": -1.0
+        },
+        {
+          "montee": 88,
+          "pas_median": 13.0,
+          "pas_median_melange": 16.0,
+          "excedent": -3.0
+        }
+      ],
+      "chunks_qui_se_repetent": 4,
+      "chunks_qui_decroissent_partout": 0,
+      "lexcedent": {
+        "decidable": true,
+        "montee_lue": 72,
+        "au_pas": 16.0,
+        "le_creux": 13.0,
+        "le_creux_en_couches": 64,
+        "la_remontee_maximale": 3.0,
+        "elle_commence_a": 72,
+        "la_bosse": 3.0,
+        "il_y_a_une_bosse": true,
+        "sommet_de_la_courbe_en_couches": 8,
+        "elle_decroit_partout": false
+      },
+      "le_melange": {
+        "decidable": true,
+        "montee_lue": 72,
+        "au_pas": 16.0,
+        "le_creux": 15.0,
+        "le_creux_en_couches": 48,
+        "la_remontee_maximale": 3.0,
+        "elle_commence_a": 64,
+        "la_bosse": 1.0,
+        "il_y_a_une_bosse": true,
+        "sommet_de_la_courbe_en_couches": 0,
+        "elle_decroit_partout": false
+      },
+      "lempilement_se_repete": true,
+      "la_texture_decroit_partout": false,
+      "chunks": [
+        {
+          "chunk": [
+            68,
+            189
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 37,
+          "profondeurs_montantes": 12,
+          "profondeurs_descendantes": 0,
+          "lectures_par_barreau": 288,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 288,
+              "rubans_melanges": 168,
+              "pas_median": 21.0,
+              "pas_median_melange": 22.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 8,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 25.0,
+              "pas_median_melange": 16.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 16,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 31.0,
+              "pas_median_melange": 16.0,
+              "excedent": 15.0
+            },
+            {
+              "montee": 24,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 29.0,
+              "pas_median_melange": 19.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 32,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 27.0,
+              "pas_median_melange": 17.0,
+              "excedent": 10.0
+            },
+            {
+              "montee": 40,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 17.0,
+              "pas_median_melange": 18.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 48,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 17.0,
+              "pas_median_melange": 20.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 56,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 17.0,
+              "pas_median_melange": 19.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 64,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 13.0,
+              "pas_median_melange": 18.0,
+              "excedent": -5.0
+            },
+            {
+              "montee": 72,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 14.0,
+              "pas_median_melange": 15.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 80,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 14.0,
+              "pas_median_melange": 17.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 88,
+              "rubans": 288,
+              "rubans_melanges": 408,
+              "pas_median": 13.0,
+              "pas_median_melange": 17.0,
+              "excedent": -4.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 14.0,
+            "le_creux": 13.0,
+            "le_creux_en_couches": 64,
+            "la_remontee_maximale": 1.0,
+            "elle_commence_a": 72,
+            "la_bosse": 1.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 16,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 15.0,
+            "le_creux": 16.0,
+            "le_creux_en_couches": 8,
+            "la_remontee_maximale": 4.0,
+            "elle_commence_a": 48,
+            "la_bosse": -1.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": true,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            68,
+            379
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 30,
+          "profondeurs_montantes": 16,
+          "profondeurs_descendantes": 4,
+          "lectures_par_barreau": 480,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 384,
+              "rubans_melanges": 360,
+              "pas_median": 28.0,
+              "pas_median_melange": 20.0,
+              "excedent": 8.0
+            },
+            {
+              "montee": 8,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 17.0,
+              "pas_median_melange": 14.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 16,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 17.0,
+              "pas_median_melange": 14.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 24,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 15.0,
+              "pas_median_melange": 14.5,
+              "excedent": 0.5
+            },
+            {
+              "montee": 32,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 18.0,
+              "pas_median_melange": 14.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 40,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 15.0,
+              "pas_median_melange": 14.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 48,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 15.0,
+              "pas_median_melange": 14.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 56,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 12.0,
+              "pas_median_melange": 14.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 64,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 11.0,
+              "pas_median_melange": 14.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 72,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 11.0,
+              "pas_median_melange": 13.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 80,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 12.0,
+              "pas_median_melange": 13.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 88,
+              "rubans": 480,
+              "rubans_melanges": 696,
+              "pas_median": 11.5,
+              "pas_median_melange": 14.0,
+              "excedent": -2.5
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 11.0,
+            "le_creux": 11.0,
+            "le_creux_en_couches": 64,
+            "la_remontee_maximale": 1.0,
+            "elle_commence_a": 80,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 13.0,
+            "le_creux": 14.0,
+            "le_creux_en_couches": 8,
+            "la_remontee_maximale": 0.5,
+            "elle_commence_a": 24,
+            "la_bosse": -1.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": true,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            68,
+            569
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 40,
+          "profondeurs_montantes": 21,
+          "profondeurs_descendantes": 9,
+          "lectures_par_barreau": 720,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 504,
+              "rubans_melanges": 360,
+              "pas_median": 24.5,
+              "pas_median_melange": 23.0,
+              "excedent": 1.5
+            },
+            {
+              "montee": 8,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 24.0,
+              "pas_median_melange": 21.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 16,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 21.0,
+              "pas_median_melange": 20.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 24,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 21.0,
+              "pas_median_melange": 20.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 32,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 20.0,
+              "pas_median_melange": 20.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 40,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 19.0,
+              "pas_median_melange": 18.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 48,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 23.0,
+              "pas_median_melange": 18.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 56,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 21.0,
+              "pas_median_melange": 18.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 64,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 19.0,
+              "pas_median_melange": 19.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 72,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 20.0,
+              "pas_median_melange": 19.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 80,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 19.0,
+              "pas_median_melange": 20.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 88,
+              "rubans": 720,
+              "rubans_melanges": 792,
+              "pas_median": 18.0,
+              "pas_median_melange": 18.0,
+              "excedent": 0.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 20.0,
+            "le_creux": 19.0,
+            "le_creux_en_couches": 40,
+            "la_remontee_maximale": 4.0,
+            "elle_commence_a": 48,
+            "la_bosse": 1.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 19.0,
+            "le_creux": 18.0,
+            "le_creux_en_couches": 40,
+            "la_remontee_maximale": 2.0,
+            "elle_commence_a": 80,
+            "la_bosse": 1.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            136,
+            189
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 24,
+          "profondeurs_montantes": 7,
+          "profondeurs_descendantes": 0,
+          "lectures_par_barreau": 168,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 168,
+              "rubans_melanges": 96,
+              "pas_median": 13.0,
+              "pas_median_melange": 14.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 8,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 12.0,
+              "pas_median_melange": 10.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 16,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 10.0,
+              "pas_median_melange": 10.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 24,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 20.0,
+              "pas_median_melange": 11.0,
+              "excedent": 9.0
+            },
+            {
+              "montee": 32,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 13.5,
+              "pas_median_melange": 9.0,
+              "excedent": 4.5
+            },
+            {
+              "montee": 40,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 12.0,
+              "pas_median_melange": 12.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 48,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 10.0,
+              "pas_median_melange": 12.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 56,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 10.0,
+              "pas_median_melange": 11.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 64,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 9.0,
+              "pas_median_melange": 10.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 72,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 9.0,
+              "pas_median_melange": 11.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 80,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 10.0,
+              "pas_median_melange": 11.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 88,
+              "rubans": 168,
+              "rubans_melanges": 288,
+              "pas_median": 9.0,
+              "pas_median_melange": 11.0,
+              "excedent": -2.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 9.0,
+            "le_creux": 9.0,
+            "le_creux_en_couches": 64,
+            "la_remontee_maximale": 1.0,
+            "elle_commence_a": 80,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 24,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 11.0,
+            "le_creux": 9.0,
+            "le_creux_en_couches": 32,
+            "la_remontee_maximale": 3.0,
+            "elle_commence_a": 40,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            136,
+            379
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 44,
+          "profondeurs_montantes": 14,
+          "profondeurs_descendantes": 19,
+          "lectures_par_barreau": 792,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 336,
+              "rubans_melanges": 288,
+              "pas_median": 31.0,
+              "pas_median_melange": 29.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 8,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 28.0,
+              "pas_median_melange": 21.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 16,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 23.0,
+              "pas_median_melange": 21.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 24,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 23.0,
+              "pas_median_melange": 22.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 32,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 20.0,
+              "pas_median_melange": 21.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 40,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 18.0,
+              "pas_median_melange": 21.0,
+              "excedent": -3.0
+            },
+            {
+              "montee": 48,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 20.0,
+              "pas_median_melange": 21.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 56,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 20.0,
+              "pas_median_melange": 20.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 64,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 22.5,
+              "pas_median_melange": 21.0,
+              "excedent": 1.5
+            },
+            {
+              "montee": 72,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 21.0,
+              "pas_median_melange": 20.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 80,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 19.0,
+              "pas_median_melange": 21.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 88,
+              "rubans": 792,
+              "rubans_melanges": 672,
+              "pas_median": 23.0,
+              "pas_median_melange": 21.5,
+              "excedent": 1.5
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 21.0,
+            "le_creux": 18.0,
+            "le_creux_en_couches": 40,
+            "la_remontee_maximale": 5.0,
+            "elle_commence_a": 88,
+            "la_bosse": 3.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 20.0,
+            "le_creux": 20.0,
+            "le_creux_en_couches": 56,
+            "la_remontee_maximale": 1.5,
+            "elle_commence_a": 88,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            136,
+            569
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 34,
+          "profondeurs_montantes": 0,
+          "profondeurs_descendantes": 21,
+          "lectures_par_barreau": 504,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 0,
+              "rubans_melanges": 120,
+              "pas_median": null,
+              "pas_median_melange": 25.0,
+              "excedent": null
+            },
+            {
+              "montee": 8,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 22.0,
+              "pas_median_melange": 22.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 16,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 18.0,
+              "pas_median_melange": 18.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 24,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 14.0,
+              "pas_median_melange": 18.0,
+              "excedent": -4.0
+            },
+            {
+              "montee": 32,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 20.5,
+              "pas_median_melange": 18.0,
+              "excedent": 2.5
+            },
+            {
+              "montee": 40,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 23.0,
+              "pas_median_melange": 16.0,
+              "excedent": 7.0
+            },
+            {
+              "montee": 48,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 20.0,
+              "pas_median_melange": 15.0,
+              "excedent": 5.0
+            },
+            {
+              "montee": 56,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 18.0,
+              "pas_median_melange": 16.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 64,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 13.0,
+              "pas_median_melange": 20.0,
+              "excedent": -7.0
+            },
+            {
+              "montee": 72,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 13.0,
+              "pas_median_melange": 18.0,
+              "excedent": -5.0
+            },
+            {
+              "montee": 80,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 12.0,
+              "pas_median_melange": 14.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 88,
+              "rubans": 504,
+              "rubans_melanges": 432,
+              "pas_median": 13.0,
+              "pas_median_melange": 15.0,
+              "excedent": -2.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 13.0,
+            "le_creux": 13.0,
+            "le_creux_en_couches": 64,
+            "la_remontee_maximale": 0.0,
+            "elle_commence_a": 72,
+            "la_bosse": 0.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 40,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 18.0,
+            "le_creux": 15.0,
+            "le_creux_en_couches": 48,
+            "la_remontee_maximale": 5.0,
+            "elle_commence_a": 64,
+            "la_bosse": 3.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            204,
+            189
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 30,
+          "profondeurs_montantes": 8,
+          "profondeurs_descendantes": 17,
+          "lectures_par_barreau": 600,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 192,
+              "rubans_melanges": 168,
+              "pas_median": 21.5,
+              "pas_median_melange": 21.0,
+              "excedent": 0.5
+            },
+            {
+              "montee": 8,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 18.0,
+              "pas_median_melange": 17.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 16,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 15.0,
+              "pas_median_melange": 17.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 24,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 16.0,
+              "pas_median_melange": 16.5,
+              "excedent": -0.5
+            },
+            {
+              "montee": 32,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 14.0,
+              "pas_median_melange": 18.0,
+              "excedent": -4.0
+            },
+            {
+              "montee": 40,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 16.0,
+              "pas_median_melange": 16.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 48,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 18.0,
+              "pas_median_melange": 15.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 56,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 16.0,
+              "pas_median_melange": 16.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 64,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 17.0,
+              "pas_median_melange": 17.5,
+              "excedent": -0.5
+            },
+            {
+              "montee": 72,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 19.0,
+              "pas_median_melange": 16.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 80,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 13.0,
+              "pas_median_melange": 15.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 88,
+              "rubans": 600,
+              "rubans_melanges": 384,
+              "pas_median": 13.0,
+              "pas_median_melange": 15.0,
+              "excedent": -2.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 19.0,
+            "le_creux": 14.0,
+            "le_creux_en_couches": 32,
+            "la_remontee_maximale": 5.0,
+            "elle_commence_a": 72,
+            "la_bosse": 5.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 16.0,
+            "le_creux": 15.0,
+            "le_creux_en_couches": 48,
+            "la_remontee_maximale": 2.5,
+            "elle_commence_a": 64,
+            "la_bosse": 1.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": true,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            204,
+            379
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 35,
+          "profondeurs_montantes": 17,
+          "profondeurs_descendantes": 18,
+          "lectures_par_barreau": 840,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 408,
+              "rubans_melanges": 456,
+              "pas_median": 21.0,
+              "pas_median_melange": 23.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 8,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 22.0,
+              "pas_median_melange": 18.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 16,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 17.0,
+              "pas_median_melange": 18.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 24,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 17.0,
+              "pas_median_melange": 18.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 32,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 18.0,
+              "pas_median_melange": 17.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 40,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 19.0,
+              "pas_median_melange": 15.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 48,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 18.0,
+              "pas_median_melange": 16.0,
+              "excedent": 2.0
+            },
+            {
+              "montee": 56,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 18.0,
+              "pas_median_melange": 17.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 64,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 17.0,
+              "pas_median_melange": 19.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 72,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 16.0,
+              "pas_median_melange": 18.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 80,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 15.0,
+              "pas_median_melange": 17.0,
+              "excedent": -2.0
+            },
+            {
+              "montee": 88,
+              "rubans": 840,
+              "rubans_melanges": 888,
+              "pas_median": 15.0,
+              "pas_median_melange": 16.0,
+              "excedent": -1.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 16.0,
+            "le_creux": 17.0,
+            "le_creux_en_couches": 16,
+            "la_remontee_maximale": 2.0,
+            "elle_commence_a": 40,
+            "la_bosse": -1.0,
+            "il_y_a_une_bosse": false,
+            "sommet_de_la_courbe_en_couches": 8,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 18.0,
+            "le_creux": 15.0,
+            "le_creux_en_couches": 40,
+            "la_remontee_maximale": 4.0,
+            "elle_commence_a": 64,
+            "la_bosse": 3.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": false,
+          "la_texture_decroit_partout": false
+        },
+        {
+          "chunk": [
+            204,
+            569
+          ],
+          "decidable": true,
+          "plafond_du_ruban": 30,
+          "profondeurs_montantes": 17,
+          "profondeurs_descendantes": 6,
+          "lectures_par_barreau": 552,
+          "le_meme_jeu_a_tous_les_barreaux": true,
+          "barreaux": [
+            {
+              "montee": 0,
+              "rubans": 408,
+              "rubans_melanges": 360,
+              "pas_median": 20.0,
+              "pas_median_melange": 19.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 8,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 18.0,
+              "pas_median_melange": 14.0,
+              "excedent": 4.0
+            },
+            {
+              "montee": 16,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 16.0,
+              "pas_median_melange": 13.0,
+              "excedent": 3.0
+            },
+            {
+              "montee": 24,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 15.0,
+              "pas_median_melange": 15.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 32,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 16.0,
+              "pas_median_melange": 15.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 40,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 16.0,
+              "pas_median_melange": 15.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 48,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 15.0,
+              "pas_median_melange": 15.0,
+              "excedent": 0.0
+            },
+            {
+              "montee": 56,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 13.0,
+              "pas_median_melange": 14.0,
+              "excedent": -1.0
+            },
+            {
+              "montee": 64,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 12.5,
+              "pas_median_melange": 16.0,
+              "excedent": -3.5
+            },
+            {
+              "montee": 72,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 16.5,
+              "pas_median_melange": 15.0,
+              "excedent": 1.5
+            },
+            {
+              "montee": 80,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 16.0,
+              "pas_median_melange": 15.0,
+              "excedent": 1.0
+            },
+            {
+              "montee": 88,
+              "rubans": 552,
+              "rubans_melanges": 600,
+              "pas_median": 15.0,
+              "pas_median_melange": 16.0,
+              "excedent": -1.0
+            }
+          ],
+          "lexcedent": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 16.5,
+            "le_creux": 12.5,
+            "le_creux_en_couches": 64,
+            "la_remontee_maximale": 4.0,
+            "elle_commence_a": 72,
+            "la_bosse": 4.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "le_melange": {
+            "decidable": true,
+            "montee_lue": 72,
+            "au_pas": 15.0,
+            "le_creux": 13.0,
+            "le_creux_en_couches": 16,
+            "la_remontee_maximale": 3.0,
+            "elle_commence_a": 64,
+            "la_bosse": 2.0,
+            "il_y_a_une_bosse": true,
+            "sommet_de_la_courbe_en_couches": 0,
+            "elle_decroit_partout": false
+          },
+          "lempilement_se_repete": true,
+          "la_texture_decroit_partout": false
+        }
+      ]
+    }
+  ],
+  "le_verdict": {
+    "decidable": true,
+    "segments": 3,
+    "la_portee_du_transfert": {
+      "decidable": true,
+      "portee_en_couches": 16,
+      "au_dela_de_lechelle": false,
+      "excedent_a_la_portee": 0.0,
+      "excedent_maximal": 2.0,
+      "sommet_en_couches": 8,
+      "dernier_barreau": 88
+    },
+    "la_portee_du_transfert_en_couches": 16,
+    "la_portee_du_transfert_um": 38.4,
+    "la_portee_du_chemin_um": 175.2,
+    "le_chemin_porte_plus_loin_fois": 4.5625,
+    "la_contiguite_porte_plus_loin_que_la_ressemblance": true,
+    "chunks_lus": 27,
+    "chunks_qui_se_repetent": 9,
+    "chunks_qui_decroissent_partout": 0,
+    "courbe": [
+      {
+        "montee": 0,
+        "montee_um": 0.0,
+        "pas_median": 21.25,
+        "pas_median_melange": 22.0,
+        "excedent": -0.75
+      },
+      {
+        "montee": 8,
+        "montee_um": 19.2,
+        "pas_median": 19.0,
+        "pas_median_melange": 17.0,
+        "excedent": 2.0
+      },
+      {
+        "montee": 16,
+        "montee_um": 38.4,
+        "pas_median": 17.0,
+        "pas_median_melange": 17.0,
+        "excedent": 0.0
+      },
+      {
+        "montee": 24,
+        "montee_um": 57.6,
+        "pas_median": 17.0,
+        "pas_median_melange": 18.0,
+        "excedent": -1.0
+      },
+      {
+        "montee": 32,
+        "montee_um": 76.8,
+        "pas_median": 15.0,
+        "pas_median_melange": 17.0,
+        "excedent": -2.0
+      },
+      {
+        "montee": 40,
+        "montee_um": 96.0,
+        "pas_median": 15.0,
+        "pas_median_melange": 17.0,
+        "excedent": -2.0
+      },
+      {
+        "montee": 48,
+        "montee_um": 115.2,
+        "pas_median": 17.0,
+        "pas_median_melange": 16.0,
+        "excedent": 1.0
+      },
+      {
+        "montee": 56,
+        "montee_um": 134.4,
+        "pas_median": 17.0,
+        "pas_median_melange": 16.0,
+        "excedent": 1.0
+      },
+      {
+        "montee": 64,
+        "montee_um": 153.6,
+        "pas_median": 16.0,
+        "pas_median_melange": 16.0,
+        "excedent": 0.0
+      },
+      {
+        "montee": 72,
+        "montee_um": 172.8,
+        "pas_median": 16.0,
+        "pas_median_melange": 16.0,
+        "excedent": 0.0
+      },
+      {
+        "montee": 80,
+        "montee_um": 192.0,
+        "pas_median": 14.0,
+        "pas_median_melange": 15.0,
+        "excedent": -1.0
+      },
+      {
+        "montee": 88,
+        "montee_um": 211.2,
+        "pas_median": 16.5,
+        "pas_median_melange": 16.0,
+        "excedent": 0.5
+      }
+    ],
+    "lexcedent": {
+      "decidable": true,
+      "montee_lue": 72,
+      "au_pas": 16.0,
+      "le_creux": 15.0,
+      "le_creux_en_couches": 32,
+      "la_remontee_maximale": 2.0,
+      "elle_commence_a": 48,
+      "la_bosse": 1.0,
+      "il_y_a_une_bosse": false,
+      "sommet_de_la_courbe_en_couches": 0,
+      "elle_decroit_partout": false
+    },
+    "le_melange": {
+      "decidable": true,
+      "montee_lue": 72,
+      "au_pas": 16.0,
+      "le_creux": 16.0,
+      "le_creux_en_couches": 48,
+      "la_remontee_maximale": 0.0,
+      "elle_commence_a": 56,
+      "la_bosse": 0.0,
+      "il_y_a_une_bosse": false,
+      "sommet_de_la_courbe_en_couches": 0,
+      "elle_decroit_partout": false
+    },
+    "lempilement_se_repete": false,
+    "la_texture_decroit_partout": false,
+    "le_pas_en_couches": 72,
+    "le_pas_entre_deux_feuilles_um": 173.0,
+    "la_tolerance_en_couches": 8,
+    "la_bosse_tombe_a_um": 172.8,
+    "la_hauteur_de_la_bosse": 1.0,
+    "letalon_separe_les_deux": true,
+    "la_periodique_se_repete_sur_letalon": true,
+    "la_continue_decroit_partout_sur_letalon": true
+  }
+}

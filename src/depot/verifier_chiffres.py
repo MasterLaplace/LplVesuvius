@@ -3194,6 +3194,90 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 189 : L'EMPILEMENT SE REPETE-T-IL ?
+    # (1) Une remontee ne voyage jamais sans L'ENDROIT OU ELLE COMMENCE : « la courbe remonte » est
+    # vrai de presque toute courbe ; ce qui repond est qu'elle remonte AU PAS.
+    # (2) Ni sans ce que le MELANGE remonte au meme barreau, qui est ce que la quantification et la
+    # marche rapportent toutes seules.
+    # (3) Et la portee d'un SAUT ne voyage jamais sans celle d'un CHEMIN : c'est leur ECART qui dit
+    # que ce qui porte est la contiguite, et l'une seule ne dirait rien.
+    se9 = _source(racine, "lempilement_se_repete_t_il.json")
+    if se9.exists():
+        d = json.loads(se9.read_text())
+
+        def _dec189(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("departs_par_couche", "departs par couche"),
+                         ("sommet_relu_de_188", "sommet relu de 188"),
+                         ("le_pas_en_couches", "le pas en couches")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 189", int(d[cle]), 0, se9.name)
+        if d.get("voxel_um") is not None:
+            ajoute("voxel de 189", float(d["voxel_um"]), _dec189(d["voxel_um"]), se9.name,
+                   unites=("µm",))
+        for k, m in enumerate(d.get("montees") or []):
+            ajoute(f"barreau {k} de l echelle de 189", int(m), 0, se9.name)
+        for x in ((d.get("letalon") or {}).get("lignes") or []):
+            if not x.get("decidable"):
+                continue
+            q = f"de la matiere « {x['matiere']} » de 189"
+            ex = x.get("lexcedent") or {}
+            for cle, nom in (("la_remontee_maximale", "remontee maximale"),
+                             ("le_creux", "creux")):
+                if ex.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(ex[cle]), _dec189(ex[cle]), se9.name)
+            for cle, nom in (("le_creux_en_couches", "creux en couches"),
+                             ("elle_commence_a", "la remontee commence a")):
+                if ex.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(ex[cle]), 0, se9.name)
+            for b in (x.get("barreaux") or []):
+                if b.get("pas_median") is not None:
+                    ajoute(f"pas a l ecart {b['montee']} {q}", float(b["pas_median"]),
+                           _dec189(b["pas_median"]), se9.name)
+        v9 = d.get("le_verdict") or {}
+        for b in (v9.get("courbe") or []):
+            q = f"a l ecart {b['montee']} de 189"
+            for cle, nom, unite in (("montee_um", "ecart", "µm"),
+                                    ("pas_median", "pas de la vraie matiere", ""),
+                                    ("pas_median_melange", "pas des couches melangees", ""),
+                                    ("excedent", "excedent", "")):
+                if b.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(b[cle]), _dec189(b[cle]), se9.name,
+                           unites=((unite,) if unite else ()))
+        for cle, nom in (("segments", "segments"), ("chunks_lus", "chunks lus"),
+                         ("chunks_qui_se_repetent", "chunks qui se repetent"),
+                         ("chunks_qui_decroissent_partout", "chunks qui decroissent partout"),
+                         ("la_tolerance_en_couches", "tolerance en couches"),
+                         ("la_portee_du_transfert_en_couches",
+                          "portee du transfert en couches")):
+            if v9.get(cle) is not None:
+                ajoute(f"{nom} de 189", int(v9[cle]), 0, se9.name)
+        ex = v9.get("lexcedent") or {}
+        for cle, nom in (("la_remontee_maximale", "remontee maximale"), ("le_creux", "creux")):
+            if ex.get(cle) is not None:
+                ajoute(f"{nom} de 189", float(ex[cle]), _dec189(ex[cle]), se9.name)
+        for cle, nom in (("le_creux_en_couches", "creux en couches"),
+                         ("elle_commence_a", "la remontee commence a")):
+            if ex.get(cle) is not None:
+                ajoute(f"{nom} de 189", int(ex[cle]), 0, se9.name)
+        mel = v9.get("le_melange") or {}
+        if mel.get("la_remontee_maximale") is not None:
+            ajoute("remontee maximale du melange de 189", float(mel["la_remontee_maximale"]),
+                   _dec189(mel["la_remontee_maximale"]), se9.name)
+        for cle, nom, unite in (
+                ("la_portee_du_transfert_um", "portee du transfert", "µm"),
+                ("la_portee_du_chemin_um", "portee du chemin", "µm"),
+                ("le_chemin_porte_plus_loin_fois", "le chemin porte plus loin fois", ""),
+                ("la_bosse_tombe_a_um", "la bosse tombe a", "µm")):
+            if v9.get(cle) is not None:
+                ajoute(f"{nom} de 189", float(v9[cle]), _dec189(v9[cle]), se9.name,
+                       unites=((unite,) if unite else ()))
+
     # ⭐⭐⭐⭐ LA TRANCHE 188 : JUSQU'OU UNE SURFACE PEUT-ELLE DERIVER ?
     # (1) Une longueur de la vraie matiere ne voyage jamais sans celle de ses couches MELANGEES :
     # l'excedent est toute la mesure, et une longueur brute qui decroit ne dirait que « le ruban
