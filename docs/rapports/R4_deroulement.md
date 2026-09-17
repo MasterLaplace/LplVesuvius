@@ -2163,6 +2163,53 @@ sait dire qu'une matière **tourne**, et c'est leur lecture **jointe** qui est m
 celui de `176` et la comparaison est bornée par **0,7166**, ce que la fixture rend à la borne. Rien
 n'est pointé sur la matière avant cette mesure, précédent de `174`.
 
+**`180` · 2026-09-17 · le rouleau creuse-t-il ?**
+`R4-P32` demandait la mesure dont tout `179` dépendait : le creux de cohérence exige que les deux
+plis se recouvrent sur **0,5278** fois l'épaisseur d'un pli, et à recouvrement nul la cohérence vaut
+**1,0000** partout. Le chemin est exactement celui de `176`, appelé et non recopié — mêmes volumes
+dans l'ordre du dépôt, même treillis régulier **5 × 5**, même filtre du producteur.
+⚠⚠⚠ **LE PIÈGE EST NOUVEAU ET IL EST PROPRE À LA MATIÈRE RÉELLE.** Sur une courbe construite, une
+permutation des couches est un contrôle suffisant. Sur le rouleau, la cohérence est **autocorrélée**
+— deux couches voisines se ressemblent parce que le volume est lisse — donc n'importe quelle
+ondulation bat ses mélanges, et « le creux dépasse toutes ses permutations » pourrait ne vouloir dire
+que « la cohérence est lisse ». ⭐⭐⭐⭐ Ce qui complète la permutation est un **étalon sans
+frontière** lu par le même chemin : une feuille d'**un seul** pli, au même recouvrement, au bruit
+**dérivé** dont la cohérence égale celle du rouleau. Il creuse **0** fois sur douze là où une
+frontière en creuse **12** — `R4-F199`.
+⭐⭐⭐⭐ **LE ROULEAU CREUSE, ET PARTOUT** : **27** chunks sur **27**, contre **1,35** attendus par
+hasard, à une profondeur médiane de **0,7971** — au-dessus de l'étalon à frontière construite
+(**0,7361**) et de la borne que `179` avait encadrée (**0,7166**) — `R4-F198`. La condition de
+matière est donc **tenue**, et la lecture jointe de `179` est utilisable sur ce rouleau.
+✗ **MAIS CE QUE LE CREUX SÉPARE N'EST PAS UN QUART DE TOUR.** De part et d'autre de chaque creux la
+matière est lue par `la_direction_dune_tranche` de `174` : **aucun** des 27 n'a ses deux côtés muets
+et **17** en ont deux dirigés, donc ce ne sont pas des interstices vides. L'écart médian vaut
+**27,363°** contre **88,6055°** sur l'étalon, soit **0,3088** fois — `R4-F200`.
+⭐ **C'est pourtant 3,9876 fois la bascule médiane de 6,862°** que `176` publie sur le même rouleau :
+ce que `176` lisait en moyenne sur une fenêtre, cette tranche le **localise**, et l'écart y est
+quatre fois plus grand. La négation de `176` tient, et elle se précise — l'ordre en profondeur est
+**localisé**, il n'est pas une bascule.
+⚠⚠ **Deux limites dites plutôt que lissées.** La largeur lue **sature le dernier barreau** du
+balayage, **7** pour le rouleau comme pour l'étalon : une valeur qui bute sur la borne de son échelle
+n'est pas une mesure de cette valeur, donc la coïncidence des deux largeurs n'est pas un accord et
+n'est pas publiée comme tel. Et la profondeur du rouleau **dépasse** celle de l'étalon, ce qui peut
+vouloir dire un recouvrement plus épais que la borne ou une cause plus radicale qu'un recouvrement de
+deux plis ; cette tranche ne tranche pas.
+⚠ Les dix sondes de la batterie ont été vérifiées **en cassant le code** : lire un seul côté du
+creux, déclarer dirigé un côté sans texture, prendre l'écart entre un côté et lui-même, apparier le
+bruit sur l'étalon **avec** frontière, trancher une égalité par le bruit le plus fort, diviser le
+hasard par `K` au lieu de `K+1`, comparer des comptes au lieu de parts, déclarer « empilement »
+partout, accepter n'importe quelle profondeur, se contenter d'un seul creux — chacune fait tomber le
+contrôle qui la vise.
+⚠ Un défaut de figure trouvé en **regardant** l'image : les trois cohérences vivent sous un sixième,
+donc un axe de zéro à un les écrasait sur la même ligne et le creux devenait invisible. L'axe est
+maintenant calé sur les données, et une sonde l'exige.
+⭐ `R4-P32` **est répondue** et `R4-P33` **s'ouvre** : de quoi une frontière du rouleau est-elle
+faite ? Vingt-sept degrés n'est ni le quart de tour d'un pli ni les six degrés d'une moyenne. Ce qui
+sépare les causes est l'**espacement** — trente-six couches pour un pli, soixante-douze pour un
+interstice, `175` mesurant **3,024 plis** sur 109 couches — et la mesure demande un lecteur qui rende
+**plusieurs** creux par chunk, avec la liberté correspondante payée comme `179` a payé celle de la
+largeur.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

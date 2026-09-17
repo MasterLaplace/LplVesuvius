@@ -3194,6 +3194,110 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 180 : LE ROULEAU CREUSE-T-IL ?
+    # (1) Un compte de chunks qui creusent ne voyage jamais sans le compte ATTENDU PAR HASARD :
+    # « vingt-sept sur vingt-sept » ne dit rien sans « un virgule trente-cinq ».
+    # (2) Et il ne voyage jamais sans ce que creuse une matiere SANS frontiere au meme niveau de
+    # coherence : sur une coherence autocorrelee, battre ses melanges pourrait ne vouloir dire que
+    # « c'est lisse », et l'etalon vide est la seule chose qui tranche.
+    # (3) Un ecart aux creux ne voyage jamais sans ses DEUX rapports : celui a l'etalon a frontiere
+    # construite dit ce que ce n'est pas, celui a la bascule de `176` dit ce que le creux ajoute.
+    # (4) Une profondeur ne voyage jamais sans celle de l'etalon a frontiere ET sans la borne de
+    # `179` : trois nombres du meme instrument, et un seul ne se lit pas.
+    rc = _source(racine, "le_rouleau_creuse_t_il.json")
+    if rc.exists():
+        d = json.loads(rc.read_text())
+
+        def _dec180(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("cote_du_treillis", "cote du treillis"),
+                         ("permutations", "permutations"), ("decalages", "decalages")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 180", int(d[cle]), 0, rc.name)
+        if d.get("plancher_de_coherence") is not None:
+            ajoute("plancher de coherence de 180", float(d["plancher_de_coherence"]),
+                   _dec180(d["plancher_de_coherence"]), rc.name)
+        for s in (d.get("les_segments") or []):
+            if not s.get("decidable"):
+                continue
+            q = f"du segment {s['segment']} de 180"
+            for cle, nom in (("chunks_lus", "chunks lus"),
+                             ("chunks_du_treillis", "chunks du treillis"),
+                             ("chunks_qui_creusent", "chunks qui creusent"),
+                             ("les_deux_cotes_sont_diriges", "creux a deux cotes diriges"),
+                             ("largeur_mediane", "largeur mediane du creux")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(s[cle]), 0, rc.name)
+            for cle, nom, unite in (("coherence_mediane", "coherence mediane", ""),
+                                    ("profondeur_mediane", "profondeur mediane du creux", ""),
+                                    ("ecart_median_deg", "ecart median aux creux", "°")):
+                if s.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(s[cle]), _dec180(s[cle]), rc.name,
+                           unites=((unite,) if unite else ()))
+        for e in (d.get("les_etalons") or []):
+            q = f"de l etalon a {e['plis']} pli(s) et bruit {e['bruit']} de 180"
+            for cle, nom in (("cellules", "cellules"),
+                             ("chunks_qui_creusent", "cellules qui creusent"),
+                             ("largeur_mediane", "largeur mediane")):
+                if e.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(e[cle]), 0, rc.name)
+            for cle, nom, unite in (("bruit", "bruit", ""),
+                                    ("coherence_mediane", "coherence mediane", ""),
+                                    ("profondeur_mediane", "profondeur mediane", ""),
+                                    ("ecart_median_deg", "ecart median", "°")):
+                if e.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(e[cle]), _dec180(e[cle]), rc.name,
+                           unites=((unite,) if unite else ()))
+        v_ = d.get("le_verdict") or {}
+        for cle, nom in (("chunks_lus", "chunks lus"), ("segments", "segments"),
+                         ("chunks_qui_creusent", "chunks qui creusent"),
+                         ("creusent_sur_letalon_sans_frontiere",
+                          "cellules qui creusent sur l etalon sans frontiere"),
+                         ("creusent_sur_letalon_avec_frontiere",
+                          "cellules qui creusent sur l etalon avec frontiere"),
+                         ("cellules_de_letalon", "cellules de l etalon"),
+                         ("largeur_mediane_du_rouleau", "largeur mediane du rouleau"),
+                         ("largeur_de_letalon_avec_frontiere",
+                          "largeur de l etalon avec frontiere"),
+                         ("creux_dont_les_deux_cotes_sont_diriges",
+                          "creux dont les deux cotes sont diriges"),
+                         ("creux_dont_aucun_cote_nest_dirige",
+                          "creux dont aucun cote n est dirige")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 180", int(v_[cle]), 0, rc.name)
+        for cle, nom, unite in (
+                ("chunks_attendus_par_hasard", "chunks attendus par hasard", ""),
+                ("coherence_mediane_du_rouleau", "coherence mediane du rouleau", ""),
+                ("le_bruit_apparie", "le bruit apparie", ""),
+                ("coherence_mediane_de_letalon_sans_frontiere",
+                 "coherence mediane de l etalon sans frontiere", ""),
+                ("profondeur_mediane_du_rouleau", "profondeur mediane du rouleau", ""),
+                ("profondeur_de_letalon_avec_frontiere",
+                 "profondeur de l etalon avec frontiere", ""),
+                ("profondeur_a_la_borne_de_179", "profondeur a la borne de 179 relue", ""),
+                ("ecart_median_aux_creux_deg", "ecart median aux creux", "°"),
+                ("ecart_de_letalon_avec_frontiere_deg",
+                 "ecart de l etalon avec frontiere", "°"),
+                ("lecart_aux_creux_vaut_letalon_fois", "l ecart aux creux vaut l etalon fois", ""),
+                ("la_bascule_mediane_de_176_deg", "bascule mediane de 176 relue", "°"),
+                ("lecart_aux_creux_vaut_la_bascule_de_176_fois",
+                 "l ecart aux creux vaut la bascule de 176 fois", "")):
+            if v_.get(cle) is not None:
+                ajoute(f"{nom} de 180", float(v_[cle]), _dec180(v_[cle]), rc.name,
+                       unites=((unite,) if unite else ()))
+        fx_ = d.get("la_fixture_de_179") or {}
+        for cle, nom, unite in (
+                ("recouvrement_um", "recouvrement de l etalon relu de 179", "µm"),
+                ("il_vaut_le_pli_fois", "il vaut le pli fois relu de 179", "")):
+            if fx_.get(cle) is not None:
+                ajoute(f"{nom} de 180", float(fx_[cle]), _dec180(fx_[cle]), rc.name,
+                       unites=((unite,) if unite else ()))
+
     # ⭐⭐⭐⭐ LA TRANCHE 179 : LA COHERENCE CREUSE-T-ELLE A LA FRONTIERE ?
     # (1) Une profondeur de creux ne voyage jamais sans le RECOUVREMENT qui la rend : le rasoir en
     # rend AUCUNE, donc une profondeur seule se lirait comme une propriete de la frontiere alors
