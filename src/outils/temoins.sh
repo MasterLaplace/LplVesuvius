@@ -1528,6 +1528,9 @@ run "ou le chunk se trouve" uv run python "$ROOT/src/nappe/ou_le_chunk_se_trouve
 run "figure ou le chunk" uv run python "$ROOT/src/figures/figure_ou_le_chunk_se_trouve_t_il.py" --verifier
 run "structure de l etiquette" uv run python "$ROOT/src/nappe/letiquette_a_t_elle_une_structure.py" --verifier
 run "figure structure" uv run python "$ROOT/src/figures/figure_letiquette_a_t_elle_une_structure.py" --verifier
+run "ouvrir les quinze" uv run python "$ROOT/src/nappe/ouvrir_les_quinze.py" --verifier
+run "figure ouvrir les quinze" uv run python "$ROOT/src/figures/figure_ouvrir_les_quinze.py" --verifier
+run "figure la planche aveugle" uv run python "$ROOT/src/figures/figure_la_planche_a_laveugle.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

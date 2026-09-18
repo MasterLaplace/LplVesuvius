@@ -3194,6 +3194,68 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 195 : OUVRIR LES QUINZE, A L'AVEUGLE
+    # (1) Un compte de justes ne voyage JAMAIS sans les ATTENDUS PAR HASARD ni sans le SEUIL : sept
+    # justes sur quinze se lit comme un demi-succes, alors que c'est exactement la moyenne du nul.
+    # (2) Un seuil DERIVE ne voyage jamais sans la probabilite JUSTE EN DESSOUS : c'est elle qui
+    # montre qu'il est le plus petit compte que la garantie autorise, et non un nombre choisi.
+    # (3) Une force DERIVEE ne voyage jamais sans sa courbe, parce que le plancher aux forces
+    # faibles vaut la garantie elle-meme et non un reste de sensibilite.
+    # ⚠⚠ ET CHAQUE CHIFFRE COURT EST ENREGISTRE AVEC SON UNITE, jamais nu : « 30 » ou « 11 » se
+    # rencontre par accident dans n'importe quelle prose, donc `discriminante` l'ecarte — il serait
+    # exige et incontrolable a la fois. « 30 tuiles » et « 11 justes » se cherchent.
+    ss5 = _source(racine, "ouvrir_les_quinze.json")
+    if ss5.exists():
+        d = json.loads(ss5.read_text())
+
+        def _dec195(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        loi5 = d.get("la_loi_exacte") or {}
+        note5 = d.get("la_note") or {}
+        sens5 = d.get("la_sensibilite") or {}
+        cub5 = d.get("les_cubes") or {}
+        pl5 = d.get("la_planche") or {}
+        for src5, cle, nom, unites in (
+                (loi5, "tuiles", "les tuiles de la planche", ("tuiles",)),
+                (loi5, "le_seuil", "le seuil dérivé", ("justes",)),
+                (note5, "les_justes", "les justes de la lecture", ("justes",)),
+                (sens5, "replicats", "les réplicats de la sensibilité", ("réplicats",)),
+                (pl5, "cote", "le côté de la tuile", ("voxels",))):
+            if src5.get(cle) is not None:
+                ajoute(f"{nom} de 195", int(src5[cle]), 0, ss5.name, unites=unites)
+        if (cub5.get("couches_du_cube") or []):
+            ajoute("les couches du cube de 195", int(cub5["couches_du_cube"][0]), 0, ss5.name,
+                   unites=("couches",))
+        if loi5.get("attendus_par_hasard") is not None:
+            ajoute("les justes attendus par hasard de 195", float(loi5["attendus_par_hasard"]),
+                   _dec195(loi5["attendus_par_hasard"]), ss5.name, unites=("justes",))
+        for src5, cle, nom in ((loi5, "la_probabilite_au_seuil", "la probabilité au seuil"),
+                               (note5, "la_probabilite", "la probabilité de la lecture"),
+                               (sens5, "la_force_quil_faut", "la force dérivée")):
+            if src5.get(cle) is not None:
+                u = ("unités du volume",) if cle == "la_force_quil_faut" else ()
+                ajoute(f"{nom} de 195", float(src5[cle]), _dec195(src5[cle]), ss5.name, unites=u)
+        # ⚠⚠ LA PROBABILITE JUSTE SOUS LE SEUIL EST CE QUI PROUVE QUE LE SEUIL EST LE PLUS PETIT.
+        dist5 = loi5.get("la_distribution") or []
+        if loi5.get("le_seuil") and len(dist5) > int(loi5["le_seuil"]) - 1:
+            sous = dist5[int(loi5["le_seuil"]) - 1]["probabilite_den_avoir_autant_ou_plus"]
+            ajoute("la probabilité un juste sous le seuil de 195", float(sous), _dec195(sous),
+                   ss5.name)
+        # ⚠ Les deux bouts de la courbe — zero et un — ne sont pas enregistres : ils ne portent
+        # aucune decimale, donc aucune ecriture ne les rend discriminants, et un chiffre exige que
+        # rien ne peut verifier est pire qu'un chiffre absent.
+        for pt5 in (sens5.get("la_courbe") or []):
+            part5 = float(pt5["part_des_replicats"])
+            if part5 in (0.0, 1.0):
+                continue
+            ajoute(f"la part vue à la force {int(pt5['force'])} de 195", part5,
+                   _dec195(part5), ss5.name, unites=("des réplicats",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 194 : L'ETIQUETTE A-T-ELLE UNE STRUCTURE ?
     # (1) Un compte ne voyage JAMAIS sans ce que la regle rend toute seule : « quinze chunks
     # retiennent » est vrai de n'importe quelle regle, et c'est l'ecart aux attendus qui repond.

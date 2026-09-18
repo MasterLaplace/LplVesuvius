@@ -2702,6 +2702,41 @@ les a **jamais ouverts**. ⚠⚠⚠ Et le piège est écrit d'avance : regarder 
 trait commun est une maximisation **sans liste déclarée**, donc la pire forme de celle que `191` a
 payée. Ce que le regard peut rendre est une **hypothèse à déclarer**, jamais un résultat.
 
+**`195` · 2026-09-18 · ouvrir les quinze, à l'aveugle**
+⭐⭐⭐⭐ **La chaîne les avait comptés, permutés et corrélés — jamais ouverts.** Et le piège était
+écrit d'avance : regarder quinze cubes et y trouver un trait commun EST une maximisation sans liste
+déclarée, la pire forme de celle que `191` a payée. ⭐⭐⭐⭐ **La sortie a été de renverser ce que
+l'œil déclare** : il ne déclare pas un TRAIT mais une **assignation** — quinze tuiles parmi **30
+tuiles** sur une planche aveugle où quinze contrôles sont appariés **dans le même segment** — donc un
+objet et non une famille, dont le nul est **exactement hypergéométrique** — `R4-F245`. Le seuil est
+**dérivé** de la garantie : **11 justes**, probabilité **0,0134189**, quand **10** ne tiendrait pas
+(**0,0715555**).
+✗ **L'ŒIL NE SÉPARE PAS** — `R4-F244`. **7 justes** sur quinze contre **7,5 justes** attendus,
+probabilité **0,7669539** : exactement le hasard, un juste en dessous de sa moyenne. La lecture a été
+déposée dans le module avant toute levée, avec son critère.
+⭐ **ET LE CRITÈRE QU'IL A LIBREMENT DÉCLARÉ ÉTAIT DÉJÀ PAYÉ** — `R4-F246`. « Une striation de fibres
+parallèles, continue et d'une seule direction » est la **cohérence du tenseur de structure**, que
+`191` avait déclarée sous le nom `coherence_mediane` ; et le seul trait voyant de la planche — une
+tuile presque vide — est le `distance_au_bord` de `193`. L'œil libre a choisi des observables **déjà
+réfutés** et rend le même verdict.
+⚠⚠⚠ **ET LE NÉGATIF EST BORNÉ PLUTÔT QUE VENDU** — `R4-F247`. La sensibilité est mesurée sur la
+**vraie matière**, étiquette retirée à chaque réplicat : il faut **64 unités du volume** pour qu'un
+trait de **luminosité** soit vu à tous les **20 réplicats**, et le plancher aux forces faibles
+(**0,05 des réplicats**) est la garantie elle-même. Pour un trait de **texture**, aucune sensibilité
+n'est mesurée — le silence de l'œil y est un silence, pas une absence.
+⚠⚠⚠ **Deux sondes incapables d'échouer, et un défaut qui invalidait la lecture.** Une sonde
+d'appariement lisait une étiquette que le module écrit lui-même au lieu de la provenance du contrôle
+— tirer les contrôles n'importe où la laissait verte. Et la levée **retéléchargeait** : une
+exécution a perdu un cube, posé **28** tuiles, tiré un autre ordre, et noté la lecture contre une
+planche que personne n'avait regardée — `R4-F248`. Réparé en deux fois : une planche amputée est
+**refusée**, et la levée **lit l'artefact publié**, la clef étant relue par adresse depuis `190` et
+`192`.
+⭐ **Ce que la tranche livre est l'instrument** : une planche appariée, aveugle, et une loi exacte
+contre laquelle toute lecture future se note. `R4-P43` est **répondue par la négative** et `R4-P44`
+**s'ouvre** : la planche montrait une **couche**, or l'étiquette naît d'une marche qui **choisit sa
+couche** — c'est-à-dire d'une propriété de la relation **entre** couches, que la coupe montrée ne
+pouvait pas porter.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
