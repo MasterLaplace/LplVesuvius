@@ -3194,6 +3194,60 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 194 : L'ETIQUETTE A-T-ELLE UNE STRUCTURE ?
+    # (1) Un compte ne voyage JAMAIS sans ce que la regle rend toute seule : « quinze chunks
+    # retiennent » est vrai de n'importe quelle regle, et c'est l'ecart aux attendus qui repond.
+    # (2) Un khi-deux ne voyage jamais sans la MEDIANE de son nul : ici l'observe est SOUS elle,
+    # donc publier l'observe seul laisserait croire a un ecart la ou il y a une uniformite.
+    # (3) Et une distance moyenne ne voyage jamais sans celle des melanges, ni sans le CONTROLE
+    # NOMME qui ne discrimine pas : taire ce dernier laisserait croire qu'il a juge.
+    ss4 = _source(racine, "letiquette_a_t_elle_une_structure.json")
+    if ss4.exists():
+        d = json.loads(ss4.read_text())
+
+        def _dec194(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        if d.get("tirages") is not None:
+            ajoute("mélanges de 194", int(d["tirages"]), 0, ss4.name)
+        for s_, t_ in ((d.get("entre_les_segments") or {}).get("les_taux_par_segment")
+                       or {}).items():
+            ajoute(f"le taux du segment {s_} de 194", float(t_), _dec194(t_), ss4.name)
+        for f_, part in (d.get("la_courbe_de_sensibilite") or {}).items():
+            ajoute(f"la part vue à la force {f_} de 194", float(part), _dec194(part), ss4.name)
+        esp = d.get("dans_lespace") or {}
+        if esp.get("les_paires_voisines") is not None:
+            ajoute("les paires voisines de 194", int(esp["les_paires_voisines"]), 0, ss4.name)
+        v4 = d.get("le_verdict") or {}
+        for cle, nom in (("chunks", "chunks étiquetés"),
+                         ("qui_retiennent", "chunks qui retiennent"),
+                         ("segments", "segments"),
+                         ("les_observables_deja_cherches", "observables déjà cherchés"),
+                         ("la_force_derivee_de_letalon", "la force dérivée de l étalon")):
+            if v4.get(cle) is not None:
+                ajoute(f"{nom} de 194", int(v4[cle]), 0, ss4.name)
+        for cle, nom in (("les_attendus_par_hasard", "les attendus par hasard"),
+                         ("la_probabilite_du_compte", "la probabilité du compte"),
+                         ("le_seuil_des_trois_questions", "le seuil des trois questions"),
+                         ("le_khi_deux", "le khi-deux"),
+                         ("le_khi_deux_median_du_nul", "le khi-deux médian du nul"),
+                         ("la_part_des_nuls_au_moins_aussi_grands",
+                          "la part des nuls au moins aussi grands"),
+                         ("la_distance_moyenne", "la distance moyenne"),
+                         ("la_distance_moyenne_du_nul", "la distance moyenne du nul"),
+                         ("la_part_des_nuls_au_moins_aussi_serres",
+                          "la part des nuls au moins aussi serrés")):
+            if v4.get(cle) is not None:
+                ajoute(f"{nom} de 194", float(v4[cle]), _dec194(v4[cle]), ss4.name)
+        if d.get("le_taux_de_faux_relu_de_190") is not None:
+            ajoute("le taux de faux relu de 190 dans 194",
+                   float(d["le_taux_de_faux_relu_de_190"]),
+                   _dec194(d["le_taux_de_faux_relu_de_190"]), ss4.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 193 : OU LE CHUNK SE TROUVE-T-IL ?
     # (1) Une separation ne voyage JAMAIS sans SES DEUX planchers : le mélange libre et le mélange
     # DANS chaque segment repondent a deux questions differentes, et l'un sans l'autre laisserait

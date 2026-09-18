@@ -2670,6 +2670,38 @@ faut écrire n'est pas une statistique de plus mais un **rattachement**. ⚠ Et 
 honnêtement : si aucune mesure publiée ne donne l'axe du rouleau dans le repère des volumes de
 surface, la porte se ferme sur un manque de donnée.
 
+**`194` · 2026-09-18 · l'étiquette a-t-elle une structure ?**
+⭐⭐⭐⭐ **La question que trois tranches n'avaient jamais posée.** `191` a cherché parmi **19**
+observables, `193` parmi **12**, et aucun des **31** ne sépare. Avant d'en déclarer un
+trente-deuxième : **cette étiquette porte-t-elle seulement une structure ?** Trois questions
+déclarées, répondues sans un seul téléchargement, et le nombre de mélanges **dérivé** de leur nombre
+— trois questions exigent de résoudre un sur soixante, donc **59** tirages.
+★ **L'ÉTIQUETTE EST RÉELLE** — `R4-F240`. **15** chunks sur **81** retiennent contre **6,075**
+attendus au taux de faux **mesuré** de `190` (**0,075** sur quarante réplicats) : probabilité
+**0,000937548**, bien sous le seuil de **0,016667**. Ce que `190` avait trouvé n'est donc pas du
+bruit — et c'est ce qui donne leur sens aux deux négatifs de `191` et de `193`, qui laissaient
+ouverte la possibilité qu'il n'y eût rien à séparer.
+✗ **MAIS LES SEGMENTS NE DIFFÈRENT PAS** — `R4-F241`. Khi-deux **6,9823** contre une médiane de nul
+de **10,4537**, **0,8136** des mélanges au moins aussi grands. ⚠⚠ L'observé est **sous** la médiane :
+l'étiquette est plus **uniforme** que le hasard ne la ferait. ⚠⚠⚠ Et cela **corrige une lecture que
+`192` invitait** — sa tranche notait **9** sur **60** contre **6** sur **21** en disant qu'aucune
+mesure n'expliquait l'écart ; la réponse est qu'**il n'y a pas d'écart**.
+✗ **ET LES CHUNKS QUI RETIENNENT NE SE GROUPENT PAS** — `R4-F242`. Distance moyenne **164,8093**
+contre **175,0092** au nul, **0,3898** des mélanges au moins aussi serrés. ⚠⚠⚠ Avec un **contrôle
+nommé incapable de discriminer** : le compte de paires voisines vaut **0** partout, le treillis étant
+trop lâche pour qu'une adjacence existe.
+⭐⭐⭐⭐ **ET LA FORCE DE L'ÉTALON EST DÉRIVÉE** — `R4-F243`. Une face positive **marginale** n'est pas
+une face positive : un écart posé est vu à **0** des réplicats à **1/7** et **2/7**, à **0,2** à
+**3/7**, et à **1** dès **4/7**. La face retenue est **4/7**. C'est la leçon que `192` avait apprise
+après coup et que `193` avait mesurée sur `191` — appliquée ici **avant**.
+⭐ **CE QUI RESSERRE LES DEUX NÉGATIFS** : ce que la marche retient est **réel**, **uniforme**, **sans
+voisinage**, et aucun des **31** observables ne le touche. Ce n'est ni une propriété du segment ni du
+lieu : c'est une propriété du **chunk** que rien de ce qui est mesuré ne nomme.
+⭐ `R4-P43` **s'ouvre** : la chaîne a compté ces quinze chunks, les a permutés et corrélés — elle ne
+les a **jamais ouverts**. ⚠⚠⚠ Et le piège est écrit d'avance : regarder quinze cubes et y trouver un
+trait commun est une maximisation **sans liste déclarée**, donc la pire forme de celle que `191` a
+payée. Ce que le regard peut rendre est une **hypothèse à déclarer**, jamais un résultat.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
