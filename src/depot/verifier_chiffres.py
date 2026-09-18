@@ -3194,6 +3194,118 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 190 : UNE SURFACE QUI CHOISIT SA COUCHE RESTE-T-ELLE SUR SA FEUILLE ?
+    # (1) Une part qui franchit ne voyage JAMAIS sans celle du nul au meme endroit : « elle quitte sa
+    # feuille trois fois sur cent » est vrai de presque toute marche, et c'est l'ECART au hasard qui
+    # repond.
+    # (2) Ni le COMPTE de chunks sans l'ATTENDU par hasard — et cet attendu se calcule avec un taux
+    # MESURE, jamais avec la garantie theorique d'une permutation, puisque l'observe vient d'une
+    # regle differente des tirages.
+    # (3) Et les DEUX lectures voyagent ensemble : le compte dit qu'une minorite retient, la mediane
+    # dit ce que la marche fait en general, et publier l'une sans l'autre serait un nombre juste sous
+    # un mauvais nom.
+    sc0 = _source(racine, "une_surface_qui_choisit_sa_couche.json")
+    if sc0.exists():
+        d = json.loads(sc0.read_text())
+
+        def _dec190(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("departs_par_couche", "departs par couche"),):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 190", int(d[cle]), 0, sc0.name)
+        tf = d.get("le_taux_de_faux") or {}
+        for cle, nom in (("replicats", "replicats du taux"), ("tirages", "tirages du nul"),
+                         ("retiennent", "replicats qui retiennent")):
+            if tf.get(cle) is not None:
+                ajoute(f"{nom} de 190", int(tf[cle]), 0, sc0.name)
+        for cle, nom in (("le_taux_de_faux_mesure", "taux de faux mesure"),
+                         ("le_taux_garanti_par_les_tirages", "taux garanti")):
+            if tf.get(cle) is not None:
+                ajoute(f"{nom} de 190", float(tf[cle]), _dec190(tf[cle]), sc0.name)
+        for x in ((d.get("letalon") or {}).get("lignes") or []):
+            if not x.get("decidable"):
+                continue
+            q = f"de la matiere « {x['matiere']} » de 190"
+            for cle, nom in (("celle_qui_choisit", "part qui franchit en choisissant"),
+                             ("le_hasard", "part qui franchit au hasard"),
+                             ("la_regle_brute", "part qui franchit a la regle brute")):
+                val = (x.get(cle) or {}).get("part_qui_franchit")
+                if val is not None:
+                    ajoute(f"{nom} {q}", float(val), _dec190(val), sc0.name)
+            if x.get("la_plus_basse_des_parts_du_hasard") is not None:
+                ajoute(f"la plus basse des parts du hasard {q}",
+                       float(x["la_plus_basse_des_parts_du_hasard"]),
+                       _dec190(x["la_plus_basse_des_parts_du_hasard"]), sc0.name)
+        for x in ((d.get("lechelle_des_directions") or {}).get("lignes") or []):
+            e = x.get("ecart_deg")
+            if e is None:
+                continue
+            q = f"a l ecart {e} de l echelle de 190"
+            ajoute(f"barreau {e} de l echelle de 190", float(e), _dec190(e), sc0.name,
+                   unites=("°",))
+            for cle, nom in (("part_qui_franchit", "part qui franchit"),
+                             ("la_plus_basse_des_parts_du_hasard",
+                              "la plus basse des parts du hasard")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(x[cle]), _dec190(x[cle]), sc0.name)
+        for sg in (d.get("les_segments") or []):
+            if not sg.get("decidable"):
+                continue
+            q = f"du segment {sg['segment']} de 190"
+            for cle, nom in (("chunks_lus", "chunks lus"),
+                             ("chunks_ou_le_choix_retient", "chunks ou le choix retient")):
+                if sg.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(sg[cle]), 0, sc0.name)
+            for cle, nom in (("part_qui_franchit_en_choisissant",
+                              "part qui franchit en choisissant"),
+                             ("part_qui_franchit_au_hasard", "part qui franchit au hasard")):
+                if sg.get(cle) is not None:
+                    ajoute(f"{nom} {q}", float(sg[cle]), _dec190(sg[cle]), sc0.name)
+        v0 = d.get("le_verdict") or {}
+        for cle, nom in (("segments", "segments"), ("chunks_lus", "chunks lus"),
+                         ("chunks_ou_le_choix_retient", "chunks ou le choix retient"),
+                         ("les_tirages_du_nul", "tirages du nul"),
+                         ("les_replicats_du_taux", "replicats du taux"),
+                         ("la_borne_du_pas_relue_de_189_couches",
+                          "borne du pas relue de 189 en couches")):
+            if v0.get(cle) is not None:
+                ajoute(f"{nom} de 190", int(v0[cle]), 0, sc0.name)
+        for cle, nom, unite in (
+                ("la_part_qui_franchit_en_choisissant", "part qui franchit en choisissant", ""),
+                ("la_part_qui_franchit_au_hasard", "part qui franchit au hasard", ""),
+                ("la_plus_basse_des_parts_du_hasard", "la plus basse des parts du hasard", ""),
+                ("la_part_qui_franchit_a_la_regle_brute",
+                 "part qui franchit a la regle brute", ""),
+                ("le_choix_retient_fois", "le choix retient fois", ""),
+                ("les_chunks_attendus_par_hasard", "chunks attendus par hasard", ""),
+                ("le_taux_de_faux_mesure", "taux de faux mesure", ""),
+                ("le_taux_garanti_par_les_tirages", "taux garanti", ""),
+                ("frontieres_medianes", "frontieres medianes", ""),
+                ("lexcursion_en_couches", "excursion en couches", ""),
+                ("lexcursion_au_hasard_en_couches", "excursion au hasard en couches", ""),
+                ("lexcursion_um", "excursion", "µm"),
+                ("la_longueur_en_choisissant", "longueur en choisissant", ""),
+                ("la_longueur_a_plat", "longueur a plat", ""),
+                ("ce_que_le_choix_coute_en_longueur", "ce que le choix achete en longueur", ""),
+                ("les_pas_vivants_en_choisissant", "pas vivants en choisissant", ""),
+                ("les_pas_vivants_au_hasard", "pas vivants au hasard", ""),
+                ("le_pas_de_la_marche_um", "pas de la marche", "µm"),
+                ("le_pas_est_sous_la_borne_fois", "le pas est sous la borne fois", ""),
+                ("la_borne_du_pas_relue_de_189_um", "borne du pas relue de 189", "µm"),
+                ("la_bascule_du_rouleau_deg", "bascule du rouleau", "°"),
+                ("la_bascule_de_la_fixture_deg", "bascule de la fixture", "°"),
+                ("le_temoin_du_rouleau_deg", "temoin du rouleau", "°"),
+                ("le_critere_tient_jusqua_deg", "le critere tient jusqua", "°"),
+                ("le_critere_lache_a_partir_de_deg", "le critere lache a partir de", "°")):
+            if v0.get(cle) is not None:
+                ajoute(f"{nom} de 190", float(v0[cle]), _dec190(v0[cle]), sc0.name,
+                       unites=((unite,) if unite else ()))
+
     # ⭐⭐⭐⭐ LA TRANCHE 189 : L'EMPILEMENT SE REPETE-T-IL ?
     # (1) Une remontee ne voyage jamais sans L'ENDROIT OU ELLE COMMENCE : « la courbe remonte » est
     # vrai de presque toute courbe ; ce qui repond est qu'elle remonte AU PAS.

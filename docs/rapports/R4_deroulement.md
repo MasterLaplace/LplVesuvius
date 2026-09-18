@@ -2522,6 +2522,51 @@ pas la couche voisine où le transfert est le meilleur, dérive-t-elle vers la f
 écarte-t-elle ? ⚠⚠⚠ Le piège de `184` est écrit d'avance — une marche qui CHOISIT se donne une
 liberté, et cette liberté se paie contre une marche qui choisit au hasard parmi les mêmes voisines.
 
+**`190` · 2026-09-18 · une surface qui choisit sa couche reste-t-elle sur sa feuille ?**
+⭐⭐⭐⭐ **La question du graal, sous sa forme concrète** — `R4-P38`. Une surface posée pas à pas, qui à
+chaque pas choisit la couche voisine où la lecture de la fibre se transfère le mieux, dérive-t-elle
+vers la feuille ou s'en écarte-t-elle ? Le pas vaut **une couche**, soit **2,4** µm : **16** fois sous
+la borne de `189`, relue et jamais retapée.
+⚠⚠⚠ **Ce qui se mesure n'est pas la longueur, c'est où la marche atterrit.** `186` a établi
+qu'optimiser trouve de la longueur sur n'importe quelle image — son optimum exact suit **127,2** µm de
+bruit pur — donc une marche qui choisit la plus brillante de ses voisines suivra plus loin qu'une
+marche à plat, et **ce gain ne prouve rien**. La statistique publiée est la **part des marches qui ont
+quitté leur pli**.
+⚠⚠⚠ **Le pas est FORCÉ**, jamais zéro : autoriser l'immobilité confondrait « la marche est tenue » et
+« la marche ne bouge pas ». ⚠⚠⚠ **La valeur comparée est celle au-dessus du plancher de sa propre
+couche** — `R4-F226`, le défaut de `187` sous un autre costume ; la règle brute est portée comme
+contrôle nommé et franchit **0,2875** contre **0,083** sur l'étalon, donc **plus** que le hasard.
+⚠⚠ **Les égalités se tranchent au hasard** : en cassant cette règle, l'étalon à frontière posée passe
+au **rouge**.
+⭐ **L'ÉTALON SÉPARE SES DEUX FACES.** Sur une frontière posée à **90°** le choix franchit **0,083**
+contre **0,117** au hasard (**0,0131** contre **0,106** à **45,6** µm de recouvrement) ; sur des
+frontières **fictives** — mêmes couches déclarées, aucun changement de direction — il franchit
+**0,2664** contre **0,119**, donc il ne retient **rien**.
+⚠⚠⚠ **Et une réparation que l'échelle a imposée** — `R4-F227`. Un nul à **un seul** tirage est
+satisfait par un frisson : sur la matière où il n'y a rien à tenir, il passait au vert pour **quatre
+dix-millièmes** d'écart. Le nul est devenu une **famille de 19 tirages**, et le taux de faux se
+**mesure** au lieu de se supposer — **0,075** sur **40** réplicats, contre la garantie de **0,05**,
+parce que l'observé vient d'une **règle** différente des tirages et n'est donc pas échangeable avec eux.
+⭐⭐⭐⭐ **L'EXPLICATION ÉVIDENTE EST RÉFUTÉE** — `R4-F224`. On pouvait croire que le critère échoue
+parce que la bascule du rouleau vaut **6,862°** contre **90°** sur la fixture (`176`, **×0,076**). Une
+échelle d'écarts de direction dérivée de `176` le montre tenir à **90°**, **45°**, **22,5°**,
+**11,25°**, à **6,862°** — l'écart du rouleau lui-même — et jusqu'à **2,8125°**, sous le témoin de
+l'estimateur. Il ne lâche qu'à **0°**, où il n'y a rien à lire, et c'est ce barreau-là qui rend les
+autres lisibles.
+✗ **SUR LE ROULEAU, IL NE TIENT QUE DANS UNE MINORITÉ** — `R4-F223`. **6** chunks sur **21** retiennent
+au-delà du hasard contre **1,575** attendus, mais la médiane va dans l'autre sens : la marche quitte sa
+feuille **0,038** du temps contre **0,03** au hasard parmi les mêmes voisines, soit **0,7895** fois
+seulement. Les deux vivent **32** pas exactement, donc ce n'est pas qu'elle meurt plus tôt.
+⭐ **ET CE N'EST PAS FAUTE DE SIGNAL** — `R4-F225`. Le critère achète **10** pas de longueur suivable
+(**32** contre **22** à plat). Il lit donc quelque chose, et ce quelque chose **ne dit pas où est la
+feuille** : c'est la panne la plus dangereuse pour un pipeline, puisqu'elle s'accompagne d'un
+indicateur de qualité qui **monte**.
+⭐ `R4-P39` **s'ouvre** : qu'ont en commun les endroits où le rouleau se laisse suivre en profondeur ?
+Six chunks tiennent et rien ne dit de quoi ils sont faits. ⚠⚠⚠ Le piège est écrit d'avance — chercher
+ce qui sépare six chunks de quinze parmi une douzaine d'observables **est** une maximisation, donc elle
+trouvera toujours quelque chose : le nombre d'observables essayés doit être déclaré **avant**, et
+l'étiquette « retient » permutée sur les mêmes chunks.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
