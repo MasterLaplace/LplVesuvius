@@ -3194,6 +3194,65 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 192 : LA PISTE DE `191` TIENT-ELLE SUR DES CHUNKS NEUFS ?
+    # (1) Une aire ne voyage JAMAIS sans celle qu'il fallait atteindre : « 0,5654 » ne dit rien sans
+    # le seuil, et c'est leur comparaison qui est le resultat.
+    # (2) Ni sans ce que `191` avait publie : sans son aire, on ne verrait pas que la valeur a CHUTE.
+    # (3) Et le plancher ne voyage jamais sans le NOMBRE d'observables qui l'a fixe : c'est la
+    # liberte qui le fixe, et le meme observable paye deux prix differents selon qu'on cherche ou
+    # qu'on confirme.
+    sn2 = _source(racine, "la_piste_tient_elle_sur_des_chunks_neufs.json")
+    if sn2.exists():
+        d = json.loads(sn2.read_text())
+
+        def _dec192(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("tirages", "mélanges de l étiquette"),
+                         ("segments_deja_vus", "segments déjà vus"),
+                         ("segments_neufs", "segments neufs")):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 192", int(d[cle]), 0, sn2.name)
+        for x in (d.get("la_montee_du_compte") or []):
+            q = f"à {x['segments']} segments de 192"
+            for cle, nom in (("chunks", "les chunks"), ("qui_retiennent", "ceux qui retiennent")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} {q}", int(x[cle]), 0, sn2.name)
+            if x.get("part_vue_par_letalon") is not None:
+                ajoute(f"la part vue par l étalon {q}", float(x["part_vue_par_letalon"]),
+                       _dec192(x["part_vue_par_letalon"]), sn2.name)
+        et = d.get("letalon") or {}
+        for cle in ("elle_porte_letiquette", "elle_la_porte_a_lenvers", "elle_nest_que_du_bruit"):
+            x = et.get(cle) or {}
+            for c2, n2 in (("lecart_dans_le_sens_declare", "l écart de la colonne"),
+                           ("le_plancher_de_detection", "le plancher de la colonne")):
+                if x.get(c2) is not None:
+                    ajoute(f"{n2} « {cle} » de 192", float(x[c2]), _dec192(x[c2]), sn2.name)
+        v2 = d.get("le_verdict") or {}
+        for cle, nom in (("chunks_neufs", "chunks neufs"),
+                         ("chunks_neufs_qui_retiennent", "chunks neufs qui retiennent"),
+                         ("observables_de_la_recherche", "observables de la recherche"),
+                         ("chunks_de_la_recherche", "chunks de la recherche")):
+            if v2.get(cle) is not None:
+                ajoute(f"{nom} de 192", int(v2[cle]), 0, sn2.name)
+        for cle, nom in (("laire", "l aire sur les chunks neufs"),
+                         ("lecart_dans_le_sens_declare", "l écart dans le sens déclaré"),
+                         ("le_plancher_de_detection", "le plancher d un observable"),
+                         ("laire_a_depasser", "l aire à dépasser"),
+                         ("laire_de_la_recherche", "l aire de la recherche"),
+                         ("le_plancher_de_la_recherche", "le plancher de la recherche"),
+                         ("letalon_voit_a_ce_compte", "la part vue par l étalon au compte final")):
+            if v2.get(cle) is not None:
+                ajoute(f"{nom} de 192", float(v2[cle]), _dec192(v2[cle]), sn2.name)
+        pi = d.get("la_piste_de_191") or {}
+        if pi.get("separation") is not None:
+            ajoute("la séparation de la recherche de 192", float(pi["separation"]),
+                   _dec192(pi["separation"]), sn2.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 191 : LA OU LE ROULEAU SE LAISSE SUIVRE
     # (1) Une separation ne voyage JAMAIS sans le PLANCHER DE DETECTION : « le meilleur observable
     # atteint 0,3889 » ne dit rien sans ce que les melanges de l'etiquette atteignent, et c'est leur

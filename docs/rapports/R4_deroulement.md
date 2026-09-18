@@ -2606,6 +2606,38 @@ chunks étiquetés monte. ⚠⚠⚠ Mais la liste des observables doit rester **
 parce que le premier jeu n'a rien donné serait exactement la liberté non comptée que cette tranche a
 refusée, et le plancher remonterait d'autant.
 
+**`192` · 2026-09-18 · la piste de `191` tient-elle sur des chunks qu'elle n'a jamais vus ?**
+⭐⭐⭐⭐ **La différence entre CHERCHER et CONFIRMER, que cette chaîne n'avait jamais faite** —
+`R4-P40`. `191` cherchait parmi **19** observables, donc elle a payé dix-neuf ; `192` ne cherche plus
+— **un seul observable, fixé et publié avant de voir la donnée** — donc il paie un. Confondre les
+deux coûte des deux côtés : payer dix-neuf pour une hypothèse unique interdit de jamais conclure, et
+n'en payer qu'un après avoir regardé dix-neuf confirme n'importe quoi.
+⚠⚠⚠ **Et la confirmation se fait sur des chunks NEUFS** : la piste a été choisie sur les trois
+premiers segments, ce fichier étiquette les **suivants**, sans aucun recouvrement. Rejouer le test
+sur la matière qui a servi à choisir ne mesurerait que le choix qu'on y a fait.
+⚠⚠ **Le sens est DÉCLARÉ, donc le test est unilatéral**, et c'est légitime ici seulement parce que
+`191` a **publié** la direction avant que ces chunks-ci n'existent pour nous.
+⚠⚠⚠ **Un premier essai était AVEUGLE, et c'est l'étalon qui l'a dit** — `R4-F234`. À **23** chunks
+dont **3** retiennent, une colonne portant littéralement l'étiquette ne survivait à la permutation
+que **0,72** du temps. La campagne se dimensionne donc sur l'étalon, segment par segment, jusqu'à ce
+qu'il voie à **tous** les réplicats : **9** segments, **60** chunks, **9** qui retiennent. ⚠⚠ La
+règle d'arrêt ne regarde QUE les étiquettes, jamais l'observable testé, donc elle ne peut pas
+favoriser l'hypothèse.
+⭐ **L'ÉTALON SÉPARE SES TROIS FACES** — `R4-F235`. Une colonne qui porte l'étiquette tient
+(**0,4259** contre **0,1253**), la **même à l'envers** ne tient pas, du bruit pur non plus. La face à
+l'envers est celle qui compte : un instrument qui la tiendrait prendrait la valeur absolue sans le
+dire.
+✗ **LA PISTE NE TIENT PAS** — `R4-F232`. Sur **60** chunks neufs, l'aire du plafond lu dans la
+matière vaut **0,5654** quand il en fallait **0,6623** ; `191` publiait **0,8889**.
+⭐⭐ **ET LE PLANCHER TOMBE DE 0,4286 À 0,1623 POUR LE MÊME OBSERVABLE** — `R4-F233`. Même étiquette,
+même règle de permutation : seule la **liberté** change. L'instrument voit désormais plus de deux
+fois plus fin, et il ne voit rien. ⭐ Cela valide rétroactivement le refus de `191`.
+⭐ `R4-P41` **s'ouvre**, et c'est une question sur l'INSTRUMENT et non sur le rouleau : les dix-neuf
+observables de `191` sont tous **intrinsèques** — ils décrivent la texture d'un cube sans jamais dire
+**où** il se trouve dans le rouleau — alors que la chaîne sait déjà mesurer l'extrinsèque.
+⚠⚠⚠ Ce serait une **nouvelle** recherche, payant la famille entière de sa nouvelle liste, et non un
+élargissement de celle de `191` — qui rendrait son plancher faux rétroactivement.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

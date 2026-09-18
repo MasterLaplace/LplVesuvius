@@ -1,0 +1,887 @@
+{
+  "graine": 20261002,
+  "tirages": 19,
+  "replicats_de_letalon": 25,
+  "la_clef_declaree": "plafond_du_ruban",
+  "le_sens_declare": 1,
+  "segments_deja_vus": 3,
+  "segments_neufs": 9,
+  "la_piste_de_191": {
+    "clef": "plafond_du_ruban",
+    "nom": "le plafond lu dans la matière (`190`)",
+    "aire": 0.8889,
+    "separation": 0.3889,
+    "le_plancher_de_la_recherche": 0.4286,
+    "observables_de_la_recherche": 19,
+    "chunks_de_la_recherche": 21
+  },
+  "letiquetage": {
+    "decidable": true,
+    "segments": [
+      "20231007101619",
+      "20231012184424",
+      "20231016151002",
+      "20231022170901",
+      "20231031143852",
+      "20231106155351",
+      "20231210121321",
+      "20231221180251",
+      "20260602204401-5753_-7"
+    ],
+    "la_montee_du_compte": [
+      {
+        "segments": 1,
+        "chunks": 7,
+        "qui_retiennent": 0,
+        "part_vue_par_letalon": 0.0
+      },
+      {
+        "segments": 2,
+        "chunks": 14,
+        "qui_retiennent": 1,
+        "part_vue_par_letalon": 0.2
+      },
+      {
+        "segments": 3,
+        "chunks": 23,
+        "qui_retiennent": 3,
+        "part_vue_par_letalon": 0.72
+      },
+      {
+        "segments": 4,
+        "chunks": 31,
+        "qui_retiennent": 5,
+        "part_vue_par_letalon": 0.84
+      },
+      {
+        "segments": 5,
+        "chunks": 37,
+        "qui_retiennent": 6,
+        "part_vue_par_letalon": 0.96
+      },
+      {
+        "segments": 6,
+        "chunks": 42,
+        "qui_retiennent": 6,
+        "part_vue_par_letalon": 0.88
+      },
+      {
+        "segments": 7,
+        "chunks": 49,
+        "qui_retiennent": 7,
+        "part_vue_par_letalon": 0.96
+      },
+      {
+        "segments": 8,
+        "chunks": 57,
+        "qui_retiennent": 9,
+        "part_vue_par_letalon": 0.96
+      },
+      {
+        "segments": 9,
+        "chunks": 60,
+        "qui_retiennent": 9,
+        "part_vue_par_letalon": 1.0
+      }
+    ],
+    "segments_lus": 9,
+    "refuses": [
+      {
+        "absent": 16,
+        "moins de deux frontières retenues": 2
+      },
+      {
+        "absent": 16,
+        "moins de deux frontières retenues": 2
+      },
+      {
+        "absent": 16
+      },
+      {
+        "absent": 16,
+        "moins de deux frontières retenues": 1
+      },
+      {
+        "absent": 16,
+        "moins de deux frontières retenues": 3
+      },
+      {
+        "absent": 15,
+        "moins de deux frontières retenues": 5
+      },
+      {
+        "absent": 16,
+        "moins de deux frontières retenues": 1,
+        "trop peu texturé": 1
+      },
+      {
+        "absent": 15,
+        "trop peu texturé": 1,
+        "moins de deux frontières retenues": 1
+      },
+      {
+        "absent": 19,
+        "moins de deux frontières retenues": 3
+      }
+    ],
+    "chunks_etiquetes": 60,
+    "chunks_qui_retiennent": 9,
+    "letalon_voit_a_ce_compte": 1.0,
+    "le_compte_suffit": true
+  },
+  "les_chunks": [
+    {
+      "segment": "20231007101619",
+      "chunk": [
+        101,
+        422
+      ],
+      "etiquette": false,
+      "valeur": 34.0
+    },
+    {
+      "segment": "20231007101619",
+      "chunk": [
+        101,
+        633
+      ],
+      "etiquette": false,
+      "valeur": 32.0
+    },
+    {
+      "segment": "20231007101619",
+      "chunk": [
+        203,
+        211
+      ],
+      "etiquette": false,
+      "valeur": 36.0
+    },
+    {
+      "segment": "20231007101619",
+      "chunk": [
+        203,
+        422
+      ],
+      "etiquette": false,
+      "valeur": 34.0
+    },
+    {
+      "segment": "20231007101619",
+      "chunk": [
+        203,
+        633
+      ],
+      "etiquette": false,
+      "valeur": 32.0
+    },
+    {
+      "segment": "20231007101619",
+      "chunk": [
+        304,
+        211
+      ],
+      "etiquette": false,
+      "valeur": 32.0
+    },
+    {
+      "segment": "20231007101619",
+      "chunk": [
+        304,
+        422
+      ],
+      "etiquette": false,
+      "valeur": 30.0
+    },
+    {
+      "segment": "20231012184424",
+      "chunk": [
+        99,
+        147
+      ],
+      "etiquette": false,
+      "valeur": 36.0
+    },
+    {
+      "segment": "20231012184424",
+      "chunk": [
+        99,
+        443
+      ],
+      "etiquette": false,
+      "valeur": 29.0
+    },
+    {
+      "segment": "20231012184424",
+      "chunk": [
+        198,
+        147
+      ],
+      "etiquette": true,
+      "valeur": 42.0
+    },
+    {
+      "segment": "20231012184424",
+      "chunk": [
+        198,
+        443
+      ],
+      "etiquette": false,
+      "valeur": 36.0
+    },
+    {
+      "segment": "20231012184424",
+      "chunk": [
+        297,
+        147
+      ],
+      "etiquette": false,
+      "valeur": 34.0
+    },
+    {
+      "segment": "20231012184424",
+      "chunk": [
+        297,
+        295
+      ],
+      "etiquette": false,
+      "valeur": 34.0
+    },
+    {
+      "segment": "20231012184424",
+      "chunk": [
+        297,
+        443
+      ],
+      "etiquette": false,
+      "valeur": 36.0
+    },
+    {
+      "segment": "20231016151002",
+      "chunk": [
+        62,
+        101
+      ],
+      "etiquette": true,
+      "valeur": 31.0
+    },
+    {
+      "segment": "20231016151002",
+      "chunk": [
+        62,
+        202
+      ],
+      "etiquette": false,
+      "valeur": 38.0
+    },
+    {
+      "segment": "20231016151002",
+      "chunk": [
+        62,
+        303
+      ],
+      "etiquette": false,
+      "valeur": 36.0
+    },
+    {
+      "segment": "20231016151002",
+      "chunk": [
+        124,
+        101
+      ],
+      "etiquette": false,
+      "valeur": 26.0
+    },
+    {
+      "segment": "20231016151002",
+      "chunk": [
+        124,
+        202
+      ],
+      "etiquette": false,
+      "valeur": 21.0
+    },
+    {
+      "segment": "20231016151002",
+      "chunk": [
+        124,
+        303
+      ],
+      "etiquette": false,
+      "valeur": 34.0
+    },
+    {
+      "segment": "20231016151002",
+      "chunk": [
+        186,
+        101
+      ],
+      "etiquette": false,
+      "valeur": 35.0
+    },
+    {
+      "segment": "20231016151002",
+      "chunk": [
+        186,
+        202
+      ],
+      "etiquette": true,
+      "valeur": 35.0
+    },
+    {
+      "segment": "20231016151002",
+      "chunk": [
+        186,
+        303
+      ],
+      "etiquette": false,
+      "valeur": 40.0
+    },
+    {
+      "segment": "20231022170901",
+      "chunk": [
+        41,
+        452
+      ],
+      "etiquette": false,
+      "valeur": 38.0
+    },
+    {
+      "segment": "20231022170901",
+      "chunk": [
+        41,
+        678
+      ],
+      "etiquette": false,
+      "valeur": 34.0
+    },
+    {
+      "segment": "20231022170901",
+      "chunk": [
+        83,
+        226
+      ],
+      "etiquette": true,
+      "valeur": 28.0
+    },
+    {
+      "segment": "20231022170901",
+      "chunk": [
+        83,
+        452
+      ],
+      "etiquette": true,
+      "valeur": 28.0
+    },
+    {
+      "segment": "20231022170901",
+      "chunk": [
+        83,
+        678
+      ],
+      "etiquette": false,
+      "valeur": 33.0
+    },
+    {
+      "segment": "20231022170901",
+      "chunk": [
+        125,
+        226
+      ],
+      "etiquette": false,
+      "valeur": 30.0
+    },
+    {
+      "segment": "20231022170901",
+      "chunk": [
+        125,
+        452
+      ],
+      "etiquette": false,
+      "valeur": 42.0
+    },
+    {
+      "segment": "20231022170901",
+      "chunk": [
+        125,
+        678
+      ],
+      "etiquette": false,
+      "valeur": 34.0
+    },
+    {
+      "segment": "20231031143852",
+      "chunk": [
+        66,
+        85
+      ],
+      "etiquette": false,
+      "valeur": 32.0
+    },
+    {
+      "segment": "20231031143852",
+      "chunk": [
+        66,
+        171
+      ],
+      "etiquette": false,
+      "valeur": 30.0
+    },
+    {
+      "segment": "20231031143852",
+      "chunk": [
+        133,
+        171
+      ],
+      "etiquette": false,
+      "valeur": 37.0
+    },
+    {
+      "segment": "20231031143852",
+      "chunk": [
+        133,
+        257
+      ],
+      "etiquette": true,
+      "valeur": 34.0
+    },
+    {
+      "segment": "20231031143852",
+      "chunk": [
+        200,
+        171
+      ],
+      "etiquette": false,
+      "valeur": 37.0
+    },
+    {
+      "segment": "20231031143852",
+      "chunk": [
+        200,
+        257
+      ],
+      "etiquette": false,
+      "valeur": 32.0
+    },
+    {
+      "segment": "20231106155351",
+      "chunk": [
+        66,
+        100
+      ],
+      "etiquette": false,
+      "valeur": 37.0
+    },
+    {
+      "segment": "20231106155351",
+      "chunk": [
+        133,
+        100
+      ],
+      "etiquette": false,
+      "valeur": 35.0
+    },
+    {
+      "segment": "20231106155351",
+      "chunk": [
+        200,
+        100
+      ],
+      "etiquette": false,
+      "valeur": 30.0
+    },
+    {
+      "segment": "20231106155351",
+      "chunk": [
+        200,
+        200
+      ],
+      "etiquette": false,
+      "valeur": 36.0
+    },
+    {
+      "segment": "20231106155351",
+      "chunk": [
+        200,
+        300
+      ],
+      "etiquette": false,
+      "valeur": 30.0
+    },
+    {
+      "segment": "20231210121321",
+      "chunk": [
+        99,
+        78
+      ],
+      "etiquette": true,
+      "valeur": 39.0
+    },
+    {
+      "segment": "20231210121321",
+      "chunk": [
+        99,
+        156
+      ],
+      "etiquette": false,
+      "valeur": 29.0
+    },
+    {
+      "segment": "20231210121321",
+      "chunk": [
+        99,
+        234
+      ],
+      "etiquette": false,
+      "valeur": 39.0
+    },
+    {
+      "segment": "20231210121321",
+      "chunk": [
+        199,
+        156
+      ],
+      "etiquette": false,
+      "valeur": 30.0
+    },
+    {
+      "segment": "20231210121321",
+      "chunk": [
+        298,
+        78
+      ],
+      "etiquette": false,
+      "valeur": 38.0
+    },
+    {
+      "segment": "20231210121321",
+      "chunk": [
+        298,
+        156
+      ],
+      "etiquette": false,
+      "valeur": 35.0
+    },
+    {
+      "segment": "20231210121321",
+      "chunk": [
+        298,
+        234
+      ],
+      "etiquette": false,
+      "valeur": 41.0
+    },
+    {
+      "segment": "20231221180251",
+      "chunk": [
+        0,
+        246
+      ],
+      "etiquette": false,
+      "valeur": 1.0
+    },
+    {
+      "segment": "20231221180251",
+      "chunk": [
+        62,
+        82
+      ],
+      "etiquette": true,
+      "valeur": 42.0
+    },
+    {
+      "segment": "20231221180251",
+      "chunk": [
+        62,
+        164
+      ],
+      "etiquette": false,
+      "valeur": 40.0
+    },
+    {
+      "segment": "20231221180251",
+      "chunk": [
+        124,
+        82
+      ],
+      "etiquette": false,
+      "valeur": 42.0
+    },
+    {
+      "segment": "20231221180251",
+      "chunk": [
+        124,
+        164
+      ],
+      "etiquette": false,
+      "valeur": 34.0
+    },
+    {
+      "segment": "20231221180251",
+      "chunk": [
+        124,
+        246
+      ],
+      "etiquette": false,
+      "valeur": 28.0
+    },
+    {
+      "segment": "20231221180251",
+      "chunk": [
+        186,
+        82
+      ],
+      "etiquette": true,
+      "valeur": 36.0
+    },
+    {
+      "segment": "20231221180251",
+      "chunk": [
+        186,
+        246
+      ],
+      "etiquette": false,
+      "valeur": 34.0
+    },
+    {
+      "segment": "20260602204401-5753_-7",
+      "chunk": [
+        154,
+        44
+      ],
+      "etiquette": false,
+      "valeur": 21.0
+    },
+    {
+      "segment": "20260602204401-5753_-7",
+      "chunk": [
+        309,
+        22
+      ],
+      "etiquette": false,
+      "valeur": 14.0
+    },
+    {
+      "segment": "20260602204401-5753_-7",
+      "chunk": [
+        463,
+        44
+      ],
+      "etiquette": false,
+      "valeur": 40.0
+    }
+  ],
+  "letalon": {
+    "elle_porte_letiquette": {
+      "decidable": true,
+      "laire": 0.9259,
+      "lecart_dans_le_sens_declare": 0.4259,
+      "le_nul": {
+        "decidable": true,
+        "tirages": 19,
+        "le_plus_grand_ecart": 0.1253,
+        "les_ecarts": [
+          -0.1732,
+          -0.0316,
+          -0.1645,
+          0.1253,
+          -0.0534,
+          -0.0294,
+          0.0207,
+          0.0251,
+          -0.171,
+          -0.158,
+          -0.0991,
+          -0.0447,
+          -0.1536,
+          -0.0054,
+          0.0447,
+          0.0556,
+          -0.1013,
+          0.0294,
+          0.0272
+        ]
+      },
+      "le_plancher_de_detection": 0.1253,
+      "laire_a_depasser": 0.6253,
+      "la_piste_tient": true,
+      "attendu": true
+    },
+    "elle_la_porte_a_lenvers": {
+      "decidable": true,
+      "laire": 0.0741,
+      "lecart_dans_le_sens_declare": -0.4259,
+      "le_nul": {
+        "decidable": true,
+        "tirages": 19,
+        "le_plus_grand_ecart": 0.1732,
+        "les_ecarts": [
+          0.1732,
+          0.0316,
+          0.1645,
+          -0.1253,
+          0.0534,
+          0.0294,
+          -0.0207,
+          -0.0251,
+          0.171,
+          0.158,
+          0.0991,
+          0.0447,
+          0.1536,
+          0.0054,
+          -0.0447,
+          -0.0556,
+          0.1013,
+          -0.0294,
+          -0.0272
+        ]
+      },
+      "le_plancher_de_detection": 0.1732,
+      "laire_a_depasser": 0.6732,
+      "la_piste_tient": false,
+      "attendu": false
+    },
+    "elle_nest_que_du_bruit": {
+      "decidable": true,
+      "laire": 0.3399,
+      "lecart_dans_le_sens_declare": -0.1601,
+      "le_nul": {
+        "decidable": true,
+        "tirages": 19,
+        "le_plus_grand_ecart": 0.158,
+        "les_ecarts": [
+          0.1514,
+          -0.1122,
+          0.012,
+          -0.0599,
+          -0.171,
+          0.158,
+          -0.2146,
+          0.0773,
+          0.0686,
+          0.0207,
+          0.0251,
+          -0.0686,
+          0.0599,
+          -0.0294,
+          0.0577,
+          0.0556,
+          -0.0076,
+          -0.1078,
+          0.0207
+        ]
+      },
+      "le_plancher_de_detection": 0.158,
+      "laire_a_depasser": 0.658,
+      "la_piste_tient": false,
+      "attendu": false
+    },
+    "letalon_separe_les_trois": true
+  },
+  "la_montee_du_compte": [
+    {
+      "segments": 1,
+      "chunks": 7,
+      "qui_retiennent": 0,
+      "part_vue_par_letalon": 0.0
+    },
+    {
+      "segments": 2,
+      "chunks": 14,
+      "qui_retiennent": 1,
+      "part_vue_par_letalon": 0.2
+    },
+    {
+      "segments": 3,
+      "chunks": 23,
+      "qui_retiennent": 3,
+      "part_vue_par_letalon": 0.72
+    },
+    {
+      "segments": 4,
+      "chunks": 31,
+      "qui_retiennent": 5,
+      "part_vue_par_letalon": 0.84
+    },
+    {
+      "segments": 5,
+      "chunks": 37,
+      "qui_retiennent": 6,
+      "part_vue_par_letalon": 0.96
+    },
+    {
+      "segments": 6,
+      "chunks": 42,
+      "qui_retiennent": 6,
+      "part_vue_par_letalon": 0.88
+    },
+    {
+      "segments": 7,
+      "chunks": 49,
+      "qui_retiennent": 7,
+      "part_vue_par_letalon": 0.96
+    },
+    {
+      "segments": 8,
+      "chunks": 57,
+      "qui_retiennent": 9,
+      "part_vue_par_letalon": 0.96
+    },
+    {
+      "segments": 9,
+      "chunks": 60,
+      "qui_retiennent": 9,
+      "part_vue_par_letalon": 1.0
+    }
+  ],
+  "le_verdict": {
+    "decidable": true,
+    "laire": 0.5654,
+    "lecart_dans_le_sens_declare": 0.0654,
+    "le_nul": {
+      "decidable": true,
+      "tirages": 19,
+      "le_plus_grand_ecart": 0.1623,
+      "les_ecarts": [
+        0.0163,
+        -0.1656,
+        0.1057,
+        0.0076,
+        -0.0011,
+        0.0,
+        -0.0871,
+        -0.1024,
+        0.0142,
+        -0.122,
+        -0.1558,
+        0.1623,
+        -0.1514,
+        -0.1743,
+        -0.1656,
+        0.1046,
+        0.0207,
+        0.0719,
+        0.1449
+      ]
+    },
+    "le_plancher_de_detection": 0.1623,
+    "laire_a_depasser": 0.6623,
+    "la_piste_tient": false,
+    "chunks_neufs": 60,
+    "chunks_neufs_qui_retiennent": 9,
+    "letalon_voit_a_ce_compte": 1.0,
+    "le_premier_compte": {
+      "segments": 1,
+      "chunks": 7,
+      "qui_retiennent": 0,
+      "part_vue_par_letalon": 0.0
+    },
+    "le_compte_suffit": true,
+    "laire_de_la_recherche": 0.8889,
+    "le_plancher_de_la_recherche": 0.4286,
+    "observables_de_la_recherche": 19,
+    "chunks_de_la_recherche": 21,
+    "letalon_separe_les_trois": true
+  }
+}
