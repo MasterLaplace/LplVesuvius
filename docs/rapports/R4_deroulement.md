@@ -2775,6 +2775,43 @@ un sens. ⚠⚠⚠ Et la contrainte liante est mesurée : onze justes sur quinze
 parfaite, et la PART exigée baisse avec la taille de la planche. Ce qui manque n'est pas une idée,
 c'est un **compte de chunks étiquetés**.
 
+**`197` · 2026-09-18 · que montrent ces deux vues ?**
+⭐⭐⭐⭐ **Une objection de l'auteur, pas un plan.** Devant la planche de `196` : « ça ressemble encore
+à une vue axiale, pas au résultat déplié ». `195` et `196` avaient **affirmé** ce que leurs axes
+signifient — « la couche du milieu », « la coupe en profondeur » — et rien ne l'avait mesuré. Cette
+tranche ne juge aucune étiquette et ne cherche aucun observable : elle **décrit l'instrument**.
+★ **LA PROFONDEUR EST BIEN L'AXE QUI TRAVERSE L'EMPILEMENT** — `R4-F254`. **14 cubes** sur 30 y
+dépassent tous leurs **19** mélanges contre **1,5** attendu par hasard, contre **7 cubes** et
+**5 cubes** pour la hauteur et la largeur ; et son autocorrélation médiane vaut **0,210486** quand
+celles des deux autres sont **négatives**. Les deux vues montrent donc ce qu'elles annonçaient.
+⚠⚠ **MAIS LA PÉRIODE N'EST PAS CELLE D'UN PLI** — `R4-F255` : **44,5** voxels (**106,8** µm) contre
+**72,0833**. L'estimateur prend le premier maximum **local**, donc le plus PETIT décalage où le
+profil se répète, et une structure plus fine que le pli le remporte. Cent neuf couches ne portent
+qu'**1,5121** pli.
+⭐⭐⭐⭐ **ET LE CHIFFRE QUI MANQUAIT AU DÉROULAGE EST LÀ** — `R4-F256`. Le maillage publié quitte son
+feuillet de **4 voxels** en médiane, soit **0,055491** pli, sur trois dixièmes de millimètre — mais
+jusqu'à **65,3 voxels**, et **3 coupes** sur **29 coupes** portent des colonnes qui **saturent** la
+plage de **36 voxels**. La tenue est bonne en général et **perdue par endroits**. ⚠⚠⚠ La saturation
+est la limite du recalage, publiée à côté : au-delà d'une demi-période un décalage se confond avec
+celui d'un pli entier, donc sans ce compte une pile très inclinée rendrait un PETIT serpentement.
+⚠⚠⚠ **ET L'ÉCHELLE EST LE VRAI ENSEIGNEMENT** — `R4-F257`. Un volume de surface fait **109
+couches** × **50600** × **36400**, soit **121,44** × **87,36 mm** dépliés ; une vignette de `195` et
+`196` en couvre **un segment sur 124449**, la planche entière **un segment sur 4148**. Leurs
+résultats tiennent, mais la question « ce cube porte-t-il la marque ? » a été posée dans une fenêtre
+d'un cent-millième d'un segment, alors que le prix demande **cent pour cent** du recto.
+⚠⚠⚠ **TROIS DÉFAUTS TROUVÉS PAR LES SONDES, ET UN CHIFFRE DE SONDE PUBLIÉ PAR ERREUR.**
+L'autocorrélation n'était pas normalisée par le **recouvrement**, donc une onde de période quarante
+culminait au décalage **deux** ; le maximum **global** n'est pas la fondamentale, donc la même onde
+rendait « période 200 » ; et une règle de `196` avait été transplantée à tort, la mesure refusant
+parce que 28 cubes sur 30 avaient répondu — or ici il n'y a **aucune planche** dont l'ordre dépende
+du compte. ⚠⚠ Enfin, le serpentement fabriqué par un suivi par argmax avait été **dessiné dans la
+figure** avec la valeur **74**, lue dans une sortie de bris : elle est fausse, la mesure en rend
+**73,3 voxels**, soit **1,016879** pli — `R4-F258`. Le remède n'est pas de corriger le nombre mais
+de lui donner un **producteur**, donc la règle réfutée est désormais mesurée par l'étalon.
+⭐ `R4-P46` **s'ouvre** : où le maillage quitte-t-il son feuillet, **sur un segment entier** ? C'est
+la première moitié de ce qui remplace l'humain du transfert — savoir **où** corriger — et
+l'instrument est livré ; il ne manque que des téléchargements.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

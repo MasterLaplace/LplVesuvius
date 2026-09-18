@@ -3194,6 +3194,107 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 197 : QUE MONTRENT CES DEUX VUES ?
+    # (1) Un compte d'axe ne voyage JAMAIS sans les DEUX autres : « quatorze sur trente » ne dit
+    # rien tant qu'on ne sait pas ce que rendent la hauteur et la largeur sur la meme epreuve.
+    # (2) Un serpentement ne voyage jamais sans sa SATURATION : au-dela d'une demi-periode, un
+    # decalage se confond avec celui d'un pli entier, donc une pile tres inclinee rendrait un PETIT
+    # serpentement et le chiffre se lirait a l'envers.
+    # (3) Et la part montree ne voyage jamais sans l'aire du segment : « 0,094 mm² » est une taille,
+    # pas une echelle.
+    ss7 = _source(racine, "que_montrent_ces_deux_vues.json")
+    if ss7.exists():
+        d = json.loads(ss7.read_text())
+
+        def _dec197(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        par7 = d.get("par_axe") or {}
+        ser7 = d.get("le_serpentement") or {}
+        pm7 = d.get("la_part_montree") or {}
+        et7 = d.get("letalon") or {}
+        for nom7, court in (("la profondeur", "profondeur"), ("la hauteur", "hauteur"),
+                            ("la largeur", "largeur")):
+            a7 = par7.get(nom7) or {}
+            if a7.get("depassent_tous_les_melanges") is not None:
+                ajoute(f"les cubes de la {court} de 197",
+                       int(a7["depassent_tous_les_melanges"]), 0, ss7.name, unites=("cubes",))
+            for cle, nom, unites in (("la_periode_mediane_en_voxels", "la période", ("vx",)),
+                                     ("la_periode_mediane_en_um", "la période en µm", ("µm",)),
+                                     ("lautocorrelation_mediane", "l autocorrélation", ())):
+                if a7.get(cle) is not None:
+                    ajoute(f"{nom} de la {court} de 197", float(a7[cle]), _dec197(a7[cle]),
+                           ss7.name, unites=unites)
+        for cle, nom, unites in (("coupes_lues", "les coupes lues", ("coupes",)),
+                                 ("les_coupes_avec_colonnes_saturees", "les coupes saturées",
+                                  ("coupes",)),
+                                 ("les_colonnes_saturees_en_tout", "les colonnes saturées",
+                                  ("colonnes",))):
+            if ser7.get(cle) is not None:
+                ajoute(f"{nom} de 197", int(ser7[cle]), 0, ss7.name, unites=unites)
+        for cle, nom, unites in (("le_median_en_voxels", "le serpentement médian", ("voxels",)),
+                                 ("le_median_en_plis", "le serpentement médian en plis", ()),
+                                 ("le_maximal_en_voxels", "le serpentement maximal", ("voxels",))):
+            if ser7.get(cle) is not None:
+                ajoute(f"{nom} de 197", float(ser7[cle]), _dec197(ser7[cle]), ss7.name,
+                       unites=unites)
+        for cle, nom, unites in (("le_cote_de_la_tuile_um", "le côté d une tuile", ("µm",)),
+                                 ("laire_dune_tuile_mm2", "l aire d une tuile", ("mm²",)),
+                                 ("laire_mediane_dun_segment_mm2", "l aire d un segment",
+                                  ("mm²",))):
+            if pm7.get(cle) is not None:
+                ajoute(f"{nom} de 197", float(pm7[cle]), _dec197(pm7[cle]), ss7.name,
+                       unites=unites)
+        for cle, nom in (("une_tuile_pour_combien_de_segment", "une tuile pour combien"),
+                         ("une_planche_pour_combien_de_segment", "une planche pour combien"),
+                         ("segments_lus", "les segments lus")):
+            if pm7.get(cle) is not None:
+                ajoute(f"{nom} de 197", int(pm7[cle]), 0, ss7.name, unites=("segments",))
+        if d.get("le_pas_dun_pli_en_voxels") is not None:
+            ajoute("le pas d un pli en voxels de 197", float(d["le_pas_dun_pli_en_voxels"]),
+                   _dec197(d["le_pas_dun_pli_en_voxels"]), ss7.name, unites=("voxels",))
+        if d.get("la_plage_de_recalage") is not None:
+            ajoute("la plage de recalage de 197", int(d["la_plage_de_recalage"]), 0, ss7.name,
+                   unites=("voxels",))
+        un7 = next((v for v in (d.get("la_forme_des_volumes") or {}).values()
+                    if v.get("decidable")), None)
+        if un7:
+            for cle, nom, unites in (("couches", "les couches d un volume", ("couches",)),
+                                     ("hauteur", "la hauteur d un volume", ("×",)),
+                                     ("largeur", "la largeur d un volume", ())):
+                ajoute(f"{nom} de 197", int(un7[cle]), 0, ss7.name, unites=unites)
+            for cle, nom, unites in (("epaisseur_en_plis", "l épaisseur en plis", ("pli",)),
+                                     ("epaisseur_um", "l épaisseur en µm", ("µm",)),
+                                     ("hauteur_mm", "la hauteur en mm", ("×",)),
+                                     ("largeur_mm", "la largeur en mm", ("mm",))):
+                ajoute(f"{nom} de 197", float(un7[cle]), _dec197(un7[cle]), ss7.name,
+                       unites=unites)
+        # ⚠⚠ LE CONTROLE NOMME PORTE SON PROPRE CHIFFRE : sans lui, « la regle est fausse » est une
+        # affirmation, et c'est precisement ce qu'un chiffre de sonde avait fait croire.
+        ar7 = et7.get("la_meme_pile_suivie_par_la_bande_la_plus_claire") or {}
+        for cle, nom, unites in (("le_serpentement_en_voxels",
+                                  "le serpentement du contrôle nommé", ("voxels",)),
+                                 ("le_serpentement_en_plis",
+                                  "le serpentement du contrôle nommé en plis", ("pli",))):
+            if ar7.get(cle) is not None:
+                ajoute(f"{nom} de 197", float(ar7[cle]), _dec197(ar7[cle]), ss7.name,
+                       unites=unites)
+        for cle, sous, nom, unites in (
+                ("une_pile_inclinee", "le_serpentement_en_voxels",
+                 "le serpentement de la pile inclinée", ("voxels",)),
+                ("une_pile_trop_inclinee", "les_colonnes_saturees",
+                 "les colonnes saturées de la pile trop inclinée", ("colonnes",))):
+            x7 = (et7.get(cle) or {}).get(sous)
+            if x7 is not None:
+                ajoute(f"{nom} de 197", float(x7), _dec197(x7), ss7.name, unites=unites)
+        if et7.get("la_pente_posee_en_plis") is not None:
+            ajoute("la pente posée de 197", float(et7["la_pente_posee_en_plis"]),
+                   _dec197(et7["la_pente_posee_en_plis"]), ss7.name, unites=("pli",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 196 : REGARDER DANS LA PROFONDEUR
     # (1) Chacune des DEUX epreuves ne voyage jamais sans SON seuil ni sans ses attendus : « dix
     # justes sur quinze » se lit comme un succes tant qu'on ne dit pas qu'il en fallait onze.

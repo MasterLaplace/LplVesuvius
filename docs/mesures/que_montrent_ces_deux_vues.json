@@ -1,0 +1,224 @@
+{
+  "graine": 20261005,
+  "tirages": 19,
+  "le_pas_dun_pli_en_voxels": 72.0833,
+  "la_plage_de_recalage": 36,
+  "les_cubes": {
+    "demandes": 30,
+    "rendus": 30,
+    "refuses": {}
+  },
+  "la_forme_des_volumes": {
+    "20230702185753": {
+      "decidable": true,
+      "couches": 109,
+      "hauteur": 50600,
+      "largeur": 36400,
+      "epaisseur_um": 261.6,
+      "epaisseur_en_plis": 1.5121,
+      "hauteur_mm": 121.44,
+      "largeur_mm": 87.36
+    },
+    "20230929220926": {
+      "decidable": true,
+      "couches": 109,
+      "hauteur": 32080,
+      "largeur": 75800,
+      "epaisseur_um": 261.6,
+      "epaisseur_en_plis": 1.5121,
+      "hauteur_mm": 76.992,
+      "largeur_mm": 181.92
+    },
+    "20231005123336": {
+      "decidable": true,
+      "couches": 109,
+      "hauteur": 34880,
+      "largeur": 97280,
+      "epaisseur_um": 261.6,
+      "epaisseur_en_plis": 1.5121,
+      "hauteur_mm": 83.712,
+      "largeur_mm": 233.472
+    },
+    "20231012184424": {
+      "decidable": true,
+      "couches": 109,
+      "hauteur": 50800,
+      "largeur": 75720,
+      "epaisseur_um": 261.6,
+      "epaisseur_en_plis": 1.5121,
+      "hauteur_mm": 121.92,
+      "largeur_mm": 181.728
+    },
+    "20231016151002": {
+      "decidable": true,
+      "couches": 109,
+      "hauteur": 31960,
+      "largeur": 51960,
+      "epaisseur_um": 261.6,
+      "epaisseur_en_plis": 1.5121,
+      "hauteur_mm": 76.704,
+      "largeur_mm": 124.704
+    },
+    "20231022170901": {
+      "decidable": true,
+      "couches": 109,
+      "hauteur": 21380,
+      "largeur": 115820,
+      "epaisseur_um": 261.6,
+      "epaisseur_en_plis": 1.5121,
+      "hauteur_mm": 51.312,
+      "largeur_mm": 277.968
+    },
+    "20231031143852": {
+      "decidable": true,
+      "couches": 109,
+      "hauteur": 34180,
+      "largeur": 44020,
+      "epaisseur_um": 261.6,
+      "epaisseur_en_plis": 1.5121,
+      "hauteur_mm": 82.032,
+      "largeur_mm": 105.648
+    },
+    "20231210121321": {
+      "decidable": true,
+      "couches": 109,
+      "hauteur": 51000,
+      "largeur": 39980,
+      "epaisseur_um": 261.6,
+      "epaisseur_en_plis": 1.5121,
+      "hauteur_mm": 122.4,
+      "largeur_mm": 95.952
+    },
+    "20231221180251": {
+      "decidable": true,
+      "couches": 109,
+      "hauteur": 31960,
+      "largeur": 42060,
+      "epaisseur_um": 261.6,
+      "epaisseur_en_plis": 1.5121,
+      "hauteur_mm": 76.704,
+      "largeur_mm": 100.944
+    }
+  },
+  "la_part_montree": {
+    "decidable": true,
+    "segments_lus": 9,
+    "le_cote_de_la_tuile_um": 307.2,
+    "laire_dune_tuile_mm2": 0.094372,
+    "laire_mediane_dun_segment_mm2": 11744.52,
+    "la_part_dun_segment_par_tuile": 8.035e-06,
+    "la_part_dun_segment_par_planche": 0.0002411,
+    "une_tuile_pour_combien_de_segment": 124449,
+    "une_planche_pour_combien_de_segment": 4148
+  },
+  "par_axe": {
+    "la profondeur": {
+      "cubes_lus": 30,
+      "depassent_tous_les_melanges": 14,
+      "la_periode_mediane_en_voxels": 44.5,
+      "la_periode_mediane_en_um": 106.8,
+      "lautocorrelation_mediane": 0.210486,
+      "les_attendus_par_hasard": 1.5
+    },
+    "la hauteur": {
+      "cubes_lus": 30,
+      "depassent_tous_les_melanges": 7,
+      "la_periode_mediane_en_voxels": 54.5,
+      "la_periode_mediane_en_um": 130.8,
+      "lautocorrelation_mediane": -0.009798,
+      "les_attendus_par_hasard": 1.5
+    },
+    "la largeur": {
+      "cubes_lus": 30,
+      "depassent_tous_les_melanges": 5,
+      "la_periode_mediane_en_voxels": 50.0,
+      "la_periode_mediane_en_um": 120.0,
+      "lautocorrelation_mediane": -0.012121,
+      "les_attendus_par_hasard": 1.5
+    }
+  },
+  "le_serpentement": {
+    "coupes_lues": 29,
+    "le_median_en_voxels": 4.0,
+    "le_median_en_plis": 0.055491,
+    "le_maximal_en_voxels": 65.3,
+    "les_coupes_avec_colonnes_saturees": 3,
+    "les_colonnes_saturees_en_tout": 16
+  },
+  "letalon": {
+    "par_axe": {
+      "la profondeur": {
+        "decidable": true,
+        "la_periode_en_voxels": 69,
+        "le_premier_passage_a_zero": 17,
+        "lautocorrelation": 1.052687,
+        "la_periode_en_um": 165.6,
+        "tirages": 19,
+        "lautocorrelation_mediane_du_nul": 0.068643,
+        "les_melanges_au_moins_aussi_forts": 0,
+        "elle_depasse_tous_les_melanges": true
+      },
+      "la hauteur": {
+        "decidable": true,
+        "la_periode_en_voxels": 2,
+        "le_premier_passage_a_zero": 1,
+        "lautocorrelation": 0.020852,
+        "la_periode_en_um": 4.8,
+        "tirages": 19,
+        "lautocorrelation_mediane_du_nul": 0.112268,
+        "les_melanges_au_moins_aussi_forts": 14,
+        "elle_depasse_tous_les_melanges": false
+      },
+      "la largeur": {
+        "decidable": true,
+        "la_periode_en_voxels": 3,
+        "le_premier_passage_a_zero": 1,
+        "lautocorrelation": 0.198252,
+        "la_periode_en_um": 7.2,
+        "tirages": 19,
+        "lautocorrelation_mediane_du_nul": 0.144945,
+        "les_melanges_au_moins_aussi_forts": 5,
+        "elle_depasse_tous_les_melanges": false
+      }
+    },
+    "seul_le_premier_axe_porte_la_periode": true,
+    "une_pile_plate": {
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 0.0,
+      "le_serpentement_en_plis": 0.0,
+      "lecart_maximal_en_voxels": 0,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    "la_meme_pile_suivie_par_la_bande_la_plus_claire": {
+      "decidable": true,
+      "le_serpentement_en_voxels": 73.3,
+      "le_serpentement_en_plis": 1.016879
+    },
+    "une_pile_inclinee": {
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 14.0,
+      "le_serpentement_en_plis": 0.19422,
+      "lecart_maximal_en_voxels": 18,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    "la_pente_posee_en_plis": 0.25,
+    "une_pile_trop_inclinee": {
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 68.0,
+      "le_serpentement_en_plis": 0.943353,
+      "lecart_maximal_en_voxels": 72,
+      "les_colonnes_saturees": 12,
+      "la_part_saturee": 0.09375
+    },
+    "le_suivi_par_argmax_fabrique_du_serpentement": true,
+    "letalon_separe": true
+  }
+}

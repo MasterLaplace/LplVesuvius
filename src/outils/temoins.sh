@@ -1534,6 +1534,8 @@ run "figure la planche aveugle" uv run python "$ROOT/src/figures/figure_la_planc
 run "regarder en profondeur" uv run python "$ROOT/src/nappe/regarder_dans_la_profondeur.py" --verifier
 run "figure regarder en profondeur" uv run python "$ROOT/src/figures/figure_regarder_dans_la_profondeur.py" --verifier
 run "figure planche en profondeur" uv run python "$ROOT/src/figures/figure_la_planche_en_profondeur.py" --verifier
+run "que montrent ces deux vues" uv run python "$ROOT/src/nappe/que_montrent_ces_deux_vues.py" --verifier
+run "figure deux vues" uv run python "$ROOT/src/figures/figure_que_montrent_ces_deux_vues.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
