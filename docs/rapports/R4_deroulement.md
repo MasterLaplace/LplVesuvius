@@ -2567,6 +2567,45 @@ ce qui sépare six chunks de quinze parmi une douzaine d'observables **est** une
 trouvera toujours quelque chose : le nombre d'observables essayés doit être déclaré **avant**, et
 l'étiquette « retient » permutée sur les mêmes chunks.
 
+**`191` · 2026-09-18 · là où le rouleau se laisse suivre, et le prix de la question**
+⭐⭐⭐⭐ **La question que `190` laisse ouverte** — `R4-P39`. Six chunks sur vingt et un tiennent leur
+feuille au-delà du hasard et rien ne dit de quoi ils sont faits. Or un déroulage n'a pas besoin qu'un
+critère marche partout : il a besoin de **savoir où il marche**.
+⚠⚠⚠ **Le piège EST la tranche, pas un détail de méthode.** Chercher ce qui sépare six chunks de
+quinze parmi une liste d'observables **est** une maximisation, donc elle trouvera toujours quelque
+chose — la leçon de `186` et de `174`. Trois règles, et elles sont dans le code : la liste est
+**déclarée, fermée, et son nombre publié** ; la liberté du choix est payée par une **statistique de
+famille** où chaque mélange reprend le maximum sur **toute** la liste ; et le **plancher de
+détection** est publié.
+⚠⚠ **Trois observables sont EXCLUS** — la part franchie, la plus basse des tirages, ce que le choix
+retient. Ce sont les **ingrédients de l'étiquette**, donc les inclure ferait une vérification qui ne
+peut pas échouer. Ils servent de face **positive** à l'étalon.
+⭐ **La jointure n'a rien demandé à personne** : toutes les tranches du rouleau lisent le même
+treillis et enregistrent leurs chunks sous les mêmes coordonnées. Les **19** observables viennent de
+`180`, `187`, `188`, `189` et des conditions de marche de `190`, lus **verbatim**. ⚠ Un chunk absent
+d'une source est un **trou**, jamais une valeur par défaut — `187` n'en couvre que **16** sur **21** —
+et un observable que sa source ne rend nulle part est **nommé** plutôt que retiré en silence.
+⭐ **L'ÉTALON SÉPARE SES DEUX FACES** — `R4-F231`. Une liste de **19** colonnes dont une porte
+l'étiquette bruitée est retrouvée (**0,4444** contre un plancher de **0,4111**) ; une liste de même
+longueur qui n'est **que** du bruit ne rend rien (**0,2889**). C'est ce qui rend le silence de
+l'instrument lisible.
+✗ **AUCUN DES DIX-NEUF OBSERVABLES DÉCLARÉS NE SÉPARE** — `R4-F228`. Le meilleur atteint **0,3889**
+quand les mélanges de l'étiquette montent à **0,4286**. **18** sont lus ; le dix-neuvième — la portée
+en profondeur de `188` — est muet parce que cette tranche-là l'avait publiée comme une **borne**.
+⭐⭐⭐⭐ **ET LA RAISON EST UN FAIT SUR LE COMPTE, PAS SUR LA MATIÈRE** — `R4-F229`. Avec **6** chunks
+contre **15** et cette liberté-là, rien sous une aire de **0,9286** n'est établissable ici, quoi
+qu'on mesure. Le plancher **monte strictement** quand la liste s'allonge : c'est le prix de la
+liberté, et une sonde le vérifie en cassant la règle.
+⭐ **CE QUI RESTE EST UNE PISTE NOMMÉE** — `R4-F230`. Le plafond lu dans la matière rend une aire de
+**0,8889** : les chunks où la marche tient sont ceux où une fibre se suit **déjà plus loin à plat**.
+La longueur suivable de `187` (**0,8167**) et le nombre de couches texturées (**0,8**) pointent dans
+le même sens, la montée dérivée des frontières dans l'autre (**0,1417**), et **aucun ne franchit le
+plancher**.
+⭐ `R4-P40` **s'ouvre**, et le remède est arithmétique : le plancher **descend** quand le nombre de
+chunks étiquetés monte. ⚠⚠⚠ Mais la liste des observables doit rester **la même** — en ajouter un
+parce que le premier jeu n'a rien donné serait exactement la liberté non comptée que cette tranche a
+refusée, et le plancher remonterait d'autant.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -1520,6 +1520,8 @@ run "empilement repete"  uv run python "$ROOT/src/nappe/lempilement_se_repete_t_
 run "figure empilement"  uv run python "$ROOT/src/figures/figure_lempilement_se_repete_t_il.py" --verifier
 run "surface qui choisit" uv run python "$ROOT/src/nappe/une_surface_qui_choisit_sa_couche.py" --verifier
 run "figure qui choisit" uv run python "$ROOT/src/figures/figure_une_surface_qui_choisit_sa_couche.py" --verifier
+run "ou il se laisse suivre" uv run python "$ROOT/src/nappe/la_ou_le_rouleau_se_laisse_suivre.py" --verifier
+run "figure se laisse suivre" uv run python "$ROOT/src/figures/figure_la_ou_le_rouleau_se_laisse_suivre.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

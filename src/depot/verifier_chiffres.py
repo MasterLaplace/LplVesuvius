@@ -3194,6 +3194,61 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 191 : LA OU LE ROULEAU SE LAISSE SUIVRE
+    # (1) Une separation ne voyage JAMAIS sans le PLANCHER DE DETECTION : « le meilleur observable
+    # atteint 0,3889 » ne dit rien sans ce que les melanges de l'etiquette atteignent, et c'est leur
+    # comparaison qui est le resultat.
+    # (2) Ni sans le NOMBRE d'observables declares : le plancher depend de la liberte qu'on s'est
+    # donnee, donc un plancher sans son compte serait un plancher sans son prix.
+    # (3) Et une aire ne voyage jamais sans sa separation : l'une dit le SENS, l'autre la FORCE, et
+    # publier la force seule perdrait de quel cote penche la piste.
+    ss1 = _source(racine, "la_ou_le_rouleau_se_laisse_suivre.json")
+    if ss1.exists():
+        d = json.loads(ss1.read_text())
+
+        def _dec191(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        for cle, nom in (("tirages", "mélanges de l étiquette"),):
+            if d.get(cle) is not None:
+                ajoute(f"{nom} de 191", int(d[cle]), 0, ss1.name)
+        et = d.get("letalon") or {}
+        for cle, nom in (("avec_lingredient", "de la liste qui porte l ingrédient"),
+                         ("rien_que_du_bruit", "de la liste de bruit pur")):
+            x = et.get(cle) or {}
+            for c2, n2 in (("la_separation_maximale", "la séparation maximale"),
+                           ("le_plancher_de_detection", "le plancher de détection")):
+                if x.get(c2) is not None:
+                    ajoute(f"{n2} {nom} de 191", float(x[c2]), _dec191(x[c2]), ss1.name)
+        v1 = d.get("le_verdict") or {}
+        for x in (v1.get("tous") or []):
+            q = f"de « {x['nom']} » de 191"
+            for c2, n2 in (("separation", "la séparation"), ("aire", "l aire sous la courbe")):
+                if x.get(c2) is not None:
+                    ajoute(f"{n2} {q}", float(x[c2]), _dec191(x[c2]), ss1.name)
+            if x.get("chunks_couverts") is not None:
+                ajoute(f"les chunks couverts {q}", int(x["chunks_couverts"]), 0, ss1.name)
+        for cle, nom in (("chunks_etiquetes", "chunks étiquetés"),
+                         ("chunks_qui_retiennent", "chunks qui retiennent"),
+                         ("observables_declares", "observables déclarés"),
+                         ("observables_lus", "observables lus")):
+            if v1.get(cle) is not None:
+                ajoute(f"{nom} de 191", int(v1[cle]), 0, ss1.name)
+        for cle, nom in (("la_separation_maximale", "la séparation maximale"),
+                         ("le_plancher_de_detection", "le plancher de détection"),
+                         ("laire_a_depasser", "l aire à dépasser")):
+            if v1.get(cle) is not None:
+                ajoute(f"{nom} de 191", float(v1[cle]), _dec191(v1[cle]), ss1.name)
+        mei = v1.get("le_meilleur") or {}
+        for cle, nom in (("aire", "l aire du meilleur observable"),
+                         ("separation", "la séparation du meilleur observable")):
+            if mei.get(cle) is not None:
+                ajoute(f"{nom} de 191", float(mei[cle]), _dec191(mei[cle]), ss1.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 190 : UNE SURFACE QUI CHOISIT SA COUCHE RESTE-T-ELLE SUR SA FEUILLE ?
     # (1) Une part qui franchit ne voyage JAMAIS sans celle du nul au meme endroit : « elle quitte sa
     # feuille trois fois sur cent » est vrai de presque toute marche, et c'est l'ECART au hasard qui

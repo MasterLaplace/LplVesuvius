@@ -1,0 +1,862 @@
+{
+  "graine": 20261001,
+  "tirages": 19,
+  "letiquette": "le_choix_retient_la_marche",
+  "la_mesure_etiquetee": "une_surface_qui_choisit_sa_couche",
+  "les_exclus": [
+    "la part franchie en choisissant",
+    "la plus basse des parts du hasard",
+    "ce que le choix retient"
+  ],
+  "chunks_etiquetes": 21,
+  "chunks_qui_retiennent": 6,
+  "observables_declares": 19,
+  "la_table": {
+    "decidable": true,
+    "chunks": [
+      [
+        "20230702185753",
+        98,
+        71
+      ],
+      [
+        "20230702185753",
+        98,
+        142
+      ],
+      [
+        "20230702185753",
+        98,
+        213
+      ],
+      [
+        "20230702185753",
+        197,
+        71
+      ],
+      [
+        "20230702185753",
+        197,
+        213
+      ],
+      [
+        "20230702185753",
+        296,
+        71
+      ],
+      [
+        "20230702185753",
+        296,
+        142
+      ],
+      [
+        "20230929220926",
+        62,
+        148
+      ],
+      [
+        "20230929220926",
+        62,
+        296
+      ],
+      [
+        "20230929220926",
+        62,
+        444
+      ],
+      [
+        "20230929220926",
+        125,
+        148
+      ],
+      [
+        "20230929220926",
+        125,
+        444
+      ],
+      [
+        "20230929220926",
+        187,
+        444
+      ],
+      [
+        "20231005123336",
+        68,
+        189
+      ],
+      [
+        "20231005123336",
+        68,
+        379
+      ],
+      [
+        "20231005123336",
+        68,
+        569
+      ],
+      [
+        "20231005123336",
+        136,
+        189
+      ],
+      [
+        "20231005123336",
+        136,
+        379
+      ],
+      [
+        "20231005123336",
+        136,
+        569
+      ],
+      [
+        "20231005123336",
+        204,
+        379
+      ],
+      [
+        "20231005123336",
+        204,
+        569
+      ]
+    ],
+    "etiquettes": [
+      false,
+      false,
+      false,
+      true,
+      false,
+      false,
+      false,
+      false,
+      true,
+      false,
+      true,
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      true,
+      false,
+      false,
+      false
+    ],
+    "chunks_etiquetes": 21,
+    "chunks_qui_retiennent": 6,
+    "observables_declares": 19
+  },
+  "les_colonnes": [
+    {
+      "mesure": "le_rouleau_creuse_t_il",
+      "cle": "profondeur",
+      "nom": "la profondeur du creux (`180`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "le_rouleau_creuse_t_il",
+      "cle": "excedent",
+      "nom": "l'excédent du creux sur ses mélanges (`180`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "le_rouleau_creuse_t_il",
+      "cle": "statistique",
+      "nom": "la statistique de famille du creux (`180`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "le_rouleau_creuse_t_il",
+      "cle": "coherence_mediane",
+      "nom": "la cohérence médiane du chunk (`180`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "le_rouleau_creuse_t_il",
+      "cle": "coherence_minimale",
+      "nom": "la cohérence minimale du chunk (`180`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "le_rouleau_creuse_t_il",
+      "cle": "largeur",
+      "nom": "la largeur du creux (`180`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "le_rouleau_creuse_t_il",
+      "cle": "couche",
+      "nom": "la couche où le creux tombe (`180`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "un_ruban_qui_saute_perd_il_sa_fibre",
+      "cle": "pas_a_plat",
+      "nom": "la longueur suivable à plat (`187`)",
+      "chunks_couverts": 16
+    },
+    {
+      "mesure": "un_ruban_qui_saute_perd_il_sa_fibre",
+      "cle": "ce_que_le_saut_coute",
+      "nom": "ce que le saut coûte au ruban (`187`)",
+      "chunks_couverts": 16
+    },
+    {
+      "mesure": "un_ruban_qui_saute_perd_il_sa_fibre",
+      "cle": "ce_que_la_derive_coute",
+      "nom": "ce que la dérive coûte au ruban (`187`)",
+      "chunks_couverts": 16
+    },
+    {
+      "mesure": "un_ruban_qui_saute_perd_il_sa_fibre",
+      "cle": "montee",
+      "nom": "la montée dérivée des frontières (`187`)",
+      "chunks_couverts": 16
+    },
+    {
+      "mesure": "jusquou_une_surface_peut_elle_deriver",
+      "cle": "portee_en_couches",
+      "nom": "la portée en profondeur (`188`)",
+      "chunks_couverts": 0
+    },
+    {
+      "mesure": "jusquou_une_surface_peut_elle_deriver",
+      "cle": "excedent_maximal",
+      "nom": "l'excédent maximal sur le mélange (`188`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "jusquou_une_surface_peut_elle_deriver",
+      "cle": "sommet_en_couches",
+      "nom": "la montée où l'excédent culmine (`188`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "lempilement_se_repete_t_il",
+      "cle": "lectures_par_barreau",
+      "nom": "les lectures par barreau (`189`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "lempilement_se_repete_t_il",
+      "cle": "profondeurs_montantes",
+      "nom": "les profondeurs communes montantes (`189`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "une_surface_qui_choisit_sa_couche",
+      "cle": "plafond_du_ruban",
+      "nom": "le plafond lu dans la matière (`190`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "une_surface_qui_choisit_sa_couche",
+      "cle": "marches",
+      "nom": "le nombre de couches texturées (`190`)",
+      "chunks_couverts": 21
+    },
+    {
+      "mesure": "une_surface_qui_choisit_sa_couche",
+      "cle": "frontieres",
+      "nom": "le nombre de frontières lues (`190`)",
+      "chunks_couverts": 21
+    }
+  ],
+  "letalon": {
+    "combien_dobservables": 19,
+    "avec_lingredient": {
+      "decidable": true,
+      "observables_lus": 19,
+      "le_meilleur": {
+        "nom": "l'ingrédient de l'étiquette, bruité",
+        "mesure": "étalon",
+        "cle": "l'ingrédient de l'étiquette, bruité",
+        "aire": 0.9444,
+        "separation": 0.4444,
+        "chunks_couverts": 21
+      },
+      "observables_sans_lecture": [],
+      "la_separation_maximale": 0.4444,
+      "tous": [
+        {
+          "nom": "l'ingrédient de l'étiquette, bruité",
+          "mesure": "étalon",
+          "cle": "l'ingrédient de l'étiquette, bruité",
+          "aire": 0.9444,
+          "separation": 0.4444,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 0",
+          "mesure": "étalon",
+          "cle": "du bruit pur 0",
+          "aire": 0.5333,
+          "separation": 0.0333,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 1",
+          "mesure": "étalon",
+          "cle": "du bruit pur 1",
+          "aire": 0.5556,
+          "separation": 0.0556,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 2",
+          "mesure": "étalon",
+          "cle": "du bruit pur 2",
+          "aire": 0.5444,
+          "separation": 0.0444,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 3",
+          "mesure": "étalon",
+          "cle": "du bruit pur 3",
+          "aire": 0.5667,
+          "separation": 0.0667,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 4",
+          "mesure": "étalon",
+          "cle": "du bruit pur 4",
+          "aire": 0.3333,
+          "separation": 0.1667,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 5",
+          "mesure": "étalon",
+          "cle": "du bruit pur 5",
+          "aire": 0.4667,
+          "separation": 0.0333,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 6",
+          "mesure": "étalon",
+          "cle": "du bruit pur 6",
+          "aire": 0.2111,
+          "separation": 0.2889,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 7",
+          "mesure": "étalon",
+          "cle": "du bruit pur 7",
+          "aire": 0.3333,
+          "separation": 0.1667,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 8",
+          "mesure": "étalon",
+          "cle": "du bruit pur 8",
+          "aire": 0.3778,
+          "separation": 0.1222,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 9",
+          "mesure": "étalon",
+          "cle": "du bruit pur 9",
+          "aire": 0.4222,
+          "separation": 0.0778,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 10",
+          "mesure": "étalon",
+          "cle": "du bruit pur 10",
+          "aire": 0.4333,
+          "separation": 0.0667,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 11",
+          "mesure": "étalon",
+          "cle": "du bruit pur 11",
+          "aire": 0.3,
+          "separation": 0.2,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 12",
+          "mesure": "étalon",
+          "cle": "du bruit pur 12",
+          "aire": 0.6778,
+          "separation": 0.1778,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 13",
+          "mesure": "étalon",
+          "cle": "du bruit pur 13",
+          "aire": 0.6111,
+          "separation": 0.1111,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 14",
+          "mesure": "étalon",
+          "cle": "du bruit pur 14",
+          "aire": 0.3889,
+          "separation": 0.1111,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 15",
+          "mesure": "étalon",
+          "cle": "du bruit pur 15",
+          "aire": 0.2889,
+          "separation": 0.2111,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 16",
+          "mesure": "étalon",
+          "cle": "du bruit pur 16",
+          "aire": 0.4889,
+          "separation": 0.0111,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 17",
+          "mesure": "étalon",
+          "cle": "du bruit pur 17",
+          "aire": 0.3778,
+          "separation": 0.1222,
+          "chunks_couverts": 21
+        }
+      ],
+      "le_nul": {
+        "decidable": true,
+        "tirages": 19,
+        "le_plus_grand_maximum": 0.4111,
+        "le_maximum_median": 0.2778,
+        "les_maxima": [
+          0.2778,
+          0.2889,
+          0.3,
+          0.3111,
+          0.1667,
+          0.2556,
+          0.3444,
+          0.2667,
+          0.2778,
+          0.2444,
+          0.3222,
+          0.2,
+          0.4111,
+          0.3556,
+          0.2444,
+          0.2222,
+          0.3556,
+          0.2778,
+          0.2333
+        ]
+      },
+      "le_plancher_de_detection": 0.4111,
+      "laire_a_depasser": 0.9111,
+      "un_observable_separe": true
+    },
+    "rien_que_du_bruit": {
+      "decidable": true,
+      "observables_lus": 19,
+      "le_meilleur": {
+        "nom": "du bruit pur 6",
+        "mesure": "étalon",
+        "cle": "du bruit pur 6",
+        "aire": 0.2111,
+        "separation": 0.2889,
+        "chunks_couverts": 21
+      },
+      "observables_sans_lecture": [],
+      "la_separation_maximale": 0.2889,
+      "tous": [
+        {
+          "nom": "du bruit pur 0",
+          "mesure": "étalon",
+          "cle": "du bruit pur 0",
+          "aire": 0.5333,
+          "separation": 0.0333,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 1",
+          "mesure": "étalon",
+          "cle": "du bruit pur 1",
+          "aire": 0.5556,
+          "separation": 0.0556,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 2",
+          "mesure": "étalon",
+          "cle": "du bruit pur 2",
+          "aire": 0.5444,
+          "separation": 0.0444,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 3",
+          "mesure": "étalon",
+          "cle": "du bruit pur 3",
+          "aire": 0.5667,
+          "separation": 0.0667,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 4",
+          "mesure": "étalon",
+          "cle": "du bruit pur 4",
+          "aire": 0.3333,
+          "separation": 0.1667,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 5",
+          "mesure": "étalon",
+          "cle": "du bruit pur 5",
+          "aire": 0.4667,
+          "separation": 0.0333,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 6",
+          "mesure": "étalon",
+          "cle": "du bruit pur 6",
+          "aire": 0.2111,
+          "separation": 0.2889,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 7",
+          "mesure": "étalon",
+          "cle": "du bruit pur 7",
+          "aire": 0.3333,
+          "separation": 0.1667,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 8",
+          "mesure": "étalon",
+          "cle": "du bruit pur 8",
+          "aire": 0.3778,
+          "separation": 0.1222,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 9",
+          "mesure": "étalon",
+          "cle": "du bruit pur 9",
+          "aire": 0.4222,
+          "separation": 0.0778,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 10",
+          "mesure": "étalon",
+          "cle": "du bruit pur 10",
+          "aire": 0.4333,
+          "separation": 0.0667,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 11",
+          "mesure": "étalon",
+          "cle": "du bruit pur 11",
+          "aire": 0.3,
+          "separation": 0.2,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 12",
+          "mesure": "étalon",
+          "cle": "du bruit pur 12",
+          "aire": 0.6778,
+          "separation": 0.1778,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 13",
+          "mesure": "étalon",
+          "cle": "du bruit pur 13",
+          "aire": 0.6111,
+          "separation": 0.1111,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 14",
+          "mesure": "étalon",
+          "cle": "du bruit pur 14",
+          "aire": 0.3889,
+          "separation": 0.1111,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 15",
+          "mesure": "étalon",
+          "cle": "du bruit pur 15",
+          "aire": 0.2889,
+          "separation": 0.2111,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 16",
+          "mesure": "étalon",
+          "cle": "du bruit pur 16",
+          "aire": 0.4889,
+          "separation": 0.0111,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 17",
+          "mesure": "étalon",
+          "cle": "du bruit pur 17",
+          "aire": 0.3778,
+          "separation": 0.1222,
+          "chunks_couverts": 21
+        },
+        {
+          "nom": "du bruit pur 18",
+          "mesure": "étalon",
+          "cle": "du bruit pur 18",
+          "aire": 0.5111,
+          "separation": 0.0111,
+          "chunks_couverts": 21
+        }
+      ],
+      "le_nul": {
+        "decidable": true,
+        "tirages": 19,
+        "le_plus_grand_maximum": 0.4111,
+        "le_maximum_median": 0.2778,
+        "les_maxima": [
+          0.2778,
+          0.2889,
+          0.3,
+          0.3111,
+          0.1667,
+          0.2556,
+          0.3444,
+          0.2667,
+          0.2778,
+          0.2444,
+          0.3222,
+          0.1778,
+          0.4111,
+          0.3556,
+          0.2444,
+          0.2222,
+          0.3556,
+          0.2556,
+          0.2222
+        ]
+      },
+      "le_plancher_de_detection": 0.4111,
+      "laire_a_depasser": 0.9111,
+      "un_observable_separe": false
+    },
+    "letalon_separe_les_deux": true
+  },
+  "le_verdict": {
+    "decidable": true,
+    "observables_lus": 18,
+    "le_meilleur": {
+      "nom": "le plafond lu dans la matière (`190`)",
+      "mesure": "une_surface_qui_choisit_sa_couche",
+      "cle": "plafond_du_ruban",
+      "aire": 0.8889,
+      "separation": 0.3889,
+      "chunks_couverts": 21
+    },
+    "observables_sans_lecture": [
+      "la portée en profondeur (`188`)"
+    ],
+    "la_separation_maximale": 0.3889,
+    "tous": [
+      {
+        "nom": "la profondeur du creux (`180`)",
+        "mesure": "le_rouleau_creuse_t_il",
+        "cle": "profondeur",
+        "aire": 0.4111,
+        "separation": 0.0889,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "l'excédent du creux sur ses mélanges (`180`)",
+        "mesure": "le_rouleau_creuse_t_il",
+        "cle": "excedent",
+        "aire": 0.4778,
+        "separation": 0.0222,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "la statistique de famille du creux (`180`)",
+        "mesure": "le_rouleau_creuse_t_il",
+        "cle": "statistique",
+        "aire": 0.4778,
+        "separation": 0.0222,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "la cohérence médiane du chunk (`180`)",
+        "mesure": "le_rouleau_creuse_t_il",
+        "cle": "coherence_mediane",
+        "aire": 0.7556,
+        "separation": 0.2556,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "la cohérence minimale du chunk (`180`)",
+        "mesure": "le_rouleau_creuse_t_il",
+        "cle": "coherence_minimale",
+        "aire": 0.7111,
+        "separation": 0.2111,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "la largeur du creux (`180`)",
+        "mesure": "le_rouleau_creuse_t_il",
+        "cle": "largeur",
+        "aire": 0.4444,
+        "separation": 0.0556,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "la couche où le creux tombe (`180`)",
+        "mesure": "le_rouleau_creuse_t_il",
+        "cle": "couche",
+        "aire": 0.4556,
+        "separation": 0.0444,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "la longueur suivable à plat (`187`)",
+        "mesure": "un_ruban_qui_saute_perd_il_sa_fibre",
+        "cle": "pas_a_plat",
+        "aire": 0.8167,
+        "separation": 0.3167,
+        "chunks_couverts": 16
+      },
+      {
+        "nom": "ce que le saut coûte au ruban (`187`)",
+        "mesure": "un_ruban_qui_saute_perd_il_sa_fibre",
+        "cle": "ce_que_le_saut_coute",
+        "aire": 0.5333,
+        "separation": 0.0333,
+        "chunks_couverts": 16
+      },
+      {
+        "nom": "ce que la dérive coûte au ruban (`187`)",
+        "mesure": "un_ruban_qui_saute_perd_il_sa_fibre",
+        "cle": "ce_que_la_derive_coute",
+        "aire": 0.2917,
+        "separation": 0.2083,
+        "chunks_couverts": 16
+      },
+      {
+        "nom": "la montée dérivée des frontières (`187`)",
+        "mesure": "un_ruban_qui_saute_perd_il_sa_fibre",
+        "cle": "montee",
+        "aire": 0.1417,
+        "separation": 0.3583,
+        "chunks_couverts": 16
+      },
+      {
+        "nom": "l'excédent maximal sur le mélange (`188`)",
+        "mesure": "jusquou_une_surface_peut_elle_deriver",
+        "cle": "excedent_maximal",
+        "aire": 0.7944,
+        "separation": 0.2944,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "la montée où l'excédent culmine (`188`)",
+        "mesure": "jusquou_une_surface_peut_elle_deriver",
+        "cle": "sommet_en_couches",
+        "aire": 0.5722,
+        "separation": 0.0722,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "les lectures par barreau (`189`)",
+        "mesure": "lempilement_se_repete_t_il",
+        "cle": "lectures_par_barreau",
+        "aire": 0.7222,
+        "separation": 0.2222,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "les profondeurs communes montantes (`189`)",
+        "mesure": "lempilement_se_repete_t_il",
+        "cle": "profondeurs_montantes",
+        "aire": 0.6833,
+        "separation": 0.1833,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "le plafond lu dans la matière (`190`)",
+        "mesure": "une_surface_qui_choisit_sa_couche",
+        "cle": "plafond_du_ruban",
+        "aire": 0.8889,
+        "separation": 0.3889,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "le nombre de couches texturées (`190`)",
+        "mesure": "une_surface_qui_choisit_sa_couche",
+        "cle": "marches",
+        "aire": 0.8,
+        "separation": 0.3,
+        "chunks_couverts": 21
+      },
+      {
+        "nom": "le nombre de frontières lues (`190`)",
+        "mesure": "une_surface_qui_choisit_sa_couche",
+        "cle": "frontieres",
+        "aire": 0.55,
+        "separation": 0.05,
+        "chunks_couverts": 21
+      }
+    ],
+    "le_nul": {
+      "decidable": true,
+      "tirages": 19,
+      "le_plus_grand_maximum": 0.4286,
+      "le_maximum_median": 0.2778,
+      "les_maxima": [
+        0.3556,
+        0.359,
+        0.2778,
+        0.2778,
+        0.2396,
+        0.2,
+        0.2333,
+        0.4,
+        0.4286,
+        0.3222,
+        0.1727,
+        0.2444,
+        0.2917,
+        0.3455,
+        0.3229,
+        0.1778,
+        0.2222,
+        0.1273,
+        0.2444
+      ]
+    },
+    "le_plancher_de_detection": 0.4286,
+    "laire_a_depasser": 0.9286,
+    "un_observable_separe": false,
+    "chunks_etiquetes": 21,
+    "chunks_qui_retiennent": 6,
+    "observables_declares": 19,
+    "letalon_separe_les_deux": true
+  }
+}
