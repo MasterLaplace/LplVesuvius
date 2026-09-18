@@ -159,8 +159,12 @@ def un_bloc(url: str, meta: dict, cy: int, cx: int, delai: float = DELAI):
     return np.frombuffer(data, dtype=np.dtype(meta["dtype"])).reshape(profond, hy, hx), None
 
 
-def les_cubes(paires: list[dict], delai: float = DELAI) -> dict:
+def les_cubes(paires: list[dict], delai: float = DELAI, garder_le_cube: bool = False) -> dict:
     """Les trente cubes, téléchargés une fois, et la couche du milieu de chacun.
+
+    ⚠⚠ `garder_le_cube` EST NUL PAR DEFAUT, ET C'EST LA REGLE DU DEPOT : une tranche publiee ne se
+    corrige jamais en place. `196` a besoin du cube entier pour en tirer une coupe en profondeur ;
+    avec le defaut, cette tranche rend exactement ce qu'elle rendait.
 
     ⚠ Une paire dont un des deux cubes ne répond pas est écartée ENTIÈRE : garder le retenant sans
     son contrôle briserait l'appariement, et la loi exacte compterait quinze contre quatorze.
@@ -191,13 +195,16 @@ def les_cubes(paires: list[dict], delai: float = DELAI) -> dict:
             if bloc is None:
                 refus[pourquoi] = refus.get(pourquoi, 0) + 1
                 break
-            deux.append((camp, np.asarray(bloc[la_couche_montree(bloc.shape[0])], dtype=float)))
+            deux.append((camp, bloc))
         if len(deux) != 2:
             continue
         gardees.append(p)
-        for camp, couche in deux:
-            tuiles.append({"segment": seg, "chunk": list(p[camp]),
-                           "retient": camp == "retient", "couche": couche})
+        for camp, bloc in deux:
+            t = {"segment": seg, "chunk": list(p[camp]), "retient": camp == "retient",
+                 "couche": np.asarray(bloc[la_couche_montree(bloc.shape[0])], dtype=float)}
+            if garder_le_cube:
+                t["cube"] = np.asarray(bloc, dtype=float)
+            tuiles.append(t)
     return {"tuiles": tuiles, "paires_gardees": gardees, "refuses": refus,
             "couches": {int(m["chunks"][0]) for m in metas.values()}}
 
