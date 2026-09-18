@@ -2737,6 +2737,44 @@ contre laquelle toute lecture future se note. `R4-P43` est **répondue par la n�
 couche** — c'est-à-dire d'une propriété de la relation **entre** couches, que la coupe montrée ne
 pouvait pas porter.
 
+**`196` · 2026-09-18 · regarder dans la profondeur**
+⭐⭐⭐⭐ **`195` regardait une COUCHE, or l'étiquette naît d'une marche qui CHOISIT sa couche** : une
+propriété de la relation **entre** couches, que sa coupe ne pouvait pas porter. La vue est donc une
+section **(couche, colonne)** à la rangée **médiane**, déclarée par l'arithmétique — choisir la plus
+parlante des cent vingt-huit serait la maximisation que `195` a désamorcée.
+⭐⭐⭐⭐ **Et les deux dettes de `195` sont payées, toutes deux déclarées AVANT la lecture** —
+`R4-F250`. L'**épreuve appariée**, que `195` s'était interdit d'ajouter après coup, et la
+**sensibilité à un trait de texture**, que `195` n'avait jamais mesurée. Deux épreuves sur les mêmes
+données sont deux chances : chacune reçoit **0,025**, moitié de la garantie. ⚠⚠ Le prix se trouve
+**gratuit** ici — les deux lois exactes sautent la garantie d'un compte au suivant — et le dire vaut
+mieux que laisser croire qu'il a mordu.
+✗ **AUCUNE DES DEUX ÉPREUVES NE PASSE** — `R4-F249`. L'assignation rend **10** justes sur quinze
+contre **7,5 justes** attendus (**0,0715555**, seuil **11 justes**) ; les paires **7** bonnes sur
+**9** informatives contre **4,5 bonnes** (**0,0898438**, seuil **8**), six paires étant **muettes**.
+⚠⚠ `195` rendait **7 justes** sur les MÊMES cubes, donc la profondeur en rend davantage — mais cette
+comparaison n'a PAS été déclarée : c'est une observation, pas une épreuve.
+★ **LE NÉGATIF EST DEUX FOIS MIEUX BORNÉ** — `R4-F251`. Une stratification posée à la période d'un
+pli (**72,0833 voxels**, dérivée) exige **64 unités du volume** pour être vue à tous les réplicats,
+comme la luminosité, et les **quatre contrôles croisés** rendent **1**, **0**, **1** et
+**0,05 des réplicats** : chaque lecteur est aveugle au trait de l'autre.
+⚠⚠⚠ **Un vrai défaut, trouvé par un contrôle croisé et par rien d'autre** — `R4-F252`. La
+stratification n'était pas centrée : cent neuf couches pour une période de soixante-douze, donc une
+cycle et demi et une moyenne non nulle. Le trait déplaçait la **luminosité**, l'autre lecteur le
+voyait, et le contrôle qui doit **séparer** les deux a viré au rouge. Une sonde qui aurait seulement
+vérifié que le lecteur de texture MONTE avec la texture serait restée verte.
+⭐ **La lecture est SCELLÉE par un commit signé antérieur à toute clef** — `R4-F253`. ⚠⚠ Ce que le
+sceau prouve est étroit et se dit : la lecture précède tout fichier portant la réponse, non que le
+code n'aurait pas pu la calculer. **Un sceau est un horodatage, pas une serrure.**
+⚠⚠⚠ **Deux sondes incapables d'échouer, sur onze bris.** L'une inspectait un dictionnaire que le
+test fabrique au lieu de ce que `mesurer` publie — un champ ajouté à la vraie sortie la laissait
+verte ; elle compare désormais un **ensemble de champs déclaré**. L'autre affirmait un seuil apparié
+de **13** que l'arithmétique exacte contredit.
+⭐ `R4-P44` est **répondue par la négative** et `R4-P45` **s'ouvre** : la direction est désormais
+**publiée**, donc une confirmation à la manière de `192` devient légitime — chunks neufs, une vue,
+un sens. ⚠⚠⚠ Et la contrainte liante est mesurée : onze justes sur quinze est une séparation presque
+parfaite, et la PART exigée baisse avec la taille de la planche. Ce qui manque n'est pas une idée,
+c'est un **compte de chunks étiquetés**.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

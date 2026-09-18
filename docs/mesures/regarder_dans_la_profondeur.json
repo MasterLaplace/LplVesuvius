@@ -248,6 +248,158 @@
         186,
         82
       ]
+    ],
+    "adresses": [
+      [
+        "20231016151002",
+        186,
+        202
+      ],
+      [
+        "20231005123336",
+        136,
+        189
+      ],
+      [
+        "20230702185753",
+        296,
+        142
+      ],
+      [
+        "20231005123336",
+        68,
+        569
+      ],
+      [
+        "20231210121321",
+        99,
+        234
+      ],
+      [
+        "20231221180251",
+        62,
+        164
+      ],
+      [
+        "20231016151002",
+        62,
+        202
+      ],
+      [
+        "20231031143852",
+        133,
+        257
+      ],
+      [
+        "20231012184424",
+        198,
+        147
+      ],
+      [
+        "20231031143852",
+        66,
+        171
+      ],
+      [
+        "20231221180251",
+        186,
+        82
+      ],
+      [
+        "20230929220926",
+        125,
+        148
+      ],
+      [
+        "20230929220926",
+        62,
+        296
+      ],
+      [
+        "20231221180251",
+        0,
+        246
+      ],
+      [
+        "20230929220926",
+        62,
+        148
+      ],
+      [
+        "20231005123336",
+        68,
+        379
+      ],
+      [
+        "20231005123336",
+        204,
+        379
+      ],
+      [
+        "20231016151002",
+        124,
+        303
+      ],
+      [
+        "20230702185753",
+        197,
+        71
+      ],
+      [
+        "20231012184424",
+        99,
+        443
+      ],
+      [
+        "20231022170901",
+        83,
+        226
+      ],
+      [
+        "20231022170901",
+        83,
+        452
+      ],
+      [
+        "20231005123336",
+        136,
+        569
+      ],
+      [
+        "20231221180251",
+        62,
+        82
+      ],
+      [
+        "20231022170901",
+        41,
+        452
+      ],
+      [
+        "20231022170901",
+        125,
+        226
+      ],
+      [
+        "20230929220926",
+        62,
+        444
+      ],
+      [
+        "20231210121321",
+        99,
+        78
+      ],
+      [
+        "20231005123336",
+        136,
+        379
+      ],
+      [
+        "20231016151002",
+        62,
+        101
+      ]
     ]
   },
   "la_loi_exacte": {
@@ -388,13 +540,136 @@
     "la_luminosite_vue_par_le_lecteur_de_luminosite": 1.0,
     "la_force_posee": 64.0
   },
-  "la_lecture_deposee": [],
-  "ce_que_loeil_a_cru_voir": "",
-  "la_cle": null,
-  "la_note": null,
-  "la_note_appariee": null,
+  "la_lecture_deposee": [
+    1,
+    5,
+    8,
+    9,
+    10,
+    11,
+    12,
+    16,
+    19,
+    20,
+    21,
+    24,
+    26,
+    27,
+    30
+  ],
+  "ce_que_loeil_a_cru_voir": "un feuillet CONTINU et nettement SÉPARÉ de ses voisins, qu'on pourrait suivre d'un bord à l'autre de la coupe — ni enchevêtrement de feuillets qui fusionnent, ni coupe presque vide",
+  "la_cle": [
+    1,
+    4,
+    8,
+    9,
+    11,
+    12,
+    13,
+    16,
+    19,
+    21,
+    22,
+    24,
+    28,
+    29,
+    30
+  ],
+  "la_note": {
+    "decidable": true,
+    "les_tuiles_designees": [
+      1,
+      5,
+      8,
+      9,
+      10,
+      11,
+      12,
+      16,
+      19,
+      20,
+      21,
+      24,
+      26,
+      27,
+      30
+    ],
+    "les_justes": 10,
+    "les_attendus_par_hasard": 7.5,
+    "la_probabilite": 0.0715555,
+    "le_seuil": 11,
+    "loeil_separe": false
+  },
+  "la_note_appariee": {
+    "decidable": true,
+    "les_paires": 15,
+    "la_distribution": [
+      {
+        "bonnes": 0,
+        "probabilite": 0.0019531,
+        "probabilite_den_avoir_autant_ou_plus": 1.0
+      },
+      {
+        "bonnes": 1,
+        "probabilite": 0.0175781,
+        "probabilite_den_avoir_autant_ou_plus": 0.9980469
+      },
+      {
+        "bonnes": 2,
+        "probabilite": 0.0703125,
+        "probabilite_den_avoir_autant_ou_plus": 0.9804688
+      },
+      {
+        "bonnes": 3,
+        "probabilite": 0.1640625,
+        "probabilite_den_avoir_autant_ou_plus": 0.9101562
+      },
+      {
+        "bonnes": 4,
+        "probabilite": 0.2460938,
+        "probabilite_den_avoir_autant_ou_plus": 0.7460938
+      },
+      {
+        "bonnes": 5,
+        "probabilite": 0.2460938,
+        "probabilite_den_avoir_autant_ou_plus": 0.5
+      },
+      {
+        "bonnes": 6,
+        "probabilite": 0.1640625,
+        "probabilite_den_avoir_autant_ou_plus": 0.2539062
+      },
+      {
+        "bonnes": 7,
+        "probabilite": 0.0703125,
+        "probabilite_den_avoir_autant_ou_plus": 0.0898438
+      },
+      {
+        "bonnes": 8,
+        "probabilite": 0.0175781,
+        "probabilite_den_avoir_autant_ou_plus": 0.0195312
+      },
+      {
+        "bonnes": 9,
+        "probabilite": 0.0019531,
+        "probabilite_den_avoir_autant_ou_plus": 0.0019531
+      }
+    ],
+    "les_paires_muettes": 6,
+    "les_paires_informatives": 9,
+    "les_bonnes_designations": 7,
+    "les_attendues_par_hasard": 4.5,
+    "la_probabilite": 0.0898438,
+    "le_seuil": 8,
+    "la_garantie": 0.025,
+    "loeil_separe": false
+  },
   "le_verdict": {
-    "leve": false,
-    "ce_qui_manque": "la lecture n'est pas encore déposée"
-  }
+    "leve": true,
+    "loeil_separe_sur_lassignation": false,
+    "loeil_separe_sur_les_paires": false,
+    "loeil_separe": false,
+    "la_force_de_texture_que_le_dispositif_voit": 64.0
+  },
+  "ce_que_195_rendait": 7
 }

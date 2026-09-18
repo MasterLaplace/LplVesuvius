@@ -3194,6 +3194,83 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 196 : REGARDER DANS LA PROFONDEUR
+    # (1) Chacune des DEUX epreuves ne voyage jamais sans SON seuil ni sans ses attendus : « dix
+    # justes sur quinze » se lit comme un succes tant qu'on ne dit pas qu'il en fallait onze.
+    # (2) L'epreuve appariee ne voyage jamais sans ses PAIRES MUETTES : sept bonnes sur quinze et
+    # sept bonnes sur neuf informatives sont deux choses differentes, et seule la seconde est jugee.
+    # (3) Et la force de texture ne voyage jamais sans les QUATRE CONTROLES CROISES : sans eux, « un
+    # lecteur de texture » n'est qu'un nom, et la borne qu'il rend ne borne rien de neuf.
+    # ⚠⚠ Chaque chiffre court est enregistre AVEC SON UNITE, jamais nu.
+    ss6 = _source(racine, "regarder_dans_la_profondeur.json")
+    if ss6.exists():
+        d = json.loads(ss6.read_text())
+
+        def _dec196(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        loi6 = d.get("la_loi_exacte") or {}
+        note6 = d.get("la_note") or {}
+        ap6 = d.get("la_note_appariee") or {}
+        sens6 = d.get("la_sensibilite_de_texture") or {}
+        cro6 = d.get("les_controles_croises") or {}
+        pl6 = d.get("la_planche") or {}
+        cub6 = d.get("les_cubes") or {}
+        for src6, cle, nom, unites in (
+                (loi6, "tuiles", "les tuiles de la planche", ("tuiles", "cubes")),
+                (loi6, "le_seuil", "le seuil de l assignation", ("justes",)),
+                (note6, "les_justes", "les justes de la lecture", ("justes",)),
+                (ap6, "les_paires", "les paires", ("paires",)),
+                (ap6, "les_paires_informatives", "les paires informatives", ("informatives",)),
+                (ap6, "les_paires_muettes", "les paires muettes", ("muettes",)),
+                (ap6, "les_bonnes_designations", "les bonnes désignations", ("bonnes",)),
+                (ap6, "le_seuil", "le seuil apparié", ("sur", "bonnes")),
+                (sens6, "replicats", "les réplicats", ("réplicats",)),
+                (pl6, "hauteur", "la hauteur de la coupe", ("×",)),
+                (pl6, "largeur", "la largeur de la coupe", ("voxels",)),
+                (cub6, "paires_gardees", "les paires gardées", ("paires",))):
+            if src6.get(cle) is not None:
+                ajoute(f"{nom} de 196", int(src6[cle]), 0, ss6.name, unites=unites)
+        if d.get("ce_que_195_rendait") is not None:
+            ajoute("ce que 195 rendait, relu par 196", int(d["ce_que_195_rendait"]), 0,
+                   ss6.name, unites=("justes",))
+        for src6, cle, nom, unites in (
+                (loi6, "attendus_par_hasard", "les justes attendus par hasard", ("justes",)),
+                (ap6, "les_attendues_par_hasard", "les bonnes attendues par hasard",
+                 ("bonnes",)),
+                (loi6, "la_garantie", "la garantie par épreuve", ()),
+                (loi6, "la_probabilite_au_seuil", "la probabilité au seuil", ()),
+                (note6, "la_probabilite", "la probabilité de l assignation", ()),
+                (ap6, "la_probabilite", "la probabilité des paires", ()),
+                (sens6, "la_force_quil_faut", "la force de texture dérivée",
+                 ("unités du volume",)),
+                (sens6, "la_periode_en_voxels", "la période d un pli", ("voxels",))):
+            if src6.get(cle) is not None:
+                ajoute(f"{nom} de 196", float(src6[cle]), _dec196(src6[cle]), ss6.name,
+                       unites=unites)
+        # ⚠ Les bouts de courbe qui valent zero ou un ne sont pas enregistres : aucune ecriture ne
+        # les rend discriminants, et un chiffre exige que rien ne peut verifier est pire qu'absent.
+        for pt6 in (sens6.get("la_courbe") or []):
+            part6 = float(pt6["part_des_replicats"])
+            if part6 in (0.0, 1.0):
+                continue
+            ajoute(f"la part de texture vue à la force {int(pt6['force'])} de 196", part6,
+                   _dec196(part6), ss6.name, unites=("des réplicats",))
+        for cle, nom in (("la_texture_vue_par_le_lecteur_de_texture", "texture par texture"),
+                         ("la_texture_vue_par_le_lecteur_de_luminosite",
+                          "texture par luminosité"),
+                         ("la_luminosite_vue_par_le_lecteur_de_texture",
+                          "luminosité par texture"),
+                         ("la_luminosite_vue_par_le_lecteur_de_luminosite",
+                          "luminosité par luminosité")):
+            if cro6.get(cle) is not None and float(cro6[cle]) not in (0.0, 1.0):
+                ajoute(f"le croisé {nom} de 196", float(cro6[cle]), _dec196(cro6[cle]),
+                       ss6.name, unites=("des réplicats",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 195 : OUVRIR LES QUINZE, A L'AVEUGLE
     # (1) Un compte de justes ne voyage JAMAIS sans les ATTENDUS PAR HASARD ni sans le SEUIL : sept
     # justes sur quinze se lit comme un demi-succes, alors que c'est exactement la moyenne du nul.

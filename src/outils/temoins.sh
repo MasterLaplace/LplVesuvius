@@ -1531,6 +1531,9 @@ run "figure structure" uv run python "$ROOT/src/figures/figure_letiquette_a_t_el
 run "ouvrir les quinze" uv run python "$ROOT/src/nappe/ouvrir_les_quinze.py" --verifier
 run "figure ouvrir les quinze" uv run python "$ROOT/src/figures/figure_ouvrir_les_quinze.py" --verifier
 run "figure la planche aveugle" uv run python "$ROOT/src/figures/figure_la_planche_a_laveugle.py" --verifier
+run "regarder en profondeur" uv run python "$ROOT/src/nappe/regarder_dans_la_profondeur.py" --verifier
+run "figure regarder en profondeur" uv run python "$ROOT/src/figures/figure_regarder_dans_la_profondeur.py" --verifier
+run "figure planche en profondeur" uv run python "$ROOT/src/figures/figure_la_planche_en_profondeur.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -56,6 +56,7 @@ from ouvrir_les_quinze import (DECIMALES, GARANTIE, _hex, _rng,  # noqa: E402
                                un_lecteur_mecanique)
 
 MESURES = RACINE / "docs" / "mesures"
+CE_QUE_LA_SURFACE_A_RENDU = MESURES / "ouvrir_les_quinze.json"
 
 # ⚠⚠ LA GRAINE DIFFERE DE CELLE DE `195`, ET CE N'EST PAS UN DETAIL : sa clef est publiee, donc une
 # planche qui reprendrait sa permutation serait lisible d'avance par quiconque l'a vue.
@@ -147,10 +148,18 @@ def le_seuil_apparie(informatives: int, garantie: float = GARANTIE_PAR_EPREUVE) 
         if la_loi_appariee(n, k) <= float(garantie):
             seuil = k
             break
+    # ⚠⚠ LA DISTRIBUTION ENTIERE EST PUBLIEE PAR LE PRODUCTEUR, comme celle de `195` : une figure
+    # qui la recalculerait serait une SECONDE definition de la loi appariee.
+    distribution = [{"bonnes": k,
+                     "probabilite": round(float(comb(n, k)) / float(2 ** n), DECIMALES),
+                     "probabilite_den_avoir_autant_ou_plus": round(la_loi_appariee(n, k),
+                                                                   DECIMALES)}
+                    for k in range(0, n + 1)] if n > 0 else []
     return {"paires_informatives": n, "attendues_par_hasard": n / 2.0,
             "la_garantie": float(garantie), "le_seuil": seuil,
             "la_probabilite_au_seuil": (None if seuil is None
-                                        else round(la_loi_appariee(n, seuil), DECIMALES))}
+                                        else round(la_loi_appariee(n, seuil), DECIMALES)),
+            "la_distribution": distribution}
 
 
 def noter_par_paires(lecture, places: list[dict],
@@ -181,6 +190,7 @@ def noter_par_paires(lecture, places: list[dict],
     s = le_seuil_apparie(informatives, garantie)
     p = round(la_loi_appariee(informatives, justes), DECIMALES)
     return {"decidable": True, "les_paires": len(par_paire),
+            "la_distribution": s["la_distribution"],
             "les_paires_muettes": int(muettes), "les_paires_informatives": int(informatives),
             "les_bonnes_designations": int(justes),
             "les_attendues_par_hasard": s["attendues_par_hasard"],
@@ -349,6 +359,21 @@ def mesurer(graine: int = GRAINE, delai: float = DELAI, replicats: int = REPLICA
     }
 
 
+def ce_que_195_a_rendu(chemin: Path = CE_QUE_LA_SURFACE_A_RENDU) -> int | None:
+    """Les justes que `195` a obtenus sur la couche du milieu des MÊMES cubes, RELUS.
+
+    ⚠⚠⚠ RELU, JAMAIS TAPE. La figure portait ce nombre en valeur de repli, donc un chiffre sans
+    producteur dessine dans une image publiee — exactement ce que `chiffres_sans_record` existe pour
+    attraper. Absent quand la mesure l'est : une comparaison qu'on ne peut pas faire ne se fabrique
+    pas.
+    """
+    if not Path(chemin).is_file():
+        return None
+    d = json.loads(Path(chemin).read_text(encoding="utf-8"))
+    n = (d.get("la_note") or {}).get("les_justes")
+    return None if n is None else int(n)
+
+
 def lever(chemin: Path, lecture=LA_LECTURE_A_LAVEUGLE, etiquettes=None) -> dict:
     """Lever l'aveugle sur la planche publiée, en RECONSTRUISANT le plan place → adresse."""
     d = json.loads(Path(chemin).read_text(encoding="utf-8"))
@@ -376,6 +401,7 @@ def lever(chemin: Path, lecture=LA_LECTURE_A_LAVEUGLE, etiquettes=None) -> dict:
     note = noter(lecture, cle, int(loi["tuiles"]), int(loi["choisies"]), loi)
     appariee = noter_par_paires(lecture, places, float(d["la_garantie_par_epreuve"]))
     return {**d, "la_cle": list(cle), "la_note": note, "la_note_appariee": appariee,
+            "ce_que_195_rendait": ce_que_195_a_rendu(),
             "la_planche": {**planche,
                            "adresses": [[t["segment"], int(t["chunk"][0]), int(t["chunk"][1])]
                                         for t in places]},
@@ -485,6 +511,15 @@ def verifier() -> int:
       str(la_loi_appariee(15, sa["le_seuil"] - 1)))
     v("les attendues par hasard valent la moitié des informatives",
       abs(sa["attendues_par_hasard"] - 7.5) < 1e-12)
+    v("★★★ la distribution appariée publiée somme à un, à la précision publiée",
+      abs(sum(x["probabilite"] for x in sa["la_distribution"]) - 1.0)
+      <= len(sa["la_distribution"]) * 10.0 ** -DECIMALES,
+      str(sum(x["probabilite"] for x in sa["la_distribution"])))
+    v("★★★ et elle est symétrique, comme un tirage à pile ou face l'est",
+      all(abs(sa["la_distribution"][k]["probabilite"]
+              - sa["la_distribution"][15 - k]["probabilite"]) < 1e-12 for k in range(16)))
+    v("★★ aucune paire informative ne donne aucune distribution",
+      le_seuil_apparie(0)["la_distribution"] == [])
 
     # ⭐⭐⭐⭐ L'EPREUVE APPARIEE SE VERIFIE SUR SES DEUX FACES ET SUR SES PAIRES MUETTES.
     places = []
@@ -565,6 +600,10 @@ def verifier() -> int:
     v("★★★★ et l'ordre est le MÊME à graine égale, donc refaisable sans réseau",
       [(t["segment"], t["chunk"], t["retient"]) for t in les_tuiles_declarees(etq, 99)["tuiles"]]
       == [(t["segment"], t["chunk"], t["retient"]) for t in dec["tuiles"]])
+    v("★★★ ce que `195` a rendu est RELU de sa mesure, jamais tapé",
+      ce_que_195_a_rendu() == 7, str(ce_que_195_a_rendu()))
+    v("★★★ et il est absent quand la mesure l'est",
+      ce_que_195_a_rendu(Path("/n/existe/pas.json")) is None)
     v("★★ chaque tuile porte le rang de sa paire",
       sorted({t["paire"] for t in dec["tuiles"]}) == list(range(6)))
 
