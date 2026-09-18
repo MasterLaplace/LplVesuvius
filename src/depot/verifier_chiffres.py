@@ -3194,6 +3194,75 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 193 : OU LE CHUNK SE TROUVE-T-IL ?
+    # (1) Une separation ne voyage JAMAIS sans SES DEUX planchers : le mélange libre et le mélange
+    # DANS chaque segment repondent a deux questions differentes, et l'un sans l'autre laisserait
+    # croire qu'une colonne figee dans un segment a ete jugee.
+    # (2) Ni sans la PART VUE PAR L'ETALON : un silence rendu par un instrument qui ne voit pas est
+    # une cecite, pas un resultat.
+    # (3) Et la part vue A LA CONFIGURATION DE `191` ne voyage jamais seule : c'est elle qui dit que
+    # son etalon a un tirage unique pouvait passer par chance, et elle n'a de sens qu'a cote de
+    # celle d'ici.
+    so3 = _source(racine, "ou_le_chunk_se_trouve_t_il.json")
+    if so3.exists():
+        d = json.loads(so3.read_text())
+
+        def _dec193(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        if d.get("tirages") is not None:
+            ajoute("mélanges de l étiquette de 193", int(d["tirages"]), 0, so3.name)
+        et = d.get("letalon") or {}
+        if et.get("replicats") is not None:
+            ajoute("réplicats de l étalon de 193", int(et["replicats"]), 0, so3.name)
+        if et.get("bruit_de_la_porteuse") is not None:
+            ajoute("le bruit de la porteuse de 193", float(et["bruit_de_la_porteuse"]),
+                   _dec193(et["bruit_de_la_porteuse"]), so3.name)
+        rb = et.get("rien_que_du_bruit") or {}
+        for cle, nom in (("la_separation_maximale", "la séparation maximale du bruit pur"),
+                         ("le_plancher_de_detection", "le plancher du bruit pur")):
+            if rb.get(cle) is not None:
+                ajoute(f"{nom} de 193", float(rb[cle]), _dec193(rb[cle]), so3.name)
+        v3 = d.get("le_verdict") or {}
+        for x in (v3.get("tous") or []):
+            q = f"de « {x['nom']} » de 193"
+            for c2, n2 in (("separation", "la séparation"), ("aire", "l aire sous la courbe")):
+                if x.get(c2) is not None:
+                    ajoute(f"{n2} {q}", float(x[c2]), _dec193(x[c2]), so3.name)
+        for cle, nom in (("chunks_etiquetes", "chunks étiquetés"),
+                         ("chunks_qui_retiennent", "chunks qui retiennent"),
+                         ("observables_declares", "observables déclarés"),
+                         ("observables_lus", "observables lus"),
+                         ("venus_de_190", "chunks venus de 190"),
+                         ("venus_de_192", "chunks venus de 192"),
+                         ("chunks_comptes_deux_fois", "chunks comptés deux fois"),
+                         ("observables_intrinseques_de_191", "observables intrinsèques de 191"),
+                         ("chunks_de_191", "chunks de 191")):
+            if v3.get(cle) is not None:
+                ajoute(f"{nom} de 193", int(v3[cle]), 0, so3.name)
+        for cle, nom in (("la_separation_maximale", "la séparation maximale"),
+                         ("le_plancher_de_detection", "le plancher du mélange libre"),
+                         ("le_plancher_stratifie", "le plancher du mélange dans chaque segment"),
+                         ("laire_a_depasser", "l aire à dépasser"),
+                         ("plancher_de_191", "le plancher de 191"),
+                         ("separation_maximale_de_191", "la séparation maximale de 191"),
+                         ("la_part_vue_avec_lingredient", "la part vue par l étalon"),
+                         ("la_part_vue_a_la_configuration_de_191",
+                          "la part vue à la configuration de 191")):
+            if v3.get(cle) is not None:
+                ajoute(f"{nom} de 193", float(v3[cle]), _dec193(v3[cle]), so3.name)
+        fig = v3.get("les_colonnes_constantes_par_segment") or []
+        ajoute("les colonnes figées dans un segment de 193", int(len(fig)), 0, so3.name)
+        mei = v3.get("le_meilleur") or {}
+        for cle, nom in (("aire", "l aire du meilleur observable"),
+                         ("separation", "la séparation du meilleur observable")):
+            if mei.get(cle) is not None:
+                ajoute(f"{nom} de 193", float(mei[cle]), _dec193(mei[cle]), so3.name)
+
     # ⭐⭐⭐⭐ LA TRANCHE 192 : LA PISTE DE `191` TIENT-ELLE SUR DES CHUNKS NEUFS ?
     # (1) Une aire ne voyage JAMAIS sans celle qu'il fallait atteindre : « 0,5654 » ne dit rien sans
     # le seuil, et c'est leur comparaison qui est le resultat.

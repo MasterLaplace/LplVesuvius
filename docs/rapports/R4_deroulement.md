@@ -2638,6 +2638,38 @@ observables de `191` sont tous **intrinsèques** — ils décrivent la texture d
 ⚠⚠⚠ Ce serait une **nouvelle** recherche, payant la famille entière de sa nouvelle liste, et non un
 élargissement de celle de `191` — qui rendrait son plancher faux rétroactivement.
 
+**`193` · 2026-09-18 · où le chunk se trouve-t-il, et est-ce que ça dit quelque chose ?**
+⭐⭐⭐⭐ **Les dix-neuf observables de `191` étaient tous INTRINSÈQUES** — `R4-P41`. Ils décrivaient la
+texture d'un cube sans jamais dire **où** il se trouve. Cette tranche en déclare **12** autres, d'un
+genre différent : la ligne et la colonne du chunk, sa position relative, sa distance au bord, la
+taille et le rang de son segment, la part de treillis qu'il rend. ⚠⚠⚠ C'est une **nouvelle**
+recherche qui paie sa **propre famille entière**, et non un élargissement de la liste de `191` — qui
+rendrait son plancher faux rétroactivement.
+⭐⭐ **Et elle se joue sur 81 chunks au lieu de 21** : un observable extrinsèque ne coûte **aucun
+téléchargement**, il se lit dans l'adresse du chunk et la forme de la grille de son segment. Les
+**60** chunks de `192` rejoignent les **21** de `190`, **0** compté deux fois, **15** retiennent.
+⚠⚠⚠ **Deux nuls, parce que deux chunks d'un segment ne sont pas étrangers** — `R4-F238`. Une
+permutation libre les suppose échangeables ; un second nul mélange l'étiquette **dans** chaque
+segment, et il rend **zéro** pour les **6** colonnes qui y sont constantes. C'est ce qu'il doit dire,
+et les six restent déclarées et **nommées**.
+⭐⭐⭐⭐ **L'ÉTALON SE MESURE SUR DES RÉPLICATS, ET CELA CORRIGE UN CONTRÔLE DE `191`** — `R4-F237`.
+Une colonne portant l'étiquette est retrouvée à **1** des **25** réplicats ici ; **à la configuration
+de `191` — 21 chunks, 19 observables — elle ne l'est qu'à 0,32**. Son étalon était un **tirage
+unique** et pouvait passer par chance. ⚠ Sa conclusion tient — elle n'avait rien trouvé — mais son
+silence était moins lisible qu'il n'en avait l'air, et c'est `192`, sur soixante chunks neufs, qui a
+réellement tranché.
+✗ **AUCUN DES DOUZE NE SÉPARE** — `R4-F236`. Le meilleur atteint **0,1631** (aire **0,3369**) contre
+un plancher de **0,2323** en mélange libre et **0,2222** en mélange dans chaque segment.
+⭐ **ET LE PLANCHER A PRESQUE DE MOITIÉ DESCENDU** — `R4-F239`, de **0,4286** à **0,2323** — le compte
+a quadruplé, la liste est plus courte, **et il n'y a toujours rien à voir**. Le silence n'est donc pas
+une question de finesse.
+⭐ `R4-P42` **s'ouvre** : les douze observables d'ici disent où un chunk est **dans son segment**,
+jamais où il est **dans le rouleau**. `laxe_est_une_courbe`, `espacement_spires` et `ecart_en_spires`
+mesurent déjà le rayon, l'écartement et le rang — et **aucune** n'est portée jusqu'au chunk. Ce qu'il
+faut écrire n'est pas une statistique de plus mais un **rattachement**. ⚠ Et il peut échouer
+honnêtement : si aucune mesure publiée ne donne l'axe du rouleau dans le repère des volumes de
+surface, la porte se ferme sur un manque de donnée.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

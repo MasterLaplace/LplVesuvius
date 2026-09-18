@@ -1,0 +1,526 @@
+{
+  "graine": 20261003,
+  "tirages": 19,
+  "letiquette": "le_choix_retient_la_marche",
+  "letiquetage": {
+    "doubles": 0,
+    "venus_de_190": 21,
+    "venus_de_192": 60,
+    "qui_retiennent": 15
+  },
+  "les_grilles": {
+    "20230702185753": {
+      "decidable": true,
+      "rang": 0,
+      "hauteur": 396,
+      "largeur": 285,
+      "positions_du_treillis": 25
+    },
+    "20230929220926": {
+      "decidable": true,
+      "rang": 1,
+      "hauteur": 251,
+      "largeur": 593,
+      "positions_du_treillis": 25
+    },
+    "20231005123336": {
+      "decidable": true,
+      "rang": 2,
+      "hauteur": 273,
+      "largeur": 760,
+      "positions_du_treillis": 25
+    },
+    "20231007101619": {
+      "decidable": true,
+      "rang": 3,
+      "hauteur": 407,
+      "largeur": 845,
+      "positions_du_treillis": 25
+    },
+    "20231012184424": {
+      "decidable": true,
+      "rang": 4,
+      "hauteur": 397,
+      "largeur": 592,
+      "positions_du_treillis": 25
+    },
+    "20231016151002": {
+      "decidable": true,
+      "rang": 5,
+      "hauteur": 250,
+      "largeur": 406,
+      "positions_du_treillis": 25
+    },
+    "20231022170901": {
+      "decidable": true,
+      "rang": 6,
+      "hauteur": 168,
+      "largeur": 905,
+      "positions_du_treillis": 25
+    },
+    "20231031143852": {
+      "decidable": true,
+      "rang": 7,
+      "hauteur": 268,
+      "largeur": 344,
+      "positions_du_treillis": 25
+    },
+    "20231106155351": {
+      "decidable": true,
+      "rang": 8,
+      "hauteur": 268,
+      "largeur": 401,
+      "positions_du_treillis": 25
+    },
+    "20231210121321": {
+      "decidable": true,
+      "rang": 9,
+      "hauteur": 399,
+      "largeur": 313,
+      "positions_du_treillis": 25
+    },
+    "20231221180251": {
+      "decidable": true,
+      "rang": 10,
+      "hauteur": 250,
+      "largeur": 329,
+      "positions_du_treillis": 25
+    },
+    "20260602204401-5753_-7": {
+      "decidable": true,
+      "rang": 11,
+      "hauteur": 619,
+      "largeur": 90,
+      "positions_du_treillis": 25
+    }
+  },
+  "les_colonnes": [
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "ligne",
+      "nom": "la ligne du chunk dans la grille",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "colonne",
+      "nom": "la colonne du chunk dans la grille",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "part_de_la_hauteur",
+      "nom": "sa position relative en hauteur",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "part_de_la_largeur",
+      "nom": "sa position relative en largeur",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "distance_au_bord",
+      "nom": "sa distance au bord de la grille, en chunks",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "distance_au_bord_relative",
+      "nom": "sa distance au bord, rapportée à la grille",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "hauteur_de_la_grille",
+      "nom": "la hauteur de la grille du segment",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "largeur_de_la_grille",
+      "nom": "la largeur de la grille du segment",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "chunks_de_la_grille",
+      "nom": "les chunks de la grille entière",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "rang_du_segment",
+      "nom": "le rang du segment dans le dépôt",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "chunks_lus_du_segment",
+      "nom": "les chunks lus du segment",
+      "chunks_couverts": 81
+    },
+    {
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "part_lue_du_segment",
+      "nom": "la part du treillis rendue",
+      "chunks_couverts": 81
+    }
+  ],
+  "les_colonnes_constantes_par_segment": [
+    "la hauteur de la grille du segment",
+    "la largeur de la grille du segment",
+    "les chunks de la grille entière",
+    "le rang du segment dans le dépôt",
+    "les chunks lus du segment",
+    "la part du treillis rendue"
+  ],
+  "la_recherche_intrinseque_de_191": {
+    "observables": 19,
+    "chunks": 21,
+    "separation_maximale": 0.3889,
+    "plancher": 0.4286
+  },
+  "la_sensibilite_a_la_configuration_de_191": 0.32,
+  "letalon": {
+    "combien_dobservables": 12,
+    "bruit_de_la_porteuse": 0.6,
+    "replicats": 25,
+    "la_part_vue_avec_lingredient": 1.0,
+    "rien_que_du_bruit": {
+      "decidable": true,
+      "observables_lus": 12,
+      "le_meilleur": {
+        "nom": "du bruit pur 8",
+        "mesure": "étalon",
+        "cle": "du bruit pur 8",
+        "aire": 0.6202,
+        "separation": 0.1202,
+        "chunks_couverts": 81
+      },
+      "observables_sans_lecture": [],
+      "la_separation_maximale": 0.1202,
+      "tous": [
+        {
+          "nom": "du bruit pur 0",
+          "mesure": "étalon",
+          "cle": "du bruit pur 0",
+          "aire": 0.5606,
+          "separation": 0.0606,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 1",
+          "mesure": "étalon",
+          "cle": "du bruit pur 1",
+          "aire": 0.4949,
+          "separation": 0.0051,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 2",
+          "mesure": "étalon",
+          "cle": "du bruit pur 2",
+          "aire": 0.5768,
+          "separation": 0.0768,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 3",
+          "mesure": "étalon",
+          "cle": "du bruit pur 3",
+          "aire": 0.5838,
+          "separation": 0.0838,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 4",
+          "mesure": "étalon",
+          "cle": "du bruit pur 4",
+          "aire": 0.4212,
+          "separation": 0.0788,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 5",
+          "mesure": "étalon",
+          "cle": "du bruit pur 5",
+          "aire": 0.5424,
+          "separation": 0.0424,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 6",
+          "mesure": "étalon",
+          "cle": "du bruit pur 6",
+          "aire": 0.401,
+          "separation": 0.099,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 7",
+          "mesure": "étalon",
+          "cle": "du bruit pur 7",
+          "aire": 0.4162,
+          "separation": 0.0838,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 8",
+          "mesure": "étalon",
+          "cle": "du bruit pur 8",
+          "aire": 0.6202,
+          "separation": 0.1202,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 9",
+          "mesure": "étalon",
+          "cle": "du bruit pur 9",
+          "aire": 0.4586,
+          "separation": 0.0414,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 10",
+          "mesure": "étalon",
+          "cle": "du bruit pur 10",
+          "aire": 0.4131,
+          "separation": 0.0869,
+          "chunks_couverts": 81
+        },
+        {
+          "nom": "du bruit pur 11",
+          "mesure": "étalon",
+          "cle": "du bruit pur 11",
+          "aire": 0.4818,
+          "separation": 0.0182,
+          "chunks_couverts": 81
+        }
+      ],
+      "le_nul": {
+        "decidable": true,
+        "tirages": 19,
+        "le_plus_grand_maximum": 0.2717,
+        "le_maximum_median": 0.1687,
+        "les_maxima": [
+          0.1566,
+          0.098,
+          0.1303,
+          0.2364,
+          0.199,
+          0.1404,
+          0.1303,
+          0.2131,
+          0.198,
+          0.1394,
+          0.1828,
+          0.1566,
+          0.0859,
+          0.1515,
+          0.2717,
+          0.1687,
+          0.2071,
+          0.2455,
+          0.201
+        ]
+      },
+      "le_plancher_de_detection": 0.2717,
+      "laire_a_depasser": 0.7717,
+      "un_observable_separe": false
+    },
+    "letalon_separe_les_deux": true
+  },
+  "le_nul_stratifie": {
+    "decidable": true,
+    "tirages": 19,
+    "le_plus_grand_maximum": 0.2222,
+    "les_maxima": [
+      0.1227,
+      0.2015,
+      0.2222,
+      0.1227,
+      0.1333,
+      0.1227,
+      0.1263,
+      0.1227,
+      0.1515,
+      0.1414,
+      0.1682,
+      0.1409,
+      0.1227,
+      0.1227,
+      0.1318,
+      0.1641,
+      0.1227,
+      0.2141,
+      0.2141
+    ]
+  },
+  "le_verdict": {
+    "decidable": true,
+    "observables_lus": 12,
+    "le_meilleur": {
+      "nom": "sa position relative en largeur",
+      "mesure": "l'adresse du chunk et la grille de son segment",
+      "cle": "part_de_la_largeur",
+      "aire": 0.3369,
+      "separation": 0.1631,
+      "chunks_couverts": 81
+    },
+    "observables_sans_lecture": [],
+    "la_separation_maximale": 0.1631,
+    "tous": [
+      {
+        "nom": "la ligne du chunk dans la grille",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "ligne",
+        "aire": 0.3449,
+        "separation": 0.1551,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "la colonne du chunk dans la grille",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "colonne",
+        "aire": 0.4354,
+        "separation": 0.0646,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "sa position relative en hauteur",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "part_de_la_hauteur",
+        "aire": 0.398,
+        "separation": 0.102,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "sa position relative en largeur",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "part_de_la_largeur",
+        "aire": 0.3369,
+        "separation": 0.1631,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "sa distance au bord de la grille, en chunks",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "distance_au_bord",
+        "aire": 0.4864,
+        "separation": 0.0136,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "sa distance au bord, rapportée à la grille",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "distance_au_bord_relative",
+        "aire": 0.5152,
+        "separation": 0.0152,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "la hauteur de la grille du segment",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "hauteur_de_la_grille",
+        "aire": 0.3773,
+        "separation": 0.1227,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "la largeur de la grille du segment",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "largeur_de_la_grille",
+        "aire": 0.5626,
+        "separation": 0.0626,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "les chunks de la grille entière",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "chunks_de_la_grille",
+        "aire": 0.5051,
+        "separation": 0.0051,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "le rang du segment dans le dépôt",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "rang_du_segment",
+        "aire": 0.4424,
+        "separation": 0.0576,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "les chunks lus du segment",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "chunks_lus_du_segment",
+        "aire": 0.6106,
+        "separation": 0.1106,
+        "chunks_couverts": 81
+      },
+      {
+        "nom": "la part du treillis rendue",
+        "mesure": "l'adresse du chunk et la grille de son segment",
+        "cle": "part_lue_du_segment",
+        "aire": 0.6106,
+        "separation": 0.1106,
+        "chunks_couverts": 81
+      }
+    ],
+    "le_nul": {
+      "decidable": true,
+      "tirages": 19,
+      "le_plus_grand_maximum": 0.2323,
+      "le_maximum_median": 0.1742,
+      "les_maxima": [
+        0.2121,
+        0.1116,
+        0.1737,
+        0.1919,
+        0.1773,
+        0.1414,
+        0.1293,
+        0.1116,
+        0.0854,
+        0.1939,
+        0.2323,
+        0.1616,
+        0.1783,
+        0.1581,
+        0.1727,
+        0.2035,
+        0.1742,
+        0.2126,
+        0.1919
+      ]
+    },
+    "le_plancher_de_detection": 0.2323,
+    "laire_a_depasser": 0.7323,
+    "un_observable_separe": false,
+    "chunks_etiquetes": 81,
+    "chunks_qui_retiennent": 15,
+    "observables_declares": 12,
+    "venus_de_190": 21,
+    "venus_de_192": 60,
+    "chunks_comptes_deux_fois": 0,
+    "le_plancher_stratifie": 0.2222,
+    "un_observable_separe_aussi_dans_chaque_segment": false,
+    "les_colonnes_constantes_par_segment": [
+      "la hauteur de la grille du segment",
+      "la largeur de la grille du segment",
+      "les chunks de la grille entière",
+      "le rang du segment dans le dépôt",
+      "les chunks lus du segment",
+      "la part du treillis rendue"
+    ],
+    "observables_intrinseques_de_191": 19,
+    "chunks_de_191": 21,
+    "plancher_de_191": 0.4286,
+    "separation_maximale_de_191": 0.3889,
+    "la_part_vue_avec_lingredient": 1.0,
+    "la_part_vue_a_la_configuration_de_191": 0.32,
+    "letalon_separe_les_deux": true
+  }
+}
