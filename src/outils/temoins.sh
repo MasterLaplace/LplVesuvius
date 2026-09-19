@@ -1536,6 +1536,8 @@ run "figure regarder en profondeur" uv run python "$ROOT/src/figures/figure_rega
 run "figure planche en profondeur" uv run python "$ROOT/src/figures/figure_la_planche_en_profondeur.py" --verifier
 run "que montrent ces deux vues" uv run python "$ROOT/src/nappe/que_montrent_ces_deux_vues.py" --verifier
 run "figure deux vues" uv run python "$ROOT/src/figures/figure_que_montrent_ces_deux_vues.py" --verifier
+run "ou le maillage quitte" uv run python "$ROOT/src/nappe/ou_le_maillage_quitte_t_il_son_feuillet.py" --verifier
+run "figure ou le maillage quitte" uv run python "$ROOT/src/figures/figure_ou_le_maillage_quitte_t_il_son_feuillet.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -3194,6 +3194,91 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 198 : OU LE MAILLAGE QUITTE-T-IL SON FEUILLET ?
+    # (1) Une distance observee ne voyage JAMAIS sans celle des melanges ni sans le compte de
+    # melanges au moins aussi serres : « 169,7787 » ne dit rien tant qu'on ignore ce que le hasard
+    # rend sur les memes positions.
+    # (2) Un serpentement ne voyage jamais sans le compte de positions qui SATURENT : pour
+    # celles-la il est un plancher, pas une valeur, et l'ecrire sans le dire l'inverse.
+    # (3) Et un compte de positions lues ne voyage jamais sans les positions SANS SURFACE ni sans
+    # le nombre de fois ou le fil a flanche : c'est ce qui separe un enonce sur le maillage d'un
+    # enonce sur le reseau.
+    ss8 = _source(racine, "ou_le_maillage_quitte_t_il_son_feuillet.json")
+    if ss8.exists():
+        d = json.loads(ss8.read_text())
+
+        def _dec198(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        c8 = d.get("la_carte") or {}
+        q8 = d.get("les_quantiles") or {}
+        g8 = d.get("le_groupement") or {}
+        e8 = d.get("letalon") or {}
+        for src8, cle, nom, unites in (
+                (c8, "positions_du_treillis", "les positions du treillis", ("positions",)),
+                (c8, "positions_lues", "les positions lues", ("positions",)),
+                (c8, "les_reprises_du_reseau", "les reprises du réseau", ("fois",)),
+                (c8, "les_reprises_permises", "les reprises permises", ("fois",)),
+                (q8, "positions", "les positions des quantiles", ("positions",)),
+                (q8, "les_positions_qui_saturent", "les positions qui saturent", ("sur",)),
+                (g8, "les_positions_du_pire_decile", "les positions du pire décile",
+                 ("positions",)),
+                (g8, "les_melanges_au_moins_aussi_serres", "les mélanges aussi serrés", ("sur",)),
+                (g8, "tirages", "les tirages", ("mélanges",)),
+                (d, "le_cote_de_la_carte", "le côté de la carte",
+                 ("positions de côté",)),
+                (d, "la_plage_de_recalage", "la plage de recalage", ("voxels",))):
+            if src8.get(cle) is not None:
+                ajoute(f"{nom} de 198", int(src8[cle]), 0, ss8.name, unites=unites)
+        if (c8.get("refuses") or {}).get("absent du dépôt") is not None:
+            ajoute("les positions sans surface de 198",
+                   int(c8["refuses"]["absent du dépôt"]), 0, ss8.name, unites=("positions",))
+        if c8.get("grille_de_chunks"):
+            ajoute("la hauteur de la grille de 198", int(c8["grille_de_chunks"][0]), 0,
+                   ss8.name, unites=("×",))
+            ajoute("la largeur de la grille de 198", int(c8["grille_de_chunks"][1]), 0,
+                   ss8.name, unites=("chunks",))
+        for src8, cle, nom, unites in (
+                (q8, "le_median_en_voxels", "le serpentement médian", ("voxels",)),
+                (q8, "le_median_en_plis", "le serpentement médian en plis", ()),
+                (q8, "le_decile_haut_en_voxels", "le décile haut", ("voxels",)),
+                (q8, "le_decile_haut_en_plis", "le décile haut en plis", ()),
+                (q8, "le_maximal_en_voxels", "le serpentement maximal", ("voxels",)),
+                (q8, "la_part_qui_sature", "la part qui sature", ()),
+                (g8, "la_distance_moyenne", "la distance moyenne", ()),
+                (g8, "la_distance_moyenne_du_nul", "la distance moyenne du nul", ()),
+                (g8, "le_seuil_du_pire_decile", "le seuil du pire décile", ("voxels",)),
+                (d, "le_pas_dun_pli_en_voxels", "le pas d un pli", ("voxels",))):
+            if src8.get(cle) is not None:
+                ajoute(f"{nom} de 198", float(src8[cle]), _dec198(src8[cle]), ss8.name,
+                       unites=unites)
+        # ⚠⚠ L'ETALON NE VOYAGE JAMAIS SANS SON TAUX DE FAUX NI SANS SA GARANTIE : une force vue a
+        # tous les replicats ne dit rien du silence que l'instrument autorise ensuite.
+        for cle, nom, unites in (("la_force_posee", "la force dérivée de l étalon", ("voxels",)),
+                                 ("le_taux_de_faux", "le taux de faux de l étalon",
+                                  ("faux sur",)),
+                                 ("la_garantie", "la garantie de l étalon", ("garantis",))):
+            if e8.get(cle) is not None:
+                ajoute(f"{nom} de 198", float(e8[cle]), _dec198(e8[cle]), ss8.name,
+                       unites=unites)
+        if (e8.get("la_sensibilite") or {}).get("replicats") is not None:
+            ajoute("les réplicats de l étalon de 198",
+                   int(e8["la_sensibilite"]["replicats"]), 0, ss8.name, unites=("réplicats",))
+        if (e8.get("la_sensibilite") or {}).get("les_positions") is not None:
+            ajoute("les positions de l étalon de 198",
+                   int(e8["la_sensibilite"]["les_positions"]), 0, ss8.name,
+                   unites=("positions",))
+        for pt8 in ((e8.get("la_sensibilite") or {}).get("la_courbe") or []):
+            part8 = float(pt8["part_des_replicats"])
+            if part8 in (0.0, 1.0):
+                continue
+            ajoute(f"la part vue à la force {int(pt8['force'])} de 198", part8,
+                   _dec198(part8), ss8.name, unites=("des réplicats",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 197 : QUE MONTRENT CES DEUX VUES ?
     # (1) Un compte d'axe ne voyage JAMAIS sans les DEUX autres : « quatorze sur trente » ne dit
     # rien tant qu'on ne sait pas ce que rendent la hauteur et la largeur sur la meme epreuve.

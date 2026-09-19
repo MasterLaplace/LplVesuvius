@@ -1,0 +1,2774 @@
+{
+  "graine": 20261006,
+  "tirages": 19,
+  "la_question_declaree": "le serpentement est-il groupé sur le segment ?",
+  "le_cote_de_la_carte": 16,
+  "le_pas_dun_pli_en_voxels": 72.0833,
+  "la_plage_de_recalage": 36,
+  "le_decile_du_pire": 90.0,
+  "la_carte": {
+    "decidable": true,
+    "segment": "20230702185753",
+    "grille_de_chunks": [
+      396,
+      285
+    ],
+    "couches": 109,
+    "positions_du_treillis": 256,
+    "positions_lues": 189,
+    "les_reprises_du_reseau": 0,
+    "les_reprises_permises": 3,
+    "les_lignes_du_treillis": [
+      0,
+      26,
+      52,
+      79,
+      105,
+      131,
+      158,
+      184,
+      210,
+      237,
+      263,
+      289,
+      316,
+      342,
+      368,
+      395
+    ],
+    "les_colonnes_du_treillis": [
+      0,
+      18,
+      37,
+      56,
+      75,
+      94,
+      113,
+      132,
+      151,
+      170,
+      189,
+      208,
+      227,
+      246,
+      265,
+      284
+    ],
+    "refuses": {
+      "absent du dépôt": 66,
+      "profil moyen plat": 1
+    }
+  },
+  "les_positions": [
+    {
+      "position": [
+        26,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 9.3,
+      "le_serpentement_en_plis": 0.129017,
+      "lecart_maximal_en_voxels": 31,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        26,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.0,
+      "le_serpentement_en_plis": 0.083237,
+      "lecart_maximal_en_voxels": 9,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        26,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        26,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 5.0,
+      "le_serpentement_en_plis": 0.069364,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        26,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 34.0,
+      "le_serpentement_en_plis": 0.471676,
+      "lecart_maximal_en_voxels": 71,
+      "les_colonnes_saturees": 1,
+      "la_part_saturee": 0.007812
+    },
+    {
+      "position": [
+        26,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 3,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        26,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 29.0,
+      "le_serpentement_en_plis": 0.402312,
+      "lecart_maximal_en_voxels": 62,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        26,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 19,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        26,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 26.5,
+      "le_serpentement_en_plis": 0.36763,
+      "lecart_maximal_en_voxels": 65,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        26,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 59.0,
+      "le_serpentement_en_plis": 0.818497,
+      "lecart_maximal_en_voxels": 72,
+      "les_colonnes_saturees": 5,
+      "la_part_saturee": 0.039062
+    },
+    {
+      "position": [
+        26,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.3,
+      "le_serpentement_en_plis": 0.101272,
+      "lecart_maximal_en_voxels": 20,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        26,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 37,
+      "les_colonnes_saturees": 1,
+      "la_part_saturee": 0.007812
+    },
+    {
+      "position": [
+        26,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 13,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        26,
+        265
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 12.0,
+      "le_serpentement_en_plis": 0.166474,
+      "lecart_maximal_en_voxels": 29,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.3,
+      "le_serpentement_en_plis": 0.087399,
+      "lecart_maximal_en_voxels": 67,
+      "les_colonnes_saturees": 7,
+      "la_part_saturee": 0.054688
+    },
+    {
+      "position": [
+        52,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 5.3,
+      "le_serpentement_en_plis": 0.073526,
+      "lecart_maximal_en_voxels": 9,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.3,
+      "le_serpentement_en_plis": 0.059653,
+      "lecart_maximal_en_voxels": 21,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 25.3,
+      "le_serpentement_en_plis": 0.350983,
+      "lecart_maximal_en_voxels": 45,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 35,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 5.0,
+      "le_serpentement_en_plis": 0.069364,
+      "lecart_maximal_en_voxels": 27,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.3,
+      "le_serpentement_en_plis": 0.101272,
+      "lecart_maximal_en_voxels": 36,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 23.3,
+      "le_serpentement_en_plis": 0.323237,
+      "lecart_maximal_en_voxels": 46,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 5,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 8,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 12.3,
+      "le_serpentement_en_plis": 0.170636,
+      "lecart_maximal_en_voxels": 27,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        52,
+        265
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 32.0,
+      "le_serpentement_en_plis": 0.443931,
+      "lecart_maximal_en_voxels": 45,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 11.0,
+      "le_serpentement_en_plis": 0.152601,
+      "lecart_maximal_en_voxels": 22,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 13.0,
+      "le_serpentement_en_plis": 0.180347,
+      "lecart_maximal_en_voxels": 22,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.3,
+      "le_serpentement_en_plis": 0.101272,
+      "lecart_maximal_en_voxels": 18,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 14.0,
+      "le_serpentement_en_plis": 0.19422,
+      "lecart_maximal_en_voxels": 43,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 35,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 5.0,
+      "le_serpentement_en_plis": 0.069364,
+      "lecart_maximal_en_voxels": 5,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 14.0,
+      "le_serpentement_en_plis": 0.19422,
+      "lecart_maximal_en_voxels": 28,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 70,
+      "les_colonnes_saturees": 4,
+      "la_part_saturee": 0.03125
+    },
+    {
+      "position": [
+        79,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 10.0,
+      "le_serpentement_en_plis": 0.138728,
+      "lecart_maximal_en_voxels": 13,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.3,
+      "le_serpentement_en_plis": 0.031908,
+      "lecart_maximal_en_voxels": 15,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.3,
+      "le_serpentement_en_plis": 0.087399,
+      "lecart_maximal_en_voxels": 11,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 17.0,
+      "le_serpentement_en_plis": 0.235838,
+      "lecart_maximal_en_voxels": 32,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        79,
+        265
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 9.0,
+      "le_serpentement_en_plis": 0.124855,
+      "lecart_maximal_en_voxels": 28,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.0,
+      "le_serpentement_en_plis": 0.09711,
+      "lecart_maximal_en_voxels": 41,
+      "les_colonnes_saturees": 5,
+      "la_part_saturee": 0.039062
+    },
+    {
+      "position": [
+        105,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 36,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.4,
+      "le_serpentement_en_plis": 0.102659,
+      "lecart_maximal_en_voxels": 18,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.3,
+      "le_serpentement_en_plis": 0.031908,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.0,
+      "le_serpentement_en_plis": 0.09711,
+      "lecart_maximal_en_voxels": 66,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.3,
+      "le_serpentement_en_plis": 0.059653,
+      "lecart_maximal_en_voxels": 9,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.0,
+      "le_serpentement_en_plis": 0.09711,
+      "lecart_maximal_en_voxels": 11,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 7,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 3,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        105,
+        265
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.0,
+      "le_serpentement_en_plis": 0.083237,
+      "lecart_maximal_en_voxels": 16,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 39,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 9.0,
+      "le_serpentement_en_plis": 0.124855,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 6,
+      "la_part_saturee": 0.046875
+    },
+    {
+      "position": [
+        131,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.0,
+      "le_serpentement_en_plis": 0.083237,
+      "lecart_maximal_en_voxels": 9,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 3,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.3,
+      "le_serpentement_en_plis": 0.031908,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.3,
+      "le_serpentement_en_plis": 0.059653,
+      "lecart_maximal_en_voxels": 11,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 17.3,
+      "le_serpentement_en_plis": 0.24,
+      "lecart_maximal_en_voxels": 56,
+      "les_colonnes_saturees": 5,
+      "la_part_saturee": 0.039062
+    },
+    {
+      "position": [
+        131,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 9.0,
+      "le_serpentement_en_plis": 0.124855,
+      "lecart_maximal_en_voxels": 16,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 5.0,
+      "le_serpentement_en_plis": 0.069364,
+      "lecart_maximal_en_voxels": 17,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 8.0,
+      "le_serpentement_en_plis": 0.110983,
+      "lecart_maximal_en_voxels": 23,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 16.0,
+      "le_serpentement_en_plis": 0.221965,
+      "lecart_maximal_en_voxels": 18,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        131,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 48.0,
+      "le_serpentement_en_plis": 0.665896,
+      "lecart_maximal_en_voxels": 72,
+      "les_colonnes_saturees": 9,
+      "la_part_saturee": 0.070312
+    },
+    {
+      "position": [
+        131,
+        265
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.0,
+      "le_serpentement_en_plis": 0.083237,
+      "lecart_maximal_en_voxels": 17,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 5,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 12.0,
+      "le_serpentement_en_plis": 0.166474,
+      "lecart_maximal_en_voxels": 22,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 5.0,
+      "le_serpentement_en_plis": 0.069364,
+      "lecart_maximal_en_voxels": 13,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 5,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.0,
+      "le_serpentement_en_plis": 0.083237,
+      "lecart_maximal_en_voxels": 20,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 15.0,
+      "le_serpentement_en_plis": 0.208092,
+      "lecart_maximal_en_voxels": 18,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 5,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 10.0,
+      "le_serpentement_en_plis": 0.138728,
+      "lecart_maximal_en_voxels": 16,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 63,
+      "les_colonnes_saturees": 1,
+      "la_part_saturee": 0.007812
+    },
+    {
+      "position": [
+        158,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.3,
+      "le_serpentement_en_plis": 0.04578,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        158,
+        265
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 26.3,
+      "le_serpentement_en_plis": 0.364855,
+      "lecart_maximal_en_voxels": 58,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        184,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.0,
+      "le_serpentement_en_plis": 0.083237,
+      "lecart_maximal_en_voxels": 12,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        184,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        184,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 7,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        184,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 5,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        184,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 14.0,
+      "le_serpentement_en_plis": 0.19422,
+      "lecart_maximal_en_voxels": 72,
+      "les_colonnes_saturees": 16,
+      "la_part_saturee": 0.125
+    },
+    {
+      "position": [
+        184,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 7,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        184,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 16.0,
+      "le_serpentement_en_plis": 0.221965,
+      "lecart_maximal_en_voxels": 21,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        184,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 4,
+      "la_part_saturee": 0.03125
+    },
+    {
+      "position": [
+        184,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 30.3,
+      "le_serpentement_en_plis": 0.420347,
+      "lecart_maximal_en_voxels": 64,
+      "les_colonnes_saturees": 2,
+      "la_part_saturee": 0.015625
+    },
+    {
+      "position": [
+        184,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 7,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        184,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 27.3,
+      "le_serpentement_en_plis": 0.378728,
+      "lecart_maximal_en_voxels": 70,
+      "les_colonnes_saturees": 4,
+      "la_part_saturee": 0.03125
+    },
+    {
+      "position": [
+        184,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 5,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        184,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 2,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 26.0,
+      "le_serpentement_en_plis": 0.360694,
+      "lecart_maximal_en_voxels": 50,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 5,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 5,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 8.6,
+      "le_serpentement_en_plis": 0.119306,
+      "lecart_maximal_en_voxels": 15,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 2,
+      "la_part_saturee": 0.015625
+    },
+    {
+      "position": [
+        210,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 12.3,
+      "le_serpentement_en_plis": 0.170636,
+      "lecart_maximal_en_voxels": 32,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.3,
+      "le_serpentement_en_plis": 0.087399,
+      "lecart_maximal_en_voxels": 41,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 18.0,
+      "le_serpentement_en_plis": 0.249711,
+      "lecart_maximal_en_voxels": 50,
+      "les_colonnes_saturees": 3,
+      "la_part_saturee": 0.023438
+    },
+    {
+      "position": [
+        210,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 10,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 46.3,
+      "le_serpentement_en_plis": 0.642312,
+      "lecart_maximal_en_voxels": 70,
+      "les_colonnes_saturees": 2,
+      "la_part_saturee": 0.015625
+    },
+    {
+      "position": [
+        210,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 36,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        210,
+        265
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 8,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 10,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 23,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 7,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 39,
+      "les_colonnes_saturees": 7,
+      "la_part_saturee": 0.054688
+    },
+    {
+      "position": [
+        237,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 5.0,
+      "le_serpentement_en_plis": 0.069364,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 3,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.0,
+      "le_serpentement_en_plis": 0.09711,
+      "lecart_maximal_en_voxels": 39,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 7,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 24.0,
+      "le_serpentement_en_plis": 0.332948,
+      "lecart_maximal_en_voxels": 29,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 37.0,
+      "le_serpentement_en_plis": 0.513295,
+      "lecart_maximal_en_voxels": 72,
+      "les_colonnes_saturees": 17,
+      "la_part_saturee": 0.132812
+    },
+    {
+      "position": [
+        237,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 44.0,
+      "le_serpentement_en_plis": 0.610405,
+      "lecart_maximal_en_voxels": 46,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        237,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 23,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        263,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 34.0,
+      "le_serpentement_en_plis": 0.471676,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 8,
+      "la_part_saturee": 0.0625
+    },
+    {
+      "position": [
+        263,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        263,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 70,
+      "les_colonnes_saturees": 1,
+      "la_part_saturee": 0.007812
+    },
+    {
+      "position": [
+        263,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.0,
+      "le_serpentement_en_plis": 0.083237,
+      "lecart_maximal_en_voxels": 8,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        263,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 7,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        263,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 35,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        263,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 38.6,
+      "le_serpentement_en_plis": 0.535491,
+      "lecart_maximal_en_voxels": 49,
+      "les_colonnes_saturees": 4,
+      "la_part_saturee": 0.03125
+    },
+    {
+      "position": [
+        263,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 24.0,
+      "le_serpentement_en_plis": 0.332948,
+      "lecart_maximal_en_voxels": 47,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        263,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 2,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        263,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 8.0,
+      "le_serpentement_en_plis": 0.110983,
+      "lecart_maximal_en_voxels": 34,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        263,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 9.9,
+      "le_serpentement_en_plis": 0.137341,
+      "lecart_maximal_en_voxels": 62,
+      "les_colonnes_saturees": 2,
+      "la_part_saturee": 0.015625
+    },
+    {
+      "position": [
+        263,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.0,
+      "le_serpentement_en_plis": 0.09711,
+      "lecart_maximal_en_voxels": 13,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        263,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 14,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        289,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 31.0,
+      "le_serpentement_en_plis": 0.430058,
+      "lecart_maximal_en_voxels": 32,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        289,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 8.0,
+      "le_serpentement_en_plis": 0.110983,
+      "lecart_maximal_en_voxels": 19,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        289,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 7,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        289,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 62.3,
+      "le_serpentement_en_plis": 0.864277,
+      "lecart_maximal_en_voxels": 68,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        289,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 70.0,
+      "le_serpentement_en_plis": 0.971098,
+      "lecart_maximal_en_voxels": 72,
+      "les_colonnes_saturees": 29,
+      "la_part_saturee": 0.226562
+    },
+    {
+      "position": [
+        289,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 26.0,
+      "le_serpentement_en_plis": 0.360694,
+      "lecart_maximal_en_voxels": 44,
+      "les_colonnes_saturees": 3,
+      "la_part_saturee": 0.023438
+    },
+    {
+      "position": [
+        289,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.6,
+      "le_serpentement_en_plis": 0.063815,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 3,
+      "la_part_saturee": 0.023438
+    },
+    {
+      "position": [
+        289,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        289,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 8.3,
+      "le_serpentement_en_plis": 0.115145,
+      "lecart_maximal_en_voxels": 23,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        289,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        289,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 13.3,
+      "le_serpentement_en_plis": 0.184509,
+      "lecart_maximal_en_voxels": 17,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        289,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 11.3,
+      "le_serpentement_en_plis": 0.156763,
+      "lecart_maximal_en_voxels": 15,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        289,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 3,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 11.3,
+      "le_serpentement_en_plis": 0.156763,
+      "lecart_maximal_en_voxels": 17,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 12.0,
+      "le_serpentement_en_plis": 0.166474,
+      "lecart_maximal_en_voxels": 26,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 5,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 17.3,
+      "le_serpentement_en_plis": 0.24,
+      "lecart_maximal_en_voxels": 40,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.3,
+      "le_serpentement_en_plis": 0.04578,
+      "lecart_maximal_en_voxels": 9,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 32.0,
+      "le_serpentement_en_plis": 0.443931,
+      "lecart_maximal_en_voxels": 62,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 37.0,
+      "le_serpentement_en_plis": 0.513295,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 23,
+      "la_part_saturee": 0.179688
+    },
+    {
+      "position": [
+        316,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.3,
+      "le_serpentement_en_plis": 0.059653,
+      "lecart_maximal_en_voxels": 10,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 11.0,
+      "le_serpentement_en_plis": 0.152601,
+      "lecart_maximal_en_voxels": 19,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 20,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 36.0,
+      "le_serpentement_en_plis": 0.499422,
+      "lecart_maximal_en_voxels": 65,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 23.0,
+      "le_serpentement_en_plis": 0.319075,
+      "lecart_maximal_en_voxels": 55,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        316,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.3,
+      "le_serpentement_en_plis": 0.031908,
+      "lecart_maximal_en_voxels": 31,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 9.0,
+      "le_serpentement_en_plis": 0.124855,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.9,
+      "le_serpentement_en_plis": 0.067977,
+      "lecart_maximal_en_voxels": 14,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 5.0,
+      "le_serpentement_en_plis": 0.069364,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.0,
+      "le_serpentement_en_plis": 0.09711,
+      "lecart_maximal_en_voxels": 35,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.0,
+      "le_serpentement_en_plis": 0.09711,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 24.3,
+      "le_serpentement_en_plis": 0.33711,
+      "lecart_maximal_en_voxels": 41,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 7.0,
+      "le_serpentement_en_plis": 0.09711,
+      "lecart_maximal_en_voxels": 11,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        342,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 35.0,
+      "le_serpentement_en_plis": 0.485549,
+      "lecart_maximal_en_voxels": 71,
+      "les_colonnes_saturees": 8,
+      "la_part_saturee": 0.0625
+    },
+    {
+      "position": [
+        342,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        18
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 6.0,
+      "le_serpentement_en_plis": 0.083237,
+      "lecart_maximal_en_voxels": 24,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        37
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 15.0,
+      "le_serpentement_en_plis": 0.208092,
+      "lecart_maximal_en_voxels": 44,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        56
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 13,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        75
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 5.0,
+      "le_serpentement_en_plis": 0.069364,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        94
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 4.0,
+      "le_serpentement_en_plis": 0.055491,
+      "lecart_maximal_en_voxels": 7,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        113
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        132
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 26.0,
+      "le_serpentement_en_plis": 0.360694,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        151
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 4,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        170
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 32.0,
+      "le_serpentement_en_plis": 0.443931,
+      "lecart_maximal_en_voxels": 60,
+      "les_colonnes_saturees": 2,
+      "la_part_saturee": 0.015625
+    },
+    {
+      "position": [
+        368,
+        189
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 5.3,
+      "le_serpentement_en_plis": 0.073526,
+      "lecart_maximal_en_voxels": 12,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        208
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 3.0,
+      "le_serpentement_en_plis": 0.041618,
+      "lecart_maximal_en_voxels": 6,
+      "les_colonnes_saturees": 0,
+      "la_part_saturee": 0.0
+    },
+    {
+      "position": [
+        368,
+        227
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 2.0,
+      "le_serpentement_en_plis": 0.027746,
+      "lecart_maximal_en_voxels": 46,
+      "les_colonnes_saturees": 3,
+      "la_part_saturee": 0.023438
+    },
+    {
+      "position": [
+        368,
+        246
+      ],
+      "decidable": true,
+      "colonnes": 128,
+      "la_plage": 36,
+      "le_serpentement_en_voxels": 16.1,
+      "le_serpentement_en_plis": 0.223353,
+      "lecart_maximal_en_voxels": 38,
+      "les_colonnes_saturees": 7,
+      "la_part_saturee": 0.054688
+    }
+  ],
+  "les_quantiles": {
+    "decidable": true,
+    "positions": 189,
+    "le_median_en_voxels": 5.0,
+    "le_median_en_plis": 0.069364,
+    "le_decile_haut_en_voxels": 27.64,
+    "le_decile_haut_en_plis": 0.383445,
+    "le_maximal_en_voxels": 70.0,
+    "les_positions_qui_saturent": 31,
+    "la_part_qui_sature": 0.164021
+  },
+  "le_groupement": {
+    "decidable": true,
+    "le_seuil_du_pire_decile": 27.64,
+    "les_positions_du_pire_decile": 19,
+    "tirages": 19,
+    "la_distance_moyenne": 169.7787,
+    "la_distance_moyenne_du_nul": 169.119,
+    "les_melanges_au_moins_aussi_serres": 11,
+    "ca_se_groupe": false
+  },
+  "letalon": {
+    "la_sensibilite": {
+      "la_courbe": [
+        {
+          "force": 0.0,
+          "part_des_replicats": 0.05
+        },
+        {
+          "force": 2.0,
+          "part_des_replicats": 0.65
+        },
+        {
+          "force": 4.0,
+          "part_des_replicats": 1.0
+        },
+        {
+          "force": 8.0,
+          "part_des_replicats": 1.0
+        },
+        {
+          "force": 16.0,
+          "part_des_replicats": 1.0
+        }
+      ],
+      "la_force_quil_faut": 4.0,
+      "replicats": 20,
+      "les_positions": 189
+    },
+    "la_force_posee": 4.0,
+    "le_taux_de_faux": 0.0,
+    "les_faux": 0,
+    "la_garantie": 0.05,
+    "la_part_chaude": 0.09999999999999998,
+    "le_taux_de_faux_tient": {
+      "les_faux": 0,
+      "replicats": 20,
+      "le_taux": 0.0,
+      "la_garantie": 0.05,
+      "la_probabilite_den_avoir_autant": 0.9999999999999991,
+      "il_tient": true
+    },
+    "letalon_separe": true
+  }
+}

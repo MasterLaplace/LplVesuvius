@@ -2812,6 +2812,43 @@ de lui donner un **producteur**, donc la règle réfutée est désormais mesuré
 la première moitié de ce qui remplace l'humain du transfert — savoir **où** corriger — et
 l'instrument est livré ; il ne manque que des téléchargements.
 
+**`198` · 2026-09-19 · où le maillage quitte-t-il son feuillet ?**
+⭐⭐⭐⭐ **`197` avait mesuré le serpentement sur trente vignettes ; ici c'est un SEGMENT entier.**
+Treillis **régulier** de **16 positions de côté** sur une grille de **396** × **285 chunks**,
+**189 positions** lues sur **256 positions**.
+✗ **LE DÉFAUT NE SE GROUPE PAS** — `R4-F259`. Les **19 positions** du pire décile sont à
+**169,7787** les unes des autres contre **169,119** au hasard, et **11** mélanges sur **19** sont au
+moins aussi serrés. ⭐⭐⭐⭐ Et cette réponse décide de la **forme du correcteur** : un défaut groupé
+se corrige localement, un défaut dispersé se corrige partout. Ce qui remplacera l'humain du
+transfert ne pourra donc **pas** être une retouche ciblée.
+★ **LA CARTE EXISTE** — `R4-F260`. Serpentement médian **5 voxels** (**0,069364** pli), décile haut
+**27,64 voxels** (**0,383445** pli), maximal **70 voxels**. ⚠⚠⚠ Mais **31** positions sur
+**189 positions** **saturent** la plage de **36 voxels** : pour celles-là le chiffre est un
+**plancher**, pas une valeur.
+⚠⚠⚠ **ET LE MAILLAGE PUBLIÉ NE COUVRE PAS UN QUART DE CE QU'IL ENJAMBE** — `R4-F261` :
+**66 positions** du treillis ne portent **aucune** surface au dépôt.
+⭐⭐⭐⭐ **UNE COUPURE DE CONNEXION A RÉVÉLÉ QUE CE CHIFFRE N'EN ÉTAIT PAS UN** — `R4-F262`. Un chunk
+qui n'existe pas et un lien qui tombe tombaient dans le **même mot** : une exécution a rendu
+**110** positions lues et **145** absents là où deux autres en rendent **189** et **66**. ⭐ La règle
+qui les sépare existait déjà dans `tracecheck.get_with_reason`, datée du 2026-08-26, et elle est
+**réutilisée**. ⭐⭐ Et la vraie réparation est de **redemander** : un 404 est une **réponse** et ne
+se redemande pas, une panne de transport n'en est pas une. Une panne qui persiste après
+**3 fois** reste une panne, et la mesure **refuse** alors de publier.
+⚠⚠⚠ **ET L'ÉTALON NE SÉPARAIT PAS, LA MESURE L'A DIT** — `R4-F263`. Il jugeait sa face **dispersée**
+sur un **tirage unique**, qui tombe du mauvais côté une fois sur vingt par construction — le défaut
+que `193` avait trouvé dans `191`. Les deux faces passent désormais par la même fonction sur
+**20 réplicats**, et le critère n'est plus « le taux est sous la garantie » mais « il est
+**compatible** avec elle » : sur vingt réplicats, un dispositif qui se trompe une fois sur vingt en
+rend **2** une fois sur quatre.
+⚠⚠⚠ **Six sondes incapables d'échouer sur vingt-trois bris**, et quatre portaient sur une fixture
+que le test fabrique plutôt que sur ce que le code rend ; une cinquième sur le chemin **par défaut**,
+que rien ne prenait — une référence morte y a survécu jusqu'à ce que la mesure plante en plein
+téléchargement.
+⭐ `R4-P46` est **répondue** et `R4-P47` **s'ouvre** : la dérive s'**accumule**-t-elle le long d'une
+spire ? Un treillis saute d'un endroit à l'autre, donc il ne dit rien de ce qui s'additionne entre
+eux — or un demi-voxel par chunk sur trois cents chunks fait un pli entier, et chaque mesure locale
+y paraîtrait irréprochable.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
