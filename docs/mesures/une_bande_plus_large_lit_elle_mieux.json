@@ -1,0 +1,262 @@
+{
+  "graine": 20261011,
+  "tirages": 19,
+  "la_question_declaree": "une bande de bord plus large lit-elle le pas avec moins de bruit, et que devient alors la portée du feuillet ?",
+  "les_epreuves_declarees": [
+    "la largeur nommée sur les coutures impaires fait-elle mieux, sur les coutures paires, que celle de `198`"
+  ],
+  "la_garantie_par_epreuve": 0.05,
+  "le_pas_dun_pli_en_voxels": 72.0833,
+  "la_demi_periode_en_voxels": 36,
+  "la_largeur_de_198": 16,
+  "les_largeurs_essayees": [
+    2,
+    4,
+    8,
+    16,
+    32,
+    64
+  ],
+  "la_ligne": {
+    "decidable": true,
+    "segment": "20230702185753",
+    "grille_de_chunks": [
+      396,
+      285
+    ],
+    "la_rangee": 198,
+    "le_cote_du_chunk": 128,
+    "les_rangees_de_coupe": [
+      32,
+      96
+    ],
+    "colonnes_demandees": 285,
+    "colonnes_lues": 251,
+    "les_reprises_du_reseau": 0,
+    "refuses": {
+      "absent du dépôt": 28,
+      "trop peu texturé": 6
+    }
+  },
+  "les_coutures_voisines": 244,
+  "les_coutures_pour_chercher": 122,
+  "les_coutures_pour_confirmer": 122,
+  "ce_que_199_a_rendu": {
+    "decidable": true,
+    "les_pas": 254,
+    "la_rangee": 198,
+    "le_pas_quadratique_en_voxels": 4.941,
+    "le_pas_maximal_en_voxels": 35.0,
+    "la_marge_du_pas_maximal_en_voxels": 1.0,
+    "les_pas_au_bord_de_lalias": 1,
+    "les_pas_qui_saturent": 0,
+    "lexcursion_en_plis": 1.304046,
+    "les_pas_sans_colonne": 2,
+    "le_cumul_est_indexable_par_colonne": false
+  },
+  "ce_que_202_a_rendu": {
+    "decidable": true,
+    "la_derive_en_voxels": 3.4585,
+    "le_bruit_du_maillage_en_voxels": 3.5189,
+    "la_largeur_du_bord": 16,
+    "la_rangee": 198
+  },
+  "la_derive_par_les_deux_rangees": {
+    "decidable": true,
+    "les_coutures": 242,
+    "la_variance_du_desaccord_en_voxels2": 0.1116,
+    "le_desaccord_quadratique_en_voxels": 0.334,
+    "le_desaccord_median_en_voxels": 0.0,
+    "la_derive_en_voxels": 0.1436,
+    "le_bruit_dune_demi_bande_en_voxels": 0.2362,
+    "le_signal_sur_bruit": 0.6081
+  },
+  "la_derive_a_la_largeur_de_198": {
+    "decidable": false,
+    "raison": "les deux moitiés se désaccordent plus qu'elles ne s'accordent : aucune dérive à extraire"
+  },
+  "la_recherche": {
+    "decidable": true,
+    "les_barreaux": [
+      {
+        "la_largeur": 2,
+        "les_coutures": 121,
+        "la_dispersion_du_pas_en_voxels": 0.1699,
+        "le_desaccord_des_rangees_en_voxels": 0.2875,
+        "lalea_en_voxels": 0.2033,
+        "le_serpentement_en_voxels": 0.4166,
+        "lerreur_en_voxels": 0.4635
+      },
+      {
+        "la_largeur": 4,
+        "les_coutures": 121,
+        "la_dispersion_du_pas_en_voxels": 0.4493,
+        "le_desaccord_des_rangees_en_voxels": 0.5604,
+        "lalea_en_voxels": 0.3963,
+        "le_serpentement_en_voxels": 4.16,
+        "lerreur_en_voxels": 4.1789
+      },
+      {
+        "la_largeur": 8,
+        "les_coutures": 121,
+        "la_dispersion_du_pas_en_voxels": 1.9354,
+        "le_desaccord_des_rangees_en_voxels": 3.8484,
+        "lalea_en_voxels": 2.7212,
+        "le_serpentement_en_voxels": 6.363,
+        "lerreur_en_voxels": 6.9204
+      },
+      {
+        "la_largeur": 16,
+        "les_coutures": 121,
+        "la_dispersion_du_pas_en_voxels": 3.8907,
+        "le_desaccord_des_rangees_en_voxels": 8.8308,
+        "lalea_en_voxels": 6.2443,
+        "le_serpentement_en_voxels": 11.333,
+        "lerreur_en_voxels": 12.9395
+      },
+      {
+        "la_largeur": 32,
+        "les_coutures": 121,
+        "la_dispersion_du_pas_en_voxels": 7.6658,
+        "le_desaccord_des_rangees_en_voxels": 12.1849,
+        "lalea_en_voxels": 8.616,
+        "le_serpentement_en_voxels": 17.2227,
+        "lerreur_en_voxels": 19.2576
+      },
+      {
+        "la_largeur": 64,
+        "les_coutures": 121,
+        "la_dispersion_du_pas_en_voxels": 9.4314,
+        "le_desaccord_des_rangees_en_voxels": 18.2238,
+        "lalea_en_voxels": 12.8862,
+        "le_serpentement_en_voxels": 19.0211,
+        "lerreur_en_voxels": 22.9751
+      }
+    ],
+    "la_largeur_nommee": 2,
+    "son_erreur_en_voxels": 0.4635,
+    "lalea_a_la_largeur_nommee_en_voxels": 0.2033,
+    "le_serpentement_a_la_largeur_nommee_en_voxels": 0.4166
+  },
+  "la_courbe_entiere": {
+    "decidable": true,
+    "les_barreaux": [
+      {
+        "la_largeur": 2,
+        "les_coutures": 242,
+        "la_dispersion_du_pas_en_voxels": 0.2203,
+        "le_desaccord_des_rangees_en_voxels": 0.334,
+        "lalea_en_voxels": 0.2362,
+        "le_serpentement_en_voxels": 0.4545,
+        "lerreur_en_voxels": 0.5122
+      },
+      {
+        "la_largeur": 4,
+        "les_coutures": 242,
+        "la_dispersion_du_pas_en_voxels": 0.567,
+        "le_desaccord_des_rangees_en_voxels": 0.7524,
+        "lalea_en_voxels": 0.532,
+        "le_serpentement_en_voxels": 4.3318,
+        "lerreur_en_voxels": 4.3643
+      },
+      {
+        "la_largeur": 8,
+        "les_coutures": 242,
+        "la_dispersion_du_pas_en_voxels": 2.1835,
+        "le_desaccord_des_rangees_en_voxels": 4.2265,
+        "lalea_en_voxels": 2.9886,
+        "le_serpentement_en_voxels": 6.0889,
+        "lerreur_en_voxels": 6.7828
+      },
+      {
+        "la_largeur": 16,
+        "les_coutures": 242,
+        "la_dispersion_du_pas_en_voxels": 3.8813,
+        "le_desaccord_des_rangees_en_voxels": 8.179,
+        "lalea_en_voxels": 5.7835,
+        "le_serpentement_en_voxels": 10.9752,
+        "lerreur_en_voxels": 12.4058
+      },
+      {
+        "la_largeur": 32,
+        "les_coutures": 242,
+        "la_dispersion_du_pas_en_voxels": 7.0929,
+        "le_desaccord_des_rangees_en_voxels": 12.8615,
+        "lalea_en_voxels": 9.0944,
+        "le_serpentement_en_voxels": 16.9073,
+        "lerreur_en_voxels": 19.198
+      },
+      {
+        "la_largeur": 64,
+        "les_coutures": 242,
+        "la_dispersion_du_pas_en_voxels": 10.4107,
+        "le_desaccord_des_rangees_en_voxels": 19.37,
+        "lalea_en_voxels": 13.6967,
+        "le_serpentement_en_voxels": 18.7653,
+        "lerreur_en_voxels": 23.2322
+      }
+    ],
+    "la_largeur_nommee": 2,
+    "son_erreur_en_voxels": 0.5122,
+    "lalea_a_la_largeur_nommee_en_voxels": 0.2362,
+    "le_serpentement_a_la_largeur_nommee_en_voxels": 0.4545,
+    "la_derive_a_la_largeur_nommee": 0.1436,
+    "la_derive_a_la_largeur_de_198": null,
+    "le_refus_a_la_largeur_de_198": "les deux moitiés se désaccordent plus qu'elles ne s'accordent : aucune dérive à extraire",
+    "la_derive_de_202_en_voxels": 3.4585,
+    "le_rapport_des_deux_derives": 0.0415
+  },
+  "lepreuve": {
+    "decidable": true,
+    "la_largeur_nommee": 2,
+    "la_largeur_de_198": 16,
+    "les_coutures_vues": 121,
+    "les_coutures_informatives": 116,
+    "les_coutures_ou_la_nommee_gagne": 115,
+    "le_seuil_apparie": 68,
+    "la_valeur_p": 0.0,
+    "la_garantie_de_lepreuve": 0.05,
+    "la_nommee_fait_mieux": true
+  },
+  "la_portee": {
+    "decidable": false,
+    "raison": "la dérive (0.1436 voxel) ne dépasse pas l'aléa qui la mesure (0.2362) : rien à projeter"
+  },
+  "le_verdict": {
+    "decidable": true,
+    "la_largeur_nommee": 2,
+    "le_serpentement_a_la_largeur_de_198_en_voxels": 10.9752,
+    "la_premisse_de_198_tient": false,
+    "de_combien_la_premisse_est_depassee": 10.9752,
+    "la_largeur_de_198": 16,
+    "la_nommee_fait_mieux": true,
+    "la_regle_de_198_tient": false,
+    "lalea_a_la_largeur_nommee_en_voxels": 0.2362,
+    "le_serpentement_a_la_largeur_nommee_en_voxels": 0.4545,
+    "la_derive_par_les_rangees_en_voxels": 0.1436,
+    "la_derive_par_le_creux_en_voxels": 3.4585,
+    "le_rapport_des_deux_derives": 0.0415,
+    "la_portee_par_la_derive_en_chunks": null,
+    "la_portee_de_199_en_chunks": null
+  },
+  "letalon": {
+    "decidable": true,
+    "la_largeur_etroite": 2,
+    "la_largeur_large": 64,
+    "le_serpentement_calme_par_colonne": 0.02,
+    "le_serpentement_agite_par_colonne": 1.0,
+    "le_serpentement_dune_bande_calme_en_voxels": 0.16,
+    "le_serpentement_dune_bande_agitee_en_voxels": 1.4142,
+    "quand_la_regle_dit_large": {
+      "les_replicats": 12,
+      "les_mieux": 12,
+      "la_part": 1.0
+    },
+    "quand_la_regle_dit_etroit": {
+      "les_replicats": 12,
+      "les_mieux": 0,
+      "la_part": 0.0
+    },
+    "letalon_separe": true
+  }
+}

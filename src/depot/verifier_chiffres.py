@@ -3194,6 +3194,90 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 203 : UNE BANDE PLUS LARGE LIT-ELLE MIEUX ?
+    # (1) Un ALEA ne voyage JAMAIS sans la DISPERSION du pas a la meme largeur : « 5,7835 » ne dit
+    # rien tant qu'on ignore que le pas lu n'en varie que de 3,8813 — c'est ce rapport, et lui seul,
+    # qui dit qu'un estimateur lit plus de bruit que de signal.
+    # (2) Un serpentement ne voyage jamais sans ce que la regle de `198` AUTORISAIT : dix voxels ne
+    # refutent rien tant qu'on ne dit pas que la regle en permettait un.
+    # (3) Une largeur nommee ne voyage jamais sans sa DISPERSION : elle gagne l'epreuve en ne lisant
+    # rien, et le publier sans cela ferait passer un instrument mort pour le meilleur.
+    # (4) Et une derive ne voyage jamais sans celle du creux de `202` : le controle croise est la
+    # raison d'etre du chiffre.
+    sb = _source(racine, "une_bande_plus_large_lit_elle_mieux.json")
+    if sb.exists():
+        d = json.loads(sb.read_text())
+
+        def _dec203(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        lgb = d.get("la_ligne") or {}
+        enb = d.get("la_courbe_entiere") or {}
+        reb = d.get("la_recherche") or {}
+        epb = d.get("lepreuve") or {}
+        veb = d.get("le_verdict") or {}
+        eb = d.get("letalon") or {}
+        dnb = d.get("la_derive_par_les_deux_rangees") or {}
+        for srcb, cle, nom, unites in (
+                (lgb, "colonnes_demandees", "les colonnes demandées", ("colonnes",)),
+                (lgb, "colonnes_lues", "les colonnes lues", ("colonnes",)),
+                (d, "les_coutures_voisines", "les coutures voisines", ("coutures",)),
+                (d, "les_coutures_pour_chercher", "les coutures pour chercher", ("coutures",)),
+                (d, "les_coutures_pour_confirmer", "les coutures pour confirmer", ("coutures",)),
+                (d, "la_largeur_de_198", "la largeur de 198", ("colonnes",)),
+                (reb, "la_largeur_nommee", "la largeur nommée", ("colonnes",)),
+                (epb, "les_coutures_vues", "les coutures vues", ("coutures",)),
+                (epb, "les_coutures_informatives", "les coutures informatives", ("coutures",)),
+                (epb, "les_coutures_ou_la_nommee_gagne", "les coutures gagnées", ("coutures",)),
+                (epb, "le_seuil_apparie", "le seuil apparié", ("coutures",)),
+                (eb, "la_largeur_etroite", "la largeur étroite de l étalon", ("colonnes",)),
+                (eb, "la_largeur_large", "la largeur large de l étalon", ("colonnes",))):
+            if srcb.get(cle) is not None:
+                ajoute(f"{nom} de 203", int(srcb[cle]), 0, sb.name, unites=unites)
+        for r_ in (lgb.get("les_rangees_de_coupe") or []):
+            ajoute(f"la rangée de coupe {r_} de 203", int(r_), 0, sb.name, unites=("sur",))
+        for x in (eb.get("quand_la_regle_dit_large"), eb.get("quand_la_regle_dit_etroit")):
+            if x and x.get("les_replicats") is not None:
+                ajoute("les réplicats par face de l étalon de 203", int(x["les_replicats"]), 0,
+                       sb.name, unites=("réplicats",))
+        for srcb, cle, nom, unites in (
+                (veb, "le_serpentement_a_la_largeur_de_198_en_voxels",
+                 "le serpentement à la largeur de 198", ("voxels",)),
+                (reb, "son_erreur_en_voxels", "l erreur de la largeur nommée", ("voxel",)),
+                (epb, "la_valeur_p", "la valeur p de l épreuve", ("pour",)),
+                (epb, "la_garantie_de_lepreuve", "la garantie de l épreuve", ("garantis",)),
+                (enb, "la_derive_a_la_largeur_nommee", "la dérive à la largeur nommée",
+                 ("voxel",)),
+                (enb, "la_derive_de_202_en_voxels", "la dérive par le creux", ("voxels",)),
+                (enb, "le_rapport_des_deux_derives", "le rapport des deux dérives", ()),
+                (dnb, "le_bruit_dune_demi_bande_en_voxels", "l aléa à la largeur nommée",
+                 ("voxel",)),
+                (dnb, "le_signal_sur_bruit", "le signal sur bruit à la largeur nommée", ()),
+                (eb, "le_serpentement_calme_par_colonne", "le serpentement calme",
+                 ("par colonne",)),
+                (eb, "le_serpentement_agite_par_colonne", "le serpentement agité",
+                 ("par colonne",)),
+                (eb, "le_serpentement_dune_bande_calme_en_voxels",
+                 "le serpentement d une bande calme", ("voxel",)),
+                (eb, "le_serpentement_dune_bande_agitee_en_voxels",
+                 "le serpentement d une bande agitée", ("voxel",))):
+            if srcb.get(cle) is not None:
+                ajoute(f"{nom} de 203", float(srcb[cle]), _dec203(srcb[cle]), sb.name,
+                       unites=unites)
+        for bar in (enb.get("les_barreaux") or []):
+            w = int(bar["la_largeur"])
+            for cle, nom in (("la_dispersion_du_pas_en_voxels", "la dispersion du pas"),
+                             ("lalea_en_voxels", "l aléa"),
+                             ("le_serpentement_en_voxels", "le serpentement"),
+                             ("lerreur_en_voxels", "l erreur")):
+                if bar.get(cle) is not None:
+                    ajoute(f"{nom} à {w} colonnes de 203", float(bar[cle]),
+                           _dec203(bar[cle]), sb.name, unites=("**",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 202 : LE CREUX BOUGE-T-IL AVEC LE MAILLAGE ?
     # (1) Une correlation ne voyage JAMAIS sans celle des MELANGES : « 0,132 » ne dit rien tant
     # qu'on ignore que le nul en rend 0,0211 a la mediane et 0,1099 au plus fort.

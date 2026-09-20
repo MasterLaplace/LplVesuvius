@@ -2994,6 +2994,41 @@ l'autre — `R4-F286` ; et deux bris qui tuaient la batterie **avant son verdict
 **s'ouvre** : la portée de `199` doit-elle être recalculée sur la dérive plutôt que sur son pas
 quadratique, et où ce nombre doit-il vivre ?
 
+**`203` · 2026-09-20 · une bande de bord plus large lit-elle mieux ?**
+⚠⚠⚠ **La tranche a commencé par mesurer la mauvaise chose sous le bon nom** — `R4-F292`. Sa première
+version coupait la bande en une moitié proche de la couture et une moitié loin, et appelait leur
+désaccord « bruit ». Mais la moitié loin compare deux endroits séparés de **w** colonnes : son
+désaccord porte la variation réelle de la profondeur sur cette distance, et il croît avec **w** même
+quand l'estimateur est parfait. ⭐ La réparation est de couper par **rangée** et non par colonne :
+deux rangées du même chunk portent sur les **mêmes** colonnes, donc leur désaccord ne peut pas
+croître avec la largeur — c'est ce qui rend les largeurs comparables.
+✗ **LA PRÉMISSE DE `198` EST RÉFUTÉE PAR LA MATIÈRE** — `R4-F287`. À la largeur de **16 colonnes**
+que sa règle nomme, la bande serpente de **10,9752 voxels** là où elle en autorisait **1 voxel**.
+⭐ Ce verdict ne doit rien au choix d'une largeur : il suffit de lire le serpentement là où la règle
+le borne.
+★★★★ **ET AUCUNE LARGEUR NE LIT PLUS DE SIGNAL QUE DE BRUIT** — `R4-F288`. Aux six largeurs, l'aléa
+dépasse la dispersion du pas lui-même : **0,2362** contre **0,2203** à **2 colonnes**, **5,7835**
+contre **3,8813** à **16 colonnes**, **13,6967** contre **10,4107** à **64 colonnes**. ⚠⚠ L'aléa est
+une **borne supérieure**, donc les deux lectures possibles sont « l'estimateur est bruité » ou « la
+surface varie tellement dans un chunk qu'une rangée ne le représente pas » — et les deux sont
+mauvaises pour un correcteur différentiel.
+⚠⚠⚠ **LA BANDE LA PLUS ÉTROITE GAGNE L'ÉPREUVE, MAIS EN NE LISANT RIEN** — `R4-F289`. Sur
+**116 coutures** réservées, la largeur de **2 colonnes** bat celle de `198` dans **115 coutures**
+(seuil **68 coutures**, P = **0 pour 0,05 garantis**) — et sa dispersion de pas vaut
+**0,2203 voxel**. Un critère d'erreur qui ne regarde pas la **dynamique** récompense un instrument
+mort.
+⭐⭐⭐⭐ **ET C'EST LE CONTRÔLE CROISÉ QUI L'A DIT** — `R4-F290`. Bâti pour être falsifiable, il l'a
+été : la dérive des deux rangées vaut **0,1436 voxel** contre **3,4585 voxels** par le creux de
+`202`, un rapport de **0,0415**. Deux méthodes qui doivent s'accorder ne s'accordent pas, donc l'une
+est cassée — c'est le critère.
+✗ **LA PORTÉE DE `199` N'EST PAS RECALCULÉE, ET LE REFUS EST DÉRIVÉ** — `R4-F291`. Une dérive de
+**0,1436 voxel** ne dépasse pas l'aléa de **0,2362 voxel** qui la mesure. La projeter rendait
+**dix-neuf mètres** sur un rouleau large de **121,44 mm**.
+⭐ `R4-P51` est **répondue**, ses deux versants du même côté, et `R4-P52` **s'ouvre** : quelle forme
+de mesure séparerait le mouvement du feuillet du bruit de sa propre lecture ? ⭐ Le gain d'une
+médiane sur **k** rangées se **prédit** avant d'être mesuré — la racine de **k** — ce qui rendra la
+tranche falsifiable.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
