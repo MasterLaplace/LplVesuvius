@@ -2882,6 +2882,35 @@ ne l'aurait-il pas **déjà mesurée** ? `180` a établi que la cohérence **cre
 pli sur **27** chunks sur **27**. C'est un repère qui ne se déduit d'aucun voisin, et rien ne l'a
 encore utilisé pour **borner** une marche.
 
+**`200` · 2026-09-20 · le creux de cohérence borne-t-il la marche ?**
+⭐⭐⭐⭐ **`199` a établi qu'une correction DIFFÉRENTIELLE ne peut rien** — les pas se compensent,
+donc il n'y a aucun biais à corriger localement. Il faut un repère lu dans **chaque chunk seul**. Or
+`180` l'a déjà mesuré : la cohérence **creuse** à une frontière de pli.
+★ **LE REPÈRE EXISTE, ET IL EST LISIBLE PRESQUE PARTOUT** — `R4-F269`. **245 repères** sur
+**251 colonnes** lues d'une rangée de **285 colonnes** portent un creux que leurs mélanges ne rendent
+pas. C'était la première moitié de ce que `R4-P48` demandait, et elle **tient**.
+⚠⚠⚠ **MAIS SA COUCHE EST PRESQUE AUSSI DISPERSÉE QU'UN TIRAGE AU HASARD** — `R4-F270`. Écart-type
+**29,1153 voxels** quand une couche tirée au hasard dans **109 couches** en donnerait
+**31,4656 voxels** : rapport **0,9253**. ⭐ Sans la borne de l'uniforme — `n` sur racine de douze —
+le chiffre ne se lirait pas.
+✗ **ET IL NE BORNE PAS LA MARCHE** — `R4-F271`. Excursion absolue **1,387283** pli contre
+**1,304046** pli pour la marche différentielle de `199`, soit un rapport de **1,0638** : il fait
+**légèrement pire**. ⚠ Le nombre de `199` est **relu** de sa mesure, jamais recalculé.
+⭐⭐⭐⭐ **LA RAISON EST MESURÉE, PAS SUPPOSÉE** — `R4-F272` : un creux dit qu'il y a une frontière,
+**jamais laquelle**. **92** paires voisines sur **244** se calent sur deux frontières séparées d'un
+pli. Ce qui manque n'est donc **pas** un repère en profondeur — il est là — c'est de savoir
+**compter les plis** : un **ordinal**, pas une position.
+⚠⚠⚠ **Et un défaut trouvé par la mesure, pas par les sondes** — `R4-F273`. La profondeur du cube
+était lue dans une clef que le lecteur ne porte pas, et la mesure a rendu **zéro** couche ; trois
+sondes vérifiaient pourtant ce champ — sur des fixtures **qui le fournissaient elles-mêmes**. C'est
+la famille des six sondes incapables d'échouer de `198`, et le remède est le même : faire porter la
+sonde sur ce que la **fonction** rend.
+⭐ `R4-P48` est **répondue** et `R4-P49` **s'ouvre** : peut-on **déplier la phase** ? `200` rend un
+absolu **modulo un pli**, `199` un incrément qui ne saute jamais (**4,941 voxels**, **0 pas**
+saturés) mais qui dérive. Leur composition donne l'**ordinal** que ni l'un ni l'autre ne porte — et
+les deux traces existent déjà, sur la même rangée, donc la tranche ne demande **aucun**
+téléchargement neuf.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

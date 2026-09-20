@@ -1540,6 +1540,8 @@ run "ou le maillage quitte" uv run python "$ROOT/src/nappe/ou_le_maillage_quitte
 run "figure ou le maillage quitte" uv run python "$ROOT/src/figures/figure_ou_le_maillage_quitte_t_il_son_feuillet.py" --verifier
 run "la derive saccumule" uv run python "$ROOT/src/nappe/la_derive_saccumule_t_elle.py" --verifier
 run "figure la derive" uv run python "$ROOT/src/figures/figure_la_derive_saccumule_t_elle.py" --verifier
+run "le creux borne la marche" uv run python "$ROOT/src/nappe/le_creux_borne_t_il_la_marche.py" --verifier
+run "figure le creux borne" uv run python "$ROOT/src/figures/figure_le_creux_borne_t_il_la_marche.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

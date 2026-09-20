@@ -3194,6 +3194,73 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 200 : LE CREUX BORNE-T-IL LA MARCHE ?
+    # (1) Un ecart-type ne voyage JAMAIS sans celui d'une loi UNIFORME sur la meme profondeur :
+    # « 29,1153 voxels » ne dit rien tant qu'on ignore ce que le non-informatif donnerait.
+    # (2) Une excursion absolue ne voyage jamais sans l'excursion DIFFERENTIELLE de `199` : la
+    # tranche existe pour les comparer, et l'une sans l'autre se lirait comme un resultat.
+    # (3) Et un compte de reperes lisibles ne voyage jamais sans le compte de chunks LUS : un
+    # repere absent dans un chunk sur deux ne bornerait rien, et c'est la moitie qui TIENT.
+    ss0 = _source(racine, "le_creux_borne_t_il_la_marche.json")
+    if ss0.exists():
+        d = json.loads(ss0.read_text())
+
+        def _dec200(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        lg0 = d.get("la_ligne") or {}
+        t0 = d.get("la_trace_absolue") or {}
+        v0 = d.get("le_verdict") or {}
+        e0 = d.get("letalon") or {}
+        for src0, cle, nom, unites in (
+                (lg0, "la_rangee", "la rangée", ("·",)),
+                (lg0, "colonnes_demandees", "les colonnes demandées", ("colonnes",)),
+                (lg0, "colonnes_lues", "les colonnes lues", ("colonnes",)),
+                (lg0, "les_reperes_lisibles", "les repères lisibles", ("repères",)),
+                (t0, "les_couches_du_cube", "les couches du cube", ("couches",)),
+                (t0, "les_sauts_de_plus_dun_demi_pli", "les sauts d un demi-pli", ("sur",)),
+                (t0, "les_reperes", "les repères de la trace", ("repères",)),
+                (t0, "lexcursion_en_voxels", "l excursion de la trace", ("voxels",)),
+                (e0, "replicats", "les réplicats de l étalon", ("réplicats",))):
+            if src0.get(cle) is not None:
+                ajoute(f"{nom} de 200", int(src0[cle]), 0, ss0.name, unites=unites)
+        for quoi, combien in (("absent du dépôt", "les colonnes sans surface"),
+                              ("trop peu texturé", "les colonnes trop peu texturées")):
+            if (lg0.get("refuses") or {}).get(quoi) is not None:
+                ajoute(f"{combien} de 200", int(lg0["refuses"][quoi]), 0, ss0.name,
+                       unites=("colonnes",))
+        for src0, cle, nom, unites in (
+                (t0, "la_couche_mediane", "la couche médiane du creux", ("e couche",)),
+                (t0, "lecart_type_en_voxels", "l écart-type observé", ("voxels",)),
+                (t0, "lecart_type_en_plis", "l écart-type en plis", ()),
+                (t0, "lecart_type_si_uniforme_en_voxels", "l écart-type de l uniforme",
+                 ("voxels",)),
+                (t0, "le_rapport_a_luniforme", "le rapport à l uniforme", ()),
+                (t0, "lexcursion_en_plis", "l excursion en plis", ()),
+                (t0, "la_part_qui_saute", "la part qui saute", ()),
+                (t0, "le_pas_quadratique_en_voxels", "le pas quadratique de la trace",
+                 ("voxels",)),
+                (v0, "lexcursion_absolue_en_plis", "l excursion absolue", ()),
+                (v0, "lexcursion_differentielle_en_plis", "l excursion différentielle", ()),
+                (v0, "le_rapport", "le rapport des deux excursions", ()),
+                (e0, "le_bruit_qui_tient", "le bruit tenu par l étalon", ("de bruit",)),
+                (e0, "le_taux_de_faux", "le taux de faux de l étalon", ("de faux",)),
+                (e0, "la_garantie", "la garantie de l étalon", ("garantis",)),
+                (d, "le_pas_dun_pli_en_voxels", "le pas d un pli", ("voxels",))):
+            if src0.get(cle) is not None:
+                ajoute(f"{nom} de 200", float(src0[cle]), _dec200(src0[cle]), ss0.name,
+                       unites=unites)
+        for pt0 in (e0.get("la_courbe") or []):
+            part0 = float(pt0["part_des_replicats"])
+            if part0 in (0.0, 1.0):
+                continue
+            ajoute(f"la part vue au bruit {pt0['le_bruit']} de 200", part0, _dec200(part0),
+                   ss0.name, unites=("des réplicats",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 199 : LA DERIVE S'ACCUMULE-T-ELLE ?
     # (1) Un deplacement net ne voyage JAMAIS sans celui du tirage des SIGNES ni sans le compte de
     # tirages aussi loin : « 79 voxels » se lit comme une derive tant qu'on ignore que le hasard en
