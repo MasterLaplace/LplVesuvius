@@ -3194,6 +3194,95 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 199 : LA DERIVE S'ACCUMULE-T-ELLE ?
+    # (1) Un deplacement net ne voyage JAMAIS sans celui du tirage des SIGNES ni sans le compte de
+    # tirages aussi loin : « 79 voxels » se lit comme une derive tant qu'on ignore que le hasard en
+    # rend 69 sur les memes pas.
+    # (2) Ni sans le nombre d'ECARTS-TYPES de marche au hasard : c'est lui qui dit « exactement une
+    # marche au hasard » la ou deux nombres bruts laisseraient croire a un ecart.
+    # (3) Et une portee ne voyage jamais sans son pas quadratique : « un demi-pli en 53 chunks »
+    # n'est une propriete de la matiere que rapportee au pas qui la produit.
+    ss9 = _source(racine, "la_derive_saccumule_t_elle.json")
+    if ss9.exists():
+        d = json.loads(ss9.read_text())
+
+        def _dec199(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        lg9 = d.get("la_ligne") or {}
+        m9 = d.get("la_marche") or {}
+        v9 = d.get("le_verdict") or {}
+        e9 = d.get("letalon") or {}
+        a9 = d.get("avant_un_demi_pli") or {}
+        b9 = d.get("avant_un_pli") or {}
+        for src9, cle, nom, unites in (
+                (lg9, "la_rangee", "la rangée", ("sur",)),
+                (lg9, "colonnes_demandees", "les colonnes demandées", ("colonnes",)),
+                (lg9, "colonnes_lues", "les colonnes lues", ("colonnes",)),
+                (lg9, "les_reprises_du_reseau", "les reprises du réseau", ("fois",)),
+                (m9, "les_pas", "les pas", ("pas",)),
+                (m9, "les_pas_qui_saturent", "les pas qui saturent", ("pas",)),
+                (m9, "le_deplacement_net_en_voxels", "le déplacement net", ("voxels",)),
+                (v9, "les_tirages_au_moins_aussi_loin", "les tirages aussi loin", ("sur",)),
+                (v9, "tirages", "les tirages", ("mélanges",)),
+                (d, "la_largeur_du_bord", "la largeur du bord", ("colonnes",)),
+                (d, "la_plage_de_recalage", "la plage de recalage", ("voxels",)),
+                (d, "les_troncons", "les tronçons", ("tronçon",)),
+                (e9, "replicats", "les réplicats de l étalon", ("réplicats",)),
+                (e9, "les_faux", "les faux de l étalon", ("sur",))):
+            if src9.get(cle) is not None:
+                ajoute(f"{nom} de 199", int(src9[cle]), 0, ss9.name, unites=unites)
+        if (lg9.get("refuses") or {}).get("absent du dépôt") is not None:
+            ajoute("les colonnes sans surface de 199",
+                   int(lg9["refuses"]["absent du dépôt"]), 0, ss9.name, unites=("colonnes",))
+        if lg9.get("grille_de_chunks"):
+            ajoute("la hauteur de la grille de 199", int(lg9["grille_de_chunks"][0]), 0,
+                   ss9.name, unites=("·",))
+        for tr9 in (m9.get("les_troncons") or [])[:1]:
+            if tr9.get("colonnes"):
+                ajoute("la première colonne du tronçon de 199", int(tr9["colonnes"][0]), 0,
+                       ss9.name, unites=("à la colonne",))
+                ajoute("la dernière colonne du tronçon de 199", int(tr9["colonnes"][1]), 0,
+                       ss9.name, unites=("|",))
+            if tr9.get("lexcursion_maximale_en_voxels") is not None:
+                ajoute("l excursion maximale de 199",
+                       int(tr9["lexcursion_maximale_en_voxels"]), 0, ss9.name,
+                       unites=("voxels",))
+        for src9, cle, nom, unites in (
+                (m9, "le_pas_median_en_voxels", "le pas médian", ("voxels",)),
+                (m9, "le_pas_quadratique_en_voxels", "le pas quadratique", ("voxels",)),
+                (m9, "le_deplacement_net_en_plis", "le déplacement net en plis", ()),
+                (m9, "lexcursion_maximale_en_plis", "l excursion maximale en plis", ()),
+                (v9, "le_deplacement_net_en_voxels", "le déplacement observé", ("voxels",)),
+                (v9, "le_deplacement_du_nul_median_en_voxels", "le déplacement du nul",
+                 ("voxels",)),
+                (v9, "la_marche_au_hasard_en_voxels", "la marche au hasard attendue",
+                 ("voxels",)),
+                (v9, "combien_de_marches_au_hasard", "les écarts-types de marche au hasard", ()),
+                (e9, "le_biais_quil_faut", "le biais dérivé", ("voxels",)),
+                (e9, "le_taux_de_faux", "le taux de faux de l étalon", ("de faux",)),
+                (e9, "la_garantie", "la garantie de l étalon", ("garantis",)),
+                (d, "le_pas_dun_pli_en_voxels", "le pas d un pli", ("voxels",))):
+            if src9.get(cle) is not None:
+                ajoute(f"{nom} de 199", float(src9[cle]), _dec199(src9[cle]), ss9.name,
+                       unites=unites)
+        for x9, nom in ((a9, "avant un demi-pli"), (b9, "avant un pli")):
+            if x9.get("les_chunks") is not None:
+                ajoute(f"les chunks {nom} de 199", float(x9["les_chunks"]),
+                       _dec199(x9["les_chunks"]), ss9.name, unites=("chunks",))
+                ajoute(f"les millimètres {nom} de 199", float(x9["la_largeur_en_mm"]),
+                       _dec199(x9["la_largeur_en_mm"]), ss9.name, unites=("mm",))
+        for pt9 in (e9.get("la_courbe") or []):
+            part9 = float(pt9["part_des_replicats"])
+            if part9 in (0.0, 1.0):
+                continue
+            ajoute(f"la part vue au biais {pt9['le_biais_pose']} de 199", part9,
+                   _dec199(part9), ss9.name, unites=("des réplicats",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 198 : OU LE MAILLAGE QUITTE-T-IL SON FEUILLET ?
     # (1) Une distance observee ne voyage JAMAIS sans celle des melanges ni sans le compte de
     # melanges au moins aussi serres : « 169,7787 » ne dit rien tant qu'on ignore ce que le hasard

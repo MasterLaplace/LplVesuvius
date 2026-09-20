@@ -30,6 +30,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import time
 from math import comb
 from pathlib import Path
 
@@ -81,8 +82,22 @@ ABSENT_DU_DEPOT = "absent du dépôt"
 LES_REPRISES = 3
 
 
+def lattente_avant_le_prochain_essai(essai: int, base: float) -> float:
+    """L'attente entre deux essais — elle DOUBLE, et une base nulle la supprime.
+
+    ⚠⚠⚠ REDEMANDER AUSSITOT NE SERT A RIEN CONTRE UNE PANNE QUI DURE, et la mesure l'a dit : une
+    ligne de deux cent quatre-vingt-cinq chunks a perdu cent cinquante-deux requetes sur des echecs
+    de resolution de nom, et pas une seule reprise n'a abouti — les quatre essais tenaient dans
+    quelques millisecondes. Une attente qui double couvre un intervalle utile sans jamais rendre une
+    panne longue acceptable : celle-la reste un refus.
+
+    ⚠ La base NULLE est le defaut, donc toute tranche anterieure garde exactement son comportement.
+    """
+    return float(base) * (2.0 ** max(0, int(essai)))
+
+
 def un_chunk(url: str, meta: dict, cy: int, cx: int, delai: float = DELAI,
-             chercher=None, reprises: int = LES_REPRISES):
+             chercher=None, reprises: int = LES_REPRISES, pause: float = 0.0):
     """Le cube brut d'un chunk, et la RAISON PRÉCISE quand il n'y en a pas.
 
     ⚠⚠⚠ C'EST LA REPARATION D'UN DEFAUT QUE LA MESURE A SUBI : une coupure de connexion a fait
@@ -104,6 +119,9 @@ def un_chunk(url: str, meta: dict, cy: int, cx: int, delai: float = DELAI,
         if raw is not None or pourquoi == "absent":
             break
         reprises_faites = essai + 1
+        attente = lattente_avant_le_prochain_essai(essai, pause)
+        if attente > 0.0 and essai < int(reprises):
+            time.sleep(attente)
     if raw is None:
         return None, (ABSENT_DU_DEPOT if pourquoi == "absent"
                       else f"{LE_RESEAU_A_ECHOUE} : {pourquoi}")
@@ -670,6 +688,15 @@ def verifier() -> int:
     v("★★★★ une panne de réseau est comptée À PART d'un chunk absent du dépôt",
       pc2["refuses"].get(ABSENT_DU_DEPOT) == 1
       and les_pannes_de_reseau(pc2["refuses"]) == 2, str(pc2["refuses"]))
+    # ⚠⚠⚠ L'ATTENTE SE SONDE SANS DORMIR : c'est une fonction pure, donc elle se verifie.
+    v("★★★★ l'attente DOUBLE d'un essai à l'autre",
+      [lattente_avant_le_prochain_essai(k, 0.5) for k in range(4)] == [0.5, 1.0, 2.0, 4.0],
+      str([lattente_avant_le_prochain_essai(k, 0.5) for k in range(4)]))
+    v("★★★★ et une base nulle la supprime, donc rien d'antérieur ne change",
+      all(lattente_avant_le_prochain_essai(k, 0.0) == 0.0 for k in range(4)))
+    v("★★★ trois reprises à une demi-seconde couvrent trois secondes et demie",
+      abs(sum(lattente_avant_le_prochain_essai(k, 0.5) for k in range(3)) - 3.5) < 1e-9,
+      str(sum(lattente_avant_le_prochain_essai(k, 0.5) for k in range(3))))
     v("★★★ et le compte de pannes ramasse toutes les raisons de transport",
       les_pannes_de_reseau({f"{LE_RESEAU_A_ECHOUE} : a": 3,
                             f"{LE_RESEAU_A_ECHOUE} : b": 4, ABSENT_DU_DEPOT: 9}) == 7)

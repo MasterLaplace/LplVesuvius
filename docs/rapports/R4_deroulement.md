@@ -2849,6 +2849,39 @@ spire ? Un treillis saute d'un endroit à l'autre, donc il ne dit rien de ce qui
 eux — or un demi-voxel par chunk sur trois cents chunks fait un pli entier, et chaque mesure locale
 y paraîtrait irréprochable.
 
+**`199` · 2026-09-20 · la dérive s'accumule-t-elle le long d'une spire ?**
+⭐⭐⭐⭐ **`198` mesurait sur un treillis, qui SAUTE d'un endroit à l'autre.** Ici la ligne est
+**contiguë** : rangée **198** sur **396**, **257 colonnes** lues sur **285 colonnes**,
+**254 pas** en **1 tronçon**. Et la question change de nature — recaler chaque chunk **sur son
+voisin**, non sur lui-même. ⚠⚠ La largeur de la bande de bord est **dérivée** du serpentement de
+`198` : **16 colonnes**, la plus grande puissance de deux dont le serpentement propre reste sous un
+voxel.
+✗ **LES PAS SE COMPENSENT** — `R4-F264`. Déplacement net **79 voxels** contre **69 voxels** au
+tirage des **signes**, **6** tirages sur **19 mélanges** aussi loin, soit **1,0032** écart-type de
+marche au hasard. ⭐⭐⭐⭐ Le nul tire les **signes** et non l'ordre : permuter les pas laisserait leur
+somme **inchangée**, donc un nul par permutation serait vide par construction.
+⭐⭐⭐⭐ **ET C'EST LA MAUVAISE NOUVELLE** — `R4-F265`. Une marche au hasard dérive quand même, comme
+la racine du nombre de pas : avec un pas quadratique de **4,941 voxels**, le demi-feuillet est perdu
+en **53,09 chunks**, soit **16,308 mm** de largeur dépliée, et l'excursion mesurée atteint déjà
+**94 voxels**, soit **1,304046** pli. ⚠⚠⚠ **Une correction différentielle ne peut donc rien** : de
+proche en proche elle n'a rien à corriger localement. Il faut une **référence absolue**.
+⚠⚠⚠ **ET UNE LIMITE QUI COMPTE** — `R4-F266` : un pas de plus d'une demi-période n'est pas saturé
+mais **aliasé**. Un pas posé de **41 voxels** est lu **-31 voxels**, donc un saut de feuillet entier
+se lit comme un **petit pas en arrière** — et rien dans le pas seul ne les distingue.
+⚠⚠ **Deux vrais défauts trouvés par les sondes avant les bris** — `R4-F267`. Le pas était rendu avec
+le **signe inverse** (l'argmax d'une corrélation croisée vaut **moins** le décalage), et la
+corrélation était normalisée par la **longueur** de la fenêtre comme `197` et `198` le font pour un
+étalement — ce qui déplace le maximum d'un voxel quand la fenêtre ne porte qu'un pli et demi. Un
+voxel de biais répété trois cents fois ferait quatre plis : une quantité qui s'**accumule** exige une
+normalisation par l'**énergie**.
+⚠ **Et une coupure de connexion a encore appris quelque chose** — `R4-F268` : redemander **aussitôt**
+ne sert à rien contre une panne qui dure — **152** requêtes perdues, **aucune** reprise aboutie.
+Réparé par une attente qui **double**, nulle par défaut.
+⭐ `R4-P47` est **répondue** et `R4-P48` **s'ouvre** : quelle est la référence absolue — et le dépôt
+ne l'aurait-il pas **déjà mesurée** ? `180` a établi que la cohérence **creuse** à une frontière de
+pli sur **27** chunks sur **27**. C'est un repère qui ne se déduit d'aucun voisin, et rien ne l'a
+encore utilisé pour **borner** une marche.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
