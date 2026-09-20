@@ -3065,6 +3065,53 @@ un correcteur absolu le devient-il aussi ? ⭐ Le gain se **prédit avant d'êtr
 bruit du creux de **18,0421** sous **3,4585** demanderait **vingt-sept** lectures indépendantes,
 donc la tranche saura **avant** de mesurer si la voie est ouverte ou fermée.
 
+**`205` · 2026-09-21 · moyenner le creux réduit-il son bruit ?**
+⭐⭐⭐⭐ **La même question qu'à `204`, posée au CREUX cette fois.** `200` lit sa couche sur UN cube,
+sans moyenner quoi que ce soit, et `202` a mesuré que son bruit vaut **18,0421 voxels** pour une
+dérive de **3,4585 voxels**. Un chunk peut être découpé en sous-colonnes, et chacune rend sa propre
+lecture.
+⭐ **La prédiction est posée AVANT la mesure, et elle est calculée, jamais tapée** — `R4-F299`.
+Ramener le bruit sous la dérive demande le **carré** de leur rapport, soit **27,2144** pris par
+EXCÈS : **28 lectures** indépendantes. ⚠⚠ `R4-P53` écrivait « vingt-sept » en prose et affirmait
+qu'un chunk ne pouvait pas les offrir : la porte avait tort sur les **deux** points, puisque la
+géométrie en offre **1024 sous-colonnes** au-dessus du plancher de l'opérateur (**3 pixels**).
+**LA VOIE ÉTAIT DONC OUVERTE** avant qu'un seul chunk ne soit lu.
+✗ **ET ELLE SE REFERME AILLEURS** — `R4-F300`. Sur **244 coutures**, l'aléa tombe de **13,0989** à
+**4,2814 voxels** entre **4** et **64 sous-colonnes**, et s'arrête à **1,2379 fois** la cible.
+⚠⚠ **Découper n'est pas gratuit, et le prix se mesure** — `R4-F301` : la dispersion **dans** le
+chunk MONTE de **14,4199** à **17,9214 voxels** pendant que l'aléa descend, et l'aléa tombe plus
+**lentement** que la racine de `k` — **1,0608** puis **1,3074**. C'est la dette de `203` payée
+d'avance : un critère aveugle à cette dynamique aurait récompensé un instrument mort.
+⭐⭐⭐⭐ **LE FAIT QUI FERME LA VOIE N'ÉTAIT PAS PRÉVU PAR LA PORTE** — `R4-F302`. Ce qui reste après
+retrait du désaccord entre sous-colonnes est une erreur **commune à un chunk** de **14,9372 voxels**,
+qu'aucun découpage n'atteint. L'erreur totale vaut **15,5387 voxels** contre **18,0421 voxels** chez
+`202` : moyenner **64 sous-colonnes** en laisse **0,8612** en place.
+⚠⚠⚠ **Et le contrôle croisé a REFUSÉ un nombre** — `R4-F303`. La « dérive » apparente vaut
+**15,3324 voxels**, soit **6,8663 fois** les **3,4585** du creux et bien au-delà des **2,233** des
+rangées : un nombre juste sous un mauvais nom est pire qu'un nombre absent, donc cette tranche ne
+publie **aucune portée** alors que son module en calcule une.
+⚠⚠ **L'ambiguïté de pli existe aussi À L'INTÉRIEUR d'un chunk** — `R4-F304` : **278**, **1410** puis
+**4966 lectures** ont dû être repliées, comptées plutôt que lissées.
+★ **L'épreuve trouve un pas** — `R4-F305` : **210 coutures** sur **244 coutures** informatives, seuil
+**136**, P = **0 pour 0,05 garantis**, avec le nul d'un demi **démontré** de `204`. ⭐ Le repli se
+retranche aux **deux** demi-pas, jamais au seul pas publié, sans quoi l'identité dont le nul est tiré
+serait rompue.
+⚠ **L'étalon sépare à la limite exacte que la règle autorise** — `R4-F306` : **12 des 12** réplicats,
+dérive retrouvée **3,3096 voxels** pour **3,5 voxels** posés, et **0,1** de faux pour **0,05
+garantis**. ⚠⚠ Sa taille est celle de `204` et n'est pas négociable : un étalon plus court échoue
+faute de **puissance**, pas faute d'instrument.
+⚠⚠⚠ **Deux vrais défauts trouvés par la MESURE et non par les sondes** : la première version ne
+transmettait rien de ce que les deux chunks d'une couture avaient lu, donc la courbe annonçait
+« dispersion dans le chunk » et « plis sautés » et rendait `None` et zéro partout — deux nombres
+justes sous un mauvais nom. La sonde ne l'avait pas vu **parce qu'elle nourrissait la courbe avec des
+coutures écrites à la main qui portaient déjà ces clefs**, une fixture complaisante. Et deux bris ont
+tué la batterie **avant son verdict** : les deux sondes lisent désormais par `.get()`.
+⭐ `R4-P53` est **répondue par la négative** et `R4-P54` **s'ouvre** : qu'est-ce qui fait que toutes
+les sous-colonnes d'un chunk se trompent **ensemble** ? ⭐ La suite se coupe dans l'autre sens — cette
+tranche a découpé le chunk dans le **plan**, la suivante doit le découper en **profondeur** — et la
+prédiction s'y pose encore avant la mesure : `179` a établi qu'une feuille d'un seul pli ne creuse à
+aucun recouvrement, donc une sous-tranche de moins d'un pli **doit** ne rien rendre.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

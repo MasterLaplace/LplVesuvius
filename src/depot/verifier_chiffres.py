@@ -3194,6 +3194,110 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 205 : MOYENNER LE CREUX REDUIT-IL SON BRUIT ?
+    # (1) L'ALEA ne voyage JAMAIS sans la DISPERSION DANS LE CHUNK au meme decoupage : la premiere
+    # tombe pendant que la seconde MONTE, et c'est cet ordre-la qui dit que decouper se paie. La
+    # publier seule recompenserait un instrument mort — la dette de `203`.
+    # (2) Ni sans l'alea PREDIT : « 4,2814 » ne dit rien tant qu'on ignore que la racine de
+    # soixante-quatre en prevoyait 3,2747, et c'est cet ECART qui renseigne.
+    # (3) Le COMPTE REQUIS ne voyage jamais sans ce que la GEOMETRIE OFFRE : c'est leur comparaison,
+    # et elle seule, qui dit que la voie etait ouverte avant la mesure.
+    # (4) Et l'erreur commune a un chunk ne voyage jamais sans les DEUX bornes du controle croise :
+    # c'est ce qui interdit de lire 15,3324 comme une derive.
+    sm = _source(racine, "moyenner_le_creux_reduit_il_son_bruit.json")
+    if sm.exists():
+        d = json.loads(sm.read_text())
+
+        def _dec205(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        lgm = d.get("la_ligne") or {}
+        prm = d.get("la_prediction") or {}
+        ecm = d.get("lechelle_des_decoupages") or {}
+        cbm = d.get("la_courbe") or {}
+        epm = d.get("lepreuve") or {}
+        vem = d.get("le_verdict") or {}
+        em = d.get("letalon") or {}
+        for srcm, cle, nom, unites in (
+                (lgm, "colonnes_demandees", "les colonnes demandées", ("colonnes",)),
+                (lgm, "colonnes_lues", "les colonnes lues", ("colonnes",)),
+                (lgm, "le_cote_du_chunk_en_pixels", "le côté du chunk", ("pixels",)),
+                (lgm, "la_rangee", "la rangée déclarée", ("rangée",)),
+                (d, "les_coutures_voisines", "les coutures voisines", ("coutures",)),
+                (prm, "les_lectures_requises", "les lectures requises", ("lectures",)),
+                (ecm, "le_plancher_de_loperateur", "le plancher de l opérateur", ("pixels",)),
+                (ecm, "le_plus_grand_compte_que_la_geometrie_offre",
+                 "ce que la géométrie offre", ("sous-colonnes",)),
+                (epm, "les_sous_colonnes", "les sous-colonnes de l épreuve", ("sous-colonnes",)),
+                (epm, "les_coutures_vues", "les coutures vues", ("coutures",)),
+                (epm, "les_coutures_informatives", "les coutures informatives", ("coutures",)),
+                (epm, "les_coutures_qui_portent_un_pas", "les coutures qui portent un pas",
+                 ("coutures",)),
+                (epm, "le_seuil_apparie", "le seuil apparié", ("**",)),
+                (em, "les_chunks_par_replicat", "les chunks par réplicat", ("chunks",)),
+                (em, "replicats", "les réplicats de l étalon", ("des",)),
+                (em, "les_vus", "les réplicats trouvés", ("des",)),
+                (em, "les_replicats_du_refus", "les réplicats du refus", ("réplicats",)),
+                (em, "les_faux", "les faux de l étalon", ("faux",))):
+            if srcm.get(cle) is not None:
+                ajoute(f"{nom} de 205", int(srcm[cle]), 0, sm.name, unites=unites)
+        for compte, cote in zip(ecm.get("les_comptes") or [],
+                                ecm.get("les_cotes_des_sous_colonnes") or []):
+            ajoute(f"le découpage à {compte} de 205", int(compte), 0, sm.name,
+                   unites=("sous-colonnes", "**"))
+            ajoute(f"le côté d une sous-colonne à {compte} de 205", int(cote), 0, sm.name,
+                   unites=("pixels", "**"))
+        for srcm, cle, nom, unites in (
+                (prm, "le_bruit_du_creux_en_voxels", "le bruit du creux de 202", ("voxels",)),
+                (prm, "la_derive_commune_en_voxels", "la dérive commune de 202", ("voxels",)),
+                (prm, "le_rapport_du_bruit_a_la_derive", "le rapport du bruit à la dérive", ()),
+                (prm, "le_rapport_des_variances", "le rapport des variances", ()),
+                (vem, "lalea_au_depart_en_voxels", "l aléa au départ", ("voxels",)),
+                (vem, "lalea_au_maximum_en_voxels", "l aléa au maximum", ("voxels",)),
+                (vem, "le_rapport_de_lalea_a_la_derive", "le rapport de l aléa à la dérive",
+                 ("fois",)),
+                (vem, "la_derive_au_maximum_en_voxels", "la dérive au maximum", ("voxels",)),
+                (vem, "le_bruit_de_chunk_en_voxels", "l erreur commune à un chunk", ("voxels",)),
+                (vem, "le_bruit_total_au_maximum_en_voxels", "l erreur totale au maximum",
+                 ("voxels",)),
+                (vem, "ce_qui_reste_du_bruit_de_202", "ce qui reste du bruit de 202", ()),
+                (vem, "la_derive_par_les_rangees_de_204_en_voxels", "la dérive par les rangées",
+                 ("voxels",)),
+                (vem, "le_rapport_des_deux_derives", "le rapport des deux dérives", ("fois",)),
+                (cbm, "ce_que_le_decoupage_coute_au_premier_barreau",
+                 "le prix du découpage au premier barreau", ("fois",)),
+                (epm, "la_valeur_p", "la valeur p de l épreuve", ("pour",)),
+                (em, "la_derive_posee_en_voxels", "la dérive posée de l étalon", ("voxels",)),
+                (em, "le_bruit_par_sous_colonne_en_voxels", "le bruit par sous-colonne",
+                 ("voxels",)),
+                (em, "la_derive_retrouvee_en_voxels", "la dérive retrouvée", ("voxels",)),
+                (em, "le_taux_de_faux", "le taux de faux de l étalon", ("**",)),
+                (em, "la_garantie", "la garantie de l étalon", ("**",))):
+            if srcm.get(cle) is not None:
+                ajoute(f"{nom} de 205", float(srcm[cle]), _dec205(srcm[cle]), sm.name,
+                       unites=unites)
+        for br in (cbm.get("les_barreaux") or []):
+            k_ = int(br["les_sous_colonnes"])
+            for cle, nom in (("lalea_en_voxels", "l aléa"),
+                             ("lalea_predit_en_voxels", "l aléa prédit"),
+                             ("la_dispersion_du_pas_en_voxels", "la dispersion du pas"),
+                             ("la_dispersion_dans_le_chunk_en_voxels", "la dispersion dans le "
+                              "chunk"),
+                             ("la_derive_en_voxels", "la dérive"),
+                             ("le_signal_sur_bruit", "le signal sur bruit"),
+                             ("le_rapport_observe_sur_predit", "le rapport observé sur prédit")):
+                if br.get(cle) is not None:
+                    ajoute(f"{nom} à {k_} sous-colonnes de 205", float(br[cle]),
+                           _dec205(br[cle]), sm.name, unites=("**", "fois"))
+            if br.get("les_sous_colonnes_repliees_dun_pli") is not None:
+                ajoute(f"les lectures repliées à {k_} sous-colonnes de 205",
+                       int(br["les_sous_colonnes_repliees_dun_pli"]), 0, sm.name,
+                       unites=("lectures",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 204 : COMBIEN DE RANGEES FAUT-IL POUR LIRE LE PAS ?
     # (1) Un ALEA ne voyage JAMAIS sans la DISPERSION du pas au meme compte de rangees : c'est leur
     # ordre qui dit s'il y a une derive a extraire, et `203` a paye qu'un critere aveugle a la

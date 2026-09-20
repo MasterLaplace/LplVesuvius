@@ -1,0 +1,213 @@
+{
+  "graine": 20261013,
+  "tirages": 19,
+  "la_question_declaree": "moyenner les sous-colonnes d'un chunk réduit-il le bruit du creux, et assez pour le faire passer sous la dérive que `202` a mesurée ?",
+  "les_epreuves_declarees": [
+    "moyenner toutes les sous-colonnes offertes laisse-t-il un pas au-delà du bruit, couture par couture"
+  ],
+  "la_garantie_par_epreuve": 0.05,
+  "le_pas_dun_pli_en_voxels": 72.0833,
+  "la_demi_periode_en_voxels": 36,
+  "ce_que_202_a_rendu": {
+    "decidable": true,
+    "la_derive_en_voxels": 3.4585,
+    "le_bruit_du_maillage_en_voxels": 3.5189,
+    "le_bruit_du_creux_en_voxels": 18.0421,
+    "la_largeur_du_bord": 16,
+    "la_rangee": 198
+  },
+  "la_prediction": {
+    "decidable": true,
+    "le_bruit_du_creux_en_voxels": 18.0421,
+    "la_derive_commune_en_voxels": 3.4585,
+    "le_rapport_du_bruit_a_la_derive": 5.2167,
+    "le_rapport_des_variances": 27.2144,
+    "les_lectures_requises": 28
+  },
+  "lechelle_des_decoupages": {
+    "decidable": true,
+    "les_grilles": [
+      2,
+      4,
+      8
+    ],
+    "les_comptes": [
+      4,
+      16,
+      64
+    ],
+    "les_cotes_des_sous_colonnes": [
+      64,
+      32,
+      16
+    ],
+    "le_plancher_de_loperateur": 3,
+    "le_plus_grand_compte_que_la_geometrie_offre": 1024,
+    "les_lectures_requises": 28,
+    "la_voie_est_ouverte_avant_la_mesure": true
+  },
+  "la_ligne": {
+    "decidable": true,
+    "segment": "20230702185753",
+    "grille_de_chunks": [
+      396,
+      285
+    ],
+    "la_rangee": 198,
+    "le_cote_du_chunk_en_pixels": 128,
+    "colonnes_demandees": 285,
+    "colonnes_lues": 251,
+    "les_grilles": [
+      2,
+      4,
+      8
+    ],
+    "les_reprises_du_reseau": 0,
+    "refuses": {
+      "absent du dépôt": 28,
+      "trop peu texturé": 6
+    }
+  },
+  "les_coutures_voisines": 244,
+  "ce_que_199_a_rendu": {
+    "decidable": true,
+    "les_pas": 254,
+    "la_rangee": 198,
+    "le_pas_quadratique_en_voxels": 4.941,
+    "le_pas_maximal_en_voxels": 35.0,
+    "la_marge_du_pas_maximal_en_voxels": 1.0,
+    "les_pas_au_bord_de_lalias": 1,
+    "les_pas_qui_saturent": 0,
+    "lexcursion_en_plis": 1.304046,
+    "les_pas_sans_colonne": 2,
+    "le_cumul_est_indexable_par_colonne": false
+  },
+  "ce_que_204_a_rendu": {
+    "decidable": true,
+    "la_derive_en_voxels": 2.233,
+    "lalea_en_voxels": 1.029,
+    "les_rangees": 16
+  },
+  "la_courbe": {
+    "decidable": true,
+    "les_barreaux": [
+      {
+        "les_sous_colonnes": 4,
+        "les_coutures": 241,
+        "lalea_en_voxels": 13.0989,
+        "lalea_predit_en_voxels": 13.0989,
+        "le_rapport_observe_sur_predit": 1.0,
+        "la_dispersion_du_pas_en_voxels": 19.1964,
+        "la_dispersion_dans_le_chunk_en_voxels": 14.4199,
+        "les_sous_colonnes_repliees_dun_pli": 278,
+        "la_derive_en_voxels": 14.0328,
+        "le_signal_sur_bruit": 1.0713
+      },
+      {
+        "les_sous_colonnes": 16,
+        "les_coutures": 243,
+        "lalea_en_voxels": 6.9477,
+        "lalea_predit_en_voxels": 6.5494,
+        "le_rapport_observe_sur_predit": 1.0608,
+        "la_dispersion_du_pas_en_voxels": 17.1576,
+        "la_dispersion_dans_le_chunk_en_voxels": 15.6146,
+        "les_sous_colonnes_repliees_dun_pli": 1410,
+        "la_derive_en_voxels": 15.688,
+        "le_signal_sur_bruit": 2.258
+      },
+      {
+        "les_sous_colonnes": 64,
+        "les_coutures": 244,
+        "lalea_en_voxels": 4.2814,
+        "lalea_predit_en_voxels": 3.2747,
+        "le_rapport_observe_sur_predit": 1.3074,
+        "la_dispersion_du_pas_en_voxels": 15.919,
+        "la_dispersion_dans_le_chunk_en_voxels": 17.9214,
+        "les_sous_colonnes_repliees_dun_pli": 4966,
+        "la_derive_en_voxels": 15.3324,
+        "le_signal_sur_bruit": 3.5812
+      }
+    ],
+    "le_compte_de_reference": 4,
+    "le_bruit_dune_seule_lecture_en_voxels": 18.0421,
+    "ce_que_le_decoupage_coute_au_premier_barreau": 1.452,
+    "les_comptes_qui_rendent_une_derive": [
+      4,
+      16,
+      64
+    ],
+    "le_meilleur_compte": 64,
+    "sa_derive_en_voxels": 15.3324,
+    "son_alea_en_voxels": 4.2814,
+    "son_signal_sur_bruit": 3.5812
+  },
+  "lepreuve": {
+    "decidable": true,
+    "les_sous_colonnes": 64,
+    "les_coutures_vues": 244,
+    "les_coutures_informatives": 244,
+    "les_coutures_qui_portent_un_pas": 210,
+    "le_seuil_apparie": 136,
+    "la_valeur_p": 0.0,
+    "la_garantie_de_lepreuve": 0.05,
+    "la_couture_porte_un_pas": true
+  },
+  "la_portee": {
+    "decidable": true,
+    "la_derive_en_voxels": 15.3324,
+    "par_la_derive": {
+      "decidable": true,
+      "les_chunks": 5.51,
+      "la_largeur_en_mm": 1.694
+    },
+    "le_pas_quadratique_de_199_en_voxels": 4.941,
+    "par_le_pas_de_199": {
+      "decidable": true,
+      "les_chunks": 53.09,
+      "la_largeur_en_mm": 16.308
+    },
+    "le_rapport_des_portees": 0.1038
+  },
+  "le_verdict": {
+    "decidable": true,
+    "les_sous_colonnes_de_lepreuve": 64,
+    "la_couture_porte_un_pas": true,
+    "la_valeur_p": 0.0,
+    "les_lectures_requises": 28,
+    "le_plus_grand_compte_que_la_geometrie_offre": 1024,
+    "la_voie_etait_ouverte_avant_la_mesure": true,
+    "lalea_au_depart_en_voxels": 13.0989,
+    "lalea_au_maximum_en_voxels": 4.2814,
+    "le_rapport_observe_sur_predit_au_maximum": 1.3074,
+    "la_dispersion_au_maximum_en_voxels": 15.919,
+    "la_derive_au_maximum_en_voxels": 15.3324,
+    "le_signal_sur_bruit_au_maximum": 3.5812,
+    "la_derive_visee_par_202_en_voxels": 3.4585,
+    "le_bruit_est_il_passe_sous_la_derive": false,
+    "le_rapport_de_lalea_a_la_derive": 1.2379,
+    "le_bruit_de_chunk_en_voxels": 14.9372,
+    "le_bruit_total_au_maximum_en_voxels": 15.5387,
+    "le_bruit_de_202_en_voxels": 18.0421,
+    "ce_qui_reste_du_bruit_de_202": 0.8612,
+    "la_derive_par_les_rangees_de_204_en_voxels": 2.233,
+    "le_rapport_des_deux_derives": 6.8663,
+    "la_portee_en_chunks": 5.51,
+    "la_portee_en_mm": 1.694
+  },
+  "letalon": {
+    "decidable": true,
+    "la_derive_posee_en_voxels": 3.5,
+    "le_bruit_par_sous_colonne_en_voxels": 6.0,
+    "les_chunks_par_replicat": 60,
+    "les_sous_colonnes_maximales": 64,
+    "replicats": 12,
+    "les_vus": 12,
+    "la_part_trouvee": 1.0,
+    "la_derive_retrouvee_en_voxels": 3.3096,
+    "les_replicats_du_refus": 40,
+    "les_faux": 4,
+    "le_taux_de_faux": 0.1,
+    "la_garantie": 0.05,
+    "letalon_separe": true
+  }
+}

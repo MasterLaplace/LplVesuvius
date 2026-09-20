@@ -326,6 +326,10 @@ def ce_que_lappariement_a_rendu(chemin: Path = CE_QUE_LAPPARIEMENT_A_RENDU) -> d
     return {"decidable": True,
             "la_derive_en_voxels": dc.get("la_derive_commune_en_voxels"),
             "le_bruit_du_maillage_en_voxels": dc.get("le_bruit_du_maillage_en_voxels"),
+            # ⚠⚠ LE BRUIT DU CREUX EST RENDU PAR CE LECTEUR-CI ET PAR AUCUN AUTRE : `205` en a
+            # besoin pour poser sa prédiction, et un second lecteur du même fichier finirait par
+            # ne plus s'accorder avec celui-ci.
+            "le_bruit_du_creux_en_voxels": dc.get("le_bruit_du_creux_en_voxels"),
             "la_largeur_du_bord": d.get("la_largeur_du_bord"),
             "la_rangee": (d.get("la_ligne") or {}).get("la_rangee")}
 
