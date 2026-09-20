@@ -3029,6 +3029,42 @@ de mesure séparerait le mouvement du feuillet du bruit de sa propre lecture ? �
 médiane sur **k** rangées se **prédit** avant d'être mesuré — la racine de **k** — ce qui rendra la
 tranche falsifiable.
 
+**`204` · 2026-09-20 · combien de rangées faut-il pour lire le pas ?**
+⭐⭐⭐⭐ **`203` avait laissé deux lectures ouvertes, et celle-ci les sépare.** Ou bien le désaccord
+de deux rangées est le **bruit** de l'estimateur — et moyenner doit le réduire — ou bien c'est la
+**variation réelle** de la surface dans un chunk — et moyenner n'y fera rien.
+⭐ **La prédiction est posée AVANT la mesure, pour la première fois de la chaîne** : si les erreurs
+des rangées sont indépendantes, l'aléa d'une moyenne de `k` rangées vaut celui d'une rangée divisé
+par la racine de `k`. ⚠⚠ Mais cette loi n'est **pas** l'épreuve — c'est l'erreur type d'une moyenne,
+donc la vérifier serait une vérification incapable d'échouer.
+★ **MOYENNER SEIZE RANGÉES FAIT PASSER LE SIGNAL DEVANT LE BRUIT** — `R4-F293`. Sur **244 coutures**,
+l'aléa tombe de **4,2369** à **1,029 voxel** entre **2 rangées** et **16 rangées**, la dispersion du
+pas reste à **2,4587**, et la dérive extraite vaut **2,233 voxels** — un signal sur bruit de
+**2,17 fois**. ⭐ À deux rangées il n'y avait **aucune** dérive à extraire : la dispersion était sous
+l'aléa, exactement ce que `203` avait trouvé.
+⭐⭐⭐⭐ **ET L'ÉPREUVE A UN NUL D'UN DEMI QUI SE DÉMONTRE** — `R4-F294`. Le pas publié est la moyenne
+des deux demi-moyennes et le désaccord leur différence, donc sans pas à lire la somme et la
+différence sont **identiquement distribuées**. **191 coutures** sur **225 informatives** portent un
+pas, pour un seuil de **126 coutures** et P = **0 pour 0,05 garantis**. Aucun réglage, aucune
+hypothèse gaussienne, et de la puissance exactement contre ce qu'elle cherche.
+★ **LA PORTÉE QUINTUPLE ET DEVIENT PLAUSIBLE** — `R4-F295`. **259,91 chunks**, soit **79,845 mm** sur
+un rouleau large de **121,44 mm** déroulé, contre **53,09 chunks** pour le pas de `199` : un rapport
+de **4,8956**. ⚠⚠ Mais c'est une portée de **marche au hasard** — elle dit après combien de coutures
+un demi-pli est perdu si rien ne corrige. Ce qui change est que le pas est désormais **mesurable**.
+★ **ET LE CONTRÔLE CROISÉ TIENT** — `R4-F296` : **2,233** contre **3,4585 voxels** par le creux de
+`202`, un rapport de **0,6457** là où `203` avec son critère cassé en donnait **0,0415**.
+⚠⚠ **Deux chiffres restent inexpliqués et sont publiés comme tels** — `R4-F297`. L'aléa tombe à
+**0,6869** de ce que la racine de `k` prédisait, et la dispersion tombe aussi, de **4,2006** à
+**2,4587** : une part de ce qui passait pour du pas à deux rangées était du bruit.
+⭐ **Et seize rangées tiennent en mémoire parce qu'un profil de bord moyenné d'avance rend
+EXACTEMENT le même pas que la bande entière** — `R4-F298`, vérifié par une sonde plutôt que supposé.
+⚠⚠ **Deux bris restés verts, réparés** : une dispersion constante passait faute d'une sonde sur sa
+**valeur**, et une fixture sans bruit tuait la batterie **avant son verdict**.
+⭐ `R4-P52` est **répondue par l'affirmative** et `R4-P53` **s'ouvre** : le pas étant enfin mesurable,
+un correcteur absolu le devient-il aussi ? ⭐ Le gain se **prédit avant d'être mesuré** — ramener le
+bruit du creux de **18,0421** sous **3,4585** demanderait **vingt-sept** lectures indépendantes,
+donc la tranche saura **avant** de mesurer si la voie est ouverte ou fermée.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

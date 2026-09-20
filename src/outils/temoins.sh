@@ -1548,6 +1548,8 @@ run "le creux bouge avec le maillage" uv run python "$ROOT/src/nappe/le_creux_bo
 run "figure le creux bouge" uv run python "$ROOT/src/figures/figure_le_creux_bouge_t_il_avec_le_maillage.py" --verifier
 run "une bande plus large" uv run python "$ROOT/src/nappe/une_bande_plus_large_lit_elle_mieux.py" --verifier
 run "figure une bande plus large" uv run python "$ROOT/src/figures/figure_une_bande_plus_large_lit_elle_mieux.py" --verifier
+run "combien de rangees" uv run python "$ROOT/src/nappe/combien_de_rangees_faut_il_pour_lire_le_pas.py" --verifier
+run "figure combien de rangees" uv run python "$ROOT/src/figures/figure_combien_de_rangees_faut_il_pour_lire_le_pas.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

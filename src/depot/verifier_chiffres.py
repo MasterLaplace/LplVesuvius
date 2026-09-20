@@ -3194,6 +3194,98 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 204 : COMBIEN DE RANGEES FAUT-IL POUR LIRE LE PAS ?
+    # (1) Un ALEA ne voyage JAMAIS sans la DISPERSION du pas au meme compte de rangees : c'est leur
+    # ordre qui dit s'il y a une derive a extraire, et `203` a paye qu'un critere aveugle a la
+    # dynamique recompense un instrument mort.
+    # (2) Ni sans l'alea PREDIT : « 1,029 » ne dit rien tant qu'on ignore que la racine de seize en
+    # prevoyait 1,498, et c'est cet ECART qui renseigne, pas la valeur.
+    # (3) Une portee ne voyage jamais sans celle de `199` : la tranche se met a COTE de la sienne,
+    # elle ne la remplace pas.
+    # (4) Et une derive ne voyage jamais sans celle du creux de `202` : le controle croise est la
+    # raison d'etre du chiffre.
+    sr = _source(racine, "combien_de_rangees_faut_il_pour_lire_le_pas.json")
+    if sr.exists():
+        d = json.loads(sr.read_text())
+
+        def _dec204(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        lgr = d.get("la_ligne") or {}
+        cbr = d.get("la_courbe") or {}
+        epr = d.get("lepreuve") or {}
+        ver = d.get("le_verdict") or {}
+        por = d.get("la_portee") or {}
+        er = d.get("letalon") or {}
+        for srcr, cle, nom, unites in (
+                (lgr, "colonnes_demandees", "les colonnes demandées", ("colonnes",)),
+                (lgr, "colonnes_lues", "les colonnes lues", ("colonnes",)),
+                (lgr, "la_largeur_du_bord", "la largeur du bord", ("colonnes",)),
+                (d, "les_coutures_voisines", "les coutures voisines", ("coutures",)),
+                (epr, "les_rangees", "les rangées de l épreuve", ("rangées",)),
+                (epr, "les_coutures_vues", "les coutures vues", ("coutures",)),
+                (epr, "les_coutures_informatives", "les coutures informatives", ("coutures",)),
+                (epr, "les_coutures_qui_portent_un_pas", "les coutures qui portent un pas",
+                 ("coutures",)),
+                (epr, "le_seuil_apparie", "le seuil apparié", ("coutures",)),
+                (er, "les_coutures_par_replicat", "les coutures par réplicat", ("coutures",)),
+                (er, "replicats", "les réplicats de l étalon", ("réplicats",)),
+                (er, "les_vus", "les réplicats trouvés", ("des",)),
+                (er, "les_replicats_du_refus", "les réplicats du refus", ("réplicats",)),
+                (er, "les_faux", "les faux de l étalon", ("faux",))):
+            if srcr.get(cle) is not None:
+                ajoute(f"{nom} de 204", int(srcr[cle]), 0, sr.name, unites=unites)
+        if lgr.get("les_rangees_lues"):
+            ajoute("les rangées lues de 204", len(lgr["les_rangees_lues"]), 0, sr.name,
+                   unites=("rangées",))
+            for r_ in (lgr["les_rangees_lues"][0], lgr["les_rangees_lues"][-1]):
+                ajoute(f"la rangée de coupe {r_} de 204", int(r_), 0, sr.name, unites=("sur",))
+        for srcr, cle, nom, unites in (
+                (ver, "lalea_au_depart_en_voxels", "l aléa au départ", ("voxel",)),
+                (ver, "lalea_au_maximum_en_voxels", "l aléa au maximum", ("voxel",)),
+                (ver, "le_rapport_observe_sur_predit_au_maximum",
+                 "le rapport observé sur prédit", ()),
+                (ver, "la_dispersion_au_maximum_en_voxels", "la dispersion au maximum", ()),
+                (ver, "la_derive_au_maximum_en_voxels", "la dérive au maximum", ("voxels",)),
+                (ver, "le_signal_sur_bruit_au_maximum", "le signal sur bruit", ("fois",)),
+                (ver, "la_derive_par_le_creux_en_voxels", "la dérive par le creux", ("voxels",)),
+                (ver, "le_rapport_des_deux_derives", "le rapport des deux dérives", ()),
+                (epr, "la_valeur_p", "la valeur p de l épreuve", ("pour",)),
+                (epr, "la_garantie_de_lepreuve", "la garantie de l épreuve", ("garantis",)),
+                (er, "le_pas_pose_en_voxels", "le pas posé de l étalon", ("voxels",)),
+                (er, "le_bruit_par_rangee_en_voxels", "le bruit par rangée", ("voxels",)),
+                (er, "la_derive_retrouvee_en_voxels", "la dérive retrouvée", ("voxels",)),
+                (er, "le_taux_de_faux", "le taux de faux de l étalon", ("pour",)),
+                (er, "la_garantie", "la garantie de l étalon", ("garantis",)),
+                (por, "le_rapport_des_portees", "le rapport des portées", ())):
+            if srcr.get(cle) is not None:
+                ajoute(f"{nom} de 204", float(srcr[cle]), _dec204(srcr[cle]), sr.name,
+                       unites=unites)
+        for quoi, nom in (("par_la_derive", "par la dérive"),
+                          ("par_le_pas_de_199", "par le pas de 199")):
+            p_ = por.get(quoi) or {}
+            if p_.get("les_chunks") is not None:
+                ajoute(f"la portée {nom} de 204", float(p_["les_chunks"]),
+                       _dec204(p_["les_chunks"]), sr.name, unites=("chunks",))
+            if p_.get("la_largeur_en_mm") is not None:
+                ajoute(f"la largeur {nom} de 204", float(p_["la_largeur_en_mm"]),
+                       _dec204(p_["la_largeur_en_mm"]), sr.name, unites=("mm",))
+        for br in (cbr.get("les_barreaux") or []):
+            k_ = int(br["les_rangees"])
+            for cle, nom in (("lalea_en_voxels", "l aléa"),
+                             ("lalea_predit_en_voxels", "l aléa prédit"),
+                             ("la_dispersion_du_pas_en_voxels", "la dispersion"),
+                             ("la_derive_en_voxels", "la dérive"),
+                             ("le_signal_sur_bruit", "le signal sur bruit"),
+                             ("le_rapport_observe_sur_predit", "le rapport observé sur prédit")):
+                if br.get(cle) is not None:
+                    ajoute(f"{nom} à {k_} rangées de 204", float(br[cle]),
+                           _dec204(br[cle]), sr.name, unites=("**", "fois"))
+
     # ⭐⭐⭐⭐ LA TRANCHE 203 : UNE BANDE PLUS LARGE LIT-ELLE MIEUX ?
     # (1) Un ALEA ne voyage JAMAIS sans la DISPERSION du pas a la meme largeur : « 5,7835 » ne dit
     # rien tant qu'on ignore que le pas lu n'en varie que de 3,8813 — c'est ce rapport, et lui seul,
