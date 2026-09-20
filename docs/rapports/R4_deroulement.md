@@ -2911,6 +2911,49 @@ saturés) mais qui dérive. Leur composition donne l'**ordinal** que ni l'un ni 
 les deux traces existent déjà, sur la même rangée, donc la tranche ne demande **aucun**
 téléchargement neuf.
 
+**`201` · 2026-09-20 · peut-on déplier la phase ?**
+⭐⭐⭐⭐ **Les deux moitiés étaient complémentaires sur le papier** : `200` rend un absolu **modulo
+un pli**, `199` un incrément qui ne saute jamais. Le dépliage de phase les compose — et il exige que
+l'absolue **soit une phase**.
+⚠⚠ **Le contrôle n'était pas tout à fait gratuit** — `R4-F280`. Le cumul de `199` n'est **pas**
+indexable par colonne : son tronçon porte **257 chunks**, donc **256** intervalles, et **254 pas**
+décidables — **2 pas** sans colonne, à des positions inconnues. Deviner vaudrait jusqu'à deux fois
+le plus grand pas lu, davantage que la demi-période. `199` entre donc comme **certification**, pas
+comme terme à additionner.
+⚠⚠⚠ **ET LA CERTIFICATION N'EN EST PAS UNE — c'est le fait neuf** — `R4-F278`. Le plus grand pas lu
+par `199` vaut **35 voxels** pour une demi-période de **36 voxels**, marge **1 voxel**. Or un pas
+lu **ne peut pas** dépasser la demi-période : la recherche s'y arrête, et un pas au-delà **aliase**
+au lieu de saturer (`199` : posé **41**, lu **−31**). Donc « **0 pas** saturés » ne dit **rien** du
+pas vrai. La condition d'Itoh n'est **pas réfutable** par une mesure différentielle de cette forme.
+✗ **LA PHASE N'EST PAS CONCENTRÉE** — `R4-F274`. Écart-type **21,491 voxels** contre
+**19,8487 voxels** pour une couche tirée dans le cube puis repliée : rapport **1,0827**, donc
+légèrement **plus** dispersée que le non-informatif. ⚠⚠⚠ Le nul n'est **pas** une phase uniforme —
+le cube porte **109 couches** pour un pli de **72,0833 voxels**, donc replier charge deux fois la
+première demi-période.
+★ **LA PHASE SE SUIT, MAIS À PEINE** — `R4-F275`. Pas replié **18,3754 voxels** contre
+**20,3023 voxels** à la médiane des **19 mélanges**, **0 mélange** aussi serré, P = **0,05** pour
+**0,05 garantis** — mais un rapport au nul de **0,9051**, donc l'épreuve se déclenche au **plancher
+exact** des tirages.
+⚠⚠⚠ **ET LE CREUX NE SUIT PAS UNE FRONTIÈRE : IL EN REDÉSIGNE UNE** — `R4-F276`. Un creux qui
+suivrait rendrait **4,941 voxels** — le pas que `199` mesure sur la **même** rangée — et le rouleau
+rend **18,3754 voxels**, soit **3,719** fois.
+✗ **LE DÉPLIAGE NE REND PAS L'ORDINAL** — `R4-F277`. Excursion dépliée **3,263584** pli contre
+**1,387283** pour `200` et **1,304046** pour `199` : **2,5027 fois pire** que le différentiel seul.
+Composer les deux moitiés **ajoute** du bruit à une marche qui en avait déjà.
+⭐⭐⭐⭐ **L'étalon place le rouleau sur sa propre échelle** — `R4-F279`. Le dépliage garde le compte
+des plis dans **1** réplicat sur un à **4,941 voxels**, **0,7 des réplicats** à **9,882 voxels**, et
+**aucun** à **19,764**. Le rouleau est à **18,3754 voxels** : dans ses propres unités, le dépliage
+y est **mort**. ⭐ Et le critère ne comporte **aucun seuil** — l'écart vaut un multiple entier de la
+période plus un bruit qui se télescope, donc diviser et arrondir **compte** les plis perdus.
+⚠⚠⚠ **Trois bris restés verts, trois défauts réels.** Le critère de l'ordinal n'était épinglé par
+aucune sonde (juger à **quatre** plis près passait) ; la statistique nommée « quadratique » pouvait
+être une moyenne absolue sans qu'aucune sonde ne le voie ; et le lecteur de `199` cherchait ses pas
+là où **sa propre fixture** les mettait, alors que `199` les **hisse à la racine** — c'est la mesure
+réelle qui l'a dit, en rendant « `199` ne publie aucun pas ».
+⭐ `R4-P49` est **répondue par la négative** et `R4-P50` **s'ouvre** : qu'est-ce qui, dans un chunk,
+**distingue les deux frontières** que son cube contient ? La cible est chiffrée — **18,3754** contre
+**4,941** — et le contrôle est dans le même segment, la même rangée.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

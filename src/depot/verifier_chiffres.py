@@ -3194,6 +3194,115 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 201 : PEUT-ON DEPLIER LA PHASE ?
+    # (1) Un pas replie observe ne voyage JAMAIS sans celui des MELANGES ni sans celui que `199`
+    # rendrait : « 18,3754 voxels » ne dit rien tant qu'on ignore que le nul en rend 20,3023 et
+    # qu'un creux qui SUIVRAIT en rendrait 4,941.
+    # (2) Une valeur p ne voyage jamais sans son RAPPORT AU NUL : une epreuve peut se declencher au
+    # plancher exact des dix-neuf tirages tout en ne s'ecartant du nul que de quelques pour cent, et
+    # « oui » se lirait alors comme « fortement ».
+    # (3) Un pas maximal du differentiel ne voyage jamais sans la DEMI-PERIODE ni sans sa marge :
+    # 35 voxels pour une limite de 36 est une tautologie, pas une certification, parce qu'un pas
+    # au-dela aliase au lieu de saturer.
+    # (4) Et une excursion depliee ne voyage jamais sans les DEUX qu'elle pretend remplacer.
+    sq = _source(racine, "peut_on_deplier_la_phase.json")
+    if sq.exists():
+        d = json.loads(sq.read_text())
+
+        def _dec201(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        c2q = d.get("ce_que_200_a_rendu") or {}
+        c1q = d.get("ce_que_199_a_rendu") or {}
+        itq = d.get("la_condition_ditoh") or {}
+        mgq = d.get("la_marginale") or {}
+        dpq = d.get("le_depliage") or {}
+        amq = d.get("langle_mort") or {}
+        acq = d.get("laccord") or {}
+        vq = d.get("le_verdict") or {}
+        eq = d.get("letalon") or {}
+        for srcq, cle, nom, unites in (
+                (c1q, "les_pas_sans_colonne", "les pas sans colonne", ("pas",)),
+                (c1q, "les_pas", "les pas de 199", ("pas",)),
+                (c2q, "les_reperes", "les repères relus de 200", ("chunks",)),
+                (c2q, "les_couches_du_cube", "les couches du cube", ("couches",)),
+                (itq, "les_pas_de_199_au_bord_de_lalias", "les pas de 199 au bord de l alias",
+                 ("pas",)),
+                (itq, "les_ecarts", "les écarts de la trace", ("sur",)),
+                (itq, "les_ecarts_certifies_au_pire", "les écarts certifiés au pire", ("sur",)),
+                (itq, "les_ecarts_certifies_au_typique", "les écarts certifiés au typique",
+                 ("sur",)),
+                (mgq, "les_phases", "les phases lues", ("chunks",)),
+                (dpq, "les_pas", "les pas dépliés", ("sur",)),
+                (amq, "les_pas_hors_enveloppe", "les pas hors enveloppe", ("sur",)),
+                (amq, "les_pas_au_bord_de_lalias", "les pas au bord de l alias", ("sur",)),
+                (acq, "tirages", "les mélanges", ("mélanges",)),
+                (acq, "les_melanges_au_moins_aussi_serres", "les mélanges aussi serrés", ("sur",)),
+                (eq, "replicats", "les réplicats de l étalon", ("réplicats",)),
+                (eq, "les_echantillons", "les échantillons par trace", ("échantillons",)),
+                (eq, "les_faux", "les faux de l étalon", ("sur",))):
+            if srcq.get(cle) is not None:
+                ajoute(f"{nom} de 201", int(srcq[cle]), 0, sq.name, unites=unites)
+        for srcq, cle, nom, unites in (
+                (d, "le_pas_dun_pli_en_voxels", "le pas d un pli", ("voxels",)),
+                (itq, "la_demi_periode_en_voxels", "la demi-période", ("voxels",)),
+                (itq, "le_pas_maximal_de_199_en_voxels", "le pas maximal de 199", ("voxels",)),
+                (itq, "la_marge_du_pas_maximal_en_voxels", "la marge du pas maximal", ("voxel",)),
+                (itq, "le_pire_cas_maximal_en_voxels", "le pire cas maximal", ("voxels",)),
+                (itq, "le_cas_typique_maximal_en_voxels", "le cas typique maximal", ("voxels",)),
+                (mgq, "la_phase_mediane_en_voxels", "la phase médiane", ("voxels",)),
+                (mgq, "lecart_type_en_voxels", "l écart-type de la phase", ("voxels",)),
+                (mgq, "lecart_type_du_nul_en_voxels", "l écart-type du nul", ("voxels",)),
+                (mgq, "le_rapport_au_nul", "le rapport marginal au nul", ()),
+                (acq, "le_pas_quadratique_observe_en_voxels", "le pas replié observé",
+                 ("voxels",)),
+                (acq, "le_pas_quadratique_median_du_nul_en_voxels", "le pas replié du nul",
+                 ("voxels",)),
+                (acq, "le_pas_quadratique_minimal_du_nul_en_voxels",
+                 "le pas replié minimal du nul", ("voxels",)),
+                (acq, "le_rapport_au_nul", "le rapport de l épreuve au nul", ()),
+                (acq, "la_valeur_p", "la valeur p de l épreuve", ("garantis",)),
+                (acq, "la_garantie_de_lepreuve", "la garantie de l épreuve", ("garantis",)),
+                (vq, "le_pas_que_199_rendrait_en_voxels", "le pas que 199 rendrait", ("voxels",)),
+                (vq, "le_rapport_a_ce_que_199_rendrait", "le rapport à ce que 199 rendrait",
+                 ("fois",)),
+                (dpq, "le_pas_quadratique_en_voxels", "le pas quadratique déplié", ("voxels",)),
+                (dpq, "le_deplacement_net_en_plis", "le déplacement net déplié", ("pli",)),
+                (dpq, "lexcursion_en_plis", "l excursion dépliée", ("pli",)),
+                (amq, "lenveloppe_du_differentiel_en_voxels", "l enveloppe du différentiel",
+                 ("voxels",)),
+                (amq, "la_part_hors_enveloppe", "la part hors enveloppe", ()),
+                (amq, "la_marge_dalias_exigee_en_voxels", "la marge d alias exigée", ("voxels",)),
+                (amq, "la_part_au_bord_de_lalias", "la part au bord de l alias", ()),
+                (amq, "la_marge_mediane_en_voxels", "la marge médiane avant l alias", ("voxels",)),
+                (vq, "lexcursion_absolue_en_plis", "l excursion absolue relue", ("pli",)),
+                (vq, "lexcursion_differentielle_en_plis", "l excursion différentielle relue",
+                 ("pli",)),
+                (vq, "le_rapport_a_labsolue", "le rapport à l absolue", ()),
+                (vq, "le_rapport_au_differentiel", "le rapport au différentiel", ()),
+                (eq, "le_pas_qui_tient", "le pas tenu par l étalon", ("voxels",)),
+                (eq, "le_pas_qui_casse", "le pas qui casse l étalon", ("voxels",)),
+                (eq, "le_taux_de_faux", "le taux de faux de l étalon", ("pour",)),
+                (eq, "la_garantie", "la garantie de l étalon", ("garantis",)),
+                (eq, "la_probabilite_den_avoir_autant", "la probabilité d en avoir autant",
+                 ("sous",))):
+            if srcq.get(cle) is not None:
+                ajoute(f"{nom} de 201", float(srcq[cle]), _dec201(srcq[cle]), sq.name,
+                       unites=unites)
+        for ptq in (eq.get("la_courbe") or []):
+            posq = float(ptq["le_pas_pose_en_voxels"])
+            ajoute(f"le pas posé {posq} de l étalon de 201", posq, _dec201(posq), sq.name,
+                   unites=("voxels",))
+            partq = float(ptq["part_des_replicats"])
+            if partq in (0.0, 1.0):
+                continue
+            ajoute(f"la part vue au pas {posq} de 201", partq, _dec201(partq), sq.name,
+                   unites=("des réplicats",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 200 : LE CREUX BORNE-T-IL LA MARCHE ?
     # (1) Un ecart-type ne voyage JAMAIS sans celui d'une loi UNIFORME sur la meme profondeur :
     # « 29,1153 voxels » ne dit rien tant qu'on ignore ce que le non-informatif donnerait.
