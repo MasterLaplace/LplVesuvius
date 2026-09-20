@@ -1544,6 +1544,8 @@ run "le creux borne la marche" uv run python "$ROOT/src/nappe/le_creux_borne_t_i
 run "figure le creux borne" uv run python "$ROOT/src/figures/figure_le_creux_borne_t_il_la_marche.py" --verifier
 run "peut-on deplier la phase" uv run python "$ROOT/src/nappe/peut_on_deplier_la_phase.py" --verifier
 run "figure deplier la phase" uv run python "$ROOT/src/figures/figure_peut_on_deplier_la_phase.py" --verifier
+run "le creux bouge avec le maillage" uv run python "$ROOT/src/nappe/le_creux_bouge_t_il_avec_le_maillage.py" --verifier
+run "figure le creux bouge" uv run python "$ROOT/src/figures/figure_le_creux_bouge_t_il_avec_le_maillage.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

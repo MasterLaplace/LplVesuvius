@@ -2954,6 +2954,46 @@ réelle qui l'a dit, en rendant « `199` ne publie aucun pas ».
 **distingue les deux frontières** que son cube contient ? La cible est chiffrée — **18,3754** contre
 **4,941** — et le contrôle est dans le même segment, la même rangée.
 
+**`202` · 2026-09-20 · le creux bouge-t-il avec le maillage ?**
+⭐⭐⭐⭐ **`R4-P50` demandait ce qui distingue les deux frontières d'un cube — mais elle présupposait
+une autre question**, que rien n'avait mesurée : le creux est-il seulement **attaché à la matière** ?
+★ **IL L'EST, ET C'EST LA PREMIÈRE RÉPONSE POSITIVE DE LA SOUS-CHAÎNE `199`-`202`** — `R4-F281`.
+Sur **231 coutures** d'une rangée de **285 colonnes**, la corrélation du pas du creux et du pas du
+maillage vaut **0,132** contre **0,0211** à la médiane des **19 mélanges** et **0,1099** pour le
+plus fort d'entre eux : **0 mélange** au moins aussi fort, P = **0,05** pour **0,05 garantis**.
+⭐ **Les deux pas sortent de la MÊME paire de chunks**, donc leur appariement n'est pas une
+hypothèse — il est dans la donnée — et chaque pas est publié **avec ses deux colonnes**, ce qui
+répare à la source le défaut que `201` avait nommé chez `199`.
+⚠⚠⚠ **Le sens n'est pas posé, il est mesuré** : la statistique est le **module** de la corrélation,
+parce que `199` a déjà rendu un pas à l'envers une fois.
+⭐⭐⭐⭐ **ET LA DÉCOMPOSITION EST LA PARTIE UTILE** — `R4-F282`. Prise seule, une pente de **0,4913**
+se lirait « le creux bouge moitié moins ». Le modèle additif — deux lecteurs qui voient une même
+dérive, chacun avec son bruit propre — dit tout autre chose : dérive commune **3,4585 voxels**,
+bruit du maillage **3,5189 voxels**, bruit du creux **18,0421 voxels**, soit un signal sur bruit de
+**0,9828** et **0,1917**. **Le creux bouge autant que le maillage ; il est lu cinq fois moins bien.**
+⚠⚠⚠ **Le lien entre la pente et la corrélation est une IDENTITÉ algébrique, pas une confirmation.**
+Ce qui se vérifie est que la variance commune reste positive et inférieure aux deux variances
+observées — faute de quoi le code refuse de publier.
+⚠⚠ **Et un chiffre de `199` est à revoir** — `R4-F283`. Son pas quadratique de **4,9403 voxels** se
+décompose en **3,4585** de dérive et **3,5189** de bruit d'estimateur, donc sa portée « un demi-pli
+en **53,09 chunks** » sous-estime la distance que le feuillet tient. ⚠ Le nombre corrigé n'est
+**pas** calculé ici : il appartient au producteur de `199`, et le recalculer ailleurs en ferait une
+seconde définition.
+⚠⚠⚠ **L'ÉTALON A REFUSÉ DE SÉPARER, ET IL AVAIT RAISON** — `R4-F284`. Quatre faux sur douze. Deux
+sondes séparées ont établi que ni l'épreuve — **0,0433** sur 300 tirages — ni la fixture —
+**0,025** sur 40 — n'étaient en cause. ⭐ Le défaut était le **nombre de réplicats** : à
+**12 réplicats**, le plus petit taux non nul vaut **0,083**, déjà plus que la garantie. Le compte se
+**dérive** — `1/garantie` pour qu'un seul faux n'excède pas la garantie, le double pour deux — d'où
+**40 réplicats**, et **2 faux** qui rendent **0,05 pour 0,05 garantis**.
+⚠⚠⚠ **Trois bris restés verts, trois défauts réels.** Une fixture qui **écrivait** la couche
+qu'elle devait faire **lire** — `R4-F285`, réparée par une sonde **structurelle** sur la profondeur
+et la largeur que seul le lecteur produit ; une **texture périodique** qui faisait aliaser
+l'estimateur dès **8,5 voxels** au lieu de la demi-période, pendant que la docstring annonçait
+l'autre — `R4-F286` ; et deux bris qui tuaient la batterie **avant son verdict**.
+⭐ `R4-P50` est **resserrée** et vaut maintenant la peine — la cible est chiffrée — et `R4-P51`
+**s'ouvre** : la portée de `199` doit-elle être recalculée sur la dérive plutôt que sur son pas
+quadratique, et où ce nombre doit-il vivre ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

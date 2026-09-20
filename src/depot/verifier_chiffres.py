@@ -3194,6 +3194,94 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 202 : LE CREUX BOUGE-T-IL AVEC LE MAILLAGE ?
+    # (1) Une correlation ne voyage JAMAIS sans celle des MELANGES : « 0,132 » ne dit rien tant
+    # qu'on ignore que le nul en rend 0,0211 a la mediane et 0,1099 au plus fort.
+    # (2) Une PENTE ne voyage jamais sans la DECOMPOSITION qui la rend lisible : « 0,4913 » se lit
+    # « le creux bouge moitie moins », alors que le modele dit qu'il bouge autant et qu'il est lu
+    # cinq fois moins bien.
+    # (3) Une derive commune ne voyage jamais sans les DEUX bruits : c'est leur rapport qui dit ce
+    # qu'il faudrait gagner pour que le repere serve.
+    # (4) Et un taux de faux ne voyage jamais sans son NOMBRE DE REPLICATS : a douze replicats, le
+    # plus petit taux non nul vaut deja plus que la garantie.
+    sw = _source(racine, "le_creux_bouge_t_il_avec_le_maillage.json")
+    if sw.exists():
+        d = json.loads(sw.read_text())
+
+        def _dec202(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        lgw = d.get("la_ligne") or {}
+        d2w = d.get("les_deux_pas") or {}
+        apw = d.get("lappariement") or {}
+        dcw = d.get("la_decomposition") or {}
+        vw = d.get("le_verdict") or {}
+        ew = d.get("letalon") or {}
+        for srcw, cle, nom, unites in (
+                (lgw, "colonnes_demandees", "les colonnes demandées", ("colonnes",)),
+                (lgw, "colonnes_lues", "les colonnes lues", ("colonnes",)),
+                (lgw, "les_reperes_lisibles", "les repères lisibles", ("repères",)),
+                (d, "les_paires_voisines", "les paires voisines", ("paires",)),
+                (d, "la_largeur_du_bord", "la largeur du bord", ("colonnes",)),
+                (d2w, "les_coutures", "les coutures appariées", ("coutures",)),
+                (d2w, "les_pas_du_maillage_qui_saturent", "les pas qui saturent", ("pas",)),
+                (apw, "tirages", "les mélanges", ("mélanges",)),
+                (apw, "les_melanges_au_moins_aussi_forts", "les mélanges aussi forts",
+                 ("mélange",)),
+                (ew, "replicats", "les réplicats de l étalon", ("réplicats",)),
+                (ew, "les_replicats_du_refus", "les réplicats du refus", ("réplicats",)),
+                (ew, "les_chunks_par_rangee", "les chunks par rangée fabriquée", ("chunks",)),
+                (ew, "les_faux", "les faux de l étalon", ("faux",))):
+            if srcw.get(cle) is not None:
+                ajoute(f"{nom} de 202", int(srcw[cle]), 0, sw.name, unites=unites)
+        for quoi, combien in (("absent du dépôt", "les colonnes sans surface"),
+                              ("trop peu texturé", "les colonnes trop peu texturées")):
+            if (lgw.get("refuses") or {}).get(quoi) is not None:
+                ajoute(f"{combien} de 202", int(lgw["refuses"][quoi]), 0, sw.name,
+                       unites=("colonnes",))
+        for srcw, cle, nom, unites in (
+                (d2w, "le_pas_quadratique_du_maillage_en_voxels", "le pas quadratique du maillage",
+                 ("voxels",)),
+                (d2w, "le_pas_quadratique_du_creux_en_voxels", "le pas quadratique du creux",
+                 ("voxels",)),
+                (apw, "la_correlation_signee", "la corrélation signée", ()),
+                (apw, "la_correlation_absolue_mediane_du_nul", "la corrélation médiane du nul",
+                 ()),
+                (apw, "la_correlation_absolue_maximale_du_nul", "la corrélation maximale du nul",
+                 ()),
+                (apw, "la_valeur_p", "la valeur p de l épreuve", ("garantis",)),
+                (apw, "la_garantie_de_lepreuve", "la garantie de l épreuve", ("garantis",)),
+                (dcw, "la_variance_du_maillage_en_voxels2", "la variance du maillage", ()),
+                (dcw, "la_variance_du_creux_en_voxels2", "la variance du creux", ()),
+                (dcw, "la_derive_commune_en_voxels", "la dérive commune", ("voxels",)),
+                (dcw, "le_bruit_du_maillage_en_voxels", "le bruit du maillage", ("voxels",)),
+                (dcw, "le_bruit_du_creux_en_voxels", "le bruit du creux", ("voxels",)),
+                (dcw, "le_signal_sur_bruit_du_maillage", "le signal sur bruit du maillage", ()),
+                (dcw, "le_signal_sur_bruit_du_creux", "le signal sur bruit du creux", ()),
+                (vw, "la_pente_du_creux_sur_le_maillage", "la pente du creux sur le maillage", ()),
+                (ew, "la_derive_qui_tient", "la dérive tenue par l étalon", ("vx",)),
+                (ew, "la_derive_qui_casse", "la dérive qui casse l étalon", ("vx",)),
+                (ew, "le_bruit", "le bruit de la fixture", ("de bruit",)),
+                (ew, "le_taux_de_faux", "le taux de faux de l étalon", ("pour",)),
+                (ew, "la_garantie", "la garantie de l étalon", ("garantis",)),
+                (ew, "la_probabilite_den_avoir_autant", "la probabilité d en avoir autant", ())):
+            if srcw.get(cle) is not None:
+                ajoute(f"{nom} de 202", float(srcw[cle]), _dec202(srcw[cle]), sw.name,
+                       unites=unites)
+        for ptw in (ew.get("la_courbe") or []):
+            derw = float(ptw["la_derive_par_couture_en_voxels"])
+            ajoute(f"la dérive posée {derw} de l étalon de 202", derw, _dec202(derw), sw.name,
+                   unites=("vx",))
+            partw = float(ptw["part_des_replicats"])
+            if partw in (0.0, 1.0):
+                continue
+            ajoute(f"la part vue à la dérive {derw} de 202", partw, _dec202(partw), sw.name,
+                   unites=("des réplicats",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 201 : PEUT-ON DEPLIER LA PHASE ?
     # (1) Un pas replie observe ne voyage JAMAIS sans celui des MELANGES ni sans celui que `199`
     # rendrait : « 18,3754 voxels » ne dit rien tant qu'on ignore que le nul en rend 20,3023 et
