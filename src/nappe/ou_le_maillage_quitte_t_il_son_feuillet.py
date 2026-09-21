@@ -308,6 +308,18 @@ def une_carte_fabriquee(positions, force: float, groupee: bool, graine: int,
     return out
 
 
+def la_queue_haute_exacte(vus: int, essais: int, probabilite: float) -> float:
+    """La probabilité EXACTE d'en voir autant ou plus, sous une loi binomiale posée.
+
+    ⚠⚠ ELLE EST ECRITE UNE SEULE FOIS, ET DEUX APPELANTS LA PARTAGENT : `le_taux_tient_la_garantie`
+    l'emploie pour juger un etalon, et `206` pour une epreuve dont la probabilite nulle vient de la
+    GEOMETRIE et non d'une garantie. Deux copies de cette somme finiraient par ne plus s'accorder
+    sur la borne de leur boucle, et c'est exactement le genre d'ecart qu'un test ne signale pas.
+    """
+    n, k, q = int(essais), int(vus), float(probabilite)
+    return float(sum(comb(n, j) * q ** j * (1.0 - q) ** (n - j) for j in range(max(0, k), n + 1)))
+
+
 def le_taux_tient_la_garantie(vus: int, replicats: int, garantie: float) -> dict:
     """Un compte de faux est-il COMPATIBLE avec la garantie, ou la dépasse-t-il vraiment ?
 
@@ -317,7 +329,7 @@ def le_taux_tient_la_garantie(vus: int, replicats: int, garantie: float) -> dict
     etalon n'est declare casse que si ce compte serait lui-meme surprenant au meme niveau.
     """
     n, k, q = int(replicats), int(vus), float(garantie)
-    pr = float(sum(comb(n, j) * q ** j * (1.0 - q) ** (n - j) for j in range(max(0, k), n + 1)))
+    pr = la_queue_haute_exacte(k, n, q)
     return {"les_faux": k, "replicats": n, "le_taux": (k / n) if n else 0.0,
             "la_garantie": q, "la_probabilite_den_avoir_autant": pr,
             "il_tient": bool(pr > q)}

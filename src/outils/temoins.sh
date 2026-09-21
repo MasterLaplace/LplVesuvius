@@ -1552,6 +1552,8 @@ run "combien de rangees" uv run python "$ROOT/src/nappe/combien_de_rangees_faut_
 run "figure combien de rangees" uv run python "$ROOT/src/figures/figure_combien_de_rangees_faut_il_pour_lire_le_pas.py" --verifier
 run "moyenner le creux" uv run python "$ROOT/src/nappe/moyenner_le_creux_reduit_il_son_bruit.py" --verifier
 run "figure moyenner le creux" uv run python "$ROOT/src/figures/figure_moyenner_le_creux_reduit_il_son_bruit.py" --verifier
+run "le creux et la profondeur" uv run python "$ROOT/src/nappe/le_creux_change_t_il_avec_la_profondeur_lue.py" --verifier
+run "figure le creux et la profondeur" uv run python "$ROOT/src/figures/figure_le_creux_change_t_il_avec_la_profondeur_lue.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

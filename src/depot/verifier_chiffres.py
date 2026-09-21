@@ -3194,6 +3194,97 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 206 : LE CREUX CHANGE-T-IL AVEC LA PROFONDEUR LUE ?
+    # (1) Une ERREUR COMMUNE ne voyage JAMAIS sans le COMPTE DE CHUNKS LISIBLES a la meme
+    # profondeur : raccourcir la fenetre change le filtre du producteur, donc une erreur qui baisse
+    # pourrait n'etre que l'effet d'avoir jete les chunks difficiles — le piege de `200`.
+    # (2) Ni sans la DISPERSION du pas : « 11,651 » ne dit rien tant qu'on ignore que la dispersion
+    # tombe de 16,6224 a 3,9808 sur le meme trajet, donc plus vite que l'erreur.
+    # (3) Une FENETRE ne voyage jamais sans la TRANSITION de `179` : c'est elle, et elle seule, qui
+    # dit pourquoi la premisse geometrique de `R4-P54` ne tenait pas.
+    # (4) Et l'ecart median de l'epreuve ne voyage jamais sans celui du MELANGE : le nul est une
+    # permutation, donc l'observe ne se lit que contre ses melanges.
+    sp = _source(racine, "le_creux_change_t_il_avec_la_profondeur_lue.json")
+    if sp.exists():
+        d = json.loads(sp.read_text())
+
+        def _dec206(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        lgp = d.get("la_ligne") or {}
+        ecp = d.get("lechelle_des_profondeurs") or {}
+        fep = d.get("la_fenetre_effective") or {}
+        cbp = d.get("la_courbe") or {}
+        epp = d.get("lepreuve") or {}
+        vep = d.get("le_verdict") or {}
+        ep_ = d.get("letalon") or {}
+        for srcp, cle, nom, unites in (
+                (lgp, "colonnes_demandees", "les colonnes demandées", ("colonnes",)),
+                (lgp, "colonnes_lues", "les colonnes lues", ("colonnes",)),
+                (lgp, "les_couches_du_cube", "les couches du cube", ("couches",)),
+                (lgp, "la_rangee", "la rangée déclarée", ("rangée",)),
+                (lgp, "les_sous_colonnes", "les sous-colonnes du plan", ("sous-colonnes",)),
+                (d, "les_coutures_voisines", "les coutures voisines", ("coutures",)),
+                (epp, "les_chunks_lus_aux_deux", "les chunks lus aux deux", ("chunks",)),
+                (epp, "les_melanges_au_moins_aussi_bas", "les mélanges aussi bas", ("sur",)),
+                (epp, "les_tirages", "les tirages de l épreuve", ("tirages",)),
+                (ep_, "les_chunks_par_replicat", "les chunks par réplicat", ("chunks",)),
+                (ep_, "replicats", "les réplicats de l étalon", ("des",)),
+                (ep_, "les_vus", "les réplicats trouvés", ("des",)),
+                (ep_, "les_replicats_du_refus", "les réplicats du refus", ("réplicats",)),
+                (ep_, "les_faux", "les faux de l étalon", ("faux",)),
+                (ep_, "les_tirages_de_lepreuve", "les tirages de l étalon", ("tirages",))):
+            if srcp.get(cle) is not None:
+                ajoute(f"{nom} de 206", int(srcp[cle]), 0, sp.name, unites=unites)
+        for p_ in (ecp.get("les_profondeurs") or []):
+            ajoute(f"la profondeur {p_} de 206", int(p_), 0, sp.name,
+                   unites=("couches", "et"))
+        for srcp, cle, nom, unites in (
+                (fep, "la_transition_de_179_en_voxels", "la transition de 179", ("voxels",)),
+                (epp, "lecart_median_replie_en_voxels", "l écart médian replié", ("voxels",)),
+                (epp, "lecart_median_des_melanges_en_voxels", "l écart médian des mélanges",
+                 ("voxels",)),
+                (epp, "la_valeur_p", "la valeur p de l épreuve", ("pour",)),
+                (vep, "lerreur_a_la_plus_courte_en_voxels", "l erreur à la plus courte",
+                 ("voxels",)),
+                (vep, "lerreur_a_la_plus_longue_en_voxels", "l erreur à la plus longue",
+                 ("voxels",)),
+                (vep, "le_rapport_des_deux_erreurs", "le rapport des deux erreurs", ()),
+                (vep, "lerreur_que_205_a_isolee_en_voxels", "l erreur isolée par 205",
+                 ("voxels",)),
+                (vep, "la_derive_visee_par_202_en_voxels", "la dérive de 202", ("voxels",)),
+                (ep_, "lecart_median_sur_la_face_positive_en_voxels",
+                 "l écart de la face positive", ("voxel",)),
+                (ep_, "lecart_median_sur_la_face_negative_en_voxels",
+                 "l écart de la face négative", ("voxels",)),
+                (ep_, "le_taux_de_faux", "le taux de faux de l étalon", ("pour",)),
+                (ep_, "la_garantie", "la garantie de l étalon", ("garantis",))):
+            if srcp.get(cle) is not None:
+                ajoute(f"{nom} de 206", float(srcp[cle]), _dec206(srcp[cle]), sp.name,
+                       unites=unites)
+        for w in (fep.get("les_fenetres") or []):
+            p_ = int(w["la_profondeur"])
+            ajoute(f"la fenêtre effective à {p_} de 206",
+                   float(w["la_fenetre_effective_en_voxels"]),
+                   _dec206(w["la_fenetre_effective_en_voxels"]), sp.name, unites=("voxels",))
+            ajoute(f"elle vaut le pas fois à {p_} de 206", float(w["elle_vaut_le_pas_fois"]),
+                   _dec206(w["elle_vaut_le_pas_fois"]), sp.name, unites=("**",))
+        for br in (cbp.get("les_barreaux") or []):
+            p_ = int(br["la_profondeur"])
+            ajoute(f"les chunks lisibles à {p_} de 206", int(br["les_chunks_lisibles"]), 0,
+                   sp.name, unites=("chunks", "**"))
+            for cle, nom in (("lalea_en_voxels", "l aléa"),
+                             ("la_dispersion_du_pas_en_voxels", "la dispersion du pas"),
+                             ("lerreur_commune_en_voxels", "l erreur commune"),
+                             ("le_signal_sur_bruit", "le signal sur bruit")):
+                if br.get(cle) is not None:
+                    ajoute(f"{nom} à {p_} couches de 206", float(br[cle]), _dec206(br[cle]),
+                           sp.name, unites=("**", "voxels"))
+
     # ⭐⭐⭐⭐ LA TRANCHE 205 : MOYENNER LE CREUX REDUIT-IL SON BRUIT ?
     # (1) L'ALEA ne voyage JAMAIS sans la DISPERSION DANS LE CHUNK au meme decoupage : la premiere
     # tombe pendant que la seconde MONTE, et c'est cet ordre-la qui dit que decouper se paie. La

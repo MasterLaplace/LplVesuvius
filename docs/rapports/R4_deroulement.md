@@ -3112,6 +3112,52 @@ tranche a découpé le chunk dans le **plan**, la suivante doit le découper en 
 prédiction s'y pose encore avant la mesure : `179` a établi qu'une feuille d'un seul pli ne creuse à
 aucun recouvrement, donc une sous-tranche de moins d'un pli **doit** ne rien rendre.
 
+**`206` · 2026-09-21 · le creux change-t-il avec la profondeur lue ?**
+⭐⭐⭐⭐ **La symétrie exacte de `205`.** Celle-là avait découpé le chunk dans le **plan** et isolé
+une erreur **commune à un chunk** de **14,9372 voxels** qu'aucun découpage n'atteint ; celle-ci le
+découpe en **profondeur**, sur l'échelle du pli — **36**, **72**, **108** et **109 couches**.
+⚠⚠⚠ **Et la prémisse chiffrée de `R4-P54` tombe avant la mesure** — `R4-F307`. La porte annonçait
+qu'une sous-tranche de moins d'un pli **devait** ne rien rendre ; or `179` a mesuré la transition à
+**19 voxels**, donc une fenêtre de **36 couches** en lit effectivement **74 voxels**, soit
+**1,0266** pas. Aucune de ces fenêtres ne peut être vide de frontière, et la mesure le confirme
+sans ambiguïté : **251 chunks** sur **251 chunks** rendent un creux à la plus courte. C'est la
+deuxième porte d'affilée dont une prémisse chiffrée tombe devant le grounding.
+★ **L'instrument passe sa garde** — `R4-F308` : les deux profondeurs lisent la **même** frontière,
+écart médian replié **16,8676 voxels** contre **19,4314 voxels** au mélange, **0 sur 19**,
+P = **0,05 pour 0,05 garantis**, sur **251 chunks**. ⭐ Le nul est une **permutation**, donc il ne
+suppose aucune période — et c'est nécessaire, parce que `179` mesure un intervalle de **36 couches**
+là où `200` replie par **72,0833 voxels**. ⚠⚠ Mais l'accord est **faible** : l'étalon en rend
+**1 voxel** quand deux profondeurs s'accordent vraiment.
+★ **La réponse à `R4-P54` est OUI** — `R4-F309` : l'erreur commune passe de **15,7743 voxels** en
+pleine profondeur à **11,651 voxels** à **72 couches**, un rapport de **0,7386**. Une erreur
+d'instrument pure ne dépendrait pas de la fenêtre.
+⚠⚠⚠ **Et ce n'est pas un gain** — `R4-F310`. La dispersion du pas tombe de **16,6224** à
+**3,9808 voxels** sur le même trajet, donc **plus vite** que l'erreur, et à **36 couches** le modèle
+additif se réfute par ses propres nombres. Raccourcir la fenêtre n'**isole** pas l'erreur, ça
+rétrécit tout — et le signal plus que le bruit. ⚠⚠ Un confondant reste entier et il est **dit** : une
+fenêtre courte et centrée confine toutes les lectures à la même bande du cube.
+⭐ **Les deux découpages atteignent bien deux quantités différentes** — `R4-F311` : l'aléa entre
+sous-colonnes ne bouge presque pas avec la profondeur (**2,3725** / **4,1002** / **3,7932** /
+**3,9386 voxels**), donc il vit dans le **plan**, exactement comme `205` le disait.
+★ **Et le contrôle croisé qui manquait à `205` tient** — `R4-F312` : **15,7743 voxels** par la
+profondeur contre **14,9372 voxels** par le plan, deux découpages sans rien de commun.
+⚠⚠⚠ **Un vrai défaut de conception a été trouvé par l'ÉTALON, avant toute mesure** — `R4-F313`. La
+première épreuve déclarée comptait les fenêtres courtes qui rendent un creux contre une part
+**géométrique** posée d'avance ; elle sur-déclenchait sur matière honnête, et la cause n'était pas un
+réglage mais la transition de `179`. L'épreuve a été **refondée** sur une permutation. ⚠⚠ Et les deux
+comptes de tirages sont désormais **séparés** — celui du lecteur de creux et celui du nul : les
+confondre plafonne la valeur p au premier des deux, donc rend l'épreuve incapable de **réussir**.
+⚠⚠ **Quatre bris ont d'abord échappé** : une sonde satisfaite par l'**absence** (la couche « tombe
+dans la fenêtre ou est absente », donc retirer l'offset restait vert), un refus dérivé que la fixture
+n'atteignait jamais, un garde entièrement couvert par un autre, et un bris qui **tuait la batterie**
+avant son verdict. ⚠ Plus un défaut vu en **regardant l'image** : la figure attachait **11,651** à
+**36 couches** alors que ce nombre est celui de **72**.
+⭐ `R4-P54` est **répondue par l'affirmative** et `R4-P55` **s'ouvre** : l'erreur commune est-elle
+celle de la **transition** qui produit le creux ? ⭐ `179` publie **19 voxels**, du même ordre que
+les **14,9372** et **15,7743** mesurés — et la prédiction se pose encore avant la mesure, puisque
+`179` porte l'échelle entière des transitions. ⚠⚠ Le piège est écrit d'avance : cette échelle a été
+balayée **sans bruit**, et le rouleau en porte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
