@@ -1,0 +1,192 @@
+{
+  "la_question_declaree": "jusqu'où une nappe tient-elle dans son feuillet, et lequel des deux budgets — traverser ou s'accorder — la lie en premier ?",
+  "les_epreuves_declarees": [],
+  "le_pas_dun_pli_en_voxels": 72.0833,
+  "le_demi_pli_en_voxels": 36,
+  "ce_que_210_a_rendu": {
+    "decidable": true,
+    "la_dispersion_du_pas_moyenne_en_voxels": 1.9245,
+    "les_rangees_moyennees": 3,
+    "les_coutures_de_210": 238,
+    "la_dispersion_dune_rangee_en_voxels": 2.4587,
+    "la_derive_en_voxels": 2.233,
+    "les_rangees_de_204": 16
+  },
+  "ce_que_211_a_rendu": {
+    "decidable": true,
+    "les_paires": {
+      "198-197": {
+        "le_desaccord_par_couture_en_voxels": 2.7138,
+        "lerreur_dechantillonnage_en_voxels": 0.1234,
+        "les_coutures_communes": 242
+      },
+      "198-199": {
+        "le_desaccord_par_couture_en_voxels": 2.9794,
+        "lerreur_dechantillonnage_en_voxels": 0.1363,
+        "les_coutures_communes": 239
+      },
+      "197-199": {
+        "le_desaccord_par_couture_en_voxels": 3.4004,
+        "lerreur_dechantillonnage_en_voxels": 0.1533,
+        "les_coutures_communes": 246
+      }
+    },
+    "la_paire_declaree": [
+      198,
+      197
+    ],
+    "les_rangees": [
+      198,
+      197,
+      199
+    ],
+    "le_bruit_de_la_mediane_selon_208_en_voxels": 1.9387,
+    "le_bruit_de_la_voisine_selon_208_en_voxels": 1.899,
+    "les_colonnes_demandees": 285
+  },
+  "le_triangle": {
+    "decidable": true,
+    "les_rangees": [
+      197,
+      198,
+      199
+    ],
+    "les_bruits_propres": {
+      "197": {
+        "la_variance_propre_en_voxels_carres": 5.0253,
+        "le_bruit_propre_en_voxels": 2.2417
+      },
+      "198": {
+        "la_variance_propre_en_voxels_carres": 2.3394,
+        "le_bruit_propre_en_voxels": 1.5295
+      },
+      "199": {
+        "la_variance_propre_en_voxels_carres": 6.5374,
+        "le_bruit_propre_en_voxels": 2.5568
+      }
+    },
+    "les_variances_negatives": [],
+    "le_modele_se_refute": false,
+    "le_modele_tient": true
+  },
+  "le_triangle_contre_208": {
+    "decidable": true,
+    "les_rangees_comparees": {
+      "198": {
+        "selon_208_en_voxels": 1.9387,
+        "selon_le_triangle_en_voxels": 1.5295,
+        "le_rapport": 0.7889,
+        "lecart_en_voxels": -0.4092
+      },
+      "197": {
+        "selon_208_en_voxels": 1.899,
+        "selon_le_triangle_en_voxels": 2.2417,
+        "le_rapport": 1.1805,
+        "lecart_en_voxels": 0.3427
+      }
+    },
+    "le_plus_grand_ecart_en_voxels": 0.4092
+  },
+  "les_budgets": {
+    "decidable": true,
+    "traverser": {
+      "la_moyenne_des_rangees": {
+        "decidable": true,
+        "la_dispersion_en_voxels": 1.9245,
+        "le_demi_pli_en_voxels": 36,
+        "la_longueur_tenable_en_coutures": 349.92,
+        "lecart_attendu_a_cette_longueur_en_voxels": 36.0,
+        "la_longueur_tenable_en_plis": 0.249422
+      },
+      "une_rangee_seule": {
+        "decidable": true,
+        "la_dispersion_en_voxels": 2.4587,
+        "le_demi_pli_en_voxels": 36,
+        "la_longueur_tenable_en_coutures": 214.38,
+        "lecart_attendu_a_cette_longueur_en_voxels": 36.0,
+        "la_longueur_tenable_en_plis": 0.249422
+      },
+      "le_plancher_de_la_matiere": {
+        "decidable": true,
+        "la_dispersion_en_voxels": 2.233,
+        "le_demi_pli_en_voxels": 36,
+        "la_longueur_tenable_en_coutures": 259.91,
+        "lecart_attendu_a_cette_longueur_en_voxels": 36.0,
+        "la_longueur_tenable_en_plis": 0.249422
+      }
+    },
+    "saccorder": {
+      "197-199": {
+        "decidable": true,
+        "la_dispersion_en_voxels": 3.4004,
+        "le_demi_pli_en_voxels": 36,
+        "la_longueur_tenable_en_coutures": 112.08,
+        "lecart_attendu_a_cette_longueur_en_voxels": 36.0,
+        "la_longueur_tenable_en_plis": 0.249422
+      },
+      "198-197": {
+        "decidable": true,
+        "la_dispersion_en_voxels": 2.7138,
+        "le_demi_pli_en_voxels": 36,
+        "la_longueur_tenable_en_coutures": 175.97,
+        "lecart_attendu_a_cette_longueur_en_voxels": 36.0,
+        "la_longueur_tenable_en_plis": 0.249422
+      },
+      "198-199": {
+        "decidable": true,
+        "la_dispersion_en_voxels": 2.9794,
+        "le_demi_pli_en_voxels": 36,
+        "la_longueur_tenable_en_coutures": 146.0,
+        "lecart_attendu_a_cette_longueur_en_voxels": 36.0,
+        "la_longueur_tenable_en_plis": 0.249422
+      }
+    },
+    "la_longueur_tenable_en_traversant_en_coutures": 349.92,
+    "la_pire_paire": "197-199",
+    "la_longueur_tenable_en_saccordant_en_coutures": 112.08,
+    "le_budget_qui_lie": "s'accorder",
+    "le_rapport_des_deux_budgets": 0.3203,
+    "ce_que_le_budget_liant_coute_en_coutures": 237.84
+  },
+  "ce_quune_rangee_demande": {
+    "decidable": true,
+    "les_colonnes_dune_rangee": 285,
+    "les_coutures_dune_rangee": 284,
+    "la_part_couverte_en_traversant": 1.2321,
+    "la_part_couverte_en_saccordant": 0.3946,
+    "une_rangee_entiere_traverse": true,
+    "une_rangee_entiere_saccorde": false,
+    "les_coutures_qui_manquent_pour_saccorder": 171.92
+  },
+  "la_nappe_entiere": {
+    "decidable": true,
+    "le_modele_tient_sur_les_rangees_mesurees": true,
+    "les_rangees_du_triangle": [
+      197,
+      198,
+      199
+    ],
+    "la_hauteur_est_gratuite_sous_le_modele": true,
+    "la_longueur_tenable_dune_nappe_en_coutures": 112.08,
+    "ce_qui_reste_a_mesurer": "le désaccord de deux rangées ÉLOIGNÉES",
+    "pourquoi_il_reste_a_mesurer": "les trois paires mesurées sont voisines, donc rien ne dit que le bruit propre ne croît pas avec la distance entre rangées"
+  },
+  "le_verdict": {
+    "decidable": true,
+    "le_budget_qui_lie": "s'accorder",
+    "la_longueur_tenable_en_traversant_en_coutures": 349.92,
+    "la_longueur_tenable_en_saccordant_en_coutures": 112.08,
+    "la_pire_paire": "197-199",
+    "le_rapport_des_deux_budgets": 0.3203,
+    "ce_que_le_budget_liant_coute_en_coutures": 237.84,
+    "les_coutures_dune_rangee": 284,
+    "la_part_couverte_en_traversant": 1.2321,
+    "la_part_couverte_en_saccordant": 0.3946,
+    "une_rangee_entiere_traverse": true,
+    "une_rangee_entiere_saccorde": false,
+    "les_coutures_qui_manquent_pour_saccorder": 171.92,
+    "le_modele_tient": true,
+    "les_variances_negatives": [],
+    "la_hauteur_est_gratuite_sous_le_modele": true
+  }
+}

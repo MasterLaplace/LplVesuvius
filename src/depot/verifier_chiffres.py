@@ -3194,6 +3194,91 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 212 : LE BUDGET DE LA NAPPE
+    # (1) Une LONGUEUR TENABLE ne voyage JAMAIS sans la DISPERSION qui la produit : c'est le
+    # carre du rapport, donc doubler la dispersion divise la longueur par quatre, et publier la
+    # seule longueur laisserait croire a une proportionnalite.
+    # (2) Ni les deux budgets l'un sans l'autre : tout l'apport de la tranche est qu'ils ne se
+    # deduisent pas l'un de l'autre et que le plus petit LIE.
+    # (3) Un BRUIT PROPRE du triangle ne voyage jamais sans celui que `208` donnait : les deux
+    # estimateurs devraient s'accorder, et l'ecart dit de combien le modele ne tient
+    # qu'approximativement.
+    # (4) Et une PART COUVERTE ne voyage jamais sans le compte de coutures d'une rangee, sinon
+    # elle ne se compare a rien.
+    sb = _source(racine, "le_budget_de_la_nappe.json")
+    if sb.exists():
+        d = json.loads(sb.read_text())
+
+        def _dec212(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        bud = d.get("les_budgets") or {}
+        tri212 = d.get("le_triangle") or {}
+        c208 = d.get("le_triangle_contre_208") or {}
+        ran = d.get("ce_quune_rangee_demande") or {}
+        nap = d.get("la_nappe_entiere") or {}
+        ver212 = d.get("le_verdict") or {}
+        p210b = d.get("ce_que_210_a_rendu") or {}
+        for srcb, cle, nom, unites in (
+                (d, "le_demi_pli_en_voxels", "le demi-pli", ("voxels",)),
+                (ran, "les_colonnes_dune_rangee", "les colonnes d une rangée", ("colonnes",)),
+                (ran, "les_coutures_dune_rangee", "les coutures d une rangée", ("coutures",)),
+                (p210b, "les_rangees_moyennees", "les rangées moyennées", ("rangées",))):
+            if srcb.get(cle) is not None:
+                ajoute(f"{nom} de 212", int(srcb[cle]), 0, sb.name, unites=unites)
+        for r_ in (tri212.get("les_rangees") or []):
+            ajoute(f"la rangée {r_} de 212", int(r_), 0, sb.name, unites=("**", "et"))
+        # ⚠⚠ CHAQUE BUDGET PORTE SA DISPERSION ET SA LONGUEUR, et les deux sont enregistrees
+        # ensemble : l'une sans l'autre ne dit pas que la relation est un CARRE.
+        for famille in ("traverser", "saccorder"):
+            for nom_, x in sorted((bud.get(famille) or {}).items()):
+                if not isinstance(x, dict) or not x.get("decidable"):
+                    continue
+                ajoute(f"la dispersion de {famille} {nom_} de 212",
+                       float(x["la_dispersion_en_voxels"]),
+                       _dec212(x["la_dispersion_en_voxels"]), sb.name,
+                       unites=("voxel", "voxels"))
+                ajoute(f"la longueur tenable de {famille} {nom_} de 212",
+                       float(x["la_longueur_tenable_en_coutures"]),
+                       _dec212(x["la_longueur_tenable_en_coutures"]), sb.name,
+                       unites=("coutures",))
+        for r_, x in sorted((tri212.get("les_bruits_propres") or {}).items()):
+            if x.get("la_variance_propre_en_voxels_carres") is not None:
+                ajoute(f"la variance propre de la rangée {r_} de 212",
+                       float(x["la_variance_propre_en_voxels_carres"]),
+                       _dec212(x["la_variance_propre_en_voxels_carres"]), sb.name,
+                       unites=("voxels",))
+            if x.get("le_bruit_propre_en_voxels") is not None:
+                ajoute(f"le bruit propre de la rangée {r_} de 212",
+                       float(x["le_bruit_propre_en_voxels"]),
+                       _dec212(x["le_bruit_propre_en_voxels"]), sb.name,
+                       unites=("voxel", "voxels"))
+        for r_, x in sorted((c208.get("les_rangees_comparees") or {}).items()):
+            for cle_, nom_, un_ in (("selon_208_en_voxels", "selon 208", ("voxel", "voxels")),
+                                    ("le_rapport", "le rapport au triangle", ("**",))):
+                if x.get(cle_) is not None:
+                    ajoute(f"le bruit de la rangée {r_} {nom_} de 212", float(x[cle_]),
+                           _dec212(x[cle_]), sb.name, unites=un_)
+        for srcb, cle, nom, unites in (
+                (c208, "le_plus_grand_ecart_en_voxels",
+                 "le plus grand écart au triangle", ("voxel",)),
+                (ran, "la_part_couverte_en_traversant", "la part couverte en traversant", ("**",)),
+                (ran, "la_part_couverte_en_saccordant", "la part couverte en s accordant", ("**",)),
+                (ran, "les_coutures_qui_manquent_pour_saccorder",
+                 "les coutures qui manquent", ("coutures",)),
+                (ver212, "le_rapport_des_deux_budgets", "le rapport des deux budgets", ("**",)),
+                (ver212, "ce_que_le_budget_liant_coute_en_coutures",
+                 "ce que le budget liant coûte", ("coutures",)),
+                (nap, "la_longueur_tenable_dune_nappe_en_coutures",
+                 "la longueur tenable d une nappe", ("coutures",))):
+            if srcb.get(cle) is not None:
+                ajoute(f"{nom} de 212", float(srcb[cle]), _dec212(srcb[cle]), sb.name,
+                       unites=unites)
+
     # ⭐⭐⭐⭐ LA TRANCHE 211 : LES RANGEES S'ACCORDENT-ELLES ENTRE ELLES ?
     # (1) Une SEPARATION ne voyage JAMAIS sans la LONGUEUR sur laquelle elle a ete lue : un
     # desaccord lu sur un troncon plus court n'est pas un meilleur accord.

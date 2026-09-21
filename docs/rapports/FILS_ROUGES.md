@@ -4,7 +4,7 @@
 
 # Les fils rouges — les lois que ce dépôt a payées
 
-**93 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
+**101 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
 
 ## R1 — 15 lois
 
@@ -208,7 +208,7 @@ L'image de 40 s jamais faite (`50`), l'image qui tranche feuille/tranche (`54` �
 
 `numcodecs` absent → « graine non couverte » (`41`) ; `imagecodecs` absent → LZW illisible (`54`) ; `verifier_zarr.sh` existait, orphelin. Le décodeur lève, il ne rend pas `None`.
 
-## R4 — 15 lois
+## R4 — 19 lois
 
 **R4-L01 · Une limite de grille publiée comme une limite matérielle**
 
@@ -270,7 +270,23 @@ L'image de 40 s jamais faite (`50`), l'image qui tranche feuille/tranche (`54` �
 
 Deux moitiés de rien ne peuvent pas être en désaccord : le désaccord vaut 0,00°, donc il passe n'importe quelle barre, et le marcheur déclare `oriente` exactement là où il ne lit rien (178 fois sur 178, `115`). La signature d'un vide se reconnaît à une **conjonction** — deux grandeurs indépendantes exactement nulles — jamais à un seuil sur l'une d'elles. C'est la quatrième fois que ce dépôt paie cette forme : `54` (piles vides lues comme surfaces plates), `60` (constante qui rendait le modèle muet), `41` §6bis (chunk absent lu comme « pas de matière »).
 
-## R5 — 20 lois
+**R4-L16 · Moyenner et différencier ne touchent pas la même moitié du bruit**
+
+Un pas lu sur un treillis se sépare en une part que les rangées voisines PARTAGENT et une part PROPRE à chacune (`R4-F321`). Moyenner $k$ rangées ne divise que la part propre — $\sigma_k = \sqrt{\sigma_p^2 + \sigma_b^2/k}$, mesuré et non projeté (`R4-F328`) — tandis que DIFFÉRENCIER deux rangées annule la part partagée tout entière : $\sigma_\Delta = \sqrt{\sigma_{b,1}^2 + \sigma_{b,2}^2}$ (`R4-F334`). **TRAVERSER et S'ACCORDER sont donc deux budgets séparés**, et améliorer l'un n'améliore pas l'autre : la moyenne de trois rangées passe sous le demi-feuillet là où une rangée seule échoue (`R4-F329`) pendant que deux rangées voisines, elles, finissent sur deux feuillets différents (`R4-F333`). ⚠ Le corollaire opérationnel : toute borne publiée doit dire LAQUELLE des deux elle borne.
+
+**R4-L17 · Un estimateur périodique aliase bien avant sa demi-période, et un compteur de saturation ne garde rien**
+
+Un pas de plus d'une demi-période n'est pas SATURÉ mais ALIASÉ : un saut de feuillet se lit comme un petit pas, du bon côté de toutes les gardes (`R4-F266`). Et l'aliasing commence bien avant cette limite dès que la matière est texturée (`R4-F286`). ⚠⚠ Conséquence directe : « zéro pas saturé » ne prouve RIEN — c'est exactement ce qu'un dépliage cassé rend (`R4-F278`). Ce qui garde est une borne DÉRIVÉE du pas quadratique de l'estimateur, pas un compteur de butée.
+
+**R4-L18 · Un décalage d'origine ne se voit que sur la séparation, jamais sur l'excursion**
+
+Deux marches bâties chacune sur son propre tronçon diffèrent d'une CONSTANTE — la distance que chacune a parcourue avant de rencontrer l'autre. Une constante ne change pas l'EXCURSION d'une différence, donc une tranche qui n'aurait publié qu'elle rendrait le bon nombre PAR ACCIDENT ; elle change la SÉPARATION, et c'est la séparation qui décide du feuillet (`R4-F337`). ⚠ Le décalage mesuré vaut **30,2708 voxels** pour un demi-feuillet de **36**, et il peut MASQUER une divergence autant qu'en fabriquer une. Le remède est dans la construction, pas dans une correction : cumuler les DIFFÉRENCES de pas part de zéro par définition même.
+
+**R4-L19 · Un nombre juste sous un mauvais nom est pire qu'un nombre absent**
+
+La forme close du tenseur de structure rend la PERPENDICULAIRE aux fibres, et le dépôt a publié **10791 angles** sous le nom de « direction des fibres » (`R4-F175`, `R4-F176`) ; un `sorted(...)[0]` a fait marcher la voisine **197** sous le nom de la médiane **198**, et c'est un RECOUPEMENT avec une tranche antérieure — aucune sonde — qui l'a livré (`R4-F327`). ⚠⚠ Les deux fois, toutes les gardes étaient vertes et tous les nombres étaient justes : seul le NOM était faux, donc rien de local ne pouvait le voir. Le seul contrôle qui attrape cette classe est le recoupement d'un producteur ANTÉRIEUR sur la même matière.
+
+## R5 — 24 lois
 
 **R5-L01 · Une vérification incapable d'échouer occupe la place d'une vraie**
 
@@ -351,6 +367,22 @@ Trois copies d'une fonction de jugement dont deux avaient déjà divergé (`75` 
 **R5-L20 · Ce qui tue n'est pas l'outil mais le motif**
 
 `pkill -f` matche sa propre ligne de commande et a tué le shell deux fois ; trois parcours de 430 s en concurrence ne finissent jamais et n'impriment rien (`89` §5) ; un script édité pendant qu'il tourne meurt (`56` A). Tuer par **PID**, et vérifier la fraîcheur d'un log avant d'en citer le verdict.
+
+**R5-L21 · La face négative d'un étalon se dimensionne, et son compte se DÉRIVE de la garantie**
+
+Un étalon à tirage unique passe par chance (`R4-F237`) ; douze réplicats ne peuvent pas DÉMONTRER un taux de faux compatible avec une garantie de **0,05** (`R4-F284`) ; le plancher de `202` — **40 réplicats** — fait EXISTER la face négative sans la faire DÉCIDER, une épreuve au niveau exact y dépassant l'acceptation dans **0,048** des courses (`R4-F332`). Le compte qui décide se dérive : mettre trois erreurs d'échantillonnage dans la marge que la règle laisse donne $m = \lceil 9(1-g)/g \rceil$. ⚠⚠⚠ Et l'erreur symétrique coûte aussi cher : exiger qu'un contrôle NUL rende ZÉRO, c'est attendre du nul ce qu'il ne peut pas donner, et cela fait refuser un étalon parfaitement sain (`R4-F339`). Une face négative se juge sur un TAUX, jamais sur un zéro (`R4-F263`).
+
+**R5-L22 · Un silence se chiffre avant de se publier, et chercher coûte plus cher que confirmer**
+
+Le plancher de détection est un fait sur le COMPTE et sur la longueur de la liste déclarée, pas sur la matière : rien ne peut être vu sous une certaine aire, et ce plancher descend de **0,4286** à **0,2323** quand le compte quadruple (`R4-F229`, `R4-F239`). ⭐ Et il descend de **0,4286** à **0,1623** pour le MÊME observable selon qu'on le CHERCHE parmi dix-neuf ou qu'on le CONFIRME seul (`R4-F233`) : une maximisation sans liste déclarée se paie en arithmétique exacte (`R4-F245`). ⚠⚠ Donc la collecte se dimensionne sur le compte où l'étalon est encore AVEUGLE (`R4-F234`), et publier « rien ne sépare » sans ce chiffre ne dit rien sur la matière.
+
+**R5-L23 · Une fixture qui écrit la réponse ne peut pas mettre le lecteur en défaut**
+
+Une fixture qui ÉCRIT ce qu'elle doit faire LIRE sépare par construction, et aucune sonde de valeur ne peut la prendre en défaut (`R4-F285`) ; une sonde dont la fixture fournit le champ qu'elle vérifie teste la fixture, pas le lecteur (`R4-F273`). ⭐ Le remède éprouvé est le CHEMIN PHYSIQUE : deux matières de la MÊME famille portant la MÊME quantité, avec l'égalité DÉMONTRÉE plutôt que réglée. ⚠⚠ Et son pendant côté sonde : une sonde qui recopie la formule du code est une SECONDE DÉFINITION, libre de dériver avec lui — la sonde juste est une IDENTITÉ entre nombres PUBLIÉS, avec une tolérance tirée de l'arrondi publié.
+
+**R5-L24 · Une prédiction dérivée d'un ajustement redonne l'ajustement, et ce n'est pas un recoupement**
+
+`208` a tiré ses deux bruits propres de son désaccord des pas ; la racine de la somme de leurs carrés le redonne donc PAR CONSTRUCTION, à **2,7138 voxels** exactement (`R4-F338`). C'est une IDENTITÉ, pas une confirmation, et la porte qui l'annonçait comme « contrôle croisé gratuit » avait tort. ⭐ Le seul recoupement qui vaille est celui de la MATIÈRE : relire le dépôt une seconde fois et retrouver le même nombre. ⚠ L'écriture approchée d'une prédiction est un piège de plus — « racine de deux fois le bruit » suppose deux bruits égaux et rend **2,7417** au lieu de **2,7138** ; les deux écritures se publient côte à côte, jamais l'une gommée.
 
 ## R6 — 9 lois
 

@@ -3319,6 +3319,38 @@ même feuillet ? ⚠⚠ La porte la plus évidente est déjà fermée — il n'y
 et il reste deux candidats, tous deux déjà mesurés ailleurs : le repère absolu de `200`, qui ne
 dérive pas par construction, et le lien latéral de `127`, dont le coût est connu.
 
+**`212` · 2026-09-21 · jusqu'où une nappe tient-elle, et lequel des deux budgets la lie ?**
+⭐ **Cette tranche ne tire aucun échantillon** : elle relit `204`, `207`, `208`, `210` et `211` et en
+tire une conséquence arithmétique, donc elle ne déclare **aucune épreuve** et ne consomme aucune part
+de la garantie. Ce qui la rend falsifiable est le **triangle**.
+★★★★ **L'équation de conception, et elle n'existait pas à `151`** — `R4-F340` : poser l'écart attendu
+de `207` égal au demi-feuillet et résoudre rend la longueur tenable comme le **carré** du rapport.
+Aucune constante, aucun seuil choisi, et **un seul nombre par budget**, comparable à la largeur d'une
+rangée.
+✗ **C'est S'ACCORDER qui lie, pas traverser** — `R4-F341` : **112,08 coutures** pour la pire paire
+contre **349,92** en traversant, rapport **0,3203**, et le budget liant coûte **237,84 coutures** de
+nappe. ⚠⚠⚠ **Conséquence directe : améliorer la traversée n'achète RIEN.** Toute la chaîne depuis
+`204` — seize rangées moyennées, le treillis, la fermeture verticale de `208`, la moyenne de `210` —
+a poussé le budget qui **ne lie pas**.
+✗ **Une rangée entière traverse mais ne s'accorde pas** — `R4-F342` : **1,2321** de couverture en
+traversant contre **0,3946** en s'accordant, et il manque **171,92 coutures**. ⚠ Même un lecteur
+PARFAIT, réduit à la dérive, ne tiendrait que **259,91 coutures** sur **284**.
+★ **Le triangle ne réfute pas le modèle** — `R4-F343` : les trois variances propres tirées des trois
+désaccords sortent positives. C'est une **inégalité sur la matière**, pas une identité : il suffirait
+que le plus grand désaccord dépasse la racine de la somme des carrés des deux autres pour qu'elle
+tombe négative.
+⚠⚠ **Mais il ne recoupe pas `208`** — `R4-F344` : **1,5295 voxel** contre **1,9387** pour la rangée
+**198**, **2,2417** contre **1,899** pour la **197**, soit jusqu'à **0,4092 voxel** d'écart. Les deux
+estimateurs ne lisent pas la même chose, et l'écart dit de combien le modèle ne tient
+qu'approximativement.
+⭐⭐⭐⭐ **Et la hauteur est GRATUITE sous le modèle** — `R4-F345`, **borné** : le désaccord de la
+première et de la dernière rangée d'une bande ne fait intervenir que ces deux-là, donc une nappe de
+**396 rangées** tient sur les mêmes **112,08 coutures** qu'une paire. ⚠⚠⚠ La conclusion est trop
+belle pour être prise sans sa condition, et cette condition n'est pas mesurée.
+⭐ `R4-P59` **s'ouvre**, et elle passe **avant** `R4-P58` : le bruit propre d'une rangée croît-il avec
+la distance à sa voisine ? C'est la mesure la moins chère de la chaîne — le pipeline de `211` sur des
+rangées plus écartées — et toute la gratuité de la hauteur en dépend.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

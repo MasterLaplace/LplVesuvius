@@ -1564,6 +1564,8 @@ run "la moyenne des rangees" uv run python "$ROOT/src/nappe/la_moyenne_des_range
 run "figure la moyenne des rangees" uv run python "$ROOT/src/figures/figure_la_moyenne_des_rangees_traverse_t_elle.py" --verifier
 run "les rangees s accordent" uv run python "$ROOT/src/nappe/les_rangees_saccordent_elles_entre_elles.py" --verifier
 run "figure les rangees s accordent" uv run python "$ROOT/src/figures/figure_les_rangees_saccordent_elles_entre_elles.py" --verifier
+run "le budget de la nappe" uv run python "$ROOT/src/nappe/le_budget_de_la_nappe.py" --verifier
+run "figure le budget de la nappe" uv run python "$ROOT/src/figures/figure_le_budget_de_la_nappe.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
