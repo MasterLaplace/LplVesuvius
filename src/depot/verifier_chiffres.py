@@ -3194,6 +3194,174 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 211 : LES RANGEES S'ACCORDENT-ELLES ENTRE ELLES ?
+    # (1) Une SEPARATION ne voyage JAMAIS sans la LONGUEUR sur laquelle elle a ete lue : un
+    # desaccord lu sur un troncon plus court n'est pas un meilleur accord.
+    # (2) Ni sans ce qu'elle ANNONCE a toutes les coutures communes : c'est la seule echelle ou la
+    # question « meme feuillet ou non » se pose, et le troncon n'est pas la rangee.
+    # (3) Un DESACCORD PAR COUTURE ne voyage jamais sans son ERREUR D'ECHANTILLONNAGE ni sans le
+    # chiffre de `208` qu'il recoupe : sans l'erreur, « 0 » ne veut rien dire.
+    # (4) Un DECALAGE D'ORIGINE ne voyage jamais sans les DEUX separations qu'il separe — celle
+    # sans recalage et celle avec — sinon la regle refutee n'est plus portee, seulement nommee.
+    # (5) Et le CONTROLE AVEUGLE de l'etalon ne voyage jamais sans son TAUX ni sans son compte :
+    # juge sur un zero, il a fait refuser un etalon sain, et c'est ce que son taux dit.
+    sr = _source(racine, "les_rangees_saccordent_elles_entre_elles.json")
+    if sr.exists():
+        d = json.loads(sr.read_text())
+
+        def _dec211(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        ecr = d.get("les_rangees_du_treillis") or {}
+        prr = d.get("le_desaccord_predit") or {}
+        p208 = d.get("ce_que_208_a_rendu") or {}
+        p210 = d.get("ce_que_210_a_rendu") or {}
+        sep = d.get("les_marches_separees") or {}
+        dsc = d.get("les_desaccords") or {}
+        vld = d.get("ce_que_les_desaccords_valent") or {}
+        dcl = d.get("les_decalages_dorigine") or {}
+        epr = d.get("lepreuve") or {}
+        ver = d.get("le_verdict") or {}
+        etr = d.get("letalon") or {}
+        lgr = d.get("les_lignes") or {}
+        for srcr, cle, nom, unites in (
+                (d, "le_demi_pli_en_voxels", "le demi-pli", ("voxels", "**")),
+                (p210, "les_coutures_communes_en_tout", "les coutures communes de 210",
+                 ("coutures",)),
+                (epr, "les_tirages_au_moins_aussi_loin", "les tirages aussi loin", ("sur",)),
+                (epr, "tirages", "les tirages de l épreuve", ("**",)),
+                (etr, "les_coutures_par_replicat", "les coutures par réplicat", ("coutures",)),
+                (etr, "replicats", "les réplicats de l étalon", ("sur", "réplicats")),
+                (etr, "les_vus", "les réplicats trouvés", ("sur",)),
+                (etr, "les_replicats_du_refus", "les réplicats du refus", ("**",)),
+                (etr, "les_replicats_du_controle_aveugle",
+                 "les réplicats du contrôle aveugle", ("**",)),
+                (etr, "les_biais_partages_vus", "les biais partagés vus", ("sur",)),
+                (etr, "les_faux", "les faux de l étalon", ("faux",)),
+                (etr, "le_plancher_de_202", "le plancher de 202", ("réplicats",))):
+            if srcr.get(cle) is not None:
+                ajoute(f"{nom} de 211", int(srcr[cle]), 0, sr.name, unites=unites)
+        for r_ in (ecr.get("les_rangees") or []):
+            ajoute(f"la rangée {r_} de 211", int(r_), 0, sr.name, unites=("**", "et"))
+        for k, x in sorted(lgr.items()):
+            if x.get("colonnes_demandees") is not None:
+                ajoute("les colonnes demandées de 211", int(x["colonnes_demandees"]), 0,
+                       sr.name, unites=("colonnes",))
+        for k, x in sorted((d.get("les_pas_par_rangee") or {}).items()):
+            ajoute(f"les pas de la rangée {k} de 211", int(x), 0, sr.name, unites=("**",))
+        # ⚠⚠ CHAQUE MARCHE PROPRE PORTE SA LONGUEUR ET SON EXCURSION : les publier separement
+        # laisserait croire que les trois rangees traversent la meme portion du rouleau.
+        for k, x in sorted(sep.items()):
+            if not x.get("decidable"):
+                continue
+            ajoute(f"les tronçons propres de la rangée {k} de 211", int(x["les_troncons"]), 0,
+                   sr.name, unites=("tronçons",))
+            ajoute(f"les coutures propres de la rangée {k} de 211",
+                   int(x["le_plus_long_troncon"][2]), 0, sr.name, unites=("coutures",))
+            ex = x.get("lexcursion") or {}
+            if ex.get("lexcursion_en_voxels") is not None:
+                ajoute(f"l excursion propre de la rangée {k} de 211",
+                       float(ex["lexcursion_en_voxels"]),
+                       _dec211(ex["lexcursion_en_voxels"]), sr.name, unites=("voxels",))
+            if ex.get("lexcursion_en_plis") is not None:
+                ajoute(f"l excursion propre de la rangée {k} de 211 en plis",
+                       float(ex["lexcursion_en_plis"]), _dec211(ex["lexcursion_en_plis"]),
+                       sr.name, unites=("pli",))
+        # ⚠⚠⚠ LES TROIS PAIRES SONT ENREGISTREES, ET PAS SEULEMENT CELLE DE L'EPREUVE : les deux
+        # controles sont publies comme description, donc ils doivent l'etre pour de bon.
+        for k, x in sorted(dsc.items()):
+            if not x.get("decidable"):
+                continue
+            ajoute(f"les coutures communes de la paire {k} de 211",
+                   int(x["les_coutures_communes"]), 0, sr.name, unites=("coutures",))
+            ajoute(f"les coutures du tronçon de la paire {k} de 211",
+                   int(x["les_coutures_du_troncon"]), 0, sr.name, unites=("coutures",))
+            ajoute(f"la séparation de la paire {k} de 211",
+                   float(x["le_desaccord_le_plus_grand_en_voxels"]),
+                   _dec211(x["le_desaccord_le_plus_grand_en_voxels"]), sr.name,
+                   unites=("voxels",))
+        for k, x in sorted(vld.items()):
+            if not x.get("decidable"):
+                continue
+            for cle_, nom_, un_ in (
+                    ("le_desaccord_par_couture_mesure_en_voxels",
+                     "le désaccord par couture", ("voxel", "voxels", "±")),
+                    ("lerreur_dechantillonnage_en_voxels",
+                     "l erreur d échantillonnage", ("voxel", "voxels")),
+                    ("lecart_a_208_en_erreurs", "l écart à 208", ("erreur", "erreurs"))):
+                if x.get(cle_) is not None:
+                    ajoute(f"{nom_} de la paire {k} de 211", float(x[cle_]),
+                           _dec211(x[cle_]), sr.name, unites=un_)
+            a_ = x.get("ce_quelle_annonce_a_toutes_les_communes") or {}
+            if a_.get("lecart_attendu_en_voxels") is not None:
+                ajoute(f"ce que la paire {k} annonce à la rangée de 211",
+                       float(a_["lecart_attendu_en_voxels"]),
+                       _dec211(a_["lecart_attendu_en_voxels"]), sr.name,
+                       unites=("voxels", "**"))
+        # ⚠⚠ LA REGLE REFUTEE EST ENREGISTREE COMME LE RESTE : un decalage d'origine publie sans
+        # les deux separations qu'il separe n'est qu'un nom.
+        for k, x in sorted(dcl.items()):
+            if not x.get("decidable"):
+                continue
+            ajoute(f"les colonnes partagées de la paire {k} de 211",
+                   int(x["les_colonnes_partagees_par_les_deux_troncons"]), 0, sr.name,
+                   unites=("colonnes",))
+            for cle_, nom_ in (("le_decalage_dorigine_en_voxels", "le décalage d origine"),
+                               ("la_separation_sans_recalage_en_voxels",
+                                "la séparation sans recalage"),
+                               ("la_separation_avec_recalage_en_voxels",
+                                "la séparation avec recalage")):
+                if x.get(cle_) is not None:
+                    ajoute(f"{nom_} de la paire {k} de 211", float(x[cle_]),
+                           _dec211(x[cle_]), sr.name, unites=("voxels", "**"))
+        for srcr, cle, nom, unites in (
+                (p208, "la_derive_partagee_en_voxels", "la dérive partagée de 208", ("voxel",)),
+                (prr, "le_bruit_propre_de_lune_en_voxels", "le bruit propre de la médiane",
+                 ("voxel",)),
+                (prr, "le_bruit_propre_de_lautre_en_voxels", "le bruit propre de la voisine",
+                 ("voxel",)),
+                (prr, "le_desaccord_par_couture_en_voxels", "le désaccord prédit",
+                 ("voxels", "**")),
+                (prr, "ce_que_racine_de_deux_donnerait_en_voxels",
+                 "ce que racine de deux donnerait", ("voxels",)),
+                (prr, "lecart_entre_les_deux_ecritures_en_voxels",
+                 "l écart entre les deux écritures", ("voxel",)),
+                (p210, "lexcursion_moyennee_en_voxels", "l excursion moyennée de 210",
+                 ("voxels",)),
+                (p210, "ce_que_la_moyenne_annonce_a_la_rangee_en_voxels",
+                 "ce que la moyenne de 210 annonce", ("voxels",)),
+                (ver, "la_separation_en_demi_plis", "la séparation en demi-feuillets",
+                 ("demi-feuillet",)),
+                (ver, "lexcursion_du_desaccord_en_voxels", "l excursion du désaccord",
+                 ("voxels",)),
+                (ver, "ce_quune_marche_au_hasard_donnerait_en_voxels",
+                 "ce qu une marche au hasard donnerait", ("voxels",)),
+                (ver, "le_rapport_a_la_marche_au_hasard", "le rapport à la marche au hasard",
+                 ("**",)),
+                (epr, "le_deplacement_net_en_voxels", "le net de l épreuve", ("voxels",)),
+                (epr, "le_deplacement_du_nul_median_en_voxels", "le nul médian", ("voxels",)),
+                (epr, "combien_de_marches_au_hasard", "les marches au hasard", ("**",)),
+                (etr, "la_derive_partagee_posee_en_voxels", "la dérive posée de l étalon",
+                 ("voxel",)),
+                (etr, "le_bruit_propre_pose_en_voxels", "le bruit propre posé de l étalon",
+                 ("voxel",)),
+                (etr, "le_biais_propre_pose_en_voxels", "le biais propre posé de l étalon",
+                 ("voxels",)),
+                (etr, "le_net_median_sur_la_face_positive_en_voxels",
+                 "le net de la face positive", ("voxels",)),
+                (etr, "le_taux_de_faux", "le taux de faux de l étalon", ("pour",)),
+                (etr, "le_taux_du_controle_aveugle", "le taux du contrôle aveugle", ("**",)),
+                (etr, "la_chance_de_rater_au_plancher", "la chance de rater au plancher",
+                 ("**",)),
+                (etr, "la_garantie", "la garantie de l étalon", ("garantis", "**"))):
+            if srcr.get(cle) is not None:
+                ajoute(f"{nom} de 211", float(srcr[cle]), _dec211(srcr[cle]), sr.name,
+                       unites=unites)
+
     # ⭐⭐⭐⭐ LA TRANCHE 210 : LA MOYENNE DES RANGEES TRAVERSE-T-ELLE VRAIMENT ?
     # (1) Une EXCURSION MOYENNEE ne voyage JAMAIS sans celle d'une RANGEE SEULE sur les MEMES
     # coutures : c'est l'appariement qui fait le gain, et « 14,2708 » seul ne dit rien.

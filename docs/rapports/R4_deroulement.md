@@ -3278,6 +3278,47 @@ s'accordent-elles entre elles ? ⚠⚠⚠ Et sa prédiction est déjà posée et
 s'annule dans la différence de deux cumuls, donc deux rangées voisines divergeraient d'environ
 **42 voxels** sur 238 coutures, **au-dessus** du demi-feuillet.
 
+**`211` · 2026-09-21 · les rangées traversées indépendamment s'accordent-elles entre elles ?**
+⭐ **La prédiction était posée avant la mesure, et elle était alarmante** : dans la différence de deux
+cumuls, la part partagée que `208` avait mesurée s'annule terme à terme, donc il ne reste que les
+deux bruits propres — une marche au hasard de **2,7138 voxels** par couture, qui croît en racine du
+nombre de coutures.
+★★★★ **Deux rangées voisines finissent sur DEUX feuillets différents** — `R4-F333` : à **242
+coutures** communes le désaccord des deux cumuls recalés annonce **42,2168 voxels** contre un
+demi-feuillet de **36 voxels**, et les deux paires de contrôle en annoncent **46,0604** et
+**53,3332** — les trois au-dessus. ⚠⚠⚠ Et la comparaison qui décide est celle avec `210` : traverser
+une surface moyennée ne demande que **29,6897 voxels** à la même échelle. **Moyenner aide à TRAVERSER
+et n'aide en RIEN à S'ACCORDER.**
+⭐ **Le désaccord est une marche au hasard, et rien ne le retient** — `R4-F334` : **2,7138 ± 0,1234
+voxel** par couture, pour une excursion mesurée de **45,875 voxels** là où une marche au hasard de
+même pas en donnerait **27,8082** — un rapport de **1,6497**.
+✗ **Et il ne s'accumule PAS, ce qui est la mauvaise nouvelle** — `R4-F335` : net **2 voxels** contre
+**21,125** au nul, **19 sur 19**. Aucune des deux rangées ne lit systématiquement plus long que
+l'autre, donc **il n'y a rien à retrancher** : une dérive systématique se corrigerait, un bruit
+irréductible non.
+★ **Les trois rangées ne traversent même pas la même portion** — `R4-F336` : leurs tronçons propres
+valent **105**, **225** et **166 coutures**, et la rangée **197** ne traverse PAS — **51,1875
+voxels** = **0,710116 pli** sur ses **225 coutures**, au-dessus du demi-feuillet. C'est le plafond de
+`207` retrouvé par une mesure directe.
+⚠⚠ **Le piège du recalage est énorme, et il ne se voit que d'un côté** — `R4-F337` : **30,2708
+voxels** de décalage d'origine pour un demi-feuillet de **36**. L'EXCURSION d'une différence y est
+insensible — mesuré vrai sur les trois paires — donc une tranche qui n'aurait publié qu'elle aurait
+rendu le bon nombre **par accident** ; la SÉPARATION y est sensible, et c'est elle qui décide du
+feuillet.
+★ **Le désaccord des pas recoupe `208` au chiffre** — `R4-F338` : **2,7138 voxels** ici contre
+**2,7138** là-bas, **0 erreur**, sur une seconde course du dépôt. ⚠⚠⚠ Mais la prédiction DÉRIVÉE n'en
+est pas un recoupement : `208` avait tiré ses deux bruits propres de ce désaccord même — identité,
+pas confirmation.
+⚠⚠⚠ **Et un contrôle nul a fait refuser un étalon sain** — `R4-F339` : exiger qu'aucun de **12
+réplicats** ne tire, quand chacun porte la garantie de **0,05**, c'est attendre du nul ce qu'il ne
+peut pas donner. Jugé au taux et sur le compte dérivé de `210`, le contrôle aveugle rend **10 sur
+171** = **0,0585** contre **8 sur 171** = **0,0468** sans aucun biais. C'est le piège de `178`
+repayé.
+⭐ `R4-P57` est **répondue** ; `R4-P58` **s'ouvre** : qu'est-ce qui tient deux rangées voisines sur le
+même feuillet ? ⚠⚠ La porte la plus évidente est déjà fermée — il n'y a pas de dérive à retrancher —
+et il reste deux candidats, tous deux déjà mesurés ailleurs : le repère absolu de `200`, qui ne
+dérive pas par construction, et le lien latéral de `127`, dont le coût est connu.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

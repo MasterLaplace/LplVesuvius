@@ -369,7 +369,7 @@ def les_replicats_du_refus(garantie: float = GARANTIE_PAR_EPREUVE) -> dict:
 
 
 def des_rangees_fabriquees(coutures: int, combien: int, derive: float, propre: float,
-                           biais: float, graine: int) -> dict:
+                           biais: float, graine: int, biais_propre: float = 0.0) -> dict:
     """`combien` rangées dont le pas partage une dérive et garde un bruit propre.
 
     ⭐⭐⭐⭐ LE BIAIS EST DANS LA PART PARTAGEE, ET C'EST CE QUI REND LA FIXTURE JUSTE : un biais que
@@ -385,6 +385,13 @@ def des_rangees_fabriquees(coutures: int, combien: int, derive: float, propre: f
     out = {}
     for k in range(int(combien)):
         propre_k = r.normal(0.0, float(propre), size=int(coutures))
+        # ⚠⚠⚠ `biais_propre` EST NUL PAR DEFAUT, ET IL LE RESTE POUR CETTE TRANCHE-CI. Il n'est
+        # porte que par la PREMIERE rangee, donc il ne survit PAS a la moyenne au meme titre que
+        # le biais commun — c'est exactement ce que `211` a besoin de fabriquer, et c'est
+        # l'inverse de ce dont `210` a besoin. Le parametre est ajoute plutot que la fixture
+        # corrigee en place, parce que les nombres de `210` en derivent deja.
+        if k == 0 and float(biais_propre) != 0.0:
+            propre_k = propre_k + float(biais_propre)
         out[int(k)] = {int(c): float(commune[c] + propre_k[c]) for c in range(int(coutures))}
     return out
 

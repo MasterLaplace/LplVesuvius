@@ -1562,6 +1562,8 @@ run "la transition et l erreur" uv run python "$ROOT/src/nappe/la_transition_fix
 run "figure la transition et l erreur" uv run python "$ROOT/src/figures/figure_la_transition_fixe_t_elle_lerreur_de_chunk.py" --verifier
 run "la moyenne des rangees" uv run python "$ROOT/src/nappe/la_moyenne_des_rangees_traverse_t_elle.py" --verifier
 run "figure la moyenne des rangees" uv run python "$ROOT/src/figures/figure_la_moyenne_des_rangees_traverse_t_elle.py" --verifier
+run "les rangees s accordent" uv run python "$ROOT/src/nappe/les_rangees_saccordent_elles_entre_elles.py" --verifier
+run "figure les rangees s accordent" uv run python "$ROOT/src/figures/figure_les_rangees_saccordent_elles_entre_elles.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
