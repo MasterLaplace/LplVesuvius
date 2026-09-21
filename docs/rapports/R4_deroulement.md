@@ -3242,6 +3242,42 @@ pas par un changement d'espacement.
 ⚠⚠⚠ `R4-P55` est **répondue par la négative** et **aucune porte nouvelle** n'est ouverte : ce que
 cette tranche produit est une **exclusion**.
 
+**`210` · 2026-09-21 · la marche construite sur la moyenne des rangées traverse-t-elle vraiment ?**
+⭐ **Les deux bornes étaient posées avant la mesure, et elles diffèrent** : `208` projetait que
+moyenner retire **tout** le bruit propre et laisse la dérive partagée de **1,5129 voxels** ; trois
+lectures n'en retirent qu'une part en racine de trois, soit **1,8819**. La dispersion mesurée devait
+tomber entre les deux, ou en dehors.
+★★★★ **La marche traverse, et elle divise l'excursion par deux** — `R4-F326` : sur le plus long
+tronçon commun, **105 coutures**, l'excursion du pas moyenné vaut **14,2708 voxels** = **0,3964
+demi-feuillet**, contre **28,0625** pour la rangée **198** seule sur les **mêmes** coutures — un gain
+mesuré de **1,9664** sans aucune correction de longueur.
+★ **Et le contrôle recoupe `207` au chiffre près** — `R4-F327` : **28,0625 voxels**, exactement ce
+que `207` avait publié. ⚠⚠⚠ C'est ce recoupement, et **aucune sonde**, qui a livré le péché capital :
+la rangée du contrôle était déduite d'un `sorted(...)[0]`, donc la voisine **197** marchait sous le
+nom de la médiane **198**.
+✗ **La projection de `208` n'est PAS atteinte** — `R4-F328` : dispersion mesurée **1,9245 ± 0,0882
+voxel** sur **238 coutures**, soit **1,272** fois la borne optimiste, et **0,4825 erreur** de la
+borne réaliste. ⭐⭐⭐⭐ Trois lectures retirent **exactement** la part que la racine de trois prédit,
+et pas davantage : le modèle est validé et la borne de `208` réfutée comme borne atteignable.
+★★★★ **Mais à l'échelle de la rangée, la moyenne bat le lecteur PARFAIT** — `R4-F329` : à **238
+coutures**, le pas moyenné annonce **29,6897 voxels** = **0,411881 pli**, sous le demi-feuillet de
+**36**, là où une rangée seule en annonce **37,931** au-dessus et où le plancher de la matière en
+laisse encore **34,449**. C'est le plafond de `207` brisé par une **mesure** et non plus par une
+projection.
+✗ **Les pas moyennés ne s'additionnent pas** — `R4-F330` : net **5,0204** contre **9,4372** au nul
+par tirage de signes, **14 sur 19**.
+⚠⚠ **Le piège écrit d'avance n'a mordu qu'à moitié** — `R4-F331` : **238 coutures** partagées contre
+**244**, mais le plus long tronçon en fait **105**, exactement celui de `207`.
+⚠⚠⚠ **Et une règle de calibration a dû changer** — `R4-F332` : le plancher de `202`, **40
+réplicats**, fait **exister** la face négative d'un étalon sans la faire **décider** — une épreuve au
+niveau exact dépasse l'acceptation dans **0,048** des cas, et cette tranche est tombée dessus. Son
+étalon décide sur **171 réplicats**, le compte qui met trois erreurs d'échantillonnage dans la marge,
+et rend **9 faux** = **0,0526 pour 0,05 garantis**. ⚠ La règle ne vaut que pour `210`.
+⭐ `R4-P56` est **répondue** ; `R4-P57` **s'ouvre** : les rangées traversées indépendamment
+s'accordent-elles entre elles ? ⚠⚠⚠ Et sa prédiction est déjà posée et alarmante — la part partagée
+s'annule dans la différence de deux cumuls, donc deux rangées voisines divergeraient d'environ
+**42 voxels** sur 238 coutures, **au-dessus** du demi-feuillet.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

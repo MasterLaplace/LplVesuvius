@@ -3194,6 +3194,141 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 210 : LA MOYENNE DES RANGEES TRAVERSE-T-ELLE VRAIMENT ?
+    # (1) Une EXCURSION MOYENNEE ne voyage JAMAIS sans celle d'une RANGEE SEULE sur les MEMES
+    # coutures : c'est l'appariement qui fait le gain, et « 14,2708 » seul ne dit rien.
+    # (2) Ni sans la LONGUEUR du troncon : une marche qui traverse un troncon plus court n'a pas
+    # traverse davantage, et c'est le piege que `R4-P56` avait ecrit d'avance.
+    # (3) Une DISPERSION MESUREE ne voyage jamais sans ses DEUX bornes : au-dessus de l'optimiste
+    # et d'accord avec la realiste sont deux faits differents, et seul le couple les separe.
+    # (4) Ni sans son ERREUR D'ECHANTILLONNAGE : sans elle, un depassement de deux pour cent se
+    # lirait comme un modele refute alors que l'ecart vaut une demi-erreur.
+    # (5) Et le COMPTE DE REPLICATS DU REFUS ne voyage jamais sans le PLANCHER de `202` qu'il
+    # depasse, ni sans la chance de rater a ce plancher : sinon « 171 » passerait pour un reglage.
+    sm = _source(racine, "la_moyenne_des_rangees_traverse_t_elle.json")
+    if sm.exists():
+        d = json.loads(sm.read_text())
+
+        def _dec210(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        ecm = d.get("les_rangees_du_treillis") or {}
+        prd = d.get("la_dispersion_predite") or {}
+        qtt = d.get("ce_que_la_moyenne_a_retire") or {}
+        mar = d.get("la_marche") or {}
+        exm = mar.get("lexcursion_moyennee") or {}
+        exs = mar.get("lexcursion_dune_rangee_seule") or {}
+        epm = d.get("lepreuve") or {}
+        vem = d.get("le_verdict") or {}
+        etm = d.get("letalon") or {}
+        alm = d.get("les_predictions_a_la_meme_longueur") or {}
+        atc = d.get("les_predictions_a_toutes_les_coutures") or {}
+        lgm = d.get("les_lignes") or {}
+        for srcm, cle, nom, unites in (
+                (d, "le_demi_pli_en_voxels", "le demi-pli", ("voxels", "de")),
+                (d, "les_coutures_communes", "les coutures communes", ("coutures",)),
+                (vem, "les_coutures_du_troncon", "les coutures du tronçon", ("coutures",)),
+                (vem, "les_coutures_de_207", "les coutures de 207", ("coutures",)),
+                (vem, "les_coutures_de_toute_la_rangee_de_207",
+                 "les coutures de toute la rangée de 207", ("**",)),
+                (mar, "la_rangee_seule", "la rangée du contrôle", ("**", "seule")),
+                (prd, "les_rangees_moyennees", "les rangées moyennées", ("rangées",)),
+                (etm, "replicats", "les réplicats de l étalon", ("des",)),
+                (etm, "les_vus", "les réplicats trouvés", ("des",)),
+                (etm, "les_replicats_du_refus", "les réplicats du refus", ("réplicats",)),
+                (etm, "le_plancher_de_202", "le plancher de 202", ("réplicats",)),
+                (etm, "les_faux", "les faux de l étalon", ("faux",)),
+                (epm, "les_tirages_au_moins_aussi_loin", "les tirages aussi loin", ("sur",)),
+                (epm, "tirages", "les tirages de l épreuve", ("**",))):
+            if srcm.get(cle) is not None:
+                ajoute(f"{nom} de 210", int(srcm[cle]), 0, sm.name, unites=unites)
+        for r_ in (ecm.get("les_rangees") or []):
+            ajoute(f"la rangée {r_} de 210", int(r_), 0, sm.name, unites=("**", "et"))
+        if mar.get("le_plus_long_troncon"):
+            a_, b_, _n = mar["le_plus_long_troncon"]
+            ajoute("le début du tronçon de 210", int(a_), 0, sm.name, unites=("**", "–"))
+            ajoute("la fin du tronçon de 210", int(b_), 0, sm.name, unites=("**", ","))
+        if mar.get("les_troncons") is not None:
+            ajoute("les tronçons de 210", len(mar["les_troncons"]), 0, sm.name,
+                   unites=("tronçons",))
+        for k, x in sorted(lgm.items()):
+            if x.get("colonnes_lues") is not None:
+                ajoute(f"les chunks lus de la rangée {k} de 210", int(x["colonnes_lues"]), 0,
+                       sm.name, unites=("**", "chunks"))
+            if x.get("colonnes_demandees") is not None:
+                ajoute("les colonnes demandées de 210", int(x["colonnes_demandees"]), 0,
+                       sm.name, unites=("colonnes",))
+        for k, x in sorted((d.get("les_pas_par_rangee") or {}).items()):
+            ajoute(f"les pas de la rangée {k} de 210", int(x), 0, sm.name, unites=("**",))
+        for k, x in sorted((qtt.get("la_dispersion_de_chaque_rangee_en_voxels") or {}).items()):
+            ajoute(f"la dispersion de la rangée {k} de 210", float(x), _dec210(x), sm.name,
+                   unites=("voxels",))
+        for nom_, x in sorted(alm.items()):
+            if isinstance(x, dict) and x.get("lecart_attendu_en_voxels") is not None:
+                ajoute(f"l écart {nom_} au tronçon de 210",
+                       float(x["lecart_attendu_en_voxels"]),
+                       _dec210(x["lecart_attendu_en_voxels"]), sm.name, unites=("voxels",))
+        for nom_, x in sorted(atc.items()):
+            if not isinstance(x, dict):
+                continue
+            for cle_, suff, un in (("lecart_attendu_en_voxels", "en voxels", ("voxels",)),
+                                   ("lecart_attendu_en_plis", "en plis", ("**",))):
+                if x.get(cle_) is not None:
+                    ajoute(f"l écart {nom_} à toutes les coutures {suff} de 210",
+                           float(x[cle_]), _dec210(x[cle_]), sm.name, unites=un)
+        for srcm, cle, nom, unites in (
+                (prd, "la_derive_partagee_en_voxels", "la dérive partagée", ("voxels",)),
+                (prd, "le_bruit_propre_en_voxels", "le bruit propre", ("voxels",)),
+                (prd, "ce_quune_rangee_seule_porte_en_voxels",
+                 "ce qu une rangée seule porte", ("voxels",)),
+                (prd, "la_borne_optimiste_en_voxels", "la borne optimiste", ("voxels",)),
+                (prd, "la_borne_realiste_en_voxels", "la borne réaliste", ("voxels",)),
+                (qtt, "la_dispersion_du_pas_moyenne_en_voxels",
+                 "la dispersion du pas moyenné", ("voxels",)),
+                (qtt, "lerreur_dechantillonnage_en_voxels",
+                 "l erreur d échantillonnage", ("voxel",)),
+                (qtt, "le_rapport_a_la_borne_optimiste", "le rapport à l optimiste", ("**",)),
+                (qtt, "le_rapport_a_la_borne_realiste", "le rapport à la réaliste", ("**",)),
+                (qtt, "lecart_a_la_borne_realiste_en_erreurs",
+                 "l écart à la réaliste", ("erreur",)),
+                (exm, "lexcursion_en_voxels", "l excursion moyennée", ("voxels",)),
+                (exm, "lexcursion_en_plis", "l excursion moyennée en plis", ("**",)),
+                (exm, "le_deplacement_net_en_voxels", "le net moyenné", ("voxels",)),
+                (exm, "le_plus_loin_en_voxels", "le plus loin moyenné", ("voxels",)),
+                (exs, "lexcursion_en_voxels", "l excursion d une rangée seule", ("voxels",)),
+                (exs, "lexcursion_en_plis", "l excursion d une rangée seule en plis", ("**",)),
+                (exs, "le_deplacement_net_en_voxels", "le net d une rangée seule", ("voxels",)),
+                (exs, "le_plus_loin_en_voxels", "le plus loin d une rangée seule", ("voxels",)),
+                (vem, "lexcursion_moyennee_en_demi_plis",
+                 "l excursion en demi-feuillets", ("**",)),
+                (vem, "le_gain_mesure_sur_lexcursion", "le gain mesuré", ("**",)),
+                (vem, "lecart_attendu_en_voxels", "l écart attendu du mesuré", ("voxels",)),
+                (vem, "le_rapport_observe_sur_attendu", "le rapport observé sur attendu", ()),
+                (epm, "le_deplacement_net_en_voxels", "le net de l épreuve", ("voxels",)),
+                (epm, "le_deplacement_du_nul_median_en_voxels", "le nul médian", ("voxels",)),
+                (epm, "combien_de_marches_au_hasard", "les marches au hasard", ("**",)),
+                (etm, "le_biais_pose_en_voxels", "le biais posé de l étalon", ("pour",)),
+                (etm, "la_derive_posee_en_voxels", "la dérive posée de l étalon", ("voxels",)),
+                (etm, "le_bruit_propre_pose_en_voxels",
+                 "le bruit propre posé de l étalon", ("voxels",)),
+                (etm, "la_dispersion_mediane_du_pas_moyenne_en_voxels",
+                 "la dispersion médiane de l étalon", ("voxels",)),
+                (etm, "le_net_median_sur_la_face_positive_en_voxels",
+                 "le net de la face positive", ("voxels",)),
+                (etm, "le_net_median_sur_la_face_negative_en_voxels",
+                 "le net de la face négative", ("voxels",)),
+                (etm, "la_chance_de_rater_au_plancher",
+                 "la chance de rater au plancher", ("des",)),
+                (etm, "le_taux_de_faux", "le taux de faux de l étalon", ("pour",)),
+                (etm, "la_garantie", "la garantie de l étalon", ("garantis",))):
+            if srcm.get(cle) is not None:
+                ajoute(f"{nom} de 210", float(srcm[cle]), _dec210(srcm[cle]), sm.name,
+                       unites=unites)
+
     # ⭐⭐⭐⭐ LA TRANCHE 209 : LA TRANSITION FIXE-T-ELLE L'ERREUR DE CHUNK ?
     # (1) Une ERREUR DE LOCALISATION ne voyage JAMAIS sans l'erreur de chunk de `205` : c'est leur
     # rapport, et lui seul, qui dit que la transition n'explique rien.

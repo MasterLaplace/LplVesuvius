@@ -1560,6 +1560,8 @@ run "une rangee voisine" uv run python "$ROOT/src/nappe/une_rangee_voisine_lit_e
 run "figure une rangee voisine" uv run python "$ROOT/src/figures/figure_une_rangee_voisine_lit_elle_le_meme_pas.py" --verifier
 run "la transition et l erreur" uv run python "$ROOT/src/nappe/la_transition_fixe_t_elle_lerreur_de_chunk.py" --verifier
 run "figure la transition et l erreur" uv run python "$ROOT/src/figures/figure_la_transition_fixe_t_elle_lerreur_de_chunk.py" --verifier
+run "la moyenne des rangees" uv run python "$ROOT/src/nappe/la_moyenne_des_rangees_traverse_t_elle.py" --verifier
+run "figure la moyenne des rangees" uv run python "$ROOT/src/figures/figure_la_moyenne_des_rangees_traverse_t_elle.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
