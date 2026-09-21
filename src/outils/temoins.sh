@@ -1556,6 +1556,10 @@ run "le creux et la profondeur" uv run python "$ROOT/src/nappe/le_creux_change_t
 run "figure le creux et la profondeur" uv run python "$ROOT/src/figures/figure_le_creux_change_t_il_avec_la_profondeur_lue.py" --verifier
 run "le cumul recale" uv run python "$ROOT/src/nappe/le_cumul_recale_traverse_t_il_la_rangee.py" --verifier
 run "figure le cumul recale" uv run python "$ROOT/src/figures/figure_le_cumul_recale_traverse_t_il_la_rangee.py" --verifier
+run "une rangee voisine" uv run python "$ROOT/src/nappe/une_rangee_voisine_lit_elle_le_meme_pas.py" --verifier
+run "figure une rangee voisine" uv run python "$ROOT/src/figures/figure_une_rangee_voisine_lit_elle_le_meme_pas.py" --verifier
+run "la transition et l erreur" uv run python "$ROOT/src/nappe/la_transition_fixe_t_elle_lerreur_de_chunk.py" --verifier
+run "figure la transition et l erreur" uv run python "$ROOT/src/figures/figure_la_transition_fixe_t_elle_lerreur_de_chunk.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

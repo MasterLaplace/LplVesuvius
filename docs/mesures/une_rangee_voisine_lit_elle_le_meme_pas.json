@@ -1,0 +1,285 @@
+{
+  "graine": 20261016,
+  "tirages": 19,
+  "la_question_declaree": "deux rangées voisines du treillis lisent-elles le même pas à la même couture, ou chacune le sien ?",
+  "les_epreuves_declarees": [
+    "les pas de deux rangées voisines sont-ils appariés"
+  ],
+  "la_garantie_par_epreuve": 0.05,
+  "le_pas_dun_pli_en_voxels": 72.0833,
+  "le_demi_pli_en_voxels": 36,
+  "les_rangees_du_treillis": {
+    "decidable": true,
+    "la_mediane": 198,
+    "les_voisines": [
+      197,
+      199
+    ],
+    "les_rangees": [
+      198,
+      197,
+      199
+    ]
+  },
+  "ce_que_204_a_rendu": {
+    "decidable": true,
+    "la_dispersion_en_voxels": 2.4587,
+    "lalea_en_voxels": 1.029,
+    "la_derive_en_voxels": 2.233,
+    "les_rangees": 16
+  },
+  "la_prediction": {
+    "decidable": true,
+    "lalea_de_204_en_voxels": 1.029,
+    "la_dispersion_de_204_en_voxels": 2.4587,
+    "si_elles_lisent_le_meme_pas_en_voxels": 1.4552,
+    "si_elles_lisent_autre_chose_en_voxels": 3.4771,
+    "le_rapport_des_deux_lectures": 2.3894
+  },
+  "les_lignes": {
+    "198": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 198,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 251,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 28,
+        "trop peu texturé": 6
+      }
+    },
+    "197": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 197,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 255,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 29,
+        "trop peu texturé": 1
+      }
+    },
+    "199": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 199,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 254,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 28,
+        "trop peu texturé": 3
+      }
+    }
+  },
+  "les_pas_par_rangee": {
+    "198": 243,
+    "197": 253,
+    "199": 250
+  },
+  "les_desaccords": {
+    "197": {
+      "decidable": true,
+      "les_coutures_communes": 242,
+      "lecart_type_du_desaccord_en_voxels": 2.7138,
+      "le_desaccord_median_en_voxels": 1.125,
+      "la_dispersion_de_la_premiere_en_voxels": 2.4591,
+      "la_dispersion_de_la_seconde_en_voxels": 2.428
+    },
+    "199": {
+      "decidable": true,
+      "les_coutures_communes": 239,
+      "lecart_type_du_desaccord_en_voxels": 2.9794,
+      "le_desaccord_median_en_voxels": 1.125,
+      "la_dispersion_de_la_premiere_en_voxels": 2.4653,
+      "la_dispersion_de_la_seconde_en_voxels": 2.901
+    }
+  },
+  "les_epreuves": {
+    "197": {
+      "decidable": true,
+      "tirages": 19,
+      "la_correlation_signee": 0.3833,
+      "la_correlation_absolue": 0.3833,
+      "la_correlation_absolue_mediane_du_nul": 0.0554,
+      "la_correlation_absolue_maximale_du_nul": 0.1481,
+      "les_melanges_au_moins_aussi_forts": 0,
+      "la_valeur_p": 0.05,
+      "la_garantie_de_lepreuve": 0.05,
+      "les_deux_pas_sont_apparies": true
+    },
+    "199": {
+      "decidable": true,
+      "tirages": 19,
+      "la_correlation_signee": 0.3927,
+      "la_correlation_absolue": 0.3927,
+      "la_correlation_absolue_mediane_du_nul": 0.0584,
+      "la_correlation_absolue_maximale_du_nul": 0.1365,
+      "les_melanges_au_moins_aussi_forts": 0,
+      "la_valeur_p": 0.05,
+      "la_garantie_de_lepreuve": 0.05,
+      "les_deux_pas_sont_apparies": true
+    }
+  },
+  "les_partages": {
+    "197": {
+      "decidable": true,
+      "la_derive_partagee_en_voxels": 1.5129,
+      "le_bruit_de_la_premiere_en_voxels": 1.9387,
+      "le_bruit_de_la_seconde_en_voxels": 1.899,
+      "le_signal_sur_bruit_de_la_premiere": 0.7804,
+      "le_signal_sur_bruit_de_la_seconde": 0.7967,
+      "la_pente_signee": 0.3785
+    },
+    "199": {
+      "decidable": true,
+      "la_derive_partagee_en_voxels": 1.6758,
+      "le_bruit_de_la_premiere_en_voxels": 1.8082,
+      "le_bruit_de_la_seconde_en_voxels": 2.368,
+      "le_signal_sur_bruit_de_la_premiere": 0.9268,
+      "le_signal_sur_bruit_de_la_seconde": 0.7077,
+      "la_pente_signee": 0.4621
+    }
+  },
+  "la_lecture": {
+    "decidable": true,
+    "lecart_type_observe_en_voxels": 2.7138,
+    "le_rapport_a_la_lecture_meme_pas": 1.8649,
+    "le_rapport_a_la_lecture_autre_chose": 0.7805,
+    "de_laquelle_il_est_le_plus_proche": "autre chose",
+    "il_tombe_entre_les_deux": true
+  },
+  "ce_que_la_boucle_rapporte": {
+    "decidable": true,
+    "la_dispersion_de_204_en_voxels": 1.5129,
+    "les_coutures": 242,
+    "lecart_attendu_en_voxels": 23.5352,
+    "lecart_attendu_en_plis": 0.3265,
+    "le_demi_pli_en_voxels": 36,
+    "il_tient_sous_le_demi_pli": true
+  },
+  "ce_que_la_rangee_seule_donne": {
+    "decidable": true,
+    "la_dispersion_de_204_en_voxels": 2.4587,
+    "les_coutures": 242,
+    "lecart_attendu_en_voxels": 38.2484,
+    "lecart_attendu_en_plis": 0.530614,
+    "le_demi_pli_en_voxels": 36,
+    "il_tient_sous_le_demi_pli": false
+  },
+  "le_verdict": {
+    "decidable": true,
+    "la_rangee_mediane": 198,
+    "la_voisine_de_lepreuve": 197,
+    "les_voisines_en_controle": [
+      199
+    ],
+    "la_correlation_absolue": 0.3833,
+    "la_valeur_p": 0.05,
+    "les_deux_pas_sont_apparies": true,
+    "les_correlations_des_controles": [
+      0.3927
+    ],
+    "lecart_type_observe_en_voxels": 2.7138,
+    "si_elles_lisent_le_meme_pas_en_voxels": 1.4552,
+    "si_elles_lisent_autre_chose_en_voxels": 3.4771,
+    "le_rapport_a_la_lecture_meme_pas": 1.8649,
+    "le_rapport_a_la_lecture_autre_chose": 0.7805,
+    "de_laquelle_il_est_le_plus_proche": "autre chose",
+    "les_coutures_communes": 242,
+    "la_derive_partagee_en_voxels": 1.5129,
+    "le_bruit_de_la_mediane_en_voxels": 1.9387,
+    "le_bruit_de_la_voisine_en_voxels": 1.899,
+    "le_signal_sur_bruit_de_la_mediane": 0.7804
+  },
+  "letalon": {
+    "decidable": true,
+    "les_coutures_par_replicat": 240,
+    "la_derive_posee_en_voxels": 2.233,
+    "lalea_pose_en_voxels": 1.029,
+    "replicats": 12,
+    "les_vus": 12,
+    "la_part_trouvee": 1.0,
+    "lecart_median_sur_la_face_positive_en_voxels": 1.4493,
+    "les_replicats_du_refus": 40,
+    "les_faux": 4,
+    "le_taux_de_faux": 0.1,
+    "lecart_median_sur_la_face_negative_en_voxels": 3.4382,
+    "la_garantie": 0.05,
+    "letalon_separe": true
+  }
+}

@@ -3191,6 +3191,57 @@ pose — une référence absolue au-delà d'une rangée — est celle que `R4-P4
 `205` et `206` ont fermée pour le creux. En rouvrir une variante ne ferait que redire ce qui est
 écrit.
 
+**`208` · 2026-09-21 · une rangée voisine lit-elle le même pas ?**
+⭐⭐⭐⭐ **C'est le plafond de `207` qui force cette tranche.** Il avait établi qu'un lecteur PARFAIT
+sur une rangée seule donnerait encore **34,8806 voxels** contre un demi-feuillet de **36** : une
+rangée se traverse de justesse, et rien de plus long. La seule chose qui batte une marche en racine
+de `n` est une référence qui ne dérive pas — ou une **fermeture de boucle**. Et le treillis en offre
+une, gratuite : les rangées **197** et **199** traversent les mêmes coutures que **198**.
+⭐ **Les deux lectures sont posées avant la mesure** — si les rangées lisent le même pas, leur
+désaccord vaut **1,4552 voxels** ; si elles lisent autre chose, **3,4771**. Les deux sortent de
+`204`, et elles diffèrent d'un facteur **2,3894**.
+★ **ELLES SONT APPARIÉES** — `R4-F319` : **|r| = 0,3833** contre **0,0554** au mélange sur
+**242 coutures**, **0 sur 19**, P = **0,05**. ⭐ Et le **contrôle** tient : la seconde voisine rend
+**0,3927**, donc au-dessus et au-dessous se comportent pareil.
+⚠⚠ **Mais elles ne lisent pas le même pas** — `R4-F320` : le désaccord vaut **2,7138 voxels**, soit
+**1,8649** fois la première lecture.
+★ **Ce qu'elles partagent est chiffré** — `R4-F321` : dérive commune **1,5129 voxels** contre un
+bruit propre de **1,9387** et **1,899**, soit un signal sur bruit de **0,7804**. La décomposition est
+celle de `202`, importée et non réécrite.
+★★ **ET C'EST CE QUI BRISE LE PLAFOND** — `R4-F322` : moyenner les rangées du treillis laisserait
+**1,5129 voxels**, donc une excursion de **23,5352 voxels** = **0,3265 pli** sur **242 coutures**, là
+où une rangée seule en donne **38,2484**. ⚠ C'est une **projection**, pas une marche mesurée.
+⚠⚠ **Quatre bris ont d'abord échappé** : une fixture complaisante où la différence des écarts-types
+et l'écart-type de la différence valaient tous deux zéro ; un faux dépôt qui rendait un chunk pour
+n'importe quelle rangée ; une sonde qui se contentait de « ça refuse » là où la ligne refuse aussi
+faute de chunks ; et un étalon toujours appelé avec ses arguments, donc dont les défauts n'étaient
+exercés par rien.
+⭐ `R4-P56` **s'ouvre** : la marche construite sur la moyenne des rangées traverse-t-elle vraiment ?
+
+**`209` · 2026-09-21 · la transition fixe-t-elle l'erreur de chunk ?**
+⚠ **Cette tranche n'est pas sur le chemin le plus court vers le déroulage, et c'est assumé** : elle
+répond à `R4-P55`, qui sert à **exclure** pour ne pas y revenir à l'aveugle. Elle a tourné **en
+parallèle** de `208`, dont la mesure était bornée par le réseau quand celle-ci l'est par le calcul.
+⭐ **La prédiction était posée avant la mesure** : si l'erreur de chunk est celle de la transition
+qui fabrique le creux, une matière à transition plus étroite doit rendre une erreur plus petite dans
+le même rapport. L'échelle a ses deux bouts dérivés de `179` — plancher **9,5 voxels**, plafond
+**36 voxels** — et elle porte le bruit **16** que `179` avait tenu, ce qui était le piège écrit
+d'avance.
+✗ **NON, ET DE TRÈS LOIN** — `R4-F323` : à la transition du rouleau (**19 voxels**), le creux situe
+une frontière **posée** à **0,3015 voxel** près, contre **14,9372 voxels** d'erreur commune mesurés
+sur le rouleau par `205` — un rapport de **0,0202**.
+✗ **Et elle ne suit même pas la transition** — `R4-F324` : **|r| = 0,3068** contre **0,0715** au
+mélange, **1 sur 19**, P = **0,1**. Les transitions varient de **3,6** et les erreurs de **0,8166**,
+soit **0,2268** fois aussi vite. ⚠⚠⚠ Le refus est **lisible** parce que l'étalon voit une pente posée
+dans **12 de ses 12 réplicats**.
+⭐ **Ce qui reste** : l'erreur de chunk ne vient ni de la transition, ni du lecteur — elle vient de
+la **matière** du rouleau, que la fixture de `179` ne porte pas. ⚠⚠ La portée est bornée et dite
+— `R4-F325` : la fixture espace ses frontières de **36 couches** là où le rouleau a un pas de
+**72,0833 voxels**, donc ce qui est testé est la proportionnalité. Un facteur cinquante ne se referme
+pas par un changement d'espacement.
+⚠⚠⚠ `R4-P55` est **répondue par la négative** et **aucune porte nouvelle** n'est ouverte : ce que
+cette tranche produit est une **exclusion**.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

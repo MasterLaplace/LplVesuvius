@@ -373,12 +373,18 @@ def sur_letalon(rangees, graine: int = GRAINE, coutures: int = 60, couches: int 
 
 
 def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
-             ouvrir=None, meta=None, combien: int = LES_RANGEES) -> dict:
+             ouvrir=None, meta=None, combien: int = LES_RANGEES,
+             rangee_du_treillis: int | None = None) -> dict:
     """Les profils de bord de chaque chunk, sur `combien` rangées — la MÊME rangée que `199`–`203`.
 
     ⭐ SEULS LES PROFILS DE BORD SONT GARDES : `un_pas` ne regarde que les `w` colonnes du bord, et
     il les moyenne. Garder le profil deja moyenne au lieu du chunk entier divise la memoire par
     plus de mille sans changer un seul nombre — une sonde le verifie plutot que de le supposer.
+
+    ⚠⚠ `rangee_du_treillis` VAUT LA RANGEE DECLAREE PAR DEFAUT, donc toute campagne anterieure lit
+    exactement la rangee qu'elle a toujours lue. `208` en a besoin pour lire les rangees VOISINES du
+    treillis, et l'ajouter avec une valeur active par defaut aurait deplace en silence ce que `204`
+    et `207` publient.
     """
     url = f"{BUCKET}/{volume['cle']}"
     if meta is None:
@@ -389,7 +395,11 @@ def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
     _, hy, hx = meta["chunks"]
     _, rows, cols = meta["shape"]
     gy, gx = -(-rows // hy), -(-cols // hx)
-    ligne = la_ligne_declaree(gy)
+    ligne = (la_ligne_declaree(gy) if rangee_du_treillis is None
+             else int(rangee_du_treillis))
+    if not 0 <= ligne < gy:
+        return {"decidable": False,
+                "raison": f"la rangée {ligne} est hors du treillis de {gy} rangées"}
     voulues = list(range(gx if colonnes is None else min(int(colonnes), gx)))
     prendre = ouvrir or (lambda cy, cx: un_chunk(url, meta, cy, cx, delai, None,
                                                  pause=LA_PAUSE_ENTRE_ESSAIS))

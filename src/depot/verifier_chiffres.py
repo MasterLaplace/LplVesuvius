@@ -3194,6 +3194,186 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 209 : LA TRANSITION FIXE-T-ELLE L'ERREUR DE CHUNK ?
+    # (1) Une ERREUR DE LOCALISATION ne voyage JAMAIS sans l'erreur de chunk de `205` : c'est leur
+    # rapport, et lui seul, qui dit que la transition n'explique rien.
+    # (2) Ni la CORRELATION sans celle du melange : un |r| de 0,3 se lit contre 0,07 au nul.
+    # (3) Et l'echelle ne voyage jamais sans le BRUIT PORTE : une echelle balayee sans bruit
+    # mesurerait un instrument plus propre que celui qui lit le rouleau.
+    st = _source(racine, "la_transition_fixe_t_elle_lerreur_de_chunk.json")
+    if st.exists():
+        d = json.loads(st.read_text())
+
+        def _dec209(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        ect = d.get("lechelle_des_transitions") or {}
+        bot = d.get("les_bornes_de_179") or {}
+        cbt = d.get("la_courbe") or {}
+        ept = d.get("lepreuve") or {}
+        vet = d.get("le_verdict") or {}
+        ett = d.get("letalon") or {}
+        for srct, cle, nom, unites in (
+                (d, "les_decalages", "les décalages", ("décalages",)),
+                (bot, "lespacement_des_frontieres_en_couches", "l espacement des frontières",
+                 ("couches", "vx")),
+                (ept, "les_melanges_au_moins_aussi_forts", "les mélanges aussi forts", ("sur",)),
+                (ept, "tirages", "les tirages de l épreuve", ("**",)),
+                (ett, "replicats", "les réplicats de l étalon", ("des",)),
+                (ett, "les_vus", "les réplicats trouvés", ("des",)),
+                (ett, "les_replicats_du_refus", "les réplicats du refus", ("réplicats",)),
+                (ett, "les_faux", "les faux de l étalon", ("faux",))):
+            if srct.get(cle) is not None:
+                ajoute(f"{nom} de 209", int(srct[cle]), 0, st.name, unites=unites)
+        if cbt.get("les_barreaux") is not None:
+            ajoute("les barreaux de 209", len(cbt["les_barreaux"]), 0, st.name,
+                   unites=("sur", "barreaux"))
+            ajoute("les barreaux lisibles de 209", cbt.get("les_transitions_lisibles") or 0, 0,
+                   st.name, unites=("sur",))
+            muets = sum(int(x.get("les_decalages_muets") or 0) for x in cbt["les_barreaux"])
+            tous = sum(int(x.get("les_decalages") or d.get("les_decalages") or 0)
+                       for x in cbt["les_barreaux"])
+            ajoute("les décalages muets de 209", muets, 0, st.name, unites=("sur",))
+            ajoute("les décalages en tout de 209", tous, 0, st.name, unites=("**",))
+        for srct, cle, nom, unites in (
+                (ect, "la_transition_du_rouleau_en_voxels", "la transition du rouleau",
+                 ("voxels",)),
+                (ect, "le_plancher_en_voxels", "le plancher de l échelle", ("voxels",)),
+                (ect, "le_plafond_en_voxels", "le plafond de l échelle", ("voxels",)),
+                (bot, "le_voxel_en_um", "le voxel de 179", ("µm",)),
+                (bot, "le_plus_grand_bruit_tenu", "le bruit porté", ("**",)),
+                (ept, "la_correlation_absolue", "la corrélation absolue", ("**",)),
+                (ept, "la_correlation_absolue_mediane_du_nul", "la corrélation du nul", ("**",)),
+                (ept, "la_correlation_absolue_maximale_du_nul",
+                 "la corrélation maximale du nul", ("**",)),
+                (ept, "la_valeur_p", "la valeur p de l épreuve", ("**",)),
+                (vet, "lerreur_a_la_transition_du_rouleau_en_voxels",
+                 "l erreur à la transition du rouleau", ("voxel",)),
+                (vet, "lerreur_de_chunk_de_205_en_voxels", "l erreur de chunk de 205",
+                 ("voxels",)),
+                (vet, "le_rapport_a_lerreur_de_chunk", "le rapport à l erreur de chunk", ()),
+                (vet, "le_rapport_des_transitions", "le rapport des transitions", ("**",)),
+                (vet, "le_rapport_des_erreurs", "le rapport des erreurs", ("**",)),
+                (vet, "lerreur_croit_elle_aussi_vite", "l erreur croît aussi vite", ("**",)),
+                (ett, "la_pente_posee", "la pente posée", ("**",)),
+                (ett, "le_bruit_pose", "le bruit posé de l étalon", ("pour",)),
+                (ett, "le_rapport_median_sur_la_face_positive", "le rapport, face positive", ()),
+                (ett, "le_rapport_median_sur_la_face_negative", "le rapport, face négative", ()),
+                (ett, "le_taux_de_faux", "le taux de faux de l étalon", ("pour",)),
+                (ett, "la_garantie", "la garantie de l étalon", ("garantis",))):
+            if srct.get(cle) is not None:
+                ajoute(f"{nom} de 209", float(srct[cle]), _dec209(srct[cle]), st.name,
+                       unites=unites)
+
+    # ⭐⭐⭐⭐ LA TRANCHE 208 : UNE RANGEE VOISINE LIT-ELLE LE MEME PAS ?
+    # (1) Une DERIVE PARTAGEE ne voyage JAMAIS sans le BRUIT PROPRE de chaque rangee : c'est leur
+    # rapport qui dit ce que moyenner peut retirer, et la derive seule se lirait comme un accord.
+    # (2) Ni le DESACCORD sans les DEUX lectures posees d'avance : « 2,7138 » ne veut rien dire tant
+    # qu'on ignore que deux lectures d'une meme couture en donneraient 1,4552 et deux lectures de
+    # choses differentes 3,4771.
+    # (3) Et ce que la BOUCLE rapporte ne voyage jamais sans ce qu'une RANGEE SEULE donne : publier
+    # le gain sans son point de comparaison ferait lire un nombre pour une conclusion.
+    sv = _source(racine, "une_rangee_voisine_lit_elle_le_meme_pas.json")
+    if sv.exists():
+        d = json.loads(sv.read_text())
+
+        def _dec208(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        ecv = d.get("les_rangees_du_treillis") or {}
+        prv = d.get("la_prediction") or {}
+        vev = d.get("le_verdict") or {}
+        etv = d.get("letalon") or {}
+        bou = d.get("ce_que_la_boucle_rapporte") or {}
+        seu = d.get("ce_que_la_rangee_seule_donne") or {}
+        lignes = d.get("les_lignes") or {}
+        for srcv, cle, nom, unites in (
+                (d, "le_demi_pli_en_voxels", "le demi-pli", ("voxels", "de")),
+                (vev, "les_coutures_communes", "les coutures communes", ("coutures",)),
+                (bou, "les_coutures", "les coutures projetées", ("coutures",)),
+                (etv, "replicats", "les réplicats de l étalon", ("des",)),
+                (etv, "les_vus", "les réplicats trouvés", ("des",)),
+                (etv, "les_replicats_du_refus", "les réplicats du refus", ("réplicats",)),
+                (etv, "les_faux", "les faux de l étalon", ("faux",))):
+            if srcv.get(cle) is not None:
+                ajoute(f"{nom} de 208", int(srcv[cle]), 0, sv.name, unites=unites)
+        for r_ in (ecv.get("les_rangees") or []):
+            ajoute(f"la rangée {r_} de 208", int(r_), 0, sv.name, unites=("**", "et"))
+        for k, x in sorted(lignes.items()):
+            if x.get("colonnes_lues") is not None:
+                ajoute(f"les chunks lus de la rangée {k} de 208", int(x["colonnes_lues"]), 0,
+                       sv.name, unites=("**", "chunks"))
+            if x.get("colonnes_demandees") is not None:
+                ajoute("les colonnes demandées de 208", int(x["colonnes_demandees"]), 0,
+                       sv.name, unites=("colonnes",))
+            if x.get("les_rangees_lues") is not None:
+                ajoute("les rangées de coupe de 208", len(x["les_rangees_lues"]), 0, sv.name,
+                       unites=("rangées",))
+        for k, x in sorted((d.get("les_pas_par_rangee") or {}).items()):
+            ajoute(f"les pas de la rangée {k} de 208", int(x), 0, sv.name, unites=("**",))
+        for k, x in sorted((d.get("les_desaccords") or {}).items()):
+            if x.get("decidable"):
+                ajoute(f"les coutures communes de {k} de 208", int(x["les_coutures_communes"]),
+                       0, sv.name, unites=("**", "coutures"))
+        for srcv, cle, nom, unites in (
+                (prv, "lalea_de_204_en_voxels", "l aléa de 204", ("voxel",)),
+                (prv, "la_dispersion_de_204_en_voxels", "la dispersion de 204", ("voxels",)),
+                (prv, "si_elles_lisent_le_meme_pas_en_voxels", "si le même pas", ("voxels",)),
+                (prv, "si_elles_lisent_autre_chose_en_voxels", "si autre chose", ("voxels",)),
+                (prv, "le_rapport_des_deux_lectures", "le rapport des deux lectures", ()),
+                (vev, "lecart_type_observe_en_voxels", "le désaccord mesuré", ("voxels",)),
+                (vev, "le_rapport_a_la_lecture_meme_pas", "le rapport à même pas", ()),
+                (vev, "le_rapport_a_la_lecture_autre_chose", "le rapport à autre chose", ()),
+                (vev, "la_correlation_absolue", "la corrélation absolue", ("**",)),
+                (vev, "la_valeur_p", "la valeur p de l épreuve", ("pour",)),
+                (vev, "la_derive_partagee_en_voxels", "la dérive partagée", ("voxels",)),
+                (vev, "le_bruit_de_la_mediane_en_voxels", "le bruit de la médiane", ("voxels",)),
+                (vev, "le_bruit_de_la_voisine_en_voxels", "le bruit de la voisine", ("voxels",)),
+                (vev, "le_signal_sur_bruit_de_la_mediane", "le signal sur bruit", ("**",)),
+                (bou, "la_dispersion_de_204_en_voxels", "la dérive de la boucle", ("voxels",)),
+                (bou, "lecart_attendu_en_voxels", "l écart de la boucle", ("voxels",)),
+                (bou, "lecart_attendu_en_plis", "l écart de la boucle en plis", ("pli",)),
+                (seu, "lecart_attendu_en_voxels", "l écart d une rangée seule", ("voxels",)),
+                (seu, "lecart_attendu_en_plis", "l écart d une rangée seule en plis", ("**",)),
+                (etv, "la_derive_posee_en_voxels", "la dérive posée de l étalon", ("voxels",)),
+                (etv, "lalea_pose_en_voxels", "l aléa posé de l étalon", ("voxel",)),
+                (etv, "lecart_median_sur_la_face_positive_en_voxels",
+                 "l écart de la face positive", ("voxels",)),
+                (etv, "lecart_median_sur_la_face_negative_en_voxels",
+                 "l écart de la face négative", ("voxels",)),
+                (etv, "le_taux_de_faux", "le taux de faux de l étalon", ("pour",)),
+                (etv, "la_garantie", "la garantie de l étalon", ("garantis",))):
+            if srcv.get(cle) is not None:
+                ajoute(f"{nom} de 208", float(srcv[cle]), _dec208(srcv[cle]), sv.name,
+                       unites=unites)
+        for k, x in sorted((d.get("les_partages") or {}).items()):
+            if not x.get("decidable"):
+                continue
+            for cle, nom in (("la_derive_partagee_en_voxels", "la dérive partagée"),
+                             ("le_bruit_de_la_premiere_en_voxels", "le bruit de la médiane"),
+                             ("le_bruit_de_la_seconde_en_voxels", "le bruit de la voisine"),
+                             ("le_signal_sur_bruit_de_la_premiere", "le signal sur bruit")):
+                if x.get(cle) is not None:
+                    ajoute(f"{nom} contre {k} de 208", float(x[cle]), _dec208(x[cle]), sv.name,
+                           unites=("voxels", "**"))
+        for k, x in sorted((d.get("les_epreuves") or {}).items()):
+            if not x.get("decidable"):
+                continue
+            for cle, nom in (("la_correlation_absolue", "la corrélation contre"),
+                             ("la_correlation_absolue_mediane_du_nul", "le nul contre")):
+                ajoute(f"{nom} {k} de 208", float(x[cle]), _dec208(x[cle]), sv.name,
+                       unites=("**",))
+            ajoute(f"les mélanges aussi forts contre {k} de 208",
+                   int(x["les_melanges_au_moins_aussi_forts"]), 0, sv.name, unites=("sur",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 207 : LE CUMUL RECALE TRAVERSE-T-IL SON TRONCON ?
     # (1) Une EXCURSION ne voyage JAMAIS sans le DEMI-PLI : elle ne veut rien dire toute seule, et
     # c'est le demi-pli, pas un seuil choisi, qui dit ce qu'elle coute.
