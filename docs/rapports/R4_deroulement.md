@@ -3158,6 +3158,39 @@ les **14,9372** et **15,7743** mesurés — et la prédiction se pose encore ava
 `179` porte l'échelle entière des transitions. ⚠⚠ Le piège est écrit d'avance : cette échelle a été
 balayée **sans bruit**, et le rouleau en porte.
 
+**`207` · 2026-09-21 · le cumul recalé traverse-t-il son tronçon ?**
+⭐⭐⭐⭐ **Cette tranche ne vient d'aucune porte nouvelle, et c'est délibéré.** `201`, `203`, `205` et
+`206` ont fermé quatre voies autour du CREUX ; le seul résultat positif de la chaîne est `204`, et il
+n'avait jamais été mis à l'épreuve de ce qu'on lui demande. La question qui sert l'objectif est donc
+celle-ci : le cumul des pas que `204` rend mesurables traverse-t-il sans quitter le feuillet ?
+⭐ **La prédiction est posée avant la mesure et n'a qu'une pièce** — `R4-F316` : **2,4587 voxels** de
+dispersion sur **105 coutures** annoncent **25,1942 voxels**, et le demi-feuillet vaut **36 voxels**.
+★ **ELLE TRAVERSE** — `R4-F314` : excursion **28,0625 voxels** = **0,389306 pli** = **0,7795**
+demi-feuillet, pour un attendu de **25,1942** — un rapport de **1,1138**. Là où `199` lisait
+**1,304046 pli** sur la même rangée, un rapport de **0,2985**. ⭐ C'est l'AMPLITUDE qui coûte un
+feuillet, pas le point d'arrivée.
+★ **Et les pas se compensent davantage qu'avant** — `R4-F315` : déplacement net **9,9375 voxels**
+contre **19,8125** au nul par tirage de signes, **13 sur 19**, soit **0,4118** marche au hasard —
+contre **1,0032** pour `199`. ⭐ L'épreuve est celle de `199`, **reprise et non réinventée**, ce qui
+est exactement ce qui rend les deux réponses comparables.
+⚠⚠⚠ **Mais le tronçon n'est pas la rangée** — `R4-F317` : le filtre du producteur écarte des chunks
+et chacun **coupe** la ligne, donc **7 tronçons** et le plus long de **106 chunks** sur **251** lus.
+À **244 coutures**, la même prédiction annonce **38,4061 voxels** = **0,532802 pli**, au-dessus du
+demi-feuillet.
+⭐⭐⭐⭐ **ET LA MATIÈRE POSE UN PLAFOND** — `R4-F318`. Avec la dérive seule — **2,233 voxels**, ce
+que `204` attribue à la surface et non au lecteur — un lecteur **parfait** donnerait **34,8806
+voxels** = **0,483892 pli**. Mieux lire ne fait donc gagner que de **38,4061** à **34,8806**, et pas
+davantage : une rangée se traverse de justesse, et ce qui est plus long qu'une rangée ne se traverse
+pas, quel que soit l'instrument.
+⚠⚠ **L'étalon a refusé ma première épreuve déclarée** — l'excursion contre ses propres pas remis
+dans un autre ordre — parce que cette statistique-là ne voit une corrélation forte que dans dix
+réplicats sur douze : l'excursion d'une seule réalisation est très variable. ⚠ Et son biais n'est pas
+choisi : c'est celui que l'étalon de `199` avait posé, **2 voxels**, relu chez son producteur.
+⚠⚠⚠ **AUCUNE PORTE NOUVELLE.** Ce que cette tranche établit est un plafond, et la question qu'il
+pose — une référence absolue au-delà d'une rangée — est celle que `R4-P49` posait déjà et que `201`,
+`205` et `206` ont fermée pour le creux. En rouvrir une variante ne ferait que redire ce qui est
+écrit.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

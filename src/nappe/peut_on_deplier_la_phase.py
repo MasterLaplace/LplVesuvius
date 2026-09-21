@@ -260,7 +260,11 @@ def ce_que_la_marche_a_rendu(chemin: Path = CE_QUE_LA_MARCHE_A_RENDU) -> dict:
                     for t in m.get("les_troncons") or [])
     demi = float(DEMI_PAS_EN_VOXELS)
     q = float(m.get("le_pas_quadratique_en_voxels") or 0.0)
+    # ⚠⚠ LE BIAIS DE L'ETALON DE `199` EST RENDU PAR CE LECTEUR-CI ET PAR AUCUN AUTRE : `207`
+    # reprend l'epreuve de `199` et doit donc reprendre le biais que son etalon avait pose, plutot
+    # que d'en choisir un. Un second lecteur du meme fichier finirait par ne plus s'accorder.
     return {"decidable": True, "les_pas": int(m.get("les_pas") or pas.size),
+            "le_biais_de_letalon_en_voxels": (d.get("letalon") or {}).get("le_biais_quil_faut"),
             "la_rangee": (d.get("la_ligne") or {}).get("la_rangee"),
             "le_pas_quadratique_en_voxels": m.get("le_pas_quadratique_en_voxels"),
             "le_pas_maximal_en_voxels": round(float(pas.max()), 4),

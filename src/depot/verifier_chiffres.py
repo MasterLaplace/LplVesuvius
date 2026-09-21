@@ -3194,6 +3194,94 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 207 : LE CUMUL RECALE TRAVERSE-T-IL SON TRONCON ?
+    # (1) Une EXCURSION ne voyage JAMAIS sans le DEMI-PLI : elle ne veut rien dire toute seule, et
+    # c'est le demi-pli, pas un seuil choisi, qui dit ce qu'elle coute.
+    # (2) Ni sans le COMPTE DE COUTURES qui l'a produite : « 28,0625 » sur cent cinq coutures et sur
+    # deux cent quarante-quatre ne sont pas le meme resultat.
+    # (3) La prediction sur le TRONCON ne voyage jamais sans celle sur la RANGEE : le troncon n'est
+    # pas la rangee, et publier la premiere seule ferait lire le verdict comme portant sur la ligne.
+    # (4) Et le PLANCHER ne voyage jamais sans la derive de `204` dont il sort : c'est ce qui en
+    # fait une borne d'instrument et non une esperance.
+    sc = _source(racine, "le_cumul_recale_traverse_t_il_la_rangee.json")
+    if sc.exists():
+        d = json.loads(sc.read_text())
+
+        def _dec207(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        lgc = d.get("la_ligne") or {}
+        prc = d.get("la_prediction") or {}
+        prr = d.get("la_prediction_a_la_rangee") or {}
+        prm = d.get("la_prediction_au_meilleur_lecteur") or {}
+        exc = d.get("lexcursion") or {}
+        epc = d.get("lepreuve") or {}
+        vec = d.get("le_verdict") or {}
+        etc = d.get("letalon") or {}
+        tron = d.get("le_plus_long_troncon") or []
+        for srcc, cle, nom, unites in (
+                (lgc, "colonnes_demandees", "les colonnes demandées", ("colonnes",)),
+                (lgc, "colonnes_lues", "les colonnes lues", ("colonnes",)),
+                (lgc, "la_rangee", "la rangée déclarée", ("rangée",)),
+                (d, "le_demi_pli_en_voxels", "le demi-pli", ("voxels",)),
+                (d, "les_pas_du_cumul", "les pas du cumul", ("**",)),
+                (d, "les_coutures_de_tous_les_troncons", "les coutures de tous les tronçons",
+                 ("**",)),
+                (prc, "les_coutures", "les coutures du tronçon", ("**",)),
+                (prr, "les_coutures", "les coutures de la rangée", ("coutures",)),
+                (epc, "les_tirages_au_moins_aussi_loin", "les tirages aussi loin", ("sur",)),
+                (epc, "tirages", "les tirages de l épreuve", ("**",)),
+                (etc, "replicats", "les réplicats de l étalon", ("des",)),
+                (etc, "les_vus", "les réplicats trouvés", ("des",)),
+                (etc, "les_replicats_du_refus", "les réplicats du refus", ("réplicats",)),
+                (etc, "les_faux", "les faux de l étalon", ("faux",))):
+            if srcc.get(cle) is not None:
+                ajoute(f"{nom} de 207", int(srcc[cle]), 0, sc.name, unites=unites)
+        if len(tron) == 3:
+            for i, nom in ((0, "le début du tronçon"), (1, "la fin du tronçon"),
+                           (2, "la longueur du tronçon")):
+                ajoute(f"{nom} de 207", int(tron[i]), 0, sc.name, unites=("**", "chunks", "à"))
+        if d.get("les_troncons") is not None:
+            ajoute("les tronçons de 207", len(d["les_troncons"]), 0, sc.name,
+                   unites=("**", "tronçons"))
+        if lgc.get("les_rangees_lues") is not None:
+            ajoute("les rangées de coupe de 207", len(lgc["les_rangees_lues"]), 0, sc.name,
+                   unites=("rangées",))
+        for srcc, cle, nom, unites in (
+                (prc, "la_dispersion_de_204_en_voxels", "la dispersion de 204", ("voxels",)),
+                (prc, "lecart_attendu_en_voxels", "l écart attendu sur le tronçon", ("voxels",)),
+                (prc, "lecart_attendu_en_plis", "l écart attendu du tronçon en plis", ("pli",)),
+                (prr, "lecart_attendu_en_voxels", "l écart attendu sur la rangée", ("voxels",)),
+                (prr, "lecart_attendu_en_plis", "l écart attendu de la rangée en plis", ("**",)),
+                (prm, "la_dispersion_de_204_en_voxels", "la dérive de 204", ("voxels",)),
+                (prm, "lecart_attendu_en_voxels", "le plancher en voxels", ("voxels",)),
+                (prm, "lecart_attendu_en_plis", "le plancher en plis", ("**",)),
+                (exc, "lexcursion_en_voxels", "l excursion", ("voxels",)),
+                (exc, "lexcursion_en_plis", "l excursion en plis", ("**",)),
+                (exc, "le_plus_loin_en_voxels", "le plus loin du départ", ("voxels",)),
+                (exc, "le_deplacement_net_en_voxels", "le déplacement net", ("voxels",)),
+                (vec, "lexcursion_en_demi_plis", "l excursion en demi-plis", ("**",)),
+                (vec, "le_rapport_observe_sur_attendu", "le rapport observé sur attendu", ()),
+                (vec, "lexcursion_de_199_en_plis", "l excursion de 199", ("pli",)),
+                (vec, "le_rapport_a_199", "le rapport à 199", ()),
+                (epc, "le_deplacement_net_en_voxels", "le net de l épreuve", ("voxels",)),
+                (epc, "le_deplacement_du_nul_median_en_voxels", "le nul médian", ("voxels",)),
+                (epc, "combien_de_marches_au_hasard", "les marches au hasard", ("**",)),
+                (etc, "le_biais_pose_en_voxels", "le biais posé de l étalon", ("voxels",)),
+                (etc, "le_net_median_sur_la_face_positive_en_voxels",
+                 "le net de la face positive", ("voxels",)),
+                (etc, "le_net_median_sur_la_face_negative_en_voxels",
+                 "le net de la face négative", ("voxels",)),
+                (etc, "le_taux_de_faux", "le taux de faux de l étalon", ("pour",)),
+                (etc, "la_garantie", "la garantie de l étalon", ("garantis",))):
+            if srcc.get(cle) is not None:
+                ajoute(f"{nom} de 207", float(srcc[cle]), _dec207(srcc[cle]), sc.name,
+                       unites=unites)
+
     # ⭐⭐⭐⭐ LA TRANCHE 206 : LE CREUX CHANGE-T-IL AVEC LA PROFONDEUR LUE ?
     # (1) Une ERREUR COMMUNE ne voyage JAMAIS sans le COMPTE DE CHUNKS LISIBLES a la meme
     # profondeur : raccourcir la fenetre change le filtre du producteur, donc une erreur qui baisse
