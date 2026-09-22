@@ -3644,6 +3644,29 @@ matière dont on connaît la réponse, à la dépendance que le consensus montre
 est le consensus des voisines à chaque couture.** `R4-P67` s'ouvre : d'une rangée à la suivante, c'est-
 à-dire la surface — une lecture neuve, avec une fermeture de boucle pour contrôle gratuit.
 
+**`222` · 2026-09-23 · les boucles se ferment-elles**
+
+⭐⭐ **Une lecture neuve** : les cinq rangées de `219`, relues par le même lecteur avec, en plus, les
+bords haut et bas de chaque chunk. Les pas horizontaux relus retombent exactement sur ceux de `219`
+(écart **0**) ; **1000** pas verticaux, **973** boucles complètes.
+⭐⭐ **Autour de quatre chunks, les boucles se ferment mieux que le hasard, et de peu** — `R4-F381` :
+rapport de fermeture **0,928** contre **0,9978** pour la médiane du nul, qui décale la moitié verticale
+des boucles contre leur moitié horizontale ; valeur P **0,0331**.
+⭐⭐⭐ **Mais le pas vertical n'explique qu'une petite part du désaccord** — `R4-F382` : **0,1332** de
+son excès sur le bruit de lecture. Le désaccord que `211` et `220` lisaient comme une erreur l'est en
+grande partie.
+⭐⭐⭐ **Et aux colonnes fortes de `219`, les boucles confirment l'erreur désignée** — `R4-F384` : à
+**10** colonnes sur **14**, elles s'ouvrent du signe qu'une erreur de la rangée désignée prédit ; **3**
+se ferment, dont la **103** que `220` laissait ouverte.
+⭐⭐⭐⭐ **Le pas commun du consensus est la surface la plus cohérente avec le transfert d'une rangée à la
+suivante** — `R4-F383` : sa séparation reste sous le demi-feuillet sur les quatre rangées de boucles
+(au plus **22,1875** voxels), quand chaque rangée avec son propre pas atteint **38,75** sans le pas
+vertical et **42,8125** avec.
+⚠⚠⚠ Une boucle est aveugle à ce qu'un chunk entier porte, et elle ne dit pas qu'un pas soit juste.
+⭐⭐⭐⭐ **Donc `R4-P67` est répondue : le consensus reste dans le feuillet du transfert d'une rangée à la
+suivante, sur tout ce qui a été lu.** `R4-P68` s'ouvre : la hauteur — le consensus des colonnes voisines
+traverse-t-il les **396** rangées du segment sans quitter le feuillet ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

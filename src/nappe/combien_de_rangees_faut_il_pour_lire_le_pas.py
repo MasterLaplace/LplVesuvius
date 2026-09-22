@@ -374,7 +374,7 @@ def sur_letalon(rangees, graine: int = GRAINE, coutures: int = 60, couches: int 
 
 def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
              ouvrir=None, meta=None, combien: int = LES_RANGEES,
-             rangee_du_treillis: int | None = None) -> dict:
+             rangee_du_treillis: int | None = None, les_bords_verticaux: bool = False) -> dict:
     """Les profils de bord de chaque chunk, sur `combien` rangées — la MÊME rangée que `199`–`203`.
 
     ⭐ SEULS LES PROFILS DE BORD SONT GARDES : `un_pas` ne regarde que les `w` colonnes du bord, et
@@ -385,6 +385,11 @@ def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
     exactement la rangee qu'elle a toujours lue. `208` en a besoin pour lire les rangees VOISINES du
     treillis, et l'ajouter avec une valeur active par defaut aurait deplace en silence ce que `204`
     et `207` publient.
+
+    ⚠⚠ `les_bords_verticaux` VAUT FAUX PAR DÉFAUT, pour la même raison. `222` en a besoin pour lire les
+    coutures ENTRE deux rangées de chunks : les bords HAUT et BAS de chaque chunk, coupés dans l'autre
+    sens (couche, rangée) à `combien` colonnes réparties comme les rangées, avec la MÊME largeur de
+    bande. Le même chunk, la même bande, le même filtre : seul le sens de la coupe change.
     """
     url = f"{BUCKET}/{volume['cle']}"
     if meta is None:
@@ -405,6 +410,7 @@ def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
                                                  pause=LA_PAUSE_ENTRE_ESSAIS))
     w = int(la_largeur_du_bord())
     droits, gauches, refus, reprises = {}, {}, {}, 0
+    bas, hauts, colonnes_de_coupe = {}, {}, None
     rangees = None
     for cx in voulues:
         bloc, pourquoi = prendre(int(ligne), int(cx))
@@ -431,7 +437,19 @@ def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
             dr[int(r_)] = np.asarray(sec[:, -ww:].mean(axis=1), dtype=float)
             ga[int(r_)] = np.asarray(sec[:, :ww].mean(axis=1), dtype=float)
         droits[int(cx)], gauches[int(cx)] = dr, ga
-    return {"decidable": bool(droits), "segment": volume["segment"],
+        if les_bords_verticaux:
+            if colonnes_de_coupe is None:
+                colonnes_de_coupe = les_rangees_a_lire(b.shape[2], combien)
+            bs, ha = {}, {}
+            for c_ in colonnes_de_coupe:
+                sec = np.asarray(b[:, :, int(c_)], dtype=float)
+                ww = max(1, min(w, sec.shape[1]))
+                bs[int(c_)] = np.asarray(sec[:, -ww:].mean(axis=1), dtype=float)
+                ha[int(c_)] = np.asarray(sec[:, :ww].mean(axis=1), dtype=float)
+            bas[int(cx)], hauts[int(cx)] = bs, ha
+    verticaux = ({"bas": bas, "hauts": hauts, "les_colonnes_de_coupe": (colonnes_de_coupe or [])}
+                 if les_bords_verticaux else {})
+    return {**verticaux, "decidable": bool(droits), "segment": volume["segment"],
             "grille_de_chunks": [int(gy), int(gx)], "la_rangee": int(ligne),
             "le_cote_du_chunk": int(hx), "la_largeur_du_bord": w,
             "les_rangees_lues": (rangees or []),

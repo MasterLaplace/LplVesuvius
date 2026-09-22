@@ -301,6 +301,20 @@ _SOURCES: list[tuple[str, bool]] = []
 serait une seconde description de ce que ce fichier lit, libre de diverger de la première."""
 
 
+def _fr222(x) -> str:
+    """Un nombre à la française, avec les décimales du producteur et aucune de plus."""
+    f = float(x)
+    if f == int(f):
+        return str(int(f))
+    return repr(f).replace(".", ",")
+
+
+def _nombre222(n: int) -> str:
+    """Un petit entier en toutes lettres, comme la prose de `222` l'écrit."""
+    mots = {1: "une", 3: "trois", 10: "dix", 14: "quatorze"}
+    return mots.get(int(n), str(n))
+
+
 def _source(racine: Path, nom: str) -> Path:
     """Le chemin d'une mesure, ENREGISTRÉ au passage.
 
@@ -3193,6 +3207,91 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             if v_.get(cle) is not None:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
+
+    # ⭐⭐⭐⭐ LA TRANCHE 222 : LES BOUCLES SE FERMENT-ELLES ?
+    # (1) ⚠⚠⚠ LE RAPPORT DE FERMETURE NE VOYAGE JAMAIS SANS LA MEDIANE DE SON NUL NI SANS LA PART
+    # EXPLIQUEE : une valeur P seule gonflerait une fermeture qui n'explique qu'une petite part.
+    # (2) ⚠⚠ LES TROIS SEPARATIONS D'UNE RANGEE DE BOUCLES VOYAGENT ENSEMBLE : c'est leur ordre qui
+    # dit quelle surface est la plus coherente.
+    s222 = _source(racine, "les_boucles_se_ferment_elles.json")
+    if s222.exists():
+        d = json.loads(s222.read_text())
+
+        def _dec222(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        lec222 = d.get("la_lecture") or {}
+        if lec222:
+            out.append(("les pas lus de 222",
+                        [f"| pas horizontaux | **{lec222['combien_de_pas_horizontaux']}** |",
+                         f"| pas verticaux | **{lec222['combien_de_pas_verticaux']}** ("], s222.name))
+            par = lec222.get("les_pas_verticaux_par_rangee_de_boucles") or {}
+            out.append(("les pas verticaux par rangée de boucles de 222",
+                        [", ".join(f"**{par[k]}**" for k in sorted(par)) + " par rangée de boucles"],
+                        s222.name))
+            for k_, lib in (("la_dispersion_des_pas_horizontaux", "la dispersion horizontale"),
+                            ("la_dispersion_des_pas_verticaux", "la dispersion verticale")):
+                ajoute(f"{lib} de 222", float(lec222[k_]), _dec222(lec222[k_]), s222.name,
+                       unites=("vx", "**"))
+        ep222 = d.get("lepreuve") or {}
+        if ep222.get("decidable"):
+            out.append(("les boucles et le nul de 222",
+                        [f"| boucles complètes | **{ep222['combien_de_boucles']}** |",
+                         f"**{ep222['decalages_au_moins_aussi_fermes']}** sur "
+                         f"**{ep222['combien_de_decalages']}**",
+                         f"au moins **{ep222['le_plus_petit_decalage']}** coutures dans chaque sens, "
+                         f"soit **{ep222['combien_de_decalages']}**"], s222.name))
+            for k_, lib in (("le_rapport_de_fermeture", "le rapport de fermeture"),
+                            ("le_rapport_median_du_nul", "la médiane du nul"),
+                            ("le_plus_petit_rapport_du_nul", "le plus petit du nul"),
+                            ("la_valeur_p", "la valeur P")):
+                ajoute(f"{lib} de 222", float(ep222[k_]), _dec222(ep222[k_]), s222.name,
+                       unites=("**",))
+        pl222 = d.get("le_plancher") or {}
+        if pl222.get("decidable"):
+            for k_ in ("la_variance_de_A", "la_variance_de_B", "la_variance_de_L", "le_plancher_de_A",
+                       "le_plancher_de_B", "le_plancher_de_L", "lexces_de_A_sur_son_plancher",
+                       "la_part_geometrique", "la_part_expliquee_de_lexces"):
+                ajoute(f"{k_.replace('_', ' ')} de 222", float(pl222[k_]), _dec222(pl222[k_]),
+                       s222.name, unites=("vx²", "**"))
+        et222 = d.get("letalon") or {}
+        if et222.get("replicats"):
+            for k_, lib in (("le_bruit_horizontal_en_voxels", "le bruit d un pas horizontal"),
+                            ("le_bruit_vertical_en_voxels", "le bruit d un pas vertical"),
+                            ("le_taux_de_faux", "le taux de faux de l étalon")):
+                ajoute(f"{lib} de 222", float(et222[k_]), _dec222(et222[k_]), s222.name,
+                       unites=("vx", "**"))
+            out.append(("les matières de l étalon de 222",
+                        [f"sur **{et222['replicats']}** matières dont on connaît la"], s222.name))
+        for r_, x_ in sorted((d.get("les_trois_surfaces") or {}).items()):
+            if not x_.get("decidable"):
+                continue
+            a_, b_ = x_["le_troncon"]
+            out.append((f"les trois surfaces de {r_} dans 222",
+                        [f"| {a_}–{b_} | **{_fr222(x_['la_separation_sigma_A'])}** | "
+                         f"**{_fr222(x_['la_separation_sigma_B'])}** | "
+                         f"**{_fr222(x_['la_separation_sigma_A_plus_B'])}** |"], s222.name))
+        fo222 = d.get("le_detail_aux_colonnes_fortes") or {}
+        if fo222.get("les_colonnes"):
+            out.append(("les formes aux colonnes fortes de 222",
+                        [f"À {_nombre222(fo222['combien_ont_la_forme_dune_erreur'])} colonnes sur "
+                         f"{_nombre222(len(fo222['les_colonnes']))}",
+                         f"**{fo222['combien_ont_la_forme_dune_erreur']}** colonnes fortes sur "
+                         f"**{len(fo222['les_colonnes'])}**"], s222.name))
+            for x_ in fo222["les_colonnes"]:
+                out.append((f"la colonne forte {x_['la_colonne']} de 222",
+                            [f"| {x_['la_colonne']} | `{x_['la_rangee']}` | "
+                             f"{_fr222(x_['lecart_a_la_mediane'])} |"], s222.name))
+        q222 = d.get("les_boucles_qui_sautent") or {}
+        if q222:
+            out.append(("les boucles qui sautent de 222",
+                        [f"Aucune des **{q222['combien_de_boucles']}** boucles ne saute un feuillet"]
+                        if q222.get("combien_sautent") == 0 else
+                        [f"**{q222['combien_sautent']}** boucles"], s222.name))
 
     # ⭐⭐⭐⭐ LA TRANCHE 221 : LE CONSENSUS TRAVERSE-T-IL LA RANGEE ?
     # (1) ⚠⚠⚠ LA DISTANCE DU CONSENSUS NE VOYAGE JAMAIS SANS CELLE DE LA RANGEE SEULE APPARIEE : c'est
