@@ -3475,11 +3475,17 @@ le pire résidu passe de **3,6279** à **2,4281** sur
 **2,7162**, **4**/**19** au moins aussi
 forts). ⚠⚠ La remise à l'échelle est circulaire si on ne la paie pas des deux côtés ; le nul subit
 EXACTEMENT le même traitement, et un bris qui l'en prive fait rougir la batterie.
-⚠⚠⚠ **La normalité est réfutée par des nombres que `214` publiait déjà** — `R4-F359` : le pire
-désaccord d'une paire vaut **11,495** écarts-types en médiane, jusqu'à
-**26,4595**, contre **3,9144** pour la pire de
-**19** gaussiennes de **239** tirages. Un excès
-d'aplatissement de **2,465** suffirait à tout expliquer sans aucune dépendance.
+⚠⚠⚠⚠ **Ce document a publié ICI un contrôle FAUX, corrigé par `217` et par un nouveau fait
+`R4-F366`.** La première version divisait le désaccord **cumulé** le plus grand de `214` par
+l'écart-type **par couture** et comparait le quotient au maximum d'un **échantillon** gaussien, soit
+environ **3,0751** — alors qu'un cumul se compare au maximum d'une **marche**, qui atteint
+**13,382**. Le repère appartenait à une autre quantité et le contrôle concluait à l'envers : les
+valeurs observées, médiane **11,495**, sont en dessous de ce qu'une marche gaussienne produit. Le
+contrôle est devenu un contrôle d'**excursion** et il répond à la question que ce nombre peut
+trancher : **l'excursion ne dépasse PAS une marche aléatoire**. ⭐ Un excès d'aplatissement de
+**2,465** suffirait à expliquer le dépassement, et c'est `217` qui le mesure — sur la série **par
+couture**, le seul objet dont le maximum se compare à celui d'un échantillon. Le résultat principal
+de la tranche ne dépendait pas de ce contrôle et est intact.
 ★★★★ **Une épreuve de budget ne peut PAS distinguer les deux mondes, et c'est mesuré** — `R4-F360` :
 sur deux matières de MÊME budget, le budget voit l'étalée **12/12** et la concentrée
 **11/12** au facteur **1,5** ; c'est la FORME qui
@@ -3535,11 +3541,16 @@ déclarée, dont elle est le cas `κ = 0`, et ne demande que l'aplatissement de 
 les trois paires il vaut **1,8685**, **2,1373** et
 **2,1815** fois l'erreur déclarée.
 ⭐⭐⭐⭐ **Donc `R4-P62` est répondue : c'est la normalité qui est fausse, pas l'indépendance.** Et
-`R4-P63` s'ouvre, la plus proche du graal de toute la chaîne : **d'où vient un désaccord de couture à
-vingt-six écarts-types ?** Un tel événement n'est pas une fluctuation. Si ce sont des SAUTS — un
-recalage qui manque une couture — alors ils ne sont pas du bruit du tout : ils sont le transfert de
-spire à spire que le graal doit corriger sans humain, ils sont LOCALISÉS, et les compter comme du
-bruit est exactement ce qui rend toute borne trop optimiste.
+`R4-P63` s'ouvre, la plus proche du graal de toute la chaîne : **d'où vient un écart de couture à
+cinq écarts-types ?** Le pire vaut **5,2539** là où le pire de dix-neuf échantillons gaussiens
+atteint **3,4904**, et **0** tirage sur **19** y arrive.
+Un écart pareil n'est pas une fluctuation gaussienne. Si ce sont des SAUTS — un recalage qui manque
+une couture — alors ils ne sont pas du bruit du tout : ils sont le transfert de spire à spire que le
+graal doit corriger sans humain, ils sont LOCALISÉS, et les compter comme du bruit est exactement ce
+qui rend toute borne trop optimiste. ⭐ Et `217` a établi en passant que la mesure ne demande
+**aucune lecture neuve** : `211` publie `les_colonnes_du_troncon` à côté de ses écarts, et les trois
+tronçons se recouvrent. ⚠⚠⚠ Mais le piège est structurel — les trois désaccords **télescopent**,
+donc « les extrêmes coïncident » est une identité arithmétique et non une observation.
 
 ## 4. Le tableau des statuts
 

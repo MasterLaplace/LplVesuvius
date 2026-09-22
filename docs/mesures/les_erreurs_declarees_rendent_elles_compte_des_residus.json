@@ -136,17 +136,20 @@
     "cest_un_plancher_pas_une_estimation": true,
     "elle_ne_vaut_que_si_lexces_est_etale_ET_que_les_queues_ny_sont_pour_rien": true
   },
-  "le_controle_des_queues": {
+  "le_controle_de_lexcursion": {
     "decidable": true,
     "combien_de_paires": 36,
     "les_coutures_de_reference": 239,
+    "tirages": 19,
     "le_rapport_le_plus_petit": 3.2476,
     "le_rapport_median": 11.495,
     "le_rapport_le_plus_grand": 26.4595,
-    "la_reference_gaussienne_mediane": 3.0751,
-    "la_reference_gaussienne_la_plus_forte": 3.9144,
+    "la_marche_gaussienne_mediane": 13.382,
+    "la_marche_gaussienne_la_plus_forte": 40.748,
+    "les_tirages_au_moins_aussi_forts": 16,
     "lexces_daplatissement_qui_suffirait": 2.465,
-    "la_normalite_est_refusee": true
+    "lexcursion_depasse_une_marche_aleatoire": false,
+    "ce_controle_ne_decide_pas_de_la_normalite": true
   },
   "letalon": {
     "decidable": true,
@@ -227,9 +230,9 @@
     "lattendu_exact_differe_du_khi_deux_naif": true,
     "le_modele_reste_non_refute_par_une_variance_negative": true,
     "letalon_separe": true,
-    "la_normalite_est_refusee": true,
+    "lexcursion_depasse_une_marche_aleatoire": false,
     "lexces_daplatissement_qui_suffirait": 2.465,
     "ce_qui_reste_a_mesurer": "LES ERREURS DÉCLARÉES SONT SOUS-ESTIMÉES, DONC LA RÉFUTATION DE `214` EST UN ARTEFACT DE SA FORMULE D'ERREUR",
-    "pourquoi": "le rapport vaut 2.2325, donc l'erreur déclarée est sous-estimée d'un facteur 1.4942 ; une fois le budget remis à l'échelle la forme redevient celle du modèle (4/19 au moins aussi forts), et la normalité que cette formule suppose est réfutée par les maxima que `214` publie (rapport médian 11.495 écarts-types contre 3.9144 pour la pire gaussienne)"
+    "pourquoi": "le rapport vaut 2.2325, donc l'erreur déclarée est sous-estimée d'un facteur 1.4942 ; une fois le budget remis à l'échelle la forme redevient celle du modèle (4/19 au moins aussi forts), laquelle des deux hypothèses est fausse demande la série par couture, que `217` lit"
   }
 }

@@ -2,6 +2,13 @@
 
 *Un résidu « en erreurs » est un rapport, et toute la chaîne n'avait interrogé que le numérateur.*
 
+> ⚠⚠⚠⚠ **CORRIGÉ PAR LUI-MÊME, AU §5.** Le contrôle des queues publié dans la première version de ce
+> document comparait un désaccord **cumulé** au repère d'un **échantillon**, et concluait donc à
+> l'envers. Il est remplacé par un contrôle d'**excursion**, qui pose la question que ce nombre peut
+> réellement trancher. ⭐ Le résultat principal de la tranche — $\Lambda =$ **2,2325**, l'excès
+> **étalé**, la réfutation de `214` ramenée à un artefact — ne dépendait pas de ce contrôle et est
+> intact. C'est `217` qui établit, sur la série par couture, que ce sont bien les **queues**.
+
 ![Les erreurs déclarées rendent-elles compte des résidus](../images/216_les_erreurs_declarees_rendent_elles_compte_des_residus.png)
 
 ## 0. Pourquoi cette tranche
@@ -108,36 +115,47 @@ eux-mêmes. Le nul subit **exactement** le même traitement — son propre $\Lam
 chacun de ses tirages et sa forme rapetissée de la même façon — donc le biais est identique des deux
 côtés. Un bris qui retire la remise à l'échelle du seul nul fait rougir la batterie.
 
-## 5. ⭐⭐⭐⭐ Les queues, et `214` les avait déjà publiées
+## 5. ⚠⚠⚠⚠ L'excursion, et la correction d'une faute de ce document
 
-La formule a **deux** hypothèses, et la seconde se vérifie sans rien mesurer de neuf.
+> **CE DOCUMENT A PUBLIÉ ICI UN CONTRÔLE FAUX, ET IL EST CORRIGÉ PLUTÔT QUE RETIRÉ.** La première
+> version divisait `le_desaccord_le_plus_grand_en_voxels` de `214` par le désaccord **par couture**
+> et lisait le quotient comme « combien d'écarts-types le pire **échantillon** atteint », puis le
+> comparait au maximum d'un **échantillon** gaussien, soit environ **3**. Or ce numérateur est
+> `max|d|` sur le désaccord **CUMULÉ** — sur la marche, pas sur ses pas. Le bon repère est donc
+> celui d'une **marche aléatoire**. Le nombre était juste ; son repère appartenait à une autre
+> quantité, ce que `R4-L19` désigne comme pire qu'un nombre absent, et **le contrôle concluait à
+> l'envers**.
+
+La formule a **deux** hypothèses, et la seconde ne se vérifie pas sur un cumul.
 
 En général, la variance d'une variance échantillonnale vaut $(\kappa+2)\sigma^4/n$, où $\kappa$ est
 l'excès d'aplatissement ; la formule déclarée est le cas $\kappa = 0$. Un excès d'aplatissement de
 $2\Lambda - 2 =$ **2,465** suffirait donc à expliquer **tout** le dépassement, **sans qu'aucune
-couture ne soit corrélée**.
+couture ne soit corrélée**. ⭐ Ce nombre-là est exact, il ne dépend que de $\Lambda$, et c'est `217`
+qui le confronte à une mesure — sur la série **par couture**, le seul objet dont le maximum se
+compare à celui d'un échantillon.
 
-⚠⚠ **Et la preuve était déjà dans le JSON de `214`, publiée et jamais lue ainsi** : chaque paire y
-porte son **désaccord le plus grand** à côté de son désaccord par couture. Le rapport des deux dit
-combien d'écarts-types le pire échantillon atteint.
+Ce que le contrôle corrigé mesure est une autre question, réelle : **le désaccord cumulé s'éloigne-t-il
+plus qu'une marche aléatoire de mêmes pas ?**
 
-| | en écarts-types |
+| | en écarts-types par couture |
 |---|---:|
 | la paire la plus sage | **3,2476** |
 | **la paire médiane** | **11,495** |
 | la paire la plus extrême | **26,4595** |
-| une gaussienne de **239** tirages, médiane | **3,0751** |
-| la pire de dix-neuf gaussiennes | **3,9144** |
+| une **marche** gaussienne de **239** pas, médiane | **13,382** |
+| la plus loin de dix-neuf marches | **40,748** |
 
-**La moitié des paires dépasse ce qu'une gaussienne fait de pire.** Aucun seuil n'entre là : on
-compare la **médiane observée** au **maximum** de la référence simulée.
+**Non : l'excursion ne dépasse pas une marche aléatoire**, et **16** des **19** marches vont au
+moins aussi loin que la médiane observée. ⚠⚠ C'est l'inverse exact de ce que la première version
+concluait à partir des **mêmes** nombres observés.
 
 ⚠ La référence est tirée sur le nombre **médian** de coutures, parce que les paires n'en portent pas
-toutes autant — de **224** à **247**. L'écart est trop petit pour changer le maximum d'une gaussienne,
-et le prendre paire par paire aurait fait trente-six références là où une suffit.
+toutes autant — de **224** à **247**.
 
-⭐ La batterie vérifie que ce contrôle sait aussi **accepter** : sur une matière réellement
-gaussienne, il ne refuse rien. Un contrôle qui refuserait tout ne protégerait de rien.
+⭐ La batterie épingle la correction au lieu de la décrire : elle vérifie que le repère d'une
+**marche** est plus de trois fois celui d'un **échantillon**, que le contrôle **refuse** de décider
+de la normalité, et qu'il sait tout de même tirer quand l'excursion est vraiment démesurée.
 
 ## 6. Ce que cette tranche fait à `214` et à `215`
 
@@ -196,10 +214,11 @@ construction, et c'est pour cela que la seconde épreuve existe. **La forme sép
 
 - ⚠⚠⚠ **Elle ne sépare PAS la dépendance des coutures de leurs queues.** Elle établit que la formule
   d'erreur est fausse, pas **laquelle** de ses deux hypothèses l'est. Les séparer demande la série
-  **par couture**, que personne ne publie, donc une lecture neuve.
+  **par couture** — que `211` publie en fait depuis le premier jour, ce que ce document ignorait et
+  que `217` a trouvé.
 - Elle ne dit donc pas combien de coutures sont réellement indépendantes. Le nombre **107,1** pour
   **239** déclarées est un **plancher** et non une estimation : il ne vaut que si l'excès est étalé
-  **et** que les queues n'y sont pour rien, or elles y sont manifestement pour quelque chose.
+  **et** que les queues n'y sont pour rien, or `217` mesure qu'elles y sont pour tout.
 - ⚠ Elle ne dit pas que le modèle additif est **vrai**. Elle dit qu'une fois les erreurs remises à
   l'échelle, rien dans ces trente-six paires ne le réfute. Un modèle non réfuté n'est pas un modèle
   démontré, et `212` le disait déjà de son triangle à trois rangées.
@@ -209,9 +228,10 @@ construction, et c'est pour cela que la seconde épreuve existe. **La forme sép
 
 ## 9. Les sondes, et les bris
 
-La batterie du module et celle de la figure sont enregistrées par `temoins.sh`. **Seize bris** ont été
-appliqués un par un, et **les seize rougissent**, sans qu'aucun ne tue la batterie ni ne lui fasse
-perdre un contrôle.
+La batterie du module et celle de la figure sont enregistrées par `temoins.sh`. **Dix-huit bris** ont été
+appliqués un par un, et **les dix-huit rougissent**, sans qu'aucun ne tue la batterie ni ne lui
+fasse perdre un contrôle. ⭐ Les trois derniers visent la faute que ce document a commise, pour
+qu'elle ne puisse pas revenir.
 
 | ce qu'on casse | ce que ça ferait si personne ne le voyait |
 |---|---|
@@ -226,7 +246,9 @@ perdre un contrôle.
 | les deux épreuves tirent chacune leur nul | on comparerait deux hasards au lieu de deux propriétés |
 | l'amplitude du décalage est choisie | la fixture déciderait elle-même si l'épreuve voit |
 | un mode inconnu se replie sur `declaree` | une matière jamais demandée entrerait dans l'étalon |
-| les queues se comparent à la gaussienne médiane | le refus de normalité deviendrait bon marché |
+| l'excursion se compare à un ÉCHANTILLON et non à une MARCHE | le contrôle conclurait à l'envers, et il l'a fait |
+| le contrôle prétend décider de la normalité | il répondrait pour une question qu'un cumul ne tranche pas |
+| le contrôle ne sait plus tirer sur une excursion démesurée | son silence ne voudrait plus rien dire |
 | l'excès d'aplatissement devient le rapport | la seconde hypothèse serait mal chiffrée |
 | le verdict nomme l'indépendance des coutures | il affirmerait ce que la mesure ne sépare pas |
 | le lecteur accepte une paire sans ses coutures | on inventerait le nombre qu'on met en procès |

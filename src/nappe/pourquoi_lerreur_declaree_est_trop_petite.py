@@ -150,12 +150,23 @@ def ce_que_laccord_a_rendu(chemin: Path = CE_QUE_LACCORD_A_RENDU) -> dict:
             return {"decidable": False,
                     "raison": f"la paire {nom} ne publie pas l'écart-type de son tronçon"}
         a = np.asarray(s, dtype=float)
-        rms = float(np.sqrt(float(np.mean((a - float(np.mean(a))) ** 2))))
+        centre = a - float(np.mean(a))
+        rms = float(np.sqrt(float(np.mean(centre ** 2))))
         if abs(rms - float(attendu)) > 5e-3:
             return {"decidable": False,
                     "raison": (f"la série de {nom} rend {rms:.4f} là où `211` publie "
                                f"{float(attendu):.4f}")}
         paires[nom] = {"la_serie": [float(x) for x in s],
+                       # ⚠⚠⚠ LE MAXIMUM PAR COUTURE EST PUBLIE ICI PARCE QUE C'EST LUI LA PREUVE
+                       # D'UNE QUEUE, et parce que `216` avait d'abord lu a sa place un desaccord
+                       # CUMULE — un nombre juste sous un nom qui appartenait a une autre quantite.
+                       # Le maximum d'un ECHANTILLON se compare au maximum d'un echantillon ; le
+                       # maximum d'un CUMUL se compare a celui d'une marche. Les melanger conclut a
+                       # l'envers, et c'est arrive.
+                       "le_plus_grand_ecart_par_couture_en_voxels":
+                           round(float(np.max(np.abs(centre))), 4),
+                       "le_plus_grand_ecart_en_ecarts_types":
+                           (round(float(np.max(np.abs(centre)) / rms), 4) if rms > 0 else None),
                        "combien_de_coutures_du_troncon": len(s),
                        "les_coutures_communes": int(v.get("les_coutures_communes") or 0),
                        "les_troncons_communs": int(v.get("les_troncons_communs") or 0),
@@ -182,13 +193,18 @@ def ce_que_216_a_rendu(chemin: Path = CE_QUE_LE_BUDGET_A_RENDU) -> dict:
             "les_tirages_au_moins_aussi_forts": b.get("les_tirages_au_moins_aussi_forts"),
             # ⚠⚠ CE QUE `217` CITE DE `216` EST RELU, JAMAIS RETAPE — precedent de `215` et `216`.
             "lexces_daplatissement_qui_suffirait":
-                (d.get("le_controle_des_queues") or {}).get("lexces_daplatissement_qui_suffirait"),
-            "le_rapport_de_queue_le_plus_grand":
-                (d.get("le_controle_des_queues") or {}).get("le_rapport_le_plus_grand"),
-            "le_rapport_de_queue_median":
-                (d.get("le_controle_des_queues") or {}).get("le_rapport_median"),
-            "la_reference_gaussienne_la_plus_forte":
-                (d.get("le_controle_des_queues") or {}).get("la_reference_gaussienne_la_plus_forte")}
+                (d.get("le_controle_de_lexcursion") or {})
+                .get("lexces_daplatissement_qui_suffirait"),
+            # ⚠⚠ RELUS PARCE QUE `217` LES CITE EN CORRIGEANT `216` : l'excursion observee et le
+            # repere de MARCHE qui la remplace. Citer un nombre sans producteur dans SA propre
+            # mesure est ce que `R4-L19` designe comme pire qu'un nombre absent, et cette tranche
+            # est justement celle qui corrige une faute de ce genre.
+            "lexcursion_mediane_de_216":
+                (d.get("le_controle_de_lexcursion") or {}).get("le_rapport_median"),
+            "la_marche_gaussienne_mediane_de_216":
+                (d.get("le_controle_de_lexcursion") or {}).get("la_marche_gaussienne_mediane"),
+            "les_coutures_de_reference_de_216":
+                (d.get("le_controle_de_lexcursion") or {}).get("les_coutures_de_reference")}
 
 
 def _centre(serie) -> np.ndarray:
@@ -586,6 +602,42 @@ def sur_letalon(n: int = 105, forces=(0.3, 0.5, 0.7, 0.9, 0.95, 0.98),
                                 and le_taux_tient(tp, GARANTIE))}
 
 
+def le_controle_du_pire_ecart(serie, tirages: int = PERMUTATIONS, graine: int = GRAINE) -> dict:
+    """CONTRÔLE NOMMÉ : le pire écart PAR COUTURE dépasse-t-il ce qu'un échantillon gaussien donne ?
+
+    ⚠⚠⚠⚠ CE CONTRÔLE EXISTE PARCE QUE `216` AVAIT POSÉ LA MÊME QUESTION SUR LE MAUVAIS OBJET. Il
+    divisait le désaccord CUMULÉ le plus grand par l'écart-type PAR COUTURE et comparait le
+    quotient au maximum d'un ÉCHANTILLON gaussien. Un cumul se compare au maximum d'une MARCHE,
+    qui va cinq fois plus loin, donc le contrôle concluait à l'envers. Ici la question est posée sur
+    la série par couture — le seul objet dont le maximum se compare à celui d'un échantillon — et
+    `216` porte désormais la sienne sous son vrai nom.
+
+    ⭐ C'est la lecture DIRECTE de la queue : l'aplatissement dit que la loi a des queues, le pire
+    écart dit jusqu'où elles vont, et les deux se mesurent sur la même série.
+
+    ⚠ Le repère est SIMULÉ sur le même nombre de coutures, donc aucun seuil n'entre là.
+    """
+    a = _centre(serie)
+    n = len(a)
+    if n < 8:
+        return {"decidable": False, "raison": "la série est trop courte"}
+    s = float(np.sqrt(float(np.mean(a ** 2))))
+    if s <= 0.0:
+        return {"decidable": False, "raison": "la série est constante"}
+    obs = float(np.max(np.abs(a)) / s)
+    g = _rng(int(graine))
+    ech = [float(np.max(np.abs(g.normal(0.0, 1.0, n)))) for _ in range(int(tirages))]
+    au_moins = int(sum(1 for x in ech if x >= obs))
+    return {"decidable": True,
+            "combien_de_coutures": int(n),
+            "tirages": int(tirages),
+            "le_pire_ecart_en_ecarts_types": round(obs, 4),
+            "lechantillon_gaussien_median": round(float(np.median(ech)), 4),
+            "lechantillon_gaussien_le_plus_fort": round(float(max(ech)), 4),
+            "les_tirages_au_moins_aussi_forts": au_moins,
+            "le_pire_ecart_depasse_une_gaussienne": bool(au_moins == 0)}
+
+
 def le_tau_implique(facteur: dict, lam: float) -> dict:
     """LA BORNE SUR LA DÉPENDANCE, prise là où elle existe : dans le BUDGET, pas dans les décalages.
 
@@ -689,7 +741,7 @@ def mesurer(graine: int = GRAINE, tirages: int = PERMUTATIONS, replicats: int = 
         return {"decidable": False, "raison": par216.get("raison"),
                 "la_question_declaree": LA_QUESTION_DECLAREE}
     familles, sur_la_serie, facteurs, refus, corriges, longues = {}, {}, {}, {}, {}, {}
-    taus = {}
+    taus, pires = {}, {}
     for nom, p in lu["les_paires"].items():
         s = p["la_serie"]
         familles[nom] = la_famille_des_decalages(s, tirages, graine, sur_les_carres=True)
@@ -700,6 +752,7 @@ def mesurer(graine: int = GRAINE, tirages: int = PERMUTATIONS, replicats: int = 
         corriges[nom] = lerreur_corrigee(facteurs[nom], p["lecart_type_du_troncon_en_voxels"],
                                          p["combien_de_coutures_du_troncon"])
         taus[nom] = le_tau_implique(facteurs[nom], par216["le_rapport"])
+        pires[nom] = le_controle_du_pire_ecart(s, tirages, graine + 3)
     n_med = int(np.median([p["combien_de_coutures_du_troncon"]
                            for p in lu["les_paires"].values()]))
     etalon = (sur_letalon(n_med, replicats=replicats, decisif=decisif, graine=graine,
@@ -721,6 +774,7 @@ def mesurer(graine: int = GRAINE, tirages: int = PERMUTATIONS, replicats: int = 
             "la_statistique_refusee": refus,
             "lerreur_corrigee": corriges,
             "le_tau_implique": taus,
+            "le_controle_du_pire_ecart": pires,
             "letalon": etalon,
             "le_verdict": juger(familles, facteurs, par216, etalon or {}, refus, longues, taus)}
 
@@ -762,6 +816,13 @@ def afficher(r: dict) -> None:
                   f"{f['le_facteur_des_queues']} · par blocs (L={f['la_longueur_de_bloc']}) "
                   f"{f['lintervalle_par_blocs']} · ordinaire {f['lintervalle_ordinaire']} · "
                   f"écart {f['lecart_relatif_des_deux_bootstraps']}")
+        pi = r["le_controle_du_pire_ecart"][nom]
+        if pi.get("decidable"):
+            print(f"      pire écart · {pi['le_pire_ecart_en_ecarts_types']} écarts-types contre "
+                  f"{pi['lechantillon_gaussien_median']} pour un échantillon gaussien de "
+                  f"{pi['combien_de_coutures']} (le plus fort "
+                  f"{pi['lechantillon_gaussien_le_plus_fort']}) · "
+                  f"{pi['les_tirages_au_moins_aussi_forts']}/{pi['tirages']} au moins aussi forts")
         ta = r["le_tau_implique"][nom]
         if ta.get("decidable"):
             print(f"      τ impliqué · {ta['le_tau_implique']} (au plus "
@@ -954,6 +1015,19 @@ def verifier() -> int:
       not lerreur_corrigee({"decidable": False}, 2.0, 200).get("decidable"))
 
     # ⚠⚠⚠ LE TAU IMPLIQUE INVERSE L'INTERVALLE, ET C'EST LE SENS QUI COMPTE.
+    pg = le_controle_du_pire_ecart(_rng(43).normal(0.0, 1.0, 105), PERMUTATIONS, 43)
+    v("★★★★ sur une gaussienne, le pire écart NE dépasse pas un échantillon gaussien",
+      pg.get("decidable") and not pg["le_pire_ecart_depasse_une_gaussienne"],
+      str(pg.get("le_pire_ecart_en_ecarts_types")))
+    pq = le_controle_du_pire_ecart(_rng(47).standard_t(3.0, 105), PERMUTATIONS, 47)
+    v("★★★★ et sur une loi à queues lourdes il DÉPASSE, sinon son silence ne voudrait rien dire",
+      pq.get("decidable") and pq["le_pire_ecart_depasse_une_gaussienne"],
+      str(pq.get("le_pire_ecart_en_ecarts_types")))
+    v("★★★★ son repère est celui d'un ÉCHANTILLON et non d'une MARCHE — une marche de cent coutures "
+      "va plus de trois fois plus loin, et les confondre est exactement la faute que `216` a faite",
+      pg.get("decidable") and pg["lechantillon_gaussien_median"] < 4.0,
+      str(pg.get("lechantillon_gaussien_median")))
+
     ti = le_tau_implique({"decidable": True, "le_facteur_des_queues": 4.0,
                           "lintervalle_par_blocs": [2.0, 8.0]}, 2.0)
     v("★★★★ le τ impliqué est le quotient du rapport par le facteur",
@@ -1014,6 +1088,9 @@ def verifier() -> int:
     v("★★★★ elle publie la famille LONGUE à côté de la déclarée, sans quoi la limite de portée "
       "resterait invisible",
       all(x.get("decidable") for x in (out.get("la_famille_longue") or {}).values()))
+    v("★★★★ elle publie le pire écart PAR COUTURE avec son repère d'ÉCHANTILLON — `216` avait posé "
+      "cette question sur un CUMUL et l'avait comparée au même repère, ce qui conclut à l'envers",
+      all(x.get("decidable") for x in (out.get("le_controle_du_pire_ecart") or {}).values()))
     v("★★★★ elle publie le remède pour chaque paire, avec l'erreur déclarée À CÔTÉ de la corrigée",
       all(x.get("decidable") and x.get("lerreur_declaree_en_voxels2") is not None
           for x in (out.get("lerreur_corrigee") or {}).values()))

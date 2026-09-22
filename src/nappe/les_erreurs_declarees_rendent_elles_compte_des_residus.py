@@ -155,9 +155,14 @@ def ce_que_le_bruit_propre_a_rendu(chemin: Path = CE_QUE_LE_BRUIT_PROPRE_A_RENDU
         paires.append({"la_paire": [int(pa[0]), int(pa[1])],
                        "le_desaccord_en_voxels": float(s),
                        "les_coutures_communes": int(n),
-                       # ⚠⚠ LE MAXIMUM PAR COUTURE EST RELU PARCE QUE L'AUTRE MOITIE DE LA FORMULE
-                       # D'ERREUR EST LA NORMALITE, et `214` l'a deja publie sans le lire ainsi.
-                       "le_desaccord_le_plus_grand_en_voxels":
+                       # ⚠⚠⚠ LE CHAMP EST RENOMME ICI, ET C'EST LA CORRECTION QUI COMPTE. `214`
+                       # le publie sous le nom `le_desaccord_le_plus_grand_en_voxels`, mais ce
+                       # qu'il contient est `max|d|` sur le desaccord CUMULE et non sur ses pas.
+                       # Une premiere version de cette tranche l'a lu comme un echantillon et l'a
+                       # compare a un repere d'echantillon : le nombre etait juste sous un nom qui
+                       # appartenait a une autre quantite, ce que `R4-L19` designe comme pire qu'un
+                       # nombre absent. Le nom porte desormais le mot CUMULE.
+                       "le_desaccord_cumule_le_plus_grand_en_voxels":
                            (None if p.get("le_desaccord_le_plus_grand_en_voxels") is None
                             else float(p["le_desaccord_le_plus_grand_en_voxels"]))})
         rangees.update(int(x) for x in pa)
@@ -560,11 +565,9 @@ def _pourquoi(depasse: bool, concentre: bool, bud: dict, frm: dict, queues: dict
                 f"l'échelle le plus grand résidu reste à "
                 f"{frm.get('le_plus_grand_residu_remis_a_lechelle')} sur "
                 f"{frm.get('la_paire_du_plus_grand')}, que le modèle déclaré ne produit jamais")
-    q = ("et la normalité que cette formule suppose est réfutée par les maxima que `214` publie "
-         f"(rapport médian {queues.get('le_rapport_median')} écarts-types contre "
-         f"{queues.get('la_reference_gaussienne_la_plus_forte')} pour la pire gaussienne)"
-         if queues.get("la_normalite_est_refusee")
-         else "et la normalité que cette formule suppose n'est pas réfutée par les maxima publiés")
+    q = ("et l'excursion cumulée s'écarte plus qu'une marche aléatoire"
+         if queues.get("lexcursion_depasse_une_marche_aleatoire")
+         else "laquelle des deux hypothèses est fausse demande la série par couture, que `217` lit")
     return (f"le rapport vaut {bud.get('le_rapport')}, donc l'erreur déclarée est sous-estimée "
             f"d'un facteur {bud.get('le_facteur_sur_lerreur')} ; une fois le budget remis à "
             f"l'échelle la forme redevient celle du modèle "
@@ -599,52 +602,62 @@ def les_coutures_effectives(bud: dict, lu: dict) -> dict:
             "elle_ne_vaut_que_si_lexces_est_etale_ET_que_les_queues_ny_sont_pour_rien": True}
 
 
-def le_controle_des_queues(paires, lam, tirages: int = PERMUTATIONS,
-                           graine: int = GRAINE) -> dict:
-    """CONTRÔLE NOMMÉ : la formule d'erreur suppose aussi la NORMALITÉ, et `214` l'a déjà réfutée.
+def le_controle_de_lexcursion(paires, lam, tirages: int = PERMUTATIONS,
+                              graine: int = GRAINE) -> dict:
+    """CONTRÔLE NOMMÉ : le désaccord CUMULÉ s'écarte-t-il plus qu'une marche aléatoire ?
 
-    ⚠⚠⚠ `se(V) = V·√(2/(n-1))` A DEUX HYPOTHÈSES, PAS UNE. L'indépendance des coutures est la
-    première et c'est celle qu'on soupçonne en premier ; la seconde est que les différences par
-    couture sont GAUSSIENNES. En général la variance d'une variance échantillonnale vaut
-    `(κ + 2)·σ⁴/n` où `κ` est l'excès d'aplatissement, et la formule déclarée est le cas `κ = 0`.
-    Un excès d'aplatissement de `2Λ - 2` suffirait donc à expliquer tout le dépassement SANS
-    qu'aucune couture ne soit corrélée.
+    ⚠⚠⚠⚠ UNE PREMIÈRE VERSION DE CE CONTRÔLE ÉTAIT FAUSSE, ET LA FAUTE EST CELLE DE `R4-L19` SOUS
+    UN COSTUME NEUF. Elle divisait `le_desaccord_le_plus_grand_en_voxels` par le désaccord PAR
+    COUTURE et lisait le quotient comme « combien d'écarts-types le pire ÉCHANTILLON atteint », puis
+    le comparait au maximum d'un ÉCHANTILLON gaussien de `n` tirages, soit environ trois. Or ce
+    numérateur est le maximum du désaccord **CUMULÉ** — `np.abs(d).max()` sur la marche, pas sur ses
+    pas. Le bon repère n'est donc pas le maximum d'un échantillon mais celui d'une MARCHE
+    ALÉATOIRE, qui vaut environ dix-sept écarts-types sur deux cent quarante pas. Le nombre était
+    juste ; c'est son REPÈRE qui appartenait à une autre quantité, et le contrôle concluait à
+    l'envers.
 
-    ⭐⭐⭐⭐ ET LA PREUVE EST DÉJÀ DANS LE JSON DE `214`, PUBLIÉE ET JAMAIS LUE AINSI : chaque paire
-    porte son désaccord le plus grand À CÔTÉ de son désaccord par couture. Le rapport des deux dit
-    combien d'écarts-types le pire échantillon atteint, et une gaussienne de `n` tirages ne va pas
-    au-delà d'une valeur que la simulation rend sans qu'aucun seuil ne soit choisi.
+    ⚠⚠⚠ CE CONTRÔLE NE DÉCIDE DONC PAS DE LA NORMALITÉ, ET NE LE PRÉTEND PLUS. Une excursion
+    cumulée ne dit presque rien de la loi des pas : elle croît comme la racine du nombre de pas
+    quelle que soit cette loi. La normalité se décide sur la série PAR COUTURE, que `211` publie et
+    que `217` mesure — et elle y est bel et bien réfutée, par un aplatissement mesuré et non par un
+    rapport mal appariƩ.
 
-    ⚠ Le contrôle ne dit PAS lequel des deux défauts est en cause, et ne le prétend pas : il dit
-    que l'un des deux suffit. Les séparer demande la série par couture, que personne ne publie.
+    ⭐ CE QUE CE CONTRÔLE DIT VRAIMENT, ET C'EST UNE QUESTION RÉELLE : le désaccord cumulé
+    s'éloigne-t-il PLUS qu'une marche aléatoire de mêmes pas ? Une réponse positive désignerait une
+    dérive ou des sauts ; une réponse négative dit que l'excursion est celle d'une marche ordinaire.
+
+    ⚠ L'excès d'aplatissement qui suffirait à expliquer `Λ` reste publié ici : il est exact, il ne
+    dépend que de `Λ`, et c'est lui que `217` confronte à une mesure.
     """
     ratios, ns = [], []
-    for p in paires:
-        s = float(p.get("le_desaccord_en_voxels") or 0.0)
-        mx = p.get("le_desaccord_le_plus_grand_en_voxels")
+    for p_ in paires:
+        s = float(p_.get("le_desaccord_en_voxels") or 0.0)
+        mx = p_.get("le_desaccord_cumule_le_plus_grand_en_voxels")
         if mx is None or s <= 0.0:
             continue
         ratios.append(float(mx) / s)
-        ns.append(int(p["les_coutures_communes"]))
+        ns.append(int(p_["les_coutures_communes"]))
     if len(ratios) < 4:
-        return {"decidable": False, "raison": "trop peu de paires portent leur maximum"}
+        return {"decidable": False, "raison": "trop peu de paires portent leur excursion"}
     g = _rng(int(graine))
     n_median = int(np.median(ns))
-    gaussiens = [float(np.max(np.abs(g.normal(0.0, 1.0, n_median)))) for _ in range(int(tirages))]
+    marches = [float(np.max(np.abs(np.cumsum(g.normal(0.0, 1.0, n_median)))))
+               for _ in range(int(tirages))]
+    obs = float(np.median(ratios))
+    au_moins = int(sum(1 for x in marches if x >= obs))
     return {"decidable": True,
             "combien_de_paires": len(ratios),
             "les_coutures_de_reference": n_median,
+            "tirages": int(tirages),
             "le_rapport_le_plus_petit": round(float(min(ratios)), 4),
-            "le_rapport_median": round(float(np.median(ratios)), 4),
+            "le_rapport_median": round(obs, 4),
             "le_rapport_le_plus_grand": round(float(max(ratios)), 4),
-            "la_reference_gaussienne_mediane": round(float(np.median(gaussiens)), 4),
-            "la_reference_gaussienne_la_plus_forte": round(float(max(gaussiens)), 4),
+            "la_marche_gaussienne_mediane": round(float(np.median(marches)), 4),
+            "la_marche_gaussienne_la_plus_forte": round(float(max(marches)), 4),
+            "les_tirages_au_moins_aussi_forts": au_moins,
             "lexces_daplatissement_qui_suffirait": round(float(2.0 * lam - 2.0), 4),
-            # ⚠ AUCUN SEUIL : on compare la MEDIANE observee au PLUS FORT des tirages gaussiens.
-            # Si la moitie des paires depasse ce qu'une gaussienne fait de pire, la normalite est
-            # refusee sans qu'aucun nombre n'ait ete choisi.
-            "la_normalite_est_refusee":
-                bool(float(np.median(ratios)) > float(max(gaussiens)))}
+            "lexcursion_depasse_une_marche_aleatoire": bool(au_moins == 0),
+            "ce_controle_ne_decide_pas_de_la_normalite": True}
 
 
 def juger(bud: dict, frm: dict, eff: dict, naif: dict, budget: dict, lu: dict,
@@ -661,7 +674,8 @@ def juger(bud: dict, frm: dict, eff: dict, naif: dict, budget: dict, lu: dict,
         "le_modele_reste_non_refute_par_une_variance_negative": bool(
             not lu.get("les_variances_negatives_de_214")),
         "letalon_separe": (bool(etalon.get("elle_separe")) if etalon else None),
-        "la_normalite_est_refusee": queues.get("la_normalite_est_refusee"),
+        "lexcursion_depasse_une_marche_aleatoire":
+            queues.get("lexcursion_depasse_une_marche_aleatoire"),
         "lexces_daplatissement_qui_suffirait": queues.get("lexces_daplatissement_qui_suffirait"),
         "ce_qui_reste_a_mesurer": _ce_qui_reste(depasse, concentre),
         "pourquoi": _pourquoi(depasse, concentre, bud, frm, queues),
@@ -687,8 +701,8 @@ def mesurer(graine: int = GRAINE, tirages: int = PERMUTATIONS, replicats: int = 
     frm = la_forme(aj["_std"], tre, attendu, nul)
     naif = le_refus_du_khi_deux_naif(aj["_std"], float(budget["la_trace_du_projecteur"]), attendu)
     eff = les_coutures_effectives(bud, lu)
-    queues = le_controle_des_queues(lu["les_paires"], float(bud.get("le_rapport") or 1.0),
-                                    tirages, graine + 2)
+    queues = le_controle_de_lexcursion(lu["les_paires"], float(bud.get("le_rapport") or 1.0),
+                                       tirages, graine + 2)
     etalon = (sur_letalon(tre, attendu, replicats=replicats, decisif=decisif, graine=graine,
                           tirages=tirages) if avec_etalon else None)
     return {"decidable": True,
@@ -705,7 +719,7 @@ def mesurer(graine: int = GRAINE, tirages: int = PERMUTATIONS, replicats: int = 
             "lepreuve_de_la_forme": frm,
             "le_refus_du_khi_deux_naif": naif,
             "les_coutures_effectives": eff,
-            "le_controle_des_queues": queues,
+            "le_controle_de_lexcursion": queues,
             "letalon": etalon,
             "le_verdict": juger(bud, frm, eff, naif, budget, lu, etalon or {}, queues)}
 
@@ -741,16 +755,20 @@ def afficher(r: dict) -> None:
         print(f"  nul médian {f['la_forme_du_nul_mediane']} · le plus fort "
               f"{f['la_forme_du_nul_la_plus_forte']} · "
               f"{f['les_tirages_au_moins_aussi_forts']}/{f['tirages']} au moins aussi forts")
-    q = r.get("le_controle_des_queues") or {}
+    q = r.get("le_controle_de_lexcursion") or {}
     if q.get("decidable"):
-        print(f"\nCONTRÔLE DES QUEUES · le pire désaccord d'une paire vaut de "
+        print(f"\nCONTRÔLE DE L'EXCURSION · le désaccord CUMULÉ le plus grand vaut de "
               f"{q['le_rapport_le_plus_petit']} à {q['le_rapport_le_plus_grand']} écarts-types "
-              f"(médiane {q['le_rapport_median']}) contre {q['la_reference_gaussienne_mediane']} "
-              f"pour une gaussienne de {q['les_coutures_de_reference']} tirages "
-              f"(la pire : {q['la_reference_gaussienne_la_plus_forte']})")
-        print(f"  la normalité est refusée : {q['la_normalite_est_refusee']} · un excès "
-              f"d'aplatissement de {q['lexces_daplatissement_qui_suffirait']} suffirait à tout "
-              f"expliquer sans aucune dépendance")
+              f"par couture (médiane {q['le_rapport_median']}) contre "
+              f"{q['la_marche_gaussienne_mediane']} pour une MARCHE gaussienne de "
+              f"{q['les_coutures_de_reference']} pas (la plus forte : "
+              f"{q['la_marche_gaussienne_la_plus_forte']})")
+        print(f"  l'excursion dépasse une marche aléatoire : "
+              f"{q['lexcursion_depasse_une_marche_aleatoire']} · "
+              f"{q['les_tirages_au_moins_aussi_forts']}/{q['tirages']} marches au moins aussi "
+              f"loin · ⚠ ce contrôle NE décide PAS de la normalité")
+        print(f"  un excès d'aplatissement de {q['lexces_daplatissement_qui_suffirait']} "
+              f"suffirait à expliquer le dépassement — c'est `217` qui le mesure")
     e = r["les_coutures_effectives"]
     if e.get("decidable"):
         print(f"\nCOUTURES EFFECTIVES · au plus {e['les_coutures_effectives_impliquees']} pour "
@@ -960,28 +978,40 @@ def verifier() -> int:
       "pondér" in (naif.get("pourquoi_il_est_refuse") or "").lower())
 
     # ⚠⚠⚠ LE CONTROLE DES QUEUES : IL DOIT POUVOIR REFUSER *ET* ACCEPTER.
-    q = le_controle_des_queues(lu["les_paires"], float(bud["le_rapport"]), PERMUTATIONS, 41)
-    v("★★★★ sur la matière lue, la normalité est REFUSÉE — un contrôle qui ne refuserait jamais ne "
-      "protégerait de rien",
-      q.get("decidable") and q["la_normalite_est_refusee"],
-      f"médiane {q.get('le_rapport_median')} contre {q.get('la_reference_gaussienne_la_plus_forte')}")
+    # ⚠⚠⚠⚠ LE CONTROLE DE L'EXCURSION A ETE FAUX, ET LES SONDES DOIVENT EPINGLER LA CORRECTION.
+    # La premiere version comparait un desaccord CUMULE a un repere d'ECHANTILLON. Deux sondes
+    # tiennent desormais la difference : le repere doit etre celui d'une MARCHE, donc bien plus
+    # grand que celui d'un echantillon, et le controle doit REFUSER de decider de la normalite.
+    q = le_controle_de_lexcursion(lu["les_paires"], float(bud["le_rapport"]), PERMUTATIONS, 41)
     gg = _rng(7)
-    gauss = [{"la_paire": [i, i + 1], "les_coutures_communes": 239,
-              "le_desaccord_en_voxels": 1.0,
-              "le_desaccord_le_plus_grand_en_voxels":
-                  float(np.max(np.abs(gg.normal(0.0, 1.0, 239))))} for i in range(36)]
-    qg = le_controle_des_queues(gauss, 1.0, PERMUTATIONS, 41)
-    v("★★★★ et sur une matière VRAIMENT gaussienne il ACCEPTE — sinon il refuserait tout et son "
-      "refus ne voudrait rien dire",
-      qg.get("decidable") and not qg["la_normalite_est_refusee"],
-      f"médiane {qg.get('le_rapport_median')} contre "
-      f"{qg.get('la_reference_gaussienne_la_plus_forte')}")
+    ech = [float(np.max(np.abs(gg.normal(0.0, 1.0, 239)))) for _ in range(200)]
+    v("★★★★ le repère d'une MARCHE est bien plus loin que celui d'un ÉCHANTILLON — c'est toute la "
+      "faute de la première version, et la sonde l'épingle plutôt que de la décrire",
+      q.get("decidable") and q["la_marche_gaussienne_mediane"] > 3.0 * float(np.median(ech)),
+      f"marche {q.get('la_marche_gaussienne_mediane')} contre échantillon "
+      f"{float(np.median(ech)):.4f}")
+    v("★★★★ et le contrôle REFUSE de décider de la normalité — une excursion cumulée croît comme "
+      "la racine du nombre de pas quelle que soit la loi des pas",
+      q.get("decidable") and q.get("ce_controle_ne_decide_pas_de_la_normalite") is True
+      and "normalite" not in json.dumps(q).lower().replace("ne_decide_pas_de_la_normalite", ""))
+    v("★★★★ sur la matière lue, l'excursion NE dépasse PAS une marche aléatoire — la première "
+      "version concluait l'inverse à partir du même nombre",
+      q.get("decidable") and not q["lexcursion_depasse_une_marche_aleatoire"],
+      f"médiane {q.get('le_rapport_median')} contre {q.get('la_marche_gaussienne_mediane')}")
+    loin = [{"la_paire": [i, i + 1], "les_coutures_communes": 239,
+             "le_desaccord_en_voxels": 1.0,
+             "le_desaccord_cumule_le_plus_grand_en_voxels": 400.0} for i in range(36)]
+    v("★★★★ et il SAIT tirer quand l'excursion est vraiment démesurée, sinon son silence ne "
+      "voudrait rien dire",
+      le_controle_de_lexcursion(loin, 1.0, PERMUTATIONS, 41)
+      ["lexcursion_depasse_une_marche_aleatoire"] is True)
     v("★★★★ l'excès d'aplatissement qui suffirait est DÉRIVÉ de `2Λ - 2`, pas choisi",
       abs(q["lexces_daplatissement_qui_suffirait"] - (2.0 * float(bud["le_rapport"]) - 2.0)) < 5e-4)
-    v("★★★ une matière sans maxima publiés rend le contrôle indécidable, jamais vert",
-      not le_controle_des_queues(
+    v("★★★ une matière sans excursion publiée rend le contrôle indécidable, jamais vert",
+      not le_controle_de_lexcursion(
           [{"la_paire": [1, 2], "les_coutures_communes": 9, "le_desaccord_en_voxels": 1.0,
-            "le_desaccord_le_plus_grand_en_voxels": None} for _ in range(36)], 1.0).get("decidable"))
+            "le_desaccord_cumule_le_plus_grand_en_voxels": None} for _ in range(36)],
+          1.0).get("decidable"))
 
     # ⚠⚠ LES COUTURES EFFECTIVES SONT UN PLANCHER, ET LE DISENT.
     eff = les_coutures_effectives(bud, lu)
@@ -1030,9 +1060,11 @@ def verifier() -> int:
     v("★★★★ elle publie le budget attendu À CÔTÉ de la trace, donc le refus du naïf se vérifie",
       (out.get("le_budget_attendu") or {}).get("lenergie_attendue") is not None
       and (out.get("le_budget_attendu") or {}).get("la_trace_du_projecteur") is not None)
-    v("★★★★ elle publie le contrôle des queues, sans lequel le verdict nommerait une explication "
-      "que la mesure ne sépare pas",
-      (out.get("le_controle_des_queues") or {}).get("decidable") is True)
+    v("★★★★ elle publie le contrôle de l'excursion, qui dit ce qu'il mesure ET ce qu'il ne décide "
+      "pas — une première version décidait de la normalité à partir d'un repère d'échantillon",
+      (out.get("le_controle_de_lexcursion") or {}).get("decidable") is True
+      and (out.get("le_controle_de_lexcursion") or {})
+      .get("ce_controle_ne_decide_pas_de_la_normalite") is True)
     v("★★★★ et DANS LA MESURE COMPLÈTE les deux épreuves portent la MÊME empreinte de nul — une "
       "sonde qui ne regarderait que les épreuves appelées à la main ne verrait pas un second nul "
       "tiré au site d'assemblage",

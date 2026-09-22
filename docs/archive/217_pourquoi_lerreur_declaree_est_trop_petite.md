@@ -114,6 +114,19 @@ queues plus lourdes que la moyenne des trente-six.
 ⭐ Le bootstrap est fait **par blocs** et aussi **ordinaire** : le second détruit la dépendance, le
 premier la garde. Leur accord est le contrôle gratuit de l'épreuve précédente, et ils s'accordent.
 
+⭐⭐⭐⭐ **Et la queue se lit aussi DIRECTEMENT, sur le bon objet.** L'aplatissement dit que la loi a
+des queues ; le pire écart dit jusqu'où elles vont. Sur la série **par couture** — le seul objet dont
+le maximum se compare à celui d'un échantillon — le pire écart vaut **5,2539**, **5,1351** et
+**4,5463** écarts-types, contre un échantillon gaussien de même taille dont le maximum médian vaut
+**2,7459** (105 coutures) ou **3,1175** (166), et dont le pire sur dix-neuf tirages atteint
+**3,4904** et **3,524**. **0** tirage sur **19** y arrive, sur les trois paires.
+
+⚠⚠⚠⚠ **C'est cette question que `216` avait posée sur le MAUVAIS OBJET, et cette tranche l'a
+trouvée.** Il divisait le désaccord **cumulé** le plus grand par l'écart-type par couture et
+comparait le quotient au maximum d'un **échantillon** gaussien. Un cumul se compare au maximum d'une
+**marche**, qui va cinq fois plus loin : son contrôle concluait donc à l'envers, et il est corrigé.
+Le nombre était juste, son repère appartenait à une autre quantité — `R4-L19` sous un costume neuf.
+
 ## 5. ⚠⚠⚠ L'étalon dit que l'épreuve des décalages NE BORNE RIEN
 
 Un négatif sans étalon est un silence — la règle de ce dépôt depuis `214`. L'étalon a donc été
@@ -244,6 +257,16 @@ le nul autant que l'observé. Il a fallu un contraste **modéré** (quatre pour 
 une série **longue**, et c'est la seule fenêtre où la sonde passe sur du code juste. **Cette
 difficulté EST le résultat du §5**, rencontrée une seconde fois du côté des sondes.
 
+⚠⚠⚠⚠ **Et cette tranche a trouvé une faute dans `216`, qui était déjà commitée.** Son contrôle des
+queues divisait un désaccord **cumulé** par un écart-type **par couture** et comparait le quotient au
+maximum d'un **échantillon** gaussien. Une marche aléatoire de **239** pas atteint **13,382**
+écarts-types en médiane là où un échantillon en atteint trois : le repère était cinq fois trop petit,
+donc le contrôle déclarait la normalité réfutée alors que les nombres observés — médiane **11,495** —
+sont en dessous de ce qu'une marche gaussienne produit. `216` est corrigé sur place : son contrôle
+est devenu un contrôle d'**excursion**, qui répond à la question que ce nombre peut trancher, et sa
+batterie épingle désormais la différence entre le repère d'une **marche** et celui d'un
+**échantillon**. ⭐ Le résultat principal de `216` ne dépendait pas de ce contrôle et est intact.
+
 La mesure a été **reproduite à l'identique trois fois**.
 
 ## 10. Ce qui reste
@@ -254,8 +277,10 @@ pas de place pour une dépendance importante en plus. Le remède est écrit et n
 ⭐ Ce qui s'ouvre est la relecture : **chaque borne publiée « en erreurs » par `208`–`215` se relit
 avec un facteur qui vaut ici de 1,87 à 2,18**, et qui n'a aucune raison d'être le même ailleurs.
 ⚠ Et une question neuve, qui n'existait pas avant cette mesure : **d'où vient un désaccord de
-couture à vingt-six écarts-types ?** C'est **26,4595** que `216` publie pour la pire paire, contre
-**3,9144** pour la pire gaussienne, et la paire médiane est déjà à **11,495**. Un tel événement n'est pas une fluctuation.
-Ce sont probablement des **sauts** — un recalage qui manque une couture — et s'ils le sont, ils ne
-sont pas du bruit du tout : **ils sont le phénomène que le graal doit corriger**, et les compter
-comme du bruit est exactement ce qui rend la borne de `214` trop optimiste.
+⚠ Et une question neuve, qui n'existait pas avant cette mesure : **d'où vient un écart de couture à
+cinq écarts-types ?** Le pire vaut **5,2539** là où le pire de dix-neuf échantillons gaussiens
+atteint **3,4904**, et ce n'est pas un cas isolé puisque l'aplatissement va de **5,0249** à
+**7,6092** sur les trois paires. Un écart pareil n'est pas une fluctuation gaussienne. Ce sont
+probablement des **sauts** — un recalage qui manque une couture — et s'ils le sont, ils ne sont pas
+du bruit du tout : **ils sont le phénomène que le graal doit corriger**, ils sont **localisés**, et
+les compter comme du bruit est exactement ce qui rend toute borne trop optimiste.

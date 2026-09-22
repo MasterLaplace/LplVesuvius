@@ -3233,7 +3233,9 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 (et217, "le_compte_decisif", "le compte décisif", ("**",)),
                 (et217, "les_faux", "les faux de l étalon", ("**",)),
                 (et217, "les_tirs_sur_le_piege", "les tirs sur le piège", ("**",)),
-                (et217, "laplatissement_du_piege", "l aplatissement du piège", ("**",))):
+                (et217, "laplatissement_du_piege", "l aplatissement du piège", ("**",)),
+                (q217, "les_coutures_de_reference_de_216",
+                 "les coutures de référence de 216", ("pas", "coutures"))):
             if src_.get(cle) is not None:
                 ajoute(f"{nom} de 217", int(src_[cle]), 0, spt.name, unites=unites)
         for src_, cle, nom, unites in (
@@ -3241,11 +3243,9 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 (q217, "le_rapport", "le rapport de 216", ("**",)),
                 (q217, "lexces_daplatissement_qui_suffirait",
                  "l excès d aplatissement qui suffirait", ("**",)),
-                (q217, "le_rapport_de_queue_le_plus_grand",
-                 "le rapport de queue le plus grand", ("**",)),
-                (q217, "le_rapport_de_queue_median", "le rapport de queue médian", ("**",)),
-                (q217, "la_reference_gaussienne_la_plus_forte",
-                 "la référence gaussienne la plus forte", ("**",)),
+                (q217, "lexcursion_mediane_de_216", "l excursion médiane de 216", ("**",)),
+                (q217, "la_marche_gaussienne_mediane_de_216",
+                 "la marche gaussienne médiane de 216", ("**",)),
                 (ve217, "le_tau_implique_le_plus_grand", "le τ impliqué le plus grand", ("**",)),
                 (et217, "le_taux_de_faux", "le taux de faux", ("**",)),
                 (et217, "le_taux_sur_le_piege", "le taux sur le piège", ("**",))):
@@ -3280,6 +3280,18 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                    _dec217(x_["la_famille_observee"]), spt.name, unites=("**",))
             ajoute(f"les décalages longs de {nom_} de 217", int(x_["combien_de_decalages"]), 0,
                    spt.name, unites=("décalages",))
+        # ⚠⚠ LE PIRE ECART PAR COUTURE NE VOYAGE JAMAIS SANS SON REPERE D'ECHANTILLON. C'est la
+        # preuve DIRECTE de la queue, et `216` avait pose cette question sur un CUMUL avec le meme
+        # repere : les publier ensemble est ce qui empeche de refaire la lecture.
+        for nom_, x_ in sorted((d.get("le_controle_du_pire_ecart") or {}).items()):
+            if not x_.get("decidable"):
+                continue
+            for cle, lib in (("le_pire_ecart_en_ecarts_types", "le pire écart"),
+                             ("lechantillon_gaussien_median", "l échantillon gaussien médian"),
+                             ("lechantillon_gaussien_le_plus_fort",
+                              "l échantillon gaussien le plus fort")):
+                ajoute(f"{lib} de {nom_} de 217", float(x_[cle]), _dec217(x_[cle]), spt.name,
+                       unites=("**",))
         for nom_, x_ in sorted((d.get("le_tau_implique") or {}).items()):
             if not x_.get("decidable"):
                 continue
@@ -3334,7 +3346,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
         bg216 = d.get("le_budget_attendu") or {}
         bu216 = d.get("lepreuve_du_budget") or {}
         fo216 = d.get("lepreuve_de_la_forme") or {}
-        qu216 = d.get("le_controle_des_queues") or {}
+        qu216 = d.get("le_controle_de_lexcursion") or {}
         ef216 = d.get("les_coutures_effectives") or {}
         na216 = d.get("le_refus_du_khi_deux_naif") or {}
         et216 = d.get("letalon") or {}
@@ -3392,10 +3404,10 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 (qu216, "le_rapport_le_plus_petit", "le rapport de queue le plus petit", ("**",)),
                 (qu216, "le_rapport_median", "le rapport de queue médian", ("**",)),
                 (qu216, "le_rapport_le_plus_grand", "le rapport de queue le plus grand", ("**",)),
-                (qu216, "la_reference_gaussienne_mediane",
-                 "la référence gaussienne médiane", ("**",)),
-                (qu216, "la_reference_gaussienne_la_plus_forte",
-                 "la référence gaussienne la plus forte", ("**",)),
+                (qu216, "la_marche_gaussienne_mediane",
+                 "la marche gaussienne médiane", ("**",)),
+                (qu216, "la_marche_gaussienne_la_plus_forte",
+                 "la marche gaussienne la plus forte", ("**",)),
                 (qu216, "lexces_daplatissement_qui_suffirait",
                  "l excès d aplatissement qui suffirait", ("**",)),
                 (ef216, "les_coutures_effectives_impliquees",

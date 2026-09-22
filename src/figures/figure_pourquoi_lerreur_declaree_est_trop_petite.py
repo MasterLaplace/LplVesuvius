@@ -72,7 +72,7 @@ def lire(chemin: Path) -> dict:
     if len(d.get("ce_que_211_a_rendu") or {}) < 2:
         raise SystemExit("moins de deux paires — rien à comparer")
     for cle in ("lepreuve_des_decalages", "la_famille_longue", "lepreuve_des_queues",
-                "le_tau_implique", "lerreur_corrigee"):
+                "le_tau_implique", "lerreur_corrigee", "le_controle_du_pire_ecart"):
         if not d.get(cle):
             raise SystemExit(f"{cle} manque")
     return d
@@ -192,13 +192,19 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
     xl = gx0 + gw * lam / fmax
     art.line([xl, 130, xl, 330], fill=BON, width=2)
     ecrire(xl - 4, 336, f"le dépassement mesuré par `216` : {_fr(lam, 4)}", 0, BON)
+    pires = d["le_controle_du_pire_ecart"]
+    pmax = max(noms, key=lambda n: pires[n]["le_pire_ecart_en_ecarts_types"])
     ecrire(716, 356,
            f"le trait vert tombe DANS les trois intervalles : "
            f"{ve['combien_de_paires_couvrent_le_rapport_de_216']}/"
            f"{ve['combien_de_paires_mesurees']} paires", 0, BON)
-    ecrire(716, 376,
-           f"★ donc τ impliqué vaut au plus {_fr(ve['le_tau_implique_le_plus_grand'], 4)} : "
-           f"le budget ne laisse pas de place pour une grosse dépendance", 0, ENCRE)
+    ecrire(716, 374,
+           f"et le pire écart PAR COUTURE vaut {_fr(pires[pmax]['le_pire_ecart_en_ecarts_types'], 4)}"
+           f" écarts-types contre {_fr(pires[pmax]['lechantillon_gaussien_le_plus_fort'], 4)} pour le "
+           f"pire échantillon gaussien", 0, ALERTE)
+    ecrire(716, 388,
+           f"★ donc τ impliqué vaut au plus {_fr(ve['le_tau_implique_le_plus_grand'], 4)} : le "
+           f"budget ne laisse pas de place pour une grosse dépendance", 0, ENCRE)
 
     # ── PANNEAU 3 · L'ETALON ──────────────────────────────────────────────────────────────────
     panneau(50, 428, 660, 762, "L'ÉTALON · et il dit que l'épreuve des décalages NE BORNE RIEN")
@@ -327,6 +333,12 @@ def verifier(json_path: Path, sortie: Path) -> int:
       and all(_fr(d["lepreuve_des_queues"][n]["le_facteur_des_queues"], 4) in txt for n in noms))
     v("★★★★ elle porte le τ impliqué le plus grand, qui est la borne que l'étalon n'a pas pu donner",
       _fr(d["le_verdict"]["le_tau_implique_le_plus_grand"], 4) in txt)
+    v("★★★★ elle porte le pire écart PAR COUTURE avec son repère d'ÉCHANTILLON — c'est la preuve "
+      "DIRECTE de la queue, sur le seul objet dont le maximum se compare à celui d'un échantillon",
+      any(_fr(x["le_pire_ecart_en_ecarts_types"], 4) in txt
+          for x in d["le_controle_du_pire_ecart"].values())
+      and any(_fr(x["lechantillon_gaussien_le_plus_fort"], 4) in txt
+              for x in d["le_controle_du_pire_ecart"].values()))
     v("★★★★ elle porte les DEUX échelles de l'étalon et dit qu'aucune force n'est vue partout",
       all(_fr(e["la_force"], 2) in txt for e in d["letalon"]["lechelle_par_volatilite"])
       and "aucune force n'est vue par TOUS" in txt)

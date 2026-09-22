@@ -67,7 +67,7 @@ def lire(chemin: Path) -> dict:
         raise SystemExit(f"mesure indécidable : {d.get('raison')}")
     for cle, quoi in (("lepreuve_du_budget", "l'épreuve du budget"),
                       ("lepreuve_de_la_forme", "l'épreuve de la forme"),
-                      ("le_controle_des_queues", "le contrôle des queues"),
+                      ("le_controle_de_lexcursion", "le contrôle de l'excursion"),
                       ("letalon", "l'étalon"),
                       ("le_refus_du_khi_deux_naif", "le refus du khi-deux naïf")):
         if not (d.get(cle) or {}).get("decidable"):
@@ -98,6 +98,7 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
     cadres: list[tuple[int, int, int, int]] = []
     barres: list[tuple[float, float]] = []
     points: list[tuple[float, float]] = []
+    ecarts_traces: list[float] = []
 
     def ecrire(x, y, texte, fonte, fill):
         f = petit if fonte == 0 else fonte
@@ -131,7 +132,7 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
 
     lu = d["ce_que_214_a_rendu"]
     bg, b, f = d["le_budget_attendu"], d["lepreuve_du_budget"], d["lepreuve_de_la_forme"]
-    q, e, n, et = (d["le_controle_des_queues"], d["les_coutures_effectives"],
+    q, e, n, et = (d["le_controle_de_lexcursion"], d["les_coutures_effectives"],
                    d["le_refus_du_khi_deux_naif"], d["letalon"])
     std = d["lajustement"]["les_residus_standardises"]
     ve = d["le_verdict"]
@@ -210,30 +211,42 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
 
     # ── PANNEAU 3 · LES QUEUES ────────────────────────────────────────────────────────────────
     panneau(50, 428, 660, 762,
-            "LES QUEUES · la formule suppose aussi une gaussienne, et `214` l'avait déjà réfutée")
+            "L'EXCURSION · le désaccord CUMULÉ contre une MARCHE aléatoire")
     qx, qw = 240, 340
+    # ⚠⚠⚠ L'ECHELLE PREND LE MAXIMUM DE TOUT CE QUI EST TRACE, ET PAS SEULEMENT DE L'OBSERVE. Une
+    # premiere version la calait sur le pire rapport observe ; la marche de reference etant PLUS
+    # LOIN, sa barre etait ECRETEE par `barre` et paraissait tenir dans la piste. Une barre ecretee
+    # ne deborde jamais — donc la sonde qui verifie les debordements restait verte — mais elle
+    # AFFIRME une valeur plus petite que celle qu'elle porte, ce qui est pire qu'un debordement.
+    q_ech = max(q["le_rapport_le_plus_grand"], q["la_marche_gaussienne_la_plus_forte"]) * 1.06
     for i, (nom, val, coul) in enumerate((
             ("le pire, toutes paires", q["le_rapport_le_plus_grand"], ALERTE),
             ("la paire médiane", q["le_rapport_median"], ALERTE),
             ("la paire la plus sage", q["le_rapport_le_plus_petit"], CONTRE),
-            ("la pire gaussienne", q["la_reference_gaussienne_la_plus_forte"], BON),
-            ("la gaussienne médiane", q["la_reference_gaussienne_mediane"], BON))):
+            ("la marche la plus loin", q["la_marche_gaussienne_la_plus_forte"], BON),
+            ("la marche médiane", q["la_marche_gaussienne_mediane"], BON))):
         y = 470 + i * 36
         ecrire(66, y + 2, nom, 0, ENCRE)
-        barre(qx, y, qw, val / (q["le_rapport_le_plus_grand"] * 1.1), 13, coul)
+        barre(qx, y, qw, val / q_ech, 13, coul)
+        ecarts_traces.append(val / q_ech)
         ecrire(qx + qw + 12, y + 1, _fr(val, 4), 0, GRIS)
+    ecrire(66, 650,
+           "le désaccord CUMULÉ le plus grand, en écarts-types PAR COUTURE,", 0, GRIS)
     ecrire(66, 664,
-           f"le pire désaccord d'une paire, en écarts-types, contre une gaussienne de "
-           f"{q['les_coutures_de_reference']} tirages", 0, GRIS)
-    ecrire(66, 690,
-           f"la normalité est REFUSÉE : la moitié des paires dépasse ce qu'une gaussienne fait de "
-           f"pire ✗", 0, ALERTE)
-    ecrire(66, 714,
+           f"contre une MARCHE gaussienne de {q['les_coutures_de_reference']} pas", 0, GRIS)
+    ecrire(66, 678,
+           f"l'excursion NE dépasse PAS une marche aléatoire : "
+           f"{q['les_tirages_au_moins_aussi_forts']}/{q['tirages']} marches vont au moins aussi "
+           f"loin", 0, BON)
+    ecrire(66, 700,
+           "⚠⚠ une première version comparait ce CUMUL au maximum d'un ÉCHANTILLON gaussien "
+           "(environ trois) et", 0, ALERTE)
+    ecrire(66, 716,
+           "concluait à l'envers : le nombre était juste, son repère appartenait à une autre "
+           "quantité", 0, ALERTE)
+    ecrire(66, 738,
            f"★ un excès d'aplatissement de {_fr(q['lexces_daplatissement_qui_suffirait'], 4)} "
-           f"suffirait à expliquer tout le dépassement", 0, ENCRE)
-    ecrire(66, 732,
-           "sans qu'aucune couture ne soit corrélée — les deux défauts ne sont PAS séparés ici",
-           0, ENCRE)
+           f"suffirait à expliquer le dépassement — c'est `217` qui le mesure", 0, ENCRE)
 
     # ── PANNEAU 4 · L'ETALON ──────────────────────────────────────────────────────────────────
     panneau(700, 428, 1310, 762, "L'ÉTALON · ce que chaque épreuve peut, et ne peut PAS, distinguer")
@@ -286,7 +299,7 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list]:
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     img.save(sortie)
-    return sortie, poses, cadres, barres, points
+    return sortie, poses, cadres, barres, points, ecarts_traces
 
 
 def verifier(json_path: Path, sortie: Path) -> int:
@@ -305,7 +318,7 @@ def verifier(json_path: Path, sortie: Path) -> int:
 
     d = lire(json_path)
     tmp = sortie.parent / ".sonde_216.png"
-    _, poses, cadres, barres, points = dessiner(d, tmp)
+    _, poses, cadres, barres, points, ecarts = dessiner(d, tmp)
 
     v("★★★ le titre LIT le verdict au lieu de le recalculer",
       ("SOUS-ESTIMÉES" in le_titre(d))
@@ -328,10 +341,15 @@ def verifier(json_path: Path, sortie: Path) -> int:
       str([x for x in barres if x[0] > x[1] + 1e-6])[:160])
     v("★★★ tout ce qui est tracé reste dans la toile",
       all(0 <= x <= 1360 and 0 <= y <= 980 for x, y in points))
+    v("★★★★ aucune barre de l'excursion n'est ÉCRÊTÉE — une barre écrêtée ne déborde jamais, donc "
+      "la sonde des débordements reste verte pendant qu'elle affirme une valeur plus petite que la "
+      "sienne",
+      all(x <= 1.0 + 1e-9 for x in ecarts) and max(ecarts) > 0.9,
+      f"le plus grand écart tracé vaut {max(ecarts):.4f}")
 
     txt = " ".join(t for _, _, t, _ in poses)
     b, f, q, et = (d["lepreuve_du_budget"], d["lepreuve_de_la_forme"],
-                   d["le_controle_des_queues"], d["letalon"])
+                   d["le_controle_de_lexcursion"], d["letalon"])
     v("★★★★ elle porte le rapport ET le compte de tirages — un rapport seul ne dit pas s'il est "
       "remarquable",
       _fr(b["le_rapport"], 4) in txt
@@ -343,10 +361,13 @@ def verifier(json_path: Path, sortie: Path) -> int:
     v("★★★★ elle porte le refus du khi-deux naïf avec les DEUX rapports",
       _fr(d["le_refus_du_khi_deux_naif"]["le_rapport_naif"], 4) in txt
       and _fr(d["le_refus_du_khi_deux_naif"]["lecart_relatif"], 4) in txt)
-    v("★★★★ elle porte le contrôle des queues AVEC sa référence gaussienne — les queues seules ne "
-      "voudraient rien dire sans ce à quoi elles sont comparées",
+    v("★★★★ elle porte l'excursion AVEC la marche à laquelle elle est comparée — un cumul seul ne "
+      "voudrait rien dire, et c'est exactement la faute que la première version a commise",
       _fr(q["le_rapport_median"], 4) in txt
-      and _fr(q["la_reference_gaussienne_la_plus_forte"], 4) in txt)
+      and _fr(q["la_marche_gaussienne_la_plus_forte"], 4) in txt)
+    v("★★★★ et elle DIT que la première version comparait à un échantillon — effacer la correction "
+      "laisserait un lecteur refaire la même lecture",
+      "ÉCHANTILLON gaussien" in txt and "à l'envers" in txt)
     v("★★★★ elle porte l'excès d'aplatissement qui suffirait, sans lequel la seconde hypothèse de "
       "la formule resterait invisible",
       _fr(q["lexces_daplatissement_qui_suffirait"], 4) in txt)

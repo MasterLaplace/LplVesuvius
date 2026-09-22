@@ -11,6 +11,8 @@
   "la_garantie_par_epreuve": 0.025,
   "ce_que_211_a_rendu": {
     "197-199": {
+      "le_plus_grand_ecart_par_couture_en_voxels": 16.7733,
+      "le_plus_grand_ecart_en_ecarts_types": 5.1351,
       "combien_de_coutures_du_troncon": 166,
       "les_coutures_communes": 246,
       "les_troncons_communs": 4,
@@ -18,6 +20,8 @@
       "lecart_type_sur_toutes_les_communes_en_voxels": 3.4004
     },
     "198-197": {
+      "le_plus_grand_ecart_par_couture_en_voxels": 14.7935,
+      "le_plus_grand_ecart_en_ecarts_types": 5.2539,
       "combien_de_coutures_du_troncon": 105,
       "les_coutures_communes": 242,
       "les_troncons_communs": 7,
@@ -25,6 +29,8 @@
       "lecart_type_sur_toutes_les_communes_en_voxels": 2.7138
     },
     "198-199": {
+      "le_plus_grand_ecart_par_couture_en_voxels": 15.0661,
+      "le_plus_grand_ecart_en_ecarts_types": 4.5463,
       "combien_de_coutures_du_troncon": 105,
       "les_coutures_communes": 239,
       "les_troncons_communs": 6,
@@ -38,9 +44,9 @@
     "le_facteur_sur_lerreur": 1.4942,
     "les_tirages_au_moins_aussi_forts": 0,
     "lexces_daplatissement_qui_suffirait": 2.465,
-    "le_rapport_de_queue_le_plus_grand": 26.4595,
-    "le_rapport_de_queue_median": 11.495,
-    "la_reference_gaussienne_la_plus_forte": 3.9144
+    "lexcursion_mediane_de_216": 11.495,
+    "la_marche_gaussienne_mediane_de_216": 13.382,
+    "les_coutures_de_reference_de_216": 239
   },
   "lepreuve_des_decalages": {
     "197-199": {
@@ -352,6 +358,38 @@
       "le_tau_implique_au_plus": 1.394,
       "le_tau_implique_au_moins": 0.3194,
       "il_reste_de_la_place_pour_une_dependance": true
+    }
+  },
+  "le_controle_du_pire_ecart": {
+    "197-199": {
+      "decidable": true,
+      "combien_de_coutures": 166,
+      "tirages": 19,
+      "le_pire_ecart_en_ecarts_types": 5.1351,
+      "lechantillon_gaussien_median": 3.1175,
+      "lechantillon_gaussien_le_plus_fort": 3.524,
+      "les_tirages_au_moins_aussi_forts": 0,
+      "le_pire_ecart_depasse_une_gaussienne": true
+    },
+    "198-197": {
+      "decidable": true,
+      "combien_de_coutures": 105,
+      "tirages": 19,
+      "le_pire_ecart_en_ecarts_types": 5.2539,
+      "lechantillon_gaussien_median": 2.7459,
+      "lechantillon_gaussien_le_plus_fort": 3.4904,
+      "les_tirages_au_moins_aussi_forts": 0,
+      "le_pire_ecart_depasse_une_gaussienne": true
+    },
+    "198-199": {
+      "decidable": true,
+      "combien_de_coutures": 105,
+      "tirages": 19,
+      "le_pire_ecart_en_ecarts_types": 4.5463,
+      "lechantillon_gaussien_median": 2.7459,
+      "lechantillon_gaussien_le_plus_fort": 3.4904,
+      "les_tirages_au_moins_aussi_forts": 0,
+      "le_pire_ecart_depasse_une_gaussienne": true
     }
   },
   "letalon": {
