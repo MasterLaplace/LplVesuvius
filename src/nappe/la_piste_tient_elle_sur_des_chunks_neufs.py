@@ -187,7 +187,6 @@ def etiqueter(volumes, combien: int = DEPARTS_PAR_COUCHE, cote: int = COTE_DU_TR
             "refuses": [s_.get("refuses") for s_ in segs],
             "chunks_etiquetes": n, "chunks_qui_retiennent": k,
             "letalon_voit_a_ce_compte": letalon_voit_il(n, k, replicats, tirages),
-            "la_montee_du_compte": montee,
             "le_compte_suffit": bool(assez_de_chunks(n, k, replicats, tirages)),
             "lignes": lignes}
 
