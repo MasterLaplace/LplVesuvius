@@ -3384,6 +3384,14 @@ toutes positives de **2,5882** à **7,097 voxels carrés**, et pourtant un pire 
 **3,6279 erreurs** sur la paire **206-214**
 contre un résidu médian de **0,8039**. À trois rangées le système
 était exactement déterminé et ne pouvait rien réfuter ; neuf rangées changent la nature de l'objet.
+⚠⚠ **Et un chiffre du §8 de son document n'a PAS de producteur** : le taux de faux **0,105** de la
+statistique plus puissante qui a été refusée vient d'une exécution de développement que le code
+livré ne refait pas. Il se lit comme les taux publiés par la tranche (**0/171**), et rien ne le
+distingue d'eux. ⚠ La note est ici et non dans le document parce que rien dans `docs/archive/` ne
+se modifie ; ce qu'elle appelle est de porter la règle réfutée comme CONTRÔLE NOMMÉ, à la manière
+dont `214` porte déjà celle de `211`, pour que le nombre soit rendu au lieu d'être rappelé.
+⚠ `chiffres_sans_record` ne pouvait pas l'attraper, et sa docstring le dit : il rapproche par les
+chiffres, donc une écriture courte peut être adossée par COÏNCIDENCE.
 ⭐⭐⭐⭐ **Donc la hauteur cesse d'être gratuite, et ce n'est PAS la distance qui la rend payante.**
 `R4-P59` est **répondue par la négative**, et `R4-P60` s'ouvre, plus étroite que celle qu'elle
 remplace : qu'est-ce qui rompt l'additivité sans être la distance ? Le résidu **nomme sa paire**,
