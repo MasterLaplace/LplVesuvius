@@ -2,6 +2,13 @@
 
 *La formule d'erreur de toute la chaîne suppose une gaussienne, et la matière n'en est pas une — `211` le montrait depuis le premier jour.*
 
+> ⚠⚠ **CORRIGÉ ET CONCLU LE 2026-09-22, AUCUNE MESURE CHANGÉE.** Au §8, « un désaccord par couture à
+> vingt-six écarts-types » citait sous ce nom l'excursion **cumulée** la plus extrême de `216` — la
+> confusion même que ce document corrige chez `216` ; le pire écart **par couture** vaut **5,2539**.
+> Au §10, une ligne tronquée en double est retirée. Et la question que le §10 ouvre est tranchée par
+> `218` : les extrêmes viennent de deux colonnes, chacune portée en apparence par une seule rangée,
+> et trois rangées ne peuvent pas dire si c'est un saut — il en faut cinq.
+
 ![Pourquoi l'erreur déclarée est trop petite](../images/217_pourquoi_lerreur_declaree_est_trop_petite.png)
 
 ## 0. Pourquoi cette tranche
@@ -208,7 +215,9 @@ c'est une propriété de la matière lue, pas une constante.
 - ⚠ Elle mesure trois paires, toutes **voisines** sur le treillis (197, 198, 199). Rien ne dit que
   l'aplatissement est le même pour des rangées écartées, et `214` publie des maxima par paire qui
   varient d'un facteur huit.
-- ⚠ Elle ne dit pas **d'où** viennent les queues. Un désaccord par couture à vingt-six écarts-types
+- ⚠ Elle ne dit pas **d'où** viennent les queues. ~~Un désaccord par couture à vingt-six écarts-types~~
+  *(corrigé le 2026-09-22 : vingt-six est une excursion cumulée de `216` ; le pire écart par couture
+  vaut **5,2539**)* Un écart par couture à cinq écarts-types
   est un événement physique, pas une fluctuation, et le nommer demanderait de regarder où il se
   produit — ce que la série seule ne permet pas.
 - ⚠ Le tronçon n'est pas l'ensemble des coutures communes : **105** contiguës sur **242** pour
@@ -276,7 +285,6 @@ pas de place pour une dépendance importante en plus. Le remède est écrit et n
 
 ⭐ Ce qui s'ouvre est la relecture : **chaque borne publiée « en erreurs » par `208`–`215` se relit
 avec un facteur qui vaut ici de 1,87 à 2,18**, et qui n'a aucune raison d'être le même ailleurs.
-⚠ Et une question neuve, qui n'existait pas avant cette mesure : **d'où vient un désaccord de
 ⚠ Et une question neuve, qui n'existait pas avant cette mesure : **d'où vient un écart de couture à
 cinq écarts-types ?** Le pire vaut **5,2539** là où le pire de dix-neuf échantillons gaussiens
 atteint **3,4904**, et ce n'est pas un cas isolé puisque l'aplatissement va de **5,0249** à
@@ -284,3 +292,8 @@ atteint **3,4904**, et ce n'est pas un cas isolé puisque l'aplatissement va de 
 probablement des **sauts** — un recalage qui manque une couture — et s'ils le sont, ils ne sont pas
 du bruit du tout : **ils sont le phénomène que le graal doit corriger**, ils sont **localisés**, et
 les compter comme du bruit est exactement ce qui rend toute borne trop optimiste.
+
+> **Note du 2026-09-22 — conclu par `218`.** Aux deux colonnes où tombent ces extrêmes, **161** et
+> **172**, une rangée s'écarte seule pendant que les deux autres s'accordent : la forme d'un saut.
+> Mais trois rangées fabriquent cette forme par hasard, l'épreuve déclarée ne voit pas, et l'étalon dit
+> que cinq rangées trancheraient. Voir `218` §4–§6.

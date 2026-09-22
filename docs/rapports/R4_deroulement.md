@@ -3548,9 +3548,39 @@ Un écart pareil n'est pas une fluctuation gaussienne. Si ce sont des SAUTS — 
 une couture — alors ils ne sont pas du bruit du tout : ils sont le transfert de spire à spire que le
 graal doit corriger sans humain, ils sont LOCALISÉS, et les compter comme du bruit est exactement ce
 qui rend toute borne trop optimiste. ⭐ Et `217` a établi en passant que la mesure ne demande
-**aucune lecture neuve** : `211` publie `les_colonnes_du_troncon` à côté de ses écarts, et les trois
-tronçons se recouvrent. ⚠⚠⚠ Mais le piège est structurel — les trois désaccords **télescopent**,
-donc « les extrêmes coïncident » est une identité arithmétique et non une observation.
+**aucune lecture neuve** : `211` publie les colonnes de chaque marche et le plus long tronçon de chaque
+paire *(`les_colonnes_du_troncon`, d'abord cité ici, est calculé par `211` mais retiré de son JSON —
+corrigé par `218`)*, et les trois tronçons se recouvrent. ⚠⚠⚠ Mais le piège est structurel — les
+trois désaccords **télescopent**, donc « les extrêmes coïncident » est une identité arithmétique et
+non une observation.
+
+**`218` · 2026-09-22 · l'écart extrême est-il porté par une rangée**
+
+⭐⭐⭐⭐ **Aucune lecture neuve** : `211` publie, pour chacune de ses trois rangées, la colonne de chaque
+couture et le cumul de ses pas, et les trois se recouvrent sur **105** colonnes, de **109** à
+**213**. ⚠⚠ Le télescopage sert à VÉRIFIER la lecture — les séries de paires publiées sont exactement
+la différence des pas de rangées —, jamais à conclure.
+⚠⚠⚠ **La porte se trompait deux fois, et c'est écrit avant la mesure.** Une queue propre à une rangée
+est concentrée exactement comme un saut, donc la forme d'une colonne sépare UNE rangée de TOUTES,
+jamais un saut d'une queue ; et le nul qu'elle prescrivait rebrasse comme des séries libres des
+anomalies qui somment à zéro — `R4-F370` : il tire **37/171** = **0,2164** sur du bruit pur et ne
+voit que **2/171** des matières où la règle déclarée voit **56/171**.
+✗ **L'épreuve déclarée ne voit pas** — `R4-F367` : **4** colonnes dépassent le maximum gaussien, leur
+proximité moyenne à l'axe d'une rangée vaut **0,9774** contre **0,9752** pour le rebrassage médian,
+et **8** rebrassages sur **19** font au moins aussi bien.
+⭐⭐⭐ **Mais les extrêmes de `217` ont la forme d'un saut** — `R4-F368` : ils tombent sur deux colonnes
+seulement, **161** et **172**, et à chacune une rangée s'écarte seule — `199` de **10,6337** voxels,
+puis `198` de **-9,2865** — pendant que les deux autres s'accordent à moins d'un écart-type de leur
+désaccord ordinaire. ⚠ Description, pas preuve.
+⭐⭐⭐⭐ **Et l'étalon dit pourquoi le silence n'est pas une réponse** — `R4-F369` : quatre sauts de
+**14,7935** voxels, le plus petit extrême de `217`, sont vus **3/12** à trois rangées et **12/12** à
+cinq. La raison est géométrique (`R4-L21`) : trois axes à soixante degrés couvrent le plan, et une
+direction quelconque passe souvent pour une rangée fautive. L'étalon tient — **12/171** sur le bruit,
+**13/171** sur le piège des queues partagées.
+⭐⭐⭐⭐ **Donc `R4-P63` est conclue : trois rangées ne décident pas, il en faut cinq.** `R4-P64` est la
+plus petite lecture neuve qui tranche — les rangées `196` et `200` sur les mêmes colonnes, et
+l'épreuve de `218` sans retouche. Si elle voit, un vote de voisines désigne et corrige ces écarts :
+c'est ce qui remplace l'humain qui corrige le transfert.
 
 ## 4. Le tableau des statuts
 

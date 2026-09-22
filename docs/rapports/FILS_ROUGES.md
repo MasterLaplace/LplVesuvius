@@ -4,7 +4,7 @@
 
 # Les fils rouges — les lois que ce dépôt a payées
 
-**102 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
+**103 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
 
 ## R1 — 15 lois
 
@@ -208,7 +208,7 @@ L'image de 40 s jamais faite (`50`), l'image qui tranche feuille/tranche (`54` �
 
 `numcodecs` absent → « graine non couverte » (`41`) ; `imagecodecs` absent → LZW illisible (`54`) ; `verifier_zarr.sh` existait, orphelin. Le décodeur lève, il ne rend pas `None`.
 
-## R4 — 20 lois
+## R4 — 21 lois
 
 **R4-L01 · Une limite de grille publiée comme une limite matérielle**
 
@@ -289,6 +289,10 @@ La forme close du tenseur de structure rend la PERPENDICULAIRE aux fibres, et le
 **R4-L20 · Une erreur déclarée est une hypothèse, et elle se met en procès comme le reste**
 
 Un résidu « en erreurs » est un RAPPORT, et une chaîne entière peut n'en interroger que le numérateur. `208`–`215` ont bâti sur `se(V) = V·√(2/(n-1))` sans jamais vérifier ses deux hypothèses — indépendance et normalité des différences par couture. `216` mesure que les résidus portent **2,2325** fois le budget que cette formule autorise (**0**/**19**), donc qu'elle sous-estime l'erreur d'un facteur **1,4942**, et que le pire résidu de `214` tombe de **3,6279** à **2,4281** une fois le budget corrigé. ⭐ LA FORME DU REMÈDE EST GÉNÉRALE ET NE COÛTE RIEN : un ajustement porte sa propre prédiction d'énergie, `E[Λ] = Σ_i Σ_k (I-H)²_{ik}·σ_k²/σ_i²`, donc tout ajustement publié peut dire s'il tient dans le budget de ses propres erreurs, sans aucune mesure neuve. ⚠⚠⚠⚠ ET LA PREMIÈRE FAÇON DONT CETTE LOI A ÉTÉ ILLUSTRÉE ÉTAIT ELLE-MÊME FAUSSE, CE QUI LA REND PLUS VRAIE : `216` comparait le désaccord CUMULÉ le plus grand au maximum d'un ÉCHANTILLON gaussien, alors qu'un cumul se compare à une MARCHE. La preuve existe bel et bien et elle était publiée depuis `211`, mais c'est la série PAR COUTURE qui la porte, et son pire écart vaut **5,2539** écarts-types contre **3,4904** pour le pire de dix-neuf échantillons gaussiens. ⚠⚠⚠ La leçon n'est pas « vérifier l'indépendance » : c'est qu'une formule d'erreur empruntée à un manuel est une AFFIRMATION SUR LA MATIÈRE, et qu'un dépôt qui met ses numérateurs en procès doit y mettre ses dénominateurs ⭐⭐⭐⭐ ET `217` A TRANCHÉ LAQUELLE DES DEUX HYPOTHÈSES EST FAUSSE, SANS AUCUNE LECTURE NEUVE : c'est la NORMALITÉ. La série par couture était publiée par `211` depuis le premier jour, et son aplatissement — **5,0249** à **7,6092** — donne un facteur `(κ+2)/2` dont l'intervalle couvre le dépassement de `216` sur les trois paires. Aucune autocorrélation ne dépasse le rebrassage de sa propre série, et le budget borne toute dépendance résiduelle à **1,6099**. ⚠⚠ LE COROLLAIRE EST LA VRAIE LEÇON : une formule d'erreur de manuel suppose une LOI, et un dépôt qui mesure des choses que personne n'a mesurées n'a aucune raison de tomber sur celle du manuel. Le remède est de MESURER la loi sur ce qui est déjà lu, jamais de la supposer — `se(V) = V·√((κ+2)/n)` ne coûte rien et généralise le cas gaussien.
+
+**R4-L21 · Un vote de voisines demande assez de voisines**
+
+Ce qui remplace l'humain qui corrige un transfert est d'abord un VOTE : là où une rangée s'écarte seule pendant que ses voisines s'accordent, elle est désignée. ⚠⚠⚠ MAIS LA FORME D'UNE COLONNE NE SÉPARE QUE « UNE RANGÉE » DE « TOUTES », jamais un saut d'une queue propre à une rangée — les deux sont portés par une seule rangée, et pour un vote c'est la même chose. ⚠⚠⚠ ET TROIS RANGÉES NE VOTENT PAS : leurs axes sont trois droites à soixante degrés, toute direction est à moins de trente degrés de l'une d'elles, donc une direction quelconque passe souvent pour une fautive (`P(δ ≤ δ0) = δ0/30°` pour du bruit isotrope). `218` le mesure sur la matière : quatre sauts de la taille observée sont vus **3/12** à trois rangées et **12/12** à cinq. ⭐ Le nombre de voisines est donc un paramètre de la LECTURE, pas du traitement, et il se dérive d'un étalon avant de lire. ⚠ Et le nul d'un vote ne rebrasse jamais des anomalies qui somment à zéro comme des séries libres : il tire sur le bruit et rate les sauts (`R4-F370`).
 
 ## R5 — 24 lois
 

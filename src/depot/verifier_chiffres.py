@@ -3194,6 +3194,100 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 218 : L'ECART EXTREME EST-IL PORTE PAR UNE RANGEE ?
+    # (1) ⚠⚠⚠ UNE PROXIMITE NE VOYAGE JAMAIS SANS SON REBRASSAGE. Un `0,9774` nu se lit comme une
+    # forme de saut ; c'est le rebrassage des proximites entre colonnes qui dit s'il est
+    # remarquable, et avec trois rangees il ne l'est pas.
+    # (2) ⚠⚠⚠ UNE COLONNE D'EXTREME NE VOYAGE JAMAIS SANS LES TROIS ANOMALIES ET L'ACCORD DES DEUX
+    # AUTRES : c'est ensemble qu'elles disent « une rangee s'ecarte seule », et une seule dirait
+    # autre chose.
+    # (3) ⚠⚠⚠ UN BARREAU DE L'ECHELLE EN RANGEES NE VOYAGE JAMAIS SANS SON PIEGE : une puissance
+    # sans taux de faux ne dit rien, et c'est tout le verdict.
+    # (4) LA REGLE DE LA PORTE voyage avec la declaree sur les MEMES sauts : c'est leur face-a-face
+    # qui refute le nul prescrit.
+    sxr = _source(racine, "lecart_extreme_est_il_porte_par_une_rangee.json")
+    if sxr.exists():
+        d = json.loads(sxr.read_text())
+
+        def _dec218(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        ep218 = d.get("lepreuve") or {}
+        et218 = d.get("letalon") or {}
+        ve218 = d.get("le_verdict") or {}
+        lu218 = d.get("ce_que_211_a_rendu") or {}
+        for r_, s_ in sorted((d.get("les_bruits_propres_en_voxels") or {}).items()):
+            ajoute(f"le bruit propre de {r_} de 218", float(s_), _dec218(s_), sxr.name,
+                   unites=("vx", "**"))
+        for cle, nom in (("le_seuil_denergie", "le seuil d énergie"),
+                         ("lenergie_la_plus_forte", "l énergie la plus forte"),
+                         ("la_proximite_observee", "la proximité observée"),
+                         ("la_proximite_du_nul_mediane", "la proximité du nul médiane"),
+                         ("la_proximite_du_nul_la_plus_forte", "la proximité du nul la plus forte")):
+            if ep218.get(cle) is not None:
+                ajoute(f"{nom} de 218", float(ep218[cle]), _dec218(ep218[cle]), sxr.name,
+                       unites=("**",))
+        if ep218.get("les_tirages_au_moins_aussi_forts") is not None:
+            out.append(("les rebrassages au moins aussi forts de 218",
+                        [f"**{ep218['les_tirages_au_moins_aussi_forts']}** rebrassages sur "
+                         f"**{ep218['tirages']}**"], sxr.name))
+        if lu218.get("la_premiere_colonne") is not None:
+            out.append(("les colonnes communes de 218",
+                        [f"**{lu218['combien_de_colonnes']}** colonnes, de "
+                         f"**{lu218['la_premiere_colonne']}** à **{lu218['la_derniere_colonne']}**"],
+                        sxr.name))
+        pc218 = d.get("par_colonne") or {}
+        seuil218 = float(ep218.get("le_seuil_denergie") or 0.0)
+        for c_, e_, p_ in zip(pc218.get("les_colonnes") or [], pc218.get("les_energies") or [],
+                              pc218.get("les_proximites") or []):
+            if float(e_) > seuil218:
+                ajoute(f"l énergie de la colonne {c_} de 218", float(e_), _dec218(e_), sxr.name,
+                       unites=("**",))
+                ajoute(f"la proximité de la colonne {c_} de 218", float(p_), _dec218(p_),
+                       sxr.name, unites=("**",))
+        for nom_, x_ in sorted((d.get("le_detail_des_extremes") or {}).items()):
+            if not x_.get("dans_le_recouvrement"):
+                continue
+            for r_, a_ in sorted(x_["les_anomalies_en_voxels"].items()):
+                ajoute(f"l anomalie de {r_} à l extrême de {nom_} de 218", float(a_),
+                       _dec218(a_), sxr.name, unites=("**",))
+            a2_ = x_["le_desaccord_des_deux_autres_en_ecarts_types"]
+            ajoute(f"l accord des deux autres à l extrême de {nom_} de 218", float(a2_),
+                   _dec218(a2_), sxr.name, unites=("σ", "**"))
+        for cle, nom in (("lamplitude_des_sauts_en_voxels", "l amplitude des sauts"),
+                         ("laplatissement_du_piege", "l aplatissement du piège")):
+            if et218.get(cle) is not None:
+                ajoute(f"{nom} de 218", float(et218[cle]), _dec218(et218[cle]), sxr.name,
+                       unites=("voxels", "**"))
+        for cle, nom in (("le_faux", "le faux"), ("le_piege", "le piège"),
+                         ("la_queue_propre", "la queue propre"),
+                         ("la_regle_de_la_porte_sur_du_bruit", "la porte sur du bruit"),
+                         ("la_regle_de_la_porte_sur_des_sauts", "la porte sur des sauts"),
+                         ("la_regle_declaree_sur_les_memes_sauts", "la déclarée sur les sauts")):
+            t_ = et218.get(cle) or {}
+            if t_.get("sur"):
+                out.append((f"les tirs de {nom} de 218", [f"{t_['les_vus']}/{t_['sur']}"],
+                            sxr.name))
+                ajoute(f"le taux de {nom} de 218", float(t_["le_taux"]), _dec218(t_["le_taux"]),
+                       sxr.name, unites=("**",))
+        for b_ in (et218.get("lechelle_en_rangees") or []):
+            ajoute(f"le piège à {b_['combien_de_rangees']} rangées de 218",
+                   float(b_["le_taux_sur_le_piege"]), _dec218(b_["le_taux_sur_le_piege"]),
+                   sxr.name, unites=("**",))
+            out.append((f"les vus à {b_['combien_de_rangees']} rangées de 218",
+                        [f"**{b_['les_vus']}/{b_['sur']}**"], sxr.name))
+        for b_ in (et218.get("lechelle_en_sauts") or []):
+            out.append((f"les vus à {b_['combien_de_sauts']} sauts de 218",
+                        [f"**{b_['les_vus']}/{b_['sur']}**"], sxr.name))
+        if ve218.get("le_plus_petit_nombre_de_rangees_qui_voit") is not None:
+            out.append(("le nombre de rangées qu il faut de 218",
+                        [f"IL EN FAUT {ve218['le_plus_petit_nombre_de_rangees_qui_voit']}"],
+                        sxr.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 217 : POURQUOI L'ERREUR DECLAREE EST TROP PETITE
     # (1) ⚠⚠⚠ UNE AUTOCORRELATION NE VOYAGE JAMAIS SANS SON COMPTE DE REBRASSAGES. Un `0,3038` nu
     # se lit comme une dependance ; c'est le rebrassage de sa PROPRE serie qui dit s'il est
