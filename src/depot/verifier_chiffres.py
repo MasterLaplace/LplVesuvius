@@ -3194,6 +3194,92 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 219 : CINQ RANGEES DESIGNENT-ELLES LA FAUTIVE ?
+    # (1) ⚠⚠⚠ UNE PROXIMITE NE VOYAGE JAMAIS SANS SON REBRASSAGE, comme chez `218`.
+    # (2) ⚠⚠⚠ LES QUATRE MATIERES DE L'ATTRIBUTION VOYAGENT ENSEMBLE : c'est leur comparaison, et non
+    # l'une d'elles, qui dit que ce sont les rangees et pas les colonnes.
+    # (3) ⚠⚠ LA QUEUE PROPRE VOYAGE AVEC LE VERDICT : elle est ce qui interdit de lire « un saut ».
+    s219 = _source(racine, "cinq_rangees_designent_elles_la_fautive.json")
+    if s219.exists():
+        d = json.loads(s219.read_text())
+
+        def _dec219(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        ep219 = d.get("lepreuve") or {}
+        et219 = d.get("letalon") or {}
+        if d.get("combien_de_colonnes") is not None:
+            out.append(("les colonnes communes de 219",
+                        [f"**{d['combien_de_colonnes']}**, de **{d['la_premiere_colonne']}** à"],
+                        s219.name))
+            out.append(("les colonnes fortes de 219",
+                        [f"**{ep219['combien_de_colonnes_fortes']}** colonnes"], s219.name))
+        lues219 = [int(x["colonnes_lues"]) for x in (d.get("les_lignes") or {}).values()]
+        if lues219:
+            dem = int(next(iter(d["les_lignes"].values()))["colonnes_demandees"])
+            out.append(("les chunks lus par rangée de 219",
+                        [f"de **{min(lues219)}** à **{max(lues219)}** sur **{dem}**"], s219.name))
+        for r_, s_ in sorted((d.get("les_bruits_propres_en_voxels") or {}).items()):
+            ajoute(f"le bruit propre de {r_} de 219", float(s_), _dec219(s_), s219.name,
+                   unites=("vx", "**"))
+        for cle, nom in (("le_seuil_denergie", "le seuil d énergie"),
+                         ("lenergie_la_plus_forte", "l énergie la plus forte"),
+                         ("la_proximite_observee", "la proximité observée"),
+                         ("la_proximite_du_nul_mediane", "la proximité du nul médiane"),
+                         ("la_proximite_du_nul_la_plus_forte", "la proximité du nul la plus forte")):
+            if ep219.get(cle) is not None:
+                ajoute(f"{nom} de 219", float(ep219[cle]), _dec219(ep219[cle]), s219.name,
+                       unites=("**",))
+        pc219 = d.get("par_colonne") or {}
+        seuil219 = float(ep219.get("le_seuil_denergie") or 0.0)
+        for c_, e_, p_ in zip(pc219.get("les_colonnes") or [], pc219.get("les_energies") or [],
+                              pc219.get("les_proximites") or []):
+            if float(e_) > seuil219:
+                ajoute(f"l énergie de la colonne {c_} de 219", float(e_), _dec219(e_), s219.name,
+                       unites=("**",))
+                ajoute(f"la proximité de la colonne {c_} de 219", float(p_), _dec219(p_),
+                       s219.name, unites=("**",))
+        for col_, x_ in sorted((d.get("le_detail_aux_colonnes_de_218") or {}).items()):
+            if not x_.get("lue_par_les_cinq"):
+                continue
+            for r_, a_ in sorted(x_["les_anomalies_en_voxels"].items()):
+                ajoute(f"l anomalie de {r_} à la colonne {col_} de 219", float(a_), _dec219(a_),
+                       s219.name, unites=("**",))
+        for cle, nom in (("les_trois_rangees_de_211_sur_toutes_leurs_colonnes", "à trois rangées"),
+                         ("sur_les_colonnes_de_218", "sur les colonnes de 218")):
+            x_ = d.get(cle) or {}
+            if not x_.get("decidable"):
+                continue
+            ajoute(f"la proximité observée {nom} de 219", float(x_["la_proximite_observee"]),
+                   _dec219(x_["la_proximite_observee"]), s219.name, unites=("**",))
+            ajoute(f"la proximité du nul médiane {nom} de 219",
+                   float(x_["la_proximite_du_nul_mediane"]),
+                   _dec219(x_["la_proximite_du_nul_mediane"]), s219.name, unites=("**",))
+            out.append((f"les rebrassages {nom} de 219",
+                        [f"**{x_['les_tirages_au_moins_aussi_forts']}/{x_['tirages']}**"],
+                        s219.name))
+        for cle, nom in (("le_faux", "le faux"), ("le_piege", "le piège"),
+                         ("la_queue_propre", "la queue propre"),
+                         ("la_regle_de_la_porte_sur_du_bruit", "la porte sur du bruit"),
+                         ("la_regle_de_la_porte_sur_des_sauts", "la porte sur des sauts"),
+                         ("la_regle_declaree_sur_les_memes_sauts", "la déclarée sur les sauts")):
+            t_ = et219.get(cle) or {}
+            if t_.get("sur"):
+                out.append((f"les tirs de {nom} de 219", [f"**{t_['les_vus']}/{t_['sur']}**"],
+                            s219.name))
+                ajoute(f"le taux de {nom} de 219", float(t_["le_taux"]), _dec219(t_["le_taux"]),
+                       s219.name, unites=("**",))
+        for b_ in (et219.get("lechelle_en_rangees") or []):
+            out.append((f"les vus à {b_['combien_de_rangees']} rangées de 219",
+                        [f"**{b_['les_vus']}/{b_['sur']}**"], s219.name))
+        for b_ in (et219.get("lechelle_en_sauts") or []):
+            out.append((f"les vus à {b_['combien_de_sauts']} sauts de 219",
+                        [f"**{b_['les_vus']}/{b_['sur']}**"], s219.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 218 : L'ECART EXTREME EST-IL PORTE PAR UNE RANGEE ?
     # (1) ⚠⚠⚠ UNE PROXIMITE NE VOYAGE JAMAIS SANS SON REBRASSAGE. Un `0,9774` nu se lit comme une
     # forme de saut ; c'est le rebrassage des proximites entre colonnes qui dit s'il est

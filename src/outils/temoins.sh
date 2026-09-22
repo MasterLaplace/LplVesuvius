@@ -1576,6 +1576,8 @@ run "pourquoi l erreur declaree est trop petite" uv run python "$ROOT/src/nappe/
 run "figure pourquoi l erreur declaree est trop petite" uv run python "$ROOT/src/figures/figure_pourquoi_lerreur_declaree_est_trop_petite.py" --verifier
 run "l ecart extreme et la rangee" uv run python "$ROOT/src/nappe/lecart_extreme_est_il_porte_par_une_rangee.py" --verifier
 run "figure l ecart extreme et la rangee" uv run python "$ROOT/src/figures/figure_lecart_extreme_est_il_porte_par_une_rangee.py" --verifier
+run "cinq rangees et la fautive" uv run python "$ROOT/src/nappe/cinq_rangees_designent_elles_la_fautive.py" --verifier
+run "figure cinq rangees et la fautive" uv run python "$ROOT/src/figures/figure_cinq_rangees_designent_elles_la_fautive.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

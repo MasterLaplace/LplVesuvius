@@ -3582,6 +3582,29 @@ plus petite lecture neuve qui tranche — les rangées `196` et `200` sur les m�
 l'épreuve de `218` sans retouche. Si elle voit, un vote de voisines désigne et corrige ces écarts :
 c'est ce qui remplace l'humain qui corrige le transfert.
 
+**`219` · 2026-09-22 · cinq rangées désignent-elles la fautive**
+
+⭐⭐⭐⭐ **La plus petite lecture neuve qui décide, et l'épreuve importée de `218` sans retouche.** Le
+nombre de rangées est celui que l'étalon de `218` rend, les rangées sont la médiane de `211` et ses
+voisines, `196` à `200`, sur **227** colonnes communes. ⚠⚠⚠ Les trois rangées de `211` sont RELUES
+avec les deux nouvelles et retombent exactement sur ses pas (écart **0**) : cinq rangées lues
+aujourd'hui sont comparables à trois lues hier.
+⭐⭐⭐⭐ **L'épreuve voit** — `R4-F371` : **14** colonnes fortes, proximité moyenne **0,8697** contre
+**0,8299** pour le rebrassage médian, **0** rebrassage sur **19** n'y arrive. Les écarts de couture
+extrêmes sont portés par une rangée à la fois, et les colonnes fortes désignent les cinq rangées sans
+en privilégier aucune. ⚠⚠ Pas toutes : la plus énergique, **32**, n'est portée par aucune rangée.
+⭐⭐⭐ **Aux deux colonnes de `218`, la même rangée** — `R4-F372` : `199` à la colonne **161**, `198` à la
+**172**, avec quatre voisines qui s'accordent au lieu de deux.
+⭐⭐⭐⭐ **Et ce sont les rangées qui décident** — `R4-F373` : trois rangées ne voient pas même sur
+**238** colonnes (**7/19**), cinq voient même sur les **99** colonnes de `218` (**0/19**). ⚠ Ce contrôle
+a été ajouté après la mesure pour attribuer le gain, et c'est dit. `R4-L21` est confirmée.
+⚠⚠⚠ Ce qui est établi est « une rangée à la fois », pas « un saut » : une queue propre à une rangée
+fait tirer la règle **95/171** fois. Pour un vote de voisines, c'est la même chose.
+⭐⭐⭐⭐ **Donc `R4-P64` est répondue, et la tranche du graal qui désigne le transfert faux a bougé.**
+L'autre moitié s'ouvre, `R4-P65` : corrigées par ce vote, deux rangées restent-elles sur le même
+feuillet ? Sans lecture neuve, avec un nul écrit d'avance — la même correction appliquée à une autre
+rangée que celle que le vote désigne.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
