@@ -3495,6 +3495,52 @@ précède : chaque borne publiée « en erreurs » par `208`–`215` se relit av
 qui dira laquelle des deux hypothèses est fausse est la plus PETITE lecture neuve de la campagne —
 la série par couture d'une seule paire de rangées voisines.
 
+**`217` · 2026-09-22 · pourquoi l'erreur déclarée est trop petite**
+
+⭐⭐⭐⭐ **La série qu'il fallait était publiée par `211` depuis le premier jour**, et personne ne
+l'avait lue ainsi : `les_ecarts_de_pas_du_troncon_en_voxels`, la suite des désaccords couture par
+couture le long d'un tronçon CONTIGU, pour trois paires. `R4-P62` n'a donc demandé **aucune lecture
+neuve du volume**. ⚠ La série est vérifiée contre l'écart-type que `211` publie à côté d'elle,
+sinon lire une autre suite sous ce nom serait `R4-L19` une fois de plus.
+⚠⚠⚠ **La statistique d'abord déclarée est refusée, et pour un PLANCHER** — `R4-F361` : le temps
+d'autocorrélation par la règle de la suite initiale positive vaut **1** exactement dès que la
+première paire est négative, donc son nul s'empile au même plancher et l'épreuve ne peut pas se
+déclencher. ⭐ Le refus se démontre **sans regarder la moindre donnée**, ce qui est exactement ce
+qui rend le remplacement légitime — le précédent est la somme par rangée de `215`.
+✗ **Aucune dépendance, ni courte ni longue** — `R4-F362` : à portée courte
+**16**, **6** et **18** rebrassages sur
+**19** font au moins aussi fort ; à portée longue **7**,
+**10** et **9**. ⚠⚠ La portée longue est un CONTRÔLE et non le
+verdict, parce que la famille déclarée ne voit pas au-delà de la racine du nombre de points, et que
+le suspect physique — la dérive partagée de `208` — est de longue portée.
+⭐⭐⭐⭐ **Ce sont les QUEUES, et elles suffisent** — `R4-F363` : l'aplatissement vaut
+**5,0249**, **7,2237** et **7,6092**,
+donc le facteur des seules queues vaut **3,5125**, **4,6118**
+et **4,8046**, et leurs intervalles par blocs couvrent le rapport
+**2,2325** de `216` sur **3** paires sur **3**.
+⚠⚠⚠ C'est une PRÉDICTION FALSIFIABLE : `216` a mesuré ce rapport sur des résidus, sans jamais
+regarder une série par couture.
+⚠⚠⚠ **Mais l'épreuve des décalages NE BORNE RIEN, et l'étalon le dit** — `R4-F364` : sur des séries
+de **105** points, aucune force injectée n'est vue par les
+**12** réplicats — la volatilité stochastique plafonne à **7/12**
+à φ=**0,98**, l'échelle lente à **5/12**. ⭐ La raison est structurelle
+et c'est un RÉSULTAT : le nul hérite des valeurs extrêmes de la série, donc **des queues lourdes
+détruisent la puissance à détecter une dépendance**. Le piège — queues sans dépendance — ne fait
+tirer la règle que **9/171** = **0,0526**.
+⭐⭐ **La borne vient donc du BUDGET** : inverser la décomposition donne un `τ` impliqué d'au plus
+**1,6099**, donc pas de place pour une dépendance importante en plus des
+queues. Ce n'est pas une troisième épreuve, c'est l'inversion des deux déclarées.
+★★★★ **Et le remède tient en une ligne** — `R4-F365` : `se(V) = V·√((κ+2)/n)` généralise la formule
+déclarée, dont elle est le cas `κ = 0`, et ne demande que l'aplatissement de ce qui est déjà lu. Sur
+les trois paires il vaut **1,8685**, **2,1373** et
+**2,1815** fois l'erreur déclarée.
+⭐⭐⭐⭐ **Donc `R4-P62` est répondue : c'est la normalité qui est fausse, pas l'indépendance.** Et
+`R4-P63` s'ouvre, la plus proche du graal de toute la chaîne : **d'où vient un désaccord de couture à
+vingt-six écarts-types ?** Un tel événement n'est pas une fluctuation. Si ce sont des SAUTS — un
+recalage qui manque une couture — alors ils ne sont pas du bruit du tout : ils sont le transfert de
+spire à spire que le graal doit corriger sans humain, ils sont LOCALISÉS, et les compter comme du
+bruit est exactement ce qui rend toute borne trop optimiste.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

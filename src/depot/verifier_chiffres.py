@@ -3194,6 +3194,116 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 217 : POURQUOI L'ERREUR DECLAREE EST TROP PETITE
+    # (1) ⚠⚠⚠ UNE AUTOCORRELATION NE VOYAGE JAMAIS SANS SON COMPTE DE REBRASSAGES. Un `0,3038` nu
+    # se lit comme une dependance ; c'est le rebrassage de sa PROPRE serie qui dit s'il est
+    # remarquable, et sur cette matiere il ne l'est pas.
+    # (2) ⚠⚠⚠ UN FACTEUR DE QUEUES NE VOYAGE JAMAIS SANS SON INTERVALLE NI SANS LE RAPPORT DE
+    # `216`. Le resultat de la tranche EST leur rencontre : un facteur seul serait une estimation
+    # tres incertaine presentee comme une mesure, et le rapport seul n'aurait rien a predire.
+    # (3) ⚠⚠ UNE PORTEE COURTE NE VOYAGE JAMAIS SANS LA LONGUE. La famille declaree ne voit pas
+    # au-dela de la racine de `n`, et le suspect physique — une derive partagee — est de longue
+    # portee : publier la seule courte laisserait croire que la question a ete tranchee.
+    # (4) ⚠⚠⚠ UN BARREAU DE L'ETALON NE VOYAGE JAMAIS SANS SON SCORE, parce que c'est la SATURATION
+    # qui est le resultat : aucune force n'est vue par tous les replicats, donc l'epreuve ne borne
+    # rien, et un barreau sans son compte effacerait precisement ce fait.
+    # (5) UNE ERREUR CORRIGEE ne voyage jamais sans la DECLAREE : c'est leur rapport qui est publie.
+    spt = _source(racine, "pourquoi_lerreur_declaree_est_trop_petite.json")
+    if spt.exists():
+        d = json.loads(spt.read_text())
+
+        def _dec217(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        q217 = d.get("ce_que_216_a_rendu") or {}
+        ve217 = d.get("le_verdict") or {}
+        et217 = d.get("letalon") or {}
+        for src_, cle, nom, unites in (
+                (q217, "les_tirages_au_moins_aussi_forts",
+                 "les tirages de 216 au moins aussi forts", ("**",)),
+                (ve217, "combien_de_paires_couvrent_le_rapport_de_216",
+                 "les paires qui couvrent le rapport de 216", ("paires", "/")),
+                (ve217, "combien_de_paires_mesurees", "les paires mesurées", ("paires",)),
+                (et217, "les_coutures_par_serie", "les coutures par série", ("points",)),
+                (et217, "les_replicats", "les réplicats d un barreau", ("**",)),
+                (et217, "le_compte_decisif", "le compte décisif", ("**",)),
+                (et217, "les_faux", "les faux de l étalon", ("**",)),
+                (et217, "les_tirs_sur_le_piege", "les tirs sur le piège", ("**",)),
+                (et217, "laplatissement_du_piege", "l aplatissement du piège", ("**",))):
+            if src_.get(cle) is not None:
+                ajoute(f"{nom} de 217", int(src_[cle]), 0, spt.name, unites=unites)
+        for src_, cle, nom, unites in (
+                (d, "la_garantie_du_nul", "la garantie du nul", ("**",)),
+                (q217, "le_rapport", "le rapport de 216", ("**",)),
+                (q217, "lexces_daplatissement_qui_suffirait",
+                 "l excès d aplatissement qui suffirait", ("**",)),
+                (q217, "le_rapport_de_queue_le_plus_grand",
+                 "le rapport de queue le plus grand", ("**",)),
+                (q217, "le_rapport_de_queue_median", "le rapport de queue médian", ("**",)),
+                (q217, "la_reference_gaussienne_la_plus_forte",
+                 "la référence gaussienne la plus forte", ("**",)),
+                (ve217, "le_tau_implique_le_plus_grand", "le τ impliqué le plus grand", ("**",)),
+                (et217, "le_taux_de_faux", "le taux de faux", ("**",)),
+                (et217, "le_taux_sur_le_piege", "le taux sur le piège", ("**",))):
+            if src_.get(cle) is not None:
+                ajoute(f"{nom} de 217", float(src_[cle]), _dec217(src_[cle]), spt.name,
+                       unites=unites)
+        # ⚠⚠ CHAQUE PAIRE PORTE SES SIX NOMBRES ENSEMBLE — courte et longue, kappa et facteur,
+        # declaree et corrigee — parce que chacun se lit faux sans celui qui l'accompagne.
+        for nom_, f_ in sorted((d.get("lepreuve_des_queues") or {}).items()):
+            if not f_.get("decidable"):
+                continue
+            ajoute(f"l aplatissement de {nom_} de 217", float(f_["lexces_daplatissement"]),
+                   _dec217(f_["lexces_daplatissement"]), spt.name, unites=("**",))
+            ajoute(f"le facteur des queues de {nom_} de 217", float(f_["le_facteur_des_queues"]),
+                   _dec217(f_["le_facteur_des_queues"]), spt.name, unites=("**",))
+            for i_, bout in enumerate(("basse", "haute")):
+                ajoute(f"la borne {bout} de {nom_} de 217", float(f_["lintervalle_par_blocs"][i_]),
+                       _dec217(f_["lintervalle_par_blocs"][i_]), spt.name, unites=("**",))
+        for nom_, x_ in sorted((d.get("lepreuve_des_decalages") or {}).items()):
+            if not x_.get("decidable"):
+                continue
+            ajoute(f"l autocorrélation courte de {nom_} de 217", float(x_["la_famille_observee"]),
+                   _dec217(x_["la_famille_observee"]), spt.name, unites=("**",))
+            ajoute(f"les décalages courts de {nom_} de 217", int(x_["combien_de_decalages"]), 0,
+                   spt.name, unites=("décalages",))
+            ajoute(f"les rebrassages courts de {nom_} de 217",
+                   int(x_["les_tirages_au_moins_aussi_forts"]), 0, spt.name, unites=("**",))
+        for nom_, x_ in sorted((d.get("la_famille_longue") or {}).items()):
+            if not x_.get("decidable"):
+                continue
+            ajoute(f"l autocorrélation longue de {nom_} de 217", float(x_["la_famille_observee"]),
+                   _dec217(x_["la_famille_observee"]), spt.name, unites=("**",))
+            ajoute(f"les décalages longs de {nom_} de 217", int(x_["combien_de_decalages"]), 0,
+                   spt.name, unites=("décalages",))
+        for nom_, x_ in sorted((d.get("le_tau_implique") or {}).items()):
+            if not x_.get("decidable"):
+                continue
+            for cle, lib in (("le_tau_implique", "le τ impliqué"),
+                             ("le_tau_implique_au_plus", "le τ impliqué au plus")):
+                ajoute(f"{lib} de {nom_} de 217", float(x_[cle]), _dec217(x_[cle]), spt.name,
+                       unites=("**",))
+        for nom_, x_ in sorted((d.get("lerreur_corrigee") or {}).items()):
+            if not x_.get("decidable"):
+                continue
+            for cle, lib in (("lerreur_declaree_en_voxels2", "l erreur déclarée"),
+                             ("lerreur_corrigee_en_voxels2", "l erreur corrigée"),
+                             ("le_rapport", "le rapport du remède")):
+                ajoute(f"{lib} de {nom_} de 217", float(x_[cle]), _dec217(x_[cle]), spt.name,
+                       unites=("voxels", "vx²", "**"))
+        # ⚠⚠ LES DEUX ECHELLES, BARREAU PAR BARREAU : c'est leur SATURATION qui est le resultat.
+        for cle, lib in (("lechelle_par_volatilite", "volatilité"),
+                         ("lechelle_par_echelle_lente", "échelle lente")):
+            for b_ in (et217.get(cle) or []):
+                ajoute(f"les vus en {lib} à {b_['la_force']} de 217", int(b_["les_vus"]), 0,
+                       spt.name, unites=("**",))
+                ajoute(f"la force en {lib} de {b_['la_force']} de 217", float(b_["la_force"]),
+                       _dec217(b_["la_force"]), spt.name, unites=("**",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 216 : LES ERREURS DECLAREES RENDENT-ELLES COMPTE DES RESIDUS ?
     # (1) ⚠⚠⚠ UN RAPPORT AU BUDGET NE VOYAGE JAMAIS SANS SON COMPTE DE TIRAGES. Un `Lambda` de deux
     # se lit comme un depassement enorme ou comme du bruit selon ce que le modele declare produit,

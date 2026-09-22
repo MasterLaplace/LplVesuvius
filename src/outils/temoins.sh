@@ -1572,6 +1572,8 @@ run "le residu et ce que la rangee a lu" uv run python "$ROOT/src/nappe/le_resid
 run "figure le residu et ce que la rangee a lu" uv run python "$ROOT/src/figures/figure_le_residu_suit_il_ce_que_la_rangee_a_lu.py" --verifier
 run "les erreurs declarees et les residus" uv run python "$ROOT/src/nappe/les_erreurs_declarees_rendent_elles_compte_des_residus.py" --verifier
 run "figure les erreurs declarees et les residus" uv run python "$ROOT/src/figures/figure_les_erreurs_declarees_rendent_elles_compte_des_residus.py" --verifier
+run "pourquoi l erreur declaree est trop petite" uv run python "$ROOT/src/nappe/pourquoi_lerreur_declaree_est_trop_petite.py" --verifier
+run "figure pourquoi l erreur declaree est trop petite" uv run python "$ROOT/src/figures/figure_pourquoi_lerreur_declaree_est_trop_petite.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

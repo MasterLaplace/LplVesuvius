@@ -1,0 +1,476 @@
+{
+  "decidable": true,
+  "graine": 20261029,
+  "tirages": 19,
+  "la_question_declaree": "l'erreur déclarée est trop petite : est-ce parce que les désaccords par couture sont DÉPENDANTS le long de la rangée, ou parce que leur loi a des QUEUES bien plus lourdes qu'une gaussienne ?",
+  "les_epreuves_declarees": [
+    "une autocorrélation dépasse ce que le rebrassage de la série donne",
+    "le facteur des queues rend compte du dépassement mesuré par `216`"
+  ],
+  "la_garantie_du_nul": 0.05,
+  "la_garantie_par_epreuve": 0.025,
+  "ce_que_211_a_rendu": {
+    "197-199": {
+      "combien_de_coutures_du_troncon": 166,
+      "les_coutures_communes": 246,
+      "les_troncons_communs": 4,
+      "lecart_type_du_troncon_en_voxels": 3.2664,
+      "lecart_type_sur_toutes_les_communes_en_voxels": 3.4004
+    },
+    "198-197": {
+      "combien_de_coutures_du_troncon": 105,
+      "les_coutures_communes": 242,
+      "les_troncons_communs": 7,
+      "lecart_type_du_troncon_en_voxels": 2.8157,
+      "lecart_type_sur_toutes_les_communes_en_voxels": 2.7138
+    },
+    "198-199": {
+      "combien_de_coutures_du_troncon": 105,
+      "les_coutures_communes": 239,
+      "les_troncons_communs": 6,
+      "lecart_type_du_troncon_en_voxels": 3.3139,
+      "lecart_type_sur_toutes_les_communes_en_voxels": 2.9794
+    }
+  },
+  "ce_que_216_a_rendu": {
+    "decidable": true,
+    "le_rapport": 2.2325,
+    "le_facteur_sur_lerreur": 1.4942,
+    "les_tirages_au_moins_aussi_forts": 0,
+    "lexces_daplatissement_qui_suffirait": 2.465,
+    "le_rapport_de_queue_le_plus_grand": 26.4595,
+    "le_rapport_de_queue_median": 11.495,
+    "la_reference_gaussienne_la_plus_forte": 3.9144
+  },
+  "lepreuve_des_decalages": {
+    "197-199": {
+      "decidable": true,
+      "tirages": 19,
+      "sur_les_carres": true,
+      "combien_de_decalages": 12,
+      "les_autocorrelations": {
+        "1": -0.0075,
+        "2": -0.0068,
+        "3": -0.0337,
+        "4": -0.0247,
+        "5": -0.0388,
+        "6": 0.0092,
+        "7": -0.0269,
+        "8": 0.068,
+        "9": -0.0322,
+        "10": -0.0058,
+        "11": 0.0166,
+        "12": -0.0465
+      },
+      "le_decalage_le_plus_fort": 8,
+      "la_famille_observee": 0.068,
+      "la_famille_du_nul_mediane": 0.0951,
+      "la_famille_du_nul_la_plus_forte": 0.2005,
+      "les_tirages_au_moins_aussi_forts": 16,
+      "une_dependance_depasse_le_hasard": false
+    },
+    "198-197": {
+      "decidable": true,
+      "tirages": 19,
+      "sur_les_carres": true,
+      "combien_de_decalages": 10,
+      "les_autocorrelations": {
+        "1": -0.0238,
+        "2": -0.0453,
+        "3": 0.1437,
+        "4": -0.0058,
+        "5": -0.0576,
+        "6": -0.0477,
+        "7": -0.0309,
+        "8": 0.0422,
+        "9": 0.062,
+        "10": -0.0586
+      },
+      "le_decalage_le_plus_fort": 3,
+      "la_famille_observee": 0.1437,
+      "la_famille_du_nul_mediane": 0.1066,
+      "la_famille_du_nul_la_plus_forte": 0.2729,
+      "les_tirages_au_moins_aussi_forts": 6,
+      "une_dependance_depasse_le_hasard": false
+    },
+    "198-199": {
+      "decidable": true,
+      "tirages": 19,
+      "sur_les_carres": true,
+      "combien_de_decalages": 10,
+      "les_autocorrelations": {
+        "1": -0.02,
+        "2": -0.0723,
+        "3": -0.0476,
+        "4": -0.0511,
+        "5": -0.0235,
+        "6": -0.0283,
+        "7": -0.0289,
+        "8": -0.0025,
+        "9": -0.0326,
+        "10": -0.01
+      },
+      "le_decalage_le_plus_fort": 2,
+      "la_famille_observee": 0.0723,
+      "la_famille_du_nul_mediane": 0.2518,
+      "la_famille_du_nul_la_plus_forte": 0.3904,
+      "les_tirages_au_moins_aussi_forts": 18,
+      "une_dependance_depasse_le_hasard": false
+    }
+  },
+  "les_decalages_sur_la_serie": {
+    "197-199": {
+      "decidable": true,
+      "tirages": 19,
+      "sur_les_carres": false,
+      "combien_de_decalages": 12,
+      "les_autocorrelations": {
+        "1": -0.0421,
+        "2": -0.0784,
+        "3": -0.0198,
+        "4": -0.1619,
+        "5": 0.0128,
+        "6": -0.0093,
+        "7": -0.001,
+        "8": 0.082,
+        "9": 0.1448,
+        "10": -0.0233,
+        "11": -0.166,
+        "12": -0.1283
+      },
+      "le_decalage_le_plus_fort": 11,
+      "la_famille_observee": 0.166,
+      "la_famille_du_nul_mediane": 0.1544,
+      "la_famille_du_nul_la_plus_forte": 0.2086,
+      "les_tirages_au_moins_aussi_forts": 6,
+      "une_dependance_depasse_le_hasard": false
+    },
+    "198-197": {
+      "decidable": true,
+      "tirages": 19,
+      "sur_les_carres": false,
+      "combien_de_decalages": 10,
+      "les_autocorrelations": {
+        "1": -0.0244,
+        "2": -0.0335,
+        "3": 0.2298,
+        "4": -0.0605,
+        "5": 0.064,
+        "6": -0.0492,
+        "7": 0.0072,
+        "8": 0.0687,
+        "9": 0.0651,
+        "10": 0.0332
+      },
+      "le_decalage_le_plus_fort": 3,
+      "la_famille_observee": 0.2298,
+      "la_famille_du_nul_mediane": 0.1595,
+      "la_famille_du_nul_la_plus_forte": 0.2941,
+      "les_tirages_au_moins_aussi_forts": 2,
+      "une_dependance_depasse_le_hasard": false
+    },
+    "198-199": {
+      "decidable": true,
+      "tirages": 19,
+      "sur_les_carres": false,
+      "combien_de_decalages": 10,
+      "les_autocorrelations": {
+        "1": -0.009,
+        "2": -0.0588,
+        "3": -0.0634,
+        "4": -0.024,
+        "5": 0.0064,
+        "6": -0.1287,
+        "7": 0.1297,
+        "8": -0.0356,
+        "9": 0.0976,
+        "10": 0.0803
+      },
+      "le_decalage_le_plus_fort": 7,
+      "la_famille_observee": 0.1297,
+      "la_famille_du_nul_mediane": 0.1522,
+      "la_famille_du_nul_la_plus_forte": 0.2757,
+      "les_tirages_au_moins_aussi_forts": 15,
+      "une_dependance_depasse_le_hasard": false
+    }
+  },
+  "la_famille_longue": {
+    "197-199": {
+      "decidable": true,
+      "tirages": 19,
+      "combien_de_decalages": 41,
+      "le_decalage_le_plus_fort": 32,
+      "la_famille_observee": 0.1894,
+      "la_famille_du_nul_la_plus_forte": 0.2959,
+      "les_tirages_au_moins_aussi_forts": 7,
+      "une_dependance_longue_depasse_le_hasard": false
+    },
+    "198-197": {
+      "decidable": true,
+      "tirages": 19,
+      "combien_de_decalages": 26,
+      "le_decalage_le_plus_fort": 3,
+      "la_famille_observee": 0.1437,
+      "la_famille_du_nul_la_plus_forte": 0.411,
+      "les_tirages_au_moins_aussi_forts": 10,
+      "une_dependance_longue_depasse_le_hasard": false
+    },
+    "198-199": {
+      "decidable": true,
+      "tirages": 19,
+      "combien_de_decalages": 26,
+      "le_decalage_le_plus_fort": 11,
+      "la_famille_observee": 0.3038,
+      "la_famille_du_nul_la_plus_forte": 0.6719,
+      "les_tirages_au_moins_aussi_forts": 9,
+      "une_dependance_longue_depasse_le_hasard": false
+    }
+  },
+  "lepreuve_des_queues": {
+    "197-199": {
+      "decidable": true,
+      "combien_de_coutures": 166,
+      "lexces_daplatissement": 5.0249,
+      "le_facteur_des_queues": 3.5125,
+      "la_longueur_de_bloc": 6,
+      "les_tirages_du_bootstrap": 399,
+      "lintervalle_par_blocs": [
+        1.3867,
+        5.6621
+      ],
+      "lintervalle_ordinaire": [
+        1.4114,
+        5.1311
+      ],
+      "lecart_relatif_des_deux_bootstraps": 0.1494
+    },
+    "198-197": {
+      "decidable": true,
+      "combien_de_coutures": 105,
+      "lexces_daplatissement": 7.2237,
+      "le_facteur_des_queues": 4.6118,
+      "la_longueur_de_bloc": 5,
+      "les_tirages_du_bootstrap": 399,
+      "lintervalle_par_blocs": [
+        1.4355,
+        7.0958
+      ],
+      "lintervalle_ordinaire": [
+        1.4183,
+        7.7162
+      ],
+      "lecart_relatif_des_deux_bootstraps": 0.1012
+    },
+    "198-199": {
+      "decidable": true,
+      "combien_de_coutures": 105,
+      "lexces_daplatissement": 7.6092,
+      "le_facteur_des_queues": 4.8046,
+      "la_longueur_de_bloc": 5,
+      "les_tirages_du_bootstrap": 399,
+      "lintervalle_par_blocs": [
+        1.6015,
+        6.99
+      ],
+      "lintervalle_ordinaire": [
+        1.6637,
+        6.7473
+      ],
+      "lecart_relatif_des_deux_bootstraps": 0.06
+    }
+  },
+  "la_statistique_refusee": {
+    "197-199": {
+      "decidable": true,
+      "tau": 1.0,
+      "les_paires_sommees": 0,
+      "tau_est_au_plancher": true,
+      "pourquoi_il_est_refuse": "la règle est plancher à un par construction, donc son nul s'empile au plancher et l'épreuve ne peut pas se déclencher, quelle que soit la matière"
+    },
+    "198-197": {
+      "decidable": true,
+      "tau": 1.0,
+      "les_paires_sommees": 0,
+      "tau_est_au_plancher": true,
+      "pourquoi_il_est_refuse": "la règle est plancher à un par construction, donc son nul s'empile au plancher et l'épreuve ne peut pas se déclencher, quelle que soit la matière"
+    },
+    "198-199": {
+      "decidable": true,
+      "tau": 1.0,
+      "les_paires_sommees": 0,
+      "tau_est_au_plancher": true,
+      "pourquoi_il_est_refuse": "la règle est plancher à un par construction, donc son nul s'empile au plancher et l'épreuve ne peut pas se déclencher, quelle que soit la matière"
+    }
+  },
+  "lerreur_corrigee": {
+    "197-199": {
+      "decidable": true,
+      "les_coutures": 166,
+      "lerreur_declaree_en_voxels2": 1.1747,
+      "lerreur_corrigee_en_voxels2": 2.1948,
+      "le_rapport": 1.8685
+    },
+    "198-197": {
+      "decidable": true,
+      "les_coutures": 105,
+      "lerreur_declaree_en_voxels2": 1.0994,
+      "lerreur_corrigee_en_voxels2": 2.3498,
+      "le_rapport": 2.1373
+    },
+    "198-199": {
+      "decidable": true,
+      "les_coutures": 105,
+      "lerreur_declaree_en_voxels2": 1.5229,
+      "lerreur_corrigee_en_voxels2": 3.3222,
+      "le_rapport": 2.1815
+    }
+  },
+  "le_tau_implique": {
+    "197-199": {
+      "decidable": true,
+      "le_rapport_de_216": 2.2325,
+      "le_facteur_des_queues": 3.5125,
+      "le_tau_implique": 0.6356,
+      "le_tau_implique_au_plus": 1.6099,
+      "le_tau_implique_au_moins": 0.3943,
+      "il_reste_de_la_place_pour_une_dependance": true
+    },
+    "198-197": {
+      "decidable": true,
+      "le_rapport_de_216": 2.2325,
+      "le_facteur_des_queues": 4.6118,
+      "le_tau_implique": 0.4841,
+      "le_tau_implique_au_plus": 1.5552,
+      "le_tau_implique_au_moins": 0.3146,
+      "il_reste_de_la_place_pour_une_dependance": true
+    },
+    "198-199": {
+      "decidable": true,
+      "le_rapport_de_216": 2.2325,
+      "le_facteur_des_queues": 4.8046,
+      "le_tau_implique": 0.4647,
+      "le_tau_implique_au_plus": 1.394,
+      "le_tau_implique_au_moins": 0.3194,
+      "il_reste_de_la_place_pour_une_dependance": true
+    }
+  },
+  "letalon": {
+    "decidable": true,
+    "les_coutures_par_serie": 105,
+    "les_forces": [
+      0.3,
+      0.5,
+      0.7,
+      0.9,
+      0.95,
+      0.98
+    ],
+    "les_replicats": 12,
+    "le_compte_decisif": 171,
+    "laplatissement_du_piege": 6.0,
+    "les_forces_lentes": [
+      0.2,
+      0.4,
+      0.6,
+      0.8,
+      0.95
+    ],
+    "lechelle_par_volatilite": [
+      {
+        "la_force": 0.3,
+        "les_vus": 0,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      },
+      {
+        "la_force": 0.5,
+        "les_vus": 1,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      },
+      {
+        "la_force": 0.7,
+        "les_vus": 4,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      },
+      {
+        "la_force": 0.9,
+        "les_vus": 7,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      },
+      {
+        "la_force": 0.95,
+        "les_vus": 6,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      },
+      {
+        "la_force": 0.98,
+        "les_vus": 7,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      }
+    ],
+    "lechelle_par_echelle_lente": [
+      {
+        "la_force": 0.2,
+        "les_vus": 0,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      },
+      {
+        "la_force": 0.4,
+        "les_vus": 1,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      },
+      {
+        "la_force": 0.6,
+        "les_vus": 4,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      },
+      {
+        "la_force": 0.8,
+        "les_vus": 5,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      },
+      {
+        "la_force": 0.95,
+        "les_vus": 4,
+        "sur": 12,
+        "les_replicats_indecidables": 0
+      }
+    ],
+    "la_plus_petite_force_vue": null,
+    "la_plus_petite_force_lente_vue": null,
+    "la_volatilite_sature_sans_jamais_etre_vue_partout": true,
+    "la_suite_est_monotone": false,
+    "la_suite_lente_est_monotone": false,
+    "les_faux": 10,
+    "le_taux_de_faux": 0.0585,
+    "elle_tient_sa_garantie": true,
+    "les_tirs_sur_le_piege": 9,
+    "le_taux_sur_le_piege": 0.0526,
+    "elle_resiste_au_piege": true,
+    "elle_separe": false
+  },
+  "le_verdict": {
+    "une_dependance_depasse_le_hasard": false,
+    "une_dependance_longue_depasse_le_hasard": false,
+    "lepreuve_des_decalages_borne_quelque_chose": false,
+    "combien_de_paires_laissent_de_la_place_a_une_dependance": 3,
+    "le_tau_implique_le_plus_grand": 1.6099,
+    "combien_de_paires_couvrent_le_rapport_de_216": 3,
+    "combien_de_paires_mesurees": 3,
+    "les_queues_rendent_compte_du_depassement": true,
+    "le_rapport_de_216": 2.2325,
+    "la_statistique_refusee_est_au_plancher": true,
+    "letalon_separe": false,
+    "ce_qui_reste_a_mesurer": "CE SONT LES QUEUES, ET LE BUDGET NE LAISSE PAS DE PLACE POUR AUTRE CHOSE — MAIS L'AUTOCORRÉLATION N'A PAS PU LE BORNER ELLE-MÊME",
+    "pourquoi": "aucune des 3 paires ne rend d'autocorrélation que le rebrassage de sa propre série n'égale, et le facteur des queues couvre le rapport 2.2325 de `216` sur 3 d'entre elles ; l'étalon dit que l'épreuve des décalages ne borne rien sur cette longueur de série, donc la borne vient du budget et non d'elle"
+  }
+}
