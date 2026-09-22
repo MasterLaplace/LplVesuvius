@@ -4,7 +4,7 @@
 
 # Les contradictions, et qui a tranché
 
-**231 disputes** que ce dépôt a eues avec lui-même, et comment chacune s'est finie. Une ligne : *A a dit · B a dit · C tranche · statut*. Les lire coûte moins cher que de les repayer.
+**232 disputes** que ce dépôt a eues avec lui-même, et comment chacune s'est finie. Une ligne : *A a dit · B a dit · C tranche · statut*. Les lire coûte moins cher que de les repayer.
 
 ## R1 — 42 lignes
 
@@ -148,7 +148,7 @@
 | `R3-C50` | `53` : garde `find -path "*rendu*"` | prenait le maillage (119 px) | composant de chemin ; `GARDER_RENDU=1` | tranché |
 | `R3-C51` | `44` : pas 0,25 = 9 nappes = presque un tour | ~10 % d'un tour par nappe ; deux nappes consécutives séparées par la circonférence | colonne, pas bande | tranché |
 
-## R4 — 42 lignes
+## R4 — 43 lignes
 
 | id | A a dit | B a dit | C tranche | statut |
 |---|---|---|---|---|
@@ -194,6 +194,7 @@
 | `R4-C40` | `75` §C l. 6610 : `median_8` optimal, −26 µm hors échantillon | l'optimum était au bord de la famille ; étendue à 16/32 ; l'ancre vivante passe de 5 à 0 bras | porte fermée par défaut : trois conditions | tranché |
 | `R4-C41` | `31` §10 : la carte des 13 décide avec 50 fenêtres | `75` §C l. 3756 : 315× le budget ; puis l. 3836 : 0 rang de spire sur 13, pas exécutable | critère non mesurable, puis sans objet | tranché |
 | `R4-C42` | `HANDOFF`:567 publie **1,213** sans record (`chiffres_sans_record`) ; `HANDOFF`:3210, :3222 `cd experiments`, `cd inference_xpu` (dossiers disparus) ; `86` §4 et les fiches lient `33_incertitude_de_la_carte.md`, qui n'a jamais existé (`33` s'appelle `la_carte_nest_pas_resolue`) | — | archive gelée : notés, non corrigés | à noter |
+| `R4-C43` | `214` §6 : « le triangle SUR-DÉTERMINÉ réfute le modèle additif », pire résidu **3,6279 erreurs** sur `197-198` | `216` : ce résidu vaut **2,4281** une fois le budget d'erreur corrigé, et **4**/**19** tirages du modèle déclaré font aussi fort — la réfutation est un artefact de la formule d'erreur | les deux mesures sont justes ; c'est le DÉNOMINATEUR qui diffère, et `214` ne l'avait pas mis en procès | tranchée par `216` : `214` corrigé sur place par un renvoi, sa mesure et ses autres conclusions intactes |
 
 ## R5 — 42 lignes
 

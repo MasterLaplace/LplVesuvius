@@ -4,7 +4,7 @@
 
 # Les fils rouges — les lois que ce dépôt a payées
 
-**101 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
+**102 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
 
 ## R1 — 15 lois
 
@@ -208,7 +208,7 @@ L'image de 40 s jamais faite (`50`), l'image qui tranche feuille/tranche (`54` �
 
 `numcodecs` absent → « graine non couverte » (`41`) ; `imagecodecs` absent → LZW illisible (`54`) ; `verifier_zarr.sh` existait, orphelin. Le décodeur lève, il ne rend pas `None`.
 
-## R4 — 19 lois
+## R4 — 20 lois
 
 **R4-L01 · Une limite de grille publiée comme une limite matérielle**
 
@@ -285,6 +285,10 @@ Deux marches bâties chacune sur son propre tronçon diffèrent d'une CONSTANTE 
 **R4-L19 · Un nombre juste sous un mauvais nom est pire qu'un nombre absent**
 
 La forme close du tenseur de structure rend la PERPENDICULAIRE aux fibres, et le dépôt a publié **10791 angles** sous le nom de « direction des fibres » (`R4-F175`, `R4-F176`) ; un `sorted(...)[0]` a fait marcher la voisine **197** sous le nom de la médiane **198**, et c'est un RECOUPEMENT avec une tranche antérieure — aucune sonde — qui l'a livré (`R4-F327`). ⚠⚠ Les deux fois, toutes les gardes étaient vertes et tous les nombres étaient justes : seul le NOM était faux, donc rien de local ne pouvait le voir. Le seul contrôle qui attrape cette classe est le recoupement d'un producteur ANTÉRIEUR sur la même matière.
+
+**R4-L20 · Une erreur déclarée est une hypothèse, et elle se met en procès comme le reste**
+
+Un résidu « en erreurs » est un RAPPORT, et une chaîne entière peut n'en interroger que le numérateur. `208`–`215` ont bâti sur `se(V) = V·√(2/(n-1))` sans jamais vérifier ses deux hypothèses — indépendance et normalité des différences par couture. `216` mesure que les résidus portent **2,2325** fois le budget que cette formule autorise (**0**/**19**), donc qu'elle sous-estime l'erreur d'un facteur **1,4942**, et que le pire résidu de `214` tombe de **3,6279** à **2,4281** une fois le budget corrigé. ⭐ LA FORME DU REMÈDE EST GÉNÉRALE ET NE COÛTE RIEN : un ajustement porte sa propre prédiction d'énergie, `E[Λ] = Σ_i Σ_k (I-H)²_{ik}·σ_k²/σ_i²`, donc tout ajustement publié peut dire s'il tient dans le budget de ses propres erreurs, sans aucune mesure neuve. ⚠⚠ ET LA PREUVE DE LA SECONDE HYPOTHÈSE ÉTAIT DÉJÀ PUBLIÉE : `214` portait le désaccord LE PLUS GRAND de chaque paire à côté de son désaccord par couture, et leur rapport — **11,495** écarts-types en médiane contre **3,9144** pour la pire gaussienne — réfute la normalité depuis le premier jour. ⚠⚠⚠ La leçon n'est pas « vérifier l'indépendance » : c'est qu'une formule d'erreur empruntée à un manuel est une AFFIRMATION SUR LA MATIÈRE, et qu'un dépôt qui met ses numérateurs en procès doit y mettre ses dénominateurs
 
 ## R5 — 24 lois
 

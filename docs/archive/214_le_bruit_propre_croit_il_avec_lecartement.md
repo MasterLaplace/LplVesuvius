@@ -1,6 +1,15 @@
 # `214` — Le bruit propre croît-il avec l'écartement ? Non, et le triangle casse quand même
 
-*La distance n'est pas ce qui rend la hauteur payante — mais quelque chose la rend payante.*
+*La distance n'est pas ce qui rend la hauteur payante — et il n'est pas établi que quoi que ce soit la rende payante.*
+
+> ⚠⚠⚠⚠ **CORRIGÉ PAR `216`.** Le §6 de ce document réfute le modèle additif par un résidu de
+> **3,6279 erreurs**. « En erreurs » est un **rapport**, et ce document n'avait mis en procès que son
+> numérateur. `216` mesure que les résidus portent **2,2325** fois le budget que l'erreur déclarée
+> `se(V) = V·√(2/(n-1))` autorise — **0** des **19** tirages du modèle déclaré y arrive — donc que
+> cette erreur est sous-estimée d'un facteur **1,4942** ; une fois le budget remis à l'échelle, le
+> pire résidu vaut **2,4281**, soit **4**/**19** au moins aussi forts. **La réfutation du §6 est un
+> artefact de la formule d'erreur.** ⭐ Tout le reste de cette tranche est intact : la mesure, le
+> négatif sur l'écartement, sa borne, et la positivité des neuf variances.
 
 ![Le bruit propre croît-il avec l'écartement](../images/214_le_bruit_propre_croit_il_avec_lecartement.png)
 
@@ -152,6 +161,12 @@ croissance apparente. On n'en observe aucune. L'absence de croissance n'est donc
 longueur : elle survit à un biais qui aurait dû la masquer.
 
 ## 6. ⭐⭐⭐⭐ Le triangle SUR-DÉTERMINÉ, et il casse
+
+> ⚠⚠⚠⚠ **CETTE SECTION EST RÉFUTÉE PAR `216`, ET PAR SON DÉNOMINATEUR.** Les résidus publiés ici
+> sont justes ; ils sont divisés par une erreur trop petite. Lire cette section avec le facteur
+> **1,4942** que `216` mesure : le pire résidu devient **2,4281**, et le triangle **ne casse pas**.
+> ⚠ La raison de la sous-estimation n'est pas tranchée — `216` établit que la formule est fausse,
+> pas laquelle de ses deux hypothèses l'est, et `R4-P62` porte la mesure qui le dira.
 
 `212` avait tiré trois variances propres de trois désaccords par le triangle
 

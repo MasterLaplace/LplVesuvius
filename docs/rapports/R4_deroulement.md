@@ -3452,6 +3452,49 @@ la PAIRE, donc son effet n'est pas absorbable. ⚠⚠ Mais `R4-P61` passe devant
 dissoudre la question au lieu de la franchir : le pire résidu du triangle est le maximum de
 trente-six, et personne n'a encore demandé s'il SE REPRODUIT sur ses propres relectures.
 
+**`216` · 2026-09-22 · les erreurs déclarées rendent-elles compte des résidus ?**
+
+⚠⚠⚠ **Un résidu « en erreurs » est un RAPPORT, et la chaîne n'avait interrogé que son numérateur.**
+Le dénominateur de `214` est `se(V) = V·√(2/(n-1))`, qui n'est pas une mesure mais le résultat d'un
+calcul supposant les différences par couture **indépendantes** et **gaussiennes**. Ni l'une ni l'autre
+n'avait été vérifiée.
+⭐⭐⭐⭐ **Le budget exact n'est pas `n - p`** — `R4-F356` : la trace du projecteur vaut
+**27**, mais l'énergie standardisée attendue d'un ajustement NON pondéré vaut
+**28,6398**. Employer `n - p` aurait rendu **2,3681** au lieu de
+**2,2325**, soit **0,0607** d'écart. La batterie le vérifie dans les
+deux sens : à erreurs égales l'attendu exact REJOINT la trace, à erreurs différentes il s'en écarte.
+⚠⚠⚠ **Les résidus portent plus du double de ce budget** — `R4-F357` : énergie observée
+**63,9388** pour **28,6398** autorisés, rapport
+**2,2325**, et **0** des **19** tirages du
+modèle déclaré y arrive (médian **1,053**). L'erreur est sous-estimée d'un facteur
+**1,4942**. ⚠ Aucun seuil : « Λ dépasse un » aurait tiré une fois sur deux sur
+du code sain, donc c'est le même nul paramétrique que la forme qui tranche.
+⭐⭐⭐⭐ **Et l'excès est ÉTALÉ, pas CONCENTRÉ** — `R4-F358` : une fois le budget remis à l'échelle,
+le pire résidu passe de **3,6279** à **2,4281** sur
+`197-198` et rentre sous le nul (médian **2,0018**, le plus fort
+**2,7162**, **4**/**19** au moins aussi
+forts). ⚠⚠ La remise à l'échelle est circulaire si on ne la paie pas des deux côtés ; le nul subit
+EXACTEMENT le même traitement, et un bris qui l'en prive fait rougir la batterie.
+⚠⚠⚠ **La normalité est réfutée par des nombres que `214` publiait déjà** — `R4-F359` : le pire
+désaccord d'une paire vaut **11,495** écarts-types en médiane, jusqu'à
+**26,4595**, contre **3,9144** pour la pire de
+**19** gaussiennes de **239** tirages. Un excès
+d'aplatissement de **2,465** suffirait à tout expliquer sans aucune dépendance.
+★★★★ **Une épreuve de budget ne peut PAS distinguer les deux mondes, et c'est mesuré** — `R4-F360` :
+sur deux matières de MÊME budget, le budget voit l'étalée **12/12** et la concentrée
+**11/12** au facteur **1,5** ; c'est la FORME qui
+sépare, dès **1,25**. Faux **6/171** =
+**0,0351** et **10/171** =
+**0,0585** contre une garantie de **0,05**.
+⚠⚠⚠⚠ **Donc la réfutation du modèle additif par `214` est un artefact de sa formule d'erreur**, et
+`R4-P60` perd sa prémisse. `R4-P61` est répondue dans sa forme la moins chère : le résidu de
+`197-198` n'est ni une structure ni le bruit d'une paire, c'est un résidu ordinaire divisé par une
+erreur trop petite. `214` est corrigé sur place par un renvoi, sa mesure et ses autres conclusions
+intactes ; `215` garde ses deux faits de structure. ⭐ `R4-P62` s'ouvre, plus large que tout ce qui
+précède : chaque borne publiée « en erreurs » par `208`–`215` se relit avec ce facteur, et la mesure
+qui dira laquelle des deux hypothèses est fausse est la plus PETITE lecture neuve de la campagne —
+la série par couture d'une seule paire de rangées voisines.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

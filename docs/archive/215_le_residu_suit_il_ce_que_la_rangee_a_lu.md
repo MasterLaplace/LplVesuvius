@@ -356,6 +356,14 @@ La mesure a été **reproduite à l'identique quatre fois**, sur tous les nombre
 
 ## 11. Ce qui reste
 
+> ⚠⚠⚠⚠ **`216` A RETIRÉ SA PRÉMISSE À LA QUESTION QUE CETTE TRANCHE PARCOURAIT.** `R4-P60` demandait
+> ce qui rompt l'additivité en tenant la rupture pour établie ; `216` mesure que les résidus de
+> `214` portent **2,2325** fois le budget de ses erreurs déclarées, donc qu'il n'est pas établi que
+> quoi que ce soit la rompe. ⭐ Ce que cette tranche a mesuré reste vrai et reste utile, y compris
+> pour toute reprise : la somme par rangée est identiquement nulle, un ajustement absorbe ce qui agit
+> additivement, et la rangée `198` n'est pas payée — `216` explique d'ailleurs pourquoi elle ne
+> pouvait pas l'être.
+
 La piste A est **close par la négative**, avec sa borne. Ce qui rompt l'additivité des neuf rangées
 n'est ni leur **distance** (`214`), ni ce qu'elles ont **lu** (`215`), et l'excès de la rangée `198`
 n'est pas payé.

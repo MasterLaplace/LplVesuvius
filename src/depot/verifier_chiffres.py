@@ -3194,6 +3194,128 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 216 : LES ERREURS DECLAREES RENDENT-ELLES COMPTE DES RESIDUS ?
+    # (1) ⚠⚠⚠ UN RAPPORT AU BUDGET NE VOYAGE JAMAIS SANS SON COMPTE DE TIRAGES. Un `Lambda` de deux
+    # se lit comme un depassement enorme ou comme du bruit selon ce que le modele declare produit,
+    # et c'est le nul qui le dit, jamais l'amplitude. C'est aussi ce qui empeche de relire le
+    # verdict comme « Lambda depasse un », qui tirerait une fois sur deux sur du code sain.
+    # (2) ⚠⚠⚠ UN RESIDU REMIS A L'ECHELLE NE VOYAGE JAMAIS SANS LE RESIDU BRUT DONT IL VIENT. Le
+    # resultat de cette tranche EST le passage de l'un a l'autre ; publier le seul remis a
+    # l'echelle effacerait ce que `214` avait publie, et publier le seul brut effacerait la
+    # correction.
+    # (3) ⚠⚠ UN RAPPORT DE QUEUE NE VOYAGE JAMAIS SANS SA REFERENCE GAUSSIENNE. « Onze ecarts-types »
+    # ne veut rien dire tant qu'on ne dit pas ce qu'une gaussienne fait de pire sur le meme nombre
+    # de tirages.
+    # (4) ⚠⚠ L'ATTENDU EXACT NE VOYAGE JAMAIS SANS LA TRACE DU PROJECTEUR. Les deux nombres cote a
+    # cote sont la seule facon de montrer que l'ecart vient de la ponderation et non d'un rang.
+    # (5) Un TAUX DE FAUX ne voyage jamais sans sa GARANTIE ni sans le compte decisif.
+    sed_ = _source(racine, "les_erreurs_declarees_rendent_elles_compte_des_residus.json")
+    if sed_.exists():
+        d = json.loads(sed_.read_text())
+
+        def _dec216(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        q216 = d.get("ce_que_214_a_rendu") or {}
+        bg216 = d.get("le_budget_attendu") or {}
+        bu216 = d.get("lepreuve_du_budget") or {}
+        fo216 = d.get("lepreuve_de_la_forme") or {}
+        qu216 = d.get("le_controle_des_queues") or {}
+        ef216 = d.get("les_coutures_effectives") or {}
+        na216 = d.get("le_refus_du_khi_deux_naif") or {}
+        et216 = d.get("letalon") or {}
+        for src_, cle, nom, unites in (
+                (q216, "combien_de_rangees", "les rangées relues", ("rangées",)),
+                (q216, "combien_de_paires", "les paires relues", ("paires",)),
+                (q216, "les_coutures_les_plus_nombreuses",
+                 "les coutures les plus nombreuses", ("coutures",)),
+                (q216, "les_coutures_les_moins_nombreuses",
+                 "les coutures les moins nombreuses", ("coutures",)),
+                (q216, "les_coutures_medianes", "les coutures médianes", ("coutures",)),
+                (q216, "les_tirages_de_214_au_moins_aussi_forts",
+                 "les rebrassages de 214 au moins aussi forts", ("**",)),
+                (bg216, "combien_dequations", "les équations", ("équations",)),
+                (bg216, "combien_dinconnues", "les inconnues", ("inconnues",)),
+                (bu216, "tirages", "les tirages du nul", ("**",)),
+                (bu216, "les_tirages_au_moins_aussi_forts",
+                 "les tirages au moins aussi forts", ("**",)),
+                (fo216, "les_tirages_au_moins_aussi_forts",
+                 "les tirages de la forme au moins aussi forts", ("**",)),
+                (qu216, "les_coutures_de_reference", "les coutures de référence", ("tirages",)),
+                (ef216, "les_coutures_medianes_declarees",
+                 "les coutures déclarées", ("coutures", "déclarées")),
+                (et216, "les_replicats", "les réplicats d un barreau", ("**",)),
+                (et216, "le_compte_decisif", "le compte décisif", ("**",)),
+                (et216, "les_paires_decalees", "les paires décalées", ("paires",)),
+                (et216, "les_faux_du_budget", "les faux du budget", ("**",)),
+                (et216, "les_faux_de_la_forme", "les faux de la forme", ("**",)),
+                (et216, "les_variances_negatives_rencontrees",
+                 "les variances négatives rencontrées", ("**",))):
+            if src_.get(cle) is not None:
+                ajoute(f"{nom} de 216", int(src_[cle]), 0, sed_.name, unites=unites)
+        for src_, cle, nom, unites in (
+                (d, "la_garantie_du_nul", "la garantie du nul", ("**",)),
+                (q216, "le_pire_residu_de_214_en_erreurs",
+                 "le pire résidu de 214", ("erreurs",)),
+                (q216, "le_residu_median_de_214_en_erreurs",
+                 "le résidu médian de 214", ("erreurs",)),
+                (q216, "la_tendance_de_214_contre_lecartement",
+                 "la tendance de 214 contre l écartement", ("**",)),
+                (bg216, "la_trace_du_projecteur", "la trace du projecteur", ("**",)),
+                (bg216, "lenergie_attendue", "l énergie attendue", ("**",)),
+                (bu216, "lenergie_observee", "l énergie observée", ("**",)),
+                (bu216, "le_rapport", "le rapport au budget", ("**",)),
+                (bu216, "le_facteur_sur_lerreur", "le facteur sur l erreur", ("**",)),
+                (bu216, "le_rapport_du_nul_median", "le rapport du nul médian", ("**",)),
+                (bu216, "le_rapport_du_nul_le_plus_fort",
+                 "le rapport du nul le plus fort", ("**",)),
+                (fo216, "le_plus_grand_residu_remis_a_lechelle",
+                 "le plus grand résidu remis à l échelle", ("**",)),
+                (fo216, "le_residu_median_remis_a_lechelle",
+                 "le résidu médian remis à l échelle", ("**",)),
+                (fo216, "la_forme_du_nul_mediane", "la forme du nul médiane", ("**",)),
+                (fo216, "la_forme_du_nul_la_plus_forte", "la forme du nul la plus forte", ("**",)),
+                (qu216, "le_rapport_le_plus_petit", "le rapport de queue le plus petit", ("**",)),
+                (qu216, "le_rapport_median", "le rapport de queue médian", ("**",)),
+                (qu216, "le_rapport_le_plus_grand", "le rapport de queue le plus grand", ("**",)),
+                (qu216, "la_reference_gaussienne_mediane",
+                 "la référence gaussienne médiane", ("**",)),
+                (qu216, "la_reference_gaussienne_la_plus_forte",
+                 "la référence gaussienne la plus forte", ("**",)),
+                (qu216, "lexces_daplatissement_qui_suffirait",
+                 "l excès d aplatissement qui suffirait", ("**",)),
+                (ef216, "les_coutures_effectives_impliquees",
+                 "les coutures effectives impliquées", ("**",)),
+                (na216, "le_rapport_naif", "le rapport naïf", ("**",)),
+                (na216, "le_rapport_exact", "le rapport exact", ("**",)),
+                (na216, "lecart_relatif", "l écart relatif du naïf", ("**",)),
+                (et216, "le_plus_petit_facteur_vu_par_le_budget",
+                 "le plus petit facteur vu par le budget", ("**",)),
+                (et216, "le_plus_petit_facteur_ou_la_forme_separe",
+                 "le plus petit facteur où la forme sépare", ("**",)),
+                (et216, "le_taux_de_faux_du_budget", "le taux de faux du budget", ("**",)),
+                (et216, "le_taux_de_faux_de_la_forme", "le taux de faux de la forme", ("**",))):
+            if src_.get(cle) is not None:
+                ajoute(f"{nom} de 216", float(src_[cle]), _dec216(src_[cle]), sed_.name,
+                       unites=unites)
+        # ⚠⚠ CHAQUE BARREAU PORTE LES QUATRE COMPTES : le budget sur les DEUX matieres et la forme
+        # sur les DEUX. C'est leur ensemble qui dit ce que chaque epreuve peut et ne peut PAS
+        # distinguer, et un barreau ampute laisserait croire que le budget separe.
+        for b_ in (et216.get("lechelle") or []):
+            f_ = b_["le_facteur"]
+            for cle, nom in (("le_budget_voit_letalee", "le budget voit l étalée"),
+                             ("le_budget_voit_la_concentree", "le budget voit la concentrée"),
+                             ("la_forme_dit_concentree_sur_letalee",
+                              "la forme dit concentrée sur l étalée"),
+                             ("la_forme_dit_concentree_sur_la_concentree",
+                              "la forme dit concentrée sur la concentrée")):
+                ajoute(f"{nom} au facteur {f_} de 216", int(b_[cle]), 0, sed_.name,
+                       unites=("**",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 215 : LE RESIDU SUIT-IL CE QUE LA RANGEE A LU ?
     # (1) ⚠⚠⚠ UNE CORRELATION DE LA FAMILLE NE VOYAGE JAMAIS SANS LA PART NON ADDITIVE DE SON
     # MEMBRE. C'est la regle propre a cette tranche, et elle protege d'une lecture beaucoup plus
