@@ -3626,6 +3626,24 @@ n'est pas leurs extrêmes, c'est la marche de leurs coutures ordinaires.** Un vo
 fortes ne remplace pas l'humain. `R4-P66` s'ouvre : le consensus des voisines, pris à CHAQUE couture,
 traverse-t-il la rangée sans quitter le feuillet ?
 
+**`221` · 2026-09-22 · le consensus traverse-t-il la rangée**
+
+⭐⭐ **Aucune lecture neuve** : les pas des cinq rangées de `219`. À chaque couture, la médiane des
+rangées présentes, au moins trois sur cinq.
+⭐⭐⭐ **Le consensus franchit les trous d'une rangée** — `R4-F379` : **254** coutures sur **284** en ont
+un, en deux tronçons, là où une rangée seule s'arrête à ses propres trous.
+⭐⭐⭐⭐ **Et il traverse sans quitter le feuillet là où une rangée seule en sort** — `R4-F378` : sur
+**198** coutures d'affilée, le consensus ne s'éloigne jamais de plus de **14,9375** voxels de son départ,
+quand la rangée `197` seule, sur le même tronçon et depuis le même départ, atteint **37,375** voxels.
+C'est le contrôle apparié de `210`, et `210` l'avait prédit ; ici c'est observé.
+⭐⭐ **Extrapolé à une rangée entière, il tient** — `R4-F380` : marche médiane **27,1553** voxels par
+blocs, contre **38,4357** à **49,4078** pour les rangées seules. L'extrapolation est étalonnée sur une
+matière dont on connaît la réponse, à la dépendance que le consensus montre.
+⚠⚠⚠ La part partagée du pas reste hors de portée : aucun consensus ne la retire.
+⭐⭐⭐⭐ **Donc `R4-P66` est répondue, et `R4-L23` l'écrit : ce qui remplace l'humain le long d'une rangée
+est le consensus des voisines à chaque couture.** `R4-P67` s'ouvre : d'une rangée à la suivante, c'est-
+à-dire la surface — une lecture neuve, avec une fermeture de boucle pour contrôle gratuit.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

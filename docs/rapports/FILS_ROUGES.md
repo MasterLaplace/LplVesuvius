@@ -4,7 +4,7 @@
 
 # Les fils rouges — les lois que ce dépôt a payées
 
-**104 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
+**105 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
 
 ## R1 — 15 lois
 
@@ -208,7 +208,7 @@ L'image de 40 s jamais faite (`50`), l'image qui tranche feuille/tranche (`54` �
 
 `numcodecs` absent → « graine non couverte » (`41`) ; `imagecodecs` absent → LZW illisible (`54`) ; `verifier_zarr.sh` existait, orphelin. Le décodeur lève, il ne rend pas `None`.
 
-## R4 — 22 lois
+## R4 — 23 lois
 
 **R4-L01 · Une limite de grille publiée comme une limite matérielle**
 
@@ -297,6 +297,10 @@ Ce qui remplace l'humain qui corrige un transfert est d'abord un VOTE : là où 
 **R4-L22 · Une marche extrapolée ne garde pas la moyenne de son échantillon**
 
 Pour dire ce qu'une marche ferait sur une longueur que la matière ne couvre pas, on tire ses pas dans ceux qu'on a. ⚠⚠⚠ MAIS TIRER AVEC REMISE GARDE LA MOYENNE, et une marche de `N` pas tirés ainsi dérive de `N` fois une moyenne connue seulement à `σ/√n` près : la dérive fabriquée, `σ·N/√n`, l'emporte sur la marche, `σ·√N`, dès que `N > n`. La référence mesure alors l'échantillonnage d'une moyenne au lieu du phénomène. `220` le mesure : sur `196-197`, **92,639** voxels de dérive fabriquée contre une marche qui s'étale de **47,2557**. ⭐ Le remède est de CENTRER les pas, ce qui suppose que la moyenne n'est que du hasard — et cette supposition se publie avec l'erreur de la moyenne, jamais muette.
+
+**R4-L23 · Ce qui remplace l'humain le long d'une rangée est le consensus à chaque couture**
+
+Trois tranches le disent ensemble. `219` : les écarts extrêmes sont portés par une rangée à la fois, et cinq voisines la désignent. `220` : corriger ces seuls extrêmes ne garde pas deux rangées sur le même feuillet — c'est la marche des coutures ORDINAIRES qui les sépare. `221` : le consensus des voisines pris à CHAQUE couture traverse sans quitter le feuillet là où une rangée seule en sort, depuis le même départ (**14,9375** contre **37,375** voxels). ⭐⭐⭐⭐ Donc une rangée ne se déroule pas seule, et un vote ne se réserve pas aux anomalies : la bonne unité est le voisinage, à chaque couture. ⚠⚠⚠ Et la limite est structurelle : ce que les voisines partagent, aucun consensus ne le corrige, qu'il soit la matière ou une erreur commune.
 
 ## R5 — 24 lois
 

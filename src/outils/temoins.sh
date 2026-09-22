@@ -1580,6 +1580,8 @@ run "cinq rangees et la fautive" uv run python "$ROOT/src/nappe/cinq_rangees_des
 run "figure cinq rangees et la fautive" uv run python "$ROOT/src/figures/figure_cinq_rangees_designent_elles_la_fautive.py" --verifier
 run "le vote et le feuillet" uv run python "$ROOT/src/nappe/le_vote_ramene_t_il_les_rangees_sur_le_feuillet.py" --verifier
 run "figure le vote et le feuillet" uv run python "$ROOT/src/figures/figure_le_vote_ramene_t_il_les_rangees_sur_le_feuillet.py" --verifier
+run "le consensus et la rangee" uv run python "$ROOT/src/nappe/le_consensus_traverse_t_il_la_rangee.py" --verifier
+run "figure le consensus et la rangee" uv run python "$ROOT/src/figures/figure_le_consensus_traverse_t_il_la_rangee.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

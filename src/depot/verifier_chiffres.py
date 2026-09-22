@@ -3194,6 +3194,80 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 221 : LE CONSENSUS TRAVERSE-T-IL LA RANGEE ?
+    # (1) ⚠⚠⚠ LA DISTANCE DU CONSENSUS NE VOYAGE JAMAIS SANS CELLE DE LA RANGEE SEULE APPARIEE : c'est
+    # leur ecart, depuis le meme depart sur les memes coutures, qui fait le resultat.
+    # (2) ⚠⚠ UNE MARCHE EXTRAPOLEE NE VOYAGE JAMAIS SANS LES DEUX RAPPORTS DE SON ETALON.
+    s221 = _source(racine, "le_consensus_traverse_t_il_la_rangee.json")
+    if s221.exists():
+        d = json.loads(s221.read_text())
+
+        def _dec221(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        tr221 = d.get("le_troncon_retenu") or []
+        if tr221:
+            out.append(("le tronçon du consensus de 221",
+                        [f"sur **{tr221[2]}** coutures d'affilée (colonnes **{tr221[0]}** à "
+                         f"**{tr221[1]}**)", f"Sur **{tr221[0]}–{tr221[1]}**, **{tr221[2]}**"],
+                        s221.name))
+            out.append(("les coutures avec consensus de 221",
+                        [f"**{d['les_coutures_avec_consensus']}** coutures sur "
+                         f"**{d['les_coutures_dune_rangee']}**"], s221.name))
+        for cle, nom in (("la_traversee_du_consensus", "le consensus"),
+                         ("la_traversee_de_la_moyenne", "la moyenne")):
+            x_ = d.get(cle) or {}
+            for k_, lib in (("la_distance_au_depart_en_voxels", "la distance au départ"),
+                            ("lecart_type_des_pas_en_voxels", "la dispersion du pas")):
+                if x_.get(k_) is not None:
+                    ajoute(f"{lib} de {nom} de 221", float(x_[k_]), _dec221(x_[k_]), s221.name,
+                           unites=("vx", "**"))
+        x_ = d.get("la_traversee_du_consensus") or {}
+        for k_, lib in (("la_moyenne_des_pas_en_voxels", "la moyenne des pas"),
+                        ("son_erreur_en_voxels", "l erreur de la moyenne")):
+            if x_.get(k_) is not None:
+                ajoute(f"{lib} du consensus de 221", float(x_[k_]), _dec221(x_[k_]), s221.name,
+                       unites=("**",))
+        for r_, x_ in sorted((d.get("les_rangees_seules_sur_le_meme_troncon") or {}).items()):
+            for k_, lib in (("la_distance_au_depart_en_voxels", "la distance au départ"),
+                            ("lecart_type_des_pas_en_voxels", "la dispersion du pas")):
+                ajoute(f"{lib} de la rangée {r_} appariée de 221", float(x_[k_]), _dec221(x_[k_]),
+                       s221.name, unites=("vx", "**"))
+        ex221 = d.get("lextrapolation_du_consensus") or {}
+        for k_, lib in (("la_marche_mediane_par_blocs_en_voxels", "la marche par blocs"),
+                        ("la_marche_mediane_pas_a_pas_en_voxels", "la marche pas à pas")):
+            if ex221.get(k_) is not None:
+                ajoute(f"{lib} du consensus de 221", float(ex221[k_]), _dec221(ex221[k_]),
+                       s221.name, unites=("vx", "**"))
+        if ex221.get("tirages"):
+            out.append(("les marches sous le demi-feuillet du consensus de 221",
+                        [f"**{ex221['les_marches_sous_le_demi_pli_par_blocs']}/{ex221['tirages']}**"],
+                        s221.name))
+        for r_, x_ in sorted((d.get("les_rangees_seules_sur_leur_plus_long_troncon") or {}).items()):
+            ajoute(f"la marche par blocs de la rangée {r_} de 221",
+                   float(x_["la_marche_mediane_par_blocs_en_voxels"]),
+                   _dec221(x_["la_marche_mediane_par_blocs_en_voxels"]), s221.name,
+                   unites=("vx", "**"))
+        et221 = d.get("letalon_de_lextrapolation") or {}
+        if et221.get("decidable"):
+            for k_, lib in (("le_theta", "le θ"),
+                            ("le_rapport_median_par_blocs", "le rapport par blocs"),
+                            ("le_rapport_median_pas_a_pas", "le rapport pas à pas")):
+                ajoute(f"{lib} de l étalon de 221", float(et221[k_]), _dec221(et221[k_]), s221.name,
+                       unites=("**",))
+        if d.get("lautocorrelation_au_premier_decalage") is not None:
+            ajoute("l autocorrélation du consensus de 221",
+                   float(d["lautocorrelation_au_premier_decalage"]),
+                   _dec221(d["lautocorrelation_au_premier_decalage"]), s221.name, unites=("**",))
+        ve221 = d.get("le_verdict") or {}
+        if ve221.get("lecart_des_blocs_a_la_verite") is not None:
+            ajoute("l écart des blocs à la vérité de 221", float(ve221["lecart_des_blocs_a_la_verite"]),
+                   _dec221(ve221["lecart_des_blocs_a_la_verite"]), s221.name, unites=("**",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 220 : LE VOTE RAMENE-T-IL LES RANGEES SUR LE FEUILLET ?
     # (1) ⚠⚠⚠ UNE MARCHE MEDIANE NE VOYAGE JAMAIS SANS LE DEMI-FEUILLET NI SANS CELLE D'AVANT LE VOTE :
     # c'est leur comparaison au seuil, et l'une a l'autre, qui fait le resultat.
