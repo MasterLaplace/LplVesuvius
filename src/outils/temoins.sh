@@ -1568,6 +1568,8 @@ run "le budget de la nappe" uv run python "$ROOT/src/nappe/le_budget_de_la_nappe
 run "figure le budget de la nappe" uv run python "$ROOT/src/figures/figure_le_budget_de_la_nappe.py" --verifier
 run "le bruit propre et l ecartement" uv run python "$ROOT/src/nappe/le_bruit_propre_croit_il_avec_lecartement.py" --verifier
 run "figure le bruit propre et l ecartement" uv run python "$ROOT/src/figures/figure_le_bruit_propre_croit_il_avec_lecartement.py" --verifier
+run "le residu et ce que la rangee a lu" uv run python "$ROOT/src/nappe/le_residu_suit_il_ce_que_la_rangee_a_lu.py" --verifier
+run "figure le residu et ce que la rangee a lu" uv run python "$ROOT/src/figures/figure_le_residu_suit_il_ce_que_la_rangee_a_lu.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

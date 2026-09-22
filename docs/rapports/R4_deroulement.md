@@ -3403,6 +3403,55 @@ remplace : qu'est-ce qui rompt l'additivité sans être la distance ? Le résidu
 donc la mesure suivante est dessinée — à condition de payer le choix du maximum par la même
 permutation, comme `174` l'a appris.
 
+**`215` · 2026-09-22 · le résidu suit-il ce que la rangée a lu ?**
+
+⚠⚠⚠ **L'agrégat évident était interdit par le modèle lui-même** — `R4-F350` : la somme des huit
+résidus d'une rangée est annulée **identiquement** par les équations normales de l'ajustement
+(**0,0002** vx² au pire pour une borne d'arrondi dérivée de
+**0,0004**). Ce n'est pas une mesure, c'est une identité — donc un agrégat de
+POSITION est une vérification incapable d'échouer, et un effet de rangée UNIFORME est absorbé dans
+la variance ajustée de cette rangée sans laisser aucune trace. L'agrégat DOIT être une dispersion.
+⭐⭐⭐⭐ **Et la même orthogonalité borne toute la piste** — `R4-F351` : un ajustement additif absorbe
+par construction tout ce qui agit additivement, donc la part non additive d'une covariable va de
+**0,2576** à **0,7955** selon le membre.
+⚠⚠ Sans elle, un négatif se lirait « cette covariable n'agit pas » au lieu de « elle n'agit pas NON
+additivement », qui est tout ce que la mesure porte.
+✗ **Ce que les neuf rangées ont lu n'explique pas la rupture** — `R4-F352` : la famille de
+**six** membres, déclarée d'avance, plafonne à
+**0,0972** alors que le nul rend une famille MÉDIANE de
+**0,1628** et que **16** rebrassages sur
+**19** font au moins aussi fort. L'observé est SOUS le médian du nul.
+★★★★ **Le négatif est une BORNE, et son aveugle se diagnostique** — `R4-F353` : un lien de
+**4** erreurs d'échantillonnage sur la covariable la mieux vue aurait été trouvé
+**12/12** ; faux **9/171** =
+**0,0526** contre une garantie de **0,05**, aveugle
+**8/171** = **0,0468**. ⚠⚠ Un contrôle
+aveugle sur neuf rangées ne PEUT pas être propre — rebrasser neuf étiquettes ne détruit pas le lien
+— et c'est mesuré plutôt que subi : les aveugles qui tirent ressemblent à l'identité à
+**0,5462** en médiane, ceux qui se taisent à **0,2521**.
+⚠⚠⚠ **La rangée que `214` relevait en post hoc n'est PAS payée** — `R4-F354` : l'énergie de
+**198** vaut **32,3057** contre un médian de
+**17,4701**, mais le nul rend une énergie médiane de
+**29,5784** et **3** rebrassages sur
+**19** font au moins aussi fort. C'est la forme que `R4-P60` prescrivait, portée
+comme contrôle nommé et non comme verdict — elle répond « quelle rangée » et jamais « quoi », et elle
+avait été REGARDÉE pendant la conception, donc la déclarer ensuite l'aurait choisie. ⚠ L'étalon la
+mesure d'ailleurs beaucoup moins puissante : jamais plus de **1/12**, même au
+facteur **6**.
+★ **Le piège nommé est vide, et la dérivation qui l'a posé est démentie** — `R4-F355` : aucune des
+trois covariables ne suit la variance propre — la plus forte vaut
+**0,1255** avec **18** rebrassages sur
+**19** au moins aussi forts — donc l'artefact ne pouvait porter aucune d'elles.
+⚠⚠ Et le piège lui-même rend **0,4**, POSITIF, là où la dérivation annonçait un
+signe négatif ; **4** rebrassages sur **19** font aussi
+fort, donc il n'est ni confirmé ni actif. Les deux sens se publient plutôt que l'attendu réécrit.
+⭐⭐⭐⭐ **Donc la piste A de `R4-P60` est close par la négative, et la piste B a gagné une raison
+d'être faite.** Une covariable de RANGÉE est structurellement mal placée pour rompre l'additivité,
+puisque l'ajustement absorbe sa part la plus grande ; une frontière de FEUILLET est une propriété de
+la PAIRE, donc son effet n'est pas absorbable. ⚠⚠ Mais `R4-P61` passe devant, parce qu'elle peut
+dissoudre la question au lieu de la franchir : le pire résidu du triangle est le maximum de
+trente-six, et personne n'a encore demandé s'il SE REPRODUIT sur ses propres relectures.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

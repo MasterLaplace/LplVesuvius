@@ -3194,6 +3194,139 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 215 : LE RESIDU SUIT-IL CE QUE LA RANGEE A LU ?
+    # (1) ⚠⚠⚠ UNE CORRELATION DE LA FAMILLE NE VOYAGE JAMAIS SANS LA PART NON ADDITIVE DE SON
+    # MEMBRE. C'est la regle propre a cette tranche, et elle protege d'une lecture beaucoup plus
+    # large que la mesure : un ajustement additif absorbe par construction tout ce qui agit
+    # additivement, donc une correlation nulle sur un membre absorbe ne dit PAS « cette covariable
+    # n'agit pas », elle dit « elle n'agit pas NON additivement ». Publier l'une sans l'autre
+    # transforme une borne en une affirmation que rien ne soutient.
+    # (2) ⚠⚠ UNE ENERGIE PAR RANGEE NE VOYAGE JAMAIS SANS LE REBRASSAGE LE PLUS FORT. Le maximum
+    # sur neuf rangees est mecaniquement grand ; l'energie de la rangee la plus chargee lue seule
+    # se lit comme une decouverte alors qu'elle n'atteint meme pas le median du nul.
+    # (3) ⚠⚠ UN TAUX AVEUGLE NE VOYAGE JAMAIS SANS LES DEUX RESSEMBLANCES A L'IDENTITE. Rebrasser
+    # neuf etiquettes ne detruit pas le lien, donc un taux aveugle non nul se lirait comme un
+    # defaut de la regle ; ce sont les deux medianes qui disent que ce sont les permutations
+    # proches de l'identite qui tirent.
+    # (4) ⚠⚠ LE PIEGE NOMME NE VOYAGE JAMAIS SANS SON SENS ATTENDU. La derivation annonce un signe
+    # negatif et la mesure rend un signe positif : publier le rendu seul effacerait le fait que la
+    # derivation a ete DEMENTIE, et publier l'attendu seul serait un commentaire qui contredit sa
+    # propre mesure.
+    # (5) Un TAUX DE FAUX ne voyage jamais sans sa GARANTIE ni sans le compte decisif, et un
+    # FACTEUR de l'echelle jamais sans ses replicats vus — memes regles que `214`.
+    srs = _source(racine, "le_residu_suit_il_ce_que_la_rangee_a_lu.json")
+    if srs.exists():
+        d = json.loads(srs.read_text())
+
+        def _dec215(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        q215 = d.get("ce_que_214_a_rendu") or {}
+        ep215 = d.get("lepreuve_declaree") or {}
+        pa215 = d.get("la_part_non_additive") or {}
+        ra215 = d.get("la_regle_portee_par_la_porte") or {}
+        ag215 = d.get("lagregat_refuse") or {}
+        pg215 = d.get("le_piege_nomme") or {}
+        pc215 = d.get("le_piege_des_covariables") or {}
+        et215 = d.get("letalon") or {}
+        for src_, cle, nom, unites in (
+                (q215, "combien_de_rangees", "les rangées relues", ("rangées",)),
+                (q215, "combien_de_paires", "les paires relues", ("paires",)),
+                (q215, "les_tirages_de_214_au_moins_aussi_forts",
+                 "les rebrassages de 214 au moins aussi forts", ("**",)),
+                (ep215, "combien_de_membres", "les membres de la famille", ("membres",)),
+                (ep215, "tirages", "les rebrassages", ("**",)),
+                (ep215, "les_tirages_au_moins_aussi_forts",
+                 "les rebrassages au moins aussi forts", ("**",)),
+                (ep215, "les_rebrassages_qui_refont_lobserve",
+                 "les rebrassages qui refont l observé", ("**",)),
+                (ra215, "la_rangee_la_plus_chargee", "la rangée la plus chargée", ("**",)),
+                (ra215, "les_tirages_au_moins_aussi_forts",
+                 "les rebrassages de la règle portée au moins aussi forts", ("**",)),
+                (ag215, "les_paires_par_rangee", "les paires par rangée", ("paires",)),
+                (pg215, "les_tirages_au_moins_aussi_forts",
+                 "les rebrassages du piège au moins aussi forts", ("**",)),
+                (pc215, "les_tirages_au_moins_aussi_forts",
+                 "les rebrassages du piège des covariables au moins aussi forts", ("**",)),
+                (et215, "le_plus_petit_facteur_vu", "le plus petit facteur vu", ("**",)),
+                (et215, "les_replicats", "les réplicats d un barreau", ("**",)),
+                (et215, "le_compte_decisif", "le compte décisif", ("**",)),
+                (et215, "les_faux", "les faux de l étalon", ("**",)),
+                (et215, "les_aveugles", "les aveugles de l étalon", ("**",)),
+                (et215, "les_variances_negatives_rencontrees",
+                 "les variances négatives rencontrées", ("**",))):
+            if src_.get(cle) is not None:
+                ajoute(f"{nom} de 215", int(src_[cle]), 0, srs.name, unites=unites)
+        for src_, cle, nom, unites in (
+                (d, "la_garantie_par_epreuve", "la garantie par épreuve", ("**",)),
+                (q215, "la_tendance_de_214_contre_lecartement",
+                 "la tendance de 214 contre l écartement", ("**",)),
+                (ep215, "la_correlation_de_famille", "la corrélation de famille", ("**",)),
+                (ep215, "la_famille_du_nul_mediane", "la famille du nul médiane", ("**",)),
+                (ep215, "la_famille_du_nul_la_plus_forte",
+                 "la famille du nul la plus forte", ("**",)),
+                (pa215, "la_part_la_plus_grande", "la part non additive la plus grande", ("**",)),
+                (pa215, "la_part_la_plus_petite", "la part non additive la plus petite", ("**",)),
+                (ra215, "lenergie_la_plus_grande", "l énergie la plus grande", ("**",)),
+                (ra215, "lenergie_mediane", "l énergie médiane", ("**",)),
+                (ra215, "lenergie_du_nul_mediane", "l énergie du nul médiane", ("**",)),
+                (ra215, "lenergie_du_nul_la_plus_forte",
+                 "l énergie du nul la plus forte", ("**",)),
+                (ag215, "la_plus_grande_somme_en_valeur_absolue",
+                 "la plus grande somme signée", ("voxels", "vx²")),
+                (ag215, "la_borne_darrondi", "la borne d arrondi", ("voxels", "vx²")),
+                (pg215, "la_correlation_energie_variance",
+                 "la corrélation de l énergie à la variance", ("**",)),
+                (pc215, "la_plus_forte_en_valeur_absolue",
+                 "la plus forte corrélation à la variance", ("**",)),
+                (et215, "le_taux_de_faux", "le taux de faux", ("**",)),
+                (et215, "le_taux_aveugle", "le taux aveugle", ("**",)),
+                (et215, "la_ressemblance_mediane_des_aveugles_qui_tirent",
+                 "la ressemblance des aveugles qui tirent", ("**",)),
+                (et215, "la_ressemblance_mediane_des_aveugles_qui_se_taisent",
+                 "la ressemblance des aveugles qui se taisent", ("**",))):
+            if src_.get(cle) is not None:
+                ajoute(f"{nom} de 215", float(src_[cle]), _dec215(src_[cle]), srs.name,
+                       unites=unites)
+        # ⚠⚠ CHAQUE MEMBRE PORTE SA CORRELATION **ET** SA PART NON ADDITIVE : c'est le couple (1),
+        # et les enregistrer ensemble est le seul moyen de ne pas republier l'un sans l'autre.
+        for m_, c_ in sorted((ep215.get("les_correlations_observees") or {}).items()):
+            ajoute(f"la corrélation du membre {m_} de 215", float(c_), _dec215(c_), srs.name,
+                   unites=("**",))
+        for m_, v_ in sorted((pa215.get("les_parts_non_additives") or {}).items()):
+            if v_ is not None:
+                ajoute(f"la part non additive du membre {m_} de 215", float(v_), _dec215(v_),
+                       srs.name, unites=("**",))
+        for r_, e_ in sorted((ra215.get("les_energies") or {}).items()):
+            ajoute(f"l énergie de la rangée {r_} de 215", float(e_), _dec215(e_), srs.name,
+                   unites=("**",))
+        for n_, c_ in sorted((pc215.get("les_correlations_a_la_variance") or {}).items()):
+            if c_ is not None:
+                ajoute(f"la corrélation de {n_} à la variance de 215", float(c_), _dec215(c_),
+                       srs.name, unites=("**",))
+        # ⚠ CE QUE CHAQUE RANGEE A LU : les trois covariables declarees, une ligne par rangee.
+        for r_, lu_ in sorted((q215.get("ce_que_chaque_rangee_a_lu") or {}).items(),
+                              key=lambda x: int(x[0])):
+            for cle, nom, unites in (
+                    ("colonnes_lues", "les colonnes lues", ("colonnes",)),
+                    ("refus_faute_de_texture", "les refus de texture", ("**",)),
+                    ("pas_rendus", "les pas rendus", ("pas",))):
+                if lu_.get(cle) is not None:
+                    ajoute(f"{nom} de la rangée {r_} de 215", int(lu_[cle]), 0, srs.name,
+                           unites=unites)
+        # ⚠⚠ UN BARREAU PORTE SON SCORE, ET CELUI DE LA REGLE PORTEE A COTE : c'est leur ECART qui
+        # dit que la forme prescrite par la porte est la moins puissante des deux, et un ecart ne
+        # se lit pas sur un seul des deux nombres.
+        for b_ in (et215.get("lechelle") or []):
+            ajoute(f"les vus au facteur {int(b_['le_facteur'])} de 215", int(b_["les_vus"]), 0,
+                   srs.name, unites=("**",))
+            ajoute(f"les vus de la règle portée au facteur {int(b_['le_facteur'])} de 215",
+                   int(b_["les_vus_par_la_regle_portee"]), 0, srs.name, unites=("**",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 214 : LE BRUIT PROPRE CROIT-IL AVEC L'ECARTEMENT ?
     # (1) Un DESACCORD PAR COUTURE ne voyage JAMAIS sans la LONGUEUR sur laquelle il a ete lu.
     # C'est la regle de `211`, et la porte `R4-P59` l'a renommee comme son propre piege : deux
