@@ -3222,6 +3222,8 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                              ("la_moyenne_en_erreurs", "la moyenne en erreurs")):
                 ajoute(f"{lib} de {nom_} de 220", float(x_[cle]), _dec220(x_[cle]), s220.name,
                        unites=("vx", "**"))
+            out.append((f"les rebrassages au moins aussi loin de {nom_} de 220",
+                        [f"**{x_['les_rebrassages_au_moins_aussi_loin']}**"], s220.name))
             out.append((f"les rangées sous le demi-feuillet de {nom_} de 220",
                         [f"{x_['les_rangees_sous_le_demi_pli_avant']} → "
                          f"**{x_['les_rangees_sous_le_demi_pli_apres']}**/{x_['tirages']}"],

@@ -123,6 +123,13 @@ C'est la prédiction que la porte avait écrite avant la mesure.
   **105** coutures sur **284**, et les cinq rangées ensemble n'en partagent jamais plus de quelques
   dizaines d'affilée. Les trous sont des chunks absents du dépôt ou trop peu texturés, et une vraie
   traversée devrait les franchir.
+- ⚠⚠⚠ **L'extrapolation suppose aussi des coutures INDÉPENDANTES**, et le tronçon dit que ce n'est pas
+  partout le cas. Sa propre marche, comparée à **171** rebrassages de ses désaccords corrigés, s'étale
+  moins que **163** d'entre eux pour `199-200` — une marche qui revient sur elle-même — et plus que
+  presque tous pour `196-197`, dont **4** seulement vont au moins aussi loin ; `197-198` et `198-199`
+  sont ordinaires (**21** et **29**). Une marche qui revient sur elle-même s'étale moins que des pas
+  indépendants ne l'annoncent, donc le verdict à l'échelle de la rangée peut être trop sévère pour
+  `199-200` et trop clément pour `196-197`.
 - ⚠⚠ **Le centrage suppose que la moyenne d'un tronçon n'est que du hasard.** Une dérive relative
   systématique entre deux rangées ferait pire que ce que la marche centrée annonce.
 - ⚠ Elle ne dit pas qui a raison à la colonne **103** : la rangée seule ou les quatre autres.

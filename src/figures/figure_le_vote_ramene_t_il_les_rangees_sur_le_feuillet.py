@@ -213,8 +213,8 @@ def dessiner(d: dict, sortie: Path):
            "⚠ ce qui n'est PAS établi : que la moyenne d'un tronçon ne soit que du hasard — elle est "
            "publiée avec son erreur, et le centrage le suppose.", moyen, ALERTE)
     ecrire(50, 934,
-           "⚠ et une rangée entière n'est lue ici que par extrapolation : les tronçons communs sont "
-           "plus courts qu'elle.", moyen, ALERTE)
+           "⚠ et une rangée entière n'est lue que par extrapolation, de pas supposés indépendants : "
+           "les tronçons sont plus courts qu'elle.", moyen, ALERTE)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     img.save(sortie)
