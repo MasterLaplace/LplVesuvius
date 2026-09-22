@@ -202,3 +202,11 @@ disent, elles restent sur le même feuillet. ⚠⚠ Le piège est écrit d'avanc
 celle de ses voisines rapproche forcément les rangées entre elles, donc la correction se juge contre
 la même correction appliquée aux mêmes colonnes **à une autre rangée que celle que le vote désigne** —
 c'est le seul nul qui demande si le vote a désigné la bonne.
+
+> **Note du 2026-09-22 — corrigé et conclu par `220`.** Le nul écrit ci-dessus « la même correction
+> appliquée aux mêmes colonnes à une autre rangée » ne tient pas sa garantie : sur du bruit gaussien
+> il « gagne » **27/171** fois, plus de deux fois la garantie, parce qu'il partage la décision qu'il
+> juge. Il est refusé par `220`, qui mesure l'autre moitié directement : le vote aux colonnes fortes
+> retire les extrêmes et ne garde aucune paire voisine sur le même feuillet à l'échelle d'une rangée —
+> c'est la marche des coutures ordinaires qui les sépare.
+

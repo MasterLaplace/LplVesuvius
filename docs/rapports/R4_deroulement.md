@@ -3603,7 +3603,28 @@ fait tirer la règle **95/171** fois. Pour un vote de voisines, c'est la même c
 ⭐⭐⭐⭐ **Donc `R4-P64` est répondue, et la tranche du graal qui désigne le transfert faux a bougé.**
 L'autre moitié s'ouvre, `R4-P65` : corrigées par ce vote, deux rangées restent-elles sur le même
 feuillet ? Sans lecture neuve, avec un nul écrit d'avance — la même correction appliquée à une autre
-rangée que celle que le vote désigne.
+rangée que celle que le vote désigne *(ce nul ne tient pas sa garantie, et `220` le refuse)*.
+
+**`220` · 2026-09-22 · le vote ramène-t-il les rangées sur le feuillet**
+
+⭐⭐ **Aucune lecture neuve** : les pas, les colonnes fortes et les rangées désignées de `219`, relus.
+À chacune des **14** colonnes fortes, la rangée désignée prend la médiane des quatre autres.
+⚠⚠⚠ **Deux instruments refusés.** Le nul que la porte prescrivait — corriger une AUTRE rangée — partage
+la décision qu'il juge et « gagne » **27/171** fois sur du bruit pur (`R4-F376`). Et la marche de la
+rangée d'abord déclarée gardait la moyenne du tronçon, dont l'erreur l'emporte sur la marche dès que la
+rangée est plus longue que lui (`R4-F377`, `R4-L22`) ; le défaut a été vu sur la mesure avant d'être
+démontré, et c'est dit.
+★ **Le vote retire les extrêmes** : le désaccord par couture baisse sur les quatre paires voisines, de
+**3,3139** à **2,3218** voxels pour `198-199`.
+✗ **Sur le tronçon, il ne change pas qui reste** — `R4-F375` : **3** paires sur **4** sous le
+demi-feuillet avant et après, et `196-197` s'aggrave de **38,75** à **48,6562** voxels parce que le vote
+aligne `196` sur la majorité à la colonne **103**, à tort ou à raison.
+✗ **Et à l'échelle d'une rangée, aucune paire ne tient** — `R4-F374` : la meilleure marche médiane est à
+**42,4345** voxels, au-dessus du demi-feuillet de **36**.
+⭐⭐⭐⭐ **Donc `R4-P65` est répondue, comme la porte le prédisait : ce qui sépare deux rangées voisines
+n'est pas leurs extrêmes, c'est la marche de leurs coutures ordinaires.** Un vote aux seules colonnes
+fortes ne remplace pas l'humain. `R4-P66` s'ouvre : le consensus des voisines, pris à CHAQUE couture,
+traverse-t-il la rangée sans quitter le feuillet ?
 
 ## 4. Le tableau des statuts
 

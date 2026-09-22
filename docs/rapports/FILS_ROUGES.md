@@ -4,7 +4,7 @@
 
 # Les fils rouges — les lois que ce dépôt a payées
 
-**103 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
+**104 mécanismes** qui traversent les campagnes. Chacun a été payé au moins une fois, et le prix est dans le rapport qui le porte.
 
 ## R1 — 15 lois
 
@@ -208,7 +208,7 @@ L'image de 40 s jamais faite (`50`), l'image qui tranche feuille/tranche (`54` �
 
 `numcodecs` absent → « graine non couverte » (`41`) ; `imagecodecs` absent → LZW illisible (`54`) ; `verifier_zarr.sh` existait, orphelin. Le décodeur lève, il ne rend pas `None`.
 
-## R4 — 21 lois
+## R4 — 22 lois
 
 **R4-L01 · Une limite de grille publiée comme une limite matérielle**
 
@@ -293,6 +293,10 @@ Un résidu « en erreurs » est un RAPPORT, et une chaîne entière peut n'en in
 **R4-L21 · Un vote de voisines demande assez de voisines**
 
 Ce qui remplace l'humain qui corrige un transfert est d'abord un VOTE : là où une rangée s'écarte seule pendant que ses voisines s'accordent, elle est désignée. ⚠⚠⚠ MAIS LA FORME D'UNE COLONNE NE SÉPARE QUE « UNE RANGÉE » DE « TOUTES », jamais un saut d'une queue propre à une rangée — les deux sont portés par une seule rangée, et pour un vote c'est la même chose. ⚠⚠⚠ ET TROIS RANGÉES NE VOTENT PAS : leurs axes sont trois droites à soixante degrés, toute direction est à moins de trente degrés de l'une d'elles, donc une direction quelconque passe souvent pour une fautive (`P(δ ≤ δ0) = δ0/30°` pour du bruit isotrope). `218` le mesure sur la matière : quatre sauts de la taille observée sont vus **3/12** à trois rangées et **12/12** à cinq. ⭐ Le nombre de voisines est donc un paramètre de la LECTURE, pas du traitement, et il se dérive d'un étalon avant de lire. ⚠ Et le nul d'un vote ne rebrasse jamais des anomalies qui somment à zéro comme des séries libres : il tire sur le bruit et rate les sauts (`R4-F370`). ⭐⭐⭐⭐ CONFIRMÉE PAR `219` SUR LA MATIÈRE : à cinq rangées l'épreuve voit (**0/19**), et elle voit même sur les colonnes de `218` alors que trois rangées ne voient pas même sur deux fois plus de colonnes (**7/19**). Le nombre de voisines, pas le nombre de colonnes, est ce qui décide.
+
+**R4-L22 · Une marche extrapolée ne garde pas la moyenne de son échantillon**
+
+Pour dire ce qu'une marche ferait sur une longueur que la matière ne couvre pas, on tire ses pas dans ceux qu'on a. ⚠⚠⚠ MAIS TIRER AVEC REMISE GARDE LA MOYENNE, et une marche de `N` pas tirés ainsi dérive de `N` fois une moyenne connue seulement à `σ/√n` près : la dérive fabriquée, `σ·N/√n`, l'emporte sur la marche, `σ·√N`, dès que `N > n`. La référence mesure alors l'échantillonnage d'une moyenne au lieu du phénomène. `220` le mesure : sur `196-197`, **92,639** voxels de dérive fabriquée contre une marche qui s'étale de **47,2557**. ⭐ Le remède est de CENTRER les pas, ce qui suppose que la moyenne n'est que du hasard — et cette supposition se publie avec l'erreur de la moyenne, jamais muette.
 
 ## R5 — 24 lois
 

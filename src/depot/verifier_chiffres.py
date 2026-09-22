@@ -3194,6 +3194,65 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 220 : LE VOTE RAMENE-T-IL LES RANGEES SUR LE FEUILLET ?
+    # (1) ⚠⚠⚠ UNE MARCHE MEDIANE NE VOYAGE JAMAIS SANS LE DEMI-FEUILLET NI SANS CELLE D'AVANT LE VOTE :
+    # c'est leur comparaison au seuil, et l'une a l'autre, qui fait le resultat.
+    # (2) ⚠⚠ LA MARCHE REFUSEE VOYAGE AVEC LA DERIVE QU'ELLE FABRIQUE ET SON ERREUR, sans quoi le
+    # refus serait une affirmation.
+    s220 = _source(racine, "le_vote_ramene_t_il_les_rangees_sur_le_feuillet.json")
+    if s220.exists():
+        d = json.loads(s220.read_text())
+
+        def _dec220(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        for nom_, x_ in sorted((d.get("les_paires_voisines") or {}).items()):
+            if not x_.get("decidable"):
+                continue
+            for cle, lib in (("lecart_type_des_desaccords_avant_en_voxels", "le désaccord avant"),
+                             ("lecart_type_des_desaccords_apres_en_voxels", "le désaccord après"),
+                             ("la_separation_avant_en_voxels", "la séparation avant"),
+                             ("la_separation_apres_en_voxels", "la séparation après"),
+                             ("la_rangee_mediane_avant_en_voxels", "la rangée médiane avant"),
+                             ("la_rangee_mediane_apres_en_voxels", "la rangée médiane après"),
+                             ("la_moyenne_en_erreurs", "la moyenne en erreurs")):
+                ajoute(f"{lib} de {nom_} de 220", float(x_[cle]), _dec220(x_[cle]), s220.name,
+                       unites=("vx", "**"))
+            out.append((f"les rangées sous le demi-feuillet de {nom_} de 220",
+                        [f"{x_['les_rangees_sous_le_demi_pli_avant']} → "
+                         f"**{x_['les_rangees_sous_le_demi_pli_apres']}**/{x_['tirages']}"],
+                        s220.name))
+        x_ = (d.get("les_paires_voisines") or {}).get("196-197") or {}
+        if x_.get("decidable"):
+            r_ = x_["la_marche_refusee"]
+            for cle, lib in (("la_moyenne_des_desaccords_apres_en_voxels", "la moyenne"),
+                             ("son_erreur_en_voxels", "l erreur de la moyenne")):
+                ajoute(f"{lib} de 196-197 de 220", float(x_[cle]), _dec220(x_[cle]), s220.name,
+                       unites=("**",))
+            for cle, lib in (("la_derive_quelle_fabrique_apres_en_voxels", "la dérive fabriquée"),
+                             ("lerreur_sur_cette_derive_en_voxels", "l erreur sur la dérive"),
+                             ("ce_que_la_marche_setale_en_voxels", "l étalement de la marche"),
+                             ("la_rangee_mediane_apres_en_voxels", "la marche refusée")):
+                ajoute(f"{lib} de 196-197 de 220", float(r_[cle]), _dec220(r_[cle]), s220.name,
+                       unites=("**",))
+        et220 = d.get("letalon") or {}
+        if et220.get("decidable"):
+            out.append(("les victoires du nul de la porte sur du bruit de 220",
+                        [f"**{et220['les_victoires_sur_du_bruit']}/{et220['le_compte_decisif']}**"],
+                        s220.name))
+            ajoute("le taux du nul de la porte de 220", float(et220["le_taux"]),
+                   _dec220(et220["le_taux"]), s220.name, unites=("**",))
+        po220 = d.get("le_nul_de_la_porte") or {}
+        if po220.get("decidable"):
+            for cle, lib in (("la_somme_des_separations_apres_le_vote", "la somme après le vote"),
+                             ("la_somme_mediane_par_une_autre_rangee", "la somme par une autre")):
+                ajoute(f"{lib} de 220", float(po220[cle]), _dec220(po220[cle]), s220.name,
+                       unites=("**",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 219 : CINQ RANGEES DESIGNENT-ELLES LA FAUTIVE ?
     # (1) ⚠⚠⚠ UNE PROXIMITE NE VOYAGE JAMAIS SANS SON REBRASSAGE, comme chez `218`.
     # (2) ⚠⚠⚠ LES QUATRE MATIERES DE L'ATTRIBUTION VOYAGENT ENSEMBLE : c'est leur comparaison, et non

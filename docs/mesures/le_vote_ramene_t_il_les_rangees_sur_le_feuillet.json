@@ -1,0 +1,230 @@
+{
+  "decidable": true,
+  "graine": 20261101,
+  "tirages": 19,
+  "le_compte_decisif": 171,
+  "la_question_declaree": "corrigées par un vote de cinq voisines, deux rangées voisines restent-elles sur le même feuillet ?",
+  "la_mesure_declaree": "la séparation de chaque paire voisine après le vote, et celle de sa marche médiane à l'échelle d'une rangée, contre le demi-feuillet",
+  "la_garantie_du_nul": 0.05,
+  "le_demi_pli_en_voxels": 36,
+  "les_rangees": [
+    196,
+    197,
+    198,
+    199,
+    200
+  ],
+  "les_coutures_dune_rangee": 284,
+  "les_colonnes_fortes_de_219": {
+    "19": 199,
+    "21": 200,
+    "28": 200,
+    "32": 197,
+    "59": 197,
+    "102": 198,
+    "103": 196,
+    "131": 200,
+    "151": 200,
+    "161": 199,
+    "168": 196,
+    "172": 198,
+    "193": 199,
+    "267": 198
+  },
+  "les_colonnes_corrigees": 14,
+  "les_paires_voisines": {
+    "196-197": {
+      "decidable": true,
+      "la_paire": [
+        196,
+        197
+      ],
+      "le_troncon": [
+        93,
+        181,
+        89
+      ],
+      "les_coutures_corrigees_par_le_vote": 2,
+      "la_separation_avant_en_voxels": 38.75,
+      "la_separation_apres_en_voxels": 48.6562,
+      "sous_le_demi_pli_avant": false,
+      "sous_le_demi_pli_apres": false,
+      "lecart_type_des_desaccords_avant_en_voxels": 3.178,
+      "lecart_type_des_desaccords_apres_en_voxels": 2.8041,
+      "la_moyenne_des_desaccords_apres_en_voxels": 0.3262,
+      "son_erreur_en_voxels": 0.2972,
+      "la_moyenne_en_erreurs": 1.0974,
+      "le_troncon_rebrasse_median_en_voxels": 34.7188,
+      "les_rebrassages_sous_le_demi_pli": 97,
+      "les_rebrassages_au_moins_aussi_loin": 4,
+      "les_coutures_dune_rangee": 284,
+      "la_rangee_mediane_apres_en_voxels": 52.6643,
+      "la_rangee_mediane_avant_en_voxels": 56.0449,
+      "les_rangees_sous_le_demi_pli_apres": 33,
+      "les_rangees_sous_le_demi_pli_avant": 22,
+      "tirages": 171,
+      "la_marche_refusee": {
+        "pourquoi": "elle garde la moyenne du tronçon, dont l'erreur l'emporte sur la marche",
+        "la_rangee_mediane_avant_en_voxels": 61.9375,
+        "la_rangee_mediane_apres_en_voxels": 110.4062,
+        "la_derive_quelle_fabrique_apres_en_voxels": 92.639,
+        "lerreur_sur_cette_derive_en_voxels": 84.4147,
+        "ce_que_la_marche_setale_en_voxels": 47.2557
+      },
+      "elle_tient_a_lechelle_de_la_rangee": false
+    },
+    "197-198": {
+      "decidable": true,
+      "la_paire": [
+        197,
+        198
+      ],
+      "le_troncon": [
+        109,
+        213,
+        105
+      ],
+      "les_coutures_corrigees_par_le_vote": 1,
+      "la_separation_avant_en_voxels": 31.875,
+      "la_separation_apres_en_voxels": 31.875,
+      "sous_le_demi_pli_avant": true,
+      "sous_le_demi_pli_apres": true,
+      "lecart_type_des_desaccords_avant_en_voxels": 2.8157,
+      "lecart_type_des_desaccords_apres_en_voxels": 2.4133,
+      "la_moyenne_des_desaccords_apres_en_voxels": -0.1226,
+      "son_erreur_en_voxels": 0.2355,
+      "la_moyenne_en_erreurs": -0.5207,
+      "le_troncon_rebrasse_median_en_voxels": 21.125,
+      "les_rebrassages_sous_le_demi_pli": 160,
+      "les_rebrassages_au_moins_aussi_loin": 21,
+      "les_coutures_dune_rangee": 284,
+      "la_rangee_mediane_apres_en_voxels": 42.4345,
+      "la_rangee_mediane_avant_en_voxels": 53.3054,
+      "les_rangees_sous_le_demi_pli_apres": 55,
+      "les_rangees_sous_le_demi_pli_avant": 28,
+      "tirages": 171,
+      "la_marche_refusee": {
+        "pourquoi": "elle garde la moyenne du tronçon, dont l'erreur l'emporte sur la marche",
+        "la_rangee_mediane_avant_en_voxels": 52.0,
+        "la_rangee_mediane_apres_en_voxels": 51.6875,
+        "la_derive_quelle_fabrique_apres_en_voxels": 34.8238,
+        "lerreur_sur_cette_derive_en_voxels": 66.8852,
+        "ce_que_la_marche_setale_en_voxels": 40.6692
+      },
+      "elle_tient_a_lechelle_de_la_rangee": false
+    },
+    "198-199": {
+      "decidable": true,
+      "la_paire": [
+        198,
+        199
+      ],
+      "le_troncon": [
+        109,
+        213,
+        105
+      ],
+      "les_coutures_corrigees_par_le_vote": 3,
+      "la_separation_avant_en_voxels": 23.1875,
+      "la_separation_apres_en_voxels": 26.5625,
+      "sous_le_demi_pli_avant": true,
+      "sous_le_demi_pli_apres": true,
+      "lecart_type_des_desaccords_avant_en_voxels": 3.3139,
+      "lecart_type_des_desaccords_apres_en_voxels": 2.3218,
+      "la_moyenne_des_desaccords_apres_en_voxels": 0.061,
+      "son_erreur_en_voxels": 0.2266,
+      "la_moyenne_en_erreurs": 0.2693,
+      "le_troncon_rebrasse_median_en_voxels": 18.8125,
+      "les_rebrassages_sous_le_demi_pli": 168,
+      "les_rebrassages_au_moins_aussi_loin": 29,
+      "les_coutures_dune_rangee": 284,
+      "la_rangee_mediane_apres_en_voxels": 42.9762,
+      "la_rangee_mediane_avant_en_voxels": 59.8875,
+      "les_rangees_sous_le_demi_pli_apres": 58,
+      "les_rangees_sous_le_demi_pli_avant": 14,
+      "tirages": 171,
+      "la_marche_refusee": {
+        "pourquoi": "elle garde la moyenne du tronçon, dont l'erreur l'emporte sur la marche",
+        "la_rangee_mediane_avant_en_voxels": 63.0,
+        "la_rangee_mediane_apres_en_voxels": 42.3125,
+        "la_derive_quelle_fabrique_apres_en_voxels": 17.3274,
+        "lerreur_sur_cette_derive_en_voxels": 64.349,
+        "ce_que_la_marche_setale_en_voxels": 39.1271
+      },
+      "elle_tient_a_lechelle_de_la_rangee": false
+    },
+    "199-200": {
+      "decidable": true,
+      "la_paire": [
+        199,
+        200
+      ],
+      "le_troncon": [
+        64,
+        143,
+        80
+      ],
+      "les_coutures_corrigees_par_le_vote": 1,
+      "la_separation_avant_en_voxels": 11.5,
+      "la_separation_apres_en_voxels": 12.0,
+      "sous_le_demi_pli_avant": true,
+      "sous_le_demi_pli_apres": true,
+      "lecart_type_des_desaccords_avant_en_voxels": 2.7183,
+      "lecart_type_des_desaccords_apres_en_voxels": 2.413,
+      "la_moyenne_des_desaccords_apres_en_voxels": 0.1266,
+      "son_erreur_en_voxels": 0.2698,
+      "la_moyenne_en_erreurs": 0.4691,
+      "le_troncon_rebrasse_median_en_voxels": 18.6875,
+      "les_rebrassages_sous_le_demi_pli": 167,
+      "les_rebrassages_au_moins_aussi_loin": 163,
+      "les_coutures_dune_rangee": 284,
+      "la_rangee_mediane_apres_en_voxels": 46.2953,
+      "la_rangee_mediane_avant_en_voxels": 53.5852,
+      "les_rangees_sous_le_demi_pli_apres": 55,
+      "les_rangees_sous_le_demi_pli_avant": 31,
+      "tirages": 171,
+      "la_marche_refusee": {
+        "pourquoi": "elle garde la moyenne du tronçon, dont l'erreur l'emporte sur la marche",
+        "la_rangee_mediane_avant_en_voxels": 53.25,
+        "la_rangee_mediane_apres_en_voxels": 53.3125,
+        "la_derive_quelle_fabrique_apres_en_voxels": 35.9438,
+        "lerreur_sur_cette_derive_en_voxels": 76.6192,
+        "ce_que_la_marche_setale_en_voxels": 40.6652
+      },
+      "elle_tient_a_lechelle_de_la_rangee": false
+    }
+  },
+  "le_nul_de_la_porte": {
+    "decidable": true,
+    "les_colonnes_corrigees": 14,
+    "la_somme_des_separations_apres_le_vote": 119.0938,
+    "la_somme_mediane_par_une_autre_rangee": 105.7188,
+    "les_tirages_au_moins_aussi_bons": 19,
+    "tirages": 19,
+    "le_vote_gagne": false
+  },
+  "letalon": {
+    "decidable": true,
+    "les_colonnes_par_matiere": 227,
+    "les_bruits_propres_en_voxels": [
+      2.5057,
+      2.3326,
+      1.9866,
+      2.42,
+      2.4842
+    ],
+    "le_compte_decisif": 171,
+    "les_victoires_sur_du_bruit": 27,
+    "les_matieres_sans_colonne_forte": 83,
+    "le_taux": 0.1579,
+    "le_nul_de_la_porte_tient_sa_garantie": false
+  },
+  "le_verdict": {
+    "combien_de_paires": 4,
+    "combien_tiennent_a_lechelle_de_la_rangee": 0,
+    "combien_sous_le_demi_pli_avant_sur_le_troncon": 3,
+    "combien_sous_le_demi_pli_apres_sur_le_troncon": 3,
+    "le_nul_de_la_porte_est_refute": true,
+    "ce_qui_reste_a_mesurer": "LE VOTE AUX EXTRÊMES NE SUFFIT PAS : LA MARCHE ORDINAIRE SÉPARE LES RANGÉES À L'ÉCHELLE D'UNE RANGÉE"
+  }
+}
