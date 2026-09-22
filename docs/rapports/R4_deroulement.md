@@ -3351,6 +3351,45 @@ belle pour être prise sans sa condition, et cette condition n'est pas mesurée.
 la distance à sa voisine ? C'est la mesure la moins chère de la chaîne — le pipeline de `211` sur des
 rangées plus écartées — et toute la gratuité de la hauteur en dépend.
 
+**`214` · 2026-09-22 · le bruit propre d'une rangée croît-il avec l'écartement ?**
+⭐ **Une seule épreuve déclarée**, « le désaccord par couture croît-il avec l'écartement », pour une
+garantie de **0,05**. Neuf rangées autour de la médiane
+**198**, lues à ±1, ±4, ±8 et ±16 **des deux côtés**, dont les
+**36 paires** couvrent **15 écartements** DÉRIVÉS
+de **1** à **32 rangées**.
+✗ **Le désaccord ne dépend PAS de l'écartement** — `R4-F346` : corrélation de rangs
+**-0,1024**, **16** rebrassages des
+étiquettes sur **19** au moins aussi forts ;
+**2,7138 voxels** sur **242 coutures**
+au plus petit écartement contre **2,8401** sur
+**239** au plus grand. ⭐⭐⭐⭐ **Et les extrêmes ne tombent pas aux
+extrêmes** : le plus petit désaccord, **2,2936**, est à
+**8** rangées d'écart, le plus grand,
+**4,0036**, à **4**. La prédiction
+que `R4-P59` avait posée d'avance tient.
+★★★★ **Le négatif est une BORNE** — `R4-F347` : l'étalon voit
+**12/12** une croissance qui multiplie le carré du désaccord par
+**3**, et seulement **6/12** à
+**×2** ; taux de faux **0/171** pour une garantie de
+**0,05**. ⚠⚠ Les bruits propres par rangée de l'étalon sont ceux que `212` a
+MESURÉS : avec un bruit uniforme, l'épreuve choisissait la difficulté de son propre examen.
+★ **Le piège nommé pousse CONTRE le résultat** — `R4-F348` : la longueur décroît avec l'écartement
+(**-0,3427**, de
+**224** à
+**247** coutures), donc elle aurait fabriqué une
+croissance apparente. L'absence de croissance survit à un biais qui aurait dû la masquer.
+⚠⚠⚠ **Mais le triangle SUR-DÉTERMINÉ réfute le modèle additif** — `R4-F349` :
+**36 équations pour 9 inconnues**, neuf variances
+toutes positives de **2,5882** à **7,097 voxels carrés**, et pourtant un pire résidu de
+**3,6279 erreurs** sur la paire **206-214**
+contre un résidu médian de **0,8039**. À trois rangées le système
+était exactement déterminé et ne pouvait rien réfuter ; neuf rangées changent la nature de l'objet.
+⭐⭐⭐⭐ **Donc la hauteur cesse d'être gratuite, et ce n'est PAS la distance qui la rend payante.**
+`R4-P59` est **répondue par la négative**, et `R4-P60` s'ouvre, plus étroite que celle qu'elle
+remplace : qu'est-ce qui rompt l'additivité sans être la distance ? Le résidu **nomme sa paire**,
+donc la mesure suivante est dessinée — à condition de payer le choix du maximum par la même
+permutation, comme `174` l'a appris.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

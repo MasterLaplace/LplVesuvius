@@ -1,0 +1,1122 @@
+{
+  "graine": 20261026,
+  "tirages": 19,
+  "la_question_declaree": "le désaccord par couture de deux rangées croît-il avec leur écartement sur le treillis, ou ne dépend-il que de l'identité des deux rangées ?",
+  "les_epreuves_declarees": [
+    "le désaccord par couture croît-il avec l'écartement"
+  ],
+  "la_garantie_par_epreuve": 0.05,
+  "le_pas_dun_pli_en_voxels": 72.0833,
+  "le_demi_pli_en_voxels": 36,
+  "les_rangees_ecartees": {
+    "decidable": true,
+    "la_mediane": 198,
+    "les_ecartements_declares": [
+      1,
+      4,
+      8,
+      16
+    ],
+    "les_ecartements_tenus": [
+      {
+        "lecartement": 1,
+        "les_cotes": [
+          197,
+          199
+        ]
+      },
+      {
+        "lecartement": 4,
+        "les_cotes": [
+          194,
+          202
+        ]
+      },
+      {
+        "lecartement": 8,
+        "les_cotes": [
+          190,
+          206
+        ]
+      },
+      {
+        "lecartement": 16,
+        "les_cotes": [
+          182,
+          214
+        ]
+      }
+    ],
+    "les_ecartements_perdus": [],
+    "les_rangees": [
+      182,
+      190,
+      194,
+      197,
+      198,
+      199,
+      202,
+      206,
+      214
+    ],
+    "combien_de_rangees": 9
+  },
+  "ce_que_208_a_rendu": {
+    "decidable": true,
+    "la_derive_partagee_en_voxels": 1.5129,
+    "le_bruit_de_la_mediane_en_voxels": 1.9387,
+    "le_bruit_de_la_voisine_en_voxels": 1.899
+  },
+  "ce_que_211_a_rendu": {
+    "decidable": true,
+    "la_paire_de_211": [
+      198,
+      197
+    ],
+    "lecartement_de_211": 1,
+    "le_desaccord_par_couture_en_voxels": 2.7138,
+    "les_coutures_de_211": 242
+  },
+  "ce_que_212_a_rendu": {
+    "decidable": true,
+    "les_bruits_propres_en_voxels": [
+      1.5295,
+      2.2417,
+      2.5568
+    ],
+    "combien": 3,
+    "le_plus_petit_en_voxels": 1.5295,
+    "le_plus_grand_en_voxels": 2.5568
+  },
+  "les_lignes": {
+    "182": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 182,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 260,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 25
+      }
+    },
+    "190": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 190,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 246,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 32,
+        "trop peu texturé": 7
+      }
+    },
+    "194": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 194,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 253,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 30,
+        "trop peu texturé": 2
+      }
+    },
+    "197": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 197,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 255,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 29,
+        "trop peu texturé": 1
+      }
+    },
+    "198": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 198,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 251,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 28,
+        "trop peu texturé": 6
+      }
+    },
+    "199": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 199,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 254,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 28,
+        "trop peu texturé": 3
+      }
+    },
+    "202": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 202,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 254,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 28,
+        "trop peu texturé": 3
+      }
+    },
+    "206": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 206,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 252,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 29,
+        "trop peu texturé": 4
+      }
+    },
+    "214": {
+      "decidable": true,
+      "segment": "20230702185753",
+      "grille_de_chunks": [
+        396,
+        285
+      ],
+      "la_rangee": 214,
+      "le_cote_du_chunk": 128,
+      "la_largeur_du_bord": 16,
+      "les_rangees_lues": [
+        4,
+        12,
+        20,
+        28,
+        36,
+        44,
+        52,
+        60,
+        68,
+        76,
+        84,
+        92,
+        100,
+        108,
+        116,
+        124
+      ],
+      "colonnes_demandees": 285,
+      "colonnes_lues": 258,
+      "les_reprises_du_reseau": 0,
+      "refuses": {
+        "absent du dépôt": 19,
+        "trop peu texturé": 8
+      }
+    }
+  },
+  "les_pas_par_rangee": {
+    "182": 259,
+    "190": 240,
+    "194": 250,
+    "197": 253,
+    "198": 243,
+    "199": 250,
+    "202": 250,
+    "206": 247,
+    "214": 250
+  },
+  "les_paires_du_treillis": {
+    "decidable": true,
+    "combien_de_paires": 36,
+    "les_ecartements_couverts": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      12,
+      15,
+      16,
+      17,
+      20,
+      24,
+      32
+    ],
+    "combien_decartements": 15,
+    "lecartement_le_plus_petit": 1,
+    "lecartement_le_plus_grand": 32
+  },
+  "les_desaccords_par_paire": {
+    "decidable": true,
+    "les_paires": [
+      {
+        "la_paire": [
+          182,
+          190
+        ],
+        "lecartement": 8,
+        "les_coutures_communes": 240,
+        "les_coutures_du_troncon": 167,
+        "le_desaccord_par_couture_en_voxels": 2.2936,
+        "lerreur_dechantillonnage_en_voxels": 0.1047,
+        "le_desaccord_le_plus_grand_en_voxels": 60.6875,
+        "lexcursion_du_desaccord_en_voxels": 69.9375
+      },
+      {
+        "la_paire": [
+          182,
+          194
+        ],
+        "lecartement": 12,
+        "les_coutures_communes": 245,
+        "les_coutures_du_troncon": 112,
+        "le_desaccord_par_couture_en_voxels": 2.4216,
+        "lerreur_dechantillonnage_en_voxels": 0.1094,
+        "le_desaccord_le_plus_grand_en_voxels": 61.0625,
+        "lexcursion_du_desaccord_en_voxels": 67.125
+      },
+      {
+        "la_paire": [
+          182,
+          197
+        ],
+        "lecartement": 15,
+        "les_coutures_communes": 246,
+        "les_coutures_du_troncon": 225,
+        "le_desaccord_par_couture_en_voxels": 2.7794,
+        "lerreur_dechantillonnage_en_voxels": 0.1253,
+        "le_desaccord_le_plus_grand_en_voxels": 49.0833,
+        "lexcursion_du_desaccord_en_voxels": 50.5625
+      },
+      {
+        "la_paire": [
+          182,
+          198
+        ],
+        "lecartement": 16,
+        "les_coutures_communes": 235,
+        "les_coutures_du_troncon": 105,
+        "le_desaccord_par_couture_en_voxels": 2.9237,
+        "lerreur_dechantillonnage_en_voxels": 0.1349,
+        "le_desaccord_le_plus_grand_en_voxels": 15.125,
+        "lexcursion_du_desaccord_en_voxels": 26.5625
+      },
+      {
+        "la_paire": [
+          182,
+          199
+        ],
+        "lecartement": 17,
+        "les_coutures_communes": 241,
+        "les_coutures_du_troncon": 166,
+        "le_desaccord_par_couture_en_voxels": 3.3069,
+        "lerreur_dechantillonnage_en_voxels": 0.1506,
+        "le_desaccord_le_plus_grand_en_voxels": 39.8125,
+        "lexcursion_du_desaccord_en_voxels": 42.1875
+      },
+      {
+        "la_paire": [
+          182,
+          202
+        ],
+        "lecartement": 20,
+        "les_coutures_communes": 241,
+        "les_coutures_du_troncon": 111,
+        "le_desaccord_par_couture_en_voxels": 3.2623,
+        "lerreur_dechantillonnage_en_voxels": 0.1486,
+        "le_desaccord_le_plus_grand_en_voxels": 21.8958,
+        "lexcursion_du_desaccord_en_voxels": 39.5
+      },
+      {
+        "la_paire": [
+          182,
+          206
+        ],
+        "lecartement": 24,
+        "les_coutures_communes": 239,
+        "les_coutures_du_troncon": 134,
+        "le_desaccord_par_couture_en_voxels": 3.0454,
+        "lerreur_dechantillonnage_en_voxels": 0.1393,
+        "le_desaccord_le_plus_grand_en_voxels": 35.125,
+        "lexcursion_du_desaccord_en_voxels": 47.1875
+      },
+      {
+        "la_paire": [
+          182,
+          214
+        ],
+        "lecartement": 32,
+        "les_coutures_communes": 239,
+        "les_coutures_du_troncon": 74,
+        "le_desaccord_par_couture_en_voxels": 2.8401,
+        "lerreur_dechantillonnage_en_voxels": 0.1299,
+        "le_desaccord_le_plus_grand_en_voxels": 38.5,
+        "lexcursion_du_desaccord_en_voxels": 48.25
+      },
+      {
+        "la_paire": [
+          190,
+          194
+        ],
+        "lecartement": 4,
+        "les_coutures_communes": 234,
+        "les_coutures_du_troncon": 96,
+        "le_desaccord_par_couture_en_voxels": 2.3151,
+        "lerreur_dechantillonnage_en_voxels": 0.107,
+        "le_desaccord_le_plus_grand_en_voxels": 21.875,
+        "lexcursion_du_desaccord_en_voxels": 32.5625
+      },
+      {
+        "la_paire": [
+          190,
+          197
+        ],
+        "lecartement": 7,
+        "les_coutures_communes": 235,
+        "les_coutures_du_troncon": 167,
+        "le_desaccord_par_couture_en_voxels": 2.9422,
+        "lerreur_dechantillonnage_en_voxels": 0.1357,
+        "le_desaccord_le_plus_grand_en_voxels": 58.3125,
+        "lexcursion_du_desaccord_en_voxels": 79.3125
+      },
+      {
+        "la_paire": [
+          190,
+          198
+        ],
+        "lecartement": 8,
+        "les_coutures_communes": 224,
+        "les_coutures_du_troncon": 105,
+        "le_desaccord_par_couture_en_voxels": 2.7724,
+        "lerreur_dechantillonnage_en_voxels": 0.131,
+        "le_desaccord_le_plus_grand_en_voxels": 57.875,
+        "lexcursion_du_desaccord_en_voxels": 63.0625
+      },
+      {
+        "la_paire": [
+          190,
+          199
+        ],
+        "lecartement": 9,
+        "les_coutures_communes": 230,
+        "les_coutures_du_troncon": 161,
+        "le_desaccord_par_couture_en_voxels": 3.1612,
+        "lerreur_dechantillonnage_en_voxels": 0.1474,
+        "le_desaccord_le_plus_grand_en_voxels": 36.25,
+        "lexcursion_du_desaccord_en_voxels": 52.5
+      },
+      {
+        "la_paire": [
+          190,
+          202
+        ],
+        "lecartement": 12,
+        "les_coutures_communes": 230,
+        "les_coutures_du_troncon": 74,
+        "le_desaccord_par_couture_en_voxels": 3.1709,
+        "lerreur_dechantillonnage_en_voxels": 0.1478,
+        "le_desaccord_le_plus_grand_en_voxels": 26.0625,
+        "lexcursion_du_desaccord_en_voxels": 50.125
+      },
+      {
+        "la_paire": [
+          190,
+          206
+        ],
+        "lecartement": 16,
+        "les_coutures_communes": 230,
+        "les_coutures_du_troncon": 97,
+        "le_desaccord_par_couture_en_voxels": 2.9995,
+        "lerreur_dechantillonnage_en_voxels": 0.1399,
+        "le_desaccord_le_plus_grand_en_voxels": 32.5625,
+        "lexcursion_du_desaccord_en_voxels": 37.75
+      },
+      {
+        "la_paire": [
+          190,
+          214
+        ],
+        "lecartement": 24,
+        "les_coutures_communes": 225,
+        "les_coutures_du_troncon": 72,
+        "le_desaccord_par_couture_en_voxels": 2.6178,
+        "lerreur_dechantillonnage_en_voxels": 0.1234,
+        "le_desaccord_le_plus_grand_en_voxels": 16.4375,
+        "lexcursion_du_desaccord_en_voxels": 30.375
+      },
+      {
+        "la_paire": [
+          194,
+          197
+        ],
+        "lecartement": 3,
+        "les_coutures_communes": 247,
+        "les_coutures_du_troncon": 101,
+        "le_desaccord_par_couture_en_voxels": 2.8462,
+        "lerreur_dechantillonnage_en_voxels": 0.1281,
+        "le_desaccord_le_plus_grand_en_voxels": 36.1875,
+        "lexcursion_du_desaccord_en_voxels": 57.625
+      },
+      {
+        "la_paire": [
+          194,
+          198
+        ],
+        "lecartement": 4,
+        "les_coutures_communes": 236,
+        "les_coutures_du_troncon": 62,
+        "le_desaccord_par_couture_en_voxels": 2.953,
+        "lerreur_dechantillonnage_en_voxels": 0.1359,
+        "le_desaccord_le_plus_grand_en_voxels": 48.5,
+        "lexcursion_du_desaccord_en_voxels": 52.375
+      },
+      {
+        "la_paire": [
+          194,
+          199
+        ],
+        "lecartement": 5,
+        "les_coutures_communes": 244,
+        "les_coutures_du_troncon": 101,
+        "le_desaccord_par_couture_en_voxels": 3.3674,
+        "lerreur_dechantillonnage_en_voxels": 0.1524,
+        "le_desaccord_le_plus_grand_en_voxels": 15.125,
+        "lexcursion_du_desaccord_en_voxels": 21.5
+      },
+      {
+        "la_paire": [
+          194,
+          202
+        ],
+        "lecartement": 8,
+        "les_coutures_communes": 242,
+        "les_coutures_du_troncon": 79,
+        "le_desaccord_par_couture_en_voxels": 3.0808,
+        "lerreur_dechantillonnage_en_voxels": 0.14,
+        "le_desaccord_le_plus_grand_en_voxels": 23.625,
+        "lexcursion_du_desaccord_en_voxels": 46.0625
+      },
+      {
+        "la_paire": [
+          194,
+          206
+        ],
+        "lecartement": 12,
+        "les_coutures_communes": 241,
+        "les_coutures_du_troncon": 101,
+        "le_desaccord_par_couture_en_voxels": 3.1746,
+        "lerreur_dechantillonnage_en_voxels": 0.1446,
+        "le_desaccord_le_plus_grand_en_voxels": 38.5,
+        "lexcursion_du_desaccord_en_voxels": 38.75
+      },
+      {
+        "la_paire": [
+          194,
+          214
+        ],
+        "lecartement": 20,
+        "les_coutures_communes": 235,
+        "les_coutures_du_troncon": 71,
+        "le_desaccord_par_couture_en_voxels": 2.8819,
+        "lerreur_dechantillonnage_en_voxels": 0.1329,
+        "le_desaccord_le_plus_grand_en_voxels": 18.6875,
+        "lexcursion_du_desaccord_en_voxels": 20.5
+      },
+      {
+        "la_paire": [
+          197,
+          198
+        ],
+        "lecartement": 1,
+        "les_coutures_communes": 242,
+        "les_coutures_du_troncon": 105,
+        "le_desaccord_par_couture_en_voxels": 2.7138,
+        "lerreur_dechantillonnage_en_voxels": 0.1234,
+        "le_desaccord_le_plus_grand_en_voxels": 31.875,
+        "lexcursion_du_desaccord_en_voxels": 45.875
+      },
+      {
+        "la_paire": [
+          197,
+          199
+        ],
+        "lecartement": 2,
+        "les_coutures_communes": 246,
+        "les_coutures_du_troncon": 166,
+        "le_desaccord_par_couture_en_voxels": 3.4004,
+        "lerreur_dechantillonnage_en_voxels": 0.1533,
+        "le_desaccord_le_plus_grand_en_voxels": 39.625,
+        "lexcursion_du_desaccord_en_voxels": 52.3125
+      },
+      {
+        "la_paire": [
+          197,
+          202
+        ],
+        "lecartement": 5,
+        "les_coutures_communes": 246,
+        "les_coutures_du_troncon": 111,
+        "le_desaccord_par_couture_en_voxels": 3.3931,
+        "lerreur_dechantillonnage_en_voxels": 0.153,
+        "le_desaccord_le_plus_grand_en_voxels": 41.6667,
+        "lexcursion_du_desaccord_en_voxels": 53.5625
+      },
+      {
+        "la_paire": [
+          197,
+          206
+        ],
+        "lecartement": 9,
+        "les_coutures_communes": 244,
+        "les_coutures_du_troncon": 134,
+        "le_desaccord_par_couture_en_voxels": 3.5928,
+        "lerreur_dechantillonnage_en_voxels": 0.1626,
+        "le_desaccord_le_plus_grand_en_voxels": 57.25,
+        "lexcursion_du_desaccord_en_voxels": 65.875
+      },
+      {
+        "la_paire": [
+          197,
+          214
+        ],
+        "lecartement": 17,
+        "les_coutures_communes": 238,
+        "les_coutures_du_troncon": 74,
+        "le_desaccord_par_couture_en_voxels": 3.3558,
+        "lerreur_dechantillonnage_en_voxels": 0.1538,
+        "le_desaccord_le_plus_grand_en_voxels": 14.6875,
+        "lexcursion_du_desaccord_en_voxels": 20.25
+      },
+      {
+        "la_paire": [
+          198,
+          199
+        ],
+        "lecartement": 1,
+        "les_coutures_communes": 239,
+        "les_coutures_du_troncon": 105,
+        "le_desaccord_par_couture_en_voxels": 2.9794,
+        "lerreur_dechantillonnage_en_voxels": 0.1363,
+        "le_desaccord_le_plus_grand_en_voxels": 23.1875,
+        "lexcursion_du_desaccord_en_voxels": 43.0625
+      },
+      {
+        "la_paire": [
+          198,
+          202
+        ],
+        "lecartement": 4,
+        "les_coutures_communes": 237,
+        "les_coutures_du_troncon": 60,
+        "le_desaccord_par_couture_en_voxels": 3.4411,
+        "lerreur_dechantillonnage_en_voxels": 0.1581,
+        "le_desaccord_le_plus_grand_en_voxels": 27.125,
+        "lexcursion_du_desaccord_en_voxels": 46.5625
+      },
+      {
+        "la_paire": [
+          198,
+          206
+        ],
+        "lecartement": 8,
+        "les_coutures_communes": 235,
+        "les_coutures_du_troncon": 60,
+        "le_desaccord_par_couture_en_voxels": 3.6558,
+        "lerreur_dechantillonnage_en_voxels": 0.1686,
+        "le_desaccord_le_plus_grand_en_voxels": 59.0,
+        "lexcursion_du_desaccord_en_voxels": 59.0
+      },
+      {
+        "la_paire": [
+          198,
+          214
+        ],
+        "lecartement": 16,
+        "les_coutures_communes": 228,
+        "les_coutures_du_troncon": 65,
+        "le_desaccord_par_couture_en_voxels": 3.5473,
+        "lerreur_dechantillonnage_en_voxels": 0.1661,
+        "le_desaccord_le_plus_grand_en_voxels": 40.875,
+        "lexcursion_du_desaccord_en_voxels": 52.1875
+      },
+      {
+        "la_paire": [
+          199,
+          202
+        ],
+        "lecartement": 3,
+        "les_coutures_communes": 244,
+        "les_coutures_du_troncon": 79,
+        "le_desaccord_par_couture_en_voxels": 3.5093,
+        "lerreur_dechantillonnage_en_voxels": 0.1589,
+        "le_desaccord_le_plus_grand_en_voxels": 26.6875,
+        "lexcursion_du_desaccord_en_voxels": 41.0625
+      },
+      {
+        "la_paire": [
+          199,
+          206
+        ],
+        "lecartement": 7,
+        "les_coutures_communes": 241,
+        "les_coutures_du_troncon": 102,
+        "le_desaccord_par_couture_en_voxels": 3.8108,
+        "lerreur_dechantillonnage_en_voxels": 0.1736,
+        "le_desaccord_le_plus_grand_en_voxels": 50.9375,
+        "lexcursion_du_desaccord_en_voxels": 55.4375
+      },
+      {
+        "la_paire": [
+          199,
+          214
+        ],
+        "lecartement": 15,
+        "les_coutures_communes": 235,
+        "les_coutures_du_troncon": 69,
+        "le_desaccord_par_couture_en_voxels": 3.5988,
+        "lerreur_dechantillonnage_en_voxels": 0.166,
+        "le_desaccord_le_plus_grand_en_voxels": 11.6875,
+        "lexcursion_du_desaccord_en_voxels": 18.0
+      },
+      {
+        "la_paire": [
+          202,
+          206
+        ],
+        "lecartement": 4,
+        "les_coutures_communes": 241,
+        "les_coutures_du_troncon": 111,
+        "le_desaccord_par_couture_en_voxels": 4.0036,
+        "lerreur_dechantillonnage_en_voxels": 0.1824,
+        "le_desaccord_le_plus_grand_en_voxels": 34.2083,
+        "lexcursion_du_desaccord_en_voxels": 41.3125
+      },
+      {
+        "la_paire": [
+          202,
+          214
+        ],
+        "lecartement": 12,
+        "les_coutures_communes": 237,
+        "les_coutures_du_troncon": 55,
+        "le_desaccord_par_couture_en_voxels": 3.4137,
+        "lerreur_dechantillonnage_en_voxels": 0.1568,
+        "le_desaccord_le_plus_grand_en_voxels": 38.5,
+        "lexcursion_du_desaccord_en_voxels": 47.375
+      },
+      {
+        "la_paire": [
+          206,
+          214
+        ],
+        "lecartement": 8,
+        "les_coutures_communes": 232,
+        "les_coutures_du_troncon": 69,
+        "le_desaccord_par_couture_en_voxels": 3.0412,
+        "lerreur_dechantillonnage_en_voxels": 0.1412,
+        "le_desaccord_le_plus_grand_en_voxels": 24.75,
+        "lexcursion_du_desaccord_en_voxels": 36.6875
+      }
+    ],
+    "combien_de_paires": 36,
+    "les_paires_perdues": [],
+    "les_ecartements_couverts": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      7,
+      8,
+      9,
+      12,
+      15,
+      16,
+      17,
+      20,
+      24,
+      32
+    ],
+    "lecartement_le_plus_grand": 32
+  },
+  "lepreuve": {
+    "decidable": true,
+    "tirages": 19,
+    "combien_de_paires": 36,
+    "la_tendance_observee": -0.1024,
+    "la_tendance_du_nul_median": 0.095,
+    "la_tendance_du_nul_la_plus_forte": 0.3693,
+    "les_tirages_au_moins_aussi_forts": 16,
+    "les_rebrassages_qui_refont_lobserve": 0,
+    "la_suite_des_positions_a_une_symetrie": true,
+    "ca_croit_avec_lecartement": false
+  },
+  "la_regle_refutee": {
+    "decidable": true,
+    "tirages": 19,
+    "la_tendance_observee": -0.1024,
+    "la_tendance_du_nul_la_plus_forte": 0.4421,
+    "les_tirages_au_moins_aussi_forts": 15,
+    "ca_croit_selon_la_regle_refutee": false
+  },
+  "le_triangle_surdetermine": {
+    "decidable": true,
+    "combien_dequations": 36,
+    "combien_dinconnues": 9,
+    "les_bruits_propres_en_voxels2": {
+      "182": 3.0819,
+      "190": 2.5882,
+      "194": 3.2165,
+      "197": 4.907,
+      "198": 4.8917,
+      "199": 6.8218,
+      "202": 6.971,
+      "206": 7.097,
+      "214": 5.1685
+    },
+    "les_rangees_a_variance_negative": [],
+    "le_modele_est_refute_par_une_variance_negative": false,
+    "le_pire_residu_en_voxels2": -3.0166,
+    "la_paire_du_pire_residu": "206-214",
+    "le_pire_residu_en_erreurs": 3.6279,
+    "le_residu_median_en_erreurs": 0.8039,
+    "le_modele_tient_aux_erreurs": false
+  },
+  "ce_que_la_longueur_fait": {
+    "decidable": true,
+    "la_tendance_de_la_longueur": -0.3427,
+    "la_tendance_du_troncon": -0.0777,
+    "les_coutures_communes_les_plus_nombreuses": 247,
+    "les_coutures_communes_les_moins_nombreuses": 224,
+    "les_coutures_communes_medianes": 239
+  },
+  "le_verdict": {
+    "decidable": true,
+    "combien_de_paires": 36,
+    "lechelle_des_ecartements": [
+      1,
+      32
+    ],
+    "combien_decartements": 15,
+    "le_desaccord_le_plus_petit_en_voxels": 2.2936,
+    "le_desaccord_le_plus_grand_en_voxels": 4.0036,
+    "le_desaccord_median_en_voxels": 3.121,
+    "au_plus_petit_ecartement": {
+      "la_paire": [
+        197,
+        198
+      ],
+      "lecartement": 1,
+      "le_desaccord_par_couture_en_voxels": 2.7138,
+      "les_coutures_communes": 242
+    },
+    "au_plus_grand_ecartement": {
+      "la_paire": [
+        182,
+        214
+      ],
+      "lecartement": 32,
+      "le_desaccord_par_couture_en_voxels": 2.8401,
+      "les_coutures_communes": 239
+    },
+    "ce_que_211_a_mesure_a_lecartement_un_en_voxels": 2.7138,
+    "la_tendance_observee": -0.1024,
+    "les_tirages_au_moins_aussi_forts": 16,
+    "le_bruit_croit_avec_lecartement": false,
+    "la_tendance_de_la_longueur": -0.3427,
+    "le_pire_residu_du_triangle_en_erreurs": 3.6279,
+    "le_modele_additif_tient": false,
+    "le_modele_est_refute_par_une_variance_negative": false,
+    "la_hauteur_reste_gratuite": false,
+    "ce_qui_reste_a_mesurer": "CE QUI ROMPT L'ADDITIVITÉ SANS ÊTRE LA DISTANCE",
+    "pourquoi_il_reste_a_mesurer": "le désaccord ne dépend pas de l'écartement, mais le triangle sur-déterminé refuse un bruit propre par rangée : ce qui fait diverger deux rangées n'est ni leur distance ni leur seule identité"
+  },
+  "ce_quon_peut_poser": {
+    "decidable": true,
+    "le_desaccord_de_211_en_voxels": 2.7138,
+    "la_derive_partagee_de_208_en_voxels": 1.5129
+  },
+  "letalon": {
+    "decidable": true,
+    "les_positions_posees": [
+      182,
+      190,
+      194,
+      197,
+      198,
+      199,
+      202,
+      206,
+      214
+    ],
+    "les_coutures_par_replicat": 239,
+    "lecartement_le_plus_grand": 32,
+    "le_bruit_propre_pose_en_voxels": 1.9189,
+    "les_bruits_propres_par_rangee_en_voxels": {
+      "182": 1.5295,
+      "190": 2.2417,
+      "194": 2.5568,
+      "197": 1.5295,
+      "198": 2.2417,
+      "199": 2.5568,
+      "202": 1.5295,
+      "206": 2.2417,
+      "214": 2.5568
+    },
+    "la_derive_partagee_posee_en_voxels": 1.5129,
+    "la_croissance_posee_sur_la_face_negative_en_voxels": 0.0,
+    "lechelle_de_sensibilite": [
+      {
+        "le_facteur": 2,
+        "la_croissance_en_voxels": 0.4797,
+        "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels": 3.8379,
+        "les_vus": 6,
+        "replicats": 12
+      },
+      {
+        "le_facteur": 3,
+        "la_croissance_en_voxels": 0.6784,
+        "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels": 4.7004,
+        "les_vus": 12,
+        "replicats": 12
+      },
+      {
+        "le_facteur": 4,
+        "la_croissance_en_voxels": 0.8309,
+        "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels": 5.4276,
+        "les_vus": 12,
+        "replicats": 12
+      },
+      {
+        "le_facteur": 6,
+        "la_croissance_en_voxels": 1.0727,
+        "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels": 6.6474,
+        "les_vus": 12,
+        "replicats": 12
+      },
+      {
+        "le_facteur": 9,
+        "la_croissance_en_voxels": 1.3569,
+        "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels": 8.1414,
+        "les_vus": 12,
+        "replicats": 12
+      }
+    ],
+    "le_plus_petit_facteur_vu": 3,
+    "la_sensibilite_est_monotone": true,
+    "replicats": 12,
+    "les_replicats_du_refus": 171,
+    "les_faux": 0,
+    "le_plancher_de_202": 40,
+    "la_chance_de_rater_au_plancher": 0.048,
+    "le_taux_de_faux": 0.0,
+    "les_replicats_du_controle_aveugle": 171,
+    "les_derives_partagees_vues": 0,
+    "le_taux_du_controle_aveugle": 0.0,
+    "une_derive_partagee_reste_invisible": true,
+    "la_garantie": 0.05,
+    "letalon_separe": true
+  }
+}

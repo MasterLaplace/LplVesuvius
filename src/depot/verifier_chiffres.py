@@ -3194,6 +3194,129 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 214 : LE BRUIT PROPRE CROIT-IL AVEC L'ECARTEMENT ?
+    # (1) Un DESACCORD PAR COUTURE ne voyage JAMAIS sans la LONGUEUR sur laquelle il a ete lu.
+    # C'est la regle de `211`, et la porte `R4-P59` l'a renommee comme son propre piege : deux
+    # rangees eloignees partagent MOINS de trous, donc un desaccord plus petit sur un troncon plus
+    # court se lirait comme un meilleur accord.
+    # (2) Une TENDANCE ne voyage jamais sans la FORCE DU NUL qu'elle devait battre ni sans le
+    # nombre de rebrassages : une correlation de rangs seule ne dit pas si elle est remarquable.
+    # (3) Un FACTEUR de l'echelle de sensibilite ne voyage jamais sans ses REPLICATS VUS. Un
+    # barreau sans son score est une borne annoncee et non mesuree, et c'est precisement ce qui
+    # transforme un resultat negatif en un nombre publiable.
+    # (4) Une VARIANCE PROPRE du triangle ne voyage jamais sans le PIRE RESIDU en erreurs : la
+    # positivite est tout ce que `212` pouvait verifier a trois rangees, et la sur-determination
+    # est le seul apport de neuf rangees. Publier la positivite seule effacerait la refutation.
+    # (5) Un TAUX DE FAUX ne voyage jamais sans sa GARANTIE ni sans le compte de replicats.
+    sbr = _source(racine, "le_bruit_propre_croit_il_avec_lecartement.json")
+    if sbr.exists():
+        d = json.loads(sbr.read_text())
+
+        def _dec214(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            t = repr(f)
+            return len(t.split(".")[1]) if "." in t else 0
+
+        ech214 = d.get("les_rangees_ecartees") or {}
+        mes214 = d.get("les_desaccords_par_paire") or {}
+        ep214 = d.get("lepreuve") or {}
+        ref214 = d.get("la_regle_refutee") or {}
+        tri214 = d.get("le_triangle_surdetermine") or {}
+        lon214 = d.get("ce_que_la_longueur_fait") or {}
+        ver214 = d.get("le_verdict") or {}
+        et214 = d.get("letalon") or {}
+        for src_, cle, nom, unites in (
+                (ech214, "la_mediane", "la rangée médiane", ("**",)),
+                (ech214, "combien_de_rangees", "les rangées écartées", ("rangées",)),
+                (mes214, "combien_de_paires", "les paires du treillis", ("paires",)),
+                (mes214, "lecartement_le_plus_grand", "le plus grand écartement", ("rangées",)),
+                (ver214, "combien_decartements", "les écartements couverts", ("**",)),
+                (ep214, "tirages", "les rebrassages", ("**",)),
+                (ep214, "les_tirages_au_moins_aussi_forts",
+                 "les rebrassages au moins aussi forts", ("**",)),
+                (ep214, "les_rebrassages_qui_refont_lobserve",
+                 "les rebrassages qui refont l observé", ("**",)),
+                (ref214, "les_tirages_au_moins_aussi_forts",
+                 "les rebrassages de la règle réfutée", ("**",)),
+                (tri214, "combien_dequations", "les équations du triangle", ("équations",)),
+                (tri214, "combien_dinconnues", "les inconnues du triangle", ("inconnues",)),
+                (lon214, "les_coutures_communes_les_plus_nombreuses",
+                 "les coutures communes les plus nombreuses", ("coutures",)),
+                (lon214, "les_coutures_communes_les_moins_nombreuses",
+                 "les coutures communes les moins nombreuses", ("coutures",)),
+                (lon214, "les_coutures_communes_medianes",
+                 "les coutures communes médianes", ("coutures",)),
+                (et214, "les_coutures_par_replicat", "les coutures par réplicat", ("coutures",)),
+                (et214, "le_plus_petit_facteur_vu", "le plus petit facteur vu", ("**",)),
+                (et214, "replicats", "les réplicats d un barreau", ("**",)),
+                (et214, "les_replicats_du_refus", "les réplicats du refus", ("**",)),
+                (et214, "les_faux", "les faux de l étalon", ("**",)),
+                (et214, "les_replicats_du_controle_aveugle",
+                 "les réplicats du contrôle aveugle", ("**",))):
+            if src_.get(cle) is not None:
+                ajoute(f"{nom} de 214", int(src_[cle]), 0, sbr.name, unites=unites)
+        for r_ in (ech214.get("les_rangees") or []):
+            ajoute(f"la rangée {r_} de 214", int(r_), 0, sbr.name, unites=("**", "et"))
+        # ⚠⚠ CHAQUE EXTREME DE L'ECHELLE PORTE SON DESACCORD **ET** SES COUTURES : c'est le piege
+        # nomme par la porte, et le seul moyen de ne pas le repayer est de les enregistrer ensemble.
+        for cote, nom_ in (("au_plus_petit_ecartement", "au plus petit écartement"),
+                           ("au_plus_grand_ecartement", "au plus grand écartement")):
+            x = ver214.get(cote) or {}
+            if x.get("le_desaccord_par_couture_en_voxels") is not None:
+                ajoute(f"le désaccord {nom_} de 214",
+                       float(x["le_desaccord_par_couture_en_voxels"]),
+                       _dec214(x["le_desaccord_par_couture_en_voxels"]), sbr.name,
+                       unites=("voxel", "voxels", "vx"))
+                ajoute(f"les coutures {nom_} de 214", int(x["les_coutures_communes"]), 0,
+                       sbr.name, unites=("coutures",))
+                ajoute(f"l écartement {nom_} de 214", int(x["lecartement"]), 0, sbr.name,
+                       unites=("rangées",))
+        for src_, cle, nom, unites in (
+                (d, "la_garantie_par_epreuve", "la garantie par épreuve", ("**",)),
+                (ver214, "le_desaccord_le_plus_petit_en_voxels",
+                 "le plus petit désaccord", ("voxel", "voxels", "vx")),
+                (ver214, "le_desaccord_le_plus_grand_en_voxels",
+                 "le plus grand désaccord", ("voxel", "voxels", "vx")),
+                (ver214, "le_desaccord_median_en_voxels",
+                 "le désaccord médian", ("voxel", "voxels", "vx")),
+                (ver214, "ce_que_211_a_mesure_a_lecartement_un_en_voxels",
+                 "ce que 211 a mesuré", ("voxel", "voxels", "vx")),
+                (ep214, "la_tendance_observee", "la tendance observée", ("**",)),
+                (ep214, "la_tendance_du_nul_median", "la tendance du nul médian", ("**",)),
+                (ep214, "la_tendance_du_nul_la_plus_forte",
+                 "la tendance du nul la plus forte", ("**",)),
+                (ref214, "la_tendance_du_nul_la_plus_forte",
+                 "le nul le plus fort de la règle réfutée", ("**",)),
+                (lon214, "la_tendance_de_la_longueur", "la tendance de la longueur", ("**",)),
+                (tri214, "le_pire_residu_en_erreurs", "le pire résidu", ("erreurs",)),
+                (tri214, "le_residu_median_en_erreurs", "le résidu médian", ("erreur", "erreurs")),
+                (et214, "la_derive_partagee_posee_en_voxels",
+                 "la dérive partagée posée", ("voxel", "voxels")),
+                (et214, "le_taux_de_faux", "le taux de faux", ("**",)),
+                (et214, "le_taux_du_controle_aveugle", "le taux du contrôle aveugle", ("**",)),
+                (et214, "la_garantie", "la garantie de l étalon", ("**",))):
+            if src_.get(cle) is not None:
+                ajoute(f"{nom} de 214", float(src_[cle]), _dec214(src_[cle]), sbr.name,
+                       unites=unites)
+        for r_, v_ in sorted((tri214.get("les_bruits_propres_en_voxels2") or {}).items()):
+            ajoute(f"la variance propre de la rangée {r_} de 214", float(v_), _dec214(v_),
+                   sbr.name, unites=("voxels",))
+        # ⚠⚠ UN BARREAU DE L'ECHELLE PORTE SA CROISSANCE, CE QU'ELLE ANNONCE ET SON SCORE.
+        for b_ in (et214.get("lechelle_de_sensibilite") or []):
+            f_ = int(b_["le_facteur"])
+            ajoute(f"la croissance du facteur {f_} de 214",
+                   float(b_["la_croissance_en_voxels"]),
+                   _dec214(b_["la_croissance_en_voxels"]), sbr.name,
+                   unites=("voxel", "voxels", "vx"))
+            ajoute(f"ce que le facteur {f_} annonce de 214",
+                   float(b_["ce_quelle_annonce_au_plus_grand_ecartement_en_voxels"]),
+                   _dec214(b_["ce_quelle_annonce_au_plus_grand_ecartement_en_voxels"]),
+                   sbr.name, unites=("voxel", "voxels", "vx"))
+            ajoute(f"les vus du facteur {f_} de 214", int(b_["les_vus"]), 0, sbr.name,
+                   unites=("**",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 212 : LE BUDGET DE LA NAPPE
     # (1) Une LONGUEUR TENABLE ne voyage JAMAIS sans la DISPERSION qui la produit : c'est le
     # carre du rapport, donc doubler la dispersion divise la longueur par quatre, et publier la
