@@ -373,14 +373,31 @@ def contre_les_etiquettes(paires: dict, rangees, tirages: int = PERMUTATIONS,
         lignes.append((a, b))
     if len(mesure) < 3:
         return {"decidable": False, "raison": "moins de trois paires portent un désaccord"}
-    positions = np.asarray(r, dtype=float)
     cles = sorted(mesure)
     valeurs = [float(mesure[k]) for k in cles]
+    return _le_nul_des_etiquettes(cles, valeurs, r, tirages, graine)
+
+
+def _le_nul_des_etiquettes(cles, valeurs, r, tirages: int, graine: int) -> dict:
+    """
+    @brief Le rebrassage des étiquettes de rangée, appliqué à N'IMPORTE QUEL vecteur par paire.
+
+    ⚠⚠⚠ Ce moteur est extrait pour qu'il n'y en ait qu'UN. Deux règles le traversent — le désaccord
+    brut que le verdict suit, et les résidus de l'ajustement additif que la tranche porte comme
+    contrôle nommé — et elles ne diffèrent QUE par le vecteur qu'on leur donne. Deux
+    implémentations du même nul finiraient par ne pas s'accorder sur le traitement des égalités
+    structurelles, et la comparaison des deux taux de faux ne voudrait alors plus rien dire :
+    c'est précisément cette comparaison qui est publiée.
+    """
+    index = {v: i for i, v in enumerate(r)}
+    positions = np.asarray(r, dtype=float)
 
     def _ecarts(perm):
         return tuple(abs(float(positions[perm[index[a]]] - positions[perm[index[b]]]))
                      for a, b in cles)
 
+    if len(cles) < 3:
+        return {"decidable": False, "raison": "moins de trois paires portent une valeur"}
     identite = list(range(len(r)))
     observes = _ecarts(identite)
     # ⚠⚠ LA SYMETRIE SE CALCULE, ELLE NE SE DECOUVRE PAS PAR TIRAGE. Une suite de positions
@@ -410,7 +427,7 @@ def contre_les_etiquettes(paires: dict, rangees, tirages: int = PERMUTATIONS,
         return {"decidable": False, "raison": "aucun rebrassage n'a rendu de tendance distincte"}
     au_moins = int(sum(1 for x in nuls if x >= obs))
     return {"decidable": True, "tirages": int(tirages),
-            "combien_de_paires": len(mesure),
+            "combien_de_paires": len(cles),
             "la_tendance_observee": round(float(obs), 4),
             "la_tendance_du_nul_median": round(float(np.median(nuls)), 4),
             "la_tendance_du_nul_la_plus_forte": round(float(max(nuls)), 4),
@@ -418,6 +435,60 @@ def contre_les_etiquettes(paires: dict, rangees, tirages: int = PERMUTATIONS,
             "les_rebrassages_qui_refont_lobserve": int(rejets),
             "la_suite_des_positions_a_une_symetrie": symetrique,
             "ca_croit_avec_lecartement": bool(au_moins == 0)}
+
+
+
+def contre_les_residus(paires: dict, rangees, tirages: int = PERMUTATIONS,
+                       graine: int = GRAINE) -> dict:
+    """
+    @brief LA RÈGLE PLUS PUISSANTE, REFUSÉE — portée comme contrôle nommé, avec son taux de faux.
+
+    ⭐⭐⭐⭐ ELLE EST PLUS PUISSANTE, ET C'EST BIEN LÀ LE PIÈGE. Corréler l'écartement avec les
+    RÉSIDUS de l'ajustement additif, plutôt qu'avec le désaccord brut, retire des données tout ce
+    que les bruits propres des rangées expliquent — donc le bruit de fond contre lequel une
+    croissance doit ressortir s'effondre, et la face positive de l'étalon monte. Une statistique
+    qui voit mieux est exactement ce qu'on cherche, et c'est pour cela qu'il faut la mesurer au
+    lieu de l'adopter.
+
+    ⚠⚠⚠ ELLE NE TIENT PAS SA GARANTIE, ET LA RAISON EST STRUCTURELLE. Un résidu n'est pas une
+    donnée : il est AJUSTÉ depuis les trente-six désaccords mêmes que le rebrassage redistribue.
+    Le nul des étiquettes laisse intacte la structure du modèle — c'est ce qui le rend exact pour
+    le désaccord brut — mais les résidus, eux, portent en plus la contrainte de l'ajustement, que
+    la permutation ne redistribue pas. Le nul est alors trop étroit du côté qui compte.
+
+    ⚠⚠ ELLE EST DONC CALCULÉE ET PUBLIÉE, JAMAIS SUIVIE. Le verdict de la tranche lit le désaccord
+    brut ; celle-ci voyage à côté avec son taux de faux mesuré sur LES MÊMES réplicats et LES MÊMES
+    graines que la règle gardée, sans quoi les deux taux ne se compareraient pas. C'est le
+    précédent de `211`, appliqué à la statistique que la tranche a le plus regretté de refuser.
+    """
+    tri = le_triangle_surdetermine(paires, rangees)
+    if not tri.get("decidable"):
+        return {"decidable": False, "raison": tri.get("raison")}
+    par_paire = tri.get("les_residus_par_paire_en_erreurs") or {}
+    r = sorted(int(x) for x in rangees)
+    cles, valeurs = [], []
+    for nom, res in sorted(par_paire.items()):
+        if res is None:
+            continue
+        a, b = (int(x) for x in nom.split("-"))
+        cles.append((min(a, b), max(a, b)))
+        # ⚠⚠⚠ LE RÉSIDU EST SIGNÉ, ET UNE SONDE A CORRIGÉ L'INVERSE. Une première version prenait
+        # son AMPLEUR, au motif que l'ajustement rend autant de positifs que de négatifs. C'est
+        # vrai en somme et faux en structure : une croissance avec la distance laisse des résidus
+        # NÉGATIFS aux petits écartements et POSITIFS aux grands, donc la valeur absolue détruit
+        # exactement le signal cherché. Mesuré — l'ampleur ne voyait rien, et tenait sa garantie
+        # pour la seule raison qu'elle ne voyait rien.
+        valeurs.append(float(res))
+    # ⚠ AUCUN REFUS ICI : le moteur partagé en porte déjà un, et le dupliquer donnerait DEUX
+    # endroits qui décident du même seuil. Une sonde l'a montré en ne pouvant pas casser celui-ci.
+    ordre = sorted(range(len(cles)), key=lambda i: cles[i])
+    rendu = _le_nul_des_etiquettes([cles[i] for i in ordre], [valeurs[i] for i in ordre],
+                                   r, tirages, graine)
+    if not rendu.get("decidable"):
+        return rendu
+    rendu["ce_quelle_correle"] = "l'écartement contre le résidu SIGNÉ de l'ajustement additif"
+    rendu["ca_croit_selon_la_regle_plus_puissante"] = rendu.pop("ca_croit_avec_lecartement")
+    return rendu
 
 
 def le_triangle_surdetermine(paires: dict, rangees) -> dict:
@@ -480,6 +551,13 @@ def le_triangle_surdetermine(paires: dict, rangees) -> dict:
             "la_paire_du_pire_residu": noms[pire],
             "le_pire_residu_en_erreurs": (round(max(finis), 4) if finis else None),
             "le_residu_median_en_erreurs": (round(float(np.median(finis)), 4) if finis else None),
+            # ⚠⚠ LES RESIDUS PAR PAIRE SONT PUBLIES POUR QU'UNE SEULE FONCTION LES PRODUISE. La
+            # regle plus puissante que cette tranche porte comme controle nomme les LIT ici ; les
+            # recalculer chez elle serait une SECONDE DEFINITION de l'ajustement additif, donc deux
+            # chemins libres de diverger sur le rcond, sur l'ordre des equations ou sur l'erreur.
+            "les_residus_par_paire_en_erreurs": {
+                noms[i]: (round(float(en_erreurs[i]), 4) if en_erreurs[i] is not None else None)
+                for i in range(len(noms))},
             "le_modele_tient_aux_erreurs": (bool(max(finis) <= 3.0) if finis else None)}
 
 
@@ -710,6 +788,10 @@ def sur_letalon(positions, coutures: int = 240, sigma_211: float = 2.7138,
     propre = float(base["le_bruit_propre_pose_en_voxels"])
 
     def _une_course(g: int, pousse: float, partage: float):
+        """⚠⚠ LES DEUX RÈGLES LISENT LA MÊME FIXTURE ET LA MÊME GRAINE. Les mesurer sur deux
+        courses distinctes rendrait deux taux de faux qui ne se comparent pas : l'écart entre eux
+        serait alors celui des tirages autant que celui des règles, et c'est l'écart entre les
+        règles que cette tranche publie."""
         rangees = des_rangees_ecartees_fabriquees(p_, int(coutures), partage, propre, pousse, g,
                                                   propres)
         if not rangees:
@@ -717,7 +799,14 @@ def sur_letalon(positions, coutures: int = 240, sigma_211: float = 2.7138,
         mesures = les_desaccords_par_paire(rangees, colonnes, paires)
         if not mesures.get("decidable"):
             return {"decidable": False, "raison": mesures.get("raison")}
-        return contre_les_etiquettes(mesures, p_, tirages, g + 7)
+        return {"gardee": contre_les_etiquettes(mesures, p_, tirages, g + 7),
+                "puissante": contre_les_residus(mesures, p_, tirages, g + 7)}
+
+    def _vue(c) -> bool:
+        return bool((c.get("gardee") or {}).get("ca_croit_avec_lecartement"))
+
+    def _vue_puissante(c) -> bool:
+        return bool((c.get("puissante") or {}).get("ca_croit_selon_la_regle_plus_puissante"))
 
     echelle, plus_petit = [], None
     for f in sorted(int(x) for x in facteurs):
@@ -725,27 +814,31 @@ def sur_letalon(positions, coutures: int = 240, sigma_211: float = 2.7138,
         if not pose.get("decidable"):
             continue
         cr = float(pose["la_croissance_posee_en_voxels"])
-        vus = sum(int(bool(_une_course(int(graine) + 1000 * i, cr,
-                                       float(derive)).get("ca_croit_avec_lecartement")))
-                  for i in range(int(replicats)))
+        courses = [_une_course(int(graine) + 1000 * i, cr, float(derive))
+                   for i in range(int(replicats))]
+        vus = sum(int(_vue(c)) for c in courses)
+        vus_puissante = sum(int(_vue_puissante(c)) for c in courses)
         echelle.append({"le_facteur": int(f), "la_croissance_en_voxels": round(cr, 4),
                         "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels":
                             pose["ce_quelle_annonce_au_plus_grand_ecartement_en_voxels"],
-                        "les_vus": int(vus), "replicats": int(replicats)})
+                        "les_vus": int(vus),
+                        "les_vus_de_la_regle_plus_puissante": int(vus_puissante),
+                        "replicats": int(replicats)})
         if plus_petit is None and vus >= int(replicats):
             plus_petit = int(f)
     monotone = la_suite_est_monotone([b["les_vus"] for b in echelle])
     combien = les_replicats_du_refus(GARANTIE_PAR_EPREUVE)
     refus = int(combien["le_compte_decisif"])
-    faux = sum(int(bool(_une_course(int(graine) + 500000 + 1000 * i,
-                                    float(refus_croissance),
-                                    float(derive)).get("ca_croit_avec_lecartement")))
-               for i in range(refus))
-    aveugles = sum(int(bool(_une_course(int(graine) + 900000 + 1000 * i,
+    refusees = [_une_course(int(graine) + 500000 + 1000 * i, float(refus_croissance),
+                            float(derive)) for i in range(refus)]
+    faux = sum(int(_vue(c)) for c in refusees)
+    faux_puissante = sum(int(_vue_puissante(c)) for c in refusees)
+    aveugles = sum(int(_vue(_une_course(int(graine) + 900000 + 1000 * i,
                                         float(aveugle_croissance),
-                                        float(derive) * 10.0).get("ca_croit_avec_lecartement")))
+                                        float(derive) * 10.0)))
                    for i in range(refus))
     taux = float(faux) / float(refus)
+    taux_puissante = float(faux_puissante) / float(refus)
     taux_aveugle = float(aveugles) / float(refus)
     aveugle_tient = le_taux_tient(taux_aveugle)
     return {"decidable": True,
@@ -770,6 +863,24 @@ def sur_letalon(positions, coutures: int = 240, sigma_211: float = 2.7138,
             "les_derives_partagees_vues": int(aveugles),
             "le_taux_du_controle_aveugle": round(taux_aveugle, 4),
             "une_derive_partagee_reste_invisible": aveugle_tient,
+            # ⭐⭐⭐⭐ LA REGLE PLUS PUISSANTE, MESUREE SUR LES MEMES REPLICATS ET REFUSEE POUR CE
+            # QU'ELLE RENDER ICI. Elle voit mieux — c'est ce que sa colonne de l'echelle montre —
+            # et son taux de faux depasse la garantie. Publier les deux cote a cote est ce qui
+            # empeche une tranche ulterieure de la redecouvrir et de l'adopter.
+            "la_regle_plus_puissante": {
+                "ce_quelle_correle":
+                    "l'écartement contre le résidu SIGNÉ de l'ajustement additif",
+                "les_vus_par_facteur": [
+                    {"le_facteur": b["le_facteur"],
+                     "les_vus": b["les_vus_de_la_regle_plus_puissante"],
+                     "replicats": b["replicats"]} for b in echelle],
+                "les_faux": int(faux_puissante),
+                "les_replicats_du_refus": int(refus),
+                "le_taux_de_faux": round(taux_puissante, 4),
+                "elle_tient_sa_garantie": le_taux_tient(taux_puissante),
+                "elle_voit_plus_que_la_gardee": bool(
+                    sum(b["les_vus_de_la_regle_plus_puissante"] for b in echelle)
+                    > sum(b["les_vus"] for b in echelle))},
             "la_garantie": round(float(GARANTIE_PAR_EPREUVE), 4),
             "letalon_separe": bool(plus_petit is not None and monotone
                                    and le_taux_tient(taux) and aveugle_tient)}
@@ -946,6 +1057,7 @@ def mesurer(delai: float = DELAI, graine: int = GRAINE, replicats: int = 12,
         return {"decidable": False, "raison": mesures.get("raison")}
     epreuve = contre_les_etiquettes(mesures, echelle["les_rangees"], PERMUTATIONS, graine)
     refutee = contre_les_valeurs(mesures, echelle["les_rangees"], PERMUTATIONS, graine)
+    puissante = contre_les_residus(mesures, echelle["les_rangees"], PERMUTATIONS, graine)
     triangle = le_triangle_surdetermine(mesures, echelle["les_rangees"])
     longueur = ce_que_la_longueur_fait(mesures)
     posable = ce_quon_peut_poser(par_211, par_208)
@@ -967,6 +1079,7 @@ def mesurer(delai: float = DELAI, graine: int = GRAINE, replicats: int = 12,
         "les_desaccords_par_paire": mesures,
         "lepreuve": epreuve,
         "la_regle_refutee": refutee,
+        "la_regle_plus_puissante": puissante,
         "le_triangle_surdetermine": triangle,
         "ce_que_la_longueur_fait": longueur,
         "le_verdict": juger(mesures, epreuve, triangle, longueur, par_211),
@@ -1311,6 +1424,69 @@ def verifier() -> int:
                                                                   PERMUTATIONS, 11))
     v("★★★ des paires indécidables ne rendent aucune règle réfutée",
       not contre_les_valeurs({"decidable": False}, positions, 3, 5).get("decidable"))
+
+    # ⭐⭐⭐⭐ LA REGLE PLUS PUISSANTE, PORTEE COMME CONTROLE NOMME. Elle lit les residus que le
+    # triangle publie — jamais un second ajustement — et le verdict ne la suit PAS.
+    _pu_plate = contre_les_residus(mes_plates, positions, PERMUTATIONS, 11)
+    _pu_poussee = contre_les_residus(mes_poussees, positions, PERMUTATIONS, 11)
+    v("★★★★ la règle plus puissante lit une matière POUSSÉE et y voit la croissance",
+      _pu_poussee.get("decidable")
+      and _pu_poussee.get("ca_croit_selon_la_regle_plus_puissante") is True,
+      f"tendance {_pu_poussee.get('la_tendance_observee')}")
+    # ⚠⚠⚠ LE RESIDU EST SIGNE, ET C'EST CE CONTROLE QUI LE DIT. Une croissance avec la distance
+    # laisse des residus NEGATIFS aux petits ecartements et POSITIFS aux grands : la tendance
+    # observee doit donc etre franchement positive. Une version qui prendrait l'AMPLEUR du residu
+    # rendrait une tendance proche de zero — mesure, elle ne voyait plus rien du tout.
+    v("★★★★ et sa tendance est FRANCHEMENT positive, ce qui dit que le résidu est SIGNÉ",
+      (_pu_poussee.get("la_tendance_observee") or 0.0) > 0.5,
+      str(_pu_poussee.get("la_tendance_observee")))
+    v("★★★★ sur une matière PLATE elle ne déclare rien",
+      _pu_plate.get("decidable")
+      and _pu_plate.get("ca_croit_selon_la_regle_plus_puissante") is False,
+      f"tendance {_pu_plate.get('la_tendance_observee')}")
+    v("★★★★ elle est CALCULÉE et publiée sous son propre nom, jamais sous celui du verdict",
+      "ca_croit_selon_la_regle_plus_puissante" in _pu_poussee
+      and "ca_croit_avec_lecartement" not in _pu_poussee)
+    v("★★★ elle dit ce qu'elle corrèle, pour qu'on ne la confonde pas avec la règle gardée",
+      "SIGNÉ" in (_pu_poussee.get("ce_quelle_correle") or ""),
+      str(_pu_poussee.get("ce_quelle_correle")))
+    v("★★★ un triangle indécidable ne rend aucune règle plus puissante",
+      not contre_les_residus({"decidable": True, "les_paires": [
+          {"la_paire": [0, 1], "lecartement": 1, "le_desaccord_par_couture_en_voxels": 1.0,
+           "les_coutures_communes": 40}]}, [0, 1], 3, 5).get("decidable"))
+    # ⚠⚠⚠ ET LE REFUS « MOINS DE TROIS RESIDUS » DOIT ETRE ATTEIGNABLE, sinon c'est une branche
+    # que rien n'exerce. Le triangle exige deja plus d'equations que d'inconnues, donc un manque de
+    # PAIRES ne l'atteint jamais : il ne se declenche que quand des residus sont INDECIDABLES, ce
+    # qu'un desaccord nul produit — son erreur d'echantillonnage vaut alors zero, donc son residu
+    # ne se divise pas. Quatre rangees, six paires, quatre desaccords nuls : il en reste deux.
+    _muettes = {"decidable": True, "les_paires": [
+        {"la_paire": [a, b], "lecartement": abs(a - b), "les_coutures_communes": 40,
+         "le_desaccord_par_couture_en_voxels": (2.0 if (a, b) in ((0, 1), (0, 2)) else 0.0)}
+        for a, b in ((0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3))]}
+    _tri_muet = le_triangle_surdetermine(_muettes, [0, 1, 2, 3])
+    v("★★★★ le triangle reste décidable quand des désaccords sont nuls, et leurs résidus non",
+      _tri_muet.get("decidable")
+      and sum(1 for x in (_tri_muet.get("les_residus_par_paire_en_erreurs") or {}).values()
+              if x is None) == 4,
+      str(_tri_muet.get("les_residus_par_paire_en_erreurs")))
+    # ⚠⚠ LA SONDE PORTE SUR LA RAISON ET PAS SUR LE SEUL REFUS, et c'est un bris qui l'a imposé.
+    # La corrélation de rangs rend déjà None sur deux points, donc le refus est DOUBLEMENT couvert
+    # et « refusé ou non » ne peut pas distinguer les deux chemins : retirer la garde de compte
+    # laissait la sonde verte. Ce qui les sépare est ce que le refus DIT — « moins de trois »
+    # nomme la cause, « la tendance n'est pas calculable » nomme le symptôme.
+    _refus_muet = contre_les_residus(_muettes, [0, 1, 2, 3], 3, 5)
+    v("★★★★ et la règle plus puissante REFUSE alors en NOMMANT le compte, pas le symptôme",
+      not _refus_muet.get("decidable")
+      and "moins de trois" in (_refus_muet.get("raison") or ""),
+      str(_refus_muet.get("raison")))
+    # ⚠⚠ ET LE TRIANGLE PUBLIE SES RESIDUS PAR PAIRE, sinon la regle ci-dessus devrait les
+    # recalculer et il y aurait DEUX ajustements additifs libres de diverger.
+    _tri_pub = le_triangle_surdetermine(mes_poussees, positions)
+    v("★★★★ le triangle publie un résidu par paire, et c'est le seul producteur qui les rende",
+      len(_tri_pub.get("les_residus_par_paire_en_erreurs") or {})
+      == _tri_pub.get("combien_dequations"),
+      f"{len(_tri_pub.get('les_residus_par_paire_en_erreurs') or {})} pour "
+      f"{_tri_pub.get('combien_dequations')}")
     v("★★★ moins de trois paires ne rendent aucune épreuve",
       not contre_les_etiquettes({"decidable": True, "les_paires": [
           {"la_paire": [0, 1], "lecartement": 1, "le_desaccord_par_couture_en_voxels": 1.0}]},

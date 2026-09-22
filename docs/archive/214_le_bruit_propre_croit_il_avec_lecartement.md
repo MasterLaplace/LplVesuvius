@@ -122,6 +122,12 @@ l'échelle, et ne la voit qu'une fois sur deux à ×2. Donc « pas de croissance
 exactement, **« moins que ×3 »** — et ce n'est pas un seuil choisi, c'est le dernier barreau d'une
 échelle dérivée.
 
+⚠⚠ **Et cette borne est celle de la règle DÉCLARÉE, pas la meilleure atteignable.** Une statistique
+plus puissante, portée à côté comme contrôle nommé et détaillée au §8, voit le facteur **2** à
+**12/12** sur cette même échelle et tient sa garantie. La borne de cette tranche est donc
+conservatrice d'un cran, et c'est le prix de n'avoir pas changé de règle après avoir vu les
+données — chiffré, plutôt que passé sous silence.
+
 La face négative est mesurée sur **171** réplicats, ce qui n'est pas un chiffre rond : pour qu'un
 taux de faux garanti à $g$ soit décidable avec la même confiance sur $k$ faces positives, il en faut
 
@@ -198,8 +204,9 @@ leur distance ni leur seule identité**.
 réfutation, pas un diagnostic ; il nomme la paire **206-214** et rien de plus.
 
 ⚠ Elle ne dit rien au-delà de **32 rangées** d'écartement, ni en deçà d'une croissance de facteur
-**3**. Une croissance de facteur deux existe peut-être : l'épreuve ne la voit qu'une fois sur deux, et
-c'est écrit plutôt que masqué.
+**3**. Une croissance de facteur deux existe peut-être : la règle déclarée ne la voit qu'une fois sur
+deux, et c'est écrit plutôt que masqué. ⚠⚠ La règle plus puissante du §8, elle, la verrait — donc ce
+que cette tranche ne dit pas à ce facteur relève de sa DISCIPLINE et non de sa matière.
 
 ⚠ Elle ne mesure qu'une **bande** autour de la rangée 198 d'un seul segment. Rien ne dit que le
 treillis se comporte pareil ailleurs sur le rouleau.
@@ -209,10 +216,10 @@ treillis se comporte pareil ailleurs sur le rouleau.
 
 ## 8. Les sondes, et les bris
 
-La batterie du module porte **116** contrôles, celle de la figure **24**. Les contrôles n'ont pas été
-écrits puis constatés verts : ils ont été vérifiés **en cassant le code**, par quarante-deux bris
-successifs dont chacun devait rougir. Quatre tours ont été nécessaires ; la batterie est passée de
-**77** à **116** contrôles en bouchant les trous que les bris exposaient.
+La batterie du module porte **125** contrôles, celle de la figure **24**. Les contrôles n'ont pas été
+écrits puis constatés verts : ils ont été vérifiés **en cassant le code**, par quarante-neuf bris
+successifs dont chacun devait rougir. Cinq tours ont été nécessaires, et la batterie a grandi à
+chacun en bouchant les trous que les bris exposaient.
 
 ⚠⚠⚠ **Trois défauts réels ont été trouvés par ces bris, et aucun par relecture.**
 
@@ -227,10 +234,34 @@ paires est leur distance, donc l'épreuve la voit sans effort. En injectant l'h�
 a mesurée, la détection du facteur deux est tombée de **12/12** à **6/12**. Choisir la difficulté de
 son propre examen est la forme la plus discrète de la fixture complaisante.
 
-Le troisième : **une statistique plus puissante ne tenait pas sa garantie**. Corréler l'écartement
-avec les résidus de l'ajustement additif donnait 12/12 au facteur deux, mais un taux de faux de
-**0,105** contre **0,05** annoncés. Elle a été refusée. C'est ce refus qui a transformé la face
-positive en **échelle de sensibilité**, donc un résultat négatif en une borne publiable.
+Le troisième : **une statistique plus puissante existe, et le premier compte rendu qu'en faisait ce
+document était faux.** Corréler l'écartement avec le résidu **signé** de l'ajustement additif retire
+des données tout ce que les bruits propres expliquent, donc le bruit de fond contre lequel une
+croissance doit ressortir s'effondre. Elle avait été refusée en développement au motif qu'elle ne
+tenait pas sa garantie, et ce document a d'abord publié pour cela un taux de faux que **le code
+livré ne reproduit pas**.
+
+⭐⭐⭐⭐ **Elle est donc portée comme CONTRÔLE NOMMÉ, mesurée sur les MÊMES réplicats et les MÊMES
+graines que la règle gardée**, et ce qu'elle rend est publié en entier. Elle voit le facteur deux
+**12/12** là où la règle gardée n'en voit que **6/12** ; au-delà les deux sont à douze sur douze.
+Son taux de faux vaut **9/171**, soit **0,0526** contre une garantie de **0,05** — c'est-à-dire neuf
+faux là où la garantie en prédit environ neuf. **Elle tient donc sa garantie**, et la raison que ce
+document donnait pour l'écarter était fausse.
+
+⚠⚠⚠ **LA VRAIE RAISON DE GARDER LE σ BRUT EST AILLEURS, ET ELLE NE DÉPEND D'AUCUN CHIFFRE** : c'est
+la statistique **déclarée d'avance**. La tranche a déclaré une épreuve et une seule avant de mesurer ;
+adopter après coup une règle qui voit mieux serait choisir sa statistique en regardant son résultat,
+et aucune garantie ne survit à ce geste. La règle plus puissante voyage donc à côté du verdict, avec
+ses nombres, et ne le décide jamais.
+
+⚠⚠ **Et cette discipline a un COÛT, qui se chiffre plutôt que de se taire** : la borne publiée au §4
+est **×3** parce que c'est ce que la règle déclarée voit partout. La règle plus puissante voit **×2**.
+La borne de cette tranche est donc **conservatrice d'un cran**, et c'est le prix de ne pas avoir
+choisi sa règle après coup.
+
+⭐ **Sur le rouleau, les deux règles s'accordent**, et c'est ce qui rend le résultat robuste au choix
+de la statistique : la règle gardée rend **−0,1024** avec **16** rebrassages sur **19** au moins aussi
+forts, la plus puissante **0,1285** avec **4** sur **19**. Aucune des deux ne déclare de croissance.
 
 ⚠⚠ **Deux règles composées n'étaient exercées par rien**, et le vrai rouleau occupait précisément la
 case qu'elles manquaient. Le champ « ce qui reste à mesurer » ne branchait que sur la tendance : il

@@ -3304,6 +3304,36 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             ajoute(f"la variance propre de la rangée {r_} de 214", float(v_), _dec214(v_),
                    sbr.name, unites=("voxels",))
         # ⚠⚠ UN BARREAU DE L'ECHELLE PORTE SA CROISSANCE, CE QU'ELLE ANNONCE ET SON SCORE.
+        # ⚠⚠ LA REGLE PLUS PUISSANTE VOYAGE AVEC SON TAUX DE FAUX ET AVEC CE QU'ELLE VOIT. Publier
+        # l'un sans l'autre en ferait soit une statistique gratuitement refusee, soit une
+        # statistique gratuitement adoptee : c'est le COUPLE qui dit pourquoi le verdict garde le
+        # sigma brut, et le sigma brut est celui qui a ete DECLARE D'AVANCE.
+        pu214 = et214.get("la_regle_plus_puissante") or {}
+        for cle, nom, unites in (
+                ("les_faux", "les faux de la règle plus puissante", ("**",)),
+                ("les_replicats_du_refus",
+                 "les réplicats du refus de la règle plus puissante", ("**",))):
+            if pu214.get(cle) is not None:
+                ajoute(f"{nom} de 214", int(pu214[cle]), 0, sbr.name, unites=unites)
+        if pu214.get("le_taux_de_faux") is not None:
+            ajoute("le taux de faux de la règle plus puissante de 214",
+                   float(pu214["le_taux_de_faux"]), _dec214(pu214["le_taux_de_faux"]), sbr.name,
+                   unites=("**",))
+        for b_ in (pu214.get("les_vus_par_facteur") or []):
+            ajoute(f"les vus de la règle plus puissante au facteur {int(b_['le_facteur'])} de 214",
+                   int(b_["les_vus"]), 0, sbr.name, unites=("**",))
+        # ⚠ ET CE QU'ELLE REND SUR LE ROULEAU, a cote de la regle gardee : c'est leur ACCORD qui
+        # rend le verdict robuste au choix de la statistique, et un accord ne se lit pas sur un
+        # seul des deux nombres.
+        rp214 = d.get("la_regle_plus_puissante") or {}
+        if rp214.get("la_tendance_observee") is not None:
+            ajoute("la tendance de la règle plus puissante de 214",
+                   float(rp214["la_tendance_observee"]),
+                   _dec214(rp214["la_tendance_observee"]), sbr.name, unites=("**",))
+        if rp214.get("les_tirages_au_moins_aussi_forts") is not None:
+            ajoute("les rebrassages au moins aussi forts de la règle plus puissante de 214",
+                   int(rp214["les_tirages_au_moins_aussi_forts"]), 0, sbr.name, unites=("**",))
+
         for b_ in (et214.get("lechelle_de_sensibilite") or []):
             f_ = int(b_["le_facteur"])
             ajoute(f"la croissance du facteur {f_} de 214",

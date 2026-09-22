@@ -961,6 +961,19 @@
     "les_tirages_au_moins_aussi_forts": 15,
     "ca_croit_selon_la_regle_refutee": false
   },
+  "la_regle_plus_puissante": {
+    "decidable": true,
+    "tirages": 19,
+    "combien_de_paires": 36,
+    "la_tendance_observee": 0.1285,
+    "la_tendance_du_nul_median": 0.0458,
+    "la_tendance_du_nul_la_plus_forte": 0.285,
+    "les_tirages_au_moins_aussi_forts": 4,
+    "les_rebrassages_qui_refont_lobserve": 0,
+    "la_suite_des_positions_a_une_symetrie": true,
+    "ce_quelle_correle": "l'écartement contre le résidu SIGNÉ de l'ajustement additif",
+    "ca_croit_selon_la_regle_plus_puissante": false
+  },
   "le_triangle_surdetermine": {
     "decidable": true,
     "combien_dequations": 36,
@@ -982,6 +995,44 @@
     "la_paire_du_pire_residu": "206-214",
     "le_pire_residu_en_erreurs": 3.6279,
     "le_residu_median_en_erreurs": 0.8039,
+    "les_residus_par_paire_en_erreurs": {
+      "182-190": -0.8508,
+      "182-194": -0.8179,
+      "182-197": -0.378,
+      "182-198": 0.7269,
+      "182-199": 1.0336,
+      "182-202": 0.6071,
+      "182-206": -1.0638,
+      "182-214": -0.2491,
+      "190-194": -0.8961,
+      "190-197": 1.4512,
+      "190-198": 0.2835,
+      "190-199": 0.6244,
+      "190-202": 0.5273,
+      "190-206": -0.8185,
+      "190-214": -1.3957,
+      "194-197": -0.031,
+      "194-198": 0.7608,
+      "194-199": 1.2647,
+      "194-202": -0.8051,
+      "194-206": -0.2559,
+      "194-214": -0.1037,
+      "197-198": -3.6279,
+      "197-199": -0.159,
+      "197-202": -0.3507,
+      "197-206": 0.7721,
+      "197-214": 1.1464,
+      "198-199": -3.486,
+      "198-202": -0.0197,
+      "198-206": 1.1138,
+      "198-214": 2.1362,
+      "199-202": -1.3225,
+      "199-206": 0.4551,
+      "199-214": 0.8026,
+      "202-206": 1.3401,
+      "202-214": -0.4531,
+      "206-214": -3.5052
+    },
     "le_modele_tient_aux_erreurs": false
   },
   "ce_que_la_longueur_fait": {
@@ -1073,6 +1124,7 @@
         "la_croissance_en_voxels": 0.4797,
         "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels": 3.8379,
         "les_vus": 6,
+        "les_vus_de_la_regle_plus_puissante": 12,
         "replicats": 12
       },
       {
@@ -1080,6 +1132,7 @@
         "la_croissance_en_voxels": 0.6784,
         "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels": 4.7004,
         "les_vus": 12,
+        "les_vus_de_la_regle_plus_puissante": 12,
         "replicats": 12
       },
       {
@@ -1087,6 +1140,7 @@
         "la_croissance_en_voxels": 0.8309,
         "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels": 5.4276,
         "les_vus": 12,
+        "les_vus_de_la_regle_plus_puissante": 12,
         "replicats": 12
       },
       {
@@ -1094,6 +1148,7 @@
         "la_croissance_en_voxels": 1.0727,
         "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels": 6.6474,
         "les_vus": 12,
+        "les_vus_de_la_regle_plus_puissante": 12,
         "replicats": 12
       },
       {
@@ -1101,6 +1156,7 @@
         "la_croissance_en_voxels": 1.3569,
         "ce_quelle_annonce_au_plus_grand_ecartement_en_voxels": 8.1414,
         "les_vus": 12,
+        "les_vus_de_la_regle_plus_puissante": 12,
         "replicats": 12
       }
     ],
@@ -1116,6 +1172,41 @@
     "les_derives_partagees_vues": 0,
     "le_taux_du_controle_aveugle": 0.0,
     "une_derive_partagee_reste_invisible": true,
+    "la_regle_plus_puissante": {
+      "ce_quelle_correle": "l'écartement contre le résidu SIGNÉ de l'ajustement additif",
+      "les_vus_par_facteur": [
+        {
+          "le_facteur": 2,
+          "les_vus": 12,
+          "replicats": 12
+        },
+        {
+          "le_facteur": 3,
+          "les_vus": 12,
+          "replicats": 12
+        },
+        {
+          "le_facteur": 4,
+          "les_vus": 12,
+          "replicats": 12
+        },
+        {
+          "le_facteur": 6,
+          "les_vus": 12,
+          "replicats": 12
+        },
+        {
+          "le_facteur": 9,
+          "les_vus": 12,
+          "replicats": 12
+        }
+      ],
+      "les_faux": 9,
+      "les_replicats_du_refus": 171,
+      "le_taux_de_faux": 0.0526,
+      "elle_tient_sa_garantie": true,
+      "elle_voit_plus_que_la_gardee": true
+    },
     "la_garantie": 0.05,
     "letalon_separe": true
   }

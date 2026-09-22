@@ -310,7 +310,7 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list, list]
            "facteur : par combien le CARRÉ du désaccord croît sur l'échelle", petit, GRIS)
     plus_petit = et.get("le_plus_petit_facteur_vu")
     for i, b in enumerate(et.get("lechelle_de_sensibilite") or []):
-        yy = y1 + 44 + i * 26
+        yy = y1 + 40 + i * 22
         vu = int(b["les_vus"]) >= int(b["replicats"])
         ecrire(p4x + 18, yy - 2, f"×{b['le_facteur']}", petit,
                BON if vu else GRIS)
@@ -319,19 +319,28 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list, list]
         ecrire(p4x + 232, yy - 2,
                f"{b['les_vus']}/{b['replicats']} · croissance "
                f"{_fr(b['la_croissance_en_voxels'], 3)}", petit, ENCRE if vu else GRIS)
-    ys = y1 + 44 + len(et.get("lechelle_de_sensibilite") or []) * 26 + 10
+    ys = y1 + 40 + len(et.get("lechelle_de_sensibilite") or []) * 22 + 12
     ecrire(p4x + 18, ys,
            f"plus petit facteur vu partout : "
            f"{('×' + str(plus_petit)) if plus_petit else 'aucun'} · monotone "
            f"{'oui' if et.get('la_sensibilite_est_monotone') else 'NON'}", moyen, ENCRE)
-    ecrire(p4x + 18, ys + 24,
+    ecrire(p4x + 18, ys + 22,
            f"faux {et.get('les_faux')}/{et.get('les_replicats_du_refus')} = "
            f"{_fr(et.get('le_taux_de_faux'), 4)} · garantie {_fr(et.get('la_garantie'), 4)}",
            petit, GRIS)
-    ecrire(p4x + 18, ys + 42,
+    ecrire(p4x + 18, ys + 40,
            f"contrôle aveugle (dérive partagée ×10) : {_fr(et.get('le_taux_du_controle_aveugle'), 4)}",
            petit, GRIS)
-    ecrire(p4x + 18, ys + 64,
+    pu = et.get("la_regle_plus_puissante") or {}
+    if pu.get("le_taux_de_faux") is not None:
+        vus_pu = sum(int(b["les_vus"]) for b in (pu.get("les_vus_par_facteur") or []))
+        tot = sum(int(b["replicats"]) for b in (pu.get("les_vus_par_facteur") or []))
+        vus_g = sum(int(b["les_vus"]) for b in (et.get("lechelle_de_sensibilite") or []))
+        ecrire(p4x + 18, ys + 58,
+               f"la plus puissante voit {vus_pu}/{tot} contre {vus_g}/{tot} · faux "
+               f"{pu.get('les_faux')}/{pu.get('les_replicats_du_refus')} = "
+               f"{_fr(pu.get('le_taux_de_faux'), 4)}", petit, CONTRE)
+    ecrire(p4x + 18, ys + 80,
            f"{'★' if et.get('letalon_separe') else '✗'}  "
            f"{"L'ÉTALON SÉPARE" if et.get('letalon_separe') else "L'ÉTALON NE SÉPARE PAS"}",
            moyen, BON if et.get("letalon_separe") else ALERTE)
