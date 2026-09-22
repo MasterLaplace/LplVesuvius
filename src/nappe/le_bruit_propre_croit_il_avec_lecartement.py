@@ -538,7 +538,16 @@ def le_triangle_surdetermine(paires: dict, rangees) -> dict:
     en_erreurs = [float(residus[i] / erreurs[i]) if erreurs[i] > 0 else None
                   for i in range(len(residus))]
     finis = [abs(x) for x in en_erreurs if x is not None]
-    pire = max(range(len(residus)), key=lambda i: abs(residus[i]))
+    # ⚠⚠⚠ DEUX « PIRES » ET DEUX PAIRES, ET LES CONFONDRE A COÛTÉ UN NOM FAUX. Le plus grand
+    # résidu BRUT (en voxels carrés) et le plus grand résidu EN ERREURS ne tombent pas sur la même
+    # paire, puisque l'erreur d'échantillonnage varie d'une paire à l'autre avec sa longueur.
+    # Première version : elle prenait l'argmax du résidu brut pour NOMMER la paire et publiait à
+    # côté le max des résidus en erreurs — donc un nombre juste sous le nom d'une autre paire, ce
+    # que `R4-L19` désigne comme pire qu'un nombre absent. Le verdict lit les ERREURS, donc c'est
+    # la paire des erreurs qui compte ; l'autre est publiée sous son propre nom.
+    pire_brut = max(range(len(residus)), key=lambda i: abs(residus[i]))
+    pire_err = (max((i for i in range(len(residus)) if en_erreurs[i] is not None),
+                    key=lambda i: abs(en_erreurs[i])) if finis else None)
     negatives = [r[i] for i in range(len(r)) if float(sol[i]) < 0.0]
     return {"decidable": True,
             "combien_dequations": int(len(lignes)),
@@ -547,14 +556,21 @@ def le_triangle_surdetermine(paires: dict, rangees) -> dict:
                                               for i in range(len(r))},
             "les_rangees_a_variance_negative": [int(x) for x in negatives],
             "le_modele_est_refute_par_une_variance_negative": bool(len(negatives) > 0),
-            "le_pire_residu_en_voxels2": round(float(residus[pire]), 4),
-            "la_paire_du_pire_residu": noms[pire],
+            "le_pire_residu_en_voxels2": round(float(residus[pire_brut]), 4),
+            "la_paire_du_pire_residu_en_voxels2": noms[pire_brut],
             "le_pire_residu_en_erreurs": (round(max(finis), 4) if finis else None),
+            "la_paire_du_pire_residu_en_erreurs": (noms[pire_err] if pire_err is not None
+                                                   else None),
             "le_residu_median_en_erreurs": (round(float(np.median(finis)), 4) if finis else None),
             # ⚠⚠ LES RESIDUS PAR PAIRE SONT PUBLIES POUR QU'UNE SEULE FONCTION LES PRODUISE. La
             # regle plus puissante que cette tranche porte comme controle nomme les LIT ici ; les
             # recalculer chez elle serait une SECONDE DEFINITION de l'ajustement additif, donc deux
             # chemins libres de diverger sur le rcond, sur l'ordre des equations ou sur l'erreur.
+            # ⚠⚠ LES DEUX TABLES SONT PUBLIEES, et symetriquement : chaque « pire » doit pouvoir
+            # se verifier contre LA SIENNE. Publier une seule table laissait l'autre affirmation
+            # invérifiable, et c'est exactement par la que le nom faux avait survecu.
+            "les_residus_par_paire_en_voxels2": {
+                noms[i]: round(float(residus[i]), 4) for i in range(len(noms))},
             "les_residus_par_paire_en_erreurs": {
                 noms[i]: (round(float(en_erreurs[i]), 4) if en_erreurs[i] is not None else None)
                 for i in range(len(noms))},
@@ -1482,6 +1498,90 @@ def verifier() -> int:
     # ⚠⚠ ET LE TRIANGLE PUBLIE SES RESIDUS PAR PAIRE, sinon la regle ci-dessus devrait les
     # recalculer et il y aurait DEUX ajustements additifs libres de diverger.
     _tri_pub = le_triangle_surdetermine(mes_poussees, positions)
+    # ⚠⚠⚠ CHAQUE « PIRE » PORTE SA PROPRE PAIRE, ET C'EST LA SONDE QUI MANQUAIT. Le module a
+    # publie pendant toute une tranche un residu en ERREURS sous le nom de la paire du residu
+    # BRUT : les deux argmax ne coincident pas, puisque l'erreur d'echantillonnage varie avec la
+    # longueur de chaque paire. Toutes les gardes etaient vertes et tous les nombres justes — seul
+    # le NOM etait faux, ce que `R4-L19` designe comme pire qu'un nombre absent.
+    # ⚠⚠⚠ LA MATIERE EST CHOISIE POUR QUE LES DEUX ARGMAX DIFFERENT, et un premier jet ne l'avait
+    # pas fait : sur une fixture trop uniforme le pire brut et le pire en erreurs tombent sur la
+    # MEME paire, donc un code qui les confond passe au vert.
+    # ⚠⚠ ET CE QUI LES SEPARE EST LE CONTRASTE DE VALEUR, PAS CELUI DE LONGUEUR — un bris l'a
+    # montre en retirant le second sans rien deplacer. L'erreur d'echantillonnage vaut
+    # v*sqrt(2/(n-1)) : elle croit avec la VALEUR de la paire autant qu'avec sa longueur, donc une
+    # paire forte normalise son residu vers le bas et une paire faible vers le haut. La paire
+    # courte reste dans la fixture pour exercer ce chemin-la, mais elle n'est pas ce qui separe.
+    # ⚠ La separation est ASSERTEE en nom ET en valeur avant d'etre utilisee : une fixture qui
+    # cesserait de separer rendrait toute cette famille de controles incapable d'echouer.
+    # ⚠⚠⚠ CINQ RANGEES, ET PAS QUATRE, ET C'EST STRUCTUREL. A quatre rangees l'ajustement additif
+    # rend des residus EGAUX par paires complementaires — 0-3 et 1-2 portent le meme nombre — donc
+    # echanger la valeur de l'une pour celle de l'autre ne deplace RIEN et aucun controle ne peut
+    # le voir. Une fixture a quatre rangees etait donc incapable d'echouer sur ce point precis, et
+    # un bris l'a montre. A cinq, la degenerescence tombe.
+    _contraste = {"decidable": True, "les_paires": [
+        {"la_paire": [a, b], "lecartement": abs(a - b),
+         "le_desaccord_par_couture_en_voxels": sg, "les_coutures_communes": nn}
+        for (a, b), sg, nn in zip(
+            ((0, 1), (0, 2), (0, 3), (0, 4), (1, 2), (1, 3), (1, 4), (2, 3), (2, 4), (3, 4)),
+            (2.0, 2.0, 6.0, 2.0, 2.0, 2.0, 2.0, 1.0, 2.0, 2.0),
+            (240, 240, 240, 240, 240, 240, 240, 20, 240, 240))]}
+    _tri_c = le_triangle_surdetermine(_contraste, [0, 1, 2, 3, 4])
+    v("★★★★ la matière de contrôle SÉPARE les deux pires, sinon rien ne pourrait les confondre",
+      _tri_c.get("decidable")
+      and _tri_c.get("la_paire_du_pire_residu_en_voxels2") is not None
+      and _tri_c.get("la_paire_du_pire_residu_en_erreurs") is not None
+      and _tri_c.get("la_paire_du_pire_residu_en_voxels2")
+      != _tri_c.get("la_paire_du_pire_residu_en_erreurs"),
+      f"brut {_tri_c.get('la_paire_du_pire_residu_en_voxels2')} · "
+      f"erreurs {_tri_c.get('la_paire_du_pire_residu_en_erreurs')}")
+    # ⚠⚠ ET ELLE LES SEPARE AUSSI EN VALEUR, sans quoi echanger les deux ne deplacerait aucun
+    # nombre : c'est la degenerescence qui a rendu la fixture a quatre rangees inutile.
+    _rb0 = _tri_c.get("les_residus_par_paire_en_voxels2") or {}
+    v("★★★★ ... et elle les sépare EN VALEUR aussi, pas seulement en nom",
+      _tri_c.get("la_paire_du_pire_residu_en_voxels2") in _rb0
+      and _tri_c.get("la_paire_du_pire_residu_en_erreurs") in _rb0
+      and abs(abs(float(_rb0[_tri_c.get("la_paire_du_pire_residu_en_voxels2")]))
+              - abs(float(_rb0[_tri_c.get("la_paire_du_pire_residu_en_erreurs")]))) > 1e-6,
+      f"{_rb0.get(_tri_c.get('la_paire_du_pire_residu_en_voxels2'))} contre "
+      f"{_rb0.get(_tri_c.get('la_paire_du_pire_residu_en_erreurs'))}")
+    _rp = _tri_c.get("les_residus_par_paire_en_erreurs") or {}
+    v("★★★★ la paire nommée pour le pire résidu EN ERREURS porte bien cette valeur",
+      _tri_c.get("la_paire_du_pire_residu_en_erreurs") in _rp
+      and _tri_c.get("le_pire_residu_en_erreurs") is not None
+      and abs(abs(float(_rp[_tri_c.get("la_paire_du_pire_residu_en_erreurs")]))
+              - float(_tri_c.get("le_pire_residu_en_erreurs"))) < 1e-9,
+      f"{_tri_c.get('la_paire_du_pire_residu_en_erreurs')} "
+      f"= {_tri_c.get('le_pire_residu_en_erreurs')}")
+    v("★★★★ et aucune autre paire ne porte un résidu en erreurs plus grand",
+      _tri_c.get("le_pire_residu_en_erreurs") is not None
+      and max(abs(float(x)) for x in _rp.values() if x is not None)
+      <= float(_tri_c.get("le_pire_residu_en_erreurs")) + 1e-9)
+    v("★★★★ la paire du pire résidu BRUT porte elle aussi SA valeur, et pas celle de l'autre",
+      _tri_c.get("le_pire_residu_en_voxels2") is not None
+      and _tri_c.get("le_pire_residu_en_erreurs") is not None
+      and abs(abs(float(_tri_c.get("le_pire_residu_en_voxels2")))
+          - max(abs(float(x)) for x in (
+              le_triangle_surdetermine(_contraste, [0, 1, 2, 3, 4]).get(
+                  "les_residus_par_paire_en_erreurs") or {}).values()
+              if x is not None)) > 1e-6,
+      f"brut {_tri_c.get('le_pire_residu_en_voxels2')} vx² · "
+      f"erreurs {_tri_c.get('le_pire_residu_en_erreurs')}")
+    _rb = _tri_c.get("les_residus_par_paire_en_voxels2") or {}
+    v("★★★★ la paire nommée pour le pire résidu BRUT porte bien CETTE valeur, dans SA table",
+      _tri_c.get("la_paire_du_pire_residu_en_voxels2") in _rb
+      and _tri_c.get("le_pire_residu_en_voxels2") is not None
+      and abs(float(_rb[_tri_c.get("la_paire_du_pire_residu_en_voxels2")])
+              - float(_tri_c.get("le_pire_residu_en_voxels2"))) < 1e-9,
+      f"{_tri_c.get('la_paire_du_pire_residu_en_voxels2')} "
+      f"= {_tri_c.get('le_pire_residu_en_voxels2')}")
+    v("★★★★ et aucune autre paire ne porte un résidu brut plus grand en valeur absolue",
+      _tri_c.get("le_pire_residu_en_voxels2") is not None
+      and max(abs(float(x)) for x in _rb.values())
+      <= abs(float(_tri_c.get("le_pire_residu_en_voxels2"))) + 1e-9)
+    v("★★★ le nom AMBIGU a disparu : chaque pire porte son unité dans sa clef",
+      "la_paire_du_pire_residu_en_voxels2" in _tri_c
+      and "la_paire_du_pire_residu" not in _tri_c,
+      str(_tri_c.get("la_paire_du_pire_residu_en_voxels2")))
     v("★★★★ le triangle publie un résidu par paire, et c'est le seul producteur qui les rende",
       len(_tri_pub.get("les_residus_par_paire_en_erreurs") or {})
       == _tri_pub.get("combien_dequations"),

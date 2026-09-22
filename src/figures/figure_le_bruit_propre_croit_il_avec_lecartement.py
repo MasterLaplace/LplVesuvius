@@ -288,7 +288,7 @@ def dessiner(d: dict, sortie: Path) -> tuple[Path, list, list, list, list, list]
     yr = y1 + 56 + max(1, len(bruits)) * 14 + 12
     ecrire(p3x + 18, yr,
            f"pire résidu {_fr(tri.get('le_pire_residu_en_erreurs'), 4)} erreurs "
-           f"({tri.get('la_paire_du_pire_residu')})", moyen, ENCRE)
+           f"({tri.get('la_paire_du_pire_residu_en_erreurs')})", moyen, ENCRE)
     ecrire(p3x + 18, yr + 20,
            f"résidu médian {_fr(tri.get('le_residu_median_en_erreurs'), 4)} erreurs · "
            f"l'erreur est dérivée des coutures", petit, GRIS)

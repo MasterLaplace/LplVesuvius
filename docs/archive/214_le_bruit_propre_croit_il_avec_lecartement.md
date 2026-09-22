@@ -189,8 +189,39 @@ forme exacte où elle l'avait demandé.
 variance de la plus calme, la rangée **190**. C'est de l'hétérogénéité entre rangées, et c'est
 exactement celle que l'étalon injecte plutôt que de poser un bruit uniforme.
 
-> ✗ **MAIS LE PIRE RÉSIDU VAUT 3,6279 ERREURS**, sur la paire **206-214**, pour un résidu médian de
+> ✗ **MAIS LE PIRE RÉSIDU VAUT 3,6279 ERREURS**, sur la paire
+> **197-198**, pour un résidu médian de
 > **0,8039** erreur. Le modèle additif **ne tient pas**.
+
+⚠⚠⚠ **DEUX « PIRES » COHABITENT ICI, ET LES CONFONDRE A COÛTÉ UN NOM FAUX À CE DOCUMENT.** Le plus
+grand résidu **brut** vaut **-3,0166 voxels carrés** et tombe sur
+**206-214** ; le plus grand une fois **divisé par son erreur**
+tombe sur **197-198**. Les deux ne coïncident pas, parce que
+l'erreur d'échantillonnage vaut $V\sqrt{2/(n-1)}$ et croît donc avec la **valeur** de la paire
+autant qu'avec sa longueur. Le verdict lit les **erreurs** : c'est cette paire-là qui compte. La
+première version de ce document nommait l'autre, avec un nombre pourtant juste — c'est `R4-L19`, et
+seule une sonde construite sur une matière où les deux diffèrent pouvait l'attraper.
+
+Les quatre plus gros résidus, en erreurs, **avec leur signe** :
+
+| paire | résidu |
+|---|---:|
+| **197-198** | **−3,6279** |
+| **206-214** | **−3,5052** |
+| **198-199** | **−3,486** |
+| **198-214** | **2,1362** |
+
+⚠ **Le signe dit de quel côté le modèle se trompe** : un résidu positif est une paire qui désaccorde
+PLUS que la somme de ses deux bruits propres ne le prédit, un négatif une paire qui s'accorde mieux
+qu'elle ne devrait. Publier les seules amplitudes effacerait cette moitié de l'information.
+
+⚠⚠ **Et les lectures qui sautent aux yeux ne sont PAS payées.** Les trois plus gros résidus sont
+tous **négatifs** — ce sont des paires qui s'accordent MIEUX que le modèle ne le prédit, et non des
+paires qui divergent —, et la rangée **198** est dans deux des trois. Ce sont des coupables
+désignés après coup. Chaque rangée entre dans huit des trente-six
+paires, donc en voir une deux fois dans un tête de liste de trois n'a rien d'extraordinaire. C'est
+une hypothèse pour la tranche suivante, pas un résultat de celle-ci, et `R4-P60` dit comment la
+payer.
 
 ⭐⭐⭐⭐ **C'est le résultat le plus lourd de la tranche, et la porte ne l'avait pas prévu.** Elle
 demandait si la distance rendait la hauteur payante ; la réponse est non. Mais la hauteur cesse
@@ -200,8 +231,9 @@ leur distance ni leur seule identité**.
 
 ## 7. Ce que cette tranche ne dit pas
 
-⚠ Elle ne dit pas ce qui rompt l'additivité. Un résidu à 3,6279 erreurs sur une paire est une
-réfutation, pas un diagnostic ; il nomme la paire **206-214** et rien de plus.
+⚠ Elle ne dit pas ce qui rompt l'additivité. Un résidu à
+**3,6279** erreurs sur une paire est une réfutation, pas un
+diagnostic ; il nomme la paire **197-198** et rien de plus.
 
 ⚠ Elle ne dit rien au-delà de **32 rangées** d'écartement, ni en deçà d'une croissance de facteur
 **3**. Une croissance de facteur deux existe peut-être : la règle déclarée ne la voit qu'une fois sur

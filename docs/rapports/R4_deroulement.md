@@ -3381,7 +3381,7 @@ croissance apparente. L'absence de croissance survit à un biais qui aurait dû 
 ⚠⚠⚠ **Mais le triangle SUR-DÉTERMINÉ réfute le modèle additif** — `R4-F349` :
 **36 équations pour 9 inconnues**, neuf variances
 toutes positives de **2,5882** à **7,097 voxels carrés**, et pourtant un pire résidu de
-**3,6279 erreurs** sur la paire **206-214**
+**3,6279 erreurs** sur la paire **197-198**
 contre un résidu médian de **0,8039**. À trois rangées le système
 était exactement déterminé et ne pouvait rien réfuter ; neuf rangées changent la nature de l'objet.
 ⚠⚠⚠ **Et la statistique que le §8 disait refusée pour défaut de garantie la TIENT, mesure faite.**
