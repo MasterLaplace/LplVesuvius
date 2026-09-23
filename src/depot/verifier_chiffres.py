@@ -3208,6 +3208,56 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 227 : OU EST L'ERREUR DE LA BOUCLE EN HAUT A GAUCHE ?
+    # (1) ⚠⚠⚠ LA FERMETURE D'UNE BOUCLE FINE NE VOYAGE JAMAIS SANS LA PART DU BRUIT SEUL NI SANS LE SEUIL.
+    s227 = _source(racine, "ou_est_lerreur_de_la_boucle_en_haut_a_gauche.json")
+    if s227.exists():
+        d = json.loads(s227.read_text())
+
+        def _dec227(x) -> int:
+            f = float(x)
+            return 0 if f == int(f) else len(repr(f).split(".")[1])
+
+        rp227 = d.get("la_reproduction") or {}
+        if rp227.get("decidable"):
+            out.append(("la relecture de 227", [f"**{rp227['combien_de_coutures_relues']}** coutures, écart"],
+                        s227.name))
+        a227 = d.get("lanalyse_du_treillis_fin") or {}
+        pr227 = (a227.get("lepreuve") or {}).get("par_rectangle") or {}
+        noms227 = {"haut_gauche": "en haut à gauche", "haut_droite": "en haut à droite",
+                   "bas_gauche": "en bas à gauche", "bas_droite": "en bas à droite"}
+        for n_, lib in noms227.items():
+            b_, x_ = (a227.get("les_boucles") or {}).get(n_) or {}, pr227.get(n_) or {}
+            if not b_.get("fermable") or not x_:
+                continue
+            L_ = _fr222(b_["la_fermeture_en_voxels"])
+            pa = _fr222(x_["la_part_du_nul_sous_la_fermeture"])
+            fort = n_ == "haut_gauche"
+            out.append((f"la boucle fine {n_} de 227",
+                        [f"| {'**' + lib + '**' if fort else lib} | {'**' + L_ + '**' if fort else L_} | "
+                         f"{_fr222(x_['la_fermeture_mediane_du_nul_en_valeur_absolue'])} | "
+                         f"{'**' + pa + '**' if fort else pa} |"], s227.name))
+        ajoute("le seuil de sortie de 227", float(d.get("le_seuil_de_sortie") or 0.0),
+               _dec227(d.get("le_seuil_de_sortie") or 0.0), s227.name, unites=("**",))
+        et227 = d.get("letalon_de_la_designation") or {}
+        if et227.get("decidable"):
+            for k_, lib in (("le_theta", "le θ"), ("le_taux", "le taux"), ("la_borne", "la borne")):
+                ajoute(f"{lib} de l étalon de 227", float(et227[k_]), _dec227(et227[k_]), s227.name, unites=("**",))
+            out.append(("les désignations à tort de 227",
+                        [f"**{et227['combien_designent']}** fois sur **{et227['les_replicats']}**"], s227.name))
+        ep227 = a227.get("lepreuve") or {}
+        if ep227.get("decidable"):
+            for k_, lib in (("la_statistique", "Σ L²"), ("la_statistique_mediane_du_nul", "le nul de Σ L²"),
+                            ("la_valeur_p", "la valeur p")):
+                ajoute(f"{lib} de 227", float(ep227[k_]), _dec227(ep227[k_]), s227.name, unites=("**",))
+        sf227 = (d.get("sans_franchir") or {}).get("les_boucles") or {}
+        for n_ in ("bas_gauche", "bas_droite"):
+            b_ = sf227.get(n_) or {}
+            if b_.get("fermable"):
+                x = float(b_["la_fermeture_en_voxels"])
+                out.append((f"la boucle fine {n_} sans franchir de 227",
+                            [f"**{'+' if x > 0 else ''}{_fr222(x)}**"], s227.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 226 : L'AJUSTEMENT DE TOUTES LES BOUCLES GARDE-T-IL LA SPIRE ?
     # (1) ⚠⚠⚠ L'ERREUR AJUSTEE D'UNE LIGNE NE VOYAGE JAMAIS SANS SES DETOURS NI SANS LE BRUIT SEUL.
     s226 = _source(racine, "lajustement_de_toutes_les_boucles_garde_t_il_la_spire.json")

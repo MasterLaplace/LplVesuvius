@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**494 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **454** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
+**495 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **455** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 391 faits
+## R4 — 392 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -476,6 +476,7 @@
 | `R4-F389` | **là où une bande perd sa majorité, suivre le maillage franchit la couture sur la même spire, et au pire mieux que la minorité qui y lit** | sur des fenêtres cachées de chaque longueur de trou observée (1, 2, 3, 7, 12 et 17 coutures), le pas nul s'écarte au plus de **15,875** voxels du consensus, deux lignes présentes au plus de **26,0312**, et une ligne seule dépasse le demi-feuillet **5** fois sur **4722** fenêtres de 17 coutures, jusqu'à **40,1875** | établi ; ⭐⭐⭐⭐ `R4-P70` RÉPONDUE. ⚠ L'écart médian de deux lignes est plus petit sur les trous courts ; c'est le pire écart qui décide de la spire. ⚠⚠⚠ La référence des trous cachés est le consensus lui-même. | `225`, `224`, `223`, `221` · `nappe/quest_ce_qui_franchit_le_trou_de_majorite.py` |
 | `R4-F390` | **le trou franchi, les quatre rectangles restent sous le demi-feuillet, mais le grand rectangle ferme au demi-feuillet** | les rectangles ferment à **−29,25**, **−4,8438**, **−6,4375** et **3,8125** voxels ; le grand rectangle, deux chemins de **340** coutures, à **−36,7188** (**−38,125** par les lignes présentes) ; des marches indépendantes n'y restent sous le demi-feuillet que dans **0,7688** des tirages ; Σ L² sur les quatre rectangles vaut **935,001** contre **1447,4551** (p = **0,311**), et l'étalon tient (**12** fois sur **200**) | établi ; ⭐⭐⭐⭐ LA LIMITE DU CONSENSUS EST À LA MOITIÉ DU SEGMENT : son erreur s'accumule comme une marche, et une marche deux fois plus longue atteint le demi-feuillet. ⚠⚠ La fermeture dit l'écart des deux chemins, pas lequel se trompe. | `225`, `224`, `223`, `221` · `nappe/quest_ce_qui_franchit_le_trou_de_majorite.py` |
 | `R4-F391` | **même ajustées toutes à la fois, les boucles de consensus ne gardent pas la spire à la moitié du segment : l'ajustement répand l'erreur au lieu de la diluer** | retirée puis prédite par l'ajustement pondéré des onze autres demi-côtés, la colonne 71 entière (198 coutures) est prédite à **−36,8612** voxels, au-delà du demi-feuillet, la rangée 99 entière à **34,731** ; au quart, tous les demi-côtés restent dessous, le pire à **32,4707** ; la colonne 213 de 99 à 198, que sa seule boucle prédit à **−4,8438**, l'ajustement la prédit à **17,6161** | établi ; ⭐⭐⭐⭐ `R4-P71` RÉPONDUE PAR LA NÉGATIVE POUR LE CANDIDAT QU'ELLE NOMMAIT. ⚠⚠ L'erreur n'est pas un bruit réparti également : elle est concentrée dans la boucle en haut à gauche, et une moyenne la propage. ⚠ Le treillis ne dit pas lequel de ses côtés se trompe. | `226`, `225`, `224` · `nappe/lajustement_de_toutes_les_boucles_garde_t_il_la_spire.py` |
+| `R4-F392` | **une boucle plus fine montre où la fermeture de la boucle en haut à gauche se loge, mais aucune ne sort du bruit** | coupé au milieu de ses côtés par deux bandes lues (rangée 148, colonne 106 ; **61** coutures relues à l'écart **0**), le quadrant en haut à gauche donne quatre boucles fines à **−23,8438**, **−6,6875**, **2,3125** et **−1,0312** voxels, dont la somme retombe sur **−29,25** ; la boucle fine en haut à gauche ne dépasse le bruit seul que dans **0,9139** des tirages, sous le seuil **0,9875**, et la règle tient sa garantie (**15** fois sur **200**, borne **0,0808**) | établi ; ⭐⭐⭐⭐ `R4-P72` RÉPONDUE : rien ne localise l'erreur au-delà de ce qu'un bruit qui s'accumule ferait. ⚠⚠ Le trou de la colonne 106 (coutures 133 et 134), que la déclaration n'avait pas prévu, est franchi par la règle de `225`, décision prise après la lecture ; la mesure déclarée, sans franchir, est publiée à côté. | `227`, `226`, `225`, `224` · `nappe/ou_est_lerreur_de_la_boucle_en_haut_a_gauche.py` |
 
 ## R5 — 23 faits
 

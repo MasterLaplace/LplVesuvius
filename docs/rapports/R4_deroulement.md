@@ -3726,6 +3726,19 @@ du demi-feuillet ; au quart, tout reste dessous.
 ⭐⭐⭐⭐ **Donc `R4-P71` est répondue par la négative pour le candidat qu'elle nommait.** `R4-P72` s'ouvre :
 où est l'erreur que porte la boucle en haut à gauche, et une boucle plus fine la désigne-t-elle ?
 
+**`227` · 2026-09-23 · où est l'erreur de la boucle en haut à gauche**
+
+⭐⭐ **Une lecture neuve** : une bande de rangées autour de la rangée **148** et une bande de colonnes autour
+de la colonne **106**, au milieu des côtés du quadrant en haut à gauche, lues sur le seul quadrant ; elles
+retombent sur `219`, `223` et `224` sur **61** coutures, écart **0**.
+⭐⭐⭐⭐ **Aucune boucle fine ne sort du bruit** — `R4-F392` : les quatre boucles fines ferment à
+**−23,8438**, **−6,6875**, **2,3125** et **−1,0312** voxels, leur somme retombe sur **−29,25**, et la boucle
+fine en haut à gauche ne dépasse le bruit seul que dans **0,9139** des tirages, sous le seuil **0,9875**.
+⚠⚠ Un trou de la colonne 106, que la déclaration n'avait pas prévu, est franchi par la règle de `225` ; la
+mesure déclarée est publiée à côté.
+⭐⭐⭐⭐ **Donc `R4-P72` est répondue.** `R4-P73` s'ouvre : une bande plus large réduit-elle le bruit du
+consensus assez pour que le grand rectangle se ferme sous le demi-feuillet ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -1592,6 +1592,8 @@ run "le trou de majorite" uv run python "$ROOT/src/nappe/quest_ce_qui_franchit_l
 run "figure le trou de majorite" uv run python "$ROOT/src/figures/figure_quest_ce_qui_franchit_le_trou_de_majorite.py" --verifier
 run "l'ajustement de toutes les boucles" uv run python "$ROOT/src/nappe/lajustement_de_toutes_les_boucles_garde_t_il_la_spire.py" --verifier
 run "figure l'ajustement de toutes les boucles" uv run python "$ROOT/src/figures/figure_lajustement_de_toutes_les_boucles_garde_t_il_la_spire.py" --verifier
+run "l'erreur de la boucle en haut a gauche" uv run python "$ROOT/src/nappe/ou_est_lerreur_de_la_boucle_en_haut_a_gauche.py" --verifier
+run "figure l'erreur de la boucle en haut a gauche" uv run python "$ROOT/src/figures/figure_ou_est_lerreur_de_la_boucle_en_haut_a_gauche.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
