@@ -3804,6 +3804,18 @@ mesurée.
 ⭐⭐⭐⭐ **Donc `R4-P77` est conclue sans fermeture.** `R4-P78` s'ouvre : où s'arrête le segment, et une
 boucle qui suit son contour ferme-t-elle sous le demi-feuillet ?
 
+**`233` · 2026-09-24 · où s'arrête le segment**
+
+⭐⭐ **La présence, listée** : **97771** chunks sur **112860**, des rangées **5** à **394** et des colonnes
+**0** à **283**, sans lire une valeur ; la liste retombe sur les **36** lignes de `232`.
+⭐⭐⭐⭐ **Le plus grand rectangle ferme** — `R4-F398` : dérivé de la liste, il va des rangées **26** à
+**384** et des colonnes **22** à **243**, **579** coutures d'un coin à l'autre contre **340** ; lu et retombé
+en **7454** coutures à l'écart **0**, il ferme à **−11,8449** voxels à neuf lignes, sous le demi-feuillet.
+⚠⚠⚠ La fermeture reste un tirage : à cinq lignes, **−54,2812** ; et le bruit seul reste sous le
+demi-feuillet dans **0,7307** des tirages, contre **0,8789** à la moitié du segment.
+⭐⭐⭐⭐ **Donc `R4-P78` est répondue pour le plus grand rectangle.** `R4-P79` s'ouvre : le segment entre les
+bords du rectangle et ceux de l'empreinte se relie-t-il au rectangle sur la même spire ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

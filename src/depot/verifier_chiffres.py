@@ -3208,6 +3208,74 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 233 : OU S'ARRETE LE SEGMENT ?
+    # (1) ⚠⚠⚠ LA FERMETURE D'UNE LARGEUR NE VOYAGE JAMAIS SANS CELLE DE LA MOITIE NI SANS LE BRUIT SEUL, et le
+    # rectangle jamais sans l'empreinte dont il est derive.
+    s233 = _source(racine, "ou_sarrete_le_segment.json")
+    if s233.exists():
+        d = json.loads(s233.read_text())
+        em233 = d.get("lempreinte") or {}
+        if em233:
+            out.append(("la présence listée par 233",
+                        [f"**{em233['combien']}** chunks sur les **{em233['sur']}** de la grille"], s233.name))
+            out.append(("l'empreinte de 233",
+                        [f"des rangées **{em233['les_rangees'][0]}** à **{em233['les_rangees'][1]}** et des colonnes "
+                         f"**{em233['les_colonnes'][0]}** à **{em233['les_colonnes'][1]}**"], s233.name))
+        pc233 = d.get("la_presence_contre_232") or {}
+        if pc233.get("decidable"):
+            out.append(("la liste de 233 contre 232",
+                        [f"sur chacune de ses **{pc233['combien_de_lignes']}** lignes"], s233.name))
+        re233 = d.get("le_rectangle") or {}
+        if re233.get("decidable"):
+            r0, r1, c0, c1 = re233["les_coins"]
+            out.append(("le rectangle de 233",
+                        [f"Il va des rangées **{r0}** à **{r1}** et des colonnes **{c0}** à **{c1}** : "
+                         f"**{re233['le_chemin']}** coutures d'un coin à l'autre"], s233.name))
+            out.append(("le chemin de 224 repris par 233",
+                        [f"contre **{re233['le_chemin_de_224']}** pour le grand rectangle de `224`"], s233.name))
+        rp233 = d.get("la_reproduction") or {}
+        if rp233.get("decidable"):
+            out.append(("la relecture de 233",
+                        [f"**{rp233['combien_de_coutures_relues']}** coutures, écart "
+                         f"**{_fr222(rp233['lecart_le_plus_grand'])}**"], s233.name))
+        P233, M233 = d.get("par_largeur") or {}, d.get("la_moitie_du_segment") or {}
+        for k_ in sorted(P233, key=int):
+            x_, n_ = P233[k_], P233[k_]["le_nul"]
+            L_ = _fr222(x_["la_fermeture_en_voxels"])
+            if k_ in ("3", "5", "9"):
+                L_ = f"**{L_}**"
+            out.append((f"la largeur {k_} de 233",
+                        [f"| {k_} | {L_} | {_fr222(M233[k_]['la_fermeture_en_voxels'])} | "
+                         f"{_fr222(x_['la_dispersion_du_pas_en_voxels'])} | "
+                         f"{_fr222(n_['la_fermeture_mediane_en_valeur_absolue'])} | "
+                         f"{_fr222(n_['la_part_sous_le_demi_pli'])} | {_fr222(n_['la_part_sous_la_fermeture'])} |"],
+                        s233.name))
+        tr233 = [t for k_ in P233 for t in P233[k_].get("les_trous") or []]
+        if tr233:
+            out.append(("le plus long trou de 233", [f"de **{max(t['la_longueur'] for t in tr233)}** coutures au plus"],
+                        s233.name))
+        ch233 = d.get("les_deux_chemins") or {}
+        if ch233:
+            out.append(("le chemin par la rangée d'abord de 233",
+                        [f"**+{_fr222(ch233['par_la_rangee_dabord'][-1])}** par la rangée d'abord"], s233.name))
+            out.append(("le chemin par la colonne d'abord de 233",
+                        [f"**+{_fr222(ch233['par_la_colonne_dabord'][-1])}** par la colonne d'abord"], s233.name))
+        k9 = str((d.get("le_verdict") or {}).get("la_largeur_jugee"))
+        if k9 in P233:
+            c_ = {c["le_cote"]: _fr222(c["la_somme_en_voxels"]) for c in P233[k9]["les_cotes"]}
+            out.append(("les colonnes de 233", [f"**{c_['droite']}** voxels à droite, **{c_['gauche']}** à gauche"],
+                        s233.name))
+            n9 = P233[k9]["le_nul"]
+            out.append(("le bruit seul sous la fermeture de 233",
+                        [f"**{_fr222(n9['la_part_sous_la_fermeture'])}** des tirages à neuf lignes"], s233.name))
+            if k9 in M233:
+                out.append(("la médiane du bruit seul, moitié contre entier, de 233",
+                            [f"de **{_fr222(M233[k9]['la_fermeture_mediane_du_nul'])}** voxels à la moitié du segment à "
+                             f"**{_fr222(n9['la_fermeture_mediane_en_valeur_absolue'])}** au segment entier"], s233.name))
+                out.append(("le bruit seul sous le demi-feuillet, moitié contre entier, de 233",
+                            [f"de **{_fr222(M233[k9]['la_part_du_nul_sous_le_demi_pli'])}** à "
+                             f"**{_fr222(n9['la_part_sous_le_demi_pli'])}**"], s233.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 232 : DEUX CHEMINS DU SEGMENT ENTIER ARRIVENT-ILS SUR LA MEME SPIRE ?
     # (1) ⚠⚠⚠ UN TROU TROP LONG NE VOYAGE JAMAIS SANS LA LONGUEUR QUE 225 A FRANCHIE, ni une bande sans ce qui
     # lui manque : les chunks absents du depot a cote de ceux trop peu textures.
