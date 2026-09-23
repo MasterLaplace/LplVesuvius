@@ -1602,6 +1602,8 @@ run "un detour par la rangee 106" uv run python "$ROOT/src/nappe/un_detour_separ
 run "figure un detour par la rangee 106" uv run python "$ROOT/src/figures/figure_un_detour_separe_t_il_lerreur_de_la_rangee_99.py" --verifier
 run "la suite des detours sans main" uv run python "$ROOT/src/nappe/la_suite_des_detours_se_deroule_t_elle_sans_main.py" --verifier
 run "figure la suite des detours" uv run python "$ROOT/src/figures/figure_la_suite_des_detours_se_deroule_t_elle_sans_main.py" --verifier
+run "deux chemins du segment entier" uv run python "$ROOT/src/nappe/deux_chemins_du_segment_entier_arrivent_ils_sur_la_meme_spire.py" --verifier
+run "figure deux chemins du segment entier" uv run python "$ROOT/src/figures/figure_deux_chemins_du_segment_entier_arrivent_ils_sur_la_meme_spire.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

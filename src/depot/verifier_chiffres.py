@@ -3208,6 +3208,73 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 232 : DEUX CHEMINS DU SEGMENT ENTIER ARRIVENT-ILS SUR LA MEME SPIRE ?
+    # (1) ⚠⚠⚠ UN TROU TROP LONG NE VOYAGE JAMAIS SANS LA LONGUEUR QUE 225 A FRANCHIE, ni une bande sans ce qui
+    # lui manque : les chunks absents du depot a cote de ceux trop peu textures.
+    s232 = _source(racine, "deux_chemins_du_segment_entier_arrivent_ils_sur_la_meme_spire.json")
+    if s232.exists():
+        d = json.loads(s232.read_text())
+        re232 = d.get("le_rectangle") or {}
+        if re232.get("decidable"):
+            er, ec = re232["letendue_en_rangees"], re232["letendue_en_colonnes"]
+            r0, r1, c0, c1 = re232["les_coins"]
+            out.append(("l'étendue de la croix de 232",
+                        [f"rangées **{er[0]}** à **{er[1]}** et des colonnes **{ec[0]}** à **{ec[1]}**"], s232.name))
+            out.append(("le rectangle de 232",
+                        [f"les rangées **{r0}** et **{r1}**, les colonnes **{c0}** et **{c1}**"], s232.name))
+        rp232 = d.get("la_reproduction") or {}
+        if rp232.get("decidable"):
+            out.append(("la relecture de 232",
+                        [f"**{rp232['combien_de_coutures_relues']}** coutures à l'écart "
+                         f"**{_fr222(rp232['lecart_le_plus_grand'])}**"], s232.name))
+        pl232 = d.get("le_plus_long_trou_franchi_par_225")
+        if pl232 is not None:
+            out.append(("le plus long trou franchi, repris par 232", [f"a essayée, **{pl232}** coutures"], s232.name))
+        ms232 = (d.get("la_moitie_du_segment") or {}).get("9") or {}
+        if ms232:
+            out.append(("la moitié du segment relue par 232",
+                        [f"où le grand rectangle ferme à **{_fr222(ms232['la_fermeture_en_voxels'])}** voxels à neuf "
+                         f"lignes"], s232.name))
+        v232 = d.get("le_verdict") or {}
+        tr232 = ((d.get("par_largeur") or {}).get(str(v232.get("la_largeur_jugee"))) or {}).get("les_trous") or []
+        cotes232 = {}
+        if re232.get("decidable") and pl232 is not None:
+            for b in d.get("les_bandes_declarees") or []:
+                cote = {("rangees", r0): "haut", ("rangees", r1): "bas", ("colonnes", c0): "gauche",
+                        ("colonnes", c1): "droite"}[(b["le_sens"], b["le_centre"])]
+                cotes232[cote] = b
+                lec = ((d.get("les_bandes") or {}).get(b["cle"]) or {}).get("les_lectures") or {}
+                if not lec:
+                    continue
+                dem = sum(int(v.get("colonnes_demandees", v.get("rangees_demandees"))) for v in lec.values())
+                lus = sum(int(v.get("colonnes_lues", v.get("rangees_lues"))) for v in lec.values())
+                ab = [int(v["refuses"].get("absent du dépôt", 0)) for v in lec.values()]
+                tx = sum(int(v["refuses"].get("trop peu texturé", 0)) for v in lec.values())
+                long_ = any(t["le_cote"] == cote and t["la_longueur"] > int(pl232) for t in tr232)
+                lib = f"la rangée {b['le_centre']}" if b["le_sens"] == "rangees" else f"la colonne {b['le_centre']}"
+                a_ = f"**{sum(ab)}**" if long_ else str(sum(ab))
+                out.append((f"ce qui se lit sur {lib} de 232",
+                            [f"| {lib} | {min(b['les_lignes'])} à {max(b['les_lignes'])} | {dem} | {lus} | {a_} | {tx} |"],
+                            s232.name))
+                if long_:
+                    out.append((f"les absents par ligne sur {lib} de 232",
+                                [f"{lib}, de **{min(ab)}** à **{max(ab)}**"], s232.name))
+            txs = [sum(int(v["refuses"].get("trop peu texturé", 0)) for v in
+                       (((d.get("les_bandes") or {}).get(b["cle"]) or {}).get("les_lectures") or {}).values())
+                   for b in cotes232.values()]
+            if txs:
+                out.append(("les trop peu texturés de 232", [f"jamais plus de **{max(txs)}** par bande"], s232.name))
+            libs232 = {"haut": ("la rangée du haut", "la colonne"), "droite": ("la colonne de droite", "la rangée"),
+                       "bas": ("la rangée du bas", "la colonne"), "gauche": ("la colonne de gauche", "la rangée")}
+            for cote, (lib, unite) in libs232.items():
+                n_ = (c1 - c0) if cote in ("haut", "bas") else (r1 - r0)
+                tc = [t for t in tr232 if t["le_cote"] == cote]
+                longs = [t for t in tc if t["la_longueur"] > int(pl232)]
+                txt = (", ".join(f"**{t['la_longueur']}** dès {unite} {t['le_debut']}" for t in longs)
+                       if longs else "aucun")
+                out.append((f"les trous du côté {cote} de 232",
+                            [f"| {lib} | {sum(t['la_longueur'] for t in tc)} sur {n_} | {txt} |"], s232.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 231 : LA SUITE DES DETOURS SE DEROULE-T-ELLE SANS MAIN ?
     # (1) ⚠⚠⚠ LA FERMETURE D'UNE CELLULE NE VOYAGE JAMAIS SANS LA PART DU BRUIT SEUL, ni le seuil de la famille
     # sans son etalon independant — ni sans le seuil declare d'abord et le sien.

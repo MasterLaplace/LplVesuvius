@@ -3790,6 +3790,20 @@ remplacé avant la lecture.
 ⭐⭐⭐⭐ **Donc `R4-P76` est répondue.** `R4-P77` s'ouvre : à l'échelle du segment entier, les chemins de
 consensus à neuf lignes restent-ils sur la même spire ?
 
+**`232` · 2026-09-23 · deux chemins du segment entier arrivent-ils sur la même spire**
+
+⭐⭐ **Le rectangle, dérivé des bords de la croix centrale** : les rangées 11 et 388 et les colonnes 21 et
+268, les bandes de neuf lignes les plus extérieures dans l'étendue que `225` publie ; elles retombent sur
+`219` et `223` en **152** coutures, écart **0**.
+⭐⭐⭐⭐ **Le rectangle reste ouvert** — `R4-F397` : la colonne 21 et la rangée 388 se lisent presque
+entières, mais la rangée 11 et la colonne 268 perdent leur majorité sur des tronçons de **48** à **171**
+coutures, au-delà des **17** que `225` a franchies ; il y manque des chunks absents du dépôt, **1039** et
+**2006**, pas des chunks trop peu texturés.
+⚠⚠⚠ Le recto qu'on lit n'est pas un rectangle, et la fermeture à l'échelle du segment entier n'est pas
+mesurée.
+⭐⭐⭐⭐ **Donc `R4-P77` est conclue sans fermeture.** `R4-P78` s'ouvre : où s'arrête le segment, et une
+boucle qui suit son contour ferme-t-elle sous le demi-feuillet ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
