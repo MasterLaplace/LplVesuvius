@@ -3778,6 +3778,18 @@ détour, à **−14,0938**.
 ⭐⭐⭐⭐ **Donc `R4-P75` est répondue, pour la moitié.** `R4-P76` s'ouvre : la suite des détours peut-elle se
 dérouler sans main ?
 
+**`231` · 2026-09-23 · la suite des détours se déroule-t-elle sans main**
+
+⭐⭐ **Une procédure qui ne choisit aucun côté** : la boucle fine de `227` contournée par ses quatre côtés à
+la fois ; elle retrouve les détours de `229` et `230`, recompose exactement leurs cinq boucles, et ne lit que
+**2** bandes, retombées en **188** coutures, écart **0**.
+⭐⭐⭐⭐ **Aucune de ses neuf cellules ne sort du bruit** — `R4-F396` : le seuil de la famille vaut **1**, son
+étalon indépendant désigne **10** fois sur **200**, et la plus forte cellule est à **0,8228**.
+⚠⚠⚠ Le seuil partagé déclaré d'abord, **0,9944**, ne tient pas sa garantie (**22** sur **200**) : il a été
+remplacé avant la lecture.
+⭐⭐⭐⭐ **Donc `R4-P76` est répondue.** `R4-P77` s'ouvre : à l'échelle du segment entier, les chemins de
+consensus à neuf lignes restent-ils sur la même spire ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

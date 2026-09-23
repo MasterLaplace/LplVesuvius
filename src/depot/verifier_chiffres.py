@@ -3208,6 +3208,70 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 231 : LA SUITE DES DETOURS SE DEROULE-T-ELLE SANS MAIN ?
+    # (1) ⚠⚠⚠ LA FERMETURE D'UNE CELLULE NE VOYAGE JAMAIS SANS LA PART DU BRUIT SEUL, ni le seuil de la famille
+    # sans son etalon independant — ni sans le seuil declare d'abord et le sien.
+    s231 = _source(racine, "la_suite_des_detours_se_deroule_t_elle_sans_main.json")
+    if s231.exists():
+        d = json.loads(s231.read_text())
+
+        def _dec231(x) -> int:
+            f = float(x)
+            return 0 if f == int(f) else len(repr(f).split(".")[1])
+
+        def _s231(x) -> str:
+            return ("+" if float(x) > 0 else "") + _fr222(x)
+
+        rp231 = d.get("la_reproduction") or {}
+        if rp231.get("decidable"):
+            out.append(("la relecture de 231", [f"**{rp231['combien_de_coutures_relues']}** coutures, écart"],
+                        s231.name))
+        n231 = (d.get("les_niveaux") or [{}])[0]
+        dt231 = n231.get("les_detours") or {}
+        if dt231:
+            out.append(("les détours de 231",
+                        [f"colonnes **{dt231['gauche']}** et **{dt231['droite']}** et les rangées **{dt231['haut']}** "
+                         f"et **{dt231['bas']}**"], s231.name))
+        bp231 = d.get("les_boucles_publiees") or {}
+        if bp231:
+            v_ = [bp231[k] for k in ("227 haut_gauche", "229 haut_gauche", "229 haut_droite", "230 haut_gauche",
+                                     "230 haut_droite")]
+            out.append(("les boucles recomposées par 231",
+                        [f"**{_fr222(v_[0])}**,\n**{_s231(v_[1])}**, **{_fr222(v_[2])}**, **{_s231(v_[3])}** et "
+                         f"**{_fr222(v_[4])}**"], s231.name))
+        noms231 = {"haut_gauche": "en haut à gauche", "haut_milieu": "**en haut au milieu**",
+                   "haut_droite": "en haut à droite", "milieu_gauche": "au milieu à gauche", "centre": "le centre",
+                   "milieu_droite": "au milieu à droite", "bas_gauche": "en bas à gauche",
+                   "bas_milieu": "en bas au milieu", "bas_droite": "en bas à droite"}
+        ce231 = n231.get("les_cellules") or {}
+        for k_, lib in noms231.items():
+            x_ = ce231.get(k_)
+            if not x_:
+                continue
+            fort = k_ == "haut_milieu"
+            L_ = _s231(x_["la_fermeture_en_voxels"])
+            pa = _fr222(x_["la_part_du_nul_sous_la_fermeture"])
+            out.append((f"la cellule {k_} de 231",
+                        [f"| {lib} | {'**' + L_ + '**' if fort else L_} | "
+                         f"{_fr222(x_['la_fermeture_mediane_du_nul_en_valeur_absolue'])} | "
+                         f"{'**' + pa + '**' if fort else pa} |"], s231.name))
+        sf231 = n231.get("le_seuil_de_la_famille") or {}
+        if sf231.get("le_seuil") is not None:
+            for k_, lib in (("la_part_des_maxima_au_seuil", "la part des maxima au seuil"),
+                            ("la_part_des_maxima_un_cran_dessous", "la part des maxima un cran dessous")):
+                ajoute(f"{lib} de 231", float(sf231[k_]), _dec231(sf231[k_]), s231.name, unites=("**",))
+        et231 = n231.get("letalon") or {}
+        if et231.get("decidable"):
+            for k_, lib in (("le_theta", "le θ"), ("le_taux", "le taux"), ("la_borne", "la borne")):
+                ajoute(f"{lib} de l étalon de 231", float(et231[k_]), _dec231(et231[k_]), s231.name, unites=("**",))
+            out.append(("les désignations à tort de 231",
+                        [f"**{et231['combien_designent']}** fois sur **{et231['les_replicats']}**"], s231.name))
+        sp231 = (n231.get("le_seuil_partage_declare_dabord") or {})
+        if sp231.get("letalon"):
+            out.append(("le seuil déclaré d'abord de 231",
+                        [f"à **{_fr222(sp231['le_seuil'])}**, son étalon\ndésigne **{sp231['letalon']['combien_designent']}** "
+                         f"fois sur **{sp231['letalon']['les_replicats']}**"], s231.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 230 : UN DETOUR SEPARE-T-IL L'ERREUR DE LA RANGEE 99 ?
     # (1) ⚠⚠⚠ LA FERMETURE D'UNE BOUCLE DU TREILLIS DE LA RANGEE NE VOYAGE JAMAIS SANS LA PART DU BRUIT SEUL.
     s230 = _source(racine, "un_detour_separe_t_il_lerreur_de_la_rangee_99.json")
