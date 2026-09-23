@@ -3752,6 +3752,19 @@ rectangle ferme à **−28,75** à neuf lignes.
 ⭐⭐⭐⭐ **Donc `R4-P73` est répondue.** `R4-P74` s'ouvre : la colonne 71 porte-t-elle, dans sa moitié
 haute, une erreur que ses lignes partagent ?
 
+**`229` · 2026-09-23 · un détour sépare-t-il l'erreur de la colonne 71**
+
+⭐⭐ **Une lecture neuve, dérivée** : la colonne 78, la bande de cinq lignes la plus proche de la colonne 71
+dont aucune ligne ne vote pour elle ni pour la colonne 106 ; elle retombe sur `219`, `224`, `227` et `228`
+sur **82** coutures, écart **0**, et les boucles fines de gauche de `227` retombent exactement.
+⭐⭐⭐⭐ **Le détour s'accorde avec la moitié haute de la colonne 71** — `R4-F394` : la boucle étroite ferme
+à **+3,4062** voxels, moins que le bruit seul dans **0,1892** des tirages, et ne porte rien des
+**−23,8438** de `227`, qui tombent de l'autre côté du détour, à **−27,25**.
+⚠⚠ En bas, le témoin ferme à **−20,5625** : là où les colonnes 71 et 106 s'accordent, c'est le détour qui
+s'écarte des deux.
+⭐⭐⭐⭐ **Donc `R4-P74` est répondue.** `R4-P75` s'ouvre : la rangée 99, entre les colonnes 78 et 106,
+porte-t-elle la fermeture que `228` voyait du côté de la colonne 71 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

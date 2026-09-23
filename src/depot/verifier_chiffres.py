@@ -3208,6 +3208,68 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 229 : UN DETOUR SEPARE-T-IL L'ERREUR DE LA COLONNE 71 ?
+    # (1) ⚠⚠⚠ LA FERMETURE D'UNE BOUCLE DU DETOUR NE VOYAGE JAMAIS SANS LA PART DU BRUIT SEUL, et le seuil
+    # du seul test voyage avec son etalon.
+    s229 = _source(racine, "un_detour_separe_t_il_lerreur_de_la_colonne_71.json")
+    if s229.exists():
+        d = json.loads(s229.read_text())
+
+        def _dec229(x) -> int:
+            f = float(x)
+            return 0 if f == int(f) else len(repr(f).split(".")[1])
+
+        def _s229(x) -> str:
+            return ("+" if float(x) > 0 else "") + _fr222(x)
+
+        rp229 = d.get("la_reproduction") or {}
+        if rp229.get("decidable"):
+            out.append(("la relecture de 229", [f"**{rp229['combien_de_coutures_relues']}** coutures, écart"],
+                        s229.name))
+        l71, lint = d.get("les_lignes_de_la_colonne") or [], d.get("les_lignes_de_la_colonne_interieure") or []
+        ld = ((d.get("les_bandes_declarees") or [{}])[0]).get("les_lignes") or []
+        if l71 and lint and ld:
+            out.append(("les lignes de la colonne et du détour de 229",
+                        [f"de **{min(l71)}** à **{max(l71)}**", f"(**{min(lint)}** à **{max(lint)}**)",
+                         f"la colonne **{d['le_detour']}**, lignes **{min(ld)}** à **{max(ld)}**"], s229.name))
+        a229 = d.get("lanalyse_du_treillis_du_detour") or {}
+        cv229 = (a229.get("la_couverture_du_consensus") or {}).get(f"colonnes_{d.get('le_detour')}") or {}
+        if cv229:
+            out.append(("la couverture du détour de 229",
+                        [f"chacune de ses **{cv229['les_coutures_avec_consensus']}** coutures"], s229.name))
+        rc229 = d.get("les_boucles_de_227_recomposees") or {}
+        if rc229:
+            out.append(("les boucles de 227 recomposées par 229",
+                        [f"**{_fr222(rc229['haut_gauche'])}** et **{_fr222(rc229['bas_gauche'])}**"], s229.name))
+        pr229 = (a229.get("lepreuve") or {}).get("par_rectangle") or {}
+        noms229 = {"haut_gauche": "**la boucle étroite**, colonnes 71 à 78, en haut",
+                   "haut_droite": "colonnes 78 à 106, en haut",
+                   "bas_gauche": "le témoin, colonnes 71 à 78, en bas", "bas_droite": "colonnes 78 à 106, en bas"}
+        for n_, lib in noms229.items():
+            b_, x_ = (a229.get("les_boucles") or {}).get(n_) or {}, pr229.get(n_) or {}
+            if not b_.get("fermable") or not x_:
+                continue
+            fort = n_ == "haut_gauche"
+            L_ = _s229(b_["la_fermeture_en_voxels"]) if fort else _fr222(b_["la_fermeture_en_voxels"])
+            pa = _fr222(x_["la_part_du_nul_sous_la_fermeture"])
+            out.append((f"la boucle du détour {n_} de 229",
+                        [f"| {lib} | {'**' + L_ + '**' if fort else L_} | "
+                         f"{_fr222(x_['la_fermeture_mediane_du_nul_en_valeur_absolue'])} | "
+                         f"{'**' + pa + '**' if fort else pa} |"], s229.name))
+        t229 = d.get("le_test") or {}
+        if t229:
+            ajoute("le seuil du test de 229", float(t229["le_seuil"]), _dec229(t229["le_seuil"]), s229.name,
+                   unites=("**",))
+        if d.get("la_part_de_227_portee_par_la_boucle_etroite") is not None:
+            out.append(("la part de 227 portée par la boucle étroite de 229",
+                        [f"part de **{_fr222(d['la_part_de_227_portee_par_la_boucle_etroite'])}**"], s229.name))
+        et229 = d.get("letalon_du_test") or {}
+        if et229.get("decidable"):
+            for k_, lib in (("le_theta", "le θ"), ("le_taux", "le taux"), ("la_borne", "la borne")):
+                ajoute(f"{lib} de l étalon de 229", float(et229[k_]), _dec229(et229[k_]), s229.name, unites=("**",))
+            out.append(("les désignations à tort de 229",
+                        [f"**{et229['combien_designent']}** fois sur **{et229['les_replicats']}**"], s229.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 228 : UNE BANDE PLUS LARGE FERME-T-ELLE LE GRAND RECTANGLE ?
     # (1) ⚠⚠⚠ LA FERMETURE D'UNE LARGEUR NE VOYAGE JAMAIS SANS LE BRUIT SEUL DE CETTE LARGEUR : c'est
     # un tirage, et le bruit dit sa loi.

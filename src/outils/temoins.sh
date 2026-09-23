@@ -1596,6 +1596,8 @@ run "l'erreur de la boucle en haut a gauche" uv run python "$ROOT/src/nappe/ou_e
 run "figure l'erreur de la boucle en haut a gauche" uv run python "$ROOT/src/figures/figure_ou_est_lerreur_de_la_boucle_en_haut_a_gauche.py" --verifier
 run "une bande plus large" uv run python "$ROOT/src/nappe/une_bande_plus_large_ferme_t_elle_le_grand_rectangle.py" --verifier
 run "figure une bande plus large" uv run python "$ROOT/src/figures/figure_une_bande_plus_large_ferme_t_elle_le_grand_rectangle.py" --verifier
+run "un detour par la colonne 78" uv run python "$ROOT/src/nappe/un_detour_separe_t_il_lerreur_de_la_colonne_71.py" --verifier
+run "figure un detour par la colonne 78" uv run python "$ROOT/src/figures/figure_un_detour_separe_t_il_lerreur_de_la_colonne_71.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
