@@ -3739,6 +3739,19 @@ mesure déclarée est publiée à côté.
 ⭐⭐⭐⭐ **Donc `R4-P72` est répondue.** `R4-P73` s'ouvre : une bande plus large réduit-elle le bruit du
 consensus assez pour que le grand rectangle se ferme sous le demi-feuillet ?
 
+**`228` · 2026-09-23 · une bande plus large ferme-t-elle le grand rectangle**
+
+⭐⭐ **Une lecture neuve** : les quatre bandes du grand rectangle élargies de cinq à neuf lignes, par
+l'échelle de `218` ; les lignes lues retombent sur `219`, `223` et `224` sur **94** coutures, écart **0**, et
+à cinq lignes le grand rectangle retombe sur `225`.
+⭐⭐⭐⭐ **La largeur réduit le bruit, et à neuf lignes le grand rectangle se ferme** — `R4-F393` : de trois
+à neuf lignes, la fermeture médiane du bruit seul passe de **21,6875** à **15,6562** voxels, et le grand
+rectangle ferme à **−28,75** à neuf lignes.
+⚠⚠ **Mais la fermeture ne suit pas la largeur** : **−18,2188** à trois lignes, **−36,7188** à cinq,
+**−16,25** à sept. La colonne de gauche en porte l'essentiel à toutes les largeurs.
+⭐⭐⭐⭐ **Donc `R4-P73` est répondue.** `R4-P74` s'ouvre : la colonne 71 porte-t-elle, dans sa moitié
+haute, une erreur que ses lignes partagent ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3208,6 +3208,30 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 228 : UNE BANDE PLUS LARGE FERME-T-ELLE LE GRAND RECTANGLE ?
+    # (1) ⚠⚠⚠ LA FERMETURE D'UNE LARGEUR NE VOYAGE JAMAIS SANS LE BRUIT SEUL DE CETTE LARGEUR : c'est
+    # un tirage, et le bruit dit sa loi.
+    s228 = _source(racine, "une_bande_plus_large_ferme_t_elle_le_grand_rectangle.json")
+    if s228.exists():
+        d = json.loads(s228.read_text())
+        rp228 = d.get("la_reproduction") or {}
+        if rp228.get("decidable"):
+            out.append(("la relecture de 228", [f"**{rp228['combien_de_coutures_relues']}** coutures, écart"],
+                        s228.name))
+        P228 = d.get("par_largeur") or {}
+        for k_ in sorted(P228, key=int):
+            x_ = P228[k_]
+            L_ = _fr222(x_["la_fermeture_en_voxels"])
+            if k_ in ("5", "9"):
+                L_ = f"**{L_}**"
+            out.append((f"la largeur {k_} de 228",
+                        [f"| {k_} | {L_} | {_fr222(x_['la_dispersion_du_pas_en_voxels'])} | "
+                         f"{_fr222(x_['le_nul']['la_fermeture_mediane_en_valeur_absolue'])} | "
+                         f"{_fr222(x_['le_nul']['la_part_sous_le_demi_pli'])} |"], s228.name))
+            c_ = {c["le_cote"]: _fr222(c["la_somme_en_voxels"]) for c in x_["les_cotes"]}
+            out.append((f"les côtés à la largeur {k_} de 228",
+                        [f"| {k_} | {c_['haut']} | {c_['droite']} | {c_['bas']} | **{c_['gauche']}** |"], s228.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 227 : OU EST L'ERREUR DE LA BOUCLE EN HAUT A GAUCHE ?
     # (1) ⚠⚠⚠ LA FERMETURE D'UNE BOUCLE FINE NE VOYAGE JAMAIS SANS LA PART DU BRUIT SEUL NI SANS LE SEUIL.
     s227 = _source(racine, "ou_est_lerreur_de_la_boucle_en_haut_a_gauche.json")
