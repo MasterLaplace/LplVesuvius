@@ -1588,6 +1588,8 @@ run "le consensus et la hauteur" uv run python "$ROOT/src/nappe/le_consensus_tra
 run "figure le consensus et la hauteur" uv run python "$ROOT/src/figures/figure_le_consensus_traverse_t_il_la_hauteur.py" --verifier
 run "deux chemins et la meme spire" uv run python "$ROOT/src/nappe/deux_chemins_arrivent_ils_sur_la_meme_spire.py" --verifier
 run "figure deux chemins et la meme spire" uv run python "$ROOT/src/figures/figure_deux_chemins_arrivent_ils_sur_la_meme_spire.py" --verifier
+run "le trou de majorite" uv run python "$ROOT/src/nappe/quest_ce_qui_franchit_le_trou_de_majorite.py" --verifier
+run "figure le trou de majorite" uv run python "$ROOT/src/figures/figure_quest_ce_qui_franchit_le_trou_de_majorite.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

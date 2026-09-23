@@ -576,13 +576,29 @@ def juger(boucles: dict, epreuve: dict, etalon: dict | None) -> dict:
 
 # ─────────────────────────────── l'analyse ───────────────────────────────
 
+def les_pas_des_six_bandes(par219: dict, par223: dict, relues: dict, bandes, R, C) -> dict:
+    """Les six bandes, `{(sens, centre): {ligne: {couture: pas}}}` — assemblées une fois pour `224` et `225`."""
+    out = {("rangees", int(R[1])): par219["les_pas_par_rangee"],
+           ("colonnes", int(C[1])): par223["les_pas_par_colonne"]}
+    for b in bandes:
+        out[(b["le_sens"], int(b["le_centre"]))] = {
+            int(l_): {int(s): float(x[0]) for s, x in d.items()}
+            for l_, d in relues[b["cle"]]["le_long"].items()}
+    return out
+
+
 def analyser(pas_par_bande: dict, R, C, graine: int = GRAINE, tirages: int = TIRAGES,
              replicats: int = REPLICATS, avec_etalon: bool = True,
-             demi: float = DEMI_PAS_EN_VOXELS) -> dict:
+             demi: float = DEMI_PAS_EN_VOXELS, remplir: dict | None = None) -> dict:
     """Tout ce qui se calcule sur les six bandes — pur.
 
     `pas_par_bande` : `{(sens, centre): {ligne: {couture: pas}}}` pour les trois bandes de rangées
     (coutures = colonnes de gauche) et les trois bandes de colonnes (coutures = rangées du dessus).
+
+    ⚠⚠ `remplir` VAUT RIEN PAR DÉFAUT, donc `224` publie exactement ce qu'il publiait. `225` y passe
+    `{(sens, centre): {couture: pas}}` pour franchir un trou de majorité par une règle mesurée ailleurs.
+    Une couture qui A un consensus n'est JAMAIS remplie : ce serait écrire par-dessus la mesure. La
+    couverture est dite AVANT le remplissage, pour qu'un trou comblé reste un trou nommé.
     """
     attendues = {("rangees", int(r)) for r in R} | {("colonnes", int(c)) for c in C}
     if set(pas_par_bande) != attendues:
@@ -591,7 +607,6 @@ def analyser(pas_par_bande: dict, R, C, graine: int = GRAINE, tirages: int = TIR
     moy = {k: le_consensus(p, forme="moyenne") for k, p in pas_par_bande.items()}
     demi_cotes = les_demi_cotes(R, C)
     declarees = les_boucles_declarees(R, C)
-    sommes, sommes_moy = les_sommes(cons, demi_cotes), les_sommes(moy, demi_cotes)
 
     couverture = {}
     for (sens, centre), c_ in sorted(cons.items()):
@@ -601,6 +616,16 @@ def analyser(pas_par_bande: dict, R, C, graine: int = GRAINE, tirages: int = TIR
             "les_coutures_du_perimetre": int(a - de), "les_coutures_avec_consensus": len(dedans),
             "les_troncons": [[int(t[0]), int(t[-1]), len(t)] for t in les_troncons(dedans)],
             "les_coutures_sans_consensus": [int(s) for s in range(de, a) if s not in dedans]}
+    if remplir:
+        for k, seams in remplir.items():
+            if k not in cons:
+                return {"decidable": False, "raison": f"la bande {k} à remplir n'est pas une des six"}
+            deja = sorted(int(s_) for s_ in seams if int(s_) in cons[k])
+            if deja:
+                return {"decidable": False,
+                        "raison": f"remplir {k} aux coutures {deja}, qui ont un consensus : refusé"}
+            cons[k] = {**cons[k], **{int(s_): float(x) for s_, x in seams.items()}}
+    sommes, sommes_moy = les_sommes(cons, demi_cotes), les_sommes(moy, demi_cotes)
 
     boucles = {}
     for nom, coins in declarees.items():
@@ -661,7 +686,10 @@ def analyser(pas_par_bande: dict, R, C, graine: int = GRAINE, tirages: int = TIR
             "les_boucles": boucles, "lepreuve": ep,
             "lautocorrelation_commune_au_premier_decalage": (round(float(rho1), 4)
                                                              if rho1 is not None else None),
-            "letalon_de_lepreuve": etalon, "le_verdict": juger(boucles, ep, etalon)}
+            "letalon_de_lepreuve": etalon, "le_verdict": juger(boucles, ep, etalon),
+            **({"les_coutures_remplies": {f"{k[0]}_{k[1]}": {str(s_): round(float(x), 4)
+                                                             for s_, x in sorted(v_.items())}
+                                          for k, v_ in sorted(remplir.items())}} if remplir else {})}
 
 
 def mesurer(depuis: Path | None = None, delai: float = DELAI, graine: int = GRAINE,
@@ -703,12 +731,7 @@ def mesurer(depuis: Path | None = None, delai: float = DELAI, graine: int = GRAI
     rep = la_reproduction(relues, par219, par223)
     if not rep.get("decidable"):
         return {**base, "decidable": False, "raison": rep.get("raison"), "la_reproduction": rep}
-    pas_par_bande = {("rangees", int(R[1])): par219["les_pas_par_rangee"],
-                     ("colonnes", int(C[1])): par223["les_pas_par_colonne"]}
-    for b in bandes:
-        pas_par_bande[(b["le_sens"], int(b["le_centre"]))] = {
-            int(l_): {int(s): float(x[0]) for s, x in d.items()}
-            for l_, d in relues[b["cle"]]["le_long"].items()}
+    pas_par_bande = les_pas_des_six_bandes(par219, par223, relues, bandes, R, C)
     a = analyser(pas_par_bande, R, C, graine, tirages, replicats, avec_etalon)
     return {**base, "la_reproduction": rep, **a}
 

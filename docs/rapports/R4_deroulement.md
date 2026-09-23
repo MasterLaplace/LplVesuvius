@@ -3700,6 +3700,20 @@ de majorité aux coutures **140** et **141**.
 ⭐⭐⭐⭐ **Donc `R4-P69` est répondue à l'échelle d'un quart de segment.** `R4-P70` s'ouvre : là où une bande
 perd sa majorité, qu'est-ce qui franchit la couture sur la même spire ?
 
+**`225` · 2026-09-23 · qu'est-ce qui franchit le trou de majorité**
+
+⭐⭐ **Aucune lecture neuve** : les six bandes de `224`, dont l'analyse est d'abord rejouée à l'identique.
+Les trous de majorité qu'elles montrent font 1, 2, 3, 7, 12 et 17 coutures.
+⭐⭐⭐⭐ **Le maillage franchit le trou** — `R4-F389` : sur des fenêtres cachées de chacune de ces
+longueurs, un pas nul s'écarte au plus de **15,875** voxels du consensus, deux lignes présentes de
+**26,0312**, et une ligne seule quitte le feuillet **5** fois sur **4722** fenêtres de 17 coutures.
+⭐⭐⭐⭐ **La limite du consensus est à la moitié du segment** — `R4-F390` : le trou de la colonne 213
+franchi, les quatre rectangles restent sous le demi-feuillet, mais le grand rectangle, deux chemins de
+**340** coutures, ferme à **−36,7188** voxels. Des marches indépendantes n'y restent dessous que dans
+**0,7688** des tirages : l'erreur du consensus s'accumule comme une marche.
+⭐⭐⭐⭐ **Donc `R4-P70` est répondue.** `R4-P71` s'ouvre : au-delà du quart de segment, qu'est-ce qui garde
+deux chemins de consensus sur la même spire ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

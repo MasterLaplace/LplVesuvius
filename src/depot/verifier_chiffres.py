@@ -3208,6 +3208,80 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 225 : QU'EST-CE QUI FRANCHIT LE TROU DE MAJORITE ?
+    # (1) ⚠⚠⚠ LE PIRE ECART DE CHAQUE REGLE VOYAGE AVEC CEUX DES AUTRES, a chaque longueur : c'est leur
+    # comparaison qui retient la regle.
+    # (2) ⚠⚠ LA FERMETURE DU GRAND RECTANGLE NE VOYAGE JAMAIS SANS CE QUE LE BRUIT SEUL Y DONNERAIT.
+    s225 = _source(racine, "quest_ce_qui_franchit_le_trou_de_majorite.json")
+    if s225.exists():
+        d = json.loads(s225.read_text())
+
+        def _dec225(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        tb225 = d.get("les_trous_par_bande") or {}
+        for k_, v_ in sorted(tb225.items()):
+            if v_:
+                out.append((f"les trous de la bande {k_} de 225",
+                            [", ".join(f"{a_} sur **{n_}**" for a_, n_ in v_)], s225.name))
+        lo225 = d.get("les_longueurs_observees") or []
+        if len(lo225) > 1:
+            out.append(("les longueurs de trou de 225",
+                        [", ".join(str(x) for x in lo225[:-1]) + f" et {lo225[-1]} coutures"], s225.name))
+        sim225 = d.get("la_simulation") or {}
+        for k_ in sorted(sim225, key=int):
+            m_, d_, u_ = (sim225[k_][x] for x in ("le_maillage", "deux_lignes", "une_ligne"))
+            nb = int(u_["combien_au_dela_du_demi_pli"])
+            uu = (f"**{_fr222(u_['la_plus_grande'])}**" if nb else _fr222(u_["la_plus_grande"]))
+            nn = f"**{nb}**" if nb else f"{nb}"
+            out.append((f"la ligne du trou de {k_} coutures de 225",
+                        [f"| {k_} | {_fr222(m_['la_plus_grande'])} | {_fr222(d_['la_plus_grande'])} | {uu} | "
+                         f"{nn} sur {u_['combien']} |"], s225.name))
+        rr225 = d.get("la_regle_retenue") or {}
+        if rr225.get("lecart_le_plus_grand_a_la_longueur_des_trous") is not None:
+            ajoute("l écart de la règle retenue de 225", float(rr225["lecart_le_plus_grand_a_la_longueur_des_trous"]),
+                   _dec225(rr225["lecart_le_plus_grand_a_la_longueur_des_trous"]), s225.name, unites=("**",))
+        fr225 = d.get("les_franchissements") or {}
+        for regle_, f_ in sorted(fr225.items()):
+            if not f_.get("applicable"):
+                continue
+            for n_, b_ in sorted((f_.get("les_boucles") or {}).items()):
+                if not b_.get("fermable"):
+                    continue
+                ajoute(f"la fermeture de {n_} par {regle_} de 225", float(b_["la_fermeture_en_voxels"]),
+                       _dec225(b_["la_fermeture_en_voxels"]), s225.name, unites=("**",))
+                if regle_ != (d.get("le_verdict") or {}).get("la_regle"):
+                    continue
+                nl_ = b_.get("le_nul") or {}
+                for kk, lib in (("la_fermeture_mediane_du_nul_en_valeur_absolue", "la médiane du bruit"),
+                                ("la_part_du_nul_sous_le_demi_pli", "la part du bruit sous le demi-pli")):
+                    if nl_.get(kk) is not None:
+                        ajoute(f"{lib} de {n_} de 225", float(nl_[kk]), _dec225(nl_[kk]), s225.name,
+                               unites=("**",))
+        r225 = (d.get("le_verdict") or {}).get("la_regle")
+        f225 = fr225.get(r225) or {}
+        ep225 = f225.get("lepreuve") or {}
+        if ep225.get("decidable"):
+            for k_, lib in (("la_statistique", "Σ L²"), ("la_statistique_mediane_du_nul", "le nul de Σ L²"),
+                            ("la_valeur_p", "la valeur p")):
+                ajoute(f"{lib} de 225", float(ep225[k_]), _dec225(ep225[k_]), s225.name, unites=("**",))
+        et225 = f225.get("letalon_de_lepreuve") or {}
+        if et225.get("decidable"):
+            for k_, lib in (("le_theta", "le θ"), ("la_borne", "la borne")):
+                ajoute(f"{lib} de l étalon de 225", float(et225[k_]), _dec225(et225[k_]), s225.name,
+                       unites=("**",))
+            out.append(("les conclusions à tort de l étalon de 225",
+                        [f"**{et225['combien_concluent_mieux']}** fois sur **{et225['les_replicats']}**"],
+                        s225.name))
+        ch225 = f225.get("le_grand_rectangle_en_deux_chemins") or {}
+        if ch225.get("par_la_rangee_dabord"):
+            out.append(("les coutures du grand rectangle de 225",
+                        [f"**{len(ch225['par_la_rangee_dabord']) - 1}** coutures chacun"], s225.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 224 : DEUX CHEMINS ARRIVENT-ILS SUR LA MEME SPIRE ?
     # (1) ⚠⚠⚠ UNE FERMETURE NE VOYAGE JAMAIS SANS CE QUE LE BRUIT SEUL DONNERAIT : sous le
     # demi-feuillet, une boucle ne dit rien tant qu'on ne sait pas que des marches independantes y
