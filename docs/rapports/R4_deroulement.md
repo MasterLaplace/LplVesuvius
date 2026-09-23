@@ -3683,6 +3683,23 @@ son départ, quand la colonne `141` seule, sur le même tronçon, atteint **71,0
 s'ouvre : à l'échelle du segment, deux chemins de consensus vers le même chunk arrivent-ils sur la même
 spire ?
 
+**`224` · 2026-09-23 · deux chemins arrivent-ils sur la même spire**
+
+⭐⭐ **Une lecture neuve** : quatre bandes de cinq lignes à mi-chemin entre le centre de la grille et ses
+bords, les rangées **99** et **297** et les colonnes **71** et **213**, lues sur la seule portion que les
+boucles traversent. Sur les **79** coutures où elles croisent les bandes de `219` et de `223`, les pas relus
+retombent à l'écart **0**.
+⭐⭐⭐⭐ **Deux chemins de consensus arrivent sur la même spire** — `R4-F387` : les trois boucles fermées
+autour de la croix centrale ferment à **−29,25**, **−6,4375** et **3,8125** voxels, sous le demi-feuillet,
+quand une ligne seule par côté dépasse le demi-feuillet dans **21** boucles sur **54**.
+⚠⚠ **Mais pas mieux que des marches indépendantes** — `R4-F388` : Σ L² vaut **911,5391** contre
+**1037,877** (p = **0,443**), et l'étalon tient (**13** fois sur **200**). C'est la petitesse du bruit qui
+les y mène, pas une géométrie partagée.
+⚠ La boucle en haut à droite et le grand rectangle restent ouverts : la bande de la colonne **213** n'a pas
+de majorité aux coutures **140** et **141**.
+⭐⭐⭐⭐ **Donc `R4-P69` est répondue à l'échelle d'un quart de segment.** `R4-P70` s'ouvre : là où une bande
+perd sa majorité, qu'est-ce qui franchit la couture sur la même spire ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

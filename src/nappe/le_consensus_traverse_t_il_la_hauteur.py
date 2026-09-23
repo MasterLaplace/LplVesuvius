@@ -72,6 +72,7 @@ sys.path.insert(0, str(RACINE / "src" / "commun"))
 
 from cinq_rangees_designent_elles_la_fautive import les_rangees_a_lire  # noqa: E402
 from combien_de_rangees_faut_il_pour_lire_le_pas import (LES_RANGEES,  # noqa: E402
+                                                         les_bords_droit_et_gauche,
                                                          les_bords_haut_et_bas,
                                                          un_chunk_retenu)
 from combien_de_rangees_faut_il_pour_lire_le_pas import \
@@ -136,11 +137,17 @@ def les_colonnes_a_lire(colonnes_de_la_grille: int, combien: int) -> list[int]:
 # ─────────────────────────────── la lecture ───────────────────────────────
 
 def la_colonne(volume: dict, delai: float, colonne: int, ouvrir=None, meta=None,
-               combien: int = LES_RANGEES) -> dict:
+               combien: int = LES_RANGEES, les_rangees_voulues=None,
+               les_bords_horizontaux: bool = False) -> dict:
     """Les bords haut et bas de chaque chunk d'une COLONNE de chunks, du haut en bas.
 
     ⚠⚠ LE FILTRE ET LA COUPE SONT CEUX DE `la_ligne`, appelés et non recopiés : `un_chunk_retenu` et
     `les_bords_haut_et_bas`. Seul le sens de la marche change.
+
+    ⚠⚠ `les_rangees_voulues` et `les_bords_horizontaux` VALENT RIEN ET FAUX PAR DÉFAUT, donc `223` lit
+    exactement ce qu'il a lu. `224` ne lit qu'une portion de colonne, et coupe AUSSI les bords gauche
+    et droit — par `les_bords_droit_et_gauche`, la coupe même de `la_ligne` — pour que ses pas
+    horizontaux se contrôlent contre ceux de `219`.
     """
     url = f"{BUCKET}/{volume['cle']}"
     if meta is None:
@@ -156,9 +163,16 @@ def la_colonne(volume: dict, delai: float, colonne: int, ouvrir=None, meta=None,
                 "raison": f"la colonne {colonne} est hors du treillis de {gx} colonnes"}
     prendre = ouvrir or (lambda cy, cx: un_chunk(url, meta, cy, cx, delai, None,
                                                  pause=LA_PAUSE_ENTRE_ESSAIS))
+    voulues = list(range(gy))
+    if les_rangees_voulues is not None:
+        voulues = sorted({int(r) for r in les_rangees_voulues})
+        if not voulues or voulues[0] < 0 or voulues[-1] >= gy:
+            return {"decidable": False,
+                    "raison": f"les rangées voulues sortent du treillis de {gy} rangées"}
     w = int(la_largeur_du_bord())
     bas, hauts, refus, reprises, coupes = {}, {}, {}, 0, None
-    for cy in range(gy):
+    droits, gauches, rangees_de_coupe = {}, {}, None
+    for cy in voulues:
         b, pourquoi, repris = un_chunk_retenu(prendre, int(cy), int(colonne))
         reprises += repris
         if b is None:
@@ -167,10 +181,16 @@ def la_colonne(volume: dict, delai: float, colonne: int, ouvrir=None, meta=None,
         if coupes is None:
             coupes = les_coupes_a_lire(b.shape[2], combien)
         bas[int(cy)], hauts[int(cy)] = les_bords_haut_et_bas(b, coupes, w)
-    return {"decidable": bool(bas), "segment": volume["segment"],
+        if les_bords_horizontaux:
+            if rangees_de_coupe is None:
+                rangees_de_coupe = les_coupes_a_lire(b.shape[1], combien)
+            droits[int(cy)], gauches[int(cy)] = les_bords_droit_et_gauche(b, rangees_de_coupe, w)
+    horizontaux = ({"droits": droits, "gauches": gauches,
+                    "les_rangees_lues": (rangees_de_coupe or [])} if les_bords_horizontaux else {})
+    return {**horizontaux, "decidable": bool(bas), "segment": volume["segment"],
             "grille_de_chunks": [int(gy), int(gx)], "la_colonne": int(colonne),
             "le_cote_du_chunk": int(hy), "la_largeur_du_bord": w,
-            "les_colonnes_de_coupe": (coupes or []), "rangees_demandees": int(gy),
+            "les_colonnes_de_coupe": (coupes or []), "rangees_demandees": len(voulues),
             "rangees_lues": len(bas), "les_reprises_du_reseau": int(reprises), "refuses": refus,
             "bas": bas, "hauts": hauts}
 

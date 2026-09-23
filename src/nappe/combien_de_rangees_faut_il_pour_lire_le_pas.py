@@ -409,9 +409,25 @@ def les_bords_haut_et_bas(b: np.ndarray, colonnes_de_coupe, w: int) -> tuple[dic
     return bs, ha
 
 
+def les_bords_droit_et_gauche(b: np.ndarray, rangees_de_coupe, w: int) -> tuple[dict, dict]:
+    """Les profils des bords DROIT et GAUCHE d'un chunk, coupés en (couche, colonne) aux rangées données.
+
+    ⚠ Écrit une fois pour deux lecteurs : `la_ligne` le long d'une rangée, et le lecteur de `224` qui
+    coupe aussi ces bords en marchant le long d'une colonne.
+    """
+    dr, ga = {}, {}
+    for r_ in rangees_de_coupe:
+        sec = une_section(b, r_)
+        ww = max(1, min(int(w), sec.shape[1]))
+        dr[int(r_)] = np.asarray(sec[:, -ww:].mean(axis=1), dtype=float)
+        ga[int(r_)] = np.asarray(sec[:, :ww].mean(axis=1), dtype=float)
+    return dr, ga
+
+
 def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
              ouvrir=None, meta=None, combien: int = LES_RANGEES,
-             rangee_du_treillis: int | None = None, les_bords_verticaux: bool = False) -> dict:
+             rangee_du_treillis: int | None = None, les_bords_verticaux: bool = False,
+             les_colonnes_voulues=None) -> dict:
     """Les profils de bord de chaque chunk, sur `combien` rangées — la MÊME rangée que `199`–`203`.
 
     ⭐ SEULS LES PROFILS DE BORD SONT GARDES : `un_pas` ne regarde que les `w` colonnes du bord, et
@@ -427,6 +443,10 @@ def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
     coutures ENTRE deux rangées de chunks : les bords HAUT et BAS de chaque chunk, coupés dans l'autre
     sens (couche, rangée) à `combien` colonnes réparties comme les rangées, avec la MÊME largeur de
     bande. Le même chunk, la même bande, le même filtre : seul le sens de la coupe change.
+
+    ⚠⚠ `les_colonnes_voulues` VAUT RIEN PAR DÉFAUT, pour la même raison encore. `224` ne lit qu'une
+    PORTION de rangée — les colonnes entre deux bandes —, et une heure de lecture ne se paie pas pour
+    des chunks que la boucle ne traverse pas.
     """
     url = f"{BUCKET}/{volume['cle']}"
     if meta is None:
@@ -443,6 +463,11 @@ def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
         return {"decidable": False,
                 "raison": f"la rangée {ligne} est hors du treillis de {gy} rangées"}
     voulues = list(range(gx if colonnes is None else min(int(colonnes), gx)))
+    if les_colonnes_voulues is not None:
+        voulues = sorted({int(c) for c in les_colonnes_voulues})
+        if not voulues or voulues[0] < 0 or voulues[-1] >= gx:
+            return {"decidable": False,
+                    "raison": f"les colonnes voulues sortent du treillis de {gx} colonnes"}
     prendre = ouvrir or (lambda cy, cx: un_chunk(url, meta, cy, cx, delai, None,
                                                  pause=LA_PAUSE_ENTRE_ESSAIS))
     w = int(la_largeur_du_bord())
@@ -457,13 +482,7 @@ def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
             continue
         if rangees is None:
             rangees = les_rangees_a_lire(b.shape[1], combien)
-        dr, ga = {}, {}
-        for r_ in rangees:
-            sec = une_section(b, r_)
-            ww = max(1, min(w, sec.shape[1]))
-            dr[int(r_)] = np.asarray(sec[:, -ww:].mean(axis=1), dtype=float)
-            ga[int(r_)] = np.asarray(sec[:, :ww].mean(axis=1), dtype=float)
-        droits[int(cx)], gauches[int(cx)] = dr, ga
+        droits[int(cx)], gauches[int(cx)] = les_bords_droit_et_gauche(b, rangees, w)
         if les_bords_verticaux:
             if colonnes_de_coupe is None:
                 colonnes_de_coupe = les_rangees_a_lire(b.shape[2], combien)

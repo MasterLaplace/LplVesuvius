@@ -3208,6 +3208,107 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 224 : DEUX CHEMINS ARRIVENT-ILS SUR LA MEME SPIRE ?
+    # (1) ⚠⚠⚠ UNE FERMETURE NE VOYAGE JAMAIS SANS CE QUE LE BRUIT SEUL DONNERAIT : sous le
+    # demi-feuillet, une boucle ne dit rien tant qu'on ne sait pas que des marches independantes y
+    # seraient aussi.
+    # (2) ⚠⚠ LA RELECTURE DE 219 ET DE 223 VOYAGE AVEC LES BOUCLES : les bandes neuves sont controlees.
+    s224 = _source(racine, "deux_chemins_arrivent_ils_sur_la_meme_spire.json")
+    if s224.exists():
+        d = json.loads(s224.read_text())
+
+        def _dec224(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        rp224 = d.get("la_reproduction") or {}
+        if rp224.get("decidable"):
+            out.append(("la relecture de 219 et 223 par 224",
+                        [f"**{rp224['combien_de_coutures_relues']}** coutures croisées"], s224.name))
+        ce224 = d.get("les_centres") or {}
+        if ce224:
+            r_, c_ = ce224["rangees"], ce224["colonnes"]
+            out.append(("les bandes neuves de 224",
+                        [f"les rangées **{r_[0]}** et **{r_[2]}** et les colonnes **{c_[0]}** et "
+                         f"**{c_[2]}**"], s224.name))
+        lec224 = {"rangees": [], "colonnes": []}
+        for b_ in (d.get("les_bandes") or {}).values():
+            for x_ in (b_.get("les_lectures") or {}).values():
+                if b_.get("le_sens") == "rangees":
+                    lec224["rangees"].append((x_["colonnes_lues"], x_["colonnes_demandees"]))
+                else:
+                    lec224["colonnes"].append((x_["rangees_lues"], x_["rangees_demandees"]))
+        if lec224["rangees"] and lec224["colonnes"]:
+            lr_, lc_ = lec224["rangees"], lec224["colonnes"]
+            out.append(("les chunks lus par rangée de 224",
+                        [f"de **{min(x[0] for x in lr_)}** à **{max(x[0] for x in lr_)}** chunks sur "
+                         f"**{lr_[0][1]}** par rangée"], s224.name))
+            out.append(("les chunks lus par colonne de 224",
+                        [f"de **{min(x[0] for x in lc_)}** à **{max(x[0] for x in lc_)}** sur "
+                         f"**{lc_[0][1]}**"], s224.name))
+        bo224 = d.get("les_boucles") or {}
+        for n_, b_ in sorted(bo224.items()):
+            if not b_.get("fermable"):
+                continue
+            ajoute(f"la fermeture de {n_} de 224", float(b_["la_fermeture_en_voxels"]),
+                   _dec224(b_["la_fermeture_en_voxels"]), s224.name, unites=("vx", "**"))
+            ajoute(f"la fermeture de la moyenne de {n_} de 224",
+                   float(b_["la_fermeture_de_la_moyenne_en_voxels"]),
+                   _dec224(b_["la_fermeture_de_la_moyenne_en_voxels"]), s224.name, unites=("**",))
+            nl_ = b_.get("le_nul") or {}
+            for k_, lib in (("la_fermeture_mediane_du_nul_en_valeur_absolue", "la médiane du bruit"),
+                            ("la_part_du_nul_sous_le_demi_pli", "la part du bruit sous le demi-pli")):
+                if nl_.get(k_) is not None:
+                    ajoute(f"{lib} de {n_} de 224", float(nl_[k_]), _dec224(nl_[k_]), s224.name,
+                           unites=("**",))
+            if b_.get("les_coutures_par_chemin"):
+                out.append(("les coutures par chemin de 224",
+                            [f"**{b_['les_coutures_par_chemin']}** coutures par chemin"], s224.name))
+            u_ = b_.get("les_boucles_dune_ligne") or {}
+            if u_.get("decidable"):
+                k_, s_ = int(u_["combien"]), int(u_["combien_sous_le_demi_pli"])
+                out.append((f"les boucles d'une ligne de {n_} de 224", [f"**{k_}** combinaisons"],
+                            s224.name))
+                out.append((f"les boucles d'une ligne qui dépassent de {n_} de 224",
+                            [f"**{k_ - s_}** boucles sur **{k_}**"], s224.name))
+                out.append((f"la médiane d'une ligne de {n_} de 224",
+                            [f"**{_fr222(u_['la_fermeture_mediane_en_valeur_absolue'])}** voxels"],
+                            s224.name))
+                ajoute(f"la plus grande d'une ligne de {n_} de 224",
+                       float(u_["la_plus_grande_en_valeur_absolue"]),
+                       _dec224(u_["la_plus_grande_en_valeur_absolue"]), s224.name, unites=("**",))
+        dc224 = (d.get("les_demi_cotes") or {}).get("colonnes_71_99_198") or {}
+        if dc224.get("la_somme_en_voxels") is not None:
+            ajoute("le côté de la colonne 71 de 224", float(dc224["la_somme_en_voxels"]),
+                   _dec224(dc224["la_somme_en_voxels"]), s224.name, unites=("**",))
+        ep224 = d.get("lepreuve") or {}
+        if ep224.get("decidable"):
+            for k_, lib in (("la_statistique", "Σ L²"), ("la_statistique_mediane_du_nul", "le nul de Σ L²"),
+                            ("le_rapport_au_nul", "le rapport au nul"), ("la_valeur_p", "la valeur p")):
+                ajoute(f"{lib} de 224", float(ep224[k_]), _dec224(ep224[k_]), s224.name, unites=("**",))
+            out.append(("les tirages aussi fermés de 224",
+                        [f"**{ep224['tirages_au_moins_aussi_fermes']}** tirages sur **{ep224['tirages']}**"],
+                        s224.name))
+        et224 = d.get("letalon_de_lepreuve") or {}
+        if et224.get("decidable"):
+            for k_, lib in (("le_theta", "le θ"), ("le_taux", "le taux"), ("la_borne", "la borne")):
+                ajoute(f"{lib} de l étalon de 224", float(et224[k_]), _dec224(et224[k_]), s224.name,
+                       unites=("**",))
+            out.append(("les conclusions à tort de l étalon de 224",
+                        [f"**{et224['combien_concluent_mieux']}** fois sur **{et224['les_replicats']}**"],
+                        s224.name))
+        if d.get("lautocorrelation_commune_au_premier_decalage") is not None:
+            ajoute("l autocorrélation commune de 224", float(d["lautocorrelation_commune_au_premier_decalage"]),
+                   _dec224(d["lautocorrelation_commune_au_premier_decalage"]), s224.name, unites=("**",))
+        cv224 = ((d.get("la_couverture_du_consensus") or {}).get("colonnes_213") or {})
+        sc224 = cv224.get("les_coutures_sans_consensus") or []
+        if len(sc224) == 2:
+            out.append(("les coutures sans majorité de 224",
+                        [f"aux coutures **{sc224[0]}** et **{sc224[1]}**"], s224.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 223 : LE CONSENSUS TRAVERSE-T-IL LA HAUTEUR ?
     # (1) ⚠⚠⚠ LA DISTANCE DU CONSENSUS DES COLONNES NE VOYAGE JAMAIS SANS CELLE DE LA COLONNE SEULE
     # APPARIEE : c'est leur ecart, depuis le meme depart, qui fait le resultat.
