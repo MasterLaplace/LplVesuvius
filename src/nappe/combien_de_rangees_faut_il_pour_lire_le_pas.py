@@ -372,6 +372,43 @@ def sur_letalon(rangees, graine: int = GRAINE, coutures: int = 60, couches: int 
                                    <= float(GARANTIE_PAR_EPREUVE) * 2.0 + 1e-12)}
 
 
+def un_chunk_retenu(prendre, cy: int, cx: int) -> tuple:
+    """Un chunk pris puis passé au FILTRE DU PRODUCTEUR — ou la raison de son refus, et ses reprises.
+
+    ⚠⚠ ÉCRIT UNE FOIS, parce que deux lecteurs l'utilisent : `la_ligne` le long d'une rangée, et le
+    lecteur de `223` le long d'une colonne. Deux copies du filtre seraient deux réponses à « quel chunk
+    compte », libres de diverger.
+    """
+    bloc, pourquoi = prendre(int(cy), int(cx))
+    repris = 0
+    if bloc is not None and pourquoi and str(pourquoi).startswith("repris"):
+        repris = int(str(pourquoi).split()[-1])
+        pourquoi = None
+    if bloc is None:
+        return None, pourquoi, repris
+    b = np.asarray(bloc)
+    if float(b.max()) <= 0.0:
+        return None, "vide", repris
+    courbe, quoi = la_courbe_dun_bloc(b)
+    if courbe is None:
+        return None, quoi, repris
+    return b, None, repris
+
+
+def les_bords_haut_et_bas(b: np.ndarray, colonnes_de_coupe, w: int) -> tuple[dict, dict]:
+    """Les profils des bords BAS et HAUT d'un chunk, coupés en (couche, rangée) aux colonnes données.
+
+    ⚠ Même largeur de bande que les bords gauche et droit, et écrit une fois pour les deux lecteurs.
+    """
+    bs, ha = {}, {}
+    for c_ in colonnes_de_coupe:
+        sec = np.asarray(b[:, :, int(c_)], dtype=float)
+        ww = max(1, min(int(w), sec.shape[1]))
+        bs[int(c_)] = np.asarray(sec[:, -ww:].mean(axis=1), dtype=float)
+        ha[int(c_)] = np.asarray(sec[:, :ww].mean(axis=1), dtype=float)
+    return bs, ha
+
+
 def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
              ouvrir=None, meta=None, combien: int = LES_RANGEES,
              rangee_du_treillis: int | None = None, les_bords_verticaux: bool = False) -> dict:
@@ -413,20 +450,10 @@ def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
     bas, hauts, colonnes_de_coupe = {}, {}, None
     rangees = None
     for cx in voulues:
-        bloc, pourquoi = prendre(int(ligne), int(cx))
-        if bloc is not None and pourquoi and str(pourquoi).startswith("repris"):
-            reprises += int(str(pourquoi).split()[-1])
-            pourquoi = None
-        if bloc is None:
+        b, pourquoi, repris = un_chunk_retenu(prendre, int(ligne), int(cx))
+        reprises += repris
+        if b is None:
             refus[pourquoi] = refus.get(pourquoi, 0) + 1
-            continue
-        b = np.asarray(bloc)
-        if float(b.max()) <= 0.0:
-            refus["vide"] = refus.get("vide", 0) + 1
-            continue
-        courbe, quoi = la_courbe_dun_bloc(b)
-        if courbe is None:
-            refus[quoi] = refus.get(quoi, 0) + 1
             continue
         if rangees is None:
             rangees = les_rangees_a_lire(b.shape[1], combien)
@@ -440,13 +467,7 @@ def la_ligne(volume: dict, delai: float = DELAI, colonnes: int | None = None,
         if les_bords_verticaux:
             if colonnes_de_coupe is None:
                 colonnes_de_coupe = les_rangees_a_lire(b.shape[2], combien)
-            bs, ha = {}, {}
-            for c_ in colonnes_de_coupe:
-                sec = np.asarray(b[:, :, int(c_)], dtype=float)
-                ww = max(1, min(w, sec.shape[1]))
-                bs[int(c_)] = np.asarray(sec[:, -ww:].mean(axis=1), dtype=float)
-                ha[int(c_)] = np.asarray(sec[:, :ww].mean(axis=1), dtype=float)
-            bas[int(cx)], hauts[int(cx)] = bs, ha
+            bas[int(cx)], hauts[int(cx)] = les_bords_haut_et_bas(b, colonnes_de_coupe, w)
     verticaux = ({"bas": bas, "hauts": hauts, "les_colonnes_de_coupe": (colonnes_de_coupe or [])}
                  if les_bords_verticaux else {})
     return {**verticaux, "decidable": bool(droits), "segment": volume["segment"],

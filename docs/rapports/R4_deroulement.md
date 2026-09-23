@@ -3667,6 +3667,22 @@ vertical et **42,8125** avec.
 suivante, sur tout ce qui a été lu.** `R4-P68` s'ouvre : la hauteur — le consensus des colonnes voisines
 traverse-t-il les **396** rangées du segment sans quitter le feuillet ?
 
+**`223` · 2026-09-23 · le consensus traverse-t-il la hauteur**
+
+⭐⭐ **Une lecture neuve** : les colonnes de chunks **140** à **144**, la médiane de la grille et ses
+voisines, lues du haut en bas par le même filtre et la même coupe que `222`, désormais écrits une fois.
+Sur les **20** coutures verticales communes, la marche en colonne retombe exactement sur `222` (écart
+**0**).
+⭐⭐⭐⭐ **Le consensus des colonnes traverse la hauteur, observé** — `R4-F385` : il existe sur **385**
+coutures verticales des **395** d'un seul tenant et ne s'éloigne jamais de plus de **19,4062** voxels de
+son départ, quand la colonne `141` seule, sur le même tronçon, atteint **71,0625** — presque une spire.
+⭐⭐ **Aucune colonne seule ne tient** — `R4-F386` : toutes sortent du feuillet sur leur propre tronçon
+(**37,8125** à **71,0625** voxels) ; le consensus extrapolé tient (**25,4987**).
+⚠ La dispersion du consensus des colonnes est celle du consensus des rangées, à quelques centièmes près.
+⭐⭐⭐⭐ **Donc `R4-P68` est répondue, et `R4-L23` vaut dans les deux sens de la surface.** `R4-P69`
+s'ouvre : à l'échelle du segment, deux chemins de consensus vers le même chunk arrivent-ils sur la même
+spire ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3208,6 +3208,90 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 223 : LE CONSENSUS TRAVERSE-T-IL LA HAUTEUR ?
+    # (1) ⚠⚠⚠ LA DISTANCE DU CONSENSUS DES COLONNES NE VOYAGE JAMAIS SANS CELLE DE LA COLONNE SEULE
+    # APPARIEE : c'est leur ecart, depuis le meme depart, qui fait le resultat.
+    # (2) ⚠⚠ LA RELECTURE DE 222 VOYAGE AVEC LA TRAVERSEE : deux lecteurs qui s'accordent.
+    s223 = _source(racine, "le_consensus_traverse_t_il_la_hauteur.json")
+    if s223.exists():
+        d = json.loads(s223.read_text())
+
+        def _dec223(x) -> int:
+            f = float(x)
+            if f == int(f):
+                return 0
+            tt = repr(f)
+            return len(tt.split(".")[1]) if "." in tt else 0
+
+        cols223 = d.get("les_colonnes_declarees") or []
+        if cols223:
+            out.append(("les colonnes de 223", [f"**{cols223[0]}** à **{cols223[-1]}**"], s223.name))
+        lues223 = [x.get("rangees_lues") for x in (d.get("les_colonnes_lues") or {}).values()]
+        if lues223:
+            dem223 = next(iter((d.get("les_colonnes_lues") or {}).values())).get("rangees_demandees")
+            out.append(("les chunks lus par colonne de 223",
+                        [f"de **{min(lues223)}** à **{max(lues223)}** chunks sur **{dem223}**"],
+                        s223.name))
+        rp223 = d.get("la_reproduction") or {}
+        if rp223.get("decidable"):
+            out.append(("la relecture de 222 par 223",
+                        [f"les **{rp223['combien_de_coutures_relues']}** coutures verticales communes"],
+                        s223.name))
+        tr223 = d.get("le_troncon_retenu") or []
+        if tr223:
+            out.append(("le tronçon du consensus de 223",
+                        [f"**{tr223[2]}** coutures\nverticales des **{d['les_coutures_dune_colonne']}**",
+                         f"**{tr223[2]}** coutures verticales des **{d['les_coutures_dune_colonne']}**",
+                         f"de **{tr223[0]}** à **{tr223[1]}**"], s223.name))
+        for cle, nom in (("la_traversee_du_consensus", "le consensus"),
+                         ("la_traversee_de_la_moyenne", "la moyenne")):
+            x_ = d.get(cle) or {}
+            for k_, lib in (("la_distance_au_depart_en_voxels", "la distance au départ"),
+                            ("lecart_type_des_pas_en_voxels", "la dispersion du pas")):
+                if x_.get(k_) is not None:
+                    ajoute(f"{lib} de {nom} de 223", float(x_[k_]), _dec223(x_[k_]), s223.name,
+                           unites=("vx", "**"))
+        x_ = d.get("la_traversee_du_consensus") or {}
+        for k_, lib in (("la_moyenne_des_pas_en_voxels", "la moyenne des pas"),
+                        ("son_erreur_en_voxels", "l erreur de la moyenne")):
+            if x_.get(k_) is not None:
+                ajoute(f"{lib} du consensus de 223", float(x_[k_]), _dec223(x_[k_]), s223.name,
+                       unites=("**",))
+        for c_, x_ in sorted((d.get("les_colonnes_seules_sur_le_meme_troncon") or {}).items()):
+            for k_, lib in (("la_distance_au_depart_en_voxels", "la distance au départ"),
+                            ("lecart_type_des_pas_en_voxels", "la dispersion du pas")):
+                ajoute(f"{lib} de la colonne {c_} appariée de 223", float(x_[k_]), _dec223(x_[k_]),
+                       s223.name, unites=("vx", "**"))
+        for c_, x_ in sorted((d.get("les_colonnes_seules_sur_leur_plus_long_troncon") or {}).items()):
+            a_, b_, _n = x_["le_troncon"]
+            out.append((f"la colonne {c_} seule de 223",
+                        [f"| `{c_}` | {a_}–{b_} | **{_fr222(x_['la_distance_au_depart_en_voxels'])}** | "
+                         f"**{_fr222(x_['la_marche_mediane_par_blocs_en_voxels'])}** |"], s223.name))
+        ex223 = d.get("lextrapolation_du_consensus") or {}
+        if ex223:
+            ajoute("la marche par blocs du consensus de 223",
+                   float(ex223["la_marche_mediane_par_blocs_en_voxels"]),
+                   _dec223(ex223["la_marche_mediane_par_blocs_en_voxels"]), s223.name,
+                   unites=("vx", "**"))
+            out.append(("les marches sous le demi-feuillet du consensus de 223",
+                        [f"**{ex223['les_marches_sous_le_demi_pli_par_blocs']}/{ex223['tirages']}**"],
+                        s223.name))
+        et223 = d.get("letalon_de_lextrapolation") or {}
+        if et223.get("decidable"):
+            for k_, lib in (("le_theta", "le θ"),
+                            ("le_rapport_median_par_blocs", "le rapport par blocs"),
+                            ("le_rapport_median_pas_a_pas", "le rapport pas à pas")):
+                ajoute(f"{lib} de l étalon de 223", float(et223[k_]), _dec223(et223[k_]), s223.name,
+                       unites=("**",))
+        if d.get("lautocorrelation_au_premier_decalage") is not None:
+            ajoute("l autocorrélation du consensus de 223",
+                   float(d["lautocorrelation_au_premier_decalage"]),
+                   _dec223(d["lautocorrelation_au_premier_decalage"]), s223.name, unites=("**",))
+        ve223 = d.get("le_verdict") or {}
+        if ve223.get("lecart_des_blocs_a_la_verite") is not None:
+            ajoute("l écart des blocs à la vérité de 223", float(ve223["lecart_des_blocs_a_la_verite"]),
+                   _dec223(ve223["lecart_des_blocs_a_la_verite"]), s223.name, unites=("**",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 222 : LES BOUCLES SE FERMENT-ELLES ?
     # (1) ⚠⚠⚠ LE RAPPORT DE FERMETURE NE VOYAGE JAMAIS SANS LA MEDIANE DE SON NUL NI SANS LA PART
     # EXPLIQUEE : une valeur P seule gonflerait une fermeture qui n'explique qu'une petite part.
