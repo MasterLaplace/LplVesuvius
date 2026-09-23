@@ -1590,6 +1590,8 @@ run "deux chemins et la meme spire" uv run python "$ROOT/src/nappe/deux_chemins_
 run "figure deux chemins et la meme spire" uv run python "$ROOT/src/figures/figure_deux_chemins_arrivent_ils_sur_la_meme_spire.py" --verifier
 run "le trou de majorite" uv run python "$ROOT/src/nappe/quest_ce_qui_franchit_le_trou_de_majorite.py" --verifier
 run "figure le trou de majorite" uv run python "$ROOT/src/figures/figure_quest_ce_qui_franchit_le_trou_de_majorite.py" --verifier
+run "l'ajustement de toutes les boucles" uv run python "$ROOT/src/nappe/lajustement_de_toutes_les_boucles_garde_t_il_la_spire.py" --verifier
+run "figure l'ajustement de toutes les boucles" uv run python "$ROOT/src/figures/figure_lajustement_de_toutes_les_boucles_garde_t_il_la_spire.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

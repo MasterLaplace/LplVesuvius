@@ -3714,6 +3714,18 @@ franchi, les quatre rectangles restent sous le demi-feuillet, mais le grand rect
 ⭐⭐⭐⭐ **Donc `R4-P70` est répondue.** `R4-P71` s'ouvre : au-delà du quart de segment, qu'est-ce qui garde
 deux chemins de consensus sur la même spire ?
 
+**`226` · 2026-09-23 · l'ajustement de toutes les boucles garde-t-il la spire**
+
+⭐⭐ **Aucune lecture neuve** : les douze demi-côtés de `224`, le trou franchi par la règle de `225`, dont
+les cinq fermetures sont d'abord rejouées à l'identique.
+⭐⭐⭐⭐ **L'ajustement ne garde pas la spire à la moitié du segment** — `R4-F391` : chaque côté retiré puis
+prédit par l'ajustement pondéré des autres, la colonne 71 entière est prédite à **−36,8612** voxels, au-delà
+du demi-feuillet ; au quart, tout reste dessous.
+⚠⚠ **Il répand l'erreur au lieu de la diluer** : la colonne 213 de 99 à 198, que sa seule boucle prédit à
+**−4,8438**, l'ajustement la prédit à **17,6161**. L'erreur est concentrée dans la boucle en haut à gauche.
+⭐⭐⭐⭐ **Donc `R4-P71` est répondue par la négative pour le candidat qu'elle nommait.** `R4-P72` s'ouvre :
+où est l'erreur que porte la boucle en haut à gauche, et une boucle plus fine la désigne-t-elle ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

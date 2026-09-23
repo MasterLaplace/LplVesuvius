@@ -3208,6 +3208,39 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 226 : L'AJUSTEMENT DE TOUTES LES BOUCLES GARDE-T-IL LA SPIRE ?
+    # (1) ⚠⚠⚠ L'ERREUR AJUSTEE D'UNE LIGNE NE VOYAGE JAMAIS SANS SES DETOURS NI SANS LE BRUIT SEUL.
+    s226 = _source(racine, "lajustement_de_toutes_les_boucles_garde_t_il_la_spire.json")
+    if s226.exists():
+        d = json.loads(s226.read_text())
+        vc226 = d.get("la_validation_croisee") or {}
+        for nom_, x_ in sorted((vc226.get("la_moitie") or {}).items()):
+            sens_, centre_ = nom_.split("_")
+            lib = ("rangée " if sens_ == "rangees" else "colonne ") + centre_
+            aj = _fr222(x_["lerreur_ajustee_en_voxels"])
+            if not x_["sous_le_demi_pli"] or nom_ == "rangees_99":
+                aj = f"**{aj}**"
+            lab = f"**{lib}**" if not x_["sous_le_demi_pli"] else lib
+            det = " ; ".join(_fr222(v_) for v_ in x_["les_detours_en_voxels"].values())
+            out.append((f"la ligne {nom_} de 226",
+                        [f"| {lab} | {x_['les_coutures']} | {_fr222(x_['la_somme_mesuree_en_voxels'])} | {aj} | "
+                         f"{det} | {_fr222(x_['le_nul']['lerreur_mediane_en_valeur_absolue'])} | "
+                         f"{_fr222(x_['le_nul']['la_part_sous_le_demi_pli'])} |"], s226.name))
+        q226 = vc226.get("le_quart") or {}
+        for nom_ in ("colonnes_71_99_198", "colonnes_213_99_198"):
+            x_ = q226.get(nom_) or {}
+            if x_:
+                ajoute(f"l erreur ajustée de {nom_} de 226", float(x_["lerreur_ajustee_en_voxels"]),
+                       len(repr(float(x_["lerreur_ajustee_en_voxels"])).split(".")[1]), s226.name, unites=("**",))
+                for v_ in x_["les_detours_en_voxels"].values():
+                    ajoute(f"le détour de {nom_} de 226", float(v_), len(repr(float(v_)).split(".")[1]),
+                           s226.name, unites=("**",))
+        ve226 = d.get("le_verdict") or {}
+        if ve226.get("la_plus_grande_erreur_ajustee_en_valeur_absolue") is not None:
+            ajoute("la pire erreur ajustée de 226", float(ve226["la_plus_grande_erreur_ajustee_en_valeur_absolue"]),
+                   len(repr(float(ve226["la_plus_grande_erreur_ajustee_en_valeur_absolue"])).split(".")[1]),
+                   s226.name, unites=("**",))
+
     # ⭐⭐⭐⭐ LA TRANCHE 225 : QU'EST-CE QUI FRANCHIT LE TROU DE MAJORITE ?
     # (1) ⚠⚠⚠ LE PIRE ECART DE CHAQUE REGLE VOYAGE AVEC CEUX DES AUTRES, a chaque longueur : c'est leur
     # comparaison qui retient la regle.

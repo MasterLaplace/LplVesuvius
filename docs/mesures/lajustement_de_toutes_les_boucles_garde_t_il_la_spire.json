@@ -1,0 +1,416 @@
+{
+  "la_question_declaree": "au-delà du quart de segment, l'ajustement de toutes les boucles à la fois garde-t-il deux chemins sur la même spire ?",
+  "la_mesure_declaree": "l'erreur de prédiction de chaque demi-côté et de chaque ligne entière, retirés du treillis puis prédits par l'ajustement pondéré des autres, contre le demi-feuillet, contre un seul détour, et contre des côtés de bruit indépendant",
+  "graine": 20261105,
+  "tirages": 999,
+  "la_regle_de_225": "le_maillage",
+  "la_reproduction_de_225": {
+    "decidable": true,
+    "les_boucles": 5
+  },
+  "decidable": true,
+  "le_demi_pli_en_voxels": 36,
+  "les_demi_cotes": {
+    "colonnes_71_99_198": {
+      "de": [
+        0,
+        0
+      ],
+      "a": [
+        1,
+        0
+      ],
+      "la_somme_en_voxels": 22.625,
+      "la_variance_de_la_somme": 149.1678
+    },
+    "colonnes_71_198_297": {
+      "de": [
+        1,
+        0
+      ],
+      "a": [
+        2,
+        0
+      ],
+      "la_somme_en_voxels": 7.0938,
+      "la_variance_de_la_somme": 174.3198
+    },
+    "colonnes_142_99_198": {
+      "de": [
+        0,
+        1
+      ],
+      "a": [
+        1,
+        1
+      ],
+      "la_somme_en_voxels": -4.75,
+      "la_variance_de_la_somme": 197.4138
+    },
+    "colonnes_142_198_297": {
+      "de": [
+        1,
+        1
+      ],
+      "a": [
+        2,
+        1
+      ],
+      "la_somme_en_voxels": 5.3438,
+      "la_variance_de_la_somme": 94.0674
+    },
+    "colonnes_213_99_198": {
+      "de": [
+        0,
+        2
+      ],
+      "a": [
+        1,
+        2
+      ],
+      "la_somme_en_voxels": -0.1562,
+      "la_variance_de_la_somme": 119.2819
+    },
+    "colonnes_213_198_297": {
+      "de": [
+        1,
+        2
+      ],
+      "a": [
+        2,
+        2
+      ],
+      "la_somme_en_voxels": 4.0,
+      "la_variance_de_la_somme": 127.2754
+    },
+    "rangees_99_71_142": {
+      "de": [
+        0,
+        0
+      ],
+      "a": [
+        0,
+        1
+      ],
+      "la_somme_en_voxels": -5.5312,
+      "la_variance_de_la_somme": 40.3808
+    },
+    "rangees_99_142_213": {
+      "de": [
+        0,
+        1
+      ],
+      "a": [
+        0,
+        2
+      ],
+      "la_somme_en_voxels": -2.7812,
+      "la_variance_de_la_somme": 48.5609
+    },
+    "rangees_198_71_142": {
+      "de": [
+        1,
+        0
+      ],
+      "a": [
+        1,
+        1
+      ],
+      "la_somme_en_voxels": -3.6562,
+      "la_variance_de_la_somme": 90.0718
+    },
+    "rangees_198_142_213": {
+      "de": [
+        1,
+        1
+      ],
+      "a": [
+        1,
+        2
+      ],
+      "la_somme_en_voxels": 6.6562,
+      "la_variance_de_la_somme": 46.4398
+    },
+    "rangees_297_71_142": {
+      "de": [
+        2,
+        0
+      ],
+      "a": [
+        2,
+        1
+      ],
+      "la_somme_en_voxels": 1.0312,
+      "la_variance_de_la_somme": 143.2961
+    },
+    "rangees_297_142_213": {
+      "de": [
+        2,
+        1
+      ],
+      "a": [
+        2,
+        2
+      ],
+      "la_somme_en_voxels": 1.5,
+      "la_variance_de_la_somme": 68.1559
+    }
+  },
+  "la_validation_croisee": {
+    "le_quart": {
+      "colonnes_71_99_198": {
+        "les_coutures": 99,
+        "la_somme_mesuree_en_voxels": 22.625,
+        "lerreur_ajustee_en_voxels": -32.4707,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "haut_gauche": -29.25
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 12.9224,
+          "la_part_sous_le_demi_pli": 0.9379
+        }
+      },
+      "colonnes_71_198_297": {
+        "les_coutures": 99,
+        "la_somme_mesuree_en_voxels": 7.0938,
+        "lerreur_ajustee_en_voxels": -13.4444,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "bas_gauche": -6.4375
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 14.5826,
+          "la_part_sous_le_demi_pli": 0.8869
+        }
+      },
+      "colonnes_142_99_198": {
+        "les_coutures": 99,
+        "la_somme_mesuree_en_voxels": -4.75,
+        "lerreur_ajustee_en_voxels": 10.8467,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "haut_droite": -4.8438,
+          "haut_gauche": -29.25
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 12.8769,
+          "la_part_sous_le_demi_pli": 0.962
+        }
+      },
+      "colonnes_142_198_297": {
+        "les_coutures": 99,
+        "la_somme_mesuree_en_voxels": 5.3438,
+        "lerreur_ajustee_en_voxels": 6.1124,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "bas_droite": 3.8125,
+          "bas_gauche": -6.4375
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 9.7516,
+          "la_part_sous_le_demi_pli": 0.973
+        }
+      },
+      "colonnes_213_99_198": {
+        "les_coutures": 99,
+        "la_somme_mesuree_en_voxels": -0.1562,
+        "lerreur_ajustee_en_voxels": 17.6161,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "haut_droite": -4.8438
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 11.6197,
+          "la_part_sous_le_demi_pli": 0.964
+        }
+      },
+      "colonnes_213_198_297": {
+        "les_coutures": 99,
+        "la_somme_mesuree_en_voxels": 4.0,
+        "lerreur_ajustee_en_voxels": 1.4401,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "bas_droite": 3.8125
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 11.6411,
+          "la_part_sous_le_demi_pli": 0.965
+        }
+      },
+      "rangees_99_71_142": {
+        "les_coutures": 71,
+        "la_somme_mesuree_en_voxels": -5.5312,
+        "lerreur_ajustee_en_voxels": 32.4707,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "haut_gauche": -29.25
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 12.9224,
+          "la_part_sous_le_demi_pli": 0.9379
+        }
+      },
+      "rangees_99_142_213": {
+        "les_coutures": 71,
+        "la_somme_mesuree_en_voxels": -2.7812,
+        "lerreur_ajustee_en_voxels": 17.6161,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "haut_droite": -4.8438
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 11.6197,
+          "la_part_sous_le_demi_pli": 0.964
+        }
+      },
+      "rangees_198_71_142": {
+        "les_coutures": 71,
+        "la_somme_mesuree_en_voxels": -3.6562,
+        "lerreur_ajustee_en_voxels": -15.5385,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "bas_gauche": -6.4375,
+          "haut_gauche": -29.25
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 11.3994,
+          "la_part_sous_le_demi_pli": 0.977
+        }
+      },
+      "rangees_198_142_213": {
+        "les_coutures": 71,
+        "la_somme_mesuree_en_voxels": 6.6562,
+        "lerreur_ajustee_en_voxels": -9.5359,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "bas_droite": 3.8125,
+          "haut_droite": -4.8438
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 8.8556,
+          "la_part_sous_le_demi_pli": 0.995
+        }
+      },
+      "rangees_297_71_142": {
+        "les_coutures": 71,
+        "la_somme_mesuree_en_voxels": 1.0312,
+        "lerreur_ajustee_en_voxels": -13.4444,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "bas_gauche": -6.4375
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 14.5826,
+          "la_part_sous_le_demi_pli": 0.8869
+        }
+      },
+      "rangees_297_142_213": {
+        "les_coutures": 71,
+        "la_somme_mesuree_en_voxels": 1.5,
+        "lerreur_ajustee_en_voxels": -1.4401,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "bas_droite": 3.8125
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 11.6411,
+          "la_part_sous_le_demi_pli": 0.965
+        }
+      }
+    },
+    "la_moitie": {
+      "rangees_99": {
+        "les_coutures": 142,
+        "la_somme_mesuree_en_voxels": -8.3125,
+        "lerreur_ajustee_en_voxels": 34.731,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "la_moitie_haute": -34.0938,
+          "le_grand_rectangle": -36.7188
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 14.9973,
+          "la_part_sous_le_demi_pli": 0.9209
+        }
+      },
+      "rangees_198": {
+        "les_coutures": 142,
+        "la_somme_mesuree_en_voxels": 3.0,
+        "lerreur_ajustee_en_voxels": -19.5483,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "la_moitie_basse": -2.625,
+          "la_moitie_haute": -34.0938
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 12.4097,
+          "la_part_sous_le_demi_pli": 0.9479
+        }
+      },
+      "rangees_297": {
+        "les_coutures": 142,
+        "la_somme_mesuree_en_voxels": 2.5312,
+        "lerreur_ajustee_en_voxels": -12.4474,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "la_moitie_basse": -2.625,
+          "le_grand_rectangle": -36.7188
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 17.102,
+          "la_part_sous_le_demi_pli": 0.8458
+        }
+      },
+      "colonnes_71": {
+        "les_coutures": 198,
+        "la_somme_mesuree_en_voxels": 29.7188,
+        "lerreur_ajustee_en_voxels": -36.8612,
+        "sous_le_demi_pli": false,
+        "les_detours_en_voxels": {
+          "la_moitie_gauche": -35.6875,
+          "le_grand_rectangle": -36.7188
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 17.0673,
+          "la_part_sous_le_demi_pli": 0.8328
+        }
+      },
+      "colonnes_142": {
+        "les_coutures": 198,
+        "la_somme_mesuree_en_voxels": 0.5938,
+        "lerreur_ajustee_en_voxels": 15.3168,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "la_moitie_droite": -1.0313,
+          "la_moitie_gauche": -35.6875
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 14.5753,
+          "la_part_sous_le_demi_pli": 0.9089
+        }
+      },
+      "colonnes_213": {
+        "les_coutures": 198,
+        "la_somme_mesuree_en_voxels": 3.8438,
+        "lerreur_ajustee_en_voxels": 16.3766,
+        "sous_le_demi_pli": true,
+        "les_detours_en_voxels": {
+          "la_moitie_droite": -1.0313,
+          "le_grand_rectangle": -36.7188
+        },
+        "le_nul": {
+          "lerreur_mediane_en_valeur_absolue": 16.2839,
+          "la_part_sous_le_demi_pli": 0.8949
+        }
+      }
+    }
+  },
+  "le_verdict": {
+    "la_plus_grande_erreur_ajustee_en_valeur_absolue": 36.8612,
+    "le_plus_grand_detour_en_valeur_absolue": 36.7188,
+    "un_cote_ajuste_depasse": true,
+    "un_detour_depasse": true,
+    "ce_qui_reste_a_mesurer": "MÊME AJUSTÉES TOUTES ENSEMBLE, LES BOUCLES PRÉDISENT UN CÔTÉ RETIRÉ AU-DELÀ DU DEMI-FEUILLET"
+  }
+}
