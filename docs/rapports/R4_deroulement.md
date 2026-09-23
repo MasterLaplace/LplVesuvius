@@ -3765,6 +3765,19 @@ s'écarte des deux.
 ⭐⭐⭐⭐ **Donc `R4-P74` est répondue.** `R4-P75` s'ouvre : la rangée 99, entre les colonnes 78 et 106,
 porte-t-elle la fermeture que `228` voyait du côté de la colonne 71 ?
 
+**`230` · 2026-09-23 · un détour sépare-t-il l'erreur de la rangée 99**
+
+⭐⭐ **Le détour de `229`, appelé sur les rangées** : la rangée 106, dont aucune ligne ne vote pour la rangée
+99 ni pour la rangée 148 ; elle retombe sur `224`, `227`, `228` et `229` sur **92** coutures, écart **0**,
+et les boucles du haut de `229` retombent exactement.
+⭐⭐⭐⭐ **La boucle étroite de la rangée sort du bruit** — `R4-F395` : entre la rangée 99 et le détour, sur
+les colonnes 78 à 106, elle ferme à **−13,1562** voxels, **0,953** contre le seuil **0,95**, l'étalon à
+**0,075** sous **0,0808** : la première boucle à sortir du bruit depuis que `227` en a posé la règle.
+⚠⚠⚠ De justesse, et pour une part de **0,4828** des **−27,25** de `229` ; l'autre moitié reste sous le
+détour, à **−14,0938**.
+⭐⭐⭐⭐ **Donc `R4-P75` est répondue, pour la moitié.** `R4-P76` s'ouvre : la suite des détours peut-elle se
+dérouler sans main ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

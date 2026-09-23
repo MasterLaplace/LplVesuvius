@@ -200,9 +200,11 @@ def _ce_qui_reste(sort: bool, tient: bool) -> str:
             "LE BRUIT FERAIT")
 
 
-def analyser_le_detour(pas: dict, R, C, regle: str, graine: int, tirages: int, replicats: int,
+def le_test_dune_boucle(pas: dict, R, C, regle: str, graine: int, tirages: int, replicats: int, la_boucle: str,
                        garantie: float = GARANTIE, demi: float = DEMI_PAS_EN_VOXELS) -> dict:
-    """Le treillis du détour, ses trous franchis par la règle de `225`, le test unique et son étalon — pur."""
+    """Un treillis, ses trous franchis par la règle de `225`, et le test d'UNE boucle — seule dans l'épreuve, donc
+    à la garantie entière — avec son étalon — pur. Rend aussi les sommes des demi-côtés franchis, pour recomposer
+    d'autres boucles sur le même consensus."""
     trous = les_trous_des_boucles(pas, R, C)
     rem = None
     if trous:
@@ -221,29 +223,43 @@ def analyser_le_detour(pas: dict, R, C, regle: str, graine: int, tirages: int, r
         cons[k] = {**cons[k], **v_}
     dc = les_demi_cotes(R, C)
     sommes = les_sommes(cons, dc)
-    recomposees = {n: round(float(la_fermeture(sommes, co, dc)), 4) for n, co in les_boucles_de_227(R, C).items()}
     pas_dc = {d: [float(cons[(d[0], d[1])][s]) for s in range(d[2], d[3])] for d in dc}
-    # ⚠⚠ UN SEUL TEST : la boucle étroite, seule dans l'épreuve, donc à la garantie entière.
-    ep = lepreuve(pas_dc, {LA_BOUCLE_ETROITE: les_boucles_declarees(R, C)[LA_BOUCLE_ETROITE]}, dc, tirages,
-                  graine, garantie, demi)
+    # ⚠⚠ UN SEUL TEST : la boucle déclarée, seule dans l'épreuve, donc à la garantie entière.
+    ep = lepreuve(pas_dc, {la_boucle: les_boucles_declarees(R, C)[la_boucle]}, dc, tirages, graine, garantie, demi)
     testees = {n: les_boucles_declarees(R, C)[n] for n in ep["les_rectangles"]}
-    sort = les_boucles_qui_sortent(ep["par_rectangle"], garantie) == [LA_BOUCLE_ETROITE]
+    sort = les_boucles_qui_sortent(ep["par_rectangle"], garantie) == [la_boucle]
     theta = le_theta_dune_autocorrelation(lautocorrelation_commune(pas_dc.values()) or 0.0)
     et = sur_letalon({d: len(p) for d, p in pas_dc.items()}, {d: float(np.std(p)) for d, p in pas_dc.items()},
                      testees, dc, theta, replicats, tirages, graine, garantie)
-    L = a["les_boucles"][LA_BOUCLE_ETROITE]["la_fermeture_en_voxels"]
-    l227 = recomposees["haut_gauche"]
-    return {"decidable": True, "le_treillis": {"rangees": [int(r) for r in R], "colonnes": [int(c) for c in C]},
-            "lanalyse_du_treillis_du_detour": a, "les_boucles_de_227_recomposees": recomposees,
+    return {"decidable": True, "lanalyse": a, "les_sommes": sommes, "les_demi_cotes": dc,
             "le_test": {"les_boucles_testees": sorted(testees),
                         "le_seuil": round(le_seuil(len(testees), garantie), 4),
-                        "la_fermeture_en_voxels": L, **ep["par_rectangle"][LA_BOUCLE_ETROITE],
-                        "elle_sort_du_bruit": bool(sort)},
-            "letalon_du_test": {**et, "les_boucles_testees": sorted(testees)},
+                        "la_fermeture_en_voxels": a["les_boucles"][la_boucle]["la_fermeture_en_voxels"],
+                        **ep["par_rectangle"][la_boucle], "elle_sort_du_bruit": bool(sort)},
+            "letalon_du_test": {**et, "les_boucles_testees": sorted(testees)}}
+
+
+def recomposer(x: dict, boucles: dict) -> dict:
+    """Des boucles d'un autre treillis, recomposées sur les sommes franchies d'un test — en voxels, arrondies."""
+    return {n: round(float(la_fermeture(x["les_sommes"], co, x["les_demi_cotes"])), 4) for n, co in boucles.items()}
+
+
+def analyser_le_detour(pas: dict, R, C, regle: str, graine: int, tirages: int, replicats: int,
+                       garantie: float = GARANTIE, demi: float = DEMI_PAS_EN_VOXELS) -> dict:
+    """Le treillis du détour, ses trous franchis par la règle de `225`, le test unique et son étalon — pur."""
+    x = le_test_dune_boucle(pas, R, C, regle, graine, tirages, replicats, LA_BOUCLE_ETROITE, garantie, demi)
+    if not x.get("decidable"):
+        return x
+    recomposees = recomposer(x, les_boucles_de_227(R, C))
+    t, et = x["le_test"], x["letalon_du_test"]
+    L, l227 = t["la_fermeture_en_voxels"], recomposees["haut_gauche"]
+    sort, tient = t["elle_sort_du_bruit"], et["elle_tient_sa_garantie"]
+    return {"decidable": True, "le_treillis": {"rangees": [int(r) for r in R], "colonnes": [int(c) for c in C]},
+            "lanalyse_du_treillis_du_detour": x["lanalyse"], "les_boucles_de_227_recomposees": recomposees,
+            "le_test": t, "letalon_du_test": et,
             "la_part_de_227_portee_par_la_boucle_etroite": (round(float(L) / l227, 4) if l227 else None),
-            "le_verdict": {"la_boucle_etroite_sort_du_bruit": bool(sort),
-                           "letalon_tient": bool(et["elle_tient_sa_garantie"]),
-                           "ce_qui_reste_a_mesurer": _ce_qui_reste(sort, et["elle_tient_sa_garantie"])}}
+            "le_verdict": {"la_boucle_etroite_sort_du_bruit": bool(sort), "letalon_tient": bool(tient),
+                           "ce_qui_reste_a_mesurer": _ce_qui_reste(sort, tient)}}
 
 
 # ─────────────────────────────── la mesure ───────────────────────────────

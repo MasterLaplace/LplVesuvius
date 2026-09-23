@@ -3208,6 +3208,64 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 230 : UN DETOUR SEPARE-T-IL L'ERREUR DE LA RANGEE 99 ?
+    # (1) ⚠⚠⚠ LA FERMETURE D'UNE BOUCLE DU TREILLIS DE LA RANGEE NE VOYAGE JAMAIS SANS LA PART DU BRUIT SEUL.
+    s230 = _source(racine, "un_detour_separe_t_il_lerreur_de_la_rangee_99.json")
+    if s230.exists():
+        d = json.loads(s230.read_text())
+
+        def _dec230(x) -> int:
+            f = float(x)
+            return 0 if f == int(f) else len(repr(f).split(".")[1])
+
+        def _s230(x) -> str:
+            return ("+" if float(x) > 0 else "") + _fr222(x)
+
+        rp230 = d.get("la_reproduction") or {}
+        if rp230.get("decidable"):
+            out.append(("la relecture de 230", [f"**{rp230['combien_de_coutures_relues']}** coutures, écart"],
+                        s230.name))
+        l99, lint = d.get("les_lignes_de_la_rangee") or [], d.get("les_lignes_de_la_rangee_interieure") or []
+        ld = ((d.get("les_bandes_declarees") or [{}])[0]).get("les_lignes") or []
+        if l99 and lint and ld:
+            out.append(("les lignes de la rangée et du détour de 230",
+                        [f"**{min(l99)}** à **{max(l99)}**", f"(**{min(lint)}** à **{max(lint)}**)",
+                         f"la rangée **{d['le_detour']}**, lignes **{min(ld)}** à **{max(ld)}**"], s230.name))
+        a230 = d.get("lanalyse_du_treillis_de_la_rangee") or {}
+        cv230 = (a230.get("la_couverture_du_consensus") or {}).get(f"rangees_{d.get('le_detour')}") or {}
+        if cv230:
+            out.append(("la couverture du détour de 230",
+                        [f"chacune de ses **{cv230['les_coutures_avec_consensus']}** coutures"], s230.name))
+        rc230 = d.get("les_boucles_de_229_recomposees") or {}
+        if rc230:
+            out.append(("les boucles de 229 recomposées par 230",
+                        [f"**{_s230(rc230['haut_gauche'])}** et **{_fr222(rc230['haut_droite'])}**"], s230.name))
+        pr230 = (a230.get("lepreuve") or {}).get("par_rectangle") or {}
+        noms230 = {"haut_droite": "**la boucle étroite de la rangée**, rangées 99 à 106, colonnes 78 à 106",
+                   "haut_gauche": "le témoin, rangées 99 à 106, colonnes 71 à 78",
+                   "bas_droite": "sous le détour, colonnes 78 à 106", "bas_gauche": "sous le détour, colonnes 71 à 78"}
+        for n_, lib in noms230.items():
+            b_, x_ = (a230.get("les_boucles") or {}).get(n_) or {}, pr230.get(n_) or {}
+            if not b_.get("fermable") or not x_:
+                continue
+            fort = n_ == "haut_droite"
+            L_ = _fr222(b_["la_fermeture_en_voxels"]) if fort or float(b_["la_fermeture_en_voxels"]) <= 0 \
+                else _s230(b_["la_fermeture_en_voxels"])
+            pa = _fr222(x_["la_part_du_nul_sous_la_fermeture"])
+            out.append((f"la boucle {n_} de 230",
+                        [f"| {lib} | {'**' + L_ + '**' if fort else L_} | "
+                         f"{_fr222(x_['la_fermeture_mediane_du_nul_en_valeur_absolue'])} | "
+                         f"{'**' + pa + '**' if fort else pa} |"], s230.name))
+        if d.get("la_part_de_229_portee_par_la_boucle_etroite") is not None:
+            out.append(("la part de 229 portée par la boucle étroite de 230",
+                        [f"part de **{_fr222(d['la_part_de_229_portee_par_la_boucle_etroite'])}**"], s230.name))
+        et230 = d.get("letalon_du_test") or {}
+        if et230.get("decidable"):
+            for k_, lib in (("le_theta", "le θ"), ("le_taux", "le taux"), ("la_borne", "la borne")):
+                ajoute(f"{lib} de l étalon de 230", float(et230[k_]), _dec230(et230[k_]), s230.name, unites=("**",))
+            out.append(("les désignations à tort de 230",
+                        [f"**{et230['combien_designent']}** fois sur **{et230['les_replicats']}**"], s230.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 229 : UN DETOUR SEPARE-T-IL L'ERREUR DE LA COLONNE 71 ?
     # (1) ⚠⚠⚠ LA FERMETURE D'UNE BOUCLE DU DETOUR NE VOYAGE JAMAIS SANS LA PART DU BRUIT SEUL, et le seuil
     # du seul test voyage avec son etalon.
