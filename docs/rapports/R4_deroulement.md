@@ -3941,6 +3941,15 @@ longue durant au plus **30** rangées ; une suite de coupes à la portée de 40 
 ⚠⚠⚠ Le rectangle de `239` et l'aile étroite de `243` sont coupés plus large ; les ailes de `240` et `241`, non.
 `R4-P90` s'ouvre : coupés à 29 rangs au plus, restent-ils dessous ?
 
+**`246` · 2026-09-24 · la couverture sans main** — rien n'est lu
+
+⭐⭐⭐⭐ **Sans aucun choix, la procédure refait ce que la main avait fait** — `R4-F410` : l'aile de droite franchit, la
+troisième ligne désigne la colonne **260**, l'aile qui l'évite tient, et sous elle l'aile étroite à sept lignes est trouvée.
+Sur les quatre côtés elle cherche aussi ce que la main n'avait pas cherché, et demande **111** bandes, **24263** chunks,
+dont **15984** pour le rectangle.
+⚠⚠⚠ Jugée sur ce qui est lu, sa couverture est **0,0648** : le rectangle n'est pas jugé tant que ses coupes ne sont pas lues.
+`R4-P91` s'ouvre : tout lu, que couvre-t-elle ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

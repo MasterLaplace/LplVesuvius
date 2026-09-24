@@ -3208,6 +3208,36 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 246 : LA COUVERTURE SANS MAIN
+    # (1) ⚠⚠⚠ UNE COUVERTURE SANS MAIN NE VOYAGE JAMAIS SANS CE QU'ELLE DEMANDE ENCORE À LIRE.
+    s246 = _source(racine, "la_couverture_sans_main.json")
+    if s246.exists():
+        d = json.loads(s246.read_text())
+        v246 = d.get("le_verdict") or {}
+        if v246.get("combien_de_bandes_a_lire") is not None and d.get("ce_qui_reste_a_lire") is not None:
+            out.append(("ce que 246 demande", [f"elle demande **{v246['combien_de_bandes_a_lire']}** bandes, "
+                                               f"**{d['ce_qui_reste_a_lire']}** chunks"], s246.name))
+        j246 = d.get("le_journal") or []
+        if j246 and j246[0].get("la_boucle") == "le rectangle" and j246[0].get("ce_quelle_coute") is not None:
+            out.append(("le rectangle de 246", [f"Le rectangle coûte à lui seul **{j246[0]['ce_quelle_coute']}**"],
+                        s246.name))
+        n246 = {}
+        for e in j246[1:]:
+            n246[e["letat"]] = n246.get(e["letat"], 0) + 1
+        if j246:
+            out.append(("le journal de 246", [f"**{n246.get('dessous', 0)}** boucles dessous, **{n246.get('franchit', 0)}** "
+                                              f"qui franchit, **{n246.get('à lire', 0) + (1 if j246[0]['letat'] == 'à lire' else 0)}** à lire"],
+                        s246.name))
+        dp246 = [e.get("le_departage") for e in j246 if e.get("le_departage")]
+        if dp246 and (dp246[0].get("le_verdict") or {}).get("la_ligne_qui_derive") is not None:
+            out.append(("la ligne que 246 désigne", [f"la troisième ligne désigne la colonne "
+                                                     f"**{dp246[0]['le_verdict']['la_ligne_qui_derive']}**"], s246.name))
+        cv246 = d.get("la_couverture") or {}
+        if cv246:
+            out.append(("la couverture de 246",
+                        [f"entourent **{cv246['combien']}** chunks sur **{cv246['sur']}**, "
+                         f"**{_fr222(cv246['la_part'])}** de l'empreinte"], s246.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 245 : LA PORTÉE VOIT-ELLE SA TRAVERSÉE ?
     # (1) ⚠⚠⚠ UNE PORTÉE NE VOYAGE JAMAIS SANS LES TRAVERSÉES D'UN SEUL TENANT DONT ELLE EST TIRÉE.
     s245 = _source(racine, "la_portee_voit_elle_sa_traversee.json")

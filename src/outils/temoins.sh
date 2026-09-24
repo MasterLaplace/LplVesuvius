@@ -1628,6 +1628,8 @@ run "une aile plus etroite tient-elle" uv run python "$ROOT/src/nappe/une_aile_p
 run "figure une aile plus etroite tient-elle" uv run python "$ROOT/src/figures/figure_une_aile_plus_etroite_tient_elle.py" --verifier
 run "la portee voit-elle sa traversee" uv run python "$ROOT/src/nappe/la_portee_voit_elle_sa_traversee.py" --verifier
 run "figure la portee voit-elle sa traversee" uv run python "$ROOT/src/figures/figure_la_portee_voit_elle_sa_traversee.py" --verifier
+run "la couverture sans main" uv run python "$ROOT/src/nappe/la_couverture_sans_main.py" --verifier
+run "figure la couverture sans main" uv run python "$ROOT/src/figures/figure_la_couverture_sans_main.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

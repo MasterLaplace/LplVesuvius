@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**144 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**145 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 106 portes
+## Grand Prize — 107 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -125,6 +125,7 @@
 - **R4-P88** *(le graal)* · **SOUS LA RANGÉE 112, UNE AILE PLUS ÉTROITE QUE NEUF LIGNES, DONT LA COLONNE EXTÉRIEURE NE PARTAGE AUCUNE LIGNE AVEC LA COLONNE 260, RELIE-T-ELLE AU RECTANGLE LA MATIÈRE AU-DELÀ DE LA COLONNE 243 ?** ⭐⭐⭐ C'EST CE QUE `242` DÉSIGNE. À neuf lignes, sous la rangée 112, aucune colonne extérieure assez loin de la 243 et de la 260 ne tient : toute aile de droite y passe par des lignes de la colonne qui dérive. L'échelle de `218` a des largeurs de trois, cinq et sept lignes. ⭐⭐⭐⭐ RÉPONDUE PAR `243` : à sept lignes, l'aile de droite qui évite la colonne 260 va des rangées 112 à 266 par la colonne 252 et tient sur son profil ; les boucles qui tiennent entourent désormais **0,9172** de l'empreinte. La suite, entre les colonnes 252 et 260, est `R4-P89`.
 - **R4-P89** *(le graal)* · **SOUS LA RANGÉE 112, QU'EST-CE QUI RELIE AU RECTANGLE LA MATIÈRE ENTRE LA COLONNE 252 ET LA COLONNE 260, LÀ OÙ TOUTE COLONNE PARTAGE DES LIGNES AVEC LA 260 ?** ⭐⭐⭐ C'EST CE QUE `243` DÉSIGNE. À sept lignes, l'aile étroite s'arrête à la colonne 252 : une colonne plus proche partagerait des lignes avec les neuf de la colonne 260.
 - **R4-P90** *(le graal)* · **COUPÉS À 29 RANGS AU PLUS, LE PLUS GRAND RECTANGLE DE `233` ET L'AILE ÉTROITE DE `243` RESTENT-ILS SOUS LE DEMI-FEUILLET ?** ⭐⭐⭐ C'EST CE QUE `245` DÉSIGNE. La portée de 40 que `239` a tirée de `235` ne voit pas les traversées de `235` ; le rectangle, coupé jusqu'à 37 rangs, et l'aile étroite, jusqu'à 39, laisseraient passer une traversée comme les siennes. C'est aussi le pas auquel une procédure sans main devra couper.
+- **R4-P91** *(le graal)* · **LES 111 BANDES QUE LA PROCÉDURE SANS MAIN DEMANDE UNE FOIS LUES, QUE COUVRE-T-ELLE, ET LE RECTANGLE RESTE-T-IL DESSOUS AU PAS QUI VOIT ?** ⭐⭐⭐ C'EST CE QUE `246` DÉSIGNE. Sans aucun choix, la procédure refait ce que la main avait fait ; pour juger le reste elle demande 24263 chunks, dont 15984 pour le rectangle. Y répondre répond aussi à `R4-P90` pour le rectangle et l'aile étroite.
 
 ## Progress Prizes — 19 portes
 
