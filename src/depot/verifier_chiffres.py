@@ -3208,6 +3208,61 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 253 : LA CHAÎNE, REJUGÉE HORS DES DÉCHIRURES
+    s253 = _source(racine, "la_chaine_rejugee_hors_des_dechirures.json")
+    if s253.exists():
+        d = json.loads(s253.read_text())
+        pr = d.get("les_predictions") or {}
+        if "m7" in pr and "ps256" in pr:
+            m7p, m7m = pr["m7"]["du_cote_plus"], pr["m7"]["du_cote_moins"]
+            psp, psm = pr["ps256"]["du_cote_plus"], pr["ps256"]["du_cote_moins"]
+            for nom_c, x in (("plus", m7p), ("moins", m7m)):
+                out.append((f"les couches bordées {nom_c} dans 253",
+                            [f"| bordée d'une falaise, côté {nom_c} | " + " | ".join(_fr222(v_) for v_ in x["la_part_des_couches_bordees_dune_falaise"]) + " |"],
+                            s253.name))
+                out.append((f"les couches déchirées {nom_c} dans 253",
+                            [f"| bordée ou hors de la plus grande pièce, côté {nom_c} | " + " | ".join(_fr222(v_) for v_ in x["la_part_des_couches_dechirees"]) + " |"],
+                            s253.name))
+            ip, im = m7p["le_juge_intact"]["par_saut"], m7m["le_juge_intact"]["par_saut"]
+            out.append(("les derniers sauts du juge intact dans 253",
+                        [f"ne laisse que **{ip[2]['les_points_notes']}** et **{ip[3]['les_points_notes']}** points côté plus, "
+                         f"**{im[2]['les_points_notes']}** et **{im[3]['les_points_notes']}** côté moins"], s253.name))
+            out.append(("le premier saut intact dans 253",
+                        [f"**{_fr222(ip[0]['la_chaine']['la_part_sur_la_bonne_spire'])}** et **{_fr222(im[0]['la_chaine']['la_part_sur_la_bonne_spire'])}** "
+                         f"des points au premier saut (**{ip[0]['les_points_notes']}** et"], s253.name))
+            out.append(("le deuxième saut intact dans 253",
+                        [f"en **{_fr222(ip[1]['la_chaine']['la_part_sur_la_bonne_spire'])}** et **{_fr222(im[1]['la_chaine']['la_part_sur_la_bonne_spire'])}** "
+                         f"au deuxième (**{ip[1]['les_points_notes']}** et **{im[1]['les_points_notes']}** notés)"], s253.name))
+            gp = m7p["le_juge_intact"]["qui_tient"]["la_chaine"]["parmi_ceux_qui_ont_tenu_le_saut_precedent"]
+            gm = m7m["le_juge_intact"]["qui_tient"]["la_chaine"]["parmi_ceux_qui_ont_tenu_le_saut_precedent"]
+            out.append(("le deuxième saut gardé dans 253", [f"en garde **{_fr222(gp[1])}** et **{_fr222(gm[1])}**"], s253.name))
+            qp, qm = psp["le_juge_intact"]["par_saut"], psm["le_juge_intact"]["par_saut"]
+            out.append(("le juge intact avec ps256 dans 253",
+                        [f"**{_fr222(qp[0]['la_chaine']['la_part_sur_la_bonne_spire'])}** et **{_fr222(qm[0]['la_chaine']['la_part_sur_la_bonne_spire'])}**, "
+                         f"puis **{_fr222(qp[1]['la_chaine']['la_part_sur_la_bonne_spire'])}**"], s253.name))
+            jp = m7p["le_juge_de_248"]["par_saut"][0]["la_chaine"]["la_part_sur_la_bonne_spire"]
+            jm = m7m["le_juge_de_248"]["par_saut"][0]["la_chaine"]["la_part_sur_la_bonne_spire"]
+            out.append(("le juge de 248 refait dans 253", [f"exactement les chiffres de `248` : **{_fr222(jp)}** et **{_fr222(jm)}**"], s253.name))
+            sp, sm = m7p["le_juge_sans_falaise"], m7m["le_juge_sans_falaise"]
+            fp, fm = sp["sur_les_points_notes_a_chaque_saut"], sm["sur_les_points_notes_a_chaque_saut"]
+            out.append(("les points sans falaise de 253", [f"Sur les **{fp['les_points']}** et **{fm['les_points']}** points"], s253.name))
+            for nom_c, fx in (("plus", fp), ("moins", fm)):
+                out.append((f"le pas fixe sans falaise {nom_c} dans 253",
+                            [f"| le pas fixe, côté {nom_c} | " + " | ".join(_fr222(v_) for v_ in fx["le_temoin_sans_lecture"]) + " |"], s253.name))
+                out.append((f"la chaîne sans falaise {nom_c} dans 253",
+                            [f"| **la chaîne, côté {nom_c}** | " + " | ".join(f"**{_fr222(v_)}**" for v_ in fx["la_chaine"]) + " |"], s253.name))
+            out.append(("la tenue sans falaise dans 253",
+                        [f"**{_fr222(sp['qui_tient']['la_chaine']['la_part_qui_tient_tous_les_sauts'])}** et "
+                         f"**{_fr222(sm['qui_tient']['la_chaine']['la_part_qui_tient_tous_les_sauts'])}** de ces points, contre "
+                         f"**{_fr222(sp['qui_tient']['le_temoin_sans_lecture']['la_part_qui_tient_tous_les_sauts'])}** et "
+                         f"**{_fr222(sm['qui_tient']['le_temoin_sans_lecture']['la_part_qui_tient_tous_les_sauts'])}**"], s253.name))
+            out.append(("la tenue sans falaise avec ps256 dans 253",
+                        [f"**{_fr222(psp['le_juge_sans_falaise']['qui_tient']['la_chaine']['la_part_qui_tient_tous_les_sauts'])}** et "
+                         f"**{_fr222(psm['le_juge_sans_falaise']['qui_tient']['la_chaine']['la_part_qui_tient_tous_les_sauts'])}**"], s253.name))
+            for nom_c, x in (("plus", sp), ("moins", sm)):
+                pas = x["qui_tient"]["la_chaine"]["parmi_ceux_qui_ont_tenu_le_saut_precedent"]
+                out.append((f"le pas à pas sans falaise {nom_c} dans 253", ["**" + " · ".join(_fr222(v_) for v_ in pas) + "**"], s253.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 252 : LA SURFACE PRODUITE, ET LA COUCHE DU JUGE
     s252a = _source(racine, "la_surface_produite_se_dechire_t_elle.json")
     if s252a.exists():

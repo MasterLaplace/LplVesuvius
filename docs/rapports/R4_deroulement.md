@@ -4000,6 +4000,14 @@ gardée monte de **0,912** à **0,9428**. ⚠⚠⚠ Là où les deux prédiction
 saute, sa couche est bordée d'une falaise en **0,8717** et **0,8753** des points, la surface de la chaîne en **0,2659** et
 **0,2308**. Une feuille ne saute pas d'un tour entre deux mailles voisines : c'est la première moitié de `R4-P93`.
 
+**`253` · 2026-09-24 · la chaîne, rejugée hors des déchirures** — la chaîne de `248`, deux juges
+
+⭐⭐⭐⭐ **Environ un point sur vingt perdu par saut, pas un sur dix** — `R4-F425` : jugée là où la couche de la bande est
+continue et d'une pièce, la chaîne retombe sur la bonne spire en **0,948** et **0,9517** des points au premier saut,
+**0,922** et **0,9257** au deuxième. `R4-F426` : jugée sans falaise, ajouté après, elle tient les quatre sauts sur
+**0,8949** et **0,9103** des points au lieu de **0,7236** et **0,7703** ; le pas fixe reste à **0,3536** et **0,3763**.
+`R4-P93` a une réponse, sous réserve : là où le juge se déchire, la matière est peut-être aussi la plus difficile.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
