@@ -3926,6 +3926,13 @@ l'empreinte.
 ⚠⚠⚠ Entre les colonnes 252 et 260, rien n'est relié.
 ⭐⭐⭐⭐ **Donc `R4-P88` est répondue.** `R4-P89` s'ouvre : qu'est-ce qui relie la matière entre les colonnes 252 et 260 ?
 
+**`244` · 2026-09-24 · le pipeline, version trois** — un montage, qui ne mesure rien
+
+⭐⭐⭐ Le maillon que `213` disait ouvert, accorder les rangées, est franchi sur un segment : des boucles qui
+restent sous le demi-feuillet sur leur profil entourent **0,9172** de l'empreinte (`R4-F408`).
+⚠⚠⚠ Trois choses manquent au Graal : l'enchaînement des boucles a été piloté à la main, il tient sur un seul
+segment déjà tracé, et aucun livrable ne l'exécute. La suite est d'enchaîner sans main.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
