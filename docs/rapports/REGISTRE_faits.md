@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**532 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **492** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
+**534 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **494** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 429 faits
+## R4 — 431 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -514,6 +514,8 @@
 | `R4-F427` | **réparer par les voisins les points que le retour et le désaccord signalent défait presque autant qu'elle répare** | sur la bande `w028-037`, la réparation touche **0,1079 · 0,0883 · 0,1159 · 0,123** et **0,1021 · 0,0989 · 0,1045 · 0,1188** des points aux quatre sauts ; au premier saut, sur **2856** et **2761** points réparés jugés, elle rend justes **0,0837** et **0,0844**, rend ratés **0,0648** et **0,0525**, en laisse justes **0,5882** et **0,5762** et ratés **0,2633** et **0,2869** | établi ; ⭐⭐⭐ La première réparation sans juge de la chaîne. ⚠⚠ La médiane des voisins sains ne ramène pas les trois quarts des ratés qu'elle touche. ⚠ Le diagnostic du premier saut a été ajouté après la mesure. | `254` · `nappe/reparer_avant_le_saut_suivant.py` |
 | `R4-F428` | **réparer avant le saut suivant ne fait presque rien gagner à la tenue de la chaîne sur quatre sauts** | jugée comme `248`, la chaîne tient les quatre sauts sur **0,7247** et **0,7725** des points en réparant, **0,7236** et **0,7703** sans ; jugée sans falaise, **0,9003** et **0,9109** contre **0,8949** et **0,9103** ; la chaîne sans réparation est celle de `248` au voxel près | établi ; ⭐⭐⭐ Le retour et le désaccord voient où la chaîne a raté, mais réparer par la surface voisine ne la corrige pas. ⚠ Une seule règle de réparation. | `254` · `nappe/reparer_avant_le_saut_suivant.py` |
 | `R4-F429` | **rayon par rayon, la présence de fibres publiée pour PHercParis4 ne sépare pas une feuille d'un interstice, et les ratés communs des deux prédictions ne s'y lisent pas** | au niveau 3 (19,2 µm), sur la bande `w028-037`, l'aire sous la courbe des deux témoins vaut **0,5342** et **0,5367** (fibres du 1er août), **0,4323** et **0,462** (fibres du 15 septembre), **0,5484** et **0,5508**, **0,4535** et **0,4697** sans rapport au segment ; la seconde ne voit aucune fibre sur la feuille du segment pour **0,3971** et **0,4165** des témoins ; en moyenne la première sépare la feuille (**1,679** et **2,2614**) de l'interstice (**0,6321** et **0,7069**), mais là où la chaîne est tombée sur les ratés communs trop près le contraste vaut **1,0829** et **1,134** | établi ; ⭐⭐ La troisième source indépendante des prédictions de surface ne tranche pas à la résolution publiée. ⚠ La lecture sans rapport a été ajoutée après la mesure. | `255` · `nappe/les_fibres_voient_elles_ce_que_les_predictions_ratent.py` |
+| `R4-F430` | **les 111 bandes lues, la procédure de couverture sans main va au bout sur `20230702185753` et couvre plus que la main** | relancée sur les **112** bandes publiées et les **111** qu'elle demandait, la procédure ne demande plus rien ; elle entoure **93795** chunks sur **97771**, soit **0,9593** de l'empreinte, contre **89678**, soit **0,9172**, à la main (`243`) ; elle retrouve les **5** boucles de la main, n'en perd aucune et en tient **31** de plus ; **32297** coutures relues au croisement des bandes, écart le plus grand **0** voxel | établi ; ⭐⭐⭐⭐ La réponse à `R4-P91` : la couverture par boucles se déroule sans main jusqu'au bout. ⚠⚠ Un seul segment, celui sur lequel les règles ont été écrites ; ce qu'aucune boucle n'entoure n'est pas relié. | `256` · `nappe/la_couverture_sans_main.py` |
+| `R4-F431` | **coupés tous les 29 rangs au plus, le rectangle de `233` et l'aile étroite de `243` restent sous le demi-feuillet** | le rectangle `[26, 384, 22, 243]`, jugé sur **19** coupes, a pour écart le plus grand **18,6016** voxels : dessous ; l'aile étroite de `243`, à **7** lignes, est dessous | établi ; ⭐⭐⭐ La réponse à `R4-P90` pour le rectangle et l'aile étroite. ⚠ Une traversée plus courte que le pas qui voit n'est pas vue. | `256` · `nappe/la_couverture_sans_main.py` |
 
 ## R5 — 23 faits
 

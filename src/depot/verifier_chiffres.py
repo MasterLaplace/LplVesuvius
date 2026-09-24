@@ -3208,6 +3208,34 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 256 : LA COUVERTURE SANS MAIN, UNE FOIS LUE
+    s256 = _source(racine, "la_couverture_sans_main_une_fois_lue.json")
+    if s256.exists():
+        d = json.loads(s256.read_text())
+        c, m = d.get("la_couverture") or {}, d.get("la_couverture_a_la_main") or {}
+        if c and m and not (d.get("le_verdict") or {}).get("il_reste_a_lire", True):
+            out.append(("la couverture sans main de 256",
+                        [f"| **sans main, tout lu** | **{c['combien']}** | **{c['sur']}** | **{_fr222(c['la_part'])}** |"], s256.name))
+            out.append(("la couverture à la main de 256", [f"| à la main (`243`) | {m['combien']} | {m['sur']} | {_fr222(m['la_part'])} |"],
+                        s256.name))
+            cp = d["la_comparaison"]
+            out.append(("les boucles de 256",
+                        [f"Elle retrouve les **{len(cp['retrouvees'])}** boucles que la main tenait"], s256.name))
+            out.append(("les boucles en plus de 256", [f"elle en tient **{len(cp['tenues_sans_main_seulement'])}** de plus"], s256.name))
+            rp = d["la_reproduction"]
+            out.append(("les coutures relues de 256", [f"**{rp['combien_de_coutures_relues']}** coutures sont relues"], s256.name))
+            out.append(("les lignes de présence de 256", [f"sur **{d['la_presence_contre_la_lecture']['combien_de_lignes']}** lignes"], s256.name))
+            etats = {}
+            for e in d["le_journal"]:
+                etats[e["letat"]] = etats.get(e["letat"], 0) + 1
+            out.append(("le journal de 256", [f"Son journal compte **{etats.get('dessous', 0)}** boucles dessous, **{etats.get('franchit', 0)}**"],
+                        s256.name))
+            r = next(e for e in d["le_journal"] if e["la_boucle"] == "le rectangle")
+            prof = [p["le_cumul_en_voxels"] for p in r["le_profil"]]
+            out.append(("le rectangle de 256", [f"jugé sur **{len(prof)}** coupes ; son écart le plus grand",
+                                                f"au demi-feuillet vaut **{_fr222(max(abs(x) for x in prof))}** voxels"], s256.name))
+            out.append(("l'écart du rectangle de 256", [f"**{_fr222(max(abs(x) for x in prof))}** voxels : il est **{r['letat']}**"], s256.name))
+
     # ⭐⭐⭐ LA TRANCHE 255 : LES FIBRES
     s255 = _source(racine, "les_fibres_voient_elles_ce_que_les_predictions_ratent.json")
     if s255.exists():

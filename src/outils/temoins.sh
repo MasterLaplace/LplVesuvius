@@ -1649,6 +1649,7 @@ run "reparer avant le saut suivant" uv run python "$ROOT/src/nappe/reparer_avant
 run "figure reparer avant le saut suivant" uv run python "$ROOT/src/figures/figure_reparer_avant_le_saut_suivant.py" --verifier
 run "les fibres voient-elles ce que les predictions ratent" uv run python "$ROOT/src/nappe/les_fibres_voient_elles_ce_que_les_predictions_ratent.py" --verifier
 run "figure les fibres voient-elles ce que les predictions ratent" uv run python "$ROOT/src/figures/figure_les_fibres_voient_elles_ce_que_les_predictions_ratent.py" --verifier
+run "figure la couverture sans main une fois lue" uv run python "$ROOT/src/figures/figure_la_couverture_sans_main_une_fois_lue.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -76,6 +76,10 @@ def le_titre(d: dict) -> str:
     if v["il_reste_a_lire"]:
         return (f"SANS MAIN, LA PROCÉDURE REFAIT CE QUE LA MAIN A FAIT, ET DEMANDE {v['combien_de_bandes_a_lire']} "
                 f"BANDES DE PLUS")
+    c = d.get("la_couverture") or {}
+    if c.get("la_part") is not None:
+        return (f"SANS MAIN, LA PROCÉDURE VA AU BOUT : ELLE COUVRE {_fr(c['la_part'], 4)} DE L'EMPREINTE ET NE DEMANDE "
+                f"PLUS RIEN")
     return "SANS MAIN, LA PROCÉDURE VA AU BOUT ET NE DEMANDE PLUS RIEN"
 
 
@@ -236,7 +240,8 @@ def verifier(json_path: Path, sortie: Path) -> int:
     t3 = {le_titre({"le_verdict": {"il_y_a_un_rectangle": a, "il_reste_a_lire": b, "combien_de_bandes_a_lire": 3}})
           for a, b in ((False, False), (True, True), (True, False))}
     v("★★★★ les trois titres possibles sont distincts", len(t3) == 3)
-    v("★★★ le titre LIT le verdict", ("DEMANDE" in le_titre(d)) == bool(d["le_verdict"]["il_reste_a_lire"]))
+    # ⚠ « DEMANDE » seul ne départage rien : le titre de la procédure finie dit « ne demande plus rien ».
+    v("★★★ le titre LIT le verdict", ("BANDES DE PLUS" in le_titre(d)) == bool(d["le_verdict"]["il_reste_a_lire"]))
     v("★★★★ aucun texte ne déborde de la toile", not textes_debordants(poses, L_),
       str(textes_debordants(poses, L_))[:200])
     v("★★★★ aucun texte ne sort de son cadre", not textes_hors_cadre(poses, cadres),

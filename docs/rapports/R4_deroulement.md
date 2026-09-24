@@ -4021,6 +4021,13 @@ touchés restent ratés. `R4-F428` : la chaîne tient les quatre sauts sur **0,7
 feuille d'un interstice (aires de **0,4323** à **0,5508**) ; en moyenne elle voit les feuilles, mais pas les ratés que
 `m7` et `ps256` font ensemble.
 
+**`256` · 2026-09-25 · la couverture sans main, une fois lue** — les 111 bandes de `246`
+
+⭐⭐⭐⭐ **La procédure sans main va au bout** — `R4-F430` : relancée sur les bandes qu'elle demandait, elle ne demande
+plus rien et entoure **93795** chunks sur **97771**, soit **0,9593** de l'empreinte, contre **0,9172** à la main ; elle
+retrouve les **5** boucles de la main et en tient **31** de plus. `R4-F431` : coupés tous les 29 rangs, le rectangle et
+l'aile étroite restent sous le demi-feuillet. `R4-P91` et `R4-P90` ont leur réponse.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
