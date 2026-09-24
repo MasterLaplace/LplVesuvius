@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**145 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**146 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 107 portes
+## Grand Prize — 108 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -126,6 +126,7 @@
 - **R4-P89** *(le graal)* · **SOUS LA RANGÉE 112, QU'EST-CE QUI RELIE AU RECTANGLE LA MATIÈRE ENTRE LA COLONNE 252 ET LA COLONNE 260, LÀ OÙ TOUTE COLONNE PARTAGE DES LIGNES AVEC LA 260 ?** ⭐⭐⭐ C'EST CE QUE `243` DÉSIGNE. À sept lignes, l'aile étroite s'arrête à la colonne 252 : une colonne plus proche partagerait des lignes avec les neuf de la colonne 260.
 - **R4-P90** *(le graal)* · **COUPÉS À 29 RANGS AU PLUS, LE PLUS GRAND RECTANGLE DE `233` ET L'AILE ÉTROITE DE `243` RESTENT-ILS SOUS LE DEMI-FEUILLET ?** ⭐⭐⭐ C'EST CE QUE `245` DÉSIGNE. La portée de 40 que `239` a tirée de `235` ne voit pas les traversées de `235` ; le rectangle, coupé jusqu'à 37 rangs, et l'aile étroite, jusqu'à 39, laisseraient passer une traversée comme les siennes. C'est aussi le pas auquel une procédure sans main devra couper.
 - **R4-P91** *(le graal)* · **LES 111 BANDES QUE LA PROCÉDURE SANS MAIN DEMANDE UNE FOIS LUES, QUE COUVRE-T-ELLE, ET LE RECTANGLE RESTE-T-IL DESSOUS AU PAS QUI VOIT ?** ⭐⭐⭐ C'EST CE QUE `246` DÉSIGNE. Sans aucun choix, la procédure refait ce que la main avait fait ; pour juger le reste elle demande 24263 chunks, dont 15984 pour le rectangle. Y répondre répond aussi à `R4-P90` pour le rectangle et l'aile étroite.
+- **R4-P92** *(le graal)* · **LA SPIRE VOISINE, PRODUITE EN MAILLAGE PAR LA FEUILLE SUIVANTE ET LE VOTE, TIENT-ELLE SOUS LES BOUCLES DU TREILLIS, ET QU'EST-CE QUI RATTRAPE LES HUIT POINTS SUR CENT QUI MANQUENT ?** ⭐⭐⭐ C'EST CE QUE `247` DÉSIGNE. Point par point, compter les feuilles retrouve la spire voisine en 0,9214 et 0,9163 des points du segment ; il reste à en faire une surface, à la juger comme la chaîne juge un segment publié, et à trouver ce qui corrige les feuilles manquées ou fausses.
 
 ## Progress Prizes — 19 portes
 

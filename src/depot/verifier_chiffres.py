@@ -3208,6 +3208,89 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 247 : LE TRANSFERT, TENTÉ
+    # (1) ⚠⚠⚠ LE JUGE D'ABORD : la couche que le segment porte lui-même au tour voisin.
+    s247a = _source(racine, "la_spire_voisine_est_elle_a_un_pas.json")
+    if s247a.exists():
+        soi = (json.loads(s247a.read_text()).get("le_segment_lui_meme") or {})
+        if soi.get("la_part_avec_une_couche") is not None:
+            out.append(("le juge de 247", [f"En face de **{_fr222(soi['la_part_avec_une_couche'])}** de ses points"],
+                        s247a.name))
+        for cote, nom in (("du_cote_plus", "plus"), ("du_cote_moins", "moins")):
+            c = soi.get(cote) or {}
+            if c.get("lecart_median_voxels") is not None:
+                out.append((f"la couche {nom} de 247",
+                            [f"| {nom} | {_fr222(c['la_part_des_points'])} | {_fr222(c['lecart_median_voxels'])} voxels | "
+                             f"{_fr222(c['lecart_median_en_pas'])} | {_fr222(c['la_part_dans_la_fenetre'])} |"],
+                            s247a.name))
+    # (2) ⚠⚠⚠ CHAQUE RÈGLE, DES DEUX CÔTÉS, SANS EN CHOISIR UNE : la table entière est recalculée.
+    s247b = _source(racine, "le_transfert_retrouve_t_il_la_spire_voisine.json")
+    if s247b.exists():
+        d = json.loads(s247b.read_text())
+        pr = (d.get("les_predictions") or {})
+
+        def part247(pred, cote, verite, regle):
+            j = pr[pred][cote][verite]
+            if regle is None:
+                return j["le_temoin_sans_lecture"]["la_part_sur_la_bonne_spire"]
+            if regle == "le_recalage":
+                return j["le_recalage"]["la_part_sur_la_bonne_spire"]
+            return j["les_etages_posterieurs"][regle]["la_part_sur_la_bonne_spire"]
+
+        if "m7" in pr and "ps256" in pr:
+            for nom, regle, gras in (("un pas fixe, sans lire", None, False), ("recaler vers un pas", "le_recalage", False),
+                                     ("recaler, voter, sinon le pas", "le_consensus_sinon_le_pas", False),
+                                     ("le vote itéré", "le_vote_itere", False),
+                                     ("la feuille suivante", "la_feuille_suivante", False),
+                                     ("la feuille suivante, puis le vote",
+                                      "la_feuille_suivante_sinon_le_pas_puis_le_vote", True)):
+                a = _fr222(part247("m7", "du_cote_plus", "le_segment_seul", regle))
+                b = _fr222(part247("m7", "du_cote_moins", "le_segment_seul", regle))
+                ligne = (f"| **{nom}** | **{a}** | **{b}** |" if gras else f"| {nom} | {a} | {b} |")
+                out.append((f"{nom} dans 247", [ligne], s247b.name))
+            j_p = pr["m7"]["du_cote_plus"]["le_segment_seul"]
+            j_m = pr["m7"]["du_cote_moins"]["le_segment_seul"]
+            out.append(("l'erreur du pas fixe dans 247",
+                        [f"**{_fr222(j_p['le_temoin_sans_lecture']['lerreur_mediane_voxels'])}** et "
+                         f"**{_fr222(j_m['le_temoin_sans_lecture']['lerreur_mediane_voxels'])}** voxels"], s247b.name))
+            fv = "la_feuille_suivante_sinon_le_pas_puis_le_vote"
+            out.append(("l'erreur de la feuille suivante dans 247",
+                        [f"**{_fr222(j_p['les_etages_posterieurs'][fv]['lerreur_mediane_voxels'])}** et "
+                         f"**{_fr222(j_m['les_etages_posterieurs'][fv]['lerreur_mediane_voxels'])}** voxels"], s247b.name))
+            out.append(("247 jugé avec les témoins",
+                        [f"**{_fr222(part247('m7', 'du_cote_plus', 'le_segment_et_ses_temoins', fv))}** et "
+                         f"**{_fr222(part247('m7', 'du_cote_moins', 'le_segment_et_ses_temoins', fv))}** des points"],
+                        s247b.name))
+            out.append(("le pas fixe de 247 jugé avec les témoins",
+                        [f"**{_fr222(part247('m7', 'du_cote_plus', 'le_segment_et_ses_temoins', None))}** et "
+                         f"**{_fr222(part247('m7', 'du_cote_moins', 'le_segment_et_ses_temoins', None))}** pour le pas fixe"],
+                        s247b.name))
+            out.append(("247 avec ps256",
+                        [f"**{_fr222(part247('ps256', 'du_cote_plus', 'le_segment_seul', fv))}** et "
+                         f"**{_fr222(part247('ps256', 'du_cote_moins', 'le_segment_seul', fv))}**"], s247b.name))
+            out.append(("le contrôle du repère de 247",
+                        [f"`m7` le voit en **{_fr222(pr['m7']['le_controle_du_repere']['la_part_des_points_ou_la_prediction_voit_le_segment'])}** "
+                         f"de ses points, `ps256` en **{_fr222(pr['ps256']['le_controle_du_repere']['la_part_des_points_ou_la_prediction_voit_le_segment'])}**"],
+                        s247b.name))
+    # (3) ⚠⚠⚠ LA VALIDATION, SUR UNE TRACE FAITE PAR D'AUTRES.
+    s247c = _source(racine, "le_transfert_sur_la_bande_w028_037.json")
+    if s247c.exists():
+        d = json.loads(s247c.read_text())
+        pr = (d.get("les_predictions") or {})
+        fv = "la_feuille_suivante_sinon_le_pas_puis_le_vote"
+        if "m7" in pr and "ps256" in pr:
+            out.append(("les points de la bande de 247", [f"**{d['les_points']}** points"], s247c.name))
+            n0 = [pr["m7"][c]["le_segment_seul"]["le_temoin_sans_lecture"]["la_part_sur_la_bonne_spire"]
+                  for c in ("du_cote_plus", "du_cote_moins")]
+            out.append(("le pas fixe sur la bande de 247",
+                        [f"| un pas fixe, sans lire | {_fr222(n0[0])} | {_fr222(n0[1])} |"], s247c.name))
+            for pred in ("m7", "ps256"):
+                v2 = [pr[pred][c]["le_segment_seul"]["les_etages_posterieurs"][fv]["la_part_sur_la_bonne_spire"]
+                      for c in ("du_cote_plus", "du_cote_moins")]
+                out.append((f"la bande de 247 avec {pred}",
+                            [f"| la feuille suivante, puis le vote (`{pred}`) | {_fr222(v2[0])} | {_fr222(v2[1])} |"],
+                            s247c.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 246 : LA COUVERTURE SANS MAIN
     # (1) ⚠⚠⚠ UNE COUVERTURE SANS MAIN NE VOYAGE JAMAIS SANS CE QU'ELLE DEMANDE ENCORE À LIRE.
     s246 = _source(racine, "la_couverture_sans_main.json")

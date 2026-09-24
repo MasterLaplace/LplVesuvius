@@ -3950,6 +3950,16 @@ dont **15984** pour le rectangle.
 ⚠⚠⚠ Jugée sur ce qui est lu, sa couverture est **0,0648** : le rectangle n'est pas jugé tant que ses coupes ne sont pas lues.
 `R4-P91` s'ouvre : tout lu, que couvre-t-elle ?
 
+**`247` · 2026-09-24 · le transfert, tenté** — deux prédictions publiées, lues à 9,6 µm
+
+⭐⭐⭐⭐ **La chaîne produit la spire voisine elle-même, point par point** — `R4-F411` : `20230702185753` porte sa propre
+spire voisine en face de **0,997** de ses points, à **1,0129** et **1,0378** pas ; c'est le juge. `R4-F412` : compter les
+feuilles le long de la normale puis faire voter les voisins retombe sur la bonne spire en **0,9214** et **0,9163** des
+points, un pas fixe en **0,7613** et **0,7508** ; viser un pas ne le bat pas. `R4-F413` : sur la bande `w028-037`, tracée
+par d'autres, **0,915** et **0,9166** contre **0,8208** et **0,8107**.
+⚠⚠⚠ Aucune spire entière n'est produite : une maille sur huit, sans maillage. `R4-P92` s'ouvre : en faire une surface, et
+la juger par les boucles.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

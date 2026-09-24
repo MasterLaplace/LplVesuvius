@@ -1,0 +1,132 @@
+{
+  "le_segment_lui_meme": {
+    "decidable": true,
+    "les_points_lus": 62815,
+    "le_rayon_voxels": 252.2917,
+    "lecart_lateral_max": 39.99999940395356,
+    "la_distance_sur_la_surface_min_mailles": 19,
+    "la_part_avec_une_couche": 0.997,
+    "du_cote_plus": {
+      "la_part_des_points": 0.6346,
+      "lecart_median_voxels": 73.0129,
+      "lecart_median_en_pas": 1.0129,
+      "les_quantiles_voxels": {
+        "q05": 36.3135,
+        "q25": 53.8698,
+        "q50": 73.0129,
+        "q75": 98.8112,
+        "q95": 150.8212
+      },
+      "la_part_dans_la_fenetre": 0.7613
+    },
+    "du_cote_moins": {
+      "la_part_des_points": 0.6722,
+      "lecart_median_voxels": 74.8107,
+      "lecart_median_en_pas": 1.0378,
+      "les_quantiles_voxels": {
+        "q05": 36.6608,
+        "q25": 54.9502,
+        "q50": 74.8107,
+        "q75": 101.2034,
+        "q95": 153.4566
+      },
+      "la_part_dans_la_fenetre": 0.7508
+    }
+  },
+  "le_segment": "20230702185753",
+  "le_volume": "20260411134726-2.4um",
+  "le_pas_en_voxels": 72.0833,
+  "le_demi_feuillet": 36,
+  "la_fenetre_voxels": [
+    36.0833,
+    108.0833
+  ],
+  "la_maille": 8,
+  "les_temoins": {
+    "20260602230115-20230702185753_v14": {
+      "decidable": true,
+      "les_points_lus": 62815,
+      "les_points_en_face": 53982,
+      "le_recouvrement": 0.8594,
+      "lecart_median_voxels": -10.8589,
+      "lecart_median_en_pas": -0.1506,
+      "les_quantiles_voxels": {
+        "q05": -102.7676,
+        "q25": -31.786,
+        "q50": -10.8589,
+        "q75": 1.0653,
+        "q95": 20.565
+      },
+      "la_part_du_meme_signe": 0.7288,
+      "la_part_dans_la_fenetre": 0.2008,
+      "la_part_sous_le_demi_feuillet": 0.7573,
+      "le_nom_annonce": 0,
+      "lespacement_du_temoin": 20.0,
+      "le_nom_est_tenu": true
+    },
+    "20260602225659-5753_0": {
+      "decidable": true,
+      "les_points_lus": 62815,
+      "les_points_en_face": 42287,
+      "le_recouvrement": 0.6732,
+      "lecart_median_voxels": -31.8472,
+      "lecart_median_en_pas": -0.4418,
+      "les_quantiles_voxels": {
+        "q05": -143.5176,
+        "q25": -76.9772,
+        "q50": -31.8472,
+        "q75": 0.0587,
+        "q95": 13.362
+      },
+      "la_part_du_meme_signe": 0.7482,
+      "la_part_dans_la_fenetre": 0.3852,
+      "la_part_sous_le_demi_feuillet": 0.4918,
+      "le_nom_annonce": 0,
+      "lespacement_du_temoin": 19.99999970197678,
+      "le_nom_est_tenu": true
+    },
+    "20260603005223-5753_-1": {
+      "decidable": true,
+      "les_points_lus": 62815,
+      "les_points_en_face": 26660,
+      "le_recouvrement": 0.4244,
+      "lecart_median_voxels": -81.0171,
+      "lecart_median_en_pas": -1.1239,
+      "les_quantiles_voxels": {
+        "q05": -205.7313,
+        "q25": -122.3531,
+        "q50": -81.0171,
+        "q75": -52.9337,
+        "q95": -3.2275
+      },
+      "la_part_du_meme_signe": 0.9551,
+      "la_part_dans_la_fenetre": 0.5873,
+      "la_part_sous_le_demi_feuillet": 0.0911,
+      "le_nom_annonce": 1,
+      "lespacement_du_temoin": 19.99999970197678,
+      "le_nom_est_tenu": true
+    },
+    "20260603024952-5753_-2": {
+      "decidable": true,
+      "les_points_lus": 62815,
+      "les_points_en_face": 15471,
+      "le_recouvrement": 0.2463,
+      "lecart_median_voxels": -128.5428,
+      "lecart_median_en_pas": -1.7833,
+      "les_quantiles_voxels": {
+        "q05": -266.1798,
+        "q25": -172.3288,
+        "q50": -128.5428,
+        "q75": -95.9531,
+        "q95": -68.7285
+      },
+      "la_part_du_meme_signe": 0.9976,
+      "la_part_dans_la_fenetre": 0.3471,
+      "la_part_sous_le_demi_feuillet": 0.0078,
+      "le_nom_annonce": 2,
+      "lespacement_du_temoin": 19.99999970197678,
+      "le_nom_est_tenu": true
+    }
+  },
+  "decidable": true
+}
