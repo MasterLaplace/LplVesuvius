@@ -1,0 +1,70 @@
+{
+  "la_question_declaree": "sous la rangée où s'arrête l'aile qui évite la colonne qui dérive, une aile qui l'évite encore tient-elle sur son profil ?",
+  "la_mesure_declaree": "la plus grande aile du côté de `241` dont la bande extérieure ne partage aucune ligne avec la ligne que `241` évite, sur les rangées du rectangle de `233` sous l'aile de `241`, coupée à la portée de `241`, l'instrument de `228` sur l'aile et sur chaque tranche, et la fermeture cumulée coupe après coupe",
+  "la_presence_contre_234": {
+    "decidable": true,
+    "combien_de_lignes": 81
+  },
+  "le_cote": "droite",
+  "la_ligne_evitee": 260,
+  "la_portee": 40,
+  "sous_la_rangee": 112,
+  "laile_de_241": [
+    26,
+    112,
+    243,
+    269
+  ],
+  "les_rangees_cherchees": [
+    112,
+    384,
+    22,
+    243
+  ],
+  "laile": {
+    "le_cote": "droite",
+    "les_coins": null,
+    "laire": 0,
+    "le_chemin": 0
+  },
+  "les_boucles_de_241": [
+    [
+      26,
+      384,
+      22,
+      243
+    ],
+    [
+      14,
+      26,
+      32,
+      81
+    ],
+    [
+      216,
+      308,
+      13,
+      22
+    ],
+    [
+      26,
+      112,
+      243,
+      269
+    ]
+  ],
+  "la_couverture_de_241": {
+    "combien": 88457,
+    "sur": 97771,
+    "la_part": 0.9047
+  },
+  "decidable": true,
+  "le_verdict": {
+    "la_largeur_jugee": 9,
+    "la_ligne_evitee": 260,
+    "sous_la_rangee": 112,
+    "reste_dessous": false,
+    "franchit": false,
+    "ce_qui_reste_a_mesurer": "SOUS LA RANGÉE 112, AUCUNE AILE NE TIENT SANS PARTAGER DE LIGNE AVEC LA LIGNE 260 : RIEN N'EST LU"
+  }
+}

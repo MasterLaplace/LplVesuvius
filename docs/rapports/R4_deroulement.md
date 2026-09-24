@@ -3906,6 +3906,15 @@ entourent **0,9047** de l'empreinte.
 ⭐⭐⭐⭐ **Donc `R4-P86` est répondue en partie.** `R4-P87` s'ouvre : sous la rangée 112, qu'est-ce qui relie au rectangle
 la matière au-delà de la colonne 243 ?
 
+**`242` · 2026-09-24 · sous l'aile qui évite la colonne**
+
+⭐⭐⭐⭐ **Aucune aile** — `R4-F407` : la règle de `234`, sur les rangées **112** à **384** du rectangle, parmi les colonnes
+extérieures à neuf colonnes au moins de la 243 et de la **260**, ne trouve rien ; rien n'est lu. Sous la rangée 112, la
+colonne 260 n'a pas de remplaçante.
+⚠⚠⚠ La mesure ne dit pas si la colonne 260 est mal lue sous la rangée 112.
+⭐⭐⭐⭐ **Donc `R4-P87` est répondue par la négative, à neuf lignes.** `R4-P88` s'ouvre : une aile plus étroite y relie-t-elle
+la matière au-delà de la colonne 243 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

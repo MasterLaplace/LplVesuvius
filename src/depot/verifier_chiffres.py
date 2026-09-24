@@ -3208,6 +3208,26 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 242 : SOUS L'AILE QUI ÉVITE LA COLONNE
+    # (1) ⚠⚠⚠ UNE AILE ABSENTE NE VOYAGE JAMAIS SANS LES RANGÉES OÙ ELLE A ÉTÉ CHERCHÉE NI LA LIGNE QU'ELLE ÉVITE.
+    s242 = _source(racine, "sous_laile_qui_evite_la_colonne.json")
+    if s242.exists():
+        d = json.loads(s242.read_text())
+        ch242 = d.get("les_rangees_cherchees")
+        if ch242 and d.get("la_ligne_evitee") is not None:
+            out.append(("les rangées cherchées par 242",
+                        [f"de la rangée **{ch242[0]}** à la rangée **{ch242[1]}**"], s242.name))
+            out.append(("la ligne évitée par 242", [f"la ligne que `241` évite, la **{d['la_ligne_evitee']}**"],
+                        s242.name))
+        v242 = (d.get("le_verdict") or {}).get("ce_qui_reste_a_mesurer")
+        if v242:
+            out.append(("le verdict de 242", [v242], s242.name))
+        cv242 = d.get("la_couverture") or d.get("la_couverture_de_241") or {}
+        if cv242:
+            out.append(("la couverture selon 242",
+                        [f"entourent **{cv242['combien']}** chunks sur **{cv242['sur']}**, "
+                         f"**{_fr222(cv242['la_part'])}** de l'empreinte"], s242.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 241 : AU-DELÀ DE LA COLONNE QUI DÉRIVE
     # (1) ⚠⚠⚠ LE PROFIL DE L'AILE NE VOYAGE JAMAIS SANS CELUI DE LA COLONNE QU'ELLE ÉVITE, SUR LES MÊMES RANGÉES.
     s241 = _source(racine, "au_dela_de_la_colonne_qui_derive.json")
