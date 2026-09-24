@@ -22,7 +22,9 @@ encre = [
     "transformers>=4.46,<5",
     "timesformer-pytorch>=0.4",
 ]
-tests = ["pytest>=8"]
+# scipy : pour le code de RECHERCHE, que les tests de parité importent comme oracle ; le logiciel
+# lui-même ne l importe pas.
+tests = ["pytest>=8", "scipy>=1.11"]
 
 [project.scripts]
 vesuve = "vesuve.cli:main"
