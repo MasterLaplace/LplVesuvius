@@ -3986,6 +3986,13 @@ et **0,1953** des ratés et **0,0392** et **0,0408** des justes ; écarter les s
 **0,912** à **0,9238**. `R4-F420` : le segment dit la même chose. La plupart des ratés sont symétriques, et le retour
 les refait.
 
+**`251` · 2026-09-24 · deux prédictions, contrôle indépendant** — `m7` contre `ps256`, sans réseau
+
+⭐⭐⭐ **Le désaccord voit plus que le retour, et une part reste invisible** — `R4-F421` : sur la bande, le désaccord
+signale **0,2948** et **0,3103** des ratés de `m7`, les deux contrôles réunis **0,4192** et **0,4269** ; la part juste
+gardée monte de **0,912** à **0,9428**. ⚠⚠⚠ Là où les deux prédictions s'accordent, elles ratent ensemble **0,0518** et
+**0,0496** des points. `R4-F422` : le segment donne la même part.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

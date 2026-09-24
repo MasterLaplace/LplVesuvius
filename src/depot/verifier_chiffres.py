@@ -3208,6 +3208,56 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 251 : DEUX PRÉDICTIONS
+    s251a = _source(racine, "deux_predictions_trahissent_elles_le_saut_rate.json")
+    if s251a.exists():
+        d = json.loads(s251a.read_text())
+        xp, xm = d.get("du_cote_plus") or {}, d.get("du_cote_moins") or {}
+        if xp and xm:
+            out.append(("le désaccord de 251",
+                        [f"en désaccord sur **{_fr222(xp['la_part_en_desaccord_sur_tous_les_points'])}** et "
+                         f"**{_fr222(xm['la_part_en_desaccord_sur_tous_les_points'])}** des points"], s251a.name))
+            for etat, cle_e in (("accord", "la_ou_elles_saccordent"), ("désaccord", "la_ou_elles_divergent")):
+                for nom_c, x in (("plus", xp), ("moins", xm)):
+                    q = x[cle_e]
+                    out.append((f"le {etat} côté {nom_c} dans 251",
+                                [f"| {etat}, côté {nom_c} | {q['combien']} | {_fr222(q['les_deux'])} | {_fr222(q['seul_le_premier'])} | "
+                                 f"{_fr222(q['seul_le_second'])} | {_fr222(q['aucun'])} |"], s251a.name))
+            for nom, cle, gras in (("le retour", "le_retour", False), ("le désaccord", "le_desaccord", False),
+                                   ("les deux réunis", "la_reunion", True)):
+                a_, b_ = xp["les_detecteurs"]["m7"][cle], xm["les_detecteurs"]["m7"][cle]
+                cells = [f"{_fr222(a_[k])} · {_fr222(b_[k])}" for k in (
+                    "la_part_des_rates_signales", "la_part_des_justes_signales_a_tort", "la_part_ratee_parmi_les_signales",
+                    "la_part_juste_parmi_les_gardes", "la_part_gardee")]
+                ligne = ("| **" + nom + "** | " + " | ".join(f"**{c}**" for c in cells) + " |" if gras
+                         else "| " + nom + " | " + " | ".join(cells) + " |")
+                out.append((f"{nom} dans 251", [ligne], s251a.name))
+            a_, b_ = xp["les_detecteurs"]["ps256"]["le_desaccord"], xm["les_detecteurs"]["ps256"]["le_desaccord"]
+            out.append(("le désaccord pour ps256 dans 251",
+                        [f"**{_fr222(a_['la_part_des_rates_signales'])}** et **{_fr222(b_['la_part_des_rates_signales'])}** de ses ratés"],
+                        s251a.name))
+            j_ = [x["les_detecteurs"]["m7"]["le_retour"]["la_part_juste_a_laller"] for x in (xp, xm)]
+            out.append(("la part juste de m7 dans 251", [f"**{_fr222(j_[0])}** et **{_fr222(j_[1])}** sans rien écarter"],
+                        s251a.name))
+    s251b = _source(racine, "deux_predictions_sur_le_segment_5753.json")
+    if s251b.exists():
+        d = json.loads(s251b.read_text())
+        xp, xm = d.get("du_cote_plus") or {}, d.get("du_cote_moins") or {}
+        if xp and xm:
+            dp, dm = xp["les_detecteurs"]["m7"], xm["les_detecteurs"]["m7"]
+            out.append(("le désaccord sur le segment dans 251",
+                        [f"le désaccord signale **{_fr222(dp['le_desaccord']['la_part_des_rates_signales'])}** et "
+                         f"**{_fr222(dm['le_desaccord']['la_part_des_rates_signales'])}** des ratés, les deux réunis "
+                         f"**{_fr222(dp['la_reunion']['la_part_des_rates_signales'])}** et **{_fr222(dm['la_reunion']['la_part_des_rates_signales'])}**"],
+                        s251b.name))
+            out.append(("la part gardée sur le segment dans 251",
+                        [f"de **{_fr222(dp['la_reunion']['la_part_juste_a_laller'])}** à **{_fr222(dp['la_reunion']['la_part_juste_parmi_les_gardes'])}** "
+                         f"et de **{_fr222(dm['la_reunion']['la_part_juste_a_laller'])}** à **{_fr222(dm['la_reunion']['la_part_juste_parmi_les_gardes'])}**"],
+                        s251b.name))
+            out.append(("les ratés communs sur le segment dans 251",
+                        [f"**{_fr222(xp['la_ou_elles_saccordent']['aucun'])}** et **{_fr222(xm['la_ou_elles_saccordent']['aucun'])}**"],
+                        s251b.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 250 : LE RETOUR
     for nom_s, fichier in (("la bande", "le_retour_trahit_il_le_saut_rate.json"),
                            ("le segment", "le_retour_sur_le_segment_5753.json")):

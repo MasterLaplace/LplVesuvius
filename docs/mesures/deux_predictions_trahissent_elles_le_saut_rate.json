@@ -1,0 +1,160 @@
+{
+ "le_segment": "20260623142658-w028-037",
+ "les_rangees": [
+  0.45,
+  0.55
+ ],
+ "la_maille": 8,
+ "les_points": 30536,
+ "du_cote_plus": {
+  "laller_contre_247_ecart_max_voxels": 0.0,
+  "la_part_en_desaccord_sur_tous_les_points": 0.0638,
+  "les_detecteurs": {
+   "m7": {
+    "le_retour": {
+     "les_points_notes": 26852,
+     "les_justes": 24488,
+     "les_rates": 2364,
+     "les_signales": 1383,
+     "la_part_juste_a_laller": 0.912,
+     "la_part_des_rates_signales": 0.1789,
+     "la_part_des_justes_signales_a_tort": 0.0392,
+     "la_part_ratee_parmi_les_signales": 0.3059,
+     "la_part_gardee": 0.9485,
+     "la_part_juste_parmi_les_gardes": 0.9238
+    },
+    "le_desaccord": {
+     "les_points_notes": 26852,
+     "les_justes": 24488,
+     "les_rates": 2364,
+     "les_signales": 1701,
+     "la_part_juste_a_laller": 0.912,
+     "la_part_des_rates_signales": 0.2948,
+     "la_part_des_justes_signales_a_tort": 0.041,
+     "la_part_ratee_parmi_les_signales": 0.4098,
+     "la_part_gardee": 0.9367,
+     "la_part_juste_parmi_les_gardes": 0.9337
+    },
+    "la_reunion": {
+     "les_points_notes": 26852,
+     "les_justes": 24488,
+     "les_rates": 2364,
+     "les_signales": 2856,
+     "la_part_juste_a_laller": 0.912,
+     "la_part_des_rates_signales": 0.4192,
+     "la_part_des_justes_signales_a_tort": 0.0762,
+     "la_part_ratee_parmi_les_signales": 0.347,
+     "la_part_gardee": 0.8936,
+     "la_part_juste_parmi_les_gardes": 0.9428
+    }
+   },
+   "ps256": {
+    "le_desaccord": {
+     "les_points_notes": 26852,
+     "les_justes": 24611,
+     "les_rates": 2241,
+     "les_signales": 1701,
+     "la_part_juste_a_laller": 0.9165,
+     "la_part_des_rates_signales": 0.2753,
+     "la_part_des_justes_signales_a_tort": 0.044,
+     "la_part_ratee_parmi_les_signales": 0.3627,
+     "la_part_gardee": 0.9367,
+     "la_part_juste_parmi_les_gardes": 0.9354
+    }
+   }
+  },
+  "la_ou_elles_divergent": {
+   "combien": 1701,
+   "seul_le_premier": 0.3122,
+   "seul_le_second": 0.3592,
+   "les_deux": 0.2781,
+   "aucun": 0.0506
+  },
+  "la_ou_elles_saccordent": {
+   "combien": 25151,
+   "seul_le_premier": 0.0128,
+   "seul_le_second": 0.0145,
+   "les_deux": 0.921,
+   "aucun": 0.0518
+  }
+ },
+ "du_cote_moins": {
+  "laller_contre_247_ecart_max_voxels": 0.0,
+  "la_part_en_desaccord_sur_tous_les_points": 0.0578,
+  "les_detecteurs": {
+   "m7": {
+    "le_retour": {
+     "les_points_notes": 27848,
+     "les_justes": 25447,
+     "les_rates": 2401,
+     "les_signales": 1507,
+     "la_part_juste_a_laller": 0.9138,
+     "la_part_des_rates_signales": 0.1953,
+     "la_part_des_justes_signales_a_tort": 0.0408,
+     "la_part_ratee_parmi_les_signales": 0.3112,
+     "la_part_gardee": 0.9459,
+     "la_part_juste_parmi_les_gardes": 0.9267
+    },
+    "le_desaccord": {
+     "les_points_notes": 27848,
+     "les_justes": 25447,
+     "les_rates": 2401,
+     "les_signales": 1570,
+     "la_part_juste_a_laller": 0.9138,
+     "la_part_des_rates_signales": 0.3103,
+     "la_part_des_justes_signales_a_tort": 0.0324,
+     "la_part_ratee_parmi_les_signales": 0.4745,
+     "la_part_gardee": 0.9436,
+     "la_part_juste_parmi_les_gardes": 0.937
+    },
+    "la_reunion": {
+     "les_points_notes": 27848,
+     "les_justes": 25447,
+     "les_rates": 2401,
+     "les_signales": 2761,
+     "la_part_juste_a_laller": 0.9138,
+     "la_part_des_rates_signales": 0.4269,
+     "la_part_des_justes_signales_a_tort": 0.0682,
+     "la_part_ratee_parmi_les_signales": 0.3712,
+     "la_part_gardee": 0.9009,
+     "la_part_juste_parmi_les_gardes": 0.9452
+    }
+   },
+   "ps256": {
+    "le_desaccord": {
+     "les_points_notes": 27848,
+     "les_justes": 25722,
+     "les_rates": 2126,
+     "les_signales": 1570,
+     "la_part_juste_a_laller": 0.9237,
+     "la_part_des_rates_signales": 0.2291,
+     "la_part_des_justes_signales_a_tort": 0.0421,
+     "la_part_ratee_parmi_les_signales": 0.3102,
+     "la_part_gardee": 0.9436,
+     "la_part_juste_parmi_les_gardes": 0.9376
+    }
+   }
+  },
+  "la_ou_elles_divergent": {
+   "combien": 1570,
+   "seul_le_premier": 0.2229,
+   "seul_le_second": 0.3873,
+   "les_deux": 0.3025,
+   "aucun": 0.0873
+  },
+  "la_ou_elles_saccordent": {
+   "combien": 26278,
+   "seul_le_premier": 0.0127,
+   "seul_le_second": 0.0134,
+   "les_deux": 0.9242,
+   "aucun": 0.0496
+  }
+ },
+ "la_lecture": {
+  "chunks_lus": 1542,
+  "combien_de_pannes": 0,
+  "les_pannes": []
+ },
+ "les_secondes": 17.1,
+ "decidable": true
+}
