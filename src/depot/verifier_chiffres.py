@@ -3208,6 +3208,64 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 243 : UNE AILE PLUS ÉTROITE TIENT-ELLE ?
+    # (1) ⚠⚠⚠ UNE FERMETURE NE VOYAGE JAMAIS SANS LA LARGEUR À LAQUELLE ELLE EST JUGÉE.
+    s243 = _source(racine, "une_aile_plus_etroite_tient_elle.json")
+    if s243.exists():
+        d = json.loads(s243.read_text())
+        k243 = d.get("la_largeur")
+        mot243 = {3: "trois", 5: "cinq", 7: "sept"}.get(k243, str(k243))
+        co243 = (d.get("laile") or {}).get("les_coins")
+        if co243 and k243:
+            out.append(("l'aile de 243", [f"à **{k243}** lignes, la plus grande aile va des rangées {co243[0]} à "
+                                          f"{co243[1]} et des colonnes {co243[2]} à {co243[3]}"], s243.name))
+        dc243 = d.get("le_decoupage") or {}
+        if dc243:
+            out.append(("le découpage de 243", [f"**{dc243['combien_de_sous_boucles']}** tranches, deux coupes voisines à "
+                                                f"**{dc243['le_plus_grand_ecart']}** rangs au plus"], s243.name))
+        pl243 = d.get("la_presence_contre_la_lecture") or {}
+        if pl243.get("decidable"):
+            out.append(("la présence contre la lecture de 243",
+                        [f"sur les **{pl243['combien_de_lignes']}** lignes lues"], s243.name))
+        rp243 = d.get("la_reproduction") or {}
+        if rp243.get("decidable"):
+            out.append(("la relecture de 243",
+                        [f"retombent en **{rp243['combien_de_coutures_relues']}** coutures, écart "
+                         f"**{_fr222(rp243['lecart_le_plus_grand'])}**"], s243.name))
+        e243 = ((d.get("lemboitement") or {}).get("par_largeur") or {}).get(str(k243)) or {}
+        if e243.get("jugeable"):
+            out.append(("les tranches de 243 contre l'aile", [f"**{_fr222(e243['la_somme_des_sous_boucles'])}** à "
+                                                              f"{mot243} lignes, écart {_fr222(e243['lecart'])}"],
+                        s243.name))
+        for sb in d.get("par_tranche") or []:
+            x_ = sb["par_largeur"].get(str(k243)) or {}
+            if x_.get("fermable"):
+                out.append((f"la tranche {sb['entre'][0]} à {sb['entre'][1]} de 243",
+                            [f"| {sb['entre'][0]} à {sb['entre'][1]} | {_fr222(x_['la_fermeture_en_voxels'])} | "
+                             f"{_fr222(x_['la_dispersion_du_pas_en_voxels'])} | "
+                             f"{_fr222(x_['le_nul']['la_fermeture_mediane_en_valeur_absolue'])} | "
+                             f"{_fr222(x_['le_nul']['la_part_sous_la_fermeture'])} |"], s243.name))
+        xa243 = ((d.get("laile_entiere") or {}).get("par_largeur") or {}).get(str(k243)) or {}
+        if xa243.get("fermable") and co243:
+            out.append(("l'aile entière de 243",
+                        [f"| **{co243[0]} à {co243[1]}, l'aile entière** | **{_fr222(xa243['la_fermeture_en_voxels'])}** "
+                         f"| {_fr222(xa243['la_dispersion_du_pas_en_voxels'])} | "
+                         f"{_fr222(xa243['le_nul']['la_fermeture_mediane_en_valeur_absolue'])} | "
+                         f"{_fr222(xa243['le_nul']['la_part_sous_la_fermeture'])} |"], s243.name))
+        pr243 = d.get("le_profil") or []
+        pic243 = (d.get("le_verdict_des_tranches") or {}).get("le_pic") or {}
+        if pr243 and co243:
+            cel = [(f"**{_fr222(q['le_cumul_en_voxels'])}**" if q == pic243 else _fr222(q["le_cumul_en_voxels"]))
+                   for q in pr243]
+            out.append(("le profil de 243",
+                        [f"| cumul depuis la rangée {co243[0]}, par la colonne {co243[3]} | " + " | ".join(cel) + " |"],
+                        s243.name))
+        cv243 = d.get("la_couverture") or {}
+        if cv243:
+            out.append(("la couverture de 243",
+                        [f"entourent **{cv243['combien']}** chunks sur **{cv243['sur']}**, "
+                         f"**{_fr222(cv243['la_part'])}** de l'empreinte"], s243.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 242 : SOUS L'AILE QUI ÉVITE LA COLONNE
     # (1) ⚠⚠⚠ UNE AILE ABSENTE NE VOYAGE JAMAIS SANS LES RANGÉES OÙ ELLE A ÉTÉ CHERCHÉE NI LA LIGNE QU'ELLE ÉVITE.
     s242 = _source(racine, "sous_laile_qui_evite_la_colonne.json")

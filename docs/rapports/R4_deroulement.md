@@ -3915,6 +3915,17 @@ colonne 260 n'a pas de remplaçante.
 ⭐⭐⭐⭐ **Donc `R4-P87` est répondue par la négative, à neuf lignes.** `R4-P88` s'ouvre : une aile plus étroite y relie-t-elle
 la matière au-delà de la colonne 243 ?
 
+**`243` · 2026-09-24 · une aile plus étroite**
+
+⭐⭐ **L'aile étroite** : à **7** lignes, la plus grande qui évite les neuf lignes de la colonne 260 va des rangées **112** à
+**266** par la colonne **252** ; ses six bandes retombent en **669** coutures à l'écart **0**, et ses **4** tranches somment à
+sa fermeture.
+⭐⭐⭐⭐ **Elle tient sur son profil** — `R4-F408` : à sept lignes, elle ferme à **2,875** et son cumul reste entre **−15,375**
+et **2,875**, y compris là où la colonne 260 franchit le demi-feuillet ; les boucles qui tiennent entourent **0,9172** de
+l'empreinte.
+⚠⚠⚠ Entre les colonnes 252 et 260, rien n'est relié.
+⭐⭐⭐⭐ **Donc `R4-P88` est répondue.** `R4-P89` s'ouvre : qu'est-ce qui relie la matière entre les colonnes 252 et 260 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
