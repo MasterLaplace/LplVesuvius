@@ -1,0 +1,9 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    { "label": "vesuve : construire le noyau (debug)", "type": "shell", "command": "make debug",
+      "options": { "cwd": "${workspaceFolder}" }, "problemMatcher": ["$gcc"] },
+    { "label": "vesuve : construire les tests C", "type": "shell", "command": "make test || true",
+      "options": { "cwd": "${workspaceFolder}" }, "problemMatcher": ["$gcc"] }
+  ]
+}

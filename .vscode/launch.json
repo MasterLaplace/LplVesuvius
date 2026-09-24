@@ -1,0 +1,37 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "vesuve : le test Python sous le curseur",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-q", "${file}"],
+      "cwd": "${workspaceFolder}",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "preLaunchTask": "vesuve : construire le noyau (debug)",
+      "justMyCode": false
+    },
+    {
+      "name": "vesuve : le test C sous le curseur",
+      "type": "cppdbg",
+      "request": "launch",
+      "program": "${workspaceFolder}/build/tests/${fileBasenameNoExtension}",
+      "cwd": "${workspaceFolder}",
+      "MIMode": "gdb",
+      "preLaunchTask": "vesuve : construire les tests C",
+      "environment": [{ "name": "ASAN_OPTIONS", "value": "detect_leaks=0" }]
+    },
+    {
+      "name": "vesuve : le programme (formules)",
+      "type": "debugpy",
+      "request": "launch",
+      "module": "vesuve.cli",
+      "args": ["formules"],
+      "cwd": "${workspaceFolder}",
+      "python": "${workspaceFolder}/.venv/bin/python",
+      "preLaunchTask": "vesuve : construire le noyau (debug)",
+      "justMyCode": false
+    }
+  ]
+}

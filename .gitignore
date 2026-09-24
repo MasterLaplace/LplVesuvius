@@ -1,0 +1,7 @@
+build/
+vesuve/_noyau/
+__pycache__/
+.venv/
+.pytest_cache/
+sorties/
+cache/
