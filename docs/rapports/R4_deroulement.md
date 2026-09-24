@@ -3894,6 +3894,18 @@ fermeture que `234` publie pour chaque aile.
 ⭐⭐⭐⭐ **Donc `R4-P85` est répondue.** `R4-P86` s'ouvre : qu'est-ce qui relie au rectangle, sur la même spire, les
 **11778** chunks qu'aucune boucle qui tient sur son profil n'entoure ?
 
+**`241` · 2026-09-24 · au-delà de la colonne qui dérive**
+
+⭐⭐ **L'aile qui évite la colonne 260** : la plus grande va des rangées **26** à **112** et des colonnes **243** à
+**269** ; coupée à la portée de `239`, ses cinq bandes retombent en **2940** coutures à l'écart **0**, et ses **3** tranches
+somment à sa fermeture.
+⭐⭐⭐⭐ **Elle tient sur son profil** — `R4-F406` : à neuf lignes, elle ferme à **1,2159** et son cumul reste sous
+**7,3125**, quand l'aile par la colonne 260 arrive à **−24,2813** sur les mêmes rangées ; les boucles qui tiennent
+entourent **0,9047** de l'empreinte.
+⚠⚠⚠ Sous la rangée 112, rien n'est vu.
+⭐⭐⭐⭐ **Donc `R4-P86` est répondue en partie.** `R4-P87` s'ouvre : sous la rangée 112, qu'est-ce qui relie au rectangle
+la matière au-delà de la colonne 243 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

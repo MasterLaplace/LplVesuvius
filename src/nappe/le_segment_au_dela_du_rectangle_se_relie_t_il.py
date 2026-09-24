@@ -154,12 +154,13 @@ def la_bande_interieure(cote: str, coins) -> tuple[str, int]:
             "bas": ("rangees", r1)}[cote]
 
 
-def laile(A: np.ndarray, coins, cote: str, k: int, tenues=None) -> dict:
+def laile(A: np.ndarray, coins, cote: str, k: int, tenues=None, exclues=()) -> dict:
     """La plus grande aile d'un côté : la plus grande aire, puis le plus long chemin, puis le plus petit début,
     puis la bande extérieure la plus proche ; ou aucune.
 
     ⚠⚠ La bande extérieure est à `k` lignes au moins de la bande intérieure, les deux bandes de travers à `k`
-    lignes au moins l'une de l'autre : aucune ligne n'est partagée.
+    lignes au moins l'une de l'autre : aucune ligne n'est partagée. ⚠ `exclues` : des bandes avec lesquelles la
+    bande extérieure ne partage aucune ligne non plus.
     """
     A = np.asarray(A, dtype=bool)
     gy, gx = A.shape
@@ -176,6 +177,8 @@ def laile(A: np.ndarray, coins, cote: str, k: int, tenues=None) -> dict:
         travers, exterieure = "colonnes", "rangees"
     meilleur, cle_m = None, None
     for x in dehors_:
+        if any(abs(int(x) - int(e)) < int(k) for e in exclues):
+            continue
         a_, b_ = min(dedans, x), max(dedans, x)
         ys = [y for y in range(lo, hi + 1) if tient(PR, PC, travers, y, a_, b_)]
         for ya in ys:
@@ -509,6 +512,10 @@ def verifier() -> int:
       str({c: ap[c]["les_coins"] for c in LES_COTES}))
     v("★★★ l'aire et le chemin d'une aile sont ceux de ses coins",
       ap["droite"]["laire"] == 20 * 8 and ap["droite"]["le_chemin"] == 28)
+    v("★★★★ une bande extérieure qui partage une ligne avec une bande exclue n'est pas prise, à k lignes près",
+      laile(Ap, [10, 30, 10, 20], "droite", 3, exclues=[28])["les_coins"] == [10, 30, 20, 25]
+      and laile(Ap, [10, 30, 10, 20], "droite", 3, exclues=[26])["les_coins"] == [10, 30, 20, 23]
+      and laile(Ap, [10, 30, 10, 20], "droite", 3, exclues=[24])["les_coins"] == [10, 30, 20, 28])
     Ae = np.zeros((40, 30), dtype=bool)
     Ae[0:40, 0:23] = True
     v("★★★★ une bande extérieure à moins de k lignes de la bande qu'elle prolonge n'est pas une aile",

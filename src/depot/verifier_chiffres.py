@@ -3208,6 +3208,69 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 241 : AU-DELÀ DE LA COLONNE QUI DÉRIVE
+    # (1) ⚠⚠⚠ LE PROFIL DE L'AILE NE VOYAGE JAMAIS SANS CELUI DE LA COLONNE QU'ELLE ÉVITE, SUR LES MÊMES RANGÉES.
+    s241 = _source(racine, "au_dela_de_la_colonne_qui_derive.json")
+    s235_241 = _source(racine, "ou_laile_de_droite_se_separe.json")
+    if s241.exists():
+        d = json.loads(s241.read_text())
+        co241 = (d.get("laile") or {}).get("les_coins")
+        if co241:
+            out.append(("l'aile de 241", [f"va des rangées {co241[0]} à {co241[1]} et des colonnes {co241[2]} à "
+                                          f"{co241[3]}"], s241.name))
+        dc241 = d.get("le_decoupage") or {}
+        if dc241:
+            out.append(("le découpage de 241", [f"**{dc241['combien_de_sous_boucles']}** tranches, deux coupes voisines à "
+                                                f"**{dc241['le_plus_grand_ecart']}** rangs au plus"], s241.name))
+        pl241 = d.get("la_presence_contre_la_lecture") or {}
+        if pl241.get("decidable"):
+            out.append(("la présence contre la lecture de 241",
+                        [f"sur les **{pl241['combien_de_lignes']}** lignes lues"], s241.name))
+        rp241 = d.get("la_reproduction") or {}
+        if rp241.get("decidable"):
+            out.append(("la relecture de 241",
+                        [f"retombent en **{rp241['combien_de_coutures_relues']}** coutures, écart "
+                         f"**{_fr222(rp241['lecart_le_plus_grand'])}**"], s241.name))
+        k9 = str((d.get("le_verdict") or {}).get("la_largeur_jugee"))
+        e241 = ((d.get("lemboitement") or {}).get("par_largeur") or {}).get(k9) or {}
+        if e241.get("jugeable"):
+            out.append(("les tranches de 241 contre l'aile", [f"**{_fr222(e241['la_somme_des_sous_boucles'])}** à neuf "
+                                                              f"lignes, écart {_fr222(e241['lecart'])}"], s241.name))
+        for sb in d.get("par_tranche") or []:
+            x_ = sb["par_largeur"].get(k9) or {}
+            if x_.get("fermable"):
+                out.append((f"la tranche {sb['entre'][0]} à {sb['entre'][1]} de 241",
+                            [f"| {sb['entre'][0]} à {sb['entre'][1]} | {_fr222(x_['la_fermeture_en_voxels'])} | "
+                             f"{_fr222(x_['la_dispersion_du_pas_en_voxels'])} | "
+                             f"{_fr222(x_['le_nul']['la_fermeture_mediane_en_valeur_absolue'])} | "
+                             f"{_fr222(x_['le_nul']['la_part_sous_la_fermeture'])} |"], s241.name))
+        xa = ((d.get("laile_entiere") or {}).get("par_largeur") or {}).get(k9) or {}
+        if xa.get("fermable") and co241:
+            out.append(("l'aile entière de 241",
+                        [f"| **{co241[0]} à {co241[1]}, l'aile entière** | **{_fr222(xa['la_fermeture_en_voxels'])}** | "
+                         f"{_fr222(xa['la_dispersion_du_pas_en_voxels'])} | "
+                         f"{_fr222(xa['le_nul']['la_fermeture_mediane_en_valeur_absolue'])} | "
+                         f"{_fr222(xa['le_nul']['la_part_sous_la_fermeture'])} |"], s241.name))
+        pr241 = d.get("le_profil") or []
+        pic241 = (d.get("le_verdict_des_tranches") or {}).get("le_pic") or {}
+        if pr241 and co241:
+            cel = [(f"**{_fr222(q['le_cumul_en_voxels'])}**" if q == pic241 else _fr222(q["le_cumul_en_voxels"]))
+                   for q in pr241]
+            out.append(("le profil de 241",
+                        [f"| cumul depuis la rangée {co241[0]}, par la colonne {co241[3]} | " + " | ".join(cel) + " |"],
+                        s241.name))
+        if co241 and s235_241.exists():
+            q235 = [q for q in json.loads(s235_241.read_text()).get("le_profil") or [] if q["la_coupe"] >= co241[1]]
+            if q235:
+                out.append(("la colonne évitée par 241, dans 235",
+                            [f"à **{_fr222(q235[0]['le_cumul_en_voxels'])}** à la coupe {q235[0]['la_coupe']}"],
+                            s241.name))
+        cv241 = d.get("la_couverture") or {}
+        if cv241:
+            out.append(("la couverture de 241",
+                        [f"entourent **{cv241['combien']}** chunks sur **{cv241['sur']}**, "
+                         f"**{_fr222(cv241['la_part'])}** de l'empreinte"], s241.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 240 : LES AILES TIENNENT-ELLES SUR LEUR PROFIL ?
     # (1) ⚠⚠⚠ UNE COUVERTURE NE VOYAGE JAMAIS SANS CE QU'ELLE LAISSE : les chunks qu'aucune boucle n'entoure.
     s240 = _source(racine, "les_ailes_tiennent_elles_sur_leur_profil.json")

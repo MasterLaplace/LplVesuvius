@@ -1620,6 +1620,8 @@ run "le rectangle entre ses coupes" uv run python "$ROOT/src/nappe/le_rectangle_
 run "figure le rectangle entre ses coupes" uv run python "$ROOT/src/figures/figure_le_rectangle_entre_ses_coupes.py" --verifier
 run "les ailes tiennent-elles sur leur profil" uv run python "$ROOT/src/nappe/les_ailes_tiennent_elles_sur_leur_profil.py" --verifier
 run "figure les ailes tiennent-elles sur leur profil" uv run python "$ROOT/src/figures/figure_les_ailes_tiennent_elles_sur_leur_profil.py" --verifier
+run "au-dela de la colonne qui derive" uv run python "$ROOT/src/nappe/au_dela_de_la_colonne_qui_derive.py" --verifier
+run "figure au-dela de la colonne qui derive" uv run python "$ROOT/src/figures/figure_au_dela_de_la_colonne_qui_derive.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
