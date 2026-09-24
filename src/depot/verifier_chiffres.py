@@ -3208,6 +3208,95 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 249 : LE SCAN BRUT, LÀ OÙ LA BANDE SAUTE
+    s249 = _source(racine, "la_bande_a_t_elle_manque_un_tour.json")
+    if s249.exists():
+        d = json.loads(s249.read_text())
+        pr = d.get("les_predictions") or {}
+        if "m7" in pr and "ps256" in pr:
+            m7p, m7m = pr["m7"]["du_cote_plus"], pr["m7"]["du_cote_moins"]
+            psp, psm = pr["ps256"]["du_cote_plus"], pr["ps256"]["du_cote_moins"]
+            J = "trop_pres_la_ou_la_bande_saute"
+            N = "trop_pres_la_ou_elle_ne_saute_pas"
+            # (1) ⚠⚠ LES GROUPES ET CE QUI EST LU.
+            out.append(("les chutes où la bande saute dans 249",
+                        [f"**{m7p['les_chutes'][J]['combien']}** et **{m7m['les_chutes'][J]['combien']}** avec `m7`, "
+                         f"**{psp['les_chutes'][J]['combien']}** et **{psm['les_chutes'][J]['combien']}** avec `ps256`"], s249.name))
+            for g, nom in ((J, "où la bande saute"), (N, "où elle ne saute pas")):
+                c_, b_ = ([_fr222(x['les_chutes'][g][k]['mediane']) for x in (m7p, m7m)]
+                          for k in ("la_profondeur_de_la_chaine_en_pas", "la_profondeur_de_la_bande_en_pas"))
+                out.append((f"la profondeur de la chaîne pour les chutes {nom} dans 249",
+                            [f"**{c_[0]}** et **{c_[1]}** pas"], s249.name))
+                out.append((f"la profondeur de la bande pour les chutes {nom} dans 249",
+                            [f"**{b_[0]}** et **{b_[1]}**"], s249.name))
+            out.append(("les chutes où la bande ne saute pas dans 249",
+                        [f"**{m7p['les_chutes'][N]['combien']}** et **{m7m['les_chutes'][N]['combien']}** avec `m7`"], s249.name))
+            out.append(("les chunks lus dans 249", [f"**{d['la_lecture']['chunks_lus']}** chunks lus"], s249.name))
+            # (2) ⚠⚠⚠ L'ÉTALONNAGE DU JUGE POINT PAR POINT.
+            for x, nom in ((m7p, "plus"), (m7m, "moins")):
+                sl = x["le_seuil"]
+                out.append((f"le seuil {nom} dans 249",
+                            [f"| côté {nom} | {_fr222(sl['laire_sous_la_courbe'])} | {_fr222(sl['la_sensibilite'])} | "
+                             f"{_fr222(sl['les_fausses_alertes'])} |"], s249.name))
+            out.append(("l'aire avec ps256 dans 249",
+                        [f"**{_fr222(psp['le_seuil']['laire_sous_la_courbe'])}** et **{_fr222(psm['le_seuil']['laire_sous_la_courbe'])}**"],
+                        s249.name))
+            out.append(("les médianes des témoins dans 249",
+                        [f"**{_fr222(m7p['le_temoin_feuille']['mediane'])}** pour la feuille et "
+                         f"**{_fr222(m7p['le_temoin_interstice']['mediane'])}** pour l'interstice"], s249.name))
+            # (3) ⚠⚠ LE PROFIL MÉDIAN DES TÉMOINS À UN PAS : le pic suivant et le creux, lus dans le profil publié.
+            def pic_et_creux(x):
+                pp = x["le_profil_des_temoins_a_un_pas"]
+                devant = list(zip(pp["t"], pp["mediane"]))[12:]
+                pic = max((c for c in devant if 48 <= c[0] <= 108), key=lambda c: c[1])
+                creux = min((c for c in devant if 12 <= c[0] <= 72), key=lambda c: c[1])
+                return pp["combien"], pic, creux
+            (np_, pic_p, creux_p), (nm_, pic_m, _) = pic_et_creux(m7p), pic_et_creux(m7m)
+            out.append(("les témoins à un pas dans 249", [f"**{np_}** et **{nm_}** points d'accord"], s249.name))
+            out.append(("le pic suivant côté plus dans 249",
+                        [f"culmine à **{_fr222(pic_p[0])}** voxels du segment (**{_fr222(pic_p[1])}**) après un creux à "
+                         f"**{_fr222(creux_p[0])}**"], s249.name))
+            out.append(("le creux côté plus dans 249", [f"(**{_fr222(creux_p[1])}**)"], s249.name))
+            out.append(("le pic suivant côté moins dans 249",
+                        [f"culmine à **{_fr222(pic_m[0])}** voxels (**{_fr222(pic_m[1])}**)"], s249.name))
+            # (4) ⚠⚠⚠ LE JUGE EN MOYENNE, CHAQUE GROUPE, SANS EN CHOISIR UN.
+            for nom, cle, gras in (("feuille connue (alignée sur la chute de la chaîne)", "le_temoin_feuille", False),
+                                   ("interstice connu (à mi-chemin)", "le_temoin_interstice", False),
+                                   ("chute trop près, là où la bande saute", J, True),
+                                   ("chute trop près, là où elle ne saute pas", N, False)):
+                a_, b_ = m7p["le_juge_en_moyenne"][cle], m7m["le_juge_en_moyenne"][cle]
+                cells = [f"{_fr222(a_['le_contraste'])} [{_fr222(a_['q05'])} ; {_fr222(a_['q95'])}]",
+                         f"{_fr222(b_['le_contraste'])} [{_fr222(b_['q05'])} ; {_fr222(b_['q95'])}]",
+                         _fr222(a_["lamplitude"]), _fr222(b_["lamplitude"])]
+                ligne = ("| **" + nom + "** | " + " | ".join(f"**{c}**" for c in cells) + " |" if gras
+                         else "| " + nom + " | " + " | ".join(cells) + " |")
+                out.append((f"{nom} en moyenne dans 249", [ligne], s249.name))
+            jp, jm = psp["le_juge_en_moyenne"], psm["le_juge_en_moyenne"]
+            out.append(("les chutes où la bande saute avec ps256 dans 249",
+                        [f"**{_fr222(jp[J]['le_contraste'])}** et **{_fr222(jm[J]['le_contraste'])}**, amplitude "
+                         f"**{_fr222(jp[J]['lamplitude'])}** et **{_fr222(jm[J]['lamplitude'])}**"], s249.name))
+            out.append(("la feuille avec ps256 dans 249",
+                        [f"**{_fr222(jp['le_temoin_feuille']['le_contraste'])}** et **{_fr222(jm['le_temoin_feuille']['le_contraste'])}** pour la feuille"],
+                        s249.name))
+            out.append(("l'interstice avec ps256 dans 249",
+                        [f"**{_fr222(jp['le_temoin_interstice']['le_contraste'])}** et **{_fr222(jm['le_temoin_interstice']['le_contraste'])}** pour l'interstice"],
+                        s249.name))
+            bp, bm = m7p["le_juge_en_moyenne"], m7m["le_juge_en_moyenne"]
+            out.append(("la couche de la bande dans 249",
+                        [f"**{_fr222(bp['la_couche_de_la_bande_la_ou_elle_saute']['le_contraste'])}** et "
+                         f"**{_fr222(bm['la_couche_de_la_bande_la_ou_elle_saute']['le_contraste'])}** contre "
+                         f"**{_fr222(bp['le_temoin_feuille_sur_la_bande']['le_contraste'])}** et "
+                         f"**{_fr222(bm['le_temoin_feuille_sur_la_bande']['le_contraste'])}**"], s249.name))
+            out.append(("l'amplitude de la couche de la bande dans 249",
+                        [f"**{_fr222(bp['la_couche_de_la_bande_la_ou_elle_saute']['lamplitude'])}** et "
+                         f"**{_fr222(bm['la_couche_de_la_bande_la_ou_elle_saute']['lamplitude'])}** contre "
+                         f"**{_fr222(bp['le_temoin_feuille_sur_la_bande']['lamplitude'])}** et "
+                         f"**{_fr222(bm['le_temoin_feuille_sur_la_bande']['lamplitude'])}**"], s249.name))
+            out.append(("la matière où la bande ne saute pas dans 249",
+                        [f"**{_fr222(bp[N]['le_contraste'])}** et **{_fr222(bm[N]['le_contraste'])}**,"], s249.name))
+            out.append(("la matière où la bande ne saute pas avec ps256 dans 249",
+                        [f"**{_fr222(jp[N]['le_contraste'])}** et **{_fr222(jm[N]['le_contraste'])}** avec `ps256`"], s249.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 248 : LE TRANSFERT, ENCHAÎNÉ
     # (1) ⚠⚠⚠ LE JUGE : les couches que la bande porte elle-même, et les points notés à chaque saut.
     s248a = _source(racine, "le_transfert_enchaine_tient_il_les_spires.json")

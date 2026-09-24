@@ -3970,6 +3970,15 @@ et un saut raté est définitif. `R4-F415` : les ratés tombent surtout trop pr�
 saute plus d'un pas et demi. `R4-F416` : `20230702185753` confirme les deux premiers sauts. `R4-P93` s'ouvre : départager
 la bande et la chaîne là où la bande saute.
 
+**`249` · 2026-09-24 · le scan brut, là où la bande saute** — niveau 2, 9,6 µm, 1845 chunks
+
+⚠⚠⚠ **Le scan ne dit pas qui a manqué un tour** — `R4-F417` : rayon par rayon, rapporté à la feuille du segment, il ne
+sépare une feuille connue d'un interstice connu qu'à une aire de **0,5552** et **0,5632** ; le juge déclaré d'avance
+échoue son étalonnage. Le profil médian des témoins montre pourtant la feuille, décalée de sa face : la bande trace une
+face, et la matière est du côté plus. `R4-F418` : en moyenne, ajouté après, le scan sépare la feuille (**1,117** et
+**1,0878**) de l'interstice (**0,9011** et **0,9693**), et là où la bande saute il est plat autour de la chute de la
+chaîne (**0,9924** et **1,0018**) comme autour de la couche de la bande. `R4-P93` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

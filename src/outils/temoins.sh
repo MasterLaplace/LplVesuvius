@@ -1635,6 +1635,8 @@ run "le transfert retrouve-t-il la spire voisine" uv run python "$ROOT/src/nappe
 run "figure le transfert retrouve-t-il la spire voisine" uv run python "$ROOT/src/figures/figure_le_transfert_retrouve_t_il_la_spire_voisine.py" --verifier
 run "le transfert enchaine tient-il les spires" uv run python "$ROOT/src/nappe/le_transfert_enchaine_tient_il_les_spires.py" --verifier
 run "figure le transfert enchaine tient-il les spires" uv run python "$ROOT/src/figures/figure_le_transfert_enchaine_tient_il_les_spires.py" --verifier
+run "la bande a-t-elle manque un tour" uv run python "$ROOT/src/nappe/la_bande_a_t_elle_manque_un_tour.py" --verifier
+run "figure la bande a-t-elle manque un tour" uv run python "$ROOT/src/figures/figure_la_bande_a_t_elle_manque_un_tour.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
