@@ -3827,6 +3827,18 @@ tirages : son écart tient à ses deux colonnes, **28,9375** voxels le long de l
 ⭐⭐⭐⭐ **Donc `R4-P79` est répondue pour les ailes que la présence porte.** `R4-P80` s'ouvre : où, le long
 des rangées 26 à 223, les deux colonnes de l'aile de droite se séparent-elles ?
 
+**`235` · 2026-09-24 · où l'aile de droite se sépare**
+
+⭐⭐ **Les coupes, dérivées** : l'aile de droite de `234` se découpe en **21** sous-boucles de neuf ou dix rangées ;
+ses **20** coupes lues retombent en **3040** coutures à l'écart **0**, et la somme des sous-boucles retombe sur la
+fermeture de l'aile, **−35,6938**, écart **0**.
+⭐⭐⭐⭐ **L'écart se cumule** — `R4-F400` : aucune sous-boucle n'arrive au demi-feuillet, la plus grande à
+**−12,4062** ; **14** des 21 portent le signe de l'aile.
+⚠⚠⚠ En chemin, la fermeture cumulée depuis la rangée 26 atteint **−40,2188** à la coupe 173 : le « oui » de `234`
+pour l'aile de droite tient à l'endroit où elle s'arrête.
+⭐⭐⭐⭐ **Donc `R4-P80` est répondue.** `R4-P81` s'ouvre : laquelle des deux colonnes de l'aile de droite dérive, et
+de combien par rangée ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

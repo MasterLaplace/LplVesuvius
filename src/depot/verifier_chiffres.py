@@ -3208,6 +3208,92 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 235 : OU L'AILE DE DROITE SE SEPARE-T-ELLE ?
+    # (1) ⚠⚠⚠ UNE SOUS-BOUCLE NE VOYAGE JAMAIS SANS SON BRUIT SEUL, et le profil jamais sans les coupes ou il
+    # atteint le demi-feuillet : c'est la que le « oui » de 234 se defait.
+    s235 = _source(racine, "ou_laile_de_droite_se_separe.json")
+    s224c = _source(racine, "deux_chemins_arrivent_ils_sur_la_meme_spire.json")
+    if s235.exists():
+        d = json.loads(s235.read_text())
+        ai235 = d.get("laile") or {}
+        if ai235:
+            out.append(("l'aile découpée par 235", [f"droite, à **{_fr222(ai235['la_fermeture_en_voxels'])}**"],
+                        s235.name))
+        de235 = d.get("le_decoupage") or {}
+        if de235:
+            out.append(("le découpage de 235", [f"**{de235['combien_de_sous_boucles']}** sous-boucles, de neuf",
+                                                f"le plus grand écart valant **{de235['le_plus_grand_ecart']}**"],
+                        s235.name))
+        pl235 = d.get("la_presence_contre_la_lecture") or {}
+        if pl235.get("decidable"):
+            out.append(("la présence contre la lecture de 235",
+                        [f"Sur les **{pl235['combien_de_lignes']}** lignes lues"], s235.name))
+        rp235 = d.get("la_reproduction") or {}
+        if rp235.get("decidable"):
+            out.append(("la relecture de 235",
+                        [f"retombent en **{rp235['combien_de_coutures_relues']}** coutures, écart "
+                         f"**{_fr222(rp235['lecart_le_plus_grand'])}**"], s235.name))
+        for k_, x_ in sorted(((d.get("lemboitement") or {}).get("par_largeur") or {}).items(), key=lambda t: int(t[0])):
+            if x_.get("jugeable"):
+                out.append((f"l'emboîtement de 235 à {k_} lignes",
+                            [f"| {k_} | {_fr222(x_['la_somme_des_sous_boucles'])} | {_fr222(x_['la_fermeture_de_laile'])} "
+                             f"| {_fr222(x_['lecart'])} |"], s235.name))
+        v235 = d.get("le_verdict") or {}
+        k9 = str(v235.get("la_largeur_jugee"))
+        SB = d.get("par_sous_boucle") or []
+        pg = v235.get("la_plus_grande") or {}
+        for sb in SB:
+            x_ = sb["par_largeur"].get(k9) or {}
+            if not x_.get("fermable"):
+                continue
+            n_ = x_["le_nul"]
+            L_ = _fr222(x_["la_fermeture_en_voxels"])
+            if pg and sb["entre"] == pg.get("entre"):
+                L_ = f"**{L_}**"
+            out.append((f"la sous-boucle {sb['entre'][0]} à {sb['entre'][1]} de 235",
+                        [f"| {sb['entre'][0]} à {sb['entre'][1]} | {L_} | "
+                         f"{_fr222(x_['la_dispersion_du_pas_en_voxels'])} | "
+                         f"{_fr222(n_['la_fermeture_mediane_en_valeur_absolue'])} | "
+                         f"{_fr222(n_['la_part_sous_la_fermeture'])} |"], s235.name))
+        if pg:
+            out.append(("la plus grande sous-boucle de 235",
+                        [f"la plus grande, des rangées {pg['entre'][0]} à {pg['entre'][1]}, ferme à "
+                         f"{_fr222(pg['la_fermeture_en_voxels'])}"], s235.name))
+        fer235 = [sb for sb in SB if (sb["par_largeur"].get(k9) or {}).get("fermable")]
+        if fer235 and ai235:
+            loin_ = max(fer235, key=lambda sb: sb["par_largeur"][k9]["le_nul"]["la_part_sous_la_fermeture"])
+            out.append(("la sous-boucle de 235 la plus éloignée de son bruit seul",
+                        [f"celle des rangées {loin_['entre'][0]} à {loin_['entre'][1]} : le bruit seul y ferme plus "
+                         f"serré dans {_fr222(loin_['par_largeur'][k9]['le_nul']['la_part_sous_la_fermeture'])} des "
+                         f"tirages"], s235.name))
+            meme = sum(1 for sb in fer235 if sb["par_largeur"][k9]["la_fermeture_en_voxels"]
+                       * ai235["la_fermeture_en_voxels"] > 0)
+            out.append(("les sous-boucles de 235 du signe de l'aile",
+                        [f"**{meme}** des {len(SB)} sous-boucles portent le signe de l'aile"], s235.name))
+        pr235 = d.get("le_profil") or []
+        if pr235 and s224c.exists():
+            demi = float(json.loads(s224c.read_text())["le_demi_pli_en_voxels"])
+            fr_ = [i for i, q in enumerate(pr235) if abs(q["le_cumul_en_voxels"]) >= demi]
+            if fr_:
+                i0 = fr_[0]
+                if i0 > 0:
+                    out.append(("le profil de 235 avant le demi-feuillet",
+                                [f"est à {_fr222(pr235[i0 - 1]['le_cumul_en_voxels'])} à la coupe "
+                                 f"{pr235[i0 - 1]['la_coupe']}, puis :"], s235.name))
+                cellules = [(f"**{_fr222(q['le_cumul_en_voxels'])}**" if abs(q["le_cumul_en_voxels"]) >= demi
+                             else _fr222(q["le_cumul_en_voxels"])) for q in pr235[i0:]]
+                out.append(("le profil de 235 à partir du demi-feuillet",
+                            ["| coupe | " + " | ".join(str(q["la_coupe"]) for q in pr235[i0:]) + " |",
+                             "| cumul | " + " | ".join(cellules) + " |"], s235.name))
+                cs_ = [str(pr235[i]["la_coupe"]) for i in fr_]
+                out.append(("les coupes de 235 où le cumul atteint le demi-feuillet",
+                            [f"l'aile arrêtée à la rangée {', '.join(cs_[:-1])} ou {cs_[-1]}" if len(cs_) > 1
+                             else f"l'aile arrêtée à la rangée {cs_[0]}"], s235.name))
+            if ai235:
+                out.append(("la marge de l'aile de 235 au bout",
+                            [f"au bout, que de {_fr222(round(demi - abs(ai235['la_fermeture_en_voxels']), 4))}"],
+                            s235.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 234 : LE SEGMENT AU-DELA DU RECTANGLE SE RELIE-T-IL AU RECTANGLE ?
     # (1) ⚠⚠⚠ UNE AILE QUI FERME NE VOYAGE JAMAIS SANS LE BRUIT SEUL, et la plus lache jamais sans sa marge sous le
     # demi-feuillet ni sans les deux colonnes qui la portent.
