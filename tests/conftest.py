@@ -11,6 +11,8 @@ import pytest
 # une réécriture qui ne rend pas ses sorties sur les mêmes entrées n'est pas une réécriture.
 LA_RECHERCHE = Path(os.environ.get("VESUVE_RECHERCHE", Path(__file__).resolve().parents[2]))
 LES_MESURES = LA_RECHERCHE / "docs" / "mesures"
+# Les données lourdes (piles, modèles) ne sont pas versionnées : `VESUVE_DONNEES` pointe le `data/` qui les porte.
+LES_DONNEES = Path(os.environ.get("VESUVE_DONNEES", LA_RECHERCHE / "data"))
 
 
 def la_recherche_est_la() -> bool:
