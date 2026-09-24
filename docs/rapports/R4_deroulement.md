@@ -3861,6 +3861,16 @@ l'aile et de la large, qui passent par la colonne 260, l'atteignent chacun à tr
 ⭐⭐⭐⭐ **Donc `R4-P82` est répondue.** `R4-P83` s'ouvre : le plus grand rectangle de `233`, jugé sur son profil, reste-t-il
 sous le demi-feuillet ?
 
+**`238` · 2026-09-24 · le rectangle tient-il sur son profil**
+
+⭐⭐ **Les coupes, reprises de `224`** : les rangées **99**, **198** et **297** tiennent d'une colonne du rectangle à l'autre ;
+lues, elles retombent en **4589** coutures à l'écart **0**, et les **4** tranches somment à **−11,8449**.
+⭐⭐⭐⭐ **Le rectangle tient sur son profil** — `R4-F403` : à neuf lignes, son cumul vaut **14,1485**, **9,3985**,
+**−14,7265** puis **−11,8449** ; son « oui » ne tient pas qu'à l'endroit où il finit.
+⚠⚠⚠ Entre deux coupes, rien n'est vu.
+⭐⭐⭐⭐ **Donc `R4-P83` est répondue aux coupes où le profil est vu.** `R4-P84` s'ouvre : entre deux coupes, le profil
+reste-t-il sous le demi-feuillet ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

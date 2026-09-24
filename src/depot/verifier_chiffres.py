@@ -3208,6 +3208,51 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 238 : LE RECTANGLE TIENT-IL SUR SON PROFIL ?
+    # (1) ⚠⚠⚠ LE PROFIL NE VOYAGE JAMAIS SANS SES COUPES : entre deux, rien n'est vu.
+    s238 = _source(racine, "le_rectangle_tient_il_sur_son_profil.json")
+    if s238.exists():
+        d = json.loads(s238.read_text())
+        cp238 = d.get("les_coupes") or []
+        if cp238:
+            out.append(("les tranches de 238", [f"Le rectangle se découpe en **{len(cp238) - 1}** tranches"], s238.name))
+        pl238 = d.get("la_presence_contre_la_lecture") or {}
+        if pl238.get("decidable"):
+            out.append(("la présence contre la lecture de 238",
+                        [f"sur les **{pl238['combien_de_lignes']}** lignes lues"], s238.name))
+        rp238 = d.get("la_reproduction") or {}
+        if rp238.get("decidable"):
+            out.append(("la relecture de 238",
+                        [f"retombent en **{rp238['combien_de_coutures_relues']}** coutures, écart "
+                         f"**{_fr222(rp238['lecart_le_plus_grand'])}**"], s238.name))
+        e238 = (d.get("lemboitement") or {}).get("par_largeur") or {}
+        if (e238.get("9") or {}).get("jugeable") and (e238.get("7") or {}).get("jugeable"):
+            out.append(("les tranches de 238 contre 233",
+                        [f"**{_fr222(e238['9']['la_somme_des_sous_boucles'])}** à neuf lignes, écart "
+                         f"{_fr222(e238['9']['lecart'])}",
+                         f"{_fr222(e238['7']['la_somme_des_sous_boucles'])} contre "
+                         f"{_fr222(e238['7']['la_fermeture_de_laile'])} à"], s238.name))
+        k9 = str((d.get("le_verdict") or {}).get("la_largeur_jugee"))
+        for sb in d.get("par_tranche") or []:
+            x_ = sb["par_largeur"].get(k9) or {}
+            if x_.get("fermable"):
+                out.append((f"la tranche {sb['entre'][0]} à {sb['entre'][1]} de 238",
+                            [f"| {sb['entre'][0]} à {sb['entre'][1]} | {_fr222(x_['la_fermeture_en_voxels'])} | "
+                             f"{_fr222(x_['la_dispersion_du_pas_en_voxels'])} | "
+                             f"{_fr222(x_['le_nul']['la_fermeture_mediane_en_valeur_absolue'])} | "
+                             f"{_fr222(x_['le_nul']['la_part_sous_la_fermeture'])} |"], s238.name))
+        pr238 = d.get("le_profil") or []
+        pic238 = (d.get("le_verdict") or {}).get("le_pic") or {}
+        if pr238:
+            cel = [(f"**{_fr222(q['le_cumul_en_voxels'])}**" if q == pic238 else _fr222(q["le_cumul_en_voxels"]))
+                   for q in pr238]
+            out.append(("le profil de 238",
+                        ["| coupe | " + " | ".join(str(q["la_coupe"]) for q in pr238) + " |",
+                         "| cumul depuis la rangée 26 | " + " | ".join(cel) + " |"], s238.name))
+        if pic238:
+            out.append(("le pic de 238", [f"ferment à {_fr222(abs(pic238['le_cumul_en_voxels']))} voxels au plus"],
+                        s238.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 237 : L'ETROITE RESTE-T-ELLE SANS ECART ?
     # (1) ⚠⚠⚠ UN PROFIL NE VOYAGE JAMAIS SANS SON POINT LE PLUS LOIN DE ZERO NI SANS LES COUPES OU IL ATTEINT LE
     # DEMI-FEUILLET : c'est la que le jugement au bout se defait.
