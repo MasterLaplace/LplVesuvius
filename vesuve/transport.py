@@ -36,6 +36,7 @@ class Transport:
         self._local = threading.local()
         self.octets = 0
         self._verrou = threading.Lock()
+        self._toutes: list[http.client.HTTPSConnection] = []  # pour les fermer, fil mort ou vivant
 
     def _connexion(self, hote: str) -> http.client.HTTPSConnection:
         pool = getattr(self._local, "pool", None)
@@ -44,7 +45,22 @@ class Transport:
         c = pool.get(hote)
         if c is None:
             c = pool[hote] = http.client.HTTPSConnection(hote, timeout=self.delai)
+            with self._verrou:
+                self._toutes.append(c)
         return c
+
+    def fermer(self) -> None:
+        """Ferme chaque connexion ouverte, y compris celles des fils déjà terminés.
+
+        ⚠ Un fil d'un pool qui meurt ne ferme pas la connexion rangée dans son `threading.local` : sa socket TLS
+        est ramassée ouverte. Sur une lecture de milliers de chunks, c'est une fuite de descripteurs ; les
+        tests, qui traitent les avertissements en erreurs, l'ont attrapée (`ResourceWarning`).
+        """
+        with self._verrou:
+            toutes, self._toutes = self._toutes, []
+        for c in toutes:
+            c.close()
+        self._local = threading.local()
 
     def _oublier(self, hote: str) -> None:
         c = getattr(self._local, "pool", {}).pop(hote, None)
@@ -86,6 +102,9 @@ class TransportEnMemoire:
         self.corps = corps
         self.demandes: list[str] = []
         self.octets = 0
+
+    def fermer(self) -> None:
+        pass
 
     def get(self, url: str) -> Reponse:
         self.demandes.append(url)

@@ -30,6 +30,7 @@ class Distant:
         tmp = f.with_suffix(".tmp")
         tmp.write_bytes(r.corps)
         tmp.replace(f)
+        getattr(self.transport, "fermer", lambda: None)()
         return r.corps
 
     def dossier_tifxyz(self, chemin: str) -> Path:

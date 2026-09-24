@@ -52,5 +52,11 @@ torch = { index = "pytorch-cpu" }
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 # La porte de merge : un avertissement est une erreur, ici et non dans un script de CI.
-filterwarnings = ["error"]
+filterwarnings = [
+    "error",
+    # ⚠ La SEULE exception, et elle vise un code tiers : `timesformer_pytorch/__init__.py:1` compare `amt is 0`,
+    # que Python 3.12+ signale à la compilation. Ce n'est pas notre code, le comportement est correct pour un
+    # petit entier, et la ligne tombera le jour où la dépendance est corrigée ou remplacée.
+    "ignore:\"is\" with 'int' literal:SyntaxWarning",
+]
 markers = ["reseau: lit le bucket public (dl.ash2txt.org, S3) ; sauté sans VESUVE_RESEAU=1"]

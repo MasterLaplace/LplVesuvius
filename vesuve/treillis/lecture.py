@@ -65,8 +65,11 @@ class LecteurDeBandes:
         if not manquants:
             return
         debut, octets = time.monotonic(), getattr(self.tableau.transport, "octets", 0)
-        with ThreadPoolExecutor(max_workers=self.fils) as pool:
-            list(pool.map(lambda p: self.digest(*p), manquants))
+        try:
+            with ThreadPoolExecutor(max_workers=self.fils) as pool:
+                list(pool.map(lambda p: self.digest(*p), manquants))
+        finally:
+            getattr(self.tableau.transport, "fermer", lambda: None)()  # les fils du pool sont morts
         if self.journal is not None:
             duree = time.monotonic() - debut
             lus = getattr(self.tableau.transport, "octets", 0) - octets

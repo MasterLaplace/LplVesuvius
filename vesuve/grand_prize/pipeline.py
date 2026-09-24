@@ -254,5 +254,6 @@ def lancer(segment: str = "20230702185753", sortie: Path = Path("sorties/grand-p
                f"nul par blocs : graine {ctx['la_procedure']['graine']}, {ctx['la_procedure']['tirages']} tirages ; "
                f"juge : graine 20260924")
     r.exigence("intégré à VC3D", "non mesurée", "la surface et `approval.tif` suivent le contrat tifxyz que villa lit")
+    transport.fermer()
     r.ecrire(sortie)
     return r
