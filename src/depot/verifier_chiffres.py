@@ -3208,6 +3208,122 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 248 : LE TRANSFERT, ENCHAÎNÉ
+    # (1) ⚠⚠⚠ LE JUGE : les couches que la bande porte elle-même, et les points notés à chaque saut.
+    s248a = _source(racine, "le_transfert_enchaine_tient_il_les_spires.json")
+    if s248a.exists():
+        d = json.loads(s248a.read_text())
+        pr = d.get("les_predictions") or {}
+        co = d.get("les_couches") or {}
+        if "m7" in pr and "ps256" in pr and co:
+            out.append(("les points de la bande de 248", [f"**{d['les_points']}**"], s248a.name))
+            for cote, nom in (("du_cote_plus", "plus"), ("du_cote_moins", "moins")):
+                out.append((f"les couches {nom} de 248",
+                            [f"| part des points qui l'ont, côté {nom} | " + " | ".join(_fr222(x) for x in co[cote]) + " |"],
+                            s248a.name))
+            m7 = pr["m7"]
+            sf = {c: m7[c]["sur_les_points_notes_a_chaque_saut"] for c in ("du_cote_plus", "du_cote_moins")}
+            out.append(("les points notés à chaque saut dans 248",
+                        [f"**{sf['du_cote_plus']['les_points']}** côté plus, **{sf['du_cote_moins']['les_points']}** côté moins"],
+                        s248a.name))
+            # (2) ⚠⚠⚠ LA COURBE PAR SAUT, CHAQUE PROCÉDURE, SANS EN CHOISIR UNE.
+            for nom, cle, gras in (("le pas fixe, sans lire", "le_temoin_sans_lecture", False),
+                                   ("le compte sur un rayon", "le_compte_sur_un_rayon", False),
+                                   ("la chaîne, normale du segment", "la_chaine_le_long_de_la_normale_du_segment", False),
+                                   ("la chaîne", "la_chaine", True)):
+                cells = [f"{_fr222(a)} · {_fr222(b)}" for a, b in zip(sf["du_cote_plus"][cle], sf["du_cote_moins"][cle])]
+                ligne = ("| **" + nom + "** | " + " | ".join(f"**{c}**" for c in cells) + " |" if gras
+                         else "| " + nom + " | " + " | ".join(cells) + " |")
+                out.append((f"{nom} saut par saut dans 248", [ligne], s248a.name))
+                qt = [pr[p][c]["qui_tient"][cle]["la_part_qui_tient_tous_les_sauts"]
+                      for p in ("m7", "ps256") for c in ("du_cote_plus", "du_cote_moins")]
+                ligne = ("| **" + nom + "** | " + " | ".join(f"**{_fr222(x)}**" for x in qt) + " |" if gras
+                         else "| " + nom + " | " + " | ".join(_fr222(x) for x in qt) + " |")
+                out.append((f"{nom} tient les quatre sauts dans 248", [ligne], s248a.name))
+            for c, nom in (("du_cote_plus", "plus"), ("du_cote_moins", "moins")):
+                pas = m7[c]["qui_tient"]["la_chaine"]["parmi_ceux_qui_ont_tenu_le_saut_precedent"]
+                out.append((f"la chaîne pas à pas {nom} dans 248", ["**" + " · ".join(_fr222(x) for x in pas) + "**"],
+                            s248a.name))
+            dp = m7["du_cote_plus"]["les_sauts"][-1]["la_chaine_en_detail"]
+            dm = m7["du_cote_moins"]["les_sauts"][-1]["la_chaine_en_detail"]
+            out.append(("la dérive de la chaîne dans 248",
+                        [f"**{_fr222(dp['la_derive_laterale_mediane_voxels'])}** et **{_fr222(dm['la_derive_laterale_mediane_voxels'])}** voxels"],
+                        s248a.name))
+            out.append(("l'angle de la chaîne dans 248",
+                        [f"**{_fr222(dp['langle_median_a_la_normale_du_segment_degres'])}°** et "
+                         f"**{_fr222(dm['langle_median_a_la_normale_du_segment_degres'])}°**"], s248a.name))
+            # (3) ⚠⚠ OÙ LA CHAÎNE RATE.
+            r1 = [m7[c]["les_rates_de_la_chaine"][0] for c in ("du_cote_plus", "du_cote_moins")]
+            r4 = [m7[c]["les_rates_de_la_chaine"][-1] for c in ("du_cote_plus", "du_cote_moins")]
+            out.append(("les ratés du premier saut dans 248",
+                        [f"**{r1[0]['trop_pres']}** et **{r1[1]['trop_pres']}** points tombent trop près, "
+                         f"**{r1[0]['trop_loin']}** et **{r1[1]['trop_loin']}** trop loin"], s248a.name))
+            k = "trop_pres_dont_la_ou_la_bande_saute_plus_dun_pas_et_demi"
+            out.append(("les chutes où la bande saute dans 248", [f"**{_fr222(r1[0][k])}** et **{_fr222(r1[1][k])}**"],
+                        s248a.name))
+            k = "la_part_des_notes_ou_la_bande_saute_plus_dun_pas_et_demi"
+            out.append(("la part où la bande saute dans 248", [f"**{_fr222(r1[0][k])}** et **{_fr222(r1[1][k])}**"],
+                        s248a.name))
+            k = "trop_pres_dont_sur_la_couche_davant"
+            out.append(("la spire de retard dans 248", [f"**{_fr222(r4[0][k])}** et **{_fr222(r4[1][k])}**"], s248a.name))
+            na = {p: [[s_["la_chaine_en_detail"]["la_part_des_sauts_qui_navancent_pas"] for s_ in pr[p][c]["les_sauts"]]
+                      for c in ("du_cote_plus", "du_cote_moins")] for p in ("m7", "ps256")}
+            out.append(("les sauts qui n'avancent pas dans 248",
+                        [f"**{_fr222(na['m7'][0][0])}** et **{_fr222(na['m7'][1][0])}** des points au premier saut"],
+                        s248a.name))
+            out.append(("les sauts suivants qui n'avancent pas dans 248",
+                        [", ".join(f"**{_fr222(x)}**" for x in na["m7"][0][1:-1]) + f", **{_fr222(na['m7'][0][-1])}** et "
+                         + ", ".join(f"**{_fr222(x)}**" for x in na["m7"][1][1:])], s248a.name))
+            out.append(("les sauts qui n'avancent pas avec ps256 dans 248",
+                        [f"**{_fr222(na['ps256'][0][-1])}** et **{_fr222(na['ps256'][1][-1])}** au quatrième"], s248a.name))
+            # (4) ⚠⚠⚠ LES CONTRÔLES : le premier saut est celui de 247, et la première couche aussi.
+            ecarts = [pr[p][c]["le_premier_saut_contre_celui_de_247_ecart_max_voxels"]
+                      for p in ("m7", "ps256") for c in ("du_cote_plus", "du_cote_moins")]
+            if all(e == 0.0 for e in ecarts):
+                out.append(("le premier saut de 248 est celui de 247", ["**Le premier saut est celui de `247`**, à zéro voxel près"],
+                            s248a.name))
+            n1 = m7["du_cote_plus"]["les_sauts"][0]["les_points_notes"]
+            out.append(("le juge de 248 note plus de points", [f"**{n1}** points au lieu de"], s248a.name))
+            c1 = [d["les_controles"][f"la_premiere_couche_est_celle_de_247_{c}"] for c in ("du_cote_plus", "du_cote_moins")]
+            out.append(("la première couche de 248 contre 247",
+                        [f"sauf en **{c1[0]['les_points_ou_les_deux_different']}** et **{c1[1]['les_points_ou_les_deux_different']}** points sur "
+                         f"{c1[0]['les_points_ou_247_a_une_couche']} et"], s248a.name))
+            out.append(("les couches perdues de 248",
+                        [f"**{c1[0]['les_points_ou_247_en_a_une_et_pas_ici']}** et **{c1[1]['les_points_ou_247_en_a_une_et_pas_ici']}** points en avaient une"],
+                        s248a.name))
+            nm = d["les_controles"]["la_normale_de_la_maille_contre_celle_du_maillage_degres"]
+            out.append(("la normale de la maille dans 248", [f"**{_fr222(nm['mediane'])}°** en médiane"], s248a.name))
+            out.append(("la normale de la maille au 95e centile dans 248", [f"**{_fr222(nm['q95'])}°** au 95ᵉ centile"],
+                        s248a.name))
+    # (5) ⚠⚠ LE SECOND OBJET, QUI NE JUGE QUE DEUX SAUTS.
+    s248b = _source(racine, "le_transfert_enchaine_sur_le_segment_5753.json")
+    if s248b.exists():
+        d = json.loads(s248b.read_text())
+        pr = d.get("les_predictions") or {}
+        co = d.get("les_couches") or {}
+        if "m7" in pr and "ps256" in pr and co:
+            out.append(("la deuxième couche du segment dans 248",
+                        [f"**{_fr222(co['du_cote_plus'][1])}** et **{_fr222(co['du_cote_moins'][1])}**"], s248b.name))
+            out.append(("la troisième couche du segment dans 248",
+                        [f"**{_fr222(co['du_cote_plus'][2])}** et **{_fr222(co['du_cote_moins'][2])}**"], s248b.name))
+            sp, sm = pr["m7"]["du_cote_plus"]["les_sauts"], pr["m7"]["du_cote_moins"]["les_sauts"]
+            out.append(("le pas fixe sur le segment dans 248",
+                        [f"| le pas fixe, sans lire | {_fr222(sp[0]['le_temoin_sans_lecture']['la_part_sur_la_bonne_spire'])} · "
+                         f"{_fr222(sm[0]['le_temoin_sans_lecture']['la_part_sur_la_bonne_spire'])} | "
+                         f"{_fr222(sp[1]['le_temoin_sans_lecture']['la_part_sur_la_bonne_spire'])} · "
+                         f"{_fr222(sm[1]['le_temoin_sans_lecture']['la_part_sur_la_bonne_spire'])} |"], s248b.name))
+            out.append(("la chaîne sur le segment dans 248",
+                        [f"| **la chaîne** | **{_fr222(sp[0]['la_chaine']['la_part_sur_la_bonne_spire'])} · "
+                         f"{_fr222(sm[0]['la_chaine']['la_part_sur_la_bonne_spire'])}** | "
+                         f"**{_fr222(sp[1]['la_chaine']['la_part_sur_la_bonne_spire'])} · "
+                         f"{_fr222(sm[1]['la_chaine']['la_part_sur_la_bonne_spire'])}** |"], s248b.name))
+            out.append(("les points du deuxième saut sur le segment dans 248",
+                        [f"**{sp[1]['les_points_notes']}** et **{sm[1]['les_points_notes']}** points sont notés"], s248b.name))
+            qp, qm = pr["ps256"]["du_cote_plus"]["les_sauts"][1], pr["ps256"]["du_cote_moins"]["les_sauts"][1]
+            out.append(("le segment avec ps256 dans 248",
+                        [f"**{_fr222(qp['la_chaine']['la_part_sur_la_bonne_spire'])}** et "
+                         f"**{_fr222(qm['la_chaine']['la_part_sur_la_bonne_spire'])}**"], s248b.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 247 : LE TRANSFERT, TENTÉ
     # (1) ⚠⚠⚠ LE JUGE D'ABORD : la couche que le segment porte lui-même au tour voisin.
     s247a = _source(racine, "la_spire_voisine_est_elle_a_un_pas.json")

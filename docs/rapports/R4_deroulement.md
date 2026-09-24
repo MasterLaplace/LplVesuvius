@@ -3960,6 +3960,16 @@ par d'autres, **0,915** et **0,9166** contre **0,8208** et **0,8107**.
 ⚠⚠⚠ Aucune spire entière n'est produite : une maille sur huit, sans maillage. `R4-P92` s'ouvre : en faire une surface, et
 la juger par les boucles.
 
+**`248` · 2026-09-24 · le transfert, enchaîné** — quatre sauts, jugés par la bande `w028-037`
+
+⭐⭐⭐⭐ **La chaîne tient la spire saut après saut, et le pas fixe s'effondre dès le deuxième** — `R4-F414` : parmi les
+**9379** et **8790** points qui ont une couche à chacun des quatre sauts, la chaîne tient les quatre d'affilée sur
+**0,7236** et **0,7703** d'entre eux avec `m7`, **0,6958** et **0,7536** avec `ps256`, le pas fixe sur **0,3243** et
+**0,3651** ; recalculer la normale ne coûte rien. ⚠⚠⚠ Chaque saut perd encore de 0,09 à 0,14 de ceux qui avaient tenu,
+et un saut raté est définitif. `R4-F415` : les ratés tombent surtout trop près, au premier saut là où la bande elle-même
+saute plus d'un pas et demi. `R4-F416` : `20230702185753` confirme les deux premiers sauts. `R4-P93` s'ouvre : départager
+la bande et la chaîne là où la bande saute.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

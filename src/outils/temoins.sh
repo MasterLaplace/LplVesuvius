@@ -1633,6 +1633,8 @@ run "figure la couverture sans main" uv run python "$ROOT/src/figures/figure_la_
 run "la spire voisine est-elle a un pas" uv run python "$ROOT/src/nappe/la_spire_voisine_est_elle_a_un_pas.py" --verifier
 run "le transfert retrouve-t-il la spire voisine" uv run python "$ROOT/src/nappe/le_transfert_retrouve_t_il_la_spire_voisine.py" --verifier
 run "figure le transfert retrouve-t-il la spire voisine" uv run python "$ROOT/src/figures/figure_le_transfert_retrouve_t_il_la_spire_voisine.py" --verifier
+run "le transfert enchaine tient-il les spires" uv run python "$ROOT/src/nappe/le_transfert_enchaine_tient_il_les_spires.py" --verifier
+run "figure le transfert enchaine tient-il les spires" uv run python "$ROOT/src/figures/figure_le_transfert_enchaine_tient_il_les_spires.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
