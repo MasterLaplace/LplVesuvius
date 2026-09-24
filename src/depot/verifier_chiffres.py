@@ -3208,6 +3208,64 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 240 : LES AILES TIENNENT-ELLES SUR LEUR PROFIL ?
+    # (1) ⚠⚠⚠ UNE COUVERTURE NE VOYAGE JAMAIS SANS CE QU'ELLE LAISSE : les chunks qu'aucune boucle n'entoure.
+    s240 = _source(racine, "les_ailes_tiennent_elles_sur_leur_profil.json")
+    if s240.exists():
+        d = json.loads(s240.read_text())
+        lib240 = {"haut": "l'aile du haut", "gauche": "l'aile de gauche", "droite": "l'aile de droite",
+                  "bas": "l'aile du bas"}
+        k9 = str((d.get("le_verdict") or {}).get("la_largeur_jugee"))
+        for c in (d.get("le_verdict") or {}).get("les_ailes_jugees") or []:
+            dc = (d.get("les_decoupages") or {}).get(c) or {}
+            cs = [str(x) for x in dc.get("les_coupes") or []]
+            if len(cs) > 1:
+                out.append((f"les coupes de {lib240[c]} de 240", [f"aux coupes {', '.join(cs[:-1])} et {cs[-1]}"],
+                            s240.name))
+            pa = (d.get("par_aile") or {}).get(c) or {}
+            e_ = ((pa.get("lemboitement") or {}).get("par_largeur") or {}).get(k9) or {}
+            if e_.get("jugeable"):
+                out.append((f"{lib240[c]} de 240 contre 234",
+                            [f"somme à **{_fr222(e_['la_somme_des_sous_boucles'])}** à neuf lignes contre "
+                             f"{_fr222(e_['la_fermeture_de_laile'])} publiée par `234`"], s240.name))
+            for sb in pa.get("par_sous_boucle") or []:
+                x_ = sb["par_largeur"].get(k9) or {}
+                if x_.get("fermable"):
+                    out.append((f"la sous-boucle {sb['entre'][0]} à {sb['entre'][1]} de 240",
+                                [f"| {sb['entre'][0]} à {sb['entre'][1]} | {_fr222(x_['la_fermeture_en_voxels'])} | "
+                                 f"{_fr222(x_['la_dispersion_du_pas_en_voxels'])} | "
+                                 f"{_fr222(x_['le_nul']['la_fermeture_mediane_en_valeur_absolue'])} | "
+                                 f"{_fr222(x_['le_nul']['la_part_sous_la_fermeture'])} |"], s240.name))
+            pr = pa.get("le_profil") or []
+            pic = (pa.get("le_verdict") or {}).get("le_pic") or {}
+            if pr and cs:
+                lbl = "la colonne" if dc.get("le_sens") == "colonnes" else "la rangée"
+                cel = [(f"**{_fr222(q['le_cumul_en_voxels'])}**" if q == pic else _fr222(q["le_cumul_en_voxels"]))
+                       for q in pr]
+                out.append((f"le profil de {lib240[c]} de 240",
+                            ["| coupe | " + " | ".join(str(q["la_coupe"]) for q in pr) + " |",
+                             f"| cumul depuis {lbl} {cs[0]} | " + " | ".join(cel) + " |"], s240.name))
+            if pic:
+                out.append((f"le pic de {lib240[c]} de 240",
+                            [f"Le cumul de {lib240[c]} va au plus à **{_fr222(pic['le_cumul_en_voxels'])}** voxels, à la "
+                             f"coupe {pic['la_coupe']}"], s240.name))
+        pl240 = d.get("la_presence_contre_la_lecture") or {}
+        if pl240.get("decidable"):
+            out.append(("la présence contre la lecture de 240",
+                        [f"sur les **{pl240['combien_de_lignes']}** lignes lues"], s240.name))
+        rp240 = d.get("la_reproduction") or {}
+        if rp240.get("decidable") and rp240.get("combien_de_coutures_relues"):
+            out.append(("la relecture de 240",
+                        [f"retombent en **{rp240['combien_de_coutures_relues']}** coutures, écart "
+                         f"**{_fr222(rp240['lecart_le_plus_grand'])}**"], s240.name))
+        cv240 = (d.get("la_couverture") or {}).get("par_les_boucles_qui_restent_dessous_sur_leur_profil") or {}
+        if cv240:
+            out.append(("la couverture de 240",
+                        [f"entourent **{cv240['combien']}** chunks sur **{cv240['sur']}**, "
+                         f"**{_fr222(cv240['la_part'])}** de l'empreinte"], s240.name))
+            out.append(("ce que la couverture de 240 laisse",
+                        [f"les **{cv240['sur'] - cv240['combien']}** chunks de l'empreinte"], s240.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 239 : LE RECTANGLE ENTRE SES COUPES
     # (1) ⚠⚠⚠ LE PROFIL NE VOYAGE JAMAIS SANS LA PORTÉE : une traversée plus courte n'est pas vue.
     s239 = _source(racine, "le_rectangle_entre_ses_coupes.json")

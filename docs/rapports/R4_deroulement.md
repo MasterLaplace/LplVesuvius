@@ -3882,6 +3882,18 @@ l'écart **0**, et les **11** tranches fines somment à **−11,8449**.
 ⭐⭐⭐⭐ **Donc `R4-P84` est répondue à la portée de `235`.** `R4-P85` s'ouvre : les ailes du haut et de gauche de `234`,
 jugées sur leur profil, restent-elles sous le demi-feuillet ?
 
+**`240` · 2026-09-24 · les ailes tiennent-elles sur leur profil**
+
+⭐⭐ **Les ailes du haut et de gauche, coupées par la règle de `235`** : **5** et **10** sous-boucles, deux coupes voisines à
+dix coutures au plus ; lues, les 13 coupes retombent en **2853** coutures à l'écart **0**, et les sous-boucles somment à la
+fermeture que `234` publie pour chaque aile.
+⭐⭐⭐⭐ **Les deux ailes tiennent sur leur profil** — `R4-F405` : à neuf lignes, le cumul de l'aile du haut va au plus à
+**−8,1875**, celui de l'aile de gauche à **6,9446** ; avec le rectangle, les boucles qui tiennent sur leur profil entourent
+**0,8795** de l'empreinte.
+⚠ La dernière sous-boucle de l'aile de gauche sort de son bruit seul, à **10,5** voxels, loin du demi-feuillet.
+⭐⭐⭐⭐ **Donc `R4-P85` est répondue.** `R4-P86` s'ouvre : qu'est-ce qui relie au rectangle, sur la même spire, les
+**11778** chunks qu'aucune boucle qui tient sur son profil n'entoure ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
