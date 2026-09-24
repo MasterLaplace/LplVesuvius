@@ -3208,6 +3208,65 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 237 : L'ETROITE RESTE-T-ELLE SANS ECART ?
+    # (1) ⚠⚠⚠ UN PROFIL NE VOYAGE JAMAIS SANS SON POINT LE PLUS LOIN DE ZERO NI SANS LES COUPES OU IL ATTEINT LE
+    # DEMI-FEUILLET : c'est la que le jugement au bout se defait.
+    s237 = _source(racine, "letroite_reste_t_elle_sans_ecart.json")
+    if s237.exists():
+        d = json.loads(s237.read_text())
+        cs237 = d.get("les_coupes_de_letroite") or []
+        if cs237:
+            out.append(("les coupes de l'étroite de 237", [f"les **{len(cs237) - 2}** tiennent"], s237.name))
+        pl237 = d.get("la_presence_contre_la_lecture") or {}
+        if pl237.get("decidable"):
+            out.append(("la présence contre la lecture de 237",
+                        [f"Sur les **{pl237['combien_de_lignes']}** lignes lues"], s237.name))
+        rp237 = d.get("la_reproduction") or {}
+        if rp237.get("decidable"):
+            out.append(("la relecture de 237",
+                        [f"retombent en **{rp237['combien_de_coutures_relues']}** coutures, écart "
+                         f"**{_fr222(rp237['lecart_le_plus_grand'])}**"], s237.name))
+        ee = (d.get("lemboitement_de_letroite") or {}).get("par_largeur") or {}
+        if (ee.get("9") or {}).get("jugeable") and (ee.get("7") or {}).get("jugeable"):
+            out.append(("l'étroite de 237 contre 236",
+                        [f"**{_fr222(ee['9']['la_somme_des_sous_boucles'])}** à neuf lignes, "
+                         f"{_fr222(ee['7']['la_somme_des_sous_boucles'])} contre "
+                         f"{_fr222(ee['7']['la_fermeture_de_laile'])} à sept"], s237.name))
+        PF = d.get("par_famille") or {}
+        v237 = d.get("le_verdict") or {}
+        k9 = str(v237.get("la_largeur_jugee"))
+        if all(n in PF for n in ("laile", "letroite", "la_large")):
+            for j, sb in enumerate(PF["letroite"]):
+                xs = [PF[n][j]["par_largeur"][k9] for n in ("laile", "letroite", "la_large")]
+                if all(x["fermable"] for x in xs):
+                    out.append((f"l'intervalle {sb['entre'][0]} à {sb['entre'][1]} de 237",
+                                [f"| {sb['entre'][0]} à {sb['entre'][1]} | "
+                                 + " | ".join(_fr222(x["la_fermeture_en_voxels"]) for x in xs) + " |"], s237.name))
+            pg = v237.get("la_plus_grande_de_la_large") or {}
+            if pg:
+                j_ = next((j for j, sb in enumerate(PF["letroite"]) if sb["entre"] == pg["entre"]), None)
+                if j_ is not None:
+                    xa, xe = PF["laile"][j_]["par_largeur"][k9], PF["letroite"][j_]["par_largeur"][k9]
+                    out.append(("la plus grande sous-boucle de la large de 237",
+                                [f"{_fr222(xe['la_fermeture_en_voxels'])} et {_fr222(pg['la_fermeture_en_voxels'])}, "
+                                 f"l'aile {_fr222(xa['la_fermeture_en_voxels'])}"], s237.name))
+        PR = d.get("les_profils") or {}
+        fr237 = v237.get("les_franchissements") or {}
+        lib_ = {"letroite": "l'étroite", "laile": "l'aile", "la_large": "la large"}
+        for n in ("letroite", "laile", "la_large"):
+            pr_ = PR.get(n) or []
+            if not pr_:
+                continue
+            ext = max(pr_, key=lambda q: abs(q["le_cumul_en_voxels"]))
+            cf = ", ".join(str(q["la_coupe"]) for q in fr237.get(n) or []) or "aucune"
+            out.append((f"le profil {n} de 237",
+                        [f"| {lib_[n]} | {_fr222(ext['le_cumul_en_voxels'])}, à la coupe {ext['la_coupe']} | "
+                         f"{_fr222(pr_[-1]['le_cumul_en_voxels'])} | {cf} |"], s237.name))
+        pic = v237.get("le_pic_de_letroite") or {}
+        if pic:
+            out.append(("le pic de l'étroite de 237",
+                        [f"{_fr222(abs(pic['le_cumul_en_voxels']))} voxels ; les deux boucles"], s237.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 236 : LAQUELLE DES DEUX COLONNES DERIVE ?
     # (1) ⚠⚠⚠ LA COLONNE DESIGNEE NE VOYAGE JAMAIS SANS SA PLUS PETITE MARGE SUR LE BRUIT SEUL.
     s236 = _source(racine, "laquelle_des_deux_colonnes_derive.json")

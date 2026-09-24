@@ -1612,6 +1612,8 @@ run "ou l'aile de droite se separe" uv run python "$ROOT/src/nappe/ou_laile_de_d
 run "figure ou l'aile de droite se separe" uv run python "$ROOT/src/figures/figure_ou_laile_de_droite_se_separe.py" --verifier
 run "laquelle des deux colonnes derive" uv run python "$ROOT/src/nappe/laquelle_des_deux_colonnes_derive.py" --verifier
 run "figure laquelle des deux colonnes derive" uv run python "$ROOT/src/figures/figure_laquelle_des_deux_colonnes_derive.py" --verifier
+run "l'etroite reste-t-elle sans ecart" uv run python "$ROOT/src/nappe/letroite_reste_t_elle_sans_ecart.py" --verifier
+run "figure l'etroite reste-t-elle sans ecart" uv run python "$ROOT/src/figures/figure_letroite_reste_t_elle_sans_ecart.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -3850,6 +3850,17 @@ et la large à **−26,4125** ; l'étroite est la plus serrée aux quatre largeu
 ⭐⭐⭐⭐ **Donc `R4-P81` est répondue.** `R4-P82` s'ouvre : découpée aux coupes de `235`, l'étroite reste-t-elle sans écart
 cumulé pendant que l'aile dérive, et où la colonne 260 s'écarte-t-elle ?
 
+**`237` · 2026-09-24 · l'étroite reste-t-elle sans écart**
+
+⭐⭐ **Les coupes, reprises** : les **20** coupes de `235` tiennent entre les colonnes 234 et 243 ; lues, elles retombent
+en **3057** coutures à l'écart **0**, et les trois familles de sous-boucles s'emboîtent dans chaque intervalle.
+⭐⭐⭐⭐ **L'étroite reste sous le demi-feuillet tout du long** — `R4-F402` : son cumul va au plus à **−12,1874** ; ceux de
+l'aile et de la large, qui passent par la colonne 260, l'atteignent chacun à trois coupes, jusqu'à **−40,2188** et
+**−43,25**.
+⚠⚠⚠ Le « oui » de `234` pour l'aile de droite ne tient pas : il faut juger une boucle sur son profil, pas à son bout.
+⭐⭐⭐⭐ **Donc `R4-P82` est répondue.** `R4-P83` s'ouvre : le plus grand rectangle de `233`, jugé sur son profil, reste-t-il
+sous le demi-feuillet ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
