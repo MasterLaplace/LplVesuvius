@@ -4008,6 +4008,13 @@ continue et d'une pièce, la chaîne retombe sur la bonne spire en **0,948** et 
 **0,8949** et **0,9103** des points au lieu de **0,7236** et **0,7703** ; le pas fixe reste à **0,3536** et **0,3763**.
 `R4-P93` a une réponse, sous réserve : là où le juge se déchire, la matière est peut-être aussi la plus difficile.
 
+**`254` · 2026-09-24 · réparer avant le saut suivant** — le retour et le désaccord signalent, les voisins réparent
+
+⚠⚠⚠ **La réparation par les voisins ne remplace pas l'humain** — `R4-F427` : au premier saut, elle rend justes **0,0837**
+et **0,0844** des points qu'elle touche et en rend ratés **0,0648** et **0,0525** ; près des trois quarts des ratés
+touchés restent ratés. `R4-F428` : la chaîne tient les quatre sauts sur **0,7247** et **0,7725** des points au lieu de
+**0,7236** et **0,7703**.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

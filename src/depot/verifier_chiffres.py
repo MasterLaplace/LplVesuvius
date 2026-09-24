@@ -3208,6 +3208,36 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 254 : RÉPARER AVANT LE SAUT SUIVANT
+    s254 = _source(racine, "reparer_avant_le_saut_suivant.json")
+    if s254.exists():
+        d = json.loads(s254.read_text())
+        xp, xm = d.get("du_cote_plus") or {}, d.get("du_cote_moins") or {}
+        if xp and xm:
+            out.append(("les points touchés dans 254",
+                        ["**" + " · ".join(_fr222(v_) for v_ in xp["la_part_reparee_par_saut"]) + "** des points côté plus et **"
+                         + " · ".join(_fr222(v_) for v_ in xm["la_part_reparee_par_saut"][:2]) + " ·"], s254.name))
+            cp, cm = xp["ce_que_la_reparation_a_fait_au_premier_saut"], xm["ce_que_la_reparation_a_fait_au_premier_saut"]
+            out.append(("les points réparés jugés dans 254", [f"sur les **{cp['les_points_repares_notes']}** et **{cm['les_points_repares_notes']}** points réparés"],
+                        s254.name))
+            for nom, cle in (("raté devenu juste", "rate_devenu_juste"), ("juste devenu raté", "juste_devenu_rate"),
+                             ("resté juste", "reste_juste"), ("resté raté", "reste_rate")):
+                out.append((f"{nom} dans 254", [f"| {nom} | {_fr222(cp[cle])} | {_fr222(cm[cle])} |"], s254.name))
+            for nom, cle_r, juge, gras in (("jugée comme `248`, sans réparation", "sans_reparation", "le_juge_de_248", False),
+                                           ("jugée comme `248`, en réparant", "en_reparant", "le_juge_de_248", True),
+                                           ("jugée sans falaise, sans réparation", "sans_reparation", "le_juge_sans_falaise", False),
+                                           ("jugée sans falaise, en réparant", "en_reparant", "le_juge_sans_falaise", True)):
+                a_ = _fr222(xp[cle_r][juge]["qui_tient"]["la_chaine"]["la_part_qui_tient_tous_les_sauts"])
+                b_ = _fr222(xm[cle_r][juge]["qui_tient"]["la_chaine"]["la_part_qui_tient_tous_les_sauts"])
+                ligne = f"| **{nom}** | **{a_}** | **{b_}** |" if gras else f"| {nom} | {a_} | {b_} |"
+                out.append((f"la tenue {nom} dans 254", [ligne], s254.name))
+            ap = xp["sans_reparation"]["le_juge_de_248"]["sur_les_points_notes_a_chaque_saut"]["la_chaine"]
+            bp = xp["en_reparant"]["le_juge_de_248"]["sur_les_points_notes_a_chaque_saut"]["la_chaine"]
+            out.append(("les courbes de 254", ["**" + " · ".join(_fr222(v_) for v_ in ap[:3]) + " ·",
+                                               "**" + " · ".join(_fr222(v_) for v_ in bp[:3]) + " ·"], s254.name))
+            if xp["la_chaine_sans_reparation_contre_248_ecart_max_voxels"] == 0.0 and xm["la_chaine_sans_reparation_contre_248_ecart_max_voxels"] == 0.0:
+                out.append(("la chaîne sans réparation de 254 est celle de 248", ["c'est celle de `248`, au voxel près"], s254.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 253 : LA CHAÎNE, REJUGÉE HORS DES DÉCHIRURES
     s253 = _source(racine, "la_chaine_rejugee_hors_des_dechirures.json")
     if s253.exists():
