@@ -72,14 +72,16 @@ def _progress(a, journal) -> int:
 
 def _first_letters(a, journal) -> int:
     from vesuve.first_letters.pipeline import lancer
-    r = lancer(Path(a.couches), Path(a.surface), a.rouleau, Path(a.sortie), cote_mm=a.cote_mm, modele=a.modele,
-               journal=journal)
+    r = lancer(Path(a.couches), Path(a.surface), a.rouleau, Path(a.sortie), cote_mm=a.cote_mm,
+               modele=Path(a.modele) if a.modele else None, carte=Path(a.carte) if a.carte else None,
+               etiquettes=Path(a.etiquettes) if a.etiquettes else None, journal=journal)
     return 2 if r.arrete else 0
 
 
 def _paris4_title(a, journal) -> int:
     from vesuve.paris4_title.pipeline import lancer
-    r = lancer(Path(a.cartes), Path(a.sortie), Path(a.cache), journal=journal)
+    r = lancer(Path(a.cartes), Path(a.sortie), Path(a.cache), maillages=Path(a.maillages) if a.maillages else None,
+               journal=journal)
     return 2 if r.arrete else 0
 
 
@@ -124,10 +126,13 @@ def main(argv=None) -> int:
     fl.add_argument("--rouleau", required=True, help="le rouleau, pour l'éligibilité et le régime (PHerc1447…)")
     fl.add_argument("--cote-mm", type=float, default=20.0, help="le côté de la zone, en mm (défaut 20 : 4 cm²)")
     fl.add_argument("--modele", default=None, help="le dossier du modèle d'encre (TimeSformer), optionnel")
+    fl.add_argument("--carte", default=None, help="une carte d'encre déjà inférée (.npy, logits), de la forme de la pile")
+    fl.add_argument("--etiquettes", default=None, help="les étiquettes d'entraînement du modèle, pour le recouvrement")
     commun(fl, "sorties/first-letters")
 
     t = sous.add_parser("paris4-title", help="chercher le titre de Scroll 1 là où finit le texte")
-    t.add_argument("--cartes", required=True, help="le dossier des cartes d'encre publiées de PHercParis4")
+    t.add_argument("--cartes", required=True, help="le dossier des cartes d'encre publiées de PHercParis4 (wNNN-MMM)")
+    t.add_argument("--maillages", default=None, help="le dossier des maillages des bandes (un tifxyz par segment)")
     commun(t, "sorties/paris4-title")
 
     d = sous.add_parser("demo", help="les quatre pipelines, sur les données embarquées et locales")

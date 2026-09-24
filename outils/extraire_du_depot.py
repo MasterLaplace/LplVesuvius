@@ -94,6 +94,14 @@ def extraire(recherche: Path, sortie: Path) -> dict:
                           "les_fichiers": {str(p.relative_to(recherche)): _empreinte(p) for p in sources_lues}},
     }
     _ecrire(sortie / "contexte.json", contexte)
+
+    # L'axe courbe de PHercParis4 (`90`), pour le pipeline du titre : où est le cœur.
+    axe = json.loads((mesures / "laxe_est_une_courbe.json").read_text())
+    (sortie.parents[1] / "paris4").mkdir(parents=True, exist_ok=True)
+    _ecrire(sortie.parents[1] / "paris4" / "laxe.json",
+            {"le_volume": axe["volume"], "le_voxel_um": axe["voxel_um"], "la_trace": axe["trace"],
+             "la_provenance": {"le_fichier": "docs/mesures/laxe_est_une_courbe.json",
+                               "son_empreinte": _empreinte(mesures / "laxe_est_une_courbe.json")}})
     return contexte
 
 

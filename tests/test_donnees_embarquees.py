@@ -17,10 +17,13 @@ def test_lembarque_egale_une_extraction_fraiche(tmp_path):
     spec = importlib.util.spec_from_file_location("extraire", ICI / "outils" / "extraire_du_depot.py")
     m = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(m)
+    tmp_path = tmp_path / "segments" / m.LE_SEGMENT
     m.extraire(LA_RECHERCHE, tmp_path)
     for f in ("presence.json.gz", "bandes_publiees.json.gz", "sources_de_controle.json.gz"):
         assert (tmp_path / f).read_bytes() == (donnees.LA_RACINE / m.LE_SEGMENT / f).read_bytes(), \
             f"{f} est périmé : relancer outils/extraire_du_depot.py"
+    assert (tmp_path.parents[1] / "paris4" / "laxe.json").read_bytes() == \
+        (donnees.LA_RACINE.parent / "paris4" / "laxe.json").read_bytes(), "laxe.json est périmé"
     frais = json.loads((tmp_path / "contexte.json").read_text())
     embarque = donnees.le_segment(m.LE_SEGMENT)["contexte"]
     frais["la_provenance"].pop("le_commit_de_la_recherche")

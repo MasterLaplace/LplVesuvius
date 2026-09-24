@@ -14,6 +14,8 @@ dependencies = [
     "imagecodecs>=2024.1",
     "numcodecs>=0.12,<0.16",
     "pillow>=10.0",
+    # scipy : la rotation des profils de rangées (`vesuve/rendu/rangees.py`), comme chez le producteur.
+    "scipy>=1.11",
 ]
 
 [project.optional-dependencies]
@@ -49,4 +51,6 @@ torch = { index = "pytorch-cpu" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+# La porte de merge : un avertissement est une erreur, ici et non dans un script de CI.
+filterwarnings = ["error"]
 markers = ["reseau: lit le bucket public (dl.ash2txt.org, S3) ; sauté sans VESUVE_RESEAU=1"]
