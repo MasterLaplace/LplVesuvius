@@ -1,7 +1,7 @@
 ---
 id: V-001
 titre: Un logiciel qui exécute, prix par prix, ce que le dépôt a validé
-statut: EN COURS
+statut: LIVRÉ
 priorite: 1
 ouvert: 2026-09-24
 ---
@@ -47,3 +47,23 @@ C11 et services Python, adossés aux nombres publiés.
 
 Ce qui n'est pas couvert : dérouler un rouleau entier (le Grand Prize n'est pas gagné par ce
 logiciel, il dit jusqu'où la chaîne va), lire du grec, entraîner un modèle.
+
+## Livré le 2026-09-24
+
+Les cinq critères, vérifiés le jour même :
+
+1. Les quatre verbes tournent sur des données réelles (`exemples/`, un run daté). Grand Prize : 6333
+   chunks sur 97771 certifiés, et 111 bandes (24263 chunks) nommées comme restant à lire. Progress :
+   la colonne 260, rangées 26 à 223, désignée. First Letters sur PHerc1447 : aucune rangée
+   périodique, dit comme tel. Paris 4 : la dernière colonne de `w010-027`, courte, et la zone qui la
+   suit, sur la révision qui recale à 0,98.
+2. `make test` : 98 vérifications C, 0 échec, sous ASan et UBSan, zéro avertissement.
+3. `pytest` : 75 tests verts deux fois de suite (`VESUVE_RESEAU=1`), chacun sondé en cassant la règle
+   qu'il garde.
+4. `docker build` construit et teste le noyau ; `docker run --network none` va au bout du Grand Prize
+   et de Progress.
+5. Hors ligne, les étages distants disent « le réseau a échoué » et nomment le fichier ; sans
+   `--donnees`, First Letters et Paris 4 sont sautés en le disant.
+
+Ce qui reste, et qui n'est pas ce logiciel : lire les 111 bandes (`vesuve grand-prize --lire`), et
+faire regarder les vues de Paris 4 par un papyrologue.

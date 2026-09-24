@@ -1,0 +1,29 @@
+[
+ {
+  "la_boucle": [
+   26,
+   223,
+   243,
+   260
+  ],
+  "le_cote": "droite",
+  "la_largeur": 9,
+  "la_fermeture_en_voxels": -35.6938,
+  "le_pic": {
+   "la_coupe": 173,
+   "le_cumul_en_voxels": -40.2188
+  },
+  "les_coupes_au_dela_du_demi_feuillet": [
+   163,
+   173,
+   203
+  ],
+  "le_departage": "départagée",
+  "la_troisieme_ligne": 234,
+  "la_ligne_qui_derive": 260,
+  "les_marges": {
+   "laile": 11.2626,
+   "la_large": 2.8875
+  }
+ }
+]

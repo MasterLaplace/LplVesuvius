@@ -1,0 +1,3368 @@
+{
+ "le_rectangle": [
+  26,
+  384,
+  22,
+  243
+ ],
+ "le_journal": [
+  {
+   "la_boucle": "le rectangle",
+   "les_coins": [
+    26,
+    384,
+    22,
+    243
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     22,
+     243
+    ],
+    "les_coupes": [
+     26,
+     44,
+     62,
+     80,
+     99,
+     115,
+     132,
+     148,
+     165,
+     181,
+     198,
+     214,
+     231,
+     247,
+     264,
+     280,
+     297,
+     326,
+     355,
+     384
+    ],
+    "les_coupes_deja_lues": [
+     62,
+     99,
+     132,
+     165,
+     198,
+     231,
+     264,
+     297,
+     326,
+     355
+    ],
+    "combien_de_sous_boucles": 19,
+    "le_plus_grand_ecart": 29,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_44_22_243_9",
+     "le_sens": "rangees",
+     "le_centre": 44,
+     "les_lignes": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48
+     ],
+     "de": 22,
+     "a": 243
+    },
+    {
+     "cle": "rangees_80_22_243_9",
+     "le_sens": "rangees",
+     "le_centre": 80,
+     "les_lignes": [
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84
+     ],
+     "de": 22,
+     "a": 243
+    },
+    {
+     "cle": "rangees_115_22_243_9",
+     "le_sens": "rangees",
+     "le_centre": 115,
+     "les_lignes": [
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119
+     ],
+     "de": 22,
+     "a": 243
+    },
+    {
+     "cle": "rangees_148_22_243_9",
+     "le_sens": "rangees",
+     "le_centre": 148,
+     "les_lignes": [
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152
+     ],
+     "de": 22,
+     "a": 243
+    },
+    {
+     "cle": "rangees_181_22_243_9",
+     "le_sens": "rangees",
+     "le_centre": 181,
+     "les_lignes": [
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185
+     ],
+     "de": 22,
+     "a": 243
+    },
+    {
+     "cle": "rangees_214_22_243_9",
+     "le_sens": "rangees",
+     "le_centre": 214,
+     "les_lignes": [
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218
+     ],
+     "de": 22,
+     "a": 243
+    },
+    {
+     "cle": "rangees_247_22_243_9",
+     "le_sens": "rangees",
+     "le_centre": 247,
+     "les_lignes": [
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251
+     ],
+     "de": 22,
+     "a": 243
+    },
+    {
+     "cle": "rangees_280_22_243_9",
+     "le_sens": "rangees",
+     "le_centre": 280,
+     "les_lignes": [
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
+      284
+     ],
+     "de": 22,
+     "a": 243
+    }
+   ],
+   "ce_quelle_coute": 15984
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    22,
+    243
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    14,
+    26,
+    32,
+    81
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     14,
+     26
+    ],
+    "les_coupes": [
+     32,
+     41,
+     51,
+     61,
+     71,
+     81
+    ],
+    "les_coupes_deja_lues": [
+     41,
+     51,
+     61,
+     71
+    ],
+    "combien_de_sous_boucles": 5,
+    "le_plus_grand_ecart": 10,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "dessous",
+   "la_fermeture": -2.0133,
+   "le_profil": [
+    {
+     "la_coupe": 41,
+     "le_cumul_en_voxels": -3.625
+    },
+    {
+     "la_coupe": 51,
+     "le_cumul_en_voxels": 1.875
+    },
+    {
+     "la_coupe": 61,
+     "le_cumul_en_voxels": -6.4375
+    },
+    {
+     "la_coupe": 71,
+     "le_cumul_en_voxels": -8.1875
+    },
+    {
+     "la_coupe": 81,
+     "le_cumul_en_voxels": -2.0133
+    }
+   ],
+   "le_pic": {
+    "la_coupe": 71,
+    "le_cumul_en_voxels": -8.1875
+   }
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    22,
+    32
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    20,
+    26,
+    22,
+    32
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     20,
+     26
+    ],
+    "les_coupes": [
+     22,
+     32
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 10,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_20_22_32_5",
+     "le_sens": "rangees",
+     "le_centre": 20,
+     "les_lignes": [
+      18,
+      19,
+      20,
+      21,
+      22
+     ],
+     "de": 22,
+     "a": 32
+    },
+    {
+     "cle": "colonnes_22_20_26_5",
+     "le_sens": "colonnes",
+     "le_centre": 22,
+     "les_lignes": [
+      20,
+      21,
+      22,
+      23,
+      24
+     ],
+     "de": 20,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 90
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    81,
+    243
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    15,
+    26,
+    126,
+    173
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     15,
+     26
+    ],
+    "les_coupes": [
+     126,
+     149,
+     173
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 2,
+    "le_plus_grand_ecart": 24,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_15_126_173_9",
+     "le_sens": "rangees",
+     "le_centre": 15,
+     "les_lignes": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+     ],
+     "de": 126,
+     "a": 173
+    },
+    {
+     "cle": "colonnes_126_15_26_9",
+     "le_sens": "colonnes",
+     "le_centre": 126,
+     "les_lignes": [
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130
+     ],
+     "de": 15,
+     "a": 26
+    },
+    {
+     "cle": "colonnes_173_15_26_9",
+     "le_sens": "colonnes",
+     "le_centre": 173,
+     "les_lignes": [
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177
+     ],
+     "de": 15,
+     "a": 26
+    },
+    {
+     "cle": "colonnes_149_15_26_9",
+     "le_sens": "colonnes",
+     "le_centre": 149,
+     "les_lignes": [
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153
+     ],
+     "de": 15,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 756
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    81,
+    126
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    17,
+    26,
+    81,
+    90
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     17,
+     26
+    ],
+    "les_coupes": [
+     81,
+     90
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 9,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_17_81_90_9",
+     "le_sens": "rangees",
+     "le_centre": 17,
+     "les_lignes": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+     ],
+     "de": 81,
+     "a": 90
+    },
+    {
+     "cle": "colonnes_90_17_26_9",
+     "le_sens": "colonnes",
+     "le_centre": 90,
+     "les_lignes": [
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94
+     ],
+     "de": 17,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 180
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    90,
+    126
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    20,
+    26,
+    109,
+    126
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     20,
+     26
+    ],
+    "les_coupes": [
+     109,
+     126
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 17,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_20_109_126_5",
+     "le_sens": "rangees",
+     "le_centre": 20,
+     "les_lignes": [
+      18,
+      19,
+      20,
+      21,
+      22
+     ],
+     "de": 109,
+     "a": 126
+    },
+    {
+     "cle": "colonnes_109_20_26_5",
+     "le_sens": "colonnes",
+     "le_centre": 109,
+     "les_lignes": [
+      107,
+      108,
+      109,
+      110,
+      111
+     ],
+     "de": 20,
+     "a": 26
+    },
+    {
+     "cle": "colonnes_126_20_26_5",
+     "le_sens": "colonnes",
+     "le_centre": 126,
+     "les_lignes": [
+      124,
+      125,
+      126,
+      127,
+      128
+     ],
+     "de": 20,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 160
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    90,
+    109
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    21,
+    26,
+    90,
+    96
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     21,
+     26
+    ],
+    "les_coupes": [
+     90,
+     96
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 6,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_21_90_96_5",
+     "le_sens": "rangees",
+     "le_centre": 21,
+     "les_lignes": [
+      19,
+      20,
+      21,
+      22,
+      23
+     ],
+     "de": 90,
+     "a": 96
+    },
+    {
+     "cle": "colonnes_90_21_26_5",
+     "le_sens": "colonnes",
+     "le_centre": 90,
+     "les_lignes": [
+      88,
+      89,
+      90,
+      91,
+      92
+     ],
+     "de": 21,
+     "a": 26
+    },
+    {
+     "cle": "colonnes_96_21_26_5",
+     "le_sens": "colonnes",
+     "le_centre": 96,
+     "les_lignes": [
+      94,
+      95,
+      96,
+      97,
+      98
+     ],
+     "de": 21,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 95
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    96,
+    109
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    23,
+    26,
+    96,
+    109
+   ],
+   "la_largeur": 3,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     23,
+     26
+    ],
+    "les_coupes": [
+     96,
+     109
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 13,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_23_96_109_3",
+     "le_sens": "rangees",
+     "le_centre": 23,
+     "les_lignes": [
+      22,
+      23,
+      24
+     ],
+     "de": 96,
+     "a": 109
+    },
+    {
+     "cle": "colonnes_96_23_26_3",
+     "le_sens": "colonnes",
+     "le_centre": 96,
+     "les_lignes": [
+      95,
+      96,
+      97
+     ],
+     "de": 23,
+     "a": 26
+    },
+    {
+     "cle": "colonnes_109_23_26_3",
+     "le_sens": "colonnes",
+     "le_centre": 109,
+     "les_lignes": [
+      108,
+      109,
+      110
+     ],
+     "de": 23,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 66
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    173,
+    243
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    15,
+    26,
+    216,
+    243
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     15,
+     26
+    ],
+    "les_coupes": [
+     216,
+     243
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 27,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_15_216_243_9",
+     "le_sens": "rangees",
+     "le_centre": 15,
+     "les_lignes": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+     ],
+     "de": 216,
+     "a": 243
+    },
+    {
+     "cle": "colonnes_216_15_26_9",
+     "le_sens": "colonnes",
+     "le_centre": 216,
+     "les_lignes": [
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219,
+      220
+     ],
+     "de": 15,
+     "a": 26
+    },
+    {
+     "cle": "colonnes_243_15_26_9",
+     "le_sens": "colonnes",
+     "le_centre": 243,
+     "les_lignes": [
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247
+     ],
+     "de": 15,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 468
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    173,
+    216
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    18,
+    26,
+    173,
+    181
+   ],
+   "la_largeur": 7,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     18,
+     26
+    ],
+    "les_coupes": [
+     173,
+     181
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 8,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_18_173_181_7",
+     "le_sens": "rangees",
+     "le_centre": 18,
+     "les_lignes": [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+     ],
+     "de": 173,
+     "a": 181
+    },
+    {
+     "cle": "colonnes_173_18_26_7",
+     "le_sens": "colonnes",
+     "le_centre": 173,
+     "les_lignes": [
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176
+     ],
+     "de": 18,
+     "a": 26
+    },
+    {
+     "cle": "colonnes_181_18_26_7",
+     "le_sens": "colonnes",
+     "le_centre": 181,
+     "les_lignes": [
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184
+     ],
+     "de": 18,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 189
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    181,
+    216
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    21,
+    26,
+    197,
+    216
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     21,
+     26
+    ],
+    "les_coupes": [
+     197,
+     216
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 19,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_21_197_216_5",
+     "le_sens": "rangees",
+     "le_centre": 21,
+     "les_lignes": [
+      19,
+      20,
+      21,
+      22,
+      23
+     ],
+     "de": 197,
+     "a": 216
+    },
+    {
+     "cle": "colonnes_197_21_26_5",
+     "le_sens": "colonnes",
+     "le_centre": 197,
+     "les_lignes": [
+      195,
+      196,
+      197,
+      198,
+      199
+     ],
+     "de": 21,
+     "a": 26
+    },
+    {
+     "cle": "colonnes_216_21_26_5",
+     "le_sens": "colonnes",
+     "le_centre": 216,
+     "les_lignes": [
+      214,
+      215,
+      216,
+      217,
+      218
+     ],
+     "de": 21,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 160
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    181,
+    197
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    21,
+    26,
+    181,
+    190
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     21,
+     26
+    ],
+    "les_coupes": [
+     181,
+     190
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 9,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_21_181_190_5",
+     "le_sens": "rangees",
+     "le_centre": 21,
+     "les_lignes": [
+      19,
+      20,
+      21,
+      22,
+      23
+     ],
+     "de": 181,
+     "a": 190
+    },
+    {
+     "cle": "colonnes_181_21_26_5",
+     "le_sens": "colonnes",
+     "le_centre": 181,
+     "les_lignes": [
+      179,
+      180,
+      181,
+      182,
+      183
+     ],
+     "de": 21,
+     "a": 26
+    },
+    {
+     "cle": "colonnes_190_21_26_5",
+     "le_sens": "colonnes",
+     "le_centre": 190,
+     "les_lignes": [
+      188,
+      189,
+      190,
+      191,
+      192
+     ],
+     "de": 21,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 110
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "haut",
+   "la_portion": [
+    190,
+    197
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    22,
+    26,
+    190,
+    197
+   ],
+   "la_largeur": 3,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     22,
+     26
+    ],
+    "les_coupes": [
+     190,
+     197
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 7,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_22_190_197_3",
+     "le_sens": "rangees",
+     "le_centre": 22,
+     "les_lignes": [
+      21,
+      22,
+      23
+     ],
+     "de": 190,
+     "a": 197
+    },
+    {
+     "cle": "colonnes_190_22_26_3",
+     "le_sens": "colonnes",
+     "le_centre": 190,
+     "les_lignes": [
+      189,
+      190,
+      191
+     ],
+     "de": 22,
+     "a": 26
+    },
+    {
+     "cle": "colonnes_197_22_26_3",
+     "le_sens": "colonnes",
+     "le_centre": 197,
+     "les_lignes": [
+      196,
+      197,
+      198
+     ],
+     "de": 22,
+     "a": 26
+    }
+   ],
+   "ce_quelle_coute": 54
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "droite",
+   "la_portion": [
+    26,
+    384
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    26,
+    223,
+    243,
+    260
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     243,
+     260
+    ],
+    "les_coupes": [
+     26,
+     35,
+     44,
+     53,
+     62,
+     71,
+     80,
+     89,
+     98,
+     107,
+     116,
+     125,
+     134,
+     143,
+     153,
+     163,
+     173,
+     183,
+     193,
+     203,
+     213,
+     223
+    ],
+    "les_coupes_deja_lues": [
+     35,
+     44,
+     53,
+     62,
+     71,
+     80,
+     89,
+     98,
+     107,
+     116,
+     125,
+     134,
+     143,
+     153,
+     163,
+     173,
+     183,
+     193,
+     203,
+     213
+    ],
+    "combien_de_sous_boucles": 21,
+    "le_plus_grand_ecart": 10,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "franchit",
+   "la_fermeture": -35.6938,
+   "le_profil": [
+    {
+     "la_coupe": 35,
+     "le_cumul_en_voxels": -1.875
+    },
+    {
+     "la_coupe": 44,
+     "le_cumul_en_voxels": 1.875
+    },
+    {
+     "la_coupe": 53,
+     "le_cumul_en_voxels": -5.9375
+    },
+    {
+     "la_coupe": 62,
+     "le_cumul_en_voxels": -6.2187
+    },
+    {
+     "la_coupe": 71,
+     "le_cumul_en_voxels": -5.5937
+    },
+    {
+     "la_coupe": 80,
+     "le_cumul_en_voxels": -17.9999
+    },
+    {
+     "la_coupe": 89,
+     "le_cumul_en_voxels": -13.3749
+    },
+    {
+     "la_coupe": 98,
+     "le_cumul_en_voxels": -20.8437
+    },
+    {
+     "la_coupe": 107,
+     "le_cumul_en_voxels": -19.6875
+    },
+    {
+     "la_coupe": 116,
+     "le_cumul_en_voxels": -24.2813
+    },
+    {
+     "la_coupe": 125,
+     "le_cumul_en_voxels": -25.1563
+    },
+    {
+     "la_coupe": 134,
+     "le_cumul_en_voxels": -26.6251
+    },
+    {
+     "la_coupe": 143,
+     "le_cumul_en_voxels": -24.6563
+    },
+    {
+     "la_coupe": 153,
+     "le_cumul_en_voxels": -27.0313
+    },
+    {
+     "la_coupe": 163,
+     "le_cumul_en_voxels": -36.6563
+    },
+    {
+     "la_coupe": 173,
+     "le_cumul_en_voxels": -40.2188
+    },
+    {
+     "la_coupe": 183,
+     "le_cumul_en_voxels": -31.8813
+    },
+    {
+     "la_coupe": 193,
+     "le_cumul_en_voxels": -34.3501
+    },
+    {
+     "la_coupe": 203,
+     "le_cumul_en_voxels": -37.6626
+    },
+    {
+     "la_coupe": 213,
+     "le_cumul_en_voxels": -30.6626
+    },
+    {
+     "la_coupe": 223,
+     "le_cumul_en_voxels": -35.6938
+    }
+   ],
+   "le_pic": {
+    "la_coupe": 173,
+    "le_cumul_en_voxels": -40.2188
+   },
+   "le_departage": {
+    "letat": "départagée",
+    "la_troisieme_ligne": {
+     "la_ligne": 234,
+     "le_sens": "colonnes",
+     "la_plus_proche": 243,
+     "la_plus_loin": 260,
+     "du_cote_du_rectangle": true,
+     "lecart": 9
+    },
+    "le_verdict": {
+     "la_largeur_jugee": 9,
+     "les_boucles_ouvertes": [],
+     "la_plus_serree": "letroite",
+     "tranche": true,
+     "la_ligne_qui_derive": 260,
+     "les_marges": {
+      "laile": 11.2626,
+      "la_large": 2.8875
+     },
+     "cest_une_colonne_de_laile": true
+    }
+   }
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "droite",
+   "la_portion": [
+    26,
+    384
+   ],
+   "les_exclues": [
+    [
+     260,
+     9
+    ]
+   ],
+   "les_coins": [
+    26,
+    112,
+    243,
+    269
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     243,
+     269
+    ],
+    "les_coupes": [
+     26,
+     54,
+     83,
+     112
+    ],
+    "les_coupes_deja_lues": [
+     54,
+     83
+    ],
+    "combien_de_sous_boucles": 3,
+    "le_plus_grand_ecart": 29,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "dessous",
+   "la_fermeture": 1.2159,
+   "le_profil": [
+    {
+     "la_coupe": 54,
+     "le_cumul_en_voxels": 7.3125
+    },
+    {
+     "la_coupe": 83,
+     "le_cumul_en_voxels": -5.125
+    },
+    {
+     "la_coupe": 112,
+     "le_cumul_en_voxels": 1.2159
+    }
+   ],
+   "le_pic": {
+    "la_coupe": 54,
+    "le_cumul_en_voxels": 7.3125
+   }
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "droite",
+   "la_portion": [
+    112,
+    384
+   ],
+   "les_exclues": [
+    [
+     260,
+     9
+    ]
+   ],
+   "les_coins": [
+    112,
+    266,
+    243,
+    252
+   ],
+   "la_largeur": 7,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     243,
+     252
+    ],
+    "les_coupes": [
+     112,
+     125,
+     134,
+     143,
+     150,
+     163,
+     173,
+     183,
+     193,
+     203,
+     213,
+     223,
+     244,
+     266
+    ],
+    "les_coupes_deja_lues": [
+     125,
+     134,
+     143,
+     150,
+     163,
+     173,
+     183,
+     193,
+     203,
+     213,
+     223
+    ],
+    "combien_de_sous_boucles": 13,
+    "le_plus_grand_ecart": 22,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_244_243_252_7",
+     "le_sens": "rangees",
+     "le_centre": 244,
+     "les_lignes": [
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247
+     ],
+     "de": 243,
+     "a": 252
+    }
+   ],
+   "ce_quelle_coute": 70
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "droite",
+   "la_portion": [
+    266,
+    384
+   ],
+   "les_exclues": [
+    [
+     260,
+     9
+    ]
+   ],
+   "les_coins": [
+    339,
+    384,
+    243,
+    251
+   ],
+   "la_largeur": 7,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     243,
+     251
+    ],
+    "les_coupes": [
+     339,
+     361,
+     384
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 2,
+    "le_plus_grand_ecart": 23,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_339_243_251_7",
+     "le_sens": "rangees",
+     "le_centre": 339,
+     "les_lignes": [
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342
+     ],
+     "de": 243,
+     "a": 251
+    },
+    {
+     "cle": "rangees_384_243_251_7",
+     "le_sens": "rangees",
+     "le_centre": 384,
+     "les_lignes": [
+      381,
+      382,
+      383,
+      384,
+      385,
+      386,
+      387
+     ],
+     "de": 243,
+     "a": 251
+    },
+    {
+     "cle": "colonnes_251_339_384_7",
+     "le_sens": "colonnes",
+     "le_centre": 251,
+     "les_lignes": [
+      248,
+      249,
+      250,
+      251,
+      252,
+      253,
+      254
+     ],
+     "de": 339,
+     "a": 384
+    },
+    {
+     "cle": "rangees_361_243_251_7",
+     "le_sens": "rangees",
+     "le_centre": 361,
+     "les_lignes": [
+      358,
+      359,
+      360,
+      361,
+      362,
+      363,
+      364
+     ],
+     "de": 243,
+     "a": 251
+    }
+   ],
+   "ce_quelle_coute": 511
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "droite",
+   "la_portion": [
+    266,
+    339
+   ],
+   "les_exclues": [
+    [
+     260,
+     9
+    ]
+   ],
+   "les_coins": [
+    320,
+    339,
+    243,
+    248
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     243,
+     248
+    ],
+    "les_coupes": [
+     320,
+     339
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 19,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_320_243_248_5",
+     "le_sens": "rangees",
+     "le_centre": 320,
+     "les_lignes": [
+      318,
+      319,
+      320,
+      321,
+      322
+     ],
+     "de": 243,
+     "a": 248
+    },
+    {
+     "cle": "rangees_339_243_248_5",
+     "le_sens": "rangees",
+     "le_centre": 339,
+     "les_lignes": [
+      337,
+      338,
+      339,
+      340,
+      341
+     ],
+     "de": 243,
+     "a": 248
+    },
+    {
+     "cle": "colonnes_248_320_339_5",
+     "le_sens": "colonnes",
+     "le_centre": 248,
+     "les_lignes": [
+      246,
+      247,
+      248,
+      249,
+      250
+     ],
+     "de": 320,
+     "a": 339
+    }
+   ],
+   "ce_quelle_coute": 160
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "droite",
+   "la_portion": [
+    266,
+    320
+   ],
+   "les_exclues": [
+    [
+     260,
+     9
+    ]
+   ],
+   "les_coins": [
+    266,
+    279,
+    243,
+    248
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     243,
+     248
+    ],
+    "les_coupes": [
+     266,
+     279
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 13,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_279_243_248_5",
+     "le_sens": "rangees",
+     "le_centre": 279,
+     "les_lignes": [
+      277,
+      278,
+      279,
+      280,
+      281
+     ],
+     "de": 243,
+     "a": 248
+    },
+    {
+     "cle": "colonnes_248_266_279_5",
+     "le_sens": "colonnes",
+     "le_centre": 248,
+     "les_lignes": [
+      246,
+      247,
+      248,
+      249,
+      250
+     ],
+     "de": 266,
+     "a": 279
+    }
+   ],
+   "ce_quelle_coute": 100
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "droite",
+   "la_portion": [
+    279,
+    320
+   ],
+   "les_exclues": [
+    [
+     260,
+     9
+    ]
+   ],
+   "les_coins": [
+    279,
+    320,
+    243,
+    246
+   ],
+   "la_largeur": 3,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     243,
+     246
+    ],
+    "les_coupes": [
+     279,
+     299,
+     320
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 2,
+    "le_plus_grand_ecart": 21,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_279_243_246_3",
+     "le_sens": "rangees",
+     "le_centre": 279,
+     "les_lignes": [
+      278,
+      279,
+      280
+     ],
+     "de": 243,
+     "a": 246
+    },
+    {
+     "cle": "rangees_320_243_246_3",
+     "le_sens": "rangees",
+     "le_centre": 320,
+     "les_lignes": [
+      319,
+      320,
+      321
+     ],
+     "de": 243,
+     "a": 246
+    },
+    {
+     "cle": "colonnes_246_279_320_3",
+     "le_sens": "colonnes",
+     "le_centre": 246,
+     "les_lignes": [
+      245,
+      246,
+      247
+     ],
+     "de": 279,
+     "a": 320
+    },
+    {
+     "cle": "rangees_299_243_246_3",
+     "le_sens": "rangees",
+     "le_centre": 299,
+     "les_lignes": [
+      298,
+      299,
+      300
+     ],
+     "de": 243,
+     "a": 246
+    }
+   ],
+   "ce_quelle_coute": 162
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "bas",
+   "la_portion": [
+    22,
+    243
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    384,
+    389,
+    117,
+    156
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     384,
+     389
+    ],
+    "les_coupes": [
+     117,
+     136,
+     156
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 2,
+    "le_plus_grand_ecart": 20,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_389_117_156_5",
+     "le_sens": "rangees",
+     "le_centre": 389,
+     "les_lignes": [
+      387,
+      388,
+      389,
+      390,
+      391
+     ],
+     "de": 117,
+     "a": 156
+    },
+    {
+     "cle": "colonnes_117_384_389_5",
+     "le_sens": "colonnes",
+     "le_centre": 117,
+     "les_lignes": [
+      115,
+      116,
+      117,
+      118,
+      119
+     ],
+     "de": 384,
+     "a": 389
+    },
+    {
+     "cle": "colonnes_156_384_389_5",
+     "le_sens": "colonnes",
+     "le_centre": 156,
+     "les_lignes": [
+      154,
+      155,
+      156,
+      157,
+      158
+     ],
+     "de": 384,
+     "a": 389
+    },
+    {
+     "cle": "colonnes_136_384_389_5",
+     "le_sens": "colonnes",
+     "le_centre": 136,
+     "les_lignes": [
+      134,
+      135,
+      136,
+      137,
+      138
+     ],
+     "de": 384,
+     "a": 389
+    }
+   ],
+   "ce_quelle_coute": 290
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "bas",
+   "la_portion": [
+    22,
+    117
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    384,
+    389,
+    28,
+    61
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     384,
+     389
+    ],
+    "les_coupes": [
+     28,
+     44,
+     61
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 2,
+    "le_plus_grand_ecart": 17,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_389_28_61_5",
+     "le_sens": "rangees",
+     "le_centre": 389,
+     "les_lignes": [
+      387,
+      388,
+      389,
+      390,
+      391
+     ],
+     "de": 28,
+     "a": 61
+    },
+    {
+     "cle": "colonnes_28_384_389_5",
+     "le_sens": "colonnes",
+     "le_centre": 28,
+     "les_lignes": [
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "de": 384,
+     "a": 389
+    },
+    {
+     "cle": "colonnes_61_384_389_5",
+     "le_sens": "colonnes",
+     "le_centre": 61,
+     "les_lignes": [
+      59,
+      60,
+      61,
+      62,
+      63
+     ],
+     "de": 384,
+     "a": 389
+    },
+    {
+     "cle": "colonnes_44_384_389_5",
+     "le_sens": "colonnes",
+     "le_centre": 44,
+     "les_lignes": [
+      42,
+      43,
+      44,
+      45,
+      46
+     ],
+     "de": 384,
+     "a": 389
+    }
+   ],
+   "ce_quelle_coute": 260
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "bas",
+   "la_portion": [
+    22,
+    28
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    384,
+    389,
+    22,
+    28
+   ],
+   "la_largeur": 3,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     384,
+     389
+    ],
+    "les_coupes": [
+     22,
+     28
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 6,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_389_22_28_3",
+     "le_sens": "rangees",
+     "le_centre": 389,
+     "les_lignes": [
+      388,
+      389,
+      390
+     ],
+     "de": 22,
+     "a": 28
+    },
+    {
+     "cle": "colonnes_22_384_389_3",
+     "le_sens": "colonnes",
+     "le_centre": 22,
+     "les_lignes": [
+      21,
+      22,
+      23
+     ],
+     "de": 384,
+     "a": 389
+    },
+    {
+     "cle": "colonnes_28_384_389_3",
+     "le_sens": "colonnes",
+     "le_centre": 28,
+     "les_lignes": [
+      27,
+      28,
+      29
+     ],
+     "de": 384,
+     "a": 389
+    }
+   ],
+   "ce_quelle_coute": 57
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "bas",
+   "la_portion": [
+    61,
+    117
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    384,
+    387,
+    61,
+    117
+   ],
+   "la_largeur": 3,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     384,
+     387
+    ],
+    "les_coupes": [
+     61,
+     89,
+     117
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 2,
+    "le_plus_grand_ecart": 28,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_387_61_117_3",
+     "le_sens": "rangees",
+     "le_centre": 387,
+     "les_lignes": [
+      386,
+      387,
+      388
+     ],
+     "de": 61,
+     "a": 117
+    },
+    {
+     "cle": "colonnes_61_384_387_3",
+     "le_sens": "colonnes",
+     "le_centre": 61,
+     "les_lignes": [
+      60,
+      61,
+      62
+     ],
+     "de": 384,
+     "a": 387
+    },
+    {
+     "cle": "colonnes_117_384_387_3",
+     "le_sens": "colonnes",
+     "le_centre": 117,
+     "les_lignes": [
+      116,
+      117,
+      118
+     ],
+     "de": 384,
+     "a": 387
+    },
+    {
+     "cle": "colonnes_89_384_387_3",
+     "le_sens": "colonnes",
+     "le_centre": 89,
+     "les_lignes": [
+      88,
+      89,
+      90
+     ],
+     "de": 384,
+     "a": 387
+    }
+   ],
+   "ce_quelle_coute": 207
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "bas",
+   "la_portion": [
+    156,
+    243
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    384,
+    389,
+    204,
+    242
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     384,
+     389
+    ],
+    "les_coupes": [
+     204,
+     223,
+     242
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 2,
+    "le_plus_grand_ecart": 19,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_389_204_242_5",
+     "le_sens": "rangees",
+     "le_centre": 389,
+     "les_lignes": [
+      387,
+      388,
+      389,
+      390,
+      391
+     ],
+     "de": 204,
+     "a": 242
+    },
+    {
+     "cle": "colonnes_204_384_389_5",
+     "le_sens": "colonnes",
+     "le_centre": 204,
+     "les_lignes": [
+      202,
+      203,
+      204,
+      205,
+      206
+     ],
+     "de": 384,
+     "a": 389
+    },
+    {
+     "cle": "colonnes_242_384_389_5",
+     "le_sens": "colonnes",
+     "le_centre": 242,
+     "les_lignes": [
+      240,
+      241,
+      242,
+      243,
+      244
+     ],
+     "de": 384,
+     "a": 389
+    },
+    {
+     "cle": "colonnes_223_384_389_5",
+     "le_sens": "colonnes",
+     "le_centre": 223,
+     "les_lignes": [
+      221,
+      222,
+      223,
+      224,
+      225
+     ],
+     "de": 384,
+     "a": 389
+    }
+   ],
+   "ce_quelle_coute": 285
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "bas",
+   "la_portion": [
+    156,
+    204
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    384,
+    387,
+    156,
+    204
+   ],
+   "la_largeur": 3,
+   "le_decoupage": {
+    "le_sens": "colonnes",
+    "les_bornes": [
+     384,
+     387
+    ],
+    "les_coupes": [
+     156,
+     180,
+     204
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 2,
+    "le_plus_grand_ecart": 24,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_387_156_204_3",
+     "le_sens": "rangees",
+     "le_centre": 387,
+     "les_lignes": [
+      386,
+      387,
+      388
+     ],
+     "de": 156,
+     "a": 204
+    },
+    {
+     "cle": "colonnes_156_384_387_3",
+     "le_sens": "colonnes",
+     "le_centre": 156,
+     "les_lignes": [
+      155,
+      156,
+      157
+     ],
+     "de": 384,
+     "a": 387
+    },
+    {
+     "cle": "colonnes_204_384_387_3",
+     "le_sens": "colonnes",
+     "le_centre": 204,
+     "les_lignes": [
+      203,
+      204,
+      205
+     ],
+     "de": 384,
+     "a": 387
+    },
+    {
+     "cle": "colonnes_180_384_387_3",
+     "le_sens": "colonnes",
+     "le_centre": 180,
+     "les_lignes": [
+      179,
+      180,
+      181
+     ],
+     "de": 384,
+     "a": 387
+    }
+   ],
+   "ce_quelle_coute": 183
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "bas",
+   "la_portion": [
+    242,
+    243
+   ],
+   "les_exclues": [],
+   "letat": "aucune aile"
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    26,
+    384
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    216,
+    308,
+    13,
+    22
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     13,
+     22
+    ],
+    "les_coupes": [
+     216,
+     225,
+     234,
+     243,
+     252,
+     261,
+     270,
+     279,
+     288,
+     298,
+     308
+    ],
+    "les_coupes_deja_lues": [
+     225,
+     234,
+     243,
+     252,
+     261,
+     270,
+     279,
+     288,
+     298
+    ],
+    "combien_de_sous_boucles": 10,
+    "le_plus_grand_ecart": 10,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "dessous",
+   "la_fermeture": 6.9445,
+   "le_profil": [
+    {
+     "la_coupe": 225,
+     "le_cumul_en_voxels": 0.2014
+    },
+    {
+     "la_coupe": 234,
+     "le_cumul_en_voxels": 1.382
+    },
+    {
+     "la_coupe": 243,
+     "le_cumul_en_voxels": -1.368
+    },
+    {
+     "la_coupe": 252,
+     "le_cumul_en_voxels": -0.3992
+    },
+    {
+     "la_coupe": 261,
+     "le_cumul_en_voxels": -1.1804
+    },
+    {
+     "la_coupe": 270,
+     "le_cumul_en_voxels": -3.5866
+    },
+    {
+     "la_coupe": 279,
+     "le_cumul_en_voxels": -4.3366
+    },
+    {
+     "la_coupe": 288,
+     "le_cumul_en_voxels": -2.8366
+    },
+    {
+     "la_coupe": 298,
+     "le_cumul_en_voxels": -3.5554
+    },
+    {
+     "la_coupe": 308,
+     "le_cumul_en_voxels": 6.9446
+    }
+   ],
+   "le_pic": {
+    "la_coupe": 308,
+    "le_cumul_en_voxels": 6.9446
+   }
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    26,
+    216
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    78,
+    148,
+    13,
+    22
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     13,
+     22
+    ],
+    "les_coupes": [
+     78,
+     101,
+     124,
+     148
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 3,
+    "le_plus_grand_ecart": 24,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_78_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 78,
+     "les_lignes": [
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82
+     ],
+     "de": 13,
+     "a": 22
+    },
+    {
+     "cle": "rangees_148_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 148,
+     "les_lignes": [
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152
+     ],
+     "de": 13,
+     "a": 22
+    },
+    {
+     "cle": "colonnes_13_78_148_9",
+     "le_sens": "colonnes",
+     "le_centre": 13,
+     "les_lignes": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+     ],
+     "de": 78,
+     "a": 148
+    },
+    {
+     "cle": "rangees_101_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 101,
+     "les_lignes": [
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105
+     ],
+     "de": 13,
+     "a": 22
+    },
+    {
+     "cle": "rangees_124_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 124,
+     "les_lignes": [
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128
+     ],
+     "de": 13,
+     "a": 22
+    }
+   ],
+   "ce_quelle_coute": 999
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    26,
+    78
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    39,
+    78,
+    15,
+    22
+   ],
+   "la_largeur": 7,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     15,
+     22
+    ],
+    "les_coupes": [
+     39,
+     58,
+     78
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 2,
+    "le_plus_grand_ecart": 20,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_39_15_22_7",
+     "le_sens": "rangees",
+     "le_centre": 39,
+     "les_lignes": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42
+     ],
+     "de": 15,
+     "a": 22
+    },
+    {
+     "cle": "rangees_78_15_22_7",
+     "le_sens": "rangees",
+     "le_centre": 78,
+     "les_lignes": [
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81
+     ],
+     "de": 15,
+     "a": 22
+    },
+    {
+     "cle": "colonnes_15_39_78_7",
+     "le_sens": "colonnes",
+     "le_centre": 15,
+     "les_lignes": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+     ],
+     "de": 39,
+     "a": 78
+    },
+    {
+     "cle": "rangees_58_15_22_7",
+     "le_sens": "rangees",
+     "le_centre": 58,
+     "les_lignes": [
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61
+     ],
+     "de": 15,
+     "a": 22
+    }
+   ],
+   "ce_quelle_coute": 448
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    26,
+    39
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    26,
+    39,
+    16,
+    22
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     16,
+     22
+    ],
+    "les_coupes": [
+     26,
+     39
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 13,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_26_16_22_5",
+     "le_sens": "rangees",
+     "le_centre": 26,
+     "les_lignes": [
+      24,
+      25,
+      26,
+      27,
+      28
+     ],
+     "de": 16,
+     "a": 22
+    },
+    {
+     "cle": "rangees_39_16_22_5",
+     "le_sens": "rangees",
+     "le_centre": 39,
+     "les_lignes": [
+      37,
+      38,
+      39,
+      40,
+      41
+     ],
+     "de": 16,
+     "a": 22
+    },
+    {
+     "cle": "colonnes_16_26_39_5",
+     "le_sens": "colonnes",
+     "le_centre": 16,
+     "les_lignes": [
+      14,
+      15,
+      16,
+      17,
+      18
+     ],
+     "de": 26,
+     "a": 39
+    }
+   ],
+   "ce_quelle_coute": 140
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    148,
+    216
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    153,
+    185,
+    13,
+    22
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     13,
+     22
+    ],
+    "les_coupes": [
+     153,
+     169,
+     185
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 2,
+    "le_plus_grand_ecart": 16,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_153_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 153,
+     "les_lignes": [
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157
+     ],
+     "de": 13,
+     "a": 22
+    },
+    {
+     "cle": "rangees_185_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 185,
+     "les_lignes": [
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189
+     ],
+     "de": 13,
+     "a": 22
+    },
+    {
+     "cle": "colonnes_13_153_185_9",
+     "le_sens": "colonnes",
+     "le_centre": 13,
+     "les_lignes": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+     ],
+     "de": 153,
+     "a": 185
+    },
+    {
+     "cle": "rangees_169_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 169,
+     "les_lignes": [
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173
+     ],
+     "de": 13,
+     "a": 22
+    }
+   ],
+   "ce_quelle_coute": 567
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    148,
+    153
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    148,
+    153,
+    12,
+    22
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     12,
+     22
+    ],
+    "les_coupes": [
+     148,
+     153
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 5,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_148_12_22_5",
+     "le_sens": "rangees",
+     "le_centre": 148,
+     "les_lignes": [
+      146,
+      147,
+      148,
+      149,
+      150
+     ],
+     "de": 12,
+     "a": 22
+    },
+    {
+     "cle": "rangees_153_12_22_5",
+     "le_sens": "rangees",
+     "le_centre": 153,
+     "les_lignes": [
+      151,
+      152,
+      153,
+      154,
+      155
+     ],
+     "de": 12,
+     "a": 22
+    },
+    {
+     "cle": "colonnes_12_148_153_5",
+     "le_sens": "colonnes",
+     "le_centre": 12,
+     "les_lignes": [
+      10,
+      11,
+      12,
+      13,
+      14
+     ],
+     "de": 148,
+     "a": 153
+    }
+   ],
+   "ce_quelle_coute": 140
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    185,
+    216
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    185,
+    196,
+    17,
+    22
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     17,
+     22
+    ],
+    "les_coupes": [
+     185,
+     196
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 11,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_185_17_22_5",
+     "le_sens": "rangees",
+     "le_centre": 185,
+     "les_lignes": [
+      183,
+      184,
+      185,
+      186,
+      187
+     ],
+     "de": 17,
+     "a": 22
+    },
+    {
+     "cle": "rangees_196_17_22_5",
+     "le_sens": "rangees",
+     "le_centre": 196,
+     "les_lignes": [
+      194,
+      195,
+      196,
+      197,
+      198
+     ],
+     "de": 17,
+     "a": 22
+    },
+    {
+     "cle": "colonnes_17_185_196_5",
+     "le_sens": "colonnes",
+     "le_centre": 17,
+     "les_lignes": [
+      15,
+      16,
+      17,
+      18,
+      19
+     ],
+     "de": 185,
+     "a": 196
+    }
+   ],
+   "ce_quelle_coute": 120
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    196,
+    216
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    209,
+    216,
+    17,
+    22
+   ],
+   "la_largeur": 5,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     17,
+     22
+    ],
+    "les_coupes": [
+     209,
+     216
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 7,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_209_17_22_5",
+     "le_sens": "rangees",
+     "le_centre": 209,
+     "les_lignes": [
+      207,
+      208,
+      209,
+      210,
+      211
+     ],
+     "de": 17,
+     "a": 22
+    },
+    {
+     "cle": "colonnes_17_209_216_5",
+     "le_sens": "colonnes",
+     "le_centre": 17,
+     "les_lignes": [
+      15,
+      16,
+      17,
+      18,
+      19
+     ],
+     "de": 209,
+     "a": 216
+    }
+   ],
+   "ce_quelle_coute": 70
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    196,
+    209
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    196,
+    209,
+    19,
+    22
+   ],
+   "la_largeur": 3,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     19,
+     22
+    ],
+    "les_coupes": [
+     196,
+     209
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 13,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_196_19_22_3",
+     "le_sens": "rangees",
+     "le_centre": 196,
+     "les_lignes": [
+      195,
+      196,
+      197
+     ],
+     "de": 19,
+     "a": 22
+    },
+    {
+     "cle": "rangees_209_19_22_3",
+     "le_sens": "rangees",
+     "le_centre": 209,
+     "les_lignes": [
+      208,
+      209,
+      210
+     ],
+     "de": 19,
+     "a": 22
+    },
+    {
+     "cle": "colonnes_19_196_209_3",
+     "le_sens": "colonnes",
+     "le_centre": 19,
+     "les_lignes": [
+      18,
+      19,
+      20
+     ],
+     "de": 196,
+     "a": 209
+    }
+   ],
+   "ce_quelle_coute": 66
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    308,
+    384
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    315,
+    384,
+    13,
+    22
+   ],
+   "la_largeur": 9,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     13,
+     22
+    ],
+    "les_coupes": [
+     315,
+     338,
+     361,
+     384
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 3,
+    "le_plus_grand_ecart": 23,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_315_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 315,
+     "les_lignes": [
+      311,
+      312,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318,
+      319
+     ],
+     "de": 13,
+     "a": 22
+    },
+    {
+     "cle": "rangees_384_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 384,
+     "les_lignes": [
+      380,
+      381,
+      382,
+      383,
+      384,
+      385,
+      386,
+      387,
+      388
+     ],
+     "de": 13,
+     "a": 22
+    },
+    {
+     "cle": "colonnes_13_315_384_9",
+     "le_sens": "colonnes",
+     "le_centre": 13,
+     "les_lignes": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+     ],
+     "de": 315,
+     "a": 384
+    },
+    {
+     "cle": "rangees_338_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 338,
+     "les_lignes": [
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342
+     ],
+     "de": 13,
+     "a": 22
+    },
+    {
+     "cle": "rangees_361_13_22_9",
+     "le_sens": "rangees",
+     "le_centre": 361,
+     "les_lignes": [
+      357,
+      358,
+      359,
+      360,
+      361,
+      362,
+      363,
+      364,
+      365
+     ],
+     "de": 13,
+     "a": 22
+    }
+   ],
+   "ce_quelle_coute": 990
+  },
+  {
+   "la_boucle": "l'aile",
+   "le_cote": "gauche",
+   "la_portion": [
+    308,
+    315
+   ],
+   "les_exclues": [],
+   "les_coins": [
+    308,
+    315,
+    13,
+    22
+   ],
+   "la_largeur": 7,
+   "le_decoupage": {
+    "le_sens": "rangees",
+    "les_bornes": [
+     13,
+     22
+    ],
+    "les_coupes": [
+     308,
+     315
+    ],
+    "les_coupes_deja_lues": [],
+    "combien_de_sous_boucles": 1,
+    "le_plus_grand_ecart": 7,
+    "les_ecarts_au_dela_de_la_portee": []
+   },
+   "letat": "à lire",
+   "les_demandes": [
+    {
+     "cle": "rangees_315_13_22_7",
+     "le_sens": "rangees",
+     "le_centre": 315,
+     "les_lignes": [
+      312,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318
+     ],
+     "de": 13,
+     "a": 22
+    },
+    {
+     "cle": "colonnes_13_308_315_7",
+     "le_sens": "colonnes",
+     "le_centre": 13,
+     "les_lignes": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+     ],
+     "de": 308,
+     "a": 315
+    }
+   ],
+   "ce_quelle_coute": 126
+  }
+ ],
+ "les_boucles_qui_tiennent": [
+  {
+   "les_coins": [
+    14,
+    26,
+    32,
+    81
+   ],
+   "la_largeur": 9
+  },
+  {
+   "les_coins": [
+    26,
+    112,
+    243,
+    269
+   ],
+   "la_largeur": 9
+  },
+  {
+   "les_coins": [
+    216,
+    308,
+    13,
+    22
+   ],
+   "la_largeur": 9
+  }
+ ],
+ "la_couverture": {
+  "combien": 6333,
+  "sur": 97771,
+  "la_part": 0.0648
+ },
+ "ce_qui_reste_a_lire": 24263
+}
