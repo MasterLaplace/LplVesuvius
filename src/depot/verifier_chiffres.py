@@ -3208,6 +3208,70 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 236 : LAQUELLE DES DEUX COLONNES DERIVE ?
+    # (1) ⚠⚠⚠ LA COLONNE DESIGNEE NE VOYAGE JAMAIS SANS SA PLUS PETITE MARGE SUR LE BRUIT SEUL.
+    s236 = _source(racine, "laquelle_des_deux_colonnes_derive.json")
+    if s236.exists():
+        d = json.loads(s236.read_text())
+        tl236 = d.get("la_troisieme_ligne") or {}
+        if tl236:
+            cote_ = "du côté du rectangle" if tl236.get("du_cote_du_rectangle") else "de l'autre côté de l'aile"
+            out.append(("la troisième ligne de 236",
+                        [f"C'est la colonne **{tl236['la_ligne']}**, {cote_}, à **{tl236['lecart']}** colonnes de la "
+                         f"{tl236['la_plus_proche']}"], s236.name))
+        pl236 = d.get("la_presence_contre_la_lecture") or {}
+        if pl236.get("decidable"):
+            out.append(("la présence contre la lecture de 236", [f"les **{pl236['combien_de_lignes']}** lignes lues"],
+                        s236.name))
+        rp236 = d.get("la_reproduction") or {}
+        if rp236.get("decidable"):
+            out.append(("la relecture de 236",
+                        [f"retombent en **{rp236['combien_de_coutures_relues']}** coutures, écart "
+                         f"**{_fr222(rp236['lecart_le_plus_grand'])}**"], s236.name))
+        PB = d.get("par_boucle") or {}
+        v236 = d.get("le_verdict") or {}
+        k9 = str(v236.get("la_largeur_jugee"))
+        EM = (d.get("lemboitement") or {}).get("par_largeur") or {}
+        noms_ = ("laile", "letroite", "la_large")
+        if all(n in PB for n in noms_):
+            for k_ in sorted(PB["laile"]["par_largeur"], key=int):
+                xs = {n: PB[n]["par_largeur"][k_] for n in noms_}
+                if not all(x["fermable"] for x in xs.values()) or not (EM.get(k_) or {}).get("jugeable"):
+                    continue
+                cel = []
+                for n in noms_:
+                    c_ = _fr222(xs[n]["la_fermeture_en_voxels"])
+                    cel.append(f"**{c_}**" if k_ == k9 and n == v236.get("la_plus_serree") else c_)
+                out.append((f"les trois boucles de 236 à {k_} lignes",
+                            [f"| {k_} | " + " | ".join(cel) + f" | {_fr222(EM[k_]['lecart'])} |"], s236.name))
+            lib_ = {"laile": "l'aile", "letroite": "l'étroite", "la_large": "la large"}
+            excl = {"laile": tl236.get("la_ligne"), "letroite": tl236.get("la_plus_loin"),
+                    "la_large": tl236.get("la_plus_proche")}
+            for n in noms_:
+                x_ = PB[n]["par_largeur"].get(k9) or {}
+                if not x_.get("fermable"):
+                    continue
+                L_ = _fr222(x_["la_fermeture_en_voxels"])
+                if n == v236.get("la_plus_serree"):
+                    L_ = f"**{L_}**"
+                out.append((f"la boucle {n} de 236 contre le bruit seul",
+                            [f"| {lib_[n]} | {excl[n]} | {L_} | "
+                             f"{_fr222(x_['le_nul']['la_fermeture_mediane_en_valeur_absolue'])} | "
+                             f"{_fr222(x_['le_nul']['la_part_sous_la_fermeture'])} |"], s236.name))
+            mg = v236.get("les_marges") or {}
+            if "laile" in mg and "la_large" in mg:
+                out.append(("les marges de 236",
+                            [f"**{_fr222(mg['laile'])}** voxels sur l'aile et de **{_fr222(mg['la_large'])}** sur la "
+                             f"large", f"La marge sur la large, {_fr222(mg['la_large'])} voxels"], s236.name))
+            xa, xe = PB["laile"]["par_largeur"].get(k9) or {}, PB["letroite"]["par_largeur"].get(k9) or {}
+            if xa.get("fermable") and xe.get("fermable"):
+                ca = {c["le_cote"]: c["la_somme_en_voxels"] for c in xa["les_cotes"]}
+                ce = {c["le_cote"]: c["la_somme_en_voxels"] for c in xe["les_cotes"]}
+                out.append(("les sommes par colonne de 236",
+                            [f"vaut {_fr222(ce['gauche'])} pour la",
+                             f"{_fr222(ce['droite'])} pour la {PB['letroite']['les_coins'][3]} et "
+                             f"{_fr222(ca['droite'])} pour la {PB['laile']['les_coins'][3]}"], s236.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 235 : OU L'AILE DE DROITE SE SEPARE-T-ELLE ?
     # (1) ⚠⚠⚠ UNE SOUS-BOUCLE NE VOYAGE JAMAIS SANS SON BRUIT SEUL, et le profil jamais sans les coupes ou il
     # atteint le demi-feuillet : c'est la que le « oui » de 234 se defait.

@@ -1610,6 +1610,8 @@ run "le segment au-dela du rectangle se relie-t-il" uv run python "$ROOT/src/nap
 run "figure le segment au-dela du rectangle se relie-t-il" uv run python "$ROOT/src/figures/figure_le_segment_au_dela_du_rectangle_se_relie_t_il.py" --verifier
 run "ou l'aile de droite se separe" uv run python "$ROOT/src/nappe/ou_laile_de_droite_se_separe.py" --verifier
 run "figure ou l'aile de droite se separe" uv run python "$ROOT/src/figures/figure_ou_laile_de_droite_se_separe.py" --verifier
+run "laquelle des deux colonnes derive" uv run python "$ROOT/src/nappe/laquelle_des_deux_colonnes_derive.py" --verifier
+run "figure laquelle des deux colonnes derive" uv run python "$ROOT/src/figures/figure_laquelle_des_deux_colonnes_derive.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

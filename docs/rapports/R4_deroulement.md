@@ -3839,6 +3839,17 @@ pour l'aile de droite tient à l'endroit où elle s'arrête.
 ⭐⭐⭐⭐ **Donc `R4-P80` est répondue.** `R4-P81` s'ouvre : laquelle des deux colonnes de l'aile de droite dérive, et
 de combien par rangée ?
 
+**`236` · 2026-09-24 · laquelle des deux colonnes dérive**
+
+⭐⭐ **La troisième ligne, dérivée** : la colonne **234**, à **9** colonnes de la 243, du côté du rectangle ; ses trois
+bandes lues retombent en **404** coutures à l'écart **0**, la boucle de l'aile retombe sur `234` et la large sur la somme
+des deux autres.
+⭐⭐⭐⭐ **La colonne 260 dérive** — `R4-F401` : à neuf lignes, l'étroite ferme à **9,2812** voxels, l'aile à **−35,6938**
+et la large à **−26,4125** ; l'étroite est la plus serrée aux quatre largeurs.
+⚠⚠⚠ La désignation tient de peu : **2,8875** voxels de marge sur le bruit seul de la large.
+⭐⭐⭐⭐ **Donc `R4-P81` est répondue.** `R4-P82` s'ouvre : découpée aux coupes de `235`, l'étroite reste-t-elle sans écart
+cumulé pendant que l'aile dérive, et où la colonne 260 s'écarte-t-elle ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
