@@ -188,7 +188,7 @@ def main(argv=None) -> int:
     commun(t, "sorties/paris4-title")
 
     d = verbe("demo", "les quatre pipelines, sur les données embarquées et locales")
-    d.add_argument("--donnees", default=None, help="le dossier data/ de LplVesuvius (First Letters, Paris 4)")
+    d.add_argument("--donnees", default=None, help="un dossier organisé comme le data/ de la branche experimental (First Letters, Paris 4)")
     commun(d, "sorties/demo")
 
     lr = verbe("lire", "relire un rapport écrit par un pipeline")

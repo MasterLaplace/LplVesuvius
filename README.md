@@ -9,12 +9,20 @@ neighbouring chunks, the consensus of five neighbouring lines removes each line'
 that closes under half a sheet at every cut of its profile certifies that its two paths did not change
 winding** (`docs/archive/244`, `246`).
 
+## Two branches
+
+- **`main`** is this program: what the research validated, ported, tested and released.
+- **`experimental`** is the laboratory it comes from: 246 dated slices, each one a measurement with
+  its figure, including every idea that failed. Every path of the form `docs/…` or `src/…` cited here refers
+  to that branch. A piece reaches `main` by a pull request, once it has a published number to be tested
+  against.
+
 ## Start in five minutes
 
 ```bash
 make                                   # the C core, with its symbols (make test: under sanitizers)
 uv run vesuve demo                     # Grand Prize and Progress, on the embedded segment
-uv run vesuve demo --donnees ../data   # all four prizes, with LplVesuvius's data/ directory
+uv run vesuve demo --donnees path/to/data   # all four prizes, given the local inputs the demo names
 uv run vesuve lire sorties/demo/grand-prize
 ```
 
@@ -63,8 +71,8 @@ flowchart LR
 
 ## What is verified, and against what
 
-Every ported piece is compared with **the very function that produced the published numbers** in LplVesuvius
-(`tests/`, run twice before a merge, warnings as errors):
+Every ported piece is compared with **the very function that produced the published numbers** on the
+`experimental` branch (`tests/`, run twice on every pull request by `.github/workflows/tests.yml`, warnings as errors):
 
 - the C kernels, on thousands of random inputs: the step of a cut, the seam step, the border profiles bit for
   bit, the texture filter on layers crowded around its 0.15 floor, the Fresnel number of 59 published scans
@@ -81,7 +89,11 @@ Each test was probed by breaking the rule it guards, and turned red.
 
 - **It does not read text.** No letter, no title, no word is claimed; the program says where to look and what
   its witnesses are worth.
-- **It does not unroll a scroll.** It certifies part of one published segment and says how much remains.
+- **It does not unroll a scroll, and it generates no surface.** The segment, its surface volume and every ink
+  map it reads were produced by the Vesuvius Challenge team. What it adds is a verdict on them: which chunks
+  stayed on one winding, where a published segment changed winding, where to look for a title. The Grand
+  Prize question is answered on the *checking* side of the transfer from one winding to the next, not on the
+  side that makes it.
 - **It does not choose a window where the ink looks strong.** Windows are chosen on papyrus coverage alone.
 - **It does not turn a failure into a zero.** An undecidable stage says why, a network failure is never an
   absence, and a missing file is named.
@@ -93,6 +105,6 @@ Each test was probed by breaking the rule it guards, and turned red.
 | `noyau/` | the C core: `include/vesuve.h`, `src/`, `tests/` |
 | `vesuve/` | the Python package: shared services, then one package per prize |
 | `vesuve/donnees/` | what the pipelines need from the research tree, extracted by `outils/extraire_du_depot.py` |
-| `tests/` | parity tests against the research producers (`VESUVE_RECHERCHE`, `VESUVE_DONNEES`, `VESUVE_RESEAU=1`) |
+| `tests/` | the tests; parity tests run against a working copy of `experimental` (`VESUVE_RECHERCHE`), heavy data (`VESUVE_DONNEES`) and the network (`VESUVE_RESEAU=1`), and are skipped with the reason otherwise |
 | `exemples/` | a dated run of the four pipelines, reports and previews |
 | `backlog/` | the work item this program answers |

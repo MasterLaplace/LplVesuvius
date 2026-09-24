@@ -2,8 +2,8 @@
 
 Grand Prize et Progress tournent sur le segment embarqué, sans rien d'autre (le réseau n'ajoute que la carte
 d'encre et la surface). First Letters et le titre de Paris 4 ont besoin de données que le logiciel n'embarque
-pas (des piles de couches, des cartes d'encre) : on les lui donne avec `--donnees`, le dossier `data/` de
-LplVesuvius, et sans lui ils sont sautés en le disant.
+pas (des piles de couches, des cartes d'encre) : on les lui donne avec `--donnees`, un dossier organisé comme
+le `data/` de la branche `experimental`, et sans lui ils sont sautés en nommant ce qu'il devrait porter.
 """
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ LES_ENTREES = {
 def _ce_qui_manque(d: Path | None, entrees: dict) -> str | None:
     """None si tout est là ; sinon chaque entrée absente, par son nom, et si c'est un lien mort."""
     if d is None:
-        return "donner --donnees <data/ de LplVesuvius>"
+        return "donner --donnees DIR, qui porte " + ", ".join(entrees.values())
     manque = [f"{v}{' (lien mort)' if (d / v).is_symlink() else ''}" for v in entrees.values() if not (d / v).exists()]
     return ("absent de " + str(d) + " : " + ", ".join(manque)) if manque else None
 

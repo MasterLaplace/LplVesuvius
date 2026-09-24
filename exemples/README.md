@@ -4,7 +4,7 @@ A dated run (2026-09-24), kept so the outputs can be seen without running anythi
 of at most 1600 px; the pipelines write them at full resolution. Regenerate with:
 
 ```bash
-uv run vesuve demo --donnees ../data --sortie sorties/demo
+uv run vesuve demo --donnees path/to/data --sortie sorties/demo
 uv run python outils/faire_les_exemples.py sorties/demo
 ```
 

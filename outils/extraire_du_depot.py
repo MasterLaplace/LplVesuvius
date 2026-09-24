@@ -7,7 +7,7 @@ couverture à la main. Ce script les relit par les lecteurs mêmes de la chaîne
 `vesuve/donnees/segments/<segment>/`, de façon déterministe (clés triées, gzip sans date), pour qu'un
 test puisse exiger que l'embarqué égale une extraction fraîche.
 
-    uv run --extra tests python outils/extraire_du_depot.py [--recherche <racine>]
+    uv run --extra tests python outils/extraire_du_depot.py --recherche <copie de la branche experimental>
 """
 from __future__ import annotations
 
@@ -15,6 +15,7 @@ import argparse
 import gzip
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
@@ -107,7 +108,9 @@ def extraire(recherche: Path, sortie: Path) -> dict:
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    p.add_argument("--recherche", type=Path, default=ICI.parent)
+    racine = os.environ.get("VESUVE_RECHERCHE")
+    p.add_argument("--recherche", type=Path, required=racine is None, default=racine,
+                   help="une copie de travail de la branche experimental (défaut : VESUVE_RECHERCHE)")
     p.add_argument("--sortie", type=Path, default=LA_SORTIE)
     a = p.parse_args()
     c = extraire(a.recherche.resolve(), a.sortie)
