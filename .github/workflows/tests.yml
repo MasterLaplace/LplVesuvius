@@ -1,0 +1,34 @@
+# The merge gate: the C core under sanitizers, then the Python tests, twice, warnings as errors.
+# The parity tests compare each port with the research code that produced the published numbers, so the
+# job checks out that code from the `experimental` branch (only src/ and docs/mesures/, about 110 MB).
+name: tests
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - name: The oracle, from the experimental branch
+        uses: actions/checkout@v5
+        with:
+          ref: experimental
+          path: recherche
+          sparse-checkout: |
+            src
+            docs/mesures
+      - uses: astral-sh/setup-uv@v6
+      - name: C core, under ASan and UBSan
+        run: make test
+      - name: C core, the shared library
+        run: make
+      - name: Python tests, twice
+        env:
+          VESUVE_RECHERCHE: ${{ github.workspace }}/recherche
+        run: |
+          uv run --extra tests pytest -q -rs
+          uv run --extra tests pytest -q
