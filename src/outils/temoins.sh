@@ -1650,6 +1650,8 @@ run "figure reparer avant le saut suivant" uv run python "$ROOT/src/figures/figu
 run "les fibres voient-elles ce que les predictions ratent" uv run python "$ROOT/src/nappe/les_fibres_voient_elles_ce_que_les_predictions_ratent.py" --verifier
 run "figure les fibres voient-elles ce que les predictions ratent" uv run python "$ROOT/src/figures/figure_les_fibres_voient_elles_ce_que_les_predictions_ratent.py" --verifier
 run "figure la couverture sans main une fois lue" uv run python "$ROOT/src/figures/figure_la_couverture_sans_main_une_fois_lue.py" --verifier
+run "la spire produite se lit-elle dans le treillis" uv run python "$ROOT/src/nappe/la_spire_produite_se_lit_elle_dans_le_treillis.py" --verifier
+run "figure la spire produite se lit-elle dans le treillis" uv run python "$ROOT/src/figures/figure_la_spire_produite_se_lit_elle_dans_le_treillis.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

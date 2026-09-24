@@ -3208,6 +3208,47 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 257 : LA SPIRE PRODUITE DANS LE TREILLIS
+    s257 = _source(racine, "la_spire_produite_se_lit_elle_dans_le_treillis.json")
+    if s257.exists():
+        d = json.loads(s257.read_text())
+        c, b, z = d.get("le_controle") or {}, d.get("le_bloc") or {}, d.get("ce_que_la_marche_retrouve_de_la_rampe") or {}
+        if d.get("decidable") and c.get("decidable") and z.get("decidable"):
+            out.append(("le contrôle du rendu de 257", [f"sur **{c['les_voxels']}** voxels, **{_fr222(c['la_part_des_voxels_egaux'])}** sont égaux"],
+                        s257.name))
+            out.append(("l'écart du rendu de 257", [f"l'écart le plus grand vaut **{c['lecart_max']}**"], s257.name))
+            out.append(("le bloc de 257", [f"à la rangée **{b['la_rangee']}**, colonne **{b['la_colonne']}** : **{b['les_rates']}** ratés sur **{b['les_points_notes']}**"],
+                        s257.name))
+            out.append(("les blocs candidats de 257", [f"parmi les **{b['les_blocs_candidats']}** blocs"], s257.name))
+            for nom, lib in (("la_publiee", "la publiée"), ("le_segment_reduit", "le segment réduit"),
+                             ("la_spire_produite", "**la spire produite**")):
+                p = d["les_piles"][nom]
+                a = p["laccord_des_paires"]
+                n = p["la_marche"]["les_coutures"]
+                e = _fr222(p["letendue_de_la_marche_voxels"])
+                s_ = _fr222(a["la_part_que_la_marche_separe_parmi_celles_que_le_juge_separe"])
+                r_ = _fr222(a["la_correlation"]).replace("-", "−")
+                if nom == "la_spire_produite":
+                    ligne = f"| {lib} | **{n}** | **{e}** | **{s_}** | **{r_}** |"
+                else:
+                    ligne = f"| {lib} | {n} | {e} | {s_} | {r_} |"
+                out.append((f"la marche de {nom} en 257", [ligne], s257.name))
+            a = d["les_piles"]["la_spire_produite"]["laccord_des_paires"]
+            out.append(("les paires de 257", [f"Le juge sépare **{a['les_paires_que_le_juge_separe']}** paires"], s257.name))
+            out.append(("les paires réunies de 257", [f"en réunit **{a['les_paires_quil_reunit']}**"], s257.name))
+            out.append(("la rampe de 257", [f"**La marche ne retrouve que {_fr222(z['la_pente'])} de la rampe**"], s257.name))
+            out.append(("ce que rend la rampe de 257",
+                        [f"Sur **{_fr222(z['lecart_pose_voxels'])}** voxels posés, elle en rend **{_fr222(z['lecart_retrouve_voxels'])}**"],
+                        s257.name))
+            fp = d["la_feuille_dans_la_pile"]
+            out.append(("la feuille dans la pile de 257",
+                        [f"**{_fr222(fp['le_segment_reduit']['lecart_median_voxels'])}** voxels du milieu en médiane"], s257.name))
+            out.append(("la part au milieu de 257",
+                        [f"dans **{_fr222(fp['le_segment_reduit']['la_part_a_moins_dun_quart_de_pas'])}** des chunks seulement"], s257.name))
+            out.append(("la feuille de la spire produite de 257",
+                        [f"**{_fr222(fp['la_spire_produite']['lecart_median_voxels'])}** voxels et **{_fr222(fp['la_spire_produite']['la_part_a_moins_dun_quart_de_pas'])}**"],
+                        s257.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 256 : LA COUVERTURE SANS MAIN, UNE FOIS LUE
     s256 = _source(racine, "la_couverture_sans_main_une_fois_lue.json")
     if s256.exists():

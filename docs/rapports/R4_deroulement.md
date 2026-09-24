@@ -4028,6 +4028,13 @@ plus rien et entoure **93795** chunks sur **97771**, soit **0,9593** de l'emprei
 retrouve les **5** boucles de la main et en tient **31** de plus. `R4-F431` : coupés tous les 29 rangs, le rectangle et
 l'aile étroite restent sous le demi-feuillet. `R4-P91` et `R4-P90` ont leur réponse.
 
+**`257` · 2026-09-25 · la spire produite dans le treillis** — `R4-P92`
+
+⭐⭐⭐⭐ **La marche des coutures ne voit pas une dérive lente** — `R4-F433` : rendue depuis le scan brut comme le segment
+l'est (`R4-F432`, à un niveau de gris près), la spire produite se lit dans le treillis, mais d'une rampe posée d'un pas la
+marche ne retrouve que **0,1396**. Sur le bloc le plus raté, le segment lui-même passe entre deux feuilles (`R4-F434`).
+`R4-P94` s'ouvre : un pas lu de centre à centre.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
