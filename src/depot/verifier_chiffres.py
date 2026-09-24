@@ -3208,6 +3208,61 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 239 : LE RECTANGLE ENTRE SES COUPES
+    # (1) ⚠⚠⚠ LE PROFIL NE VOYAGE JAMAIS SANS LA PORTÉE : une traversée plus courte n'est pas vue.
+    s239 = _source(racine, "le_rectangle_entre_ses_coupes.json")
+    if s239.exists():
+        d = json.loads(s239.read_text())
+        if d.get("la_portee") is not None:
+            out.append(("la portée de 239", [f"une portée de **{d['la_portee']}** rangées"], s239.name))
+        cp239 = [str(c) for c in d.get("les_coupes_de_plus") or []]
+        if len(cp239) > 1:
+            out.append(("les coupes de plus de 239",
+                        [f"**{len(cp239)}** coupes de plus, aux rangées {', '.join(cp239[:-1])} et {cp239[-1]}"],
+                        s239.name))
+        pl239 = d.get("la_presence_contre_la_lecture") or {}
+        if pl239.get("decidable"):
+            out.append(("la présence contre la lecture de 239",
+                        [f"sur les **{pl239['combien_de_lignes']}** lignes lues"], s239.name))
+        rp239 = d.get("la_reproduction") or {}
+        if rp239.get("decidable"):
+            out.append(("la relecture de 239",
+                        [f"retombent en **{rp239['combien_de_coutures_relues']}** coutures, écart "
+                         f"**{_fr222(rp239['lecart_le_plus_grand'])}**"], s239.name))
+        e239 = (d.get("lemboitement") or {}).get("par_largeur") or {}
+        if (e239.get("9") or {}).get("jugeable") and (e239.get("7") or {}).get("jugeable"):
+            out.append(("les tranches fines de 239 contre 233",
+                        [f"les **{len(d.get('par_tranche') or [])}** tranches fines somment à "
+                         f"**{_fr222(e239['9']['la_somme_des_sous_boucles'])}** à neuf lignes, écart "
+                         f"{_fr222(e239['9']['lecart'])}",
+                         f"{_fr222(e239['7']['la_somme_des_sous_boucles'])} contre "
+                         f"{_fr222(e239['7']['la_fermeture_de_laile'])} à"], s239.name))
+        t238 = d.get("lemboitement_par_tranche_de_238") or []
+        if len(t238) > 1:
+            n_ = [f"**{x['combien_de_largeurs_jugees']}**" for x in t238]
+            out.append(("les tranches fines de 239 contre 238",
+                        [f"à {', '.join(n_[:-1])} et {n_[-1]} largeurs"], s239.name))
+        k9 = str((d.get("le_verdict") or {}).get("la_largeur_jugee"))
+        for sb in d.get("par_tranche") or []:
+            x_ = sb["par_largeur"].get(k9) or {}
+            if x_.get("fermable"):
+                out.append((f"la tranche fine {sb['entre'][0]} à {sb['entre'][1]} de 239",
+                            [f"| {sb['entre'][0]} à {sb['entre'][1]} | {_fr222(x_['la_fermeture_en_voxels'])} | "
+                             f"{_fr222(x_['la_dispersion_du_pas_en_voxels'])} | "
+                             f"{_fr222(x_['le_nul']['la_fermeture_mediane_en_valeur_absolue'])} | "
+                             f"{_fr222(x_['le_nul']['la_part_sous_la_fermeture'])} |"], s239.name))
+        pr239 = d.get("le_profil") or []
+        pic239 = (d.get("le_verdict") or {}).get("le_pic") or {}
+        if pr239:
+            cel = [(f"**{_fr222(q['le_cumul_en_voxels'])}**" if q == pic239 else _fr222(q["le_cumul_en_voxels"]))
+                   for q in pr239]
+            out.append(("le profil de 239",
+                        ["| coupe | " + " | ".join(str(q["la_coupe"]) for q in pr239) + " |",
+                         "| cumul depuis la rangée 26 | " + " | ".join(cel) + " |"], s239.name))
+        if pic239:
+            out.append(("le pic de 239", [f"le cumul va au plus à **{_fr222(pic239['le_cumul_en_voxels'])}** voxels, "
+                                          f"à la coupe {pic239['la_coupe']}"], s239.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 238 : LE RECTANGLE TIENT-IL SUR SON PROFIL ?
     # (1) ⚠⚠⚠ LE PROFIL NE VOYAGE JAMAIS SANS SES COUPES : entre deux, rien n'est vu.
     s238 = _source(racine, "le_rectangle_tient_il_sur_son_profil.json")

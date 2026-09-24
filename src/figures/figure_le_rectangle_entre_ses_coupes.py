@@ -1,12 +1,13 @@
-"""Le rectangle tient-il sur son profil : ses tranches d'une coupe à l'autre, et la fermeture qu'elles cumulent.
+"""Le rectangle entre ses coupes : les tranches fines, et la fermeture qu'elles cumulent, coupe après coupe.
 
-⚠⚠ **Ce que cette figure doit rendre évident.** À gauche, LES TRANCHES : le rectangle de `233` coupé aux rangées de
-`224`, chaque tranche contre son bruit seul, à neuf lignes. À droite, LE PROFIL : la fermeture cumulée depuis la
-rangée 26, sur le même axe des rangées, contre le demi-feuillet — c'est le panneau qui conclut. En bas, le verdict.
+⚠⚠ **Ce que cette figure doit rendre évident.** À gauche, LES TRANCHES FINES : le rectangle de `233` coupé aux rangées
+de `224` et aux coupes de plus, chaque tranche contre son bruit seul, à neuf lignes. À droite, LE PROFIL : la fermeture
+cumulée depuis la rangée 26, les coupes de `238` en gros points, contre le demi-feuillet — c'est le panneau qui
+conclut. En bas, le verdict.
 
-  uv run python src/figures/figure_le_rectangle_tient_il_sur_son_profil.py \\
-      --json docs/mesures/le_rectangle_tient_il_sur_son_profil.json \\
-      --sortie docs/images/238_le_rectangle_tient_il_sur_son_profil.png
+  uv run python src/figures/figure_le_rectangle_entre_ses_coupes.py \\
+      --json docs/mesures/le_rectangle_entre_ses_coupes.json \\
+      --sortie docs/images/239_le_rectangle_entre_ses_coupes.png
 """
 from __future__ import annotations
 
@@ -48,7 +49,7 @@ def _fr(x, n: int = 4) -> str:
 
 
 def lire(chemin: Path) -> dict:
-    """Le JSON de `le_rectangle_tient_il_sur_son_profil.py`, et le demi-feuillet de `224`."""
+    """Le JSON de `le_rectangle_entre_ses_coupes.py`, et le demi-feuillet de `224`."""
     d = json.loads(chemin.read_text())
     if not d.get("decidable"):
         raise SystemExit(f"mesure indécidable : {d.get('raison')}")
@@ -63,12 +64,12 @@ def le_titre(d: dict) -> str:
     """Le titre LIT le verdict au lieu de le recalculer, dans l'ordre de priorité des issues."""
     v = d["le_verdict"]
     if v["combien_de_tranches"] < 2:
-        return "AUCUNE COUPE NE TIENT DANS LE RECTANGLE"
+        return "AUCUNE COUPE DE PLUS NE TIENT DANS LE RECTANGLE"
     if v["les_tranches_ouvertes"]:
-        return "À NEUF LIGNES, UN TROU TROP LONG LAISSE UNE TRANCHE OUVERTE"
+        return "À NEUF LIGNES, UN TROU TROP LONG LAISSE UNE TRANCHE FINE OUVERTE"
     if v["franchit"]:
-        return "À NEUF LIGNES, LE RECTANGLE NE FERME QU'AU BOUT : SON PROFIL ATTEINT LE DEMI-FEUILLET"
-    return "À NEUF LIGNES, LE PROFIL DU RECTANGLE RESTE SOUS LE DEMI-FEUILLET À CHAQUE COUPE"
+        return "À NEUF LIGNES, ENTRE SES COUPES, LE PROFIL DU RECTANGLE ATTEINT LE DEMI-FEUILLET"
+    return "À NEUF LIGNES, ENTRE SES COUPES AUSSI, LE PROFIL DU RECTANGLE RESTE SOUS LE DEMI-FEUILLET"
 
 
 def dessiner(d: dict, sortie: Path):
@@ -100,8 +101,9 @@ def dessiner(d: dict, sortie: Path):
     rp = d.get("la_reproduction") or {}
 
     ecrire(50, 26, le_titre(d), gros, ENCRE)
-    ecrire(50, 54, f"le plus grand rectangle de 233, rangées {r0} à {r1} et colonnes {c0} à {c1}, coupé aux rangées de 224 "
-                   f"· lues pour cette tranche, les coupes retombent sur les bandes publiées en "
+    c238 = [int(x) for x in d.get("les_coupes_de_238") or []]
+    ecrire(50, 54, f"le rectangle de 233 coupé tous les {d['la_portee']} rangs au plus, la plus longue traversée de 235 · "
+                   f"les {len(d.get('les_coupes_de_plus') or [])} coupes de plus retombent sur les bandes publiées en "
                    f"{rp.get('combien_de_coutures_relues', 0)} coutures à l'écart {_fr(rp.get('lecart_le_plus_grand'))}",
            petit, GRIS)
     Y0, Y1 = 150, 700
@@ -110,8 +112,8 @@ def dessiner(d: dict, sortie: Path):
         return Y0 + (Y1 - Y0) * (float(r) - r0) / max(1.0, float(r1 - r0))
 
     # ── PANNEAU 1 · LES TRANCHES ─────────────────────────────────────────────────────────────
-    panneau(50, 84, 560, 800, "LES TRANCHES · chacune contre son bruit seul, à neuf lignes")
-    TX0, TW, TMAX = 330, 170, 40.0
+    panneau(50, 84, 560, 800, "LES TRANCHES FINES · chacune contre son bruit seul, à neuf lignes")
+    TX0, TW, TMAX = 300, 150, 40.0
 
     def TX(x):
         return TX0 + TW * max(-TMAX, min(TMAX, float(x))) / TMAX
@@ -122,8 +124,8 @@ def dessiner(d: dict, sortie: Path):
     ecrire(TX0 - 3, Y1 + 10, "0", 0, GRIS)
     ecrire(TX(demi) - 8, Y1 + 10, f"{_fr(demi)}", 0, ALERTE)
     for c in coupes:
-        art.line([160, Y(c), 545, Y(c)], fill=TRAIT, width=1)
-        ecrire(66, Y(c) - 7, f"rangée {c}", 0, GRIS)
+        art.line([140, Y(c), 500, Y(c)], fill=GRIS if c in c238 else TRAIT, width=1)
+        ecrire(66, Y(c) - 7, f"rangée {c}", 0, ENCRE if c in c238 else GRIS)
     n_t = 0
     for sb in pt:
         a_, b_ = sb["entre"]
@@ -132,18 +134,17 @@ def dessiner(d: dict, sortie: Path):
         if x["fermable"]:
             L = float(x["la_fermeture_en_voxels"])
             med = float(x["le_nul"]["la_fermeture_mediane_en_valeur_absolue"])
-            art.rectangle([TX(-med), ym - 16, TX(med), ym + 16], fill=BANDE, outline=TRAIT)
-            art.rectangle([min(TX0, TX(L)), ym - 6, max(TX0, TX(L)), ym + 6], fill=BON if abs(L) < demi else ALERTE)
+            art.rectangle([TX(-med), ym - 9, TX(med), ym + 9], fill=BANDE, outline=TRAIT)
+            art.rectangle([min(TX0, TX(L)), ym - 4, max(TX0, TX(L)), ym + 4], fill=BON if abs(L) < demi else ALERTE)
             points.append((TX(L), ym))
-            ecrire(66, ym - 14, f"{_fr(L)}", 0, ENCRE)
-            ecrire(66, ym + 2, f"bruit {_fr(x['le_nul']['la_part_sous_la_fermeture'])}", 0, GRIS)
+            ecrire(TX(TMAX) + 14, ym - 7, f"{_fr(L)}", 0, ENCRE)
         else:
             art.rectangle([TX(-TMAX), ym - 6, TX(TMAX), ym + 6], outline=ALERTE)
-            ecrire(66, ym - 7, "ouverte", 0, ALERTE)
+            ecrire(TX(TMAX) + 14, ym - 7, "ouverte", 0, ALERTE)
         n_t += 1
     traces["tranches"] = n_t
     ecrire(66, 740, "barre : la fermeture de la tranche, en voxels ; fond : ± la médiane du bruit seul", 0, GRIS)
-    ecrire(66, 756, "bruit : la part du bruit seul qui ferme plus serré", 0, GRIS)
+    ecrire(66, 756, "rangées en noir : les coupes de 238 ; en gris : les coupes de plus", 0, GRIS)
 
     # ── PANNEAU 2 · LE PROFIL ────────────────────────────────────────────────────────────────
     panneau(580, 84, 1310, 800, "LE PROFIL · la fermeture cumulée depuis la rangée 26")
@@ -165,13 +166,15 @@ def dessiner(d: dict, sortie: Path):
                       xa + (xb - xa) * (i + 1) / 20, ya + (yb - ya) * (i + 1) / 20], fill=CONTRE, width=2)
     for (x_, y_), p in zip(pts[1:], prof):
         loin = abs(float(p["le_cumul_en_voxels"])) >= demi
-        art.ellipse([x_ - 4, y_ - 4, x_ + 4, y_ + 4], fill=ALERTE if loin else CONTRE)
+        r_ = 5 if int(p["la_coupe"]) in c238 else 3
+        art.ellipse([x_ - r_, y_ - r_, x_ + r_, y_ + r_], fill=ALERTE if loin else CONTRE)
         ecrire(596, y_ - 7, f"coupe {p['la_coupe']} : {_fr(p['le_cumul_en_voxels'])}", 0, ALERTE if loin else ENCRE)
         points.append((x_, y_))
     traces["profil"] = len(pts)
     ecrire(596, 740, f"traits bruns : le demi-feuillet, à ±{_fr(demi)} voxels ; en brun, une coupe où le cumul l'atteint",
            0, GRIS)
-    ecrire(596, 756, "⚠ en tirets : entre deux coupes, le profil n'est pas vu", 0, GRIS)
+    ecrire(596, 756, f"gros points : les coupes de 238 ; ⚠ en tirets, entre deux coupes : non vu, sur au plus "
+                     f"{d['la_portee']} rangs", 0, GRIS)
 
     # ── BANDE ────────────────────────────────────────────────────────────────────────────────
     art.rectangle([0, 818, L_, H_], fill=BANDE)
@@ -179,10 +182,10 @@ def dessiner(d: dict, sortie: Path):
     if v.get("le_pic"):
         ecrire(50, 856, f"★ le cumul va au plus à {_fr(v['le_pic']['le_cumul_en_voxels'])} voxels, à la coupe "
                         f"{v['le_pic']['la_coupe']} ; au bout, {_fr(prof[-1]['le_cumul_en_voxels'])}.", moyen, ENCRE)
-    ecrire(50, 882, "★ les tranches somment à la fermeture que 233 publie pour le rectangle, à l'arrondi près.", moyen,
-           ENCRE)
-    ecrire(50, 908, "⚠ ce qui n'est PAS établi : ce que fait le profil entre deux coupes, ni, si une tranche s'écarte, "
-                    "laquelle de ses lignes dérive.", moyen, ALERTE)
+    ecrire(50, 882, "★ les tranches fines somment au rectangle de 233 et, entre deux coupes de 238, à la tranche de 238.",
+           moyen, ENCRE)
+    ecrire(50, 908, f"⚠ ce qui n'est PAS établi : une traversée plus courte que {d['la_portee']} rangs, entre deux coupes.",
+           moyen, ALERTE)
 
     sortie.parent.mkdir(parents=True, exist_ok=True)
     img.save(sortie)
@@ -204,7 +207,7 @@ def verifier(json_path: Path, sortie: Path) -> int:
             echecs.append(f"{nom}{(' — ' + detail) if detail else ''}")
 
     d = lire(json_path)
-    tmp = sortie.parent / ".sonde_238.png"
+    tmp = sortie.parent / ".sonde_239.png"
     _, poses, cadres, points, traces = dessiner(d, tmp)
 
     def _v(m, ouv, fr):
@@ -213,7 +216,7 @@ def verifier(json_path: Path, sortie: Path) -> int:
     v("★★★★ les quatre titres possibles sont distincts, et l'ordre des issues prime",
       len({le_titre(x) for x in tous}) == 4 and le_titre(_v(1, [[0, 9]], True)) == le_titre(_v(1, [], False))
       and le_titre(_v(4, [[0, 9]], True)) == le_titre(_v(4, [[0, 9]], False)))
-    v("★★★ le titre LIT le verdict", ("QU'AU BOUT" in le_titre(d)) == bool(d["le_verdict"].get("franchit")))
+    v("★★★ le titre LIT le verdict", ("ATTEINT" in le_titre(d)) == bool(d["le_verdict"].get("franchit")))
     v("★★★★ aucun texte ne déborde de la toile", not textes_debordants(poses, L_),
       str(textes_debordants(poses, L_))[:200])
     v("★★★★ aucun texte ne sort de son cadre", not textes_hors_cadre(poses, cadres),
@@ -248,9 +251,8 @@ def verifier(json_path: Path, sortie: Path) -> int:
 
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    p.add_argument("--json", type=Path, default=RACINE / "docs" / "mesures" / "le_rectangle_tient_il_sur_son_profil.json")
-    p.add_argument("--sortie", type=Path,
-                   default=RACINE / "docs" / "images" / "238_le_rectangle_tient_il_sur_son_profil.png")
+    p.add_argument("--json", type=Path, default=RACINE / "docs" / "mesures" / "le_rectangle_entre_ses_coupes.json")
+    p.add_argument("--sortie", type=Path, default=RACINE / "docs" / "images" / "239_le_rectangle_entre_ses_coupes.png")
     p.add_argument("--verifier", action="store_true")
     a = p.parse_args()
     if a.verifier:

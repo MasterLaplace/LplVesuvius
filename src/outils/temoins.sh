@@ -1616,6 +1616,8 @@ run "l'etroite reste-t-elle sans ecart" uv run python "$ROOT/src/nappe/letroite_
 run "figure l'etroite reste-t-elle sans ecart" uv run python "$ROOT/src/figures/figure_letroite_reste_t_elle_sans_ecart.py" --verifier
 run "le rectangle tient-il sur son profil" uv run python "$ROOT/src/nappe/le_rectangle_tient_il_sur_son_profil.py" --verifier
 run "figure le rectangle tient-il sur son profil" uv run python "$ROOT/src/figures/figure_le_rectangle_tient_il_sur_son_profil.py" --verifier
+run "le rectangle entre ses coupes" uv run python "$ROOT/src/nappe/le_rectangle_entre_ses_coupes.py" --verifier
+run "figure le rectangle entre ses coupes" uv run python "$ROOT/src/figures/figure_le_rectangle_entre_ses_coupes.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -119,7 +119,7 @@ def ce_que_235_a_publie(chemin: Path = CE_QUE_235_A_PUBLIE) -> dict:
         return d
     return {"decidable": True, "aile": d["laile"], "decoupage": d["le_decoupage"], "bandes": d["les_bandes_declarees"],
             "publiees": d["les_bandes"], "relues": {k: relire_une_bande(x) for k, x in d["les_bandes"].items()},
-            "par_sous_boucle": d["par_sous_boucle"]}
+            "par_sous_boucle": d["par_sous_boucle"], "profil": d.get("le_profil") or []}
 
 
 def ce_que_236_a_publie(chemin: Path = CE_QUE_236_A_PUBLIE) -> dict:

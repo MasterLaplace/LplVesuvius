@@ -3871,6 +3871,17 @@ lues, elles retombent en **4589** coutures à l'écart **0**, et les **4** tranc
 ⭐⭐⭐⭐ **Donc `R4-P83` est répondue aux coupes où le profil est vu.** `R4-P84` s'ouvre : entre deux coupes, le profil
 reste-t-il sous le demi-feuillet ?
 
+**`239` · 2026-09-24 · le rectangle entre ses coupes**
+
+⭐⭐ **Les coupes de plus, dérivées de la portée de `235`** : partagées en parts qui ne dépassent pas **40** rangées, les
+tranches de `238` donnent **7** coupes de plus, qui toutes tiennent ; lues, elles retombent en **2273** coutures à
+l'écart **0**, et les **11** tranches fines somment à **−11,8449**.
+⭐⭐⭐⭐ **Le rectangle tient entre ses coupes** — `R4-F404` : à neuf lignes, son cumul reste entre **−14,7265** et
+**14,1485**, son pic à la coupe 297 comme dans `238`.
+⚠⚠⚠ Une traversée plus courte que la portée n'est pas vue.
+⭐⭐⭐⭐ **Donc `R4-P84` est répondue à la portée de `235`.** `R4-P85` s'ouvre : les ailes du haut et de gauche de `234`,
+jugées sur leur profil, restent-elles sous le demi-feuillet ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
