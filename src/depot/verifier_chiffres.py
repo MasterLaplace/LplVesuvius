@@ -3208,6 +3208,93 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 234 : LE SEGMENT AU-DELA DU RECTANGLE SE RELIE-T-IL AU RECTANGLE ?
+    # (1) ⚠⚠⚠ UNE AILE QUI FERME NE VOYAGE JAMAIS SANS LE BRUIT SEUL, et la plus lache jamais sans sa marge sous le
+    # demi-feuillet ni sans les deux colonnes qui la portent.
+    s234 = _source(racine, "le_segment_au_dela_du_rectangle_se_relie_t_il.json")
+    s224b = _source(racine, "deux_chemins_arrivent_ils_sur_la_meme_spire.json")
+    if s234.exists():
+        d = json.loads(s234.read_text())
+        for c_, a_ in (d.get("les_ailes") or {}).items():
+            if a_.get("les_coins"):
+                a0, a1, b0, b1 = a_["les_coins"]
+                out.append((f"l'aile {c_} de 234",
+                            [f"| {c_} | {a0} à {a1} | {b0} à {b1} | {a_['laire']} | {a_['le_chemin']} |"], s234.name))
+        cd234 = d.get("la_couverture_declaree") or {}
+        if cd234:
+            r_, t_ = cd234["par_le_rectangle"], cd234["par_le_rectangle_et_toutes_les_ailes"]
+            out.append(("la couverture du rectangle seul, 234",
+                        [f"**{r_['combien']}** chunks sur les **{r_['sur']}** que le dépôt porte, soit "
+                         f"**{_fr222(r_['la_part'])}**"], s234.name))
+            out.append(("la couverture déclarée avec toutes les ailes, 234",
+                        [f"avec toutes les ailes, **{t_['combien']}**, soit **{_fr222(t_['la_part'])}**"], s234.name))
+        pl234 = d.get("la_presence_contre_la_lecture") or {}
+        if pl234.get("decidable"):
+            out.append(("la présence contre la lecture de 234",
+                        [f"Sur les **{pl234['combien_de_lignes']}** lignes lues"], s234.name))
+        rp234 = d.get("la_reproduction") or {}
+        if rp234.get("decidable"):
+            pc_ = rp234["par_croisement"]
+            neuves = {k_.split("×")[0] for k_ in pc_}
+            publiees = {k_.split("×")[0] for k_ in pc_ if not k_.split("×")[1].startswith("234 ")}
+            entre = sum(v_ for k_, v_ in pc_.items() if k_.split("×")[1].startswith("234 "))
+            out.append(("la relecture de 234",
+                        [f"**{rp234['combien_de_coutures_relues']}** coutures, écart "
+                         f"**{_fr222(rp234['lecart_le_plus_grand'])}**"], s234.name))
+            if neuves == publiees:
+                out.append(("les bandes neuves de 234 contrôlées par une bande publiée",
+                            [f"chacune des **{len(neuves)}** bandes neuves croise une bande publiée"], s234.name))
+            out.append(("les coutures entre bandes neuves de 234",
+                        [f"**{entre}** coutures sur les {rp234['combien_de_coutures_relues']}"], s234.name))
+        pl225 = d.get("le_plus_long_trou_franchi_par_225")
+        if pl225 is not None:
+            out.append(("le plus long trou franchi, repris par 234",
+                        [f"jusqu'aux **{pl225}** coutures que `225` a essayées"], s234.name))
+        PA = d.get("par_aile") or {}
+        for c_ in ("haut", "droite", "bas", "gauche"):
+            for k_, x_ in sorted(((PA.get(c_) or {}).get("par_largeur") or {}).items(), key=lambda t: int(t[0])):
+                if not x_.get("fermable"):
+                    continue
+                n_ = x_["le_nul"]
+                L_ = _fr222(x_["la_fermeture_en_voxels"])
+                if k_ == "9":
+                    L_ = f"**{L_}**"
+                out.append((f"l'aile {c_} de 234 à {k_} lignes",
+                            [f"| {c_} | {k_} | {L_} | {_fr222(x_['la_dispersion_du_pas_en_voxels'])} | "
+                             f"{_fr222(n_['la_fermeture_mediane_en_valeur_absolue'])} | "
+                             f"{_fr222(n_['la_part_sous_le_demi_pli'])} | {_fr222(n_['la_part_sous_la_fermeture'])} |"],
+                            s234.name))
+        v234 = d.get("le_verdict") or {}
+        k9 = str(v234.get("la_largeur_jugee"))
+        lache = None
+        for c_ in v234.get("les_ailes_qui_ferment") or []:
+            x_ = ((PA.get(c_) or {}).get("par_largeur") or {}).get(k9)
+            if x_ and x_.get("fermable") and (lache is None or abs(x_["la_fermeture_en_voxels"])
+                                              > abs(lache[1]["la_fermeture_en_voxels"])):
+                lache = (c_, x_)
+        if lache is not None and s224b.exists():
+            demi = float(json.loads(s224b.read_text())["le_demi_pli_en_voxels"])
+            c_, x_ = lache
+            out.append(("la marge de l'aile la plus lâche de 234",
+                        [f"elle est à **{_fr222(round(demi - abs(x_['la_fermeture_en_voxels']), 4))}** voxel du "
+                         f"demi-feuillet"], s234.name))
+            out.append(("le bruit seul sous la fermeture de l'aile la plus lâche de 234",
+                        [f"plus serré que la mesure dans **{_fr222(x_['le_nul']['la_part_sous_la_fermeture'])}** des "
+                         f"tirages"], s234.name))
+            co_ = {c["le_cote"]: c["la_somme_en_voxels"] for c in x_["les_cotes"]}
+            a0, a1, b0, b1 = d["les_ailes"][c_]["les_coins"]
+            if c_ in ("droite", "gauche"):
+                interieure, exterieure = (("gauche", b0), ("droite", b1)) if c_ == "droite" else \
+                    (("droite", b1), ("gauche", b0))
+                out.append(("les deux colonnes de l'aile la plus lâche de 234",
+                            [f"**{_fr222(co_[interieure[0]])}** voxels le long de la colonne {interieure[1]}",
+                             f"**{_fr222(co_[exterieure[0]])}** le long de la colonne {exterieure[1]}"], s234.name))
+        cf234 = (d.get("la_couverture") or {}).get("par_le_rectangle_et_les_ailes_qui_ferment")
+        if cf234:
+            out.append(("la couverture des ailes qui ferment, 234",
+                        [f"entourent **{cf234['combien']}** chunks sur **{cf234['sur']}**, soit "
+                         f"**{_fr222(cf234['la_part'])}**"], s234.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 233 : OU S'ARRETE LE SEGMENT ?
     # (1) ⚠⚠⚠ LA FERMETURE D'UNE LARGEUR NE VOYAGE JAMAIS SANS CELLE DE LA MOITIE NI SANS LE BRUIT SEUL, et le
     # rectangle jamais sans l'empreinte dont il est derive.

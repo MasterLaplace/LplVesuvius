@@ -1606,6 +1606,8 @@ run "deux chemins du segment entier" uv run python "$ROOT/src/nappe/deux_chemins
 run "figure deux chemins du segment entier" uv run python "$ROOT/src/figures/figure_deux_chemins_du_segment_entier_arrivent_ils_sur_la_meme_spire.py" --verifier
 run "ou s'arrete le segment" uv run python "$ROOT/src/nappe/ou_sarrete_le_segment.py" --verifier
 run "figure ou s'arrete le segment" uv run python "$ROOT/src/figures/figure_ou_sarrete_le_segment.py" --verifier
+run "le segment au-dela du rectangle se relie-t-il" uv run python "$ROOT/src/nappe/le_segment_au_dela_du_rectangle_se_relie_t_il.py" --verifier
+run "figure le segment au-dela du rectangle se relie-t-il" uv run python "$ROOT/src/figures/figure_le_segment_au_dela_du_rectangle_se_relie_t_il.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

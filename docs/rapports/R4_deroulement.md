@@ -3816,6 +3816,17 @@ demi-feuillet dans **0,7307** des tirages, contre **0,8789** à la moitié du se
 ⭐⭐⭐⭐ **Donc `R4-P78` est répondue pour le plus grand rectangle.** `R4-P79` s'ouvre : le segment entre les
 bords du rectangle et ceux de l'empreinte se relie-t-il au rectangle sur la même spire ?
 
+**`234` · 2026-09-24 · le segment au-delà du rectangle**
+
+⭐⭐ **Les ailes, dérivées** : de la présence publiée par `233`, trois ailes, en haut, à droite et à gauche ;
+aucune ne tient en bas. Leurs **9** bandes neuves, lues, retombent en **1729** coutures à l'écart **0**.
+⭐⭐⭐⭐ **Chaque aile ferme** — `R4-F399` : à neuf lignes, **−2,0133**, **−35,6938** et **6,9445** voxels,
+sous le demi-feuillet ; les boucles qui ferment entourent **0,9153** de l'empreinte, contre **0,8633**.
+⚠⚠⚠ L'aile de droite ferme à **0,3062** voxel du bord, et le bruit seul ferme plus serré dans **0,8959** des
+tirages : son écart tient à ses deux colonnes, **28,9375** voxels le long de la 243, **−4,9437** le long de la 260.
+⭐⭐⭐⭐ **Donc `R4-P79` est répondue pour les ailes que la présence porte.** `R4-P80` s'ouvre : où, le long
+des rangées 26 à 223, les deux colonnes de l'aile de droite se séparent-elles ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
