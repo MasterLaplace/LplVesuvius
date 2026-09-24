@@ -1,0 +1,198 @@
+{
+  "la_question_declaree": "la portée de `239` voit-elle la traversée de `235` dont elle est tirée ?",
+  "la_mesure_declaree": "les traversées d'un seul tenant du profil de `235`, le plus petit écart maximal d'une suite de ses coupes qui les évite toutes, et, contre lui, la portée de `239` et le plus grand écart de chaque découpage publié",
+  "decidable": true,
+  "le_demi_feuillet": 36.0,
+  "le_debut_de_laile": 26,
+  "le_profil_de_235": [
+    {
+      "la_coupe": 35,
+      "le_cumul_en_voxels": -1.875
+    },
+    {
+      "la_coupe": 44,
+      "le_cumul_en_voxels": 1.875
+    },
+    {
+      "la_coupe": 53,
+      "le_cumul_en_voxels": -5.9375
+    },
+    {
+      "la_coupe": 62,
+      "le_cumul_en_voxels": -6.2187
+    },
+    {
+      "la_coupe": 71,
+      "le_cumul_en_voxels": -5.5937
+    },
+    {
+      "la_coupe": 80,
+      "le_cumul_en_voxels": -17.9999
+    },
+    {
+      "la_coupe": 89,
+      "le_cumul_en_voxels": -13.3749
+    },
+    {
+      "la_coupe": 98,
+      "le_cumul_en_voxels": -20.8437
+    },
+    {
+      "la_coupe": 107,
+      "le_cumul_en_voxels": -19.6875
+    },
+    {
+      "la_coupe": 116,
+      "le_cumul_en_voxels": -24.2813
+    },
+    {
+      "la_coupe": 125,
+      "le_cumul_en_voxels": -25.1563
+    },
+    {
+      "la_coupe": 134,
+      "le_cumul_en_voxels": -26.6251
+    },
+    {
+      "la_coupe": 143,
+      "le_cumul_en_voxels": -24.6563
+    },
+    {
+      "la_coupe": 153,
+      "le_cumul_en_voxels": -27.0313
+    },
+    {
+      "la_coupe": 163,
+      "le_cumul_en_voxels": -36.6563
+    },
+    {
+      "la_coupe": 173,
+      "le_cumul_en_voxels": -40.2188
+    },
+    {
+      "la_coupe": 183,
+      "le_cumul_en_voxels": -31.8813
+    },
+    {
+      "la_coupe": 193,
+      "le_cumul_en_voxels": -34.3501
+    },
+    {
+      "la_coupe": 203,
+      "le_cumul_en_voxels": -37.6626
+    },
+    {
+      "la_coupe": 213,
+      "le_cumul_en_voxels": -30.6626
+    },
+    {
+      "la_coupe": 223,
+      "le_cumul_en_voxels": -35.6938
+    }
+  ],
+  "les_traversees": [
+    {
+      "de": 163,
+      "avant": 153,
+      "a": 173,
+      "jusqua": 183,
+      "au_moins": 10,
+      "au_plus": 30
+    },
+    {
+      "de": 203,
+      "avant": 193,
+      "a": 203,
+      "jusqua": 213,
+      "au_moins": 0,
+      "au_plus": 20
+    }
+  ],
+  "le_verdict": {
+    "la_portee_de_239": 40,
+    "lecart_qui_evite": 30,
+    "la_portee_qui_voit": 29,
+    "la_portee_voit": false,
+    "ce_qui_reste_a_mesurer": "À LA PORTÉE DE 40, UNE SUITE DE COUPES DE `235` ÉVITE TOUTE TRAVERSÉE : IL FAUT 29 RANGÉES AU PLUS POUR LA VOIR"
+  },
+  "les_decoupages": [
+    {
+      "la_tranche": "239",
+      "la_boucle": "le rectangle",
+      "les_coupes": [
+        26,
+        62,
+        99,
+        132,
+        165,
+        198,
+        231,
+        264,
+        297,
+        326,
+        355,
+        384
+      ],
+      "le_plus_grand_ecart": 37,
+      "voit": false
+    },
+    {
+      "la_tranche": "240",
+      "la_boucle": "l'aile gauche",
+      "les_coupes": [
+        216,
+        225,
+        234,
+        243,
+        252,
+        261,
+        270,
+        279,
+        288,
+        298,
+        308
+      ],
+      "le_plus_grand_ecart": 10,
+      "voit": true
+    },
+    {
+      "la_tranche": "240",
+      "la_boucle": "l'aile haut",
+      "les_coupes": [
+        32,
+        41,
+        51,
+        61,
+        71,
+        81
+      ],
+      "le_plus_grand_ecart": 10,
+      "voit": true
+    },
+    {
+      "la_tranche": "241",
+      "la_boucle": "l'aile",
+      "les_coupes": [
+        26,
+        54,
+        83,
+        112
+      ],
+      "le_plus_grand_ecart": 29,
+      "voit": true
+    },
+    {
+      "la_tranche": "243",
+      "la_boucle": "l'aile",
+      "les_coupes": [
+        112,
+        150,
+        189,
+        227,
+        266
+      ],
+      "le_plus_grand_ecart": 39,
+      "voit": false
+    }
+  ]
+}

@@ -3933,6 +3933,14 @@ restent sous le demi-feuillet sur leur profil entourent **0,9172** de l'empreint
 ⚠⚠⚠ Trois choses manquent au Graal : l'enchaînement des boucles a été piloté à la main, il tient sur un seul
 segment déjà tracé, et aucun livrable ne l'exécute. La suite est d'enchaîner sans main.
 
+**`245` · 2026-09-24 · la portée voit-elle sa traversée ?** — rien n'est lu
+
+⭐⭐⭐⭐ **Non** — `R4-F409` : sur le profil de `235`, les coupes au-delà du demi-feuillet forment deux traversées, la plus
+longue durant au plus **30** rangées ; une suite de coupes à la portée de 40 les évite toutes, et il faut couper tous les
+**29** rangs au plus pour les voir. La prémisse de `239` tombe (`R4-C44`).
+⚠⚠⚠ Le rectangle de `239` et l'aile étroite de `243` sont coupés plus large ; les ailes de `240` et `241`, non.
+`R4-P90` s'ouvre : coupés à 29 rangs au plus, restent-ils dessous ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3208,6 +3208,25 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 245 : LA PORTÉE VOIT-ELLE SA TRAVERSÉE ?
+    # (1) ⚠⚠⚠ UNE PORTÉE NE VOYAGE JAMAIS SANS LES TRAVERSÉES D'UN SEUL TENANT DONT ELLE EST TIRÉE.
+    s245 = _source(racine, "la_portee_voit_elle_sa_traversee.json")
+    if s245.exists():
+        d = json.loads(s245.read_text())
+        for t in d.get("les_traversees") or []:
+            out.append((f"la traversée {t['de']} de 245", [f"entre les coupes {t['avant']} et {t['jusqua']}, elle dure de "
+                                                         f"**{t['au_moins']}** à **{t['au_plus']}** rangées"], s245.name))
+        v245 = d.get("le_verdict") or {}
+        if v245.get("lecart_qui_evite") is not None:
+            out.append(("l'écart qui évite de 245", [f"son plus grand écart est de **{v245['lecart_qui_evite']}** rangées"],
+                        s245.name))
+        if v245.get("ce_qui_reste_a_mesurer"):
+            out.append(("le verdict de 245", [v245["ce_qui_reste_a_mesurer"]], s245.name))
+        for x in d.get("les_decoupages") or []:
+            out.append((f"le découpage de {x['la_tranche']} {x['la_boucle']} selon 245",
+                        [f"| `{x['la_tranche']}` | {x['la_boucle']} | {x['le_plus_grand_ecart']} | "
+                         f"{'oui' if x['voit'] else 'non'} |"], s245.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 243 : UNE AILE PLUS ÉTROITE TIENT-ELLE ?
     # (1) ⚠⚠⚠ UNE FERMETURE NE VOYAGE JAMAIS SANS LA LARGEUR À LAQUELLE ELLE EST JUGÉE.
     s243 = _source(racine, "une_aile_plus_etroite_tient_elle.json")
