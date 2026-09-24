@@ -3208,6 +3208,39 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐ LA TRANCHE 255 : LES FIBRES
+    s255 = _source(racine, "les_fibres_voient_elles_ce_que_les_predictions_ratent.json")
+    if s255.exists():
+        d = json.loads(s255.read_text())
+        fb = d.get("les_fibres") or {}
+        if "fibres_0801" in fb and "fibres_0915" in fb:
+            gr = d["les_groupes"]
+            out.append(("les témoins de 255", [f"(**{gr['du_cote_plus']['accord_et_juste']}** et **{gr['du_cote_moins']['accord_et_juste']}**)"],
+                        s255.name))
+            out.append(("les ratés communs de 255",
+                        [f"**{gr['du_cote_plus']['rates_communs_trop_pres']}** et **{gr['du_cote_moins']['rates_communs_trop_pres']}** trop près"],
+                        s255.name))
+            for nom_f, f_ in (("fibres du 1er août", "fibres_0801"), ("fibres du 15 septembre", "fibres_0915")):
+                xp, xm = fb[f_]["du_cote_plus"], fb[f_]["du_cote_moins"]
+                out.append((f"{nom_f} rapportées dans 255",
+                            [f"| {nom_f}, rapportées au segment | {_fr222(xp['le_seuil']['laire_sous_la_courbe'])} | "
+                             f"{_fr222(xm['le_seuil']['laire_sous_la_courbe'])} |"], s255.name))
+                out.append((f"{nom_f} brutes dans 255",
+                            [f"| {nom_f}, brutes | {_fr222(xp['sans_rapport']['le_seuil_sur_la_presence_brute']['laire_sous_la_courbe'])} | "
+                             f"{_fr222(xm['sans_rapport']['le_seuil_sur_la_presence_brute']['laire_sous_la_courbe'])} |"], s255.name))
+                out.append((f"{nom_f} sans fibre dans 255",
+                            [f"**{_fr222(xp['sans_rapport']['la_part_des_temoins_sans_fibre_sur_le_segment'])}** et "
+                             f"**{_fr222(xm['sans_rapport']['la_part_des_temoins_sans_fibre_sur_le_segment'])}**"], s255.name))
+            xp, xm = fb["fibres_0801"]["du_cote_plus"], fb["fibres_0801"]["du_cote_moins"]
+            out.append(("la moyenne des fibres dans 255",
+                        [f"**{_fr222(xp['en_moyenne']['le_temoin_feuille']['le_contraste'])}** et **{_fr222(xm['en_moyenne']['le_temoin_feuille']['le_contraste'])}** pour la feuille"],
+                        s255.name))
+            cp = xp["les_rates_communs"]["rates_communs_trop_pres"]["la_ou_la_chaine_est_tombee"]["en_moyenne"]
+            cm = xm["les_rates_communs"]["rates_communs_trop_pres"]["la_ou_la_chaine_est_tombee"]["en_moyenne"]
+            out.append(("les ratés communs dans les fibres de 255",
+                        [f"le contraste vaut\n**{_fr222(cp['le_contraste'])}** et **{_fr222(cm['le_contraste'])}**",
+                         f"le contraste vaut **{_fr222(cp['le_contraste'])}** et **{_fr222(cm['le_contraste'])}**"], s255.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 254 : RÉPARER AVANT LE SAUT SUIVANT
     s254 = _source(racine, "reparer_avant_le_saut_suivant.json")
     if s254.exists():

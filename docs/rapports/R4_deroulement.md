@@ -4015,6 +4015,12 @@ et **0,0844** des points qu'elle touche et en rend ratés **0,0648** et **0,0525
 touchés restent ratés. `R4-F428` : la chaîne tient les quatre sauts sur **0,7247** et **0,7725** des points au lieu de
 **0,7236** et **0,7703**.
 
+**`255` · 2026-09-25 · les fibres, troisième source** — présence de fibres publiée, niveau 3
+
+⚠⚠ **Les fibres ne tranchent pas les ratés communs** — `R4-F429` : rayon par rayon, la présence de fibres ne sépare pas une
+feuille d'un interstice (aires de **0,4323** à **0,5508**) ; en moyenne elle voit les feuilles, mais pas les ratés que
+`m7` et `ps256` font ensemble.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

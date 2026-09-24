@@ -1647,6 +1647,8 @@ run "la chaine rejugee hors des dechirures" uv run python "$ROOT/src/nappe/la_ch
 run "figure la chaine rejugee hors des dechirures" uv run python "$ROOT/src/figures/figure_la_chaine_rejugee_hors_des_dechirures.py" --verifier
 run "reparer avant le saut suivant" uv run python "$ROOT/src/nappe/reparer_avant_le_saut_suivant.py" --verifier
 run "figure reparer avant le saut suivant" uv run python "$ROOT/src/figures/figure_reparer_avant_le_saut_suivant.py" --verifier
+run "les fibres voient-elles ce que les predictions ratent" uv run python "$ROOT/src/nappe/les_fibres_voient_elles_ce_que_les_predictions_ratent.py" --verifier
+run "figure les fibres voient-elles ce que les predictions ratent" uv run python "$ROOT/src/figures/figure_les_fibres_voient_elles_ce_que_les_predictions_ratent.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
