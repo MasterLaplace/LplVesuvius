@@ -3208,6 +3208,73 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 252 : LA SURFACE PRODUITE, ET LA COUCHE DU JUGE
+    s252a = _source(racine, "la_surface_produite_se_dechire_t_elle.json")
+    if s252a.exists():
+        d = json.loads(s252a.read_text())
+        xp, xm = d.get("du_cote_plus") or {}, d.get("du_cote_moins") or {}
+        if xp and xm:
+            fo = d["la_forme_de_la_maille"]
+            out.append(("la maille de 252", [f"**{fo[0]}** rangées et\n**{fo[1]}** colonnes", f"**{fo[0]}** rangées et **{fo[1]}** colonnes"],
+                        s252a.name))
+            out.append(("les pièces de 252", [f"| pièces | {xp['les_pieces']['les_pieces']} | {xm['les_pieces']['les_pieces']} |"], s252a.name))
+            out.append(("la plus grande pièce de 252",
+                        [f"| mailles de la plus grande, sur {xp['les_pieces']['les_mailles']} | {xp['les_pieces']['la_plus_grande']} | "
+                         f"{xm['les_pieces']['la_plus_grande']} |"], s252a.name))
+            out.append(("la part bordée de 252", [f"| part bordée d'une falaise | {_fr222(xp['la_part_bordee_dune_falaise'])} | "
+                                                 f"{_fr222(xm['la_part_bordee_dune_falaise'])} |"], s252a.name))
+            hp, hm = xp["les_detecteurs"]["hors_de_la_plus_grande_piece"], xm["les_detecteurs"]["hors_de_la_plus_grande_piece"]
+            fp, fm = xp["les_detecteurs"]["la_falaise"], xm["les_detecteurs"]["la_falaise"]
+            out.append(("la pièce dans 252", [f"ne\nsignale que **{_fr222(hp['la_part_des_rates_signales'])}** et "
+                                             f"**{_fr222(hm['la_part_des_rates_signales'])}** des ratés",
+                                             f"ne signale que **{_fr222(hp['la_part_des_rates_signales'])}** et "
+                                             f"**{_fr222(hm['la_part_des_rates_signales'])}** des ratés"], s252a.name))
+            out.append(("la falaise dans 252", [f"La falaise en signale **{_fr222(fp['la_part_des_rates_signales'])}** et "
+                                               f"**{_fr222(fm['la_part_des_rates_signales'])}**"], s252a.name))
+            out.append(("les justes de la falaise dans 252", [f"**{_fr222(fp['la_part_des_justes_signales_a_tort'])}** et\n"
+                                                             f"**{_fr222(fm['la_part_des_justes_signales_a_tort'])}**",
+                                                             f"**{_fr222(fp['la_part_des_justes_signales_a_tort'])}** et "
+                                                             f"**{_fr222(fm['la_part_des_justes_signales_a_tort'])}**"], s252a.name))
+            out.append(("la précision de la falaise dans 252", [f"(**{_fr222(fp['la_part_ratee_parmi_les_signales'])}** et "
+                                                               f"**{_fr222(fm['la_part_ratee_parmi_les_signales'])}**)"], s252a.name))
+            cp, cm = xp["les_rates_communs"], xm["les_rates_communs"]
+            out.append(("les ratés communs de 252", [f"(**{cp['combien']}** et **{cm['combien']}** points, "
+                                                    f"**{_fr222(cp['la_part_des_notes'])}** et **{_fr222(cm['la_part_des_notes'])}**"],
+                        s252a.name))
+            out.append(("la falaise sur les ratés communs de 252",
+                        [f"falaise en signale **{_fr222(cp['la_part_signalee_par_la_falaise'])}** et "
+                         f"**{_fr222(cm['la_part_signalee_par_la_falaise'])}**"], s252a.name))
+            tp, tm = xp["les_detecteurs"]["les_trois"], xm["les_detecteurs"]["les_trois"]
+            rp, rm = xp["les_detecteurs"]["le_retour_et_le_desaccord"], xm["les_detecteurs"]["le_retour_et_le_desaccord"]
+            out.append(("les trois dans 252", [f"**{_fr222(tp['la_part_des_rates_signales'])}** et **{_fr222(tm['la_part_des_rates_signales'])}** "
+                                              f"des ratés signalés, contre **{_fr222(rp['la_part_des_rates_signales'])}** et "
+                                              f"**{_fr222(rm['la_part_des_rates_signales'])}**"], s252a.name))
+            for g, nom_g, gras in (("accord", "accord", False), ("trop_pres_la_ou_la_bande_saute", "la bande saute", True)):
+                for nom_c, x in (("plus", xp), ("moins", xm)):
+                    q = x["les_falaises_par_groupe"][g]
+                    a_, b_ = _fr222(q["bordes_dans_la_surface_de_la_chaine"]), _fr222(q["bordes_dans_la_couche_de_la_bande"])
+                    ligne = (f"| **{nom_g}, côté {nom_c}** | **{a_}** | **{b_}** |" if gras else f"| {nom_g}, côté {nom_c} | {a_} | {b_} |")
+                    out.append((f"la falaise {nom_g} {nom_c} dans 252", [ligne], s252a.name))
+            out.append(("la borne de 252",
+                        [f"au plus de **{_fr222(fp['la_part_juste_a_laller'])}** à "
+                         f"**{_fr222(xp['la_part_juste_au_plus_si_les_chutes_ou_la_bande_saute_etaient_justes'])}** et de "
+                         f"**{_fr222(fm['la_part_juste_a_laller'])}** à "
+                         f"**{_fr222(xm['la_part_juste_au_plus_si_les_chutes_ou_la_bande_saute_etaient_justes'])}**"], s252a.name))
+    s252b = _source(racine, "la_surface_produite_du_segment_5753.json")
+    if s252b.exists():
+        d = json.loads(s252b.read_text())
+        xp, xm = d.get("du_cote_plus") or {}, d.get("du_cote_moins") or {}
+        if xp and xm:
+            gp = xp["les_falaises_par_groupe"]["trop_pres_la_ou_la_bande_saute"]
+            gm = xm["les_falaises_par_groupe"]["trop_pres_la_ou_la_bande_saute"]
+            out.append(("le segment dans 252",
+                        [f"**{_fr222(gp['bordes_dans_la_surface_de_la_chaine'])}** et **{_fr222(gm['bordes_dans_la_surface_de_la_chaine'])}** "
+                         f"dans la surface de la chaîne, **{_fr222(gp['bordes_dans_la_couche_de_la_bande'])}** et"],
+                        s252b.name))
+            out.append(("la borne du segment dans 252",
+                        [f"**{_fr222(xp['la_part_juste_au_plus_si_les_chutes_ou_la_bande_saute_etaient_justes'])}** et "
+                         f"**{_fr222(xm['la_part_juste_au_plus_si_les_chutes_ou_la_bande_saute_etaient_justes'])}**"], s252b.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 251 : DEUX PRÉDICTIONS
     s251a = _source(racine, "deux_predictions_trahissent_elles_le_saut_rate.json")
     if s251a.exists():

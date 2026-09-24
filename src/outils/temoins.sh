@@ -1641,6 +1641,8 @@ run "le retour trahit-il le saut rate" uv run python "$ROOT/src/nappe/le_retour_
 run "figure le retour trahit-il le saut rate" uv run python "$ROOT/src/figures/figure_le_retour_trahit_il_le_saut_rate.py" --verifier
 run "deux predictions trahissent-elles le saut rate" uv run python "$ROOT/src/nappe/deux_predictions_trahissent_elles_le_saut_rate.py" --verifier
 run "figure deux predictions trahissent-elles le saut rate" uv run python "$ROOT/src/figures/figure_deux_predictions_trahissent_elles_le_saut_rate.py" --verifier
+run "la surface produite se dechire-t-elle" uv run python "$ROOT/src/nappe/la_surface_produite_se_dechire_t_elle.py" --verifier
+run "figure la surface produite se dechire-t-elle" uv run python "$ROOT/src/figures/figure_la_surface_produite_se_dechire_t_elle.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

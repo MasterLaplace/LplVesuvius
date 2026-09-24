@@ -3993,6 +3993,13 @@ signale **0,2948** et **0,3103** des ratés de `m7`, les deux contrôles réunis
 gardée monte de **0,912** à **0,9428**. ⚠⚠⚠ Là où les deux prédictions s'accordent, elles ratent ensemble **0,0518** et
 **0,0496** des points. `R4-F422` : le segment donne la même part.
 
+**`252` · 2026-09-24 · la surface produite, et la couche du juge** — la même règle de falaise sur les deux
+
+⭐⭐⭐⭐ **Là où la bande saute, c'est sa couche qui se déchire** — `R4-F423` : la surface de la chaîne tient en une pièce
+(**30513** mailles sur **30536**) ; ses ratés s'y fondent, et aucune pièce ne les détache. `R4-F424` : là où la bande
+saute, sa couche est bordée d'une falaise en **0,8717** et **0,8753** des points, la surface de la chaîne en **0,2659** et
+**0,2308**. Une feuille ne saute pas d'un tour entre deux mailles voisines : c'est la première moitié de `R4-P93`.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
