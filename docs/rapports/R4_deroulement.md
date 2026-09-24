@@ -3979,6 +3979,13 @@ face, et la matière est du côté plus. `R4-F418` : en moyenne, ajouté après,
 **1,0878**) de l'interstice (**0,9011** et **0,9693**), et là où la bande saute il est plat autour de la chute de la
 chaîne (**0,9924** et **1,0018**) comme autour de la couche de la bande. `R4-P93` reste ouverte.
 
+**`250` · 2026-09-24 · le retour, contrôle sans juge** — l'aller de `248`, puis le saut inverse
+
+⚠⚠ **Le retour ne trahit qu'une petite part des sauts ratés** — `R4-F419` : sur la bande, avec `m7`, il signale **0,1789**
+et **0,1953** des ratés et **0,0392** et **0,0408** des justes ; écarter les signalés fait passer la part juste de
+**0,912** à **0,9238**. `R4-F420` : le segment dit la même chose. La plupart des ratés sont symétriques, et le retour
+les refait.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

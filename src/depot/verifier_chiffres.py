@@ -3208,6 +3208,60 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 250 : LE RETOUR
+    for nom_s, fichier in (("la bande", "le_retour_trahit_il_le_saut_rate.json"),
+                           ("le segment", "le_retour_sur_le_segment_5753.json")):
+        s250 = _source(racine, fichier)
+        if not s250.exists():
+            continue
+        d = json.loads(s250.read_text())
+        pr = d.get("les_predictions") or {}
+        if "m7" not in pr or "ps256" not in pr:
+            continue
+        cp, cm = pr["m7"]["du_cote_plus"]["la_confusion"], pr["m7"]["du_cote_moins"]["la_confusion"]
+        qp, qm = pr["ps256"]["du_cote_plus"]["la_confusion"], pr["ps256"]["du_cote_moins"]["la_confusion"]
+        if nom_s == "la bande":
+            out.append(("les points notés de 250", [f"**{cp['les_points_notes']}** et **{cm['les_points_notes']}** points notés"],
+                        s250.name))
+            for nom, cle, gras in (("part des ratés signalés", "la_part_des_rates_signales", False),
+                                   ("part des justes signalés à tort", "la_part_des_justes_signales_a_tort", False),
+                                   ("part ratée parmi les signalés", "la_part_ratee_parmi_les_signales", False),
+                                   ("part juste à l'aller", "la_part_juste_a_laller", False),
+                                   ("part juste parmi les points gardés", "la_part_juste_parmi_les_gardes", True)):
+                a_, b_ = _fr222(cp[cle]), _fr222(cm[cle])
+                ligne = f"| **{nom}** | **{a_}** | **{b_}** |" if gras else f"| {nom} | {a_} | {b_} |"
+                out.append((f"{nom} dans 250", [ligne], s250.name))
+            gp, gm = pr["m7"]["du_cote_plus"]["les_rates_par_genre"], pr["m7"]["du_cote_moins"]["les_rates_par_genre"]
+            out.append(("les chutes trop près signalées dans 250",
+                        [f"(**{_fr222(gp['trop_pres']['la_part_signalee'])}** et **{_fr222(gm['trop_pres']['la_part_signalee'])}**)"],
+                        s250.name))
+            out.append(("les chutes trop loin signalées dans 250",
+                        [f"(**{_fr222(gp['trop_loin']['la_part_signalee'])}** et **{_fr222(gm['trop_loin']['la_part_signalee'])}**)"],
+                        s250.name))
+            rp = pr["m7"]["du_cote_plus"]["le_retour_des_incoherents_en_pas"]["mediane"]
+            rm = pr["m7"]["du_cote_moins"]["le_retour_des_incoherents_en_pas"]["mediane"]
+            out.append(("le retour des signalés dans 250", [f"**{_fr222(rp)}** et **{_fr222(rm)}** pas"], s250.name))
+            out.append(("la bande avec ps256 dans 250",
+                        [f"**{_fr222(qp['la_part_des_rates_signales'])}** et **{_fr222(qm['la_part_des_rates_signales'])}** des ratés"],
+                        s250.name))
+            out.append(("la part juste avec ps256 dans 250",
+                        [f"de **{_fr222(qp['la_part_juste_a_laller'])}** à **{_fr222(qp['la_part_juste_parmi_les_gardes'])}** et de "
+                         f"**{_fr222(qm['la_part_juste_a_laller'])}** à **{_fr222(qm['la_part_juste_parmi_les_gardes'])}**"],
+                        s250.name))
+            ecarts = [pr[p][c]["laller_contre_247_ecart_max_voxels"] for p in ("m7", "ps256")
+                      for c in ("du_cote_plus", "du_cote_moins")]
+            if all(e == 0.0 for e in ecarts):
+                out.append(("l'aller de 250 est celui de 248", ["à zéro voxel près, avec les deux prédictions"], s250.name))
+        else:
+            out.append(("le segment dans 250",
+                        [f"signale **{_fr222(cp['la_part_des_rates_signales'])}** et **{_fr222(cm['la_part_des_rates_signales'])}** des ratés et "
+                         f"**{_fr222(cp['la_part_des_justes_signales_a_tort'])}** et **{_fr222(cm['la_part_des_justes_signales_a_tort'])}** des justes"],
+                        s250.name))
+            out.append(("la part juste du segment dans 250",
+                        [f"de **{_fr222(cp['la_part_juste_a_laller'])}** à **{_fr222(cp['la_part_juste_parmi_les_gardes'])}** et de "
+                         f"**{_fr222(cm['la_part_juste_a_laller'])}** à **{_fr222(cm['la_part_juste_parmi_les_gardes'])}**"],
+                        s250.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 249 : LE SCAN BRUT, LÀ OÙ LA BANDE SAUTE
     s249 = _source(racine, "la_bande_a_t_elle_manque_un_tour.json")
     if s249.exists():
