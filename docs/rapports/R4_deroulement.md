@@ -4035,6 +4035,12 @@ l'est (`R4-F432`, à un niveau de gris près), la spire produite se lit dans le 
 marche ne retrouve que **0,1396**. Sur le bloc le plus raté, le segment lui-même passe entre deux feuilles (`R4-F434`).
 `R4-P94` s'ouvre : un pas lu de centre à centre.
 
+**`258` · 2026-09-25 · le pas de centre à centre** — `R4-P94`
+
+⭐⭐⭐⭐ **Lu de centre à centre, le treillis voit une dérive que la couture ne voit pas** — `R4-F435` : d'une rampe qui
+décale la même matière, **1,2505** contre **0,1317**. Mais d'une rampe rendue il ne retrouve que **0,4807**, sous le seuil
+déclaré, et sur la spire produite il suit l'erreur jugée à un tiers (`R4-F436`). `R4-P94` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

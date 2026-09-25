@@ -3208,6 +3208,31 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 258 : LE PAS DE CENTRE À CENTRE
+    s258 = _source(racine, "le_pas_de_centre_a_centre_voit_il_la_rampe.json")
+    if s258.exists():
+        d = json.loads(s258.read_text())
+        if d.get("decidable"):
+            z, n = d["ce_que_la_marche_retrouve_de_la_rampe"], d["la_rampe_numerique"]
+            out.append(("la rampe rendue de 258", [f"a une pente de **{_fr222(z['la_pente'])}** : elle rend **{_fr222(z['lecart_retrouve_voxels'])}** voxels"], s258.name))
+            out.append(("les chunks de la rampe numérique de 258", [f"| sur **{n['de_centre_a_centre']['les_chunks']}** chunks | pente | voxels retrouvés sur 24 |"], s258.name))
+            out.append(("la couture sur la rampe numérique de 258",
+                        [f"| le pas à la couture | {_fr222(n['a_la_couture']['la_pente'])} | {_fr222(n['a_la_couture']['lecart_retrouve_voxels'])} |"], s258.name))
+            out.append(("le centre sur la rampe numérique de 258",
+                        [f"| **le pas de centre à centre** | **{_fr222(n['de_centre_a_centre']['la_pente'])}** | **{_fr222(n['de_centre_a_centre']['lecart_retrouve_voxels'])}** |"], s258.name))
+            p = d["les_piles"]["le_segment_reduit"]
+            out.append(("la marche du segment de 258", [f"s'étend sur **{_fr222(p['letendue_de_la_marche_voxels'])}** voxels sur le bloc"], s258.name))
+            out.append(("le résidu du segment de 258", [f"son résidu vaut {_fr222(p['la_marche']['le_residu_rms'])} voxels"], s258.name))
+            dc = d["la_difference_des_marches_des_coutures"]["laccord_des_paires"]
+            out.append(("la couture sur la spire produite de 258", [f"| à la couture | 0 | 1 | {_fr222(dc['la_correlation'])} |"], s258.name))
+            a = d["la_difference_des_marches"]["laccord_des_paires"]
+            out.append(("le centre sur la spire produite de 258",
+                        [f"| **de centre à centre** | **{_fr222(a['la_part_que_la_marche_separe_parmi_celles_que_le_juge_separe'])}** | **{_fr222(a['la_part_que_la_marche_reunit_parmi_celles_que_le_juge_reunit'])}** | **{_fr222(a['la_correlation'])}** |"],
+                        s258.name))
+            out.append(("les paires de 258", [f"Le juge sépare **{a['les_paires_que_le_juge_separe']}** paires de chunks et en réunit **{a['les_paires_quil_reunit']}**"], s258.name))
+            c = d["la_difference_des_marches"]["contre_lerreur_jugee"]
+            out.append(("la pente contre l'erreur de 258", [f"suit l'erreur jugée avec une pente de **{_fr222(c['la_pente'])}**"], s258.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 257 : LA SPIRE PRODUITE DANS LE TREILLIS
     s257 = _source(racine, "la_spire_produite_se_lit_elle_dans_le_treillis.json")
     if s257.exists():
