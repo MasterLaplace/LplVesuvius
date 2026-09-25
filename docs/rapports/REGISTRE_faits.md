@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**539 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **499** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
+**541 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **501** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 436 faits
+## R4 — 438 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -521,6 +521,8 @@
 | `R4-F434` | **sur le bloc le plus raté du transfert, le segment lui-même passe entre deux feuilles** | au bloc de 16 × 16 chunks à la rangée **16**, colonne **176**, que la règle désigne (**100** ratés sur **206** points notés), la couche la plus claire de chaque chunk de la pile du segment est à **35** voxels du milieu en médiane, à moins d'un quart de pas dans **0,2332** des chunks | établi ; ⚠⚠ Mesuré après avoir regardé les coupes. Le bloc le plus raté est un bloc où le point de départ est déjà faux. | `257` · `nappe/la_spire_produite_se_lit_elle_dans_le_treillis.py` |
 | `R4-F435` | **lu d'un centre de chunk à l'autre, le pas voit une dérive de la même matière que le pas lu à la couture ne voit pas** | la pile du segment décalée en profondeur de zéro à **24** voxels sur quatre chunks, sur **215** chunks : le pas de centre à centre en retrouve **1,2505** (30,0131 voxels), le pas à la couture **0,1317** (3,1603) | établi ; ⭐⭐⭐⭐ Le même estimateur que `224`, sur le chunk entier au lieu de seize colonnes de bord. ⚠⚠ La rampe numérique a été ajoutée après la première mesure ; le pas de centre à centre surestime d'un quart. | `258` · `nappe/le_pas_de_centre_a_centre_voit_il_la_rampe.py` |
 | `R4-F436` | **sur la spire produite, la marche de centre à centre moins celle du segment suit l'erreur jugée à un tiers ; d'une rampe rendue d'un pas, elle ne retrouve que 0,4807** | la rampe rendue de `257` (**72,08** voxels) est retrouvée à **0,4807**, sous le seuil déclaré d'un demi ; sur le bloc de `257`, la différence des marches corrèle à **0,6463** avec l'erreur jugée, pente **0,3317**, et sépare **0,1375** des paires que le juge sépare (**0** à la couture) | établi ; ⚠⚠ Par la règle déclarée, il n'y a pas encore d'instrument. Un seul bloc, où le segment passe entre deux feuilles ; la pente contre l'erreur est postérieure. | `258` · `nappe/le_pas_de_centre_a_centre_voit_il_la_rampe.py` |
+| `R4-F437` | **d'un bloc à l'autre, le pas de centre à centre ne retrouve pas la même rampe : ce n'est pas un instrument** | la même rampe numérique de **24** voxels, retrouvée à **1,2505** de centre à centre sur le bloc de `257`, ne l'est qu'à **0,0573** sur le segment réduit du bloc de la rangée 160, colonne 144, et à **0,3846** sur sa pile publiée ; le pas à la couture reste entre **0,1317** et **0,2015** | établi ; ⭐⭐⭐⭐ Referme `258` sur ce qu'il laissait ouvert. ⚠⚠ Deux blocs ; la pile publiée a été ajoutée après la première mesure. Les feuilles de ce bloc ondulent sur moins d'un chunk, ce qui est vu sur les coupes, pas mesuré. | `259` · `nappe/le_pas_de_centre_a_centre_la_ou_le_segment_tient_sa_feuille.py` |
+| `R4-F438` | **là où `m7` voit le segment sur sa feuille, la couche la plus claire d'un chunk n'en est pas un repère** | au bloc de la rangée 160, colonne 144, où `m7` voit le segment en **0,9592** des points de la maille, la couche la plus claire de chaque chunk n'est à moins d'un quart de pas du milieu que dans **0,3359** des chunks de la pile publiée, et **0,2656** de celle du segment réduit | établi ; ⚠⚠ Le repère sur lequel reposait `R4-F434`, avec la coupe de `257`. Ajouté après la première mesure pour la pile publiée. | `259` · `nappe/le_pas_de_centre_a_centre_la_ou_le_segment_tient_sa_feuille.py` |
 
 ## R5 — 23 faits
 

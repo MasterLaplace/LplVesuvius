@@ -4041,6 +4041,12 @@ marche ne retrouve que **0,1396**. Sur le bloc le plus raté, le segment lui-mê
 décale la même matière, **1,2505** contre **0,1317**. Mais d'une rampe rendue il ne retrouve que **0,4807**, sous le seuil
 déclaré, et sur la spire produite il suit l'erreur jugée à un tiers (`R4-F436`). `R4-P94` reste ouverte.
 
+**`259` · 2026-09-25 · le pas de centre à centre sur un second bloc** — `R4-P94`
+
+⭐⭐⭐⭐ **Le pas de centre à centre ne se transporte pas** — `R4-F437` : la même rampe numérique, retrouvée à **1,2505** sur le
+bloc de `257`, ne l'est qu'à **0,0573** sur un bloc où `m7` voit le segment sur sa feuille, et à **0,3846** sur sa pile
+publiée. La couche la plus claire d'un chunk n'y est pas un repère de la feuille (`R4-F438`). `R4-P94` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

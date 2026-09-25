@@ -3208,6 +3208,28 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 259 : LE PAS DE CENTRE À CENTRE SUR UN SECOND BLOC
+    s259 = _source(racine, "le_pas_de_centre_a_centre_la_ou_le_segment_tient_sa_feuille.json")
+    if s259.exists():
+        d = json.loads(s259.read_text())
+        if d.get("decidable") and d.get("la_pile_publiee"):
+            b, f_r, f_p = d["le_bloc"], d["la_feuille_dans_la_pile_du_segment"], d["la_pile_publiee"]["la_feuille_dans_la_pile"]
+            n, np_ = d["la_rampe_numerique"], d["la_pile_publiee"]["la_rampe_numerique"]
+            out.append(("m7 sur toute la maille en 259", [f"en **{_fr222(d['la_part_ou_m7_voit_le_segment_sur_toute_la_maille'])}** des points de la maille sur tout le segment"], s259.name))
+            out.append(("les blocs propres de 259", [f"Parmi les blocs de `257`, **{b['les_blocs_propres']}** portent au moins"], s259.name))
+            out.append(("le bloc de 259", [f"`m7` y voit le segment en **{_fr222(b['la_part_ou_m7_voit_le_segment'])}** des points, et il porte **{b['les_rates']}** ratés jugés sur **{b['les_points_notes']}** points notés"], s259.name))
+            out.append(("la feuille du segment réduit de 259", [f"est à **{_fr222(f_r['lecart_median_voxels'])}** voxels du milieu en médiane"], s259.name))
+            out.append(("la part du segment réduit de 259", [f"du milieu dans **{_fr222(f_r['la_part_a_moins_dun_quart_de_pas'])}** des chunks seulement"], s259.name))
+            out.append(("la feuille publiée de 259", [f"**{_fr222(f_p['lecart_median_voxels'])}** voxels et **{_fr222(f_p['la_part_a_moins_dun_quart_de_pas'])}**"], s259.name))
+            out.append(("la rampe du segment réduit de 259", [f"| ce bloc, segment réduit | **{_fr222(n['de_centre_a_centre']['la_pente'])}** | **{_fr222(n['a_la_couture']['la_pente'])}** |"], s259.name))
+            out.append(("la rampe de la pile publiée de 259", [f"| ce bloc, pile publiée | **{_fr222(np_['de_centre_a_centre']['la_pente'])}** | **{_fr222(np_['a_la_couture']['la_pente'])}** |"], s259.name))
+            m = d["les_marches"]
+            out.append(("la marche du segment de 259", [f"La marche du segment s'étend sur **{_fr222(m['de_centre_a_centre']['le_segment']['letendue_voxels'])}**"], s259.name))
+            out.append(("la marche du segment à la couture de 259", [f"voxels de centre à centre, sur {_fr222(m['a_la_couture']['le_segment']['letendue_voxels'])} à la couture"], s259.name))
+            a = m["de_centre_a_centre"]["la_difference"]["laccord_des_paires"]
+            out.append(("les paires de 259", [f"{_fr222(a['la_part_que_la_marche_separe_parmi_celles_que_le_juge_separe'])} des paires que le juge sépare de centre à centre"], s259.name))
+            out.append(("le juge de 259", [f"le juge en sépare **{a['les_paires_que_le_juge_separe']}** et en réunit {a['les_paires_quil_reunit']}"], s259.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 258 : LE PAS DE CENTRE À CENTRE
     s258 = _source(racine, "le_pas_de_centre_a_centre_voit_il_la_rampe.json")
     if s258.exists():
