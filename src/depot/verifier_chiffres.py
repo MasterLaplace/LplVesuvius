@@ -3208,6 +3208,52 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 274 : LA GARDE DE LA MARCHE DU SEGMENT RÉDUIT
+    s274 = _source(racine, "la_marche_du_segment_dit_elle_ou_ne_pas_corriger.json")
+    if s274.exists():
+        d = json.loads(s274.read_text())
+        if d.get("decidable"):
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            for nom, b_ in d["les_voisinages"].items():
+                bloc = (f"le bloc de `{nom[-3:]}`, choisi" if nom.startswith("le_bloc_de_")
+                        else f"`({b_['la_rangee']}, {b_['la_colonne']})`")
+                s_, a_ = b_["sans_la_garde"], b_["avec_la_garde"]
+                out.append((f"la ligne {nom} de 274",
+                            [f"| {bloc} | {b_['avant']['les_points_notes']} | {sg(b_['avant']['la_part_sur_la_bonne_spire'])} | "
+                             f"{sg(s_['apres']['la_part_sur_la_bonne_spire'])} | "
+                             f"{sg(a_['apres']['la_part_sur_la_bonne_spire'])} | "
+                             f"{s_['les_rates_rendus_justes']} → {a_['les_rates_rendus_justes']} | "
+                             f"{s_['les_justes_rendus_rates']} → {a_['les_justes_rendus_rates']} |"], s274.name))
+            for cle, titre, gras in (("les_neuf", "les neuf", True), ("les_choisis", "les deux choisis", False),
+                                     ("les_reguliers", "les sept réguliers", False)):
+                r_ = d["les_reunis"][cle]
+                n_ = str(r_["les_blocs"])
+                g_ = f"{sg(r_['sans_la_garde']['le_gain_net'])} → {sg(r_['avec_la_garde']['le_gain_net'])}"
+                if gras:
+                    titre, n_, g_ = f"**{titre}**", f"**{n_}**", f"**{g_}**"
+                out.append((f"la ligne {cle} de 274",
+                            [f"| {titre} | {n_} | {sg(r_['avant'])} | {sg(r_['sans_la_garde']['apres'])} | "
+                             f"{sg(r_['avec_la_garde']['apres'])} | {g_} |"], s274.name))
+            g_ = d["les_reunis"]["les_neuf"]
+            t_ = {k: sum(b_["retenus_par_la_garde"][k] for b_ in d["les_voisinages"].values())
+                  for k in ("les_rates_rendus_justes", "les_justes_rendus_rates")}
+            phrase = (f"évite {t_['les_justes_rendus_rates']} des {g_['sans_la_garde']['les_justes_rendus_rates']} "
+                      f"justes que la procédure rend ratés et perd {t_['les_rates_rendus_justes']} des "
+                      f"{g_['sans_la_garde']['les_rates_rendus_justes']}")
+            out.append(("le fait de 274", [phrase, f"le gain net des neuf blocs passe de "
+                                                   f"{g_['sans_la_garde']['le_gain_net']} à {g_['avec_la_garde']['le_gain_net']}"],
+                        s274.name))
+            t7 = d["les_voisinages"]["le_bloc_de_257"]
+            out.append(("le bloc de 257 en 274",
+                        [f"sous {t7['retenus_par_la_garde']['les_points_corriges']}",
+                         f"des {t7['sans_la_garde']['les_points_corriges']} points corrigés, et la procédure en rend "
+                         f"{t7['retenus_par_la_garde']['les_rates_rendus_justes']} justes"], s274.name))
+            # ⚠ Le nombre est écrit en toutes lettres dans le document : un compte qui changerait ne retrouverait plus sa phrase.
+            en_lettres = {9: "neuf"}.get(len(d["les_voisinages"]), str(len(d["les_voisinages"])))
+            if all(b_["reproduit"] for b_ in d["les_voisinages"].values()):
+                out.append(("la reproduction de 274", [f"Les {en_lettres} voisinages redonnent, sans la garde"], s274.name))
+            out.append(("le verdict de 274", [f"**{d['le_verdict']['lissue'].upper()}.**"], s274.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 273 : LE SEGMENT RÉDUIT CONTRE LE SEGMENT
     s273 = _source(racine, "le_segment_reduit_quitte_t_il_la_feuille_du_segment.json")
     if s273.exists():

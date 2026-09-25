@@ -4137,6 +4137,13 @@ produite qui porte l'écart. Le segment réduit est sur une seule feuille. `R4-P
 et sa marche en lit 46,3791 : c'est la marche qui lit mal** — `R4-F454`. Sur les 6441 chunks des trois voisinages, 0,0054
 seulement sont à un quart de pas ou plus. Ce que la procédure abîme vient de la marche. `R4-P95` reste ouverte.
 
+**`274` · 2026-09-25 · la garde de la marche du segment réduit** — `R4-P95`
+
+⭐⭐⭐⭐ **Sans juge, la garde de la marche du segment réduit évite 6 des 7 justes que la procédure rend ratés et perd 11 des 37
+ratés qu'elle rend justes : le gain net des neuf blocs passe de 30 à 25** — `R4-F455`. Sur les blocs réguliers, la procédure
+n'abîme plus rien ; sur le bloc de `257`, la garde retient 12 des 22 points corrigés, dont 11 rendus justes. La garde
+n'améliore pas la procédure. `R4-P95` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

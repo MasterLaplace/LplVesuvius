@@ -1684,6 +1684,8 @@ run "laquelle des deux marches porte l'ecart" uv run python "$ROOT/src/nappe/laq
 run "figure laquelle des deux marches porte l'ecart" uv run python "$ROOT/src/figures/figure_laquelle_des_deux_marches_porte_lecart.py" --verifier
 run "le segment reduit quitte-t-il la feuille du segment" uv run python "$ROOT/src/nappe/le_segment_reduit_quitte_t_il_la_feuille_du_segment.py" --verifier
 run "figure le segment reduit quitte-t-il la feuille du segment" uv run python "$ROOT/src/figures/figure_le_segment_reduit_quitte_t_il_la_feuille_du_segment.py" --verifier
+run "la marche du segment dit-elle ou ne pas corriger" uv run python "$ROOT/src/nappe/la_marche_du_segment_dit_elle_ou_ne_pas_corriger.py" --verifier
+run "figure la marche du segment dit-elle ou ne pas corriger" uv run python "$ROOT/src/figures/figure_la_marche_du_segment_dit_elle_ou_ne_pas_corriger.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -1,0 +1,445 @@
+{
+ "la_glissade_voxels": 69.458,
+ "le_seuil_voxels": 18.0,
+ "les_voisinages": {
+  "le_bloc_de_257": {
+   "les_ancres_voxels": {
+    "la_difference": 0.8001,
+    "le_segment_reduit": -6.3707
+   },
+   "avant": {
+    "les_points_notes": 154,
+    "la_part_sur_la_bonne_spire": 0.474
+   },
+   "sans_la_garde": {
+    "les_points_corriges": 22,
+    "apres": {
+     "les_points_notes": 154,
+     "la_part_sur_la_bonne_spire": 0.6039
+    },
+    "les_rates_rendus_justes": 20,
+    "les_justes_rendus_rates": 0
+   },
+   "avec_la_garde": {
+    "les_points_corriges": 10,
+    "apres": {
+     "les_points_notes": 154,
+     "la_part_sur_la_bonne_spire": 0.5325
+    },
+    "les_rates_rendus_justes": 9,
+    "les_justes_rendus_rates": 0
+   },
+   "retenus_par_la_garde": {
+    "les_points_corriges": 12,
+    "les_rates_rendus_justes": 11,
+    "les_justes_rendus_rates": 0
+   },
+   "la_rangee": 16,
+   "la_colonne": 176,
+   "publie": {
+    "les_points_corriges": 22,
+    "les_rates_rendus_justes": 20,
+    "les_justes_rendus_rates": 0
+   },
+   "reproduit": true,
+   "les_secondes": 359.3
+  },
+  "le_bloc_de_259": {
+   "les_ancres_voxels": {
+    "la_difference": 4.2479,
+    "le_segment_reduit": -1.4693
+   },
+   "avant": {
+    "les_points_notes": 151,
+    "la_part_sur_la_bonne_spire": 0.6225
+   },
+   "sans_la_garde": {
+    "les_points_corriges": 29,
+    "apres": {
+     "les_points_notes": 151,
+     "la_part_sur_la_bonne_spire": 0.7152
+    },
+    "les_rates_rendus_justes": 15,
+    "les_justes_rendus_rates": 1
+   },
+   "avec_la_garde": {
+    "les_points_corriges": 26,
+    "apres": {
+     "les_points_notes": 151,
+     "la_part_sur_la_bonne_spire": 0.7152
+    },
+    "les_rates_rendus_justes": 15,
+    "les_justes_rendus_rates": 1
+   },
+   "retenus_par_la_garde": {
+    "les_points_corriges": 3,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "la_rangee": 160,
+   "la_colonne": 144,
+   "publie": {
+    "les_points_corriges": 29,
+    "les_rates_rendus_justes": 15,
+    "les_justes_rendus_rates": 1
+   },
+   "reproduit": true,
+   "les_secondes": 478.6
+  },
+  "32_128": {
+   "les_ancres_voxels": {
+    "la_difference": 2.1742,
+    "le_segment_reduit": 0.5961
+   },
+   "avant": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "sans_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 168,
+     "la_part_sur_la_bonne_spire": 1.0
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "avec_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 168,
+     "la_part_sur_la_bonne_spire": 1.0
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "retenus_par_la_garde": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "la_rangee": 32,
+   "la_colonne": 128,
+   "publie": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "reproduit": true,
+   "les_secondes": 321.1
+  },
+  "112_192": {
+   "les_ancres_voxels": {
+    "la_difference": -1.2381,
+    "le_segment_reduit": 0.5319
+   },
+   "avant": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 0.9583
+   },
+   "sans_la_garde": {
+    "les_points_corriges": 2,
+    "apres": {
+     "les_points_notes": 168,
+     "la_part_sur_la_bonne_spire": 0.9702
+    },
+    "les_rates_rendus_justes": 2,
+    "les_justes_rendus_rates": 0
+   },
+   "avec_la_garde": {
+    "les_points_corriges": 2,
+    "apres": {
+     "les_points_notes": 168,
+     "la_part_sur_la_bonne_spire": 0.9702
+    },
+    "les_rates_rendus_justes": 2,
+    "les_justes_rendus_rates": 0
+   },
+   "retenus_par_la_garde": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "la_rangee": 112,
+   "la_colonne": 192,
+   "publie": {
+    "les_points_corriges": 2,
+    "les_rates_rendus_justes": 2,
+    "les_justes_rendus_rates": 0
+   },
+   "reproduit": true,
+   "les_secondes": 399.0
+  },
+  "160_160": {
+   "les_ancres_voxels": {
+    "la_difference": 0.2022,
+    "le_segment_reduit": 0.1079
+   },
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.8225
+   },
+   "sans_la_garde": {
+    "les_points_corriges": 6,
+    "apres": {
+     "les_points_notes": 169,
+     "la_part_sur_la_bonne_spire": 0.787
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 6
+   },
+   "avec_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 169,
+     "la_part_sur_la_bonne_spire": 0.8225
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "retenus_par_la_garde": {
+    "les_points_corriges": 6,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 6
+   },
+   "la_rangee": 160,
+   "la_colonne": 160,
+   "publie": {
+    "les_points_corriges": 6,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 6
+   },
+   "reproduit": true,
+   "les_secondes": 503.0
+  },
+  "208_176": {
+   "les_ancres_voxels": {
+    "la_difference": -1.0493,
+    "le_segment_reduit": -0.0037
+   },
+   "avant": {
+    "les_points_notes": 130,
+    "la_part_sur_la_bonne_spire": 0.8769
+   },
+   "sans_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 130,
+     "la_part_sur_la_bonne_spire": 0.8769
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "avec_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 130,
+     "la_part_sur_la_bonne_spire": 0.8769
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "retenus_par_la_garde": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "la_rangee": 208,
+   "la_colonne": 176,
+   "publie": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "reproduit": true,
+   "les_secondes": 525.7
+  },
+  "256_128": {
+   "les_ancres_voxels": {
+    "la_difference": -1.8066,
+    "le_segment_reduit": -1.6754
+   },
+   "avant": {
+    "les_points_notes": 150,
+    "la_part_sur_la_bonne_spire": 0.8467
+   },
+   "sans_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 150,
+     "la_part_sur_la_bonne_spire": 0.8467
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "avec_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 150,
+     "la_part_sur_la_bonne_spire": 0.8467
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "retenus_par_la_garde": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "la_rangee": 256,
+   "la_colonne": 128,
+   "publie": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "reproduit": true,
+   "les_secondes": 612.4
+  },
+  "304_128": {
+   "les_ancres_voxels": {
+    "la_difference": -1.7151,
+    "le_segment_reduit": -1.4549
+   },
+   "avant": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 0.9295
+   },
+   "sans_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 156,
+     "la_part_sur_la_bonne_spire": 0.9295
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "avec_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 156,
+     "la_part_sur_la_bonne_spire": 0.9295
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "retenus_par_la_garde": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "la_rangee": 304,
+   "la_colonne": 128,
+   "publie": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "reproduit": true,
+   "les_secondes": 411.7
+  },
+  "352_128": {
+   "les_ancres_voxels": {
+    "la_difference": -0.6677,
+    "le_segment_reduit": 0.0968
+   },
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.9941
+   },
+   "sans_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 169,
+     "la_part_sur_la_bonne_spire": 0.9941
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "avec_la_garde": {
+    "les_points_corriges": 0,
+    "apres": {
+     "les_points_notes": 169,
+     "la_part_sur_la_bonne_spire": 0.9941
+    },
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "retenus_par_la_garde": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "la_rangee": 352,
+   "la_colonne": 128,
+   "publie": {
+    "les_points_corriges": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "reproduit": true,
+   "les_secondes": 384.3
+  }
+ },
+ "decidable": true,
+ "les_reunis": {
+  "les_neuf": {
+   "les_blocs": 9,
+   "avant": 0.8403,
+   "sans_la_garde": {
+    "apres": 0.8615,
+    "les_points_corriges": 59,
+    "les_rates_rendus_justes": 37,
+    "les_justes_rendus_rates": 7,
+    "le_gain_net": 30
+   },
+   "avec_la_garde": {
+    "apres": 0.858,
+    "les_points_corriges": 38,
+    "les_rates_rendus_justes": 26,
+    "les_justes_rendus_rates": 1,
+    "le_gain_net": 25
+   }
+  },
+  "les_choisis": {
+   "les_blocs": 2,
+   "avant": 0.5475,
+   "sans_la_garde": {
+    "apres": 0.659,
+    "les_points_corriges": 51,
+    "les_rates_rendus_justes": 35,
+    "les_justes_rendus_rates": 1,
+    "le_gain_net": 34
+   },
+   "avec_la_garde": {
+    "apres": 0.623,
+    "les_points_corriges": 36,
+    "les_rates_rendus_justes": 24,
+    "les_justes_rendus_rates": 1,
+    "le_gain_net": 23
+   }
+  },
+  "les_reguliers": {
+   "les_blocs": 7,
+   "avant": 0.9207,
+   "sans_la_garde": {
+    "apres": 0.9171,
+    "les_points_corriges": 8,
+    "les_rates_rendus_justes": 2,
+    "les_justes_rendus_rates": 6,
+    "le_gain_net": -4
+   },
+   "avec_la_garde": {
+    "apres": 0.9225,
+    "les_points_corriges": 2,
+    "les_rates_rendus_justes": 2,
+    "les_justes_rendus_rates": 0,
+    "le_gain_net": 2
+   }
+  }
+ },
+ "les_secondes": 3995.8,
+ "le_verdict": {
+  "lissue": "la garde n'améliore pas la procédure"
+ }
+}
