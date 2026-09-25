@@ -3208,6 +3208,35 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 271 : CE QUE LE JUGE VOYAIT SOUS LES POINTS CORRIGÉS
+    s271 = _source(racine, "les_points_corriges_etaient_ils_decales.json")
+    if s271.exists():
+        d = json.loads(s271.read_text())
+        if d.get("decidable"):
+            r_ = d["les_reunis"]
+            for cle, titre in (("rendu_juste", "ratés rendus justes"), ("rendu_rate", "**justes rendus ratés**"),
+                               ("reste_rate", "ratés restés ratés"), ("reste_juste", "justes restés justes")):
+                f_ = r_[cle]
+                n_, s_, c_ = (str(f_["les_points"]), _fr222(f_["le_decalage_juge_median_voxels"]),
+                              _fr222(f_["lecart_lu_median_voxels"]))
+                if titre.startswith("**"):
+                    n_, s_, c_ = f"**{n_}**", f"**{s_}**", f"**{c_}**"
+                out.append((f"la ligne {cle} de 271", [f"| {titre} | {n_} | {s_} | {c_} |"], s271.name))
+            t_ = r_["le_temoin"]
+            out.append(("le témoin de 271", [f"**{t_['les_points']}** justes que la décision ne corrige pas, à "
+                                             f"**{_fr222(t_['le_decalage_juge_abs_median_voxels'])}** voxels"], s271.name))
+            for nom, v_ in d["les_voisinages"].items():
+                bloc = "le bloc de `259`" if nom == "le_bloc_de_259" else f"`({nom.replace('_', ', ')})`"
+                for p_ in v_["les_points"]:
+                    if p_["la_classe"] == "rendu_rate":
+                        out.append((f"un juste rendu raté de {nom} en 271",
+                                    [f"| {bloc} | {_fr222(p_['e']).replace('-', '−')} | "
+                                     f"{_fr222(p_['c']).replace('-', '−')} |"], s271.name))
+            # ⚠ Le nombre est écrit en toutes lettres dans le document : un compte qui changerait ne retrouverait plus sa phrase.
+            en_lettres = {9: "neuf"}.get(len(d["les_voisinages"]), str(len(d["les_voisinages"])))
+            out.append(("la reproduction de 271", [f"Les {en_lettres} voisinages redonnent leurs comptes publiés"],
+                        s271.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 270 : L'ANCRE DES VOISINS SUR LES BLOCS RÉGULIERS
     s270 = _source(racine, "lancre_du_voisinage_tient_elle_sur_des_blocs_reguliers.json")
     s265b = _source(racine, "le_voisinage_dit_il_quel_niveau_est_le_bon.json")

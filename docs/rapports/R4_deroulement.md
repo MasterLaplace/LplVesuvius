@@ -4119,6 +4119,12 @@ pente, et la marche n'en lit qu'une partie. `R4-P95` reste ouverte.
 6 justes rendus ratés, tous sur `(160, 160)`, qui touche le bloc de `259`** — `R4-F451`. La procédure qui corrige les deux blocs
 choisis défait un peu ailleurs, là où `268` trouvait déjà la marche en désaccord avec le juge. `R4-P95` reste ouverte.
 
+**`271` · 2026-09-25 · ce que le juge voyait sous les points corrigés** — `R4-P95`
+
+⭐⭐⭐⭐ **Les justes que la décision rend ratés, le juge ne les voyait pas décalés : 8,43 voxels en médiane, là où la marche
+lisait 67,65 sous eux** — `R4-F452`. Les ratés rendus justes, eux, sont jugés à 53,78 voxels et lus à 59,5. Là où la procédure
+abîme, la marche et le juge diffèrent d'une spire. `R4-P95` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
