@@ -3208,6 +3208,52 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 270 : L'ANCRE DES VOISINS SUR LES BLOCS RÉGULIERS
+    s270 = _source(racine, "lancre_du_voisinage_tient_elle_sur_des_blocs_reguliers.json")
+    s265b = _source(racine, "le_voisinage_dit_il_quel_niveau_est_le_bon.json")
+    if s270.exists() and s265b.exists():
+        d = json.loads(s270.read_text())
+        choisis = json.loads(s265b.read_text())["les_blocs"]
+        if d.get("decidable"):
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            for b in d["les_blocs"].values():
+                y, x = b["la_rangee"], b["la_colonne"]
+                # ⚠ Le contact se recompte par les coordonnées, à un bloc de distance, jamais par la prose.
+                nom = f"`({y}, {x})`" + "".join(f", voisin du bloc de `{n[-3:]}`" for n, c in choisis.items()
+                                                if abs(c["la_rangee"] - y) + abs(c["la_colonne"] - x) == 16)
+                e, k = b["lancre_du_voisinage"], b["lancre_du_bloc"]
+                de, dk = e["la_decision"], k["la_decision"]
+                ligne = (f"| {nom} | {b['avant']['les_points_notes']} | {_fr222(b['avant']['la_part_sur_la_bonne_spire'])} "
+                         f"| {sg(e['lancre_voxels'])} | {_fr222(de['apres']['la_part_sur_la_bonne_spire'])} "
+                         f"| {de['les_rates_rendus_justes']} / {de['les_justes_rendus_rates']} | {sg(k['lancre_voxels'])} "
+                         f"| {_fr222(dk['apres']['la_part_sur_la_bonne_spire'])} "
+                         f"| {dk['les_rates_rendus_justes']} / {dk['les_justes_rendus_rates']} |")
+                out.append((f"la ligne {y}_{x} de 270", [ligne], s270.name))
+            g = d["les_reunis"]
+            v_, k_ = g["lancre_du_voisinage"], g["lancre_du_bloc"]
+            out.append(("la ligne réunie de 270",
+                        [f"| **réunis** | | **{_fr222(g['avant'])}** | | **{_fr222(v_['apres'])}** "
+                         f"| **{v_['les_rates_rendus_justes']}** / **{v_['les_justes_rendus_rates']}** | "
+                         f"| {_fr222(k_['apres'])} | {k_['les_rates_rendus_justes']} / {k_['les_justes_rendus_rates']} |"],
+                        s270.name))
+            out.append(("le compte des rendus de 270",
+                        [f"**{d['les_rendus']}** rendus, dont **{d['les_rendus_refaits']}** refaits"
+                         + (" pour cette tranche et aucun raté" if not d["les_rendus_rates"] else "")], s270.name))
+            c = d["les_blocs"]["160_160"]
+            out.append(("le mélange de (160, 160) en 270",
+                        [f"donne **{_fr222(c['lancre_du_voisinage']['le_melange']['glissee_au_dessus'])}** aux spires "
+                         "glissées au-dessus",
+                         f"{_fr222(c['lancre_du_bloc']['le_melange']['glissee_au_dessus'])}. Les deux bosses"], s270.name))
+            bo = c["les_deux_bosses_du_bloc"]
+            out.append(("les deux bosses de (160, 160) en 270",
+                        [f"sont à {_fr222(bo['les_centres_voxels'][0])} et {_fr222(bo['les_centres_voxels'][1])} voxels, "
+                         f"avec des poids {_fr222(bo['les_poids'][0])} et {_fr222(bo['les_poids'][1])}"], s270.name))
+            vj = c["les_voisins_juges"]
+            out.append(("les voisins jugés de (160, 160) en 270",
+                        [", ".join(_fr222(vj[n]["la_part_sur_la_bonne_spire"]) for n in ("144_160", "176_160"))
+                         + f" et {_fr222(vj['160_176']['la_part_sur_la_bonne_spire'])}",
+                         f"est le bloc de `259`, à **{_fr222(vj['160_144']['la_part_sur_la_bonne_spire'])}**"], s270.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 269 : CE QUE LA MARCHE LIT DE CE QUE LE JUGE VOIT SAUTER
     s269 = _source(racine, "la_marche_lit_elle_ce_que_le_juge_voit_sauter.json")
     if s269.exists():

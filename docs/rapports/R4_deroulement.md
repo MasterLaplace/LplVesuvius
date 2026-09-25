@@ -4113,6 +4113,12 @@ n'est plus abîmé, ni corrigé ; celui de `257` passe de **0,474** à **0,6948*
 moitié** — `R4-F450` : **0,5135**, **0,7101** sur le voisinage de `257`, **0,3838** sur celui de `259`. Les ratés se font en
 pente, et la marche n'en lit qu'une partie. `R4-P95` reste ouverte.
 
+**`270` · 2026-09-25 · l'ancre des voisins sur les blocs réguliers** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur les blocs réguliers, l'ancre des voisins fait baisser la part réunie de 0,9207 à 0,9171 : 2 ratés rendus justes,
+6 justes rendus ratés, tous sur `(160, 160)`, qui touche le bloc de `259`** — `R4-F451`. La procédure qui corrige les deux blocs
+choisis défait un peu ailleurs, là où `268` trouvait déjà la marche en désaccord avec le juge. `R4-P95` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
