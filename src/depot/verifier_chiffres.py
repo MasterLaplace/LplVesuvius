@@ -3208,6 +3208,30 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 273 : LE SEGMENT RÉDUIT CONTRE LE SEGMENT
+    s273 = _source(racine, "le_segment_reduit_quitte_t_il_la_feuille_du_segment.json")
+    if s273.exists():
+        d = json.loads(s273.read_text())
+        if d.get("decidable"):
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            v_ = d["les_voisinages"]
+            for f_, titre, gras in ((v_["160_160"]["les_chunks_corriges"], "`(160, 160)`, corrigés", True),
+                                    (v_["le_bloc_de_257"]["les_chunks_corriges_juges_rates"],
+                                     "le bloc de `257`, corrigés et jugés ratés", False),
+                                    (v_["le_bloc_de_259"]["les_chunks_corriges_juges_rates"],
+                                     "le bloc de `259`, corrigés et jugés ratés", False),
+                                    (d["tous_les_chunks"], "les trois voisinages, tous les chunks", False)):
+                n_, a_ = str(f_["les_chunks"]), sg(f_["lecart_abs_median_voxels"])
+                if gras:
+                    titre, n_, a_ = f"**{titre}**", f"**{n_}**", f"**{a_}**"
+                out.append((f"la ligne {titre} de 273",
+                            [f"| {titre} | {n_} | {a_} | {sg(f_['lecart_median_voxels'])} | "
+                             f"{sg(f_['la_part_au_quart_de_pas_ou_plus'])} |"], s273.name))
+            c_ = [sg(v_[n]["la_correlation_avec_la_marche_du_segment_reduit"])
+                  for n in ("160_160", "le_bloc_de_257", "le_bloc_de_259")]
+            out.append(("les corrélations de 273", [f"vaut {c_[0]} sur `(160, 160)`, {c_[1]}",
+                                                    f"sur le bloc de `257` et {c_[2]} sur celui de `259`"], s273.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 272 : LAQUELLE DES DEUX MARCHES PORTE L'ÉCART
     s272 = _source(racine, "laquelle_des_deux_marches_porte_lecart.json")
     if s272.exists():

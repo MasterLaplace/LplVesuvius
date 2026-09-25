@@ -4131,6 +4131,12 @@ abîme, la marche et le juge diffèrent d'une spire. `R4-P95` reste ouverte.
 66,766, contre 19,244 pour la spire produite** — `R4-F453`. Sous les ratés qu'elle corrige juste, c'est la marche de la spire
 produite qui porte l'écart. Le segment réduit est sur une seule feuille. `R4-P95` reste ouverte.
 
+**`273` · 2026-09-25 · le segment réduit contre le segment** — `R4-P95`
+
+⭐⭐⭐⭐ **Sous les chunks que la décision corrige sur `(160, 160)`, le segment réduit est à 2,0976 voxels du segment en médiane,
+et sa marche en lit 46,3791 : c'est la marche qui lit mal** — `R4-F454`. Sur les 6441 chunks des trois voisinages, 0,0054
+seulement sont à un quart de pas ou plus. Ce que la procédure abîme vient de la marche. `R4-P95` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
