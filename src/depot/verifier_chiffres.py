@@ -3208,6 +3208,34 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 268 : LES FRONTIÈRES JUGÉES À LEURS SAUTS
+    s268 = _source(racine, "une_frontiere_se_juge_elle_a_ses_sauts.json")
+    if s268.exists():
+        d = json.loads(s268.read_text())
+        if d.get("decidable"):
+            v7, v9 = d["les_voisinages"]["le_bloc_de_257"], d["les_voisinages"]["le_bloc_de_259"]
+            c7, w7 = v7["le_centre"], v7["les_voisins_reunis"]
+            out.append(("le voisinage de 257 en 268",
+                        [f"| {v7['les_frontieres_fausses_corrigees']} | "
+                         f"{'**arrêté par la garde**, une fausse reste' if v7['reste_fausse'] else 'aucune fausse'} | "
+                         f"{_fr222(c7['avant']['la_part_sur_la_bonne_spire'])} → "
+                         f"**{_fr222(c7['apres']['la_part_sur_la_bonne_spire'])}**, {c7['les_rates_rendus_justes']} ratés "
+                         f"rendus justes, {c7['les_justes_rendus_rates']} justes rendus ratés | {_fr222(w7['avant'])} → "
+                         f"{_fr222(w7['apres'])}, {w7['les_rates_rendus_justes']} et {w7['les_justes_rendus_rates']} |"],
+                        s268.name))
+            g_ = max(v9["le_journal"], key=lambda f: f["les_chunks_decales"])
+            out.append(("la grande fausse de 268", [f"a **{g_['les_aretes']}** arêtes et un saut médian de"], s268.name))
+            out.append(("le saut de la grande fausse de 268",
+                        [f"**{_fr222(g_['le_saut_median_voxels']).replace('-', '−')}** voxels : elle dit zéro"], s268.name))
+            out.append(("les chunks ramenés de 268", [f"**{g_['les_chunks_decales']}** chunks sont ramenés"], s268.name))
+            autres = sorted(abs(f["le_saut_median_voxels"]) for f in v9["le_journal"] if f is not g_)
+            out.append(("les autres fausses de 268", [f"{_fr222(autres[0])} à {_fr222(autres[-1])} voxels en médiane"],
+                        s268.name))
+            r_ = d["les_reguliers_reunis"]
+            out.append(("les réguliers de 268", [f"de {_fr222(r_['avant'])} à **{_fr222(r_['apres'])}** : "
+                                                 f"{r_['les_rates_rendus_justes']} ratés rendus justes, "
+                                                 f"{r_['les_justes_rendus_rates']} justes rendus ratés"], s268.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 267 : L'ESCALIER DES MARCHES
     s267 = _source(racine, "lescalier_porte_t_il_le_choix_de_la_spire.json")
     if s267.exists():

@@ -4100,6 +4100,13 @@ spire** — `R4-F448` : sur le voisinage de `257`, le bloc central de **0,474** 
 mis à une spire et le bloc central de **0,6225** à **0,4172**. `R4-P95` reste ouverte : savoir, sans le juge, qu'une frontière
 est fausse.
 
+**`268` · 2026-09-25 · les frontières jugées à leurs sauts** — `R4-P95`
+
+⭐⭐⭐⭐ **Juger une frontière à la médiane de ses sauts défait la fausse frontière de `267`, et avec elle toutes les marches du
+voisinage de `259`** — `R4-F449` : **66** arêtes, un saut médian de **−20,39** voxels, **528** chunks ramenés ; le bloc de `259`
+n'est plus abîmé, ni corrigé ; celui de `257` passe de **0,474** à **0,6948**, sans que le jugement s'arrête de lui-même.
+`R4-P95` reste ouverte : les ratés du bloc de `259` ne sautent que d'un demi.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
