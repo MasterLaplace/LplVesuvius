@@ -134,9 +134,15 @@ def le_cadre(cy: int, cx: int, cote: int, chunk: int = LE_COTE_DU_CHUNK) -> dict
     return {"x": int(cx) * chunk, "y": int(cy) * chunk, "largeur": int(cote) * chunk, "hauteur": int(cote) * chunk}
 
 
-def la_commande_de_rendu(tifxyz: Path, sortie: Path, cadre: dict, couches: int = LES_COUCHES) -> list[str]:
-    """La commande qui rend une pile comme la publiée : 109 couches au pas d'un voxel, normales retournées."""
-    return ["-v", str(LE_DOSSIER / "cache"), "--remote-url", LE_VOLUME_BRUT, "--scale", "1", "-g", "0",
+def la_commande_de_rendu(tifxyz: Path, sortie: Path, cadre: dict, couches: int = LES_COUCHES,
+                         miroir: Path | None = None) -> list[str]:
+    """La commande qui rend une pile comme la publiée : 109 couches au pas d'un voxel, normales retournées.
+
+    ⚠ Avec `miroir`, le volume est lu dans ce dossier local et nulle part ailleurs (`le_miroir_du_volume`) : sans l'adresse
+    distante, un chunk que le miroir n'a pas se lit comme du vide, jamais comme un téléchargement caché.
+    """
+    source = ["-v", str(miroir)] if miroir is not None else ["-v", str(LE_DOSSIER / "cache"), "--remote-url", LE_VOLUME_BRUT]
+    return [*source, "--scale", "1", "-g", "0",
             "-s", str(tifxyz), "--tif-output", str(sortie), "-n", str(int(couches)), "--slice-step", "1",
             "--flip-normals", "--crop-x", str(cadre["x"]), "--crop-y", str(cadre["y"]),
             "--crop-width", str(cadre["largeur"]), "--crop-height", str(cadre["hauteur"])]
@@ -152,7 +158,8 @@ def la_pile_est_complete(sortie: Path) -> bool:
     return (sortie / LE_TEMOIN_DE_FIN).is_file() and len(list(sortie.glob("*.tif"))) == LES_COUCHES
 
 
-def rendre(tifxyz: Path, sortie: Path, cadre: dict, patience: int = LA_PATIENCE, lancer=subprocess.run) -> dict:
+def rendre(tifxyz: Path, sortie: Path, cadre: dict, patience: int = LA_PATIENCE, lancer=subprocess.run,
+           miroir: Path | None = None) -> dict:
     """La pile, par le chien de garde du dépôt ; une pile complète n'est pas refaite.
 
     ⚠ Le témoin de fin n'est écrit qu'après un rendu qui a rendu zéro ET ses 109 couches, et il est retiré AVANT de relancer :
@@ -162,9 +169,10 @@ def rendre(tifxyz: Path, sortie: Path, cadre: dict, patience: int = LA_PATIENCE,
     if la_pile_est_complete(sortie):
         return {"rendue": True, "reprise": True}
     (sortie / LE_TEMOIN_DE_FIN).unlink(missing_ok=True)
+    ecartee = mettre_de_cote(sortie)
     debut = time.monotonic()
     cmd = [str(RACINE / "src" / "outils" / "rendre_surveille.sh"), str(sortie), str(int(patience)), "--",
-           *la_commande_de_rendu(tifxyz, sortie, cadre)]
+           *la_commande_de_rendu(tifxyz, sortie, cadre, miroir=miroir)]
     sortie.parent.mkdir(parents=True, exist_ok=True)
     journal = sortie.with_suffix(".log")
     with journal.open("w") as fh:
@@ -174,7 +182,26 @@ def rendre(tifxyz: Path, sortie: Path, cadre: dict, patience: int = LA_PATIENCE,
     if ok:
         (sortie / LE_TEMOIN_DE_FIN).write_text(f"code {rc}, {n} couches\n")
     return {"rendue": ok, "reprise": False, "le_code": rc, "les_couches": n,
-            "les_secondes": round(time.monotonic() - debut, 1)}
+            "les_secondes": round(time.monotonic() - debut, 1), **({"mise_de_cote": str(ecartee)} if ecartee else {})}
+
+
+def mettre_de_cote(sortie: Path) -> Path | None:
+    """Une pile inachevée, déplacée avant qu'un rendu ne la refasse ; rien n'est effacé.
+
+    ⚠⚠ `vc_render_tifxyz` ne refait pas une pile dont les 109 fichiers existent : il écrit « all slices exist, skipping » et
+    rend zéro. Or il crée ses 109 fichiers dès le début. Une pile coupée en route, relancée en place, était donc déclarée
+    rendue sans qu'un pixel ne change, et recevait le témoin de fin : le 2026-09-25, quatre piles du segment l'ont reçu ainsi.
+    """
+    if not (sortie.is_dir() and any(sortie.glob("*.tif"))):
+        return None
+    base, k = sortie.parent / "_partielles" / f"{sortie.name}_{time.strftime('%Y%m%dT%H%M%S')}", 0
+    dest = base
+    while dest.exists():
+        k += 1
+        dest = base.with_name(f"{base.name}_{k}")
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    sortie.rename(dest)
+    return dest
 
 
 def le_journal_prouve_la_fin(journal: Path) -> bool:
@@ -647,6 +674,9 @@ def verifier() -> int:
       lambda: "--flip-normals" in c and c[c.index("-n") + 1] == "109" and c[c.index("--slice-step") + 1] == "1"
       and c[c.index("--crop-x") + 1] == "640" and c[c.index("--crop-y") + 1] == "384"
       and c[c.index("--crop-width") + 1] == "256")
+    cm = la_commande_de_rendu(Path("m"), Path("s"), le_cadre(3, 5, 2), miroir=Path("miroir"))
+    v("★★★★ depuis un miroir, le volume est le miroir et rien n'est lu à distance",
+      lambda: cm[cm.index("-v") + 1] == "miroir" and "--remote-url" not in cm and cm[2:] == c[4:])
     pile = np.arange(LES_COUCHES * 256 * 384, dtype=np.int64).reshape(LES_COUCHES, 256, 384) % 251
     ouv = servir(pile, 10, 20)
     b, why = ouv(11, 22)
@@ -751,11 +781,15 @@ def verifier() -> int:
             self.returncode = code
 
     def faux_rendu(code: int):
+        """Comme `vc_render_tifxyz` : les 109 fichiers d'abord, vides, puis remplis si le rendu va au bout ; et rien du
+        tout si les 109 existent déjà."""
         def lancer(cmd, **_):
             sortie = Path(cmd[cmd.index("--tif-output") + 1])
+            if sortie.is_dir() and all((sortie / f"{k:03d}.tif").exists() for k in range(LES_COUCHES)):
+                return _Fin(0)
             sortie.mkdir(parents=True, exist_ok=True)
             for k in range(LES_COUCHES):
-                (sortie / f"{k:03d}.tif").write_bytes(b"")
+                (sortie / f"{k:03d}.tif").write_bytes(b"" if code else b"rendu")
             return _Fin(code)
         return lancer
 
@@ -773,6 +807,9 @@ def verifier() -> int:
         r2 = rendre(Path("m"), s_, le_cadre(0, 0, 1), lancer=faux_rendu(0))
         v("★★★★ la pile interrompue est refaite, et le rendu qui va au bout pose le témoin",
           lambda: r2["rendue"] and not r2["reprise"] and la_pile_est_complete(s_), str(r2))
+        v("★★★★ refaite pour de vrai : ses couches sont celles du nouveau rendu, et l'inachevée est mise de côté, pas effacée",
+          lambda: all((s_ / f"{k:03d}.tif").read_bytes() == b"rendu" for k in range(LES_COUCHES))
+          and Path(r2.get("mise_de_cote", "/nulle/part")).is_dir(), str(r2))
         r3 = rendre(Path("m"), s_, le_cadre(0, 0, 1), lancer=faux_rendu(1))
         v("★★★ une pile complète est reprise sans être relancée", lambda: r3 == {"rendue": True, "reprise": True}, str(r3))
         a_ = Path(t) / "anciennes"
