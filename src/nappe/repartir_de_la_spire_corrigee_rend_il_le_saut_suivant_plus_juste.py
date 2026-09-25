@@ -126,11 +126,12 @@ def le_verdict(r: dict) -> dict:
     return {"lissue": "repartir de la spire corrigée ne rend pas le saut suivant plus juste"}
 
 
-def mesurer(cache: Path = LE_CACHE, maille: int = LA_MAILLE, delai: float = DELAI, sauts: int = LES_SAUTS) -> dict:
-    debut = time.monotonic()
+def les_deux_chaines(cache: Path = LE_CACHE, maille: int = LA_MAILLE, delai: float = DELAI,
+                     sauts: int = LES_SAUTS) -> dict | str:
+    """Le témoin et la chaîne partie de la spire corrigée, avec ce qui les juge ; la raison si le segment manque."""
     d = telecharger(LE_SEGMENT, cache, delai)
     if isinstance(d, str):
-        return {"decidable": False, "la_raison": d, "le_verdict": le_verdict({})}
+        return d
     ref, valide, esp = lire_tifxyz(d)
     couches = les_couches_ordonnees(ref, valide, esp, maille, sauts)
     normales, ok = les_normales(ref, valide)
@@ -160,8 +161,19 @@ def mesurer(cache: Path = LE_CACHE, maille: int = LA_MAILLE, delai: float = DELA
     tau0, tau1 = tau0[gi, gj], tau1[gi, gj]
     temoin = enchainer(p, n, LE_SIGNE, sauts, lire_rayon, sur_la_grille, gi, gj, True)
     corrigee = enchainer(p, n, LE_SIGNE, sauts, lire_rayon, sur_la_grille, gi, gj, True, premier=tau1)
-    pt, pc = les_profondeurs(temoin, p, n), les_profondeurs(corrigee, p, n)
-    np.save(LE_DEUXIEME_SAUT, sur_la_grille(pc[1]))
+    return {"p": p, "n": n, "verite": verite, "tau0": tau0, "tau1": tau1, "temoin": temoin, "corrigee": corrigee,
+            "pt": les_profondeurs(temoin, p, n), "pc": les_profondeurs(corrigee, p, n), "stats": stats,
+            "sur_la_grille": sur_la_grille}
+
+
+def mesurer(cache: Path = LE_CACHE, maille: int = LA_MAILLE, delai: float = DELAI, sauts: int = LES_SAUTS) -> dict:
+    debut = time.monotonic()
+    c = les_deux_chaines(cache, maille, delai, sauts)
+    if isinstance(c, str):
+        return {"decidable": False, "la_raison": c, "le_verdict": le_verdict({})}
+    p, verite, tau0, tau1, temoin, pt, pc, stats = (c[k] for k in ("p", "verite", "tau0", "tau1", "temoin", "pt", "pc",
+                                                                   "stats"))
+    np.save(LE_DEUXIEME_SAUT, c["sur_la_grille"](pc[1]))
 
     publie = json.loads(CE_QUE_248_A_PUBLIE.read_text())["les_predictions"][LA_PREDICTION][LE_COTE]["les_sauts"]
     juges = [juger_le_saut(pt[h], verite[h], LE_SIGNE, h + 1) for h in range(sauts)]

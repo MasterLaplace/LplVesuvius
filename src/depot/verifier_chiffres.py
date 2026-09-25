@@ -3208,6 +3208,50 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 277 : LES RATÉS DU DEUXIÈME SAUT, HÉRITÉS OU PROPRES
+    s277 = _source(racine, "les_rates_du_deuxieme_saut_viennent_ils_du_premier.json")
+    if s277.exists():
+        d = json.loads(s277.read_text())
+        if d.get("decidable"):
+            t_, c_ = d["le_temoin"], d["partie_de_la_spire_corrigee"]
+            out.append(("le témoin de 277", [f"| le témoin, parti du segment | {t_['les_rates_du_deuxieme_saut']} | "
+                                             f"{t_['les_herites']} | {t_['les_propres']} |"], s277.name))
+            out.append(("la spire corrigée de 277",
+                        [f"| **partie de la spire corrigée** | **{c_['les_rates_du_deuxieme_saut']}** | "
+                         f"**{c_['les_herites']}** | **{c_['les_propres']}** |"], s277.name))
+            for nom, r_ in (("le témoin", t_), ("partie de la spire corrigée", c_)):
+                p_ = r_["parmi_les_propres"]
+                out.append((f"les propres de {nom} en 277",
+                            [f"| {nom} | {p_['trop_pres']} | {p_['trop_loin']} | {p_['retombes_sur_la_premiere_couche']} | "
+                             f"{p_['dun_saut_qui_navance_pas']} |"], s277.name))
+            out.append(("le fait de 277",
+                        [f"la chaîne rate au deuxième saut {c_['les_propres']} points dont le premier saut était juste, "
+                         f"et {c_['les_herites']}",
+                         f"la chaîne rate {c_['les_propres']} points au deuxième saut dont le premier était juste, et "
+                         f"{c_['les_herites']} dont le premier avait raté"], s277.name))
+            out.append(("les écarts de 277",
+                        [f"La spire corrigée retire {t_['les_herites'] - c_['les_herites']} ratés hérités au deuxième saut, "
+                         f"et", f"en ajoute {c_['les_propres'] - t_['les_propres']} propres"], s277.name))
+            ch = d["les_changements_du_deuxieme_saut"]
+            rj, jr = ch["les_rates_rendus_justes"], ch["les_justes_rendus_rates"]
+            out.append(("les changements de 277",
+                        [f"{rj['le_premier_saut_a_change'] + rj['le_premier_saut_est_le_meme']} ratés : "
+                         f"{rj['le_premier_saut_a_change']} dont le premier saut a changé, "
+                         f"{rj['le_premier_saut_est_le_meme']} dont il est le même",
+                         f"ratés {jr['le_premier_saut_a_change'] + jr['le_premier_saut_est_le_meme']} justes : "
+                         f"{jr['le_premier_saut_a_change']} dont le premier saut a changé, "
+                         f"{jr['le_premier_saut_est_le_meme']} dont il est le même"], s277.name))
+            # ⚠ Les mots qui résument les nombres doivent tomber avec eux.
+            p_ = c_["parmi_les_propres"]
+            if p_["trop_pres"] > c_["les_propres"] / 2 and p_["retombes_sur_la_premiere_couche"] < p_["trop_pres"] / 2:
+                out.append(("la plupart de 277", ["La plupart des ratés propres tombent trop près de la deuxième couche"],
+                            s277.name))
+            if (c_["les_points_notes_au_deuxieme_saut_seulement"] == 0 and d["le_deuxieme_saut_de_276"]["reproduit"]):
+                out.append(("tous notés de 277",
+                            [f"Les {d['le_deuxieme_saut_de_276']['refait']['les_points_notes']} points notés au deuxième "
+                             f"saut le sont tous au premier"], s277.name))
+            out.append(("le verdict de 277", [f"**{d['le_verdict']['lissue'].upper()}.**"], s277.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 276 : LA CHAÎNE REPARTIE DE LA SPIRE CORRIGÉE
     s276 = _source(racine, "repartir_de_la_spire_corrigee_rend_il_le_saut_suivant_plus_juste.json")
     if s276.exists():

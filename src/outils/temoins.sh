@@ -1691,6 +1691,8 @@ run "la procedure sans juge tient-elle sur le segment entier" uv run python "$RO
 run "figure la procedure sans juge tient-elle sur le segment entier" uv run python "$ROOT/src/figures/figure_la_procedure_sans_juge_tient_elle_sur_le_segment_entier.py" --verifier
 run "repartir de la spire corrigee rend-il le saut suivant plus juste" uv run python "$ROOT/src/nappe/repartir_de_la_spire_corrigee_rend_il_le_saut_suivant_plus_juste.py" --verifier
 run "figure repartir de la spire corrigee rend-il le saut suivant plus juste" uv run python "$ROOT/src/figures/figure_repartir_de_la_spire_corrigee_rend_il_le_saut_suivant_plus_juste.py" --verifier
+run "les rates du deuxieme saut viennent-ils du premier" uv run python "$ROOT/src/nappe/les_rates_du_deuxieme_saut_viennent_ils_du_premier.py" --verifier
+run "figure les rates du deuxieme saut viennent-ils du premier" uv run python "$ROOT/src/figures/figure_les_rates_du_deuxieme_saut_viennent_ils_du_premier.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

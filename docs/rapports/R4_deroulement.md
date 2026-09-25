@@ -4158,6 +4158,12 @@ net de 25. Des 65 points dont la spire corrigée rend le premier saut juste, 0,4
 pour le témoin** — `R4-F457`. Le témoin redonne `248` aux quatre sauts. Repartir de la spire corrigée rend le saut suivant
 plus juste. `R4-P95` reste ouverte : le deuxième saut n'est pas corrigé.
 
+**`277` · 2026-09-25 · les ratés du deuxième saut, hérités ou propres** — `R4-P95`
+
+⭐⭐⭐⭐ **Repartie de la spire corrigée, la chaîne rate au deuxième saut 1220 points dont le premier saut était juste, et 627
+dont il avait raté : le deuxième saut rate surtout de lui-même** — `R4-F458`. Le témoin en rate 1190 et 682. Les ratés propres
+tombent surtout trop près de la deuxième couche. Chaque saut demande sa correction. `R4-P95` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

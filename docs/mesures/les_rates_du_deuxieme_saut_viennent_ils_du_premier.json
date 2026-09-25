@@ -1,0 +1,68 @@
+{
+ "le_deuxieme_saut_de_276": {
+  "publie": {
+   "les_points_notes": 16635,
+   "les_points_ou_les_deux_chaines_different": 378,
+   "le_temoin": 0.8875,
+   "partie_de_la_spire_corrigee": 0.889,
+   "les_rates_rendus_justes": 52,
+   "les_justes_rendus_rates": 27,
+   "le_gain_net": 25
+  },
+  "refait": {
+   "les_points_notes": 16635,
+   "les_points_ou_les_deux_chaines_different": 378,
+   "le_temoin": 0.8875,
+   "partie_de_la_spire_corrigee": 0.889,
+   "les_rates_rendus_justes": 52,
+   "les_justes_rendus_rates": 27,
+   "le_gain_net": 25
+  },
+  "reproduit": true
+ },
+ "le_premier_saut_du_temoin_contre_la_spire_produite_ecart_max_voxels": 0.0,
+ "le_temoin": {
+  "les_points_notes_aux_deux_sauts": 16635,
+  "les_points_notes_au_deuxieme_saut_seulement": 0,
+  "les_rates_du_deuxieme_saut": 1872,
+  "les_herites": 682,
+  "les_propres": 1190,
+  "parmi_les_propres": {
+   "trop_pres": 989,
+   "trop_loin": 201,
+   "retombes_sur_la_premiere_couche": 66,
+   "dun_saut_qui_navance_pas": 21
+  }
+ },
+ "partie_de_la_spire_corrigee": {
+  "les_points_notes_aux_deux_sauts": 16635,
+  "les_points_notes_au_deuxieme_saut_seulement": 0,
+  "les_rates_du_deuxieme_saut": 1847,
+  "les_herites": 627,
+  "les_propres": 1220,
+  "parmi_les_propres": {
+   "trop_pres": 1016,
+   "trop_loin": 204,
+   "retombes_sur_la_premiere_couche": 95,
+   "dun_saut_qui_navance_pas": 35
+  }
+ },
+ "les_changements_du_deuxieme_saut": {
+  "les_rates_rendus_justes": {
+   "le_premier_saut_a_change": 40,
+   "le_premier_saut_est_le_meme": 12
+  },
+  "les_justes_rendus_rates": {
+   "le_premier_saut_a_change": 16,
+   "le_premier_saut_est_le_meme": 11
+  }
+ },
+ "la_lecture": {
+  "combien_de_pannes": 0
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "le deuxième saut rate surtout de lui-même : chaque saut demande sa correction"
+ },
+ "les_secondes": 78.9
+}
