@@ -4144,6 +4144,13 @@ ratés qu'elle rend justes : le gain net des neuf blocs passe de 30 à 25** — 
 n'abîme plus rien ; sur le bloc de `257`, la garde retient 12 des 22 points corrigés, dont 11 rendus justes. La garde
 n'améliore pas la procédure. `R4-P95` reste ouverte.
 
+**`275` · 2026-09-25 · la procédure sans juge sur le segment entier** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur les 340 blocs candidats du segment, la procédure sans juge de `265` rend 163 ratés justes pour 41 justes ratés :
+un gain net de 122, dont 92 hors des neuf blocs où elle avait été regardée** — `R4-F456`. La part monte sur 42 blocs et
+descend sur 11 ; sur le segment entier, elle passe de 0,9303 à 0,9334. La procédure améliore la spire produite sur le
+segment entier. `R4-P95` reste ouverte : la spire suivante n'est pas encore transférée depuis la spire corrigée.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

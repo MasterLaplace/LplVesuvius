@@ -3208,6 +3208,78 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 275 : LA PROCÉDURE SANS JUGE SUR LE SEGMENT ENTIER
+    s275 = _source(racine, "la_procedure_sans_juge_tient_elle_sur_le_segment_entier.json")
+    if s275.exists():
+        d = json.loads(s275.read_text())
+        if d.get("decidable"):
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            g_ = d["les_reunis"]
+            gain = lambda b_: b_["les_rates_rendus_justes"] - b_["les_justes_rendus_rates"]  # noqa: E731
+            # ⚠ La règle du tableau est écrite dans le document : un gain net d'au moins 3 en valeur absolue.
+            noms = {(16, 176): "le bloc de `257`, choisi", (160, 144): "le bloc de `259`, choisi"}
+            decides = [b_ for b_ in d["les_blocs"] if b_.get("decidable")]
+            for b_ in decides:
+                if abs(gain(b_)) >= 3:
+                    rc = (b_["la_rangee"], b_["la_colonne"])
+                    out.append((f"la ligne {rc} de 275",
+                                [f"| {noms.get(rc, f'`({rc[0]}, {rc[1]})`')} | {b_['avant']['les_points_notes']} | "
+                                 f"{sg(b_['avant']['la_part_sur_la_bonne_spire'])} | "
+                                 f"{sg(b_['apres']['la_part_sur_la_bonne_spire'])} | {b_['les_points_corriges']} | "
+                                 f"{b_['les_rates_rendus_justes']} | {b_['les_justes_rendus_rates']} | {sg(gain(b_))} |"],
+                                s275.name))
+            neuf = {k: sum(v_["refait"][k] for v_ in d["la_reproduction"]["les_voisinages"].values())
+                    for k in ("les_rates_rendus_justes", "les_justes_rendus_rates")}
+            n9 = len(d["la_reproduction"]["les_voisinages"])
+            out.append(("les réunis de 275",
+                        [f"| **les {g_['les_blocs']}** | **{g_['les_blocs']}** | **{g_['les_rates_rendus_justes']}** | "
+                         f"**{g_['les_justes_rendus_rates']}** | **{g_['le_gain_net']}** |"], s275.name))
+            out.append(("les neuf de 275",
+                        [f"| les neuf publiés par `265` et `270` | {n9} | {neuf['les_rates_rendus_justes']} | "
+                         f"{neuf['les_justes_rendus_rates']} | "
+                         f"{neuf['les_rates_rendus_justes'] - neuf['les_justes_rendus_rates']} |"], s275.name))
+            autres = {k: g_[k] - neuf[k] for k in neuf}
+            gain_autres = autres["les_rates_rendus_justes"] - autres["les_justes_rendus_rates"]
+            out.append(("les autres de 275",
+                        [f"| les {g_['les_blocs'] - n9} autres | {g_['les_blocs'] - n9} | "
+                         f"{autres['les_rates_rendus_justes']} | {autres['les_justes_rendus_rates']} | {gain_autres} |"],
+                        s275.name))
+            out.append(("le fait de 275",
+                        [f"Sur les {d['les_candidats']} blocs candidats du segment, la procédure sans juge de `265` rend "
+                         f"{g_['les_rates_rendus_justes']} ratés justes pour {g_['les_justes_rendus_rates']} justes ratés",
+                         f"un gain net de {g_['le_gain_net']}, dont {gain_autres} hors des neuf blocs",
+                         f"sur les {d['les_candidats']} blocs candidats, elle rend {g_['les_rates_rendus_justes']} ratés "
+                         f"justes pour {g_['les_justes_rendus_rates']} justes ratés, un gain net de {g_['le_gain_net']}"],
+                        s275.name))
+            s_ = d["le_segment_entier"]
+            out.append(("les parts de 275",
+                        [f"La décision corrige {g_['les_points_corriges']} points",
+                         f"Sur les {g_['les_points_notes']} points notés des blocs",
+                         f"passe de {sg(g_['avant'])} à {sg(g_['apres'])}",
+                         f"La part monte sur {g_['les_blocs_qui_montent']} blocs, descend sur "
+                         f"{g_['les_blocs_qui_descendent']} et ne bouge pas sur {g_['les_blocs_immobiles']}",
+                         f"couvrent {sg(d['la_part_des_points_notes_du_segment_dans_les_blocs'])} des points notés du "
+                         f"segment",
+                         f"Sur le segment entier, {s_['avant']['les_points_notes']} points notés, la part passe de "
+                         f"{sg(s_['avant']['la_part_sur_la_bonne_spire'])} à {sg(s_['apres']['la_part_sur_la_bonne_spire'])}"],
+                        s275.name))
+            quatre = sorted(decides, key=lambda b_: -gain(b_))[:4]
+            out.append(("les quatre blocs de 275",
+                        [f"Quatre blocs portent {sum(gain(b_) for b_ in quatre)} des {g_['le_gain_net']}"], s275.name))
+            c160 = next(b_ for b_ in decides if (b_["la_rangee"], b_["la_colonne"]) == (160, 160))
+            out.append(("le bloc (160, 160) de 275",
+                        [f"Sur `(160, 160)`, la procédure rend {c160['les_justes_rendus_rates']} justes ratés"], s275.name))
+            if not d["les_non_decides"]:
+                out.append(("les non décidés de 275", ["Aucun bloc candidat n'est resté non décidé"], s275.name))
+            # ⚠ Les deux nombres sont écrits en toutes lettres dans le document : un compte qui changerait ne retrouverait
+            # plus sa phrase.
+            if d["la_reproduction"]["tous"] and n9 == 9:
+                out.append(("la reproduction de 275", ["les comptes sont redevenus les publiés, tous les neuf"], s275.name))
+            m_ = d["le_controle_du_miroir"]["les_piles"]
+            if len(m_) == 8 and all(x.get("les_voxels_differents") == 0 for x in m_.values()):
+                out.append(("le miroir de 275", ["Les huit sont identiques voxel pour voxel"], s275.name))
+            out.append(("le verdict de 275", [f"**{d['le_verdict']['lissue'].upper()}.**"], s275.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 274 : LA GARDE DE LA MARCHE DU SEGMENT RÉDUIT
     s274 = _source(racine, "la_marche_du_segment_dit_elle_ou_ne_pas_corriger.json")
     if s274.exists():

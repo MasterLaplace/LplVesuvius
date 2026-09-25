@@ -1687,6 +1687,8 @@ run "figure le segment reduit quitte-t-il la feuille du segment" uv run python "
 run "la marche du segment dit-elle ou ne pas corriger" uv run python "$ROOT/src/nappe/la_marche_du_segment_dit_elle_ou_ne_pas_corriger.py" --verifier
 run "figure la marche du segment dit-elle ou ne pas corriger" uv run python "$ROOT/src/figures/figure_la_marche_du_segment_dit_elle_ou_ne_pas_corriger.py" --verifier
 run "le miroir du volume" uv run python "$ROOT/src/nappe/le_miroir_du_volume.py" --verifier
+run "la procedure sans juge tient-elle sur le segment entier" uv run python "$ROOT/src/nappe/la_procedure_sans_juge_tient_elle_sur_le_segment_entier.py" --verifier
+run "figure la procedure sans juge tient-elle sur le segment entier" uv run python "$ROOT/src/figures/figure_la_procedure_sans_juge_tient_elle_sur_le_segment_entier.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
