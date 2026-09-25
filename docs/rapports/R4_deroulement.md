@@ -4080,6 +4080,13 @@ elle a glissé** — `R4-F445` : sur les blocs réguliers, **4** ratés rendus j
 **0,9243** ; sur les deux blocs de `262`, aucun point corrigé. Vu après coup, sur le bloc de `257`, deux bosses à
 **70,9434** voxels et l'ancre entre les deux. `R4-P95` reste ouverte : savoir, hors du bloc, quel niveau est le bon.
 
+**`265` · 2026-09-25 · l'ancre prise chez les voisins** — `R4-P95`
+
+⭐⭐⭐⭐ **L'ancre prise chez les voisins fait corriger la décision là où l'ancre du bloc ne lui faisait rien corriger** —
+`R4-F446` : de **0,474** à **0,6039** et de **0,6225** à **0,7152**, **35** ratés rendus justes pour **1** juste rendu raté.
+Vu après coup, la marche dérive d'un bloc à l'autre, de **62,185** voxels entre des voisins que le juge voit à **8,0224**
+près. `R4-P95` reste ouverte : la dérive de la marche empêche de prendre le niveau plus loin.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

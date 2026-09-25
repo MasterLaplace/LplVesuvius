@@ -3208,6 +3208,37 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 265 : L'ANCRE PRISE CHEZ LES VOISINS
+    s265 = _source(racine, "le_voisinage_dit_il_quel_niveau_est_le_bon.json")
+    if s265.exists():
+        d = json.loads(s265.read_text())
+        if d.get("decidable"):
+            for n in ("le_bloc_de_257", "le_bloc_de_259"):
+                b = d["les_blocs"][n]
+                e, k = b["lancre_du_voisinage"], b["lancre_du_bloc"]
+                de, dk = e["la_decision"], k["la_decision"]
+                out.append((f"l'ancre du voisinage de {n} en 265",
+                            [f"ancre {_fr222(e['lancre_voxels'])} ; glissées {_fr222(e['le_melange']['glissee_au_dessous'])} ; "
+                             f"décision **{_fr222(de['apres']['la_part_sur_la_bonne_spire'])}** : "
+                             f"{de['les_points_corriges']} corrigés, {de['les_rates_rendus_justes']} ratés rendus justes, "
+                             f"{de['les_justes_rendus_rates']} juste rendu raté"], s265.name))
+                out.append((f"l'ancre du bloc de {n} en 265",
+                            [f"ancre {_fr222(k['lancre_voxels']).replace('-', '−')} ; glissées 0 ; décision "
+                             f"{_fr222(dk['apres']['la_part_sur_la_bonne_spire'])} : aucun corrigé"], s265.name))
+            der = d["les_derivees"]
+            s_ = der["les_deux_blocs"]["lancre_du_voisinage_la_decision"]
+            out.append(("le compte de 265", [f"**{s_['les_rates_rendus_justes']}** ratés rendus justes pour "
+                                             f"**{s_['les_justes_rendus_rates']}** juste rendu raté"], s265.name))
+            ea = der["lecart_des_ancres_voxels"]
+            out.append(("l'écart des ancres de 265", [f"**{_fr222(ea['le_bloc_de_257'])}** et "
+                                                      f"**{_fr222(ea['le_bloc_de_259'])}** voxels l'une de l'autre"],
+                        s265.name))
+            vu = der["vu_apres_coup"]
+            out.append(("la dérive de 265", [f"que le juge voit à **{_fr222(vu['letendue_des_erreurs_jugees_des_voisins_voxels']['le_bloc_de_259'])}** "
+                                             f"voxels près, sont dans la marche à "
+                                             f"**{_fr222(vu['letendue_des_niveaux_des_voisins_voxels']['le_bloc_de_259'])}** "
+                                             "voxels"], s265.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 264 : PESER GLISSÉ CONTRE JUSTE
     s264 = _source(racine, "la_marche_sait_elle_ou_ne_pas_corriger.json")
     if s264.exists():

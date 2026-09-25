@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**548 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **508** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
+**549 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **509** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 445 faits
+## R4 — 446 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -530,6 +530,7 @@
 | `R4-F443` | **répétée, la correction sans juge continue de ramener la spire produite sur la bonne spire, puis s'arrête d'elle-même** | la règle de `261`, sans changement, jusqu'à ce qu'aucun point ne soit signalé : sur les blocs de `257` et `259`, la part sur la bonne spire va de **0,474** à **0,6299** puis **0,6688**, et de **0,6225** à **0,702** puis **0,7152** ; les points signalés passent de **54** à **9** puis **0**, et de **52** à **9**, **1** puis **0** | établi ; ⭐⭐⭐⭐ Une procédure qui corrige, se relit et s'arrête seule. ⚠⚠ Deux blocs ; ce qui reste raté, le juge le voit et la marche non. | `262` · `nappe/la_correction_repetee_converge_t_elle.py` |
 | `R4-F444` | **sur huit blocs pris à pas réguliers, la correction sans juge, répétée jusqu'à l'arrêt, défait plus qu'elle ne corrige : réunie, la part sur la bonne spire passe de 0,9207 à 0,9117** | la procédure de `262` sans changement, sur les candidats de `257` pris à pas réguliers : sur les **1110** points notés de sept blocs, **13** ratés rendus justes et **23** justes rendus ratés ; la première passe signale **13** des 88 ratés et **29** des 1022 justes ; la part monte sur trois blocs, descend sur deux, ne bouge pas sur deux ; la procédure s'arrête seule sur **7** blocs sur 8 | établi ; ⭐⭐⭐⭐ Les gains de `262` sont là où la spire produite était mauvaise ; là où elle est déjà juste, la marche signale surtout du bruit. ⚠⚠ Huit blocs, un côté, `m7` ; rien ne dit encore, sans le juge, où ne pas corriger. | `263` · `nappe/la_correction_tient_elle_sur_des_blocs_reguliers.py` |
 | `R4-F445` | **peser glissé contre juste, bloc par bloc, ne défait rien là où la spire produite est juste, et ne corrige rien là où elle a glissé** | une passe ; les écarts à l'ancre lus comme un bruit et deux spires glissées à ± 69,458 voxels, poids et largeur ajustés à chaque bloc ; sur les sept blocs réguliers notés, **4** ratés rendus justes et **0** juste rendu raté, de **0,9207** à **0,9243**, là où la règle fixe rend 11 et 20 et tombe à 0,9126 ; sur les deux blocs de `262`, **aucun** point corrigé : le mélange y lit un bruit large de **40,892** et **35,1169** voxels | établi ; ⭐⭐⭐⭐ La décision sait où ne pas corriger. ⚠⚠ Vu après coup : sur le bloc de `257`, les écarts forment deux bosses à **70,9434** voxels l'une de l'autre, poids 0,4631 et 0,5369, et l'ancre tombe entre les deux ; la marche ne dit pas laquelle est sur la bonne spire. Dix blocs déjà vus, une passe. | `264` · `nappe/la_marche_sait_elle_ou_ne_pas_corriger.py` |
+| `R4-F446` | **l'ancre prise chez les blocs voisins, marchés avec lui d'un seul tenant, fait corriger la décision de 264 là où l'ancre du bloc ne lui faisait rien corriger** | la médiane de la différence sur les voisins seuls, la décision de `264` sans changement, une passe : sur les blocs de `257` et `259`, de **0,474** à **0,6039** et de **0,6225** à **0,7152**, **35** ratés rendus justes pour **1** juste rendu raté ; avec l'ancre du bloc, sur la même marche, aucun point corrigé ; les deux ancres sont à **4,6072** et **12,7963** voxels l'une de l'autre | établi ; ⭐⭐⭐⭐ Hors du bloc, le niveau se prend chez les voisins. ⚠⚠ La décision est sensible à son ancre ; vu après coup, la marche dérive d'un bloc à l'autre : les voisins de `259`, que le juge voit à **8,0224** voxels près, y sont à **62,185** voxels les uns des autres. Deux blocs choisis, une passe. | `265` · `nappe/le_voisinage_dit_il_quel_niveau_est_le_bon.py` |
 
 ## R5 — 23 faits
 
