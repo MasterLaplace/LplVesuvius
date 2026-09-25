@@ -4073,6 +4073,13 @@ procédure de `262`, sans changement, sur huit blocs que rien n'a choisis ; la p
 réunie passe de **0,9207** à **0,9117**, **13** ratés rendus justes pour **23** justes rendus ratés. `R4-P95` reste ouverte :
 avant la boucle, savoir sans le juge où ne pas corriger.
 
+**`264` · 2026-09-25 · peser glissé contre juste** — `R4-P95`
+
+⭐⭐⭐⭐ **Peser glissé contre juste, bloc par bloc, ne défait rien là où la spire produite est juste, et ne corrige rien là où
+elle a glissé** — `R4-F445` : sur les blocs réguliers, **4** ratés rendus justes et **0** juste rendu raté, de **0,9207** à
+**0,9243** ; sur les deux blocs de `262`, aucun point corrigé. Vu après coup, sur le bloc de `257`, deux bosses à
+**70,9434** voxels et l'ancre entre les deux. `R4-P95` reste ouverte : savoir, hors du bloc, quel niveau est le bon.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

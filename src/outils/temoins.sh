@@ -1664,6 +1664,8 @@ run "la correction repetee converge-t-elle" uv run python "$ROOT/src/nappe/la_co
 run "figure la correction repetee converge-t-elle" uv run python "$ROOT/src/figures/figure_la_correction_repetee_converge_t_elle.py" --verifier
 run "la correction tient-elle sur des blocs reguliers" uv run python "$ROOT/src/nappe/la_correction_tient_elle_sur_des_blocs_reguliers.py" --verifier
 run "figure la correction tient-elle sur des blocs reguliers" uv run python "$ROOT/src/figures/figure_la_correction_tient_elle_sur_des_blocs_reguliers.py" --verifier
+run "la marche sait-elle ou ne pas corriger" uv run python "$ROOT/src/nappe/la_marche_sait_elle_ou_ne_pas_corriger.py" --verifier
+run "figure la marche sait-elle ou ne pas corriger" uv run python "$ROOT/src/figures/figure_la_marche_sait_elle_ou_ne_pas_corriger.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

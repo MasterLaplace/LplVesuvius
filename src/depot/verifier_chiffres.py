@@ -3208,6 +3208,36 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 264 : PESER GLISSÉ CONTRE JUSTE
+    s264 = _source(racine, "la_marche_sait_elle_ou_ne_pas_corriger.json")
+    if s264.exists():
+        d = json.loads(s264.read_text())
+        if d.get("decidable"):
+            for cle, nom in (("les_reguliers", "réguliers"), ("les_choisis", "choisis")):
+                g = d[cle]
+                f_, c_ = g["la_regle_fixe"], g["la_decision"]
+                out.append((f"la règle fixe sur les {nom} de 264",
+                            [f"| {_fr222(g['avant'])} | {_fr222(f_['apres'])} : {f_['les_points_corriges']} points corrigés, "
+                             f"{f_['les_rates_rendus_justes']} ratés rendus justes, {f_['les_justes_rendus_rates']} justes "
+                             "rendus ratés |"], s264.name))
+            c_ = d["les_reguliers"]["la_decision"]
+            out.append(("la décision sur les réguliers de 264",
+                        [f"| **{_fr222(c_['apres'])}** : {c_['les_points_corriges']} points corrigés, "
+                         f"**{c_['les_rates_rendus_justes']}** ratés rendus justes, **{c_['les_justes_rendus_rates']}** juste "
+                         "rendu raté |"], s264.name))
+            b7, b9 = d["les_blocs"]["le_bloc_de_257"], d["les_blocs"]["le_bloc_de_259"]
+            out.append(("les largeurs de 264", [f"un bruit large de **{_fr222(b7['le_melange']['la_largeur_voxels'])}** et "
+                                                f"**{_fr222(b9['le_melange']['la_largeur_voxels'])}**"], s264.name))
+            for n, titre in (("le_bloc_de_257", "le bloc de `257`"), ("le_bloc_de_259", "le bloc de `259`"),
+                             ("304_128", "`(304, 128)`")):
+                bo = d["les_blocs"][n]["vu_apres_coup"]["les_deux_bosses"]
+                c0, c1 = bo["les_centres_voxels"]
+                w0, w1 = bo["les_poids"]
+                ecart = f"**{_fr222(bo['lecart_voxels'])}**" if n == "le_bloc_de_257" else _fr222(bo["lecart_voxels"])
+                out.append((f"les bosses de {n} en 264",
+                            [f"| {titre} | {_fr222(c0).replace('-', '−')} et {_fr222(c1)} | {_fr222(w0)} et {_fr222(w1)} | "
+                             f"{ecart} |"], s264.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 263 : LA CORRECTION SUR DES BLOCS PRIS À PAS RÉGULIERS
     s263 = _source(racine, "la_correction_tient_elle_sur_des_blocs_reguliers.json")
     if s263.exists():
