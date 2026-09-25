@@ -4093,6 +4093,13 @@ près. `R4-P95` reste ouverte : la dérive de la marche empêche de prendre le n
 juge tient pour justes, ce que la marche ajoute diffère de **34,7587** voxels entre huit et seize chunks, de **43,8298**
 entre seize et trente-deux. `R4-P95` reste ouverte : porter un niveau plus loin demande autre chose que la somme des pas.
 
+**`267` · 2026-09-25 · l'escalier des marches** — `R4-P95`
+
+⭐⭐⭐⭐ **Porter un choix entier de proche en proche ne tient pas : une seule frontière fausse met toute une région à une
+spire** — `R4-F448` : sur le voisinage de `257`, le bloc central de **0,474** à **0,6883** ; sur celui de `259`, **516** chunks
+mis à une spire et le bloc central de **0,6225** à **0,4172**. `R4-P95` reste ouverte : savoir, sans le juge, qu'une frontière
+est fausse.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

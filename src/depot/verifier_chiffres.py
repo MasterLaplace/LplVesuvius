@@ -3208,6 +3208,30 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 267 : L'ESCALIER DES MARCHES
+    s267 = _source(racine, "lescalier_porte_t_il_le_choix_de_la_spire.json")
+    if s267.exists():
+        d = json.loads(s267.read_text())
+        if d.get("decidable"):
+            for n in ("le_bloc_de_257", "le_bloc_de_259"):
+                v_ = d["les_voisinages"][n]
+                m_ = ", ".join(f"{_fr222(int(a_)).replace('-', '−')} : {b_}"
+                               for a_, b_ in sorted(v_["les_marches"].items(), key=lambda kv: int(kv[0])))
+                c_, w_ = v_["le_centre"], v_["les_voisins_reunis"]
+                out.append((f"les marches de {n} en 267", [f"| {m_} | {v_['les_points_deplaces']} |"], s267.name))
+                out.append((f"le centre de {n} en 267",
+                            [f"{_fr222(c_['avant']['la_part_sur_la_bonne_spire'])} → "
+                             f"**{_fr222(c_['apres']['la_part_sur_la_bonne_spire'])}**"], s267.name))
+                out.append((f"les voisins de {n} en 267",
+                            [f"{_fr222(w_['avant'])} → {_fr222(w_['apres'])}", f"{_fr222(w_['avant'])} → **{_fr222(w_['apres'])}**"],
+                            s267.name))
+            r_ = d["les_reguliers_reunis"]
+            out.append(("les réguliers de 267", [f"de {_fr222(r_['avant'])} à **{_fr222(r_['apres'])}** : "
+                                                 f"{r_['les_rates_rendus_justes']} ratés rendus justes,"], s267.name))
+            b7 = d["les_blocs"]["le_bloc_de_257"]["le_bloc"]
+            out.append(("le bloc de 257 seul en 267", [f"tombe de {_fr222(b7['avant']['la_part_sur_la_bonne_spire'])} à "
+                                                       f"{_fr222(b7['apres']['la_part_sur_la_bonne_spire'])}"], s267.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 266 : JUSQU'OÙ LA MARCHE PORTE UN NIVEAU
     s266 = _source(racine, "jusquou_la_marche_porte_t_elle_un_niveau.json")
     if s266.exists():

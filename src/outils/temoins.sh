@@ -1670,6 +1670,8 @@ run "le voisinage dit-il quel niveau est le bon" uv run python "$ROOT/src/nappe/
 run "figure le voisinage dit-il quel niveau est le bon" uv run python "$ROOT/src/figures/figure_le_voisinage_dit_il_quel_niveau_est_le_bon.py" --verifier
 run "jusqu'ou la marche porte-t-elle un niveau" uv run python "$ROOT/src/nappe/jusquou_la_marche_porte_t_elle_un_niveau.py" --verifier
 run "figure jusqu'ou la marche porte-t-elle un niveau" uv run python "$ROOT/src/figures/figure_jusquou_la_marche_porte_t_elle_un_niveau.py" --verifier
+run "l'escalier porte-t-il le choix de la spire" uv run python "$ROOT/src/nappe/lescalier_porte_t_il_le_choix_de_la_spire.py" --verifier
+run "figure l'escalier porte-t-il le choix de la spire" uv run python "$ROOT/src/figures/figure_lescalier_porte_t_il_le_choix_de_la_spire.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
