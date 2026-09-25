@@ -1,0 +1,110 @@
+{
+ "les_passes_au_plus": 4,
+ "les_blocs": {
+  "le_bloc_de_257": {
+   "la_rangee": 16,
+   "la_colonne": 176,
+   "les_passes": [
+    {
+     "la_passe": 1,
+     "lancre_voxels": 16.705,
+     "les_points_signales": 54,
+     "lecart_type_de_la_difference_lue_voxels": 40.6496,
+     "la_part_sur_la_bonne_spire_apres": 0.6299,
+     "la_part_de_261": 0.6299,
+     "la_part_avant": 0.474,
+     "le_rendu": {
+      "rendue": true,
+      "reprise": true
+     }
+    },
+    {
+     "la_passe": 2,
+     "lancre_voxels": 13.1646,
+     "les_points_signales": 9,
+     "lecart_type_de_la_difference_lue_voxels": 24.1468,
+     "la_part_sur_la_bonne_spire_apres": 0.6688,
+     "le_rendu": {
+      "rendue": true,
+      "reprise": false,
+      "le_code": 0,
+      "les_couches": 109,
+      "les_secondes": 430.7
+     }
+    },
+    {
+     "la_passe": 3,
+     "lancre_voxels": 12.3382,
+     "les_points_signales": 0,
+     "lecart_type_de_la_difference_lue_voxels": 20.5447,
+     "la_part_sur_la_bonne_spire_apres": 0.6688
+    }
+   ],
+   "la_suite": "plus haute"
+  },
+  "le_bloc_de_259": {
+   "la_rangee": 160,
+   "la_colonne": 144,
+   "les_passes": [
+    {
+     "la_passe": 1,
+     "lancre_voxels": 0.35,
+     "les_points_signales": 52,
+     "lecart_type_de_la_difference_lue_voxels": 35.1148,
+     "la_part_sur_la_bonne_spire_apres": 0.702,
+     "la_part_de_261": 0.702,
+     "la_part_avant": 0.6225,
+     "le_rendu": {
+      "rendue": true,
+      "reprise": true
+     }
+    },
+    {
+     "la_passe": 2,
+     "lancre_voxels": 1.2962,
+     "les_points_signales": 9,
+     "lecart_type_de_la_difference_lue_voxels": 23.9168,
+     "la_part_sur_la_bonne_spire_apres": 0.7152,
+     "le_rendu": {
+      "rendue": true,
+      "reprise": false,
+      "le_code": 0,
+      "les_couches": 109,
+      "les_secondes": 230.4
+     }
+    },
+    {
+     "la_passe": 3,
+     "lancre_voxels": 0.9731,
+     "les_points_signales": 1,
+     "lecart_type_de_la_difference_lue_voxels": 21.0157,
+     "la_part_sur_la_bonne_spire_apres": 0.7152,
+     "le_rendu": {
+      "rendue": true,
+      "reprise": false,
+      "le_code": 0,
+      "les_couches": 109,
+      "les_secondes": 220.4
+     }
+    },
+    {
+     "la_passe": 4,
+     "lancre_voxels": 0.9156,
+     "les_points_signales": 0,
+     "lecart_type_de_la_difference_lue_voxels": 20.2775,
+     "la_part_sur_la_bonne_spire_apres": 0.7152
+    }
+   ],
+   "la_suite": "plus haute"
+  }
+ },
+ "les_secondes": 974.0,
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "plus haute sur les deux blocs : répéter corrige encore",
+  "les_suites": {
+   "le_bloc_de_257": "plus haute",
+   "le_bloc_de_259": "plus haute"
+  }
+ }
+}

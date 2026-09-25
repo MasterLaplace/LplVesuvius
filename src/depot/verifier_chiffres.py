@@ -3208,6 +3208,24 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 262 : LA CORRECTION RÉPÉTÉE
+    s262 = _source(racine, "la_correction_repetee_converge_t_elle.json")
+    if s262.exists():
+        d = json.loads(s262.read_text())
+        if d.get("decidable"):
+            p7, p9 = d["les_blocs"]["le_bloc_de_257"]["les_passes"], d["les_blocs"]["le_bloc_de_259"]["les_passes"]
+            ap = lambda p: _fr222(p["la_part_sur_la_bonne_spire_apres"])  # noqa: E731
+            out.append(("la première passe de 262", [f"elle rend **{ap(p7[0])}** et **{ap(p9[0])}**, ce que `261` publie"], s262.name))
+            out.append(("avant en 262", [f"| avant | | {_fr222(p7[0]['la_part_avant'])} | | {_fr222(p9[0]['la_part_avant'])} |"], s262.name))
+            out.append(("passe 1 de 262", [f"| 1 | {p7[0]['les_points_signales']} | {ap(p7[0])} | {p9[0]['les_points_signales']} | {ap(p9[0])} |"], s262.name))
+            out.append(("passe 2 de 262", [f"| 2 | {p7[1]['les_points_signales']} | **{ap(p7[1])}** | {p9[1]['les_points_signales']} | **{ap(p9[1])}** |"], s262.name))
+            out.append(("passe 3 de 262", [f"| 3 | **{p7[2]['les_points_signales']}** | | {p9[2]['les_points_signales']} | {ap(p9[2])} |"], s262.name))
+            out.append(("passe 4 de 262", [f"| 4 | | | **{p9[3]['les_points_signales']}** | |"], s262.name))
+            e = lambda p: _fr222(p["lecart_type_de_la_difference_lue_voxels"])  # noqa: E731
+            out.append(("l'écart type de 262", [f"tombe de **{e(p7[0])}** à {e(p7[1])} puis **{e(p7[2])}**"], s262.name))
+            out.append(("l'écart type du second bloc de 262", [f"et de **{e(p9[0])}** à {e(p9[1])}, {e(p9[2])} puis **{e(p9[3])}** sur celui de `259`"], s262.name))
+            out.append(("l'ancre de 262", [f"de {_fr222(p7[0]['lancre_voxels'])} à {_fr222(p7[-1]['lancre_voxels'])} voxels, et de {_fr222(p9[0]['lancre_voxels'])} à {_fr222(p9[-1]['lancre_voxels'])}"], s262.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 261 : LA MARCHE CORRIGE LA SPIRE PRODUITE
     s261 = _source(racine, "la_marche_corrige_t_elle_la_spire_produite.json")
     if s261.exists():

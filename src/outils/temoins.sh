@@ -1660,6 +1660,8 @@ run "le pas de fenetre en fenetre voit-il la rampe" uv run python "$ROOT/src/nap
 run "figure le pas de fenetre en fenetre voit-il la rampe" uv run python "$ROOT/src/figures/figure_le_pas_de_fenetre_en_fenetre_voit_il_la_rampe.py" --verifier
 run "la marche corrige-t-elle la spire produite" uv run python "$ROOT/src/nappe/la_marche_corrige_t_elle_la_spire_produite.py" --verifier
 run "figure la marche corrige-t-elle la spire produite" uv run python "$ROOT/src/figures/figure_la_marche_corrige_t_elle_la_spire_produite.py" --verifier
+run "la correction repetee converge-t-elle" uv run python "$ROOT/src/nappe/la_correction_repetee_converge_t_elle.py" --verifier
+run "figure la correction repetee converge-t-elle" uv run python "$ROOT/src/figures/figure_la_correction_repetee_converge_t_elle.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

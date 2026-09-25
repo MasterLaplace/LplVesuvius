@@ -4060,6 +4060,12 @@ réponse ; `R4-P95` s'ouvre.
 **0,9636**), l'ancre à la médiane, les points à un demi-feuillet ramenés de leur écart ; la part sur la bonne spire passe de
 **0,474** à **0,6299** et de **0,6225** à **0,702**. `R4-P95` reste ouverte pour la boucle.
 
+**`262` · 2026-09-25 · la correction répétée** — `R4-P95`
+
+⭐⭐⭐⭐ **La correction sans juge, répétée, s'arrête d'elle-même** — `R4-F443` : la part sur la bonne spire va de **0,474** à
+**0,6688** et de **0,6225** à **0,7152**, et la procédure finit quand la marche ne signale plus rien. `R4-P95` reste ouverte
+pour la boucle.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
