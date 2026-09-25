@@ -4087,6 +4087,12 @@ elle a glissé** — `R4-F445` : sur les blocs réguliers, **4** ratés rendus j
 Vu après coup, la marche dérive d'un bloc à l'autre, de **62,185** voxels entre des voisins que le juge voit à **8,0224**
 près. `R4-P95` reste ouverte : la dérive de la marche empêche de prendre le niveau plus loin.
 
+**`266` · 2026-09-25 · jusqu'où la marche porte un niveau** — `R4-P95`
+
+⭐⭐⭐⭐ **La marche porte un niveau à un demi-feuillet près sur un bloc, pas au-delà** — `R4-F447` : entre deux chunks que le
+juge tient pour justes, ce que la marche ajoute diffère de **34,7587** voxels entre huit et seize chunks, de **43,8298**
+entre seize et trente-deux. `R4-P95` reste ouverte : porter un niveau plus loin demande autre chose que la somme des pas.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

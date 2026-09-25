@@ -1668,6 +1668,8 @@ run "la marche sait-elle ou ne pas corriger" uv run python "$ROOT/src/nappe/la_m
 run "figure la marche sait-elle ou ne pas corriger" uv run python "$ROOT/src/figures/figure_la_marche_sait_elle_ou_ne_pas_corriger.py" --verifier
 run "le voisinage dit-il quel niveau est le bon" uv run python "$ROOT/src/nappe/le_voisinage_dit_il_quel_niveau_est_le_bon.py" --verifier
 run "figure le voisinage dit-il quel niveau est le bon" uv run python "$ROOT/src/figures/figure_le_voisinage_dit_il_quel_niveau_est_le_bon.py" --verifier
+run "jusqu'ou la marche porte-t-elle un niveau" uv run python "$ROOT/src/nappe/jusquou_la_marche_porte_t_elle_un_niveau.py" --verifier
+run "figure jusqu'ou la marche porte-t-elle un niveau" uv run python "$ROOT/src/figures/figure_jusquou_la_marche_porte_t_elle_un_niveau.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

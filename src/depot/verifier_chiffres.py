@@ -3208,6 +3208,30 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 266 : JUSQU'OÙ LA MARCHE PORTE UN NIVEAU
+    s266 = _source(racine, "jusquou_la_marche_porte_t_elle_un_niveau.json")
+    if s266.exists():
+        d = json.loads(s266.read_text())
+        if d.get("decidable"):
+            libelles = ("1 à 2", "2 à 4", "4 à 8", "8 à 16", "16 à 32", "32 à 64")
+            cols = [d["bloc_par_bloc"], d["dun_seul_tenant"], d["les_voisinages"]["le_bloc_de_257"]["les_classes"],
+                    d["les_voisinages"]["le_bloc_de_259"]["les_classes"]]
+            for k, lib in enumerate(libelles):
+                cel = []
+                for j, c in enumerate(cols):
+                    x = c[k]["sigma_voxels"]
+                    t = "" if x is None else _fr222(x)
+                    cel.append(f"**{t}**" if j == 1 and lib in ("8 à 16", "16 à 32") else t)
+                ligne = "| " + lib + " | " + " | ".join(cel) + " |"
+                out.append((f"la classe {lib} de 266", [ligne.replace("|  |", "| |")], s266.name))
+            out.append(("la pente de 266", [f"pente de **{_fr222(d['la_pente_en_log']['dun_seul_tenant'])}** d'un seul "
+                                            f"tenant et {_fr222(d['la_pente_en_log']['bloc_par_bloc'])} bloc par"],
+                        s266.name))
+            out.append(("la portée de 266", [f"la portée est de **{d['la_portee_en_chunks']}**"], s266.name))
+            v_ = d["les_voisinages"]
+            out.append(("les chunks de 266", [f"{v_['le_bloc_de_257']['les_chunks']} et {v_['le_bloc_de_259']['les_chunks']} "
+                                              "chunks que le juge tient pour justes"], s266.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 265 : L'ANCRE PRISE CHEZ LES VOISINS
     s265 = _source(racine, "le_voisinage_dit_il_quel_niveau_est_le_bon.json")
     if s265.exists():
