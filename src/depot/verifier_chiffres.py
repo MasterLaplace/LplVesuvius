@@ -3208,6 +3208,29 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 261 : LA MARCHE CORRIGE LA SPIRE PRODUITE
+    s261 = _source(racine, "la_marche_corrige_t_elle_la_spire_produite.json")
+    if s261.exists():
+        d = json.loads(s261.read_text())
+        if d.get("decidable") and d.get("les_blocs"):
+            z = d["le_signe"]
+            out.append(("le signe de 261", [f"en retrouve **{_fr222(z['la_pente'])}** : **{_fr222(z['lecart_retrouve_voxels'])}** voxels sur 72,08, sur **{z['les_chunks']}** chunks"], s261.name))
+            b7, b9 = d["les_blocs"]["le_bloc_de_257"], d["les_blocs"]["le_bloc_de_259"]
+            g = lambda b, k: b["le_signalement"][k]  # noqa: E731
+            out.append(("l'ancre de 261", [f"| l'ancre, la médiane de la différence | {_fr222(b7['lancre_voxels'])} voxels | {_fr222(b9['lancre_voxels'])} voxel |"], s261.name))
+            out.append(("les signalés de 261", [f"| points du bloc, signalés | {b7['les_points_du_bloc']}, **{b7['les_points_signales']}** | {b9['les_points_du_bloc']}, **{b9['les_points_signales']}** |"], s261.name))
+            out.append(("les notés de 261", [f"| ratés et justes notés | {g(b7, 'les_rates')} et {g(b7, 'les_justes')} | {g(b9, 'les_rates')} et {g(b9, 'les_justes')} |"], s261.name))
+            out.append(("les ratés signalés de 261", [f"| des ratés, signalés | **{_fr222(g(b7, 'la_part_des_rates_signales'))}** | **{_fr222(g(b9, 'la_part_des_rates_signales'))}** |"], s261.name))
+            out.append(("les justes signalés de 261", [f"| des justes, signalés | {_fr222(g(b7, 'la_part_des_justes_signales'))} | {_fr222(g(b9, 'la_part_des_justes_signales'))} |"], s261.name))
+            out.append(("avant et après de 261", [f"| **sur la bonne spire, avant → après** | **{_fr222(b7['avant']['la_part_sur_la_bonne_spire'])} → {_fr222(b7['apres']['la_part_sur_la_bonne_spire'])}** | **{_fr222(b9['avant']['la_part_sur_la_bonne_spire'])} → {_fr222(b9['apres']['la_part_sur_la_bonne_spire'])}** |"], s261.name))
+            out.append(("les ratés rendus justes de 261", [f"| ratés rendus justes | {b7['les_rates_rendus_justes']} | {b9['les_rates_rendus_justes']} |"], s261.name))
+            out.append(("les justes rendus ratés de 261", [f"| justes rendus ratés | {b7['les_justes_rendus_rates']} | {b9['les_justes_rendus_rates']} |"], s261.name))
+            r7, r9 = b7["relue"], b9["relue"]
+            out.append(("l'écart type de 261", [f"son écart type passe de **{_fr222(r7['lecart_type_de_la_difference_avant'])}** à"], s261.name))
+            out.append(("l'écart type après de 261", [f"**{_fr222(r7['lecart_type_de_la_difference_apres'])}** voxels sur le bloc de `257`, et de **{_fr222(r9['lecart_type_de_la_difference_avant'])}** à **{_fr222(r9['lecart_type_de_la_difference_apres'])}** sur celui de `259`"], s261.name))
+            a7, a9 = r7["laccord_des_paires_avec_lerreur_restante"], r9["laccord_des_paires_avec_lerreur_restante"]
+            out.append(("ce qui reste de 261", [f"la marche relue sépare **{_fr222(a7['la_part_que_la_marche_separe_parmi_celles_que_le_juge_separe'])}** et **{_fr222(a9['la_part_que_la_marche_separe_parmi_celles_que_le_juge_separe'])}** des paires"], s261.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 260 : LE PAS DE FENÊTRE EN FENÊTRE
     s260 = _source(racine, "le_pas_de_fenetre_en_fenetre_voit_il_la_rampe.json")
     if s260.exists():

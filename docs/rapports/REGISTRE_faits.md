@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**543 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **503** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
+**545 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **505** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 440 faits
+## R4 — 442 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -525,6 +525,8 @@
 | `R4-F438` | **là où `m7` voit le segment sur sa feuille, la couche la plus claire d'un chunk n'en est pas un repère** | au bloc de la rangée 160, colonne 144, où `m7` voit le segment en **0,9592** des points de la maille, la couche la plus claire de chaque chunk n'est à moins d'un quart de pas du milieu que dans **0,3359** des chunks de la pile publiée, et **0,2656** de celle du segment réduit | établi ; ⚠⚠ Le repère sur lequel reposait `R4-F434`, avec la coupe de `257`. Ajouté après la première mesure pour la pile publiée. | `259` · `nappe/le_pas_de_centre_a_centre_la_ou_le_segment_tient_sa_feuille.py` |
 | `R4-F439` | **des pas courts, enchaînés de fenêtre en fenêtre à travers le chunk, voient la dérive sur les trois piles** | la rampe numérique de **24** voxels est retrouvée à **1,833**, **1,1859** et **0,9737** sur le segment réduit du bloc de `257`, le segment réduit du bloc de `259` et sa pile publiée ; à la couture **0,1317** à **0,2015**, de centre à centre **0,0573** à **1,2505** | établi ; ⭐⭐⭐⭐ La fenêtre de seize colonnes de la couture, comparée à sa voisine partout, le sommet affiné au dixième de voxel. ⚠ Surestime la rampe de trois quarts sur le bloc de `257`. | `260` · `nappe/le_pas_de_fenetre_en_fenetre_voit_il_la_rampe.py` |
 | `R4-F440` | **sur la spire produite, la marche de fenêtre en fenêtre moins celle du segment sépare les chunks que le juge sépare** | sur les blocs de `257` et `259`, elle sépare **0,698** et **0,6309** des paires que le juge sépare, en réunit **0,5367** et **0,6538** de celles qu'il réunit, corrélation **0,6611** et **0,6888** avec son erreur ; le témoin plat et la couture ne séparent rien | établi ; ⭐⭐⭐⭐ La première mesure, faite du seul scan rendu le long des deux surfaces, qui voit où la spire produite glisse. ⚠⚠ Bruitée : résidu **7,894** et **4,5357** voxels, contre 2,03 et 1,6539 à la couture. Deux blocs, un côté, `m7`. | `260` · `nappe/le_pas_de_fenetre_en_fenetre_voit_il_la_rampe.py` |
+| `R4-F441` | **de fenêtre en fenêtre, la marche retrouve presque toute une rampe rendue d'un pas, et son signe fixe la correction sans le juge** | sur la rampe rendue de `257` (72,08 voxels sur quatre chunks), la marche de fenêtre en fenêtre moins celle du segment retrouve **0,9636**, soit **69,458** voxels, sur **213** chunks ; de centre à centre **0,4807**, à la couture **0,1396** ; le signe est positif | établi ; ⭐⭐⭐ La calibration du sens de la correction de `261`, faite sur une surface posée et non sur le juge. ⚠ Un bloc. | `261` · `nappe/la_marche_corrige_t_elle_la_spire_produite.py` |
+| `R4-F442` | **sans le juge, la marche de fenêtre en fenêtre corrige la spire produite : la part sur la bonne spire passe de 0,474 à 0,6299 et de 0,6225 à 0,702** | l'ancre à la médiane du bloc, chaque point de la maille à un demi-feuillet ou plus de l'ancre ramené de son écart : sur les blocs de `257` et `259`, **31** et **19** ratés rendus justes, **7** et **7** justes rendus ratés ; des ratés signalés **0,4198** et **0,5789**, des justes **0,274** et **0,1809** ; relue, la différence des marches passe d'un écart type de **40,6496** à **24,1468** et de **35,1148** à **23,9168** voxels | établi ; ⭐⭐⭐⭐ La première correction sans humain qui relève nettement la part juste. ⚠⚠ Deux blocs, une passe, un côté, `m7` ; l'ancre suppose la majorité juste. | `261` · `nappe/la_marche_corrige_t_elle_la_spire_produite.py` |
 
 ## R5 — 23 faits
 

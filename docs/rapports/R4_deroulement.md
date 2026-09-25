@@ -4054,6 +4054,12 @@ retrouvée sur les trois piles (**1,833**, **1,1859**, **0,9737**) ; `R4-F440` :
 sépare **0,698** et **0,6309** des paires que le juge sépare, là où la couture n'en séparait aucune. Bruité. `R4-P94` a sa
 réponse ; `R4-P95` s'ouvre.
 
+**`261` · 2026-09-25 · la marche corrige la spire produite** — `R4-P95`
+
+⭐⭐⭐⭐ **Sans le juge, la marche corrige le transfert** — `R4-F442` : le signe fixé par une rampe rendue (`R4-F441`,
+**0,9636**), l'ancre à la médiane, les points à un demi-feuillet ramenés de leur écart ; la part sur la bonne spire passe de
+**0,474** à **0,6299** et de **0,6225** à **0,702**. `R4-P95` reste ouverte pour la boucle.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
