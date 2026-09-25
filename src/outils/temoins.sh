@@ -1680,6 +1680,8 @@ run "l'ancre du voisinage tient-elle sur des blocs reguliers" uv run python "$RO
 run "figure l'ancre du voisinage tient-elle sur des blocs reguliers" uv run python "$ROOT/src/figures/figure_lancre_du_voisinage_tient_elle_sur_des_blocs_reguliers.py" --verifier
 run "les points corriges etaient-ils decales" uv run python "$ROOT/src/nappe/les_points_corriges_etaient_ils_decales.py" --verifier
 run "figure les points corriges etaient-ils decales" uv run python "$ROOT/src/figures/figure_les_points_corriges_etaient_ils_decales.py" --verifier
+run "laquelle des deux marches porte l'ecart" uv run python "$ROOT/src/nappe/laquelle_des_deux_marches_porte_lecart.py" --verifier
+run "figure laquelle des deux marches porte l'ecart" uv run python "$ROOT/src/figures/figure_laquelle_des_deux_marches_porte_lecart.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

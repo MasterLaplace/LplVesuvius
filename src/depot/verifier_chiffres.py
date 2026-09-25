@@ -3208,6 +3208,30 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 272 : LAQUELLE DES DEUX MARCHES PORTE L'ÉCART
+    s272 = _source(racine, "laquelle_des_deux_marches_porte_lecart.json")
+    if s272.exists():
+        d = json.loads(s272.read_text())
+        if d.get("decidable"):
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            lignes = (("160_160", "juges_justes", "`(160, 160)`, jugés justes", True),
+                      ("le_bloc_de_257", "juges_rates", "le bloc de `257`, jugés ratés", False),
+                      ("le_bloc_de_259", "juges_rates", "le bloc de `259`, jugés ratés", False),
+                      ("le_bloc_de_257", "juges_justes", "le bloc de `257`, jugés justes", False),
+                      ("le_bloc_de_259", "juges_justes", "le bloc de `259`, jugés justes", False))
+            for nom, fam, titre, gras in lignes:
+                f_ = d["les_voisinages"][nom][fam]
+                n_, e_, c_ = str(f_["les_chunks"]), sg(f_["lerreur_jugee_abs_mediane_voxels"]), sg(f_["lecart_median_voxels"])
+                p_, r_ = sg(f_["la_part_de_la_spire_produite_mediane_voxels"]), sg(f_["la_part_du_segment_reduit_mediane_voxels"])
+                if gras:
+                    titre, n_, c_, p_, r_ = f"**{titre}**", f"**{n_}**", f"**{c_}**", f"**{p_}**", f"**{r_}**"
+                out.append((f"la ligne {nom} {fam} de 272", [f"| {titre} | {n_} | {e_} | {c_} | {p_} | {r_} |"], s272.name))
+            m_ = max(v_["lecart_max_a_la_publiee_voxels"] for v_ in d["les_voisinages"].values())
+            out.append(("la reproduction de 272", [f"la redonne à {sg(m_)} voxel près sur les trois"], s272.name))
+            out.append(("les chunks corrigés de (160, 160) en 272",
+                        [f"Les {d['les_voisinages']['160_160']['les_chunks_corriges']} chunks que la décision corrige"],
+                        s272.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 271 : CE QUE LE JUGE VOYAIT SOUS LES POINTS CORRIGÉS
     s271 = _source(racine, "les_points_corriges_etaient_ils_decales.json")
     if s271.exists():

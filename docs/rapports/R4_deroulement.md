@@ -4125,6 +4125,12 @@ choisis défait un peu ailleurs, là où `268` trouvait déjà la marche en dés
 lisait 67,65 sous eux** — `R4-F452`. Les ratés rendus justes, eux, sont jugés à 53,78 voxels et lus à 59,5. Là où la procédure
 abîme, la marche et le juge diffèrent d'une spire. `R4-P95` reste ouverte.
 
+**`272` · 2026-09-25 · laquelle des deux marches porte l'écart** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur `(160, 160)`, l'écart que la décision corrige est surtout dans la marche du segment réduit : 46,3791 voxels des
+66,766, contre 19,244 pour la spire produite** — `R4-F453`. Sous les ratés qu'elle corrige juste, c'est la marche de la spire
+produite qui porte l'écart. Le segment réduit est sur une seule feuille. `R4-P95` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
