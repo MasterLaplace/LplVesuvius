@@ -3208,6 +3208,43 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 276 : LA CHAÎNE REPARTIE DE LA SPIRE CORRIGÉE
+    s276 = _source(racine, "repartir_de_la_spire_corrigee_rend_il_le_saut_suivant_plus_juste.json")
+    if s276.exists():
+        d = json.loads(s276.read_text())
+        if d.get("decidable"):
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            for h, s_ in enumerate(d["les_sauts"], start=1):
+                cellules = [str(h), str(s_["les_points_notes"]), sg(s_["le_temoin"]), sg(s_["partie_de_la_spire_corrigee"]),
+                            str(s_["les_rates_rendus_justes"]), str(s_["les_justes_rendus_rates"]), sg(s_["le_gain_net"])]
+                if h == 2:
+                    cellules = [f"**{c}**" for c in cellules]
+                out.append((f"le saut {h} de 276", ["| " + " | ".join(cellules) + " |"], s276.name))
+            s2, r_ = d["les_sauts"][1], d["la_reprise"]
+            out.append(("le fait de 276",
+                        [f"rend au deuxième saut {s2['les_rates_rendus_justes']} ratés justes pour "
+                         f"{s2['les_justes_rendus_rates']} justes ratés : un gain",
+                         f"Des {r_['les_points']} points dont la spire corrigée rend le premier saut juste, "
+                         f"{sg(r_['partie_de_la_spire_corrigee'])} retombent juste au deuxième, contre {sg(r_['le_temoin'])}",
+                         f"au deuxième saut, la chaîne rend {s2['les_rates_rendus_justes']} ratés justes pour "
+                         f"{s2['les_justes_rendus_rates']} justes ratés, un gain net de {s2['le_gain_net']}"], s276.name))
+            out.append(("la spire corrigée de 276",
+                        [f"La spire corrigée diffère de la spire produite en "
+                         f"{d['les_points_ou_la_spire_corrigee_differe_de_la_produite']} points sur {d['les_points']}"],
+                        s276.name))
+            # ⚠ Les mots qui résument la reprise dépendent de ses nombres : ils doivent tomber avec eux.
+            if 0.4 <= r_["partie_de_la_spire_corrigee"] < 0.5:
+                out.append(("la moitié de 276", ["moins de la moitié au saut suivant"], s276.name))
+            if r_["le_temoin"] < 0.1:
+                out.append(("le témoin de 276", ["entraîne presque toujours le deuxième"], s276.name))
+            if d["la_reproduction"]["tous"] and len(d["la_reproduction"]["les_sauts"]) == 4:
+                out.append(("la reproduction de 276", ["Le témoin redonne `248` aux quatre sauts"], s276.name))
+            if (d["le_premier_saut_du_temoin_contre_la_spire_produite_ecart_max_voxels"] == 0
+                    and not d["la_lecture"]["combien_de_pannes"]):
+                out.append(("le contrôle de 276", ["0 voxel près. Aucune lecture de la prédiction n'est tombée en panne"],
+                            s276.name))
+            out.append(("le verdict de 276", [f"**{d['le_verdict']['lissue'].upper()}.**"], s276.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 275 : LA PROCÉDURE SANS JUGE SUR LE SEGMENT ENTIER
     s275 = _source(racine, "la_procedure_sans_juge_tient_elle_sur_le_segment_entier.json")
     if s275.exists():

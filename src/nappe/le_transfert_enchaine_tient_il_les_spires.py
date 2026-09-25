@@ -192,17 +192,22 @@ def compter_sur_un_rayon(p, n, cote, sauts, lire_rayon, sur_la_grille, gi, gj) -
     return out
 
 
-def enchainer(p, n, cote, sauts, lire_rayon, sur_la_grille, gi, gj, recalculer: bool = True) -> list[dict]:
+def enchainer(p, n, cote, sauts, lire_rayon, sur_la_grille, gi, gj, recalculer: bool = True,
+              premier: np.ndarray | None = None) -> list[dict]:
     """Les sauts successifs de `247`, chacun parti de la surface produite par le précédent.
 
-    Avec `recalculer`, chaque saut suit la normale de la surface d'où il part ; sans, celle du segment."""
+    Avec `recalculer`, chaque saut suit la normale de la surface d'où il part ; sans, celle du segment. Avec `premier`,
+    le premier saut n'est pas lu : il est ce pas-là, le long de la normale du segment, et la chaîne repart de lui."""
     q, nq = p.copy(), n.copy()
     out = []
-    for _ in range(sauts):
-        t, vu = lire_rayon(q, nq, cote, LA_PORTEE)
-        suivante = la_feuille_suivante(t, vu)
-        depart = np.where(np.isfinite(suivante), suivante, cote * PAS_EN_VOXELS)
-        pas, changes = le_vote_itere(les_centres(t, vu), depart, sur_la_grille, gi, gj)
+    for k in range(sauts):
+        if k == 0 and premier is not None:
+            pas, changes = np.asarray(premier, dtype=float), []
+        else:
+            t, vu = lire_rayon(q, nq, cote, LA_PORTEE)
+            suivante = la_feuille_suivante(t, vu)
+            depart = np.where(np.isfinite(suivante), suivante, cote * PAS_EN_VOXELS)
+            pas, changes = le_vote_itere(les_centres(t, vu), depart, sur_la_grille, gi, gj)
         q = q + pas[:, None] * nq
         calcule = np.ones(len(q), dtype=bool)
         if recalculer:

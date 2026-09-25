@@ -4151,6 +4151,13 @@ un gain net de 122, dont 92 hors des neuf blocs où elle avait été regardée**
 descend sur 11 ; sur le segment entier, elle passe de 0,9303 à 0,9334. La procédure améliore la spire produite sur le
 segment entier. `R4-P95` reste ouverte : la spire suivante n'est pas encore transférée depuis la spire corrigée.
 
+**`276` · 2026-09-25 · la chaîne repartie de la spire corrigée** — `R4-P95`
+
+⭐⭐⭐⭐ **Repartie de la spire corrigée, la chaîne de `248` rend au deuxième saut 52 ratés justes pour 27 justes ratés : un gain
+net de 25. Des 65 points dont la spire corrigée rend le premier saut juste, 0,4769 retombent juste au deuxième, contre 0,0615
+pour le témoin** — `R4-F457`. Le témoin redonne `248` aux quatre sauts. Repartir de la spire corrigée rend le saut suivant
+plus juste. `R4-P95` reste ouverte : le deuxième saut n'est pas corrigé.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

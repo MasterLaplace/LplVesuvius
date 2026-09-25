@@ -1,0 +1,125 @@
+{
+ "le_segment": "20230702185753",
+ "la_prediction": "m7",
+ "le_cote": "du_cote_plus",
+ "la_maille": 8,
+ "les_points": 62815,
+ "les_sauts_de_la_chaine": 4,
+ "les_points_ou_la_spire_corrigee_differe_de_la_produite": 495,
+ "le_premier_saut_du_temoin_contre_la_spire_produite_ecart_max_voxels": 0.0,
+ "la_reproduction": {
+  "les_sauts": [
+   {
+    "le_saut": 1,
+    "publie": {
+     "les_points_notes": 40024,
+     "la_part_sur_la_bonne_spire": 0.9177
+    },
+    "refait": {
+     "les_points_notes": 40024,
+     "la_part_sur_la_bonne_spire": 0.9177
+    },
+    "reproduit": true
+   },
+   {
+    "le_saut": 2,
+    "publie": {
+     "les_points_notes": 16635,
+     "la_part_sur_la_bonne_spire": 0.8875
+    },
+    "refait": {
+     "les_points_notes": 16635,
+     "la_part_sur_la_bonne_spire": 0.8875
+    },
+    "reproduit": true
+   },
+   {
+    "le_saut": 3,
+    "publie": {
+     "les_points_notes": 295,
+     "la_part_sur_la_bonne_spire": 0.8305
+    },
+    "refait": {
+     "les_points_notes": 295,
+     "la_part_sur_la_bonne_spire": 0.8305
+    },
+    "reproduit": true
+   },
+   {
+    "le_saut": 4,
+    "publie": {
+     "les_points_notes": 32,
+     "la_part_sur_la_bonne_spire": 0.3438
+    },
+    "refait": {
+     "les_points_notes": 32,
+     "la_part_sur_la_bonne_spire": 0.3438
+    },
+    "reproduit": true
+   }
+  ],
+  "tous": true
+ },
+ "les_sauts": [
+  {
+   "les_points_notes": 40024,
+   "les_points_ou_les_deux_chaines_different": 325,
+   "le_temoin": 0.9177,
+   "partie_de_la_spire_corrigee": 0.9212,
+   "les_rates_rendus_justes": 182,
+   "les_justes_rendus_rates": 45,
+   "le_gain_net": 137
+  },
+  {
+   "les_points_notes": 16635,
+   "les_points_ou_les_deux_chaines_different": 378,
+   "le_temoin": 0.8875,
+   "partie_de_la_spire_corrigee": 0.889,
+   "les_rates_rendus_justes": 52,
+   "les_justes_rendus_rates": 27,
+   "le_gain_net": 25
+  },
+  {
+   "les_points_notes": 295,
+   "les_points_ou_les_deux_chaines_different": 10,
+   "le_temoin": 0.8305,
+   "partie_de_la_spire_corrigee": 0.8271,
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 1,
+   "le_gain_net": -1
+  },
+  {
+   "les_points_notes": 32,
+   "les_points_ou_les_deux_chaines_different": 5,
+   "le_temoin": 0.3438,
+   "partie_de_la_spire_corrigee": 0.3438,
+   "les_rates_rendus_justes": 1,
+   "les_justes_rendus_rates": 1,
+   "le_gain_net": 0
+  }
+ ],
+ "la_reprise": {
+  "les_points": 65,
+  "le_temoin": 0.0615,
+  "partie_de_la_spire_corrigee": 0.4769
+ },
+ "les_temoins_sans_lecture": [
+  0.7583,
+  0.5059,
+  0.4475,
+  0.625
+ ],
+ "la_lecture": {
+  "chunks_lus": 13491,
+  "chunks_absents": 2,
+  "mo_lus": 4740.6,
+  "les_pannes": [],
+  "combien_de_pannes": 0
+ },
+ "le_deuxieme_saut": "deuxieme_saut_depuis_la_corrigee_265_20230702185753_m7_du_cote_plus.npy",
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "repartir de la spire corrigée rend le saut suivant plus juste"
+ },
+ "les_secondes": 78.5
+}
