@@ -4066,6 +4066,13 @@ réponse ; `R4-P95` s'ouvre.
 **0,6688** et de **0,6225** à **0,7152**, et la procédure finit quand la marche ne signale plus rien. `R4-P95` reste ouverte
 pour la boucle.
 
+**`263` · 2026-09-25 · la correction sur des blocs pris à pas réguliers** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur des blocs pris à pas réguliers, la correction sans juge défait plus qu'elle ne corrige** — `R4-F444` : la
+procédure de `262`, sans changement, sur huit blocs que rien n'a choisis ; la part monte sur trois, descend sur deux, et
+réunie passe de **0,9207** à **0,9117**, **13** ratés rendus justes pour **23** justes rendus ratés. `R4-P95` reste ouverte :
+avant la boucle, savoir sans le juge où ne pas corriger.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

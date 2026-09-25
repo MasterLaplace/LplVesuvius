@@ -3208,6 +3208,45 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 263 : LA CORRECTION SUR DES BLOCS PRIS À PAS RÉGULIERS
+    s263 = _source(racine, "la_correction_tient_elle_sur_des_blocs_reguliers.json")
+    if s263.exists():
+        d = json.loads(s263.read_text())
+        if d.get("decidable"):
+            r = d["reunis"]
+            q = r["la_premiere_passe"]
+            out.append(("la réunion de 263", [f"Sur les **{r['les_points_notes']}** points notés, la part sur la bonne spire "
+                                              f"passe de **{_fr222(r['avant'])}** à **{_fr222(r['apres'])}** : "
+                                              f"**{r['les_rates_rendus_justes']}** ratés rendus justes,"], s263.name))
+            out.append(("les justes de 263", [f"**{r['les_justes_rendus_rates']}** justes rendus ratés. La première passe "
+                                              f"signale **{q['les_rates_signales']}** des {q['les_rates']} ratés "
+                                              f"(**{_fr222(q['la_part_des_rates_signales'])}**) et "
+                                              f"**{q['les_justes_signales']}** des {q['les_justes']} justes"], s263.name))
+            out.append(("le compte des candidats de 263", [f"La règle de `257` admet **{d['les_blocs_candidats']}** blocs"],
+                        s263.name))
+            out.append(("l'arrêt de 263", [f"La procédure s'arrête seule sur **{r['les_blocs_qui_sarretent_seuls']}** blocs "
+                                           f"sur {r['les_blocs_decidables']}"], s263.name))
+            for n, b in d["les_blocs"].items():
+                if b["avant"]["la_part_sur_la_bonne_spire"] is None:
+                    continue
+                p_ = b["les_passes"]
+                s0, sf = _fr222(p_[0]["lecart_type_de_la_difference_lue_voxels"]), \
+                    _fr222(p_[-1]["lecart_type_de_la_difference_lue_voxels"])
+                ligne = (f"| ({b['la_rangee']}, {b['la_colonne']}) | {b['avant']['les_points_notes']} | "
+                         f"{_fr222(b['avant']['la_part_sur_la_bonne_spire'])} → "
+                         f"{_fr222(b['apres']['la_part_sur_la_bonne_spire'])} | "
+                         f"{', '.join(str(x['les_points_signales']) for x in p_)} | "
+                         f"{s0 if len(p_) == 1 else f'{s0} → {sf}'} | {b['les_rates_rendus_justes']} | "
+                         f"{b['les_justes_rendus_rates']} |")
+                out.append((f"le bloc {n} de 263", [ligne], s263.name))
+            g = r["les_gains"]
+            haut = sorted((x for x in g.values() if x > 0), reverse=True)
+            bas = sorted((x for x in g.values() if x < 0), reverse=True)
+            sg = lambda x: ("+" if x > 0 else "−") + _fr222(abs(x))  # noqa: E731
+            out.append(("les hausses de 263", [f"les trois hausses valent {', '.join(sg(x) for x in haut[:-1])} et "
+                                               f"{sg(haut[-1])}"], s263.name))
+            out.append(("les baisses de 263", [f"baisses {sg(bas[0])} et {sg(bas[1])}"], s263.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 262 : LA CORRECTION RÉPÉTÉE
     s262 = _source(racine, "la_correction_repetee_converge_t_elle.json")
     if s262.exists():

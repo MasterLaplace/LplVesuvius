@@ -1,0 +1,658 @@
+{
+ "les_blocs_candidats": 340,
+ "le_controle": {
+  "le_bloc_de_la_regle_de_257": [
+   16,
+   176
+  ],
+  "le_bloc_publie": [
+   16,
+   176
+  ]
+ },
+ "les_exclus": [
+  [
+   16,
+   176
+  ],
+  [
+   160,
+   144
+  ]
+ ],
+ "les_passes_au_plus": 4,
+ "les_blocs_choisis": [
+  [
+   32,
+   128
+  ],
+  [
+   80,
+   32
+  ],
+  [
+   112,
+   192
+  ],
+  [
+   160,
+   160
+  ],
+  [
+   208,
+   176
+  ],
+  [
+   256,
+   128
+  ],
+  [
+   304,
+   128
+  ],
+  [
+   352,
+   128
+  ]
+ ],
+ "les_blocs": {
+  "32_128": {
+   "la_rangee": 32,
+   "la_colonne": 128,
+   "les_rendus": {
+    "le_segment_reduit": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 861.6
+    },
+    "la_spire_produite": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 951.7
+    }
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0,
+   "les_points_du_bloc": 169,
+   "le_signalement_de_la_premiere_passe": {
+    "les_rates": 0,
+    "les_justes": 168,
+    "la_part_des_rates_signales": null,
+    "la_part_des_justes_signales": 0.0
+   },
+   "avant": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "apres": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_passes": [
+    {
+     "la_passe": 1,
+     "lancre_voxels": 0.4883,
+     "les_points_signales": 0,
+     "lecart_type_de_la_difference_lue_voxels": 13.2526,
+     "la_part_sur_la_bonne_spire_apres": 1.0
+    }
+   ],
+   "sarrete_seule": true,
+   "les_chunks_relies": 255,
+   "la_suite": "égale",
+   "les_secondes": 1858.4,
+   "decidable": true
+  },
+  "80_32": {
+   "la_rangee": 80,
+   "la_colonne": 32,
+   "les_rendus": {
+    "le_segment_reduit": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 611.2
+    },
+    "la_spire_produite": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 711.2
+    }
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0,
+   "les_points_du_bloc": 169,
+   "le_signalement_de_la_premiere_passe": {
+    "les_rates": 0,
+    "les_justes": 0,
+    "la_part_des_rates_signales": null,
+    "la_part_des_justes_signales": null
+   },
+   "avant": {
+    "les_points_notes": 0,
+    "la_part_sur_la_bonne_spire": null
+   },
+   "apres": {
+    "les_points_notes": 0,
+    "la_part_sur_la_bonne_spire": null
+   },
+   "les_passes": [
+    {
+     "la_passe": 1,
+     "lancre_voxels": -0.291,
+     "les_points_signales": 0,
+     "lecart_type_de_la_difference_lue_voxels": 12.2196,
+     "la_part_sur_la_bonne_spire_apres": null
+    }
+   ],
+   "sarrete_seule": true,
+   "les_chunks_relies": 248,
+   "la_suite": null,
+   "les_secondes": 1360.3,
+   "decidable": true
+  },
+  "112_192": {
+   "la_rangee": 112,
+   "la_colonne": 192,
+   "les_rendus": {
+    "le_segment_reduit": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 160.3
+    },
+    "la_spire_produite": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 150.6
+    },
+    "la_passe_1": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 140.3
+    }
+   },
+   "les_rates_rendus_justes": 3,
+   "les_justes_rendus_rates": 0,
+   "les_points_du_bloc": 169,
+   "le_signalement_de_la_premiere_passe": {
+    "les_rates": 7,
+    "les_justes": 161,
+    "la_part_des_rates_signales": 0.4286,
+    "la_part_des_justes_signales": 0.0062
+   },
+   "avant": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 0.9583
+   },
+   "apres": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 0.9762
+   },
+   "les_passes": [
+    {
+     "la_passe": 1,
+     "lancre_voxels": -0.8406,
+     "les_points_signales": 4,
+     "lecart_type_de_la_difference_lue_voxels": 17.9079,
+     "la_part_sur_la_bonne_spire_apres": 0.9762
+    },
+    {
+     "la_passe": 2,
+     "lancre_voxels": 0.0616,
+     "les_points_signales": 0,
+     "lecart_type_de_la_difference_lue_voxels": 15.1912,
+     "la_part_sur_la_bonne_spire_apres": 0.9762
+    }
+   ],
+   "sarrete_seule": true,
+   "les_chunks_relies": 233,
+   "la_suite": "plus haute",
+   "les_secondes": 521.1,
+   "decidable": true
+  },
+  "160_160": {
+   "la_rangee": 160,
+   "la_colonne": 160,
+   "les_rendus": {
+    "le_segment_reduit": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 190.4
+    },
+    "la_spire_produite": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 220.4
+    },
+    "la_passe_1": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 200.6
+    },
+    "la_passe_2": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 210.4
+    }
+   },
+   "les_rates_rendus_justes": 6,
+   "les_justes_rendus_rates": 12,
+   "les_points_du_bloc": 169,
+   "le_signalement_de_la_premiere_passe": {
+    "les_rates": 30,
+    "les_justes": 139,
+    "la_part_des_rates_signales": 0.2667,
+    "la_part_des_justes_signales": 0.1151
+   },
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.8225
+   },
+   "apres": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.787
+   },
+   "les_passes": [
+    {
+     "la_passe": 1,
+     "lancre_voxels": -0.252,
+     "les_points_signales": 24,
+     "lecart_type_de_la_difference_lue_voxels": 27.899,
+     "la_part_sur_la_bonne_spire_apres": 0.8047
+    },
+    {
+     "la_passe": 2,
+     "lancre_voxels": -1.3128,
+     "les_points_signales": 9,
+     "lecart_type_de_la_difference_lue_voxels": 22.4254,
+     "la_part_sur_la_bonne_spire_apres": 0.787
+    },
+    {
+     "la_passe": 3,
+     "lancre_voxels": 1.2095,
+     "les_points_signales": 0,
+     "lecart_type_de_la_difference_lue_voxels": 18.545,
+     "la_part_sur_la_bonne_spire_apres": 0.787
+    }
+   ],
+   "sarrete_seule": true,
+   "les_chunks_relies": 249,
+   "la_suite": "plus basse",
+   "les_secondes": 912.0,
+   "decidable": true
+  },
+  "208_176": {
+   "la_rangee": 208,
+   "la_colonne": 176,
+   "les_rendus": {
+    "le_segment_reduit": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 500.9
+    },
+    "la_spire_produite": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 501.2
+    },
+    "la_passe_1": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 531.1
+    },
+    "la_passe_2": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 571.1
+    },
+    "la_passe_3": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 521.0
+    }
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 10,
+   "les_points_du_bloc": 169,
+   "le_signalement_de_la_premiere_passe": {
+    "les_rates": 16,
+    "les_justes": 114,
+    "la_part_des_rates_signales": 0.0,
+    "la_part_des_justes_signales": 0.0965
+   },
+   "avant": {
+    "les_points_notes": 130,
+    "la_part_sur_la_bonne_spire": 0.8769
+   },
+   "apres": {
+    "les_points_notes": 130,
+    "la_part_sur_la_bonne_spire": 0.8
+   },
+   "les_passes": [
+    {
+     "la_passe": 1,
+     "lancre_voxels": -2.5392,
+     "les_points_signales": 13,
+     "lecart_type_de_la_difference_lue_voxels": 21.3539,
+     "la_part_sur_la_bonne_spire_apres": 0.8
+    },
+    {
+     "la_passe": 2,
+     "lancre_voxels": -1.1048,
+     "les_points_signales": 3,
+     "lecart_type_de_la_difference_lue_voxels": 17.8265,
+     "la_part_sur_la_bonne_spire_apres": 0.8
+    },
+    {
+     "la_passe": 3,
+     "lancre_voxels": -1.2259,
+     "les_points_signales": 4,
+     "lecart_type_de_la_difference_lue_voxels": 18.2741,
+     "la_part_sur_la_bonne_spire_apres": 0.8
+    },
+    {
+     "la_passe": 4,
+     "lancre_voxels": -2.5172,
+     "les_points_signales": 8,
+     "lecart_type_de_la_difference_lue_voxels": 19.9292,
+     "la_part_sur_la_bonne_spire_apres": 0.8
+    }
+   ],
+   "sarrete_seule": false,
+   "les_chunks_relies": 251,
+   "la_suite": "plus basse",
+   "les_secondes": 2761.5,
+   "decidable": true
+  },
+  "256_128": {
+   "la_rangee": 256,
+   "la_colonne": 128,
+   "les_rendus": {
+    "le_segment_reduit": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 310.7
+    },
+    "la_spire_produite": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 481.0
+    },
+    "la_passe_1": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 481.0
+    },
+    "la_passe_2": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 470.9
+    },
+    "la_passe_3": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 460.8
+    }
+   },
+   "les_rates_rendus_justes": 1,
+   "les_justes_rendus_rates": 0,
+   "les_points_du_bloc": 169,
+   "le_signalement_de_la_premiere_passe": {
+    "les_rates": 23,
+    "les_justes": 127,
+    "la_part_des_rates_signales": 0.0,
+    "la_part_des_justes_signales": 0.0
+   },
+   "avant": {
+    "les_points_notes": 150,
+    "la_part_sur_la_bonne_spire": 0.8467
+   },
+   "apres": {
+    "les_points_notes": 150,
+    "la_part_sur_la_bonne_spire": 0.8533
+   },
+   "les_passes": [
+    {
+     "la_passe": 1,
+     "lancre_voxels": -0.3739,
+     "les_points_signales": 3,
+     "lecart_type_de_la_difference_lue_voxels": 19.8993,
+     "la_part_sur_la_bonne_spire_apres": 0.8467
+    },
+    {
+     "la_passe": 2,
+     "lancre_voxels": -0.549,
+     "les_points_signales": 4,
+     "lecart_type_de_la_difference_lue_voxels": 19.8489,
+     "la_part_sur_la_bonne_spire_apres": 0.8533
+    },
+    {
+     "la_passe": 3,
+     "lancre_voxels": -0.5484,
+     "les_points_signales": 2,
+     "lecart_type_de_la_difference_lue_voxels": 19.296,
+     "la_part_sur_la_bonne_spire_apres": 0.8533
+    },
+    {
+     "la_passe": 4,
+     "lancre_voxels": -0.6226,
+     "les_points_signales": 0,
+     "lecart_type_de_la_difference_lue_voxels": 18.8357,
+     "la_part_sur_la_bonne_spire_apres": 0.8533
+    }
+   ],
+   "sarrete_seule": true,
+   "les_chunks_relies": 248,
+   "la_suite": "plus haute",
+   "les_secondes": 2345.4,
+   "decidable": true
+  },
+  "304_128": {
+   "la_rangee": 304,
+   "la_colonne": 128,
+   "les_rendus": {
+    "le_segment_reduit": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 190.4
+    },
+    "la_spire_produite": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 220.4
+    },
+    "la_passe_1": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 190.3
+    },
+    "la_passe_2": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 190.4
+    }
+   },
+   "les_rates_rendus_justes": 3,
+   "les_justes_rendus_rates": 1,
+   "les_points_du_bloc": 156,
+   "le_signalement_de_la_premiere_passe": {
+    "les_rates": 11,
+    "les_justes": 145,
+    "la_part_des_rates_signales": 0.1818,
+    "la_part_des_justes_signales": 0.0069
+   },
+   "avant": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 0.9295
+   },
+   "apres": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 0.9423
+   },
+   "les_passes": [
+    {
+     "la_passe": 1,
+     "lancre_voxels": -1.2969,
+     "les_points_signales": 3,
+     "lecart_type_de_la_difference_lue_voxels": 19.3696,
+     "la_part_sur_la_bonne_spire_apres": 0.9359
+    },
+    {
+     "la_passe": 2,
+     "lancre_voxels": -1.22,
+     "les_points_signales": 1,
+     "lecart_type_de_la_difference_lue_voxels": 17.7871,
+     "la_part_sur_la_bonne_spire_apres": 0.9423
+    },
+    {
+     "la_passe": 3,
+     "lancre_voxels": -1.1318,
+     "les_points_signales": 0,
+     "lecart_type_de_la_difference_lue_voxels": 17.6542,
+     "la_part_sur_la_bonne_spire_apres": 0.9423
+    }
+   ],
+   "sarrete_seule": true,
+   "les_chunks_relies": 253,
+   "la_suite": "plus haute",
+   "les_secondes": 892.5,
+   "decidable": true
+  },
+  "352_128": {
+   "la_rangee": 352,
+   "la_colonne": 128,
+   "les_rendus": {
+    "le_segment_reduit": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 180.3
+    },
+    "la_spire_produite": {
+     "rendue": true,
+     "reprise": false,
+     "le_code": 0,
+     "les_couches": 109,
+     "les_secondes": 170.4
+    }
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0,
+   "les_points_du_bloc": 169,
+   "le_signalement_de_la_premiere_passe": {
+    "les_rates": 1,
+    "les_justes": 168,
+    "la_part_des_rates_signales": 0.0,
+    "la_part_des_justes_signales": 0.0
+   },
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.9941
+   },
+   "apres": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.9941
+   },
+   "les_passes": [
+    {
+     "la_passe": 1,
+     "lancre_voxels": -0.6795,
+     "les_points_signales": 0,
+     "lecart_type_de_la_difference_lue_voxels": 14.5965,
+     "la_part_sur_la_bonne_spire_apres": 0.9941
+    }
+   ],
+   "sarrete_seule": true,
+   "les_chunks_relies": 250,
+   "la_suite": "égale",
+   "les_secondes": 413.0,
+   "decidable": true
+  }
+ },
+ "reunis": {
+  "les_blocs_decidables": 8,
+  "avant": 0.9207,
+  "apres": 0.9117,
+  "les_points_notes": 1110,
+  "les_rates_rendus_justes": 13,
+  "les_justes_rendus_rates": 23,
+  "les_blocs_qui_sarretent_seuls": 7,
+  "les_gains": {
+   "32_128": 0.0,
+   "112_192": 0.0179,
+   "160_160": -0.0355,
+   "208_176": -0.0769,
+   "256_128": 0.0066,
+   "304_128": 0.0128,
+   "352_128": 0.0
+  },
+  "la_premiere_passe": {
+   "les_rates": 88,
+   "les_rates_signales": 13,
+   "les_justes": 1022,
+   "les_justes_signales": 29,
+   "la_part_des_rates_signales": 0.1477,
+   "la_part_des_justes_signales": 0.0284
+  }
+ },
+ "les_secondes": 5535.7,
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "plus haute sur plus de blocs qu'elle n'est plus basse : elle tient en majorité, et défait ailleurs",
+  "les_comptes": {
+   "plus haute": 3,
+   "plus basse": 2,
+   "égale": 2
+  }
+ }
+}

@@ -203,25 +203,35 @@ def la_fenetre_de_maille(cy: int, cx: int, cote: int, maille: int = LA_MAILLE, c
     return slice(r0, r1 + 1), slice(c0, c1 + 1)
 
 
-def le_bloc(tau: np.ndarray, erreur: np.ndarray, empreinte: np.ndarray, gy: int, gx: int, cote: int = LE_BLOC,
-            pas_de_grille: int = 20) -> dict:
-    """Le bloc de la règle : dans l'empreinte, la surface produite partout définie, le plus de ratés jugés.
+def les_blocs_candidats(tau: np.ndarray, empreinte: np.ndarray, gy: int, gx: int, cote: int = LE_BLOC,
+                        pas_de_grille: int = 20) -> list[tuple[int, int]]:
+    """Les blocs que la règle admet, au pas du bloc : dans l'empreinte, la surface produite partout définie.
 
-    `empreinte` est la validité de la grille pleine du segment ; égalités départagées par la rangée puis la colonne.
+    `empreinte` est la validité de la grille pleine du segment ; l'ordre est celui de la rangée puis de la colonne.
     """
-    cands = []
+    out = []
     for by in range(0, gy - cote + 1, cote):
         for bx in range(0, gx - cote + 1, cote):
             e0 = empreinte[by * LE_COTE_DU_CHUNK // pas_de_grille:(by + cote) * LE_COTE_DU_CHUNK // pas_de_grille,
                            bx * LE_COTE_DU_CHUNK // pas_de_grille:(bx + cote) * LE_COTE_DU_CHUNK // pas_de_grille]
             sr, sc = la_fenetre_de_maille(by, bx, cote, pas_de_grille=pas_de_grille)
-            t = tau[sr, sc]
             if e0.size == 0 or not e0.all() or sr.stop > tau.shape[0] or sc.stop > tau.shape[1] \
-                    or not np.isfinite(t).all():
+                    or not np.isfinite(tau[sr, sc]).all():
                 continue
-            e = erreur[sr, sc]
-            note = np.isfinite(e)
-            cands.append((-int((np.abs(e[note]) >= DEMI_PAS_EN_VOXELS).sum()), by, bx, int(note.sum())))
+            out.append((by, bx))
+    return out
+
+
+def le_bloc(tau: np.ndarray, erreur: np.ndarray, empreinte: np.ndarray, gy: int, gx: int, cote: int = LE_BLOC,
+            pas_de_grille: int = 20) -> dict:
+    """Le bloc de la règle : parmi les candidats, le plus de ratés jugés ; égalités départagées par la rangée puis la
+    colonne."""
+    cands = []
+    for by, bx in les_blocs_candidats(tau, empreinte, gy, gx, cote, pas_de_grille):
+        sr, sc = la_fenetre_de_maille(by, bx, cote, pas_de_grille=pas_de_grille)
+        e = erreur[sr, sc]
+        note = np.isfinite(e)
+        cands.append((-int((np.abs(e[note]) >= DEMI_PAS_EN_VOXELS).sum()), by, bx, int(note.sum())))
     if not cands:
         return {"decidable": False, "la_raison": "aucun bloc ne tient la règle"}
     cands.sort()
