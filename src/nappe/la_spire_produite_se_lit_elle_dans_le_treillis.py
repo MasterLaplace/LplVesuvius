@@ -54,6 +54,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 import time
@@ -81,6 +82,7 @@ LE_CONTROLE = (196, 144, 2)   # rangée et colonne du premier chunk, côté en c
 LA_PREDICTION, LE_COTE = "m7", "du_cote_plus"
 LES_JUGES = ("le_segment_seul", "le_segment_et_ses_temoins")
 LA_PATIENCE = 900
+LE_TEMOIN_DE_FIN = ".rendu_complet"
 LE_PAS_DE_COUPE = 8
 LA_RAMPE_EN_CHUNKS = 4   # la largeur de la transition posée par le contrôle positif
 LE_DOSSIER_DE_LA_RAMPE = "la_rampe_des_rangees"
@@ -140,20 +142,67 @@ def la_commande_de_rendu(tifxyz: Path, sortie: Path, cadre: dict, couches: int =
             "--crop-width", str(cadre["largeur"]), "--crop-height", str(cadre["hauteur"])]
 
 
-def rendre(tifxyz: Path, sortie: Path, cadre: dict, patience: int = LA_PATIENCE) -> dict:
-    """La pile, par le chien de garde du dépôt ; une pile déjà rendue et complète n'est pas refaite."""
-    if sortie.is_dir() and len(list(sortie.glob("*.tif"))) == LES_COUCHES:
+def la_pile_est_complete(sortie: Path) -> bool:
+    """Une pile se reprend quand le rendu qui l'a écrite est allé au bout : ses 109 couches ET le témoin de fin.
+
+    ⚠⚠ Compter les couches ne suffit pas. `vc_render_tifxyz` crée ses 109 fichiers dès le début puis les remplit bande par
+    bande : le 2026-09-25, une pile avait ses 109 fichiers à 18 % de son rendu. Une pile coupée en route, machine éteinte ou
+    réseau perdu, passait donc pour complète, et la mesure suivante aurait lu une pile en partie vide sans rien en dire.
+    """
+    return (sortie / LE_TEMOIN_DE_FIN).is_file() and len(list(sortie.glob("*.tif"))) == LES_COUCHES
+
+
+def rendre(tifxyz: Path, sortie: Path, cadre: dict, patience: int = LA_PATIENCE, lancer=subprocess.run) -> dict:
+    """La pile, par le chien de garde du dépôt ; une pile complète n'est pas refaite.
+
+    ⚠ Le témoin de fin n'est écrit qu'après un rendu qui a rendu zéro ET ses 109 couches, et il est retiré AVANT de relancer :
+    un témoin resté d'un rendu précédent ferait passer pour complète la pile qu'un nouveau rendu interrompu laisse derrière lui.
+    `lancer` n'est remplacé que par la batterie, pour exercer ce chemin sans télécharger une pile.
+    """
+    if la_pile_est_complete(sortie):
         return {"rendue": True, "reprise": True}
+    (sortie / LE_TEMOIN_DE_FIN).unlink(missing_ok=True)
     debut = time.monotonic()
     cmd = [str(RACINE / "src" / "outils" / "rendre_surveille.sh"), str(sortie), str(int(patience)), "--",
            *la_commande_de_rendu(tifxyz, sortie, cadre)]
     sortie.parent.mkdir(parents=True, exist_ok=True)
     journal = sortie.with_suffix(".log")
     with journal.open("w") as fh:
-        rc = subprocess.run(cmd, stdout=fh, stderr=subprocess.STDOUT, cwd=RACINE).returncode
+        rc = lancer(cmd, stdout=fh, stderr=subprocess.STDOUT, cwd=RACINE).returncode
     n = len(list(sortie.glob("*.tif"))) if sortie.is_dir() else 0
-    return {"rendue": rc == 0 and n == LES_COUCHES, "reprise": False, "le_code": rc, "les_couches": n,
+    ok = rc == 0 and n == LES_COUCHES
+    if ok:
+        (sortie / LE_TEMOIN_DE_FIN).write_text(f"code {rc}, {n} couches\n")
+    return {"rendue": ok, "reprise": False, "le_code": rc, "les_couches": n,
             "les_secondes": round(time.monotonic() - debut, 1)}
+
+
+def le_journal_prouve_la_fin(journal: Path) -> bool:
+    """Un journal de rendu écrit avant le témoin de fin prouve que le rendu est allé au bout : la dernière bande à 100 %, la
+    ligne de débit du chien de garde, et aucun abandon."""
+    if not journal.is_file():
+        return False
+    t = journal.read_text(errors="replace")
+    return bool(re.search(r"band (\d+)/\1 \(100%\)", t)) and "   rendu :" in t and "ABANDONNE" not in t
+
+
+def marquer_les_piles_anciennes(dossier: Path = LE_DOSSIER) -> dict:
+    """Le témoin de fin, posé une fois sur les piles rendues avant qu'il existe, quand leur journal prouve la fin.
+
+    ⚠ Une pile dont le journal ne prouve rien n'est pas marquée : elle sera refaite à son prochain usage, ce qui coûte un
+    rendu, là où la marquer à tort coûterait une mesure fausse.
+    """
+    out = {"deja_marquees": [], "marquees": [], "laissees": []}
+    for d in sorted(x for x in dossier.rglob("*") if x.is_dir() and len(list(x.glob("*.tif"))) == LES_COUCHES):
+        nom = str(d.relative_to(dossier))
+        if (d / LE_TEMOIN_DE_FIN).is_file():
+            out["deja_marquees"].append(nom)
+        elif le_journal_prouve_la_fin(d.with_suffix(".log")):
+            (d / LE_TEMOIN_DE_FIN).write_text("posé après coup : le journal prouve la fin\n")
+            out["marquees"].append(nom)
+        else:
+            out["laissees"].append(nom)
+    return out
 
 
 def lire_la_pile(dossier: Path) -> np.ndarray:
@@ -696,6 +745,51 @@ def verifier() -> int:
       lambda: abs(la_part_retrouvee(tem + pose, tem, pose)["la_pente"] - 1.0) < 1e-9
       and abs(la_part_retrouvee(tem, tem, pose)["la_pente"]) < 1e-9)
 
+    # La reprise : une pile coupée en route a ses 109 fichiers, et ne doit pas passer pour complète.
+    class _Fin:
+        def __init__(self, code):
+            self.returncode = code
+
+    def faux_rendu(code: int):
+        def lancer(cmd, **_):
+            sortie = Path(cmd[cmd.index("--tif-output") + 1])
+            sortie.mkdir(parents=True, exist_ok=True)
+            for k in range(LES_COUCHES):
+                (sortie / f"{k:03d}.tif").write_bytes(b"")
+            return _Fin(code)
+        return lancer
+
+    with tempfile.TemporaryDirectory() as t:
+        s_ = Path(t) / "bloc"
+        s_.mkdir()
+        for k in range(LES_COUCHES - 1):
+            (s_ / f"{k:03d}.tif").write_bytes(b"")
+        (s_ / LE_TEMOIN_DE_FIN).write_text("un témoin resté d'avant")
+        r1 = rendre(Path("m"), s_, le_cadre(0, 0, 1), lancer=faux_rendu(4))
+        v("★★★★ un rendu interrompu laisse ses 109 fichiers, et la pile n'est pas complète",
+          lambda: not r1["rendue"] and r1["les_couches"] == LES_COUCHES and not la_pile_est_complete(s_), str(r1))
+        v("★★★★ le témoin resté d'un rendu précédent est retiré avant de relancer",
+          lambda: not (s_ / LE_TEMOIN_DE_FIN).exists())
+        r2 = rendre(Path("m"), s_, le_cadre(0, 0, 1), lancer=faux_rendu(0))
+        v("★★★★ la pile interrompue est refaite, et le rendu qui va au bout pose le témoin",
+          lambda: r2["rendue"] and not r2["reprise"] and la_pile_est_complete(s_), str(r2))
+        r3 = rendre(Path("m"), s_, le_cadre(0, 0, 1), lancer=faux_rendu(1))
+        v("★★★ une pile complète est reprise sans être relancée", lambda: r3 == {"rendue": True, "reprise": True}, str(r3))
+        a_ = Path(t) / "anciennes"
+        fin = "  band 15/16 (93%)\r  band 16/16 (100%)  eta 0m00s\nRendering: x\n   rendu : 9 octets en 3 s (3 Kio/s)\n"
+        for nom, j in (("finie", fin), ("coupee", "  band 3/16 (18%)  eta 7m06s"),
+                       ("abandonnee", fin + "⚠⚠ RENDU ABANDONNE — ni activité\n"), ("sans_journal", None)):
+            (a_ / nom).mkdir(parents=True)
+            for k in range(LES_COUCHES):
+                (a_ / nom / f"{k:03d}.tif").write_bytes(b"")
+            if j is not None:
+                (a_ / f"{nom}.log").write_text(j)
+        ma = marquer_les_piles_anciennes(a_)
+        v("★★★★ le témoin n'est posé après coup que sur une pile dont le journal prouve la fin",
+          lambda: ma["marquees"] == ["finie"] and ma["laissees"] == ["abandonnee", "coupee", "sans_journal"], str(ma))
+        mb = marquer_les_piles_anciennes(a_)
+        v("★★★ une seconde passe ne marque rien de plus", lambda: mb["deja_marquees"] == ["finie"] and not mb["marquees"])
+
     for x in echecs:
         print(f"  ÉCHEC {x}")
     print(f"{Path(__file__).name}   {'ALL PASS' if not echecs else 'DES SONDES ONT ÉCHOUÉ'} "
@@ -707,9 +801,15 @@ def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     p.add_argument("--verifier", action="store_true")
     p.add_argument("--json", type=Path)
+    p.add_argument("--marquer-les-anciennes", action="store_true",
+                   help="pose le témoin de fin sur les piles rendues avant lui, quand leur journal prouve la fin")
     a = p.parse_args()
     if a.verifier:
         return verifier()
+    if a.marquer_les_anciennes:
+        m = marquer_les_piles_anciennes()
+        print(json.dumps({k: len(x) for k, x in m.items()} | {"laissees": m["laissees"]}, indent=1, ensure_ascii=False))
+        return 0
     r = mesurer()
     r["le_verdict"] = le_verdict(r)
     texte = json.dumps(r, indent=2, ensure_ascii=False)
