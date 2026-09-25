@@ -1,0 +1,154 @@
+{
+ "le_deuxieme_saut_de_276": {
+  "publie": {
+   "les_points_notes": 16635,
+   "les_points_ou_les_deux_chaines_different": 378,
+   "le_temoin": 0.8875,
+   "partie_de_la_spire_corrigee": 0.889,
+   "les_rates_rendus_justes": 52,
+   "les_justes_rendus_rates": 27,
+   "le_gain_net": 25
+  },
+  "refait": {
+   "les_points_notes": 16635,
+   "les_points_ou_les_deux_chaines_different": 378,
+   "le_temoin": 0.8875,
+   "partie_de_la_spire_corrigee": 0.889,
+   "les_rates_rendus_justes": 52,
+   "les_justes_rendus_rates": 27,
+   "le_gain_net": 25
+  },
+  "reproduit": true
+ },
+ "les_points_deplaces_par_la_correction": 495,
+ "les_points_recales": 269,
+ "la_distance_a_la_feuille": {
+  "la_spire_corrigee_aux_points_deplaces": {
+   "les_points": 495,
+   "sans_feuille_sur_le_rayon": 46,
+   "la_mediane_voxels": 28.0513,
+   "au_dela_de_la_reconnaissance": 335,
+   "au_dela_dun_demi_feuillet": 180
+  },
+  "la_spire_produite_ailleurs": {
+   "les_points": 62320,
+   "sans_feuille_sur_le_rayon": 1426,
+   "la_mediane_voxels": 0.0,
+   "au_dela_de_la_reconnaissance": 3172,
+   "au_dela_dun_demi_feuillet": 3172
+  }
+ },
+ "les_sauts": [
+  {
+   "les_points_notes": 40024,
+   "les_points_ou_les_deux_chaines_different": 176,
+   "les_rates_rendus_justes": 4,
+   "les_justes_rendus_rates": 12,
+   "le_gain_net": -8,
+   "partie_de_la_spire_recalee": 0.921,
+   "partie_de_la_spire_corrigee": 0.9212
+  },
+  {
+   "les_points_notes": 16635,
+   "les_points_ou_les_deux_chaines_different": 245,
+   "les_rates_rendus_justes": 29,
+   "les_justes_rendus_rates": 5,
+   "le_gain_net": 24,
+   "partie_de_la_spire_recalee": 0.8904,
+   "partie_de_la_spire_corrigee": 0.889
+  },
+  {
+   "les_points_notes": 295,
+   "les_points_ou_les_deux_chaines_different": 4,
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0,
+   "le_gain_net": 0,
+   "partie_de_la_spire_recalee": 0.8271,
+   "partie_de_la_spire_corrigee": 0.8271
+  },
+  {
+   "les_points_notes": 32,
+   "les_points_ou_les_deux_chaines_different": 3,
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0,
+   "le_gain_net": 0,
+   "partie_de_la_spire_recalee": 0.3438,
+   "partie_de_la_spire_corrigee": 0.3438
+  }
+ ],
+ "le_rangement": {
+  "le_juge_de_248": {
+   "partie_de_la_spire_corrigee": {
+    "les_points_notes_aux_deux_sauts": 16635,
+    "les_points_notes_au_deuxieme_saut_seulement": 0,
+    "les_rates_du_deuxieme_saut": 1847,
+    "les_herites": 627,
+    "les_propres": 1220,
+    "parmi_les_propres": {
+     "trop_pres": 1016,
+     "trop_loin": 204,
+     "retombes_sur_la_premiere_couche": 95,
+     "dun_saut_qui_navance_pas": 35
+    }
+   },
+   "partie_de_la_spire_recalee": {
+    "les_points_notes_aux_deux_sauts": 16635,
+    "les_points_notes_au_deuxieme_saut_seulement": 0,
+    "les_rates_du_deuxieme_saut": 1823,
+    "les_herites": 630,
+    "les_propres": 1193,
+    "parmi_les_propres": {
+     "trop_pres": 985,
+     "trop_loin": 208,
+     "retombes_sur_la_premiere_couche": 74,
+     "dun_saut_qui_navance_pas": 21
+    }
+   }
+  },
+  "le_juge_intact": {
+   "partie_de_la_spire_corrigee": {
+    "les_points_notes_aux_deux_sauts": 7863,
+    "les_points_notes_au_deuxieme_saut_seulement": 1015,
+    "les_rates_du_deuxieme_saut": 338,
+    "les_herites": 86,
+    "les_propres": 252,
+    "parmi_les_propres": {
+     "trop_pres": 200,
+     "trop_loin": 52,
+     "retombes_sur_la_premiere_couche": 36,
+     "dun_saut_qui_navance_pas": 16
+    }
+   },
+   "partie_de_la_spire_recalee": {
+    "les_points_notes_aux_deux_sauts": 7863,
+    "les_points_notes_au_deuxieme_saut_seulement": 1015,
+    "les_rates_du_deuxieme_saut": 323,
+    "les_herites": 86,
+    "les_propres": 237,
+    "parmi_les_propres": {
+     "trop_pres": 185,
+     "trop_loin": 52,
+     "retombes_sur_la_premiere_couche": 21,
+     "dun_saut_qui_navance_pas": 6
+    }
+   }
+  }
+ },
+ "le_deuxieme_saut_sous_le_juge_intact": {
+  "les_points_notes": 8878,
+  "les_points_ou_les_deux_chaines_different": 80,
+  "les_rates_rendus_justes": 17,
+  "les_justes_rendus_rates": 0,
+  "le_gain_net": 17,
+  "partie_de_la_spire_recalee": 0.9503,
+  "partie_de_la_spire_corrigee": 0.9484
+ },
+ "la_lecture": {
+  "combien_de_pannes": 0
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "recaler la spire corrigée sur la feuille rend le deuxième saut plus juste"
+ },
+ "les_secondes": 110.5
+}

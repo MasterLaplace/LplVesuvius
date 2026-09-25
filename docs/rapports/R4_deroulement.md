@@ -4171,6 +4171,13 @@ saut était juste et 86 dont il avait raté. Ce juge écarte 968 des 1220 ratés
 rate encore surtout de lui-même, et la spire corrigée y ajoute des sauts qui retombent sur la première couche. `R4-P95` reste
 ouverte.
 
+**`279` · 2026-09-25 · la spire corrigée recalée sur la feuille** — `R4-P95`
+
+⭐⭐⭐⭐ **La correction pose 335 des 495 points qu'elle déplace à plus de 12 voxels de leur feuille. Recalée sur la feuille, la
+spire corrigée rend au deuxième saut 29 ratés justes pour 5 justes ratés : un gain net de 24** — `R4-F460`. Sous le juge
+intact, les sauts qui n'avancent pas reviennent de 16 à 6, le compte du témoin. Au premier saut, le recalage coûte 12 justes
+pour 4 ratés rendus justes. `R4-P95` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3208,6 +3208,52 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 279 : LA SPIRE CORRIGÉE RECALÉE SUR LA FEUILLE
+    s279 = _source(racine, "recaler_la_spire_corrigee_sur_la_feuille_rend_il_le_deuxieme_saut_plus_juste.json")
+    if s279.exists():
+        d = json.loads(s279.read_text())
+        if d.get("decidable"):
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            dist = d["la_distance_a_la_feuille"]
+            for cle, nom in (("la_spire_corrigee_aux_points_deplaces", "la spire corrigée, aux points que la correction déplace"),
+                             ("la_spire_produite_ailleurs", "la spire produite, partout ailleurs")):
+                r_ = dist[cle]
+                out.append((f"la distance {cle} de 279",
+                            [f"| {nom} | {r_['les_points']} | {sg(r_['la_mediane_voxels'])} | "
+                             f"{r_['au_dela_de_la_reconnaissance']} | {r_['au_dela_dun_demi_feuillet']} | "
+                             f"{r_['sans_feuille_sur_le_rayon']} |"], s279.name))
+            for h, s_ in enumerate(d["les_sauts"], start=1):
+                cel = [str(h), str(s_["les_points_notes"]), sg(s_["partie_de_la_spire_corrigee"]),
+                       sg(s_["partie_de_la_spire_recalee"]), str(s_["les_rates_rendus_justes"]),
+                       str(s_["les_justes_rendus_rates"]), sg(s_["le_gain_net"])]
+                if h == 2:
+                    cel = [f"**{c}**" for c in cel]
+                out.append((f"le saut {h} de 279", ["| " + " | ".join(cel) + " |"], s279.name))
+            s2, c_ = d["les_sauts"][1], dist["la_spire_corrigee_aux_points_deplaces"]
+            out.append(("le fait de 279",
+                        [f"La correction pose {c_['au_dela_de_la_reconnaissance']} des {c_['les_points']} points qu'elle "
+                         f"déplace à plus de 12 voxels de leur feuille",
+                         f"spire corrigée rend au deuxième saut {s2['les_rates_rendus_justes']} ratés justes pour "
+                         f"{s2['les_justes_rendus_rates']} justes ratés : un gain net de {s2['le_gain_net']}",
+                         f"au deuxième saut, {s2['les_rates_rendus_justes']} ratés rendus justes pour "
+                         f"{s2['les_justes_rendus_rates']} justes rendus ratés, un gain net de {s2['le_gain_net']}"],
+                        s279.name))
+            si = d["le_deuxieme_saut_sous_le_juge_intact"]
+            ri = d["le_rangement"]["le_juge_intact"]
+            pc_, pr_ = ri["partie_de_la_spire_corrigee"]["parmi_les_propres"], ri["partie_de_la_spire_recalee"]["parmi_les_propres"]
+            out.append(("le juge intact de 279",
+                        [f"Sous le juge intact de `253`, le deuxième saut compte {si['les_rates_rendus_justes']} ratés rendus "
+                         f"justes et {si['les_justes_rendus_rates']} juste rendu raté",
+                         f"ceux qui retombent sur la première couche passent de {pc_['retombes_sur_la_premiere_couche']} à "
+                         f"{pr_['retombes_sur_la_premiere_couche']}, et ceux d'un saut qui n'avance pas de "
+                         f"{pc_['dun_saut_qui_navance_pas']} à {pr_['dun_saut_qui_navance_pas']}"], s279.name))
+            s1 = d["les_sauts"][0]
+            out.append(("le premier saut de 279",
+                        [f"Au premier saut, le recalage coûte {s1['les_justes_rendus_rates']} justes pour "
+                         f"{s1['les_rates_rendus_justes']} ratés rendus justes"], s279.name))
+            out.append(("les recalés de 279", [f"Le recalage en déplace {d['les_points_recales']}"], s279.name))
+            out.append(("le verdict de 279", [f"**{d['le_verdict']['lissue'].upper()}.**"], s279.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 278 : LES RATÉS DU DEUXIÈME SAUT SOUS UN JUGE INTACT
     s278 = _source(racine, "sous_un_juge_intact_le_deuxieme_saut_rate_t_il_encore_de_lui_meme.json")
     if s278.exists():

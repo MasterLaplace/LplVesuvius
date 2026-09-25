@@ -163,7 +163,7 @@ def les_deux_chaines(cache: Path = LE_CACHE, maille: int = LA_MAILLE, delai: flo
     corrigee = enchainer(p, n, LE_SIGNE, sauts, lire_rayon, sur_la_grille, gi, gj, True, premier=tau1)
     return {"p": p, "n": n, "verite": verite, "tau0": tau0, "tau1": tau1, "temoin": temoin, "corrigee": corrigee,
             "pt": les_profondeurs(temoin, p, n), "pc": les_profondeurs(corrigee, p, n), "stats": stats,
-            "sur_la_grille": sur_la_grille, "gi": gi, "gj": gj}
+            "sur_la_grille": sur_la_grille, "gi": gi, "gj": gj, "lire_rayon": lire_rayon}
 
 
 def mesurer(cache: Path = LE_CACHE, maille: int = LA_MAILLE, delai: float = DELAI, sauts: int = LES_SAUTS) -> dict:
