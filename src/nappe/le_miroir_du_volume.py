@@ -79,15 +79,31 @@ def le_fichier(c: tuple[int, int, int], miroir: Path = LE_MIROIR) -> Path:
     return miroir / "0" / str(c[0]) / str(c[1]) / str(c[2])
 
 
-def telecharger(url: str) -> bytes | None:
-    """Les octets d'un objet, ou None s'il n'existe pas : un chunk absent de S3 est un chunk vide, au sens de zarr."""
-    try:
-        with urllib.request.urlopen(url, timeout=120) as r:
-            return r.read()
-    except urllib.error.HTTPError as e:
-        if e.code in (403, 404):
-            return None
-        raise
+LES_ESSAIS = 8
+
+
+def telecharger(url: str, essais: int = LES_ESSAIS, attendre=time.sleep, ouvrir=None) -> bytes | None:
+    """Les octets d'un objet, ou None s'il n'existe pas : un chunk absent de S3 est un chunk vide, au sens de zarr.
+
+    ⚠ Une panne passagère est réessayée, jusqu'à `essais` fois, en attendant de plus en plus longtemps : le 2026-09-25, une
+    seule résolution de nom échouée a arrêté le rendu du segment à sa huitième rangée. Seule une absence déclarée par S3 rend
+    None ; tout le reste, une fois les essais épuisés, lève.
+    """
+    ouvrir = ouvrir or (lambda u: urllib.request.urlopen(u, timeout=120))
+    for k in range(int(essais)):
+        try:
+            with ouvrir(url) as r:
+                return r.read()
+        except urllib.error.HTTPError as e:
+            if e.code in (403, 404):
+                return None
+            if k == int(essais) - 1:
+                raise
+        except (urllib.error.URLError, OSError):
+            if k == int(essais) - 1:
+                raise
+        attendre(min(60.0, 2.0 ** k))
+    return None
 
 
 def preparer(miroir: Path = LE_MIROIR, source: str = LE_VOLUME_BRUT, lire=telecharger) -> None:
@@ -210,6 +226,32 @@ def verifier() -> int:
         v("★★★★ vider ne retire que ce qui n'est plus demandé",
           n == 2 and le_fichier((4, 4, 4), m).is_file() and not le_fichier((1, 2, 3), m).is_file()
           and not le_fichier((9, 9, 9), m).with_suffix(".vide").is_file(), str(n))
+
+    import contextlib
+    import io
+
+    def une_source(pannes: int):
+        compte = {"n": 0}
+
+        def ouvrir(url):
+            compte["n"] += 1
+            if compte["n"] <= pannes:
+                raise urllib.error.URLError("Temporary failure in name resolution")
+            return contextlib.closing(io.BytesIO(b"chunk"))
+        return ouvrir, compte
+
+    ouv, cpt = une_source(2)
+    v("★★★★ une panne passagère est réessayée, et le chunk arrive",
+      lambda: telecharger("u", attendre=lambda _: None, ouvrir=ouv) == b"chunk" and cpt["n"] == 3, str(cpt))
+    ouv, cpt = une_source(99)
+
+    def toujours_en_panne():
+        try:
+            telecharger("u", essais=3, attendre=lambda _: None, ouvrir=ouv)
+        except urllib.error.URLError:
+            return cpt["n"] == 3
+        return False
+    v("★★★ une panne qui dure lève après ses essais, sans se faire passer pour un chunk vide", toujours_en_panne)
 
     for e in echecs:
         print(f"  ÉCHEC {e}")
