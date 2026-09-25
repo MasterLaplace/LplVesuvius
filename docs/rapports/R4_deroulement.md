@@ -4047,6 +4047,13 @@ déclaré, et sur la spire produite il suit l'erreur jugée à un tiers (`R4-F43
 bloc de `257`, ne l'est qu'à **0,0573** sur un bloc où `m7` voit le segment sur sa feuille, et à **0,3846** sur sa pile
 publiée. La couche la plus claire d'un chunk n'y est pas un repère de la feuille (`R4-F438`). `R4-P94` reste ouverte.
 
+**`260` · 2026-09-25 · le pas de fenêtre en fenêtre** — `R4-P94`
+
+⭐⭐⭐⭐ **Le treillis, lu de fenêtre en fenêtre, voit où la spire produite glisse** — `R4-F439` : la rampe numérique est
+retrouvée sur les trois piles (**1,833**, **1,1859**, **0,9737**) ; `R4-F440` : sur la spire produite, la différence des marches
+sépare **0,698** et **0,6309** des paires que le juge sépare, là où la couture n'en séparait aucune. Bruité. `R4-P94` a sa
+réponse ; `R4-P95` s'ouvre.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**148 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**149 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 110 portes
+## Grand Prize — 111 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -129,6 +129,7 @@
 - **R4-P92** *(le graal)* · **LA SPIRE VOISINE, PRODUITE EN MAILLAGE PAR LA FEUILLE SUIVANTE ET LE VOTE, TIENT-ELLE SOUS LES BOUCLES DU TREILLIS, ET QU'EST-CE QUI RATTRAPE LES HUIT POINTS SUR CENT QUI MANQUENT ?** ⭐⭐⭐ C'EST CE QUE `247` DÉSIGNE. Point par point, compter les feuilles retrouve la spire voisine en 0,9214 et 0,9163 des points du segment ; il reste à en faire une surface, à la juger comme la chaîne juge un segment publié, et à trouver ce qui corrige les feuilles manquées ou fausses.
 - **R4-P93** *(le graal)* · **LÀ OÙ LA BANDE SAUTE PLUS D'UN PAS ET DEMI D'UNE COUCHE À LA SUIVANTE, EST-CE ELLE QUI A MANQUÉ UN TOUR, OU LA CHAÎNE QUI S'ARRÊTE SUR UNE FAUSSE FEUILLE ?** ⭐⭐⭐ C'EST CE QUE `248` DÉSIGNE. Enchaînée sur quatre sauts, la chaîne perd de 0,09 à 0,14 de ceux qui avaient tenu à chaque saut ; au premier, 0,7144 et 0,7368 de ses chutes trop près tombent là où la bande saute ainsi. La réponse dit si la chaîne perd un point sur dix par saut, ou moins, et donc ce qui reste à rattraper avant le saut suivant.
 - **R4-P94** *(le graal)* · **UN PAS LU D'UN CENTRE DE CHUNK À L'AUTRE, ET NON À LA COUTURE, RETROUVE-T-IL LA RAMPE POSÉE, ET QUE DIT-IL ALORS DE LA SPIRE PRODUITE ?** ⭐⭐⭐ C'EST CE QUE `257` DÉSIGNE. La spire produite a désormais une pile, rendue comme le segment l'est ; mais la marche des coutures ne retrouve que 0,1396 d'une rampe posée d'un pas, donc elle ne peut pas juger une surface qui glisse d'une spire à l'autre en douceur.
+- **R4-P95** *(le graal)* · **SANS LE JUGE, LA MARCHE DE FENÊTRE EN FENÊTRE DE LA SPIRE PRODUITE DÉSIGNE-T-ELLE LES CHUNKS OÙ LA CHAÎNE A RATÉ, ET TIENT-ELLE SUR UNE BOUCLE ?** ⭐⭐⭐ C'EST CE QUE `260` DÉSIGNE. De fenêtre en fenêtre, le treillis voit où la spire produite glisse : il sépare 0,698 et 0,6309 des paires que le juge sépare. Mais il le fait avec le juge, sur un bloc, et bruité (résidu trois fois celui de la couture) : reste à s'en passer, et à le marcher aussi loin qu'une boucle.
 
 ## Progress Prizes — 19 portes
 

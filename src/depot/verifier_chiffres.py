@@ -3208,6 +3208,30 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 260 : LE PAS DE FENÊTRE EN FENÊTRE
+    s260 = _source(racine, "le_pas_de_fenetre_en_fenetre_voit_il_la_rampe.json")
+    if s260.exists():
+        d = json.loads(s260.read_text())
+        if d.get("decidable"):
+            r = d["la_rampe_numerique"]
+            a7, a9 = r["le_bloc_de_257_segment_reduit"], r["le_bloc_de_259_segment_reduit"]
+            ap = r["le_bloc_de_259_pile_publiee"]
+            out.append(("la rampe du bloc 257 de 260", [f"| le bloc de `257`, segment réduit | 0,1317 | 1,2505 | **{_fr222(a7['la_pente'])}** |"], s260.name))
+            out.append(("la rampe du bloc 259 de 260", [f"| le bloc de `259`, segment réduit | 0,2015 | 0,0573 | **{_fr222(a9['la_pente'])}** |"], s260.name))
+            out.append(("la rampe publiée de 260", [f"| le bloc de `259`, pile publiée | 0,1764 | 0,3846 | **{_fr222(ap['la_pente'])}** |"], s260.name))
+            out.append(("ce que rend la rampe de 260", [f"il en rend **{_fr222(a7['lecart_retrouve_voxels'])}**, **{_fr222(a9['lecart_retrouve_voxels'])}** et **{_fr222(ap['lecart_retrouve_voxels'])}** voxels sur 24"], s260.name))
+            b7, b9 = d["les_blocs"]["le_bloc_de_257"], d["les_blocs"]["le_bloc_de_259"]
+            p7, p9 = b7["la_difference"]["laccord_des_paires"], b9["la_difference"]["laccord_des_paires"]
+            out.append(("le juge de 260", [f"| le juge sépare / réunit | {p7['les_paires_que_le_juge_separe']} / {p7['les_paires_quil_reunit']} paires | {p9['les_paires_que_le_juge_separe']} / {p9['les_paires_quil_reunit']} paires |"], s260.name))
+            out.append(("sépare en 260", [f"| **sépare**, de ce que le juge sépare | **{_fr222(p7['la_part_que_la_marche_separe_parmi_celles_que_le_juge_separe'])}** | **{_fr222(p9['la_part_que_la_marche_separe_parmi_celles_que_le_juge_separe'])}** |"], s260.name))
+            out.append(("réunit en 260", [f"| réunit, de ce que le juge réunit | {_fr222(p7['la_part_que_la_marche_reunit_parmi_celles_que_le_juge_reunit'])} | {_fr222(p9['la_part_que_la_marche_reunit_parmi_celles_que_le_juge_reunit'])} |"], s260.name))
+            out.append(("corrélation en 260", [f"| corrélation avec l'erreur | {_fr222(p7['la_correlation'])} | {_fr222(p9['la_correlation'])} |"], s260.name))
+            c7, c9 = b7["la_difference"]["contre_lerreur_jugee"], b9["la_difference"]["contre_lerreur_jugee"]
+            out.append(("pente en 260", [f"| pente contre l'erreur | {_fr222(c7['la_pente'])} | {_fr222(c9['la_pente'])} |"], s260.name))
+            out.append(("le résidu de 260", [f"vaut **{_fr222(b7['le_segment']['le_residu_rms'])}** et **{_fr222(b9['le_segment']['le_residu_rms'])}** voxels sur le segment"], s260.name))
+            out.append(("la marche du segment de 260", [f"sur **{_fr222(b7['le_segment']['letendue_voxels'])}** voxels sur le bloc de `257`, et **{_fr222(b9['le_segment']['letendue_voxels'])}** sur celui de `259`"], s260.name))
+            out.append(("la marche publiée de 260", [f"({_fr222(b9['la_pile_publiee']['letendue_voxels'])} sur sa pile publiée)"], s260.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 259 : LE PAS DE CENTRE À CENTRE SUR UN SECOND BLOC
     s259 = _source(racine, "le_pas_de_centre_a_centre_la_ou_le_segment_tient_sa_feuille.json")
     if s259.exists():
