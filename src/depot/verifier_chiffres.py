@@ -3208,6 +3208,50 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 278 : LES RATÉS DU DEUXIÈME SAUT SOUS UN JUGE INTACT
+    s278 = _source(racine, "sous_un_juge_intact_le_deuxieme_saut_rate_t_il_encore_de_lui_meme.json")
+    if s278.exists():
+        d = json.loads(s278.read_text())
+        if d.get("decidable"):
+            noms = {"le_juge_de_248": "le juge de `248`", "le_juge_intact": "le juge intact de `253`",
+                    "le_juge_sans_falaise": "le juge sans falaise de `253`"}
+            chaines = {"le_temoin": "le témoin", "partie_de_la_spire_corrigee": "partie de la spire corrigée"}
+            for kj, nj in noms.items():
+                for kc, nc in chaines.items():
+                    r_ = d[kj][kc]
+                    cel = [nj, str(d["les_points_notes"][kj]), nc, str(r_["les_rates_du_deuxieme_saut"]),
+                           str(r_["les_herites"]), str(r_["les_propres"])]
+                    if kj == "le_juge_intact":
+                        cel[0], cel[1] = f"**{cel[0]}**", f"**{cel[1]}**"
+                        if kc == "partie_de_la_spire_corrigee":
+                            cel[2:] = [f"**{c}**" for c in cel[2:]]
+                    out.append((f"la ligne {kj} {kc} de 278", ["| " + " | ".join(cel) + " |"], s278.name))
+            o_ = d["le_juge_intact"]["partie_de_la_spire_corrigee"]
+            t_ = d["le_juge_intact"]["le_temoin"]
+            e_ = d["les_propres_de_277_que_le_juge_intact_ecarte"]
+            out.append(("le fait de 278",
+                        [f"rate au deuxième saut {o_['les_propres']} points dont le premier",
+                         f"saut était juste et {o_['les_herites']} dont il avait raté. Ce juge écarte "
+                         f"{e_['partie_de_la_spire_corrigee']['ecartes']} des {e_['partie_de_la_spire_corrigee']['les_propres']}"
+                         f" ratés propres de `277`",
+                         f"{o_['les_propres']} ratés propres pour {o_['les_herites']} hérités, mais ce juge écarte "
+                         f"{e_['partie_de_la_spire_corrigee']['ecartes']} des {e_['partie_de_la_spire_corrigee']['les_propres']}"
+                         f" ratés propres de `277`"], s278.name))
+            out.append(("le témoin écarté de 278",
+                        [f"Le juge intact écarte aussi {e_['le_temoin']['ecartes']} des {e_['le_temoin']['les_propres']} "
+                         f"ratés propres du témoin"], s278.name))
+            pc_, pt_ = o_["parmi_les_propres"], t_["parmi_les_propres"]
+            out.append(("ce que la spire corrigée ajoute en 278",
+                        [f"Sous le juge intact, la spire corrigée retire {t_['les_herites'] - o_['les_herites']} ratés "
+                         f"hérités et ajoute {o_['les_propres'] - t_['les_propres']} ratés propres",
+                         f"retombent sur la première couche, contre {pt_['retombes_sur_la_premiere_couche']} pour le témoin, "
+                         f"et {pc_['dun_saut_qui_navance_pas']} viennent d'un saut qui n'avance pas, contre "
+                         f"{pt_['dun_saut_qui_navance_pas']}", f"Parmi ses ratés propres, "
+                                                               f"{pc_['retombes_sur_la_premiere_couche']}"], s278.name))
+            if all(x["reproduit"] for x in d["le_rangement_de_277"].values()):
+                out.append(("la reproduction de 278", ["elles redonnent le rangement de `277` compte pour"], s278.name))
+            out.append(("le verdict de 278", [f"**{d['le_verdict']['lissue'].upper()}.**"], s278.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 277 : LES RATÉS DU DEUXIÈME SAUT, HÉRITÉS OU PROPRES
     s277 = _source(racine, "les_rates_du_deuxieme_saut_viennent_ils_du_premier.json")
     if s277.exists():

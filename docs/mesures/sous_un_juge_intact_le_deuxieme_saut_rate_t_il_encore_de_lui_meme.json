@@ -1,0 +1,119 @@
+{
+ "le_juge_de_248": {
+  "le_temoin": {
+   "les_points_notes_aux_deux_sauts": 16635,
+   "les_points_notes_au_deuxieme_saut_seulement": 0,
+   "les_rates_du_deuxieme_saut": 1872,
+   "les_herites": 682,
+   "les_propres": 1190,
+   "parmi_les_propres": {
+    "trop_pres": 989,
+    "trop_loin": 201,
+    "retombes_sur_la_premiere_couche": 66,
+    "dun_saut_qui_navance_pas": 21
+   }
+  },
+  "partie_de_la_spire_corrigee": {
+   "les_points_notes_aux_deux_sauts": 16635,
+   "les_points_notes_au_deuxieme_saut_seulement": 0,
+   "les_rates_du_deuxieme_saut": 1847,
+   "les_herites": 627,
+   "les_propres": 1220,
+   "parmi_les_propres": {
+    "trop_pres": 1016,
+    "trop_loin": 204,
+    "retombes_sur_la_premiere_couche": 95,
+    "dun_saut_qui_navance_pas": 35
+   }
+  }
+ },
+ "le_juge_intact": {
+  "le_temoin": {
+   "les_points_notes_aux_deux_sauts": 7863,
+   "les_points_notes_au_deuxieme_saut_seulement": 1015,
+   "les_rates_du_deuxieme_saut": 342,
+   "les_herites": 110,
+   "les_propres": 232,
+   "parmi_les_propres": {
+    "trop_pres": 179,
+    "trop_loin": 53,
+    "retombes_sur_la_premiere_couche": 15,
+    "dun_saut_qui_navance_pas": 6
+   }
+  },
+  "partie_de_la_spire_corrigee": {
+   "les_points_notes_aux_deux_sauts": 7863,
+   "les_points_notes_au_deuxieme_saut_seulement": 1015,
+   "les_rates_du_deuxieme_saut": 338,
+   "les_herites": 86,
+   "les_propres": 252,
+   "parmi_les_propres": {
+    "trop_pres": 200,
+    "trop_loin": 52,
+    "retombes_sur_la_premiere_couche": 36,
+    "dun_saut_qui_navance_pas": 16
+   }
+  }
+ },
+ "le_juge_sans_falaise": {
+  "le_temoin": {
+   "les_points_notes_aux_deux_sauts": 8063,
+   "les_points_notes_au_deuxieme_saut_seulement": 1086,
+   "les_rates_du_deuxieme_saut": 412,
+   "les_herites": 148,
+   "les_propres": 264,
+   "parmi_les_propres": {
+    "trop_pres": 187,
+    "trop_loin": 77,
+    "retombes_sur_la_premiere_couche": 15,
+    "dun_saut_qui_navance_pas": 6
+   }
+  },
+  "partie_de_la_spire_corrigee": {
+   "les_points_notes_aux_deux_sauts": 8063,
+   "les_points_notes_au_deuxieme_saut_seulement": 1086,
+   "les_rates_du_deuxieme_saut": 408,
+   "les_herites": 124,
+   "les_propres": 284,
+   "parmi_les_propres": {
+    "trop_pres": 208,
+    "trop_loin": 76,
+    "retombes_sur_la_premiere_couche": 36,
+    "dun_saut_qui_navance_pas": 16
+   }
+  }
+ },
+ "le_rangement_de_277": {
+  "le_temoin": {
+   "reproduit": true
+  },
+  "partie_de_la_spire_corrigee": {
+   "reproduit": true
+  }
+ },
+ "les_propres_de_277_que_le_juge_intact_ecarte": {
+  "le_temoin": {
+   "les_propres": 1190,
+   "ecartes": 958,
+   "gardes": 232
+  },
+  "partie_de_la_spire_corrigee": {
+   "les_propres": 1220,
+   "ecartes": 968,
+   "gardes": 252
+  }
+ },
+ "les_points_notes": {
+  "le_juge_de_248": 16635,
+  "le_juge_intact": 7863,
+  "le_juge_sans_falaise": 8063
+ },
+ "la_lecture": {
+  "combien_de_pannes": 0
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "sous un juge intact, le deuxième saut rate encore surtout de lui-même"
+ },
+ "les_secondes": 78.0
+}

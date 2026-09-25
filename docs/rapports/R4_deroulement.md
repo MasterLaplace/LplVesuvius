@@ -4164,6 +4164,13 @@ plus juste. `R4-P95` reste ouverte : le deuxième saut n'est pas corrigé.
 dont il avait raté : le deuxième saut rate surtout de lui-même** — `R4-F458`. Le témoin en rate 1190 et 682. Les ratés propres
 tombent surtout trop près de la deuxième couche. Chaque saut demande sa correction. `R4-P95` reste ouverte.
 
+**`278` · 2026-09-25 · les ratés du deuxième saut sous un juge intact** — `R4-P95`
+
+⭐⭐⭐⭐ **Sous le juge intact de `253`, la chaîne partie de la spire corrigée rate au deuxième saut 252 points dont le premier
+saut était juste et 86 dont il avait raté. Ce juge écarte 968 des 1220 ratés propres de `277`** — `R4-F459`. Le deuxième saut
+rate encore surtout de lui-même, et la spire corrigée y ajoute des sauts qui retombent sur la première couche. `R4-P95` reste
+ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
