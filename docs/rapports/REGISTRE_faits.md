@@ -4,7 +4,7 @@
 
 # Les faits, et ce qu'ils valent aujourd'hui
 
-**552 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **512** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
+**553 faits**, un par ligne, avec la valeur qui les porte, le statut qu'ils ont aujourd'hui, la source qui les prouve et le producteur qui les recalcule. Répartition : **513** établi, **23** borné, **14** réfuté, **3** rétracté, **0** ouvert.
 
 ## R1 — 20 faits
 
@@ -81,7 +81,7 @@
 | `R3-F19` | **la chaîne radiale converge six tours et casse au septième** ; ce qui décide est la portée, pas le pas | officiel + 6 spires `gen_neighbor` : 4/7 convergent, 7ᵉ +1,475 ; pas 0,5 → 6/7 ; optimum en U, bassin 0,25–0,5 ; portée = `neighbor_exit_count` × pas ; repousse libre : casse au 3ᵉ tour | établi | `43` §1–6 · `spire_suivante.sh`, `table_chaine.py` |
 | `R3-F20` | **la chaîne avance d'une nappe à la fois, et s'érode** | 113 µm entre nappes (100–138) ; érosion **15,6 %/tour** sur l'aire utile (58 → 23 % valides) ; ~10 % d'un tour par nappe → une colonne, pas une bande ; rayon refusé (résidu 0,5 mm pour 0,113 d'écart) | établi ; « 4,0 % » rétracté | `44` §1–7 · `geometrie_chaine.py` |
 
-## R4 — 449 faits
+## R4 — 450 faits
 
 | id | fait | valeur | statut | source · producteur |
 |---|---|---|---|---|
@@ -534,6 +534,7 @@
 | `R4-F447` | **la marche porte un niveau à un demi-feuillet près sur un bloc, pas au-delà : la portée est de 16 chunks** | en chaque chunk que le juge tient pour juste, `r = D − 0,9636 · E` ; entre deux chunks d'une même marche, σ la racine de la moyenne de `(r₁ − r₂)²` : sur les marches d'un seul tenant de `265`, **18,2497** voxels entre chunks voisins, **34,7587** entre huit et seize chunks, **43,8298** entre seize et trente-deux, **51,0054** au-delà ; pente en log **0,3009**, là où une marche au hasard aurait un demi | établi ; ⭐⭐⭐⭐ Au-delà d'un bloc, la marche seule ne porte pas un niveau. ⚠⚠ La frontière exacte de l'issue déclarée ; l'erreur du juge entre dans σ ; une médiane sur beaucoup de chunks n'est pas mesurée ici. Deux voisinages, dix blocs. | `266` · `nappe/jusquou_la_marche_porte_t_elle_un_niveau.py` |
 | `R4-F448` | **porter un choix entier de spire de proche en proche ne tient pas : une seule frontière fausse met toute une région à une spire** | l'escalier des marches, de proche en proche, l'arête la plus douce d'abord, marches de moins de quatre chunks reprises, référence l'entier le plus fréquent, correction d'un pas plein : sur le voisinage de `257`, le bloc central de **0,474** à **0,6883** ; sur celui de `259`, **516** chunks mis à une spire, le bloc central de **0,6225** à **0,4172**, **184** justes des voisins rendus ratés ; sur les blocs réguliers marchés seuls, de **0,9207** à **0,8721** | établi ; ⭐⭐⭐⭐ Là où chaque frontière est juste, l'escalier corrige mieux que tout ce qui a été essayé ; une seule frontière fausse défait plus que tout. ⚠⚠ Quelle arête porte le faux choix n'est pas établi. Deux voisinages, dix blocs, une passe. | `267` · `nappe/lescalier_porte_t_il_le_choix_de_la_spire.py` |
 | `R4-F449` | **juger une frontière de l'escalier à la médiane de ses sauts défait la fausse frontière de 267, et avec elle toutes les marches du voisinage de 259** | l'entier que dit une frontière, l'arrondi de la médiane de ses sauts sur 69,458 voxels ; s'il n'est pas l'écart d'entiers, la plus petite marche ramenée : sur le voisinage de `259`, la frontière de `267` a **66** arêtes et un saut médian de **−20,39** voxels, **528** chunks ramenés, les sept autres frontières sautent de 23,11 à 33,755 voxels, le bloc reste à **0,6225** et ses voisins à 0,8936 ; sur celui de `257`, le bloc central de **0,474** à **0,6948**, arrêté par la garde ; blocs réguliers marchés seuls, de **0,9207** à **0,8838**, les 48 justes rendus ratés sur `(160, 160)` | établi ; ⭐⭐⭐⭐ Ce que le juge tient pour raté sur le bloc de `259` ne fait pas, dans la marche, de frontière qui saute d'une glissade. ⚠⚠ Le jugement ne s'arrête pas de lui-même sur `257` ; sur `(160, 160)`, marché seul, la marche saute d'une glissade là où le juge ne voit rien. Deux voisinages, dix blocs, une passe. | `268` · `nappe/une_frontiere_se_juge_elle_a_ses_sauts.py` |
+| `R4-F450` | **d'un chunk juste à son voisin raté, le juge ne voit sauter que 29,7492 voxels en médiane, et la marche en lit la moitié** | sur les marches d'un seul tenant, **275** paires de chunks qui se touchent, l'un juste et l'autre raté : la pente de ΔD contre ΔE, rapportée à celle de la rampe, vaut **0,5135** ; **0,7101** sur le voisinage de `257`, **0,3838** sur celui de `259` ; **0,1855** des paires ont un ΔD d'un demi-glissement ou plus | établi ; ⭐⭐⭐⭐ Les ratés se font en pente sur plusieurs chunks, et la marche ne lit qu'une partie de cette pente. ⚠⚠ L'erreur du juge tire la pente vers zéro : le témoin des paires justes ne rend que 0,6413 ; si le juge a raison sur ces ratés n'est pas établi. | `269` · `nappe/la_marche_lit_elle_ce_que_le_juge_voit_sauter.py` |
 
 ## R5 — 23 faits
 

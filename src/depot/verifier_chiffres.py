@@ -3208,6 +3208,29 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 269 : CE QUE LA MARCHE LIT DE CE QUE LE JUGE VOIT SAUTER
+    s269 = _source(racine, "la_marche_lit_elle_ce_que_le_juge_voit_sauter.json")
+    if s269.exists():
+        d = json.loads(s269.read_text())
+        if d.get("decidable"):
+            for titre, fam, gras in (("**d'un seul tenant**, les deux voisinages", d["dun_seul_tenant"], True),
+                                     ("le voisinage de `257`", d["les_voisinages"]["le_bloc_de_257"], False),
+                                     ("le voisinage de `259`", d["les_voisinages"]["le_bloc_de_259"], False),
+                                     ("bloc par bloc, les dix blocs", d["bloc_par_bloc"], False)):
+                f_, j_ = fam["franchit"], fam["justes"]
+                sj = _fr222(f_["le_saut_juge_median_voxels"])
+                pl = _fr222(f_["la_part_lue"])
+                if gras:
+                    sj, pl = f"**{sj}** voxels", f"**{pl}**"
+                else:
+                    sj = f"{sj}"
+                    pl = f"**{pl}**" if titre.endswith("`259`") else pl
+                ligne = f"| {titre} | {f_['les_paires']} | {sj} | {pl} | {_fr222(j_['la_part_lue'])} |"
+                out.append((f"la ligne {titre} de 269", [ligne], s269.name))
+            out.append(("la demi-glissade de 269",
+                        [f"**{_fr222(d['dun_seul_tenant']['franchit']['la_part_des_sauts_lus_a_une_demi_glissade'])}** "
+                         "seulement ont un `ΔD`"], s269.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 268 : LES FRONTIÈRES JUGÉES À LEURS SAUTS
     s268 = _source(racine, "une_frontiere_se_juge_elle_a_ses_sauts.json")
     if s268.exists():

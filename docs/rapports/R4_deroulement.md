@@ -4107,6 +4107,12 @@ voisinage de `259`** — `R4-F449` : **66** arêtes, un saut médian de **−20,
 n'est plus abîmé, ni corrigé ; celui de `257` passe de **0,474** à **0,6948**, sans que le jugement s'arrête de lui-même.
 `R4-P95` reste ouverte : les ratés du bloc de `259` ne sautent que d'un demi.
 
+**`269` · 2026-09-25 · ce que la marche lit de ce que le juge voit sauter** — `R4-P95`
+
+⭐⭐⭐⭐ **D'un chunk juste à son voisin raté, le juge ne voit sauter que 29,7492 voxels en médiane, et la marche en lit la
+moitié** — `R4-F450` : **0,5135**, **0,7101** sur le voisinage de `257`, **0,3838** sur celui de `259`. Les ratés se font en
+pente, et la marche n'en lit qu'une partie. `R4-P95` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

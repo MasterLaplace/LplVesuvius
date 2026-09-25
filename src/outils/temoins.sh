@@ -1674,6 +1674,8 @@ run "l'escalier porte-t-il le choix de la spire" uv run python "$ROOT/src/nappe/
 run "figure l'escalier porte-t-il le choix de la spire" uv run python "$ROOT/src/figures/figure_lescalier_porte_t_il_le_choix_de_la_spire.py" --verifier
 run "une frontiere se juge-t-elle a ses sauts" uv run python "$ROOT/src/nappe/une_frontiere_se_juge_elle_a_ses_sauts.py" --verifier
 run "figure une frontiere se juge-t-elle a ses sauts" uv run python "$ROOT/src/figures/figure_une_frontiere_se_juge_elle_a_ses_sauts.py" --verifier
+run "la marche lit-elle ce que le juge voit sauter" uv run python "$ROOT/src/nappe/la_marche_lit_elle_ce_que_le_juge_voit_sauter.py" --verifier
+run "figure la marche lit-elle ce que le juge voit sauter" uv run python "$ROOT/src/figures/figure_la_marche_lit_elle_ce_que_le_juge_voit_sauter.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
