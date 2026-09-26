@@ -4258,6 +4258,13 @@ meilleur choix éprouvé.
 le hasard seul ferait un écart au moins aussi grand avec une probabilité de 0,549** — `R4-F471`. Test du signe, seuil 0,05 fixé
 avant le calcul. `R4-P95` reste ouverte : sur la bande, rien de ce qui a été éprouvé ne se distingue du hasard.
 
+**`291` · 2026-09-26 · la procédure du segment avec ses seuls voisins est et ouest** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur le segment, avec ses seuls voisins est et ouest, la procédure de `265` fait encore monter 43 blocs pour 16 qui
+descendent, au-delà du hasard. Mais elle corrige 1047 points au lieu de 495, et son gain net sur les points tombe de 122 à 5** —
+`R4-F472`. La décision d'un bloc prend une règle facultative qui choisit ses voisins. `R4-P95` reste ouverte : une tranche de la
+bande assez haute pour donner quatre voisins à ses blocs n'a pas été éprouvée.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

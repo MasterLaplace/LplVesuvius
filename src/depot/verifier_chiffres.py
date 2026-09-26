@@ -3208,6 +3208,47 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 291 : LA PROCÉDURE DU SEGMENT AVEC SES SEULS VOISINS EST ET OUEST
+    s291 = _source(racine, "la_procedure_tient_elle_sur_le_segment_avec_ses_seuls_voisins_est_et_ouest.json")
+    if s291.exists():
+        d = json.loads(s291.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            T, E = d["avec_tous_les_voisins"], d["avec_les_seuls_voisins_est_et_ouest"]
+            rt, re_ = T["les_reunis"], E["les_reunis"]
+            tb, eb, tp, ep = T["le_test"]["sur_les_blocs"], E["le_test"]["sur_les_blocs"], T["le_test"]["sur_les_points"], \
+                E["le_test"]["sur_les_points"]
+            out.append(("le titre de 291",
+                        [f"Bloc par bloc, {'oui' if eb['sous_le_seuil'] else 'non'} : {eb['les_blocs_qui_montent']} blocs "
+                         f"montent et {eb['les_blocs_qui_descendent']} descendent. Mais sur les points, son gain net tombe "
+                         f"de {sg(tp['le_gain_net'])} à {sg(ep['le_gain_net'])}"], s291.name))
+            for nom, r_, p_, b_, gras in (("tous", rt, tp, tb, False), ("l'est et l'ouest", re_, ep, eb, True)):
+                cel = [nom, str(r_["les_points_corriges"]), str(p_["les_rates_rendus_justes"]),
+                       str(p_["les_justes_rendus_rates"]), sg(p_["le_gain_net"]), _fr222(p_["la_probabilite"]),
+                       f"{b_['les_blocs_qui_montent']}, {b_['les_blocs_qui_descendent']}", _fr222(b_["la_probabilite"])]
+                out.append((f"la ligne {nom} de 291",
+                            ["| " + " | ".join(f"**{c}**" if gras else c for c in cel) + " |"], s291.name))
+            out.append(("les points de 291",
+                        [f"la décision corrige deux fois plus de points, {re_['les_points_corriges']} contre "
+                         f"{rt['les_points_corriges']}",
+                         f"justes qu'elle répare de ratés. Sur les blocs, la part des points sur la bonne spire passe de "
+                         f"{sg(re_['avant'])} à {sg(re_['apres'])}, contre",
+                         f"{sg(rt['apres'])} avec"], s291.name))
+            out.append(("le fait de 291",
+                        [f"descendent, au-delà du hasard. Mais elle corrige {re_['les_points_corriges']} points au lieu de "
+                         f"{rt['les_points_corriges']}, et son gain net sur les points tombe de {sg(tp['le_gain_net'])} à "
+                         f"{sg(ep['le_gain_net'])}",
+                         f"fait encore monter {eb['les_blocs_qui_montent']} blocs pour {eb['les_blocs_qui_descendent']} qui"],
+                        s291.name))
+            out.append(("le contrôle de 291",
+                        [f"bloc par bloc, sur les {d['les_blocs_candidats']} blocs",
+                         f"chacun des {d['les_blocs_candidats']} blocs en garde au"], s291.name))
+            out.append(("la durée de 291", [f"La mesure a pris {sg(d['les_secondes'])} s"], s291.name))
+            out.append(("le verdict de 291", [f"**{d['le_verdict']['lissue'].upper()}.**"], s291.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 290 : LES GAINS PUBLIÉS CONTRE LE HASARD
     s290 = _source(racine, "les_gains_publies_se_distinguent_ils_du_hasard.json")
     if s290.exists():

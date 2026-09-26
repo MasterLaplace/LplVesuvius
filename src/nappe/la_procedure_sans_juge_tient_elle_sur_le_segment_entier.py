@@ -322,9 +322,10 @@ def la_decision_du_bloc(tau0: np.ndarray, err: np.ndarray, prod: np.ndarray, red
 
 
 def un_bloc(by: int, bx: int, candidats: set, tables: dict, rendus: dict, tau0, err, glissade,
-            surfaces: tuple = LES_SURFACES) -> tuple[dict, tuple]:
-    """La décision de `265` sur un bloc ; `surfaces` est (la référence, la surface produite), dans cet ordre."""
-    blocs = [(by, bx)] + les_voisins(by, bx, candidats)
+            surfaces: tuple = LES_SURFACES, les_voisins_de=les_voisins) -> tuple[dict, tuple]:
+    """La décision de `265` sur un bloc ; `surfaces` est (la référence, la surface produite), dans cet ordre, et
+    `les_voisins_de` choisit les blocs voisins que la marche et l'ancre lisent."""
+    blocs = [(by, bx)] + les_voisins_de(by, bx, candidats)
     for s in surfaces:
         for vy, vx in blocs:
             if not rendus.get((s, vy, vx)) or (s, vy, vx) not in tables:

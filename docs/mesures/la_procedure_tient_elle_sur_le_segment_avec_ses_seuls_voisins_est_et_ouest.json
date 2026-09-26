@@ -1,0 +1,100 @@
+{
+ "les_blocs_candidats": 340,
+ "les_blocs_qui_different_de_275": [],
+ "avec_tous_les_voisins": {
+  "les_reunis": {
+   "les_blocs": 340,
+   "avant": 0.9339,
+   "apres": 0.9374,
+   "les_points_notes": 34917,
+   "les_points_corriges": 495,
+   "les_rates_rendus_justes": 163,
+   "les_justes_rendus_rates": 41,
+   "le_gain_net": 122,
+   "les_blocs_qui_montent": 42,
+   "les_blocs_qui_descendent": 11,
+   "les_blocs_immobiles": 287
+  },
+  "le_test": {
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 42,
+    "les_blocs_qui_descendent": 11,
+    "la_probabilite": 2.25e-05,
+    "sous_le_seuil": true
+   },
+   "sur_les_points": {
+    "les_rates_rendus_justes": 163,
+    "les_justes_rendus_rates": 41,
+    "le_gain_net": 122,
+    "la_probabilite": 2.04e-18,
+    "sous_le_seuil": true
+   }
+  }
+ },
+ "avec_les_seuls_voisins_est_et_ouest": {
+  "les_reunis": {
+   "les_blocs": 340,
+   "avant": 0.9339,
+   "apres": 0.934,
+   "les_points_notes": 34917,
+   "les_points_corriges": 1047,
+   "les_rates_rendus_justes": 187,
+   "les_justes_rendus_rates": 182,
+   "le_gain_net": 5,
+   "les_blocs_qui_montent": 43,
+   "les_blocs_qui_descendent": 16,
+   "les_blocs_immobiles": 281
+  },
+  "le_test": {
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 43,
+    "les_blocs_qui_descendent": 16,
+    "la_probabilite": 0.000584,
+    "sous_le_seuil": true
+   },
+   "sur_les_points": {
+    "les_rates_rendus_justes": 187,
+    "les_justes_rendus_rates": 182,
+    "le_gain_net": 5,
+    "la_probabilite": 0.835,
+    "sous_le_seuil": false
+   }
+  },
+  "les_non_decides": 0
+ },
+ "les_memes_blocs_avec_tous_les_voisins": {
+  "les_reunis": {
+   "les_blocs": 340,
+   "avant": 0.9339,
+   "apres": 0.9374,
+   "les_points_notes": 34917,
+   "les_points_corriges": 495,
+   "les_rates_rendus_justes": 163,
+   "les_justes_rendus_rates": 41,
+   "le_gain_net": 122,
+   "les_blocs_qui_montent": 42,
+   "les_blocs_qui_descendent": 11,
+   "les_blocs_immobiles": 287
+  },
+  "le_test": {
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 42,
+    "les_blocs_qui_descendent": 11,
+    "la_probabilite": 2.25e-05,
+    "sous_le_seuil": true
+   },
+   "sur_les_points": {
+    "les_rates_rendus_justes": 163,
+    "les_justes_rendus_rates": 41,
+    "le_gain_net": 122,
+    "la_probabilite": 2.04e-18,
+    "sous_le_seuil": true
+   }
+  }
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "la procédure tient sur le segment avec ses seuls voisins est et ouest"
+ },
+ "les_secondes": 20.9
+}
