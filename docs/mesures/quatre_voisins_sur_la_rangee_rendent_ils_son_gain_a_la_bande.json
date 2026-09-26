@@ -1,0 +1,87 @@
+{
+ "le_segment": {
+  "les_blocs_qui_different_de_la_publiee": [],
+  "avec_quatre_voisins_sur_la_rangee": {
+   "les_reunis": {
+    "les_blocs": 340,
+    "avant": 0.9339,
+    "apres": 0.9251,
+    "les_points_notes": 34917,
+    "les_points_corriges": 1665,
+    "les_rates_rendus_justes": 135,
+    "les_justes_rendus_rates": 442,
+    "le_gain_net": -307,
+    "les_blocs_qui_montent": 37,
+    "les_blocs_qui_descendent": 23,
+    "les_blocs_immobiles": 280
+   },
+   "le_test": {
+    "sur_les_blocs": {
+     "les_blocs_qui_montent": 37,
+     "les_blocs_qui_descendent": 23,
+     "la_probabilite": 0.0925,
+     "sous_le_seuil": false
+    },
+    "sur_les_points": {
+     "les_rates_rendus_justes": 135,
+     "les_justes_rendus_rates": 442,
+     "le_gain_net": -307,
+     "la_probabilite": 4.83e-39,
+     "sous_le_seuil": true
+    }
+   },
+   "les_non_decides": 0,
+   "les_voisins": {
+    "1": 0,
+    "2": 46,
+    "3": 46,
+    "4": 248
+   }
+  }
+ },
+ "la_bande": {
+  "les_blocs_qui_different_de_la_publiee": [],
+  "avec_quatre_voisins_sur_la_rangee": {
+   "les_reunis": {
+    "les_blocs": 84,
+    "avant": 0.9527,
+    "apres": 0.9519,
+    "les_points_notes": 12398,
+    "les_points_corriges": 62,
+    "les_rates_rendus_justes": 16,
+    "les_justes_rendus_rates": 26,
+    "le_gain_net": -10,
+    "les_blocs_qui_montent": 7,
+    "les_blocs_qui_descendent": 10,
+    "les_blocs_immobiles": 67
+   },
+   "le_test": {
+    "sur_les_blocs": {
+     "les_blocs_qui_montent": 7,
+     "les_blocs_qui_descendent": 10,
+     "la_probabilite": 0.629,
+     "sous_le_seuil": false
+    },
+    "sur_les_points": {
+     "les_rates_rendus_justes": 16,
+     "les_justes_rendus_rates": 26,
+     "le_gain_net": -10,
+     "la_probabilite": 0.164,
+     "sous_le_seuil": false
+    }
+   },
+   "les_non_decides": 0,
+   "les_voisins": {
+    "1": 0,
+    "2": 2,
+    "3": 2,
+    "4": 80
+   }
+  }
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "quatre voisins sur la rangée ne rendent pas à la bande un gain qui se distingue du hasard"
+ },
+ "les_secondes": 30.5
+}

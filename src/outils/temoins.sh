@@ -1725,6 +1725,8 @@ run "l'ancre est-ouest suffit-elle a perdre le gain du segment" uv run python "$
 run "figure l'ancre est-ouest suffit-elle a perdre le gain du segment" uv run python "$ROOT/src/figures/figure_lancre_est_ouest_suffit_elle_a_perdre_le_gain_du_segment.py" --verifier
 run "l'ancre nord-sud garde-t-elle le gain du segment" uv run python "$ROOT/src/nappe/lancre_nord_sud_garde_t_elle_le_gain_du_segment.py" --verifier
 run "figure l'ancre nord-sud garde-t-elle le gain du segment" uv run python "$ROOT/src/figures/figure_lancre_nord_sud_garde_t_elle_le_gain_du_segment.py" --verifier
+run "quatre voisins sur la rangee rendent-ils son gain a la bande" uv run python "$ROOT/src/nappe/quatre_voisins_sur_la_rangee_rendent_ils_son_gain_a_la_bande.py" --verifier
+run "figure quatre voisins sur la rangee rendent-ils son gain a la bande" uv run python "$ROOT/src/figures/figure_quatre_voisins_sur_la_rangee_rendent_ils_son_gain_a_la_bande.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

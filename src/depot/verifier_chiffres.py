@@ -3208,6 +3208,62 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 294 : QUATRE VOISINS SUR LA RANGÉE
+    s294 = _source(racine, "quatre_voisins_sur_la_rangee_rendent_ils_son_gain_a_la_bande.json")
+    # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.
+    s290b = _source(racine, "les_gains_publies_se_distinguent_ils_du_hasard.json")
+    s275e = _source(racine, "la_procedure_sans_juge_tient_elle_sur_le_segment_entier.json")
+    s281e = _source(racine, "la_procedure_sans_juge_tient_elle_sur_la_bande.json")
+    if s294.exists() and s290b.exists() and s275e.exists() and s281e.exists():
+        d = json.loads(s294.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            t290 = {t["la_tranche"]: t for t in json.loads(s290b.read_text())["les_tranches"]}
+            S_, B_ = (d[k]["avec_quatre_voisins_sur_la_rangee"] for k in ("le_segment", "la_bande"))
+            rs, rb = S_["les_reunis"], B_["les_reunis"]
+            g275 = t290["275"]["sur_les_points"]["le_gain_net"]
+            out.append(("le titre de 294",
+                        [f"{'Oui' if d['le_verdict']['lissue'].startswith('quatre voisins sur la rangée rendent') else 'Non'} : "
+                         f"{rb['les_rates_rendus_justes']} ratés justes pour {rb['les_justes_rendus_rates']} justes ratés",
+                         f"la même façon fait tomber le gain de {sg(g275)} à {sg(rs['le_gain_net'])}"], s294.name))
+            out.append(("les voisins de 294",
+                        [f"sur la bande, {B_['les_voisins']['4']} des {rb['les_blocs']} ont leurs quatre voisins sur la "
+                         f"rangée, et sur le segment {S_['les_voisins']['4']} des {rs['les_blocs']}"], s294.name))
+            lignes = []
+            for surf, tranche, x_ in (("le segment", "275", None), ("le segment", None, S_), ("la bande", "281", None),
+                                      ("la bande", None, B_)):
+                if tranche:
+                    t_ = t290[tranche]
+                    p_, b_ = t_["sur_les_points"], t_["sur_les_blocs"]
+                    corr = json.loads((s275e if tranche == "275" else s281e).read_text())["les_reunis"]["les_points_corriges"]
+                    nom, gras = f"ceux de `{tranche}`", False
+                else:
+                    p_, b_ = x_["le_test"]["sur_les_points"], x_["le_test"]["sur_les_blocs"]
+                    corr, nom, gras = x_["les_reunis"]["les_points_corriges"], "quatre sur la rangée", surf == "la bande"
+                cel = [surf, nom, str(corr), str(p_["les_rates_rendus_justes"]), str(p_["les_justes_rendus_rates"]),
+                       sg(p_["le_gain_net"]), _fr222(p_["la_probabilite"]),
+                       f"{b_['les_blocs_qui_montent']}, {b_['les_blocs_qui_descendent']}", _fr222(b_["la_probabilite"])]
+                lignes.append("| " + " | ".join(f"**{c}**" if gras else c for c in cel) + " |")
+            for i, lg in enumerate(lignes):
+                out.append((f"la ligne {i} de 294", [lg], s294.name))
+            out.append(("le fait de 294",
+                        [f"la procédure rend {rb['les_rates_rendus_justes']} ratés justes pour {rb['les_justes_rendus_rates']} "
+                         f"justes ratés, comme avec deux",
+                         f"Sur le segment, la même façon corrige {rs['les_points_corriges']} points et rend "
+                         f"{rs['les_rates_rendus_justes']} ratés justes pour {rs['les_justes_rendus_rates']} justes ratés",
+                         f"un gain net de {sg(rs['le_gain_net'])}, contre"],
+                        s294.name))
+            out.append(("les parts de 294",
+                        [f"saut moins juste, de {sg(rs['avant'])} à {sg(rs['apres'])} sur les blocs"], s294.name))
+            c275 = json.loads(s275e.read_text())["les_reunis"]["les_points_corriges"]
+            out.append(("la bande de 294", [f"elle corrige {rb['les_points_corriges']} points, quand le segment passe de "
+                                            f"{c275} à {rs['les_points_corriges']}"], s294.name))
+            out.append(("la durée de 294", [f"La mesure a pris {sg(d['les_secondes'])} s"], s294.name))
+            out.append(("le verdict de 294", [f"**{d['le_verdict']['lissue'].upper()}.**"], s294.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 293 : L'ANCRE NORD-SUD SOUS LA MARCHE DU SEGMENT
     s293 = _source(racine, "lancre_nord_sud_garde_t_elle_le_gain_du_segment.json")
     if s293.exists():

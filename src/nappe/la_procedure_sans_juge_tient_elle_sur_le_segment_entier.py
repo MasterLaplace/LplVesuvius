@@ -302,15 +302,17 @@ def tout_rendre(candidats: set, ouvriers: int, surfaces: tuple = LES_SURFACES) -
 # ── LA DÉCISION, BLOC PAR BLOC ─────────────────────────────────────────────────────────────────────────────────────
 
 def la_decision_du_bloc(tau0: np.ndarray, err: np.ndarray, prod: np.ndarray, red: np.ndarray, by: int, bx: int,
-                        glissade: float, lancre=lancre_du_voisinage) -> tuple[dict, np.ndarray, np.ndarray] | None:
+                        glissade: float, lancre=lancre_du_voisinage,
+                        marge: int = LE_BLOC) -> tuple[dict, np.ndarray, np.ndarray] | None:
     """La décision de `265` sur un voisinage : son bilan, les points corrigés et leur nouvelle valeur. None si aucun voisin
-    ne se relie au bloc. `lancre` prend l'ancre sur la différence des marches du voisinage."""
+    ne se relie au bloc. `lancre` prend l'ancre sur la différence des marches du voisinage, dont le bloc est à `marge`
+    chunks du bord."""
     c = LE_BLOC
     diff = prod - red
-    ancre = lancre(diff, by - c, bx - c, by, bx)
+    ancre = lancre(diff, by - marge, bx - marge, by, bx)
     if ancre is None:
         return None
-    d_b = diff[c:2 * c, c:2 * c] - ancre
+    d_b = diff[marge:marge + c, marge:marge + c] - ancre
     ecart, dedans = la_carte_aux_points(d_b, by, bx, tau0.shape)
     ecart = np.where(dedans, ecart, np.nan)
     dec = la_decision(ecart, le_melange(d_b, glissade))
@@ -323,9 +325,10 @@ def la_decision_du_bloc(tau0: np.ndarray, err: np.ndarray, prod: np.ndarray, red
 
 def un_bloc(by: int, bx: int, candidats: set, tables: dict, rendus: dict, tau0, err, glissade,
             surfaces: tuple = LES_SURFACES, les_voisins_de=les_voisins,
-            lancre=lancre_du_voisinage) -> tuple[dict, tuple]:
+            lancre=lancre_du_voisinage, portee: int = 1) -> tuple[dict, tuple]:
     """La décision de `265` sur un bloc ; `surfaces` est (la référence, la surface produite), dans cet ordre,
-    `les_voisins_de` choisit les blocs voisins que la marche et l'ancre lisent, et `lancre` prend l'ancre."""
+    `les_voisins_de` choisit les blocs voisins que la marche et l'ancre lisent, `lancre` prend l'ancre, et la marche
+    s'étend sur `portee` blocs de chaque côté du bloc."""
     blocs = [(by, bx)] + les_voisins_de(by, bx, candidats)
     for s in surfaces:
         for vy, vx in blocs:
@@ -334,9 +337,10 @@ def un_bloc(by: int, bx: int, candidats: set, tables: dict, rendus: dict, tau0, 
                         "la_raison": f"{s} ne se rend pas sur ({vy}, {vx})"}, None
     if len(blocs) == 1:
         return {"la_rangee": by, "la_colonne": bx, "decidable": False, "la_raison": "aucun voisin candidat"}, None
-    prof = {s: la_marche_assemblee({b: tables[(s, *b)] for b in blocs}, blocs, by - LE_BLOC, bx - LE_BLOC,
-                                   3 * LE_BLOC)["la_profondeur"] for s in surfaces}
-    lu = la_decision_du_bloc(tau0, err, prof[surfaces[1]], prof[surfaces[0]], by, bx, glissade, lancre)
+    marge = portee * LE_BLOC
+    prof = {s: la_marche_assemblee({b: tables[(s, *b)] for b in blocs}, blocs, by - marge, bx - marge,
+                                   2 * marge + LE_BLOC)["la_profondeur"] for s in surfaces}
+    lu = la_decision_du_bloc(tau0, err, prof[surfaces[1]], prof[surfaces[0]], by, bx, glissade, lancre, marge)
     if lu is None:
         return {"la_rangee": by, "la_colonne": bx, "decidable": False, "la_raison": "aucun voisin ne se relie au bloc"}, None
     bilan, corriges, tau1 = lu

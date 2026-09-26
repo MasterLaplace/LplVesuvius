@@ -4279,6 +4279,13 @@ du hasard, là où l'ancre est-ouest n'en garde que 23. Mais les deux demi-ancre
 au lieu de 495, et perdent chacune plus des deux tiers du gain** — `R4-F474`. `R4-P95` reste ouverte : la bande a besoin d'une
 ancre prise sur plus de chunks que ses deux voisins immédiats.
 
+**`294` · 2026-09-26 · quatre voisins sur la rangée** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur la bande, avec quatre voisins sur sa rangée, la procédure rend 16 ratés justes pour 26 justes ratés, comme avec deux.
+Sur le segment, la même façon corrige 1665 points et rend 135 ratés justes pour 442 justes ratés : un gain net de −307, contre
+122 avec les voisins de `275`** — `R4-F475`. La décision d'un bloc prend la portée de sa marche. `R4-P95` reste ouverte : il faut
+une marche qui s'étende dans les deux directions, et la tranche de la bande n'en a qu'une.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
