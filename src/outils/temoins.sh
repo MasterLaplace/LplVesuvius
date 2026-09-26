@@ -1709,6 +1709,8 @@ run "repartir du deuxieme saut corrige rend-il le troisieme saut de la bande plu
 run "figure repartir du deuxieme saut corrige rend-il le troisieme saut de la bande plus juste" uv run python "$ROOT/src/figures/figure_repartir_du_deuxieme_saut_corrige_rend_il_le_troisieme_saut_de_la_bande_plus_juste.py" --verifier
 run "recaler le deuxieme saut sur son rayon rend-il le troisieme saut plus juste" uv run python "$ROOT/src/nappe/recaler_le_deuxieme_saut_sur_son_rayon_rend_il_le_troisieme_saut_plus_juste.py" --verifier
 run "figure recaler le deuxieme saut sur son rayon rend-il le troisieme saut plus juste" uv run python "$ROOT/src/figures/figure_recaler_le_deuxieme_saut_sur_son_rayon_rend_il_le_troisieme_saut_plus_juste.py" --verifier
+run "les pertes du troisieme saut viennent-elles des points corriges" uv run python "$ROOT/src/nappe/les_pertes_du_troisieme_saut_viennent_elles_des_points_corriges.py" --verifier
+run "figure les pertes du troisieme saut viennent-elles des points corriges" uv run python "$ROOT/src/figures/figure_les_pertes_du_troisieme_saut_viennent_elles_des_points_corriges.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

@@ -4223,6 +4223,13 @@ repart rend au troisième saut 7 ratés justes pour 15 justes ratés : un gain n
 saut non corrigé est sur sa feuille, et le recalage ramène 33 points sur 69, contre 18 dans `284`. Le troisième saut perd quand
 même. `R4-P95` reste ouverte : ce n'est pas le rayon du recalage qui fait perdre le troisième saut.
 
+**`286` · 2026-09-26 · où tombent les pertes du troisième saut** — `R4-P95`
+
+⭐⭐⭐⭐ **Au troisième saut de la bande, 10 des 15 justes que la chaîne repartie du deuxième saut corrigé rend ratés sont des
+points que la correction n'a pas touchés, à une, deux ou trois mailles d'un point déplacé. Aux points déplacés eux-mêmes, elle
+rend 6 ratés justes pour 5 justes ratés** — `R4-F467`. Le troisième saut ne perd pas aux points corrigés, il perd autour d'eux.
+`R4-P95` reste ouverte : il faut faire repartir la chaîne sans déranger les voisins d'un point corrigé.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

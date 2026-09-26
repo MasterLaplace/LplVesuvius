@@ -3208,6 +3208,57 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 286 : OÙ TOMBENT LES PERTES DU TROISIÈME SAUT
+    s286 = _source(racine, "les_pertes_du_troisieme_saut_viennent_elles_des_points_corriges.json")
+    if s286.exists():
+        d = json.loads(s286.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            t3, t4 = d["le_troisieme_saut"], d["le_quatrieme_saut"]
+            c3, c4 = t3["les_classes"], t4["les_classes"]
+            ici = c3["le_point_lui_meme"]
+            ailleurs_jr = t3["les_justes_rendus_rates"] - ici["les_justes_rendus_rates"]
+            ailleurs_rj = t3["les_rates_rendus_justes"] - ici["les_rates_rendus_justes"]
+            out.append(("le titre de 286",
+                        [f"{'Oui' if 2 * ici['les_justes_rendus_rates'] > t3['les_justes_rendus_rates'] else 'Non'} : "
+                         f"{ailleurs_jr} des {t3['les_justes_rendus_rates']} sont des points qu'elle n'a pas touchés"],
+                        s286.name))
+            out.append(("les comptes de 286",
+                        [f"Le rangement refait les comptes de `285` : {t3['les_rates_rendus_justes']} pour "
+                         f"{t3['les_justes_rendus_rates']} au troisième saut, {t4['les_rates_rendus_justes']} pour "
+                         f"{t4['les_justes_rendus_rates']} au quatrième."], s286.name))
+            libs = (("le_point_lui_meme", "le point déplacé lui-même"), ("a_une_maille", "une maille"),
+                    ("a_deux_ou_trois_mailles", "deux ou trois mailles"), ("a_quatre_mailles_ou_plus", "quatre mailles ou plus"))
+            for nom_s, cl in (("troisième", c3), ("quatrième", c4)):
+                for cle, lib in libs:
+                    x_ = cl[cle]
+                    out.append((f"la ligne {cle} au {nom_s} saut de 286",
+                                [f"| {lib} | {x_['ou_les_deux_chaines_different']} | {x_['les_rates_rendus_justes']} | "
+                                 f"{x_['les_justes_rendus_rates']} |"], s286.name))
+            out.append(("ici et ailleurs, 286",
+                        [f"la reprise rend {ici['les_rates_rendus_justes']} ratés justes pour {ici['les_justes_rendus_rates']} "
+                         f"justes ratés. À côté d'eux, {ailleurs_rj} pour {ailleurs_jr}."], s286.name))
+            out.append(("le fait de 286",
+                        [f"**Au troisième saut de la bande, {ailleurs_jr} des {t3['les_justes_rendus_rates']} justes que la "
+                         f"chaîne repartie",
+                         f"rend {ici['les_rates_rendus_justes']} ratés justes pour {ici['les_justes_rendus_rates']} justes "
+                         f"ratés**"], s286.name))
+            e_ = d["les_points_deplaces_du_deuxieme_au_troisieme"]
+            out.append(("les points déplacés de 286",
+                        [f"Parmi les points déplacés, {e_['les_points']} sont notés au deuxième et au troisième saut",
+                         f"restent au troisième, {e_['justes_puis_justes']}",
+                         f"le restent, {e_['rates_puis_rates']}."], s286.name))
+            if c4["a_quatre_mailles_ou_plus"]["ou_les_deux_chaines_different"] and not (
+                    c4["a_quatre_mailles_ou_plus"]["les_rates_rendus_justes"]
+                    or c4["a_quatre_mailles_ou_plus"]["les_justes_rendus_rates"]):
+                out.append(("les changements lointains de 286",
+                            ["les changements s'étendent à quatre mailles et plus, mais n'y rendent rien juste ni raté"],
+                            s286.name))
+            out.append(("la durée de 286", [f"La mesure a pris {_fr222(d['les_secondes'])} s"], s286.name))
+            out.append(("le verdict de 286", [f"**{d['le_verdict']['lissue'].upper()}.**"], s286.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 285 : LE DEUXIÈME SAUT CORRIGÉ RECALÉ SUR SON RAYON
     s285 = _source(racine, "recaler_le_deuxieme_saut_sur_son_rayon_rend_il_le_troisieme_saut_plus_juste.json")
     # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.

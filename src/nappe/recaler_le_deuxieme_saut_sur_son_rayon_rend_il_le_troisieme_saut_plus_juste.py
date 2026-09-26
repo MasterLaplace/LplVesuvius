@@ -94,16 +94,12 @@ def le_verdict(r: dict) -> dict:
     return {"lissue": "recalé sur son rayon, le deuxième saut corrigé ne rend pas le troisième saut de la bande plus juste"}
 
 
-def mesurer() -> dict:
-    debut = time.monotonic()
-    b = la_bande()
-    if isinstance(b, str):
-        return {"decidable": False, "la_raison": b, "le_verdict": le_verdict({})}
-    p, n, gi, gj, v = b["p"], b["n"], b["gi"], b["gj"], b["verite"]
+def les_deux_reprises(b: dict) -> dict:
+    """La chaîne de `248`, le deuxième saut corrigé de `283` recalé sur son rayon, et les deux reprises qui en partent :
+    celle du deuxième saut recalé et le témoin, parti du deuxième saut non corrigé."""
+    p, n, gi, gj = b["p"], b["n"], b["gi"], b["gj"]
     chaine = enchainer(p, n, LE_SIGNE, LES_SAUTS, b["lire_rayon"], b["sur_la_grille"], gi, gj, True)
     taus = les_profondeurs_de(chaine, p, n)
-    publie = json.loads(CE_QUE_248_A_PUBLIE.read_text())["les_predictions"][LA_PREDICTION][LE_COTE]["les_sauts"]
-    d283 = json.loads(CE_QUE_283_A_PUBLIE.read_text())
     q1, n1, q2, tau2 = chaine[0]["q"], chaine[0]["n"], chaine[1]["q"], taus[1]
     tau2c = np.load(LE_DEUXIEME_SAUT_CORRIGE)[gi, gj]
     with np.errstate(invalid="ignore"):
@@ -118,12 +114,28 @@ def mesurer() -> dict:
         recale = deplace & ~(np.abs(s2r - s2c) < 1e-9)
     q2r = poser_sur_le_rayon(q2c, q1, n1, s2r, recale)
     tau2r = les_profondeurs_de([{"q": q2r}], p, n)[0]
-    grille = b["sur_la_grille"]
-    np.save(LE_DEUXIEME_SAUT_RECALE_SUR_SON_RAYON, grille(tau2r))
     temoin = la_reprise(q2, chaine[0]["n"], b, LES_SAUTS - 2)
     reprise = la_reprise(q2r, chaine[0]["n"], b, LES_SAUTS - 2)
-    tt, tr = les_profondeurs_de(temoin, p, n), les_profondeurs_de(reprise, p, n)
-    nq2 = les_normales_de_la_reprise(q2, chaine[0]["n"], grille, gi, gj)
+    return {"chaine": chaine, "taus": taus, "deplace": deplace, "recale": recale, "centres": centres, "proche": proche,
+            "s2": s2, "s2c": s2c, "tau2c": tau2c, "tau2r": tau2r,
+            "tt": les_profondeurs_de(temoin, p, n), "tr": les_profondeurs_de(reprise, p, n)}
+
+
+def mesurer() -> dict:
+    debut = time.monotonic()
+    b = la_bande()
+    if isinstance(b, str):
+        return {"decidable": False, "la_raison": b, "le_verdict": le_verdict({})}
+    p, n, gi, gj, v = b["p"], b["n"], b["gi"], b["gj"], b["verite"]
+    r = les_deux_reprises(b)
+    chaine, taus, deplace, recale, centres, proche = (r[k] for k in ("chaine", "taus", "deplace", "recale", "centres",
+                                                                      "proche"))
+    s2, s2c, tau2, tau2c, tau2r, tt, tr = r["s2"], r["s2c"], taus[1], r["tau2c"], r["tau2r"], r["tt"], r["tr"]
+    publie = json.loads(CE_QUE_248_A_PUBLIE.read_text())["les_predictions"][LA_PREDICTION][LE_COTE]["les_sauts"]
+    d283 = json.loads(CE_QUE_283_A_PUBLIE.read_text())
+    grille = b["sur_la_grille"]
+    np.save(LE_DEUXIEME_SAUT_RECALE_SUR_SON_RAYON, grille(tau2r))
+    nq2 = les_normales_de_la_reprise(chaine[1]["q"], chaine[0]["n"], grille, gi, gj)
     tous = np.isfinite(s2)
     out = {"la_reproduction_de_248": la_reproduction_des_sauts(taus, v, publie, 1),
            "la_reprise_du_temoin": la_reproduction_des_sauts(tt, v, publie, 3),

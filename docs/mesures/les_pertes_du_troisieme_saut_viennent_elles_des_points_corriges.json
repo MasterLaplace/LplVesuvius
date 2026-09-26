@@ -1,0 +1,84 @@
+{
+ "les_points_deplaces": 69,
+ "le_troisieme_saut": {
+  "les_points_notes": 16010,
+  "ou_les_deux_chaines_different": 96,
+  "les_rates_rendus_justes": 7,
+  "les_justes_rendus_rates": 15,
+  "les_classes": {
+   "le_point_lui_meme": {
+    "ou_les_deux_chaines_different": 13,
+    "les_rates_rendus_justes": 6,
+    "les_justes_rendus_rates": 5
+   },
+   "a_une_maille": {
+    "ou_les_deux_chaines_different": 66,
+    "les_rates_rendus_justes": 1,
+    "les_justes_rendus_rates": 6
+   },
+   "a_deux_ou_trois_mailles": {
+    "ou_les_deux_chaines_different": 17,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 4
+   },
+   "a_quatre_mailles_ou_plus": {
+    "ou_les_deux_chaines_different": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   }
+  }
+ },
+ "le_quatrieme_saut": {
+  "les_points_notes": 9379,
+  "ou_les_deux_chaines_different": 121,
+  "les_rates_rendus_justes": 3,
+  "les_justes_rendus_rates": 4,
+  "les_classes": {
+   "le_point_lui_meme": {
+    "ou_les_deux_chaines_different": 6,
+    "les_rates_rendus_justes": 2,
+    "les_justes_rendus_rates": 3
+   },
+   "a_une_maille": {
+    "ou_les_deux_chaines_different": 44,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 1
+   },
+   "a_deux_ou_trois_mailles": {
+    "ou_les_deux_chaines_different": 52,
+    "les_rates_rendus_justes": 1,
+    "les_justes_rendus_rates": 0
+   },
+   "a_quatre_mailles_ou_plus": {
+    "ou_les_deux_chaines_different": 19,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   }
+  }
+ },
+ "les_points_deplaces_du_deuxieme_au_troisieme": {
+  "les_points": 13,
+  "justes_puis_justes": 6,
+  "justes_puis_rates": 0,
+  "rates_puis_justes": 0,
+  "rates_puis_rates": 7
+ },
+ "la_lecture": {
+  "combien_de_pannes": 0
+ },
+ "les_comptes_de_285": {
+  "au_troisieme": [
+   7,
+   15
+  ],
+  "au_quatrieme": [
+   3,
+   4
+  ]
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "la perte du troisième saut vient de points que la correction n'a pas touchés"
+ },
+ "les_secondes": 31.3
+}
