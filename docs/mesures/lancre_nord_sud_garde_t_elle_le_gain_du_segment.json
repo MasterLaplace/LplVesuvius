@@ -1,0 +1,100 @@
+{
+ "les_blocs_candidats": 340,
+ "les_blocs_qui_different_de_275": [],
+ "avec_lancre_nord_sud": {
+  "les_reunis": {
+   "les_blocs": 339,
+   "avant": 0.9336,
+   "apres": 0.9348,
+   "les_points_notes": 34752,
+   "les_points_corriges": 1009,
+   "les_rates_rendus_justes": 180,
+   "les_justes_rendus_rates": 139,
+   "le_gain_net": 41,
+   "les_blocs_qui_montent": 41,
+   "les_blocs_qui_descendent": 16,
+   "les_blocs_immobiles": 282
+  },
+  "le_test": {
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 41,
+    "les_blocs_qui_descendent": 16,
+    "la_probabilite": 0.00126,
+    "sous_le_seuil": true
+   },
+   "sur_les_points": {
+    "les_rates_rendus_justes": 180,
+    "les_justes_rendus_rates": 139,
+    "le_gain_net": 41,
+    "la_probabilite": 0.025,
+    "sous_le_seuil": true
+   }
+  },
+  "les_non_decides": 1
+ },
+ "avec_lancre_est_ouest_sur_les_memes_blocs": {
+  "les_reunis": {
+   "les_blocs": 339,
+   "avant": 0.9336,
+   "apres": 0.9343,
+   "les_points_notes": 34752,
+   "les_points_corriges": 999,
+   "les_rates_rendus_justes": 182,
+   "les_justes_rendus_rates": 159,
+   "le_gain_net": 23,
+   "les_blocs_qui_montent": 42,
+   "les_blocs_qui_descendent": 16,
+   "les_blocs_immobiles": 281
+  },
+  "le_test": {
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 42,
+    "les_blocs_qui_descendent": 16,
+    "la_probabilite": 0.000862,
+    "sous_le_seuil": true
+   },
+   "sur_les_points": {
+    "les_rates_rendus_justes": 182,
+    "les_justes_rendus_rates": 159,
+    "le_gain_net": 23,
+    "la_probabilite": 0.233,
+    "sous_le_seuil": false
+   }
+  }
+ },
+ "avec_lancre_de_275_sur_les_memes_blocs": {
+  "les_reunis": {
+   "les_blocs": 339,
+   "avant": 0.9336,
+   "apres": 0.9372,
+   "les_points_notes": 34752,
+   "les_points_corriges": 495,
+   "les_rates_rendus_justes": 163,
+   "les_justes_rendus_rates": 41,
+   "le_gain_net": 122,
+   "les_blocs_qui_montent": 42,
+   "les_blocs_qui_descendent": 11,
+   "les_blocs_immobiles": 286
+  },
+  "le_test": {
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 42,
+    "les_blocs_qui_descendent": 11,
+    "la_probabilite": 2.25e-05,
+    "sous_le_seuil": true
+   },
+   "sur_les_points": {
+    "les_rates_rendus_justes": 163,
+    "les_justes_rendus_rates": 41,
+    "le_gain_net": 122,
+    "la_probabilite": 2.04e-18,
+    "sous_le_seuil": true
+   }
+  }
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "l'ancre nord-sud garde le gain du segment : c'est la direction est-ouest qui gâte l'ancre"
+ },
+ "les_secondes": 34.8
+}

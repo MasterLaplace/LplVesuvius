@@ -1723,6 +1723,8 @@ run "la procedure tient-elle sur le segment avec ses seuls voisins est et ouest"
 run "figure la procedure tient-elle sur le segment avec ses seuls voisins est et ouest" uv run python "$ROOT/src/figures/figure_la_procedure_tient_elle_sur_le_segment_avec_ses_seuls_voisins_est_et_ouest.py" --verifier
 run "l'ancre est-ouest suffit-elle a perdre le gain du segment" uv run python "$ROOT/src/nappe/lancre_est_ouest_suffit_elle_a_perdre_le_gain_du_segment.py" --verifier
 run "figure l'ancre est-ouest suffit-elle a perdre le gain du segment" uv run python "$ROOT/src/figures/figure_lancre_est_ouest_suffit_elle_a_perdre_le_gain_du_segment.py" --verifier
+run "l'ancre nord-sud garde-t-elle le gain du segment" uv run python "$ROOT/src/nappe/lancre_nord_sud_garde_t_elle_le_gain_du_segment.py" --verifier
+run "figure l'ancre nord-sud garde-t-elle le gain du segment" uv run python "$ROOT/src/figures/figure_lancre_nord_sud_garde_t_elle_le_gain_du_segment.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

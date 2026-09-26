@@ -3208,6 +3208,41 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 293 : L'ANCRE NORD-SUD SOUS LA MARCHE DU SEGMENT
+    s293 = _source(racine, "lancre_nord_sud_garde_t_elle_le_gain_du_segment.json")
+    if s293.exists():
+        d = json.loads(s293.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            T, N, E = (d["avec_lancre_de_275_sur_les_memes_blocs"], d["avec_lancre_nord_sud"],
+                       d["avec_lancre_est_ouest_sur_les_memes_blocs"])
+            np_, ep = N["le_test"]["sur_les_points"], E["le_test"]["sur_les_points"]
+            out.append(("le titre de 293",
+                        [f"Au seuil déclaré, {'oui' if np_['sous_le_seuil'] else 'non'} : {sg(np_['le_gain_net'])} contre "
+                         f"{sg(ep['le_gain_net'])}"], s293.name))
+            for nom, x_, gras in (("celle de `275`", T, False), ("au nord et au sud", N, True),
+                                  ("à l'est et à l'ouest", E, False)):
+                r_, p_, b_ = x_["les_reunis"], x_["le_test"]["sur_les_points"], x_["le_test"]["sur_les_blocs"]
+                cel = [nom, str(r_["les_points_corriges"]), str(p_["les_rates_rendus_justes"]),
+                       str(p_["les_justes_rendus_rates"]), sg(p_["le_gain_net"]), _fr222(p_["la_probabilite"]),
+                       f"{b_['les_blocs_qui_montent']}, {b_['les_blocs_qui_descendent']}", _fr222(b_["la_probabilite"])]
+                out.append((f"la ligne {nom} de 293", ["| " + " | ".join(f"**{c}**" if gras else c for c in cel) + " |"],
+                            s293.name))
+            out.append(("les blocs de 293",
+                        [f"bloc n'a aucun voisin au nord ni au sud, et n'est pas décidé ; les trois ancres sont comparées "
+                         f"sur les {N['les_reunis']['les_blocs']} autres."
+                         if N["les_non_decides"] == 1 else f"{N['les_non_decides']} blocs"], s293.name))
+            out.append(("le fait de 293",
+                        [f"du hasard, là où l'ancre est-ouest n'en garde que {sg(ep['le_gain_net'])}. Mais les deux "
+                         f"demi-ancres doublent le nombre de points corrigés, {N['les_reunis']['les_points_corriges']} et "
+                         f"{E['les_reunis']['les_points_corriges']}",
+                         f"garde un gain net de {sg(np_['le_gain_net'])} sur les points"], s293.name))
+            out.append(("la durée de 293", [f"La mesure a pris {sg(d['les_secondes'])} s"], s293.name))
+            out.append(("le verdict de 293", [f"**{d['le_verdict']['lissue'].upper()}.**"], s293.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 292 : L'ANCRE EST-OUEST SOUS LA MARCHE DU SEGMENT
     s292 = _source(racine, "lancre_est_ouest_suffit_elle_a_perdre_le_gain_du_segment.json")
     if s292.exists():

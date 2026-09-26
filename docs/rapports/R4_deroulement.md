@@ -4272,6 +4272,13 @@ bande assez haute pour donner quatre voisins à ses blocs n'a pas été éprouv�
 La décision d'un bloc prend une règle facultative qui prend son ancre. `R4-P95` reste ouverte : il faut une ancre qui se contente
 de l'est et de l'ouest.
 
+**`293` · 2026-09-26 · l'ancre nord-sud sous la marche du segment** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur le segment, sous la marche de `275`, l'ancre prise au nord et au sud garde un gain net de 41 sur les points, au-delà
+du hasard, là où l'ancre est-ouest n'en garde que 23. Mais les deux demi-ancres doublent le nombre de points corrigés, 1009 et 999
+au lieu de 495, et perdent chacune plus des deux tiers du gain** — `R4-F474`. `R4-P95` reste ouverte : la bande a besoin d'une
+ancre prise sur plus de chunks que ses deux voisins immédiats.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
