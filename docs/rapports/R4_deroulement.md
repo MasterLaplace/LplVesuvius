@@ -4216,6 +4216,13 @@ ratés : un gain net de −7. Au quatrième, 3 pour 3** — `R4-F465`. La repris
 Le recalage de `279` ne ramène que 18 des 69 points sur une feuille : la correction les pose à une médiane de 59,5061 voxels de
 la plus proche. `R4-P95` reste ouverte : sur la bande, corriger le deuxième saut ne profite pas au troisième.
 
+**`285` · 2026-09-26 · le deuxième saut corrigé recalé sur son rayon** — `R4-P95`
+
+⭐⭐⭐⭐ **Recalé sur le rayon d'où il part, le deuxième saut corrigé de la bande gagne 16 au deuxième saut, mais la chaîne qui en
+repart rend au troisième saut 7 ratés justes pour 15 justes ratés : un gain net de −8** — `R4-F466`. Sur ce rayon, le deuxième
+saut non corrigé est sur sa feuille, et le recalage ramène 33 points sur 69, contre 18 dans `284`. Le troisième saut perd quand
+même. `R4-P95` reste ouverte : ce n'est pas le rayon du recalage qui fait perdre le troisième saut.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

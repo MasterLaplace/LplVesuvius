@@ -3208,6 +3208,61 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 285 : LE DEUXIÈME SAUT CORRIGÉ RECALÉ SUR SON RAYON
+    s285 = _source(racine, "recaler_le_deuxieme_saut_sur_son_rayon_rend_il_le_troisieme_saut_plus_juste.json")
+    # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.
+    s284b = _source(racine, "repartir_du_deuxieme_saut_corrige_rend_il_le_troisieme_saut_de_la_bande_plus_juste.json")
+    if s285.exists():
+        d = json.loads(s285.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            s2, s3, s4 = d["le_deuxieme_saut"]["recale_contre_temoin"], d["les_sauts"][0], d["les_sauts"][1]
+            out.append(("le titre de 285",
+                        [f"{'Oui' if s3['le_gain_net'] > 0 else 'Non'} : {s3['les_rates_rendus_justes']} ratés justes pour "
+                         f"{s3['les_justes_rendus_rates']} justes ratés, un gain net de {sg(s3['le_gain_net'])}"], s285.name))
+            dd = d["la_distance_a_la_feuille_sur_le_rayon_du_saut"]
+            for cle, lib, gras in (("le_deuxieme_saut_non_corrige_partout", "le deuxième saut non corrigé, partout", False),
+                                   ("le_deuxieme_saut_non_corrige_aux_points_deplaces",
+                                    "le deuxième saut non corrigé, aux points que la correction déplace", False),
+                                   ("le_deuxieme_saut_corrige_aux_points_deplaces",
+                                    "le deuxième saut corrigé, aux mêmes points", True)):
+                x_ = dd[cle]
+                m_ = f"{sg(x_['la_mediane_voxels'])} {'voxel' if abs(x_['la_mediane_voxels']) <= 1 else 'voxels'}"
+                cel = [lib, str(x_["les_points"]), m_, str(x_["au_dela_dun_demi_feuillet"]),
+                       str(x_["sans_feuille_sur_le_rayon"])]
+                out.append((f"la distance {cle} de 285",
+                            ["| " + " | ".join(f"**{c}**" if gras else c for c in cel) + " |"], s285.name))
+            p284 = json.loads(s284b.read_text())["les_points_recales"] if s284b.exists() else None
+            out.append(("les recalés de 285",
+                        [f"le recalage en ramène **{d['les_points_recales']}** sur {d['les_points_deplaces_par_283']}, contre "
+                         f"{p284} dans `284`"], s285.name))
+            for k_, (h, x_) in enumerate((("2, recalé", s2), ("**3**", s3), ("4", s4))):
+                gras = k_ == 1
+                b_ = (lambda t: f"**{t}**") if gras else (lambda t: t)
+                out.append((f"le saut {h} de 285",
+                            [f"| {h} | {b_(x_['les_points_notes'])} | {x_['les_points_ou_les_deux_chaines_different']} | "
+                             f"{b_(sg(x_['le_temoin']))} | {b_(sg(x_['partie_de_la_spire_corrigee']))} | "
+                             f"{b_(x_['les_rates_rendus_justes'])} | {b_(x_['les_justes_rendus_rates'])} | "
+                             f"{b_(sg(x_['le_gain_net']))} |"], s285.name))
+            rc = d["le_deuxieme_saut"]["recale_contre_corrige"]
+            out.append(("le gain du recalage de 285",
+                        [f"le deuxième saut gagne {sg(rc['le_gain_net'])} de plus que corrigé seul : "
+                         f"{rc['les_rates_rendus_justes']} ratés rendus justes pour {rc['les_justes_rendus_rates']}"],
+                        s285.name))
+            out.append(("le fait de 285",
+                        [f"le deuxième saut corrigé de la bande gagne {sg(s2['le_gain_net'])} au deuxième saut",
+                         f"repart rend au troisième saut {s3['les_rates_rendus_justes']} ratés justes pour "
+                         f"{s3['les_justes_rendus_rates']} justes ratés : un gain net de {sg(s3['le_gain_net'])}"], s285.name))
+            if s284b.exists():
+                g284 = json.loads(s284b.read_text())["les_sauts"][0]["le_gain_net"]
+                out.append(("le troisième saut de 284 rappelé par 285",
+                            [f"{sg(g284)} dans `284`, {sg(s3['le_gain_net'])} ici"], s285.name))
+            out.append(("la durée de 285", [f"La mesure a pris {sg(d['les_secondes'])} s"], s285.name))
+            out.append(("le verdict de 285", [f"**{d['le_verdict']['lissue'].upper()}.**"], s285.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 284 : LA CHAÎNE REPARTIE DU DEUXIÈME SAUT CORRIGÉ DE LA BANDE
     s284 = _source(racine, "repartir_du_deuxieme_saut_corrige_rend_il_le_troisieme_saut_de_la_bande_plus_juste.json")
     if s284.exists():
