@@ -1703,6 +1703,8 @@ run "la procedure sans juge tient-elle sur la bande" uv run python "$ROOT/src/na
 run "figure la procedure sans juge tient-elle sur la bande" uv run python "$ROOT/src/figures/figure_la_procedure_sans_juge_tient_elle_sur_la_bande.py" --verifier
 run "la marche lit-elle les rates de la bande" uv run python "$ROOT/src/nappe/la_marche_lit_elle_les_rates_de_la_bande.py" --verifier
 run "figure la marche lit-elle les rates de la bande" uv run python "$ROOT/src/figures/figure_la_marche_lit_elle_les_rates_de_la_bande.py" --verifier
+run "la procedure sans juge corrige-t-elle le deuxieme saut de la bande" uv run python "$ROOT/src/nappe/la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut_de_la_bande.py" --verifier
+run "figure la procedure sans juge corrige-t-elle le deuxieme saut de la bande" uv run python "$ROOT/src/figures/figure_la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut_de_la_bande.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

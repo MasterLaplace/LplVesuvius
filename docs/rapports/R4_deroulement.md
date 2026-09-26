@@ -4202,6 +4202,13 @@ casse une part des justes pareille, 0,035 contre 0,0338. Mais la décision n'en 
 sur la bande est le choix. `R4-P95` reste ouverte : il faut une décision qui choisisse sans le juge parmi des écarts de moins
 d'un pas.
 
+**`283` · 2026-09-26 · la procédure sans juge sur le deuxième saut de la bande** — `R4-P95`
+
+⭐⭐⭐⭐ **Au deuxième saut de la bande, la procédure sans juge de `265`, prise sur le premier saut, rend 23 ratés justes pour 9
+justes ratés sur 66 blocs : un gain net de 14** — `R4-F464`. La chaîne redonne `248` et son premier saut celui de `281`, et les
+deux piles du contrôle sont identiques au miroir. La procédure corrige le deuxième saut de la bande, mais trois blocs portent 15
+du gain. `R4-P95` reste ouverte : le troisième saut n'est pas corrigé.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

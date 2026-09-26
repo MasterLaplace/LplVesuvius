@@ -3208,6 +3208,90 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 283 : LA PROCÉDURE SANS JUGE SUR LE DEUXIÈME SAUT DE LA BANDE
+    s283 = _source(racine, "la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut_de_la_bande.json")
+    # ⚠ Cherchées hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.
+    s282b = _source(racine, "la_marche_lit_elle_les_rates_de_la_bande.json")
+    s248c = _source(racine, "le_transfert_enchaine_tient_il_les_spires.json")
+    s281b = _source(racine, "la_procedure_sans_juge_tient_elle_sur_la_bande.json")
+    if s283.exists():
+        d = json.loads(s283.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            gain = lambda b_: b_["les_rates_rendus_justes"] - b_["les_justes_rendus_rates"]  # noqa: E731
+            g_ = d["les_reunis"]
+            rj, jr, gn = g_["les_rates_rendus_justes"], g_["les_justes_rendus_rates"], g_["le_gain_net"]
+            out.append(("le titre de 283",
+                        [f"{'Oui' if gn > 0 else 'Non'} : sur les {d['les_blocs_notes']} blocs notés, elle rend {rj} ratés "
+                         f"justes pour {jr} justes ratés, un gain net de {sg(gn)}"], s283.name))
+            out.append(("les réunis de 283",
+                        [f"| **la deuxième couche de la bande** | **{g_['les_blocs']}** | **{g_['les_points_notes']}** | "
+                         f"**{sg(g_['avant'])}** | **{sg(g_['apres'])}** | **{rj}** | **{jr}** | **{sg(gn)}** |"], s283.name))
+            out.append(("le fait de 283",
+                        [f"prise sur le premier saut, rend {rj} ratés justes pour {jr}",
+                         f"justes ratés sur {g_['les_blocs']} blocs : un gain net de {sg(gn)}"], s283.name))
+            decides = [b_ for b_ in d["les_blocs"] if b_.get("decidable")]
+            touches = sum(1 for b_ in decides if b_["les_points_corriges"])
+            out.append(("les parts de 283",
+                        [f"La décision corrige {g_['les_points_corriges']} points, sur {touches} blocs. La part monte sur "
+                         f"{g_['les_blocs_qui_montent']} blocs, descend sur {g_['les_blocs_qui_descendent']} et ne bouge "
+                         f"pas sur {g_['les_blocs_immobiles']}."], s283.name))
+            part, e_ = d["la_part_des_points_notes_dans_les_blocs"], d["le_deuxieme_saut_entier"]
+            out.append(("la couverture de 283",
+                        [f"couvrent {sg(part)} des points notés du deuxième saut",
+                         f"la part passe de {sg(e_['avant']['la_part_sur_la_bonne_spire'])} à "
+                         f"{sg(e_['apres']['la_part_sur_la_bonne_spire'])}.",
+                         f"Les {sg(round(1 - part, 4))} des points notés du deuxième saut"], s283.name))
+            out.append(("les blocs de 283",
+                        [f"point du juge du deuxième saut : **{d['les_blocs_notes']}** blocs sur "
+                         f"{json.loads(s281b.read_text())['les_blocs_candidats'] if s281b.exists() else '?'}",
+                         f"**{d['les_blocs_rendus_en_tout']}** blocs sont rendus"], s283.name))
+            c_ = d["le_controle_du_miroir"]
+            if c_["identiques"] and all(x == 0 for x in c_["les_piles"].values()):
+                blocs_c = " et ".join(f"`({b.split('_')[0]}, {b.split('_')[1]})`" for b in c_["les_blocs"])
+                out.append(("le contrôle de 283", [f"le plus de points, {blocs_c}, sont rendus à distance"], s283.name))
+            forts = [b_ for b_ in decides if abs(gain(b_)) >= 3]
+            for b_ in forts:
+                out.append((f"la ligne ({b_['la_rangee']}, {b_['la_colonne']}) de 283",
+                            [f"| `({b_['la_rangee']}, {b_['la_colonne']})` | {b_['avant']['les_points_notes']} | "
+                             f"{sg(b_['avant']['la_part_sur_la_bonne_spire'])} | "
+                             f"{sg(b_['apres']['la_part_sur_la_bonne_spire'])} | {b_['les_points_corriges']} | "
+                             f"{b_['les_rates_rendus_justes']} | {b_['les_justes_rendus_rates']} | {sg(gain(b_))} |"],
+                            s283.name))
+            mots = {3: "trois"}
+            f_ = sum(gain(b_) for b_ in forts)
+            out.append(("les forts de 283",
+                        [f"Les {mots.get(len(forts), len(forts))} portent {sg(f_)} ; les {len(decides) - len(forts)} autres "
+                         f"blocs réunis rendent {sg(gn - f_)}. Aucun bloc ne perd plus de {sg(-min(gain(b_) for b_ in decides))} "
+                         f"points."], s283.name))
+            lm = d["ce_que_la_marche_lit"]
+            if s282b.exists():
+                p1 = json.loads(s282b.read_text())["la_bande"]
+                for lib, cle in (("des ratés, réparables", "la_part_des_rates_que_la_marche_repare"),
+                                 ("des ratés trop loin, réparables", "la_part_reparable_des_rates_trop_loin"),
+                                 ("des ratés trop près, réparables", "la_part_reparable_des_rates_trop_pres"),
+                                 ("des justes, cassables", "la_part_des_justes_que_la_marche_casse"),
+                                 ("corrélation de l'écart à l'erreur", "la_correlation_de_lecart_a_lerreur")):
+                    out.append((f"la lecture {cle} de 283", [f"| {lib} | {sg(p1[cle])} | {sg(lm[cle])} |"], s283.name))
+                out.append(("les comptes lus de 283", [f"| ratés, justes | {p1['les_rates']}, {p1['les_justes']} | "
+                                                       f"{lm['les_rates']}, {lm['les_justes']} |"], s283.name))
+                r1, r2 = p1["la_decision_retient"], lm["la_decision_retient"]
+                out.append(("ce que retient la décision de 283",
+                            [f"| la décision retient | {r1['des_reparables']} des {p1['les_rates_reparables']} réparables, "
+                             f"{r1['des_cassables']} des {p1['les_justes_cassables']} cassables | {r2['des_reparables']} des "
+                             f"{lm['les_rates_reparables']} réparables, {r2['des_cassables']} des {lm['les_justes_cassables']} "
+                             f"cassables |"], s283.name))
+            if s248c.exists():
+                h2 = json.loads(s248c.read_text())["les_predictions"]["m7"]["du_cote_plus"]["les_sauts"][1]["la_chaine"]
+                out.append(("le deuxième saut de 248 rappelé par 283",
+                            [f"rate {sg(round(1 - h2['la_part_sur_la_bonne_spire'], 4))} des points notés, dont "
+                             f"{sg(h2['la_part_trop_pres'])} trop près"], s283.name))
+            out.append(("la durée de 283", [f"La mesure a pris {sg(d['les_secondes'])} s"], s283.name))
+            out.append(("le verdict de 283", [f"**{d['le_verdict']['lissue'].upper()}.**"], s283.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 282 : CE QUE LA MARCHE LIT DES RATÉS DE LA BANDE
     s282 = _source(racine, "la_marche_lit_elle_les_rates_de_la_bande.json")
     if s282.exists():
