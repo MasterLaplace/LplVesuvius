@@ -1,0 +1,100 @@
+{
+ "les_blocs_candidats": 340,
+ "les_blocs_qui_different_de_275": [],
+ "avec_lancre_de_275": {
+  "les_reunis": {
+   "les_blocs": 340,
+   "avant": 0.9339,
+   "apres": 0.9374,
+   "les_points_notes": 34917,
+   "les_points_corriges": 495,
+   "les_rates_rendus_justes": 163,
+   "les_justes_rendus_rates": 41,
+   "le_gain_net": 122,
+   "les_blocs_qui_montent": 42,
+   "les_blocs_qui_descendent": 11,
+   "les_blocs_immobiles": 287
+  },
+  "le_test": {
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 42,
+    "les_blocs_qui_descendent": 11,
+    "la_probabilite": 2.25e-05,
+    "sous_le_seuil": true
+   },
+   "sur_les_points": {
+    "les_rates_rendus_justes": 163,
+    "les_justes_rendus_rates": 41,
+    "le_gain_net": 122,
+    "la_probabilite": 2.04e-18,
+    "sous_le_seuil": true
+   }
+  }
+ },
+ "avec_lancre_est_ouest": {
+  "les_reunis": {
+   "les_blocs": 340,
+   "avant": 0.9339,
+   "apres": 0.9346,
+   "les_points_notes": 34917,
+   "les_points_corriges": 999,
+   "les_rates_rendus_justes": 182,
+   "les_justes_rendus_rates": 159,
+   "le_gain_net": 23,
+   "les_blocs_qui_montent": 42,
+   "les_blocs_qui_descendent": 16,
+   "les_blocs_immobiles": 282
+  },
+  "le_test": {
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 42,
+    "les_blocs_qui_descendent": 16,
+    "la_probabilite": 0.000862,
+    "sous_le_seuil": true
+   },
+   "sur_les_points": {
+    "les_rates_rendus_justes": 182,
+    "les_justes_rendus_rates": 159,
+    "le_gain_net": 23,
+    "la_probabilite": 0.233,
+    "sous_le_seuil": false
+   }
+  },
+  "les_non_decides": 0
+ },
+ "la_marche_et_lancre_est_ouest_de_291": {
+  "les_reunis": {
+   "les_blocs": 340,
+   "avant": 0.9339,
+   "apres": 0.934,
+   "les_points_notes": 34917,
+   "les_points_corriges": 1047,
+   "les_rates_rendus_justes": 187,
+   "les_justes_rendus_rates": 182,
+   "le_gain_net": 5,
+   "les_blocs_qui_montent": 43,
+   "les_blocs_qui_descendent": 16,
+   "les_blocs_immobiles": 281
+  },
+  "le_test": {
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 43,
+    "les_blocs_qui_descendent": 16,
+    "la_probabilite": 0.000584,
+    "sous_le_seuil": true
+   },
+   "sur_les_points": {
+    "les_rates_rendus_justes": 187,
+    "les_justes_rendus_rates": 182,
+    "le_gain_net": 5,
+    "la_probabilite": 0.835,
+    "sous_le_seuil": false
+   }
+  }
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "l'ancre est-ouest suffit à faire perdre son gain à la procédure du segment"
+ },
+ "les_secondes": 22.6
+}

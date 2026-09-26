@@ -4265,6 +4265,13 @@ descendent, au-delà du hasard. Mais elle corrige 1047 points au lieu de 495, et
 `R4-F472`. La décision d'un bloc prend une règle facultative qui choisit ses voisins. `R4-P95` reste ouverte : une tranche de la
 bande assez haute pour donner quatre voisins à ses blocs n'a pas été éprouvée.
 
+**`292` · 2026-09-26 · l'ancre est-ouest sous la marche du segment** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur le segment, sous la marche de `275`, l'ancre prise à l'est et à l'ouest seulement fait corriger 999 points au lieu de
+495, et fait tomber le gain net sur les points de 122 à 23 : l'ancre, plus que la marche, porte la perte de `291`** — `R4-F473`.
+La décision d'un bloc prend une règle facultative qui prend son ancre. `R4-P95` reste ouverte : il faut une ancre qui se contente
+de l'est et de l'ouest.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

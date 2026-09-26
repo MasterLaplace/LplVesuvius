@@ -3208,6 +3208,40 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 292 : L'ANCRE EST-OUEST SOUS LA MARCHE DU SEGMENT
+    s292 = _source(racine, "lancre_est_ouest_suffit_elle_a_perdre_le_gain_du_segment.json")
+    if s292.exists():
+        d = json.loads(s292.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            T, E, M = d["avec_lancre_de_275"], d["avec_lancre_est_ouest"], d["la_marche_et_lancre_est_ouest_de_291"]
+            tp, ep = T["le_test"]["sur_les_points"], E["le_test"]["sur_les_points"]
+            out.append(("le titre de 292",
+                        [f"{'Oui' if not ep['sous_le_seuil'] else 'Non'} : sous la marche de `275`, elle fait tomber le gain "
+                         f"net sur les points de {sg(tp['le_gain_net'])} à {sg(ep['le_gain_net'])}"], s292.name))
+            for nom, x_, gras in (("celles de `275`", T, False), ("la marche de `275`, l'ancre est-ouest", E, True),
+                                  ("la marche et l'ancre est-ouest (`291`)", M, False)):
+                r_, p_, b_ = x_["les_reunis"], x_["le_test"]["sur_les_points"], x_["le_test"]["sur_les_blocs"]
+                cel = [nom, str(r_["les_points_corriges"]), str(p_["les_rates_rendus_justes"]),
+                       str(p_["les_justes_rendus_rates"]), sg(p_["le_gain_net"]), _fr222(p_["la_probabilite"]),
+                       f"{b_['les_blocs_qui_montent']}, {b_['les_blocs_qui_descendent']}", _fr222(b_["la_probabilite"])]
+                out.append((f"la ligne {nom} de 292", ["| " + " | ".join(f"**{c}**" if gras else c for c in cel) + " |"],
+                            s292.name))
+            re_, rt = E["les_reunis"], T["les_reunis"]
+            out.append(("le fait de 292",
+                        [f"de {rt['les_points_corriges']}, et fait tomber le gain net sur les points de {sg(tp['le_gain_net'])} "
+                         f"à {sg(ep['le_gain_net'])}",
+                         f"l'ancre prise à l'est et à l'ouest seulement fait corriger {re_['les_points_corriges']} points au "
+                         f"lieu"], s292.name))
+            out.append(("les parts de 292",
+                        [f"passe de {sg(re_['avant'])} à {sg(re_['apres'])} avec l'ancre est-ouest, contre {sg(rt['apres'])} "
+                         f"avec celle"], s292.name))
+            out.append(("la durée de 292", [f"La mesure a pris {sg(d['les_secondes'])} s"], s292.name))
+            out.append(("le verdict de 292", [f"**{d['le_verdict']['lissue'].upper()}.**"], s292.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 291 : LA PROCÉDURE DU SEGMENT AVEC SES SEULS VOISINS EST ET OUEST
     s291 = _source(racine, "la_procedure_tient_elle_sur_le_segment_avec_ses_seuls_voisins_est_et_ouest.json")
     if s291.exists():
