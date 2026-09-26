@@ -4230,6 +4230,13 @@ points que la correction n'a pas touchés, à une, deux ou trois mailles d'un po
 rend 6 ratés justes pour 5 justes ratés** — `R4-F467`. Le troisième saut ne perd pas aux points corrigés, il perd autour d'eux.
 `R4-P95` reste ouverte : il faut faire repartir la chaîne sans déranger les voisins d'un point corrigé.
 
+**`287` · 2026-09-26 · les normales recalculées et la perte du troisième saut** — `R4-P95`
+
+⭐⭐⭐⭐ **Avec les normales du témoin, la chaîne repartie du deuxième saut corrigé de la bande perd 7 justes autour des points
+corrigés au troisième saut, contre 10 avec les normales recalculées. Sur tout le troisième saut, elle rend 7 ratés justes pour
+12 justes ratés, un gain net de −5, contre −8** — `R4-F468`. Les normales recalculées portent une part de la perte. `R4-P95`
+reste ouverte : le vote n'est pas isolé, et le troisième saut perd encore.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

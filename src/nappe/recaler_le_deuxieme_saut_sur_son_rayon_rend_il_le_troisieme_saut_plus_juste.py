@@ -117,7 +117,7 @@ def les_deux_reprises(b: dict) -> dict:
     temoin = la_reprise(q2, chaine[0]["n"], b, LES_SAUTS - 2)
     reprise = la_reprise(q2r, chaine[0]["n"], b, LES_SAUTS - 2)
     return {"chaine": chaine, "taus": taus, "deplace": deplace, "recale": recale, "centres": centres, "proche": proche,
-            "s2": s2, "s2c": s2c, "tau2c": tau2c, "tau2r": tau2r,
+            "s2": s2, "s2c": s2c, "tau2c": tau2c, "tau2r": tau2r, "q2": q2, "q2r": q2r,
             "tt": les_profondeurs_de(temoin, p, n), "tr": les_profondeurs_de(reprise, p, n)}
 
 

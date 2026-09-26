@@ -1,0 +1,85 @@
+{
+ "les_points_deplaces": 69,
+ "les_comptes_de_285_refaits": {
+  "au_troisieme": [
+   7,
+   15
+  ],
+  "au_quatrieme": [
+   3,
+   4
+  ]
+ },
+ "les_comptes_de_285_publies": {
+  "au_troisieme": [
+   7,
+   15
+  ],
+  "au_quatrieme": [
+   3,
+   4
+  ]
+ },
+ "les_sauts": [
+  {
+   "les_points_notes": 16010,
+   "les_points_ou_les_deux_chaines_different": 45,
+   "le_temoin": 0.7686,
+   "partie_de_la_spire_corrigee": 0.7683,
+   "les_rates_rendus_justes": 7,
+   "les_justes_rendus_rates": 12,
+   "le_gain_net": -5,
+   "le_saut": 3
+  },
+  {
+   "les_points_notes": 9379,
+   "les_points_ou_les_deux_chaines_different": 67,
+   "le_temoin": 0.754,
+   "partie_de_la_spire_corrigee": 0.7539,
+   "les_rates_rendus_justes": 3,
+   "les_justes_rendus_rates": 4,
+   "le_gain_net": -1,
+   "le_saut": 4
+  }
+ ],
+ "le_troisieme_saut_range": {
+  "les_points_notes": 16010,
+  "ou_les_deux_chaines_different": 45,
+  "les_rates_rendus_justes": 7,
+  "les_justes_rendus_rates": 12,
+  "les_classes": {
+   "le_point_lui_meme": {
+    "ou_les_deux_chaines_different": 13,
+    "les_rates_rendus_justes": 6,
+    "les_justes_rendus_rates": 5
+   },
+   "a_une_maille": {
+    "ou_les_deux_chaines_different": 19,
+    "les_rates_rendus_justes": 1,
+    "les_justes_rendus_rates": 5
+   },
+   "a_deux_ou_trois_mailles": {
+    "ou_les_deux_chaines_different": 13,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 2
+   },
+   "a_quatre_mailles_ou_plus": {
+    "ou_les_deux_chaines_different": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   }
+  }
+ },
+ "les_justes_perdus_autour": {
+  "avec_les_normales_du_temoin": 7,
+  "dans_285": 10
+ },
+ "la_lecture": {
+  "combien_de_pannes": 0
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "les normales recalculées portent une part de la perte du troisième saut"
+ },
+ "les_secondes": 34.6
+}

@@ -3208,6 +3208,59 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 287 : LES NORMALES RECALCULÉES ET LA PERTE DU TROISIÈME SAUT
+    s287 = _source(racine, "les_normales_recalculees_portent_elles_la_perte_du_troisieme_saut.json")
+    # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.
+    s286b = _source(racine, "les_pertes_du_troisieme_saut_viennent_elles_des_points_corriges.json")
+    s285c = _source(racine, "recaler_le_deuxieme_saut_sur_son_rayon_rend_il_le_troisieme_saut_plus_juste.json")
+    if s287.exists() and s286b.exists():
+        d = json.loads(s287.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            a_ = d["les_justes_perdus_autour"]
+            avec, avant = a_["avec_les_normales_du_temoin"], a_["dans_285"]
+            s3, s4 = d["les_sauts"][0], d["les_sauts"][1]
+            g285 = json.loads(s285c.read_text())["les_sauts"][0]["le_gain_net"] if s285c.exists() else None
+            out.append(("le titre de 287",
+                        [f"{'En partie' if avec < avant else 'Non'} : avec les normales du témoin, la reprise perd {avec} "
+                         f"justes autour d'eux, contre {avant}"], s287.name))
+            c_ = d["les_comptes_de_285_refaits"]
+            out.append(("les contrôles de 287",
+                        [f"redonnent ses comptes, {c_['au_troisieme'][0]} pour {c_['au_troisieme'][1]} au troisième saut et "
+                         f"{c_['au_quatrieme'][0]} pour {c_['au_quatrieme'][1]} au quatrième"], s287.name))
+            r286 = json.loads(s286b.read_text())["le_troisieme_saut"]["les_classes"]
+            r287 = d["le_troisieme_saut_range"]["les_classes"]
+            for cle, lib in (("le_point_lui_meme", "le point déplacé lui-même"), ("a_une_maille", "une maille"),
+                             ("a_deux_ou_trois_mailles", "deux ou trois mailles"),
+                             ("a_quatre_mailles_ou_plus", "quatre mailles ou plus")):
+                x_, y_ = r286[cle], r287[cle]
+                out.append((f"la ligne {cle} de 287",
+                            [f"| {lib} | {x_['ou_les_deux_chaines_different']} | {x_['les_rates_rendus_justes']} | "
+                             f"{x_['les_justes_rendus_rates']} | {y_['ou_les_deux_chaines_different']} | "
+                             f"{y_['les_rates_rendus_justes']} | {y_['les_justes_rendus_rates']} |"], s287.name))
+            tot286 = json.loads(s286b.read_text())["le_troisieme_saut"]["ou_les_deux_chaines_different"]
+            out.append(("les changements de 287",
+                        [f"{d['le_troisieme_saut_range']['ou_les_deux_chaines_different']} points notés changent au "
+                         f"troisième saut, contre {tot286}",
+                         f"à une maille d'un point déplacé, {r287['a_une_maille']['ou_les_deux_chaines_different']} contre",
+                         f"{r286['a_une_maille']['ou_les_deux_chaines_different']}. Aux points déplacés eux-mêmes"],
+                        s287.name))
+            out.append(("le fait de 287",
+                        [f"corrigés au troisième saut, contre {avant} avec les normales recalculées",
+                         f"perd {avec} justes autour des points",
+                         f"{s3['les_justes_rendus_rates']} justes ratés, un gain net de {sg(s3['le_gain_net'])}, contre "
+                         f"{sg(g285)}"], s287.name))
+            out.append(("le quatrième saut de 287",
+                        [f"Au quatrième saut, elle rend {s4['les_rates_rendus_justes']} ratés justes pour "
+                         f"{s4['les_justes_rendus_rates']} justes ratés"], s287.name))
+            out.append(("la part des normales de 287",
+                        [f"Les normales recalculées portent {avant - avec} des {avant} justes perdus"], s287.name))
+            out.append(("la durée de 287", [f"La mesure a pris {sg(d['les_secondes'])} s"], s287.name))
+            out.append(("le verdict de 287", [f"**{d['le_verdict']['lissue'].upper()}.**"], s287.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 286 : OÙ TOMBENT LES PERTES DU TROISIÈME SAUT
     s286 = _source(racine, "les_pertes_du_troisieme_saut_viennent_elles_des_points_corriges.json")
     if s286.exists():
