@@ -3208,6 +3208,54 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 289 : LA FEUILLE QUE L'ÉCART DÉSIGNE
+    s289 = _source(racine, "ramener_sur_la_feuille_que_lecart_designe_corrige_t_il_le_deuxieme_saut_de_la_bande.json")
+    if s289.exists():
+        d = json.loads(s289.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            r_, p_, e_, t_ = (d["les_blocs_notes_reunis"], d["la_decision_de_283_publiee"], d["parmi_eux"],
+                              d["le_deuxieme_saut_entier"])
+            out.append(("le titre de 289",
+                        [f"{'Oui' if r_['le_gain_net'] > 0 else 'Non'} : {d['les_points_qui_bougent']} points bougent, et ils "
+                         f"rendent {r_['les_rates_rendus_justes']} ratés justes pour {r_['les_justes_rendus_rates']} justes "
+                         f"ratés, un gain net de {sg(r_['le_gain_net'])}"], s289.name))
+            out.append(("le contrôle de 289",
+                        [f"{d['les_blocs_notes']} blocs notés, la décision de `264` prise sur l'écart relu redonne les points "
+                         f"corrigés de `283`, "
+                         f"et, réunis, ses {p_['des_reparables']} ratés rendus",
+                         f"justes et ses {p_['des_cassables']} justes rendus ratés"], s289.name))
+            out.append(("ce que fait 289",
+                        [f"L'écart est lu sur {d['les_points_ou_lecart_est_lu']} points des blocs notés. La correction en "
+                         f"déplace **{d['les_points_qui_bougent']}**, contre {p_['en_tout']} pour la décision de `264`",
+                         f"eux, l'écart lu répare {e_['des_reparables']} ratés et casse {e_['des_cassables']} justes, sur les "
+                         f"{e_['les_reparables_en_tout']} ratés réparables et les {e_['les_cassables_en_tout']} justes "
+                         f"cassables des blocs."], s289.name))
+            out.append(("la ligne 264 de 289",
+                        [f"| la décision de `264` (`283`) | {p_['en_tout']} | {p_['des_reparables']} | {p_['des_cassables']} | "
+                         f"{sg(p_['des_reparables'] - p_['des_cassables'])} |"], s289.name))
+            out.append(("la ligne feuille de 289",
+                        [f"| **la feuille que l'écart désigne** | **{d['les_points_qui_bougent']}** | "
+                         f"**{r_['les_rates_rendus_justes']}** | **{r_['les_justes_rendus_rates']}** | "
+                         f"**{sg(r_['le_gain_net'])}** |"], s289.name))
+            out.append(("les parts de 289",
+                        [f"la part des points sur la bonne spire passe de {sg(r_['avant']['la_part_sur_la_bonne_spire'])} à "
+                         f"{sg(r_['apres']['la_part_sur_la_bonne_spire'])} ; sur le deuxième saut entier, de "
+                         f"{sg(t_['le_temoin'])} à",
+                         f"{sg(t_['partie_de_la_spire_corrigee'])}."], s289.name))
+            out.append(("le fait de 289",
+                        [f"désigne en déplace {d['les_points_qui_bougent']}, qui rendent {r_['les_rates_rendus_justes']}",
+                         f"ratés justes pour {r_['les_justes_rendus_rates']} justes ratés : un gain net de "
+                         f"{sg(r_['le_gain_net'])}, quand la décision de `264` rend {p_['des_reparables']} pour "
+                         f"{p_['des_cassables']}"], s289.name))
+            out.append(("le pourquoi de 289",
+                        [f"{e_['des_reparables']} contre {e_['des_cassables']}"], s289.name))
+            out.append(("la durée de 289", [f"La mesure a pris {sg(d['les_secondes'])} s"], s289.name))
+            out.append(("le verdict de 289", [f"**{d['le_verdict']['lissue'].upper()}.**"], s289.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 288 : UNE REPRISE QUI NE DÉRANGE PAS LES VOISINS
     s288 = _source(racine, "une_reprise_qui_ne_derange_pas_les_voisins_rend_elle_le_troisieme_saut_plus_juste.json")
     # ⚠ Cherchées hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.

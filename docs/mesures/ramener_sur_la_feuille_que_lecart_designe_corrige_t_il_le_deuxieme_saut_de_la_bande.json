@@ -1,0 +1,56 @@
+{
+ "les_blocs_notes": 66,
+ "les_blocs_qui_different_de_283": [],
+ "la_decision_de_283_refaite": {
+  "des_reparables": 23,
+  "des_cassables": 9,
+  "en_tout": 69
+ },
+ "la_decision_de_283_publiee": {
+  "des_reparables": 23,
+  "des_cassables": 9,
+  "en_tout": 69
+ },
+ "les_points_ou_lecart_est_lu": 10972,
+ "les_points_qui_bougent": 133,
+ "parmi_eux": {
+  "des_reparables": 32,
+  "des_cassables": 35,
+  "les_reparables_en_tout": 444,
+  "les_cassables_en_tout": 421
+ },
+ "les_blocs_notes_reunis": {
+  "les_points_notes": 10652,
+  "les_points_ou_les_deux_chaines_different": 128,
+  "le_temoin": 0.8596,
+  "partie_de_la_spire_corrigee": 0.8589,
+  "les_rates_rendus_justes": 32,
+  "les_justes_rendus_rates": 39,
+  "le_gain_net": -7,
+  "avant": {
+   "les_points_notes": 10652,
+   "la_part_sur_la_bonne_spire": 0.8596
+  },
+  "apres": {
+   "les_points_notes": 10652,
+   "la_part_sur_la_bonne_spire": 0.8589
+  }
+ },
+ "le_deuxieme_saut_entier": {
+  "les_points_notes": 22318,
+  "les_points_ou_les_deux_chaines_different": 128,
+  "le_temoin": 0.8087,
+  "partie_de_la_spire_corrigee": 0.8084,
+  "les_rates_rendus_justes": 32,
+  "les_justes_rendus_rates": 39,
+  "le_gain_net": -7
+ },
+ "la_lecture": {
+  "combien_de_pannes": 0
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "ramener sur la feuille que l'écart désigne ne corrige pas le deuxième saut de la bande"
+ },
+ "les_secondes": 22.1
+}

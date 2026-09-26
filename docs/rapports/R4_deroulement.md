@@ -4244,6 +4244,13 @@ leurs voisins, la chaîne rend au troisième saut 6 ratés justes pour 6 justes 
 `R4-F469`. Le vote et la chaîne prennent un masque facultatif des votants, sans rien changer sans lui. La perte du troisième saut
 disparaît, sans devenir un gain. `R4-P95` reste ouverte.
 
+**`289` · 2026-09-26 · la feuille que l'écart désigne** — `R4-P95`
+
+⭐⭐⭐⭐ **Au deuxième saut de la bande, poser chaque point sur la feuille que l'écart lu désigne en déplace 133, qui rendent 32
+ratés justes pour 39 justes ratés : un gain net de −7, quand la décision de `264` rend 23 pour 9** — `R4-F470`. Autant de justes
+cassables que de ratés réparables mènent près d'une autre feuille. `R4-P95` reste ouverte : la décision de `264` reste le
+meilleur choix éprouvé.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
