@@ -3208,6 +3208,81 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 282 : CE QUE LA MARCHE LIT DES RATÉS DE LA BANDE
+    s282 = _source(racine, "la_marche_lit_elle_les_rates_de_la_bande.json")
+    if s282.exists():
+        d = json.loads(s282.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            S_, B_ = d["le_segment"], d["la_bande"]
+            ps, pb = S_["la_part_des_rates_que_la_marche_repare"], B_["la_part_des_rates_que_la_marche_repare"]
+            rs, rb = S_["la_decision_retient"], B_["la_decision_retient"]
+            out.append(("le titre de 282",
+                        [f"{'Oui' if pb >= ps else 'Non'} : elle en répare {sg(pb)}, contre {sg(ps)} sur le segment",
+                         f"la décision retient {rb['des_reparables']} des {B_['les_rates_reparables']} ratés réparables, "
+                         f"et {rb['des_cassables']} des {B_['les_justes_cassables']} justes cassables"], s282.name))
+            cs, cb = S_["le_controle"], B_["le_controle"]
+            if cs["reproduit"] and cb["reproduit"]:
+                out.append(("les contrôles de 282",
+                            [f"**{cs['les_blocs_lus']}** blocs du segment et des **{cb['les_blocs_lus']}** blocs de la bande",
+                             f"publiés : {cs['les_rates_rendus_justes_publies']} et {cs['les_justes_rendus_rates_publies']} "
+                             f"sur le segment, {cb['les_rates_rendus_justes_publies']} et "
+                             f"{cb['les_justes_rendus_rates_publies']} sur la bande"], s282.name))
+            out.append(("les points de 282",
+                        [f"{S_['les_points_notes']} points notés du segment et {B_['les_points_notes']} de la bande"],
+                        s282.name))
+            for lib, cle, gras in (("des ratés, réparables", "la_part_des_rates_que_la_marche_repare", True),
+                                   ("des ratés trop loin, réparables", "la_part_reparable_des_rates_trop_loin", False),
+                                   ("des ratés trop près, réparables", "la_part_reparable_des_rates_trop_pres", False),
+                                   ("des justes, cassables", "la_part_des_justes_que_la_marche_casse", False),
+                                   ("corrélation de l'écart à l'erreur", "la_correlation_de_lecart_a_lerreur", False)):
+                a_, b_ = sg(S_[cle]), sg(B_[cle])
+                out.append((f"la ligne {cle} de 282",
+                            [f"| **{lib}** | **{a_}** | **{b_}** |" if gras else f"| {lib} | {a_} | {b_} |"], s282.name))
+            out.append(("les comptes de 282", [f"| ratés, justes | {S_['les_rates']}, {S_['les_justes']} | "
+                                               f"{B_['les_rates']}, {B_['les_justes']} |"], s282.name))
+            out.append(("le biais de 282",
+                        [f"| médiane de l'écart des justes | {sg(S_['la_mediane_de_lecart_des_justes_voxels'])} voxel | "
+                         f"{sg(B_['la_mediane_de_lecart_des_justes_voxels'])} voxel |"], s282.name))
+            out.append(("le fait de 282",
+                        [f"répare {sg(pb)} des ratés du premier saut, contre {sg(ps)} sur le segment",
+                         f"casse une part des justes pareille, {sg(B_['la_part_des_justes_que_la_marche_casse'])} contre "
+                         f"{sg(S_['la_part_des_justes_que_la_marche_casse'])}",
+                         f"la décision n'en retient que {rb['des_reparables']} des {B_['les_rates_reparables']} réparables, "
+                         f"pour {rb['des_cassables']} des"], s282.name))
+            for nom, x_, r_ in (("le segment", S_, rs), ("la bande", B_, rb)):
+                R, C = x_["les_rates_reparables"], x_["les_justes_cassables"]
+                out.append((f"ce que la décision retient sur {nom} de 282",
+                            [f"| {nom} | {R} | {r_['des_reparables']}, soit {sg(round(r_['des_reparables'] / R, 4))} | "
+                             f"{C} | {r_['des_cassables']}, soit {sg(round(r_['des_cassables'] / C, 4))} |"], s282.name))
+            out.append(("ramener partout, 282",
+                        [f"rendrait {S_['les_rates_reparables']} ratés justes pour {S_['les_justes_cassables']} justes ratés "
+                         f"sur le segment, et {B_['les_rates_reparables']} pour {B_['les_justes_cassables']} sur la"],
+                        s282.name))
+            out.append(("le rapport des justes de 282",
+                        [f"La bande a {round(B_['les_justes'] / B_['les_rates'])} fois plus de justes que de ratés"],
+                        s282.name))
+
+            def _pres(x_, borne=60.0):
+                h_ = x_["lhistogramme"]
+                b__, c__ = h_["les_bords_voxels"], h_["les_comptes"]
+                loin = sum(sum(c__[i]) for i in range(len(c__)) if b__[i] >= borne or b__[i + 1] <= -borne)
+                return x_["les_rates"] - loin
+            out.append(("vu après coup, 282",
+                        [f"Sur la bande, {_pres(B_)} des {B_['les_rates']} ratés sont à moins de 60 voxels",
+                         f"sur le segment, {_pres(S_)} des {S_['les_rates']}.",
+                         f"La médiane de l'écart des ratés réparables vaut "
+                         f"{sg(B_['la_mediane_de_lecart_absolu_des_reparables_voxels'])}",
+                         f"voxels sur la bande et {sg(S_['la_mediane_de_lecart_absolu_des_reparables_voxels'])} sur le "
+                         f"segment, quand la décision cherche un glissement à {sg(B_['la_glissade_voxels'])} voxels"],
+                        s282.name))
+            out.append(("la durée de 282", [f"La mesure a pris {sg(d['les_secondes'])} s"], s282.name))
+            out.append(("le verdict de 282", [f"**{d['le_verdict']['lissue'].upper()}.**"], s282.name))
+            # ⚠ Les écritures d'une entrée sont des ALTERNATIVES : chaque morceau d'une phrase coupée est son propre contrôle.
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e_) > 1 else nom, [x], src)
+                        for nom, e_, src in out[k0:] for i, x in enumerate(e_)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 281 : LA PROCÉDURE SANS JUGE SUR LA BANDE W028-037
     s281 = _source(racine, "la_procedure_sans_juge_tient_elle_sur_la_bande.json")
     # ⚠ Cherchées hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.

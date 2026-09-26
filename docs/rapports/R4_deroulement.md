@@ -4194,6 +4194,14 @@ règle du treillis redonne celui de `257`, et les quatre piles du contrôle sont
 pas le premier saut sur la bande, et le bloc `(16, 928)` porte −8 des −10. `R4-P95` reste ouverte : pourquoi la procédure ne
 passe pas d'un segment à l'autre n'est pas établi, et la glissade n'a pas été retrouvée sur la bande.
 
+**`282` · 2026-09-26 · ce que la marche lit des ratés de la bande** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur la bande, l'écart que la marche lit répare 0,7707 des ratés du premier saut, contre 0,5849 sur le segment, et
+casse une part des justes pareille, 0,035 contre 0,0338. Mais la décision n'en retient que 15 des 373 réparables, pour 25 des
+370 cassables** — `R4-F463`. Aucune pile n'est rendue : l'écart relu redonne la décision publiée bloc par bloc. Ce qui manque
+sur la bande est le choix. `R4-P95` reste ouverte : il faut une décision qui choisisse sans le juge parmi des écarts de moins
+d'un pas.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
