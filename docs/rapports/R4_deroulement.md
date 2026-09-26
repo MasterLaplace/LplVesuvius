@@ -4186,6 +4186,14 @@ ratés sur 123 blocs : un gain net de 51. Sous le juge intact, 14 pour 2** — `
 corrige le deuxième saut. `R4-P95` reste ouverte : le deuxième saut corrigé n'est pas recalé, et le troisième saut n'est pas
 corrigé.
 
+**`281` · 2026-09-26 · la procédure sans juge sur la bande `w028-037`** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur la bande `w028-037`, la procédure sans juge de `265`, glissade de `261` comprise, rend au premier saut 15 ratés
+justes pour 25 justes ratés sur 84 blocs : un gain net de −10** — `R4-F462`. La chaîne redonne `248` aux quatre sauts, la
+règle du treillis redonne celui de `257`, et les quatre piles du contrôle sont identiques au miroir. La procédure n'améliore
+pas le premier saut sur la bande, et le bloc `(16, 928)` porte −8 des −10. `R4-P95` reste ouverte : pourquoi la procédure ne
+passe pas d'un segment à l'autre n'est pas établi, et la glissade n'a pas été retrouvée sur la bande.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

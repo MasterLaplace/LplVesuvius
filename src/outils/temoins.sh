@@ -1699,6 +1699,8 @@ run "recaler la spire corrigee sur la feuille rend-il le deuxieme saut plus just
 run "figure recaler la spire corrigee sur la feuille rend-il le deuxieme saut plus juste" uv run python "$ROOT/src/figures/figure_recaler_la_spire_corrigee_sur_la_feuille_rend_il_le_deuxieme_saut_plus_juste.py" --verifier
 run "la procedure sans juge corrige-t-elle le deuxieme saut" uv run python "$ROOT/src/nappe/la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut.py" --verifier
 run "figure la procedure sans juge corrige-t-elle le deuxieme saut" uv run python "$ROOT/src/figures/figure_la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut.py" --verifier
+run "la procedure sans juge tient-elle sur la bande" uv run python "$ROOT/src/nappe/la_procedure_sans_juge_tient_elle_sur_la_bande.py" --verifier
+run "figure la procedure sans juge tient-elle sur la bande" uv run python "$ROOT/src/figures/figure_la_procedure_sans_juge_tient_elle_sur_la_bande.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

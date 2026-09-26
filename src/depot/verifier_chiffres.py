@@ -3208,6 +3208,101 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 281 : LA PROCÉDURE SANS JUGE SUR LA BANDE W028-037
+    s281 = _source(racine, "la_procedure_sans_juge_tient_elle_sur_la_bande.json")
+    # ⚠ Cherchées hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.
+    s248b = _source(racine, "le_transfert_enchaine_tient_il_les_spires.json")
+    s275b = _source(racine, "la_procedure_sans_juge_tient_elle_sur_le_segment_entier.json")
+    if s281.exists():
+        d = json.loads(s281.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            gain = lambda b_: b_["les_rates_rendus_justes"] - b_["les_justes_rendus_rates"]  # noqa: E731
+            g_ = d["les_reunis"]
+            rj, jr, gn = g_["les_rates_rendus_justes"], g_["les_justes_rendus_rates"], g_["le_gain_net"]
+            out.append(("les réunis de 281",
+                        [f"| **la première couche de la bande** | **{g_['les_blocs']}** | **{g_['les_points_notes']}** | "
+                         f"**{sg(g_['avant'])}** | **{sg(g_['apres'])}** | **{rj}** | **{jr}** | **{sg(gn)}** |"], s281.name))
+            out.append(("le titre de 281",
+                        [f"{'Oui' if gn > 0 else 'Non'} : sur les {d['les_blocs_candidats']} blocs candidats du premier "
+                         f"saut, elle rend {rj} ratés justes pour {jr} justes ratés, un gain net de {sg(gn)}"], s281.name))
+            out.append(("le fait de 281",
+                        [f"rend au premier saut {rj} ratés",
+                         f"justes pour {jr} justes ratés sur {g_['les_blocs']} blocs : un gain net de {sg(gn)}"], s281.name))
+            decides = [b_ for b_ in d["les_blocs"] if b_.get("decidable")]
+            touches = sum(1 for b_ in decides if b_["les_points_corriges"])
+            out.append(("les parts de 281",
+                        [f"La décision corrige {g_['les_points_corriges']} points, sur {touches} blocs. La part monte sur "
+                         f"{g_['les_blocs_qui_montent']} blocs, descend sur {g_['les_blocs_qui_descendent']} et ne bouge "
+                         f"pas sur {g_['les_blocs_immobiles']}."], s281.name))
+            vides = sum(1 for b_ in decides if not b_["avant"]["les_points_notes"])
+            out.append(("les blocs sans point de 281",
+                        [f"il y a {vides} blocs où le bilan ne note aucun point"], s281.name))
+            part = d["la_part_des_points_notes_dans_les_blocs"]
+            e_ = d["la_bande_entiere"]
+            out.append(("la couverture de 281",
+                        [f"Les blocs couvrent {sg(part)} des points notés du premier saut de la bande",
+                         f"la bande entière, la part passe de {sg(e_['avant']['la_part_sur_la_bonne_spire'])} à "
+                         f"{sg(e_['apres']['la_part_sur_la_bonne_spire'])}.",
+                         f"Les {sg(round(1 - part, 2))} des points notés du premier saut"], s281.name))
+            sauts = d["la_reproduction_de_248"]["les_sauts"]
+            if d["la_reproduction_de_248"]["tous"]:
+                n_ = [str(s_["refait"]["les_points_notes"]) for s_ in sauts]
+                out.append(("la reproduction de 281",
+                            [f"compte pour compte : {', '.join(n_[:-1])} et {n_[-1]} points notés"], s281.name))
+            t_ = d["le_treillis"]
+            if t_["reproduit"]:
+                out.append(("le treillis de 281",
+                            [f"la grille de la tranche ({t_['la_grille_de_la_tranche'][0]} × "
+                             f"{t_['la_grille_de_la_tranche'][1]})",
+                             f"soit {t_['la_bande'][0]} × {t_['la_bande'][1]} chunks",
+                             f"le treillis que `257` lit dans le volume publié, {t_['celui_de_257'][0]} × "
+                             f"{t_['celui_de_257'][1]}"], s281.name))
+            out.append(("les blocs de 281",
+                        [f"les **{d['les_blocs_candidats']}** blocs candidats sont tous sur la rangée de blocs "
+                         f"{decides[0]['la_rangee']}",
+                         f"**{2 * len(d['les_blocs'])}** piles"], s281.name))
+            c_ = d["le_controle_du_miroir"]
+            if c_["identiques"] and all(x == 0 for x in c_["les_piles"].values()):
+                blocs_c = " et ".join(f"`({b.split('_')[0]}, {b.split('_')[1]})`" for b in c_["les_blocs"])
+                out.append(("le contrôle de 281", [f"le plus de points notés, {blocs_c}, sont rendus à distance"], s281.name))
+            out.append(("la glissade de 281", [f"**{sg(d['la_glissade_voxels'])}** voxels"], s281.name))
+            # ⚠ La règle du tableau est écrite dans le document : un gain net d'au moins 3 en valeur absolue.
+            forts = [b_ for b_ in decides if abs(gain(b_)) >= 3]
+            for b_ in forts:
+                out.append((f"la ligne ({b_['la_rangee']}, {b_['la_colonne']}) de 281",
+                            [f"| `({b_['la_rangee']}, {b_['la_colonne']})` | {b_['avant']['les_points_notes']} | "
+                             f"{sg(b_['avant']['la_part_sur_la_bonne_spire'])} | "
+                             f"{sg(b_['apres']['la_part_sur_la_bonne_spire'])} | {b_['les_points_corriges']} | "
+                             f"{b_['les_rates_rendus_justes']} | {b_['les_justes_rendus_rates']} | {sg(gain(b_))} |"],
+                            s281.name))
+            mots = {3: "trois", 6: "six"}
+            out.append(("les forts de 281",
+                        [f"Les {mots.get(len(forts), len(forts))} portent {sg(sum(gain(b_) for b_ in forts))} des "
+                         f"{sg(gn)}"], s281.name))
+            pire = min(decides, key=gain)
+            out.append(("le pire bloc de 281",
+                        [f"Le bloc `({pire['la_rangee']}, {pire['la_colonne']})` porte à lui seul {sg(gain(pire))} : sur "
+                         f"ses {pire['les_points_corriges']} points corrigés, la décision rend "
+                         f"{pire['les_justes_rendus_rates']} justes"], s281.name))
+            if s275b.exists():
+                g1 = json.loads(s275b.read_text())["les_reunis"]
+                out.append(("le segment rappelé par 281",
+                            [f"{sg(g_['avant'])} sur ses blocs contre {sg(g1['avant'])} sur ceux de `275`",
+                             f"y corrige {g_['les_points_corriges']} points sur {g_['les_blocs']} blocs, quand elle en "
+                             f"corrigeait {g1['les_points_corriges']} sur {g1['les_blocs']}"], s281.name))
+            if s248b.exists():
+                couv = json.loads(s248b.read_text())["les_couches"]["du_cote_plus"]
+                out.append(("les couches de la bande rappelées par 281",
+                            [f"notent {', '.join(sg(x) for x in couv[:-1])}",
+                             f"et {sg(couv[-1])} des points aux sauts 1 à {len(couv)}"], s281.name))
+            out.append(("le verdict de 281", [f"**{d['le_verdict']['lissue'].upper()}.**"], s281.name))
+            # ⚠ Les écritures d'une entrée sont des ALTERNATIVES : une seule retrouvée suffit. Chaque morceau d'une phrase
+            # coupée par la ligne est donc son propre contrôle.
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e_) > 1 else nom, [x], src)
+                        for nom, e_, src in out[k0:] for i, x in enumerate(e_)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 280 : LA PROCÉDURE SANS JUGE SUR LE DEUXIÈME SAUT
     s280 = _source(racine, "la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut.json")
     # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.
