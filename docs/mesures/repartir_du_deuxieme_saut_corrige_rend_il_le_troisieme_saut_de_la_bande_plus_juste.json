@@ -1,0 +1,215 @@
+{
+ "la_reproduction_de_248": {
+  "les_sauts": [
+   {
+    "le_saut": 1,
+    "publie": {
+     "les_points_notes": 26852,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.912,
+      "la_part_trop_loin": 0.0316,
+      "la_part_trop_pres": 0.0565,
+      "lerreur_mediane_voxels": 6.2542
+     }
+    },
+    "refait": {
+     "les_points_notes": 26852,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.912,
+      "la_part_trop_loin": 0.0316,
+      "la_part_trop_pres": 0.0565,
+      "lerreur_mediane_voxels": 6.2542
+     }
+    },
+    "reproduit": true
+   },
+   {
+    "le_saut": 2,
+    "publie": {
+     "les_points_notes": 22318,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.8087,
+      "la_part_trop_loin": 0.0461,
+      "la_part_trop_pres": 0.1452,
+      "lerreur_mediane_voxels": 6.9576
+     }
+    },
+    "refait": {
+     "les_points_notes": 22318,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.8087,
+      "la_part_trop_loin": 0.0461,
+      "la_part_trop_pres": 0.1452,
+      "lerreur_mediane_voxels": 6.9576
+     }
+    },
+    "reproduit": true
+   },
+   {
+    "le_saut": 3,
+    "publie": {
+     "les_points_notes": 16010,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.7686,
+      "la_part_trop_loin": 0.065,
+      "la_part_trop_pres": 0.1665,
+      "lerreur_mediane_voxels": 7.1587
+     }
+    },
+    "refait": {
+     "les_points_notes": 16010,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.7686,
+      "la_part_trop_loin": 0.065,
+      "la_part_trop_pres": 0.1665,
+      "lerreur_mediane_voxels": 7.1587
+     }
+    },
+    "reproduit": true
+   },
+   {
+    "le_saut": 4,
+    "publie": {
+     "les_points_notes": 9379,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.754,
+      "la_part_trop_loin": 0.0831,
+      "la_part_trop_pres": 0.1629,
+      "lerreur_mediane_voxels": 7.2624
+     }
+    },
+    "refait": {
+     "les_points_notes": 9379,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.754,
+      "la_part_trop_loin": 0.0831,
+      "la_part_trop_pres": 0.1629,
+      "lerreur_mediane_voxels": 7.2624
+     }
+    },
+    "reproduit": true
+   }
+  ],
+  "tous": true
+ },
+ "la_reprise_du_temoin": {
+  "les_sauts": [
+   {
+    "le_saut": 3,
+    "publie": {
+     "les_points_notes": 16010,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.7686,
+      "la_part_trop_loin": 0.065,
+      "la_part_trop_pres": 0.1665,
+      "lerreur_mediane_voxels": 7.1587
+     }
+    },
+    "refait": {
+     "les_points_notes": 16010,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.7686,
+      "la_part_trop_loin": 0.065,
+      "la_part_trop_pres": 0.1665,
+      "lerreur_mediane_voxels": 7.1587
+     }
+    },
+    "reproduit": true
+   },
+   {
+    "le_saut": 4,
+    "publie": {
+     "les_points_notes": 9379,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.754,
+      "la_part_trop_loin": 0.0831,
+      "la_part_trop_pres": 0.1629,
+      "lerreur_mediane_voxels": 7.2624
+     }
+    },
+    "refait": {
+     "les_points_notes": 9379,
+     "la_chaine": {
+      "la_part_sur_la_bonne_spire": 0.754,
+      "la_part_trop_loin": 0.0831,
+      "la_part_trop_pres": 0.1629,
+      "lerreur_mediane_voxels": 7.2624
+     }
+    },
+    "reproduit": true
+   }
+  ],
+  "tous": true
+ },
+ "les_normales_du_deuxieme_saut_redonnees": true,
+ "les_points_deplaces_par_283": 69,
+ "les_points_corriges_publies_par_283": 69,
+ "les_points_recales": 18,
+ "la_distance_a_la_feuille_des_points_deplaces": {
+  "les_points": 69,
+  "sans_feuille_sur_le_rayon": 13,
+  "la_mediane_voxels": 59.5061,
+  "au_dela_de_la_reconnaissance": 48,
+  "au_dela_dun_demi_feuillet": 38
+ },
+ "le_deuxieme_saut": {
+  "corrige_contre_temoin": {
+   "les_points_notes": 22318,
+   "les_points_ou_les_deux_chaines_different": 43,
+   "le_temoin": 0.8087,
+   "partie_de_la_spire_corrigee": 0.8093,
+   "les_rates_rendus_justes": 23,
+   "les_justes_rendus_rates": 9,
+   "le_gain_net": 14
+  },
+  "recale_contre_temoin": {
+   "les_points_notes": 22318,
+   "les_points_ou_les_deux_chaines_different": 43,
+   "le_temoin": 0.8087,
+   "partie_de_la_spire_corrigee": 0.8093,
+   "les_rates_rendus_justes": 22,
+   "les_justes_rendus_rates": 8,
+   "le_gain_net": 14
+  },
+  "recale_contre_corrige": {
+   "les_points_notes": 22318,
+   "les_points_ou_les_deux_chaines_different": 15,
+   "le_temoin": 0.8093,
+   "partie_de_la_spire_corrigee": 0.8093,
+   "les_rates_rendus_justes": 2,
+   "les_justes_rendus_rates": 2,
+   "le_gain_net": 0
+  }
+ },
+ "les_sauts": [
+  {
+   "les_points_notes": 16010,
+   "les_points_ou_les_deux_chaines_different": 95,
+   "le_temoin": 0.7686,
+   "partie_de_la_spire_corrigee": 0.7681,
+   "les_rates_rendus_justes": 7,
+   "les_justes_rendus_rates": 14,
+   "le_gain_net": -7,
+   "le_saut": 3
+  },
+  {
+   "les_points_notes": 9379,
+   "les_points_ou_les_deux_chaines_different": 100,
+   "le_temoin": 0.754,
+   "partie_de_la_spire_corrigee": 0.754,
+   "les_rates_rendus_justes": 3,
+   "les_justes_rendus_rates": 3,
+   "le_gain_net": 0,
+   "le_saut": 4
+  }
+ ],
+ "la_lecture": {
+  "combien_de_pannes": 0
+ },
+ "le_deuxieme_saut_recale": "deuxieme_saut_de_la_bande_corrige_recale_265_20260623142658-w028-037_m7_du_cote_plus.npy",
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "repartir du deuxième saut corrigé ne rend pas le troisième saut de la bande plus juste"
+ },
+ "les_secondes": 31.9
+}

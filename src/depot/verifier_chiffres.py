@@ -3208,6 +3208,55 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 284 : LA CHAÎNE REPARTIE DU DEUXIÈME SAUT CORRIGÉ DE LA BANDE
+    s284 = _source(racine, "repartir_du_deuxieme_saut_corrige_rend_il_le_troisieme_saut_de_la_bande_plus_juste.json")
+    if s284.exists():
+        d = json.loads(s284.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            s3, s4 = d["les_sauts"][0], d["les_sauts"][1]
+            out.append(("le titre de 284",
+                        [f"{'Oui' if s3['le_gain_net'] > 0 else 'Non'} : elle y rend {s3['les_rates_rendus_justes']} ratés "
+                         f"justes pour {s3['les_justes_rendus_rates']} justes ratés, un gain net de {sg(s3['le_gain_net'])}"],
+                        s284.name))
+            dist = d["la_distance_a_la_feuille_des_points_deplaces"]
+            out.append(("le recalage de 284",
+                        [f"Le recalage ne déplace que **{d['les_points_recales']}** des {d['les_points_deplaces_par_283']} "
+                         f"points",
+                         f"une médiane de **{sg(dist['la_mediane_voxels'])}** voxels de la feuille",
+                         f"la plus proche : {dist['au_dela_de_la_reconnaissance']} au-delà des 12 voxels",
+                         f"{dist['au_dela_dun_demi_feuillet']} au-delà d'un demi-feuillet, et {dist['sans_feuille_sur_le_rayon']} "
+                         f"sans"], s284.name))
+            for cle, lib in (("corrige_contre_temoin", "corrigé, contre le témoin"),
+                             ("recale_contre_temoin", "recalé, contre le témoin"),
+                             ("recale_contre_corrige", "recalé, contre corrigé")):
+                x_ = d["le_deuxieme_saut"][cle]
+                out.append((f"le deuxième saut {cle} de 284",
+                            [f"| {lib} | {x_['les_rates_rendus_justes']} | {x_['les_justes_rendus_rates']} | "
+                             f"{sg(x_['le_gain_net'])} |"], s284.name))
+            out.append(("le troisième saut de 284",
+                        [f"| **3** | **{s3['les_points_notes']}** | {s3['les_points_ou_les_deux_chaines_different']} | "
+                         f"**{sg(s3['le_temoin'])}** | **{sg(s3['partie_de_la_spire_corrigee'])}** | "
+                         f"**{s3['les_rates_rendus_justes']}** | **{s3['les_justes_rendus_rates']}** | "
+                         f"**{sg(s3['le_gain_net'])}** |"], s284.name))
+            out.append(("le quatrième saut de 284",
+                        [f"| 4 | {s4['les_points_notes']} | {s4['les_points_ou_les_deux_chaines_different']} | "
+                         f"{sg(s4['le_temoin'])} | {sg(s4['partie_de_la_spire_corrigee'])} | {s4['les_rates_rendus_justes']} | "
+                         f"{s4['les_justes_rendus_rates']} | {sg(s4['le_gain_net'])} |"], s284.name))
+            out.append(("le fait de 284",
+                        [f"la chaîne rend au troisième saut {s3['les_rates_rendus_justes']} ratés justes pour "
+                         f"{s3['les_justes_rendus_rates']} justes",
+                         f"ratés : un gain net de {sg(s3['le_gain_net'])}. Au quatrième, {s4['les_rates_rendus_justes']} pour "
+                         f"{s4['les_justes_rendus_rates']}"], s284.name))
+            out.append(("les points hors feuille de 284",
+                        [f"La correction laisse {dist['au_dela_dun_demi_feuillet']} points à plus d'un demi-feuillet de toute "
+                         f"feuille"], s284.name))
+            out.append(("la durée de 284", [f"La mesure a pris {sg(d['les_secondes'])} s"], s284.name))
+            out.append(("le verdict de 284", [f"**{d['le_verdict']['lissue'].upper()}.**"], s284.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 283 : LA PROCÉDURE SANS JUGE SUR LE DEUXIÈME SAUT DE LA BANDE
     s283 = _source(racine, "la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut_de_la_bande.json")
     # ⚠ Cherchées hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.

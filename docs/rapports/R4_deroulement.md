@@ -4209,6 +4209,13 @@ justes ratés sur 66 blocs : un gain net de 14** — `R4-F464`. La chaîne redon
 deux piles du contrôle sont identiques au miroir. La procédure corrige le deuxième saut de la bande, mais trois blocs portent 15
 du gain. `R4-P95` reste ouverte : le troisième saut n'est pas corrigé.
 
+**`284` · 2026-09-26 · la chaîne repartie du deuxième saut corrigé de la bande** — `R4-P95`
+
+⭐⭐⭐⭐ **Repartie du deuxième saut corrigé et recalé de la bande, la chaîne rend au troisième saut 7 ratés justes pour 14 justes
+ratés : un gain net de −7. Au quatrième, 3 pour 3** — `R4-F465`. La reprise partie du deuxième saut non corrigé redonne `248`.
+Le recalage de `279` ne ramène que 18 des 69 points sur une feuille : la correction les pose à une médiane de 59,5061 voxels de
+la plus proche. `R4-P95` reste ouverte : sur la bande, corriger le deuxième saut ne profite pas au troisième.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -1705,6 +1705,8 @@ run "la marche lit-elle les rates de la bande" uv run python "$ROOT/src/nappe/la
 run "figure la marche lit-elle les rates de la bande" uv run python "$ROOT/src/figures/figure_la_marche_lit_elle_les_rates_de_la_bande.py" --verifier
 run "la procedure sans juge corrige-t-elle le deuxieme saut de la bande" uv run python "$ROOT/src/nappe/la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut_de_la_bande.py" --verifier
 run "figure la procedure sans juge corrige-t-elle le deuxieme saut de la bande" uv run python "$ROOT/src/figures/figure_la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut_de_la_bande.py" --verifier
+run "repartir du deuxieme saut corrige rend-il le troisieme saut de la bande plus juste" uv run python "$ROOT/src/nappe/repartir_du_deuxieme_saut_corrige_rend_il_le_troisieme_saut_de_la_bande_plus_juste.py" --verifier
+run "figure repartir du deuxieme saut corrige rend-il le troisieme saut de la bande plus juste" uv run python "$ROOT/src/figures/figure_repartir_du_deuxieme_saut_corrige_rend_il_le_troisieme_saut_de_la_bande_plus_juste.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier
