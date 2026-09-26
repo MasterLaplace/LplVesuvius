@@ -3208,6 +3208,86 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 280 : LA PROCÉDURE SANS JUGE SUR LE DEUXIÈME SAUT
+    s280 = _source(racine, "la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut.json")
+    # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.
+    s275_ = _source(racine, "la_procedure_sans_juge_tient_elle_sur_le_segment_entier.json")
+    if s280.exists():
+        d = json.loads(s280.read_text())
+        if d.get("decidable"):
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            gain = lambda b_: b_["les_rates_rendus_justes"] - b_["les_justes_rendus_rates"]  # noqa: E731
+            g_, gi = d["les_reunis"], d["les_reunis_sous_le_juge_intact"]
+            out.append(("les réunis de 280",
+                        [f"| **le juge de `248`** | **{g_['les_blocs']}** | **{g_['les_points_notes']}** | "
+                         f"**{sg(g_['avant'])}** | **{sg(g_['apres'])}** | **{g_['les_rates_rendus_justes']}** | "
+                         f"**{g_['les_justes_rendus_rates']}** | **{g_['le_gain_net']}** |"], s280.name))
+            out.append(("le juge intact de 280",
+                        [f"| le juge intact de `253` | {gi['les_blocs']} | {gi['les_points_notes']} | {sg(gi['avant'])} | "
+                         f"{sg(gi['apres'])} | {gi['les_rates_rendus_justes']} | {gi['les_justes_rendus_rates']} | "
+                         f"{gi['le_gain_net']} |"], s280.name))
+            out.append(("le titre de 280",
+                        [f"Oui : sur les {d['les_blocs_notes']} blocs notés du deuxième saut, elle rend "
+                         f"{g_['les_rates_rendus_justes']} ratés justes pour {g_['les_justes_rendus_rates']} justes ratés, "
+                         f"un gain net de {g_['le_gain_net']}"], s280.name))
+            out.append(("le fait de 280",
+                        [f"rend {g_['les_rates_rendus_justes']} ratés justes pour {g_['les_justes_rendus_rates']} justes",
+                         f"ratés sur {g_['les_blocs']} blocs : un gain net de {g_['le_gain_net']}. Sous le juge intact, "
+                         f"{gi['les_rates_rendus_justes']} pour {gi['les_justes_rendus_rates']}"], s280.name))
+            out.append(("les parts de 280",
+                        [f"La décision corrige {g_['les_points_corriges']} points. La part monte sur "
+                         f"{g_['les_blocs_qui_montent']} blocs, descend sur {g_['les_blocs_qui_descendent']} et ne bouge "
+                         f"pas sur {g_['les_blocs_immobiles']}."], s280.name))
+            vides = sum(1 for b_ in d["les_blocs"] if b_.get("decidable") and not b_["avant"]["les_points_notes"])
+            out.append(("les blocs sans point de 280",
+                        [f"Parmi ces {g_['les_blocs_immobiles']}, il y a {vides} blocs où le bilan ne note aucun point"],
+                        s280.name))
+            r279 = d["le_deuxieme_saut_de_279"]
+            out.append(("la couverture de 280",
+                        [f"{sg(round(g_['les_points_notes'] / r279['refait']['les_points_notes'], 2))} des points notés "
+                         f"du deuxième saut"], s280.name))
+            n_ = d["les_blocs_notes"]
+            out.append(("les blocs de 280",
+                        [f"point du juge du deuxième saut : **{n_}** blocs",
+                         f"soit **{d['les_blocs_rendus_en_tout']}** blocs et **{2 * d['les_blocs_rendus_en_tout']}** piles"],
+                        s280.name))
+            if r279["reproduit"]:
+                p_ = r279["publie"]
+                out.append(("la reproduction de 280",
+                            [f"compte pour compte : {p_['les_points_notes']} points notés,",
+                             f"{p_['les_rates_rendus_justes']} ratés rendus justes, {p_['les_justes_rendus_rates']} justes "
+                             f"rendus ratés."], s280.name))
+            c_ = d["le_controle_du_miroir"]
+            if c_["identiques"] and all(x == 0 for x in c_["les_piles"].values()):
+                blocs_c = " et ".join(f"`({b.split('_')[0]}, {b.split('_')[1]})`" for b in c_["les_blocs"])
+                out.append(("le contrôle de 280", [f"le plus de points, {blocs_c}, sont rendus à distance"], s280.name))
+            # ⚠ La règle du tableau est écrite dans le document : un gain net d'au moins 3 en valeur absolue.
+            forts = [b_ for b_ in d["les_blocs"] if b_.get("decidable") and abs(gain(b_)) >= 3]
+            for b_ in forts:
+                out.append((f"la ligne ({b_['la_rangee']}, {b_['la_colonne']}) de 280",
+                            [f"| `({b_['la_rangee']}, {b_['la_colonne']})` | {b_['avant']['les_points_notes']} | "
+                             f"{sg(b_['avant']['la_part_sur_la_bonne_spire'])} | "
+                             f"{sg(b_['apres']['la_part_sur_la_bonne_spire'])} | {b_['les_points_corriges']} | "
+                             f"{b_['les_rates_rendus_justes']} | {b_['les_justes_rendus_rates']} | {sg(gain(b_))} |"],
+                            s280.name))
+            mots = {3: "trois", 6: "six"}
+            out.append(("les forts de 280",
+                        [f"Les {mots.get(len(forts), len(forts))} portent {sum(gain(b_) for b_ in forts)} des "
+                         f"{g_['le_gain_net']}"], s280.name))
+            descendent = [b_ for b_ in d["les_blocs"] if b_.get("decidable") and b_["avant"]["les_points_notes"]
+                          and b_["apres"]["la_part_sur_la_bonne_spire"] < b_["avant"]["la_part_sur_la_bonne_spire"]]
+            if all(gain(b_) == -1 for b_ in descendent):
+                out.append(("les blocs qui descendent de 280",
+                            [f"chacun des {mots.get(len(descendent), len(descendent))} qui descendent rend un juste raté "
+                             f"de plus"], s280.name))
+            if s275_.exists():
+                g1 = json.loads(s275_.read_text())["les_reunis"]
+                out.append(("le premier saut rappelé par 280",
+                            [f"rend ici {g_['les_justes_rendus_rates']} justes ratés pour {g_['les_rates_rendus_justes']} "
+                             f"ratés justes, quand elle en rendait {g1['les_justes_rendus_rates']} pour "
+                             f"{g1['les_rates_rendus_justes']} au premier"], s280.name))
+            out.append(("le verdict de 280", [f"**{d['le_verdict']['lissue'].upper()}.**"], s280.name))
+
     # ⭐⭐⭐⭐ LA TRANCHE 279 : LA SPIRE CORRIGÉE RECALÉE SUR LA FEUILLE
     s279 = _source(racine, "recaler_la_spire_corrigee_sur_la_feuille_rend_il_le_deuxieme_saut_plus_juste.json")
     if s279.exists():

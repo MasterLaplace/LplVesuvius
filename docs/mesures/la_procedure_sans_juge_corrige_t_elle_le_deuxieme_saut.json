@@ -1,0 +1,2293 @@
+{
+ "la_glissade_voxels": 69.458,
+ "les_blocs_notes": 123,
+ "les_blocs_rendus_en_tout": 171,
+ "le_deuxieme_saut_de_279": {
+  "publie": {
+   "les_points_notes": 16635,
+   "les_points_ou_les_deux_chaines_different": 245,
+   "les_rates_rendus_justes": 29,
+   "les_justes_rendus_rates": 5,
+   "le_gain_net": 24,
+   "partie_de_la_spire_recalee": 0.8904,
+   "partie_de_la_spire_corrigee": 0.889
+  },
+  "refait": {
+   "les_points_notes": 16635,
+   "les_points_ou_les_deux_chaines_different": 245,
+   "les_rates_rendus_justes": 29,
+   "les_justes_rendus_rates": 5,
+   "le_gain_net": 24,
+   "partie_de_la_spire_recalee": 0.8904,
+   "partie_de_la_spire_corrigee": 0.889
+  },
+  "reproduit": true
+ },
+ "le_controle_du_miroir": {
+  "les_blocs": [
+   "96_256",
+   "112_208"
+  ],
+  "identiques": true,
+  "les_piles": {
+   "la_spire_recalee_96_256": 0,
+   "la_spire_recalee_112_208": 0,
+   "le_deuxieme_saut_96_256": 0,
+   "le_deuxieme_saut_112_208": 0
+  }
+ },
+ "les_pas": {
+  "les_tables_faites": 42,
+  "les_secondes": 262.7
+ },
+ "les_piles_manquantes": [],
+ "les_blocs": [
+  {
+   "la_rangee": 16,
+   "la_colonne": 96,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 7.39,
+   "avant": {
+    "les_points_notes": 3,
+    "la_part_sur_la_bonne_spire": 0.3333
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 3,
+    "la_part_sur_la_bonne_spire": 0.3333
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 16,
+   "la_colonne": 112,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -2.9289,
+   "avant": {
+    "les_points_notes": 1,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 1,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 16,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -3.8883,
+   "avant": {
+    "les_points_notes": 120,
+    "la_part_sur_la_bonne_spire": 0.7583
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 120,
+    "la_part_sur_la_bonne_spire": 0.7583
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 16,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 7.2412,
+   "avant": {
+    "les_points_notes": 164,
+    "la_part_sur_la_bonne_spire": 0.8963
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 164,
+    "la_part_sur_la_bonne_spire": 0.8963
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 16,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 1.7267,
+   "avant": {
+    "les_points_notes": 151,
+    "la_part_sur_la_bonne_spire": 0.9272
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 151,
+    "la_part_sur_la_bonne_spire": 0.9272
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 16,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 4.6003,
+   "avant": {
+    "les_points_notes": 167,
+    "la_part_sur_la_bonne_spire": 0.7665
+   },
+   "les_points_corriges": 31,
+   "apres": {
+    "les_points_notes": 167,
+    "la_part_sur_la_bonne_spire": 0.8743
+   },
+   "les_rates_rendus_justes": 21,
+   "les_justes_rendus_rates": 3
+  },
+  {
+   "la_rangee": 16,
+   "la_colonne": 256,
+   "decidable": true,
+   "les_voisins": 2,
+   "lancre_voxels": 2.8452,
+   "avant": {
+    "les_points_notes": 166,
+    "la_part_sur_la_bonne_spire": 0.4819
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 166,
+    "la_part_sur_la_bonne_spire": 0.4819
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 32,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.3895,
+   "avant": {
+    "les_points_notes": 0,
+    "la_part_sur_la_bonne_spire": null
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 0,
+    "la_part_sur_la_bonne_spire": null
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 32,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.8379,
+   "avant": {
+    "les_points_notes": 144,
+    "la_part_sur_la_bonne_spire": 0.9861
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 144,
+    "la_part_sur_la_bonne_spire": 0.9861
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 32,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 4.0102,
+   "avant": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 32,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.5209,
+   "avant": {
+    "les_points_notes": 152,
+    "la_part_sur_la_bonne_spire": 0.9737
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 152,
+    "la_part_sur_la_bonne_spire": 0.9737
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 32,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.3859,
+   "avant": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 0.994
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 0.994
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 32,
+   "la_colonne": 256,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 2.9794,
+   "avant": {
+    "les_points_notes": 166,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 166,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 48,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 2.4892,
+   "avant": {
+    "les_points_notes": 0,
+    "la_part_sur_la_bonne_spire": null
+   },
+   "les_points_corriges": 3,
+   "apres": {
+    "les_points_notes": 0,
+    "la_part_sur_la_bonne_spire": null
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 48,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.3955,
+   "avant": {
+    "les_points_notes": 143,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 143,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 48,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.8888,
+   "avant": {
+    "les_points_notes": 155,
+    "la_part_sur_la_bonne_spire": 0.9548
+   },
+   "les_points_corriges": 2,
+   "apres": {
+    "les_points_notes": 155,
+    "la_part_sur_la_bonne_spire": 0.9548
+   },
+   "les_rates_rendus_justes": 1,
+   "les_justes_rendus_rates": 1
+  },
+  {
+   "la_rangee": 48,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -4.0906,
+   "avant": {
+    "les_points_notes": 147,
+    "la_part_sur_la_bonne_spire": 0.8163
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 147,
+    "la_part_sur_la_bonne_spire": 0.8163
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 48,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 5.232,
+   "avant": {
+    "les_points_notes": 155,
+    "la_part_sur_la_bonne_spire": 0.8452
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 155,
+    "la_part_sur_la_bonne_spire": 0.8452
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 48,
+   "la_colonne": 256,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 8.6276,
+   "avant": {
+    "les_points_notes": 165,
+    "la_part_sur_la_bonne_spire": 0.9212
+   },
+   "les_points_corriges": 3,
+   "apres": {
+    "les_points_notes": 165,
+    "la_part_sur_la_bonne_spire": 0.9212
+   },
+   "les_rates_rendus_justes": 1,
+   "les_justes_rendus_rates": 1
+  },
+  {
+   "la_rangee": 64,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -4.9446,
+   "avant": {
+    "les_points_notes": 0,
+    "la_part_sur_la_bonne_spire": null
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 0,
+    "la_part_sur_la_bonne_spire": null
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 64,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 2.9801,
+   "avant": {
+    "les_points_notes": 133,
+    "la_part_sur_la_bonne_spire": 0.9774
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 133,
+    "la_part_sur_la_bonne_spire": 0.9774
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 64,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 7.0551,
+   "avant": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.8792
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.8792
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 64,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -0.9432,
+   "avant": {
+    "les_points_notes": 111,
+    "la_part_sur_la_bonne_spire": 0.6396
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 111,
+    "la_part_sur_la_bonne_spire": 0.6486
+   },
+   "les_rates_rendus_justes": 1,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 64,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 6.1168,
+   "avant": {
+    "les_points_notes": 135,
+    "la_part_sur_la_bonne_spire": 0.7185
+   },
+   "les_points_corriges": 14,
+   "apres": {
+    "les_points_notes": 135,
+    "la_part_sur_la_bonne_spire": 0.7407
+   },
+   "les_rates_rendus_justes": 3,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 64,
+   "la_colonne": 256,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 2.4455,
+   "avant": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.9128
+   },
+   "les_points_corriges": 2,
+   "apres": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.9128
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 80,
+   "la_colonne": 144,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.3382,
+   "avant": {
+    "les_points_notes": 1,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 10,
+   "apres": {
+    "les_points_notes": 1,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 80,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 4.267,
+   "avant": {
+    "les_points_notes": 10,
+    "la_part_sur_la_bonne_spire": 0.8
+   },
+   "les_points_corriges": 6,
+   "apres": {
+    "les_points_notes": 10,
+    "la_part_sur_la_bonne_spire": 0.8
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 80,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 4.8564,
+   "avant": {
+    "les_points_notes": 158,
+    "la_part_sur_la_bonne_spire": 0.7785
+   },
+   "les_points_corriges": 34,
+   "apres": {
+    "les_points_notes": 158,
+    "la_part_sur_la_bonne_spire": 0.7848
+   },
+   "les_rates_rendus_justes": 11,
+   "les_justes_rendus_rates": 10
+  },
+  {
+   "la_rangee": 80,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 9.864,
+   "avant": {
+    "les_points_notes": 146,
+    "la_part_sur_la_bonne_spire": 0.7397
+   },
+   "les_points_corriges": 12,
+   "apres": {
+    "les_points_notes": 146,
+    "la_part_sur_la_bonne_spire": 0.774
+   },
+   "les_rates_rendus_justes": 6,
+   "les_justes_rendus_rates": 1
+  },
+  {
+   "la_rangee": 80,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 2.8418,
+   "avant": {
+    "les_points_notes": 117,
+    "la_part_sur_la_bonne_spire": 0.8547
+   },
+   "les_points_corriges": 17,
+   "apres": {
+    "les_points_notes": 117,
+    "la_part_sur_la_bonne_spire": 0.8632
+   },
+   "les_rates_rendus_justes": 1,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 80,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 10.1766,
+   "avant": {
+    "les_points_notes": 114,
+    "la_part_sur_la_bonne_spire": 0.7368
+   },
+   "les_points_corriges": 35,
+   "apres": {
+    "les_points_notes": 114,
+    "la_part_sur_la_bonne_spire": 0.7632
+   },
+   "les_rates_rendus_justes": 4,
+   "les_justes_rendus_rates": 1
+  },
+  {
+   "la_rangee": 80,
+   "la_colonne": 256,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 6.9251,
+   "avant": {
+    "les_points_notes": 153,
+    "la_part_sur_la_bonne_spire": 0.8889
+   },
+   "les_points_corriges": 5,
+   "apres": {
+    "les_points_notes": 153,
+    "la_part_sur_la_bonne_spire": 0.8954
+   },
+   "les_rates_rendus_justes": 1,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 96,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.697,
+   "avant": {
+    "les_points_notes": 24,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 24,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 96,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 2.3584,
+   "avant": {
+    "les_points_notes": 166,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 166,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 96,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 5.174,
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 96,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 7.9846,
+   "avant": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 0.8205
+   },
+   "les_points_corriges": 4,
+   "apres": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 0.8269
+   },
+   "les_rates_rendus_justes": 1,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 96,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.3567,
+   "avant": {
+    "les_points_notes": 166,
+    "la_part_sur_la_bonne_spire": 0.9217
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 166,
+    "la_part_sur_la_bonne_spire": 0.9217
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 96,
+   "la_colonne": 256,
+   "decidable": true,
+   "les_voisins": 2,
+   "lancre_voxels": 2.1369,
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 112,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.7317,
+   "avant": {
+    "les_points_notes": 18,
+    "la_part_sur_la_bonne_spire": 0.8333
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 18,
+    "la_part_sur_la_bonne_spire": 0.8333
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 112,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.2975,
+   "avant": {
+    "les_points_notes": 164,
+    "la_part_sur_la_bonne_spire": 0.9634
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 164,
+    "la_part_sur_la_bonne_spire": 0.9634
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 112,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -3.6817,
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 112,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -0.5223,
+   "avant": {
+    "les_points_notes": 142,
+    "la_part_sur_la_bonne_spire": 0.9225
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 142,
+    "la_part_sur_la_bonne_spire": 0.9225
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 112,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 1.1638,
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.9231
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.9231
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 128,
+   "la_colonne": 128,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.2317,
+   "avant": {
+    "les_points_notes": 1,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 1,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 128,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.5816,
+   "avant": {
+    "les_points_notes": 24,
+    "la_part_sur_la_bonne_spire": 0.9583
+   },
+   "les_points_corriges": 3,
+   "apres": {
+    "les_points_notes": 24,
+    "la_part_sur_la_bonne_spire": 0.9583
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 128,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -0.5288,
+   "avant": {
+    "les_points_notes": 148,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 148,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 128,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -2.0421,
+   "avant": {
+    "les_points_notes": 167,
+    "la_part_sur_la_bonne_spire": 0.9341
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 167,
+    "la_part_sur_la_bonne_spire": 0.9341
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 128,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.471,
+   "avant": {
+    "les_points_notes": 135,
+    "la_part_sur_la_bonne_spire": 0.5481
+   },
+   "les_points_corriges": 26,
+   "apres": {
+    "les_points_notes": 135,
+    "la_part_sur_la_bonne_spire": 0.5852
+   },
+   "les_rates_rendus_justes": 5,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 128,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -0.7945,
+   "avant": {
+    "les_points_notes": 161,
+    "la_part_sur_la_bonne_spire": 0.6584
+   },
+   "les_points_corriges": 3,
+   "apres": {
+    "les_points_notes": 161,
+    "la_part_sur_la_bonne_spire": 0.677
+   },
+   "les_rates_rendus_justes": 3,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 144,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.7468,
+   "avant": {
+    "les_points_notes": 18,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 18,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 144,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -3.1984,
+   "avant": {
+    "les_points_notes": 143,
+    "la_part_sur_la_bonne_spire": 0.986
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 143,
+    "la_part_sur_la_bonne_spire": 0.986
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 144,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -2.8161,
+   "avant": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.9262
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.9262
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 144,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 10.7457,
+   "avant": {
+    "les_points_notes": 106,
+    "la_part_sur_la_bonne_spire": 0.7264
+   },
+   "les_points_corriges": 37,
+   "apres": {
+    "les_points_notes": 106,
+    "la_part_sur_la_bonne_spire": 0.7358
+   },
+   "les_rates_rendus_justes": 7,
+   "les_justes_rendus_rates": 6
+  },
+  {
+   "la_rangee": 144,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -1.5682,
+   "avant": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.8523
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.8523
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 160,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -0.1181,
+   "avant": {
+    "les_points_notes": 21,
+    "la_part_sur_la_bonne_spire": 0.8571
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 21,
+    "la_part_sur_la_bonne_spire": 0.8571
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 160,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.422,
+   "avant": {
+    "les_points_notes": 151,
+    "la_part_sur_la_bonne_spire": 0.9934
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 151,
+    "la_part_sur_la_bonne_spire": 0.9934
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 160,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 5.2587,
+   "avant": {
+    "les_points_notes": 163,
+    "la_part_sur_la_bonne_spire": 0.9325
+   },
+   "les_points_corriges": 2,
+   "apres": {
+    "les_points_notes": 163,
+    "la_part_sur_la_bonne_spire": 0.9448
+   },
+   "les_rates_rendus_justes": 2,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 160,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 8.6695,
+   "avant": {
+    "les_points_notes": 154,
+    "la_part_sur_la_bonne_spire": 0.8442
+   },
+   "les_points_corriges": 20,
+   "apres": {
+    "les_points_notes": 154,
+    "la_part_sur_la_bonne_spire": 0.8377
+   },
+   "les_rates_rendus_justes": 4,
+   "les_justes_rendus_rates": 5
+  },
+  {
+   "la_rangee": 160,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 4.6365,
+   "avant": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 0.7024
+   },
+   "les_points_corriges": 3,
+   "apres": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 0.7143
+   },
+   "les_rates_rendus_justes": 2,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 176,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.7007,
+   "avant": {
+    "les_points_notes": 31,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 31,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 176,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 3.5433,
+   "avant": {
+    "les_points_notes": 157,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 157,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 176,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -0.828,
+   "avant": {
+    "les_points_notes": 161,
+    "la_part_sur_la_bonne_spire": 0.9814
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 161,
+    "la_part_sur_la_bonne_spire": 0.9752
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 1
+  },
+  {
+   "la_rangee": 176,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.0595,
+   "avant": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 0.9872
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 0.9872
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 176,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 1.6745,
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.9941
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.9941
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 192,
+   "la_colonne": 96,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 6.4131,
+   "avant": {
+    "les_points_notes": 8,
+    "la_part_sur_la_bonne_spire": 0.125
+   },
+   "les_points_corriges": 3,
+   "apres": {
+    "les_points_notes": 8,
+    "la_part_sur_la_bonne_spire": 0.125
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 192,
+   "la_colonne": 112,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.4254,
+   "avant": {
+    "les_points_notes": 2,
+    "la_part_sur_la_bonne_spire": 0.5
+   },
+   "les_points_corriges": 32,
+   "apres": {
+    "les_points_notes": 2,
+    "la_part_sur_la_bonne_spire": 0.5
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 192,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -7.56,
+   "avant": {
+    "les_points_notes": 3,
+    "la_part_sur_la_bonne_spire": 0.3333
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 3,
+    "la_part_sur_la_bonne_spire": 0.3333
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 192,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -5.6964,
+   "avant": {
+    "les_points_notes": 90,
+    "la_part_sur_la_bonne_spire": 0.8
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 90,
+    "la_part_sur_la_bonne_spire": 0.8
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 192,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.6655,
+   "avant": {
+    "les_points_notes": 153,
+    "la_part_sur_la_bonne_spire": 0.8824
+   },
+   "les_points_corriges": 4,
+   "apres": {
+    "les_points_notes": 153,
+    "la_part_sur_la_bonne_spire": 0.8824
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 192,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 3.3745,
+   "avant": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 192,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -1.2429,
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.9882
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.9882
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 208,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 2.1502,
+   "avant": {
+    "les_points_notes": 22,
+    "la_part_sur_la_bonne_spire": 0.4545
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 22,
+    "la_part_sur_la_bonne_spire": 0.4545
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 208,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.4398,
+   "avant": {
+    "les_points_notes": 82,
+    "la_part_sur_la_bonne_spire": 0.9268
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 82,
+    "la_part_sur_la_bonne_spire": 0.9268
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 208,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 5.1542,
+   "avant": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.9463
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.9463
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 208,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -0.3655,
+   "avant": {
+    "les_points_notes": 154,
+    "la_part_sur_la_bonne_spire": 0.9935
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 154,
+    "la_part_sur_la_bonne_spire": 0.9935
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 208,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -3.6831,
+   "avant": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.9231
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 169,
+    "la_part_sur_la_bonne_spire": 0.929
+   },
+   "les_rates_rendus_justes": 1,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 224,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.8875,
+   "avant": {
+    "les_points_notes": 18,
+    "la_part_sur_la_bonne_spire": 0.9444
+   },
+   "les_points_corriges": 5,
+   "apres": {
+    "les_points_notes": 18,
+    "la_part_sur_la_bonne_spire": 0.9444
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 224,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -0.4584,
+   "avant": {
+    "les_points_notes": 104,
+    "la_part_sur_la_bonne_spire": 0.9904
+   },
+   "les_points_corriges": 2,
+   "apres": {
+    "les_points_notes": 104,
+    "la_part_sur_la_bonne_spire": 0.9904
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 224,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.5526,
+   "avant": {
+    "les_points_notes": 151,
+    "la_part_sur_la_bonne_spire": 0.9404
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 151,
+    "la_part_sur_la_bonne_spire": 0.9404
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 224,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -0.5747,
+   "avant": {
+    "les_points_notes": 136,
+    "la_part_sur_la_bonne_spire": 0.9485
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 136,
+    "la_part_sur_la_bonne_spire": 0.9485
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 224,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 0.5004,
+   "avant": {
+    "les_points_notes": 145,
+    "la_part_sur_la_bonne_spire": 0.8828
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 145,
+    "la_part_sur_la_bonne_spire": 0.8828
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 240,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 2.705,
+   "avant": {
+    "les_points_notes": 24,
+    "la_part_sur_la_bonne_spire": 0.8333
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 24,
+    "la_part_sur_la_bonne_spire": 0.8333
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 240,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.229,
+   "avant": {
+    "les_points_notes": 131,
+    "la_part_sur_la_bonne_spire": 0.9695
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 131,
+    "la_part_sur_la_bonne_spire": 0.9695
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 240,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 2.774,
+   "avant": {
+    "les_points_notes": 159,
+    "la_part_sur_la_bonne_spire": 0.9057
+   },
+   "les_points_corriges": 7,
+   "apres": {
+    "les_points_notes": 159,
+    "la_part_sur_la_bonne_spire": 0.9182
+   },
+   "les_rates_rendus_justes": 2,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 240,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 7.4266,
+   "avant": {
+    "les_points_notes": 141,
+    "la_part_sur_la_bonne_spire": 0.8794
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 141,
+    "la_part_sur_la_bonne_spire": 0.8794
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 240,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 2,
+   "lancre_voxels": -4.0143,
+   "avant": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 0.9167
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 0.9167
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 256,
+   "la_colonne": 128,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 5.9509,
+   "avant": {
+    "les_points_notes": 4,
+    "la_part_sur_la_bonne_spire": 0.25
+   },
+   "les_points_corriges": 33,
+   "apres": {
+    "les_points_notes": 4,
+    "la_part_sur_la_bonne_spire": 0.25
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 256,
+   "la_colonne": 160,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.1928,
+   "avant": {
+    "les_points_notes": 1,
+    "la_part_sur_la_bonne_spire": 0.0
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 1,
+    "la_part_sur_la_bonne_spire": 0.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 256,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 3.3047,
+   "avant": {
+    "les_points_notes": 19,
+    "la_part_sur_la_bonne_spire": 0.6842
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 19,
+    "la_part_sur_la_bonne_spire": 0.6842
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 256,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -4.2949,
+   "avant": {
+    "les_points_notes": 113,
+    "la_part_sur_la_bonne_spire": 0.9469
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 113,
+    "la_part_sur_la_bonne_spire": 0.9469
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 256,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 4.4417,
+   "avant": {
+    "les_points_notes": 142,
+    "la_part_sur_la_bonne_spire": 0.8239
+   },
+   "les_points_corriges": 18,
+   "apres": {
+    "les_points_notes": 142,
+    "la_part_sur_la_bonne_spire": 0.831
+   },
+   "les_rates_rendus_justes": 2,
+   "les_justes_rendus_rates": 1
+  },
+  {
+   "la_rangee": 256,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -0.0264,
+   "avant": {
+    "les_points_notes": 153,
+    "la_part_sur_la_bonne_spire": 0.8758
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 153,
+    "la_part_sur_la_bonne_spire": 0.8758
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 272,
+   "la_colonne": 128,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.3884,
+   "avant": {
+    "les_points_notes": 9,
+    "la_part_sur_la_bonne_spire": 0.3333
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 9,
+    "la_part_sur_la_bonne_spire": 0.3333
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 272,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.5329,
+   "avant": {
+    "les_points_notes": 9,
+    "la_part_sur_la_bonne_spire": 0.2222
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 9,
+    "la_part_sur_la_bonne_spire": 0.2222
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 272,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.3965,
+   "avant": {
+    "les_points_notes": 94,
+    "la_part_sur_la_bonne_spire": 0.9468
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 94,
+    "la_part_sur_la_bonne_spire": 0.9468
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 272,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.6036,
+   "avant": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.9128
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 149,
+    "la_part_sur_la_bonne_spire": 0.9128
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 272,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -0.8738,
+   "avant": {
+    "les_points_notes": 154,
+    "la_part_sur_la_bonne_spire": 0.9675
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 154,
+    "la_part_sur_la_bonne_spire": 0.9675
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 288,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.1044,
+   "avant": {
+    "les_points_notes": 8,
+    "la_part_sur_la_bonne_spire": 0.5
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 8,
+    "la_part_sur_la_bonne_spire": 0.5
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 288,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -0.7175,
+   "avant": {
+    "les_points_notes": 62,
+    "la_part_sur_la_bonne_spire": 0.5645
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 62,
+    "la_part_sur_la_bonne_spire": 0.5645
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 288,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.4002,
+   "avant": {
+    "les_points_notes": 143,
+    "la_part_sur_la_bonne_spire": 0.9231
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 143,
+    "la_part_sur_la_bonne_spire": 0.9231
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 288,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 0.1909,
+   "avant": {
+    "les_points_notes": 152,
+    "la_part_sur_la_bonne_spire": 0.9474
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 152,
+    "la_part_sur_la_bonne_spire": 0.9474
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 304,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.3019,
+   "avant": {
+    "les_points_notes": 1,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 1,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 304,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -0.7722,
+   "avant": {
+    "les_points_notes": 85,
+    "la_part_sur_la_bonne_spire": 0.7647
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 85,
+    "la_part_sur_la_bonne_spire": 0.7647
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 304,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.3935,
+   "avant": {
+    "les_points_notes": 119,
+    "la_part_sur_la_bonne_spire": 0.9076
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 119,
+    "la_part_sur_la_bonne_spire": 0.9076
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 304,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 2.2771,
+   "avant": {
+    "les_points_notes": 143,
+    "la_part_sur_la_bonne_spire": 0.993
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 143,
+    "la_part_sur_la_bonne_spire": 0.993
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 320,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -3.7953,
+   "avant": {
+    "les_points_notes": 4,
+    "la_part_sur_la_bonne_spire": 0.25
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 4,
+    "la_part_sur_la_bonne_spire": 0.25
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 320,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.212,
+   "avant": {
+    "les_points_notes": 100,
+    "la_part_sur_la_bonne_spire": 0.86
+   },
+   "les_points_corriges": 3,
+   "apres": {
+    "les_points_notes": 100,
+    "la_part_sur_la_bonne_spire": 0.85
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 1
+  },
+  {
+   "la_rangee": 320,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 3.0457,
+   "avant": {
+    "les_points_notes": 140,
+    "la_part_sur_la_bonne_spire": 0.8643
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 140,
+    "la_part_sur_la_bonne_spire": 0.8643
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 320,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -0.5457,
+   "avant": {
+    "les_points_notes": 150,
+    "la_part_sur_la_bonne_spire": 0.9533
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 150,
+    "la_part_sur_la_bonne_spire": 0.9533
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 336,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": -1.2523,
+   "avant": {
+    "les_points_notes": 20,
+    "la_part_sur_la_bonne_spire": 0.95
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 20,
+    "la_part_sur_la_bonne_spire": 0.95
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 336,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.5315,
+   "avant": {
+    "les_points_notes": 125,
+    "la_part_sur_la_bonne_spire": 0.984
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 125,
+    "la_part_sur_la_bonne_spire": 0.984
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 336,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 2.6612,
+   "avant": {
+    "les_points_notes": 161,
+    "la_part_sur_la_bonne_spire": 0.9193
+   },
+   "les_points_corriges": 12,
+   "apres": {
+    "les_points_notes": 161,
+    "la_part_sur_la_bonne_spire": 0.9317
+   },
+   "les_rates_rendus_justes": 4,
+   "les_justes_rendus_rates": 2
+  },
+  {
+   "la_rangee": 336,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 0.1803,
+   "avant": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 0.9872
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 0.9872
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 352,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.631,
+   "avant": {
+    "les_points_notes": 50,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 50,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 352,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 1.2556,
+   "avant": {
+    "les_points_notes": 153,
+    "la_part_sur_la_bonne_spire": 0.9739
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 153,
+    "la_part_sur_la_bonne_spire": 0.9739
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 352,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 4,
+   "lancre_voxels": 0.4353,
+   "avant": {
+    "les_points_notes": 144,
+    "la_part_sur_la_bonne_spire": 0.9722
+   },
+   "les_points_corriges": 1,
+   "apres": {
+    "les_points_notes": 144,
+    "la_part_sur_la_bonne_spire": 0.9792
+   },
+   "les_rates_rendus_justes": 1,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 352,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -2.2254,
+   "avant": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 156,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 368,
+   "la_colonne": 128,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 0.509,
+   "avant": {
+    "les_points_notes": 2,
+    "la_part_sur_la_bonne_spire": 0.5
+   },
+   "les_points_corriges": 8,
+   "apres": {
+    "les_points_notes": 2,
+    "la_part_sur_la_bonne_spire": 0.5
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 368,
+   "la_colonne": 176,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 0.1107,
+   "avant": {
+    "les_points_notes": 35,
+    "la_part_sur_la_bonne_spire": 0.8571
+   },
+   "les_points_corriges": 7,
+   "apres": {
+    "les_points_notes": 35,
+    "la_part_sur_la_bonne_spire": 0.8571
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 368,
+   "la_colonne": 192,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 0.708,
+   "avant": {
+    "les_points_notes": 115,
+    "la_part_sur_la_bonne_spire": 0.9826
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 115,
+    "la_part_sur_la_bonne_spire": 0.9826
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 368,
+   "la_colonne": 208,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": -1.9524,
+   "avant": {
+    "les_points_notes": 160,
+    "la_part_sur_la_bonne_spire": 0.9
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 160,
+    "la_part_sur_la_bonne_spire": 0.9
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 368,
+   "la_colonne": 224,
+   "decidable": true,
+   "les_voisins": 3,
+   "lancre_voxels": 3.5405,
+   "avant": {
+    "les_points_notes": 153,
+    "la_part_sur_la_bonne_spire": 0.9673
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 153,
+    "la_part_sur_la_bonne_spire": 0.9673
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  },
+  {
+   "la_rangee": 368,
+   "la_colonne": 240,
+   "decidable": true,
+   "les_voisins": 1,
+   "lancre_voxels": -6.8697,
+   "avant": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_points_corriges": 0,
+   "apres": {
+    "les_points_notes": 168,
+    "la_part_sur_la_bonne_spire": 1.0
+   },
+   "les_rates_rendus_justes": 0,
+   "les_justes_rendus_rates": 0
+  }
+ ],
+ "les_non_decides": {},
+ "les_reunis": {
+  "les_blocs": 123,
+  "avant": 0.9027,
+  "apres": 0.9065,
+  "les_points_notes": 13641,
+  "les_points_corriges": 419,
+  "les_rates_rendus_justes": 84,
+  "les_justes_rendus_rates": 33,
+  "le_gain_net": 51,
+  "les_blocs_qui_montent": 19,
+  "les_blocs_qui_descendent": 3,
+  "les_blocs_immobiles": 101
+ },
+ "les_reunis_sous_le_juge_intact": {
+  "les_blocs": 123,
+  "avant": 0.9611,
+  "apres": 0.9628,
+  "les_points_notes": 7276,
+  "les_points_corriges": 419,
+  "les_rates_rendus_justes": 14,
+  "les_justes_rendus_rates": 2,
+  "le_gain_net": 12,
+  "les_blocs_qui_montent": 4,
+  "les_blocs_qui_descendent": 2,
+  "les_blocs_immobiles": 117
+ },
+ "le_deuxieme_saut_corrige": "deuxieme_saut_corrige_265_20230702185753_m7_du_cote_plus.npy",
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "la procédure sans juge corrige le deuxième saut"
+ },
+ "les_secondes": 272.1
+}

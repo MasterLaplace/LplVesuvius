@@ -4178,6 +4178,14 @@ spire corrigée rend au deuxième saut 29 ratés justes pour 5 justes ratés : u
 intact, les sauts qui n'avancent pas reviennent de 16 à 6, le compte du témoin. Au premier saut, le recalage coûte 12 justes
 pour 4 ratés rendus justes. `R4-P95` reste ouverte.
 
+**`280` · 2026-09-26 · la procédure sans juge sur le deuxième saut** — `R4-P95`
+
+⭐⭐⭐⭐ **Au deuxième saut, la procédure sans juge de `265`, prise sur la spire recalée, rend 84 ratés justes pour 33 justes
+ratés sur 123 blocs : un gain net de 51. Sous le juge intact, 14 pour 2** — `R4-F461`. La chaîne redonne le deuxième saut de
+`279`, et les quatre piles du contrôle sont identiques au miroir. La part monte sur 19 blocs et descend sur 3. La procédure
+corrige le deuxième saut. `R4-P95` reste ouverte : le deuxième saut corrigé n'est pas recalé, et le troisième saut n'est pas
+corrigé.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

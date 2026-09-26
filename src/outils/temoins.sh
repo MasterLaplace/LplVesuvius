@@ -1697,6 +1697,8 @@ run "sous un juge intact le deuxieme saut rate-t-il encore de lui-meme" uv run p
 run "figure sous un juge intact le deuxieme saut rate-t-il encore de lui-meme" uv run python "$ROOT/src/figures/figure_sous_un_juge_intact_le_deuxieme_saut_rate_t_il_encore_de_lui_meme.py" --verifier
 run "recaler la spire corrigee sur la feuille rend-il le deuxieme saut plus juste" uv run python "$ROOT/src/nappe/recaler_la_spire_corrigee_sur_la_feuille_rend_il_le_deuxieme_saut_plus_juste.py" --verifier
 run "figure recaler la spire corrigee sur la feuille rend-il le deuxieme saut plus juste" uv run python "$ROOT/src/figures/figure_recaler_la_spire_corrigee_sur_la_feuille_rend_il_le_deuxieme_saut_plus_juste.py" --verifier
+run "la procedure sans juge corrige-t-elle le deuxieme saut" uv run python "$ROOT/src/nappe/la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut.py" --verifier
+run "figure la procedure sans juge corrige-t-elle le deuxieme saut" uv run python "$ROOT/src/figures/figure_la_procedure_sans_juge_corrige_t_elle_le_deuxieme_saut.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

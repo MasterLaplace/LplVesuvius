@@ -176,14 +176,14 @@ def une_table(tache: tuple) -> str:
     return f"{s} ({by}, {bx})"
 
 
-def les_taches_des_pas(candidats: set, rendus: dict, final: bool) -> list[tuple]:
+def les_taches_des_pas(candidats: set, rendus: dict, final: bool, surfaces: tuple = LES_SURFACES) -> list[tuple]:
     """Les tables à faire ou à refaire. Hors du passage final, un bloc attend que ses voisins de l'est et du sud soient
     rendus ; au passage final, un voisin qui ne s'est pas rendu est laissé, et le bloc est fait sans lui.
 
     ⚠ Une table faite sans son voisin est refaite quand il devient rendu : elle manquerait les coutures qui le relient.
     """
     out = []
-    for s in LES_SURFACES:
+    for s in surfaces:
         for by, bx in sorted(candidats):
             if not rendus.get((s, by, bx)):
                 continue
@@ -200,13 +200,13 @@ def les_taches_des_pas(candidats: set, rendus: dict, final: bool) -> list[tuple]
     return out
 
 
-def les_rendus_sur_le_disque(candidats: set) -> dict:
+def les_rendus_sur_le_disque(candidats: set, surfaces: tuple = LES_SURFACES) -> dict:
     return {(s, by, bx): la_pile_est_complete(LE_DOSSIER / s / f"bloc_{by}_{bx}")
-            for s in LES_SURFACES for by, bx in candidats}
+            for s in surfaces for by, bx in candidats}
 
 
-def calculer_les_pas(candidats: set, ouvriers: int, final: bool) -> dict:
-    taches = les_taches_des_pas(candidats, les_rendus_sur_le_disque(candidats), final)
+def calculer_les_pas(candidats: set, ouvriers: int, final: bool, surfaces: tuple = LES_SURFACES) -> dict:
+    taches = les_taches_des_pas(candidats, les_rendus_sur_le_disque(candidats, surfaces), final, surfaces)
     debut = time.monotonic()
     print(f"les pas : {len(taches)} tables à faire", flush=True)
     with ProcessPoolExecutor(max_workers=int(ouvriers)) as pool:
@@ -221,7 +221,10 @@ def les_besoins(taches: list[tuple]) -> dict:
     return {t: les_chunks_dun_cadre(maillages[t[0]][0], maillages[t[0]][2], le_cadre(t[1], t[2], LE_BLOC)) for t in taches}
 
 
-def le_controle_du_miroir(ouvriers: int = 3) -> dict:
+LES_PILES_DU_CONTROLE = tuple((s, by, bx) for s in LES_SURFACES for by, bx in ((16, 176), (160, 144), (160, 160), (352, 128)))
+
+
+def le_controle_du_miroir(ouvriers: int = 3, taches: tuple = LES_PILES_DU_CONTROLE) -> dict:
     """Des piles déjà rendues à distance, rendues à nouveau depuis le miroir, comparées voxel pour voxel.
 
     ⚠⚠ C'est ce qui autorise le miroir : un chunk que l'estimation oublie se lit comme du vide, sans erreur, et seule cette
@@ -230,7 +233,7 @@ def le_controle_du_miroir(ouvriers: int = 3) -> dict:
     """
     import tifffile
 
-    taches = [(s, by, bx) for s in LES_SURFACES for by, bx in ((16, 176), (160, 144), (160, 160), (352, 128))]
+    taches = list(taches)
     rempli = remplir(set().union(*les_besoins(taches).values()))
     temoin = LE_DOSSIER / "le_miroir_controle"
 
@@ -254,14 +257,14 @@ def le_controle_du_miroir(ouvriers: int = 3) -> dict:
             "identiques": all(r.get("comparee") and r["les_voxels_differents"] == 0 for r in res.values())}
 
 
-def tout_rendre(candidats: set, ouvriers: int) -> dict:
+def tout_rendre(candidats: set, ouvriers: int, surfaces: tuple = LES_SURFACES) -> dict:
     """Les deux surfaces sur tous les blocs candidats, depuis le miroir, rangée de blocs par rangée de blocs ; une pile
     complète n'est pas refaite.
 
     Le miroir ne garde que les chunks de la rangée en cours et de la suivante, que l'on télécharge pendant que la première
     se rend : tout le segment tiendrait des centaines de gigaoctets.
     """
-    a_faire = [(s, by, bx) for (by, bx) in sorted(candidats) for s in LES_SURFACES
+    a_faire = [(s, by, bx) for (by, bx) in sorted(candidats) for s in surfaces
                if not la_pile_est_complete(LE_DOSSIER / s / f"bloc_{by}_{bx}")]
     besoin = les_besoins(a_faire)
     rangees = sorted({t[1] for t in a_faire})
@@ -318,9 +321,11 @@ def la_decision_du_bloc(tau0: np.ndarray, err: np.ndarray, prod: np.ndarray, red
     return bilan, dec & dedans, tau1
 
 
-def un_bloc(by: int, bx: int, candidats: set, tables: dict, rendus: dict, tau0, err, glissade) -> tuple[dict, tuple]:
+def un_bloc(by: int, bx: int, candidats: set, tables: dict, rendus: dict, tau0, err, glissade,
+            surfaces: tuple = LES_SURFACES) -> tuple[dict, tuple]:
+    """La décision de `265` sur un bloc ; `surfaces` est (la référence, la surface produite), dans cet ordre."""
     blocs = [(by, bx)] + les_voisins(by, bx, candidats)
-    for s in LES_SURFACES:
+    for s in surfaces:
         for vy, vx in blocs:
             if not rendus.get((s, vy, vx)) or (s, vy, vx) not in tables:
                 return {"la_rangee": by, "la_colonne": bx, "decidable": False,
@@ -328,8 +333,8 @@ def un_bloc(by: int, bx: int, candidats: set, tables: dict, rendus: dict, tau0, 
     if len(blocs) == 1:
         return {"la_rangee": by, "la_colonne": bx, "decidable": False, "la_raison": "aucun voisin candidat"}, None
     prof = {s: la_marche_assemblee({b: tables[(s, *b)] for b in blocs}, blocs, by - LE_BLOC, bx - LE_BLOC,
-                                   3 * LE_BLOC)["la_profondeur"] for s in LES_SURFACES}
-    lu = la_decision_du_bloc(tau0, err, prof["la_spire_produite"], prof["le_segment_reduit"], by, bx, glissade)
+                                   3 * LE_BLOC)["la_profondeur"] for s in surfaces}
+    lu = la_decision_du_bloc(tau0, err, prof[surfaces[1]], prof[surfaces[0]], by, bx, glissade)
     if lu is None:
         return {"la_rangee": by, "la_colonne": bx, "decidable": False, "la_raison": "aucun voisin ne se relie au bloc"}, None
     bilan, corriges, tau1 = lu
@@ -382,9 +387,9 @@ def le_segment(cache: Path = LE_CACHE) -> tuple:
     return tau0, err, glissade, set(les_blocs_candidats(tau0, valide, gy, gx))
 
 
-def les_tables(candidats: set, rendus: dict) -> dict:
+def les_tables(candidats: set, rendus: dict, surfaces: tuple = LES_SURFACES) -> dict:
     tables = {}
-    for s in LES_SURFACES:
+    for s in surfaces:
         for by, bx in candidats:
             f = le_fichier_des_pas(s, by, bx)
             if rendus[(s, by, bx)] and f.is_file():
