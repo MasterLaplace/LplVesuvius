@@ -3208,6 +3208,41 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 290 : LES GAINS PUBLIÉS CONTRE LE HASARD
+    s290 = _source(racine, "les_gains_publies_se_distinguent_ils_du_hasard.json")
+    if s290.exists():
+        d = json.loads(s290.read_text())
+        k0 = len(out)
+        sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+        fr_p = lambda x: _fr222(x)  # noqa: E731
+        par = {t["la_tranche"]: t for t in d["les_tranches"]}
+        for t in d["les_tranches"]:
+            p_ = t["sur_les_points"]
+            gras = t["la_tranche"] == "283"
+            cel = [f"`{t['la_tranche']}`", t["ce_quelle_mesure"],
+                   f"{p_['les_rates_rendus_justes']}, {p_['les_justes_rendus_rates']}", fr_p(p_["la_probabilite"])]
+            if "sur_les_blocs" in t:
+                b_ = t["sur_les_blocs"]
+                cel += [f"{b_['les_blocs_qui_montent']}, {b_['les_blocs_qui_descendent']}", fr_p(b_["la_probabilite"])]
+            ligne = "| " + " | ".join(f"**{c}**" if gras else c for c in cel) + " |"
+            if "sur_les_blocs" not in t:
+                ligne += " | |"
+            out.append((f"la ligne {t['la_tranche']} de 290", [ligne], s290.name))
+        b283 = par["283"]["sur_les_blocs"]
+        out.append(("le titre de 290",
+                    [f"au deuxième saut, {b283['les_blocs_qui_montent']} blocs montent et {b283['les_blocs_qui_descendent']} "
+                     f"descendent"], s290.name))
+        out.append(("le fait de 290",
+                    [f"et le hasard seul ferait un écart au moins aussi grand avec une probabilité de "
+                     f"{fr_p(b283['la_probabilite'])}"], s290.name))
+        out.append(("les points de 283 selon 290",
+                    [f"Sur les points, le gain de `283` passe sous le seuil, à {fr_p(par['283']['sur_les_points']['la_probabilite'])}"],
+                    s290.name))
+        out.append(("le seuil de 290", [f"Le seuil de {fr_p(d['le_seuil'])} est conventionnel"], s290.name))
+        out.append(("le verdict de 290", [f"**{d['le_verdict']['lissue'].upper()}.**"], s290.name))
+        out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                    for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 289 : LA FEUILLE QUE L'ÉCART DÉSIGNE
     s289 = _source(racine, "ramener_sur_la_feuille_que_lecart_designe_corrige_t_il_le_deuxieme_saut_de_la_bande.json")
     if s289.exists():

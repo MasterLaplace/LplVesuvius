@@ -1717,6 +1717,8 @@ run "une reprise qui ne derange pas les voisins rend-elle le troisieme saut plus
 run "figure une reprise qui ne derange pas les voisins rend-elle le troisieme saut plus juste" uv run python "$ROOT/src/figures/figure_une_reprise_qui_ne_derange_pas_les_voisins_rend_elle_le_troisieme_saut_plus_juste.py" --verifier
 run "ramener sur la feuille que l'ecart designe corrige-t-il le deuxieme saut de la bande" uv run python "$ROOT/src/nappe/ramener_sur_la_feuille_que_lecart_designe_corrige_t_il_le_deuxieme_saut_de_la_bande.py" --verifier
 run "figure ramener sur la feuille que l'ecart designe corrige-t-il le deuxieme saut de la bande" uv run python "$ROOT/src/figures/figure_ramener_sur_la_feuille_que_lecart_designe_corrige_t_il_le_deuxieme_saut_de_la_bande.py" --verifier
+run "les gains publies se distinguent-ils du hasard" uv run python "$ROOT/src/nappe/les_gains_publies_se_distinguent_ils_du_hasard.py" --verifier
+run "figure les gains publies se distinguent-ils du hasard" uv run python "$ROOT/src/figures/figure_les_gains_publies_se_distinguent_ils_du_hasard.py" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
 run "figure le debinage"      uv run python "$ROOT/src/figures/figure_le_debinage.py" --verifier
 run "le nul verso (C2)"       uv run python "$ROOT/src/encre/le_nul_verso.py" --verifier

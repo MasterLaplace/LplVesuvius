@@ -1,0 +1,153 @@
+{
+ "le_seuil": 0.05,
+ "les_tranches": [
+  {
+   "la_tranche": "275",
+   "ce_quelle_mesure": "segment, premier saut, procédure",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 163,
+    "les_justes_rendus_rates": 41,
+    "le_gain_net": 122,
+    "la_probabilite": 2.04e-18,
+    "sous_le_seuil": true
+   },
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 42,
+    "les_blocs_qui_descendent": 11,
+    "la_probabilite": 2.25e-05,
+    "sous_le_seuil": true
+   }
+  },
+  {
+   "la_tranche": "280",
+   "ce_quelle_mesure": "segment, deuxième saut, procédure",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 84,
+    "les_justes_rendus_rates": 33,
+    "le_gain_net": 51,
+    "la_probabilite": 2.67e-06,
+    "sous_le_seuil": true
+   },
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 19,
+    "les_blocs_qui_descendent": 3,
+    "la_probabilite": 0.000855,
+    "sous_le_seuil": true
+   }
+  },
+  {
+   "la_tranche": "281",
+   "ce_quelle_mesure": "bande, premier saut, procédure",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 15,
+    "les_justes_rendus_rates": 25,
+    "le_gain_net": -10,
+    "la_probabilite": 0.154,
+    "sous_le_seuil": false
+   },
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 6,
+    "les_blocs_qui_descendent": 8,
+    "la_probabilite": 0.791,
+    "sous_le_seuil": false
+   }
+  },
+  {
+   "la_tranche": "283",
+   "ce_quelle_mesure": "bande, deuxième saut, procédure",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 23,
+    "les_justes_rendus_rates": 9,
+    "le_gain_net": 14,
+    "la_probabilite": 0.0201,
+    "sous_le_seuil": true
+   },
+   "sur_les_blocs": {
+    "les_blocs_qui_montent": 7,
+    "les_blocs_qui_descendent": 4,
+    "la_probabilite": 0.549,
+    "sous_le_seuil": false
+   }
+  },
+  {
+   "la_tranche": "276",
+   "ce_quelle_mesure": "segment, deuxième saut, repris de la spire corrigée",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 52,
+    "les_justes_rendus_rates": 27,
+    "le_gain_net": 25,
+    "la_probabilite": 0.00655,
+    "sous_le_seuil": true
+   }
+  },
+  {
+   "la_tranche": "279",
+   "ce_quelle_mesure": "segment, deuxième saut, repris de la spire recalée",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 29,
+    "les_justes_rendus_rates": 5,
+    "le_gain_net": 24,
+    "la_probabilite": 3.86e-05,
+    "sous_le_seuil": true
+   }
+  },
+  {
+   "la_tranche": "284",
+   "ce_quelle_mesure": "bande, troisième saut, recalé sur le rayon de la bande",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 7,
+    "les_justes_rendus_rates": 14,
+    "le_gain_net": -7,
+    "la_probabilite": 0.189,
+    "sous_le_seuil": false
+   }
+  },
+  {
+   "la_tranche": "285",
+   "ce_quelle_mesure": "bande, troisième saut, recalé sur son rayon",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 7,
+    "les_justes_rendus_rates": 15,
+    "le_gain_net": -8,
+    "la_probabilite": 0.134,
+    "sous_le_seuil": false
+   }
+  },
+  {
+   "la_tranche": "287",
+   "ce_quelle_mesure": "bande, troisième saut, normales du témoin",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 7,
+    "les_justes_rendus_rates": 12,
+    "le_gain_net": -5,
+    "la_probabilite": 0.359,
+    "sous_le_seuil": false
+   }
+  },
+  {
+   "la_tranche": "288",
+   "ce_quelle_mesure": "bande, troisième saut, sans voter pour les voisins",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 6,
+    "les_justes_rendus_rates": 6,
+    "le_gain_net": 0,
+    "la_probabilite": 1.0,
+    "sous_le_seuil": false
+   }
+  },
+  {
+   "la_tranche": "289",
+   "ce_quelle_mesure": "bande, deuxième saut, la feuille que l'écart désigne",
+   "sur_les_points": {
+    "les_rates_rendus_justes": 32,
+    "les_justes_rendus_rates": 39,
+    "le_gain_net": -7,
+    "la_probabilite": 0.477,
+    "sous_le_seuil": false
+   }
+  }
+ ],
+ "le_verdict": {
+  "lissue": "le gain de la procédure au deuxième saut de la bande ne se distingue pas du hasard"
+ }
+}

@@ -4251,6 +4251,13 @@ ratés justes pour 39 justes ratés : un gain net de −7, quand la décision de
 cassables que de ratés réparables mènent près d'une autre feuille. `R4-P95` reste ouverte : la décision de `264` reste le
 meilleur choix éprouvé.
 
+**`290` · 2026-09-26 · les gains publiés contre le hasard** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur le segment `20230702185753`, les gains de `275`, `276`, `279` et `280` se distinguent du hasard, et ceux de `275` et
+`280` le font bloc par bloc. Sur la bande, aucun ne le fait bloc par bloc : au deuxième saut, 7 blocs montent et 4 descendent, et
+le hasard seul ferait un écart au moins aussi grand avec une probabilité de 0,549** — `R4-F471`. Test du signe, seuil 0,05 fixé
+avant le calcul. `R4-P95` reste ouverte : sur la bande, rien de ce qui a été éprouvé ne se distingue du hasard.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
