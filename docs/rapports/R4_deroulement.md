@@ -4237,6 +4237,13 @@ corrigés au troisième saut, contre 10 avec les normales recalculées. Sur tout
 12 justes ratés, un gain net de −5, contre −8** — `R4-F468`. Les normales recalculées portent une part de la perte. `R4-P95`
 reste ouverte : le vote n'est pas isolé, et le troisième saut perd encore.
 
+**`288` · 2026-09-26 · une reprise qui ne dérange pas les voisins** — `R4-P95`
+
+⭐⭐⭐⭐ **Repartie du deuxième saut corrigé de la bande avec les normales du témoin, et sans que les points corrigés votent pour
+leurs voisins, la chaîne rend au troisième saut 6 ratés justes pour 6 justes ratés : un gain net de 0, contre −8 dans `285`** —
+`R4-F469`. Le vote et la chaîne prennent un masque facultatif des votants, sans rien changer sans lui. La perte du troisième saut
+disparaît, sans devenir un gain. `R4-P95` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

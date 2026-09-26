@@ -1,0 +1,133 @@
+{
+ "les_points_deplaces": 69,
+ "les_comptes_de_285": {
+  "refaits": [
+   [
+    7,
+    15
+   ],
+   [
+    3,
+    4
+   ]
+  ],
+  "publies": [
+   [
+    7,
+    15
+   ],
+   [
+    3,
+    4
+   ]
+  ]
+ },
+ "les_comptes_de_287": {
+  "refaits": [
+   [
+    7,
+    12
+   ],
+   [
+    3,
+    4
+   ]
+  ],
+  "publies": [
+   [
+    7,
+    12
+   ],
+   [
+    3,
+    4
+   ]
+  ]
+ },
+ "les_sauts": [
+  {
+   "les_points_notes": 16010,
+   "les_points_ou_les_deux_chaines_different": 29,
+   "le_temoin": 0.7686,
+   "partie_de_la_spire_corrigee": 0.7686,
+   "les_rates_rendus_justes": 6,
+   "les_justes_rendus_rates": 6,
+   "le_gain_net": 0,
+   "le_saut": 3
+  },
+  {
+   "les_points_notes": 9379,
+   "les_points_ou_les_deux_chaines_different": 63,
+   "le_temoin": 0.754,
+   "partie_de_la_spire_corrigee": 0.7538,
+   "les_rates_rendus_justes": 2,
+   "les_justes_rendus_rates": 4,
+   "le_gain_net": -2,
+   "le_saut": 4
+  }
+ ],
+ "le_troisieme_saut_range": {
+  "les_points_notes": 16010,
+  "ou_les_deux_chaines_different": 29,
+  "les_rates_rendus_justes": 6,
+  "les_justes_rendus_rates": 6,
+  "les_classes": {
+   "le_point_lui_meme": {
+    "ou_les_deux_chaines_different": 13,
+    "les_rates_rendus_justes": 5,
+    "les_justes_rendus_rates": 5
+   },
+   "a_une_maille": {
+    "ou_les_deux_chaines_different": 16,
+    "les_rates_rendus_justes": 1,
+    "les_justes_rendus_rates": 1
+   },
+   "a_deux_ou_trois_mailles": {
+    "ou_les_deux_chaines_different": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "a_quatre_mailles_ou_plus": {
+    "ou_les_deux_chaines_different": 0,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   }
+  }
+ },
+ "le_quatrieme_saut_range": {
+  "les_points_notes": 9379,
+  "ou_les_deux_chaines_different": 63,
+  "les_rates_rendus_justes": 2,
+  "les_justes_rendus_rates": 4,
+  "les_classes": {
+   "le_point_lui_meme": {
+    "ou_les_deux_chaines_different": 6,
+    "les_rates_rendus_justes": 2,
+    "les_justes_rendus_rates": 3
+   },
+   "a_une_maille": {
+    "ou_les_deux_chaines_different": 31,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 1
+   },
+   "a_deux_ou_trois_mailles": {
+    "ou_les_deux_chaines_different": 11,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   },
+   "a_quatre_mailles_ou_plus": {
+    "ou_les_deux_chaines_different": 15,
+    "les_rates_rendus_justes": 0,
+    "les_justes_rendus_rates": 0
+   }
+  }
+ },
+ "la_lecture": {
+  "combien_de_pannes": 0
+ },
+ "decidable": true,
+ "le_verdict": {
+  "lissue": "une reprise qui ne dérange pas les voisins ne rend pas le troisième saut de la bande plus juste"
+ },
+ "les_secondes": 40.9
+}

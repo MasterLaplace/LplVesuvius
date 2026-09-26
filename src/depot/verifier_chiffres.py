@@ -3208,6 +3208,63 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 288 : UNE REPRISE QUI NE DÉRANGE PAS LES VOISINS
+    s288 = _source(racine, "une_reprise_qui_ne_derange_pas_les_voisins_rend_elle_le_troisieme_saut_plus_juste.json")
+    # ⚠ Cherchées hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.
+    s284c = _source(racine, "repartir_du_deuxieme_saut_corrige_rend_il_le_troisieme_saut_de_la_bande_plus_juste.json")
+    s285d = _source(racine, "recaler_le_deuxieme_saut_sur_son_rayon_rend_il_le_troisieme_saut_plus_juste.json")
+    s287b = _source(racine, "les_normales_recalculees_portent_elles_la_perte_du_troisieme_saut.json")
+    if s288.exists() and s284c.exists() and s285d.exists() and s287b.exists():
+        d = json.loads(s288.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            s3, s4 = d["les_sauts"][0], d["les_sauts"][1]
+            g = {t: json.loads(f.read_text())["les_sauts"][0] for t, f in (("284", s284c), ("285", s285d), ("287", s287b))}
+            out.append(("le titre de 288",
+                        [f"{'Oui' if s3['le_gain_net'] > 0 else 'Non, mais elle ne le perd plus'} : "
+                         f"{s3['les_rates_rendus_justes']} ratés justes pour {s3['les_justes_rendus_rates']} justes ratés, "
+                         f"un gain net de {sg(s3['le_gain_net'])}"], s288.name))
+            c5, c7 = d["les_comptes_de_285"]["refaits"][0], d["les_comptes_de_287"]["refaits"][0]
+            out.append(("les contrôles de 288",
+                        [f"redonnent ses comptes, {c5[0]} pour {c5[1]} au troisième saut",
+                         f"redonne ceux de `287`, {c7[0]} pour {c7[1]}"], s288.name))
+            for t, lib in (("284", "`284`, recalée sur le rayon de la bande"), ("285", "`285`, recalée sur son rayon"),
+                           ("287", "`287`, avec les normales du témoin")):
+                x_ = g[t]
+                out.append((f"la ligne {t} de 288", [f"| {lib} | {x_['les_rates_rendus_justes']} | "
+                                                     f"{x_['les_justes_rendus_rates']} | {sg(x_['le_gain_net'])} |"],
+                            s288.name))
+            out.append(("la ligne 288 de 288",
+                        [f"| **`288`, sans voter pour ses voisins** | **{s3['les_rates_rendus_justes']}** | "
+                         f"**{s3['les_justes_rendus_rates']}** | **{sg(s3['le_gain_net'])}** |"], s288.name))
+            rg = d["le_troisieme_saut_range"]
+            ici, une = rg["les_classes"]["le_point_lui_meme"], rg["les_classes"]["a_une_maille"]
+            loin = sum(rg["les_classes"][c]["ou_les_deux_chaines_different"]
+                       for c in ("a_deux_ou_trois_mailles", "a_quatre_mailles_ou_plus"))
+            out.append(("le rangement de 288",
+                        [f"Avec cette reprise, {rg['ou_les_deux_chaines_different']} points notés changent au troisième saut : "
+                         f"{ici['ou_les_deux_chaines_different']} aux points déplacés eux-mêmes, qui rendent "
+                         f"{ici['les_rates_rendus_justes']} ratés justes pour",
+                         f"{ici['les_justes_rendus_rates']} justes ratés, et {une['ou_les_deux_chaines_different']} à une "
+                         f"maille, {une['les_rates_rendus_justes']} pour {une['les_justes_rendus_rates']}."]
+                        + (["Plus rien ne change à deux mailles ou plus."] if not loin else []), s288.name))
+            out.append(("le fait de 288",
+                        [f"leurs voisins, la chaîne rend au troisième saut {s3['les_rates_rendus_justes']} ratés justes pour "
+                         f"{s3['les_justes_rendus_rates']} justes ratés : un gain net de {sg(s3['le_gain_net'])}, contre "
+                         f"{sg(g['285']['le_gain_net'])} dans `285`"], s288.name))
+            ici4 = d["le_quatrieme_saut_range"]["les_classes"]["le_point_lui_meme"]
+            out.append(("le quatrième saut de 288",
+                        [f"Au quatrième saut, elle rend {s4['les_rates_rendus_justes']} ratés justes pour "
+                         f"{s4['les_justes_rendus_rates']} justes ratés, dont {ici4['les_justes_rendus_rates']} aux points "
+                         f"déplacés eux-mêmes"], s288.name))
+            out.append(("le reste à une maille de 288",
+                        [f"Pourquoi {une['ou_les_deux_chaines_different']} points changent encore à une maille"], s288.name))
+            out.append(("la durée de 288", [f"La mesure a pris {sg(d['les_secondes'])} s"], s288.name))
+            out.append(("le verdict de 288", [f"**{d['le_verdict']['lissue'].upper()}.**"], s288.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 287 : LES NORMALES RECALCULÉES ET LA PERTE DU TROISIÈME SAUT
     s287 = _source(racine, "les_normales_recalculees_portent_elles_la_perte_du_troisieme_saut.json")
     # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.

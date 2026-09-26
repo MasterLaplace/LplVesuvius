@@ -231,13 +231,15 @@ def les_centres(t: np.ndarray, vu: np.ndarray) -> list[np.ndarray]:
 
 
 def le_vote_itere(centres: list[np.ndarray], depart: np.ndarray, sur_la_grille, gi, gj,
-                  tours: int = LES_TOURS_DE_VOTE) -> tuple[np.ndarray, list[int]]:
+                  tours: int = LES_TOURS_DE_VOTE, votant: np.ndarray | None = None) -> tuple[np.ndarray, list[int]]:
     """Chaque point vise la médiane de ses voisins et prend la feuille la plus proche à moins d'un
-    demi-feuillet ; sinon il garde la cible. Rend le champ final et le nombre de points changés par tour."""
+    demi-feuillet ; sinon il garde la cible. Rend le champ final et le nombre de points changés par tour.
+    Avec `votant`, seuls les points marqués entrent dans la médiane de leurs voisins."""
     courant = depart.copy()
     changes = []
     for _ in range(tours):
-        cible = le_consensus(sur_la_grille(courant))[gi, gj]
+        voix = courant if votant is None else np.where(votant, courant, np.nan)
+        cible = le_consensus(sur_la_grille(voix))[gi, gj]
         cible = np.where(np.isfinite(cible), cible, courant)
         neuf = cible.copy()
         for k, c in enumerate(centres):
