@@ -4293,6 +4293,14 @@ blocs qui ont leurs quatre voisins : un gain net de 2, que le hasard explique (0
 les mêmes piles, 10 pour 10** — `R4-F476`. Une tranche deux fois plus haute, trois rangées de blocs rendues, 180 piles.
 `R4-P95` reste ouverte : la géométrie du voisinage, nécessaire sur le segment, ne suffit pas sur la bande.
 
+**`296` · 2026-09-29 · la spire produite porte-t-elle le texte du segment** — `R4-P92`
+
+⭐⭐⭐⭐ **Là où le segment repasse à moins d'un demi-feuillet de la spire que le transfert produit, notre lecture de son encre et
+la carte publiée au vis-à-vis sont corrélées à 0,8331 sur six blocs choisis sans l'encre, contre 0,1166 pour le texte de la spire
+de départ et 0,1037 pour le vis-à-vis décalé** — `R4-F477`. Le juge est le segment lui-même, un tour plus loin sur sa surface ;
+le modèle d'encre est celui qui a fait la carte publiée. La partie A, vue avant d'écrire, est dite comme telle. `R4-P96` s'ouvre :
+porter ce juge sur les sauts suivants de la chaîne.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

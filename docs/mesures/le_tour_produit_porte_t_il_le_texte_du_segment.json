@@ -1,0 +1,230 @@
+{
+ "letalonnage": {
+  "le_bloc": [
+   176,
+   144
+  ],
+  "la_correlation": 0.9593,
+  "les_pixels": 65536
+ },
+ "la_partie_a": {
+  "la_bande": [
+   176,
+   64,
+   6
+  ],
+  "la_part_proche": 0.1696,
+  "lecart_median_voxels": 74.13,
+  "a_moins_dun_demi_feuillet": {
+   "les_pixels": 64440,
+   "au_vis_a_vis": 0.8909,
+   "temoin_sous_le_bloc": 0.3019,
+   "temoin_decale": 0.1949
+  },
+  "au_dela": {
+   "les_pixels": 328776,
+   "au_vis_a_vis": 0.3806,
+   "temoin_sous_le_bloc": 0.1304,
+   "temoin_decale": 0.0736
+  }
+ },
+ "la_partie_b": {
+  "le_plan": {
+   "les_blocs_de_la_partie_b": [
+    [
+     144,
+     176
+    ],
+    [
+     176,
+     192
+    ],
+    [
+     224,
+     192
+    ],
+    [
+     192,
+     144
+    ],
+    [
+     144,
+     160
+    ],
+    [
+     160,
+     176
+    ]
+   ],
+   "leurs_parts_proches": [
+    0.7511,
+    0.7333,
+    0.7156,
+    0.6889,
+    0.6714,
+    0.6476
+   ],
+   "les_blocs_examines": 340,
+   "la_part_proche_mediane": 0.0222,
+   "la_regle": "les 6 plus grandes parts de points à moins de 36 voxels de leur vis-à-vis, hors de la bande de la partie A, sur les seuls maillages"
+  },
+  "les_blocs": [
+   {
+    "le_bloc": [
+     144,
+     176
+    ],
+    "la_part_proche": 0.7511,
+    "lecart_median_voxels": 20.66,
+    "a_moins_dun_demi_feuillet": {
+     "les_pixels": 48196,
+     "au_vis_a_vis": 0.9244,
+     "temoin_sous_le_bloc": 0.0685,
+     "temoin_decale": 0.0905
+    },
+    "au_dela": {
+     "les_pixels": 17340,
+     "au_vis_a_vis": 0.752,
+     "temoin_sous_le_bloc": 0.0066,
+     "temoin_decale": 0.181
+    }
+   },
+   {
+    "le_bloc": [
+     176,
+     192
+    ],
+    "la_part_proche": 0.7333,
+    "lecart_median_voxels": 27.82,
+    "a_moins_dun_demi_feuillet": {
+     "les_pixels": 51064,
+     "au_vis_a_vis": 0.8089,
+     "temoin_sous_le_bloc": 0.1391,
+     "temoin_decale": 0.0503
+    },
+    "au_dela": {
+     "les_pixels": 14472,
+     "au_vis_a_vis": 0.9009,
+     "temoin_sous_le_bloc": 0.1033,
+     "temoin_decale": 0.1507
+    }
+   },
+   {
+    "le_bloc": [
+     224,
+     192
+    ],
+    "la_part_proche": 0.7156,
+    "lecart_median_voxels": 29.52,
+    "a_moins_dun_demi_feuillet": {
+     "les_pixels": 52136,
+     "au_vis_a_vis": 0.6758,
+     "temoin_sous_le_bloc": -0.0199,
+     "temoin_decale": 0.1013
+    },
+    "au_dela": {
+     "les_pixels": 13400,
+     "au_vis_a_vis": 0.8627,
+     "temoin_sous_le_bloc": -0.0062,
+     "temoin_decale": 0.1671
+    }
+   },
+   {
+    "le_bloc": [
+     192,
+     144
+    ],
+    "la_part_proche": 0.6889,
+    "lecart_median_voxels": 28.76,
+    "a_moins_dun_demi_feuillet": {
+     "les_pixels": 51348,
+     "au_vis_a_vis": 0.9045,
+     "temoin_sous_le_bloc": 0.1529,
+     "temoin_decale": 0.2144
+    },
+    "au_dela": {
+     "les_pixels": 14188,
+     "au_vis_a_vis": 0.9288,
+     "temoin_sous_le_bloc": 0.0945,
+     "temoin_decale": 0.0662
+    }
+   },
+   {
+    "le_bloc": [
+     144,
+     160
+    ],
+    "la_part_proche": 0.6714,
+    "lecart_median_voxels": 26.57,
+    "a_moins_dun_demi_feuillet": {
+     "les_pixels": 44216,
+     "au_vis_a_vis": 0.8905,
+     "temoin_sous_le_bloc": -0.0206,
+     "temoin_decale": 0.0192
+    },
+    "au_dela": {
+     "les_pixels": 21320,
+     "au_vis_a_vis": 0.7412,
+     "temoin_sous_le_bloc": 0.0835,
+     "temoin_decale": -0.0774
+    }
+   },
+   {
+    "le_bloc": [
+     160,
+     176
+    ],
+    "la_part_proche": 0.6476,
+    "lecart_median_voxels": 32.56,
+    "a_moins_dun_demi_feuillet": {
+     "les_pixels": 44032,
+     "au_vis_a_vis": 0.8002,
+     "temoin_sous_le_bloc": 0.2285,
+     "temoin_decale": 0.0406
+    },
+    "au_dela": {
+     "les_pixels": 21504,
+     "au_vis_a_vis": 0.4851,
+     "temoin_sous_le_bloc": 0.2457,
+     "temoin_decale": -0.0853
+    }
+   }
+  ],
+  "reunie": {
+   "a_moins_dun_demi_feuillet": {
+    "les_pixels": 290992,
+    "au_vis_a_vis": 0.8331,
+    "temoin_sous_le_bloc": 0.1166,
+    "temoin_decale": 0.1037
+   },
+   "au_dela": {
+    "les_pixels": 102224,
+    "au_vis_a_vis": 0.8164,
+    "temoin_sous_le_bloc": 0.111,
+    "temoin_decale": 0.124
+   }
+  }
+ },
+ "le_verdict": {
+  "lissue": "la spire produite porte le texte du segment là où il repasse",
+  "decidable": true
+ },
+ "decidable": true,
+ "le_modele": {
+  "nom": "scrollprize/ink_canonical_2um",
+  "sha256": "36dd0de84b7b7aa6590184192c7415466cd8a1ba7c1e59f42c6373846373c3e0",
+  "les_couches": [
+   23,
+   85
+  ],
+  "la_tuile": 256,
+  "le_pas": 128
+ },
+ "les_constantes": {
+  "loin_sur_la_surface_mailles": 30,
+  "le_demi_feuillet_voxels": 36.0,
+  "le_decalage_pixels_de_carte": 64,
+  "la_reduction": 8
+ },
+ "les_secondes": 5.5
+}

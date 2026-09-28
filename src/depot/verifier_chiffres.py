@@ -3261,6 +3261,32 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                    f"et {coupees} ceux que la chute a coupés")):
             out.append((f"les piles mises de côté de 295 ({i + 1})", [ecrit], p295.name))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 296 : LA SPIRE PRODUITE PORTE-T-ELLE LE TEXTE DU SEGMENT LÀ OÙ IL REPASSE
+    s296 = _source(racine, "le_tour_produit_porte_t_il_le_texte_du_segment.json")
+    if s296.exists():
+        d = json.loads(s296.read_text())
+        if d.get("decidable"):
+            f_ = lambda x: str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+            f2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+            a_, b_ = d["la_partie_a"], d["la_partie_b"]
+            bp = b_["reunie"]["a_moins_dun_demi_feuillet"]
+            ecrits = [("le titre de 296", f"Oui : sur six blocs choisis sans l'encre, {f2(bp['au_vis_a_vis'])} contre "
+                                          f"{f2(bp['temoin_sous_le_bloc'])} et {f2(bp['temoin_decale'])} pour ses deux témoins"),
+                      ("l'étalon de 296", f"sont corrélées à **{f_(d['letalonnage']['la_correlation'])}**, sur "
+                                          f"{d['letalonnage']['les_pixels']} pixels de carte"),
+                      ("la médiane de 296", f"de leur vis-à-vis est de **{f_(b_['le_plan']['la_part_proche_mediane'])}**"),
+                      ("l'au-delà de 296", f"la corrélation vaut encore {f_(b_['reunie']['au_dela']['au_vis_a_vis'])}")]
+            for nom, x_ in (("la partie A de 296", a_["a_moins_dun_demi_feuillet"]), ("la partie B de 296", bp)):
+                ecrits.append((nom, f"| **à moins d'un demi-feuillet** | **{x_['les_pixels']}** | **{f_(x_['au_vis_a_vis'])}** "
+                                    f"| **{f_(x_['temoin_sous_le_bloc'])}** | **{f_(x_['temoin_decale'])}** |"))
+            for bl in b_["les_blocs"]:
+                m_ = bl["a_moins_dun_demi_feuillet"]
+                ecrits.append((f"le bloc {bl['le_bloc'][0]}_{bl['le_bloc'][1]} de 296",
+                               f"| `{bl['le_bloc'][0]}_{bl['le_bloc'][1]}` | {f_(bl['la_part_proche'])} | "
+                               f"{f_(bl['lecart_median_voxels'])} | {m_['les_pixels']} | {f_(m_['au_vis_a_vis'])} | "
+                               f"{f_(m_['temoin_sous_le_bloc'])} | {f_(m_['temoin_decale'])} |"))
+            out.extend((nom, [x_], s296.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 294 : QUATRE VOISINS SUR LA RANGÉE
     s294 = _source(racine, "quatre_voisins_sur_la_rangee_rendent_ils_son_gain_a_la_bande.json")
     # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.
