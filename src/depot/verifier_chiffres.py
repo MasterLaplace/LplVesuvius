@@ -3249,6 +3249,17 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
             out.append(("le verdict de 295", [f"**{d['le_verdict']['lissue'].upper()}.**"], s295.name))
             out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
                         for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+    # Les piles que la chute a fait mettre de côté, comparées à leurs refaites (`--partielles`).
+    p295 = _source(racine, "la_bande_haute_partielles.json")
+    if p295.exists():
+        d = json.loads(p295.read_text())
+        vides = sum(1 for x in d["les_piles"].values() if x["les_couches_illisibles"] == x["les_couches"])
+        coupees = sum(1 for x in d["les_piles"].values() if not x["echouee"] and x["les_voxels_differents"])
+        for i, ecrit in enumerate((f"Les {d['les_comparees']} piles mises de côté ont été comparées",
+                                   f"{d['les_non_echouees_identiques']} sont identiques à leur refaite",
+                                   f"Les {vides} autres n'ont", f"{d['les_echouees']} sont les rendus que",
+                                   f"et {coupees} ceux que la chute a coupés")):
+            out.append((f"les piles mises de côté de 295 ({i + 1})", [ecrit], p295.name))
 
     # ⭐⭐⭐⭐ LA TRANCHE 294 : QUATRE VOISINS SUR LA RANGÉE
     s294 = _source(racine, "quatre_voisins_sur_la_rangee_rendent_ils_son_gain_a_la_bande.json")

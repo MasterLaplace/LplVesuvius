@@ -345,6 +345,60 @@ def les_zeros_des_piles(noms: list[str]) -> dict:
     return out
 
 
+def la_pile_refaite(ancienne: Path) -> Path:
+    """La pile qu'une pile mise de côté a remplacée : `_partielles/bloc_32_448_20260928T033321` → `bloc_32_448`."""
+    return ancienne.parent.parent / "_".join(ancienne.name.split("_")[:3])
+
+
+def lecart_de_deux_piles(refaite: Path, ancienne: Path) -> dict:
+    """Les voxels où deux piles diffèrent, et les couches de l'ancienne qui ne se lisent pas à la forme de la refaite.
+
+    ⚠ Une pile coupée en route porte des couches créées et jamais remplies : un fichier vide, ou tronqué. Elles comptent
+    comme différentes en entier, et à part, pour qu'« illisible » et « lisible mais faux » ne se confondent pas.
+    """
+    import tifffile
+
+    differents, illisibles = 0, 0
+    for x, y in zip(sorted(refaite.glob("*.tif")), sorted(ancienne.glob("*.tif"))):
+        a = tifffile.imread(x)
+        try:
+            b = tifffile.imread(y)
+        except Exception:  # noqa: BLE001
+            b = None
+        if b is None or b.shape != a.shape:
+            illisibles += 1
+            differents += int(a.size)
+            continue
+        differents += int((a != b).sum())
+    return {"les_voxels_differents": differents, "les_couches_illisibles": illisibles}
+
+
+def comparer_les_partielles(echouees: set[str], ouvriers: int = 4) -> dict:
+    """Chaque pile mise de côté, contre celle qui l'a remplacée, voxel pour voxel.
+
+    ⚠⚠ C'est la question que la chute pose au rendu : une pile rendue depuis un miroir abîmé, que `vc_render_tifxyz` n'a
+    PAS refusée, est-elle juste ? Une pile identique à sa refaite dit oui ; une pile qui en diffère sans avoir échoué serait
+    une corruption silencieuse, la seule qui compte. `echouees` nomme les piles que la reprise a vues échouer.
+    """
+    taches = [(s, a) for s in LES_SURFACES_HAUTES for a in sorted((LE_DOSSIER / s / "_partielles").iterdir())
+              if a.is_dir() and la_pile_refaite(a).is_dir()]
+
+    def une(t_):
+        s, a = t_
+        cle = f"{s}_{'_'.join(a.name.split('_')[1:3])}"
+        return f"{s}/{a.name}", {"echouee": cle in echouees, "les_couches": len(list(a.glob("*.tif"))),
+                                 **lecart_de_deux_piles(la_pile_refaite(a), a)}
+
+    with ThreadPoolExecutor(max_workers=int(ouvriers)) as pool:
+        piles = dict(pool.map(une, taches))
+    sures = [x for x in piles.values() if not x["echouee"]]
+    return {"les_piles": piles, "les_comparees": len(piles),
+            "les_echouees": sum(1 for x in piles.values() if x["echouee"]),
+            "les_non_echouees_identiques": sum(1 for x in sures if x["les_voxels_differents"] == 0),
+            "les_non_echouees_differentes": sum(1 for x in sures if x["les_voxels_differents"] != 0),
+            "les_echouees_differentes": sum(1 for x in piles.values() if x["echouee"] and x["les_voxels_differents"])}
+
+
 # ── LA BATTERIE ────────────────────────────────────────────────────────────────────────────────────────────────────
 
 def verifier() -> int:
@@ -390,6 +444,25 @@ def verifier() -> int:
       lexces_de_zeros(troue)["lexces_maximal_pour_mille"] == 500.0 and lexces_de_zeros(troue)["les_couches_toutes_nulles"] == 0)
     v("★★ une couche toute nulle est comptée", lexces_de_zeros(sain[:4] + [np.zeros((4, 4), np.uint8)])[
         "les_couches_toutes_nulles"] == 1)
+    import tempfile
+
+    import tifffile
+    with tempfile.TemporaryDirectory() as tmp:
+        r_, a_ = Path(tmp) / "r", Path(tmp) / "a"
+        r_.mkdir()
+        a_.mkdir()
+        for k in range(3):
+            tifffile.imwrite(r_ / f"{k:03d}.tif", np.full((4, 4), 7, np.uint8))
+        tifffile.imwrite(a_ / "000.tif", np.full((4, 4), 7, np.uint8))
+        x_ = np.full((4, 4), 7, np.uint8)
+        x_[0, 0] = 0
+        tifffile.imwrite(a_ / "001.tif", x_)
+        (a_ / "002.tif").write_bytes(b"")
+        e_ = lecart_de_deux_piles(r_, a_)
+    v("★★★★ une couche vide compte en entier et à part, une couche fausse par ses voxels",
+      e_ == {"les_voxels_differents": 17, "les_couches_illisibles": 1}, str(e_))
+    v("★★★ une pile mise de côté se rapporte au bloc qu'elle a laissé",
+      la_pile_refaite(Path("/x/s/_partielles/bloc_32_448_20260928T033321")) == Path("/x/s/bloc_32_448"))
     v("★★ sans chunk téléchargé, pas de projection", le_telechargement_projete(
         {"telecharges": 0, "absents_de_la_source": 0, "les_octets": 0}, 1000)["les_go"] is None)
 
@@ -411,7 +484,13 @@ def main() -> int:
     p.add_argument("--pas", type=int, default=None, metavar="OUVRIERS")
     p.add_argument("--json", type=Path, default=None)
     p.add_argument("--zeros", nargs="+", default=None, metavar="BLOC", help="les zéros en trop des piles nommées")
+    p.add_argument("--partielles", type=Path, default=None, metavar="JOURNAL",
+                   help="compare les piles mises de côté à leurs refaites ; JOURNAL : celui de la reprise qui a échoué")
     a = p.parse_args()
+    if a.partielles:
+        dernier = [ligne for ligne in a.partielles.read_text().splitlines() if ligne.startswith("{")][-1]
+        print(json.dumps(comparer_les_partielles(set(json.loads(dernier)["echouees"])), ensure_ascii=False, indent=1))
+        return 0
     if a.zeros:
         print(json.dumps(les_zeros_des_piles(a.zeros), ensure_ascii=False, indent=1))
         return 0

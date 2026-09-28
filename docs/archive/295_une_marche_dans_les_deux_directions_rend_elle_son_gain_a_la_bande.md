@@ -85,6 +85,11 @@ Le rendu a demandé trois reprises, et chacune a laissé ses bornes mesurées.
   dans la minute et demie qui la précède sont comparées à quatre écrites huit minutes plus tôt : sur chaque couche, les zéros
   en trop sur la médiane de sa pile. Le plus grand excès vaut 0,035 ‰ d'une couche, et aucune couche n'est toute nulle ;
   4096 voxels effacés en feraient 0,98 ‰.
+- Les 123 piles mises de côté ont été comparées le 28 septembre, voxel pour voxel, à celles qui les ont remplacées
+  (`--partielles`, `docs/mesures/la_bande_haute_partielles.json`). 106 sont identiques à leur refaite. Les 17 autres n'ont
+  aucune couche lisible : 14 sont les rendus que `vc_render_tifxyz` a refusés, et 3 ceux que la chute a coupés, dont les 109
+  fichiers étaient créés et jamais remplis. Aucune ne se lit en étant fausse : un miroir abîmé a fait échouer le rendu ou l'a
+  laissé vide, il ne l'a pas faussé en silence. Les 29 Go ne portaient donc rien d'unique, et ils ont été supprimés.
 - Le rendu tourne maintenant sous une garde de place : il s'arrête, rangée par rangée, dès que `/` ou `/mnt/c` descend sous
   40 Go, et le dit.
 - Épingler le rendu sur des cœurs fixes (`taskset`) le rend deux fois plus rapide qu'un quota de processeur seul, qui
