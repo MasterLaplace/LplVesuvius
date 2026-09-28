@@ -30,3 +30,12 @@ def test_nothing_goes_to_standard_output(capsys):
     Journal(level="DEBUG").info("VISIBLE_TRACE", n=1)
     out = capsys.readouterr()
     assert out.out == "" and "VISIBLE_TRACE" in out.err
+
+
+def test_a_field_may_be_named_like_the_event_code():
+    """A render result carries `code`, its exit code; logged as a field, it must not collide with the event code.
+
+    It did, on the first pile of the first real render: `Journal.info() got multiple values for argument 'code'`."""
+    f = io.StringIO()
+    Journal(f, "INFO", run="ab12").info("PILE_RENDERED", code=0, rendered=True)
+    assert f.getvalue() == "INFO  PILE_RENDERED run=ab12 code=0 rendered=True\n"

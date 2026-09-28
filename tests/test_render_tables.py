@@ -8,6 +8,7 @@ pile to its south) is checked without downloading a gigabyte.
 """
 from __future__ import annotations
 
+import io
 import json
 import time
 
@@ -15,6 +16,7 @@ import numpy as np
 import pytest
 
 from conftest import research
+from vesuve.journal import Journal
 from vesuve.transfer import mirror, rendering, steps, surfaces, tables
 from vesuve.transport import InMemoryTransport
 
@@ -229,7 +231,7 @@ def test_the_loop_reads_a_table_once_its_south_pile_exists_and_frees_the_piles(t
         for k in range(rendering.LAYERS):
             (output / f"{k:03d}.tif").write_bytes(b"x")
         (output / rendering.END_MARK).write_text("ok\n")
-        return {"rendered": True, "resumed": False}
+        return {"rendered": True, "resumed": False, "code": 0, "abandoned": False, "seconds": 0.0}
 
     monkeypatch.setattr(tables.rendering, "render", fake_render)
     monkeypatch.setattr(tables.rendering, "read_pile",
@@ -239,9 +241,11 @@ def test_the_loop_reads_a_table_once_its_south_pile_exists_and_frees_the_piles(t
     monkeypatch.setattr(tables.steps, "block_table",
                         lambda read, by, bx, east, south, **_: {"row": by, "column": bx, "east": east, "south": south,
                                                                 "h": {f"{by}_{bx}": [1.0, 0.0, 2]}, "v": {}})
+    log = io.StringIO()
     t = tables.TableMaker(tmp_path / "work", {"s": mesh}, {(0, 0), (0, 2), (2, 0)}, "https://s3/v.zarr",
-                          InMemoryTransport(_volume()), disks=())
+                          InMemoryTransport(_volume()), Journal(log, "INFO"), disks=())
     got = t.make()
+    assert log.getvalue().count("PILE_RENDERED") == 3 and log.getvalue().count("TABLE_READ") == 3
     assert got["rows_done"] == 2 and not got["failed"] and got["stopped"] is None
     assert t.table("s", 0, 0)["east"] and t.table("s", 0, 0)["south"]     # read after row 2 was rendered
     assert not t.table("s", 0, 2)["east"] and not t.table("s", 0, 2)["south"]

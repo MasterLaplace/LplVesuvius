@@ -9,6 +9,9 @@
 #
 # ⚠ `--user`: without it, the outputs written into the mounted folder belong to root.
 #
+#   docker build --target render -t vesuve:render .      the same program on top of ScrollPrize/villa's image, which
+#                                                          carries vc_render_tifxyz: what `grand-prize --render` needs
+#
 # ⚠ Requirements: x86-64 or arm64, 2 GiB of memory, no GPU. The network is only asked for to read the public bucket
 # (--read, the ink map, the certified surface); without it, each remote stage says so and the pipeline goes as far as
 # it can.
@@ -20,6 +23,18 @@ WORKDIR /vesuve
 COPY . .
 # The core first, and its tests under sanitizers: an image whose core fails does not build.
 RUN make test && make && pip wheel --no-cache-dir --no-deps -w /wheels .
+
+# The renderer is the community's, as it ships: the program is installed on top of its image rather than the
+# renderer rebuilt here. Its own entry point is replaced by the program's.
+FROM ghcr.io/scrollprize/villa/volume-cartographer:edge AS render
+RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-venv \
+    && rm -rf /var/lib/apt/lists/*
+COPY --from=build /wheels /wheels
+RUN python3 -m venv /opt/vesuve && /opt/vesuve/bin/pip install --no-cache-dir /wheels/*.whl && rm -rf /wheels
+ENV PATH=/opt/vesuve/bin:$PATH
+WORKDIR /work
+ENTRYPOINT ["vesuve"]
+CMD ["grand-prize", "--render", "--output", "/outputs", "--cache", "/cache"]
 
 FROM python:3.13-slim
 ARG INK=0

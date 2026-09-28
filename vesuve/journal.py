@@ -36,14 +36,14 @@ class Journal:
             parts.append(f"{key}={text!r}" if (" " in text or "=" in text or not text) else f"{key}={text}")
         print(" ".join(parts), file=self.stream, flush=True)
 
-    def debug(self, code: str, **fields) -> None:
+    def debug(self, code: str, /, **fields) -> None:
         self._write("DEBUG", code, fields)
 
-    def info(self, code: str, **fields) -> None:
+    def info(self, code: str, /, **fields) -> None:
         self._write("INFO", code, fields)
 
-    def warn(self, code: str, **fields) -> None:
+    def warn(self, code: str, /, **fields) -> None:
         self._write("WARN", code, fields)
 
-    def error(self, code: str, **fields) -> None:
+    def error(self, code: str, /, **fields) -> None:
         self._write("ERROR", code, fields)
