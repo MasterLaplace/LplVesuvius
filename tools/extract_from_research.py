@@ -148,6 +148,10 @@ def _correction_inputs(research: Path, out: Path, *, tau0, judges: dict, candida
     _write_array(out / "transfer.npy.gz", tau0)
     for name, a in judges.items():
         _write_array(out / f"judge_{name}.npy.gz", a)
+    import numpy as np
+    # What the research wrote as the corrected transfer, for the port to be compared with. Not its bytes: the least
+    # squares round differently on another processor, so the same decision can land slightly apart there.
+    _write_array(out / "research_corrected_transfer.npy.gz", np.load(corrected))
     measures = research / "docs" / "mesures"
     context = {
         "prediction": LA_PREDICTION, "side": LE_COTE.replace("du_cote_", ""), "block": int(LE_BLOC),
@@ -161,7 +165,6 @@ def _correction_inputs(research: Path, out: Path, *, tau0, judges: dict, candida
             "measures": {str(p.relative_to(research)): _digest(p) for p in (
                 measures / measure, measures / "la_marche_corrige_t_elle_la_spire_produite.json")},
             "inputs": {k: _digest(f) for k, f in sources.items()},
-            # What the research wrote as the corrected transfer: the port must write the same bytes.
             "corrected_transfer": _digest(corrected),
             "tables": hashlib.sha256(b"".join(f.read_bytes() for f in read)).hexdigest(),
         },

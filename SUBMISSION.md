@@ -68,7 +68,8 @@ without a judge and is right far more often than wrong, which is the property a 
 
 - **The published numbers, replayed.** Each port is tested against the research function that produced the
   number. The correction gives back what `275` and `281` published, block by block, and the corrected transfer it
-  writes has the same bytes as the one the research saved (`tests/test_correction.py`).
+  writes corrects the same points as the one the research saved, to within a millionth of a voxel
+  (`tests/test_correction.py`).
 - **The judges never decide.** Replaced by noise, they change the counts and not one corrected point (same file).
 - **Tests that can fail.** Rules were broken on purpose to check that their tests turn red. An anchor that keeps its
   own block, or a decision that favours the slip, makes four correction tests fail, the published counts and the

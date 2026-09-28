@@ -90,8 +90,8 @@ request, with warnings treated as errors.
   by entry, the same 111 requests and 6333 covered chunks, then twelve fabricated footprints, round after
   round.
 - The correction of the transfer is replayed from the embedded step tables. It gives back what `275` and `281`
-  published block by block (340 and 84 blocks), and the corrected transfer it writes has the same bytes as the one
-  the research saved. The judges only score: replaced by noise, they change the counts and not one corrected point.
+  published block by block (340 and 84 blocks), and the corrected transfer it writes corrects the same points as
+  the one the research saved, to within a millionth of a voxel. The judges only score: replaced by noise, they change the counts and not one corrected point.
 - What `--render` makes is compared with what the research made, on the research's own files
   (`tools/check_against_research.py`): the two surfaces are identical to the research's meshes, the step tables of
   block `(16, 256)` are identical seam for seam on both surfaces, and a pile rendered here from a fresh mirror is

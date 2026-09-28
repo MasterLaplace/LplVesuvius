@@ -58,5 +58,6 @@ def correction(name: str) -> dict:
     tables = {(role, *map(int, k.split("_"))): t for role, by_block in _read(d / "tables.json.gz").items()
               for k, t in by_block.items()}
     return {"context": ctx, "transfer": _read_array(d / "transfer.npy.gz"), "surfaces": ("reference", "produced"),
+            "research_corrected": _read_array(d / "research_corrected_transfer.npy.gz"),
             "judges": [_read_array(d / f"judge_{j}.npy.gz") for j in ctx["judges"]],
             "tables": tables, "candidates": {tuple(b) for b in ctx["candidates"]}}

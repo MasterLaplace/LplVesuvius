@@ -2,13 +2,11 @@
 
 `275` ran the procedure of `265` on the 340 candidate blocks of segment `20230702185753` and published 163 misses made
 right for 41 rights made misses; `281` ran it on the band `w028-037` and published 15 for 25. The port replays both
-from the embedded inputs alone, writes the corrected transfer the research wrote byte for byte, and each rule it
-depends on is checked against the research function that applied it.
+from the embedded inputs alone, writes the corrected transfer the research wrote (to within a millionth of a voxel),
+and each rule it depends on is checked against the research function that applied it.
 """
 from __future__ import annotations
 
-import hashlib
-import io
 import json
 
 import numpy as np
@@ -31,12 +29,6 @@ def _replay(name: str) -> dict:
     k = embedded.correction(name)
     return {**c.correct_segment(k["transfer"], k["judges"], k["tables"], k["candidates"],
                                 k["context"]["slip_voxels"], k["surfaces"]), "inputs": k}
-
-
-def _digest(a: np.ndarray) -> str:
-    buf = io.BytesIO()
-    np.save(buf, a, allow_pickle=False)
-    return hashlib.sha256(buf.getvalue()).hexdigest()
 
 
 @pytest.fixture(scope="module")
@@ -62,9 +54,20 @@ def test_the_segment_replays_what_275_published(segment):
 
 
 def test_the_corrected_transfer_is_the_one_the_research_wrote(segment, band):
-    """The digest of what `275` and `281` saved travels with the embedded inputs: this runs without the research."""
+    """The same points corrected, to the same values within a millionth of a voxel; this runs without the research.
+
+    ⚠ Not the same bytes, and the first version of this test asserted that: it passed on the machine the research ran
+    on and failed in the CI. The least squares of the walk round differently on another processor, so an identical
+    decision can land slightly apart. What must not move is WHICH points are corrected, and by how much.
+    """
     for got in (segment, band):
-        assert _digest(got["tau1"]) == got["inputs"]["context"]["provenance"]["corrected_transfer"]
+        k = got["inputs"]
+        theirs, before = k["research_corrected"], k["transfer"]
+        ours_moved = np.isfinite(before) & (got["tau1"] != before)
+        theirs_moved = np.isfinite(before) & (theirs != before)
+        assert ours_moved.sum() > 0 and np.array_equal(ours_moved, theirs_moved)
+        assert np.array_equal(np.isnan(got["tau1"]), np.isnan(theirs))
+        assert np.nanmax(np.abs(got["tau1"] - theirs)) < 1e-6
 
 
 def test_on_the_segment_every_correction_is_within_the_validated_geometry(segment):
