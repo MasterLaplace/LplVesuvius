@@ -29,8 +29,10 @@ where it did not hold. Everything is in English now, which breaks every script w
 - `vesuve grand-prize --render` makes those step tables here (stage TR): the two surfaces from the published mesh
   and the transfer, a local mirror of the raw scan one row of blocks at a time, two piles per block rendered by
   `vc_render_tifxyz`, and the window-to-window steps read from them. `--render-rows` bounds a trial run and
-  `--keep-piles` keeps the piles. It stops cleanly when a disk runs short, and a chunk at the wrong size, which a
-  crash leaves behind, is downloaded again instead of being rendered.
+  `--keep-piles` keeps the piles. The next row downloads while the current one renders, and `--table-workers`
+  processes (2 by default) read the tables meanwhile. It stops cleanly when a disk runs short, a run started again
+  picks up where it stopped (it reads its tables, since piles are freed once read), and a chunk at the wrong size,
+  which a crash leaves behind, is downloaded again instead of being rendered.
 - `tools/check_against_research.py` compares what `--render` makes with what the research made, and
   `tools/estimate_render.py` says what a render will download before it does: 153 079 chunks, 321 GB, for the
   segment.
@@ -61,6 +63,8 @@ where it did not hold. Everything is in English now, which breaks every script w
   retired, and its one item, V-001, is issue #1.
 
 ### Fixed
+- A journal field named `code` (the exit code of a render) collided with the event code and stopped the first real
+  render on its first pile; the event code is now positional-only.
 - Four equations of the formulary rendered wrong on GitHub: between `$$`, GitHub strips Markdown's
   backslash escapes before the math renderer runs, so the median lost its braces, `\#\{\ell\}` in the
   consensus [C1] failed with "macro parameter character", and `\!` turned into a `!`. Each equation now
