@@ -44,6 +44,9 @@ where it did not hold. Everything is in English now, which breaks every script w
   Its renderer is older than the research's (villa revision `1e3f4c0`, 2026-05-13). The last row rendered with it
   changed 790 seams by at most 0.00065 voxel, and the correction decided all 340 blocks alike: the same 495 points
   moved, 14 of them by values that differ by at most 1e-4 voxel (`tools/compare_corrections.py`).
+- `tools/next_winding_ink_image.py` draws the picture of research slice 296 for the submission: where the segment
+  passes over the winding the transfer produces, the ink read on that winding matches the segment's own published ink
+  (0.83 against 0.12 and 0.10 for two controls, on six blocks chosen without the ink).
 - `tools/check_against_research.py` compares what `--render` makes with what the research made, and
   `tools/estimate_render.py` says what a render will download before it does: 153 079 chunks, 321 GB, for the
   segment.

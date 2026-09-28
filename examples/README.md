@@ -39,6 +39,13 @@ Its stage TR compares the 680 tables with the embedded ones: 334 171 seams equal
 `correction.json` is byte for byte the one above, so it is not copied again, and its `corrected_transfer.npy` has
 the SHA-256 of the research's (`5f34f5d2…`).
 
+[`grand-prize-render/next_winding_ink.jpg`](grand-prize-render/next_winding_ink.jpg) is the picture of research slice
+296: the ink read on the produced winding (top) over the published ink where the segment passes over that winding one
+turn further along its surface (bottom), with the columns where it passes within half a sheet in amber. It is drawn by
+`VESUVE_RESEARCH=<experimental> uv run python tools/next_winding_ink_image.py`.
+
+![the ink of the produced winding, over the segment's own](grand-prize-render/next_winding_ink.jpg)
+
 ## Progress: [`progress/report.md`](progress/report.md)
 
 The same certificate read the other way round: the band along column 260 (orange), rows 26 to 223, where the

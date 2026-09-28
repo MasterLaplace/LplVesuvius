@@ -4,8 +4,10 @@
 295 so far. Its main result this month: on a published PHercParis4 segment, it corrects the transfer from one
 winding to the next without a human. It takes the right decision four times as often as the wrong one (163 against
 41, sign test p = 2e-18), and the judges are used only to score. It also makes the inputs of that correction
-itself, from the published mesh and the raw scan, and gets the research's corrected transfer back byte for byte. On
-a band where the same procedure does not hold, the program measures that and writes nothing.
+itself, from the published mesh and the raw scan, and gets the research's corrected transfer back byte for byte. And
+where it can be checked, the winding it produces carries the right text: the ink read on it matches the ink the segment
+itself carries at that place, 0.83 against 0.12 and 0.10 for two controls. On a band where the same procedure does
+not hold, the program measures that and writes nothing.
 
 Every number below links to the file that produces it. The research lives on the
 [`experimental`](https://github.com/MasterLaplace/LplVesuvius/tree/experimental) branch, in French; this branch,
@@ -42,6 +44,24 @@ program does two parts of that job without a human, on real data:
   fact `R4-F456`). The sign test gives p = 2.04e-18 on the points and 2.25e-05 on the blocks, 42 blocks up and 11
   down ([`290`](https://github.com/MasterLaplace/LplVesuvius/blob/experimental/docs/archive/290_les_gains_publies_se_distinguent_ils_du_hasard.md),
   fact `R4-F471`).
+
+- **It checks the produced winding by the text it carries.** The segment makes more than one turn, so in places it
+  passes over the very winding the transfer produces, one turn further along its own surface. There, the segment's
+  published ink map says what text the produced winding must carry: a judge without a hand, which knows nothing of the
+  transfer. We read the ink of the produced winding with the model that made the published map
+  (`scrollprize/ink_canonical_2um`), on six blocks chosen from the meshes alone before any ink was read on them. Where
+  the segment passes within half a sheet, our reading and the published map at the counterpart correlate at **0.83**,
+  against **0.12** for the text of the starting winding and **0.10** for the counterpart shifted by a letter; each
+  block alone lies between 0.68 and 0.92
+  ([`296`](https://github.com/MasterLaplace/LplVesuvius/blob/experimental/docs/archive/296_le_tour_produit_porte_t_il_le_texte_du_segment.md), fact `R4-F477`).
+  The reading is first calibrated on the traced winding: 0.96 against the published map.
+
+  ![Our ink reading of the produced winding, above the published ink where the segment passes over it](examples/grand-prize-render/next_winding_ink.jpg)
+
+  *Top: the ink read on the produced winding, over a 29.5 × 4.9 mm strip of row 176. Bottom: the published ink map where
+  the segment passes over that winding. Between them, in amber, where the segment passes within half a sheet, the only
+  place where the comparison judges anything. This strip was looked at before the slice was written, and the slice says
+  so; the six blocks behind the 0.83 were not.*
 
 The gain has to be read at its real size. Most transferred points were already right, so over the whole segment the
 share on the right winding moves from 0.9303 to 0.9334. What matters is that the decision to move a point is taken
@@ -130,4 +150,4 @@ The research is a series of dated slices. Each asks one question and answers it 
 
 The slices of this submission: `244` and `246` for the certificate, `247` and `248` for the transfer and its judges,
 `260` to `265` for the walk, the anchor and the decision, `275` for the whole segment, `281` and `291` to `295` for
-where it does not hold, `290` for the sign test.
+where it does not hold, `290` for the sign test, `296` for the ink of the produced winding.
