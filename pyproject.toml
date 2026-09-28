@@ -1,11 +1,10 @@
-# Le logiciel des prix : un noyau C (`noyau/`, construit par `make`) et des services Python.
+# The prize software: a C core (`core/`, built by `make`) and Python services.
 #
-# ⚠ Les dépendances de BASE sont celles qu'une commande de prix exige pour tourner ; l'inférence
-# d'encre (torch, 3,8 Gio avec CUDA) est un groupe à part, parce que trois pipelines sur quatre
-# rendent leur verdict sans elle et le disent.
+# ⚠ The BASE dependencies are those a prize command needs to run; the ink inference (torch, 3.8 GiB with
+# CUDA) is a separate group, because three pipelines out of four give their verdict without it and say so.
 [project]
 name = "vesuve"
-version = "0.1.0"
+version = "0.2.0"
 description = "One program, one pipeline per Vesuvius Challenge prize, built on what LplVesuvius validated"
 requires-python = ">=3.11"
 dependencies = [
@@ -14,18 +13,17 @@ dependencies = [
     "imagecodecs>=2024.1",
     "numcodecs>=0.12,<0.16",
     "pillow>=10.0",
-    # scipy : la rotation des profils de rangées (`vesuve/rendu/rangees.py`), comme chez le producteur.
+    # scipy: the rotation of the row profiles (`vesuve/render/rows.py`), as in the research.
     "scipy>=1.11",
 ]
 
 [project.optional-dependencies]
-encre = [
+ink = [
     "torch>=2.0",
     "transformers>=4.46,<5",
     "timesformer-pytorch>=0.4",
 ]
-# scipy : pour le code de RECHERCHE, que les tests de parité importent comme oracle ; le logiciel
-# lui-même ne l importe pas.
+# scipy: for the RESEARCH code the parity tests import as their oracle; the program itself does not import it.
 tests = ["pytest>=8", "scipy>=1.11"]
 
 [project.scripts]
@@ -37,9 +35,9 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["vesuve"]
-# La bibliothèque est construite par `make`, donc ignorée par git : sans cette ligne la roue
-# partirait sans son noyau et chaque commande échouerait au chargement.
-artifacts = ["vesuve/_noyau/libvesuve.so"]
+# The library is built by `make`, hence ignored by git: without this line the wheel would ship without its core
+# and every command would fail on load.
+artifacts = ["vesuve/_core/libvesuve.so"]
 
 [[tool.uv.index]]
 name = "pytorch-cpu"
@@ -51,12 +49,12 @@ torch = { index = "pytorch-cpu" }
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-# La porte de merge : un avertissement est une erreur, ici et non dans un script de CI.
+# The merge gate: a warning is an error, here and not in a CI script.
 filterwarnings = [
     "error",
-    # ⚠ La SEULE exception, et elle vise un code tiers : `timesformer_pytorch/__init__.py:1` compare `amt is 0`,
-    # que Python 3.12+ signale à la compilation. Ce n'est pas notre code, le comportement est correct pour un
-    # petit entier, et la ligne tombera le jour où la dépendance est corrigée ou remplacée.
+    # ⚠ The ONLY exception, and it targets third-party code: `timesformer_pytorch/__init__.py:1` compares `amt is 0`,
+    # which Python 3.12+ flags at compile time. It is not our code, the behaviour is correct for a small integer, and
+    # the line goes the day the dependency is fixed or replaced.
     "ignore:\"is\" with 'int' literal:SyntaxWarning",
 ]
-markers = ["reseau: lit le bucket public (dl.ash2txt.org, S3) ; sauté sans VESUVE_RESEAU=1"]
+markers = ["network: reads the public bucket (dl.ash2txt.org, S3); skipped without VESUVE_NETWORK=1"]

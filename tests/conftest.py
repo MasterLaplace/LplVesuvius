@@ -1,4 +1,4 @@
-"""Ce que les tests partagent : où vit le code de recherche qui sert d'oracle, et le réseau."""
+"""What the tests share: where the research code that serves as oracle lives, and the network."""
 from __future__ import annotations
 
 import os
@@ -7,29 +7,28 @@ from pathlib import Path
 
 import pytest
 
-# Le code de recherche est l'ORACLE des tests de parité : il a produit chaque nombre publié, donc
-# une réécriture qui ne rend pas ses sorties sur les mêmes entrées n'est pas une réécriture. Il vit sur la
-# branche `experimental` ; `VESUVE_RECHERCHE` pointe une copie de travail de cette branche, par exemple
-# `git worktree add ../LplVesuvius-experimental experimental`.
-_LA_RACINE = os.environ.get("VESUVE_RECHERCHE")
-LA_RECHERCHE = Path(_LA_RACINE) if _LA_RACINE else Path("VESUVE_RECHERCHE-non-defini")
-LES_MESURES = LA_RECHERCHE / "docs" / "mesures"
-# Les données lourdes (piles, modèles) ne sont pas versionnées : `VESUVE_DONNEES` pointe le `data/` qui les porte.
-LES_DONNEES = Path(os.environ.get("VESUVE_DONNEES", LA_RECHERCHE / "data"))
+# The research code is the ORACLE of the parity tests: it produced every published number, so a rewrite that does not
+# return its outputs on the same inputs is not a rewrite. It lives on the `experimental` branch; `VESUVE_RESEARCH`
+# points to a working copy of that branch, for instance `git worktree add ../LplVesuvius-experimental experimental`.
+_ROOT = os.environ.get("VESUVE_RESEARCH")
+RESEARCH = Path(_ROOT) if _ROOT else Path("VESUVE_RESEARCH-not-set")
+MEASURES = RESEARCH / "docs" / "mesures"
+# The heavy data (stacks, models) is not versioned: `VESUVE_DATA` points to the `data/` that carries it.
+DATA = Path(os.environ.get("VESUVE_DATA", RESEARCH / "data"))
 
 
-def la_recherche_est_la() -> bool:
-    return _LA_RACINE is not None and (LA_RECHERCHE / "src" / "nappe" / "la_couverture_sans_main.py").exists()
+def research_is_here() -> bool:
+    return _ROOT is not None and (RESEARCH / "src" / "nappe" / "la_couverture_sans_main.py").exists()
 
 
-if la_recherche_est_la():
-    for famille in sorted((LA_RECHERCHE / "src").iterdir()):
-        if famille.is_dir() and str(famille) not in sys.path:
-            sys.path.insert(0, str(famille))
+if research_is_here():
+    for family in sorted((RESEARCH / "src").iterdir()):
+        if family.is_dir() and str(family) not in sys.path:
+            sys.path.insert(0, str(family))
 
-recherche = pytest.mark.skipif(
-    not la_recherche_est_la(),
-    reason=(f"le code de recherche (l'oracle) n'est pas sous {LA_RECHERCHE}" if _LA_RACINE else
-            "VESUVE_RECHERCHE n'est pas défini : le pointer sur une copie de travail de la branche experimental"))
-reseau = pytest.mark.skipif(os.environ.get("VESUVE_RESEAU") != "1",
-                            reason="lit le bucket public : lancer avec VESUVE_RESEAU=1")
+research = pytest.mark.skipif(
+    not research_is_here(),
+    reason=(f"the research code (the oracle) is not under {RESEARCH}" if _ROOT else
+            "VESUVE_RESEARCH is not set: point it to a working copy of the experimental branch"))
+network = pytest.mark.skipif(os.environ.get("VESUVE_NETWORK") != "1",
+                             reason="reads the public bucket: run with VESUVE_NETWORK=1")

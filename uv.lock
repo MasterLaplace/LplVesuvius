@@ -1356,7 +1356,7 @@ wheels = [
 
 [[package]]
 name = "vesuve"
-version = "0.1.0"
+version = "0.2.0"
 source = { editable = "." }
 dependencies = [
     { name = "imagecodecs", version = "2026.3.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
@@ -1372,7 +1372,7 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
-encre = [
+ink = [
     { name = "timesformer-pytorch" },
     { name = "torch", version = "2.14.0", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "sys_platform == 'darwin'" },
     { name = "torch", version = "2.14.0+cpu", source = { registry = "https://download.pytorch.org/whl/cpu" }, marker = "sys_platform != 'darwin'" },
@@ -1394,11 +1394,11 @@ requires-dist = [
     { name = "scipy", specifier = ">=1.11" },
     { name = "scipy", marker = "extra == 'tests'", specifier = ">=1.11" },
     { name = "tifffile", specifier = ">=2024.1" },
-    { name = "timesformer-pytorch", marker = "extra == 'encre'", specifier = ">=0.4" },
-    { name = "torch", marker = "extra == 'encre'", specifier = ">=2.0", index = "https://download.pytorch.org/whl/cpu" },
-    { name = "transformers", marker = "extra == 'encre'", specifier = ">=4.46,<5" },
+    { name = "timesformer-pytorch", marker = "extra == 'ink'", specifier = ">=0.4" },
+    { name = "torch", marker = "extra == 'ink'", specifier = ">=2.0", index = "https://download.pytorch.org/whl/cpu" },
+    { name = "transformers", marker = "extra == 'ink'", specifier = ">=4.46,<5" },
 ]
-provides-extras = ["encre", "tests"]
+provides-extras = ["ink", "tests"]
 
 [[package]]
 name = "wrapt"

@@ -6,6 +6,27 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 ## [Unreleased]
 
 ### Changed
+- **Breaking: the program is now in English**, from the command line down to the C core, so that anyone
+  can read it. Scripts written against 0.1.0 need these renames:
+  - verbs: `formules` is `formulas`, `lire` is `read`;
+  - options: `--sortie` is `--output`, `--donnees` is `--data`, `--lire` is `--read`, `--tours` is
+    `--rounds`, `--fils` is `--threads`, `--lectures` is `--readings`, `--juger` is `--judge`,
+    `--sans-encre` is `--no-ink`, `--sans-surface` is `--no-surface`, `--couches` is `--layers`,
+    `--rouleau` is `--scroll`, `--cote-mm` is `--side-mm`, `--modele` is `--model`, `--carte` is
+    `--ink-map`, `--etiquettes` is `--labels`, `--cartes` is `--ink-maps`, `--maillages` is `--meshes`;
+  - outputs: `rapport.json` and `rapport.md` are `report.json` and `report.md`, and every file a pipeline
+    writes has an English name (`certificat.json` is `certificate.json`, `masque_par_chunk.tif` is
+    `chunk_mask.tif`, and so on). Report fields and state words are English too: a stage is `done`,
+    `stopped`, `skipped` or `partial`, a requirement is `met`, `not met`, `not measured` or
+    `not applicable`;
+  - environment: `VESUVE_JOURNAL` is `VESUVE_LOG`, `VESUVE_RECHERCHE` is `VESUVE_RESEARCH`,
+    `VESUVE_DONNEES` is `VESUVE_DATA`, `VESUVE_RESEAU` is `VESUVE_NETWORK`;
+  - the Docker image writes to `/outputs` and reads `/data`; its optional extra is `INK=1`;
+  - the C library is `vesuve/_core/libvesuve.so`, and its status codes are `VESUVE_OK`,
+    `VESUVE_BAD_ARGUMENT`, `VESUVE_UNDECIDABLE` and `VESUVE_NOT_IMPLEMENTED`.
+- The research stays in French. Its keys become this program's names in one place,
+  `vesuve/research.py`, and the parity tests go through it, so they still compare each port with the
+  research's own numbers.
 - Work is tracked in GitHub issues and pull requests, described in `CONTRIBUTING.md`; `backlog/` is
   retired, and its one item, V-001, is issue #1.
 

@@ -1,9 +1,9 @@
 .venv
 build
-vesuve/_noyau
+vesuve/_core
 cache
-sorties
+outputs
 **/__pycache__
 .pytest_cache
-recherche/
+research/
 .github/

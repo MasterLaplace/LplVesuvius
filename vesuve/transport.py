@@ -1,13 +1,12 @@
-"""Le transport : un GET HTTPS avec connexion persistante par fil, et la RAISON d'un échec.
+"""The transport: an HTTPS GET with one persistent connection per thread, and the REASON of a failure.
 
-⚠⚠ Deux échecs ne se confondent jamais : « absent du dépôt » (403 ou 404, un fait sur la donnée) et
-« le réseau a échoué » (tout le reste, un fait sur le fil). Le producteur a payé leur confusion : une
-coupure avait fait passer des chunks pour absents sans que rien ne le dise
-(`src/nappe/ou_le_maillage_quitte_t_il_son_feuillet.py:99`).
+⚠⚠ Two failures are never confused: "absent from the bucket" (403 or 404, a fact about the data) and "the
+network failed" (anything else, a fact about the wire). The research paid for confusing them: a cut had made
+chunks look absent without anything saying so (`src/nappe/ou_le_maillage_quitte_t_il_son_feuillet.py:99` on
+the `experimental` branch).
 
-⭐ La connexion est gardée ouverte par fil. Le lecteur du producteur ouvrait une connexion TLS par
-chunk, en série : 1,03 s par chunk de 1,78 Mo. Ici chaque fil réutilise la sienne, et le lecteur de
-bandes en fait travailler plusieurs à la fois.
+⭐ The connection is kept open per thread. The research reader opened one TLS connection per chunk, in series:
+1.03 s per chunk of 1.78 MB. Here each thread reuses its own, and the band reader runs several at once.
 """
 from __future__ import annotations
 
@@ -17,101 +16,101 @@ import time
 from dataclasses import dataclass
 from urllib.parse import urlsplit
 
-ABSENT = "absent du dépôt"
-RESEAU = "le réseau a échoué"
+ABSENT = "absent from the bucket"
+NETWORK = "the network failed"
 
 
 @dataclass(frozen=True)
-class Reponse:
-    corps: bytes | None
-    raison: str | None  # None quand le corps est là
-    reprises: int = 0
+class Response:
+    body: bytes | None
+    reason: str | None  # None when the body is there
+    retries: int = 0
 
 
 class Transport:
-    """GET avec reprises bornées : 4 essais, attentes 0,5 s, 1 s, 2 s, comme le producteur."""
+    """GET with bounded retries: 4 attempts, waiting 0.5 s, 1 s, 2 s, as the research did."""
 
-    def __init__(self, delai: float = 120.0, reprises: int = 3, pause: float = 0.5, journal=None):
-        self.delai, self.reprises, self.pause, self.journal = delai, reprises, pause, journal
+    def __init__(self, timeout: float = 120.0, retries: int = 3, pause: float = 0.5, journal=None):
+        self.timeout, self.retries, self.pause, self.journal = timeout, retries, pause, journal
         self._local = threading.local()
-        self.octets = 0
-        self._verrou = threading.Lock()
-        self._toutes: list[http.client.HTTPSConnection] = []  # pour les fermer, fil mort ou vivant
+        self.bytes_read = 0
+        self._lock = threading.Lock()
+        self._all: list[http.client.HTTPSConnection] = []  # to close them, thread dead or alive
 
-    def _connexion(self, hote: str) -> http.client.HTTPSConnection:
+    def _connection(self, host: str) -> http.client.HTTPSConnection:
         pool = getattr(self._local, "pool", None)
         if pool is None:
             pool = self._local.pool = {}
-        c = pool.get(hote)
+        c = pool.get(host)
         if c is None:
-            c = pool[hote] = http.client.HTTPSConnection(hote, timeout=self.delai)
-            with self._verrou:
-                self._toutes.append(c)
+            c = pool[host] = http.client.HTTPSConnection(host, timeout=self.timeout)
+            with self._lock:
+                self._all.append(c)
         return c
 
-    def fermer(self) -> None:
-        """Ferme chaque connexion ouverte, y compris celles des fils déjà terminés.
+    def close(self) -> None:
+        """Closes every open connection, including those of threads that already finished.
 
-        ⚠ Un fil d'un pool qui meurt ne ferme pas la connexion rangée dans son `threading.local` : sa socket TLS
-        est ramassée ouverte. Sur une lecture de milliers de chunks, c'est une fuite de descripteurs ; les
-        tests, qui traitent les avertissements en erreurs, l'ont attrapée (`ResourceWarning`).
+        ⚠ A thread of a pool that dies does not close the connection stored in its `threading.local`: its TLS
+        socket is collected open. Over a reading of thousands of chunks, that is a descriptor leak; the tests,
+        which treat warnings as errors, caught it (`ResourceWarning`).
         """
-        with self._verrou:
-            toutes, self._toutes = self._toutes, []
-        for c in toutes:
+        with self._lock:
+            connections, self._all = self._all, []
+        for c in connections:
             c.close()
         self._local = threading.local()
 
-    def _oublier(self, hote: str) -> None:
-        c = getattr(self._local, "pool", {}).pop(hote, None)
+    def _forget(self, host: str) -> None:
+        c = getattr(self._local, "pool", {}).pop(host, None)
         if c is not None:
             c.close()
 
-    def get(self, url: str) -> Reponse:
-        morceaux = urlsplit(url)
-        chemin = morceaux.path + (f"?{morceaux.query}" if morceaux.query else "")
-        derniere = "?"
-        for essai in range(self.reprises + 1):
+    def get(self, url: str) -> Response:
+        parts = urlsplit(url)
+        path = parts.path + (f"?{parts.query}" if parts.query else "")
+        last = "?"
+        for attempt in range(self.retries + 1):
             try:
-                c = self._connexion(morceaux.netloc)
-                c.request("GET", chemin, headers={"Connection": "keep-alive"})
+                c = self._connection(parts.netloc)
+                c.request("GET", path, headers={"Connection": "keep-alive"})
                 r = c.getresponse()
-                corps = r.read()
+                body = r.read()
                 if r.status in (403, 404):
-                    return Reponse(None, ABSENT, essai)
+                    return Response(None, ABSENT, attempt)
                 if r.status == 200:
-                    with self._verrou:
-                        self.octets += len(corps)
-                    return Reponse(corps, None, essai)
-                derniere = f"HTTP {r.status}"
+                    with self._lock:
+                        self.bytes_read += len(body)
+                    return Response(body, None, attempt)
+                last = f"HTTP {r.status}"
             except (OSError, http.client.HTTPException) as e:
-                derniere = type(e).__name__
-                self._oublier(morceaux.netloc)
-            if essai < self.reprises:
-                time.sleep(self.pause * (2.0 ** essai))
+                last = type(e).__name__
+                self._forget(parts.netloc)
+            if attempt < self.retries:
+                time.sleep(self.pause * (2.0 ** attempt))
         if self.journal is not None:
-            self.journal.warn("TRANSPORT_ECHEC", url=url, raison=derniere, essais=self.reprises + 1)
-        return Reponse(None, f"{RESEAU} : {derniere}", self.reprises)
+            self.journal.warn("TRANSPORT_FAILED", url=url, reason=last, attempts=self.retries + 1)
+        return Response(None, f"{NETWORK}: {last}", self.retries)
 
 
-class TransportEnMemoire:
-    """Un transport de test : un dictionnaire d'URL vers des corps. Une URL absente est « absente »,
-    une URL qui vaut `None` simule un fil tombé."""
+class InMemoryTransport:
+    """A test transport: a dictionary from URLs to bodies. A missing URL is "absent", a URL mapped to
+    `None` simulates a dropped wire."""
 
-    def __init__(self, corps: dict[str, bytes | None]):
-        self.corps = corps
-        self.demandes: list[str] = []
-        self.octets = 0
+    def __init__(self, bodies: dict[str, bytes | None]):
+        self.bodies = bodies
+        self.requests: list[str] = []
+        self.bytes_read = 0
 
-    def fermer(self) -> None:
+    def close(self) -> None:
         pass
 
-    def get(self, url: str) -> Reponse:
-        self.demandes.append(url)
-        if url not in self.corps:
-            return Reponse(None, ABSENT)
-        x = self.corps[url]
+    def get(self, url: str) -> Response:
+        self.requests.append(url)
+        if url not in self.bodies:
+            return Response(None, ABSENT)
+        x = self.bodies[url]
         if x is None:
-            return Reponse(None, f"{RESEAU} : simulé")
-        self.octets += len(x)
-        return Reponse(x, None)
+            return Response(None, f"{NETWORK}: simulated")
+        self.bytes_read += len(x)
+        return Response(x, None)

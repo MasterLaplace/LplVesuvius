@@ -1,4 +1,4 @@
-"""Chaque commande `vesuve` du README est acceptée par le programme : une doc qui cite un drapeau renommé casse ici."""
+"""Every `vesuve` command of the README is accepted by the program: a doc that quotes a renamed flag breaks here."""
 from __future__ import annotations
 
 import re
@@ -9,28 +9,28 @@ import pytest
 
 from vesuve import cli
 
-ICI = Path(__file__).resolve().parents[1]
+HERE = Path(__file__).resolve().parents[1]
 
 
-def les_commandes() -> list[list[str]]:
+def quoted_commands() -> list[list[str]]:
     out = []
-    for page in (ICI / "README.md", ICI / "exemples" / "README.md"):
-        for bloc in re.findall(r"```bash\n(.*?)```", page.read_text(), flags=re.S):
-            for ligne in bloc.splitlines():
-                ligne = ligne.split("#")[0].strip()
-                m = re.match(r"(?:uv run )?vesuve (.+)", ligne)
+    for page in (HERE / "README.md", HERE / "examples" / "README.md", HERE / "CONTRIBUTING.md"):
+        for block in re.findall(r"```bash\n(.*?)```", page.read_text(), flags=re.S):
+            for line in block.splitlines():
+                line = line.split("#")[0].strip()
+                m = re.match(r"(?:uv run )?vesuve (.+)", line)
                 if m:
                     out.append(shlex.split(m.group(1)))
     return out
 
 
-def test_le_readme_cite_des_commandes():
-    assert len(les_commandes()) >= 4  # une page sans commande ne vérifierait rien
+def test_the_readme_quotes_commands():
+    assert len(quoted_commands()) >= 4  # a page without a command would check nothing
 
 
-@pytest.mark.parametrize("argv", les_commandes(), ids=lambda a: " ".join(a))
-def test_chaque_commande_du_readme_est_acceptee(argv, monkeypatch):
-    appels = []
-    for nom in ("_grand_prize", "_progress", "_first_letters", "_paris4_title", "_demo", "_lire"):
-        monkeypatch.setattr(cli, nom, lambda a, *r, _n=nom: appels.append(_n) or 0)
-    assert cli.main(argv) == 0 and appels  # l'analyse passe, et un verbe est atteint sans rien exécuter
+@pytest.mark.parametrize("argv", quoted_commands(), ids=lambda a: " ".join(a))
+def test_each_command_of_the_readme_is_accepted(argv, monkeypatch):
+    calls = []
+    for name in ("_grand_prize", "_progress", "_first_letters", "_paris4_title", "_demo", "_read"):
+        monkeypatch.setattr(cli, name, lambda a, *r, _n=name: calls.append(_n) or 0)
+    assert cli.main(argv) == 0 and calls  # the parsing passes, and a verb is reached without running anything

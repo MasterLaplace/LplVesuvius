@@ -2,35 +2,35 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "vesuve : le test Python sous le curseur",
+      "name": "vesuve: the Python test under the cursor",
       "type": "debugpy",
       "request": "launch",
       "module": "pytest",
       "args": ["-q", "${file}"],
       "cwd": "${workspaceFolder}",
       "python": "${workspaceFolder}/.venv/bin/python",
-      "preLaunchTask": "vesuve : construire le noyau (debug)",
+      "preLaunchTask": "vesuve: build the core (debug)",
       "justMyCode": false
     },
     {
-      "name": "vesuve : le test C sous le curseur",
+      "name": "vesuve: the C test under the cursor",
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/build/tests/${fileBasenameNoExtension}",
       "cwd": "${workspaceFolder}",
       "MIMode": "gdb",
-      "preLaunchTask": "vesuve : construire les tests C",
+      "preLaunchTask": "vesuve: build the C tests",
       "environment": [{ "name": "ASAN_OPTIONS", "value": "detect_leaks=0" }]
     },
     {
-      "name": "vesuve : le programme (formules)",
+      "name": "vesuve: the program (formulas)",
       "type": "debugpy",
       "request": "launch",
       "module": "vesuve.cli",
-      "args": ["formules"],
+      "args": ["formulas"],
       "cwd": "${workspaceFolder}",
       "python": "${workspaceFolder}/.venv/bin/python",
-      "preLaunchTask": "vesuve : construire le noyau (debug)",
+      "preLaunchTask": "vesuve: build the core (debug)",
       "justMyCode": false
     }
   ]

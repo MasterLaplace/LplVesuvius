@@ -1,7 +1,6 @@
-"""vesuve : un programme, un pipeline par prix du Vesuvius Challenge.
+"""vesuve: one program, one pipeline per Vesuvius Challenge prize.
 
-Les équations vivent dans le noyau C (`vesuve.noyau`), les lectures et les écritures dans les services
-Python, et chaque prix dans son propre paquet (`grand_prize`, `first_letters`, `paris4_title`,
-`progress`), qui n'importe jamais un autre prix.
+The equations live in the C core (`vesuve.core`), reading and writing in the Python services, and each prize in
+its own package (`grand_prize`, `first_letters`, `paris4_title`, `progress`), which never imports another prize.
 """
-__version__ = "0.1.0"
+__version__ = "0.2.0"

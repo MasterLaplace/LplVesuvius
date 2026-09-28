@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v5
         with:
           ref: experimental
-          path: recherche
+          path: research
           sparse-checkout: |
             src
             docs/mesures
@@ -28,7 +28,7 @@ jobs:
         run: make
       - name: Python tests, twice
         env:
-          VESUVE_RECHERCHE: ${{ github.workspace }}/recherche
+          VESUVE_RESEARCH: ${{ github.workspace }}/research
         run: |
           uv run --extra tests pytest -q -rs
           uv run --extra tests pytest -q

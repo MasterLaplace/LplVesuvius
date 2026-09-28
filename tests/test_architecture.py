@@ -1,21 +1,21 @@
-"""Les frontières du logiciel, vérifiées et non seulement dessinées.
+"""The program's borders, checked and not only drawn.
 
-Un prix n'importe jamais un autre prix ; ce qu'ils partagent vit dans un module partagé (`treillis/` pour le
-Grand Prize et l'audit, `rendu/` pour First Letters et le titre) ou dans le commun. Et le noyau C ne dépend de
-rien : c'est lui que tout le reste appelle.
+A prize never imports another prize; what they share lives in a shared module (`lattice/` for the Grand Prize and the
+audit, `render/` for First Letters and the title) or in the common services. And the C core depends on nothing: it is
+what everything else calls.
 """
 from __future__ import annotations
 
 import ast
 from pathlib import Path
 
-LE_PAQUET = Path(__file__).resolve().parents[1] / "vesuve"
-LES_PRIX = ("grand_prize", "first_letters", "paris4_title", "progress")
+PACKAGE = Path(__file__).resolve().parents[1] / "vesuve"
+PRIZES = ("grand_prize", "first_letters", "paris4_title", "progress")
 
 
-def _imports(fichier: Path) -> set[str]:
+def _imports(path: Path) -> set[str]:
     out = set()
-    for n in ast.walk(ast.parse(fichier.read_text())):
+    for n in ast.walk(ast.parse(path.read_text())):
         if isinstance(n, ast.ImportFrom) and n.module:
             out.add(n.module)
         elif isinstance(n, ast.Import):
@@ -23,27 +23,27 @@ def _imports(fichier: Path) -> set[str]:
     return out
 
 
-def test_un_prix_nimporte_jamais_un_autre_prix():
-    vus = 0
-    for prix in LES_PRIX:
-        for f in (LE_PAQUET / prix).glob("*.py"):
+def test_a_prize_never_imports_another_prize():
+    seen = 0
+    for prize in PRIZES:
+        for f in (PACKAGE / prize).glob("*.py"):
             for m in _imports(f):
-                autres = [p for p in LES_PRIX if p != prix and m.startswith(f"vesuve.{p}")]
-                assert not autres, f"{f.relative_to(LE_PAQUET)} importe {m}"
-            vus += 1
-    assert vus >= 8
+                others = [p for p in PRIZES if p != prize and m.startswith(f"vesuve.{p}")]
+                assert not others, f"{f.relative_to(PACKAGE)} imports {m}"
+            seen += 1
+    assert seen >= 8
 
 
-def test_les_modules_partages_nimportent_aucun_prix():
-    for dossier in ("treillis", "rendu"):
-        for f in (LE_PAQUET / dossier).glob("*.py"):
+def test_the_shared_modules_import_no_prize():
+    for folder in ("lattice", "render"):
+        for f in (PACKAGE / folder).glob("*.py"):
             for m in _imports(f):
-                assert not any(m.startswith(f"vesuve.{p}") for p in LES_PRIX), f"{f.name} importe {m}"
+                assert not any(m.startswith(f"vesuve.{p}") for p in PRIZES), f"{f.name} imports {m}"
 
 
-def test_le_noyau_c_ne_depend_que_de_la_bibliotheque_standard():
-    for f in (LE_PAQUET.parent / "noyau" / "src").glob("*.c"):
-        for ligne in f.read_text().splitlines():
-            if ligne.startswith("#include"):
-                assert ligne.split()[1].strip('<>"') in {"vesuve.h", "math.h", "stdlib.h", "stdint.h", "stddef.h",
-                                                         "string.h"}, f"{f.name} : {ligne}"
+def test_the_c_core_depends_on_the_standard_library_only():
+    for f in (PACKAGE.parent / "core" / "src").glob("*.c"):
+        for line in f.read_text().splitlines():
+            if line.startswith("#include"):
+                assert line.split()[1].strip('<>"') in {"vesuve.h", "math.h", "stdlib.h", "stdint.h", "stddef.h",
+                                                        "string.h"}, f"{f.name}: {line}"

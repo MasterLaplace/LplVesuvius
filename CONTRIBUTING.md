@@ -30,7 +30,7 @@ uv run --extra tests pytest -q
 ```
 
 No warning crosses a merge: the C flags live in the `Makefile` with `-Werror`, and pytest turns warnings
-into errors. The parity tests need a working copy of `experimental` in `VESUVE_RECHERCHE`; without it
+into errors. The parity tests need a working copy of `experimental` in `VESUVE_RESEARCH`; without it
 they are skipped and say so. The CI does the same checkout, so a pull request is compared with the
 published numbers whether or not you have the research locally.
 

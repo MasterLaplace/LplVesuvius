@@ -1,8 +1,8 @@
 build/
-vesuve/_noyau/
+vesuve/_core/
 __pycache__/
 .venv/
 .pytest_cache/
-sorties/
+outputs/
 cache/
-recherche/
+research/

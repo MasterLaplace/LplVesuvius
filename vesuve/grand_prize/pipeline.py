@@ -1,21 +1,21 @@
-"""Le pipeline du Grand Prize : dérouler automatiquement, et dire exactement jusqu'où.
+"""The Grand Prize pipeline: unroll automatically, and say exactly how far.
 
-La question du prix tient en une ligne : qu'est-ce qui remplace l'humain qui corrige le transfert de spire
-à spire ? La réponse que ce pipeline exécute est celle de `244` et `246` : le treillis donne le pas de
-chaque couture, le consensus de cinq voisines retire le bruit propre de chaque ligne, et une boucle qui se
-referme sous le demi-feuillet coupe après coupe certifie que ses deux chemins n'ont pas changé de spire.
+The prize's question fits in one line: what replaces the human who corrects the transfer from one winding to
+the next? The answer this pipeline executes is that of `244` and `246`: the lattice gives the step of every
+seam, the consensus of five neighbouring lines removes each line's own noise, and a loop that closes under the
+half sheet cut after cut certifies that its two paths did not change winding.
 
-Les étages, dans l'ordre de `213` §2 et `244` §5 :
+The stages, in the order of `213` §2 and `244` §5:
 
-    E0 l'objet        est-il éligible, et sinon ce que ça coûte
-    E1 le volume      la présence des chunks du volume de surface
-    E2 l'échelle      le demi-feuillet
-    B  le budget      jusqu'où une nappe tient : pourquoi on ferme des boucles au lieu de marcher
-    E4 le treillis    les pas des bandes, publiées ou lues ici
-    E6 le certificat  la procédure sans main, et le masque par chunk
-    E7 le juge        (option) le pic de matière des chunks certifiés, sans vérité terrain
-    E8 l'encre        la carte d'encre publiée, sous le masque
-    E9 l'emballage    le masque, la surface certifiée et son `approval.tif`, et ce qui n'est pas produit
+    E0 the object       is it eligible, and if not what that costs
+    E1 the volume       the presence of the chunks of the surface volume
+    E2 the scale        the half sheet
+    B  the budget       how far a sheet trace holds: why loops are closed instead of walking
+    E4 the lattice      the steps of the bands, published or read here
+    E6 the certificate  the hand-free procedure, and the per-chunk mask
+    E7 the judge        (option) the material peak of the certified chunks, without ground truth
+    E8 the ink          the published ink map, under the mask
+    E9 the packaging    the mask, the certified surface and its `approval.tif`, and what is not produced
 """
 from __future__ import annotations
 
@@ -25,235 +25,225 @@ from pathlib import Path
 import numpy as np
 import tifffile
 
-from vesuve import catalogue, donnees, images, noyau, tifxyz
-from vesuve.distant import Distant, Indisponible
-from vesuve.noyau import Indecidable
-from vesuve.rapport import Rapport
+from vesuve import catalogue, embedded, images, tifxyz
+from vesuve.core import Undecidable
+from vesuve.lattice import certificate as cert
+from vesuve.lattice.digest import DigestCache
+from vesuve.lattice.reading import BandReader
+from vesuve.lattice.segment import certify_segment, extra_readings, published_ink_map_path
+from vesuve.remote import Remote, Unavailable
+from vesuve.remote_zarr import BUCKET, RemoteArray
+from vesuve.report import MET, NOT_MEASURED, NOT_MET, Report
 from vesuve.transport import Transport
-from vesuve.treillis import certificat as cert
-from vesuve.treillis.digest import CacheDeDigests
-from vesuve.treillis.lecture import LecteurDeBandes
-from vesuve.treillis.segment import certifier_le_segment, la_carte_dencre_publiee, les_lectures_en_plus
-from vesuve.zarr_distant import LE_BUCKET, TableauDistant
 
-LA_COUCHE_TRACEE = 54  # un volume de surface a 109 couches centrées sur la surface tracée
-LE_DEBIT_MESURE = 19.0  # chunks par seconde à 16 fils, mesuré sur la plus petite bande publiée
+TRACED_LAYER = 54      # a surface volume has 109 layers centred on the traced surface
+MEASURED_RATE = 19.0   # chunks per second at 16 threads, measured on the smallest published band
 
 
-def _certifier(A, s, neuves):
-    return certifier_le_segment(s["contexte"]["le_segment"], neuves)[1]
+def _certify(s, fresh):
+    return certify_segment(s["context"]["segment"], fresh)[1]
 
 
-def lancer(segment: str = "20230702185753", sortie: Path = Path("sorties/grand-prize"), cache: Path = Path("cache"),
-           lire: bool = False, tours: int = 6, fils: int = 16, lectures=(), juger: int = 0, encre: bool = True,
-           surface: bool = True, journal=None) -> Rapport:
-    s = donnees.le_segment(segment)
-    ctx = s["contexte"]
-    r = Rapport("grand-prize", {"segment": segment, "lobjet": ctx["lobjet"], "lire": lire, "tours": tours,
-                                "fils": fils, "lectures_en_plus": [str(x) for x in lectures], "juger": juger},
-                journal)
-    sortie = Path(sortie)
+def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-prize"), cache: Path = Path("cache"),
+        read: bool = False, rounds: int = 6, threads: int = 16, readings=(), judge: int = 0, ink: bool = True,
+        surface: bool = True, journal=None) -> Report:
+    s = embedded.segment(segment)
+    ctx = s["context"]
+    r = Report("grand-prize", {"segment": segment, "scroll": ctx["scroll"], "read": read, "rounds": rounds,
+                               "threads": threads, "extra_readings": [str(x) for x in readings], "judge": judge},
+               journal)
+    output = Path(output)
     transport = Transport(journal=journal)
-    distant = Distant(cache, transport)
+    remote = Remote(cache, transport)
 
-    with r.etage("E0", "l'objet") as e:
-        ok = catalogue.est_eligible("grand-prize", ctx["lobjet"])
-        e.noter(lobjet=ctx["lobjet"], le_segment=segment, eligible=ok,
-                les_eligibles=[v.objet for v in catalogue.LE_GRAND_PRIX])
+    with r.stage("E0", "the object") as e:
+        ok = catalogue.is_eligible("grand-prize", ctx["scroll"])
+        e.note(scroll=ctx["scroll"], segment=segment, eligible=ok, eligible_scrolls=[v.scroll for v in catalogue.GRAND_PRIZE])
         if not ok:
-            e.partiel(f"{ctx['lobjet']} n'est pas un des treize rouleaux du prix : la méthode est construite là où "
-                      f"le référent existe, et il faudra la transporter sur un rouleau sans vérité de terrain (`151` E0)")
+            e.partial(f"{ctx['scroll']} is not one of the thirteen prize scrolls: the method is built where the reference "
+                      f"exists, and it will have to be carried to a scroll without ground truth (`151` E0)")
 
     A = s["presence"]
-    with r.etage("E1", "le volume") as e:
-        e.noter(le_volume=ctx["le_volume"], la_grille=list(A.shape), les_chunks_presents=int(A.sum()),
-                la_provenance="la liste des clés du dépôt, relue par `ou_sarrete_le_segment.py` (98 pages)")
+    with r.stage("E1", "the volume") as e:
+        e.note(volume=ctx["volume"], grid=list(A.shape), chunks_present=int(A.sum()),
+               provenance="the list of the bucket's keys, read back by `ou_sarrete_le_segment.py` (98 pages)")
 
-    with r.etage("E2", "l'échelle") as e:
-        demi = e.appliquer("E2", ctx["le_pas_um"], ctx["le_voxel_um"], s_um=ctx["le_pas_um"], v_um=ctx["le_voxel_um"])
-        if demi != ctx["la_procedure"]["demi"]:
-            e.arreter(f"le demi-feuillet recalculé ({demi}) n'est pas celui de la procédure ({ctx['la_procedure']['demi']})")
+    with r.stage("E2", "the scale") as e:
+        half = e.apply("E2", ctx["step_um"], ctx["voxel_um"], s_um=ctx["step_um"], v_um=ctx["voxel_um"])
+        if half != ctx["procedure"]["half"]:
+            e.stop(f"the recomputed half sheet ({half}) is not the procedure's ({ctx['procedure']['half']})")
 
-    with r.etage("B", "le budget de la nappe") as e:
-        b = ctx["le_budget"]
-        tenables = {}
-        for famille in ("traverser", "saccorder"):
-            for nom, sigma in b[famille].items():
-                tenables[f"{famille} {nom}"] = e.appliquer("N5", float(demi), float(sigma), budget=f"{famille} {nom}",
-                                                           delta=demi, sigma=sigma)
-        s_ = b["saccorder"]
-        e.appliquer("N7", s_["198-197"] ** 2, s_["198-199"] ** 2, s_["197-199"] ** 2,
-                    rangee=198, var_198_197=s_["198-197"] ** 2, var_198_199=s_["198-199"] ** 2,
-                    var_197_199=s_["197-199"] ** 2)
-        liant = min(v for k, v in tenables.items() if k.startswith("saccorder"))
-        e.noter(la_longueur_tenable_qui_lie=round(liant, 2), les_coutures_dune_rangee=b["les_coutures_dune_rangee"],
-                la_conclusion=(f"une rangée de {b['les_coutures_dune_rangee']} coutures dépasse les {liant:.2f} que "
-                               f"l'accord permet : deux rangées marchées chacune pour soi finissent sur deux "
-                               f"feuillets (`R4-F341`). D'où le certificat : fermer des boucles plutôt que marcher."))
+    with r.stage("B", "the budget of a sheet trace") as e:
+        b = ctx["budget"]
+        holdable = {}
+        for family in ("cross", "agree"):
+            for name, sigma in b[family].items():
+                holdable[f"{family} {name}"] = e.apply("N5", float(half), float(sigma), budget=f"{family} {name}",
+                                                       delta=half, sigma=sigma)
+        a_ = b["agree"]
+        e.apply("N7", a_["198-197"] ** 2, a_["198-199"] ** 2, a_["197-199"] ** 2,
+                row=198, var_198_197=a_["198-197"] ** 2, var_198_199=a_["198-199"] ** 2, var_197_199=a_["197-199"] ** 2)
+        binding = min(v for k, v in holdable.items() if k.startswith("agree"))
+        e.note(binding_holdable_length=round(binding, 2), seams_of_a_row=b["seams_of_a_row"],
+               conclusion=(f"a row of {b['seams_of_a_row']} seams exceeds the {binding:.2f} the agreement allows: two "
+                           f"rows each walked on its own end on two sheets (`R4-F341`). Hence the certificate: close "
+                           f"loops rather than walk."))
 
-    neuves = les_lectures_en_plus(lectures)
-    with r.etage("E4", "le treillis : les bandes publiées", "B4") as e:
-        e.noter(les_bandes_publiees=len(s["bandes"]), les_bandes_donnees=len(neuves))
+    fresh = extra_readings(readings)
+    with r.stage("E4", "the lattice: the published bands", "B4") as e:
+        e.note(published_bands=len(s["bands"]), given_bands=len(fresh))
         try:
-            res = _certifier(A, s, neuves)
-        except cert.LectureRefusee as x:
-            e.arreter(f"une bande lue en plus ne retombe pas sur ce qui est publié : {x}")
-    if r.arrete:
-        r.ecrire(sortie)
+            res = _certify(s, fresh)
+        except cert.ReadingRefused as x:
+            e.stop(f"an extra band does not fall back on what is published: {x}")
+    if r.stopped:
+        r.write(output)
         return r
-    with r.etage("E4L", "le treillis : lire ce que la procédure demande", "B4") as e:
-        lus, tour = 0, 0
-        if lire and res["les_demandes"]:
-            t = TableauDistant(f"{LE_BUCKET}/{ctx['le_volume']}", transport)
-            lecteur = LecteurDeBandes(t, CacheDeDigests(Path(cache) / "digests", t.url), fils, journal, segment)
-            for tour in range(1, tours + 1):
-                for d in res["les_demandes"]:
+    with r.stage("E4L", "the lattice: reading what the procedure asks for", "B4") as e:
+        chunks_read, done_rounds = 0, 0
+        if read and res["requests"]:
+            array = RemoteArray(f"{BUCKET}/{ctx['volume']}", transport)
+            reader = BandReader(array, DigestCache(Path(cache) / "digests", array.url), threads, journal, segment)
+            for done_rounds in range(1, rounds + 1):
+                for d in res["requests"]:
                     try:
-                        neuves[d["cle"]] = lecteur.lire(d)
-                    except Indecidable as x:
-                        e.partiel(f"la bande {d['cle']} n'a pas pu être lue : {x}")
+                        fresh[d["key"]] = reader.read(d)
+                    except Undecidable as x:
+                        e.partial(f"band {d['key']} could not be read: {x}")
                         break
-                (sortie / "lectures").mkdir(parents=True, exist_ok=True)
-                (sortie / "lectures" / "bandes_lues.json").write_text(
-                    json.dumps({"les_bandes": neuves}, ensure_ascii=False))
+                (output / "readings").mkdir(parents=True, exist_ok=True)
+                (output / "readings" / "bands_read.json").write_text(json.dumps({"bands": fresh}, ensure_ascii=False))
                 try:
-                    res = _certifier(A, s, neuves)
-                except cert.LectureRefusee as x:
-                    e.arreter(f"une bande lue ici ne retombe pas sur ce qui est publié : {x}")
+                    res = _certify(s, fresh)
+                except cert.ReadingRefused as x:
+                    e.stop(f"a band read here does not fall back on what is published: {x}")
                     break
-                if not res["les_demandes"] or e.donnees["etat"] != "fait":
+                if not res["requests"] or e.data["state"] != "done":
                     break
-            lus = lecteur.chunks_lus
-        e.noter(les_bandes_publiees=len(s["bandes"]), les_bandes_neuves=len(neuves), les_chunks_lus_ici=lus,
-                les_tours_de_lecture=tour)
-        if not lire:
-            e.sauter("rejeu : les bandes publiées et celles données par --lectures ; --lire lit ce que la procédure demande")
-    if r.arrete:
-        r.ecrire(sortie)
+            chunks_read = reader.chunks_read
+        e.note(published_bands=len(s["bands"]), fresh_bands=len(fresh), chunks_read_here=chunks_read,
+               reading_rounds=done_rounds)
+        if not read:
+            e.skip("replay: the published bands and those given by --readings; --read reads what the procedure asks for")
+    if r.stopped:
+        r.write(output)
         return r
 
-    with r.etage("E6", "le certificat", "B4") as e:
-        etats = {}
-        for x in res["le_journal"]:
-            etats[x["letat"]] = etats.get(x["letat"], 0) + 1
-        e.constater("S", ctx["la_procedure"]["portee"], ecart_qui_evite=30)
-        for x in res["le_journal"]:
-            if x.get("la_fermeture") is not None:
-                e.constater("L", x["la_fermeture"], boucle=x["les_coins"], largeur=x["la_largeur"], etat=x["letat"])
-                if x.get("le_pic"):
-                    e.constater("P", x["le_pic"]["le_cumul_en_voxels"], boucle=x["les_coins"],
-                                a_la_coupe=x["le_pic"]["la_coupe"], demi=demi)
-            v = (x.get("le_departage") or {}).get("le_verdict")
-            if v and v.get("les_marges"):
-                e.constater("M", v["les_marges"], la_ligne_qui_derive=v["la_ligne_qui_derive"],
-                            la_plus_serree=v["la_plus_serree"])
-        e.constater("K", res["la_couverture"]["la_part"], chunks=res["la_couverture"]["combien"],
-                    sur=res["la_couverture"]["sur"])
-        e.noter(le_rectangle=res["le_rectangle"], les_etats=etats, les_boucles_qui_tiennent=res["les_boucles_qui_tiennent"],
-                les_bandes_a_lire=len(res["les_demandes"]), les_chunks_a_lire=res["ce_qui_reste_a_lire"],
-                le_temps_de_lecture_estime_min=round(res["ce_qui_reste_a_lire"] / LE_DEBIT_MESURE / 60, 1),
-                les_ailes_autour_dun_rectangle_non_juge=res["les_ailes_autour_dun_rectangle_non_juge"])
-        if res["les_demandes"]:
-            e.partiel(f"{len(res['les_demandes'])} bandes ({res['ce_qui_reste_a_lire']} chunks) restent à lire pour juger "
-                      f"ce que la procédure trouve ; la couverture est celle de ce qui est jugé. "
-                      f"`vesuve grand-prize --lire` les lit, environ "
-                      f"{res['ce_qui_reste_a_lire'] / LE_DEBIT_MESURE / 60:.0f} min à 16 fils")
-        if res["les_ailes_autour_dun_rectangle_non_juge"]:
-            e.noter(lavertissement=("des ailes sont certifiées autour d'un rectangle qui n'est pas lui-même jugé : "
-                                    "elles tiennent sur leur profil, mais le rectangle qui les relie n'est pas prouvé"))
-    masque = res["le_masque"]
+    with r.stage("E6", "the certificate", "B4") as e:
+        states = {}
+        for x in res["journal"]:
+            states[x["state"]] = states.get(x["state"], 0) + 1
+        e.record("S", ctx["procedure"]["reach"], gap_avoided=30)
+        for x in res["journal"]:
+            if x.get("closure") is not None:
+                e.record("L", x["closure"], loop=x["corners"], width=x["width"], state=x["state"])
+                if x.get("peak"):
+                    e.record("P", x["peak"]["cumulative_voxels"], loop=x["corners"], at_cut=x["peak"]["cut"], half=half)
+            v = (x.get("tie_break") or {}).get("verdict")
+            if v and v.get("margins"):
+                e.record("M", v["margins"], drifting_line=v["drifting_line"], tightest=v["tightest"])
+        e.record("K", res["coverage"]["share"], chunks=res["coverage"]["count"], of=res["coverage"]["of"])
+        e.note(rectangle=res["rectangle"], states=states, holding_loops=res["holding_loops"],
+               bands_to_read=len(res["requests"]), chunks_to_read=res["left_to_read"],
+               estimated_reading_minutes=round(res["left_to_read"] / MEASURED_RATE / 60, 1),
+               wings_around_an_unjudged_rectangle=res["wings_around_an_unjudged_rectangle"])
+        if res["requests"]:
+            e.partial(f"{len(res['requests'])} bands ({res['left_to_read']} chunks) are still to read to judge what the "
+                      f"procedure finds; the coverage is that of what is judged. `vesuve grand-prize --read` reads "
+                      f"them, about {res['left_to_read'] / MEASURED_RATE / 60:.0f} min at 16 threads")
+        if res["wings_around_an_unjudged_rectangle"]:
+            e.note(warning=("wings are certified around a rectangle that is not itself judged: they hold on their "
+                            "profile, but the rectangle that links them is not proved"))
+    mask = res["mask"]
 
-    with r.etage("E7", "le juge sans vérité terrain", "B3") as e:
-        if juger <= 0:
-            e.sauter("demandé avec --juger N : il lit N chunks certifiés sur le bucket")
+    with r.stage("E7", "the judge without ground truth", "B3") as e:
+        if judge <= 0:
+            e.skip("requested with --judge N: it reads N certified chunks from the bucket")
         else:
-            t = TableauDistant(f"{LE_BUCKET}/{ctx['le_volume']}", transport)
-            lecteur = LecteurDeBandes(t, CacheDeDigests(Path(cache) / "digests", t.url), fils, journal, segment)
-            ys, xs = np.nonzero(masque == cert.CERTIFIE)
+            array = RemoteArray(f"{BUCKET}/{ctx['volume']}", transport)
+            reader = BandReader(array, DigestCache(Path(cache) / "digests", array.url), threads, journal, segment)
+            ys, xs = np.nonzero(mask == cert.CERTIFIED)
             if not len(ys):
-                e.sauter("aucun chunk n'est certifié")
+                e.skip("no chunk is certified")
             else:
-                pris = np.random.default_rng(20260924).choice(len(ys), size=min(juger, len(ys)), replace=False)
-                lecteur.precharger([(int(ys[i]), int(xs[i])) for i in pris])
-                ecarts, reliefs = [], []
-                for i in pris:
-                    d = lecteur.digest(int(ys[i]), int(xs[i]))
-                    if d.retenu:
-                        p = d.profondeur
-                        ecarts.append(abs(int(np.argmax(p)) - LA_COUCHE_TRACEE) * ctx["le_voxel_um"])
+                picked = np.random.default_rng(20260924).choice(len(ys), size=min(judge, len(ys)), replace=False)
+                reader.preload([(int(ys[i]), int(xs[i])) for i in picked])
+                gaps, reliefs = [], []
+                for i in picked:
+                    d = reader.digest(int(ys[i]), int(xs[i]))
+                    if d.kept:
+                        p = d.depth
+                        gaps.append(abs(int(np.argmax(p)) - TRACED_LAYER) * ctx["voxel_um"])
                         reliefs.append(float((p.max() - p.min()) / p.mean()))
-                e.noter(les_chunks_juges=len(ecarts), lecart_median_du_pic_um=round(float(np.median(ecarts)), 2),
-                        la_part_a_moins_dun_demi_feuillet=round(float(np.mean(np.array(ecarts) < demi * ctx["le_voxel_um"])), 4),
-                        le_relief_median=round(float(np.median(reliefs)), 4),
-                        la_regle=("`src/tracecheck/tracecheck.py:204` : le pic de matière de chaque chunk doit tomber sur "
-                                  "la couche tracée ; un écart au-delà du demi-feuillet (36 voxels, 86,4 µm) dit que la "
-                                  "surface a quitté sa feuille"))
+                e.note(chunks_judged=len(gaps), median_peak_gap_um=round(float(np.median(gaps)), 2),
+                       share_within_half_sheet=round(float(np.mean(np.array(gaps) < half * ctx["voxel_um"])), 4),
+                       median_relief=round(float(np.median(reliefs)), 4),
+                       rule=("`src/tracecheck/tracecheck.py:204`: the material peak of each chunk must fall on the traced "
+                             "layer; a gap beyond the half sheet (36 voxels, 86.4 µm) says the surface left its sheet"))
 
-    with r.etage("E8", "l'encre, la règle graduée", "B3") as e:
-        if not encre:
-            e.sauter("désactivé par --sans-encre")
+    with r.stage("E8", "the ink, the measuring rule", "B3") as e:
+        if not ink:
+            e.skip("disabled by --no-ink")
         else:
-            chemin = la_carte_dencre_publiee(ctx)
+            path = published_ink_map_path(ctx)
             try:
-                carte = images.lire_une_image(distant.octets(chemin))
-                sortie.mkdir(parents=True, exist_ok=True)
-                vue = images.superposer(carte, masque)
-                vue = images.dessiner_les_boucles(vue, res["le_journal"], carte.shape[0] / masque.shape[0], 6)
-                vue.thumbnail((1600, 1600))  # la carte pleine est le produit publié ; la vue sert à lire
-                vue.save(sortie / "encre_sous_le_masque.jpg", quality=88)
-                e.noter(la_carte=chemin, sa_forme=list(carte.shape), limage="encre_sous_le_masque.jpg",
-                        la_lecture=("la carte d'encre PUBLIÉE (modèle de l'équipe, 2,4 µm), sous le masque : l'encre "
-                                    "est la règle graduée qui dit si le déroulé fait du sens, pas l'ouvrage"))
-            except Indisponible as x:
-                e.sauter(f"la carte d'encre n'a pas pu être obtenue : {x}")
+                ink_map = images.read_image(remote.fetch(path))
+                output.mkdir(parents=True, exist_ok=True)
+                view = images.overlay(ink_map, mask)
+                view = images.draw_loops(view, res["journal"], ink_map.shape[0] / mask.shape[0], 6)
+                view.thumbnail((1600, 1600))  # the full map is the published product; the view is for reading
+                view.save(output / "ink_under_mask.jpg", quality=88)
+                e.note(ink_map=path, its_shape=list(ink_map.shape), image="ink_under_mask.jpg",
+                       reading=("the PUBLISHED ink map (the team's model, 2.4 µm), under the mask: the ink is the "
+                                "measuring rule that says whether the unrolling makes sense, not the work itself"))
+            except Unavailable as x:
+                e.skip(f"the ink map could not be obtained: {x}")
 
-    with r.etage("E9", "l'emballage") as e:
-        sortie.mkdir(parents=True, exist_ok=True)
-        tifffile.imwrite(sortie / "masque_par_chunk.tif", masque)
-        images.dessiner_les_boucles(images.masque_en_couleurs(masque), res["le_journal"], 2, 1).save(
-            sortie / "masque_par_chunk.png")
-        (sortie / "certificat.json").write_text(json.dumps(
-            {k: res[k] for k in ("le_rectangle", "le_journal", "les_boucles_qui_tiennent", "la_couverture",
-                                 "ce_qui_reste_a_lire")}, ensure_ascii=False, indent=1))
-        (sortie / "bandes_a_lire.json").write_text(json.dumps(res["les_demandes"], ensure_ascii=False, indent=1))
-        produits = ["masque_par_chunk.tif", "masque_par_chunk.png", "certificat.json", "bandes_a_lire.json"]
+    with r.stage("E9", "the packaging") as e:
+        output.mkdir(parents=True, exist_ok=True)
+        tifffile.imwrite(output / "chunk_mask.tif", mask)
+        images.draw_loops(images.mask_in_colours(mask), res["journal"], 2, 1).save(output / "chunk_mask.png")
+        (output / "certificate.json").write_text(json.dumps(
+            {k: res[k] for k in ("rectangle", "journal", "holding_loops", "coverage", "left_to_read")},
+            ensure_ascii=False, indent=1))
+        (output / "bands_to_read.json").write_text(json.dumps(res["requests"], ensure_ascii=False, indent=1))
+        products = ["chunk_mask.tif", "chunk_mask.png", "certificate.json", "bands_to_read.json"]
         if surface:
-            chemin = f"{ctx['lobjet']}/segments/{segment}/mesh/{segment}-on-20260411134726-2.4um.tifxyz"
+            path = f"{ctx['scroll']}/segments/{segment}/mesh/{segment}-on-20260411134726-2.4um.tifxyz"
             try:
-                sf = tifxyz.lire(distant.dossier_tifxyz(chemin))
-                echelle = float(sf.meta["scale"][0])
-                grille = tifxyz.masque_de_chunks_vers_grille(masque, sf.forme, 128, echelle)
-                certifie = (grille == cert.CERTIFIE) & sf.valide()
-                tifxyz.ecrire(tifxyz.restreindre(sf, certifie), sortie / f"{segment}_certifie.tifxyz",
-                              approbation=certifie.astype(np.uint8))
-                produits.append(f"{segment}_certifie.tifxyz/ (x, y, z, meta.json, approval.tif)")
-                e.noter(la_surface=chemin, sa_grille=list(sf.forme), les_sommets_certifies=int(certifie.sum()),
-                        les_sommets_valides=int(sf.valide().sum()))
-            except Indisponible as x:
-                e.partiel(f"la surface n'a pas pu être obtenue : {x}")
-        e.noter(les_produits=produits,
-                ce_qui_nest_pas_produit=("`column_NN.tifxyz` : découper la surface en colonnes de texte demande que "
-                                         "l'encre soit lisible colonne par colonne, et au régime des treize rouleaux "
-                                         "le détecteur publié ne sépare pas la feuille du vide (`R1-F20`). Le livrable "
-                                         "est la surface certifiée, entière, et son masque."))
+                sf = tifxyz.read(remote.tifxyz_folder(path))
+                scale = float(sf.meta["scale"][0])
+                grid = tifxyz.chunk_mask_to_grid(mask, sf.shape, 128, scale)
+                certified = (grid == cert.CERTIFIED) & sf.valid()
+                tifxyz.write(tifxyz.restrict(sf, certified), output / f"{segment}_certified.tifxyz",
+                             approval=certified.astype(np.uint8))
+                products.append(f"{segment}_certified.tifxyz/ (x, y, z, meta.json, approval.tif)")
+                e.note(surface=path, its_grid=list(sf.shape), certified_vertices=int(certified.sum()),
+                       valid_vertices=int(sf.valid().sum()))
+            except Unavailable as x:
+                e.partial(f"the surface could not be obtained: {x}")
+        e.note(products=products,
+               not_produced=("`column_NN.tifxyz`: cutting the surface into text columns requires the ink to be legible "
+                             "column by column, and at the regime of the thirteen scrolls the published detector does "
+                             "not separate the sheet from the void (`R1-F20`). The deliverable is the certified "
+                             "surface, whole, and its mask."))
 
-    part = res["la_couverture"]["la_part"]
-    r.exigence("un des treize rouleaux éligibles", "non atteinte" if not catalogue.est_eligible("grand-prize", ctx["lobjet"])
-               else "atteinte", f"{ctx['lobjet']} : le référent de la méthode, hors de la liste")
-    r.exigence("100 % du recto déroulé", "non atteinte",
-               f"un segment publié : {res['la_couverture']['combien']} chunks certifiés sur {res['la_couverture']['sur']} "
-               f"({part:.2%} de SON empreinte), un segment n'est pas un rouleau")
-    r.exigence("pipeline automatique, au plus 8 h d'humain", "atteinte",
-               "0 h : la procédure prend chaque décision sans main (`R4-F410`) ; la seule entrée est la présence")
-    r.exigence("70 % des caractères lisibles par colonne", "non mesurée",
-               "aucune lecture ; au régime du prix l'encre publiée est plate (`R1-F20`)")
-    r.exigence("un maillage par colonne, `column_NN.tifxyz`", "non atteinte",
-               "la surface certifiée est rendue entière, avec `approval.tif` ; pas de découpage en colonnes")
-    r.exigence("image Docker", "atteinte", "`vesuve/Dockerfile`, qui lance ce pipeline depuis les données embarquées")
-    r.exigence("graines fixées et rapportées", "atteinte",
-               f"nul par blocs : graine {ctx['la_procedure']['graine']}, {ctx['la_procedure']['tirages']} tirages ; "
-               f"juge : graine 20260924")
-    r.exigence("intégré à VC3D", "non mesurée", "la surface et `approval.tif` suivent le contrat tifxyz que villa lit")
-    transport.fermer()
-    r.ecrire(sortie)
+    share = res["coverage"]["share"]
+    r.requirement("one of the thirteen eligible scrolls", NOT_MET if not catalogue.is_eligible("grand-prize", ctx["scroll"])
+                  else MET, f"{ctx['scroll']}: the method's reference, outside the list")
+    r.requirement("100 % of the recto unrolled", NOT_MET,
+                  f"one published segment: {res['coverage']['count']} chunks certified out of {res['coverage']['of']} "
+                  f"({share:.2%} of ITS footprint); a segment is not a scroll")
+    r.requirement("automated pipeline, at most 8 h of human input", MET,
+                  "0 h: the procedure takes every decision without a hand (`R4-F410`); its only input is the presence")
+    r.requirement("70 % of the characters legible per column", NOT_MEASURED,
+                  "no reading; at the prize regime the published ink is flat (`R1-F20`)")
+    r.requirement("one mesh per column, `column_NN.tifxyz`", NOT_MET,
+                  "the certified surface is returned whole, with `approval.tif`; no cutting into columns")
+    r.requirement("Docker image", MET, "`Dockerfile`, which runs this pipeline from the embedded data")
+    r.requirement("seeds fixed and reported", MET,
+                  f"block null: seed {ctx['procedure']['seed']}, {ctx['procedure']['draws']} draws; judge: seed 20260924")
+    r.requirement("integrated in VC3D", NOT_MEASURED, "the surface and `approval.tif` follow the tifxyz contract villa reads")
+    transport.close()
+    r.write(output)
     return r
