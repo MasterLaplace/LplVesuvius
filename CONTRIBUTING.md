@@ -20,6 +20,26 @@ This page is for changing the program. To use it, start with the [README](README
 5. **The changelog**: every observable change adds a line under `## [Unreleased]` in
    [`CHANGELOG.md`](CHANGELOG.md), written for whoever updates.
 
+## How the work is planned
+
+- **The direction** is the 2027 Grand Prize: 100 % of the recto of an eligible scroll unrolled without a hand. The
+  other prizes are taken along the way, when the work serves them. The pinned *Roadmap* issue gives today's order.
+- **Milestones are months**, each ending on a Progress Prize deadline, plus *Later* for what waits on a fact that is
+  not yet established. An issue may move to the next month; the move and its reason are written in the issue.
+- **Labels say what an issue serves**: `grand-prize`, `progress-prize`, `paris4-title`, `first-letters`. `research`
+  marks a question answered on `experimental`. An issue is open or closed, and nothing else: its rank within its
+  milestone is the first line of its body.
+- **A `research` issue** names the doors of `docs/rapports/REGISTRE_portes.tsv` it addresses, without copying them:
+  the registry stays the source of the research's open questions. A dated slice closes it by establishing or refuting
+  a fact, and a negative result closes it as well as a positive one.
+- **A `feat` issue** names the facts (`R*-F*`) that validate what it ports, and what the report will say where they do
+  not hold. Nothing reaches `main` without an established fact behind it: until the fact exists, the issue waits in
+  *Later* and names the fact it waits on.
+- **Nothing postpones the hardest part without it showing.** Until unrolling from a scroll with no human trace has a
+  first established fact, every monthly milestone holds at least one open issue on it.
+- **When a milestone closes**, what remains moves with its reason, the rule above is checked, and the *Roadmap* issue
+  is brought up to date.
+
 ## Before opening a pull request
 
 ```bash
