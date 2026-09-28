@@ -1,4 +1,4 @@
-"""Every `vesuve` command of the README is accepted by the program: a doc that quotes a renamed flag breaks here."""
+"""Every `vesuve` command the pages quote is accepted by the program: a page that quotes a renamed flag breaks here."""
 from __future__ import annotations
 
 import re
@@ -14,7 +14,7 @@ HERE = Path(__file__).resolve().parents[1]
 
 def quoted_commands() -> list[list[str]]:
     out = []
-    for page in (HERE / "README.md", HERE / "examples" / "README.md", HERE / "CONTRIBUTING.md"):
+    for page in (HERE / "README.md", HERE / "examples" / "README.md", HERE / "CONTRIBUTING.md", HERE / "SUBMISSION.md"):
         for block in re.findall(r"```bash\n(.*?)```", page.read_text(), flags=re.S):
             for line in block.splitlines():
                 line = line.split("#")[0].strip()
@@ -31,6 +31,6 @@ def test_the_readme_quotes_commands():
 @pytest.mark.parametrize("argv", quoted_commands(), ids=lambda a: " ".join(a))
 def test_each_command_of_the_readme_is_accepted(argv, monkeypatch):
     calls = []
-    for name in ("_grand_prize", "_progress", "_first_letters", "_paris4_title", "_demo", "_read"):
+    for name in ("_grand_prize", "_progress", "_first_letters", "_paris4_title", "_demo", "_read", "_formulas"):
         monkeypatch.setattr(cli, name, lambda a, *r, _n=name: calls.append(_n) or 0)
     assert cli.main(argv) == 0 and calls  # the parsing passes, and a verb is reached without running anything

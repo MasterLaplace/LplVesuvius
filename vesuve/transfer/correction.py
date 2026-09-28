@@ -10,8 +10,11 @@ procedure of `265`, run on the whole segment by `275`, finds those without groun
 3. a three-component mixture (the noise at 0, and a slip of one winding above and below, same width) is fitted to
    that departure by EM, and a point is corrected when a slip explains it better than the noise.
 
-The judge (two hand-checked tracings of the next winding) only SCORES the result: it never takes part in a
-decision. Ported from `la_procedure_sans_juge_tient_elle_sur_le_segment_entier.py` on the `experimental` branch and
+The judges only SCORE the result and never take part in a decision. They are the next winding as the segment's
+own tracer drew it by hand, alone and completed by three neighbouring segments (`247`), and a point is scored only
+where the two agree within half a sheet.
+
+Ported from `la_procedure_sans_juge_tient_elle_sur_le_segment_entier.py` on the `experimental` branch and
 the files it imports (`la_spire_produite_se_lit_elle_dans_le_treillis.py`, `le_voisinage_dit_il_quel_niveau_est_le_bon.py`,
 `la_marche_corrige_t_elle_la_spire_produite.py`, `la_marche_sait_elle_ou_ne_pas_corriger.py`), expression for
 expression: the least squares receive their equations in the same order, so they return the same numbers.

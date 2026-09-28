@@ -18,7 +18,7 @@ band where it was not, it says so and writes nothing.
 ## Two branches
 
 - **`main`** is this program: what the research validated, ported, tested and released.
-- **`experimental`** is the laboratory it comes from. It is a series of dated slices, numbered up to 294
+- **`experimental`** is the laboratory it comes from. It is a series of dated slices, numbered up to 295
   so far, each one a measurement with its figure, the failed ideas included. Every path of the form
   `docs/…` or `src/…` cited on this page lives on that branch. A piece moves to `main` through a pull
   request, once there is a published number to test it against.
@@ -126,3 +126,4 @@ Every test was probed by breaking the rule it guards, and each one turned red.
 | `tests/` | the tests. Parity tests run against a working copy of `experimental` (`VESUVE_RESEARCH`), heavy data (`VESUVE_DATA`) and the network (`VESUVE_NETWORK=1`), and are skipped with the reason when those are missing |
 | `examples/` | a dated run of the four pipelines, reports and previews |
 | `CONTRIBUTING.md` | how a change goes in: issue, branch, pull request, changelog, version |
+| `SUBMISSION.md` | the Progress Prize submission: what was done, on which data, and the evidence |

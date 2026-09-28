@@ -16,6 +16,8 @@ field or an exit code that changes is a breaking change once 1.0 is out.
   band, blocks with neighbours on all four sides give 7 for 5 (p = 0.774), so the correction stays validated on
   one segment only.
 - The formulary gains the five rules of the correction (walk, anchor, slip mixture, correction rule, sign test).
+- `SUBMISSION.md` answers the four questions of the September 2026 Progress Prizes form, each number linked to the
+  file that produces it, with a guide to the `experimental` branch.
 - The step tables, the transfer and the judges of the segment and of the band are embedded (5.9 MB), so the
   correction replays without the research tree; the tables come from the research's renders, which this program
   does not make.
