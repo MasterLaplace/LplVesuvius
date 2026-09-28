@@ -3,6 +3,12 @@
 Written for whoever updates. The version follows SemVer: `0.y.z` promises no stability yet, and a report
 field or an exit code that changes is a breaking change once 1.0 is out.
 
+## [Unreleased]
+
+### Changed
+- Work is tracked in GitHub issues and pull requests, described in `CONTRIBUTING.md`; `backlog/` is
+  retired, and its one item, V-001, is issue #1.
+
 ## [0.1.0] - 2026-09-24
 
 The first version: one pipeline per prize, on what the research validated.

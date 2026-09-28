@@ -107,4 +107,4 @@ Each test was probed by breaking the rule it guards, and turned red.
 | `vesuve/donnees/` | what the pipelines need from the research tree, extracted by `outils/extraire_du_depot.py` |
 | `tests/` | the tests; parity tests run against a working copy of `experimental` (`VESUVE_RECHERCHE`), heavy data (`VESUVE_DONNEES`) and the network (`VESUVE_RESEAU=1`), and are skipped with the reason otherwise |
 | `exemples/` | a dated run of the four pipelines, reports and previews |
-| `backlog/` | the work item this program answers |
+| `CONTRIBUTING.md` | how a change flows: issue, branch, pull request, changelog, version |
