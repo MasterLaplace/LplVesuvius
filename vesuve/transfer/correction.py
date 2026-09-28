@@ -49,6 +49,10 @@ def within_validated_geometry(by: int, bx: int, candidates, side: int = BLOCK) -
     the same procedure on the same segment corrects 1047 points instead of 495 and its net gain falls from 122 to 5
     (`291`, `R4-F472`); the anchor carries the loss (`292`, `R4-F473`); on the band `w028-037`, one row of blocks, it
     gives 15 misses made right for 25 rights made misses (`281`, `R4-F462`), which chance explains (`R4-F471`).
+
+    ⚠⚠ Necessary, not sufficient. On a slice of the same band twice as tall, the 28 blocks that do have neighbours on
+    all four sides give 7 for 5, which chance explains too (`295`, `R4-F476`). Passing this test does not make a
+    correction valid on a new surface: it was validated on one segment, against its judges.
     """
     return all(neighbourhood_axes(by, bx, candidates, side))
 

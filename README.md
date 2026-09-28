@@ -106,7 +106,10 @@ Every test was probed by breaking the rule it guards, and each one turned red.
   changed winding, which points of the transfer slipped by one winding and where they belong, where to look for
   a title.
 - **Claim a correction outside the conditions it was validated under.** A block is corrected only when it has
-  neighbours along both axes: with east-west neighbours alone, the research measured the gain to vanish.
+  neighbours along both axes: with east-west neighbours alone, the research measured the gain to vanish. That
+  condition is necessary and not sufficient. On a taller slice of the same band, blocks with neighbours on all four
+  sides still gain nothing that chance does not explain (`docs/archive/295`). The correction is validated on one
+  segment, and the program does not pretend otherwise.
 - **Pick a window where the ink looks strong.** Windows are chosen on papyrus coverage alone.
 - **Turn a failure into a zero.** A stage it cannot decide says why, a network failure is never reported as
   an absence, and a missing file is named.

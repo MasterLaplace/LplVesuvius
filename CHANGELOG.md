@@ -12,7 +12,9 @@ field or an exit code that changes is a breaking change once 1.0 is out.
   `corrected_transfer.npy` and `correction.json`, and the report says what the transfer is.
 - The correction is claimed only within the geometry it was validated under, neighbours along both axes. On the
   band `20260623142658-w028-037`, one row of blocks, the same procedure gives 15 for 25 (p = 0.154): the report
-  says so and nothing is written there.
+  says so and nothing is written there. The geometry is necessary and not sufficient: on a taller slice of the
+  band, blocks with neighbours on all four sides give 7 for 5 (p = 0.774), so the correction stays validated on
+  one segment only.
 - The formulary gains the five rules of the correction (walk, anchor, slip mixture, correction rule, sign test).
 - The step tables, the transfer and the judges of the segment and of the band are embedded (5.9 MB), so the
   correction replays without the research tree; the tables come from the research's renders, which this program

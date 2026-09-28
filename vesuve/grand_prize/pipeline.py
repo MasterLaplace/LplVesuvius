@@ -323,7 +323,10 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
             bp, bs = band["pooled"], band["sign_test"]
             where += (f". On the band `{CONTROL_BAND}` ({band['blocks_within_validated_geometry']} of {bp['blocks']} "
                       f"blocks within that geometry), the same procedure gives {bp['misses_made_right']} for "
-                      f"{bp['rights_made_misses']} (p = {bs['on_points']}), and nothing is claimed there")
+                      f"{bp['rights_made_misses']} (p = {bs['on_points']}), and nothing is claimed there. The "
+                      f"geometry is necessary, not sufficient: on a slice of that band twice as tall, 28 blocks with "
+                      f"neighbours on all four sides give 7 for 5 (p = 0.774, `295`, `R4-F476`). The correction is "
+                      f"validated on this segment, against its judges, and nowhere else yet")
         r.requirement("the correction claimed only where it was validated", MET, where)
     r.requirement("70 % of the characters legible per column", NOT_MEASURED,
                   "no reading; at the prize regime the published ink is flat (`R1-F20`)")
