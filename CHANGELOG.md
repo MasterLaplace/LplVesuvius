@@ -30,6 +30,12 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 - Work is tracked in GitHub issues and pull requests, described in `CONTRIBUTING.md`; `backlog/` is
   retired, and its one item, V-001, is issue #1.
 
+### Fixed
+- Four equations of the formulary rendered wrong on GitHub: between `$$`, GitHub strips Markdown's
+  backslash escapes before the math renderer runs, so the median lost its braces, `\#\{\ell\}` in the
+  consensus [C1] failed with "macro parameter character", and `\!` turned into a `!`. Each equation now
+  sits in a `math` fence, and a test fails if one does not.
+
 ## [0.1.0] - 2026-09-24
 
 The first version: one pipeline per prize, on what the research validated.

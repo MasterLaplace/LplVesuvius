@@ -68,3 +68,16 @@ def test_the_published_formulary_is_the_one_the_code_renders():
     from vesuve.cli import formulary_as_markdown
     published = Path(__file__).resolve().parents[1] / "FORMULARY.md"
     assert published.read_text() == formulary_as_markdown(), "FORMULARY.md is stale: `vesuve formulas --markdown`"
+
+
+def test_every_equation_reaches_github_with_its_backslashes():
+    """GitHub eats Markdown escapes between `$$` (`\\{` becomes `{`), so each equation must sit verbatim in a fence."""
+    import re
+
+    from vesuve.cli import formulary_as_markdown
+    from vesuve.formulary import FORMULARY
+    page = formulary_as_markdown()
+    fenced = re.findall(r"```math\n(.*?)\n```", page, flags=re.S)
+    assert "$$" not in page
+    assert sorted(fenced) == sorted(e.latex for e in FORMULARY.values())
+    assert any("\\{" in x for x in fenced)  # the case that broke on GitHub is among those checked

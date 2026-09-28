@@ -8,9 +8,9 @@ Every equation the program applies, the pipeline stage where it serves, the LplV
 
 ### [E2] the half sheet
 
-$$
+```math
 \delta = \mathrm{round}\!\left(\frac{s}{2\,v}\right)
-$$
+```
 
 Half the sheet-to-sheet step, in voxels: the search range of the step and the threshold of the certificate.
 
@@ -20,9 +20,9 @@ Half the sheet-to-sheet step, in voxels: the search range of the step and the th
 
 ### [N2] the spread of k rows
 
-$$
+```math
 \sigma_k = \sqrt{\sigma_p^2 + \sigma_b^2 / k}
-$$
+```
 
 Averaging k rows only divides their own noise, never the part they share.
 
@@ -30,9 +30,9 @@ Averaging k rows only divides their own noise, never the part they share.
 
 ### [N5] the holdable length
 
-$$
+```math
 n_{\max} = \left(\frac{\delta}{\sigma}\right)^2
-$$
+```
 
 A sheet trace whose steps spread by σ leaves its sheet after n_max seams.
 
@@ -40,9 +40,9 @@ A sheet trace whose steps spread by σ leaves its sheet after n_max seams.
 
 ### [N7] the triangle of own noises
 
-$$
+```math
 \sigma_{b,i}^2 = \frac{\sigma_\Delta^2(i,j) + \sigma_\Delta^2(i,k) - \sigma_\Delta^2(j,k)}{2}
-$$
+```
 
 Three disagreements give three own noises; a negative variance would refute the model.
 
@@ -50,9 +50,9 @@ Three disagreements give three own noises; a negative variance would refute the 
 
 ### [D1] the error of a spread
 
-$$
+```math
 \mathrm{se}(\hat\sigma) = \frac{\hat\sigma}{\sqrt{2n}}
-$$
+```
 
 Without it, a strict inequality against a bound only passes by chance.
 
@@ -60,9 +60,9 @@ Without it, a strict inequality against a bound only passes by chance.
 
 ### [D2] the decisive count
 
-$$
+```math
 m = \left\lceil \frac{9\,(1-g)}{g} \right\rceil
-$$
+```
 
 The number of replicates that puts three sampling errors within the margin of a guarantee g.
 
@@ -72,9 +72,9 @@ The number of replicates that puts three sampling errors within the margin of a 
 
 ### [F4] the step of a cut
 
-$$
+```math
 s = -\left(\arg\max_{|k| \le \delta} \frac{\sum a_{t+k}\, b_t}{\sqrt{\sum a_{t+k}^2 \sum b_t^2}} - \delta\right)
-$$
+```
 
 The depth shift that aligns a chunk's edge with its neighbour's, profiles centred, correlation normalised by the energy of both windows.
 
@@ -82,9 +82,9 @@ The depth shift that aligns a chunk's edge with its neighbour's, profiles centre
 
 ### [F4c] the step of a seam
 
-$$
+```math
 \hat s = \frac{1}{n}\sum_{i=1}^{n} s_i, \qquad d = \bar s_{\mathrm{even}} - \bar s_{\mathrm{odd}}
-$$
+```
 
 The mean of the steps of sixteen cuts, and the disagreement of its even and odd ranks, which measures chance.
 
@@ -94,9 +94,9 @@ The mean of the steps of sixteen cuts, and the disagreement of its even and odd 
 
 ### [C2] the crossed hole
 
-$$
+```math
 c(s) = 0 \quad \text{for each seam of a hole of length} \le 17
-$$
+```
 
 A majority hole of at most seventeen seams is crossed at zero step; longer, the loop is open.
 
@@ -106,9 +106,9 @@ A majority hole of at most seventeen seams is crossed at zero step; longer, the 
 
 ### [C1] the consensus
 
-$$
+```math
 c(s) = \mathrm{median}\{\hat s_\ell(s)\} \ \text{if}\ \#\{\ell\} \ge \lfloor k/2 \rfloor + 1
-$$
+```
 
 At each seam, the median of the lines of a band that are present, if there is a majority of them.
 
@@ -116,9 +116,9 @@ At each seam, the median of the lines of a band that are present, if there is a 
 
 ### [L] the closure of a loop
 
-$$
+```math
 L = H(r_0; c_0 \to c_1) + V(c_1; r_0 \to r_1) - H(r_1; c_0 \to c_1) - V(c_0; r_0 \to r_1)
-$$
+```
 
 The gap between the two paths from one corner to the other; a geometry closes it exactly.
 
@@ -126,9 +126,9 @@ The gap between the two paths from one corner to the other; a geometry closes it
 
 ### [P] the profile of a loop
 
-$$
+```math
 P_j = \sum_{i \le j} L_i, \qquad |P_j| < \delta \ \ \forall j
-$$
+```
 
 The closure cumulated cut after cut: a loop holds if its profile stays under the half sheet everywhere.
 
@@ -136,9 +136,9 @@ The closure cumulated cut after cut: a loop holds if its profile stays under the
 
 ### [S] the reach that sees
 
-$$
+```math
 p = \max_{\text{cuts off the crossing}} (y_{j+1} - y_j) - 1 = 29
-$$
+```
 
 Two neighbouring cuts at most 29 rows apart see every crossing as the segment's own did.
 
@@ -146,9 +146,9 @@ Two neighbouring cuts at most 29 rows apart see every crossing as the segment's 
 
 ### [B0] the block null
 
-$$
+```math
 b = \max\!\left(1, \min\!\left(\lceil n^{1/3}\rceil, n\right)\right)
-$$
+```
 
 The length of the blocks that draw a loop's null, to decide between two lines.
 
@@ -156,9 +156,9 @@ The length of the blocks that draw a loop's null, to decide between two lines.
 
 ### [M] the deciding margin
 
-$$
+```math
 \mu_n = |L_n| - \min_m |L_m| - \mathrm{median}\,|L_n^{\mathrm{null}}|
-$$
+```
 
 The drifting line is the one the tightest of the three loops avoids, if each other loop exceeds it by more than its own noise.
 
@@ -166,9 +166,9 @@ The drifting line is the one the tightest of the three loops avoids, if each oth
 
 ### [K] the coverage
 
-$$
+```math
 \kappa = \frac{|A \wedge \bigcup_b M_b|}{|A|}
-$$
+```
 
 The share of the present chunks surrounded by a loop that holds.
 
@@ -178,9 +178,9 @@ The share of the present chunks surrounded by a loop that holds.
 
 ### [F25] the convergence test
 
-$$
+```math
 \alpha = \frac{\log(e_1/e_0)}{\log(n_1/n_0)}
-$$
+```
 
 α ≈ 0: the surface converges, a sheet is within reach; α ≈ 1: the error follows the window.
 
@@ -188,9 +188,9 @@ $$
 
 ### [F17] the corrected coherence
 
-$$
+```math
 c' = \max\!\left(0, \frac{c - 1/\sqrt n}{1 - 1/\sqrt n}\right)
-$$
+```
 
 Zero on pure noise, one on a perfect rotation.
 
@@ -200,9 +200,9 @@ Zero on pure noise, one on a perfect rotation.
 
 ### [F31] the Fresnel number
 
-$$
+```math
 F = \frac{\sqrt{\lambda D}}{p}, \qquad \lambda = \frac{hc}{E}
-$$
+```
 
 The width of the first fringe in pixels: 0.39 for the prize scrolls, 0.74 in production.
 
@@ -210,9 +210,9 @@ The width of the first fringe in pixels: 0.39 for the prize scrolls, 0.74 in pro
 
 ### [F29] the area under the curve
 
-$$
+```math
 \mathrm{AUC} = \frac{R_+ - n_+(n_+ + 1)/2}{n_+\, n_-}
-$$
+```
 
 Mann-Whitney on mid ranks; the shuffle control must return 0.500.
 
