@@ -1,0 +1,3368 @@
+{
+ "rectangle": [
+  26,
+  384,
+  22,
+  243
+ ],
+ "journal": [
+  {
+   "loop": "the rectangle",
+   "corners": [
+    26,
+    384,
+    22,
+    243
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     22,
+     243
+    ],
+    "cuts": [
+     26,
+     44,
+     62,
+     80,
+     99,
+     115,
+     132,
+     148,
+     165,
+     181,
+     198,
+     214,
+     231,
+     247,
+     264,
+     280,
+     297,
+     326,
+     355,
+     384
+    ],
+    "cuts_already_read": [
+     62,
+     99,
+     132,
+     165,
+     198,
+     231,
+     264,
+     297,
+     326,
+     355
+    ],
+    "sub_loops": 19,
+    "largest_gap": 29,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_44_22_243_9",
+     "direction": "rows",
+     "centre": 44,
+     "lines": [
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48
+     ],
+     "start": 22,
+     "end": 243
+    },
+    {
+     "key": "rows_80_22_243_9",
+     "direction": "rows",
+     "centre": 80,
+     "lines": [
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84
+     ],
+     "start": 22,
+     "end": 243
+    },
+    {
+     "key": "rows_115_22_243_9",
+     "direction": "rows",
+     "centre": 115,
+     "lines": [
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119
+     ],
+     "start": 22,
+     "end": 243
+    },
+    {
+     "key": "rows_148_22_243_9",
+     "direction": "rows",
+     "centre": 148,
+     "lines": [
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152
+     ],
+     "start": 22,
+     "end": 243
+    },
+    {
+     "key": "rows_181_22_243_9",
+     "direction": "rows",
+     "centre": 181,
+     "lines": [
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185
+     ],
+     "start": 22,
+     "end": 243
+    },
+    {
+     "key": "rows_214_22_243_9",
+     "direction": "rows",
+     "centre": 214,
+     "lines": [
+      210,
+      211,
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218
+     ],
+     "start": 22,
+     "end": 243
+    },
+    {
+     "key": "rows_247_22_243_9",
+     "direction": "rows",
+     "centre": 247,
+     "lines": [
+      243,
+      244,
+      245,
+      246,
+      247,
+      248,
+      249,
+      250,
+      251
+     ],
+     "start": 22,
+     "end": 243
+    },
+    {
+     "key": "rows_280_22_243_9",
+     "direction": "rows",
+     "centre": 280,
+     "lines": [
+      276,
+      277,
+      278,
+      279,
+      280,
+      281,
+      282,
+      283,
+      284
+     ],
+     "start": 22,
+     "end": 243
+    }
+   ],
+   "cost": 15984
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    22,
+    243
+   ],
+   "excluded": [],
+   "corners": [
+    14,
+    26,
+    32,
+    81
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     14,
+     26
+    ],
+    "cuts": [
+     32,
+     41,
+     51,
+     61,
+     71,
+     81
+    ],
+    "cuts_already_read": [
+     41,
+     51,
+     61,
+     71
+    ],
+    "sub_loops": 5,
+    "largest_gap": 10,
+    "gaps_beyond_reach": []
+   },
+   "state": "under",
+   "closure": -2.0133,
+   "profile": [
+    {
+     "cut": 41,
+     "cumulative_voxels": -3.625
+    },
+    {
+     "cut": 51,
+     "cumulative_voxels": 1.875
+    },
+    {
+     "cut": 61,
+     "cumulative_voxels": -6.4375
+    },
+    {
+     "cut": 71,
+     "cumulative_voxels": -8.1875
+    },
+    {
+     "cut": 81,
+     "cumulative_voxels": -2.0133
+    }
+   ],
+   "peak": {
+    "cut": 71,
+    "cumulative_voxels": -8.1875
+   }
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    22,
+    32
+   ],
+   "excluded": [],
+   "corners": [
+    20,
+    26,
+    22,
+    32
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     20,
+     26
+    ],
+    "cuts": [
+     22,
+     32
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 10,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_20_22_32_5",
+     "direction": "rows",
+     "centre": 20,
+     "lines": [
+      18,
+      19,
+      20,
+      21,
+      22
+     ],
+     "start": 22,
+     "end": 32
+    },
+    {
+     "key": "columns_22_20_26_5",
+     "direction": "columns",
+     "centre": 22,
+     "lines": [
+      20,
+      21,
+      22,
+      23,
+      24
+     ],
+     "start": 20,
+     "end": 26
+    }
+   ],
+   "cost": 90
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    81,
+    243
+   ],
+   "excluded": [],
+   "corners": [
+    15,
+    26,
+    126,
+    173
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     15,
+     26
+    ],
+    "cuts": [
+     126,
+     149,
+     173
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 2,
+    "largest_gap": 24,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_15_126_173_9",
+     "direction": "rows",
+     "centre": 15,
+     "lines": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+     ],
+     "start": 126,
+     "end": 173
+    },
+    {
+     "key": "columns_126_15_26_9",
+     "direction": "columns",
+     "centre": 126,
+     "lines": [
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130
+     ],
+     "start": 15,
+     "end": 26
+    },
+    {
+     "key": "columns_173_15_26_9",
+     "direction": "columns",
+     "centre": 173,
+     "lines": [
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177
+     ],
+     "start": 15,
+     "end": 26
+    },
+    {
+     "key": "columns_149_15_26_9",
+     "direction": "columns",
+     "centre": 149,
+     "lines": [
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153
+     ],
+     "start": 15,
+     "end": 26
+    }
+   ],
+   "cost": 756
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    81,
+    126
+   ],
+   "excluded": [],
+   "corners": [
+    17,
+    26,
+    81,
+    90
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     17,
+     26
+    ],
+    "cuts": [
+     81,
+     90
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 9,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_17_81_90_9",
+     "direction": "rows",
+     "centre": 17,
+     "lines": [
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+     ],
+     "start": 81,
+     "end": 90
+    },
+    {
+     "key": "columns_90_17_26_9",
+     "direction": "columns",
+     "centre": 90,
+     "lines": [
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94
+     ],
+     "start": 17,
+     "end": 26
+    }
+   ],
+   "cost": 180
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    90,
+    126
+   ],
+   "excluded": [],
+   "corners": [
+    20,
+    26,
+    109,
+    126
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     20,
+     26
+    ],
+    "cuts": [
+     109,
+     126
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 17,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_20_109_126_5",
+     "direction": "rows",
+     "centre": 20,
+     "lines": [
+      18,
+      19,
+      20,
+      21,
+      22
+     ],
+     "start": 109,
+     "end": 126
+    },
+    {
+     "key": "columns_109_20_26_5",
+     "direction": "columns",
+     "centre": 109,
+     "lines": [
+      107,
+      108,
+      109,
+      110,
+      111
+     ],
+     "start": 20,
+     "end": 26
+    },
+    {
+     "key": "columns_126_20_26_5",
+     "direction": "columns",
+     "centre": 126,
+     "lines": [
+      124,
+      125,
+      126,
+      127,
+      128
+     ],
+     "start": 20,
+     "end": 26
+    }
+   ],
+   "cost": 160
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    90,
+    109
+   ],
+   "excluded": [],
+   "corners": [
+    21,
+    26,
+    90,
+    96
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     21,
+     26
+    ],
+    "cuts": [
+     90,
+     96
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 6,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_21_90_96_5",
+     "direction": "rows",
+     "centre": 21,
+     "lines": [
+      19,
+      20,
+      21,
+      22,
+      23
+     ],
+     "start": 90,
+     "end": 96
+    },
+    {
+     "key": "columns_90_21_26_5",
+     "direction": "columns",
+     "centre": 90,
+     "lines": [
+      88,
+      89,
+      90,
+      91,
+      92
+     ],
+     "start": 21,
+     "end": 26
+    },
+    {
+     "key": "columns_96_21_26_5",
+     "direction": "columns",
+     "centre": 96,
+     "lines": [
+      94,
+      95,
+      96,
+      97,
+      98
+     ],
+     "start": 21,
+     "end": 26
+    }
+   ],
+   "cost": 95
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    96,
+    109
+   ],
+   "excluded": [],
+   "corners": [
+    23,
+    26,
+    96,
+    109
+   ],
+   "width": 3,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     23,
+     26
+    ],
+    "cuts": [
+     96,
+     109
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 13,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_23_96_109_3",
+     "direction": "rows",
+     "centre": 23,
+     "lines": [
+      22,
+      23,
+      24
+     ],
+     "start": 96,
+     "end": 109
+    },
+    {
+     "key": "columns_96_23_26_3",
+     "direction": "columns",
+     "centre": 96,
+     "lines": [
+      95,
+      96,
+      97
+     ],
+     "start": 23,
+     "end": 26
+    },
+    {
+     "key": "columns_109_23_26_3",
+     "direction": "columns",
+     "centre": 109,
+     "lines": [
+      108,
+      109,
+      110
+     ],
+     "start": 23,
+     "end": 26
+    }
+   ],
+   "cost": 66
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    173,
+    243
+   ],
+   "excluded": [],
+   "corners": [
+    15,
+    26,
+    216,
+    243
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     15,
+     26
+    ],
+    "cuts": [
+     216,
+     243
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 27,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_15_216_243_9",
+     "direction": "rows",
+     "centre": 15,
+     "lines": [
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19
+     ],
+     "start": 216,
+     "end": 243
+    },
+    {
+     "key": "columns_216_15_26_9",
+     "direction": "columns",
+     "centre": 216,
+     "lines": [
+      212,
+      213,
+      214,
+      215,
+      216,
+      217,
+      218,
+      219,
+      220
+     ],
+     "start": 15,
+     "end": 26
+    },
+    {
+     "key": "columns_243_15_26_9",
+     "direction": "columns",
+     "centre": 243,
+     "lines": [
+      239,
+      240,
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247
+     ],
+     "start": 15,
+     "end": 26
+    }
+   ],
+   "cost": 468
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    173,
+    216
+   ],
+   "excluded": [],
+   "corners": [
+    18,
+    26,
+    173,
+    181
+   ],
+   "width": 7,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     18,
+     26
+    ],
+    "cuts": [
+     173,
+     181
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 8,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_18_173_181_7",
+     "direction": "rows",
+     "centre": 18,
+     "lines": [
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+     ],
+     "start": 173,
+     "end": 181
+    },
+    {
+     "key": "columns_173_18_26_7",
+     "direction": "columns",
+     "centre": 173,
+     "lines": [
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176
+     ],
+     "start": 18,
+     "end": 26
+    },
+    {
+     "key": "columns_181_18_26_7",
+     "direction": "columns",
+     "centre": 181,
+     "lines": [
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184
+     ],
+     "start": 18,
+     "end": 26
+    }
+   ],
+   "cost": 189
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    181,
+    216
+   ],
+   "excluded": [],
+   "corners": [
+    21,
+    26,
+    197,
+    216
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     21,
+     26
+    ],
+    "cuts": [
+     197,
+     216
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 19,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_21_197_216_5",
+     "direction": "rows",
+     "centre": 21,
+     "lines": [
+      19,
+      20,
+      21,
+      22,
+      23
+     ],
+     "start": 197,
+     "end": 216
+    },
+    {
+     "key": "columns_197_21_26_5",
+     "direction": "columns",
+     "centre": 197,
+     "lines": [
+      195,
+      196,
+      197,
+      198,
+      199
+     ],
+     "start": 21,
+     "end": 26
+    },
+    {
+     "key": "columns_216_21_26_5",
+     "direction": "columns",
+     "centre": 216,
+     "lines": [
+      214,
+      215,
+      216,
+      217,
+      218
+     ],
+     "start": 21,
+     "end": 26
+    }
+   ],
+   "cost": 160
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    181,
+    197
+   ],
+   "excluded": [],
+   "corners": [
+    21,
+    26,
+    181,
+    190
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     21,
+     26
+    ],
+    "cuts": [
+     181,
+     190
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 9,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_21_181_190_5",
+     "direction": "rows",
+     "centre": 21,
+     "lines": [
+      19,
+      20,
+      21,
+      22,
+      23
+     ],
+     "start": 181,
+     "end": 190
+    },
+    {
+     "key": "columns_181_21_26_5",
+     "direction": "columns",
+     "centre": 181,
+     "lines": [
+      179,
+      180,
+      181,
+      182,
+      183
+     ],
+     "start": 21,
+     "end": 26
+    },
+    {
+     "key": "columns_190_21_26_5",
+     "direction": "columns",
+     "centre": 190,
+     "lines": [
+      188,
+      189,
+      190,
+      191,
+      192
+     ],
+     "start": 21,
+     "end": 26
+    }
+   ],
+   "cost": 110
+  },
+  {
+   "loop": "the wing",
+   "side": "top",
+   "portion": [
+    190,
+    197
+   ],
+   "excluded": [],
+   "corners": [
+    22,
+    26,
+    190,
+    197
+   ],
+   "width": 3,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     22,
+     26
+    ],
+    "cuts": [
+     190,
+     197
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 7,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_22_190_197_3",
+     "direction": "rows",
+     "centre": 22,
+     "lines": [
+      21,
+      22,
+      23
+     ],
+     "start": 190,
+     "end": 197
+    },
+    {
+     "key": "columns_190_22_26_3",
+     "direction": "columns",
+     "centre": 190,
+     "lines": [
+      189,
+      190,
+      191
+     ],
+     "start": 22,
+     "end": 26
+    },
+    {
+     "key": "columns_197_22_26_3",
+     "direction": "columns",
+     "centre": 197,
+     "lines": [
+      196,
+      197,
+      198
+     ],
+     "start": 22,
+     "end": 26
+    }
+   ],
+   "cost": 54
+  },
+  {
+   "loop": "the wing",
+   "side": "right",
+   "portion": [
+    26,
+    384
+   ],
+   "excluded": [],
+   "corners": [
+    26,
+    223,
+    243,
+    260
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     243,
+     260
+    ],
+    "cuts": [
+     26,
+     35,
+     44,
+     53,
+     62,
+     71,
+     80,
+     89,
+     98,
+     107,
+     116,
+     125,
+     134,
+     143,
+     153,
+     163,
+     173,
+     183,
+     193,
+     203,
+     213,
+     223
+    ],
+    "cuts_already_read": [
+     35,
+     44,
+     53,
+     62,
+     71,
+     80,
+     89,
+     98,
+     107,
+     116,
+     125,
+     134,
+     143,
+     153,
+     163,
+     173,
+     183,
+     193,
+     203,
+     213
+    ],
+    "sub_loops": 21,
+    "largest_gap": 10,
+    "gaps_beyond_reach": []
+   },
+   "state": "crosses",
+   "closure": -35.6938,
+   "profile": [
+    {
+     "cut": 35,
+     "cumulative_voxels": -1.875
+    },
+    {
+     "cut": 44,
+     "cumulative_voxels": 1.875
+    },
+    {
+     "cut": 53,
+     "cumulative_voxels": -5.9375
+    },
+    {
+     "cut": 62,
+     "cumulative_voxels": -6.2187
+    },
+    {
+     "cut": 71,
+     "cumulative_voxels": -5.5937
+    },
+    {
+     "cut": 80,
+     "cumulative_voxels": -17.9999
+    },
+    {
+     "cut": 89,
+     "cumulative_voxels": -13.3749
+    },
+    {
+     "cut": 98,
+     "cumulative_voxels": -20.8437
+    },
+    {
+     "cut": 107,
+     "cumulative_voxels": -19.6875
+    },
+    {
+     "cut": 116,
+     "cumulative_voxels": -24.2813
+    },
+    {
+     "cut": 125,
+     "cumulative_voxels": -25.1563
+    },
+    {
+     "cut": 134,
+     "cumulative_voxels": -26.6251
+    },
+    {
+     "cut": 143,
+     "cumulative_voxels": -24.6563
+    },
+    {
+     "cut": 153,
+     "cumulative_voxels": -27.0313
+    },
+    {
+     "cut": 163,
+     "cumulative_voxels": -36.6563
+    },
+    {
+     "cut": 173,
+     "cumulative_voxels": -40.2188
+    },
+    {
+     "cut": 183,
+     "cumulative_voxels": -31.8813
+    },
+    {
+     "cut": 193,
+     "cumulative_voxels": -34.3501
+    },
+    {
+     "cut": 203,
+     "cumulative_voxels": -37.6626
+    },
+    {
+     "cut": 213,
+     "cumulative_voxels": -30.6626
+    },
+    {
+     "cut": 223,
+     "cumulative_voxels": -35.6938
+    }
+   ],
+   "peak": {
+    "cut": 173,
+    "cumulative_voxels": -40.2188
+   },
+   "tie_break": {
+    "state": "decided",
+    "third_line": {
+     "line": 234,
+     "direction": "columns",
+     "nearest": 243,
+     "farthest": 260,
+     "on_rectangle_side": true,
+     "gap": 9
+    },
+    "verdict": {
+     "width_judged": 9,
+     "open_loops": [],
+     "tightest": "narrow",
+     "decides": true,
+     "drifting_line": 260,
+     "margins": {
+      "wing": 11.2626,
+      "wide": 2.8875
+     },
+     "is_a_wing_column": true
+    }
+   }
+  },
+  {
+   "loop": "the wing",
+   "side": "right",
+   "portion": [
+    26,
+    384
+   ],
+   "excluded": [
+    [
+     260,
+     9
+    ]
+   ],
+   "corners": [
+    26,
+    112,
+    243,
+    269
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     243,
+     269
+    ],
+    "cuts": [
+     26,
+     54,
+     83,
+     112
+    ],
+    "cuts_already_read": [
+     54,
+     83
+    ],
+    "sub_loops": 3,
+    "largest_gap": 29,
+    "gaps_beyond_reach": []
+   },
+   "state": "under",
+   "closure": 1.2159,
+   "profile": [
+    {
+     "cut": 54,
+     "cumulative_voxels": 7.3125
+    },
+    {
+     "cut": 83,
+     "cumulative_voxels": -5.125
+    },
+    {
+     "cut": 112,
+     "cumulative_voxels": 1.2159
+    }
+   ],
+   "peak": {
+    "cut": 54,
+    "cumulative_voxels": 7.3125
+   }
+  },
+  {
+   "loop": "the wing",
+   "side": "right",
+   "portion": [
+    112,
+    384
+   ],
+   "excluded": [
+    [
+     260,
+     9
+    ]
+   ],
+   "corners": [
+    112,
+    266,
+    243,
+    252
+   ],
+   "width": 7,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     243,
+     252
+    ],
+    "cuts": [
+     112,
+     125,
+     134,
+     143,
+     150,
+     163,
+     173,
+     183,
+     193,
+     203,
+     213,
+     223,
+     244,
+     266
+    ],
+    "cuts_already_read": [
+     125,
+     134,
+     143,
+     150,
+     163,
+     173,
+     183,
+     193,
+     203,
+     213,
+     223
+    ],
+    "sub_loops": 13,
+    "largest_gap": 22,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_244_243_252_7",
+     "direction": "rows",
+     "centre": 244,
+     "lines": [
+      241,
+      242,
+      243,
+      244,
+      245,
+      246,
+      247
+     ],
+     "start": 243,
+     "end": 252
+    }
+   ],
+   "cost": 70
+  },
+  {
+   "loop": "the wing",
+   "side": "right",
+   "portion": [
+    266,
+    384
+   ],
+   "excluded": [
+    [
+     260,
+     9
+    ]
+   ],
+   "corners": [
+    339,
+    384,
+    243,
+    251
+   ],
+   "width": 7,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     243,
+     251
+    ],
+    "cuts": [
+     339,
+     361,
+     384
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 2,
+    "largest_gap": 23,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_339_243_251_7",
+     "direction": "rows",
+     "centre": 339,
+     "lines": [
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342
+     ],
+     "start": 243,
+     "end": 251
+    },
+    {
+     "key": "rows_384_243_251_7",
+     "direction": "rows",
+     "centre": 384,
+     "lines": [
+      381,
+      382,
+      383,
+      384,
+      385,
+      386,
+      387
+     ],
+     "start": 243,
+     "end": 251
+    },
+    {
+     "key": "columns_251_339_384_7",
+     "direction": "columns",
+     "centre": 251,
+     "lines": [
+      248,
+      249,
+      250,
+      251,
+      252,
+      253,
+      254
+     ],
+     "start": 339,
+     "end": 384
+    },
+    {
+     "key": "rows_361_243_251_7",
+     "direction": "rows",
+     "centre": 361,
+     "lines": [
+      358,
+      359,
+      360,
+      361,
+      362,
+      363,
+      364
+     ],
+     "start": 243,
+     "end": 251
+    }
+   ],
+   "cost": 511
+  },
+  {
+   "loop": "the wing",
+   "side": "right",
+   "portion": [
+    266,
+    339
+   ],
+   "excluded": [
+    [
+     260,
+     9
+    ]
+   ],
+   "corners": [
+    320,
+    339,
+    243,
+    248
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     243,
+     248
+    ],
+    "cuts": [
+     320,
+     339
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 19,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_320_243_248_5",
+     "direction": "rows",
+     "centre": 320,
+     "lines": [
+      318,
+      319,
+      320,
+      321,
+      322
+     ],
+     "start": 243,
+     "end": 248
+    },
+    {
+     "key": "rows_339_243_248_5",
+     "direction": "rows",
+     "centre": 339,
+     "lines": [
+      337,
+      338,
+      339,
+      340,
+      341
+     ],
+     "start": 243,
+     "end": 248
+    },
+    {
+     "key": "columns_248_320_339_5",
+     "direction": "columns",
+     "centre": 248,
+     "lines": [
+      246,
+      247,
+      248,
+      249,
+      250
+     ],
+     "start": 320,
+     "end": 339
+    }
+   ],
+   "cost": 160
+  },
+  {
+   "loop": "the wing",
+   "side": "right",
+   "portion": [
+    266,
+    320
+   ],
+   "excluded": [
+    [
+     260,
+     9
+    ]
+   ],
+   "corners": [
+    266,
+    279,
+    243,
+    248
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     243,
+     248
+    ],
+    "cuts": [
+     266,
+     279
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 13,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_279_243_248_5",
+     "direction": "rows",
+     "centre": 279,
+     "lines": [
+      277,
+      278,
+      279,
+      280,
+      281
+     ],
+     "start": 243,
+     "end": 248
+    },
+    {
+     "key": "columns_248_266_279_5",
+     "direction": "columns",
+     "centre": 248,
+     "lines": [
+      246,
+      247,
+      248,
+      249,
+      250
+     ],
+     "start": 266,
+     "end": 279
+    }
+   ],
+   "cost": 100
+  },
+  {
+   "loop": "the wing",
+   "side": "right",
+   "portion": [
+    279,
+    320
+   ],
+   "excluded": [
+    [
+     260,
+     9
+    ]
+   ],
+   "corners": [
+    279,
+    320,
+    243,
+    246
+   ],
+   "width": 3,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     243,
+     246
+    ],
+    "cuts": [
+     279,
+     299,
+     320
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 2,
+    "largest_gap": 21,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_279_243_246_3",
+     "direction": "rows",
+     "centre": 279,
+     "lines": [
+      278,
+      279,
+      280
+     ],
+     "start": 243,
+     "end": 246
+    },
+    {
+     "key": "rows_320_243_246_3",
+     "direction": "rows",
+     "centre": 320,
+     "lines": [
+      319,
+      320,
+      321
+     ],
+     "start": 243,
+     "end": 246
+    },
+    {
+     "key": "columns_246_279_320_3",
+     "direction": "columns",
+     "centre": 246,
+     "lines": [
+      245,
+      246,
+      247
+     ],
+     "start": 279,
+     "end": 320
+    },
+    {
+     "key": "rows_299_243_246_3",
+     "direction": "rows",
+     "centre": 299,
+     "lines": [
+      298,
+      299,
+      300
+     ],
+     "start": 243,
+     "end": 246
+    }
+   ],
+   "cost": 162
+  },
+  {
+   "loop": "the wing",
+   "side": "bottom",
+   "portion": [
+    22,
+    243
+   ],
+   "excluded": [],
+   "corners": [
+    384,
+    389,
+    117,
+    156
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     384,
+     389
+    ],
+    "cuts": [
+     117,
+     136,
+     156
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 2,
+    "largest_gap": 20,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_389_117_156_5",
+     "direction": "rows",
+     "centre": 389,
+     "lines": [
+      387,
+      388,
+      389,
+      390,
+      391
+     ],
+     "start": 117,
+     "end": 156
+    },
+    {
+     "key": "columns_117_384_389_5",
+     "direction": "columns",
+     "centre": 117,
+     "lines": [
+      115,
+      116,
+      117,
+      118,
+      119
+     ],
+     "start": 384,
+     "end": 389
+    },
+    {
+     "key": "columns_156_384_389_5",
+     "direction": "columns",
+     "centre": 156,
+     "lines": [
+      154,
+      155,
+      156,
+      157,
+      158
+     ],
+     "start": 384,
+     "end": 389
+    },
+    {
+     "key": "columns_136_384_389_5",
+     "direction": "columns",
+     "centre": 136,
+     "lines": [
+      134,
+      135,
+      136,
+      137,
+      138
+     ],
+     "start": 384,
+     "end": 389
+    }
+   ],
+   "cost": 290
+  },
+  {
+   "loop": "the wing",
+   "side": "bottom",
+   "portion": [
+    22,
+    117
+   ],
+   "excluded": [],
+   "corners": [
+    384,
+    389,
+    28,
+    61
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     384,
+     389
+    ],
+    "cuts": [
+     28,
+     44,
+     61
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 2,
+    "largest_gap": 17,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_389_28_61_5",
+     "direction": "rows",
+     "centre": 389,
+     "lines": [
+      387,
+      388,
+      389,
+      390,
+      391
+     ],
+     "start": 28,
+     "end": 61
+    },
+    {
+     "key": "columns_28_384_389_5",
+     "direction": "columns",
+     "centre": 28,
+     "lines": [
+      26,
+      27,
+      28,
+      29,
+      30
+     ],
+     "start": 384,
+     "end": 389
+    },
+    {
+     "key": "columns_61_384_389_5",
+     "direction": "columns",
+     "centre": 61,
+     "lines": [
+      59,
+      60,
+      61,
+      62,
+      63
+     ],
+     "start": 384,
+     "end": 389
+    },
+    {
+     "key": "columns_44_384_389_5",
+     "direction": "columns",
+     "centre": 44,
+     "lines": [
+      42,
+      43,
+      44,
+      45,
+      46
+     ],
+     "start": 384,
+     "end": 389
+    }
+   ],
+   "cost": 260
+  },
+  {
+   "loop": "the wing",
+   "side": "bottom",
+   "portion": [
+    22,
+    28
+   ],
+   "excluded": [],
+   "corners": [
+    384,
+    389,
+    22,
+    28
+   ],
+   "width": 3,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     384,
+     389
+    ],
+    "cuts": [
+     22,
+     28
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 6,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_389_22_28_3",
+     "direction": "rows",
+     "centre": 389,
+     "lines": [
+      388,
+      389,
+      390
+     ],
+     "start": 22,
+     "end": 28
+    },
+    {
+     "key": "columns_22_384_389_3",
+     "direction": "columns",
+     "centre": 22,
+     "lines": [
+      21,
+      22,
+      23
+     ],
+     "start": 384,
+     "end": 389
+    },
+    {
+     "key": "columns_28_384_389_3",
+     "direction": "columns",
+     "centre": 28,
+     "lines": [
+      27,
+      28,
+      29
+     ],
+     "start": 384,
+     "end": 389
+    }
+   ],
+   "cost": 57
+  },
+  {
+   "loop": "the wing",
+   "side": "bottom",
+   "portion": [
+    61,
+    117
+   ],
+   "excluded": [],
+   "corners": [
+    384,
+    387,
+    61,
+    117
+   ],
+   "width": 3,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     384,
+     387
+    ],
+    "cuts": [
+     61,
+     89,
+     117
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 2,
+    "largest_gap": 28,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_387_61_117_3",
+     "direction": "rows",
+     "centre": 387,
+     "lines": [
+      386,
+      387,
+      388
+     ],
+     "start": 61,
+     "end": 117
+    },
+    {
+     "key": "columns_61_384_387_3",
+     "direction": "columns",
+     "centre": 61,
+     "lines": [
+      60,
+      61,
+      62
+     ],
+     "start": 384,
+     "end": 387
+    },
+    {
+     "key": "columns_117_384_387_3",
+     "direction": "columns",
+     "centre": 117,
+     "lines": [
+      116,
+      117,
+      118
+     ],
+     "start": 384,
+     "end": 387
+    },
+    {
+     "key": "columns_89_384_387_3",
+     "direction": "columns",
+     "centre": 89,
+     "lines": [
+      88,
+      89,
+      90
+     ],
+     "start": 384,
+     "end": 387
+    }
+   ],
+   "cost": 207
+  },
+  {
+   "loop": "the wing",
+   "side": "bottom",
+   "portion": [
+    156,
+    243
+   ],
+   "excluded": [],
+   "corners": [
+    384,
+    389,
+    204,
+    242
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     384,
+     389
+    ],
+    "cuts": [
+     204,
+     223,
+     242
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 2,
+    "largest_gap": 19,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_389_204_242_5",
+     "direction": "rows",
+     "centre": 389,
+     "lines": [
+      387,
+      388,
+      389,
+      390,
+      391
+     ],
+     "start": 204,
+     "end": 242
+    },
+    {
+     "key": "columns_204_384_389_5",
+     "direction": "columns",
+     "centre": 204,
+     "lines": [
+      202,
+      203,
+      204,
+      205,
+      206
+     ],
+     "start": 384,
+     "end": 389
+    },
+    {
+     "key": "columns_242_384_389_5",
+     "direction": "columns",
+     "centre": 242,
+     "lines": [
+      240,
+      241,
+      242,
+      243,
+      244
+     ],
+     "start": 384,
+     "end": 389
+    },
+    {
+     "key": "columns_223_384_389_5",
+     "direction": "columns",
+     "centre": 223,
+     "lines": [
+      221,
+      222,
+      223,
+      224,
+      225
+     ],
+     "start": 384,
+     "end": 389
+    }
+   ],
+   "cost": 285
+  },
+  {
+   "loop": "the wing",
+   "side": "bottom",
+   "portion": [
+    156,
+    204
+   ],
+   "excluded": [],
+   "corners": [
+    384,
+    387,
+    156,
+    204
+   ],
+   "width": 3,
+   "cutting": {
+    "direction": "columns",
+    "bounds": [
+     384,
+     387
+    ],
+    "cuts": [
+     156,
+     180,
+     204
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 2,
+    "largest_gap": 24,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_387_156_204_3",
+     "direction": "rows",
+     "centre": 387,
+     "lines": [
+      386,
+      387,
+      388
+     ],
+     "start": 156,
+     "end": 204
+    },
+    {
+     "key": "columns_156_384_387_3",
+     "direction": "columns",
+     "centre": 156,
+     "lines": [
+      155,
+      156,
+      157
+     ],
+     "start": 384,
+     "end": 387
+    },
+    {
+     "key": "columns_204_384_387_3",
+     "direction": "columns",
+     "centre": 204,
+     "lines": [
+      203,
+      204,
+      205
+     ],
+     "start": 384,
+     "end": 387
+    },
+    {
+     "key": "columns_180_384_387_3",
+     "direction": "columns",
+     "centre": 180,
+     "lines": [
+      179,
+      180,
+      181
+     ],
+     "start": 384,
+     "end": 387
+    }
+   ],
+   "cost": 183
+  },
+  {
+   "loop": "the wing",
+   "side": "bottom",
+   "portion": [
+    242,
+    243
+   ],
+   "excluded": [],
+   "state": "no wing"
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    26,
+    384
+   ],
+   "excluded": [],
+   "corners": [
+    216,
+    308,
+    13,
+    22
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     13,
+     22
+    ],
+    "cuts": [
+     216,
+     225,
+     234,
+     243,
+     252,
+     261,
+     270,
+     279,
+     288,
+     298,
+     308
+    ],
+    "cuts_already_read": [
+     225,
+     234,
+     243,
+     252,
+     261,
+     270,
+     279,
+     288,
+     298
+    ],
+    "sub_loops": 10,
+    "largest_gap": 10,
+    "gaps_beyond_reach": []
+   },
+   "state": "under",
+   "closure": 6.9445,
+   "profile": [
+    {
+     "cut": 225,
+     "cumulative_voxels": 0.2014
+    },
+    {
+     "cut": 234,
+     "cumulative_voxels": 1.382
+    },
+    {
+     "cut": 243,
+     "cumulative_voxels": -1.368
+    },
+    {
+     "cut": 252,
+     "cumulative_voxels": -0.3992
+    },
+    {
+     "cut": 261,
+     "cumulative_voxels": -1.1804
+    },
+    {
+     "cut": 270,
+     "cumulative_voxels": -3.5866
+    },
+    {
+     "cut": 279,
+     "cumulative_voxels": -4.3366
+    },
+    {
+     "cut": 288,
+     "cumulative_voxels": -2.8366
+    },
+    {
+     "cut": 298,
+     "cumulative_voxels": -3.5554
+    },
+    {
+     "cut": 308,
+     "cumulative_voxels": 6.9446
+    }
+   ],
+   "peak": {
+    "cut": 308,
+    "cumulative_voxels": 6.9446
+   }
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    26,
+    216
+   ],
+   "excluded": [],
+   "corners": [
+    78,
+    148,
+    13,
+    22
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     13,
+     22
+    ],
+    "cuts": [
+     78,
+     101,
+     124,
+     148
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 3,
+    "largest_gap": 24,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_78_13_22_9",
+     "direction": "rows",
+     "centre": 78,
+     "lines": [
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82
+     ],
+     "start": 13,
+     "end": 22
+    },
+    {
+     "key": "rows_148_13_22_9",
+     "direction": "rows",
+     "centre": 148,
+     "lines": [
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152
+     ],
+     "start": 13,
+     "end": 22
+    },
+    {
+     "key": "columns_13_78_148_9",
+     "direction": "columns",
+     "centre": 13,
+     "lines": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+     ],
+     "start": 78,
+     "end": 148
+    },
+    {
+     "key": "rows_101_13_22_9",
+     "direction": "rows",
+     "centre": 101,
+     "lines": [
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105
+     ],
+     "start": 13,
+     "end": 22
+    },
+    {
+     "key": "rows_124_13_22_9",
+     "direction": "rows",
+     "centre": 124,
+     "lines": [
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128
+     ],
+     "start": 13,
+     "end": 22
+    }
+   ],
+   "cost": 999
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    26,
+    78
+   ],
+   "excluded": [],
+   "corners": [
+    39,
+    78,
+    15,
+    22
+   ],
+   "width": 7,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     15,
+     22
+    ],
+    "cuts": [
+     39,
+     58,
+     78
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 2,
+    "largest_gap": 20,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_39_15_22_7",
+     "direction": "rows",
+     "centre": 39,
+     "lines": [
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42
+     ],
+     "start": 15,
+     "end": 22
+    },
+    {
+     "key": "rows_78_15_22_7",
+     "direction": "rows",
+     "centre": 78,
+     "lines": [
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81
+     ],
+     "start": 15,
+     "end": 22
+    },
+    {
+     "key": "columns_15_39_78_7",
+     "direction": "columns",
+     "centre": 15,
+     "lines": [
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+     ],
+     "start": 39,
+     "end": 78
+    },
+    {
+     "key": "rows_58_15_22_7",
+     "direction": "rows",
+     "centre": 58,
+     "lines": [
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61
+     ],
+     "start": 15,
+     "end": 22
+    }
+   ],
+   "cost": 448
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    26,
+    39
+   ],
+   "excluded": [],
+   "corners": [
+    26,
+    39,
+    16,
+    22
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     16,
+     22
+    ],
+    "cuts": [
+     26,
+     39
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 13,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_26_16_22_5",
+     "direction": "rows",
+     "centre": 26,
+     "lines": [
+      24,
+      25,
+      26,
+      27,
+      28
+     ],
+     "start": 16,
+     "end": 22
+    },
+    {
+     "key": "rows_39_16_22_5",
+     "direction": "rows",
+     "centre": 39,
+     "lines": [
+      37,
+      38,
+      39,
+      40,
+      41
+     ],
+     "start": 16,
+     "end": 22
+    },
+    {
+     "key": "columns_16_26_39_5",
+     "direction": "columns",
+     "centre": 16,
+     "lines": [
+      14,
+      15,
+      16,
+      17,
+      18
+     ],
+     "start": 26,
+     "end": 39
+    }
+   ],
+   "cost": 140
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    148,
+    216
+   ],
+   "excluded": [],
+   "corners": [
+    153,
+    185,
+    13,
+    22
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     13,
+     22
+    ],
+    "cuts": [
+     153,
+     169,
+     185
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 2,
+    "largest_gap": 16,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_153_13_22_9",
+     "direction": "rows",
+     "centre": 153,
+     "lines": [
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157
+     ],
+     "start": 13,
+     "end": 22
+    },
+    {
+     "key": "rows_185_13_22_9",
+     "direction": "rows",
+     "centre": 185,
+     "lines": [
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189
+     ],
+     "start": 13,
+     "end": 22
+    },
+    {
+     "key": "columns_13_153_185_9",
+     "direction": "columns",
+     "centre": 13,
+     "lines": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+     ],
+     "start": 153,
+     "end": 185
+    },
+    {
+     "key": "rows_169_13_22_9",
+     "direction": "rows",
+     "centre": 169,
+     "lines": [
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173
+     ],
+     "start": 13,
+     "end": 22
+    }
+   ],
+   "cost": 567
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    148,
+    153
+   ],
+   "excluded": [],
+   "corners": [
+    148,
+    153,
+    12,
+    22
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     12,
+     22
+    ],
+    "cuts": [
+     148,
+     153
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 5,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_148_12_22_5",
+     "direction": "rows",
+     "centre": 148,
+     "lines": [
+      146,
+      147,
+      148,
+      149,
+      150
+     ],
+     "start": 12,
+     "end": 22
+    },
+    {
+     "key": "rows_153_12_22_5",
+     "direction": "rows",
+     "centre": 153,
+     "lines": [
+      151,
+      152,
+      153,
+      154,
+      155
+     ],
+     "start": 12,
+     "end": 22
+    },
+    {
+     "key": "columns_12_148_153_5",
+     "direction": "columns",
+     "centre": 12,
+     "lines": [
+      10,
+      11,
+      12,
+      13,
+      14
+     ],
+     "start": 148,
+     "end": 153
+    }
+   ],
+   "cost": 140
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    185,
+    216
+   ],
+   "excluded": [],
+   "corners": [
+    185,
+    196,
+    17,
+    22
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     17,
+     22
+    ],
+    "cuts": [
+     185,
+     196
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 11,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_185_17_22_5",
+     "direction": "rows",
+     "centre": 185,
+     "lines": [
+      183,
+      184,
+      185,
+      186,
+      187
+     ],
+     "start": 17,
+     "end": 22
+    },
+    {
+     "key": "rows_196_17_22_5",
+     "direction": "rows",
+     "centre": 196,
+     "lines": [
+      194,
+      195,
+      196,
+      197,
+      198
+     ],
+     "start": 17,
+     "end": 22
+    },
+    {
+     "key": "columns_17_185_196_5",
+     "direction": "columns",
+     "centre": 17,
+     "lines": [
+      15,
+      16,
+      17,
+      18,
+      19
+     ],
+     "start": 185,
+     "end": 196
+    }
+   ],
+   "cost": 120
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    196,
+    216
+   ],
+   "excluded": [],
+   "corners": [
+    209,
+    216,
+    17,
+    22
+   ],
+   "width": 5,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     17,
+     22
+    ],
+    "cuts": [
+     209,
+     216
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 7,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_209_17_22_5",
+     "direction": "rows",
+     "centre": 209,
+     "lines": [
+      207,
+      208,
+      209,
+      210,
+      211
+     ],
+     "start": 17,
+     "end": 22
+    },
+    {
+     "key": "columns_17_209_216_5",
+     "direction": "columns",
+     "centre": 17,
+     "lines": [
+      15,
+      16,
+      17,
+      18,
+      19
+     ],
+     "start": 209,
+     "end": 216
+    }
+   ],
+   "cost": 70
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    196,
+    209
+   ],
+   "excluded": [],
+   "corners": [
+    196,
+    209,
+    19,
+    22
+   ],
+   "width": 3,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     19,
+     22
+    ],
+    "cuts": [
+     196,
+     209
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 13,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_196_19_22_3",
+     "direction": "rows",
+     "centre": 196,
+     "lines": [
+      195,
+      196,
+      197
+     ],
+     "start": 19,
+     "end": 22
+    },
+    {
+     "key": "rows_209_19_22_3",
+     "direction": "rows",
+     "centre": 209,
+     "lines": [
+      208,
+      209,
+      210
+     ],
+     "start": 19,
+     "end": 22
+    },
+    {
+     "key": "columns_19_196_209_3",
+     "direction": "columns",
+     "centre": 19,
+     "lines": [
+      18,
+      19,
+      20
+     ],
+     "start": 196,
+     "end": 209
+    }
+   ],
+   "cost": 66
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    308,
+    384
+   ],
+   "excluded": [],
+   "corners": [
+    315,
+    384,
+    13,
+    22
+   ],
+   "width": 9,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     13,
+     22
+    ],
+    "cuts": [
+     315,
+     338,
+     361,
+     384
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 3,
+    "largest_gap": 23,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_315_13_22_9",
+     "direction": "rows",
+     "centre": 315,
+     "lines": [
+      311,
+      312,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318,
+      319
+     ],
+     "start": 13,
+     "end": 22
+    },
+    {
+     "key": "rows_384_13_22_9",
+     "direction": "rows",
+     "centre": 384,
+     "lines": [
+      380,
+      381,
+      382,
+      383,
+      384,
+      385,
+      386,
+      387,
+      388
+     ],
+     "start": 13,
+     "end": 22
+    },
+    {
+     "key": "columns_13_315_384_9",
+     "direction": "columns",
+     "centre": 13,
+     "lines": [
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+     ],
+     "start": 315,
+     "end": 384
+    },
+    {
+     "key": "rows_338_13_22_9",
+     "direction": "rows",
+     "centre": 338,
+     "lines": [
+      334,
+      335,
+      336,
+      337,
+      338,
+      339,
+      340,
+      341,
+      342
+     ],
+     "start": 13,
+     "end": 22
+    },
+    {
+     "key": "rows_361_13_22_9",
+     "direction": "rows",
+     "centre": 361,
+     "lines": [
+      357,
+      358,
+      359,
+      360,
+      361,
+      362,
+      363,
+      364,
+      365
+     ],
+     "start": 13,
+     "end": 22
+    }
+   ],
+   "cost": 990
+  },
+  {
+   "loop": "the wing",
+   "side": "left",
+   "portion": [
+    308,
+    315
+   ],
+   "excluded": [],
+   "corners": [
+    308,
+    315,
+    13,
+    22
+   ],
+   "width": 7,
+   "cutting": {
+    "direction": "rows",
+    "bounds": [
+     13,
+     22
+    ],
+    "cuts": [
+     308,
+     315
+    ],
+    "cuts_already_read": [],
+    "sub_loops": 1,
+    "largest_gap": 7,
+    "gaps_beyond_reach": []
+   },
+   "state": "to read",
+   "requests": [
+    {
+     "key": "rows_315_13_22_7",
+     "direction": "rows",
+     "centre": 315,
+     "lines": [
+      312,
+      313,
+      314,
+      315,
+      316,
+      317,
+      318
+     ],
+     "start": 13,
+     "end": 22
+    },
+    {
+     "key": "columns_13_308_315_7",
+     "direction": "columns",
+     "centre": 13,
+     "lines": [
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16
+     ],
+     "start": 308,
+     "end": 315
+    }
+   ],
+   "cost": 126
+  }
+ ],
+ "holding_loops": [
+  {
+   "corners": [
+    14,
+    26,
+    32,
+    81
+   ],
+   "width": 9
+  },
+  {
+   "corners": [
+    26,
+    112,
+    243,
+    269
+   ],
+   "width": 9
+  },
+  {
+   "corners": [
+    216,
+    308,
+    13,
+    22
+   ],
+   "width": 9
+  }
+ ],
+ "coverage": {
+  "count": 6333,
+  "of": 97771,
+  "share": 0.0648
+ },
+ "left_to_read": 24263
+}

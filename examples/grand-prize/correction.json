@@ -1,0 +1,6553 @@
+{
+ "pooled": {
+  "blocks": 340,
+  "before": 0.9339,
+  "after": 0.9374,
+  "scored_points": 34917,
+  "corrected_points": 495,
+  "misses_made_right": 163,
+  "rights_made_misses": 41,
+  "net_gain": 122,
+  "blocks_up": 42,
+  "blocks_down": 11,
+  "blocks_unchanged": 287
+ },
+ "pooled_within_validated_geometry": {
+  "blocks": 339,
+  "before": 0.9336,
+  "after": 0.9372,
+  "scored_points": 34752,
+  "corrected_points": 495,
+  "misses_made_right": 163,
+  "rights_made_misses": 41,
+  "net_gain": 122,
+  "blocks_up": 42,
+  "blocks_down": 11,
+  "blocks_unchanged": 286
+ },
+ "sign_test": {
+  "on_points": 2.04e-18,
+  "on_blocks": 2.25e-05
+ },
+ "whole_surface": {
+  "before": {
+   "scored_points": 38581,
+   "share_on_the_right_winding": 0.9303
+  },
+  "after": {
+   "scored_points": 38581,
+   "share_on_the_right_winding": 0.9334
+  }
+ },
+ "blocks_within_validated_geometry": 339,
+ "undecided": {},
+ "prediction": "m7",
+ "side": "plus",
+ "blocks": [
+  {
+   "row": 16,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 2,
+   "anchor_voxels": -1.923,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -0.8169,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.8624,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 11.4537,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -4.7172,
+   "before": {
+    "scored_points": 41,
+    "share_on_the_right_winding": 0.8537
+   },
+   "corrected_points": 16,
+   "after": {
+    "scored_points": 41,
+    "share_on_the_right_winding": 0.8537
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 2,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 5.1416,
+   "before": {
+    "scored_points": 159,
+    "share_on_the_right_winding": 0.9371
+   },
+   "corrected_points": 18,
+   "after": {
+    "scored_points": 159,
+    "share_on_the_right_winding": 0.9245
+   },
+   "misses_made_right": 3,
+   "rights_made_misses": 5,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 6.5975,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9702
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9702
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -2.475,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.8333
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.8333
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 7.0696,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.8225
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.8225
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.8001,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.474
+   },
+   "corrected_points": 22,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.6039
+   },
+   "misses_made_right": 20,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -1.1005,
+   "before": {
+    "scored_points": 159,
+    "share_on_the_right_winding": 0.9371
+   },
+   "corrected_points": 4,
+   "after": {
+    "scored_points": 159,
+    "share_on_the_right_winding": 0.9182
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 3,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.1455,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9763
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9704
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -0.7215,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.9675
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.974
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -3.5042,
+   "before": {
+    "scored_points": 159,
+    "share_on_the_right_winding": 0.9182
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 159,
+    "share_on_the_right_winding": 0.9182
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 16,
+   "column": 256,
+   "decidable": true,
+   "neighbours": 2,
+   "anchor_voxels": 8.0934,
+   "before": {
+    "scored_points": 114,
+    "share_on_the_right_winding": 0.5877
+   },
+   "corrected_points": 43,
+   "after": {
+    "scored_points": 114,
+    "share_on_the_right_winding": 0.8246
+   },
+   "misses_made_right": 30,
+   "rights_made_misses": 3,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 2,
+   "anchor_voxels": -0.7735,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 4,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.6095,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.2358,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.9302,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.8174,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.5664,
+   "before": {
+    "scored_points": 65,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 65,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.8502,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.1742,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.1798,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9423
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9487
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.6262,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9882
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9882
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.0298,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9882
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.4457,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.2,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.0131,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.2437,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9882
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9882
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 32,
+   "column": 256,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.7623,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 2.1784,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 3,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.9917,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 6,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 3.0761,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.5996,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.4604,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.8421,
+   "before": {
+    "scored_points": 80,
+    "share_on_the_right_winding": 0.9875
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 80,
+    "share_on_the_right_winding": 0.9875
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.3746,
+   "before": {
+    "scored_points": 167,
+    "share_on_the_right_winding": 0.9641
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 167,
+    "share_on_the_right_winding": 0.9641
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.3726,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9583
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9583
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -5.7714,
+   "before": {
+    "scored_points": 147,
+    "share_on_the_right_winding": 0.7143
+   },
+   "corrected_points": 5,
+   "after": {
+    "scored_points": 147,
+    "share_on_the_right_winding": 0.7143
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.5324,
+   "before": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.8735
+   },
+   "corrected_points": 6,
+   "after": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.8916
+   },
+   "misses_made_right": 4,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 6.6389,
+   "before": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 0.9879
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 0.9818
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.6218,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 3.0306,
+   "before": {
+    "scored_points": 162,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 162,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 6.5009,
+   "before": {
+    "scored_points": 145,
+    "share_on_the_right_winding": 0.8966
+   },
+   "corrected_points": 6,
+   "after": {
+    "scored_points": 145,
+    "share_on_the_right_winding": 0.9103
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.3234,
+   "before": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 0.9264
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 0.9264
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 48,
+   "column": 256,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -1.4883,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9762
+   },
+   "corrected_points": 3,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9762
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -1.361,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.0153,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 6.6496,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 13,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.9337,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 9,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.3434,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.2885,
+   "before": {
+    "scored_points": 71,
+    "share_on_the_right_winding": 0.9859
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 71,
+    "share_on_the_right_winding": 0.9859
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.6356,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9231
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9231
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.8882,
+   "before": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.9342
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.9408
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.4694,
+   "before": {
+    "scored_points": 127,
+    "share_on_the_right_winding": 0.7874
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 127,
+    "share_on_the_right_winding": 0.7874
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.799,
+   "before": {
+    "scored_points": 150,
+    "share_on_the_right_winding": 0.7467
+   },
+   "corrected_points": 19,
+   "after": {
+    "scored_points": 150,
+    "share_on_the_right_winding": 0.8133
+   },
+   "misses_made_right": 10,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -4.1369,
+   "before": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.9474
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.9474
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 3.9793,
+   "before": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 0.9613
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 0.9677
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.9567,
+   "before": {
+    "scored_points": 151,
+    "share_on_the_right_winding": 0.8808
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 151,
+    "share_on_the_right_winding": 0.8808
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 5.8534,
+   "before": {
+    "scored_points": 102,
+    "share_on_the_right_winding": 0.902
+   },
+   "corrected_points": 31,
+   "after": {
+    "scored_points": 102,
+    "share_on_the_right_winding": 0.902
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 3.1742,
+   "before": {
+    "scored_points": 148,
+    "share_on_the_right_winding": 0.8716
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 148,
+    "share_on_the_right_winding": 0.8716
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 64,
+   "column": 256,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -2.7718,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.9221
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.9286
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.9167,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.3979,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.661,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.6585,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.5013,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.671,
+   "before": {
+    "scored_points": 97,
+    "share_on_the_right_winding": 0.9485
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 97,
+    "share_on_the_right_winding": 0.9485
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.9725,
+   "before": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.8012
+   },
+   "corrected_points": 7,
+   "after": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.8133
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.5667,
+   "before": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.8618
+   },
+   "corrected_points": 8,
+   "after": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.8684
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -6.0617,
+   "before": {
+    "scored_points": 148,
+    "share_on_the_right_winding": 0.7973
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 148,
+    "share_on_the_right_winding": 0.7973
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.1922,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.8155
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.8155
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.5609,
+   "before": {
+    "scored_points": 160,
+    "share_on_the_right_winding": 0.9625
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 160,
+    "share_on_the_right_winding": 0.9625
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -5.0512,
+   "before": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 0.865
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 0.865
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.7483,
+   "before": {
+    "scored_points": 158,
+    "share_on_the_right_winding": 0.8861
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 158,
+    "share_on_the_right_winding": 0.8861
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.457,
+   "before": {
+    "scored_points": 134,
+    "share_on_the_right_winding": 0.8657
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 134,
+    "share_on_the_right_winding": 0.8657
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.078,
+   "before": {
+    "scored_points": 137,
+    "share_on_the_right_winding": 0.8248
+   },
+   "corrected_points": 4,
+   "after": {
+    "scored_points": 137,
+    "share_on_the_right_winding": 0.8248
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 80,
+   "column": 256,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -1.705,
+   "before": {
+    "scored_points": 162,
+    "share_on_the_right_winding": 0.8951
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 162,
+    "share_on_the_right_winding": 0.9012
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 1.2329,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 3.1751,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.0325,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -5.6821,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.2904,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 3,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.5203,
+   "before": {
+    "scored_points": 112,
+    "share_on_the_right_winding": 0.9911
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 112,
+    "share_on_the_right_winding": 0.9911
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 3.4327,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 3.9296,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9882
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.1568,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.6987
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.7051
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.6808,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9645
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9645
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.3664,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.473,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.0893,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 3.7947,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9936
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9936
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.8207,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 96,
+   "column": 256,
+   "decidable": true,
+   "neighbours": 2,
+   "anchor_voxels": -5.0481,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -6.2364,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.3957,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.1968,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -4.8466,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 4,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.4,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.358,
+   "before": {
+    "scored_points": 105,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 105,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.7736,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.1384,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.994
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.994
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.6545,
+   "before": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.8618
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.8618
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.7553,
+   "before": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.9006
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.9006
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.9217,
+   "before": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 0.9455
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 0.9394
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.2381,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9583
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9702
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 4.5537,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.8649,
+   "before": {
+    "scored_points": 145,
+    "share_on_the_right_winding": 0.9724
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 145,
+    "share_on_the_right_winding": 0.9724
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 112,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.7921,
+   "before": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.9876
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.9814
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.5579,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -7.0884,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.0409,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.8907,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.5678,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.5009,
+   "before": {
+    "scored_points": 107,
+    "share_on_the_right_winding": 0.9907
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 107,
+    "share_on_the_right_winding": 0.9907
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.1656,
+   "before": {
+    "scored_points": 162,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 162,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.6354,
+   "before": {
+    "scored_points": 150,
+    "share_on_the_right_winding": 0.9733
+   },
+   "corrected_points": 3,
+   "after": {
+    "scored_points": 150,
+    "share_on_the_right_winding": 0.9733
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.1387,
+   "before": {
+    "scored_points": 141,
+    "share_on_the_right_winding": 0.6312
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 141,
+    "share_on_the_right_winding": 0.6312
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.7593,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.7792
+   },
+   "corrected_points": 10,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.7857
+   },
+   "misses_made_right": 5,
+   "rights_made_misses": 4,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.7968,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9763
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9882
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.8479,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.4081,
+   "before": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.9752
+   },
+   "corrected_points": 3,
+   "after": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.9627
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 2,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.6692,
+   "before": {
+    "scored_points": 140,
+    "share_on_the_right_winding": 0.85
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 140,
+    "share_on_the_right_winding": 0.8429
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 128,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -3.4649,
+   "before": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 0.9869
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 0.9869
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 3.5816,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.9365,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.153,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 5,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.4431,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.3353,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.4388,
+   "before": {
+    "scored_points": 91,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 91,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -3.3054,
+   "before": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 6.1681,
+   "before": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.9408
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.9539
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.3977,
+   "before": {
+    "scored_points": 127,
+    "share_on_the_right_winding": 0.7559
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 127,
+    "share_on_the_right_winding": 0.7559
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -3.733,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9872
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9872
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.2046,
+   "before": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.3904,
+   "before": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -4.0597,
+   "before": {
+    "scored_points": 139,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 139,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.1106,
+   "before": {
+    "scored_points": 123,
+    "share_on_the_right_winding": 0.9512
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 123,
+    "share_on_the_right_winding": 0.9593
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 144,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -3.0374,
+   "before": {
+    "scored_points": 146,
+    "share_on_the_right_winding": 0.9863
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 146,
+    "share_on_the_right_winding": 0.9863
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 2,
+   "anchor_voxels": -5.3768,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 9,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.1566,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 10,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.103,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -4.5892,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 7,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.1363,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.9114,
+   "before": {
+    "scored_points": 110,
+    "share_on_the_right_winding": 0.9636
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 110,
+    "share_on_the_right_winding": 0.9636
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.6456,
+   "before": {
+    "scored_points": 164,
+    "share_on_the_right_winding": 0.9817
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 164,
+    "share_on_the_right_winding": 0.9878
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.282,
+   "before": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 4.2479,
+   "before": {
+    "scored_points": 151,
+    "share_on_the_right_winding": 0.6225
+   },
+   "corrected_points": 29,
+   "after": {
+    "scored_points": 151,
+    "share_on_the_right_winding": 0.7152
+   },
+   "misses_made_right": 15,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.2022,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.8225
+   },
+   "corrected_points": 6,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.787
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 6,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.3416,
+   "before": {
+    "scored_points": 158,
+    "share_on_the_right_winding": 0.981
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 158,
+    "share_on_the_right_winding": 0.981
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.764,
+   "before": {
+    "scored_points": 162,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 162,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.3637,
+   "before": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.9627
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.9689
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.8775,
+   "before": {
+    "scored_points": 148,
+    "share_on_the_right_winding": 0.9662
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 148,
+    "share_on_the_right_winding": 0.9797
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 160,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -3.3859,
+   "before": {
+    "scored_points": 164,
+    "share_on_the_right_winding": 0.9512
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 164,
+    "share_on_the_right_winding": 0.9512
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -4.0455,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.802,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.6055,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.536,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.3644,
+   "before": {
+    "scored_points": 111,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 111,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.0913,
+   "before": {
+    "scored_points": 160,
+    "share_on_the_right_winding": 0.9875
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 160,
+    "share_on_the_right_winding": 0.9875
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.7496,
+   "before": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.9819
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.9819
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.5016,
+   "before": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.9737
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.9737
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.5396,
+   "before": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 0.9935
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 0.9935
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.5241,
+   "before": {
+    "scored_points": 149,
+    "share_on_the_right_winding": 0.9597
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 149,
+    "share_on_the_right_winding": 0.9597
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.8622,
+   "before": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.6609,
+   "before": {
+    "scored_points": 149,
+    "share_on_the_right_winding": 0.9597
+   },
+   "corrected_points": 4,
+   "after": {
+    "scored_points": 149,
+    "share_on_the_right_winding": 0.9799
+   },
+   "misses_made_right": 3,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.3021,
+   "before": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 176,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -2.014,
+   "before": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -14.3779,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 3,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -4.7962,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.496,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -3.0538,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -4.4552,
+   "before": {
+    "scored_points": 32,
+    "share_on_the_right_winding": 0.6875
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 32,
+    "share_on_the_right_winding": 0.6875
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.124,
+   "before": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 0.7791
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 0.7791
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.3059,
+   "before": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 0.9264
+   },
+   "corrected_points": 5,
+   "after": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 0.9325
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 3.1667,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -4.6151,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9881
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9881
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.8048,
+   "before": {
+    "scored_points": 147,
+    "share_on_the_right_winding": 0.9116
+   },
+   "corrected_points": 4,
+   "after": {
+    "scored_points": 147,
+    "share_on_the_right_winding": 0.9116
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.2645,
+   "before": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.7081
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.7081
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 4.5664,
+   "before": {
+    "scored_points": 141,
+    "share_on_the_right_winding": 0.9007
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 141,
+    "share_on_the_right_winding": 0.9007
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.0465,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 192,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 1.9616,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.994
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.994
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -4.7204,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.8093,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.316,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 5.8801,
+   "before": {
+    "scored_points": 2,
+    "share_on_the_right_winding": 0.0
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 2,
+    "share_on_the_right_winding": 0.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.3247,
+   "before": {
+    "scored_points": 77,
+    "share_on_the_right_winding": 0.8701
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 77,
+    "share_on_the_right_winding": 0.8701
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.703,
+   "before": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.9337
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.9337
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.5172,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9881
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -4.0976,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.9935
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.9935
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.7738,
+   "before": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.8447
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.8447
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.0493,
+   "before": {
+    "scored_points": 130,
+    "share_on_the_right_winding": 0.8769
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 130,
+    "share_on_the_right_winding": 0.8769
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.7793,
+   "before": {
+    "scored_points": 167,
+    "share_on_the_right_winding": 0.8144
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 167,
+    "share_on_the_right_winding": 0.8144
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.2789,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.9675
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.9675
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.0749,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.987
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.987
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 208,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 1.9368,
+   "before": {
+    "scored_points": 164,
+    "share_on_the_right_winding": 0.9756
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 164,
+    "share_on_the_right_winding": 0.9756
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 2,
+   "anchor_voxels": 8.6111,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 5.0789,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 20,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.201,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.444,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 4.7826,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.1183,
+   "before": {
+    "scored_points": 103,
+    "share_on_the_right_winding": 0.9806
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 103,
+    "share_on_the_right_winding": 0.9806
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.2514,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9808
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9808
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.802,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.7195,
+   "before": {
+    "scored_points": 144,
+    "share_on_the_right_winding": 0.8958
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 144,
+    "share_on_the_right_winding": 0.8958
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.2729,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.7436
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.7436
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.6504,
+   "before": {
+    "scored_points": 148,
+    "share_on_the_right_winding": 0.9662
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 148,
+    "share_on_the_right_winding": 0.9662
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.5432,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9872
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9872
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.4458,
+   "before": {
+    "scored_points": 149,
+    "share_on_the_right_winding": 0.9664
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 149,
+    "share_on_the_right_winding": 0.9664
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.5652,
+   "before": {
+    "scored_points": 141,
+    "share_on_the_right_winding": 0.9787
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 141,
+    "share_on_the_right_winding": 0.9929
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 224,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -4.8211,
+   "before": {
+    "scored_points": 145,
+    "share_on_the_right_winding": 0.9172
+   },
+   "corrected_points": 4,
+   "after": {
+    "scored_points": 145,
+    "share_on_the_right_winding": 0.931
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -6.2573,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.4056,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.3244,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.8063,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -3.1096,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.083,
+   "before": {
+    "scored_points": 126,
+    "share_on_the_right_winding": 0.9286
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 126,
+    "share_on_the_right_winding": 0.9286
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.3927,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.4858,
+   "before": {
+    "scored_points": 167,
+    "share_on_the_right_winding": 0.976
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 167,
+    "share_on_the_right_winding": 0.976
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 3.705,
+   "before": {
+    "scored_points": 150,
+    "share_on_the_right_winding": 0.7533
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 150,
+    "share_on_the_right_winding": 0.7533
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.4339,
+   "before": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.8976
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.8976
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -3.6498,
+   "before": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.9458
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.9458
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.1497,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.9087,
+   "before": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.9217
+   },
+   "corrected_points": 5,
+   "after": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.9277
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.1164,
+   "before": {
+    "scored_points": 145,
+    "share_on_the_right_winding": 0.8828
+   },
+   "corrected_points": 3,
+   "after": {
+    "scored_points": 145,
+    "share_on_the_right_winding": 0.9034
+   },
+   "misses_made_right": 3,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 240,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 2,
+   "anchor_voxels": 3.1845,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.8462
+   },
+   "corrected_points": 4,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.8698
+   },
+   "misses_made_right": 4,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -2.7884,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.1391,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.0211,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.9292,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -3.4511,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.8208,
+   "before": {
+    "scored_points": 132,
+    "share_on_the_right_winding": 0.9394
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 132,
+    "share_on_the_right_winding": 0.9394
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.6224,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9822
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9822
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.8066,
+   "before": {
+    "scored_points": 150,
+    "share_on_the_right_winding": 0.8467
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 150,
+    "share_on_the_right_winding": 0.8467
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -5.4778,
+   "before": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 0.915
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 0.915
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.4437,
+   "before": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.7566
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.7566
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.2487,
+   "before": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 0.9216
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 0.9216
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.4985,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9704
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9704
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.8633,
+   "before": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 0.9548
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 0.9548
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 256,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -1.402,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.9286
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.9286
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.0405,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.5151,
+   "before": {
+    "scored_points": 3,
+    "share_on_the_right_winding": 0.0
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 3,
+    "share_on_the_right_winding": 0.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.8691,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.0734,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.1648,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.5976,
+   "before": {
+    "scored_points": 130,
+    "share_on_the_right_winding": 0.9308
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 130,
+    "share_on_the_right_winding": 0.9308
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.7577,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9763
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9763
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.5822,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9467
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9467
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.8877,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.6848,
+   "before": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.9379
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 161,
+    "share_on_the_right_winding": 0.9379
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -4.1732,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.6686
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.6686
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.1336,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9527
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9527
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.3536,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.987
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 0.987
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 272,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -0.4326,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.8556,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.8333,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.8771,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.6584,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.7706,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.2251,
+   "before": {
+    "scored_points": 117,
+    "share_on_the_right_winding": 0.8803
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 117,
+    "share_on_the_right_winding": 0.8803
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.0017,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9645
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9645
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.3036,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9112
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9112
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.2821,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9679
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9679
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.4771,
+   "before": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.9737
+   },
+   "corrected_points": 3,
+   "after": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 0.9737
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.7268,
+   "before": {
+    "scored_points": 158,
+    "share_on_the_right_winding": 0.7089
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 158,
+    "share_on_the_right_winding": 0.7089
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -3.5626,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.8225
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.8225
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.891,
+   "before": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 0.9939
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 0.9877
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 1,
+   "validated_geometry": true
+  },
+  {
+   "row": 288,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -0.6865,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -8.0837,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 4,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.0331,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.0052,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.0699,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.1789,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.9898,
+   "before": {
+    "scored_points": 91,
+    "share_on_the_right_winding": 0.8791
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 91,
+    "share_on_the_right_winding": 0.8791
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.2848,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9808
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9808
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.7151,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9295
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9295
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.472,
+   "before": {
+    "scored_points": 144,
+    "share_on_the_right_winding": 0.9792
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 144,
+    "share_on_the_right_winding": 0.9792
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.0267,
+   "before": {
+    "scored_points": 146,
+    "share_on_the_right_winding": 0.9452
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 146,
+    "share_on_the_right_winding": 0.9452
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.4354,
+   "before": {
+    "scored_points": 147,
+    "share_on_the_right_winding": 0.8027
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 147,
+    "share_on_the_right_winding": 0.8095
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.3996,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9038
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9038
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.1699,
+   "before": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 0.9412
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 153,
+    "share_on_the_right_winding": 0.9412
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 304,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 1.7755,
+   "before": {
+    "scored_points": 144,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 144,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 1.5979,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.218,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.2902,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 4,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.9668,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.6874,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.7365,
+   "before": {
+    "scored_points": 110,
+    "share_on_the_right_winding": 0.7909
+   },
+   "corrected_points": 5,
+   "after": {
+    "scored_points": 110,
+    "share_on_the_right_winding": 0.8091
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.1898,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.3042,
+   "before": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 0.8364
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 0.8424
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.2949,
+   "before": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.368,
+   "before": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.9578
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 166,
+    "share_on_the_right_winding": 0.9578
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -3.898,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.7456
+   },
+   "corrected_points": 6,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.7811
+   },
+   "misses_made_right": 6,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -3.216,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.858
+   },
+   "corrected_points": 9,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.8876
+   },
+   "misses_made_right": 5,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.0806,
+   "before": {
+    "scored_points": 151,
+    "share_on_the_right_winding": 0.9801
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 151,
+    "share_on_the_right_winding": 0.9801
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 320,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.3538,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -0.4347,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.0887,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -2.5617,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.0659,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.5503,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -4.4143,
+   "before": {
+    "scored_points": 128,
+    "share_on_the_right_winding": 0.9219
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 128,
+    "share_on_the_right_winding": 0.9219
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.6872,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9763
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9763
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.5225,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.929
+   },
+   "corrected_points": 5,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9527
+   },
+   "misses_made_right": 4,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.7108,
+   "before": {
+    "scored_points": 145,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 145,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.0857,
+   "before": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.2169,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9882
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9882
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.9391,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.3694,
+   "before": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 163,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 336,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -0.1479,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -1.7508,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.3518,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.0244,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 1.008,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.5922,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 2.4941,
+   "before": {
+    "scored_points": 142,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 142,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.2913,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9226
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9226
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.6677,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -0.09,
+   "before": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 152,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.5178,
+   "before": {
+    "scored_points": 146,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 146,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": -1.0282,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.994
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.994
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.06,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9941
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 4,
+   "anchor_voxels": 0.7869,
+   "before": {
+    "scored_points": 160,
+    "share_on_the_right_winding": 0.9812
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 160,
+    "share_on_the_right_winding": 0.9812
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 352,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 0.4493,
+   "before": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 154,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 16,
+   "decidable": true,
+   "neighbours": 2,
+   "anchor_voxels": 0.262,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 32,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -3.3192,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 5,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 48,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -0.3666,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 64,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 3.9125,
+   "before": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 0,
+    "share_on_the_right_winding": null
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 80,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 2.6094,
+   "before": {
+    "scored_points": 6,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 6,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 96,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -1.6806,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9524
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9524
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 112,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -1.9329,
+   "before": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9586
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 169,
+    "share_on_the_right_winding": 0.9586
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 128,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 2.2276,
+   "before": {
+    "scored_points": 159,
+    "share_on_the_right_winding": 0.8742
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 159,
+    "share_on_the_right_winding": 0.8868
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 144,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 2.259,
+   "before": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9872
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 156,
+    "share_on_the_right_winding": 0.9936
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 160,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -1.5478,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9286
+   },
+   "corrected_points": 2,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9405
+   },
+   "misses_made_right": 2,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 176,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 2.1365,
+   "before": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 0.9613
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 155,
+    "share_on_the_right_winding": 0.9613
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 192,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": 1.8467,
+   "before": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.9881
+   },
+   "corrected_points": 1,
+   "after": {
+    "scored_points": 168,
+    "share_on_the_right_winding": 0.994
+   },
+   "misses_made_right": 1,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 208,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -0.6403,
+   "before": {
+    "scored_points": 160,
+    "share_on_the_right_winding": 0.9875
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 160,
+    "share_on_the_right_winding": 0.9875
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 224,
+   "decidable": true,
+   "neighbours": 3,
+   "anchor_voxels": -1.7405,
+   "before": {
+    "scored_points": 146,
+    "share_on_the_right_winding": 1.0
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 146,
+    "share_on_the_right_winding": 1.0
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": true
+  },
+  {
+   "row": 368,
+   "column": 240,
+   "decidable": true,
+   "neighbours": 1,
+   "anchor_voxels": 1.9386,
+   "before": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 0.9879
+   },
+   "corrected_points": 0,
+   "after": {
+    "scored_points": 165,
+    "share_on_the_right_winding": 0.9879
+   },
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "validated_geometry": false
+  }
+ ],
+ "control_band": {
+  "surface": "20260623142658-w028-037",
+  "pooled": {
+   "blocks": 84,
+   "before": 0.9527,
+   "after": 0.9519,
+   "scored_points": 12398,
+   "corrected_points": 61,
+   "misses_made_right": 15,
+   "rights_made_misses": 25,
+   "net_gain": -10,
+   "blocks_up": 6,
+   "blocks_down": 8,
+   "blocks_unchanged": 70
+  },
+  "pooled_within_validated_geometry": {
+   "blocks": 0,
+   "before": null,
+   "after": null,
+   "scored_points": 0,
+   "corrected_points": 0,
+   "misses_made_right": 0,
+   "rights_made_misses": 0,
+   "net_gain": 0,
+   "blocks_up": 0,
+   "blocks_down": 0,
+   "blocks_unchanged": 0
+  },
+  "sign_test": {
+   "on_points": 0.154,
+   "on_blocks": 0.791
+  },
+  "whole_surface": {
+   "before": {
+    "scored_points": 26852,
+    "share_on_the_right_winding": 0.912
+   },
+   "after": {
+    "scored_points": 26852,
+    "share_on_the_right_winding": 0.9116
+   }
+  },
+  "blocks_within_validated_geometry": 0,
+  "undecided": {}
+ }
+}

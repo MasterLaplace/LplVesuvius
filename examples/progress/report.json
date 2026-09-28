@@ -1,0 +1,118 @@
+{
+ "software": "vesuve 0.2.0",
+ "core": "0.2.0",
+ "prize": "progress",
+ "machine": "Linux x86_64 python 3.13.14",
+ "run": "b48f4c24",
+ "inputs": {
+  "segment": "20230702185753",
+  "extra_readings": []
+ },
+ "stages": [
+  {
+   "id": "P0",
+   "name": "the audited segment",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "scroll": "PHercParis4",
+    "segment": "20230702185753",
+    "volume": "PHercParis4/segments/20230702185753/surface-volumes/2.4um-0.22m-78keV-volume-20260411134726.zarr",
+    "nature": "a published segment, traced by others: the audit judges an existing method"
+   },
+   "seconds": 1.987
+  },
+  {
+   "id": "P1",
+   "name": "the certificate, read the other way round",
+   "rung": "B4",
+   "state": "done",
+   "equations": [
+    {
+     "id": "P",
+     "name": "the profile of a loop",
+     "latex": "P_j = \\sum_{i \\le j} L_i, \\qquad |P_j| < \\delta \\ \\ \\forall j",
+     "fact": "R4-F403",
+     "inputs": {
+      "loop": [
+       26,
+       223,
+       243,
+       260
+      ],
+      "at_cut": 173,
+      "half": 36.0
+     },
+     "value": -40.2188
+    },
+    {
+     "id": "M",
+     "name": "the deciding margin",
+     "latex": "\\mu_n = |L_n| - \\min_m |L_m| - \\mathrm{median}\\,|L_n^{\\mathrm{null}}|",
+     "fact": "R4-F401",
+     "inputs": {
+      "drifting_line": 260
+     },
+     "value": {
+      "wing": 11.2626,
+      "wide": 2.8875
+     }
+    }
+   ],
+   "outputs": {
+    "loops_judged": 4,
+    "loops_that_cross": 1
+   },
+   "seconds": 0.0
+  },
+  {
+   "id": "P2",
+   "name": "the failure cases",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "suspect_chunks": 963,
+    "cases": [
+     "column 260, lines 26 to 223: the cumulative closure crosses the half sheet at cuts [163, 173, 203] (peak -40.2188 voxels at cut 173)"
+    ],
+    "limit": "the audit does not tell a misread column from material that moves away (`R4-F406`): it names where to look"
+   },
+   "seconds": 0.01
+  },
+  {
+   "id": "P3",
+   "name": "the suspect region, on the published ink",
+   "rung": "B3",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "image": "ink_and_suspect_region.jpg"
+   },
+   "seconds": 1.752
+  }
+ ],
+ "requirements": [
+  {
+   "requirement": "detect a failure case of an existing method on real data",
+   "state": "met",
+   "what_is_measured": "column 260, lines 26 to 223: the cumulative closure crosses the half sheet at cuts [163, 173, 203] (peak -40.2188 voxels at cut 173)",
+   "evidence": ""
+  },
+  {
+   "requirement": "reproducible and documented",
+   "state": "met",
+   "what_is_measured": "replayed from the embedded data, with no network and no free seed",
+   "evidence": ""
+  },
+  {
+   "requirement": "bound what is claimed",
+   "state": "met",
+   "what_is_measured": "a region to look at, not a condemnation (`R4-F406`)",
+   "evidence": ""
+  }
+ ],
+ "stop": null,
+ "seconds": 3.75
+}

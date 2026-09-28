@@ -20,6 +20,12 @@ Blue outlines: the rectangle, and the wings still to read.
 
 ![per-chunk mask](grand-prize/chunk_mask.jpg)
 
+[`grand-prize/correction.json`](grand-prize/correction.json) is the correction of the transfer to the next winding,
+block by block: 340 blocks, 495 points brought back by one winding, 163 misses made right for 41 rights made misses.
+It also holds the control on the band `w028-037`, where the same procedure gives 15 for 25 and nothing is written.
+The corrected transfer itself, `corrected_transfer.npy`, is left out of the examples: it is an array, not something
+to look at.
+
 ## Progress: [`progress/report.md`](progress/report.md)
 
 The same certificate read the other way round: the band along column 260 (orange), rows 26 to 223, where the

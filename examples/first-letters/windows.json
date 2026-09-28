@@ -1,0 +1,18 @@
+{
+ "window": {
+  "r0": 208,
+  "c0": 528,
+  "side": 2315,
+  "papyrus": 3825969,
+  "papyrus_share": 0.7139
+ },
+ "held_out_window": {
+  "r0": 2064,
+  "c0": 0,
+  "side": 523,
+  "papyrus": 240429,
+  "papyrus_share": 0.879,
+  "side_reduced": true
+ },
+ "pixel_um": 8.64
+}

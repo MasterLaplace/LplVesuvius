@@ -1,0 +1,40 @@
+[
+ {
+  "segment": "20260623141924",
+  "last_column_px": [
+   7344,
+   11218
+  ],
+  "its_last_line_px": 5968,
+  "its_written_height": 1.0,
+  "candidate_region_px": {
+   "columns": [
+    6376,
+    15092
+   ],
+   "rows": [
+    5968,
+    5969
+   ]
+  }
+ },
+ {
+  "segment": "20260701183124",
+  "last_column_px": [
+   11311,
+   14529
+  ],
+  "its_last_line_px": 1635,
+  "its_written_height": 0.188,
+  "candidate_region_px": {
+   "columns": [
+    10507,
+    17747
+   ],
+   "rows": [
+    1635,
+    8720
+   ]
+  }
+ }
+]

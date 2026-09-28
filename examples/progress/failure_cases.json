@@ -1,0 +1,29 @@
+[
+ {
+  "loop": [
+   26,
+   223,
+   243,
+   260
+  ],
+  "side": "right",
+  "width": 9,
+  "closure_voxels": -35.6938,
+  "peak": {
+   "cut": 173,
+   "cumulative_voxels": -40.2188
+  },
+  "cuts_beyond_half_sheet": [
+   163,
+   173,
+   203
+  ],
+  "tie_break": "decided",
+  "third_line": 234,
+  "drifting_line": 260,
+  "margins": {
+   "wing": 11.2626,
+   "wide": 2.8875
+  }
+ }
+]

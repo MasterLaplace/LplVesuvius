@@ -1,0 +1,258 @@
+{
+ "software": "vesuve 0.2.0",
+ "core": "0.2.0",
+ "prize": "first-letters",
+ "machine": "Linux x86_64 python 3.13.14",
+ "run": "b48f4c24",
+ "inputs": {
+  "layers": "/home/masterlaplace/LplVesuvius/data/couches/PHerc1447_complet",
+  "surface": "/home/masterlaplace/LplVesuvius/data/segments_officiels/20250702235910-auto_grown_20250702235910292",
+  "scroll": "PHerc1447",
+  "side_mm": 20.0,
+  "model": null,
+  "ink_map": "/home/masterlaplace/LplVesuvius/data/out/ink_PHerc1447_complet.npy"
+ },
+ "stages": [
+  {
+   "id": "F0",
+   "name": "the object and its regime",
+   "rung": "B1",
+   "state": "done",
+   "equations": [
+    {
+     "id": "F31",
+     "name": "the Fresnel number",
+     "latex": "F = \\frac{\\sqrt{\\lambda D}}{p}, \\qquad \\lambda = \\frac{hc}{E}",
+     "fact": "R6-F08",
+     "inputs": {
+      "pixel_um": 8.64,
+      "distance_m": 1.2,
+      "energy_kev": 116.0
+     },
+     "value": 0.4145062141344445
+    },
+    {
+     "id": "F31",
+     "name": "the Fresnel number",
+     "latex": "F = \\frac{\\sqrt{\\lambda D}}{p}, \\qquad \\lambda = \\frac{hc}{E}",
+     "fact": "R6-F08",
+     "inputs": {
+      "regime": "production",
+      "pixel_um": 2.4,
+      "distance_m": 0.2,
+      "energy_kev": 78.0
+     },
+     "value": 0.7429158337762755
+    }
+   ],
+   "outputs": {
+    "volume": "20250521151220",
+    "ratio_to_production_regime": 0.558,
+    "consequence": "a survey scan: the published ink models were trained at the production regime, and at the prize regime their agreement with the published map is flat (`R1-F20`). Their output here is a view, not evidence."
+   },
+   "seconds": 0.0
+  },
+  {
+   "id": "F1",
+   "name": "the surface",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "layers": 31,
+    "middle_layer": 15,
+    "shape": [
+     2980,
+     3240
+    ],
+    "dtype": "uint8",
+    "papyrus_share": 0.5254,
+    "mesh": "20250702235910-auto_grown_20250702235910292",
+    "mesh_exists": true
+   },
+   "seconds": 0.006
+  },
+  {
+   "id": "F2",
+   "name": "the 4 cm² window",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "side_px": 2315,
+    "side_mm": 20.0,
+    "window": {
+     "r0": 208,
+     "c0": 528,
+     "side": 2315,
+     "papyrus": 3825969,
+     "papyrus_share": 0.7139
+    },
+    "held_out_window": {
+     "r0": 2064,
+     "c0": 0,
+     "side": 523,
+     "papyrus": 240429,
+     "papyrus_share": 0.879,
+     "side_reduced": true
+    },
+    "rule": "chosen on papyrus coverage ALONE, never on the ink: a window elected where the ink looks strong would make letters out of any noise"
+   },
+   "seconds": 5.795
+  },
+  {
+   "id": "F3",
+   "name": "the render where the fibres show",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "image": "20250702235910-auto_grown_20250702235910292_fibres.png",
+    "rule": "the middle layer stretched between 1 and 99 % (`couche_de_rendu.py:35`)"
+   },
+   "seconds": 0.74
+  },
+  {
+   "id": "F4",
+   "name": "the ink without a model",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "image": "20250702235910-auto_grown_20250702235910292_without_model.png",
+    "layers": [
+     12,
+     13,
+     14,
+     15,
+     16,
+     17,
+     18
+    ],
+    "rule": "\"sometimes ink is visible directly in the flattened render, with no model at all — usually bright areas\": the maximum projection of the seven central layers. A view, not a detector."
+   },
+   "seconds": 0.817
+  },
+  {
+   "id": "F5",
+   "name": "the model's ink",
+   "rung": "B3",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "ink_map": "/home/masterlaplace/LplVesuvius/data/out/ink_PHerc1447_complet.npy",
+    "provenance": "a map inferred elsewhere, given with --ink-map",
+    "share_seen": 1.0,
+    "share_above_0": 0.042
+   },
+   "seconds": 0.083
+  },
+  {
+   "id": "F6",
+   "name": "the witnesses",
+   "rung": "B3",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "rows": {
+     "real": {
+      "period_px": null,
+      "sharpness": 0.0,
+      "angle_deg": null,
+      "floor": null,
+      "periodic": false
+     },
+     "shuffled": {
+      "period_px": 76,
+      "sharpness": 0.14880421447260087,
+      "floor": 0.17865619976519528,
+      "angle_deg": 10.0,
+      "periodic": false
+     },
+     "held_out": {
+      "period_px": null,
+      "sharpness": 0.0,
+      "angle_deg": null,
+      "floor": null,
+      "periodic": false
+     },
+     "held_out_shuffled": {
+      "period_px": 60,
+      "sharpness": 0.2665149596308152,
+      "floor": 0.2798487698086308,
+      "angle_deg": -12.0,
+      "periodic": false
+     }
+    },
+    "rows_drawn": 0,
+    "image": "20250702235910-auto_grown_20250702235910292_ink.png",
+    "rule": "`typographie.py`: the ink binarised by Otsu, the density per row autocorrelated, periodic when the sharpness exceeds 2√(2 ln k)/√n; the shuffle must lose the period",
+    "training_overlap": "NONE: this segment is not among the 45 labelled segments of the 2023 model"
+   },
+   "seconds": 6.973
+  },
+  {
+   "id": "F7",
+   "name": "the packaging",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "products": [
+     "20250702235910-auto_grown_20250702235910292_fibres.png",
+     "20250702235910-auto_grown_20250702235910292_ink.png",
+     "20250702235910-auto_grown_20250702235910292_without_model.png",
+     "windows.json"
+    ],
+    "left_to_a_human": "reading: count ten letters in the window, and check they hold on the held-out region. The pipeline says where to look and what its witnesses are worth; it does not read."
+   },
+   "seconds": 0.0
+  }
+ ],
+ "requirements": [
+  {
+   "requirement": "one of the 23 eligible scrolls",
+   "state": "met",
+   "what_is_measured": "PHerc1447, volume 20250521151220",
+   "evidence": ""
+  },
+  {
+   "requirement": "ten letters in 4 cm²",
+   "state": "not measured",
+   "what_is_measured": "no letter is read by this pipeline: that is the work of an eye",
+   "evidence": ""
+  },
+  {
+   "requirement": "a static programmatic image, named after its mesh",
+   "state": "met",
+   "what_is_measured": "20250702235910-auto_grown_20250702235910292_ink.png, 20250702235910-auto_grown_20250702235910292_fibres.png",
+   "evidence": ""
+  },
+  {
+   "requirement": "a 1 cm scale bar",
+   "state": "met",
+   "what_is_measured": "10 mm = 1157 px at 8.64 µm",
+   "evidence": ""
+  },
+  {
+   "requirement": "rows annotated",
+   "state": "not met",
+   "what_is_measured": "no inner autocorrelation peak, at any angle within ±12°: no rows in the model's ink",
+   "evidence": ""
+  },
+  {
+   "requirement": "ink on a render where the fibres show",
+   "state": "met",
+   "what_is_measured": "20250702235910-auto_grown_20250702235910292_ink.png",
+   "evidence": ""
+  },
+  {
+   "requirement": "show the text is not hallucinated",
+   "state": "not met",
+   "what_is_measured": "the shuffle of the same pixels loses the line spacing; the held-out region is measured separately; no ground truth on this scroll",
+   "evidence": ""
+  }
+ ],
+ "stop": null,
+ "seconds": 14.42
+}

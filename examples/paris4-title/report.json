@@ -1,0 +1,221 @@
+{
+ "software": "vesuve 0.2.0",
+ "core": "0.2.0",
+ "prize": "paris4-title",
+ "machine": "Linux x86_64 python 3.13.14",
+ "run": "b48f4c24",
+ "inputs": {
+  "ink_maps": "/home/masterlaplace/LplVesuvius/data/encre/PHercParis4",
+  "meshes": "/home/masterlaplace/LplVesuvius/data/paris4_bandes"
+ },
+ "stages": [
+  {
+   "id": "T0",
+   "name": "the rule",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "rule": "the beginning of the text is on the outside of the scroll, the end and the title (the colophon) at the core: \"the end of the papyrus (the innermost part of the carbonised scroll) where the colophon with the title of the work may be preserved\"",
+    "status": "reported (`docs/archive/06_mesures_a_faire.md:10-15`, Bodleian), not measured here",
+    "what_the_prize_says": "no ink detected so far in the expected region; possibly a different ink; the top rows physically missing"
+   },
+   "seconds": 0.0
+  },
+  {
+   "id": "T1",
+   "name": "the innermost band",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "bands_seen": 55,
+    "innermost": "w010-027",
+    "its_revisions": [
+     "20260623141924",
+     "20260701183124"
+    ],
+    "missing": "windings w000 to w009 are in no published band: the core itself is not traced"
+   },
+   "seconds": 0.001
+  },
+  {
+   "id": "T2·20260623141924",
+   "name": "the direction of the winding",
+   "rung": "B1",
+   "state": "partial",
+   "equations": [],
+   "outputs": {
+    "radius_at_start_mm": 5.54,
+    "radius_at_end_mm": 2.88,
+    "ink_map_orientation": "identity",
+    "its_correlation": 0.303,
+    "core_is_on_the": "right of the map"
+   },
+   "reason": "the map's silhouette only correlates at 0.30 with the mesh's: the orientation kept is not established",
+   "seconds": 0.273
+  },
+  {
+   "id": "T4·20260623141924",
+   "name": "the end of the text",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "threshold": 0.128,
+    "last_column": [
+     146,
+     222
+    ],
+    "written_slices": [
+     5,
+     15
+    ],
+    "band_share_after_the_text": 0.5033,
+    "rule": "16 slices × 449 cells along the winding, written or empty by Otsu's threshold on all the cells: no parameter chosen"
+   },
+   "seconds": 0.635
+  },
+  {
+   "id": "T2·20260701183124",
+   "name": "the direction of the winding",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "radius_at_start_mm": 5.41,
+    "radius_at_end_mm": 2.88,
+    "ink_map_orientation": "identity",
+    "its_correlation": 0.981,
+    "core_is_on_the": "right of the map"
+   },
+   "seconds": 0.358
+  },
+  {
+   "id": "T4·20260701183124",
+   "name": "the end of the text",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "threshold": 0.1393,
+    "last_column": [
+     239,
+     306
+    ],
+    "written_slices": [
+     0,
+     2
+    ],
+    "band_share_after_the_text": 0.3163,
+    "rule": "16 slices × 449 cells along the winding, written or empty by Otsu's threshold on all the cells: no parameter chosen"
+   },
+   "seconds": 1.086
+  },
+  {
+   "id": "T5",
+   "name": "the witness: two revisions of the same band",
+   "rung": "B3",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "shares_after_the_text": [
+     0.5033,
+     0.3163
+    ],
+    "their_gap": 0.187,
+    "reading": "two independent meshes of the same band: if they put the end of the text at the same place on the winding, the end is not an artefact of one mesh"
+   },
+   "seconds": 0.0
+  },
+  {
+   "id": "T6",
+   "name": "the candidates",
+   "rung": "B1",
+   "state": "done",
+   "equations": [],
+   "outputs": {
+    "places": [
+     {
+      "segment": "20260623141924",
+      "last_column_px": [
+       7344,
+       11218
+      ],
+      "its_last_line_px": 5968,
+      "its_written_height": 1.0,
+      "candidate_region_px": {
+       "columns": [
+        6376,
+        15092
+       ],
+       "rows": [
+        5968,
+        5969
+       ]
+      }
+     },
+     {
+      "segment": "20260701183124",
+      "last_column_px": [
+       11311,
+       14529
+      ],
+      "its_last_line_px": 1635,
+      "its_written_height": 0.188,
+      "candidate_region_px": {
+       "columns": [
+        10507,
+        17747
+       ],
+       "rows": [
+        1635,
+        8720
+       ]
+      }
+     }
+    ],
+    "products": [
+     "20260623141924_last_column.png",
+     "20260623141924_below_the_last_line.png",
+     "20260623141924_whole_band.jpg",
+     "20260701183124_last_column.png",
+     "20260701183124_below_the_last_line.png",
+     "20260701183124_whole_band.jpg",
+     "candidates.json"
+    ],
+    "reading": "when the last column is SHORT and nothing follows it towards the core, that is the shape of the end of a book: the final title is to be looked for under its last line and in the space that follows it. In orange the column, in blue the region",
+    "left_to_do": "read, and look for ANOTHER ink: the prize says the expected region showed no detectable ink; these views are those of the published model, and the ink-3d product or the 1.129 µm map are the next ones to look at"
+   },
+   "seconds": 22.246
+  }
+ ],
+ "requirements": [
+  {
+   "requirement": "an image papyrologists can read",
+   "state": "not measured",
+   "what_is_measured": "views of the end of the text on the innermost band, at 19.2 µm per pixel; nobody has read them",
+   "evidence": ""
+  },
+  {
+   "requirement": "any volume of Scroll 1, 2.4 µm included",
+   "state": "met",
+   "what_is_measured": "the published ink maps on the 2.4 µm volume",
+   "evidence": ""
+  },
+  {
+   "requirement": "validation on a held-out region",
+   "state": "partial",
+   "what_is_measured": "two independent revisions of the same band compared (T5); no ground truth",
+   "evidence": ""
+  },
+  {
+   "requirement": "the core of the scroll",
+   "state": "not met",
+   "what_is_measured": "windings w000 to w009 are in no published band",
+   "evidence": ""
+  }
+ ],
+ "stop": null,
+ "seconds": 25.43
+}
