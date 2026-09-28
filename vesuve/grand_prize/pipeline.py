@@ -98,6 +98,19 @@ def _compare_tables(made: dict, embedded_tables: dict) -> dict:
             "largest_difference_voxels": worst}
 
 
+def _summary(got: dict) -> dict:
+    """What a replay says, without the arrays."""
+    return {"pooled": got["pooled"], "pooled_within_validated_geometry": got["pooled_within_validated_geometry"],
+            "sign_test": {k: float(f"{v:.3g}") for k, v in got["sign_test"].items()},
+            "whole_surface": got["whole_segment"],
+            "blocks_within_validated_geometry": sum(1 for b in got["blocks"] if b["validated_geometry"]),
+            "undecided": {f"{b['row']}_{b['column']}": b["reason"] for b in got["blocks"] if not b["decidable"]}}
+
+
+def _certify(s, fresh):
+    return certify_segment(s["context"]["segment"], fresh)[1]
+
+
 def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-prize"), cache: Path = Path("cache"),
         read: bool = False, rounds: int = 6, threads: int = 16, readings=(), judge: int = 0, ink: bool = True,
         surface: bool = True, render: bool = False, render_rows: int | None = None, keep_piles: bool = False,
