@@ -39,6 +39,14 @@ docker build -t vesuve .
 docker run --rm --user "$(id -u):$(id -g)" -v "$PWD/outputs:/outputs" vesuve
 ```
 
+The `render` target puts the same program on top of ScrollPrize/villa's published image, which carries
+`vc_render_tifxyz`, so that `grand-prize --render` runs in a container (the image weighs 12 GB):
+
+```bash
+docker build --target render -t vesuve:render .
+docker run --rm --user "$(id -u):$(id -g)" -v "$PWD/outputs:/outputs" -v "$PWD/cache:/cache" vesuve:render
+```
+
 Options, defaults and exit codes are in `vesuve --help` and `vesuve <prize> --help`, so this page does not
 repeat them. Each run writes `report.json` into its output folder, plus a `report.md` rendered from it.
 

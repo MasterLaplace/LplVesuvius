@@ -37,6 +37,13 @@ where it did not hold. Everything is in English now, which breaks every script w
   seam for seam: 334 171 seams, none different, none missing. The correction run on them writes a
   `corrected_transfer.npy` byte-identical to the research's and the same `correction.json` as the replay. The run
   read 288 GB of the raw scan, since its first two rows were already on disk from a trial.
+- A renderer without `--flip-normals`, like the one in villa's published images, renders the pile unflipped and
+  its layers are reversed. On the renderer that has both, the two piles are identical voxel for voxel
+  (`tools/check_flip_fallback.py`), and the pile's journal line says `layers_reversed`.
+- `docker build --target render` puts the program on villa's published image, so `--render` runs in a container.
+  Its renderer is older than the research's (villa revision `1e3f4c0`, 2026-05-13). The last row rendered with it
+  changed 790 seams by at most 0.00065 voxel, and the correction decided all 340 blocks alike: the same 495 points
+  moved, 14 of them by values that differ by at most 1e-4 voxel (`tools/compare_corrections.py`).
 - `tools/check_against_research.py` compares what `--render` makes with what the research made, and
   `tools/estimate_render.py` says what a render will download before it does: 153 079 chunks, 321 GB, for the
   segment.
@@ -75,8 +82,9 @@ where it did not hold. Everything is in English now, which breaks every script w
   sits in a `math` fence, and a test fails if one does not.
 
 ### Known limits
-- The Docker image does not carry `vc_render_tifxyz`, so `--render` inside it reports the renderer missing and
-  the correction replays the embedded tables. The renderer is ScrollPrize/villa's `volume-cartographer`.
+- The default Docker image does not carry `vc_render_tifxyz`, so `--render` inside it reports the renderer missing
+  and the correction replays the embedded tables; the `render` target carries it. The renderer is
+  ScrollPrize/villa's `volume-cartographer`.
 - The correction is validated on one segment. `--render` makes its inputs from the public data, but the
   transfer itself is still the one the research's chain produced (`248`), embedded.
 

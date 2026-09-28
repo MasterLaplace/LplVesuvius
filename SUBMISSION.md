@@ -108,9 +108,10 @@ VESUVE_RESEARCH=../research uv run --extra tests pytest -q -rs
 
 - It does not unroll a scroll. It certifies and corrects surfaces others traced, on one segment of PHercParis4,
   which is not one of the thirteen scrolls of the 2027 Grand Prize.
-- Its Docker image does not render the step tables the correction reads. `--render` makes them, but it needs
-  `vc_render_tifxyz` installed, about 320 GB read from the raw scan and about 5 h; without it, the program replays
-  the tables it embeds, which are the same ones.
+- Its default Docker image does not render the step tables the correction reads; it replays the tables it embeds,
+  which are the same ones. `--render` makes them, with `vc_render_tifxyz`, about 320 GB read from the raw scan and
+  about 5 h. The image's `render` target carries villa's published renderer, which is older than the research's:
+  on the last row its tables differ by at most 0.00065 voxel, and the correction decides every block alike.
 - It does not read text. First Letters on PHerc1447 finds no periodic rows under the 2023 model (`R1-F20`), and the
   Paris 4 title search shows where an end-title would be, for a papyrologist to judge.
 
