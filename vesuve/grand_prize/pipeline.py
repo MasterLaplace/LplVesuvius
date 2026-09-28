@@ -70,8 +70,12 @@ def _make_tables(segment: str, cache: Path, remote, transport, journal, rows: in
 
 
 def _compare_tables(made: dict, embedded_tables: dict) -> dict:
-    """Seam by seam, the tables made here against those of the research's renders."""
-    same = different = 0
+    """Seam by seam, the tables made here against those of the research's renders.
+
+    A seam missing on one side is counted apart from a seam whose step differs: the first is a neighbour not rendered
+    (yet), the second would be a real disagreement.
+    """
+    same = different = missing_here = missing_there = 0
     worst = 0.0
     for key, t in made.items():
         ref = embedded_tables.get(key)
@@ -80,27 +84,18 @@ def _compare_tables(made: dict, embedded_tables: dict) -> dict:
         for d in ("h", "v"):
             for seam in set(t[d]) | set(ref[d]):
                 a, b = t[d].get(seam), ref[d].get(seam)
-                if a == b:
+                if a is None:
+                    missing_here += 1
+                elif b is None:
+                    missing_there += 1
+                elif a == b:
                     same += 1
                 else:
                     different += 1
-                    if a is not None and b is not None:
-                        worst = max(worst, abs(a - b))
+                    worst = max(worst, abs(a - b))
     return {"tables": len(made), "seams_equal": same, "seams_different": different,
+            "seams_missing_here": missing_here, "seams_missing_in_the_research": missing_there,
             "largest_difference_voxels": worst}
-
-
-def _summary(got: dict) -> dict:
-    """What a replay says, without the arrays."""
-    return {"pooled": got["pooled"], "pooled_within_validated_geometry": got["pooled_within_validated_geometry"],
-            "sign_test": {k: float(f"{v:.3g}") for k, v in got["sign_test"].items()},
-            "whole_surface": got["whole_segment"],
-            "blocks_within_validated_geometry": sum(1 for b in got["blocks"] if b["validated_geometry"]),
-            "undecided": {f"{b['row']}_{b['column']}": b["reason"] for b in got["blocks"] if not b["decidable"]}}
-
-
-def _certify(s, fresh):
-    return certify_segment(s["context"]["segment"], fresh)[1]
 
 
 def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-prize"), cache: Path = Path("cache"),

@@ -113,6 +113,7 @@ class TableMaker:
         rows = sorted({by for by, _ in self.candidates})
         if stop_after_rows is not None:
             rows = rows[:int(stop_after_rows)]
+        rows = self._rows_still_needed(rows)
         self._to_render = {r: self._piles_to_render(r) for r in rows}
         self._row_needs: dict[int, set] = {}
         done_rows, fills, failed, pending, stopped = [], [], {}, [], short_of_space(self.disks)
@@ -152,6 +153,18 @@ class TableMaker:
                 pool.shutdown(wait=True)
         return {"rows": len(rows), "rows_done": len(done_rows), "failed": failed, "stopped": stopped,
                 "bytes_downloaded": int(sum(f["bytes"] for f in fills)), "seconds": round(time.monotonic() - start, 1)}
+
+    def _is_final(self, s: str, b: tuple[int, int]) -> bool:
+        """The table of the block exists and was read with every neighbour it will ever have."""
+        t = self.table(s, *b)
+        return t is not None and t["east"] == ((b[0], b[1] + BLOCK) in self.candidates) and \
+            t["south"] == ((b[0] + BLOCK, b[1]) in self.candidates)
+
+    def _rows_still_needed(self, rows: list[int]) -> list[int]:
+        """The rows whose piles something still reads: a row whose tables are not final, or whose piles are the south
+        neighbours of a row above that is not final. What a stopped run finished is not rendered again."""
+        final = {r: all(self._is_final(s, b) for b in self.candidates if b[0] == r for s in self.meshes) for r in rows}
+        return [r for i, r in enumerate(rows) if not final[r] or (i > 0 and not final[rows[i - 1]])]
 
     def _piles_to_render(self, r: int) -> list[tuple[str, tuple[int, int]]]:
         return [(s, b) for b in sorted(b for b in self.candidates if b[0] == r) for s in self.meshes

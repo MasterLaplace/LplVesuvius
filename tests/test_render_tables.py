@@ -295,3 +295,36 @@ def test_worker_processes_read_the_same_tables_as_this_process(tmp_path):
         spawned = pool.submit(tables.table_from_piles, tmp_path / "a", tmp_path / "b", None, 0, 0,
                               tmp_path / "t2.json", 2).result()
     assert len(inline["h"]) == 4 and spawned == inline and json.loads((tmp_path / "t2.json").read_text()) == inline
+
+
+def test_a_run_started_again_renders_only_what_is_still_needed(tmp_path, monkeypatch):
+    """Piles are freed once read, so a stopped run cannot tell what it did from its piles: it reads its tables."""
+    points, valid = _curved_surface(60, 60)
+    mesh = surfaces.write_for_render(tmp_path / "mesh", points, valid, 1 / 20.0, "s")
+    rendered = []
+
+    def fake_render(tifxyz, output, box, mirror_folder, **_):
+        output.mkdir(parents=True, exist_ok=True)
+        rendered.append(output.name)
+        for k in range(rendering.LAYERS):
+            (output / f"{k:03d}.tif").write_bytes(b"x")
+        (output / rendering.END_MARK).write_text("ok\n")
+        return {"rendered": True, "resumed": False}
+
+    monkeypatch.setattr(tables.rendering, "render", fake_render)
+    monkeypatch.setattr(tables.rendering, "read_pile",
+                        lambda folder, rows=slice(None), columns=slice(None): np.zeros((109, 256, 256), np.uint8))
+    monkeypatch.setattr(tables.TableMaker, "needs", lambda self, s, by, bx: set())
+    monkeypatch.setattr(tables, "BLOCK", 2)
+    monkeypatch.setattr(tables.steps, "block_table",
+                        lambda read, by, bx, east, south, **_: {"east": east, "south": south, "h": {}, "v": {}})
+    make = lambda: tables.TableMaker(tmp_path / "work", {"s": mesh}, {(0, 0), (2, 0), (4, 0)},  # noqa: E731
+                                     "https://s3/v.zarr", InMemoryTransport(_volume()), disks=()).make()
+    make()
+    assert rendered == ["block_0_0", "block_2_0", "block_4_0"]
+    rendered.clear()
+    make()
+    assert rendered == []                                                   # everything final: nothing again
+    (tmp_path / "work" / "tables" / "s" / "block_2_0.json").unlink()
+    make()
+    assert rendered == ["block_2_0", "block_4_0"]                           # row 2, and row 4 for its south seams
