@@ -30,7 +30,7 @@ FROM ghcr.io/scrollprize/villa/volume-cartographer:edge AS render
 RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-venv \
     && rm -rf /var/lib/apt/lists/*
 COPY --from=build /wheels /wheels
-RUN python3 -m venv /opt/vesuve && /opt/vesuve/bin/pip install --no-cache-dir /wheels/*.whl && rm -rf /wheels
+RUN /usr/bin/python3 -m venv /opt/vesuve && /opt/vesuve/bin/pip install --no-cache-dir /wheels/*.whl && rm -rf /wheels
 ENV PATH=/opt/vesuve/bin:$PATH
 WORKDIR /work
 ENTRYPOINT ["vesuve"]
