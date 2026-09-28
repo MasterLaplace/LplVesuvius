@@ -3,8 +3,9 @@
 **vesuve 0.2.0** is one Docker image with one pipeline per prize, built on a series of dated research slices,
 295 so far. Its main result this month: on a published PHercParis4 segment, it corrects the transfer from one
 winding to the next without a human. It takes the right decision four times as often as the wrong one (163 against
-41, sign test p = 2e-18), and the judges are used only to score. On a band where the same procedure does not hold,
-the program measures that and writes nothing.
+41, sign test p = 2e-18), and the judges are used only to score. It also makes the inputs of that correction
+itself, from the published mesh and the raw scan, and gets the research's corrected transfer back byte for byte. On
+a band where the same procedure does not hold, the program measures that and writes nothing.
 
 Every number below links to the file that produces it. The research lives on the
 [`experimental`](https://github.com/MasterLaplace/LplVesuvius/tree/experimental) branch, in French; this branch,
@@ -16,7 +17,8 @@ Every number below links to the file that produces it. The research lives on the
 
 - **PHercParis4, segment `20230702185753`**: its surface volume
   (`2.4um-0.22m-78keV-volume-20260411134726.zarr`), read chunk by chunk from the public bucket; its published mesh;
-  its published ink map; and the next winding that the segment's own tracer drew by hand, used as the judge.
+  its published ink map; the next winding that the segment's own tracer drew by hand, used as the judge; and, for
+  `--render`, the raw scan the segment was cut from (`volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr`).
 - **PHercParis4, band `20260623142658-w028-037`**: where the correction was measured not to hold.
 - **PHerc1447, segment `20250702235910`**, for First Letters, and the innermost published PHercParis4 bands
   (`w010-027`) for the title search.
@@ -70,6 +72,11 @@ without a judge and is right far more often than wrong, which is the property a 
   number. The correction gives back what `275` and `281` published, block by block, and the corrected transfer it
   writes corrects the same points as the one the research saved, to within a millionth of a voxel
   (`tests/test_correction.py`).
+- **The inputs, made again from public data.** `vesuve grand-prize --render` renders two piles per block through
+  `vc_render_tifxyz`, from the published mesh and the raw scan, and reads the step tables from them. Over the whole
+  segment (5 h 09 on three cores, 288 GB read) its 680 tables equal the research's seam for seam, 334 171 seams with
+  none different, and the correction run on them writes a corrected transfer whose SHA-256 is the research's
+  ([`examples/grand-prize-render/report.md`](examples/grand-prize-render/report.md)).
 - **The judges never decide.** Replaced by noise, they change the counts and not one corrected point (same file).
 - **Tests that can fail.** Rules were broken on purpose to check that their tests turn red. An anchor that keeps its
   own block, or a decision that favours the slip, makes four correction tests fail, the published counts and the
@@ -85,6 +92,7 @@ without a judge and is right far more often than wrong, which is the property a 
 ```bash
 make test                                  # the C core under AddressSanitizer and UndefinedBehaviorSanitizer
 uv run vesuve grand-prize --no-surface     # the certificate and the correction, about 20 s
+uv run vesuve grand-prize --render --no-ink --no-surface --output outputs/render  # needs vc_render_tifxyz: about 5 h
 uv run vesuve read outputs/grand-prize     # the stages, the requirements, where it stops
 uv run vesuve formulas                     # every equation it applies
 ```
@@ -100,8 +108,9 @@ VESUVE_RESEARCH=../research uv run --extra tests pytest -q -rs
 
 - It does not unroll a scroll. It certifies and corrects surfaces others traced, on one segment of PHercParis4,
   which is not one of the thirteen scrolls of the 2027 Grand Prize.
-- It does not render the step tables the correction reads. They come from the research's renders (two surfaces
-  rendered through `vc_render_tifxyz` from about 50 GB of chunks) and are embedded; the program replays the decision.
+- Its Docker image does not render the step tables the correction reads. `--render` makes them, but it needs
+  `vc_render_tifxyz` installed, about 320 GB read from the raw scan and about 5 h; without it, the program replays
+  the tables it embeds, which are the same ones.
 - It does not read text. First Letters on PHerc1447 finds no periodic rows under the 2023 model (`R1-F20`), and the
   Paris 4 title search shows where an end-title would be, for a papyrologist to judge.
 

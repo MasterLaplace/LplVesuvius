@@ -26,6 +26,19 @@ It also holds the control on the band `w028-037`, where the same procedure gives
 The corrected transfer itself, `corrected_transfer.npy`, is left out of the examples: it is an array, not something
 to look at.
 
+## Grand Prize, tables made here: [`grand-prize-render/report.md`](grand-prize-render/report.md)
+
+The same correction, on step tables the program made itself from the published mesh and the raw scan, over the
+whole segment (2026-09-28, 5 h 09 on three cores, 288 GB read):
+
+```bash
+uv run vesuve grand-prize --render --threads 8 --no-ink --no-surface --output outputs/render-full --cache cache
+```
+
+Its stage TR compares the 680 tables with the embedded ones: 334 171 seams equal, none different, none missing. Its
+`correction.json` is byte for byte the one above, so it is not copied again, and its `corrected_transfer.npy` has
+the SHA-256 of the research's (`5f34f5d2…`).
+
 ## Progress: [`progress/report.md`](progress/report.md)
 
 The same certificate read the other way round: the band along column 260 (orange), rows 26 to 223, where the

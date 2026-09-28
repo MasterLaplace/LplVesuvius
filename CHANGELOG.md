@@ -33,6 +33,10 @@ where it did not hold. Everything is in English now, which breaks every script w
   processes (2 by default) read the tables meanwhile. It stops cleanly when a disk runs short, a run started again
   picks up where it stopped (it reads its tables, since piles are freed once read), and a chunk at the wrong size,
   which a crash leaves behind, is downloaded again instead of being rendered.
+- Measured over the whole segment on three cores, `--render` took 5 h 09. Its 680 tables equal the research's
+  seam for seam: 334 171 seams, none different, none missing. The correction run on them writes a
+  `corrected_transfer.npy` byte-identical to the research's and the same `correction.json` as the replay. The run
+  read 288 GB of the raw scan, since its first two rows were already on disk from a trial.
 - `tools/check_against_research.py` compares what `--render` makes with what the research made, and
   `tools/estimate_render.py` says what a render will download before it does: 153 079 chunks, 321 GB, for the
   segment.
