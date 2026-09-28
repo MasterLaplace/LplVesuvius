@@ -20,12 +20,20 @@ where it did not hold. Everything is in English now, which breaks every script w
   says so and nothing is written there. The geometry is necessary and not sufficient: on a taller slice of the
   band, blocks with neighbours on all four sides give 7 for 5 (p = 0.774), so the correction stays validated on
   one segment only.
-- The formulary gains the five rules of the correction (walk, anchor, slip mixture, correction rule, sign test).
+- The formulary gains the six rules of the correction (window-to-window step, walk, anchor, slip mixture,
+  correction rule, sign test).
 - `SUBMISSION.md` answers the four questions of the September 2026 Progress Prizes form, each number linked to the
   file that produces it, with a guide to the `experimental` branch.
 - The step tables, the transfer and the judges of the segment and of the band are embedded (5.9 MB), so the
-  correction replays without the research tree; the tables come from the research's renders, which this program
-  does not make.
+  correction replays without the research tree.
+- `vesuve grand-prize --render` makes those step tables here (stage TR): the two surfaces from the published mesh
+  and the transfer, a local mirror of the raw scan one row of blocks at a time, two piles per block rendered by
+  `vc_render_tifxyz`, and the window-to-window steps read from them. `--render-rows` bounds a trial run and
+  `--keep-piles` keeps the piles. It stops cleanly when a disk runs short, and a chunk at the wrong size, which a
+  crash leaves behind, is downloaded again instead of being rendered.
+- `tools/check_against_research.py` compares what `--render` makes with what the research made, and
+  `tools/estimate_render.py` says what a render will download before it does: 153 079 chunks, 321 GB, for the
+  segment.
 
 ### Changed
 - **Breaking: the program is now in English**, from the command line down to the C core, so that anyone
@@ -57,6 +65,12 @@ where it did not hold. Everything is in English now, which breaks every script w
   backslash escapes before the math renderer runs, so the median lost its braces, `\#\{\ell\}` in the
   consensus [C1] failed with "macro parameter character", and `\!` turned into a `!`. Each equation now
   sits in a `math` fence, and a test fails if one does not.
+
+### Known limits
+- The Docker image does not carry `vc_render_tifxyz`, so `--render` inside it reports the renderer missing and
+  the correction replays the embedded tables. The renderer is ScrollPrize/villa's `volume-cartographer`.
+- The correction is validated on one segment. `--render` makes its inputs from the public data, but the
+  transfer itself is still the one the research's chain produced (`248`), embedded.
 
 ## [0.1.0] - 2026-09-24
 

@@ -48,7 +48,7 @@ Measured on real data. The reports are in [`examples/`](examples/README.md).
 
 | prize | command | what it writes | where it stops, and why |
 |---|---|---|---|
-| **Grand Prize** | `vesuve grand-prize` | a per-chunk certificate mask, the certified surface as tifxyz with `approval.tif`, the published ink map under the mask, and the transfer to the next winding corrected without a hand (`corrected_transfer.npy`, `correction.json`) | one published segment: 6333 of 97771 chunks certified. To judge the rest it still has to read 111 bands (24263 chunks, about 21 min at 16 threads). The correction gains 122 points net on 340 blocks (sign test p = 2.04e-18), but it replays step tables the research rendered and does not render them. There is no `column_NN.tifxyz` because columns need legible ink |
+| **Grand Prize** | `vesuve grand-prize` | a per-chunk certificate mask, the certified surface as tifxyz with `approval.tif`, the published ink map under the mask, and the transfer to the next winding corrected without a hand (`corrected_transfer.npy`, `correction.json`) | one published segment: 6333 of 97771 chunks certified. To judge the rest it still has to read 111 bands (24263 chunks, about 21 min at 16 threads). The correction gains 122 points net on 340 blocks (sign test p = 2.04e-18). By default it replays the step tables the research rendered; `--render` makes them here, which needs `vc_render_tifxyz` and about 320 GB read from the raw scan. There is no `column_NN.tifxyz` because columns need legible ink |
 | **Progress** | `vesuve progress` | where a published segment changes winding | column 260, rows 26 to 223, crossing half a sheet at cuts 163, 173 and 203. It cannot tell a misread column from material that really diverges |
 | **First Letters** | `vesuve first-letters` | a 4 cm² window chosen on papyrus alone, the fibre render, a view without the model, the model's ink, row witnesses, a 1 cm scale bar | on PHerc1447 the 2023 model shows no periodic rows at any angle (`R1-F20`), so it claims no letters |
 | **Paris 4 title** | `vesuve paris4-title` | the last written column of the innermost band, and the region after it where an end-title would sit | on the well-registered revision it finds a short last column whose lines fill the top fifth. Nobody has read the crops yet |
@@ -92,6 +92,10 @@ request, with warnings treated as errors.
 - The correction of the transfer is replayed from the embedded step tables. It gives back what `275` and `281`
   published block by block (340 and 84 blocks), and the corrected transfer it writes has the same bytes as the one
   the research saved. The judges only score: replaced by noise, they change the counts and not one corrected point.
+- What `--render` makes is compared with what the research made, on the research's own files
+  (`tools/check_against_research.py`): the two surfaces are identical to the research's meshes, the step tables of
+  block `(16, 256)` are identical seam for seam on both surfaces, and a pile rendered here from a fresh mirror is
+  identical to the research's, voxel for voxel (457 179 136 voxels).
 - The row test and the TimeSformer sweep are checked against their producers.
 
 Every test was probed by breaking the rule it guards, and each one turned red.
