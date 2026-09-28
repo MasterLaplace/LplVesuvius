@@ -224,6 +224,14 @@ def les_besoins(taches: list[tuple]) -> dict:
 LES_PILES_DU_CONTROLE = tuple((s, by, bx) for s in LES_SURFACES for by, bx in ((16, 176), (160, 144), (160, 160), (352, 128)))
 
 
+def les_voxels_differents(ref: Path, neuf: Path) -> int:
+    """Les voxels où deux piles diffèrent, couche par couche."""
+    import tifffile
+
+    return sum(int((tifffile.imread(x) != tifffile.imread(y)).sum())
+               for x, y in zip(sorted(ref.glob("*.tif")), sorted(neuf.glob("*.tif"))))
+
+
 def le_controle_du_miroir(ouvriers: int = 3, taches: tuple = LES_PILES_DU_CONTROLE) -> dict:
     """Des piles déjà rendues à distance, rendues à nouveau depuis le miroir, comparées voxel pour voxel.
 
@@ -231,8 +239,6 @@ def le_controle_du_miroir(ouvriers: int = 3, taches: tuple = LES_PILES_DU_CONTRO
     comparaison le verrait. Les piles comparées sont celles des deux blocs choisis et de deux blocs réguliers, sur les deux
     surfaces, fixées ici avant tout rendu depuis le miroir.
     """
-    import tifffile
-
     taches = list(taches)
     rempli = remplir(set().union(*les_besoins(taches).values()))
     temoin = LE_DOSSIER / "le_miroir_controle"
@@ -245,9 +251,8 @@ def le_controle_du_miroir(ouvriers: int = 3, taches: tuple = LES_PILES_DU_CONTRO
         r = rendre(LE_DOSSIER / s / "maillage", neuf, le_cadre(by, bx, LE_BLOC), miroir=LE_MIROIR)
         if not r["rendue"]:
             return t, {"comparee": False, "la_raison": "le rendu depuis le miroir échoue"}
-        diff = sum(int((tifffile.imread(x) != tifffile.imread(y)).sum())
-                   for x, y in zip(sorted(ref.glob("*.tif")), sorted(neuf.glob("*.tif"))))
-        return t, {"comparee": True, "les_voxels_differents": diff, "les_secondes": r.get("les_secondes")}
+        return t, {"comparee": True, "les_voxels_differents": les_voxels_differents(ref, neuf),
+                   "les_secondes": r.get("les_secondes")}
 
     with ThreadPoolExecutor(max_workers=int(ouvriers)) as pool:
         res = dict(pool.map(un, taches))
@@ -257,12 +262,36 @@ def le_controle_du_miroir(ouvriers: int = 3, taches: tuple = LES_PILES_DU_CONTRO
             "identiques": all(r.get("comparee") and r["les_voxels_differents"] == 0 for r in res.values())}
 
 
+LE_SEUIL_DE_PLACE_GO = 40.0
+LES_DISQUES = (Path("/"), Path("/mnt/c"))
+
+
+def la_place_manque(seuil_go: float = LE_SEUIL_DE_PLACE_GO, disques: tuple = LES_DISQUES) -> str | None:
+    """None tant que chaque disque présent garde plus de `seuil_go` Go libres ; sinon lequel, et combien il lui reste.
+
+    ⚠⚠ Sous WSL, `/` est un disque virtuel déclaré plus grand que le disque Windows qui le porte : il annonce de la place que
+    `C:` n'a pas, et c'est `C:` qui se remplit. Le 2026-09-28, un rendu l'a rempli, et WSL puis presque tout le PC sont
+    tombés, alors que `/` annonçait encore 278 Go libres. Chaque disque est donc regardé, et le premier qui manque arrête.
+    """
+    import shutil
+
+    for d in disques:
+        if Path(d).is_dir():
+            libre = shutil.disk_usage(d).free / 1e9
+            if libre < seuil_go:
+                return f"{d} n'a plus que {libre:.1f} Go libres, sous le seuil de {seuil_go:g} Go"
+    return None
+
+
 def tout_rendre(candidats: set, ouvriers: int, surfaces: tuple = LES_SURFACES) -> dict:
     """Les deux surfaces sur tous les blocs candidats, depuis le miroir, rangée de blocs par rangée de blocs ; une pile
     complète n'est pas refaite.
 
     Le miroir ne garde que les chunks de la rangée en cours et de la suivante, que l'on télécharge pendant que la première
     se rend : tout le segment tiendrait des centaines de gigaoctets.
+
+    ⚠ Le rendu s'arrête proprement dès qu'un disque passe sous `LE_SEUIL_DE_PLACE_GO` : aucune rangée n'est plus
+    téléchargée, aucune pile n'est plus commencée, et la cause est rendue. Les piles complètes restent, donc il reprend.
     """
     a_faire = [(s, by, bx) for (by, bx) in sorted(candidats) for s in surfaces
                if not la_pile_est_complete(LE_DOSSIER / s / f"bloc_{by}_{bx}")]
@@ -273,6 +302,9 @@ def tout_rendre(candidats: set, ouvriers: int, surfaces: tuple = LES_SURFACES) -
 
     def un(t):
         s, by, bx = t
+        manque = la_place_manque()
+        if manque:
+            return t, {"rendue": False, "la_raison": manque}
         r = rendre(LE_DOSSIER / s / "maillage", LE_DOSSIER / s / f"bloc_{by}_{bx}", le_cadre(by, bx, LE_BLOC),
                    miroir=LE_MIROIR)
         print(f"  rendu {s} ({by}, {bx}) : {r['rendue']}, {r.get('les_secondes')} s, "
@@ -281,13 +313,17 @@ def tout_rendre(candidats: set, ouvriers: int, surfaces: tuple = LES_SURFACES) -
 
     # ⚠ Le téléchargement de la rangée suivante et le vidage courent ensemble sans se gêner : l'un n'écrit que des chunks
     # que l'autre garde.
+    arret = la_place_manque()
     with ThreadPoolExecutor(max_workers=1) as avance:
-        futur = avance.submit(remplir, de(rangees[0])) if rangees else None
+        futur = avance.submit(remplir, de(rangees[0])) if rangees and not arret else None
         for i, r in enumerate(rangees):
+            if arret:
+                break
             remplis.append(futur.result())
             print(f"rangée {r} ({i + 1}/{len(rangees)}) : {remplis[-1]}", flush=True)
             garde = de(rangees[i + 1] if i + 1 < len(rangees) else None)
-            futur = avance.submit(remplir, garde)
+            arret = la_place_manque()
+            futur = avance.submit(remplir, garde if not arret else set())
             with ThreadPoolExecutor(max_workers=int(ouvriers)) as pool:
                 res.update(pool.map(un, [t for t in a_faire if t[1] == r]))
             vider(garde)
@@ -296,6 +332,7 @@ def tout_rendre(candidats: set, ouvriers: int, surfaces: tuple = LES_SURFACES) -
     return {"les_piles_a_rendre": len(a_faire), "rendues": sum(1 for r in res.values() if r["rendue"]),
             "echouees": sorted(f"{s}_{by}_{bx}" for (s, by, bx), r in res.items() if not r["rendue"]),
             "les_octets_telecharges": int(sum(x["les_octets"] for x in remplis)),
+            "arrete_faute_de_place": arret or la_place_manque(),
             "les_secondes": round(time.monotonic() - debut, 1)}
 
 
@@ -570,6 +607,17 @@ def verifier() -> int:
     pub = {(0, 0): {"nom": "a", "les_points_corriges": 4, "les_rates_rendus_justes": 3, "les_justes_rendus_rates": 0}}
     v("★★★ la reproduction exige les comptes publiés, et un bloc non décidé ne reproduit rien",
       la_reproduction([b1], pub)["tous"] and not la_reproduction([b3 | {"la_rangee": 0, "la_colonne": 0}], pub)["tous"])
+
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        v("★★★★ un disque sous le seuil arrête, et la raison le nomme",
+          (la_place_manque(1e12, (Path(tmp),)) or "").startswith(f"{tmp} n'a plus que"))
+        v("★★★ un disque au-dessus du seuil laisse passer", la_place_manque(0.0, (Path(tmp),)) is None)
+        v("★★★ un disque absent n'arrête rien, et le suivant est quand même regardé",
+          la_place_manque(1e12, (Path(tmp) / "absent",)) is None
+          and la_place_manque(1e12, (Path(tmp) / "absent", Path(tmp))) is not None)
+    v("★★★★ C: est regardé, pas seulement le disque virtuel", Path("/mnt/c") in LES_DISQUES)
 
     for e in echecs:
         print(f"  ÉCHEC {e}")

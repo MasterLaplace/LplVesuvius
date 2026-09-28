@@ -131,13 +131,14 @@ def le_verdict(r: dict) -> dict:
 
 # ── LES ÉTAPES ─────────────────────────────────────────────────────────────────────────────────────────────────────
 
-def la_bande(cache: Path = LE_CACHE, sauts: int = LES_SAUTS) -> dict | str:
-    """La tranche de la bande comme `248` la lit : les points de la maille, leurs normales, leurs couches et le rayon."""
+def la_bande(cache: Path = LE_CACHE, sauts: int = LES_SAUTS, rangees: tuple[float, float] = LA_TRANCHE) -> dict | str:
+    """La tranche de la bande comme `248` la lit : les points de la maille, leurs normales, leurs couches et le rayon.
+    `rangees` choisit la tranche, celle de `248` par défaut."""
     d = telecharger(LA_BANDE, cache, DELAI)
     if isinstance(d, str):
         return d
     ref, valide, esp = lire_tifxyz(d)
-    ref, valide = la_tranche(ref, valide, LA_TRANCHE)
+    ref, valide = la_tranche(ref, valide, rangees)
     couches = les_couches_ordonnees(ref, valide, esp, LA_MAILLE, sauts)
     normales, ok = les_normales(ref, valide)
     grille = np.zeros_like(ok)
