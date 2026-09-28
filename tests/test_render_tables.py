@@ -157,6 +157,46 @@ def test_a_pile_is_complete_only_with_its_end_mark_and_an_unfinished_one_is_set_
                                 runner=_fake_runner(code=3))["rendered"]
 
 
+def _recording_runner(seen: list):
+    """A renderer that records its command and writes layer k as the bytes of k, so that an order can be read back."""
+    def run(cmd, output, log, patience):
+        seen.append(cmd)
+        for k in range(rendering.LAYERS):
+            (output / f"{k:03d}.tif").write_bytes(b"%03d" % k)
+        return {"code": 0, "abandoned": False, "seconds": 0.0}
+    return run
+
+
+def test_a_renderer_without_flip_normals_renders_unflipped_and_the_layers_are_reversed(tmp_path):
+    seen = []
+    out = tmp_path / "block_0_0"
+    got = rendering.render(tmp_path / "m", out, rendering.crop(0, 0, 1), tmp_path / "mir",
+                           runner=_recording_runner(seen), flips=False)
+    assert "--flip-normals" not in seen[0]
+    assert got["rendered"] and got["layers_reversed"] and rendering.is_complete(out)
+    layers = sorted(out.glob("*.tif"))
+    assert [f.read_bytes() for f in layers] == [b"%03d" % (rendering.LAYERS - 1 - k) for k in range(rendering.LAYERS)]
+
+
+def test_a_renderer_with_flip_normals_is_asked_for_it_and_its_layers_are_left_alone(tmp_path):
+    seen = []
+    out = tmp_path / "block_0_0"
+    got = rendering.render(tmp_path / "m", out, rendering.crop(0, 0, 1), tmp_path / "mir",
+                           runner=_recording_runner(seen), flips=True)
+    assert "--flip-normals" in seen[0] and not got["layers_reversed"]
+    assert [f.read_bytes() for f in sorted(out.glob("*.tif"))] == [b"%03d" % k for k in range(rendering.LAYERS)]
+
+
+def test_whether_a_renderer_flips_normals_is_read_from_its_help(tmp_path):
+    new, old = tmp_path / "new", tmp_path / "old"
+    new.write_text("#!/bin/sh\necho '  --flip-normals   Negate surface normals'\n")
+    old.write_text("#!/bin/sh\necho '  --flip arg (=-1)   Flip: 0=V, 1=H, 2=Both' >&2\n")
+    for f in (new, old):
+        f.chmod(0o755)
+    assert rendering.flips_normals(str(new)) and not rendering.flips_normals(str(old))
+    assert not rendering.flips_normals(str(tmp_path / "absent"))
+
+
 def test_the_watchdog_abandons_an_idle_process_and_spares_a_working_one(tmp_path):
     out = tmp_path / "o"
     out.mkdir()
