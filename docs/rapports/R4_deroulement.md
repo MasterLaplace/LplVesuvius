@@ -4286,6 +4286,13 @@ Sur le segment, la même façon corrige 1665 points et rend 135 ratés justes po
 122 avec les voisins de `275`** — `R4-F475`. La décision d'un bloc prend la portée de sa marche. `R4-P95` reste ouverte : il faut
 une marche qui s'étende dans les deux directions, et la tranche de la bande n'en a qu'une.
 
+**`295` · 2026-09-28 · une marche dans les deux directions sur la bande** — `R4-P95`
+
+⭐⭐⭐⭐ **Sur la bande, avec des voisins au nord et au sud, la procédure rend 7 ratés justes pour 5 justes ratés sur les 28
+blocs qui ont leurs quatre voisins : un gain net de 2, que le hasard explique (0,774). Avec les seuls voisins est et ouest, sur
+les mêmes piles, 10 pour 10** — `R4-F476`. Une tranche deux fois plus haute, trois rangées de blocs rendues, 180 piles.
+`R4-P95` reste ouverte : la géométrie du voisinage, nécessaire sur le segment, ne suffit pas sur la bande.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

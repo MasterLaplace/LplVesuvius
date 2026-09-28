@@ -3208,6 +3208,48 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                 ajoute(f"{nom} de 176", float(v_[cle]), _dec176(v_[cle]), rec.name,
                        unites=((unite,) if unite else ()))
 
+    # ⭐⭐⭐⭐ LA TRANCHE 295 : UNE MARCHE DANS LES DEUX DIRECTIONS SUR LA BANDE
+    s295 = _source(racine, "une_marche_dans_les_deux_directions_rend_elle_son_gain_a_la_bande.json")
+    if s295.exists():
+        d = json.loads(s295.read_text())
+        if d.get("decidable"):
+            k0 = len(out)
+            sg = lambda x: _fr222(x).replace("-", "−")  # noqa: E731
+            Q = d["les_blocs_a_quatre_voisins"]
+            T_, E_ = Q["avec_tous_leurs_voisins"], Q["avec_les_seuls_voisins_est_et_ouest"]
+            pt, pe = T_["le_test"]["sur_les_points"], E_["le_test"]["sur_les_points"]
+            out.append(("le titre de 295",
+                        [f"{'Oui' if d['le_verdict']['lissue'].startswith('une marche dans les deux directions rend') else 'Non'}"
+                         f" : {pt['les_rates_rendus_justes']} ratés justes pour {pt['les_justes_rendus_rates']} justes ratés sur "
+                         f"les blocs à quatre voisins, un gain net de {sg(pt['le_gain_net'])}"], s295.name))
+            quatre = sum(1 for b_ in d["les_blocs"] if b_["les_voisins"] == 4)
+            out.append(("les blocs de 295",
+                        [f"Les {d['les_blocs_decides']} blocs de la rangée 32 sont décidés, {quatre} avec leurs quatre voisins",
+                         f"donnent {d['les_blocs_rendus']} blocs à rendre, soit {d['le_plan']['le_cout']['les_piles']} piles",
+                         f"{d['le_plan']['le_cout']['les_chunks']} chunks, "
+                         f"{_fr222(d['le_plan']['le_cout']['le_disque_go'])} Go projetés"], s295.name))
+            for nom, x_, gras in (("tous leurs voisins", T_, True), ("est et ouest seulement", E_, False)):
+                r_, p_, b_ = x_["les_reunis"], x_["le_test"]["sur_les_points"], x_["le_test"]["sur_les_blocs"]
+                cel = [nom, str(r_["les_blocs"]), str(r_["les_points_corriges"]), str(p_["les_rates_rendus_justes"]),
+                       str(p_["les_justes_rendus_rates"]), sg(p_["le_gain_net"]), _fr222(p_["la_probabilite"]),
+                       f"{b_['les_blocs_qui_montent']}, {b_['les_blocs_qui_descendent']}", _fr222(b_["la_probabilite"])]
+                out.append((f"la ligne {nom} de 295", ["| " + " | ".join(f"**{c}**" if gras else c for c in cel) + " |"],
+                            s295.name))
+            out.append(("le fait de 295",
+                        [f"la procédure rend {pt['les_rates_rendus_justes']} ratés justes pour {pt['les_justes_rendus_rates']} "
+                         f"justes ratés sur les {T_['les_reunis']['les_blocs']}",
+                         f"que le hasard explique ({_fr222(pt['la_probabilite'])})",
+                         f"sur les mêmes piles, {pe['les_rates_rendus_justes']} pour {pe['les_justes_rendus_rates']}"],
+                        s295.name))
+            out.append(("les parts de 295",
+                        [f"passe de {sg(T_['les_reunis']['avant'])} à {sg(T_['les_reunis']['apres'])}"], s295.name))
+            out.append(("la durée de 295", [f"La mesure a pris {sg(d['les_secondes'])} s, dont "
+                                            f"{sg(d['les_pas']['les_secondes'])} s pour les "
+                                            f"{d['les_pas']['les_tables_faites']} tables"], s295.name))
+            out.append(("le verdict de 295", [f"**{d['le_verdict']['lissue'].upper()}.**"], s295.name))
+            out[k0:] = [(f"{nom} ({i + 1})" if len(e__) > 1 else nom, [x], src)
+                        for nom, e__, src in out[k0:] for i, x in enumerate(e__)]
+
     # ⭐⭐⭐⭐ LA TRANCHE 294 : QUATRE VOISINS SUR LA RANGÉE
     s294 = _source(racine, "quatre_voisins_sur_la_rangee_rendent_ils_son_gain_a_la_bande.json")
     # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.

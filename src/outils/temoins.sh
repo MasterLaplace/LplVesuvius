@@ -1727,6 +1727,8 @@ run "l'ancre nord-sud garde-t-elle le gain du segment" uv run python "$ROOT/src/
 run "figure l'ancre nord-sud garde-t-elle le gain du segment" uv run python "$ROOT/src/figures/figure_lancre_nord_sud_garde_t_elle_le_gain_du_segment.py" --verifier
 run "quatre voisins sur la rangee rendent-ils son gain a la bande" uv run python "$ROOT/src/nappe/quatre_voisins_sur_la_rangee_rendent_ils_son_gain_a_la_bande.py" --verifier
 run "figure quatre voisins sur la rangee rendent-ils son gain a la bande" uv run python "$ROOT/src/figures/figure_quatre_voisins_sur_la_rangee_rendent_ils_son_gain_a_la_bande.py" --verifier
+run "une marche dans les deux directions rend-elle son gain a la bande" uv run python "$ROOT/src/nappe/une_marche_dans_les_deux_directions_rend_elle_son_gain_a_la_bande.py" --verifier
+run "figure une marche dans les deux directions rend-elle son gain a la bande" uv run python "$ROOT/src/figures/figure_une_marche_dans_les_deux_directions_rend_elle_son_gain_a_la_bande.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
