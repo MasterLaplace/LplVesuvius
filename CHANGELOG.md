@@ -5,6 +5,11 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-09-28
+
+The transfer to the next winding, corrected where the research validated it, and a plain statement of
+where it did not hold. Everything is in English now, which breaks every script written against 0.1.0.
+
 ### Added
 - `vesuve grand-prize` corrects the transfer to the next winding without a hand (stage T), the procedure of
   `265` as `275` ran it on segment `20230702185753`: 163 misses made right for 41 rights made misses on 340
