@@ -131,7 +131,7 @@ def _write_array(path: Path, a) -> None:
 
 
 def _correction_inputs(research: Path, out: Path, *, tau0, judges: dict, candidates, slip: float, surfaces: tuple,
-                       sources: dict, measure: str, corrected: Path) -> dict:
+                       sources: dict, measure: str, corrected: Path, render: dict | None = None) -> dict:
     """Write what the correction reads on one surface: tables, transfer, judges and context."""
     from la_spire_produite_se_lit_elle_dans_le_treillis import LA_PREDICTION, LE_BLOC, LE_COTE, LE_DOSSIER
     out.mkdir(parents=True, exist_ok=True)
@@ -154,6 +154,9 @@ def _correction_inputs(research: Path, out: Path, *, tau0, judges: dict, candida
         "slip_voxels": float(slip), "candidates": [list(b) for b in sorted(candidates)],
         "judges": list(judges), "research_surfaces": dict(zip(ROLES, surfaces)),
         "published": measure,
+        # What making the step tables here reads: the published mesh the two surfaces come from, and the raw scan the
+        # piles are rendered from (paths in the public bucket).
+        **({"render": render} if render else {}),
         "provenance": {
             "measures": {str(p.relative_to(research)): _digest(p) for p in (
                 measures / measure, measures / "la_marche_corrige_t_elle_la_spire_produite.json")},
@@ -183,8 +186,8 @@ def extract_correction(research: Path, output: Path) -> dict:
                                                                 LES_COUCHES_DE_LA_BANDE, LES_SURFACES_DE_LA_BANDE,
                                                                 lire_le_plan)
     from la_procedure_sans_juge_tient_elle_sur_le_segment_entier import LA_SPIRE_CORRIGEE, le_segment
-    from la_spire_produite_se_lit_elle_dans_le_treillis import LA_PREDICTION, LE_COTE, LES_JUGES
-    from la_spire_voisine_est_elle_a_un_pas import LE_CACHE
+    from la_spire_produite_se_lit_elle_dans_le_treillis import LA_PREDICTION, LE_COTE, LE_VOLUME_BRUT, LES_JUGES
+    from la_spire_voisine_est_elle_a_un_pas import BUCKET, LE_CACHE, la_cle_du_maillage
     from le_voisinage_dit_il_quel_niveau_est_le_bon import LES_SURFACES
     tau0, _err, slip, candidates = le_segment(LE_CACHE)
     judges = {"segment_alone": "le_segment_seul", "segment_and_witnesses": "le_segment_et_ses_temoins"}
@@ -194,7 +197,9 @@ def extract_correction(research: Path, output: Path) -> dict:
     segment = _correction_inputs(
         research, output / "correction", tau0=tau0, judges={k: np.load(f) for k, f in files.items()},
         candidates=candidates, slip=slip, surfaces=tuple(LES_SURFACES), sources={"transfer": transfer, **files},
-        measure="la_procedure_sans_juge_tient_elle_sur_le_segment_entier.json", corrected=LA_SPIRE_CORRIGEE)
+        measure="la_procedure_sans_juge_tient_elle_sur_le_segment_entier.json", corrected=LA_SPIRE_CORRIGEE,
+        render={"mesh": la_cle_du_maillage(SEGMENT), "raw_volume": LE_VOLUME_BRUT.removeprefix(f"{BUCKET}/"),
+                "mesh_step": 8, "layers": 109})
     layers = np.load(LES_COUCHES_DE_LA_BANDE)
     _correction_inputs(
         research, output.parent / BAND / "correction", tau0=np.load(LE_PREMIER_SAUT),

@@ -21,7 +21,7 @@ from vesuve import core
 @dataclass(frozen=True)
 class Equation:
     id: str
-    stage: str      # the pipeline stage where it serves: E2, B, E4, E5, E6, E7, T, E8
+    stage: str      # the pipeline stage where it serves: E2, B, E4, E5, E6, E7, TR, T, E8
     name: str
     latex: str
     statement: str  # what it says, in one sentence
@@ -96,6 +96,14 @@ FORMULARY: dict[str, Equation] = {e.id: e for e in [
        r"c' = \max\!\left(0, \frac{c - 1/\sqrt n}{1 - 1/\sqrt n}\right)",
        "Zero on pure noise, one on a perfect rotation.", "R4-F100", "`151` [F17]",
        core.corrected_coherence),
+    _E("F4w", "TR", "the window-to-window step",
+       r"s = -\left(k^\star + \frac{c_{k^\star-1} - c_{k^\star+1}}{2\,(c_{k^\star-1} - 2\,c_{k^\star} + c_{k^\star+1})}"
+       r"\right), \quad c_k = \frac{\langle a_{[k]}, b_{[k]} \rangle}{\lVert a_{[k]} \rVert\, \lVert b_{[k]} \rVert},"
+       r" \quad |k| \le \delta",
+       "The shift that aligns two window profiles: the top of their normalised correlation over lags of up to half a "
+       "sheet, refined by a parabola. The step of a seam is the sum of eight of them, from the centre of one chunk to "
+       "the centre of the next, averaged over sixteen cuts.",
+       "R4-F439", "`le_pas_de_fenetre_en_fenetre_voit_il_la_rampe.py:71`"),
     _E("W", "T", "the walk of a neighbourhood",
        r"\hat D = \arg\min_{D,\ \sum_c D_c = 0} \sum_{(i,j)} \left(D_j - D_i - s_{ij}\right)^2",
        "The depth of the sheet in every chunk, by least squares on the window-to-window steps of the seams, over the "

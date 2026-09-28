@@ -196,6 +196,18 @@ Zero on pure noise, one on a perfect rotation.
 
 *Fact* `R4-F100` · *source* `151` [F17] · **C core**
 
+## TR: making the step tables of the correction
+
+### [F4w] the window-to-window step
+
+```math
+s = -\left(k^\star + \frac{c_{k^\star-1} - c_{k^\star+1}}{2\,(c_{k^\star-1} - 2\,c_{k^\star} + c_{k^\star+1})}\right), \quad c_k = \frac{\langle a_{[k]}, b_{[k]} \rangle}{\lVert a_{[k]} \rVert\, \lVert b_{[k]} \rVert}, \quad |k| \le \delta
+```
+
+The shift that aligns two window profiles: the top of their normalised correlation over lags of up to half a sheet, refined by a parabola. The step of a seam is the sum of eight of them, from the centre of one chunk to the centre of the next, averaged over sixteen cuts.
+
+*Fact* `R4-F439` · *source* `le_pas_de_fenetre_en_fenetre_voit_il_la_rampe.py:71` · **procedure rule**
+
 ## T: correcting the transfer to the next winding
 
 ### [W] the walk of a neighbourhood

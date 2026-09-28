@@ -24,7 +24,7 @@ def test_the_grand_prize_offline_returns_its_certificate_and_says_what_it_does_n
     r = grand_prize(output=tmp_path, cache=tmp_path / "cache")
     d = json.loads((tmp_path / "report.json").read_text())
     stages = {s["id"]: s for s in d["stages"]}
-    assert [s["id"] for s in d["stages"]] == ["E0", "E1", "E2", "B", "E4", "E4L", "E6", "E7", "T", "E8", "E9"]
+    assert [s["id"] for s in d["stages"]] == ["E0", "E1", "E2", "B", "E4", "E4L", "E6", "E7", "TR", "T", "E8", "E9"]
     assert stages["E2"]["equations"][0]["value"] == 36
     assert round(min(q["value"] for q in stages["B"]["equations"] if q["id"] == "N5"), 2) == 112.08
     assert round(next(q["value"] for q in stages["B"]["equations"] if q["id"] == "N7"), 4) == 2.3394  # R4-F343
@@ -37,6 +37,7 @@ def test_the_grand_prize_offline_returns_its_certificate_and_says_what_it_does_n
     assert requirements["one mesh per column, `column_NN.tifxyz`"] == "not met"
     assert requirements["the transfer to the next winding corrected without a hand"] == "met"  # offline: embedded
     assert stages["T"]["outputs"]["net_gain"] == 122 and (tmp_path / "corrected_transfer.npy").exists()
+    assert stages["TR"]["state"] == "skipped" and "--render" in stages["TR"]["reason"]
     assert not r.stopped
 
 
@@ -83,3 +84,12 @@ def test_every_equation_reaches_github_with_its_backslashes():
     assert "$$" not in page
     assert sorted(fenced) == sorted(e.latex for e in FORMULARY.values())
     assert any("\\{" in x for x in fenced)  # the case that broke on GitHub is among those checked
+
+
+def test_without_the_renderer_the_tables_are_not_made_and_the_correction_says_whose_it_replays(tmp_path, monkeypatch):
+    _offline(monkeypatch)
+    monkeypatch.setattr("vesuve.grand_prize.pipeline.rendering.renderer", lambda: None)
+    grand_prize(output=tmp_path, cache=tmp_path / "cache", ink=False, surface=False, render=True)
+    stages = {s["id"]: s for s in json.loads((tmp_path / "report.json").read_text())["stages"]}
+    assert stages["TR"]["state"] == "partial" and "vc_render_tifxyz" in stages["TR"]["reason"]
+    assert stages["T"]["state"] == "done" and "research's renders" in stages["T"]["outputs"]["where_the_inputs_come_from"]

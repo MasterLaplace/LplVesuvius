@@ -14,6 +14,7 @@ The stages, in the order of `213` §2 and `244` §5:
     E4 the lattice      the steps of the bands, published or read here
     E6 the certificate  the hand-free procedure, and the per-chunk mask
     E7 the judge        (option) the material peak of the certified chunks, without ground truth
+    TR the tables       (option) the step tables of the correction, made here: mirror, render, steps
     T  the transfer     the hand-free correction of the transfer to the next winding, where it was validated
     E8 the ink          the published ink map, under the mask
     E9 the packaging    the mask, the certified surface and its `approval.tif`, and what is not produced
@@ -35,7 +36,8 @@ from vesuve.lattice.segment import certify_segment, extra_readings, published_in
 from vesuve.remote import Remote, Unavailable
 from vesuve.remote_zarr import BUCKET, RemoteArray
 from vesuve.report import MET, NOT_MEASURED, NOT_MET, Report
-from vesuve.transfer import correction
+from vesuve.transfer import correction, rendering, surfaces
+from vesuve.transfer.tables import TableMaker
 from vesuve.transport import Transport
 
 TRACED_LAYER = 54      # a surface volume has 109 layers centred on the traced surface
@@ -44,11 +46,47 @@ CONTROL_BAND = "20260623142658-w028-037"  # where the correction was measured to
 THRESHOLD = 0.05       # the sign test's threshold (`290`)
 
 
-def _correct(name: str) -> dict:
+def _correct(name: str, tables: dict | None = None) -> dict:
     k = embedded.correction(name)
-    got = correction.correct_segment(k["transfer"], k["judges"], k["tables"], k["candidates"],
-                                     k["context"]["slip_voxels"], k["surfaces"])
+    got = correction.correct_segment(k["transfer"], k["judges"], k["tables"] if tables is None else tables,
+                                     k["candidates"], k["context"]["slip_voxels"], k["surfaces"])
     return {**got, "context": k["context"]}
+
+
+def _make_tables(segment: str, cache: Path, remote, transport, journal, rows: int | None, keep_piles: bool,
+                 threads: int) -> dict:
+    """The two surfaces, then the piles and the step tables of every candidate block, under `cache/render/`."""
+    k = embedded.correction(segment)
+    rc = k["context"].get("render")
+    if rc is None:
+        raise FileNotFoundError(f"segment {segment} embeds no render inputs")
+    work = Path(cache) / "render" / segment
+    made = surfaces.the_two_surfaces(remote.tifxyz_folder(rc["mesh"]), k["transfer"], work / "surfaces", rc["mesh_step"])
+    maker = TableMaker(work, {"reference": made["reference"], "produced": made["produced"]}, k["candidates"],
+                       f"{BUCKET}/{rc['raw_volume']}", transport, journal, keep_piles=keep_piles, threads=threads)
+    return {"report": maker.make(stop_after_rows=rows), "tables": maker.tables_for_the_correction(), "surfaces": made,
+            "work": work}
+
+
+def _compare_tables(made: dict, embedded_tables: dict) -> dict:
+    """Seam by seam, the tables made here against those of the research's renders."""
+    same = different = 0
+    worst = 0.0
+    for key, t in made.items():
+        ref = embedded_tables.get(key)
+        if ref is None:
+            continue
+        for d in ("h", "v"):
+            for seam in set(t[d]) | set(ref[d]):
+                a, b = t[d].get(seam), ref[d].get(seam)
+                if a == b:
+                    same += 1
+                else:
+                    different += 1
+                    if a is not None and b is not None:
+                        worst = max(worst, abs(a - b))
+    return {"tables": len(made), "seams_equal": same, "seams_different": different,
+            "largest_difference_voxels": worst}
 
 
 def _summary(got: dict) -> dict:
@@ -66,7 +104,8 @@ def _certify(s, fresh):
 
 def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-prize"), cache: Path = Path("cache"),
         read: bool = False, rounds: int = 6, threads: int = 16, readings=(), judge: int = 0, ink: bool = True,
-        surface: bool = True, journal=None) -> Report:
+        surface: bool = True, render: bool = False, render_rows: int | None = None, keep_piles: bool = False,
+        journal=None) -> Report:
     s = embedded.segment(segment)
     ctx = s["context"]
     r = Report("grand-prize", {"segment": segment, "scroll": ctx["scroll"], "read": read, "rounds": rounds,
@@ -201,10 +240,28 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                        rule=("`src/tracecheck/tracecheck.py:204`: the material peak of each chunk must fall on the traced "
                              "layer; a gap beyond the half sheet (36 voxels, 86.4 µm) says the surface left its sheet"))
 
-    transfer = None
+    transfer, made = None, None
+    with r.stage("TR", "the step tables, made here", "B4") as e:
+        if not render:
+            e.skip("the correction replays the tables of the research's renders; --render makes them here")
+        elif rendering.renderer() is None:
+            e.partial(f"`{rendering.RENDERER}` is not installed: it is the renderer of ScrollPrize/villa "
+                      f"(`volume-cartographer`), and the tables cannot be made without it")
+        else:
+            try:
+                made = _make_tables(segment, cache, remote, transport, journal, render_rows, keep_piles, threads)
+            except (FileNotFoundError, Unavailable) as x:
+                e.partial(f"the tables could not be made: {x}")
+            if made is not None:
+                rep = made["report"]
+                compared = _compare_tables(made["tables"], embedded.correction(segment)["tables"])
+                e.note(work=str(made["work"]), mesh_points=made["surfaces"]["points"], **rep, compared=compared)
+                if rep["stopped"] or rep["failed"] or rep["rows_done"] < rep["rows"]:
+                    e.partial(rep["stopped"] or f"{len(rep['failed'])} piles failed, {rep['rows_done']} rows of "
+                              f"{rep['rows']} done")
     with r.stage("T", "the transfer to the next winding", "B4") as e:
         try:
-            got = _correct(segment)
+            got = _correct(segment, made["tables"] if made else None)
         except FileNotFoundError as x:
             e.skip(f"no correction inputs are embedded for this segment ({x})")
             got = None
@@ -245,9 +302,9 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                                              "blocks_within_validated_geometry":
                                                  control["blocks_within_validated_geometry"]},
                    where_the_inputs_come_from=(
-                       "the step tables are those of the research's renders (`275`, `281`: two surfaces rendered "
-                       "through `vc_render_tifxyz` from about 50 GB of chunks); this program replays the decision on "
-                       "them and does not render them"))
+                       "the step tables made here in stage TR, from the published mesh and the raw scan" if made else
+                       "the step tables of the research's renders (`275`, `281`: two surfaces rendered through "
+                       "`vc_render_tifxyz` from about 50 GB of chunks); --render makes them here"))
             if summary["undecided"]:
                 e.partial(f"{len(summary['undecided'])} blocks are left undecided")
 
