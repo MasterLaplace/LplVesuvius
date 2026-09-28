@@ -55,6 +55,11 @@ KEYS = {
     "le_segment": "segment", "le_volume": "volume", "le_voxel_um": "voxel_um", "lobjet": "scroll",
     "la_couverture_a_la_main": "hand_coverage", "la_trace": "trace", "les_rangees": "rows",
     "la_grille": "grid",
+    # the correction of the transfer (`275`, `281`)
+    "les_blocs": "blocks", "les_voisins": "neighbours", "lancre_voxels": "anchor_voxels", "avant": "before",
+    "apres": "after", "les_points_notes": "scored_points", "la_part_sur_la_bonne_spire": "share_on_the_right_winding",
+    "les_points_corriges": "corrected_points", "les_rates_rendus_justes": "misses_made_right",
+    "les_justes_rendus_rates": "rights_made_misses", "les_reunis": "pooled", "le_gain_net": "net_gain",
 }
 
 VALUES = {

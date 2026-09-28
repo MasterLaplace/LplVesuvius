@@ -54,6 +54,7 @@ def formulary_as_markdown() -> str:
              "of the research producer; the others are procedure rules, in Python.", ""]
     stages = {"E2": "E2: the scale", "B": "B: the budget of a sheet trace", "E4": "E4: the lattice",
               "E5": "E5: the holes", "E6": "E6: the certificate", "E7": "E7: judging without ground truth",
+              "T": "T: correcting the transfer to the next winding",
               "E8": "E8: the ink, the measuring rule"}
     for key, title in stages.items():
         es = [e for e in FORMULARY.values() if e.stage == key]

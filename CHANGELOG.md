@@ -5,6 +5,19 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 
 ## [Unreleased]
 
+### Added
+- `vesuve grand-prize` corrects the transfer to the next winding without a hand (stage T), the procedure of
+  `265` as `275` ran it on segment `20230702185753`: 163 misses made right for 41 rights made misses on 340
+  blocks, a net gain of 122, sign test p = 2.04e-18 on the points and 2.25e-05 on the blocks. It writes
+  `corrected_transfer.npy` and `correction.json`, and the report says what the transfer is.
+- The correction is claimed only within the geometry it was validated under, neighbours along both axes. On the
+  band `20260623142658-w028-037`, one row of blocks, the same procedure gives 15 for 25 (p = 0.154): the report
+  says so and nothing is written there.
+- The formulary gains the five rules of the correction (walk, anchor, slip mixture, correction rule, sign test).
+- The step tables, the transfer and the judges of the segment and of the band are embedded (5.9 MB), so the
+  correction replays without the research tree; the tables come from the research's renders, which this program
+  does not make.
+
 ### Changed
 - **Breaking: the program is now in English**, from the command line down to the C core, so that anyone
   can read it. Scripts written against 0.1.0 need these renames:

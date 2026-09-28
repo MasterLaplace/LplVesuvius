@@ -47,3 +47,21 @@ def test_the_replay_from_the_embedded_data_equals_the_publication():
     published = to_english(json.loads((MEASURES / "la_couverture_sans_main.json").read_text()))
     assert r["requests"] == published["requests"]
     assert r["holding_loops"] == published["holding_loops"]
+
+
+@research
+def test_the_embedded_correction_inputs_equal_a_fresh_extraction(tmp_path):
+    """Only where the research's unversioned `data/` lives: the step tables come from its renders."""
+    import pytest
+    if not (RESEARCH / "data" / "rendu_spire_voisine" / "les_pas").is_dir():
+        pytest.skip(f"the research's renders are not under {RESEARCH / 'data'}")
+    spec = importlib.util.spec_from_file_location("extract", HERE / "tools" / "extract_from_research.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    out = tmp_path / "segments" / m.SEGMENT
+    m.extract_correction(RESEARCH, out)
+    for name in (m.SEGMENT, m.BAND):
+        fresh, kept = out.parent / name / "correction", embedded.ROOT / name / "correction"
+        assert sorted(p.name for p in fresh.iterdir()) == sorted(p.name for p in kept.iterdir())
+        for f in fresh.iterdir():
+            assert f.read_bytes() == (kept / f.name).read_bytes(), f"{name}/correction/{f.name} is stale"

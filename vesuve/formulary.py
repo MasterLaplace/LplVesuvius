@@ -21,7 +21,7 @@ from vesuve import core
 @dataclass(frozen=True)
 class Equation:
     id: str
-    stage: str      # the pipeline stage where it serves: E2, B, E4, E5, E6, E7, E8
+    stage: str      # the pipeline stage where it serves: E2, B, E4, E5, E6, E7, T, E8
     name: str
     latex: str
     statement: str  # what it says, in one sentence
@@ -96,6 +96,32 @@ FORMULARY: dict[str, Equation] = {e.id: e for e in [
        r"c' = \max\!\left(0, \frac{c - 1/\sqrt n}{1 - 1/\sqrt n}\right)",
        "Zero on pure noise, one on a perfect rotation.", "R4-F100", "`151` [F17]",
        core.corrected_coherence),
+    _E("W", "T", "the walk of a neighbourhood",
+       r"\hat D = \arg\min_{D,\ \sum_c D_c = 0} \sum_{(i,j)} \left(D_j - D_i - s_{ij}\right)^2",
+       "The depth of the sheet in every chunk, by least squares on the window-to-window steps of the seams, over the "
+       "largest connected set of chunks; walked once on the reference and once on the produced winding.",
+       "R4-F440", "`la_spire_produite_se_lit_elle_dans_le_treillis.py:328`"),
+    _E("A", "T", "the anchor of a block",
+       r"a = \mathrm{median}\left\{\hat D^{\,p}_c - \hat D^{\,r}_c \ :\ c \in \mathcal{N} \setminus B\right\}",
+       "The level the produced winding should have, read on the neighbouring blocks only: the block itself is left "
+       "out, so its own slip cannot pull its anchor.",
+       "R4-F446", "`le_voisinage_dit_il_quel_niveau_est_le_bon.py:98`"),
+    _E("X", "T", "the slip mixture",
+       r"x \sim w_0\,\mathcal{N}(0, \sigma^2) + w_+\,\mathcal{N}(g, \sigma^2) + w_-\,\mathcal{N}(-g, \sigma^2)",
+       "The departure of each chunk from its anchor is noise, or a slip of one winding above or below; weights and "
+       "the shared width by EM, the slip g = 69.458 voxels read without a judge by `261`.",
+       "R4-F445", "`la_marche_sait_elle_ou_ne_pas_corriger.py:79`"),
+    _E("R", "T", "the correction rule",
+       r"\tau_1 = \tau_0 - x \quad \text{if} \quad \max\left(w_+ e^{-\frac{(x-g)^2}{2\sigma^2}},\ "
+       r"w_- e^{-\frac{(x+g)^2}{2\sigma^2}}\right) > w_0\, e^{-\frac{x^2}{2\sigma^2}}",
+       "A point of the transfer is brought back by its departure when a slip explains that departure better than the "
+       "noise; otherwise it is left alone. No judge takes part.",
+       "R4-F456", "`la_marche_sait_elle_ou_ne_pas_corriger.py:131`"),
+    _E("G", "T", "the sign test",
+       r"p = \min\left(1,\ 2 \sum_{i \le \min(a, b)} \binom{a+b}{i} 2^{-(a+b)}\right)",
+       "How often chance alone, one in two, would give a split at least as uneven as a misses made right against b "
+       "rights made misses; exact and two-sided.",
+       "R4-F471", "`les_gains_publies_se_distinguent_ils_du_hasard.py:78`"),
     _E("F31", "E8", "the Fresnel number", r"F = \frac{\sqrt{\lambda D}}{p}, \qquad \lambda = \frac{hc}{E}",
        "The width of the first fringe in pixels: 0.39 for the prize scrolls, 0.74 in production.",
        "R6-F08", "`src/encre/nombre_de_fresnel.py:142`", core.fresnel_number),

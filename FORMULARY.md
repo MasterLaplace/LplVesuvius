@@ -196,6 +196,58 @@ Zero on pure noise, one on a perfect rotation.
 
 *Fact* `R4-F100` · *source* `151` [F17] · **C core**
 
+## T: correcting the transfer to the next winding
+
+### [W] the walk of a neighbourhood
+
+```math
+\hat D = \arg\min_{D,\ \sum_c D_c = 0} \sum_{(i,j)} \left(D_j - D_i - s_{ij}\right)^2
+```
+
+The depth of the sheet in every chunk, by least squares on the window-to-window steps of the seams, over the largest connected set of chunks; walked once on the reference and once on the produced winding.
+
+*Fact* `R4-F440` · *source* `la_spire_produite_se_lit_elle_dans_le_treillis.py:328` · **procedure rule**
+
+### [A] the anchor of a block
+
+```math
+a = \mathrm{median}\left\{\hat D^{\,p}_c - \hat D^{\,r}_c \ :\ c \in \mathcal{N} \setminus B\right\}
+```
+
+The level the produced winding should have, read on the neighbouring blocks only: the block itself is left out, so its own slip cannot pull its anchor.
+
+*Fact* `R4-F446` · *source* `le_voisinage_dit_il_quel_niveau_est_le_bon.py:98` · **procedure rule**
+
+### [X] the slip mixture
+
+```math
+x \sim w_0\,\mathcal{N}(0, \sigma^2) + w_+\,\mathcal{N}(g, \sigma^2) + w_-\,\mathcal{N}(-g, \sigma^2)
+```
+
+The departure of each chunk from its anchor is noise, or a slip of one winding above or below; weights and the shared width by EM, the slip g = 69.458 voxels read without a judge by `261`.
+
+*Fact* `R4-F445` · *source* `la_marche_sait_elle_ou_ne_pas_corriger.py:79` · **procedure rule**
+
+### [R] the correction rule
+
+```math
+\tau_1 = \tau_0 - x \quad \text{if} \quad \max\left(w_+ e^{-\frac{(x-g)^2}{2\sigma^2}},\ w_- e^{-\frac{(x+g)^2}{2\sigma^2}}\right) > w_0\, e^{-\frac{x^2}{2\sigma^2}}
+```
+
+A point of the transfer is brought back by its departure when a slip explains that departure better than the noise; otherwise it is left alone. No judge takes part.
+
+*Fact* `R4-F456` · *source* `la_marche_sait_elle_ou_ne_pas_corriger.py:131` · **procedure rule**
+
+### [G] the sign test
+
+```math
+p = \min\left(1,\ 2 \sum_{i \le \min(a, b)} \binom{a+b}{i} 2^{-(a+b)}\right)
+```
+
+How often chance alone, one in two, would give a split at least as uneven as a misses made right against b rights made misses; exact and two-sided.
+
+*Fact* `R4-F471` · *source* `les_gains_publies_se_distinguent_ils_du_hasard.py:78` · **procedure rule**
+
 ## E8: the ink, the measuring rule
 
 ### [F31] the Fresnel number

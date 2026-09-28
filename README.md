@@ -9,6 +9,12 @@ neighbouring chunks. The consensus of five neighbouring lines removes each line'
 whose closure stays under half a sheet at every cut of its profile certifies that its two paths stayed on
 the same winding (`docs/archive/244`, `246`).
 
+Since 0.2.0 it also corrects that transfer where it goes wrong, still without a hand. It walks the sheet on the
+reference and on the produced winding, anchors their difference on the neighbouring blocks, and brings a point back
+by one winding when a slip explains its departure better than the noise does. On the one segment where this was
+validated, that turns 163 misses into right points for 41 right points turned into misses (`docs/archive/275`). On a
+band where it was not, it says so and writes nothing.
+
 ## Two branches
 
 - **`main`** is this program: what the research validated, ported, tested and released.
@@ -42,7 +48,7 @@ Measured on real data. The reports are in [`examples/`](examples/README.md).
 
 | prize | command | what it writes | where it stops, and why |
 |---|---|---|---|
-| **Grand Prize** | `vesuve grand-prize` | a per-chunk certificate mask, the certified surface as tifxyz with `approval.tif`, the published ink map under the mask | one published segment: 6333 of 97771 chunks certified. To judge the rest it still has to read 111 bands (24263 chunks, about 21 min at 16 threads). There is no `column_NN.tifxyz` because columns need legible ink |
+| **Grand Prize** | `vesuve grand-prize` | a per-chunk certificate mask, the certified surface as tifxyz with `approval.tif`, the published ink map under the mask, and the transfer to the next winding corrected without a hand (`corrected_transfer.npy`, `correction.json`) | one published segment: 6333 of 97771 chunks certified. To judge the rest it still has to read 111 bands (24263 chunks, about 21 min at 16 threads). The correction gains 122 points net on 340 blocks (sign test p = 2.04e-18), but it replays step tables the research rendered and does not render them. There is no `column_NN.tifxyz` because columns need legible ink |
 | **Progress** | `vesuve progress` | where a published segment changes winding | column 260, rows 26 to 223, crossing half a sheet at cuts 163, 173 and 203. It cannot tell a misread column from material that really diverges |
 | **First Letters** | `vesuve first-letters` | a 4 cm² window chosen on papyrus alone, the fibre render, a view without the model, the model's ink, row witnesses, a 1 cm scale bar | on PHerc1447 the 2023 model shows no periodic rows at any angle (`R1-F20`), so it claims no letters |
 | **Paris 4 title** | `vesuve paris4-title` | the last written column of the innermost band, and the region after it where an end-title would sit | on the well-registered revision it finds a short last column whose lines fill the top fifth. Nobody has read the crops yet |
@@ -83,6 +89,9 @@ request, with warnings treated as errors.
 - The hand-free procedure is replayed from 112 published bands. It gives back the published journal entry
   by entry, the same 111 requests and 6333 covered chunks, then twelve fabricated footprints, round after
   round.
+- The correction of the transfer is replayed from the embedded step tables. It gives back what `275` and `281`
+  published block by block (340 and 84 blocks), and the corrected transfer it writes has the same bytes as the one
+  the research saved. The judges only score: replaced by noise, they change the counts and not one corrected point.
 - The row test and the TimeSformer sweep are checked against their producers.
 
 Every test was probed by breaking the rule it guards, and each one turned red.
@@ -92,10 +101,12 @@ Every test was probed by breaking the rule it guards, and each one turned red.
 - **Read text.** It claims no letter, no title, no word. It says where to look and what its witnesses are
   worth.
 - **Unroll a scroll or generate a surface.** The segment, its surface volume and every ink map it reads
-  were made by the Vesuvius Challenge team. What it adds is a verdict on them: which chunks stayed on one
-  winding, where a published segment changed winding, where to look for a title. It answers the Grand Prize
-  question from the side that checks the transfer from one winding to the next, and does not make that
-  transfer.
+  were made by the Vesuvius Challenge team, and the transfer to the next winding comes from the research's
+  chain. What it adds is a verdict on them: which chunks stayed on one winding, where a published segment
+  changed winding, which points of the transfer slipped by one winding and where they belong, where to look for
+  a title.
+- **Claim a correction outside the conditions it was validated under.** A block is corrected only when it has
+  neighbours along both axes: with east-west neighbours alone, the research measured the gain to vanish.
 - **Pick a window where the ink looks strong.** Windows are chosen on papyrus coverage alone.
 - **Turn a failure into a zero.** A stage it cannot decide says why, a network failure is never reported as
   an absence, and a missing file is named.
@@ -108,6 +119,7 @@ Every test was probed by breaking the rule it guards, and each one turned red.
 | `vesuve/` | the Python package: shared services, then one package per prize |
 | `vesuve/research.py` | the one place where the research's French keys become this program's names |
 | `vesuve/data/` | what the pipelines need from the research tree, extracted by `tools/extract_from_research.py` |
+| `vesuve/transfer/` | the hand-free correction of the transfer to the next winding |
 | `tests/` | the tests. Parity tests run against a working copy of `experimental` (`VESUVE_RESEARCH`), heavy data (`VESUVE_DATA`) and the network (`VESUVE_NETWORK=1`), and are skipped with the reason when those are missing |
 | `examples/` | a dated run of the four pipelines, reports and previews |
 | `CONTRIBUTING.md` | how a change goes in: issue, branch, pull request, changelog, version |

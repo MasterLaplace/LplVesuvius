@@ -115,6 +115,96 @@ def extract(research: Path, output: Path) -> dict:
     return context
 
 
+# The hand-free correction reads two surfaces, a reference then the produced winding, in the order `un_bloc` expects.
+ROLES = ("reference", "produced")
+BAND = "20260623142658-w028-037"
+
+
+def _write_array(path: Path, a) -> None:
+    """A NumPy array as `.npy.gz`, byte for byte the same on every run (np.savez would stamp the date)."""
+    import io
+
+    import numpy as np
+    buf = io.BytesIO()
+    np.save(buf, np.asarray(a), allow_pickle=False)
+    path.write_bytes(gzip.compress(buf.getvalue(), compresslevel=9, mtime=0))
+
+
+def _correction_inputs(research: Path, out: Path, *, tau0, judges: dict, candidates, slip: float, surfaces: tuple,
+                       sources: dict, measure: str, corrected: Path) -> dict:
+    """Write what the correction reads on one surface: tables, transfer, judges and context."""
+    from la_spire_produite_se_lit_elle_dans_le_treillis import LA_PREDICTION, LE_BLOC, LE_COTE, LE_DOSSIER
+    out.mkdir(parents=True, exist_ok=True)
+    tables, read = {}, []
+    for role, french in zip(ROLES, surfaces):
+        tables[role] = {}
+        for by, bx in sorted(candidates):
+            f = LE_DOSSIER / "les_pas" / french / f"bloc_{by}_{bx}.json"
+            t = json.loads(f.read_text())
+            # The walk reads the mean step of a seam and nothing else (`la_marche_du_bloc`, `x[0]`).
+            tables[role][f"{by}_{bx}"] = {d: {seam: x[0] for seam, x in t[d].items()} for d in ("h", "v")}
+            read.append(f)
+    _write(out / "tables.json.gz", tables)
+    _write_array(out / "transfer.npy.gz", tau0)
+    for name, a in judges.items():
+        _write_array(out / f"judge_{name}.npy.gz", a)
+    measures = research / "docs" / "mesures"
+    context = {
+        "prediction": LA_PREDICTION, "side": LE_COTE.replace("du_cote_", ""), "block": int(LE_BLOC),
+        "slip_voxels": float(slip), "candidates": [list(b) for b in sorted(candidates)],
+        "judges": list(judges), "research_surfaces": dict(zip(ROLES, surfaces)),
+        "published": measure,
+        "provenance": {
+            "measures": {str(p.relative_to(research)): _digest(p) for p in (
+                measures / measure, measures / "la_marche_corrige_t_elle_la_spire_produite.json")},
+            "inputs": {k: _digest(f) for k, f in sources.items()},
+            # What the research wrote as the corrected transfer: the port must write the same bytes.
+            "corrected_transfer": _digest(corrected),
+            "tables": hashlib.sha256(b"".join(f.read_bytes() for f in read)).hexdigest(),
+        },
+    }
+    _write(out / "context.json", context)
+    return context
+
+
+def extract_correction(research: Path, output: Path) -> dict:
+    """What the hand-free correction reads, from the research's UNVERSIONED `data/`: on the segment (`275`, where it
+    was validated) and on the band `w028-037` (`281`, where it was not).
+
+    ⚠ These inputs are not in `docs/mesures/`: the step tables come from renders of the surface volume (about 50 GB
+    of chunks read through `vc_render_tifxyz`), and the transfer and the judges from the chain of `248`. They are
+    embedded so that the correction replays anywhere, and the replay is checked against what `275` and `281`
+    PUBLISHED, block by block, which does run everywhere; this extraction itself only runs where the research data
+    lives.
+    """
+    _prepare(research)
+    import numpy as np
+    from la_procedure_sans_juge_tient_elle_sur_la_bande import (LE_PREMIER_SAUT, LE_PREMIER_SAUT_CORRIGE,
+                                                                LES_COUCHES_DE_LA_BANDE, LES_SURFACES_DE_LA_BANDE,
+                                                                lire_le_plan)
+    from la_procedure_sans_juge_tient_elle_sur_le_segment_entier import LA_SPIRE_CORRIGEE, le_segment
+    from la_spire_produite_se_lit_elle_dans_le_treillis import LA_PREDICTION, LE_COTE, LES_JUGES
+    from la_spire_voisine_est_elle_a_un_pas import LE_CACHE
+    from le_voisinage_dit_il_quel_niveau_est_le_bon import LES_SURFACES
+    tau0, _err, slip, candidates = le_segment(LE_CACHE)
+    judges = {"segment_alone": "le_segment_seul", "segment_and_witnesses": "le_segment_et_ses_temoins"}
+    assert tuple(judges.values()) == tuple(LES_JUGES), "the research changed its judges"
+    files = {name: LE_CACHE / f"verite_{SEGMENT}_{french}_{LE_COTE}.npy" for name, french in judges.items()}
+    transfer = LE_CACHE / f"transfert_suivante_{SEGMENT}_{LA_PREDICTION}_{LE_COTE}.npy"
+    segment = _correction_inputs(
+        research, output / "correction", tau0=tau0, judges={k: np.load(f) for k, f in files.items()},
+        candidates=candidates, slip=slip, surfaces=tuple(LES_SURFACES), sources={"transfer": transfer, **files},
+        measure="la_procedure_sans_juge_tient_elle_sur_le_segment_entier.json", corrected=LA_SPIRE_CORRIGEE)
+    layers = np.load(LES_COUCHES_DE_LA_BANDE)
+    _correction_inputs(
+        research, output.parent / BAND / "correction", tau0=np.load(LE_PREMIER_SAUT),
+        judges={"band_layers": layers[..., 0]}, candidates=lire_le_plan()["candidats"], slip=slip,
+        surfaces=tuple(LES_SURFACES_DE_LA_BANDE),
+        sources={"transfer": LE_PREMIER_SAUT, "band_layers": LES_COUCHES_DE_LA_BANDE},
+        measure="la_procedure_sans_juge_tient_elle_sur_la_bande.json", corrected=LE_PREMIER_SAUT_CORRIGE)
+    return segment
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     root = os.environ.get("VESUVE_RESEARCH")
@@ -124,6 +214,8 @@ def main() -> int:
     a = p.parse_args()
     c = extract(a.research.resolve(), a.output)
     print(f"written: {a.output} ({len(c['provenance']['files'])} research files read)")
+    k = extract_correction(a.research.resolve(), a.output)
+    print(f"written: {a.output / 'correction'} ({len(k['candidates'])} candidate blocks)")
     return 0
 
 

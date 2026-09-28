@@ -14,6 +14,7 @@ The stages, in the order of `213` §2 and `244` §5:
     E4 the lattice      the steps of the bands, published or read here
     E6 the certificate  the hand-free procedure, and the per-chunk mask
     E7 the judge        (option) the material peak of the certified chunks, without ground truth
+    T  the transfer     the hand-free correction of the transfer to the next winding, where it was validated
     E8 the ink          the published ink map, under the mask
     E9 the packaging    the mask, the certified surface and its `approval.tif`, and what is not produced
 """
@@ -34,10 +35,29 @@ from vesuve.lattice.segment import certify_segment, extra_readings, published_in
 from vesuve.remote import Remote, Unavailable
 from vesuve.remote_zarr import BUCKET, RemoteArray
 from vesuve.report import MET, NOT_MEASURED, NOT_MET, Report
+from vesuve.transfer import correction
 from vesuve.transport import Transport
 
 TRACED_LAYER = 54      # a surface volume has 109 layers centred on the traced surface
 MEASURED_RATE = 19.0   # chunks per second at 16 threads, measured on the smallest published band
+CONTROL_BAND = "20260623142658-w028-037"  # where the correction was measured to fail (`281`)
+THRESHOLD = 0.05       # the sign test's threshold (`290`)
+
+
+def _correct(name: str) -> dict:
+    k = embedded.correction(name)
+    got = correction.correct_segment(k["transfer"], k["judges"], k["tables"], k["candidates"],
+                                     k["context"]["slip_voxels"], k["surfaces"])
+    return {**got, "context": k["context"]}
+
+
+def _summary(got: dict) -> dict:
+    """What a replay says, without the arrays."""
+    return {"pooled": got["pooled"], "pooled_within_validated_geometry": got["pooled_within_validated_geometry"],
+            "sign_test": {k: float(f"{v:.3g}") for k, v in got["sign_test"].items()},
+            "whole_surface": got["whole_segment"],
+            "blocks_within_validated_geometry": sum(1 for b in got["blocks"] if b["validated_geometry"]),
+            "undecided": {f"{b['row']}_{b['column']}": b["reason"] for b in got["blocks"] if not b["decidable"]}}
 
 
 def _certify(s, fresh):
@@ -181,6 +201,56 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                        rule=("`src/tracecheck/tracecheck.py:204`: the material peak of each chunk must fall on the traced "
                              "layer; a gap beyond the half sheet (36 voxels, 86.4 µm) says the surface left its sheet"))
 
+    transfer = None
+    with r.stage("T", "the transfer to the next winding", "B4") as e:
+        try:
+            got = _correct(segment)
+        except FileNotFoundError as x:
+            e.skip(f"no correction inputs are embedded for this segment ({x})")
+            got = None
+        if got is not None:
+            kc, p = got["context"], got["pooled"]
+            decided = [b for b in got["blocks"] if b["decidable"]]
+            e.record("W", 2 * len(decided), surfaces=kc["research_surfaces"], neighbourhoods=len(decided))
+            e.record("A", round(float(np.median([abs(b["anchor_voxels"]) for b in decided])), 4) if decided else None,
+                     what="median |anchor| over the decided blocks, voxels")
+            e.record("X", kc["slip_voxels"], source="`261`, read on the segment without a judge")
+            e.record("R", p["corrected_points"], blocks=p["blocks"])
+            e.record("G", got["sign_test"]["on_points"], misses_made_right=p["misses_made_right"],
+                     rights_made_misses=p["rights_made_misses"])
+            e.record("G", got["sign_test"]["on_blocks"], blocks_up=p["blocks_up"], blocks_down=p["blocks_down"])
+            output.mkdir(parents=True, exist_ok=True)
+            np.save(output / "corrected_transfer.npy", got["claimed"])
+            summary = _summary(got)
+            try:
+                control = _summary(_correct(CONTROL_BAND))
+            except FileNotFoundError:
+                control = None
+            (output / "correction.json").write_text(json.dumps(
+                {**summary, "prediction": kc["prediction"], "side": kc["side"], "blocks": got["blocks"],
+                 "control_band": {"surface": CONTROL_BAND, **control} if control else None},
+                ensure_ascii=False, indent=1))
+            transfer = {"segment": summary, "band": control}
+            e.note(corrected_transfer="corrected_transfer.npy", details="correction.json",
+                   what_the_transfer_is=(f"the distance from each point of the segment's mesh (one point every 8 grid "
+                                         f"cells) to the next winding, in voxels along the normal, side {kc['side']}, "
+                                         f"transferred by `{kc['prediction']}` (`248`); NaN where there is no point"),
+                   blocks=p["blocks"], corrected_points=p["corrected_points"],
+                   misses_made_right=p["misses_made_right"], rights_made_misses=p["rights_made_misses"],
+                   net_gain=p["net_gain"], share_before=p["before"], share_after=p["after"],
+                   sign_test=summary["sign_test"], whole_segment=summary["whole_surface"],
+                   blocks_within_validated_geometry=summary["blocks_within_validated_geometry"],
+                   control_band=control and {"surface": CONTROL_BAND, "pooled": control["pooled"],
+                                             "sign_test": control["sign_test"],
+                                             "blocks_within_validated_geometry":
+                                                 control["blocks_within_validated_geometry"]},
+                   where_the_inputs_come_from=(
+                       "the step tables are those of the research's renders (`275`, `281`: two surfaces rendered "
+                       "through `vc_render_tifxyz` from about 50 GB of chunks); this program replays the decision on "
+                       "them and does not render them"))
+            if summary["undecided"]:
+                e.partial(f"{len(summary['undecided'])} blocks are left undecided")
+
     with r.stage("E8", "the ink, the measuring rule", "B3") as e:
         if not ink:
             e.skip("disabled by --no-ink")
@@ -208,6 +278,8 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
             ensure_ascii=False, indent=1))
         (output / "bands_to_read.json").write_text(json.dumps(res["requests"], ensure_ascii=False, indent=1))
         products = ["chunk_mask.tif", "chunk_mask.png", "certificate.json", "bands_to_read.json"]
+        if transfer is not None:
+            products += ["corrected_transfer.npy", "correction.json"]
         if surface:
             path = f"{ctx['scroll']}/segments/{segment}/mesh/{segment}-on-20260411134726-2.4um.tifxyz"
             try:
@@ -236,6 +308,23 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                   f"({share:.2%} of ITS footprint); a segment is not a scroll")
     r.requirement("automated pipeline, at most 8 h of human input", MET,
                   "0 h: the procedure takes every decision without a hand (`R4-F410`); its only input is the presence")
+    if transfer is not None:
+        seg, band = transfer["segment"], transfer["band"]
+        p, st = seg["pooled"], seg["sign_test"]
+        holds = p["net_gain"] > 0 and st["on_points"] < THRESHOLD and st["on_blocks"] < THRESHOLD
+        r.requirement("the transfer to the next winding corrected without a hand", MET if holds else NOT_MET,
+                      f"{p['misses_made_right']} misses made right for {p['rights_made_misses']} rights made misses "
+                      f"on {p['blocks']} blocks, a net gain of {p['net_gain']}; sign test p = {st['on_points']} on the "
+                      f"points and {st['on_blocks']} on the blocks ({p['blocks_up']} up, {p['blocks_down']} down). "
+                      f"The judge only scores (`R4-F456`, `R4-F471`)")
+        where = (f"{seg['blocks_within_validated_geometry']} of {p['blocks']} blocks have neighbours along both axes, "
+                 f"and only their corrections are written")
+        if band:
+            bp, bs = band["pooled"], band["sign_test"]
+            where += (f". On the band `{CONTROL_BAND}` ({band['blocks_within_validated_geometry']} of {bp['blocks']} "
+                      f"blocks within that geometry), the same procedure gives {bp['misses_made_right']} for "
+                      f"{bp['rights_made_misses']} (p = {bs['on_points']}), and nothing is claimed there")
+        r.requirement("the correction claimed only where it was validated", MET, where)
     r.requirement("70 % of the characters legible per column", NOT_MEASURED,
                   "no reading; at the prize regime the published ink is flat (`R1-F20`)")
     r.requirement("one mesh per column, `column_NN.tifxyz`", NOT_MET,
