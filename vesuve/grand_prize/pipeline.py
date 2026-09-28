@@ -54,7 +54,7 @@ def _correct(name: str, tables: dict | None = None) -> dict:
 
 
 def _make_tables(segment: str, cache: Path, remote, transport, journal, rows: int | None, keep_piles: bool,
-                 threads: int) -> dict:
+                 threads: int, table_workers: int) -> dict:
     """The two surfaces, then the piles and the step tables of every candidate block, under `cache/render/`."""
     k = embedded.correction(segment)
     rc = k["context"].get("render")
@@ -63,7 +63,8 @@ def _make_tables(segment: str, cache: Path, remote, transport, journal, rows: in
     work = Path(cache) / "render" / segment
     made = surfaces.the_two_surfaces(remote.tifxyz_folder(rc["mesh"]), k["transfer"], work / "surfaces", rc["mesh_step"])
     maker = TableMaker(work, {"reference": made["reference"], "produced": made["produced"]}, k["candidates"],
-                       f"{BUCKET}/{rc['raw_volume']}", transport, journal, keep_piles=keep_piles, threads=threads)
+                       f"{BUCKET}/{rc['raw_volume']}", transport, journal, keep_piles=keep_piles, threads=threads,
+                       table_workers=table_workers)
     return {"report": maker.make(stop_after_rows=rows), "tables": maker.tables_for_the_correction(), "surfaces": made,
             "work": work}
 
@@ -105,7 +106,7 @@ def _certify(s, fresh):
 def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-prize"), cache: Path = Path("cache"),
         read: bool = False, rounds: int = 6, threads: int = 16, readings=(), judge: int = 0, ink: bool = True,
         surface: bool = True, render: bool = False, render_rows: int | None = None, keep_piles: bool = False,
-        journal=None) -> Report:
+        table_workers: int = 2, journal=None) -> Report:
     s = embedded.segment(segment)
     ctx = s["context"]
     r = Report("grand-prize", {"segment": segment, "scroll": ctx["scroll"], "read": read, "rounds": rounds,
@@ -249,7 +250,8 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                       f"(`volume-cartographer`), and the tables cannot be made without it")
         else:
             try:
-                made = _make_tables(segment, cache, remote, transport, journal, render_rows, keep_piles, threads)
+                made = _make_tables(segment, cache, remote, transport, journal, render_rows, keep_piles, threads,
+                                    table_workers)
             except (FileNotFoundError, Unavailable) as x:
                 e.partial(f"the tables could not be made: {x}")
             if made is not None:

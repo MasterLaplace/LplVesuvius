@@ -104,7 +104,8 @@ def chunk_reader(piles: dict[tuple[int, int], np.ndarray], side: int = BLOCK, ch
         if p is None:
             return None
         y, x = int(cy) - key[0], int(cx) - key[1]
-        return p[:, y * chunk:(y + 1) * chunk, x * chunk:(x + 1) * chunk]
+        b = p[:, y * chunk:(y + 1) * chunk, x * chunk:(x + 1) * chunk]
+        return b if b.shape[1:] == (chunk, chunk) else None
     return read
 
 

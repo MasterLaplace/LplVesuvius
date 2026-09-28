@@ -130,6 +130,7 @@ def render(tifxyz: Path, output: Path, box: dict, mirror: Path, layers: int = LA
     return {"rendered": ok, "resumed": False, "layers": n, **got, **({"set_aside": str(moved)} if moved else {})}
 
 
-def read_pile(folder: Path) -> np.ndarray:
-    """The 109 layers of a pile, stacked (layer, y, x)."""
-    return np.stack([tifffile.imread(f) for f in sorted(Path(folder).glob("*.tif"))])
+def read_pile(folder: Path, rows: slice = slice(None), columns: slice = slice(None)) -> np.ndarray:
+    """The 109 layers of a pile, stacked (layer, y, x); `rows` and `columns` keep a strip, cut layer by layer so that the
+    whole pile is never held for it."""
+    return np.stack([np.ascontiguousarray(tifffile.imread(f)[rows, columns]) for f in sorted(Path(folder).glob("*.tif"))])

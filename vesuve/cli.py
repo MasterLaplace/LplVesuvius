@@ -73,7 +73,8 @@ def _grand_prize(a, journal) -> int:
     from vesuve.grand_prize.pipeline import run
     r = run(a.segment, Path(a.output), Path(a.cache), read=a.read, rounds=a.rounds, threads=a.threads,
             readings=[Path(x) for x in a.readings], judge=a.judge, ink=not a.no_ink, surface=not a.no_surface,
-            render=a.render, render_rows=a.render_rows, keep_piles=a.keep_piles, journal=journal)
+            render=a.render, render_rows=a.render_rows, keep_piles=a.keep_piles, table_workers=a.table_workers,
+            journal=journal)
     return 2 if r.stopped else 0
 
 
@@ -176,6 +177,8 @@ def main(argv=None) -> int:
     g.add_argument("--render", action="store_true", help="make the step tables of the correction here (hours)")
     g.add_argument("--render-rows", type=int, default=None, help="with --render, stop after N rows of blocks")
     g.add_argument("--keep-piles", action="store_true", help="with --render, keep the rendered piles (237 MB each)")
+    g.add_argument("--table-workers", type=int, default=2,
+                   help="with --render, processes that read the step tables while the next rows render (0: none)")
     common(g, "outputs/grand-prize")
 
     q = verb("progress", "audit a published segment: where did it change winding?")

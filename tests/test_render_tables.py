@@ -232,7 +232,8 @@ def test_the_loop_reads_a_table_once_its_south_pile_exists_and_frees_the_piles(t
         return {"rendered": True, "resumed": False}
 
     monkeypatch.setattr(tables.rendering, "render", fake_render)
-    monkeypatch.setattr(tables.rendering, "read_pile", lambda folder: pile)
+    monkeypatch.setattr(tables.rendering, "read_pile",
+                        lambda folder, rows=slice(None), columns=slice(None): pile[:, rows, columns])
     monkeypatch.setattr(tables.TableMaker, "needs", lambda self, s, by, bx: set())
     monkeypatch.setattr(tables, "BLOCK", 2)
     monkeypatch.setattr(tables.steps, "block_table",
@@ -262,7 +263,7 @@ def test_a_chunk_two_rows_share_is_downloaded_once(tmp_path, monkeypatch):
     mesh = surfaces.write_for_render(tmp_path / "mesh", points, valid, 1 / 20.0, "s")
     monkeypatch.setattr(tables, "BLOCK", 2)
     monkeypatch.setattr(tables.rendering, "render", lambda *a, **k: {"rendered": True, "resumed": False})
-    monkeypatch.setattr(tables.TableMaker, "_tables_of_row", lambda self, r: None)
+    monkeypatch.setattr(tables.TableMaker, "_submit_tables", lambda self, r, pool: [])
     shared = {0: {(0, 0, 0), (0, 0, 1)}, 2: {(0, 0, 1), (0, 0, 2)}, 4: {(0, 0, 3)}}
     monkeypatch.setattr(tables.TableMaker, "needs", lambda self, s, by, bx: shared[by])
     bodies = {**_volume(), **{f"https://s3/v.zarr/0/0/0/{i}": bytes(8) for i in range(4)}}
@@ -273,3 +274,20 @@ def test_a_chunk_two_rows_share_is_downloaded_once(tmp_path, monkeypatch):
     chunks = [u for u in transport.requests if u.startswith("https://s3/v.zarr/0/0/0/")]
     assert sorted(chunks) == [f"https://s3/v.zarr/0/0/0/{i}" for i in range(4)]   # (0, 0, 1) once, not twice
     assert not maker.mirror.path((0, 0, 0)).exists() and maker.mirror.path((0, 0, 3)).exists()
+
+
+def test_worker_processes_read_the_same_tables_as_this_process(tmp_path):
+    """The tables read by spawned workers, while the next rows render, are those read in this process."""
+    piles = {"a": _sheet_pile(2, 2, seed=1), "b": _sheet_pile(2, 2, seed=2)}
+    import tifffile
+    for name, p in piles.items():
+        (tmp_path / name).mkdir()
+        for k, layer in enumerate(p):
+            tifffile.imwrite(tmp_path / name / f"{k:03d}.tif", layer)
+    inline = tables.table_from_piles(tmp_path / "a", tmp_path / "b", None, 0, 0, tmp_path / "t1.json", side=2)
+    import multiprocessing
+    from concurrent.futures import ProcessPoolExecutor
+    with ProcessPoolExecutor(1, mp_context=multiprocessing.get_context("spawn")) as pool:
+        spawned = pool.submit(tables.table_from_piles, tmp_path / "a", tmp_path / "b", None, 0, 0,
+                              tmp_path / "t2.json", 2).result()
+    assert len(inline["h"]) == 4 and spawned == inline and json.loads((tmp_path / "t2.json").read_text()) == inline
