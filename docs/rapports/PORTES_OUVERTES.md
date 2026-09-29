@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**182 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**183 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 144 portes
+## Grand Prize — 145 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -162,7 +162,8 @@
 - **R4-P125** *(le graal)* · **RÉPONDUE par `327` : non, il ne change rien.** Le saut parti de la médiane tombe sur le tour suivant de PHercParis4 sur les 4 mêmes graines et pose au pas sur les 5 mêmes côtés de PHerc0358 ; là où le départ change, la croissance rejoint la même feuille de `m7` (`R4-F512`). La suite est `R4-P126`.
 - **R4-P126** *(le graal)* · **RÉPONDUE par `328` et `329`.** Sans référent, la chaîne qui croît tient 1 saut au pas en médiane sur les 5 côtés de PHerc0358 et 2,5 sur les 14 de PHercParis4 (`R4-F513`) ; contre les tours publiés `5753_0` à `5753_-3` de PHercParis4, elle passe d'un tour au suivant 14 fois sur 14 côté intérieur (`R4-F514`). La suite est `R4-P127`.
 - **R4-P127** *(le référent)* · **RÉPONDUE par `330` : six tours d'affilée en médiane.** Avec `5753_0` à `5753_-7` chargés et huit sauts, la chaîne qui croît touche `5753_0` sur les huit graines et descend jusqu'à `5753_-6` sur cinq ; elle s'arrête quand la spire s'épuise ou que `5753_-7` ne passe pas là (`R4-F516`). La suite est `R4-P128`.
-- **R4-P128** *(le graal)* · **RELANCER CHAQUE SAUT QUI CROÎT SUR LA SURFACE ENTIÈRE QU'IL A ATTEINTE, PLUTÔT QUE DANS LE PLAN FIXE DE LA GRAINE, PROLONGE-T-IL LA DESCENTE DE LA CHAÎNE SUR PHercParis4, ET LA CHAÎNE DE PHerc0358 ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `330` DÉSIGNE. La chaîne s'arrête d'abord parce que sa spire rétrécit, de 46,2 % du plan au premier saut à quelques pour cent au huitième, dans un plan de 65 × 65 points qui ne change pas (`R4-F516`, `R4-F513`).
+- **R4-P128** *(le graal)* · **RÉPONDUE par `331` : non, pas telle quelle.** Relancée en une nappe entière sur la feuille atteinte, la chaîne garde sa surface mais descend 5,5 tours publiés en médiane sur PHercParis4 contre 6, avec quatre sauts faux contre un ; sur PHerc0358 elle tient 2 sauts en médiane contre 1 (`R4-F517`). La suite est `R4-P129`.
+- **R4-P129** *(le graal)* · **UNE RELANCE QUI FAIT CROÎTRE LA NAPPE À PARTIR DE LA SPIRE ENTIÈRE, CHAQUE POINT POSÉ GARDANT SA FEUILLE, PLUTÔT QUE D'UN PLAN NEUF POSÉ EN SON CENTRE, GARDE-T-ELLE LA JUSTESSE DE LA CHAÎNE SANS RELANCE EN LUI RENDANT SA SURFACE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `331` DÉSIGNE. La chaîne sans relance rétrécit mais ne se trompe presque jamais (`R4-F516`) ; la relance par un plan neuf rend la surface et fait quatre sauts faux (`R4-F517`).
 
 ## Progress Prizes — 19 portes
 

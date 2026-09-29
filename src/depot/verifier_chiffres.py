@@ -3336,6 +3336,23 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 331 : UNE CHAÎNE RELANCÉE À CHAQUE TOUR DESCEND-ELLE PLUS LOIN
+    s331 = _source(racine, "une_chaine_relancee_a_chaque_tour_descend_elle_plus_loin.json")
+    s330_ = _source(racine, "jusqua_quel_tour_publie_la_chaine_qui_croit_descend_elle.json")
+    s328_ = _source(racine, "combien_de_sauts_la_chaine_qui_croit_tient_elle_au_pas.json")
+    if s331.exists() and s330_.exists() and s328_.exists():
+        d = json.loads(s331.read_text())
+        sans4 = {g["le_rang"]: g["la_descente"] for g in json.loads(s330_.read_text())["les_graines"]}
+        sans0 = {(c["le_rang"], c["le_cote"]): c["tient"] for c in json.loads(s328_.read_text())["les_cotes"]["PHerc0358"]}
+        ecrits = [("le verdict de 331", d["le_verdict"]["lissue"].upper())]
+        for g in d["les_graines"]["PHercParis4"]:
+            ecrits.append((f"la graine {g['le_rang']} de 331", f"| {g['le_rang']} | {sans4[g['le_rang']]} | {g['la_descente']} | "
+                                                              f"{g['les_cotes']['moins']['larret']} |"))
+        for c in d["les_cotes"]["PHerc0358"]:
+            ecrits.append((f"g{c['le_rang']} {c['le_cote']} de 331",
+                           f"| g{c['le_rang']} {c['le_cote']} | {sans0[(c['le_rang'], c['le_cote'])]} | {c['tient']} |"))
+        out.extend((nom, [x_], s331.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 330 : JUSQU'À QUEL TOUR PUBLIÉ LA CHAÎNE QUI CROÎT DESCEND-ELLE
     s330 = _source(racine, "jusqua_quel_tour_publie_la_chaine_qui_croit_descend_elle.json")
     if s330.exists():

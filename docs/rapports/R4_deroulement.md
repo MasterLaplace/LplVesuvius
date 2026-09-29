@@ -4527,6 +4527,12 @@ six graines. `R4-P127` s'ouvre : au-delà du troisième saut.
 cinq elle descend six tours consécutifs publiés, un par saut ; elle s'arrête quand sa spire s'épuise ou que `5753_-7` ne passe pas là.
 `R4-P128` s'ouvre : relancer chaque saut sur la surface entière atteinte.
 
+**`331` · 2026-09-29 · une chaîne relancée à chaque tour descend-elle plus loin** — `R4-P128`
+
+⭐⭐⭐⭐ **Elle garde sa surface, mais se trompe de tour quatre fois : 5,5 tours publiés contre 6** — `R4-F517`. La nappe relancée sur un
+plan neuf prend parfois le même tour ou celui d'après ; sur PHerc0358, la relance allonge deux côtés et en raccourcit un. `R4-P129`
+s'ouvre : relancer depuis la spire entière, chaque point gardant sa feuille.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
