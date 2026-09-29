@@ -3336,6 +3336,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 305 : UNE NAPPE QUI REFUSE DE CHANGER DE FEUILLE SUIT-ELLE ENCORE SA FEUILLE
+    s305 = _source(racine, "une_nappe_qui_refuse_de_changer_de_feuille_suit_elle_encore_sa_feuille.json")
+    if s305.exists():
+        d = json.loads(s305.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 305", d["le_verdict"]["lissue"].upper())]
+        for g in d["les_graines"]:
+            pv = g.get("la_pente_du_vote") or {}
+            ecrits.append((f"la graine {g['le_rang']} de 305",
+                           f"| {g['le_rang']} | {g['la_nappe']} | {f_(g['le_z'])} | {f_(g['le_z_de_la_nappe_du_vote'])} | "
+                           f"{f_(g['la_part_du_plan'])} | {f_(g['les_dechirures'])} | "
+                           f"{g['les_boucles']['ceux_qui_ne_ferment_pas']} | {f_(g.get('la_part_du_vote_gardee'))} | "
+                           f"{f_(pv.get('la_part_au_dela_de_la_tolerance'))} |"))
+        out.extend((nom, [x_], s305.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 304 : LES SAUTS D'UN DEMI-PAS PASSENT-ILS D'UNE FEUILLE À L'AUTRE
     s304 = _source(racine, "les_sauts_dun_demi_pas_passent_ils_dune_feuille_a_lautre.json")
     if s304.exists():

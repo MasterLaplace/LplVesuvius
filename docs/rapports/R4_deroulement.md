@@ -4362,6 +4362,13 @@ consécutives, ou pas.
 profil a la forme du passage à la spire suivante** — `R4-F485`. Les nappes de `301` suivent l'empilement, et passent d'une feuille à
 la voisine sur un carré de voisins sur dix, là où les feuilles sont serrées. `R4-P104` s'ouvre : une nappe d'une seule feuille.
 
+**`305` · 2026-09-29 · une nappe qui refuse de changer de feuille suit-elle encore sa feuille** — `R4-P104`
+
+⭐⭐⭐⭐⭐ **Sur PHerc0358, une nappe de `m7` qui croît depuis sa graine sans prendre une feuille à plus d'un quart de pas de ses
+voisins suit sa feuille sur trois graines sur huit, et sur les graines 3 et 6 d'une seule feuille** — `R4-F486`. Sans déchirure ni
+boucle ouverte, sur 87 à 90 % du plan de 6 mm, avec un Z plus haut que la nappe du vote. Aux graines 4, 7 et 8, où la feuille change
+vite d'un point au suivant, la croissance s'arrête à moins de la moitié du plan. `R4-P105` et `R4-P106` s'ouvrent.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

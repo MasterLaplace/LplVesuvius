@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**158 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**160 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 120 portes
+## Grand Prize — 122 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -138,7 +138,9 @@
 - **R4-P101** *(le graal)* · **RÉPONDUE en partie par `302`.** Pour quatre nappes sur cinq, la nappe et ses deux spires tiennent d'une seule pièce qui suit sa feuille (`R4-F483`) ; mais trois d'entre elles ne ferment pas 10 à 14 % de leurs boucles, par des sauts d'un peu plus d'un demi-pas. Que la spire suivante soit la voisine reste ouvert. La suite est `R4-P102`.
 - **R4-P102** *(le graal)* · **RÉPONDUE par `304` : un creux.** En travers des sauts d'un demi-pas, le scan a la forme du passage à la spire suivante sur trois nappes sur cinq (`R4-F485`) : ces nappes passent d'une feuille à la voisine sur un carré de voisins sur dix. La suite est `R4-P104`.
 - **R4-P103** *(le graal)* · **LES QUATRE SPIRES TIRÉES D'UNE NAPPE DE `m7` SUR PHerc0358 SONT-ELLES QUATRE SPIRES CONSÉCUTIVES ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `303` DÉSIGNE. La chaîne suit sa feuille jusqu'au quatrième saut sur cinq côtés sur dix, au pas du rouleau à chaque saut sur les graines 4 et 7. L'alignement ne voit ni le rang ni un saut de deux feuilles ; la fermeture des boucles à l'échelle d'une spire (`R4-F430`), ou la continuité de la phase `lasagna` publiée, le peuvent. ⚠ Une chaîne de 6 mm.
-- **R4-P104** *(le graal)* · **UN VOTE QUI REFUSE DE PASSER D'UNE FEUILLE À LA VOISINE, OU UNE NAPPE RÉDUITE À LA RÉGION QU'AUCUN SAUT NE TRAVERSE, DONNE-T-IL UNE NAPPE D'UNE SEULE FEUILLE QUI SUIT ENCORE SA FEUILLE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `304` DÉSIGNE. Les nappes de `m7` de PHerc0358 suivent l'empilement, mais passent à la feuille voisine sur un carré de voisins sur dix, là où les feuilles sont serrées à 12 ou 13 voxels. Une chaîne ne part d'une seule spire que si sa nappe n'en a qu'une.
+- **R4-P104** *(le graal)* · **RÉPONDUE par `305` : oui, sur deux graines.** Une nappe qui croît depuis sa graine sans prendre une feuille à plus d'un quart de pas de ses voisins suit sa feuille sur trois graines sur huit, et sur les graines 3 et 6 d'une seule feuille, sans déchirure ni boucle ouverte, sur 87 à 90 % du plan (`R4-F486`). La suite est `R4-P105` et `R4-P106`.
+- **R4-P105** *(le graal)* · **LA CHAÎNE DE `303`, PARTIE DES NAPPES D'UNE SEULE FEUILLE DES GRAINES 3 ET 6, ET DONT CHAQUE SAUT CROÎT À SON TOUR SANS CHANGER DE FEUILLE, SUIT-ELLE SA FEUILLE SUR QUATRE SPIRES D'UNE SEULE FEUILLE CHACUNE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `305` DÉSIGNE. Sur PHerc0358, deux nappes d'une seule feuille suivent leur feuille sur 6 mm ; la chaîne qui part d'elles dirait si une première surface et ses spires voisines peuvent être produites sans main, chacune sur une seule spire.
+- **R4-P106** *(le graal)* · **UNE CROISSANCE DONT LE PLAN SE RÉORIENTE SUR LA NORMALE DE CE QU'ELLE A DÉJÀ POSÉ TIENT-ELLE UNE SEULE FEUILLE AUX GRAINES 4, 7 ET 8, OÙ LA NAPPE DU VOTE CHANGE DE PLUS D'UN QUART DE PAS D'UN POINT AU SUIVANT SUR 18 À 34 % DE SES PAIRES ?** ⭐⭐⭐⭐ C'EST CE QUE `305` DÉSIGNE. Une croissance au quart de pas sur un plan fixe ne suit pas une feuille qui le coupe à plus de 27° environ : elle s'arrête à 37 à 47 % du plan. ⚠ Que la cause soit la pente et non le bruit du vote n'est pas établi.
 
 ## Progress Prizes — 19 portes
 
