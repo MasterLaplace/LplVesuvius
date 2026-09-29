@@ -75,10 +75,11 @@ LA_TOLERANCE = 5.0                 # voxels : un quart de pas
 # ── La croissance ──────────────────────────────────────────────────────────────────────────────────────────────────
 
 def croitre(centres: list[np.ndarray], forme: tuple, depart: tuple, tolerance: float = LA_TOLERANCE,
-            demi_portee: float = m300.LA_DEMI_PORTEE) -> tuple[np.ndarray, np.ndarray]:
+            demi_portee: float = m300.LA_DEMI_PORTEE, cible_de_depart: float = 0.0) -> tuple[np.ndarray, np.ndarray]:
     """La croissance en largeur depuis `depart` : chaque point prend la feuille la plus proche de la médiane de ses voisins
-    posés, à au plus `tolerance` ; sinon il est réévalué quand un voisin de plus est posé. Rend les décalages (NaN hors des
-    points posés) et le masque des points posés."""
+    posés, à au plus `tolerance` ; sinon il est réévalué quand un voisin de plus est posé. Le départ prend la feuille la plus
+    proche de `cible_de_depart`, à au plus `demi_portee`. Rend les décalages (NaN hors des points posés) et le masque des points
+    posés."""
     h, w = forme
     dec = np.full(forme, np.nan)
     pose = np.zeros(forme, dtype=bool)
@@ -86,8 +87,8 @@ def croitre(centres: list[np.ndarray], forme: tuple, depart: tuple, tolerance: f
     c0 = centres[i0 * w + j0]
     if not len(c0):
         return dec, pose
-    k = int(np.argmin(np.abs(c0)))
-    if abs(c0[k]) > demi_portee:
+    k = int(np.argmin(np.abs(c0 - cible_de_depart)))
+    if abs(c0[k] - cible_de_depart) > demi_portee:
         return dec, pose
     dec[i0, j0], pose[i0, j0] = c0[k], True
     file = deque([(i0, j0)])
@@ -311,6 +312,9 @@ def verifier() -> int:
     v("★★★ sans feuille à la graine, rien n'est posé", not croitre(vide, (h, w), (4, 4))[1].any())
     loin = [np.array([40.0])] * (h * w)
     v("★★★ une feuille au-delà de la portée n'est pas prise à la graine", not croitre(loin, (h, w), (4, 4))[1].any())
+    dec, pose = croitre(deux, (h, w), (4, 4), demi_portee=LA_TOLERANCE, cible_de_depart=11.0)
+    v("★★★ un départ donné prend la feuille la plus proche de sa cible, et la croissance y reste",
+      pose.all() and np.allclose(dec, 12.0))
     dv = np.zeros((h, w))
     okv = np.ones((h, w), dtype=bool)
     dc = np.zeros((h, w))

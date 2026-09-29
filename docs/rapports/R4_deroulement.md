@@ -4369,6 +4369,13 @@ voisins suit sa feuille sur trois graines sur huit, et sur les graines 3 et 6 d'
 boucle ouverte, sur 87 à 90 % du plan de 6 mm, avec un Z plus haut que la nappe du vote. Aux graines 4, 7 et 8, où la feuille change
 vite d'un point au suivant, la croissance s'arrête à moins de la moitié du plan. `R4-P105` et `R4-P106` s'ouvrent.
 
+**`306` · 2026-09-29 · la chaîne d'une seule feuille suit-elle sa feuille sur quatre spires** — `R4-P105`
+
+⭐⭐⭐⭐ **Non : la chaîne partie des nappes d'une seule feuille, chaque saut croissant sans poser ce que `m7` ne voit pas, ne tient
+dès le premier saut sur aucun des quatre côtés** — `R4-F487`. `m7` ne voit la spire suivante que par morceaux, et là où le saut
+couvre le plan, le juge ne l'y voit pas posé. Les spires − de la graine 3 de `301` et `303` n'étaient appuyées sur `m7` que sur 1 à
+4 % de leurs points : `R4-P107` s'ouvre, sur ce que le juge mesure.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -1749,6 +1749,8 @@ run "les sauts d un demi-pas passent-ils d une feuille a l autre" uv run python 
 run "figure les sauts d un demi-pas passent-ils d une feuille a l autre" uv run python "$ROOT/src/figures/figure_les_sauts_dun_demi_pas_passent_ils_dune_feuille_a_lautre.py" --verifier
 run "une nappe qui refuse de changer de feuille suit-elle encore sa feuille" uv run python "$ROOT/src/nappe/une_nappe_qui_refuse_de_changer_de_feuille_suit_elle_encore_sa_feuille.py" --verifier
 run "figure une nappe qui refuse de changer de feuille suit-elle encore sa feuille" uv run python "$ROOT/src/figures/figure_une_nappe_qui_refuse_de_changer_de_feuille_suit_elle_encore_sa_feuille.py" --verifier
+run "la chaine d une seule feuille suit-elle sa feuille sur quatre spires" uv run python "$ROOT/src/nappe/la_chaine_dune_seule_feuille_suit_elle_sa_feuille_sur_quatre_spires.py" --verifier
+run "figure la chaine d une seule feuille suit-elle sa feuille sur quatre spires" uv run python "$ROOT/src/figures/figure_la_chaine_dune_seule_feuille_suit_elle_sa_feuille_sur_quatre_spires.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

@@ -3336,6 +3336,20 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 306 : LA CHAÎNE D'UNE SEULE FEUILLE SUIT-ELLE SA FEUILLE SUR QUATRE SPIRES
+    s306 = _source(racine, "la_chaine_dune_seule_feuille_suit_elle_sa_feuille_sur_quatre_spires.json")
+    if s306.exists():
+        d = json.loads(s306.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 306", d["le_verdict"]["lissue"].upper())]
+        for c in d["les_cotes"]:
+            for x_ in c["les_sauts"]:
+                ecrits.append((f"le saut {x_['le_saut']} côté {c['le_cote']} de la graine {c['le_rang']} de 306",
+                               f"| {c['le_rang']} | {c['le_cote']} | {x_['le_saut']} | {x_['la_piece']} | {f_(x_['le_z'])} | "
+                               f"{f_(x_['la_part_du_plan'])} | {x_['les_boucles']['ceux_qui_ne_ferment_pas']} | "
+                               f"{f_(x_['le_pas_median_voxels'])} | {f_(x_['la_part_au_pas'])} |"))
+        out.extend((nom, [x_], s306.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 305 : UNE NAPPE QUI REFUSE DE CHANGER DE FEUILLE SUIT-ELLE ENCORE SA FEUILLE
     s305 = _source(racine, "une_nappe_qui_refuse_de_changer_de_feuille_suit_elle_encore_sa_feuille.json")
     if s305.exists():
