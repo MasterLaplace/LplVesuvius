@@ -1,0 +1,621 @@
+{
+ "la_question": "Là où deux tours publiés voisins se recouvrent, autour des graines 1 à 3, la plage de m7 sous eux est-elle deux fois plus épaisse que là où ils sont séparés, deux feuilles collées, ou d'épaisseur simple, un tour posé sur la feuille de son voisin ?",
+ "les_constantes": {
+  "le_maximum": 600,
+  "le_minimum": 50,
+  "le_colle": 1.5,
+  "le_simple": 1.2
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 749,
+  "absents": 0,
+  "octets": 278833831
+ },
+ "les_paires": [
+  {
+   "le_rang": 1,
+   "les_tours": [
+    0,
+    -1
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "2": 117,
+     "3": 415,
+     "4": 67,
+     "5": 1
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 1,
+     "2": 95,
+     "3": 391,
+     "4": 113
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 1,
+   "les_tours": [
+    -1,
+    -2
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "2": 111,
+     "3": 424,
+     "4": 65
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 4,
+     "2": 117,
+     "3": 395,
+     "4": 81,
+     "5": 3
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 1,
+   "les_tours": [
+    -2,
+    -3
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "2": 137,
+     "3": 408,
+     "4": 53,
+     "5": 2
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "2": 138,
+     "3": 381,
+     "4": 80,
+     "5": 1
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 1,
+   "les_tours": [
+    -3,
+    -4
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 156,
+     "3": 379,
+     "4": 62,
+     "5": 1
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 1,
+     "2": 124,
+     "3": 377,
+     "4": 95,
+     "5": 3
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 1,
+   "les_tours": [
+    -4,
+    -5
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 1,
+     "2": 117,
+     "3": 441,
+     "4": 39,
+     "5": 2
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 1,
+     "2": 110,
+     "3": 415,
+     "4": 73,
+     "5": 1
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 1,
+   "les_tours": [
+    -5,
+    -6
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 109,
+     "3": 401,
+     "4": 82,
+     "5": 6
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 93,
+     "3": 423,
+     "4": 81,
+     "5": 1
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 2,
+   "les_tours": [
+    0,
+    -1
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 1,
+     "2": 122,
+     "3": 397,
+     "4": 80
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "2": 158,
+     "3": 370,
+     "4": 71,
+     "5": 1
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 2,
+   "les_tours": [
+    -1,
+    -2
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 1,
+     "2": 129,
+     "3": 409,
+     "4": 61
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 139,
+     "3": 401,
+     "4": 58
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 2,
+   "les_tours": [
+    -2,
+    -3
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 3,
+     "2": 147,
+     "3": 383,
+     "4": 67
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "2": 161,
+     "3": 376,
+     "4": 61,
+     "5": 2
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 2,
+   "les_tours": [
+    -3,
+    -4
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 3,
+     "2": 134,
+     "3": 403,
+     "4": 60
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 5,
+     "2": 159,
+     "3": 364,
+     "4": 71,
+     "6": 1
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 2,
+   "les_tours": [
+    -4,
+    -5
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 1,
+     "2": 115,
+     "3": 433,
+     "4": 51
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 160,
+     "3": 364,
+     "4": 73,
+     "5": 1
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 2,
+   "les_tours": [
+    -5,
+    -6
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 114,
+     "3": 396,
+     "4": 83,
+     "5": 4,
+     "15": 1
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 3,
+     "2": 119,
+     "3": 406,
+     "4": 70,
+     "5": 2
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 3,
+   "les_tours": [
+    0,
+    -1
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 113,
+     "3": 411,
+     "4": 74
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 141,
+     "3": 364,
+     "4": 93
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 3,
+   "les_tours": [
+    -1,
+    -2
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 1,
+     "2": 128,
+     "3": 397,
+     "4": 73,
+     "5": 1
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 598,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 130,
+     "3": 399,
+     "4": 64,
+     "5": 3
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 3,
+   "les_tours": [
+    -2,
+    -3
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 129,
+     "3": 407,
+     "4": 60,
+     "5": 2
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 134,
+     "3": 386,
+     "4": 78
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 3,
+   "les_tours": [
+    -3,
+    -4
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 147,
+     "3": 387,
+     "4": 63,
+     "5": 1
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 3,
+     "2": 133,
+     "3": 383,
+     "4": 79,
+     "5": 1,
+     "7": 1
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 3,
+   "les_tours": [
+    -4,
+    -5
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 128,
+     "3": 418,
+     "4": 51,
+     "5": 1
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 3,
+     "2": 146,
+     "3": 383,
+     "4": 67,
+     "5": 1
+    }
+   },
+   "le_rapport": 1.0
+  },
+  {
+   "le_rang": 3,
+   "les_tours": [
+    -5,
+    -6
+   ],
+   "les_recouverts": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 3,
+     "2": 121,
+     "3": 398,
+     "4": 75,
+     "5": 2,
+     "7": 1
+    }
+   },
+   "les_separes": {
+    "les_sommets": 600,
+    "qui_voient_une_plage": 600,
+    "la_longueur_mediane_l2": 3.0,
+    "le_nombre_median_de_plages": 1.0,
+    "les_longueurs_comptees": {
+     "1": 2,
+     "2": 115,
+     "3": 425,
+     "4": 58
+    }
+   },
+   "le_rapport": 1.0
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "n": 18,
+  "r": 1.0,
+  "lissue": "sous les 18 paires qui se recouvrent, la plage de m7 là où les tours se recouvrent a en médiane 1 fois la longueur de celle d'où ils sont séparés ; un tour posé sur la feuille de son voisin"
+ },
+ "les_secondes": 9.9
+}

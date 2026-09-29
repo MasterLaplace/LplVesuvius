@@ -1821,6 +1821,8 @@ run "jugée strictement, jusqu'où la chaîne bornée descend-elle" uv run pytho
 run "figure jugée strictement, jusqu'où la chaîne bornée descend-elle" uv run python "$ROOT/src/figures/figure_jugee_strictement_jusquou_la_chaine_bornee_descend_elle.py" --verifier
 run "les tours publiés voisins se recouvrent-ils" uv run python "$ROOT/src/nappe/les_tours_publies_voisins_se_recouvrent_ils.py" --verifier
 run "figure les tours publiés voisins se recouvrent-ils" uv run python "$ROOT/src/figures/figure_les_tours_publies_voisins_se_recouvrent_ils.py" --verifier
+run "sous le recouvrement, m7 voit-il deux feuilles collées" uv run python "$ROOT/src/nappe/sous_le_recouvrement_m7_voit_il_deux_feuilles_collees.py" --verifier
+run "figure sous le recouvrement, m7 voit-il deux feuilles collées" uv run python "$ROOT/src/figures/figure_sous_le_recouvrement_m7_voit_il_deux_feuilles_collees.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

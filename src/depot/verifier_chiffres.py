@@ -3336,6 +3336,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 342 : SOUS LE RECOUVREMENT, m7 VOIT-IL DEUX FEUILLES COLLÉES
+    s342 = _source(racine, "sous_le_recouvrement_m7_voit_il_deux_feuilles_collees.json")
+    if s342.exists():
+        d = json.loads(s342.read_text())
+        ecrits = [("le verdict de 342", d["le_verdict"]["lissue"].upper()),
+                  ("les chunks de m7 lus de 342", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne")]
+        for g_, nom_ in (("les_recouverts", "sous le recouvrement"), ("les_separes", "là où les tours sont séparés")):
+            c_ = {}
+            for p_ in d["les_paires"]:
+                for k_, n_ in p_[g_]["les_longueurs_comptees"].items():
+                    c_[min(int(k_), 5)] = c_.get(min(int(k_), 5), 0) + n_
+            tot_ = sum(c_.values())
+            ecrits.append((f"les longueurs de plage {g_} de 342",
+                           f"| {nom_} | " + " | ".join(f"{c_.get(x, 0) / tot_ * 100:.1f} %".replace(".", ",") for x in (1, 2, 3, 4, 5)) + " |"))
+        out.extend((nom, [x_], s342.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 341 : LES TOURS PUBLIÉS VOISINS SE RECOUVRENT-ILS
     s341 = _source(racine, "les_tours_publies_voisins_se_recouvrent_ils.json")
     if s341.exists():

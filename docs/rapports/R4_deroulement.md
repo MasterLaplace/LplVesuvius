@@ -4591,6 +4591,11 @@ seul tour. `R4-P137` s'ouvre : un recouvrement des tours publiés autour des gra
 quart de pas du suivant, contre 2 à 15 % autour des graines 4 à 6 : c'est là qu'aucune chaîne ne descend strictement. `R4-P138` s'ouvre :
 deux feuilles collées ou un tour mal posé.
 
+**`342` · 2026-09-29 · sous le recouvrement, m7 voit-il deux feuilles collées** — `R4-P138`
+
+⭐⭐⭐ **Non, la même plage mince qu'ailleurs ; mais `m7` ne saurait pas le dire** — `R4-F528`. Sous deux tours publiés recouverts, `m7` ne
+voit qu'une plage de 3 voxels, comme sous un tour seul ; toutes ses plages ont ici 2 à 4 voxels. `R4-P139` s'ouvre : la matière du scan.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
