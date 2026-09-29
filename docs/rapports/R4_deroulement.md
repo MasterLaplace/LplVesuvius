@@ -4479,6 +4479,12 @@ s'ouvrent.
 de `m7` continue le tracé humain sur 6 mm ; c'est le vote qui en changeait. `R4-P121` s'ouvre : la chaîne, jugée là où le segment
 repasse un tour plus loin.
 
+**`323` · 2026-09-29 · la spire qui croît tombe-t-elle sur le tour suivant du segment** — `R4-P121`
+
+⭐⭐⭐⭐⭐ **Sur quatre graines sur huit, et à 98 à 99 % sur trois d'entre elles** — `R4-F506`, `R4-F507`. La spire suivante, tirée de
+`m7` par le saut qui croît, tombe sur le tour que la main humaine a tracé ensuite, pendant que la nappe elle-même n'y est pas. Sur la
+graine 4, la nappe était déjà sur le tour suivant, à 57 voxels du tracé. `R4-P122` s'ouvre : ce qui diffère sur PHerc0358.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

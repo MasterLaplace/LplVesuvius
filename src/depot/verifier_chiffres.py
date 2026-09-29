@@ -3336,6 +3336,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 323 : LA SPIRE QUI CROÎT TOMBE-T-ELLE SUR LE TOUR SUIVANT DU SEGMENT
+    s323 = _source(racine, "la_spire_qui_croit_tombe_t_elle_sur_le_tour_suivant_du_segment.json")
+    if s323.exists():
+        d = json.loads(s323.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 323", d["le_verdict"]["lissue"].upper()),
+                  ("la lecture de m7 de 323", f"{d['la_lecture_de_m7']['lus']} chunks")]
+        for g in d["les_graines"]:
+            cases = " | ".join(f"{f_(g[s_].get('lecart_median_voxels'))} · {f_(g[s_].get('la_part_a_un_quart_de_pas'))} "
+                               f"({g[s_]['les_sommets_en_face']})" for s_ in ("la_nappe", "la_spire_plus", "la_spire_moins"))
+            ecrits.append((f"la graine {g['le_rang']} de 323",
+                           f"| {g['le_rang']} | {g['les_sommets_du_tour_suivant']} | "
+                           f"{f_(g['la_distance_mediane_au_vis_a_vis_voxels'])} | {cases} | {g['la_lecture']} |"))
+        out.extend((nom, [x_], s323.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 322 : LA NAPPE QUI CROÎT TIENT-ELLE LE TRACÉ HUMAIN DE PHERCPARIS4
     s322 = _source(racine, "la_nappe_qui_croit_tient_elle_le_trace_humain_de_paris4.json")
     if s322.exists():

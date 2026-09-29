@@ -1783,6 +1783,8 @@ run "la nappe de m7 retrouve-t-elle le tracé humain de PHercParis4" uv run pyth
 run "figure la nappe de m7 retrouve-t-elle le tracé humain de PHercParis4" uv run python "$ROOT/src/figures/figure_la_nappe_de_m7_retrouve_t_elle_le_trace_humain_de_paris4.py" --verifier
 run "la nappe qui croît tient-elle le tracé humain de PHercParis4" uv run python "$ROOT/src/nappe/la_nappe_qui_croit_tient_elle_le_trace_humain_de_paris4.py" --verifier
 run "figure la nappe qui croît tient-elle le tracé humain de PHercParis4" uv run python "$ROOT/src/figures/figure_la_nappe_qui_croit_tient_elle_le_trace_humain_de_paris4.py" --verifier
+run "la spire qui croît tombe-t-elle sur le tour suivant du segment" uv run python "$ROOT/src/nappe/la_spire_qui_croit_tombe_t_elle_sur_le_tour_suivant_du_segment.py" --verifier
+run "figure la spire qui croît tombe-t-elle sur le tour suivant du segment" uv run python "$ROOT/src/figures/figure_la_spire_qui_croit_tombe_t_elle_sur_le_tour_suivant_du_segment.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
