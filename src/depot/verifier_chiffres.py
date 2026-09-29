@@ -3336,6 +3336,19 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐ LA TRANCHE 319 : LE SCAN MONTRE-T-IL LA FEUILLE QUE M7 MANQUE
+    s319 = _source(racine, "le_scan_montre_t_il_la_feuille_que_m7_manque.json")
+    if s319.exists():
+        d = json.loads(s319.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 319", d["le_verdict"]["lissue"].upper())]
+        for c in d["les_cotes"]:
+            a_, b_ = c["m7_voit"], c["m7_ne_voit_rien"]
+            ecrits.append((f"la graine {c['le_rang']} côté {c['le_cote']} de 319",
+                           f"| {c['le_rang']} | {c['le_cote']} | {a_['les_rayons_lus']} | {f_(a_['la_saillance'])} | "
+                           f"{b_['les_rayons_lus']} | {f_(b_['la_saillance'])} | {c['la_lecture']} |"))
+        out.extend((nom, [x_], s319.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 318 : UNE CHAÎNE QUI N'ÉTEND QUE CE QU'ELLE VOIT TIENT-ELLE
     s318 = _source(racine, "une_chaine_qui_netend_que_ce_quelle_voit_tient_elle.json")
     if s318.exists():

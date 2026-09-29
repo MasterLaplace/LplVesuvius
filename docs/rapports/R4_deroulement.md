@@ -4453,6 +4453,12 @@ là où `m7` la porte, 15 à 16 % des points au seizième saut. `R4-P115` s'ouvr
 sur le pas dès le premier saut, et elle se vide en trois à neuf sauts** — `R4-F499`. `m7` est juste là où il voit, mais il manque trop
 de feuilles pour qu'une chaîne ne tienne que par lui. `R4-P116` s'ouvre : le scan montre-t-il ce que `m7` manque ?
 
+**`319` · 2026-09-29 · le scan montre-t-il la feuille que m7 manque** — `R4-P116`
+
+⭐⭐⭐ **La règle dit cinq côtés sur neuf, et la figure dit que la règle ne mesurait pas ce qu'elle nommait** — `R4-F500`. La saillance
+lisait la remontée après le creux, pas un maximum, et le témoin était lui-même plat par moyenne. `R4-P116` reste ouverte ; `R4-P117`
+s'ouvre, une lecture rayon par rayon.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
