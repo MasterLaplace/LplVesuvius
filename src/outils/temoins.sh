@@ -1731,6 +1731,8 @@ run "une marche dans les deux directions rend-elle son gain a la bande" uv run p
 run "figure une marche dans les deux directions rend-elle son gain a la bande" uv run python "$ROOT/src/figures/figure_une_marche_dans_les_deux_directions_rend_elle_son_gain_a_la_bande.py" --verifier
 run "le tour produit porte-t-il le texte du segment" uv run python "$ROOT/src/nappe/le_tour_produit_porte_t_il_le_texte_du_segment.py" --verifier
 run "figure le tour produit porte-t-il le texte du segment" uv run python "$ROOT/src/figures/figure_le_tour_produit_porte_t_il_le_texte_du_segment.py" --verifier
+run "le texte suit-il la chaine au-dela du premier saut" uv run python "$ROOT/src/nappe/le_texte_suit_il_la_chaine_au_dela_du_premier_saut.py" --verifier
+run "figure le texte suit-il la chaine au-dela du premier saut" uv run python "$ROOT/src/figures/figure_le_texte_suit_il_la_chaine_au_dela_du_premier_saut.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

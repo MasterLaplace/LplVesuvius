@@ -4301,6 +4301,14 @@ de départ et 0,1037 pour le vis-à-vis décalé** — `R4-F477`. Le juge est le
 le modèle d'encre est celui qui a fait la carte publiée. La partie A, vue avant d'écrire, est dite comme telle. `R4-P96` s'ouvre :
 porter ce juge sur les sauts suivants de la chaîne.
 
+**`297` · 2026-09-29 · le texte suit-il la chaîne au-delà du premier saut** — `R4-P96`
+
+⭐⭐⭐⭐ **Au deuxième saut de la chaîne de `248`, là où le segment repasse, notre lecture de son encre et la carte publiée au
+vis-à-vis sont corrélées à 0,8749, contre 0,1761, 0,0016 et 0,2914 pour ses trois témoins, dont le texte un tour en arrière** —
+`R4-F478`. Au troisième, 0,4459 contre 0,3992 au plus, mais 0,9888 des pixels jugés font face à la même feuille du segment que le
+saut précédent : le troisième témoin ne départage plus, et ce saut n'est pas établi. Le quatrième n'est pas vu. `R4-P97` s'ouvre :
+ce qui dit qu'un saut a avancé là où le segment ne repasse plus qu'une fois.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3287,6 +3287,55 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(m_['temoin_sous_le_bloc'])} | {f_(m_['temoin_decale'])} |"))
             out.extend((nom, [x_], s296.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 297 : LE TEXTE SUIT-IL LA CHAÎNE AU-DELÀ DU PREMIER SAUT
+    s297 = _source(racine, "le_texte_suit_il_la_chaine_au_dela_du_premier_saut.json")
+    if s297.exists():
+        d = json.loads(s297.read_text())
+        if d.get("decidable"):
+            f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+            f2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+            s_ = d["les_sauts"]
+            m2 = s_["2"]["reunie"]["a_moins_dun_demi_feuillet"]
+            m3 = s_["3"]["reunie"]["a_moins_dun_demi_feuillet"]
+            temoins = ("temoin_sous_le_bloc", "temoin_decale", "temoin_du_saut_precedent")
+            rep = d["le_plan"]["la_chaine_redonne_248"]["les_sauts"]
+            ecrits = [("le titre de 297", f"Au deuxième saut, oui : {f2(m2['au_vis_a_vis'])} contre "
+                                          f"{f2(max(m2[t] for t in temoins))} au plus pour ses trois témoins"),
+                      ("l'étalon de 297", f"**{f_(d['letalonnage']['la_correlation'])}** sur {d['letalonnage']['les_pixels']} "
+                                          "pixels"),
+                      ("la chaîne de 297", f"({', '.join(str(r['refait']['les_points_notes']) for r in rep[:3])} et "
+                                           f"{rep[3]['refait']['les_points_notes']} points notés ; "
+                                           f"{', '.join(f_(r['refait']['la_part_sur_la_bonne_spire']) for r in rep[:3])} et "
+                                           f"{f_(rep[3]['refait']['la_part_sur_la_bonne_spire'])} sur la bonne spire)"),
+                      ("la même feuille au saut 3 de 297",
+                       f"Mais **{f_(m3['la_part_sur_la_meme_feuille_que_le_saut_precedent'])}** des pixels jugés"),
+                      ("la même feuille au saut 2 de 297",
+                       f"La moitié des pixels jugés ({f_(m2['la_part_sur_la_meme_feuille_que_le_saut_precedent'])})"),
+                      ("le juge de 248 au saut 2 de 297",
+                       f"la corrélation vaut {f2(m2['sous_le_juge_de_248']['juste']['au_vis_a_vis'])} sur "
+                       f"{m2['sous_le_juge_de_248']['juste']['les_pixels']} pixels")]
+            for h in ("1", "2", "3", "4"):
+                s = s_[h]
+                lu = "oui" if s["se_lit"] else f"non, {s['les_pixels_proches_des_blocs']} sur ses six blocs"
+                ecrits.append((f"ce que le juge voit au saut {h} de 297",
+                               f"| {h} | {s['les_pixels_proches_du_segment']} | {f_(s['la_part_proche_mediane'])} | "
+                               f"{s['les_blocs_a_plus_de_la_moitie_proche']} | {lu} |"))
+            for h in ("2", "3"):
+                for cle, nom in (("a_moins_dun_demi_feuillet", "**à moins d'un demi-feuillet**"), ("au_dela", "au-delà")):
+                    x_ = s_[h]["reunie"][cle]
+                    gras = cle == "a_moins_dun_demi_feuillet"
+                    cellules = [x_["les_pixels"], x_["au_vis_a_vis"], *(x_[t] for t in temoins)]
+                    txt = " | ".join((f"**{f_(c)}**" if gras else f_(c)) for c in cellules)
+                    ecrits.append((f"le saut {h} réuni ({cle}) de 297", f"| {nom} | {txt} |"))
+            for bl in s_["2"]["les_mesures"]:
+                x_ = bl["a_moins_dun_demi_feuillet"]
+                ecrits.append((f"le bloc {bl['le_bloc'][0]}_{bl['le_bloc'][1]} du saut 2 de 297",
+                               f"| `{bl['le_bloc'][0]}_{bl['le_bloc'][1]}` | {x_['les_pixels']} | {f_(x_['au_vis_a_vis'])} | "
+                               f"{f_(x_['temoin_sous_le_bloc'])} | {f_(x_['temoin_decale'])} | "
+                               f"{f_(x_['temoin_du_saut_precedent'])} | "
+                               f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
+            out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 294 : QUATRE VOISINS SUR LA RANGÉE
     s294 = _source(racine, "quatre_voisins_sur_la_rangee_rendent_ils_son_gain_a_la_bande.json")
     # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.

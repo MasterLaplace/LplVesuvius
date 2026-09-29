@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**150 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**151 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 112 portes
+## Grand Prize — 113 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -130,7 +130,8 @@
 - **R4-P93** *(le graal)* · **LÀ OÙ LA BANDE SAUTE PLUS D'UN PAS ET DEMI D'UNE COUCHE À LA SUIVANTE, EST-CE ELLE QUI A MANQUÉ UN TOUR, OU LA CHAÎNE QUI S'ARRÊTE SUR UNE FAUSSE FEUILLE ?** ⭐⭐⭐ C'EST CE QUE `248` DÉSIGNE. Enchaînée sur quatre sauts, la chaîne perd de 0,09 à 0,14 de ceux qui avaient tenu à chaque saut ; au premier, 0,7144 et 0,7368 de ses chutes trop près tombent là où la bande saute ainsi. La réponse dit si la chaîne perd un point sur dix par saut, ou moins, et donc ce qui reste à rattraper avant le saut suivant.
 - **R4-P94** *(le graal)* · **UN PAS LU D'UN CENTRE DE CHUNK À L'AUTRE, ET NON À LA COUTURE, RETROUVE-T-IL LA RAMPE POSÉE, ET QUE DIT-IL ALORS DE LA SPIRE PRODUITE ?** ⭐⭐⭐ C'EST CE QUE `257` DÉSIGNE. La spire produite a désormais une pile, rendue comme le segment l'est ; mais la marche des coutures ne retrouve que 0,1396 d'une rampe posée d'un pas, donc elle ne peut pas juger une surface qui glisse d'une spire à l'autre en douceur.
 - **R4-P95** *(le graal)* · **SANS LE JUGE, LA MARCHE DE FENÊTRE EN FENÊTRE DE LA SPIRE PRODUITE DÉSIGNE-T-ELLE LES CHUNKS OÙ LA CHAÎNE A RATÉ, ET TIENT-ELLE SUR UNE BOUCLE ?** ⭐⭐⭐ C'EST CE QUE `260` DÉSIGNE. De fenêtre en fenêtre, le treillis voit où la spire produite glisse : il sépare 0,698 et 0,6309 des paires que le juge sépare. Mais il le fait avec le juge, sur un bloc, et bruité (résidu trois fois celui de la couture) : reste à s'en passer, et à le marcher aussi loin qu'une boucle.
-- **R4-P96** *(le graal)* · **LE JUGE D'ENCRE DU SEGMENT QUI REPASSE, PORTÉ SUR LES SPIRES SUIVANTES DE LA CHAÎNE DE `248`, DIT-IL À QUEL SAUT LA CHAÎNE PERD LA FEUILLE ?** ⭐⭐⭐ C'EST CE QUE `296` DÉSIGNE. Là où le segment repasse à moins d'un demi-feuillet de la spire produite, notre lecture de son encre retrouve la carte publiée au vis-à-vis (0,8331 contre 0,1166 et 0,1037). Le même juge, sur les sauts suivants, serait le premier juge d'encre sans main qui suive la chaîne au-delà du premier saut. ⚠ Il n'existe que là où le segment repasse.
+- **R4-P96** *(le graal)* · **RÉPONDUE par `297`, en deux moitiés.** Le juge d'encre du segment qui repasse, porté sur la chaîne de `248` : au deuxième saut le texte suit (0,8749 contre 0,1761, 0,0016 et 0,2914, `R4-F478`) ; au troisième, 0,4459 contre 0,3992 au plus, sur un témoin qui fait face à la même feuille du segment que la mesure pour 0,9888 des pixels : ce saut n'est pas établi ; le quatrième n'est pas vu (9600 pixels). La suite est `R4-P97`.
+- **R4-P97** *(le graal)* · **LÀ OÙ LE SEGMENT NE REPASSE PLUS QU'UNE FOIS PRÈS DE LA CHAÎNE, QU'EST-CE QUI DIT QU'UN SAUT A AVANCÉ D'UNE FEUILLE SUR LE PRÉCÉDENT ?** ⭐⭐⭐ C'EST CE QUE `297` DÉSIGNE. Au deuxième saut, le texte suit (0,8749 contre 0,2914 au plus) ; au troisième, 0,4459 contre 0,3992, mais 0,9888 des pixels jugés font face à la même feuille du segment que le saut précédent, et le témoin du texte un tour en arrière ne départage plus. L'écart entre les deux surfaces, là où elles sont jugées, le peut sans l'encre. ⚠ Le juge d'encre ne vaut que là où le segment repasse.
 
 ## Progress Prizes — 19 portes
 
