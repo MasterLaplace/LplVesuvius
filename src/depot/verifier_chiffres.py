@@ -3336,6 +3336,20 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 320 : RAYON PAR RAYON, LE SCAN MONTRE-T-IL LA FEUILLE QUE M7 MANQUE
+    s320 = _source(racine, "rayon_par_rayon_le_scan_montre_t_il_la_feuille_que_m7_manque.json")
+    if s320.exists():
+        d = json.loads(s320.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 320", d["le_verdict"]["lissue"].upper())]
+        for c in d["les_cotes"]:
+            a_, b_, t_ = c["m7_voit"], c["m7_ne_voit_rien"], c["le_temoin_tangent"]
+            ecrits.append((f"la graine {c['le_rang']} côté {c['le_cote']} de 320",
+                           f"| {c['le_rang']} | {c['le_cote']} | {f_(a_['la_part_qui_montre'])} ({a_['les_rayons_lus']}) | "
+                           f"{f_(b_['la_part_qui_montre'])} ({b_['les_rayons_lus']}) | {f_(t_['la_part_qui_montre'])} "
+                           f"({t_['les_rayons_lus']}) | {c['la_lecture']} |"))
+        out.extend((nom, [x_], s320.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐ LA TRANCHE 319 : LE SCAN MONTRE-T-IL LA FEUILLE QUE M7 MANQUE
     s319 = _source(racine, "le_scan_montre_t_il_la_feuille_que_m7_manque.json")
     if s319.exists():

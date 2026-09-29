@@ -1,0 +1,188 @@
+{
+ "la_question": "Rayon par rayon, là où m7 ne voit pas de feuille après celle d'une nappe, le profil du scan a-t-il un maximum à un pas, aussi souvent que là où m7 en voit une ?",
+ "les_constantes": {
+  "la_proeminence": 0.5,
+  "le_temoin_minimum": 0.3,
+  "le_minimum": 100
+ },
+ "les_cotes": [
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "le_temoin_tangent": {
+    "les_rayons_lus": 2930,
+    "la_part_qui_montre": 0.8775
+   },
+   "m7_voit": {
+    "les_rayons_lus": 820,
+    "la_part_qui_montre": 0.7817
+   },
+   "m7_ne_voit_rien": {
+    "les_rayons_lus": 2110,
+    "la_part_qui_montre": 0.237
+   },
+   "la_lecture": "mêlé"
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_temoin_tangent": {
+    "les_rayons_lus": 2927,
+    "la_part_qui_montre": 0.9276
+   },
+   "m7_voit": {
+    "les_rayons_lus": 155,
+    "la_part_qui_montre": 0.1548
+   },
+   "m7_ne_voit_rien": {
+    "les_rayons_lus": 2775,
+    "la_part_qui_montre": 0.1528
+   },
+   "la_lecture": "non lu"
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "le_temoin_tangent": {
+    "les_rayons_lus": 2488,
+    "la_part_qui_montre": 0.8047
+   },
+   "m7_voit": {
+    "les_rayons_lus": 1693,
+    "la_part_qui_montre": 0.8547
+   },
+   "m7_ne_voit_rien": {
+    "les_rayons_lus": 795,
+    "la_part_qui_montre": 0.5648
+   },
+   "la_lecture": "le scan montre la feuille que m7 manque"
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "le_temoin_tangent": {
+    "les_rayons_lus": 2488,
+    "la_part_qui_montre": 0.8039
+   },
+   "m7_voit": {
+    "les_rayons_lus": 1660,
+    "la_part_qui_montre": 0.8464
+   },
+   "m7_ne_voit_rien": {
+    "les_rayons_lus": 828,
+    "la_part_qui_montre": 0.7862
+   },
+   "la_lecture": "le scan montre la feuille que m7 manque"
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "le_temoin_tangent": {
+    "les_rayons_lus": 2038,
+    "la_part_qui_montre": 0.8935
+   },
+   "m7_voit": {
+    "les_rayons_lus": 379,
+    "la_part_qui_montre": 0.8232
+   },
+   "m7_ne_voit_rien": {
+    "les_rayons_lus": 1659,
+    "la_part_qui_montre": 0.2598
+   },
+   "la_lecture": "mêlé"
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_temoin_tangent": {
+    "les_rayons_lus": 2038,
+    "la_part_qui_montre": 0.713
+   },
+   "m7_voit": {
+    "les_rayons_lus": 1878,
+    "la_part_qui_montre": 0.9627
+   },
+   "m7_ne_voit_rien": {
+    "les_rayons_lus": 160,
+    "la_part_qui_montre": 0.5375
+   },
+   "la_lecture": "le scan montre la feuille que m7 manque"
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_temoin_tangent": {
+    "les_rayons_lus": 2891,
+    "la_part_qui_montre": 0.8651
+   },
+   "m7_voit": {
+    "les_rayons_lus": 2506,
+    "la_part_qui_montre": 0.899
+   },
+   "m7_ne_voit_rien": {
+    "les_rayons_lus": 385,
+    "la_part_qui_montre": 0.7818
+   },
+   "la_lecture": "le scan montre la feuille que m7 manque"
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_temoin_tangent": {
+    "les_rayons_lus": 2891,
+    "la_part_qui_montre": 0.8571
+   },
+   "m7_voit": {
+    "les_rayons_lus": 2483,
+    "la_part_qui_montre": 0.8985
+   },
+   "m7_ne_voit_rien": {
+    "les_rayons_lus": 408,
+    "la_part_qui_montre": 0.7328
+   },
+   "la_lecture": "le scan montre la feuille que m7 manque"
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_temoin_tangent": {
+    "les_rayons_lus": 2706,
+    "la_part_qui_montre": 0.8226
+   },
+   "m7_voit": {
+    "les_rayons_lus": 2184,
+    "la_part_qui_montre": 0.8878
+   },
+   "m7_ne_voit_rien": {
+    "les_rayons_lus": 522,
+    "la_part_qui_montre": 0.7759
+   },
+   "la_lecture": "le scan montre la feuille que m7 manque"
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_temoin_tangent": {
+    "les_rayons_lus": 2706,
+    "la_part_qui_montre": 0.8075
+   },
+   "m7_voit": {
+    "les_rayons_lus": 2149,
+    "la_part_qui_montre": 0.8981
+   },
+   "m7_ne_voit_rien": {
+    "les_rayons_lus": 557,
+    "la_part_qui_montre": 0.7989
+   },
+   "la_lecture": "le scan montre la feuille que m7 manque"
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "k": 7,
+  "j": 0,
+  "n": 9,
+  "lissue": "rayon par rayon, sur 7 des 9 côtés lus, le scan montre la feuille que m7 manque ; sur 0, il ne la montre pas"
+ },
+ "les_secondes": 18.4
+}

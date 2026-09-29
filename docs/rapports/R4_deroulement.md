@@ -4459,6 +4459,12 @@ de feuilles pour qu'une chaîne ne tienne que par lui. `R4-P116` s'ouvre : le sc
 lisait la remontée après le creux, pas un maximum, et le témoin était lui-même plat par moyenne. `R4-P116` reste ouverte ; `R4-P117`
 s'ouvre, une lecture rayon par rayon.
 
+**`320` · 2026-09-29 · rayon par rayon, le scan montre-t-il la feuille que m7 manque** — `R4-P117`
+
+⭐⭐⭐⭐ **La règle dit sept côtés sur neuf, et le témoin tangent dit que le compte mesure la texture** — `R4-F501`. Le long du plan
+de la nappe, où aucune feuille ne passe, 71 à 93 % des profils ont le même maximum. `R4-P118` s'ouvre : PHercParis4 publie `m7` à
+9,6 µm et a un tracé humain, la vérification qui manque à toute la série.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

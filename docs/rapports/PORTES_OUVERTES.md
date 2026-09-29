@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**171 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**172 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 133 portes
+## Grand Prize — 134 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -152,6 +152,7 @@
 - **R4-P115** *(le graal)* · **RÉPONDUE par `318` : non.** Ne posant que ce que `m7` voit, depuis chaque région où il voit une feuille après la sienne, la chaîne ne tient sur aucun côté : ses régions ne s'accordent pas sur le pas dès le premier saut, et elle se vide en trois à neuf sauts (`R4-F499`). La suite est `R4-P116`.
 - **R4-P116** *(le graal)* · **LÀ OÙ `m7` MANQUE LA FEUILLE SUIVANTE D'UNE SURFACE DE LA CHAÎNE, LE SCAN LA MONTRE-T-IL, UN MAXIMUM DE DENSITÉ À UN PAS DE LA SURFACE QUE `m7` N'A PAS MARQUÉ ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `318` DÉSIGNE. `m7` manque la feuille suivante sur 14 à 26 % des rayons des graines 4, 7 et 8 (`R4-F494`), et une chaîne qui ne pose que ce qu'il voit ne tient pas (`R4-F499`). Si le scan montre ces feuilles, c'est une prédiction à compléter par le scan ; sinon, c'est le scan qui les colle à 9,362 µm.
 - **R4-P117** *(le graal)* · **RAYON PAR RAYON, LÀ OÙ `m7` NE VOIT PAS DE FEUILLE APRÈS CELLE D'UNE NAPPE, LE PROFIL DU SCAN A-T-IL UN MAXIMUM LOCAL ENTRE 12 ET 28 VOXELS, ET AUSSI SOUVENT QUE LÀ OÙ `m7` VOIT UNE FEUILLE ?** ⭐⭐⭐⭐ C'EST CE QUE `319` DÉSIGNE. La moyenne des profils efface le maximum qu'elle cherche, et une saillance entre deux fenêtres fixes lit la forme du creux (`R4-F500`) ; compter les maxima rayon par rayon ne dépend ni de l'une ni de l'autre.
+- **R4-P118** *(le référent)* · **LA NAPPE DE `m7` TIRÉE SUR PHercParis4 COMME SUR PHerc0358, À 9,6 µm, COÏNCIDE-T-ELLE AVEC LE TRACÉ HUMAIN, ET SA CHAÎNE AVEC LES SPIRES VOISINES DU SEGMENT ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `320` DÉSIGNE, ET C'EST LA VÉRIFICATION QUI MANQUE À TOUTE LA SÉRIE `300` À `320`. PHercParis4 publie la même prédiction, `m7`, au niveau 2, la résolution de PHerc0358, et il a un tracé humain : tout ce que la série a mesuré sans référent sur PHerc0358 peut y être mesuré contre une réponse connue.
 
 ## Progress Prizes — 19 portes
 
