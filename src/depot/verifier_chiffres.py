@@ -3336,6 +3336,20 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 315 : LA CHAÎNE TIENT-ELLE AU-DELÀ DE QUATRE SAUTS
+    s315 = _source(racine, "la_chaine_tient_elle_au_dela_de_quatre_sauts.json")
+    if s315.exists():
+        d = json.loads(s315.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 315", d["le_verdict"]["lissue"].upper())]
+        for c in d["les_cotes"]:
+            x_ = c["les_sauts"]
+            ecrits.append((f"la graine {c['le_rang']} côté {c['le_cote']} de 315",
+                           f"| {c['le_rang']} | {c['le_cote']} | {c['le_dernier_saut_qui_tient']} | "
+                           f"{f_(x_[0]['la_part_appuyee'])} | {f_(x_[7]['la_part_appuyee'])} | {f_(x_[15]['la_part_appuyee'])} | "
+                           f"{f_(x_[15]['le_pas_median_voxels'])} | {f_(x_[15]['le_plus_dense'])} | {f_(x_[15]['aucune'])} |"))
+        out.extend((nom, [x_], s315.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐ LA TRANCHE 314 : LA PHASE PUBLIÉE AVANCE-T-ELLE AU MÊME PAS LE LONG DE LA CHAÎNE
     s314 = _source(racine, "la_phase_publiee_avance_t_elle_au_meme_pas_le_long_de_la_chaine.json")
     if s314.exists():

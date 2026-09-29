@@ -4429,6 +4429,12 @@ encore : une chaîne qui fait un tour le dirait.
 permutée** — `R4-F495`. La phase publiée varie trop peu sur les graines 4, 7 et 8, et saute d'un coup autour de la nappe sur les
 graines 3 et 6. `R4-P103` reste ouverte : une chaîne qui fait un tour la trancherait.
 
+**`315` · 2026-09-29 · la chaîne tient-elle au-delà de quatre sauts**
+
+⭐⭐⭐⭐⭐ **Oui : prolongée à seize sauts, la chaîne de `303` tient jusqu'au seizième sur six côtés sur dix ; sur les graines 4 et 7,
+trente-trois surfaces empilées au plus dense du scan, sur 6 mm** — `R4-F496`. Mais `m7` n'appuie plus que 15 à 16 % des points au
+seizième saut : ce qui tient loin est surtout extrapolé au pas par défaut, et le scan dit que l'empilement y est régulier.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
