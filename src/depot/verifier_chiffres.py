@@ -3336,6 +3336,49 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 346 : LES SURFACES À DEUX TOURS TENUES SONT-ELLES LÀ OÙ LEURS TOURS SE RECOUVRENT
+    s346 = _source(racine, "les_surfaces_a_deux_tours_tenues_sont_elles_la_ou_leurs_tours_se_recouvrent.json")
+    if s346.exists():
+        import statistics
+        d = json.loads(s346.read_text())
+        v_ = d["le_verdict"]
+        c2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        ctl = [s_ for s_ in d["les_surfaces"] if s_["le_rang"] < 4]
+        parts = sorted(s_["la_surface"]["la_part"] for s_ in ctl if s_["la_surface"]["la_part"] is not None)
+        posees = sum(x_ >= 0.5 for x_ in parts)
+        propres = [s_ for s_ in d["les_surfaces"] if s_["le_rang"] >= 4]
+        en_face = sum(x_["en_face_de_lautre"] for s_ in propres for x_ in s_["les_parts"].values())
+        au_quart = sum(x_["a_un_quart"] for s_ in propres for x_ in s_["les_parts"].values())
+        lus = sum(x_["lus"] if "lus" in x_ else x_["PHercParis4"]["lus"] for x_ in d["la_lecture_de_m7"].values())
+        ecrits = [("le verdict de 346", v_["lissue"].upper()),
+                  ("les chunks de m7 lus de 346", f"`m7` a été lu en {lus:,} chunks, sans panne".replace(",", " ", 1)),
+                  ("le contrôle lu de 346", f"le contrôle voit le recouvrement sous les {posees} surfaces qu'il lit"),
+                  ("les parts du contrôle de 346", f"des {len(parts)} surfaces lues sont posées où leurs tours se recouvrent, à des parts de "
+                                                   f"{c2(parts[0])} à {c2(parts[-1])}, {c2(statistics.median(parts))} en médiane"),
+                  ("le contrôle rapporté de 346", f"contre {posees} des {len(parts)} autour des graines 1 à 3"),
+                  ("le contrôle non lu de 346", f"le contrôle ne lit pas {'une surface' if len(ctl) - len(parts) == 1 else len(ctl) - len(parts)} "
+                                                f"sur {len(ctl)}"),
+                  ("les sommets en face de 346", f"{en_face:,}".replace(",", " ") + " sommets ont l'autre tour en face, et "
+                                                 + ("aucun ne l'a à un quart de pas" if au_quart == 0 else f"{au_quart} l'ont à un quart de pas"))]
+        for s_ in propres:
+            a_ = s_["la_surface"]
+            x_ = s_["les_parts"][f"{a_['les_tours_de_trop'][0]}|{a_['le_tour_attendu']}"]
+            tours = ", ".join(str(t) for t in sorted([a_["le_tour_attendu"], *a_["les_tours_de_trop"]], reverse=True))
+            ecrits.append((f"la surface {s_['la_chaine']} {s_['le_rang']}-{s_['le_saut']} de 346",
+                           f"| {s_['la_chaine']} | {s_['le_rang']}, saut {s_['le_saut']} | {tours} | {a_['le_tour_attendu']} | "
+                           f"{x_['les_sommets_poses']} | {x_['en_face_de_lautre']} | {x_['a_un_quart']} |"))
+        for s_ in propres:
+            a_ = s_["la_surface"]
+            if not (s_["tient_par_345"] and a_["la_lecture"] == "non lue"):
+                continue
+            t_, at_ = a_["les_tours_de_trop"][0], a_["le_tour_attendu"]
+            x_, y_ = s_["les_parts"][f"{t_}|{at_}"], s_["les_parts"][f"{at_}|{t_}"]
+            ecrits += [("la tenue non lue de 346", f"Des {x_['les_sommets_poses']} sommets de `5753_{t_}` posés sur la surface"),
+                       ("l'attendu en face de la tenue non lue de 346", f"{x_['en_face_de_lautre']} seulement ont"),
+                       ("l'autre sens de la tenue non lue de 346", f"dans l'autre sens, {y_['en_face_de_lautre']} des {y_['les_sommets_poses']} "
+                                                                    f"sommets de `5753_{at_}` posés sur elle ont")]
+        out.extend((nom, [x_], s346.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 345 : LES FEUILLES DE m7 FRANCHIES SÉPARENT-ELLES LES SAUTS JUSTES DES FAUX
     s345 = _source(racine, "les_feuilles_de_m7_franchies_separent_elles_les_sauts_justes_des_faux.json")
     if s345.exists():

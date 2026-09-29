@@ -212,8 +212,8 @@ def les_tenues(nom: str, d: dict, rang: int, cote: str) -> list[dict]:
 def les_en_plus(nom: str, d: dict, rang: int, cote: str) -> list | None:
     g = next(x for x in m340.les_graines_de(nom, d) if x["le_rang"] == rang)
     if nom == "sans relance":
-        ep = [s.get("en_plus") for s in g["les_cotes"][cote]["les_spires"]]
-        return ep if all(x is not None for x in ep) else None
+        spires = g["les_cotes"][cote]["les_spires"]
+        return [s["en_plus"] for s in spires] if all("en_plus" in s for s in spires) else None
     return g["les_cotes"][cote].get("les_en_plus")
 
 
@@ -373,6 +373,10 @@ def verifier() -> int:
       [s["en_plus"] for s in spires] == [(100.0, 120.0), (120.0, 140.0), (140.0, 160.0)], str([s["en_plus"] for s in spires]))
     ss = les_sauts([lect(t0=R), lect(t1=R), lect(t2=R)], [t_(True), t_(False)], "moins", en_plus=["a", "b"])
     v("★★★ en plus, chaque saut porte ce qu'on a mesuré de lui", [s["en_plus"] for s in ss] == ["a", "b"])
+    sp = lambda *xs: {"les_graines": [{"le_rang": 1, "les_cotes": {"moins": {"les_spires": list(xs)}}}]}  # noqa: E731
+    v("★★★ en plus, une mesure qui ne rend rien est portée telle quelle, et une mesure absente ne l'est pas",
+      les_en_plus("sans relance", sp({"en_plus": None}, {"en_plus": "x"}), 1, "moins") == [None, "x"]
+      and les_en_plus("sans relance", sp({}, {}), 1, "moins") is None)
 
     s_ = lambda j, t: {"la_justesse": j, "tient": t}  # noqa: E731
     def d_(sauts_propres, sauts_sales=(), **kw):

@@ -4614,6 +4614,13 @@ qu'il tient ne sont donc validés par rien. `R4-P141` s'ouvre : compter les feui
 graines 4 à 8. Il refuse le saut qui passe par-dessus `5753_-5`, que le pas nominal tenait ; mais une surface qui retrouve deux tours
 passe pour lui à la feuille suivante. `R4-P142` s'ouvre : ces surfaces sont-elles là où les deux tours publiés se recouvrent ?
 
+**`346` · 2026-09-29 · les surfaces à deux tours tenues sont-elles là où leurs tours se recouvrent** — `R4-P142`
+
+⭐⭐⭐⭐ **Indécidable : l'une n'est pas lue, les deux autres sont à cheval** — `R4-F532`. Sur les graines 4 à 8, aucun sommet d'un
+tour publié sous une surface à deux tours n'a l'autre tour à un quart de pas ; autour des graines 1 à 3, les 18 surfaces lues sont
+posées où leurs tours se recouvrent. Ce que disent les surfaces lues va vers la surface, et non vers le référent. `R4-P143` s'ouvre :
+le compte de `345` voit-il, point par point, l'endroit où la surface change de feuille ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
