@@ -3336,6 +3336,35 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 300 : UNE NAPPE TIRÉE DE M7 SUIT-ELLE SA FEUILLE
+    s300 = _source(racine, "une_nappe_tiree_de_m7_suit_elle_sa_feuille.json")
+    if s300.exists():
+        d = json.loads(s300.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        e_, rl = d["letalonnage"], d["les_releves"]
+        juste = {tuple(x["le_bloc"]): x["la_part_juste"] for x in e_["la_part_juste_du_premier_saut_selon_248"]}
+        ecrits = [("les pièces du traceur dans 300",
+                   f"**{rl['les_pieces_du_traceur']['combien']}** pièces, Z médian "
+                   f"**{f_(rl['les_pieces_du_traceur']['le_z_median'])}**, **{rl['les_pieces_du_traceur']['au_moins_3']}** "
+                   f"seule au-dessus de 3 ({f_(rl['les_pieces_du_traceur']['le_z_max'])})"),
+                  ("la rampe la plus haute de 300", f"la plus haute est à {f_(rl['letalonnage']['le_plus_haut_des_rampes'])}"),
+                  ("le tracé le plus bas de 300", f"ne descend jamais sous {f_(rl['letalonnage']['le_plus_bas_du_trace'])}"),
+                  ("les morceaux de 300", f"**{d['les_morceaux']['PHercParis4']['combien']}** morceaux de PHercParis4 et "
+                                          f"**{d['les_morceaux']['PHerc0358']['combien']}**")]
+        for b in e_["les_blocs"]:
+            k = tuple(b["le_bloc"])
+            ecrits.append((f"le bloc {k[0]}_{k[1]} de 300",
+                           f"| `{k[0]}_{k[1]}` | {f_(b['le_segment'])} | {f_(b['saut_1'])} | {f_(b['rampe_douce'])} | "
+                           f"{f_(b['rampe_raide'])} | {f_(juste.get(k))} |"))
+        for g in d["le_rouleau"]["les_graines"]:
+            x_ = g["le_detail"]
+            ecrits.append((f"la graine {g['le_rang']} de 300",
+                           f"| {g['le_rang']} | {f_(g['la_part_appuyee'])} | {f_(g['les_dechirures'])} | "
+                           f"{f_(x_['nappe']['le_z'])} | {f_(x_['plus']['le_z'])} | {f_(x_['moins']['le_z'])} | "
+                           f"{f_(x_['plus']['le_pas_median_des_appuyes_voxels'])} / "
+                           f"{f_(x_['moins']['le_pas_median_des_appuyes_voxels'])} |"))
+        out.extend((nom, [x_], s300.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐ LA TRANCHE 299 : L'ALIGNEMENT DES PROFILS DIT-IL SI UNE PREMIÈRE SURFACE SUIT SA FEUILLE
     s299 = _source(racine, "lalignement_des_profils_dit_il_si_une_premiere_surface_suit_sa_feuille.json")
     if s299.exists():

@@ -1,0 +1,768 @@
+{
+ "la_question": "Une première surface tirée de la seule prédiction m7 suit-elle sa feuille sur un rouleau du prix, et la spire suivante aussi ?",
+ "les_constantes": {
+  "le_z_minimum": 3.0,
+  "les_phases": [
+   0.0,
+   0.5,
+   1.0,
+   1.5
+  ],
+  "les_pentes": {
+   "rampe_douce": 0.25,
+   "rampe_raide": 1.0
+  },
+  "le_cote_du_plan": 65,
+  "le_pas_du_plan_voxels": 10.0,
+  "le_pas_0358_voxels": 20.0,
+  "la_demi_portee_voxels": 30.0,
+  "le_controle_voxels": 3.0
+ },
+ "letalonnage": {
+  "les_blocs": [
+   {
+    "le_bloc": [
+     64,
+     16
+    ],
+    "lalignement": {
+     "le_segment": 0.69,
+     "saut_1": 0.57,
+     "rampe_douce": 0.09,
+     "rampe_raide": 0.13
+    },
+    "les_temoins": {
+     "le_segment": [
+      0.135,
+      0.033
+     ],
+     "saut_1": [
+      0.179,
+      0.036
+     ],
+     "rampe_douce": [
+      0.204,
+      0.073
+     ],
+     "rampe_raide": [
+      0.163,
+      0.036
+     ]
+    },
+    "le_segment": 17.07,
+    "saut_1": 10.741,
+    "rampe_douce": -1.556,
+    "rampe_raide": -0.899
+   },
+   {
+    "le_bloc": [
+     96,
+     256
+    ],
+    "lalignement": {
+     "le_segment": 1.06,
+     "saut_1": 1.15,
+     "rampe_douce": 0.25,
+     "rampe_raide": 0.27
+    },
+    "les_temoins": {
+     "le_segment": [
+      0.26,
+      0.043
+     ],
+     "saut_1": [
+      0.214,
+      0.029
+     ],
+     "rampe_douce": [
+      0.249,
+      0.185
+     ],
+     "rampe_raide": [
+      0.211,
+      0.119
+     ]
+    },
+    "le_segment": 18.423,
+    "saut_1": 32.012,
+    "rampe_douce": 0.007,
+    "rampe_raide": 0.493
+   },
+   {
+    "le_bloc": [
+     160,
+     80
+    ],
+    "lalignement": {
+     "le_segment": 0.68,
+     "saut_1": 0.46,
+     "rampe_douce": 0.17,
+     "rampe_raide": 0.2
+    },
+    "les_temoins": {
+     "le_segment": [
+      0.171,
+      0.022
+     ],
+     "saut_1": [
+      0.155,
+      0.053
+     ],
+     "rampe_douce": [
+      0.165,
+      0.093
+     ],
+     "rampe_raide": [
+      0.169,
+      0.034
+     ]
+    },
+    "le_segment": 23.476,
+    "saut_1": 5.735,
+    "rampe_douce": 0.054,
+    "rampe_raide": 0.908
+   },
+   {
+    "le_bloc": [
+     208,
+     240
+    ],
+    "lalignement": {
+     "le_segment": 0.6,
+     "saut_1": 0.38,
+     "rampe_douce": 0.24,
+     "rampe_raide": 0.29
+    },
+    "les_temoins": {
+     "le_segment": [
+      0.196,
+      0.049
+     ],
+     "saut_1": [
+      0.201,
+      0.063
+     ],
+     "rampe_douce": [
+      0.188,
+      0.039
+     ],
+     "rampe_raide": [
+      0.185,
+      0.047
+     ]
+    },
+    "le_segment": 8.294,
+    "saut_1": 2.842,
+    "rampe_douce": 1.34,
+    "rampe_raide": 2.224
+   },
+   {
+    "le_bloc": [
+     272,
+     80
+    ],
+    "lalignement": {
+     "le_segment": 0.45,
+     "saut_1": 0.46,
+     "rampe_douce": 0.19,
+     "rampe_raide": 0.18
+    },
+    "les_temoins": {
+     "le_segment": [
+      0.166,
+      0.023
+     ],
+     "saut_1": [
+      0.194,
+      0.025
+     ],
+     "rampe_douce": [
+      0.182,
+      0.058
+     ],
+     "rampe_raide": [
+      0.143,
+      0.033
+     ]
+    },
+    "le_segment": 12.534,
+    "saut_1": 10.635,
+    "rampe_douce": 0.13,
+    "rampe_raide": 1.127
+   },
+   {
+    "le_bloc": [
+     320,
+     160
+    ],
+    "lalignement": {
+     "le_segment": 0.86,
+     "saut_1": 0.69,
+     "rampe_douce": 0.1,
+     "rampe_raide": 0.16
+    },
+    "les_temoins": {
+     "le_segment": [
+      0.171,
+      0.049
+     ],
+     "saut_1": [
+      0.182,
+      0.056
+     ],
+     "rampe_douce": [
+      0.171,
+      0.047
+     ],
+     "rampe_raide": [
+      0.153,
+      0.027
+     ]
+    },
+    "le_segment": 14.192,
+    "saut_1": 9.063,
+    "rampe_douce": -1.515,
+    "rampe_raide": 0.277
+   }
+  ],
+  "le_verdict": {
+   "separe": false,
+   "les_raisons": [
+    "bloc [208, 240] : le saut_1 n'a pas Z ≥ 3 (2.842)"
+   ]
+  },
+  "la_part_juste_du_premier_saut_selon_248": [
+   {
+    "le_bloc": [
+     64,
+     16
+    ],
+    "les_mailles_notees": 0,
+    "la_part_juste": null
+   },
+   {
+    "le_bloc": [
+     96,
+     256
+    ],
+    "les_mailles_notees": 225,
+    "la_part_juste": 0.9911
+   },
+   {
+    "le_bloc": [
+     160,
+     80
+    ],
+    "les_mailles_notees": 0,
+    "la_part_juste": null
+   },
+   {
+    "le_bloc": [
+     208,
+     240
+    ],
+    "les_mailles_notees": 210,
+    "la_part_juste": 0.9619
+   },
+   {
+    "le_bloc": [
+     272,
+     80
+    ],
+    "les_mailles_notees": 0,
+    "la_part_juste": null
+   },
+   {
+    "le_bloc": [
+     320,
+     160
+    ],
+    "les_mailles_notees": 196,
+    "la_part_juste": 0.9592
+   }
+  ]
+ },
+ "le_rouleau": {
+  "les_graines": [
+   {
+    "le_rang": 1,
+    "la_graine": [
+     4936,
+     2576,
+     7852
+    ],
+    "la_part_appuyee": 0.5408,
+    "les_dechirures": 0.0083,
+    "les_sauts": {
+     "plus": "suit sa feuille",
+     "moins": "suit sa feuille"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": 12.79,
+      "lalignement": 1.47,
+      "la_moyenne_des_temoins": 0.647,
+      "les_points_juges": 3807,
+      "sans_matiere": 162,
+      "la_piece": "suit sa feuille"
+     },
+     "plus": {
+      "le_z": 10.93,
+      "lalignement": 1.18,
+      "la_moyenne_des_temoins": 0.455,
+      "les_points_juges": 3712,
+      "sans_matiere": 9,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.614,
+      "les_tours": 11,
+      "le_pas_median_des_appuyes_voxels": 29.5,
+      "les_dechirures": 0.0429
+     },
+     "moins": {
+      "le_z": 26.893,
+      "lalignement": 2.44,
+      "la_moyenne_des_temoins": 0.96,
+      "les_points_juges": 3207,
+      "sans_matiere": 514,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.2343,
+      "les_tours": 7,
+      "le_pas_median_des_appuyes_voxels": 20.0,
+      "les_dechirures": 0.011
+     }
+    },
+    "la_nappe": "suit sa feuille"
+   },
+   {
+    "le_rang": 2,
+    "la_graine": [
+     2424,
+     5036,
+     7728
+    ],
+    "la_part_appuyee": 0.6949,
+    "les_dechirures": 0.0028,
+    "les_sauts": {
+     "plus": "suit sa feuille",
+     "moins": "suit sa feuille"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": 1.935,
+      "lalignement": 1.89,
+      "la_moyenne_des_temoins": 1.505,
+      "les_points_juges": 3967,
+      "sans_matiere": 2,
+      "la_piece": "ne la suit pas"
+     },
+     "plus": {
+      "le_z": 7.275,
+      "lalignement": 2.86,
+      "la_moyenne_des_temoins": 2.086,
+      "les_points_juges": 3640,
+      "sans_matiere": 81,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.0854,
+      "les_tours": 4,
+      "le_pas_median_des_appuyes_voxels": 15.0,
+      "les_dechirures": 0.002
+     },
+     "moins": {
+      "le_z": 6.907,
+      "lalignement": 1.09,
+      "la_moyenne_des_temoins": 0.535,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.5785,
+      "les_tours": 11,
+      "le_pas_median_des_appuyes_voxels": 27.5,
+      "les_dechirures": 0.0663
+     }
+    },
+    "la_nappe": "ne la suit pas"
+   },
+   {
+    "le_rang": 3,
+    "la_graine": [
+     4976,
+     5260,
+     7880
+    ],
+    "la_part_appuyee": 0.8329,
+    "les_dechirures": 0.0357,
+    "les_sauts": {
+     "plus": "suit sa feuille",
+     "moins": "ne la suit pas"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": 2.739,
+      "lalignement": 0.4,
+      "la_moyenne_des_temoins": 0.258,
+      "les_points_juges": 3969,
+      "sans_matiere": 0,
+      "la_piece": "ne la suit pas"
+     },
+     "plus": {
+      "le_z": 18.552,
+      "lalignement": 0.7,
+      "la_moyenne_des_temoins": 0.133,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.8457,
+      "les_tours": 11,
+      "le_pas_median_des_appuyes_voxels": 20.0,
+      "les_dechirures": 0.0474
+     },
+     "moins": {
+      "le_z": 2.58,
+      "lalignement": 0.35,
+      "la_moyenne_des_temoins": 0.242,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "ne la suit pas",
+      "la_part_appuyee": 0.8457,
+      "les_tours": 11,
+      "le_pas_median_des_appuyes_voxels": 15.5,
+      "les_dechirures": 0.0443
+     }
+    },
+    "la_nappe": "ne la suit pas"
+   },
+   {
+    "le_rang": 4,
+    "la_graine": [
+     2992,
+     2864,
+     8424
+    ],
+    "la_part_appuyee": 0.6992,
+    "les_dechirures": 0.0645,
+    "les_sauts": {
+     "plus": "suit sa feuille",
+     "moins": "suit sa feuille"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": 23.677,
+      "lalignement": 0.4,
+      "la_moyenne_des_temoins": 0.09,
+      "les_points_juges": 3969,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille"
+     },
+     "plus": {
+      "le_z": 15.902,
+      "lalignement": 0.34,
+      "la_moyenne_des_temoins": 0.085,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.7122,
+      "les_tours": 11,
+      "le_pas_median_des_appuyes_voxels": 19.5,
+      "les_dechirures": 0.0681
+     },
+     "moins": {
+      "le_z": 6.436,
+      "lalignement": 0.31,
+      "la_moyenne_des_temoins": 0.091,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.7233,
+      "les_tours": 11,
+      "le_pas_median_des_appuyes_voxels": 22.0,
+      "les_dechirures": 0.0677
+     }
+    },
+    "la_nappe": "suit sa feuille"
+   }
+  ],
+  "les_pieces_du_traceur": [
+   {
+    "la_piece": "trace1_16_0",
+    "le_z": -1.05,
+    "lalignement": 0.54,
+    "les_points_juges": 99
+   },
+   {
+    "la_piece": "trace1_32_0",
+    "le_z": -1.76,
+    "lalignement": 0.13,
+    "les_points_juges": 765
+   },
+   {
+    "la_piece": "trace1_32_16",
+    "le_z": 2.517,
+    "lalignement": 0.6,
+    "les_points_juges": 447
+   },
+   {
+    "la_piece": "trace1_48_0",
+    "le_z": -1.54,
+    "lalignement": 0.11,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace1_48_16",
+    "le_z": -2.544,
+    "lalignement": 0.09,
+    "les_points_juges": 900
+   },
+   {
+    "la_piece": "trace1_48_32",
+    "le_z": 4.731,
+    "lalignement": 0.33,
+    "les_points_juges": 801
+   },
+   {
+    "la_piece": "trace1_48_48",
+    "le_z": 1.015,
+    "lalignement": 1.01,
+    "les_points_juges": 97
+   },
+   {
+    "la_piece": "trace1_64_0",
+    "le_z": -1.28,
+    "lalignement": 0.14,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace1_64_16",
+    "le_z": 0.174,
+    "lalignement": 0.13,
+    "les_points_juges": 900
+   },
+   {
+    "la_piece": "trace1_64_32",
+    "le_z": 0.362,
+    "lalignement": 0.16,
+    "les_points_juges": 900
+   },
+   {
+    "la_piece": "trace2_0_16",
+    "le_z": 0.934,
+    "lalignement": 0.98,
+    "les_points_juges": 170
+   },
+   {
+    "la_piece": "trace2_0_32",
+    "le_z": -0.412,
+    "lalignement": 0.27,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace2_0_48",
+    "le_z": -1.811,
+    "lalignement": 0.1,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace2_0_64",
+    "le_z": -1.347,
+    "lalignement": 0.11,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace2_0_80",
+    "le_z": 1.127,
+    "lalignement": 0.38,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace2_0_96",
+    "le_z": -1.266,
+    "lalignement": 0.15,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace2_0_112",
+    "le_z": 0.256,
+    "lalignement": 0.19,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace2_0_128",
+    "le_z": 0.166,
+    "lalignement": 0.31,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace2_0_144",
+    "le_z": -0.307,
+    "lalignement": 0.16,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace2_0_160",
+    "le_z": 2.239,
+    "lalignement": 0.29,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace3_0_0",
+    "le_z": -0.268,
+    "lalignement": 0.18,
+    "les_points_juges": 676
+   },
+   {
+    "la_piece": "trace3_0_16",
+    "le_z": -0.913,
+    "lalignement": 0.13,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace3_0_32",
+    "le_z": -0.158,
+    "lalignement": 0.19,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace3_0_48",
+    "le_z": 1.338,
+    "lalignement": 0.25,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace3_0_64",
+    "le_z": -0.9,
+    "lalignement": 0.14,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace3_0_80",
+    "le_z": -0.046,
+    "lalignement": 0.16,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace3_0_96",
+    "le_z": -1.158,
+    "lalignement": 0.14,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace3_0_112",
+    "le_z": 1.464,
+    "lalignement": 0.23,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace3_0_128",
+    "le_z": 0.453,
+    "lalignement": 0.39,
+    "les_points_juges": 621
+   },
+   {
+    "la_piece": "trace3_16_0",
+    "le_z": -0.707,
+    "lalignement": 0.15,
+    "les_points_juges": 780
+   },
+   {
+    "la_piece": "trace4_32_112",
+    "le_z": -2.007,
+    "lalignement": 1.81,
+    "les_points_juges": 121
+   },
+   {
+    "la_piece": "trace4_32_128",
+    "le_z": -1.907,
+    "lalignement": 1.11,
+    "les_points_juges": 318
+   },
+   {
+    "la_piece": "trace4_48_80",
+    "le_z": -0.007,
+    "lalignement": 1.46,
+    "les_points_juges": 96
+   },
+   {
+    "la_piece": "trace4_48_96",
+    "le_z": 1.781,
+    "lalignement": 0.97,
+    "les_points_juges": 584
+   },
+   {
+    "la_piece": "trace4_48_112",
+    "le_z": -1.969,
+    "lalignement": 0.4,
+    "les_points_juges": 882
+   },
+   {
+    "la_piece": "trace4_48_128",
+    "le_z": -1.297,
+    "lalignement": 0.26,
+    "les_points_juges": 900
+   },
+   {
+    "la_piece": "trace4_48_144",
+    "le_z": -0.044,
+    "lalignement": 0.42,
+    "les_points_juges": 812
+   },
+   {
+    "la_piece": "trace4_48_160",
+    "le_z": 0.967,
+    "lalignement": 0.99,
+    "les_points_juges": 346
+   },
+   {
+    "la_piece": "trace4_64_64",
+    "le_z": 1.317,
+    "lalignement": 0.48,
+    "les_points_juges": 382
+   },
+   {
+    "la_piece": "trace4_64_80",
+    "le_z": 1.278,
+    "lalignement": 0.66,
+    "les_points_juges": 880
+   }
+  ]
+ },
+ "la_lecture_de_m7": {
+  "lus": 411,
+  "absents": 0,
+  "octets": 156307423,
+  "pannes": []
+ },
+ "les_morceaux": {
+  "PHercParis4": {
+   "combien": 370,
+   "les_octets": 775946240
+  },
+  "PHerc0358": {
+   "combien": 1051,
+   "les_octets": 2204106752
+  }
+ },
+ "les_pannes": [],
+ "le_verdict": {
+  "decidable": true,
+  "separe": false,
+  "lissue": "au pas du prix, l'alignement contre huit traversées ne sépare pas une feuille d'une traversée"
+ },
+ "les_secondes": 181.2,
+ "les_releves": {
+  "les_pieces_du_traceur": {
+   "combien": 40,
+   "au_moins_3": 1,
+   "le_z_median": -0.102,
+   "le_z_min": -2.544,
+   "le_z_max": 4.731
+  },
+  "letalonnage": {
+   "les_surfaces_justes_au_moins_3": 11,
+   "les_surfaces_justes": 12,
+   "le_plus_bas_des_justes": 2.842,
+   "le_plus_bas_du_trace": 8.294,
+   "les_rampes_au_moins_3": 0,
+   "les_rampes": 12,
+   "le_plus_haut_des_rampes": 2.224
+  }
+ }
+}

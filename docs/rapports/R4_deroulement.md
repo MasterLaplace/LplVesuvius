@@ -4326,6 +4326,14 @@ bloc par bloc, le tracé humain et le premier saut des traversées** — `R4-F48
 surfaces neuves du traceur, sans aucune auto-intersection, ont en médiane l'alignement de leurs rampes, et sortent de la matière
 pour 36 à 54 % de leurs points. `R4-P99` s'ouvre : un témoin fait de nombreuses rampes.
 
+**`300` · 2026-09-29 · une nappe tirée de m7 suit-elle sa feuille** — `R4-P99`, #17
+
+⭐⭐⭐⭐ **Contre huit rampes plantées, onze des douze surfaces justes dépassent Z = 3 et aucune des douze rampes ; le premier saut
+tombe à 2,842 sur un bloc où il est juste, et la règle tout-ou-rien ne passe pas** — `R4-F481`. Rapportées : sur PHerc0358, une
+première surface tirée de `m7` seule, sans traceur, par le vote de `247`, se cale sur l'empilement pour deux graines sur quatre
+(Z 12,79 et 23,677), avec ses deux spires suivantes, à des pas médians proches du pas du rouleau ; les pièces du traceur restent à
+−0,102 en médiane. `R4-P100` s'ouvre : un étalonnage par taux, et des graines neuves.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
