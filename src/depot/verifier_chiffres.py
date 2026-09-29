@@ -3336,6 +3336,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐ LA TRANCHE 311 : LES MAXIMA DU SCAN SONT-ILS AU PAS OU PAR PAIRES
+    s311 = _source(racine, "les_maxima_du_scan_sont_ils_au_pas_ou_par_paires.json")
+    if s311.exists():
+        d = json.loads(s311.read_text())
+        f_ = lambda xs: ", ".join(str(x).replace("-", "−") for x in xs) if xs else "—"  # noqa: E731
+        ecrits = [("le verdict de 311", d["le_verdict"]["lissue"].split(" (")[0].upper() + ".")]
+        for x_ in d["phercs0358"]:
+            ecrits.append((f"la surface {x_['la_surface']} de 311",
+                           f"| {x_['la_surface'].replace('_', ' ')} | {x_['les_points_juges']} | {f_(x_['les_maxima'])} | "
+                           f"{f_(x_['les_ecarts'])} | {x_['la_forme']} |"))
+        pf = d["paris4_les_formes"]
+        ecrits.append(("les formes de PHercParis4 de 311",
+                       f"{pf['au pas']} blocs au pas, {pf['par paires']} par paires, {pf['serrés']} serrés et "
+                       f"{pf['indécidable']} indécidables"))
+        out.extend((nom, [x_], s311.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 310 : LA CHAÎNE RELUE AU PLUS DENSE RESTE-T-ELLE AU CŒUR D'UNE FEUILLE
     s310 = _source(racine, "la_chaine_relue_au_plus_dense_reste_t_elle_au_coeur_dune_feuille.json")
     if s310.exists():

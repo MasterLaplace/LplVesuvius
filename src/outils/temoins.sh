@@ -1759,6 +1759,8 @@ run "le plus dense dit-il si une surface est sur sa feuille" uv run python "$ROO
 run "figure le plus dense dit-il si une surface est sur sa feuille" uv run python "$ROOT/src/figures/figure_le_plus_dense_dit_il_si_une_surface_est_sur_sa_feuille.py" --verifier
 run "la chaine relue au plus dense reste-t-elle au coeur d une feuille" uv run python "$ROOT/src/nappe/la_chaine_relue_au_plus_dense_reste_t_elle_au_coeur_dune_feuille.py" --verifier
 run "figure la chaine relue au plus dense reste-t-elle au coeur d une feuille" uv run python "$ROOT/src/figures/figure_la_chaine_relue_au_plus_dense_reste_t_elle_au_coeur_dune_feuille.py" --verifier
+run "les maxima du scan sont-ils au pas ou par paires" uv run python "$ROOT/src/nappe/les_maxima_du_scan_sont_ils_au_pas_ou_par_paires.py" --verifier
+run "figure les maxima du scan sont-ils au pas ou par paires" uv run python "$ROOT/src/figures/figure_les_maxima_du_scan_sont_ils_au_pas_ou_par_paires.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

@@ -4404,6 +4404,12 @@ dense du scan pendant quatre sauts, et sur les graines 4, 7 et 8 chaque saut ava
 surfaces empilées au cœur d'une feuille, tirées de la seule prédiction publiée, sans référent. Qu'elles soient chacune d'une seule
 feuille, et consécutives, reste ouvert : `R4-P111`.
 
+**`311` · 2026-09-29 · les maxima du scan sont-ils au pas ou par paires**
+
+⭐⭐⭐ **Indécidable : le profil moyen sur deux pas de part et d'autre d'une nappe de `m7` ne garde que deux maxima** — `R4-F492`.
+Sur PHercParis4 aussi, bloc par bloc, il est indécidable dans 19 blocs sur 24. La question de `304`, feuille voisine ou seconde
+couche d'une même feuille, reste ouverte : `R4-P112`, une lecture point par point.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
