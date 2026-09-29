@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**198 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**199 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 160 portes
+## Grand Prize — 161 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -178,7 +178,8 @@
 - **R4-P141** *(le graal)* · **RÉPONDUE par `345` : en partie.** Compter les feuilles de `m7` qu'un saut franchit tient 95 des 104 sauts justes et 3 des 6 faux ; il refuse le saut par-dessus `5753_-5` que le pas nominal tenait, mais tient trois des quatre sauts qui retrouvent deux tours (`R4-F531`). La suite est `R4-P142`.
 - **R4-P142** *(le référent)* · **RÉPONDUE par `346` : indécidable.** La surface tenue relancée depuis la spire, graine 8, septième saut, n'est pas lue ; rapporté à côté, les deux autres sont à cheval sur deux feuilles, aucun de leurs sommets n'ayant l'autre tour à un quart de pas, contre 18 des 18 surfaces lues autour des graines 1 à 3 (`R4-F532`). La suite est `R4-P143`.
 - **R4-P143** *(le graal)* · **RÉPONDUE par `347` : sous certaines seulement.** Sous deux des trois surfaces tenues à tort, aucun point posé sur le tour de trop n'est compté : le compte ne les voit qu'en ne les comptant pas ; sous la surface bornée, le tour de trop est celui d'où part le saut et 165 des 273 points posés dessus franchissent une feuille (`R4-F533`). La suite est `R4-P144`.
-- **R4-P144** *(le référent)* · **LÀ OÙ LES POINTS DE LA SURFACE BORNÉE, GRAINE 8, QUATRIÈME SAUT, POSÉS SUR `5753_-2` FRANCHISSENT UNE FEUILLE, LA SURFACE D'OÙ PART LE SAUT EST-ELLE POSÉE SUR `5753_-2` ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `347` DÉSIGNE. Si non, la surface de départ n'était déjà pas sur son tour à cet endroit, et l'erreur du saut commence un saut plus tôt ; si oui, `5753_-2` y est lui-même posé sur deux feuilles de `m7`, comme un tour publié l'est sur la feuille de son voisin autour des graines 1 à 3 (`R4-F529`)
+- **R4-P144** *(le référent)* · **RÉPONDUE par `348` : non.** Des 152 pieds lus sur `5753_-2`, un seul y est posé ; 152 sont posés sur `5753_-1`. La surface de départ, que donne un saut dit juste, est déjà à cheval sur deux tours voisins, et l'erreur commence un saut plus tôt (`R4-F534`). La suite est `R4-P145`.
+- **R4-P145** *(le graal)* · **PARMI LES SAUTS QUE LA LECTURE STRICTE DIT JUSTES SUR LES GRAINES 4 À 8, COMBIEN DONNENT UNE SURFACE À CHEVAL SUR LE TOUR ATTENDU ET SON VOISIN, ET UN COMPTE SANS RÉFÉRENT LE VOIT-IL ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `348` DÉSIGNE. La lecture stricte ne voit une surface à cheval que lorsqu'elle retrouve les deux tours (`R4-F534`) : si d'autres sauts justes sont à cheval sans le dire, les bilans de `344` et `345` comptent comme justes des sauts qui ne le sont qu'en partie, et un critère pour `#5` doit voir cela d'abord
 
 ## Progress Prizes — 19 portes
 

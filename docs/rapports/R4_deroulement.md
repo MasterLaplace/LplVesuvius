@@ -4628,6 +4628,13 @@ compté : le compte de `345`, qui ne juge que ses points comptés, ne les pesait
 d'où part le saut, et 165 des 273 points posés dessus franchissent pourtant une feuille. `R4-P144` s'ouvre : la surface de départ
 y est-elle posée sur ce tour ?
 
+**`348` · 2026-09-29 · la surface de départ est-elle sur son tour sous la surface bornée** — `R4-P144`
+
+⭐⭐⭐⭐⭐ **Non : elle y est sur le tour voisin** — `R4-F534`. Là où la surface bornée de la graine 8 est posée sur `5753_-2`, le tour
+d'où part le saut, la surface de départ est posée sur `5753_-1` : 1 pied sur 152. Cette surface de départ, que donne un saut dit juste,
+est déjà à cheval sur deux tours voisins ; l'erreur commence un saut plus tôt. `R4-P145` s'ouvre : combien de sauts justes sont ainsi
+à cheval sans le dire ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

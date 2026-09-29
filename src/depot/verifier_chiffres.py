@@ -3336,6 +3336,44 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 348 : LA SURFACE DE DÉPART EST-ELLE SUR SON TOUR SOUS LA SURFACE BORNÉE
+    s348 = _source(racine, "la_surface_de_depart_est_elle_sur_son_tour_sous_la_surface_bornee.json")
+    s348_345 = _source(racine, "les_feuilles_de_m7_franchies_separent_elles_les_sauts_justes_des_faux.json")
+    if s348.exists() and s348_345.exists():
+        d = json.loads(s348.read_text())
+        v_ = d["le_verdict"]
+        c_ = d["les_constantes"]["la_surface"]
+        la = next(s_ for s_ in d["les_surfaces"] if all(s_[k] == x_ for k, x_ in c_.items()))["la_surface"]
+        q_, k_ = la["la_question"], la["le_controle"]
+        w0 = la["le_tour_de_depart"]
+        voisin = str(w0 + 1) if la["le_tour_attendu"] < w0 else str(w0 - 1)
+        autres = [s_["la_surface"]["la_question"]["la_part_posee"] for s_ in d["les_surfaces"]
+                  if not all(s_[k] == x_ for k, x_ in c_.items()) and s_["la_surface"] is not None
+                  and s_["la_surface"]["la_question"]["la_part_posee"] is not None]
+        lus = sum(x_["lus"] if "lus" in x_ else x_["PHercParis4"]["lus"] for x_ in d["la_lecture_de_m7"].values())
+        d345 = json.loads(s348_345.read_text())
+        g345 = next(g for g in d345["les_chaines"][c_["la_chaine"]]["les_graines"] if g["le_rang"] == c_["le_rang"])
+        avant = g345["les_cotes"][c_["le_cote"]]["les_sauts"][c_["le_saut"] - 2]
+        ligne = lambda nom, g: (f"| {nom} | {g['les_points']} | {g['les_pieds_lus']} | {g['les_tours_des_pieds'].get(voisin, 0)} | "  # noqa: E731
+                                f"{g['les_tours_des_pieds'].get(str(w0), 0)} | {g['sans_tour']} |")
+        ecrits = [("le verdict de 348", v_["lissue"].upper()),
+                  ("les chunks de m7 lus de 348", f"`m7` a été lu en {lus:,} chunks, sans panne".replace(",", " ", 1)),
+                  ("la question de 348", ligne("la question : points du tour de trop, une feuille", q_)),
+                  ("le contrôle de 348", ligne("le contrôle : points du tour attendu, une feuille", k_)),
+                  ("les pieds lus de 348", f"Des {q_['les_pieds_lus']} pieds lus sur"),
+                  ("les pieds posés de 348", f"{'un seul' if q_['les_pieds_poses'] == 1 else q_['les_pieds_poses']} y "
+                                             f"{'est posé' if q_['les_pieds_poses'] == 1 else 'sont posés'}, soit "
+                                             f"{round(100 * q_['la_part_posee'])} %"),
+                  ("les pieds sur le voisin de 348", f"{q_['les_tours_des_pieds'].get(voisin, 0)} pieds sont posés sur `5753_{voisin}`"),
+                  ("les pieds du contrôle de 348", f"les {k_['les_pieds_lus']} pieds"),
+                  ("l'écart de 348", f"de {str(q_['lecart_median_en_pas']).replace('.', ',')} pas"),
+                  ("les autres surfaces de 348", f"Sous les {len(autres)} autres"),
+                  ("le saut d'avant de 348", f"sur {round(100 * avant['les_feuilles']['la_part_dune_feuille'])} % de ses"),
+                  ("le saut d'avant juste de 348", "la lecture stricte le dit juste" if avant["la_justesse"] == "juste" else "?")]
+        if all(p >= 0.75 for p in autres):
+            ecrits.append(("les autres au-dessus des trois quarts de 348", "les trois quarts des pieds au moins sont posés sur le tour de"))
+        out.extend((nom, [x_], s348.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 347 : LES POINTS POSÉS SUR LE TOUR DE TROP FRANCHISSENT-ILS AUTRE CHOSE QU'UNE FEUILLE
     s347 = _source(racine, "les_points_poses_sur_le_tour_de_trop_franchissent_ils_autre_chose_quune_feuille.json")
     if s347.exists():

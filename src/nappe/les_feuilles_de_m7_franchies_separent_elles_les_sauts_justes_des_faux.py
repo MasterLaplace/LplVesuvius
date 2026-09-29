@@ -89,8 +89,8 @@ def le_compte(vu: np.ndarray, t: np.ndarray, d: float, tolerance: float) -> int 
 
 def les_comptes_point_par_point(depart: dict, arrivee: dict | None, lire_valeurs, pas: float) -> dict | None:
     """Les points posés de la surface d'arrivée que le compte prend, au plus `m326.LE_MAXIMUM_DE_POINTS`, avec leurs normales ; pour
-    chacun, s'il a la surface de départ en face et le nombre de feuilles de `m7` qu'il passe, None s'il n'est pas compté. None s'il n'y a
-    pas de tels points."""
+    chacun, son écart à la surface de départ le long de sa normale, s'il l'a en face, et le nombre de feuilles de `m7` qu'il passe, None
+    s'il n'est pas compté. None s'il n'y a pas de tels points."""
     from la_spire_voisine_est_elle_a_un_pas import les_normales
 
     if arrivee is None or not arrivee["valide"].any() or not depart["valide"].any():
@@ -114,7 +114,7 @@ def les_comptes_point_par_point(depart: dict, arrivee: dict | None, lire_valeurs
         vu = lire_valeurs(idx) > 0
         for i, rayon, dd in zip(np.flatnonzero(en_face), vu, d[en_face]):
             comptes[i] = le_compte(rayon, t, float(dd), tol)
-    return {"les_points": q, "les_normales": nq, "en_face": en_face, "les_comptes": comptes}
+    return {"les_points": q, "les_normales": nq, "les_ecarts": d, "en_face": en_face, "les_comptes": comptes}
 
 
 def les_feuilles_franchies(depart: dict, arrivee: dict | None, lire_valeurs, pas: float) -> dict:

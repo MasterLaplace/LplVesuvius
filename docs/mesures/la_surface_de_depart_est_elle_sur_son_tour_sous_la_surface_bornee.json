@@ -1,0 +1,934 @@
+{
+ "la_question": "Là où les points de la surface bornée, graine 8, quatrième saut, posés sur 5753_-2 franchissent une feuille, la surface d'où part le saut est-elle posée sur 5753_-2 ?",
+ "les_constantes": {
+  "la_surface": {
+   "la_chaine": "bornée",
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_saut": 4
+  },
+  "la_part_au_moins": 0.75,
+  "la_part_au_plus": 0.25,
+  "la_part_du_controle": 0.5,
+  "le_minimum_de_pieds": 50,
+  "le_quart_voxels": 18.021
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "sans relance": {
+   "lus": 6023,
+   "absents": 0,
+   "octets": 2707477397
+  },
+  "relancée depuis un point": {
+   "PHercParis4": {
+    "lus": 13867,
+    "absents": 0,
+    "octets": 6160505777
+   }
+  },
+  "relancée depuis la spire": {
+   "PHercParis4": {
+    "lus": 14081,
+    "absents": 0,
+    "octets": 6212116064
+   }
+  },
+  "bornée": {
+   "PHercParis4": {
+    "lus": 11557,
+    "absents": 0,
+    "octets": 5185671971
+   }
+  }
+ },
+ "redonne_344": true,
+ "redonne_345": true,
+ "les_lectures_saccordent": true,
+ "les_surfaces": [
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": 0,
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "la_question": {
+     "les_points": 459,
+     "les_pieds_lus": 432,
+     "les_pieds_poses": 407,
+     "la_part_posee": 0.9421,
+     "les_tours_des_pieds": {
+      "0": 407
+     },
+     "sans_tour": 52,
+     "lecart_median_en_pas": 1.73
+    },
+    "le_controle": {
+     "les_points": 374,
+     "les_pieds_lus": 371,
+     "les_pieds_poses": 371,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 371
+     },
+     "sans_tour": 3,
+     "lecart_median_en_pas": 1.7228
+    }
+   }
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": 0,
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "la_question": {
+     "les_points": 773,
+     "les_pieds_lus": 773,
+     "les_pieds_poses": 773,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 773
+     },
+     "sans_tour": 0,
+     "lecart_median_en_pas": 1.5913
+    },
+    "le_controle": {
+     "les_points": 767,
+     "les_pieds_lus": 767,
+     "les_pieds_poses": 767,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 767
+     },
+     "sans_tour": 0,
+     "lecart_median_en_pas": 1.5913
+    }
+   }
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -2,
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "la_question": {
+     "les_points": 575,
+     "les_pieds_lus": 571,
+     "les_pieds_poses": 571,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-1": 570,
+      "-2": 571
+     },
+     "sans_tour": 4,
+     "lecart_median_en_pas": 1.1873
+    },
+    "le_controle": {
+     "les_points": 575,
+     "les_pieds_lus": 571,
+     "les_pieds_poses": 571,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-1": 570,
+      "-2": 571
+     },
+     "sans_tour": 4,
+     "lecart_median_en_pas": 1.1873
+    }
+   }
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 5,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -4,
+    "le_tour_attendu": -5,
+    "les_tours_de_trop": [
+     -4
+    ],
+    "la_question": {
+     "les_points": 119,
+     "les_pieds_lus": 119,
+     "les_pieds_poses": 119,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-3": 119,
+      "-4": 119
+     },
+     "sans_tour": 0,
+     "lecart_median_en_pas": 1.3343
+    },
+    "le_controle": {
+     "les_points": 119,
+     "les_pieds_lus": 119,
+     "les_pieds_poses": 119,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-3": 119,
+      "-4": 119
+     },
+     "sans_tour": 0,
+     "lecart_median_en_pas": 1.3343
+    }
+   }
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "tient_par_345": false,
+   "la_surface": {
+    "le_tour_de_depart": -2,
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -1
+    ],
+    "la_question": {
+     "les_points": 0,
+     "les_pieds_lus": 0,
+     "les_pieds_poses": 0,
+     "la_part_posee": null,
+     "les_tours_des_pieds": {},
+     "sans_tour": 0,
+     "lecart_median_en_pas": null
+    },
+    "le_controle": {
+     "les_points": 26,
+     "les_pieds_lus": 26,
+     "les_pieds_poses": 26,
+     "la_part_posee": null,
+     "les_tours_des_pieds": {
+      "-2": 26
+     },
+     "sans_tour": 0,
+     "lecart_median_en_pas": 1.4867
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 5,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -2,
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "la_question": {
+     "les_points": 496,
+     "les_pieds_lus": 463,
+     "les_pieds_poses": 451,
+     "la_part_posee": 0.9741,
+     "les_tours_des_pieds": {
+      "-1": 297,
+      "-2": 451
+     },
+     "sans_tour": 32,
+     "lecart_median_en_pas": 0.7797
+    },
+    "le_controle": {
+     "les_points": 772,
+     "les_pieds_lus": 742,
+     "les_pieds_poses": 742,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-1": 294,
+      "-2": 742
+     },
+     "sans_tour": 30,
+     "lecart_median_en_pas": 0.7328
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": 0,
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "la_question": {
+     "les_points": 623,
+     "les_pieds_lus": 552,
+     "les_pieds_poses": 552,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 552
+     },
+     "sans_tour": 71,
+     "lecart_median_en_pas": 1.4973
+    },
+    "le_controle": {
+     "les_points": 614,
+     "les_pieds_lus": 549,
+     "les_pieds_poses": 549,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 549
+     },
+     "sans_tour": 65,
+     "lecart_median_en_pas": 1.4882
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": 0,
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "la_question": {
+     "les_points": 736,
+     "les_pieds_lus": 658,
+     "les_pieds_poses": 658,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 658
+     },
+     "sans_tour": 78,
+     "lecart_median_en_pas": 1.5162
+    },
+    "le_controle": {
+     "les_points": 718,
+     "les_pieds_lus": 650,
+     "les_pieds_poses": 650,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 650
+     },
+     "sans_tour": 68,
+     "lecart_median_en_pas": 1.5059
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -2,
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "la_question": {
+     "les_points": 612,
+     "les_pieds_lus": 538,
+     "les_pieds_poses": 534,
+     "la_part_posee": 0.9926,
+     "les_tours_des_pieds": {
+      "-1": 491,
+      "-2": 534
+     },
+     "sans_tour": 78,
+     "lecart_median_en_pas": 1.1089
+    },
+    "le_controle": {
+     "les_points": 611,
+     "les_pieds_lus": 538,
+     "les_pieds_poses": 534,
+     "la_part_posee": 0.9926,
+     "les_tours_des_pieds": {
+      "-1": 491,
+      "-2": 534
+     },
+     "sans_tour": 77,
+     "lecart_median_en_pas": 1.1089
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 6,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -4,
+    "le_tour_attendu": -5,
+    "les_tours_de_trop": [
+     0
+    ],
+    "la_question": {
+     "les_points": 0,
+     "les_pieds_lus": 0,
+     "les_pieds_poses": 0,
+     "la_part_posee": null,
+     "les_tours_des_pieds": {},
+     "sans_tour": 0,
+     "lecart_median_en_pas": null
+    },
+    "le_controle": {
+     "les_points": 470,
+     "les_pieds_lus": 386,
+     "les_pieds_poses": 377,
+     "la_part_posee": 0.9767,
+     "les_tours_des_pieds": {
+      "-4": 377,
+      "-5": 377,
+      "-6": 17
+     },
+     "sans_tour": 76,
+     "lecart_median_en_pas": 1.1307
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -1,
+    "le_tour_attendu": -2,
+    "les_tours_de_trop": [
+     -6
+    ],
+    "la_question": {
+     "les_points": 0,
+     "les_pieds_lus": 0,
+     "les_pieds_poses": 0,
+     "la_part_posee": null,
+     "les_tours_des_pieds": {},
+     "sans_tour": 0,
+     "lecart_median_en_pas": null
+    },
+    "le_controle": {
+     "les_points": 570,
+     "les_pieds_lus": 536,
+     "les_pieds_poses": 536,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-1": 536
+     },
+     "sans_tour": 34,
+     "lecart_median_en_pas": 0.6692
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_saut": 6,
+   "tient_par_345": false,
+   "la_surface": {
+    "le_tour_de_depart": -3,
+    "le_tour_attendu": -4,
+    "les_tours_de_trop": [
+     -3
+    ],
+    "la_question": {
+     "les_points": 7,
+     "les_pieds_lus": 3,
+     "les_pieds_poses": 1,
+     "la_part_posee": null,
+     "les_tours_des_pieds": {
+      "-2": 2,
+      "-3": 1
+     },
+     "sans_tour": 4,
+     "lecart_median_en_pas": 0.4443
+    },
+    "le_controle": {
+     "les_points": 218,
+     "les_pieds_lus": 194,
+     "les_pieds_poses": 194,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-3": 194
+     },
+     "sans_tour": 24,
+     "lecart_median_en_pas": 0.731
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": 0,
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "la_question": {
+     "les_points": 755,
+     "les_pieds_lus": 694,
+     "les_pieds_poses": 694,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 694
+     },
+     "sans_tour": 61,
+     "lecart_median_en_pas": 1.5108
+    },
+    "le_controle": {
+     "les_points": 731,
+     "les_pieds_lus": 677,
+     "les_pieds_poses": 677,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 677
+     },
+     "sans_tour": 54,
+     "lecart_median_en_pas": 1.5051
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -2,
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "la_question": {
+     "les_points": 552,
+     "les_pieds_lus": 478,
+     "les_pieds_poses": 469,
+     "la_part_posee": 0.9812,
+     "les_tours_des_pieds": {
+      "-1": 412,
+      "-2": 469
+     },
+     "sans_tour": 83,
+     "lecart_median_en_pas": 1.0672
+    },
+    "le_controle": {
+     "les_points": 552,
+     "les_pieds_lus": 478,
+     "les_pieds_poses": 469,
+     "la_part_posee": 0.9812,
+     "les_tours_des_pieds": {
+      "-1": 412,
+      "-2": 469
+     },
+     "sans_tour": 83,
+     "lecart_median_en_pas": 1.0672
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": 0,
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "la_question": {
+     "les_points": 758,
+     "les_pieds_lus": 678,
+     "les_pieds_poses": 678,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 678
+     },
+     "sans_tour": 80,
+     "lecart_median_en_pas": 1.5117
+    },
+    "le_controle": {
+     "les_points": 738,
+     "les_pieds_lus": 668,
+     "les_pieds_poses": 668,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 668
+     },
+     "sans_tour": 70,
+     "lecart_median_en_pas": 1.5009
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -2,
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "la_question": {
+     "les_points": 649,
+     "les_pieds_lus": 567,
+     "les_pieds_poses": 566,
+     "la_part_posee": 0.9982,
+     "les_tours_des_pieds": {
+      "-1": 523,
+      "-2": 566
+     },
+     "sans_tour": 83,
+     "lecart_median_en_pas": 1.1089
+    },
+    "le_controle": {
+     "les_points": 649,
+     "les_pieds_lus": 567,
+     "les_pieds_poses": 566,
+     "la_part_posee": 0.9982,
+     "les_tours_des_pieds": {
+      "-1": 523,
+      "-2": 566
+     },
+     "sans_tour": 83,
+     "lecart_median_en_pas": 1.1089
+    }
+   }
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_saut": 7,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -5,
+    "le_tour_attendu": -6,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "la_question": {
+     "les_points": 0,
+     "les_pieds_lus": 0,
+     "les_pieds_poses": 0,
+     "la_part_posee": null,
+     "les_tours_des_pieds": {},
+     "sans_tour": 0,
+     "lecart_median_en_pas": null
+    },
+    "le_controle": {
+     "les_points": 288,
+     "les_pieds_lus": 284,
+     "les_pieds_poses": 284,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-5": 284
+     },
+     "sans_tour": 4,
+     "lecart_median_en_pas": 0.5752
+    }
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": 0,
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "la_question": {
+     "les_points": 442,
+     "les_pieds_lus": 391,
+     "les_pieds_poses": 391,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 391
+     },
+     "sans_tour": 51,
+     "lecart_median_en_pas": 1.1133
+    },
+    "le_controle": {
+     "les_points": 440,
+     "les_pieds_lus": 389,
+     "les_pieds_poses": 389,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 389
+     },
+     "sans_tour": 51,
+     "lecart_median_en_pas": 1.1152
+    }
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 5,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -2,
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "la_question": {
+     "les_points": 311,
+     "les_pieds_lus": 229,
+     "les_pieds_poses": 229,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-1": 169,
+      "-2": 229
+     },
+     "sans_tour": 82,
+     "lecart_median_en_pas": 1.0508
+    },
+    "le_controle": {
+     "les_points": 311,
+     "les_pieds_lus": 229,
+     "les_pieds_poses": 229,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-1": 169,
+      "-2": 229
+     },
+     "sans_tour": 82,
+     "lecart_median_en_pas": 1.0508
+    }
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": 0,
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "la_question": {
+     "les_points": 575,
+     "les_pieds_lus": 492,
+     "les_pieds_poses": 492,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 492
+     },
+     "sans_tour": 83,
+     "lecart_median_en_pas": 1.4886
+    },
+    "le_controle": {
+     "les_points": 559,
+     "les_pieds_lus": 480,
+     "les_pieds_poses": 480,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 480
+     },
+     "sans_tour": 79,
+     "lecart_median_en_pas": 1.4796
+    }
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -2,
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "la_question": {
+     "les_points": 613,
+     "les_pieds_lus": 499,
+     "les_pieds_poses": 499,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-1": 480,
+      "-2": 499
+     },
+     "sans_tour": 114,
+     "lecart_median_en_pas": 1.2033
+    },
+    "le_controle": {
+     "les_points": 613,
+     "les_pieds_lus": 499,
+     "les_pieds_poses": 499,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-1": 480,
+      "-2": 499
+     },
+     "sans_tour": 114,
+     "lecart_median_en_pas": 1.2033
+    }
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": 0,
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "la_question": {
+     "les_points": 737,
+     "les_pieds_lus": 675,
+     "les_pieds_poses": 675,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 675
+     },
+     "sans_tour": 62,
+     "lecart_median_en_pas": 1.5033
+    },
+    "le_controle": {
+     "les_points": 727,
+     "les_pieds_lus": 668,
+     "les_pieds_poses": 668,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "0": 668
+     },
+     "sans_tour": 59,
+     "lecart_median_en_pas": 1.5003
+    }
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -2,
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "la_question": {
+     "les_points": 552,
+     "les_pieds_lus": 490,
+     "les_pieds_poses": 472,
+     "la_part_posee": 0.9633,
+     "les_tours_des_pieds": {
+      "-1": 431,
+      "-2": 472
+     },
+     "sans_tour": 79,
+     "lecart_median_en_pas": 1.0422
+    },
+    "le_controle": {
+     "les_points": 552,
+     "les_pieds_lus": 490,
+     "les_pieds_poses": 472,
+     "la_part_posee": 0.9633,
+     "les_tours_des_pieds": {
+      "-1": 431,
+      "-2": 472
+     },
+     "sans_tour": 79,
+     "lecart_median_en_pas": 1.0422
+    }
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_de_depart": -2,
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "la_question": {
+     "les_points": 165,
+     "les_pieds_lus": 152,
+     "les_pieds_poses": 1,
+     "la_part_posee": 0.0066,
+     "les_tours_des_pieds": {
+      "-1": 152,
+      "-2": 1
+     },
+     "sans_tour": 13,
+     "lecart_median_en_pas": 0.7378
+    },
+    "le_controle": {
+     "les_points": 361,
+     "les_pieds_lus": 351,
+     "les_pieds_poses": 351,
+     "la_part_posee": 1.0,
+     "les_tours_des_pieds": {
+      "-2": 351
+     },
+     "sans_tour": 10,
+     "lecart_median_en_pas": 0.6089
+    }
+   }
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "la_part": 0.0066,
+  "lissue": "sous la surface bornée, 1 % des pieds lus des points qui franchissent une feuille depuis 5753_-2 sont posés sur 5753_-2 ; non, elle n'y est pas"
+ },
+ "les_secondes": 877.9
+}

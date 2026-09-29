@@ -159,25 +159,9 @@ def sur_tous_les_points(chaines: dict, graines: tuple) -> dict:
     return m344.le_bilan(m344.les_sauts_de(recodees, graines))
 
 
-def mesurer() -> dict:
-    t0 = time.monotonic()
-    tours = {r: m329.lire_un_tour(r, m330.LES_TOURS) for r in m330.LES_TOURS}
-
-    def garder(dep, arr, lv):
-        r = m345.les_comptes_point_par_point(dep, arr, lv, m321.LE_PAS_L2)
-        out = {"les_feuilles": m345.le_resume(r), "la_part_sur_tous": la_part_sur_tous(r)}
-        if arr is None or not arr["valide"].any():
-            return out
-        lect = m329.les_lectures(arr["la_nappe"][arr["valide"]] * m321.LE_FACTEUR, tours)
-        out["les_retrouves"] = sorted((t for t, x in lect.items() if x["la_lecture"] == "retrouve"), reverse=True)
-        if len(out["les_retrouves"]) >= 2 and r is not None:
-            out["les_comptes"] = r["les_comptes"]
-            out["les_poses"] = les_poses(r["les_points"] * m321.LE_FACTEUR, r["les_normales"],
-                                         {t: tours[t] for t in out["les_retrouves"]})
-        return out
-
-    d344 = m344.mesurer(en_plus=garder)
-    publie344 = json.loads(m345.CE_QUE_344_A_PUBLIE.read_text())
+def les_surfaces_rejouees(d344: dict, lire) -> tuple[list[dict], bool, bool]:
+    """Les sauts faux à deux tours des chaînes rejouées, chacun lu par `lire(surface d'avant, en_plus, sens)` ; si le compte de chaque saut,
+    porté par `en_plus["les_feuilles"]`, redonne ce que `345` publie ; et si les tours retrouvés sont ceux que publie `340`."""
     publie345 = json.loads(CE_QUE_345_A_PUBLIE.read_text())
     publiees = {n: json.loads((LES_MESURES / f).read_text()) for n, f in m340.LES_CHAINES.items()}
     nappes = {g["le_rang"]: {t: x["la_lecture"] for t, x in g["la_nappe"].items()} for g in publiees["sans relance"]["les_graines"]}
@@ -198,8 +182,31 @@ def mesurer() -> dict:
                         continue
                     surfaces.append({"la_chaine": n, "le_rang": g["le_rang"], "le_cote": cote, "le_saut": s["le_saut"],
                                      "tient_par_345": s345["tient"],
-                                     "la_surface": la_lecture(lect[s["le_saut"] - 1], e, m344.LE_SENS[cote])})
+                                     "la_surface": lire(lect[s["le_saut"] - 1], e, m344.LE_SENS[cote])})
                     print(json.dumps(surfaces[-1], ensure_ascii=False), flush=True)
+    return surfaces, bool(redonne345), bool(saccordent)
+
+
+def mesurer() -> dict:
+    t0 = time.monotonic()
+    tours = {r: m329.lire_un_tour(r, m330.LES_TOURS) for r in m330.LES_TOURS}
+
+    def garder(dep, arr, lv):
+        r = m345.les_comptes_point_par_point(dep, arr, lv, m321.LE_PAS_L2)
+        out = {"les_feuilles": m345.le_resume(r), "la_part_sur_tous": la_part_sur_tous(r)}
+        if arr is None or not arr["valide"].any():
+            return out
+        lect = m329.les_lectures(arr["la_nappe"][arr["valide"]] * m321.LE_FACTEUR, tours)
+        out["les_retrouves"] = sorted((t for t, x in lect.items() if x["la_lecture"] == "retrouve"), reverse=True)
+        if len(out["les_retrouves"]) >= 2 and r is not None:
+            out["les_comptes"] = r["les_comptes"]
+            out["les_poses"] = les_poses(r["les_points"] * m321.LE_FACTEUR, r["les_normales"],
+                                         {t: tours[t] for t in out["les_retrouves"]})
+        return out
+
+    d344 = m344.mesurer(en_plus=garder)
+    publie344 = json.loads(m345.CE_QUE_344_A_PUBLIE.read_text())
+    surfaces, redonne345, saccordent = les_surfaces_rejouees(d344, la_lecture)
     d = {"la_question": __doc__.splitlines()[0],
          "les_constantes": {"la_part_au_plus": LA_PART_AU_PLUS, "la_part_au_moins": LA_PART_AU_MOINS,
                             "le_minimum_de_points": LE_MINIMUM_DE_POINTS, "le_quart_voxels": round(m321.LE_QUART, 3)},
