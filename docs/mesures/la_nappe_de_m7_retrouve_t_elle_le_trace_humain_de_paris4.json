@@ -1,0 +1,1048 @@
+{
+ "la_question": "La nappe de m7, tirée sur PHercParis4 comme sur PHerc0358, au même pas de 9,6 µm, retrouve-t-elle le tracé humain, et ses spires suivantes les feuilles voisines ?",
+ "les_constantes": {
+  "la_prediction": "PHercParis4/representations/predictions/surfaces/20260411134726-surface-20260413222639-surface-m7-L2-th0.2.zarr",
+  "le_pas_l0_voxels": 72.083,
+  "le_pas_l2_voxels": 18.021,
+  "le_quart_de_pas_l0_voxels": 18.021,
+  "le_lateral_l0_voxels": 40.0,
+  "le_minimum": 50,
+  "la_fenetre_sommets": 8,
+  "lespacement_du_segment": 159.99999761581424
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 771,
+  "absents": 0,
+  "octets": 353663225
+ },
+ "les_graines": [
+  {
+   "le_rang": 1,
+   "le_sommet": [
+    108,
+    8
+   ],
+   "la_graine_l2": [
+    4966.12,
+    4257.03,
+    14763.61
+   ],
+   "les_sommets_de_la_fenetre": 149,
+   "la_part_appuyee": 0.7702,
+   "la_nappe": {
+    "les_sommets_en_face": 67,
+    "lecart_median_voxels": 71.26,
+    "lecart_median_en_pas": 0.989,
+    "la_part_a_un_quart_de_pas": 0.3433,
+    "la_lecture": "ne retrouve pas",
+    "par_anneau": [
+     {
+      "lanneau": [
+       0,
+       2
+      ],
+      "les_sommets_en_face": 12,
+      "lecart_median_du_plan_voxels": 27.06,
+      "la_part_sur_la_feuille_du_trace": 0.75,
+      "la_part_a_un_pas": 0.0833
+     },
+     {
+      "lanneau": [
+       3,
+       5
+      ],
+      "les_sommets_en_face": 30,
+      "lecart_median_du_plan_voxels": 48.49,
+      "la_part_sur_la_feuille_du_trace": 0.3333,
+      "la_part_a_un_pas": 0.2333
+     },
+     {
+      "lanneau": [
+       6,
+       8
+      ],
+      "les_sommets_en_face": 25,
+      "lecart_median_du_plan_voxels": 73.08,
+      "la_part_sur_la_feuille_du_trace": 0.16,
+      "la_part_a_un_pas": 0.2
+     }
+    ],
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     12,
+     11,
+     0,
+     4,
+     7,
+     6,
+     7,
+     8,
+     5,
+     2
+    ]
+   },
+   "la_spire_plus": {
+    "les_sommets_en_face": 52,
+    "lecart_median_voxels": 116.96,
+    "lecart_median_en_pas": 1.623,
+    "la_part_a_un_quart_de_pas": 0.3077,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8241,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     2,
+     7,
+     8,
+     6,
+     9,
+     6,
+     4
+    ]
+   },
+   "la_spire_moins": {
+    "les_sommets_en_face": 66,
+    "lecart_median_voxels": -0.86,
+    "lecart_median_en_pas": -0.012,
+    "la_part_a_un_quart_de_pas": 0.1818,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8125,
+    "lhistogramme": [
+     0,
+     0,
+     3,
+     0,
+     2,
+     4,
+     7,
+     0,
+     19,
+     21,
+     0,
+     0,
+     5,
+     1,
+     1,
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "le_rang": 2,
+   "le_sommet": [
+    108,
+    78
+   ],
+   "la_graine_l2": [
+    4992.72,
+    4438.53,
+    14752.83
+   ],
+   "les_sommets_de_la_fenetre": 289,
+   "la_part_appuyee": 0.6135,
+   "la_nappe": {
+    "les_sommets_en_face": 78,
+    "lecart_median_voxels": 4.07,
+    "lecart_median_en_pas": 0.057,
+    "la_part_a_un_quart_de_pas": 0.4231,
+    "la_lecture": "ne retrouve pas",
+    "par_anneau": [
+     {
+      "lanneau": [
+       0,
+       2
+      ],
+      "les_sommets_en_face": 20,
+      "lecart_median_du_plan_voxels": 22.9,
+      "la_part_sur_la_feuille_du_trace": 0.85,
+      "la_part_a_un_pas": 0.05
+     },
+     {
+      "lanneau": [
+       3,
+       5
+      ],
+      "les_sommets_en_face": 37,
+      "lecart_median_du_plan_voxels": 69.12,
+      "la_part_sur_la_feuille_du_trace": 0.2432,
+      "la_part_a_un_pas": 0.3784
+     },
+     {
+      "lanneau": [
+       6,
+       8
+      ],
+      "les_sommets_en_face": 21,
+      "lecart_median_du_plan_voxels": 99.58,
+      "la_part_sur_la_feuille_du_trace": 0.3333,
+      "la_part_a_un_pas": 0.1429
+     }
+    ],
+    "lhistogramme": [
+     1,
+     3,
+     8,
+     1,
+     2,
+     5,
+     0,
+     0,
+     7,
+     26,
+     0,
+     0,
+     2,
+     9,
+     4,
+     3,
+     2,
+     0
+    ]
+   },
+   "la_spire_plus": {
+    "les_sommets_en_face": 59,
+    "lecart_median_voxels": 10.36,
+    "lecart_median_en_pas": 0.144,
+    "la_part_a_un_quart_de_pas": 0.1695,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.817,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     1,
+     1,
+     2,
+     0,
+     0,
+     3,
+     24,
+     1,
+     0,
+     3,
+     4,
+     3,
+     7,
+     2,
+     4
+    ]
+   },
+   "la_spire_moins": {
+    "les_sommets_en_face": 98,
+    "lecart_median_voxels": 3.72,
+    "lecart_median_en_pas": 0.052,
+    "la_part_a_un_quart_de_pas": 0.2347,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8099,
+    "lhistogramme": [
+     0,
+     1,
+     2,
+     7,
+     7,
+     4,
+     1,
+     0,
+     5,
+     37,
+     0,
+     2,
+     4,
+     8,
+     5,
+     3,
+     2,
+     2
+    ]
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_sommet": [
+    108,
+    149
+   ],
+   "la_graine_l2": [
+    4960.57,
+    4429.99,
+    14792.18
+   ],
+   "les_sommets_de_la_fenetre": 289,
+   "la_part_appuyee": 0.608,
+   "la_nappe": {
+    "les_sommets_en_face": 79,
+    "lecart_median_voxels": 5.61,
+    "lecart_median_en_pas": 0.078,
+    "la_part_a_un_quart_de_pas": 0.7722,
+    "la_lecture": "retrouve",
+    "par_anneau": [
+     {
+      "lanneau": [
+       0,
+       2
+      ],
+      "les_sommets_en_face": 19,
+      "lecart_median_du_plan_voxels": 27.36,
+      "la_part_sur_la_feuille_du_trace": 1.0,
+      "la_part_a_un_pas": 0.0
+     },
+     {
+      "lanneau": [
+       3,
+       5
+      ],
+      "les_sommets_en_face": 36,
+      "lecart_median_du_plan_voxels": 38.36,
+      "la_part_sur_la_feuille_du_trace": 0.7222,
+      "la_part_a_un_pas": 0.0556
+     },
+     {
+      "lanneau": [
+       6,
+       8
+      ],
+      "les_sommets_en_face": 24,
+      "lecart_median_du_plan_voxels": 34.0,
+      "la_part_sur_la_feuille_du_trace": 0.6667,
+      "la_part_a_un_pas": 0.1667
+     }
+    ],
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     11,
+     50,
+     0,
+     0,
+     3,
+     3,
+     5,
+     4,
+     1,
+     0
+    ]
+   },
+   "la_spire_plus": {
+    "les_sommets_en_face": 59,
+    "lecart_median_voxels": 79.12,
+    "lecart_median_en_pas": 1.098,
+    "la_part_a_un_quart_de_pas": 0.2034,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8128,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     6,
+     17,
+     0,
+     0,
+     3,
+     9,
+     9,
+     6,
+     1,
+     2
+    ]
+   },
+   "la_spire_moins": {
+    "les_sommets_en_face": 106,
+    "lecart_median_voxels": -1.45,
+    "lecart_median_en_pas": -0.02,
+    "la_part_a_un_quart_de_pas": 0.1132,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.7839,
+    "lhistogramme": [
+     5,
+     9,
+     9,
+     10,
+     6,
+     2,
+     0,
+     0,
+     13,
+     36,
+     1,
+     1,
+     0,
+     4,
+     3,
+     1,
+     0,
+     1
+    ]
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_sommet": [
+    208,
+    8
+   ],
+   "la_graine_l2": [
+    5093.26,
+    3576.23,
+    11397.8
+   ],
+   "les_sommets_de_la_fenetre": 172,
+   "la_part_appuyee": 0.9174,
+   "la_nappe": {
+    "les_sommets_en_face": 105,
+    "lecart_median_voxels": -35.73,
+    "lecart_median_en_pas": -0.496,
+    "la_part_a_un_quart_de_pas": 0.2571,
+    "la_lecture": "ne retrouve pas",
+    "par_anneau": [
+     {
+      "lanneau": [
+       0,
+       2
+      ],
+      "les_sommets_en_face": 20,
+      "lecart_median_du_plan_voxels": 13.32,
+      "la_part_sur_la_feuille_du_trace": 0.4,
+      "la_part_a_un_pas": 0.0
+     },
+     {
+      "lanneau": [
+       3,
+       5
+      ],
+      "les_sommets_en_face": 41,
+      "lecart_median_du_plan_voxels": 51.8,
+      "la_part_sur_la_feuille_du_trace": 0.3659,
+      "la_part_a_un_pas": 0.122
+     },
+     {
+      "lanneau": [
+       6,
+       8
+      ],
+      "les_sommets_en_face": 44,
+      "lecart_median_du_plan_voxels": 68.37,
+      "la_part_sur_la_feuille_du_trace": 0.0909,
+      "la_part_a_un_pas": 0.1136
+     }
+    ],
+    "lhistogramme": [
+     0,
+     0,
+     1,
+     14,
+     1,
+     3,
+     32,
+     6,
+     20,
+     7,
+     7,
+     2,
+     5,
+     1,
+     2,
+     1,
+     0,
+     0
+    ]
+   },
+   "la_spire_plus": {
+    "les_sommets_en_face": 97,
+    "lecart_median_voxels": 23.91,
+    "lecart_median_en_pas": 0.332,
+    "la_part_a_un_quart_de_pas": 0.1134,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8746,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     4,
+     13,
+     1,
+     14,
+     11,
+     15,
+     16,
+     1,
+     6,
+     3,
+     2,
+     4,
+     4
+    ]
+   },
+   "la_spire_moins": {
+    "les_sommets_en_face": 104,
+    "lecart_median_voxels": -60.43,
+    "lecart_median_en_pas": -0.838,
+    "la_part_a_un_quart_de_pas": 0.1731,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8899,
+    "lhistogramme": [
+     10,
+     8,
+     17,
+     12,
+     0,
+     17,
+     13,
+     3,
+     11,
+     6,
+     4,
+     2,
+     0,
+     1,
+     0,
+     0,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "le_rang": 5,
+   "le_sommet": [
+    208,
+    78
+   ],
+   "la_graine_l2": [
+    5181.33,
+    3720.46,
+    11403.62
+   ],
+   "les_sommets_de_la_fenetre": 289,
+   "la_part_appuyee": 0.8559,
+   "la_nappe": {
+    "les_sommets_en_face": 107,
+    "lecart_median_voxels": -5.54,
+    "lecart_median_en_pas": -0.077,
+    "la_part_a_un_quart_de_pas": 0.4019,
+    "la_lecture": "ne retrouve pas",
+    "par_anneau": [
+     {
+      "lanneau": [
+       0,
+       2
+      ],
+      "les_sommets_en_face": 23,
+      "lecart_median_du_plan_voxels": 18.56,
+      "la_part_sur_la_feuille_du_trace": 0.6957,
+      "la_part_a_un_pas": 0.0
+     },
+     {
+      "lanneau": [
+       3,
+       5
+      ],
+      "les_sommets_en_face": 52,
+      "lecart_median_du_plan_voxels": 42.83,
+      "la_part_sur_la_feuille_du_trace": 0.4615,
+      "la_part_a_un_pas": 0.2692
+     },
+     {
+      "lanneau": [
+       6,
+       8
+      ],
+      "les_sommets_en_face": 32,
+      "lecart_median_du_plan_voxels": 78.61,
+      "la_part_sur_la_feuille_du_trace": 0.0938,
+      "la_part_a_un_pas": 0.3438
+     }
+    ],
+    "lhistogramme": [
+     2,
+     0,
+     5,
+     2,
+     7,
+     10,
+     8,
+     1,
+     37,
+     6,
+     9,
+     5,
+     5,
+     3,
+     1,
+     0,
+     2,
+     0
+    ]
+   },
+   "la_spire_plus": {
+    "les_sommets_en_face": 93,
+    "lecart_median_voxels": 31.04,
+    "lecart_median_en_pas": 0.431,
+    "la_part_a_un_quart_de_pas": 0.1828,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8585,
+    "lhistogramme": [
+     2,
+     0,
+     1,
+     2,
+     0,
+     6,
+     2,
+     0,
+     21,
+     9,
+     6,
+     19,
+     7,
+     4,
+     1,
+     1,
+     7,
+     1
+    ]
+   },
+   "la_spire_moins": {
+    "les_sommets_en_face": 112,
+    "lecart_median_voxels": -65.08,
+    "lecart_median_en_pas": -0.903,
+    "la_part_a_un_quart_de_pas": 0.2679,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8057,
+    "lhistogramme": [
+     5,
+     1,
+     12,
+     12,
+     11,
+     17,
+     2,
+     0,
+     22,
+     5,
+     4,
+     3,
+     2,
+     0,
+     2,
+     2,
+     2,
+     1
+    ]
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_sommet": [
+    208,
+    149
+   ],
+   "la_graine_l2": [
+    5139.22,
+    3709.53,
+    11430.99
+   ],
+   "les_sommets_de_la_fenetre": 289,
+   "la_part_appuyee": 0.8514,
+   "la_nappe": {
+    "les_sommets_en_face": 127,
+    "lecart_median_voxels": -6.58,
+    "lecart_median_en_pas": -0.091,
+    "la_part_a_un_quart_de_pas": 0.4016,
+    "la_lecture": "ne retrouve pas",
+    "par_anneau": [
+     {
+      "lanneau": [
+       0,
+       2
+      ],
+      "les_sommets_en_face": 25,
+      "lecart_median_du_plan_voxels": 6.54,
+      "la_part_sur_la_feuille_du_trace": 0.88,
+      "la_part_a_un_pas": 0.08
+     },
+     {
+      "lanneau": [
+       3,
+       5
+      ],
+      "les_sommets_en_face": 63,
+      "lecart_median_du_plan_voxels": 47.22,
+      "la_part_sur_la_feuille_du_trace": 0.3492,
+      "la_part_a_un_pas": 0.3175
+     },
+     {
+      "lanneau": [
+       6,
+       8
+      ],
+      "les_sommets_en_face": 39,
+      "lecart_median_du_plan_voxels": 84.93,
+      "la_part_sur_la_feuille_du_trace": 0.1795,
+      "la_part_a_un_pas": 0.1795
+     }
+    ],
+    "lhistogramme": [
+     1,
+     2,
+     4,
+     6,
+     3,
+     12,
+     14,
+     0,
+     43,
+     8,
+     0,
+     6,
+     12,
+     2,
+     2,
+     3,
+     1,
+     1
+    ]
+   },
+   "la_spire_plus": {
+    "les_sommets_en_face": 104,
+    "lecart_median_voxels": 45.16,
+    "lecart_median_en_pas": 0.626,
+    "la_part_a_un_quart_de_pas": 0.3558,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8762,
+    "lhistogramme": [
+     0,
+     1,
+     4,
+     2,
+     2,
+     5,
+     2,
+     1,
+     25,
+     6,
+     2,
+     9,
+     24,
+     6,
+     5,
+     6,
+     1,
+     0
+    ]
+   },
+   "la_spire_moins": {
+    "les_sommets_en_face": 114,
+    "lecart_median_voxels": -57.37,
+    "lecart_median_en_pas": -0.796,
+    "la_part_a_un_quart_de_pas": 0.2719,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8232,
+    "lhistogramme": [
+     0,
+     5,
+     9,
+     14,
+     11,
+     15,
+     11,
+     0,
+     26,
+     1,
+     0,
+     4,
+     3,
+     2,
+     2,
+     1,
+     0,
+     0
+    ]
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_sommet": [
+    308,
+    8
+   ],
+   "la_graine_l2": [
+    4958.44,
+    3257.23,
+    7486.93
+   ],
+   "les_sommets_de_la_fenetre": 158,
+   "la_part_appuyee": 0.9522,
+   "la_nappe": {
+    "les_sommets_en_face": 48,
+    "la_lecture": "non lue",
+    "par_anneau": [
+     {
+      "lanneau": [
+       0,
+       2
+      ],
+      "les_sommets_en_face": 22,
+      "lecart_median_du_plan_voxels": 28.15,
+      "la_part_sur_la_feuille_du_trace": 0.6818,
+      "la_part_a_un_pas": 0.0
+     },
+     {
+      "lanneau": [
+       3,
+       5
+      ],
+      "les_sommets_en_face": 22,
+      "lecart_median_du_plan_voxels": 102.01,
+      "la_part_sur_la_feuille_du_trace": 0.0909,
+      "la_part_a_un_pas": 0.2727
+     },
+     {
+      "lanneau": [
+       6,
+       8
+      ],
+      "les_sommets_en_face": 4,
+      "lecart_median_du_plan_voxels": null,
+      "la_part_sur_la_feuille_du_trace": 0.0,
+      "la_part_a_un_pas": 0.0
+     }
+    ],
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     7,
+     10,
+     0,
+     10,
+     3,
+     3,
+     3,
+     3,
+     1,
+     4
+    ]
+   },
+   "la_spire_plus": {
+    "les_sommets_en_face": 33,
+    "la_lecture": "non lue",
+    "la_part_appuyee": 0.8786,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     2,
+     6,
+     10,
+     1,
+     3,
+     1,
+     2
+    ]
+   },
+   "la_spire_moins": {
+    "les_sommets_en_face": 71,
+    "lecart_median_voxels": 37.05,
+    "lecart_median_en_pas": 0.514,
+    "la_part_a_un_quart_de_pas": 0.2535,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8876,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     3,
+     8,
+     1,
+     0,
+     11,
+     7,
+     5,
+     11,
+     4,
+     3,
+     5,
+     3,
+     4,
+     3
+    ]
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_sommet": [
+    308,
+    78
+   ],
+   "la_graine_l2": [
+    5041.95,
+    3430.36,
+    7492.74
+   ],
+   "les_sommets_de_la_fenetre": 187,
+   "la_part_appuyee": 0.9219,
+   "la_nappe": {
+    "les_sommets_en_face": 48,
+    "la_lecture": "non lue",
+    "par_anneau": [
+     {
+      "lanneau": [
+       0,
+       2
+      ],
+      "les_sommets_en_face": 23,
+      "lecart_median_du_plan_voxels": 16.64,
+      "la_part_sur_la_feuille_du_trace": 0.6087,
+      "la_part_a_un_pas": 0.0435
+     },
+     {
+      "lanneau": [
+       3,
+       5
+      ],
+      "les_sommets_en_face": 20,
+      "lecart_median_du_plan_voxels": 67.38,
+      "la_part_sur_la_feuille_du_trace": 0.2,
+      "la_part_a_un_pas": 0.3
+     },
+     {
+      "lanneau": [
+       6,
+       8
+      ],
+      "les_sommets_en_face": 5,
+      "lecart_median_du_plan_voxels": 487.91,
+      "la_part_sur_la_feuille_du_trace": 0.0,
+      "la_part_a_un_pas": 0.0
+     }
+    ],
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     5,
+     13,
+     3,
+     8,
+     3,
+     4,
+     6,
+     1,
+     0,
+     3
+    ]
+   },
+   "la_spire_plus": {
+    "les_sommets_en_face": 30,
+    "la_lecture": "non lue",
+    "la_part_appuyee": 0.8786,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     5,
+     5,
+     6,
+     3,
+     1,
+     2,
+     3
+    ]
+   },
+   "la_spire_moins": {
+    "les_sommets_en_face": 50,
+    "lecart_median_voxels": 6.34,
+    "lecart_median_en_pas": 0.088,
+    "la_part_a_un_quart_de_pas": 0.08,
+    "la_lecture": "ne retrouve pas",
+    "la_part_appuyee": 0.8374,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     1,
+     0,
+     0,
+     0,
+     0,
+     8,
+     18,
+     2,
+     6,
+     2,
+     2,
+     3,
+     1,
+     1,
+     0
+    ]
+   }
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "k": 1,
+  "n": 6,
+  "lissue": "sur 1 des 6 graines, la nappe de m7 retrouve le tracé humain de PHercParis4"
+ },
+ "les_secondes": 7.2
+}

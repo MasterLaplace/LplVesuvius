@@ -4465,6 +4465,13 @@ s'ouvre, une lecture rayon par rayon.
 de la nappe, où aucune feuille ne passe, 71 à 93 % des profils ont le même maximum. `R4-P118` s'ouvre : PHercParis4 publie `m7` à
 9,6 µm et a un tracé humain, la vérification qui manque à toute la série.
 
+**`321` · 2026-09-29 · la nappe de m7 retrouve-t-elle le tracé humain de PHercParis4** — `R4-P118`
+
+⭐⭐⭐⭐⭐ **Sur une graine sur six : elle part de la feuille du tracé et la quitte en s'éloignant de sa graine** — `R4-F502`,
+`R4-F503`. Près de la graine, 40 à 100 % des sommets en face sont à un quart de pas ; au bord du plan, 9 à 67 %. Sur quatre graines, la
+spire du côté moins revient sur le tracé : la nappe change de feuille, pas la suite des surfaces de `m7`. `R4-P119` et `R4-P120`
+s'ouvrent.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

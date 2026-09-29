@@ -3336,6 +3336,25 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 321 : LA NAPPE DE M7 RETROUVE-T-ELLE LE TRACÉ HUMAIN DE PHERCPARIS4
+    s321 = _source(racine, "la_nappe_de_m7_retrouve_t_elle_le_trace_humain_de_paris4.json")
+    if s321.exists():
+        d = json.loads(s321.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 321", d["le_verdict"]["lissue"].upper()),
+                  ("la lecture de m7 de 321", f"{d['la_lecture_de_m7']['lus']} chunks")]
+        for g in d["les_graines"]:
+            n_, p_, m_ = g["la_nappe"], g["la_spire_plus"], g["la_spire_moins"]
+            ecrits.append((f"la graine {g['le_rang']} de 321",
+                           f"| {g['le_rang']} | {n_['les_sommets_en_face']} | {f_(n_.get('lecart_median_voxels'))} | "
+                           f"{f_(n_.get('la_part_a_un_quart_de_pas'))} | {n_['la_lecture']} | "
+                           + " | ".join(f"{f_(r.get('la_part_sur_la_feuille_du_trace'))} ({r['les_sommets_en_face']})"
+                                        for r in n_["par_anneau"]) + " |"))
+            ecrits.append((f"les spires de la graine {g['le_rang']} de 321",
+                           f"| {g['le_rang']} | {f_(p_.get('lecart_median_voxels'))} | {f_(p_.get('la_part_a_un_quart_de_pas'))} | "
+                           f"{f_(m_.get('lecart_median_voxels'))} | {f_(m_.get('la_part_a_un_quart_de_pas'))} |"))
+        out.extend((nom, [x_], s321.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 320 : RAYON PAR RAYON, LE SCAN MONTRE-T-IL LA FEUILLE QUE M7 MANQUE
     s320 = _source(racine, "rayon_par_rayon_le_scan_montre_t_il_la_feuille_que_m7_manque.json")
     if s320.exists():
