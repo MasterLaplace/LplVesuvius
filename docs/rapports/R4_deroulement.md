@@ -4556,6 +4556,12 @@ s'ouvre : borner la croissance autour des semis.
 de ses semis, la relance garde chaque saut sur le tour suivant jusqu'à `5753_-6` et rend de la surface ; sur PHerc0358 la chaîne tient 3
 sauts en médiane contre 1. `R4-P132` s'ouvre : pourquoi aucune chaîne ne retrouve `5753_-7`.
 
+**`336` · 2026-09-29 · pourquoi aucune chaîne ne retrouve-t-elle le septième tour** — `R4-P132`
+
+⭐⭐⭐⭐ **`5753_-7` n'est pas posé sur `m7` comme `5753_-6` l'est** — `R4-F522`. Là où la chaîne l'attend, il est à 3 à 6 voxels du niveau 2
+des plages de `m7`, contre 0,5 à 2 pour `5753_-6`. Et les tours publiés consécutifs y sont à un demi-pas nominal l'un de l'autre, ce qui
+met en question la lecture « retrouve » à un quart de pas. `R4-P133` s'ouvre.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

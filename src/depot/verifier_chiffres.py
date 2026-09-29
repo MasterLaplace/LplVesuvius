@@ -3336,6 +3336,24 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 336 : POURQUOI AUCUNE CHAÎNE NE RETROUVE-T-ELLE LE SEPTIÈME TOUR
+    s336 = _source(racine, "pourquoi_aucune_chaine_ne_retrouve_t_elle_le_septieme_tour.json")
+    if s336.exists():
+        d = json.loads(s336.read_text())
+        f_ = lambda x: "non lu" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 336", d["le_verdict"]["lissue"].upper()),
+                  ("les chunks de m7 lus de 336", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks pour la "
+                                                   f"chaîne et {d['la_lecture_de_m7_aux_tours']['lus']} pour les tours, sans panne")]
+        for x in d["les_septiemes"]:
+            if "5753_-7_et_m7" not in x:
+                continue
+            ecrits.append((f"la septième surface de la graine {x['le_rang']} en 336",
+                           f"| {x['le_rang']} | {x['le_saut']} | {f_(x['la_surface_et_5753_-6'].get('lecart_median_en_pas'))} | "
+                           f"{f_(x['la_surface_et_5753_-7'].get('lecart_median_en_pas'))} | "
+                           f"{f_(x['5753_-7_et_5753_-6']['lecart_median_en_pas'])} | {f_(x['5753_-6_et_5753_-5']['lecart_median_en_pas'])} | "
+                           f"{f_(x['5753_-7_et_m7']['lecart_median_voxels'])} | {f_(x['5753_-6_et_m7']['lecart_median_voxels'])} |"))
+        out.extend((nom, [x_], s336.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 335 : LA CROISSANCE BORNÉE AUTOUR DES SEMIS GARDE-T-ELLE LA JUSTESSE
     s335 = _source(racine, "la_croissance_bornee_autour_des_semis_garde_t_elle_la_justesse.json")
     s333_ = _source(racine, "la_relance_partie_de_la_spire_entiere_garde_t_elle_la_justesse.json")

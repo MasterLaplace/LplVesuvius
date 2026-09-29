@@ -122,11 +122,13 @@ def le_verdict(d: dict) -> dict:
 
 
 def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False, lire_la_spire: bool = False,
-            rouleaux: tuple = ("PHercParis4", "PHerc0358")) -> dict:
+            rouleaux: tuple = ("PHercParis4", "PHerc0358"), observer=None) -> dict:
     """La mesure de `331`. Avec `relancer4(lire_valeurs)` et `relancer0(lire_valeurs)`, écrits pour `333`, les relances de
     PHercParis4 et de PHerc0358 sont fabriquées par l'appelant, et reçoivent la spire si `avec_la_spire`. Avec `lire_la_spire`, écrit
     pour `334`, PHercParis4 rapporte aussi ce que les tours publiés disent de la nappe de départ, de chaque spire, et de la part de
-    chaque nappe relancée que la croissance a posée hors de ses semis ; PHerc0358 n'est mesuré que s'il est dans `rouleaux`."""
+    chaque nappe relancée que la croissance a posée hors de ses semis ; PHerc0358 n'est mesuré que s'il est dans `rouleaux`. Avec
+    `observer(rang, cote, h, k)`, écrit pour `336`, chaque saut `h` d'un côté de PHercParis4 est montré à l'appelant, et ce qu'il rend
+    est ajouté à son relevé."""
     import le_tour_produit_porte_t_il_le_texte_du_segment as j296
     from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot, lire_les_valeurs
     from la_spire_voisine_est_elle_a_un_pas import les_normales, lire_tifxyz
@@ -153,9 +155,9 @@ def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False, lire_la
             chaine = la_chaine_relancee(r, cote, rel4, sauter, avec_la_spire=avec_la_spire)
             surfaces = [{t: x["la_lecture"] for t, x in lect_nappe.items()}]
             detail = []
-            for k in chaine:
+            for h, k in enumerate(chaine, 1):
                 rl = k["la_relance"]
-                vus = {}
+                vus = dict(observer(rang, nom, h, k) or {}) if observer is not None else {}
                 if lire_la_spire:
                     sp = m329.les_lectures(k["le_saut"]["la_spire"][k["le_saut"]["valide"]] * m321.LE_FACTEUR, tours)
                     vus["les_tours_de_la_spire"] = {str(t): x["la_lecture"] for t, x in sp.items()}
