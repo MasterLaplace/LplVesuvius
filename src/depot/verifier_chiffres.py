@@ -3336,6 +3336,26 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 334 : AU SEPTIÈME SAUT, LA SPIRE OU LA CROISSANCE SE TROMPE-T-ELLE
+    s334 = _source(racine, "au_septieme_saut_la_spire_ou_la_croissance_se_trompe_t_elle.json")
+    if s334.exists():
+        d = json.loads(s334.read_text())
+        tours_ = lambda r: " et ".join(f"`5753_{t}`" for t in r) if r else "aucun tour"  # noqa: E731
+        ecrits = [("le verdict de 334", d["le_verdict"]["lissue"].upper()),
+                  ("les chunks de m7 lus de 334", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks sur "
+                                                   "PHercParis4, sans panne")]
+        for x in d["les_sauts_faux"]:
+            ecrits.append((f"le saut faux de la graine {x['le_rang']} en 334",
+                           f"| graine {x['le_rang']}, saut {x['le_saut']} | `5753_{x['le_tour_attendu']}` | {tours_(x['la_nappe_retrouve'])} | "
+                           f"{tours_(x['la_spire_retrouve'])} | {tours_(x['la_croissance_retrouve'])} |"))
+        sp = {x["le_rang"]: x for x in d["les_descentes_des_spires"] if x["le_cote"] == "moins"}
+        for g in d["les_graines"]["PHercParis4"]:
+            c = g["les_cotes"]["moins"]
+            ecrits.append((f"la descente de la graine {g['le_rang']} en 334",
+                           f"| {g['le_rang']} | {c['la_descente']}, {c['larret']} | {sp[g['le_rang']]['la_descente']}, "
+                           f"{sp[g['le_rang']]['larret']} |"))
+        out.extend((nom, [x_], s334.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 333 : LA RELANCE PARTIE DE LA SPIRE ENTIÈRE GARDE-T-ELLE LA JUSTESSE
     s333 = _source(racine, "la_relance_partie_de_la_spire_entiere_garde_t_elle_la_justesse.json")
     s331_ = _source(racine, "une_chaine_relancee_a_chaque_tour_descend_elle_plus_loin.json")

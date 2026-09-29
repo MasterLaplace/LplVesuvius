@@ -113,10 +113,10 @@ def la_nappe_de_la_spire(spire: np.ndarray, valide: np.ndarray, graine_xyz, norm
         m = int(np.argmin(np.abs(c - cible[k])))
         if abs(c[m] - cible[k]) <= tolerance:
             dec.flat[k], pose.flat[k] = c[m], True
-    semis = int(pose.sum())
+    semes = pose.copy()
     dec, pose = m305.etendre(centres, forme, dec, pose, tolerance)
     nappe = (p + np.nan_to_num(dec.ravel())[:, None] * n[None, :]).reshape(forme + (3,))
-    return {"la_nappe": nappe, "valide": pose, "le_decalage": dec, "les_semis": semis,
+    return {"la_nappe": nappe, "valide": pose, "le_decalage": dec, "les_semis": int(semes.sum()), "les_semes": semes,
             "les_mailles_touchees": int(np.isfinite(cible).sum())}
 
 
@@ -213,7 +213,10 @@ def verifier() -> int:
       part(toute) > 0.99 and part(seul) < 0.01, f"{part(toute)} {part(seul)}")
     v("★★★★ la lacune est reposée par la croissance, sur S2, qui y est seule", toute["valide"][~ok].all()
       and np.allclose(toute["le_decalage"][~ok], 4.0))
-    v("★★★ toutes les mailles de la spire sont semées", toute["les_semis"] == int(ok.sum()) == toute["les_mailles_touchees"])
+    v("★★★ toutes les mailles de la spire sont semées", toute["les_semis"] == int(ok.sum()) == toute["les_mailles_touchees"]
+      and np.array_equal(toute["les_semes"], ok))
+    v("★★★ les semis rendus sont ceux d'avant la croissance, pas les points posés après",
+      not np.array_equal(toute["les_semes"], toute["valide"]))
     valide = np.zeros(g2.shape[:2], dtype=bool)
     valide[30:35, 30:35] = True
     petite = la_nappe_de_la_spire(sp, valide & ok, graine, haut, deux_feuilles)

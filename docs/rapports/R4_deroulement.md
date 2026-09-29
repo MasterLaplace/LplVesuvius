@@ -4544,6 +4544,12 @@ s'ouvre : relancer depuis la spire entière, chaque point gardant sa feuille.
 Chaque point de la spire semé sur sa propre feuille, la chaîne descend six tours publiés en médiane sans saut faux avant `5753_-6` ;
 sur PHerc0358 elle tient 4 sauts en médiane contre 1. `R4-P130` s'ouvre : au septième saut, la spire ou la croissance.
 
+**`334` · 2026-09-29 · au septième saut, la spire ou la croissance se trompe-t-elle** — `R4-P130`
+
+⭐⭐⭐⭐ **Surtout la croissance** — `R4-F520`. Aux trois sauts faux de `333`, la spire est sur `5753_-6` une fois et sur aucun tour deux
+fois, là où la croissance hors des semis retrouve un tour publié ; jugée sur ses spires, la chaîne ne fait qu'un saut faux. `R4-P131`
+s'ouvre : borner la croissance autour des semis.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

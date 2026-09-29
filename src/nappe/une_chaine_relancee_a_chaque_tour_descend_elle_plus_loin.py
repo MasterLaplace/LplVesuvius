@@ -121,9 +121,12 @@ def le_verdict(d: dict) -> dict:
     return {"decidable": True, "h": h, "h0": h0, "lissue": f"{tete} ; {suite}"}
 
 
-def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False) -> dict:
+def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False, lire_la_spire: bool = False,
+            rouleaux: tuple = ("PHercParis4", "PHerc0358")) -> dict:
     """La mesure de `331`. Avec `relancer4(lire_valeurs)` et `relancer0(lire_valeurs)`, écrits pour `333`, les relances de
-    PHercParis4 et de PHerc0358 sont fabriquées par l'appelant, et reçoivent la spire si `avec_la_spire`."""
+    PHercParis4 et de PHerc0358 sont fabriquées par l'appelant, et reçoivent la spire si `avec_la_spire`. Avec `lire_la_spire`, écrit
+    pour `334`, PHercParis4 rapporte aussi ce que les tours publiés disent de la nappe de départ, de chaque spire, et de la part de
+    chaque nappe relancée que la croissance a posée hors de ses semis ; PHerc0358 n'est mesuré que s'il est dans `rouleaux`."""
     import le_tour_produit_porte_t_il_le_texte_du_segment as j296
     from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot, lire_les_valeurs
     from la_spire_voisine_est_elle_a_un_pas import les_normales, lire_tifxyz
@@ -152,17 +155,27 @@ def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False) -> dict
             detail = []
             for k in chaine:
                 rl = k["la_relance"]
+                vus = {}
+                if lire_la_spire:
+                    sp = m329.les_lectures(k["le_saut"]["la_spire"][k["le_saut"]["valide"]] * m321.LE_FACTEUR, tours)
+                    vus["les_tours_de_la_spire"] = {str(t): x["la_lecture"] for t, x in sp.items()}
+                    if rl is not None and "les_semes" in rl:
+                        cr = m329.les_lectures(rl["la_nappe"][rl["valide"] & ~rl["les_semes"]] * m321.LE_FACTEUR, tours)
+                        vus["les_tours_de_la_croissance"] = {str(t): x["la_lecture"] for t, x in cr.items()}
                 if rl is None:
                     surfaces.append({t: "non lue" for t in tours})
-                    detail.append({"la_part_de_la_spire": round(float(k["le_saut"]["valide"].mean()), 4), "la_part_relancee": None})
+                    detail.append({"la_part_de_la_spire": round(float(k["le_saut"]["valide"].mean()), 4), "la_part_relancee": None,
+                                   **vus})
                     continue
                 lect = m329.les_lectures(rl["la_nappe"][rl["valide"]] * m321.LE_FACTEUR, tours)
                 surfaces.append({t: x["la_lecture"] for t, x in lect.items()})
                 detail.append({"la_part_de_la_spire": round(float(k["le_saut"]["valide"].mean()), 4),
                                "la_part_relancee": round(float(rl["valide"].mean()), 4),
                                "les_tours": {str(t): x["la_lecture"] for t, x in lect.items()},
-                               **({"les_semis": rl["les_semis"]} if "les_semis" in rl else {})})
+                               **({"les_semis": rl["les_semis"]} if "les_semis" in rl else {}), **vus})
             e["les_cotes"][nom] = dict({"les_surfaces": detail}, **m330.la_descente(surfaces))
+            if lire_la_spire:
+                e["les_cotes"][nom]["les_tours_de_la_nappe"] = {str(t): x for t, x in surfaces[0].items()}
         e["la_descente"] = max(c["la_descente"] for c in e["les_cotes"].values())
         e["le_tour_touche"] = any(c["le_tour_de_depart"] is not None for c in e["les_cotes"].values())
         graines["PHercParis4"].append(e)
@@ -171,6 +184,14 @@ def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False) -> dict
                                                        for c, v in e["les_cotes"].items()}}, ensure_ascii=False), flush=True)
     pannes = list(stats4["pannes"])
 
+    cotes0 = []
+    if "PHerc0358" not in rouleaux:
+        d = {"la_question": __doc__.splitlines()[0], "les_constantes": {"les_sauts": LES_SAUTS}, "les_pannes": pannes,
+             "la_lecture_de_m7": {"PHercParis4": {k: v for k, v in stats4.items() if k != "pannes"}},
+             "les_graines": graines, "les_cotes": {"PHerc0358": cotes0}}
+        d["le_verdict"] = le_verdict(d)
+        d["les_secondes"] = round(time.monotonic() - t0, 1)
+        return d
     d324 = json.loads(m328.CE_QUE_324_A_PUBLIE.read_text())
     a_suivre = {(c["le_rang"], c["le_cote"]) for c in d324["les_cotes"]["PHerc0358"] if c["le_saut"]["pose_au_pas"]}
     pred0 = array_meta(f"{BUCKET}/{m299.LA_PREDICTION_0358}", 0, 120.0)
@@ -178,7 +199,6 @@ def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False) -> dict
     lv0 = lambda idx: lire_les_valeurs(idx, pred0, lire0)  # noqa: E731
     d301 = {tuple(g["la_graine"]): g["le_rang"]
             for g in json.loads(m305.CE_QUE_301_A_PUBLIE.read_text())["le_rouleau"]["les_graines"]}
-    cotes0 = []
     for g in m301.les_graines_neuves():
         cle = (g["x"], g["y"], g["z"])
         rang = d301[cle]

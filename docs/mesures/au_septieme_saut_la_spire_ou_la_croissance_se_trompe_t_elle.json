@@ -1,0 +1,4997 @@
+{
+ "la_question": "Au septième saut, là où la chaîne relancée depuis sa spire se trompe de tour publié, la spire elle-même est-elle sur le mauvais tour, ou est-ce la croissance au-delà de la spire qui y retombe ?",
+ "les_constantes": {
+  "les_sauts": 8
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHercParis4": {
+   "lus": 8044,
+   "absents": 0,
+   "octets": 3518505036
+  }
+ },
+ "les_graines": {
+  "PHercParis4": [
+   {
+    "le_rang": 1,
+    "les_cotes": {
+     "plus": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.2949,
+        "la_part_relancee": 0.4376,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1128,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.368,
+        "la_part_relancee": 0.5486,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 752,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.368,
+        "la_part_relancee": 0.8234,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1053,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6213,
+        "la_part_relancee": 0.7015,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 898,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5839,
+        "la_part_relancee": 0.8043,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1044,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6275,
+        "la_part_relancee": 0.5768,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 856,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4767,
+        "la_part_relancee": 0.6618,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1024,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5169,
+        "la_part_relancee": 0.9714,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1076,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       }
+      ],
+      "le_tour_de_depart": null,
+      "la_descente": 0,
+      "larret": "aucun tour touché",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "non lue",
+       "-5": "non lue",
+       "-6": "non lue",
+       "-7": "non lue"
+      }
+     },
+     "moins": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.2949,
+        "la_part_relancee": 0.4249,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 772,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2819,
+        "la_part_relancee": 0.3929,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 551,
+        "les_tours_de_la_spire": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3117,
+        "la_part_relancee": 0.4864,
+        "les_tours": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1027,
+        "les_tours_de_la_spire": {
+         "0": "retrouve",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3472,
+        "la_part_relancee": 0.5491,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1145,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3744,
+        "la_part_relancee": 0.6078,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1167,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4717,
+        "la_part_relancee": 0.5659,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1313,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1678,
+        "la_part_relancee": 0.2921,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 580,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2097,
+        "la_part_relancee": 0.2206,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 625,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "non lue",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        }
+       }
+      ],
+      "le_tour_de_depart": 0,
+      "la_descente": 0,
+      "larret": "un tour manqué",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "non lue",
+       "-5": "non lue",
+       "-6": "non lue",
+       "-7": "non lue"
+      }
+     }
+    },
+    "la_descente": 0,
+    "le_tour_touche": true
+   },
+   {
+    "le_rang": 2,
+    "les_cotes": {
+     "plus": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.208,
+        "la_part_relancee": 0.4066,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 726,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3593,
+        "la_part_relancee": 0.2317,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 686,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1991,
+        "la_part_relancee": 0.5292,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 591,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.337,
+        "la_part_relancee": 0.7075,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1248,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4433,
+        "la_part_relancee": 0.6921,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1594,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5309,
+        "la_part_relancee": 0.6918,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1979,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5138,
+        "la_part_relancee": 0.689,
+        "les_tours": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1612,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5231,
+        "la_part_relancee": 0.7363,
+        "les_tours": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1986,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       }
+      ],
+      "le_tour_de_depart": null,
+      "la_descente": 0,
+      "larret": "aucun tour touché",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "non lue",
+       "-5": "non lue",
+       "-6": "non lue",
+       "-7": "non lue"
+      }
+     },
+     "moins": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.2097,
+        "la_part_relancee": 0.3351,
+        "les_tours": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 631,
+        "les_tours_de_la_spire": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2847,
+        "la_part_relancee": 0.3072,
+        "les_tours": {
+         "0": "retrouve",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 956,
+        "les_tours_de_la_spire": {
+         "0": "retrouve",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "retrouve",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2644,
+        "la_part_relancee": 0.2764,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 905,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2372,
+        "la_part_relancee": 0.2812,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 647,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1247,
+        "la_part_relancee": 0.1792,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 286,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1252,
+        "la_part_relancee": 0.2355,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 408,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1602,
+        "la_part_relancee": 0.2523,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 392,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1413,
+        "la_part_relancee": 0.1463,
+        "les_tours": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 241,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        }
+       }
+      ],
+      "le_tour_de_depart": 0,
+      "la_descente": 6,
+      "larret": "un saut faux",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "non lue",
+       "-5": "non lue",
+       "-6": "non lue",
+       "-7": "non lue"
+      }
+     }
+    },
+    "la_descente": 6,
+    "le_tour_touche": true
+   },
+   {
+    "le_rang": 3,
+    "les_cotes": {
+     "plus": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.2947,
+        "la_part_relancee": 0.1413,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 395,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1122,
+        "la_part_relancee": 0.4189,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 341,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3756,
+        "la_part_relancee": 0.2978,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 976,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2594,
+        "la_part_relancee": 0.4994,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 689,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2989,
+        "la_part_relancee": 0.6102,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1118,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4222,
+        "la_part_relancee": 0.6826,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1507,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5183,
+        "la_part_relancee": 0.5508,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1365,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4544,
+        "la_part_relancee": 0.5583,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 775,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       }
+      ],
+      "le_tour_de_depart": 0,
+      "la_descente": 0,
+      "larret": "un tour manqué",
+      "les_tours_de_la_nappe": {
+       "0": "retrouve",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "non lue",
+       "-5": "non lue",
+       "-6": "non lue",
+       "-7": "non lue"
+      }
+     },
+     "moins": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.2793,
+        "la_part_relancee": 0.3169,
+        "les_tours": {
+         "0": "retrouve",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 919,
+        "les_tours_de_la_spire": {
+         "0": "retrouve",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.276,
+        "la_part_relancee": 0.302,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 915,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2388,
+        "la_part_relancee": 0.2902,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 724,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1169,
+        "la_part_relancee": 0.2786,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 246,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1181,
+        "la_part_relancee": 0.2083,
+        "les_tours": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 396,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1385,
+        "la_part_relancee": 0.3489,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 492,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1503,
+        "la_part_relancee": 0.3536,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 514,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1325,
+        "la_part_relancee": 0.0862,
+        "les_tours": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 301,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       }
+      ],
+      "le_tour_de_depart": 0,
+      "la_descente": 6,
+      "larret": "un saut faux",
+      "les_tours_de_la_nappe": {
+       "0": "retrouve",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "non lue",
+       "-5": "non lue",
+       "-6": "non lue",
+       "-7": "non lue"
+      }
+     }
+    },
+    "la_descente": 6,
+    "le_tour_touche": true
+   },
+   {
+    "le_rang": 4,
+    "les_cotes": {
+     "plus": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.3844,
+        "la_part_relancee": 0.7058,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 939,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4873,
+        "la_part_relancee": 0.8466,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1221,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6575,
+        "la_part_relancee": 0.374,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 465,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.0951,
+        "la_part_relancee": 0.8523,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 362,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6589,
+        "la_part_relancee": 0.8542,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1726,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.568,
+        "la_part_relancee": 0.7901,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1410,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5654,
+        "la_part_relancee": 0.8102,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 939,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.547,
+        "la_part_relancee": 0.8923,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1791,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       }
+      ],
+      "le_tour_de_depart": null,
+      "la_descente": 0,
+      "larret": "aucun tour touché",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "ne retrouve pas",
+       "-5": "ne retrouve pas",
+       "-6": "ne retrouve pas",
+       "-7": "ne retrouve pas"
+      }
+     },
+     "moins": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.4615,
+        "la_part_relancee": 0.6582,
+        "les_tours": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1783,
+        "les_tours_de_la_spire": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5806,
+        "la_part_relancee": 0.7406,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 2098,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6286,
+        "la_part_relancee": 0.8284,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 2073,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6563,
+        "la_part_relancee": 0.8346,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 2277,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.7084,
+        "la_part_relancee": 0.8516,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1886,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.649,
+        "la_part_relancee": 0.906,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 2115,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6909,
+        "la_part_relancee": 0.8802,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 2585,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2589,
+        "la_part_relancee": 0.6916,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 798,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        }
+       }
+      ],
+      "le_tour_de_depart": 0,
+      "la_descente": 6,
+      "larret": "un saut faux",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "ne retrouve pas",
+       "-5": "ne retrouve pas",
+       "-6": "ne retrouve pas",
+       "-7": "ne retrouve pas"
+      }
+     }
+    },
+    "la_descente": 6,
+    "le_tour_touche": true
+   },
+   {
+    "le_rang": 5,
+    "les_cotes": {
+     "plus": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.2535,
+        "la_part_relancee": 0.5659,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 983,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1463,
+        "la_part_relancee": 0.7148,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 563,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5676,
+        "la_part_relancee": 0.7778,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1886,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6303,
+        "la_part_relancee": 0.8824,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1819,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6776,
+        "la_part_relancee": 0.7164,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1281,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4767,
+        "la_part_relancee": 0.8987,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1109,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.644,
+        "la_part_relancee": 0.6888,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 656,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2199,
+        "la_part_relancee": 0.8933,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 562,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       }
+      ],
+      "le_tour_de_depart": null,
+      "la_descente": 0,
+      "larret": "aucun tour touché",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "ne retrouve pas",
+       "-5": "ne retrouve pas",
+       "-6": "ne retrouve pas",
+       "-7": "ne retrouve pas"
+      }
+     },
+     "moins": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.3508,
+        "la_part_relancee": 0.6767,
+        "les_tours": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1308,
+        "les_tours_de_la_spire": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4653,
+        "la_part_relancee": 0.6289,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1706,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5631,
+        "la_part_relancee": 0.6161,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1914,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4826,
+        "la_part_relancee": 0.6864,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1691,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.507,
+        "la_part_relancee": 0.7136,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1834,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5262,
+        "la_part_relancee": 0.7101,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1722,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5657,
+        "la_part_relancee": 0.7266,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1494,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4073,
+        "la_part_relancee": 0.756,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1338,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       }
+      ],
+      "le_tour_de_depart": 0,
+      "la_descente": 6,
+      "larret": "un tour manqué",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "ne retrouve pas",
+       "-5": "ne retrouve pas",
+       "-6": "ne retrouve pas",
+       "-7": "ne retrouve pas"
+      }
+     }
+    },
+    "la_descente": 6,
+    "le_tour_touche": true
+   },
+   {
+    "le_rang": 6,
+    "les_cotes": {
+     "plus": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.3851,
+        "la_part_relancee": 0.7292,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1240,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5351,
+        "la_part_relancee": 0.9108,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1778,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.7198,
+        "la_part_relancee": 0.9586,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 2305,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.7647,
+        "la_part_relancee": 0.9278,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1871,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6935,
+        "la_part_relancee": 0.5792,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 424,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.0322,
+        "la_part_relancee": 0.8807,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 125,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6819,
+        "la_part_relancee": 0.2272,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 357,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.013,
+        "la_part_relancee": 0.6729,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 50,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       }
+      ],
+      "le_tour_de_depart": 0,
+      "la_descente": 0,
+      "larret": "un tour manqué",
+      "les_tours_de_la_nappe": {
+       "0": "retrouve",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "ne retrouve pas",
+       "-5": "ne retrouve pas",
+       "-6": "ne retrouve pas",
+       "-7": "ne retrouve pas"
+      }
+     },
+     "moins": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.387,
+        "la_part_relancee": 0.6078,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1343,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5351,
+        "la_part_relancee": 0.6876,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 2008,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5524,
+        "la_part_relancee": 0.6757,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 2156,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5257,
+        "la_part_relancee": 0.6703,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1446,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.525,
+        "la_part_relancee": 0.6665,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1629,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5032,
+        "la_part_relancee": 0.7522,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1629,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4073,
+        "la_part_relancee": 0.8454,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1229,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2516,
+        "la_part_relancee": 0.5695,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 974,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       }
+      ],
+      "le_tour_de_depart": 0,
+      "la_descente": 6,
+      "larret": "un tour manqué",
+      "les_tours_de_la_nappe": {
+       "0": "retrouve",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "ne retrouve pas",
+       "-5": "ne retrouve pas",
+       "-6": "ne retrouve pas",
+       "-7": "ne retrouve pas"
+      }
+     }
+    },
+    "la_descente": 6,
+    "le_tour_touche": true
+   },
+   {
+    "le_rang": 7,
+    "les_cotes": {
+     "plus": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.2978,
+        "la_part_relancee": 0.734,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 885,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4021,
+        "la_part_relancee": 0.6296,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 880,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.4431,
+        "la_part_relancee": 0.5567,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 577,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1314,
+        "la_part_relancee": 0.5557,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 421,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3176,
+        "la_part_relancee": 0.8353,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1156,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.5898,
+        "la_part_relancee": 0.3096,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 416,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.0504,
+        "la_part_relancee": 0.8,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 189,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.6914,
+        "la_part_relancee": 0.9363,
+        "les_tours": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 2445,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       }
+      ],
+      "le_tour_de_depart": null,
+      "la_descente": 0,
+      "larret": "aucun tour touché",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "ne retrouve pas",
+       "-5": "ne retrouve pas",
+       "-6": "ne retrouve pas",
+       "-7": "ne retrouve pas"
+      }
+     },
+     "moins": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.2604,
+        "la_part_relancee": 0.6649,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 807,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2312,
+        "la_part_relancee": 0.6871,
+        "les_tours": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 754,
+        "les_tours_de_la_spire": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3056,
+        "la_part_relancee": 0.5098,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 688,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3572,
+        "la_part_relancee": 0.7224,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 1000,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3531,
+        "la_part_relancee": 0.5053,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 864,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1929,
+        "la_part_relancee": 0.3924,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 592,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1278,
+        "la_part_relancee": 0.4483,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 405,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.0897,
+        "la_part_relancee": 0.4265,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 258,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        }
+       }
+      ],
+      "le_tour_de_depart": 0,
+      "la_descente": 6,
+      "larret": "le bout de la chaîne",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "ne retrouve pas",
+       "-5": "ne retrouve pas",
+       "-6": "ne retrouve pas",
+       "-7": "ne retrouve pas"
+      }
+     }
+    },
+    "la_descente": 6,
+    "le_tour_touche": true
+   },
+   {
+    "le_rang": 8,
+    "les_cotes": {
+     "plus": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.3567,
+        "la_part_relancee": 0.5723,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 581,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2847,
+        "la_part_relancee": 0.5844,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 968,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3032,
+        "la_part_relancee": 0.5804,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_semis": 1019,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3172,
+        "la_part_relancee": 0.5441,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 812,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2795,
+        "la_part_relancee": 0.547,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1012,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2535,
+        "la_part_relancee": 0.6428,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 932,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3751,
+        "la_part_relancee": 0.5174,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 1132,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3195,
+        "la_part_relancee": 0.502,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_semis": 985,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        }
+       }
+      ],
+      "le_tour_de_depart": null,
+      "la_descente": 0,
+      "larret": "aucun tour touché",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "ne retrouve pas",
+       "-5": "ne retrouve pas",
+       "-6": "ne retrouve pas",
+       "-7": "non lue"
+      }
+     },
+     "moins": {
+      "les_surfaces": [
+       {
+        "la_part_de_la_spire": 0.2968,
+        "la_part_relancee": 0.5389,
+        "les_tours": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 812,
+        "les_tours_de_la_spire": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "retrouve",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3103,
+        "la_part_relancee": 0.5858,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 862,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "retrouve",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.3271,
+        "la_part_relancee": 0.4776,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 740,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2026,
+        "la_part_relancee": 0.4523,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 599,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "retrouve",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.2031,
+        "la_part_relancee": 0.2436,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 624,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "retrouve",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.155,
+        "la_part_relancee": 0.2776,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 552,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "retrouve",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.1309,
+        "la_part_relancee": 0.3269,
+        "les_tours": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 462,
+        "les_tours_de_la_spire": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "ne retrouve pas",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "retrouve",
+         "-7": "ne retrouve pas"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "ne retrouve pas",
+         "-1": "ne retrouve pas",
+         "-2": "retrouve",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       },
+       {
+        "la_part_de_la_spire": 0.0178,
+        "la_part_relancee": 0.2677,
+        "les_tours": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        },
+        "les_semis": 67,
+        "les_tours_de_la_spire": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "non lue",
+         "-4": "non lue",
+         "-5": "non lue",
+         "-6": "non lue",
+         "-7": "non lue"
+        },
+        "les_tours_de_la_croissance": {
+         "0": "non lue",
+         "-1": "non lue",
+         "-2": "non lue",
+         "-3": "ne retrouve pas",
+         "-4": "ne retrouve pas",
+         "-5": "ne retrouve pas",
+         "-6": "ne retrouve pas",
+         "-7": "ne retrouve pas"
+        }
+       }
+      ],
+      "le_tour_de_depart": 0,
+      "la_descente": 6,
+      "larret": "un tour manqué",
+      "les_tours_de_la_nappe": {
+       "0": "ne retrouve pas",
+       "-1": "ne retrouve pas",
+       "-2": "ne retrouve pas",
+       "-3": "ne retrouve pas",
+       "-4": "ne retrouve pas",
+       "-5": "ne retrouve pas",
+       "-6": "ne retrouve pas",
+       "-7": "non lue"
+      }
+     }
+    },
+    "la_descente": 6,
+    "le_tour_touche": true
+   }
+  ]
+ },
+ "le_verdict": {
+  "decidable": true,
+  "f": 3,
+  "k": 1,
+  "j": 0,
+  "z": 2,
+  "lissue": "sur les 3 sauts faux, la spire est déjà sur un mauvais tour 1 fois, sur le bon tour 0 fois, hors de tout tour 2 fois ; c'est la croissance qui y retombe"
+ },
+ "les_secondes": 460.7,
+ "redonne_333": true,
+ "les_sauts_faux": [
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 8,
+   "le_tour_attendu": -7,
+   "la_nappe_retrouve": [
+    -6
+   ],
+   "la_spire_retrouve": [],
+   "la_croissance_retrouve": [
+    -6
+   ],
+   "lissue": "hors de tout tour"
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 7,
+   "le_tour_attendu": -7,
+   "la_nappe_retrouve": [
+    -1
+   ],
+   "la_spire_retrouve": [],
+   "la_croissance_retrouve": [
+    -6,
+    -1
+   ],
+   "lissue": "hors de tout tour"
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "le_saut": 8,
+   "le_tour_attendu": -7,
+   "la_nappe_retrouve": [
+    -6
+   ],
+   "la_spire_retrouve": [
+    -6
+   ],
+   "la_croissance_retrouve": [
+    -6
+   ],
+   "lissue": "sur un mauvais tour"
+  }
+ ],
+ "les_descentes_des_spires": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "le_tour_de_depart": null,
+   "la_descente": 0,
+   "larret": "aucun tour touché"
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_tour_de_depart": 0,
+   "la_descente": 6,
+   "larret": "le bout de la chaîne"
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "le_tour_de_depart": null,
+   "la_descente": 0,
+   "larret": "aucun tour touché"
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_tour_de_depart": 0,
+   "la_descente": 5,
+   "larret": "un tour manqué"
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "le_tour_de_depart": 0,
+   "la_descente": 0,
+   "larret": "un tour manqué"
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_tour_de_depart": 0,
+   "la_descente": 5,
+   "larret": "un tour manqué"
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "le_tour_de_depart": null,
+   "la_descente": 0,
+   "larret": "aucun tour touché"
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "le_tour_de_depart": 0,
+   "la_descente": 6,
+   "larret": "un saut faux"
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "le_tour_de_depart": null,
+   "la_descente": 0,
+   "larret": "aucun tour touché"
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "le_tour_de_depart": 0,
+   "la_descente": 6,
+   "larret": "un tour manqué"
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "le_tour_de_depart": 0,
+   "la_descente": 0,
+   "larret": "un tour manqué"
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_tour_de_depart": 0,
+   "la_descente": 6,
+   "larret": "un tour manqué"
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_tour_de_depart": null,
+   "la_descente": 0,
+   "larret": "aucun tour touché"
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_tour_de_depart": 0,
+   "la_descente": 6,
+   "larret": "le bout de la chaîne"
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_tour_de_depart": null,
+   "la_descente": 0,
+   "larret": "aucun tour touché"
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_tour_de_depart": 0,
+   "la_descente": 6,
+   "larret": "non lue"
+  }
+ ]
+}
