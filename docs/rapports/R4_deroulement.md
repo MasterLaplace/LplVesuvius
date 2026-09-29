@@ -4390,6 +4390,13 @@ rouleau avec un sommet à un quart de pas du tracé humain : la main pose sa sur
 dense. Les nappes de `m7` des graines 3 et 6 de PHerc0358 ont leur contraste le plus haut à leur place exacte. `R4-P109` s'ouvre :
 un juge du plus dense, étalonné sur des blocs neufs.
 
+**`309` · 2026-09-29 · le plus dense dit-il si une surface est sur sa feuille** — `R4-P109`
+
+⭐⭐⭐⭐ **Non sur le tracé humain** — `R4-F490`. Sur vingt-quatre blocs neufs de PHercParis4, la place du tracé dans sa feuille varie
+de −16 à +12 voxels de son plus dense : il ne peut étalonner aucun juge de position. Rapporté, sur PHerc0358, les surfaces de `m7`
+appuyées sur la prédiction sont à 0 à 2 voxels de leur plus dense, sauf les trois que `304` et `306` désignaient. `R4-P110`
+s'ouvre : la chaîne relue au plus dense.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

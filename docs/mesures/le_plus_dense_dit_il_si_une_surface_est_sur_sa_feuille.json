@@ -1,0 +1,870 @@
+{
+ "la_question": "Le plus dense du profil moyen, à moins d'un quart de pas d'une surface, dit-il si elle est posée sur sa feuille ?",
+ "les_constantes": {
+  "les_quarts_de_pas_voxels": {
+   "PHercParis4": 5,
+   "PHerc0358": 5
+  },
+  "les_decalages_en_pas": [
+   -1.0,
+   -0.5,
+   -0.25,
+   0.0,
+   0.25,
+   0.5,
+   1.0
+  ],
+  "les_blocs": 24
+ },
+ "les_pannes": [],
+ "paris4": {
+  "les_blocs": [
+   {
+    "le_bloc": [
+     16,
+     224
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 9,
+     "m0_25": 6,
+     "p0": 0,
+     "p0_25": -3,
+     "p0_5": -9,
+     "p1": -18
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     32,
+     176
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 15,
+     "m0_25": 11,
+     "p0": 6,
+     "p0_25": 2,
+     "p0_5": -3,
+     "p1": -12
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": false,
+     "p0_25": true,
+     "p0_5": true,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     48,
+     128
+    ],
+    "le_plus_dense": {
+     "m1": 20,
+     "m0_5": 11,
+     "m0_25": 6,
+     "p0": 2,
+     "p0_25": -3,
+     "p0_5": -7,
+     "p1": -16
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     64,
+     128
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 12,
+     "m0_25": 8,
+     "p0": 3,
+     "p0_25": -1,
+     "p0_5": -6,
+     "p1": -15
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     80,
+     48
+    ],
+    "le_plus_dense": {
+     "m1": 19,
+     "m0_5": 10,
+     "m0_25": 6,
+     "p0": 1,
+     "p0_25": -4,
+     "p0_5": -8,
+     "p1": -17
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 2805
+   },
+   {
+    "le_bloc": [
+     80,
+     256
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 13,
+     "m0_25": 9,
+     "p0": 4,
+     "p0_25": 0,
+     "p0_5": -5,
+     "p1": -14
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": true,
+     "p1": false
+    },
+    "les_points_juges": 2805
+   },
+   {
+    "le_bloc": [
+     96,
+     208
+    ],
+    "le_plus_dense": {
+     "m1": 20,
+     "m0_5": 11,
+     "m0_25": 7,
+     "p0": 2,
+     "p0_25": -2,
+     "p0_5": -7,
+     "p1": -16
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     112,
+     192
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 13,
+     "m0_25": 9,
+     "p0": 4,
+     "p0_25": 0,
+     "p0_5": -5,
+     "p1": -14
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": true,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     128,
+     160
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 13,
+     "m0_25": 8,
+     "p0": 4,
+     "p0_25": -1,
+     "p0_5": -5,
+     "p1": -14
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": true,
+     "p1": false
+    },
+    "les_points_juges": 2805
+   },
+   {
+    "le_bloc": [
+     144,
+     144
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 21,
+     "m0_25": 16,
+     "p0": 12,
+     "p0_25": 7,
+     "p0_5": 2,
+     "p1": -7
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": false,
+     "p0_25": false,
+     "p0_5": true,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     160,
+     192
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 12,
+     "m0_25": 7,
+     "p0": 3,
+     "p0_25": -2,
+     "p0_5": -6,
+     "p1": -15
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 2805
+   },
+   {
+    "le_bloc": [
+     176,
+     176
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 13,
+     "m0_25": 8,
+     "p0": 4,
+     "p0_25": -1,
+     "p0_5": -5,
+     "p1": -15
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": true,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     192,
+     160
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 17,
+     "m0_25": 13,
+     "p0": 8,
+     "p0_25": 3,
+     "p0_5": -1,
+     "p1": -10
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": false,
+     "p0_25": true,
+     "p0_5": true,
+     "p1": false
+    },
+    "les_points_juges": 2805
+   },
+   {
+    "le_bloc": [
+     208,
+     144
+    ],
+    "le_plus_dense": {
+     "m1": 20,
+     "m0_5": 11,
+     "m0_25": 7,
+     "p0": 2,
+     "p0_25": -2,
+     "p0_5": -6,
+     "p1": -16
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     224,
+     144
+    ],
+    "le_plus_dense": {
+     "m1": -14,
+     "m0_5": 14,
+     "m0_25": 9,
+     "p0": 5,
+     "p0_25": 0,
+     "p0_5": -4,
+     "p1": -13
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": true,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     240,
+     144
+    ],
+    "le_plus_dense": {
+     "m1": 7,
+     "m0_5": 17,
+     "m0_25": 12,
+     "p0": 8,
+     "p0_25": 3,
+     "p0_5": -1,
+     "p1": -10
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": false,
+     "p0_25": true,
+     "p0_5": true,
+     "p1": false
+    },
+    "les_points_juges": 2805
+   },
+   {
+    "le_bloc": [
+     256,
+     112
+    ],
+    "le_plus_dense": {
+     "m1": 19,
+     "m0_5": 10,
+     "m0_25": 5,
+     "p0": 1,
+     "p0_25": -4,
+     "p0_5": -8,
+     "p1": -17
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": true,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     272,
+     128
+    ],
+    "le_plus_dense": {
+     "m1": 21,
+     "m0_5": 13,
+     "m0_25": 8,
+     "p0": 4,
+     "p0_25": 0,
+     "p0_5": -5,
+     "p1": -14
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": true,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     288,
+     112
+    ],
+    "le_plus_dense": {
+     "m1": 17,
+     "m0_5": 8,
+     "m0_25": 4,
+     "p0": -1,
+     "p0_25": -5,
+     "p0_5": -10,
+     "p1": -18
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": true,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     304,
+     96
+    ],
+    "le_plus_dense": {
+     "m1": 7,
+     "m0_5": -2,
+     "m0_25": -6,
+     "p0": -11,
+     "p0_25": -15,
+     "p0_5": -20,
+     "p1": -17
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": true,
+     "m0_25": false,
+     "p0": false,
+     "p0_25": false,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     320,
+     48
+    ],
+    "le_plus_dense": {
+     "m1": 7,
+     "m0_5": -2,
+     "m0_25": -6,
+     "p0": -11,
+     "p0_25": -15,
+     "p0_5": -20,
+     "p1": -16
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": true,
+     "m0_25": false,
+     "p0": false,
+     "p0_25": false,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 2805
+   },
+   {
+    "le_bloc": [
+     336,
+     80
+    ],
+    "le_plus_dense": {
+     "m1": 20,
+     "m0_5": 11,
+     "m0_25": 7,
+     "p0": 2,
+     "p0_25": -2,
+     "p0_5": -7,
+     "p1": -16
+    },
+    "posee": {
+     "m1": false,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": true,
+     "p0_25": true,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 2805
+   },
+   {
+    "le_bloc": [
+     352,
+     64
+    ],
+    "le_plus_dense": {
+     "m1": 2,
+     "m0_5": -7,
+     "m0_25": -11,
+     "p0": -16,
+     "p0_25": -21,
+     "p0_5": -7,
+     "p1": -16
+    },
+    "posee": {
+     "m1": true,
+     "m0_5": false,
+     "m0_25": false,
+     "p0": false,
+     "p0_25": false,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   },
+   {
+    "le_bloc": [
+     368,
+     48
+    ],
+    "le_plus_dense": {
+     "m1": 4,
+     "m0_5": -5,
+     "m0_25": -10,
+     "p0": -14,
+     "p0_25": -19,
+     "p0_5": -21,
+     "p1": -16
+    },
+    "posee": {
+     "m1": true,
+     "m0_5": true,
+     "m0_25": false,
+     "p0": false,
+     "p0_25": false,
+     "p0_5": false,
+     "p1": false
+    },
+    "les_points_juges": 3025
+   }
+  ],
+  "la_courbe": [
+   {
+    "le_decalage_en_pas": -1.0,
+    "la_part_posee": 0.0833
+   },
+   {
+    "le_decalage_en_pas": -0.5,
+    "la_part_posee": 0.125
+   },
+   {
+    "le_decalage_en_pas": -0.25,
+    "la_part_posee": 0.0833
+   },
+   {
+    "le_decalage_en_pas": 0.0,
+    "la_part_posee": 0.6667
+   },
+   {
+    "le_decalage_en_pas": 0.25,
+    "la_part_posee": 0.7917
+   },
+   {
+    "le_decalage_en_pas": 0.5,
+    "la_part_posee": 0.4167
+   },
+   {
+    "le_decalage_en_pas": 1.0,
+    "la_part_posee": 0.0
+   }
+  ],
+  "la_place_du_plus_dense_du_trace": {
+   "le_min": -16,
+   "la_mediane": 2.5,
+   "le_max": 12,
+   "du_cote_negatif": 5
+  }
+ },
+ "phercs0358": {
+  "les_surfaces": [
+   {
+    "la_surface": "croissante_g3",
+    "le_plus_dense": -2,
+    "posee": true,
+    "les_points_juges": 3322,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "croissante_g6",
+    "le_plus_dense": 0,
+    "posee": true,
+    "les_points_juges": 3428,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "croissante_g7",
+    "le_plus_dense": 1,
+    "posee": true,
+    "les_points_juges": 1253,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g1_moins",
+    "le_plus_dense": null,
+    "posee": null,
+    "les_points_juges": 0,
+    "sans_matiere": 3721
+   },
+   {
+    "la_surface": "vote_g1_nappe",
+    "le_plus_dense": null,
+    "posee": null,
+    "les_points_juges": 0,
+    "sans_matiere": 3969
+   },
+   {
+    "la_surface": "vote_g1_plus",
+    "le_plus_dense": null,
+    "posee": null,
+    "les_points_juges": 0,
+    "sans_matiere": 3721
+   },
+   {
+    "la_surface": "vote_g2_moins",
+    "le_plus_dense": 14,
+    "posee": false,
+    "les_points_juges": 312,
+    "sans_matiere": 3409
+   },
+   {
+    "la_surface": "vote_g2_nappe",
+    "le_plus_dense": -11,
+    "posee": false,
+    "les_points_juges": 375,
+    "sans_matiere": 3594
+   },
+   {
+    "la_surface": "vote_g2_plus",
+    "le_plus_dense": -10,
+    "posee": false,
+    "les_points_juges": 326,
+    "sans_matiere": 3395
+   },
+   {
+    "la_surface": "vote_g3_moins",
+    "le_plus_dense": 18,
+    "posee": false,
+    "les_points_juges": 3649,
+    "sans_matiere": 72
+   },
+   {
+    "la_surface": "vote_g3_nappe",
+    "le_plus_dense": -2,
+    "posee": true,
+    "les_points_juges": 3968,
+    "sans_matiere": 1
+   },
+   {
+    "la_surface": "vote_g3_plus",
+    "le_plus_dense": -1,
+    "posee": true,
+    "les_points_juges": 3721,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g4_moins",
+    "le_plus_dense": -1,
+    "posee": true,
+    "les_points_juges": 3721,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g4_nappe",
+    "le_plus_dense": -2,
+    "posee": true,
+    "les_points_juges": 3969,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g4_plus",
+    "le_plus_dense": -2,
+    "posee": true,
+    "les_points_juges": 3721,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g5_moins",
+    "le_plus_dense": null,
+    "posee": null,
+    "les_points_juges": 0,
+    "sans_matiere": 3721
+   },
+   {
+    "la_surface": "vote_g5_nappe",
+    "le_plus_dense": null,
+    "posee": null,
+    "les_points_juges": 0,
+    "sans_matiere": 3969
+   },
+   {
+    "la_surface": "vote_g5_plus",
+    "le_plus_dense": null,
+    "posee": null,
+    "les_points_juges": 0,
+    "sans_matiere": 3721
+   },
+   {
+    "la_surface": "vote_g6_moins",
+    "le_plus_dense": 0,
+    "posee": true,
+    "les_points_juges": 3721,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g6_nappe",
+    "le_plus_dense": -21,
+    "posee": false,
+    "les_points_juges": 3969,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g6_plus",
+    "le_plus_dense": -20,
+    "posee": false,
+    "les_points_juges": 3721,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g7_moins",
+    "le_plus_dense": 1,
+    "posee": true,
+    "les_points_juges": 3721,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g7_nappe",
+    "le_plus_dense": 1,
+    "posee": true,
+    "les_points_juges": 3969,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g7_plus",
+    "le_plus_dense": 2,
+    "posee": true,
+    "les_points_juges": 3721,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g8_moins",
+    "le_plus_dense": -1,
+    "posee": true,
+    "les_points_juges": 3721,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g8_nappe",
+    "le_plus_dense": -2,
+    "posee": true,
+    "les_points_juges": 3969,
+    "sans_matiere": 0
+   },
+   {
+    "la_surface": "vote_g8_plus",
+    "le_plus_dense": -2,
+    "posee": true,
+    "les_points_juges": 3721,
+    "sans_matiere": 0
+   }
+  ]
+ },
+ "les_morceaux": {
+  "PHercParis4": {
+   "combien": 1233
+  },
+  "PHerc0358": {
+   "combien": 548
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "separe": false,
+  "la_part_posee_a_sa_place": 0.6667,
+  "la_part_posee_au_demi_pas": 0.2708,
+  "les_absents": 0,
+  "lissue": "le juge du plus dense ne sépare pas la feuille de l'entre-deux : le tracé est posé sur sa feuille dans 16 des 24 blocs neufs, décalé d'un demi-pas dans 13 des 48 comparaisons"
+ },
+ "les_secondes": 89.9
+}

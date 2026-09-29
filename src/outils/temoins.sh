@@ -1755,6 +1755,8 @@ run "le juge voit-il l entre-deux feuilles" uv run python "$ROOT/src/nappe/le_ju
 run "figure le juge voit-il l entre-deux feuilles" uv run python "$ROOT/src/figures/figure_le_juge_voit_il_lentre_deux_feuilles.py" --verifier
 run "un juge de position separe-t-il la feuille de l entre-deux" uv run python "$ROOT/src/nappe/un_juge_de_position_separe_t_il_la_feuille_de_lentre_deux.py" --verifier
 run "figure un juge de position separe-t-il la feuille de l entre-deux" uv run python "$ROOT/src/figures/figure_un_juge_de_position_separe_t_il_la_feuille_de_lentre_deux.py" --verifier
+run "le plus dense dit-il si une surface est sur sa feuille" uv run python "$ROOT/src/nappe/le_plus_dense_dit_il_si_une_surface_est_sur_sa_feuille.py" --verifier
+run "figure le plus dense dit-il si une surface est sur sa feuille" uv run python "$ROOT/src/figures/figure_le_plus_dense_dit_il_si_une_surface_est_sur_sa_feuille.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

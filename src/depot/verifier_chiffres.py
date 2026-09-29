@@ -3336,6 +3336,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 309 : LE PLUS DENSE DIT-IL SI UNE SURFACE EST SUR SA FEUILLE
+    s309 = _source(racine, "le_plus_dense_dit_il_si_une_surface_est_sur_sa_feuille.json")
+    if s309.exists():
+        d = json.loads(s309.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        o_ = lambda x: "—" if x is None else ("oui" if x else "non")  # noqa: E731
+        ecrits = [("le verdict de 309", d["le_verdict"]["lissue"].upper())]
+        for e in d["paris4"]["la_courbe"]:
+            ecrits.append((f"le décalage {e['le_decalage_en_pas']} de 309",
+                           f"| {f_(e['le_decalage_en_pas'])} | {f_(e['la_part_posee'])} |"))
+        for x_ in d["phercs0358"]["les_surfaces"]:
+            ecrits.append((f"la surface {x_['la_surface']} de 309",
+                           f"| {x_['la_surface'].replace('_', ' ')} | {f_(x_['le_plus_dense'])} | {o_(x_['posee'])} | "
+                           f"{x_['les_points_juges']} |"))
+        out.extend((nom, [x_], s309.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 308 : UN JUGE DE POSITION SÉPARE-T-IL LA FEUILLE DE L'ENTRE-DEUX
     s308 = _source(racine, "un_juge_de_position_separe_t_il_la_feuille_de_lentre_deux.json")
     if s308.exists():
