@@ -4376,6 +4376,13 @@ dès le premier saut sur aucun des quatre côtés** — `R4-F487`. `m7` ne voit 
 couvre le plan, le juge ne l'y voit pas posé. Les spires − de la graine 3 de `301` et `303` n'étaient appuyées sur `m7` que sur 1 à
 4 % de leurs points : `R4-P107` s'ouvre, sur ce que le juge mesure.
 
+**`307` · 2026-09-29 · le juge voit-il l'entre-deux feuilles** — `R4-P107`
+
+⭐⭐⭐⭐⭐ **Non : sur PHercParis4, le tracé humain décalé d'un demi-pas passe le juge de `301` dans 47 comparaisons sur 48** —
+`R4-F488`. La part des blocs qui passent reste entre 91,67 et 100 % de −1 à +1 pas. Le juge sépare une surface parallèle à
+l'empilement d'une surface qui le traverse, pas une surface posée sur une feuille d'une surface posée entre deux : ce que `300` à
+`306` disent « suit sa feuille » se lit « est parallèle à l'empilement ». `R4-P108` s'ouvre : un juge de position.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

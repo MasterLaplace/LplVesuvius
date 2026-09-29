@@ -3336,6 +3336,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 307 : LE JUGE VOIT-IL L'ENTRE-DEUX FEUILLES
+    s307 = _source(racine, "le_juge_voit_il_lentre_deux_feuilles.json")
+    if s307.exists():
+        d = json.loads(s307.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        noms = ["m1", "m0_75", "m0_5", "m0_25", "p0", "p0_25", "p0_5", "p0_75", "p1"]
+        ecrits = [("le verdict de 307", d["le_verdict"]["lissue"].upper())]
+        for e in d["paris4"]["la_courbe"]:
+            ecrits.append((f"le décalage {e['le_decalage_en_pas']} de 307",
+                           f"| {f_(e['le_decalage_en_pas'])} | {f_(e['le_taux'])} |"))
+        for n in d["phercs0358"]["les_nappes"]:
+            ecrits.append((f"la graine {n['le_rang']} de 307",
+                           f"| {n['le_rang']} | " + " | ".join(f_(n["les_z"][k]) for k in noms) + " |"))
+        out.extend((nom, [x_], s307.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 306 : LA CHAÎNE D'UNE SEULE FEUILLE SUIT-ELLE SA FEUILLE SUR QUATRE SPIRES
     s306 = _source(racine, "la_chaine_dune_seule_feuille_suit_elle_sa_feuille_sur_quatre_spires.json")
     if s306.exists():

@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**161 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**162 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 123 portes
+## Grand Prize — 124 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -141,7 +141,8 @@
 - **R4-P104** *(le graal)* · **RÉPONDUE par `305` : oui, sur deux graines.** Une nappe qui croît depuis sa graine sans prendre une feuille à plus d'un quart de pas de ses voisins suit sa feuille sur trois graines sur huit, et sur les graines 3 et 6 d'une seule feuille, sans déchirure ni boucle ouverte, sur 87 à 90 % du plan (`R4-F486`). La suite est `R4-P105` et `R4-P106`.
 - **R4-P105** *(le graal)* · **RÉPONDUE par `306` : non.** Aucun des quatre côtés ne tient dès le premier saut : `m7` ne voit la spire suivante que par morceaux (graine 3 : 10 et 0,1 % du plan), et là où le saut couvre le plan (graine 6 côté −, 79 %), le juge ne l'y voit pas posé (`R4-F487`). La suite est `R4-P107`.
 - **R4-P106** *(le graal)* · **UNE CROISSANCE DONT LE PLAN SE RÉORIENTE SUR LA NORMALE DE CE QU'ELLE A DÉJÀ POSÉ TIENT-ELLE UNE SEULE FEUILLE AUX GRAINES 4, 7 ET 8, OÙ LA NAPPE DU VOTE CHANGE DE PLUS D'UN QUART DE PAS D'UN POINT AU SUIVANT SUR 18 À 34 % DE SES PAIRES ?** ⭐⭐⭐⭐ C'EST CE QUE `305` DÉSIGNE. Une croissance au quart de pas sur un plan fixe ne suit pas une feuille qui le coupe à plus de 27° environ : elle s'arrête à 37 à 47 % du plan. ⚠ Que la cause soit la pente et non le bruit du vote n'est pas établi.
-- **R4-P107** *(le référent)* · **LE JUGE DE `301` NOTE-T-IL UNE NAPPE DÉCALÉE D'UN PAS ENTIER LE LONG DE SA NORMALE COMME SUR SA FEUILLE, ET DÉCALÉE D'UN DEMI-PAS COMME HORS DE SA FEUILLE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `306` DÉSIGNE. Les spires − de la graine 3 ne sont appuyées sur `m7` que sur 1 à 4 % de leurs points, presque entièrement la surface précédente décalée de 20 voxels, et le juge les dit sur leur feuille à Z 26,325. Si le juge dit oui aux deux, il juge l'alignement sur l'empilement et non la feuille, et tout ce que `300` à `306` établissent par lui est à relire ainsi.
+- **R4-P107** *(le référent)* · **RÉPONDUE par `307` : non au demi-pas.** Sur PHercParis4, le tracé humain décalé d'un demi-pas passe le juge dans 47 des 48 comparaisons, et la part des blocs qui passent reste entre 91,67 et 100 % de −1 à +1 pas (`R4-F488`) : le juge sépare l'orientation, pas la position. La suite est `R4-P108`.
+- **R4-P108** *(le référent)* · **UN JUGE DE POSITION, QUI COMPARE LE SCAN À LA PLACE D'UNE SURFACE AU SCAN À UN DEMI-PAS DE PART ET D'AUTRE, SÉPARE-T-IL SUR PHercParis4 LE TRACÉ HUMAIN DU MÊME TRACÉ DÉCALÉ D'UN DEMI-PAS ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `307` DÉSIGNE. Le juge de `301` ne voit que l'orientation ; sans un juge de position, rien ne dit si une nappe de `m7` sur PHerc0358 est posée sur une feuille ou entre deux. ⚠ `298` a vu le juge du rang échouer sur ce même défaut (0,5308 contre 0,5119) : le tracé humain est posé sur la face de sa feuille, pas en son milieu.
 
 ## Progress Prizes — 19 portes
 
