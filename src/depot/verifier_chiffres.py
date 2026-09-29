@@ -3336,6 +3336,41 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐ LA TRANCHE 299 : L'ALIGNEMENT DES PROFILS DIT-IL SI UNE PREMIÈRE SURFACE SUIT SA FEUILLE
+    s299 = _source(racine, "lalignement_des_profils_dit_il_si_une_premiere_surface_suit_sa_feuille.json")
+    if s299.exists():
+        d = json.loads(s299.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        e_, rl = d["letalonnage"], d["les_releves"]
+        cols = ("le_segment", "saut_1", "rampe_douce", "rampe_raide", "decale_dun_demi_pas")
+        et = rl["letalonnage"]
+        rampes = [et["rampe_douce"], et["rampe_raide"]]
+        ecrits = [("le tracé de 299", f"L'alignement du tracé humain va de **{f_(et['le_segment']['lalignement_min'])}** à "
+                                      f"**{f_(et['le_segment']['lalignement_max'])}**"),
+                  ("les rampes du tracé de 299", f"celui de ses rampes de **{f_(et['le_segment']['celui_des_rampes_min'])}** à "
+                                                 f"**{f_(et['le_segment']['celui_des_rampes_max'])}**"),
+                  ("le premier saut de 299", f"celui du premier saut de **{f_(et['saut_1']['lalignement_min'])}** à "
+                                             f"**{f_(et['saut_1']['lalignement_max'])}**, mais une de ses rampes atteint "
+                                             f"**{f_(et['saut_1']['celui_des_rampes_max'])}**"),
+                  ("les rampes comme surfaces dans 299",
+                   f"ont un alignement de **{f_(min(r['lalignement_min'] for r in rampes))}** à "
+                   f"**{f_(max(r['lalignement_max'] for r in rampes))}**"),
+                  ("les rampes des rampes dans 299",
+                   f"leurs propres rampes de **{f_(min(r['celui_des_rampes_min'] for r in rampes))}** à "
+                   f"**{f_(max(r['celui_des_rampes_max'] for r in rampes))}**"),
+                  ("les morceaux de 299", f"**{d['les_morceaux']['PHercParis4']['combien']}** morceaux de PHercParis4 et "
+                                          f"**{d['les_morceaux']['PHerc0358']['combien']}** de PHerc0358")]
+        for b in e_["les_blocs"]:
+            ecrits.append((f"le bloc {b['le_bloc'][0]}_{b['le_bloc'][1]} de 299",
+                           f"| `{b['le_bloc'][0]}_{b['le_bloc'][1]}` | " + " | ".join(f_(b[c]) for c in cols) + " |"))
+        for s_, r_ in zip(d["le_rouleau"]["les_surfaces"], rl["le_rouleau"]):
+            ecrits.append((f"la surface {s_['le_rang']} de 299",
+                           f"| {s_['le_rang']} | {f_(s_['laire_cm2'])} cm² | {s_['les_contacts_transverses']} | "
+                           f"{s_['les_points']} | {f_(r_['la_part_sans_matiere'])} | {r_['les_pieces_jugees']} | "
+                           f"{f_(r_['le_rapport_median'])} | {f_(r_['lalignement_median'])} | "
+                           f"{f_(r_['celui_de_la_rampe_douce'])} et {f_(r_['celui_de_la_rampe_raide'])} |"))
+        out.extend((nom, [x_], s299.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐ LA TRANCHE 298 : AU PAS DU PRIX, LA MATIÈRE DIT-ELLE SI UNE SURFACE EST POSÉE SUR SA FEUILLE
     s298 = _source(racine, "la_matiere_dit_elle_si_la_surface_est_sur_sa_feuille.json")
     if s298.exists():

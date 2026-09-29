@@ -4318,6 +4318,14 @@ face, à 3 pas de ce qu'elle a de plus dense. Le rouleau du prix, PHerc0358, n'e
 sont dans le vide masqué. La liste des juges sans référent est écrite, avec ce qui ferait échouer chacun. `R4-P98` s'ouvre :
 l'alignement des profils, déclaré avant d'être mesuré, sur des surfaces qu'on n'a pas vues.
 
+**`299` · 2026-09-29 · l'alignement des profils dit-il si une première surface suit sa feuille** — `R4-P98`
+
+⭐⭐⭐ **Au pas du prix, l'alignement d'une pièce rapporté à celui de deux rampes plantées dans ses propres points ne sépare pas,
+bloc par bloc, le tracé humain et le premier saut des traversées** — `R4-F480`. Sur six blocs neufs, le tracé passe partout (2,321
+à 4,179), mais le premier saut tombe à 1,911 et deux rampes atteignent 2,0 : le témoin est trop maigre. Sur PHerc0358, quatre
+surfaces neuves du traceur, sans aucune auto-intersection, ont en médiane l'alignement de leurs rampes, et sortent de la matière
+pour 36 à 54 % de leurs points. `R4-P99` s'ouvre : un témoin fait de nombreuses rampes.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

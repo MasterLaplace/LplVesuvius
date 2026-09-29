@@ -1735,6 +1735,8 @@ run "le texte suit-il la chaine au-dela du premier saut" uv run python "$ROOT/sr
 run "figure le texte suit-il la chaine au-dela du premier saut" uv run python "$ROOT/src/figures/figure_le_texte_suit_il_la_chaine_au_dela_du_premier_saut.py" --verifier
 run "la matiere dit-elle si la surface est sur sa feuille" uv run python "$ROOT/src/nappe/la_matiere_dit_elle_si_la_surface_est_sur_sa_feuille.py" --verifier
 run "figure la matiere dit-elle si la surface est sur sa feuille" uv run python "$ROOT/src/figures/figure_la_matiere_dit_elle_si_la_surface_est_sur_sa_feuille.py" --verifier
+run "l alignement des profils dit-il si une premiere surface suit sa feuille" uv run python "$ROOT/src/nappe/lalignement_des_profils_dit_il_si_une_premiere_surface_suit_sa_feuille.py" --verifier
+run "figure l alignement des profils dit-il si une premiere surface suit sa feuille" uv run python "$ROOT/src/figures/figure_lalignement_des_profils_dit_il_si_une_premiere_surface_suit_sa_feuille.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
