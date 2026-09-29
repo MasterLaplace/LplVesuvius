@@ -1,0 +1,407 @@
+{
+ "la_question": "Entre chaque surface de la chaîne de 303 et sa spire suivante, combien de plages de m7 le rayon traverse-t-il ?",
+ "les_constantes": {
+  "la_marge_voxels": 3.0
+ },
+ "les_nappes_se_redonnent": true,
+ "les_pannes": [],
+ "les_cotes": [
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "les_rayons": 2662,
+     "aucune": 0.9846,
+     "une": 0.0154,
+     "plus": 0.0,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 1
+    },
+    {
+     "les_rayons": 1947,
+     "aucune": 0.9461,
+     "une": 0.0508,
+     "plus": 0.0031,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 2
+    },
+    {
+     "les_rayons": 2106,
+     "aucune": 0.9511,
+     "une": 0.0484,
+     "plus": 0.0005,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 3
+    },
+    {
+     "les_rayons": 2202,
+     "aucune": 0.9069,
+     "une": 0.0899,
+     "plus": 0.0032,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 4
+    }
+   ],
+   "le_dernier_saut_qui_passe": 4
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "les_rayons": 181,
+     "aucune": 1.0,
+     "une": 0.0,
+     "plus": 0.0,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 1
+    },
+    {
+     "les_rayons": 67,
+     "aucune": 1.0,
+     "une": 0.0,
+     "plus": 0.0,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 2
+    },
+    {
+     "les_rayons": 43,
+     "aucune": 0.9767,
+     "une": 0.0233,
+     "plus": 0.0,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 3
+    },
+    {
+     "les_rayons": 42,
+     "aucune": 0.9524,
+     "une": 0.0476,
+     "plus": 0.0,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 4
+    }
+   ],
+   "le_dernier_saut_qui_passe": 4
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "les_rayons": 2659,
+     "aucune": 0.8266,
+     "une": 0.1527,
+     "plus": 0.0207,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 1
+    },
+    {
+     "les_rayons": 2564,
+     "aucune": 0.7894,
+     "une": 0.1899,
+     "plus": 0.0207,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 2
+    },
+    {
+     "les_rayons": 2230,
+     "aucune": 0.7655,
+     "une": 0.2081,
+     "plus": 0.0265,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 3
+    },
+    {
+     "les_rayons": 2094,
+     "aucune": 0.7708,
+     "une": 0.2087,
+     "plus": 0.0205,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 4
+    }
+   ],
+   "le_dernier_saut_qui_passe": 4
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "les_rayons": 2634,
+     "aucune": 0.8371,
+     "une": 0.1412,
+     "plus": 0.0216,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 1
+    },
+    {
+     "les_rayons": 2423,
+     "aucune": 0.8258,
+     "une": 0.1552,
+     "plus": 0.019,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 2
+    },
+    {
+     "les_rayons": 2189,
+     "aucune": 0.7798,
+     "une": 0.2005,
+     "plus": 0.0196,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 3
+    },
+    {
+     "les_rayons": 2021,
+     "aucune": 0.7932,
+     "une": 0.1851,
+     "plus": 0.0218,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 4
+    }
+   ],
+   "le_dernier_saut_qui_passe": 4
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "les_rayons": 1614,
+     "aucune": 0.9796,
+     "une": 0.0204,
+     "plus": 0.0,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 1
+    },
+    {
+     "les_rayons": 1931,
+     "aucune": 0.9544,
+     "une": 0.0445,
+     "plus": 0.001,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 2
+    },
+    {
+     "les_rayons": 2318,
+     "aucune": 0.9029,
+     "une": 0.0902,
+     "plus": 0.0069,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 3
+    },
+    {
+     "les_rayons": 2119,
+     "aucune": 0.9094,
+     "une": 0.0807,
+     "plus": 0.0099,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 4
+    }
+   ],
+   "le_dernier_saut_qui_passe": 4
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "les_rayons": 3798,
+     "aucune": 0.9926,
+     "une": 0.0074,
+     "plus": 0.0,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 1
+    },
+    {
+     "les_rayons": 3438,
+     "aucune": 0.9578,
+     "une": 0.0407,
+     "plus": 0.0015,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 2
+    },
+    {
+     "les_rayons": 3059,
+     "aucune": 0.9568,
+     "une": 0.0418,
+     "plus": 0.0013,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 3
+    },
+    {
+     "les_rayons": 2696,
+     "aucune": 0.9251,
+     "une": 0.0697,
+     "plus": 0.0052,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 4
+    }
+   ],
+   "le_dernier_saut_qui_passe": 4
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "les_rayons": 3064,
+     "aucune": 0.7895,
+     "une": 0.187,
+     "plus": 0.0235,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 1
+    },
+    {
+     "les_rayons": 2692,
+     "aucune": 0.7894,
+     "une": 0.1868,
+     "plus": 0.0238,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 2
+    },
+    {
+     "les_rayons": 2311,
+     "aucune": 0.7603,
+     "une": 0.2107,
+     "plus": 0.029,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 3
+    },
+    {
+     "les_rayons": 2098,
+     "aucune": 0.7193,
+     "une": 0.2512,
+     "plus": 0.0296,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 4
+    }
+   ],
+   "le_dernier_saut_qui_passe": 4
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "les_rayons": 3045,
+     "aucune": 0.7819,
+     "une": 0.198,
+     "plus": 0.02,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 1
+    },
+    {
+     "les_rayons": 2675,
+     "aucune": 0.7331,
+     "une": 0.2314,
+     "plus": 0.0355,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 2
+    },
+    {
+     "les_rayons": 2345,
+     "aucune": 0.7147,
+     "une": 0.258,
+     "plus": 0.0273,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 3
+    },
+    {
+     "les_rayons": 2166,
+     "aucune": 0.7101,
+     "une": 0.2572,
+     "plus": 0.0328,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 4
+    }
+   ],
+   "le_dernier_saut_qui_passe": 4
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "les_rayons": 2814,
+     "aucune": 0.8117,
+     "une": 0.1695,
+     "plus": 0.0188,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 1
+    },
+    {
+     "les_rayons": 2610,
+     "aucune": 0.7816,
+     "une": 0.1946,
+     "plus": 0.0238,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 2
+    },
+    {
+     "les_rayons": 2265,
+     "aucune": 0.7453,
+     "une": 0.2318,
+     "plus": 0.023,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 3
+    },
+    {
+     "les_rayons": 2085,
+     "aucune": 0.7233,
+     "une": 0.2508,
+     "plus": 0.0259,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 4
+    }
+   ],
+   "le_dernier_saut_qui_passe": 4
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "les_rayons": 2948,
+     "aucune": 0.8195,
+     "une": 0.1635,
+     "plus": 0.017,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 1
+    },
+    {
+     "les_rayons": 2631,
+     "aucune": 0.7959,
+     "une": 0.1775,
+     "plus": 0.0266,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 2
+    },
+    {
+     "les_rayons": 2339,
+     "aucune": 0.7674,
+     "une": 0.2138,
+     "plus": 0.0188,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 3
+    },
+    {
+     "les_rayons": 2095,
+     "aucune": 0.7341,
+     "une": 0.2439,
+     "plus": 0.022,
+     "le_saut": "passe à la surface suivante",
+     "le_numero": 4
+    }
+   ],
+   "le_dernier_saut_qui_passe": 4
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "k": 10,
+  "n": 10,
+  "lissue": "sur 10 des 10 côtés, la chaîne passe d'une surface de m7 à la suivante pendant ses 4 sauts"
+ },
+ "les_secondes": 22.6
+}

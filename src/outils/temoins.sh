@@ -1763,6 +1763,8 @@ run "les maxima du scan sont-ils au pas ou par paires" uv run python "$ROOT/src/
 run "figure les maxima du scan sont-ils au pas ou par paires" uv run python "$ROOT/src/figures/figure_les_maxima_du_scan_sont_ils_au_pas_ou_par_paires.py" --verifier
 run "m7 marque-t-il une ou deux surfaces par spire" uv run python "$ROOT/src/nappe/m7_marque_t_il_une_ou_deux_surfaces_par_spire.py" --verifier
 run "figure m7 marque-t-il une ou deux surfaces par spire" uv run python "$ROOT/src/figures/figure_m7_marque_t_il_une_ou_deux_surfaces_par_spire.py" --verifier
+run "la chaine saute-t-elle des surfaces de m7" uv run python "$ROOT/src/nappe/la_chaine_saute_t_elle_des_surfaces_de_m7.py" --verifier
+run "figure la chaine saute-t-elle des surfaces de m7" uv run python "$ROOT/src/figures/figure_la_chaine_saute_t_elle_des_surfaces_de_m7.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

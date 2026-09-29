@@ -4416,6 +4416,13 @@ couche d'une même feuille, reste ouverte : `R4-P112`, une lecture point par poi
 sous le pas médian du rouleau** — `R4-F493`. Au plus 30 % des écarts courts font paire. La chaîne de `303`, qui avance de 18,5 à
 22,5 voxels par saut, peut sauter une surface de `m7` : `R4-P113`.
 
+**`313` · 2026-09-29 · la chaîne saute-t-elle des surfaces de m7** — `R4-P113`
+
+⭐⭐⭐⭐⭐ **Non : sur PHerc0358, entre chaque surface de la chaîne de `303` et sa spire suivante, aucune plage de `m7` ne s'intercale
+pour 71 à 100 % des rayons, sur les dix côtés et à chaque saut** — `R4-F494`. La chaîne est une suite de surfaces consécutives de
+`m7`, chacune au plus dense du scan, au pas du rouleau. Qu'elles soient les spires consécutives du rouleau, `R4-P103` le demande
+encore : une chaîne qui fait un tour le dirait.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

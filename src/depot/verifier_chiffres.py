@@ -3336,6 +3336,19 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 313 : LA CHAÎNE SAUTE-T-ELLE DES SURFACES DE M7
+    s313 = _source(racine, "la_chaine_saute_t_elle_des_surfaces_de_m7.json")
+    if s313.exists():
+        d = json.loads(s313.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 313", d["le_verdict"]["lissue"].upper())]
+        for c in d["les_cotes"]:
+            ecrits.append((f"la graine {c['le_rang']} côté {c['le_cote']} de 313",
+                           f"| {c['le_rang']} | {c['le_cote']} | "
+                           + " | ".join(f"{f_(x_['aucune'])} / {f_(x_['une'])} ({x_['les_rayons']})" for x_ in c["les_sauts"])
+                           + f" | {c['le_dernier_saut_qui_passe']} |"))
+        out.extend((nom, [x_], s313.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 312 : M7 MARQUE-T-IL UNE OU DEUX SURFACES PAR SPIRE
     s312 = _source(racine, "m7_marque_t_il_une_ou_deux_surfaces_par_spire.json")
     if s312.exists():
