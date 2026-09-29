@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**201 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**202 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 163 portes
+## Grand Prize — 164 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -181,7 +181,8 @@
 - **R4-P144** *(le référent)* · **RÉPONDUE par `348` : non.** Des 152 pieds lus sur `5753_-2`, un seul y est posé ; 152 sont posés sur `5753_-1`. La surface de départ, que donne un saut dit juste, est déjà à cheval sur deux tours voisins, et l'erreur commence un saut plus tôt (`R4-F534`). La suite est `R4-P145`.
 - **R4-P145** *(le graal)* · **RÉPONDUE par `349` : 60 des 104, et le compte n'en voit que 3.** Sur les graines 4 à 8, 60 des 104 sauts justes donnent une surface à cheval sur le tour attendu et son voisin, tous dans les chaînes relancées, aucun dans la chaîne sans relance ; `345` en tient 53 (`R4-F535`). La suite est `R4-P146`.
 - **R4-P146** *(le graal)* · **RÉPONDUE par `350` : l'un et l'autre.** Sous les 37 surfaces lues, le retard est hérité sous 15, né ici sous 4 et mêlé sous 18 ; il naît au premier saut à cheval de chaque chaîne (427 pieds sur le tour de départ contre 136) et s'hérite ensuite (1678 contre 3397) (`R4-F536`). La suite est `R4-P147`.
-- **R4-P147** *(le graal)* · **AU SAUT OÙ LE RETARD NAÎT, LE COMPTE DE `345` VOIT-IL LES POINTS RESTÉS SUR LA FEUILLE DE DÉPART, ET UN SEUIL DE POINTS COMPTÉS À ZÉRO REFUSE-T-IL CES SAUTS SANS REFUSER LES AUTRES ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `350` DÉSIGNE. Là où le retard naît, les points restés et leurs pieds sont sur le même tour publié (`R4-F536`) ; si le compte les dit à zéro feuille, un rouleau sans tracé peut refuser la surface au moment où elle se met à cheval, avant que les sauts suivants n'en héritent
+- **R4-P147** *(le graal)* · **RÉPONDUE par `351` : en partie.** Un seuil de 50 points à zéro refuse 7 des 14 naissances du retard et 3 des 44 sauts justes sains, et 30 des 46 sauts à cheval hérités (`R4-F537`). La suite est `R4-P148`.
+- **R4-P148** *(le graal)* · **LE COMPTE DE `345` AUQUEL S'AJOUTE LE SEUIL DE 50 POINTS À ZÉRO SÉPARE-T-IL, SUR LES GRAINES 4 À 8, LES SAUTS JUSTES QUI NE SONT PAS À CHEVAL DE TOUS LES AUTRES ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `351` DÉSIGNE. `345` refuse les sauts qui passent par-dessus un tour ; le seuil refuse une part des surfaces à cheval (`R4-F537`) ; s'ils se complètent, c'est le critère à porter sur PHerc0358 pour `#5`
 
 ## Progress Prizes — 19 portes
 

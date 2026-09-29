@@ -3336,6 +3336,36 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 351 : UN SEUIL DE POINTS RESTÉS REFUSE-T-IL LES SAUTS OÙ LE RETARD NAÎT
+    s351 = _source(racine, "un_seuil_de_points_restes_refuse_t_il_les_sauts_ou_le_retard_nait.json")
+    if s351.exists():
+        d = json.loads(s351.read_text())
+        v_, b_, z_, ps_ = d["le_verdict"], d["les_bilans"], d["les_zeros"], d["par_seuil"]
+        seuil = d["les_constantes"]["le_seuil"]
+        nes = sorted(z_["les_naissances"])
+        tenus = [x for x in nes if x < seuil]
+        refus_sains = sorted(x for x in z_["les_sains"] if x >= seuil)
+        r_ = d["les_restes_des_naissances"]
+        ecrits = [("le verdict de 351", v_["lissue"].upper()),
+                  ("les naissances de 351", f"Les naissances ont de {nes[0]} à {nes[-1]} points à zéro"),
+                  ("les naissances tenues de 351", f"les sept qu'il tient en ont de {tenus[0]} à {tenus[-1]}" if len(tenus) == 7 else "?"),
+                  ("les sains à zéro de 351", f"aucun pour {sum(1 for x in z_['les_sains'] if x == 0)} des {len(z_['les_sains'])}"),
+                  ("les sains refusés de 351", f"en ont {', '.join(str(x) for x in refus_sains[:-1])} et {refus_sains[-1]}"),
+                  ("les hérités de 351", f"{b_['les_herites']['les_refuses']} des {b_['les_herites']['les_sauts']} sauts à cheval hérités sont refusés"),
+                  ("tous les à cheval de 351", f"Sur les {b_['les_naissances']['les_sauts'] + b_['les_herites']['les_sauts']} sauts justes à cheval, "
+                                               f"il en refuse {b_['les_naissances']['les_refuses'] + b_['les_herites']['les_refuses']}"),
+                  ("les restés des naissances de 351", f"{r_['a_zero']} des {r_['les_points']} points restés"),
+                  ("le seuil de 40 de 351", f"À 40 points le seuil refuse {ps_['40']['les_naissances']['les_refuses']}"),
+                  ("le seuil de 30 de 351", f"à 30 points {ps_['30']['les_naissances']['les_refuses']} et {ps_['30']['les_sains']['les_refuses']}, "
+                                            f"à 75 points {ps_['75']['les_naissances']['les_refuses']} et {ps_['75']['les_sains']['les_refuses']}"),
+                  ("le seuil de 20 de 351", f"À 20 points il en refuserait {ps_['20']['les_naissances']['les_refuses']} et "
+                                            f"{ps_['20']['les_sains']['les_refuses']}")]
+        noms = {"les_naissances": "naissances du retard", "les_sains": "sauts justes sains", "les_herites": "sauts justes à cheval hérités",
+                "les_faux": "sauts faux"}
+        for k, n_ in noms.items():
+            ecrits.append((f"le groupe {k} de 351", f"| {n_} | {b_[k]['les_sauts']} | {b_[k]['les_refuses']} |"))
+        out.extend((nom, [x_], s351.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 350 : LE RETARD DES SURFACES À CHEVAL NAÎT-IL AU SAUT QUI LE MONTRE
     s350 = _source(racine, "le_retard_des_surfaces_a_cheval_nait_il_au_saut_qui_le_montre.json")
     if s350.exists():

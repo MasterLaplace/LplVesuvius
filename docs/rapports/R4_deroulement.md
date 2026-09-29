@@ -4648,6 +4648,12 @@ haut ?
 chaîne, les pieds des points restés sont surtout sur le tour de départ (427 contre 136) ; aux sauts suivants, surtout sur le tour
 d'avant (1678 contre 3397). `R4-P147` s'ouvre : le compte voit-il le retard là où il naît ?
 
+**`351` · 2026-09-29 · un seuil de points restés refuse-t-il les sauts où le retard naît** — `R4-P147`
+
+⭐⭐⭐⭐ **En partie** — `R4-F537`. Un saut refusé dès que 50 de ses points ne franchissent aucune feuille : 7 des 14 naissances du
+retard refusées, 3 des 44 sauts justes sains, 30 des 46 sauts à cheval hérités. `R4-P148` s'ouvre : le compte de `345` et ce seuil
+ensemble séparent-ils les sauts justes sains de tous les autres ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

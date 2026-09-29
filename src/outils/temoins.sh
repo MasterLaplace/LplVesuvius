@@ -1839,6 +1839,8 @@ run "les sauts justes donnent-ils des surfaces à cheval" uv run python "$ROOT/s
 run "figure les sauts justes donnent-ils des surfaces à cheval" uv run python "$ROOT/src/figures/figure_les_sauts_justes_donnent_ils_des_surfaces_a_cheval.py" --verifier
 run "le retard des surfaces à cheval naît-il au saut qui le montre" uv run python "$ROOT/src/nappe/le_retard_des_surfaces_a_cheval_nait_il_au_saut_qui_le_montre.py" --verifier
 run "figure le retard des surfaces à cheval naît-il au saut qui le montre" uv run python "$ROOT/src/figures/figure_le_retard_des_surfaces_a_cheval_nait_il_au_saut_qui_le_montre.py" --verifier
+run "un seuil de points restés refuse-t-il les sauts où le retard naît" uv run python "$ROOT/src/nappe/un_seuil_de_points_restes_refuse_t_il_les_sauts_ou_le_retard_nait.py" --verifier
+run "figure un seuil de points restés refuse-t-il les sauts où le retard naît" uv run python "$ROOT/src/figures/figure_un_seuil_de_points_restes_refuse_t_il_les_sauts_ou_le_retard_nait.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

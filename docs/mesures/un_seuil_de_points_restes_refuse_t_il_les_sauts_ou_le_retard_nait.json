@@ -1,0 +1,1009 @@
+{
+ "la_question": "Au saut où le retard naît, un seuil de points que le compte de 345 dit à zéro feuille refuse-t-il ces sauts sans refuser les sauts justes qui ne sont pas à cheval ?",
+ "les_constantes": {
+  "le_seuil": 50,
+  "la_tenue_des_naissances": 0.75,
+  "la_tenue_des_sains": 0.25,
+  "lecart_minimal": 0.25,
+  "le_minimum": 5
+ },
+ "le_controle": true,
+ "les_groupes": {
+  "les_naissances": [
+   [
+    "bornée",
+    4,
+    "moins",
+    2
+   ],
+   [
+    "bornée",
+    5,
+    "moins",
+    7
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    3
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    4
+   ],
+   [
+    "bornée",
+    8,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis un point",
+    5,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    7
+   ]
+  ],
+  "les_sains": [
+   [
+    "bornée",
+    5,
+    "moins",
+    2
+   ],
+   [
+    "bornée",
+    5,
+    "moins",
+    3
+   ],
+   [
+    "bornée",
+    5,
+    "moins",
+    4
+   ],
+   [
+    "bornée",
+    5,
+    "moins",
+    5
+   ],
+   [
+    "bornée",
+    5,
+    "moins",
+    6
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    1
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    2
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    1
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis un point",
+    5,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis un point",
+    5,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    1
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis un point",
+    7,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    5
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    2
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    3
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    4
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    5
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    6
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    7
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    2
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    3
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    4
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    5
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    6
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    7
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    1
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    2
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    3
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    4
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    5
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    6
+   ],
+   [
+    "sans relance",
+    7,
+    "moins",
+    3
+   ],
+   [
+    "sans relance",
+    7,
+    "moins",
+    4
+   ],
+   [
+    "sans relance",
+    8,
+    "moins",
+    2
+   ],
+   [
+    "sans relance",
+    8,
+    "moins",
+    3
+   ],
+   [
+    "sans relance",
+    8,
+    "moins",
+    6
+   ],
+   [
+    "sans relance",
+    8,
+    "moins",
+    7
+   ]
+  ],
+  "les_herites": [
+   [
+    "bornée",
+    4,
+    "moins",
+    3
+   ],
+   [
+    "bornée",
+    4,
+    "moins",
+    4
+   ],
+   [
+    "bornée",
+    4,
+    "moins",
+    5
+   ],
+   [
+    "bornée",
+    4,
+    "moins",
+    6
+   ],
+   [
+    "bornée",
+    4,
+    "moins",
+    7
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    4
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    5
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    6
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    5
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    6
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    7
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    8
+   ],
+   [
+    "bornée",
+    8,
+    "moins",
+    3
+   ],
+   [
+    "bornée",
+    8,
+    "moins",
+    6
+   ],
+   [
+    "bornée",
+    8,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    8
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis un point",
+    5,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    6
+   ]
+  ],
+  "les_faux": [
+   [
+    "bornée",
+    8,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis un point",
+    5,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis un point",
+    7,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis un point",
+    7,
+    "moins",
+    6
+   ],
+   [
+    "sans relance",
+    8,
+    "moins",
+    4
+   ]
+  ]
+ },
+ "les_bilans": {
+  "les_naissances": {
+   "les_sauts": 14,
+   "les_refuses": 7,
+   "la_part": 0.5
+  },
+  "les_sains": {
+   "les_sauts": 44,
+   "les_refuses": 3,
+   "la_part": 0.0682
+  },
+  "les_herites": {
+   "les_sauts": 46,
+   "les_refuses": 30,
+   "la_part": 0.6522
+  },
+  "les_faux": {
+   "les_sauts": 6,
+   "les_refuses": 4,
+   "la_part": 0.6667
+  }
+ },
+ "par_seuil": {
+  "10": {
+   "les_naissances": {
+    "les_sauts": 14,
+    "les_refuses": 12,
+    "la_part": 0.8571
+   },
+   "les_sains": {
+    "les_sauts": 44,
+    "les_refuses": 12,
+    "la_part": 0.2727
+   },
+   "les_herites": {
+    "les_sauts": 46,
+    "les_refuses": 41,
+    "la_part": 0.8913
+   },
+   "les_faux": {
+    "les_sauts": 6,
+    "les_refuses": 5,
+    "la_part": 0.8333
+   }
+  },
+  "20": {
+   "les_naissances": {
+    "les_sauts": 14,
+    "les_refuses": 11,
+    "la_part": 0.7857
+   },
+   "les_sains": {
+    "les_sauts": 44,
+    "les_refuses": 11,
+    "la_part": 0.25
+   },
+   "les_herites": {
+    "les_sauts": 46,
+    "les_refuses": 39,
+    "la_part": 0.8478
+   },
+   "les_faux": {
+    "les_sauts": 6,
+    "les_refuses": 5,
+    "la_part": 0.8333
+   }
+  },
+  "30": {
+   "les_naissances": {
+    "les_sauts": 14,
+    "les_refuses": 8,
+    "la_part": 0.5714
+   },
+   "les_sains": {
+    "les_sauts": 44,
+    "les_refuses": 9,
+    "la_part": 0.2045
+   },
+   "les_herites": {
+    "les_sauts": 46,
+    "les_refuses": 38,
+    "la_part": 0.8261
+   },
+   "les_faux": {
+    "les_sauts": 6,
+    "les_refuses": 5,
+    "la_part": 0.8333
+   }
+  },
+  "40": {
+   "les_naissances": {
+    "les_sauts": 14,
+    "les_refuses": 7,
+    "la_part": 0.5
+   },
+   "les_sains": {
+    "les_sauts": 44,
+    "les_refuses": 3,
+    "la_part": 0.0682
+   },
+   "les_herites": {
+    "les_sauts": 46,
+    "les_refuses": 34,
+    "la_part": 0.7391
+   },
+   "les_faux": {
+    "les_sauts": 6,
+    "les_refuses": 5,
+    "la_part": 0.8333
+   }
+  },
+  "50": {
+   "les_naissances": {
+    "les_sauts": 14,
+    "les_refuses": 7,
+    "la_part": 0.5
+   },
+   "les_sains": {
+    "les_sauts": 44,
+    "les_refuses": 3,
+    "la_part": 0.0682
+   },
+   "les_herites": {
+    "les_sauts": 46,
+    "les_refuses": 30,
+    "la_part": 0.6522
+   },
+   "les_faux": {
+    "les_sauts": 6,
+    "les_refuses": 4,
+    "la_part": 0.6667
+   }
+  },
+  "75": {
+   "les_naissances": {
+    "les_sauts": 14,
+    "les_refuses": 3,
+    "la_part": 0.2143
+   },
+   "les_sains": {
+    "les_sauts": 44,
+    "les_refuses": 3,
+    "la_part": 0.0682
+   },
+   "les_herites": {
+    "les_sauts": 46,
+    "les_refuses": 20,
+    "la_part": 0.4348
+   },
+   "les_faux": {
+    "les_sauts": 6,
+    "les_refuses": 2,
+    "la_part": 0.3333
+   }
+  },
+  "100": {
+   "les_naissances": {
+    "les_sauts": 14,
+    "les_refuses": 3,
+    "la_part": 0.2143
+   },
+   "les_sains": {
+    "les_sauts": 44,
+    "les_refuses": 1,
+    "la_part": 0.0227
+   },
+   "les_herites": {
+    "les_sauts": 46,
+    "les_refuses": 12,
+    "la_part": 0.2609
+   },
+   "les_faux": {
+    "les_sauts": 6,
+    "les_refuses": 2,
+    "la_part": 0.3333
+   }
+  },
+  "150": {
+   "les_naissances": {
+    "les_sauts": 14,
+    "les_refuses": 2,
+    "la_part": 0.1429
+   },
+   "les_sains": {
+    "les_sauts": 44,
+    "les_refuses": 1,
+    "la_part": 0.0227
+   },
+   "les_herites": {
+    "les_sauts": 46,
+    "les_refuses": 10,
+    "la_part": 0.2174
+   },
+   "les_faux": {
+    "les_sauts": 6,
+    "les_refuses": 2,
+    "la_part": 0.3333
+   }
+  }
+ },
+ "les_zeros": {
+  "les_naissances": [
+   20,
+   24,
+   11,
+   5,
+   32,
+   54,
+   50,
+   24,
+   9,
+   117,
+   72,
+   50,
+   225,
+   174
+  ],
+  "les_sains": [
+   0,
+   0,
+   3,
+   27,
+   38,
+   17,
+   1,
+   9,
+   35,
+   30,
+   0,
+   34,
+   30,
+   168,
+   31,
+   20,
+   76,
+   0,
+   0,
+   92,
+   0,
+   0,
+   2,
+   2,
+   1,
+   0,
+   0,
+   2,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "les_herites": [
+   21,
+   70,
+   34,
+   55,
+   63,
+   37,
+   45,
+   177,
+   19,
+   4,
+   3,
+   12,
+   32,
+   46,
+   38,
+   94,
+   63,
+   60,
+   61,
+   66,
+   65,
+   44,
+   111,
+   230,
+   83,
+   163,
+   152,
+   293,
+   77,
+   93,
+   243,
+   81,
+   113,
+   233,
+   302,
+   43,
+   72,
+   93,
+   93,
+   94,
+   156,
+   51,
+   180,
+   0,
+   1,
+   3
+  ],
+  "les_faux": [
+   49,
+   157,
+   68,
+   72,
+   188,
+   0
+  ]
+ },
+ "les_restes_des_naissances": {
+  "les_points": 1337,
+  "a_zero": 443
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "sur les graines 4 à 8, un seuil de 50 points à zéro refuse 7 des 14 naissances du retard et 3 des 44 sauts justes sains ; il ne les sépare qu'en partie"
+ }
+}
