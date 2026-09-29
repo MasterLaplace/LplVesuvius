@@ -3336,6 +3336,27 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 317 : LES POINTS QUE M7 N'APPUIE PAS SONT-ILS AU CŒUR D'UNE FEUILLE
+    s317 = _source(racine, "les_points_que_m7_nappuie_pas_sont_ils_au_coeur_dune_feuille.json")
+    if s317.exists():
+        import statistics
+        d = json.loads(s317.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+
+        def med_(l_, g_, k_):
+            xs = [x_[g_][k_] for x_ in l_[8:16] if x_[g_][k_] is not None]
+            return round(float(statistics.median(xs)), 2) if xs else None
+
+        ecrits = [("le verdict de 317", d["le_verdict"]["lissue"].upper())]
+        for c in d["les_cotes"]:
+            cases = [f"{f_(med_(c['les_pas'][p_], 'appuyes', 'le_plus_dense'))} / "
+                     f"{f_(med_(c['les_pas'][p_], 'non_appuyes', 'le_plus_dense'))}" for p_ in ("16", "20", "24")]
+            am = [f_(med_(c["les_pas"]["20"], g_, "lamplitude")) for g_ in ("appuyes", "non_appuyes")]
+            ecrits.append((f"la graine {c['le_rang']} côté {c['le_cote']} de 317",
+                           f"| {c['le_rang']} | {c['le_cote']} | " + " | ".join(cases) + f" | {am[0]} / {am[1]} | "
+                           f"{c['la_lecture']} |"))
+        out.extend((nom, [x_], s317.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 316 : LE PAS DE LA CHAÎNE VIENT-IL DE M7 OU DU PAS PAR DÉFAUT
     s316 = _source(racine, "le_pas_de_la_chaine_vient_il_de_m7_ou_du_pas_par_defaut.json")
     if s316.exists():

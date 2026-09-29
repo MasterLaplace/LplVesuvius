@@ -4441,6 +4441,12 @@ seizième saut : ce qui tient loin est surtout extrapolé au pas par défaut, et
 voxels, et le plus dense du scan reste à 0 à 2 voxels de chaque spire pour les trois** — `R4-F497`. Le juge du plus dense lit les
 points que `m7` appuie, pas la spire : réserves sur `R4-F491` et `R4-F496`. `R4-P114` s'ouvre.
 
+**`317` · 2026-09-29 · les points que m7 n'appuie pas sont-ils au cœur d'une feuille** — `R4-P114`
+
+⭐⭐⭐⭐⭐ **Non, à aucun pas donné : les points que le vote pose sans `m7` ont un profil presque plat, au maximum aux bords de la
+fenêtre, aux pas de 16, 20 et 24 ; les points appuyés restent au plus dense** — `R4-F498`. La chaîne n'est une pile de feuilles que
+là où `m7` la porte, 15 à 16 % des points au seizième saut. `R4-P115` s'ouvre.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

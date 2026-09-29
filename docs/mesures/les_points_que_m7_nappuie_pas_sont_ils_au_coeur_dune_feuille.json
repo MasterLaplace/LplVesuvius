@@ -1,0 +1,3014 @@
+{
+ "la_question": "Les points d'une spire de la chaîne que m7 n'appuie pas sont-ils au cœur d'une feuille, au pas donné de 20 voxels et pas à 16 ni à 24 ?",
+ "les_constantes": {
+  "les_pas": [
+   16.0,
+   20.0,
+   24.0
+  ],
+  "le_quart_de_pas_voxels": 5,
+  "lamplitude_minimale": 0.5
+ },
+ "les_nappes_se_redonnent": true,
+ "les_pannes": [],
+ "les_cotes": [
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_pas": {
+    "16": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 2212,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.56,
+       "les_points_juges": 2212
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.14,
+       "les_points_juges": 1509
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2097,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.52,
+       "les_points_juges": 2097
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.13,
+       "les_points_juges": 1384
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 1885,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.4,
+       "les_points_juges": 1885
+      },
+      "non_appuyes": {
+       "le_plus_dense": 8,
+       "lamplitude": 0.14,
+       "les_points_juges": 1364
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 1762,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.47,
+       "les_points_juges": 1762
+      },
+      "non_appuyes": {
+       "le_plus_dense": 12,
+       "lamplitude": 0.24,
+       "les_points_juges": 1263
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1588,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.43,
+       "les_points_juges": 1588
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.22,
+       "les_points_juges": 1221
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1445,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.43,
+       "les_points_juges": 1445
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.22,
+       "les_points_juges": 1156
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1315,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.37,
+       "les_points_juges": 1315
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.2,
+       "les_points_juges": 1086
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1181,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.4,
+       "les_points_juges": 1181
+      },
+      "non_appuyes": {
+       "le_plus_dense": -16,
+       "lamplitude": 0.23,
+       "les_points_juges": 1028
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1023,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.35,
+       "les_points_juges": 1023
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.24,
+       "les_points_juges": 1002
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 942,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.36,
+       "les_points_juges": 942
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.14,
+       "les_points_juges": 907
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 841,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.35,
+       "les_points_juges": 841
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.22,
+       "les_points_juges": 840
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 773,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.42,
+       "les_points_juges": 773
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.24,
+       "les_points_juges": 748
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 694,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.46,
+       "les_points_juges": 694
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.27,
+       "les_points_juges": 675
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 664,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.51,
+       "les_points_juges": 664
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.21,
+       "les_points_juges": 561
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 577,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.49,
+       "les_points_juges": 577
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.25,
+       "les_points_juges": 512
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 495,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.5,
+       "les_points_juges": 495
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.39,
+       "les_points_juges": 466
+      }
+     }
+    ],
+    "20": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 2533,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.58,
+       "les_points_juges": 2533
+      },
+      "non_appuyes": {
+       "le_plus_dense": 11,
+       "lamplitude": 0.19,
+       "les_points_juges": 1188
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2429,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.51,
+       "les_points_juges": 2429
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.18,
+       "les_points_juges": 1052
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 2091,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.47,
+       "les_points_juges": 2091
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.12,
+       "les_points_juges": 1158
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 1963,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.47,
+       "les_points_juges": 1963
+      },
+      "non_appuyes": {
+       "le_plus_dense": 12,
+       "lamplitude": 0.16,
+       "les_points_juges": 1062
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1824,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.46,
+       "les_points_juges": 1824
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.21,
+       "les_points_juges": 985
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1650,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.44,
+       "les_points_juges": 1650
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.18,
+       "les_points_juges": 951
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1517,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.29,
+       "les_points_juges": 1517
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.26,
+       "les_points_juges": 884
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1333,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.4,
+       "les_points_juges": 1333
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.24,
+       "les_points_juges": 876
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1210,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.32,
+       "les_points_juges": 1210
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.24,
+       "les_points_juges": 815
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 1075,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.38,
+       "les_points_juges": 1075
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.26,
+       "les_points_juges": 774
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 979,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.35,
+       "les_points_juges": 979
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.25,
+       "les_points_juges": 702
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 906,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.37,
+       "les_points_juges": 906
+      },
+      "non_appuyes": {
+       "le_plus_dense": -10,
+       "lamplitude": 0.19,
+       "les_points_juges": 615
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 820,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.44,
+       "les_points_juges": 820
+      },
+      "non_appuyes": {
+       "le_plus_dense": 15,
+       "lamplitude": 0.27,
+       "les_points_juges": 549
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 725,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.45,
+       "les_points_juges": 725
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.34,
+       "les_points_juges": 500
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 676,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.44,
+       "les_points_juges": 676
+      },
+      "non_appuyes": {
+       "le_plus_dense": -19,
+       "lamplitude": 0.25,
+       "les_points_juges": 413
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 588,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.47,
+       "les_points_juges": 588
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.44,
+       "les_points_juges": 373
+      }
+     }
+    ],
+    "24": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 2719,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.54,
+       "les_points_juges": 2719
+      },
+      "non_appuyes": {
+       "le_plus_dense": 11,
+       "lamplitude": 0.19,
+       "les_points_juges": 1002
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2616,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.48,
+       "les_points_juges": 2616
+      },
+      "non_appuyes": {
+       "le_plus_dense": -16,
+       "lamplitude": 0.14,
+       "les_points_juges": 865
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 2326,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.38,
+       "les_points_juges": 2326
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.2,
+       "les_points_juges": 923
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 2095,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.5,
+       "les_points_juges": 2095
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.25,
+       "les_points_juges": 930
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 2000,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.46,
+       "les_points_juges": 2000
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.19,
+       "les_points_juges": 809
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1790,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.46,
+       "les_points_juges": 1790
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.22,
+       "les_points_juges": 811
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1593,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.39,
+       "les_points_juges": 1593
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.25,
+       "les_points_juges": 808
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1475,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.43,
+       "les_points_juges": 1475
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.25,
+       "les_points_juges": 734
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1322,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.39,
+       "les_points_juges": 1322
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.21,
+       "les_points_juges": 703
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 1176,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.43,
+       "les_points_juges": 1176
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.24,
+       "les_points_juges": 673
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 1096,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.43,
+       "les_points_juges": 1096
+      },
+      "non_appuyes": {
+       "le_plus_dense": -20,
+       "lamplitude": 0.23,
+       "les_points_juges": 585
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 990,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.39,
+       "les_points_juges": 990
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.19,
+       "les_points_juges": 531
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 887,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.42,
+       "les_points_juges": 887
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.3,
+       "les_points_juges": 482
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 823,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.49,
+       "les_points_juges": 823
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.33,
+       "les_points_juges": 402
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 732,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.37,
+       "les_points_juges": 732
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.22,
+       "les_points_juges": 357
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 635,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.48,
+       "les_points_juges": 635
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.26,
+       "les_points_juges": 326
+      }
+     }
+    ]
+   },
+   "au_coeur": {
+    "16": {
+     "appuyes": false,
+     "non_appuyes": false
+    },
+    "20": {
+     "appuyes": false,
+     "non_appuyes": false
+    },
+    "24": {
+     "appuyes": false,
+     "non_appuyes": false
+    }
+   },
+   "la_lecture": "hors du cœur même à 20"
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_pas": {
+    "16": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 2288,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.41,
+       "les_points_juges": 2288
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.21,
+       "les_points_juges": 1433
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2052,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.43,
+       "les_points_juges": 2052
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.16,
+       "les_points_juges": 1429
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 1753,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.45,
+       "les_points_juges": 1753
+      },
+      "non_appuyes": {
+       "le_plus_dense": 18,
+       "lamplitude": 0.23,
+       "les_points_juges": 1496
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 1661,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.52,
+       "les_points_juges": 1661
+      },
+      "non_appuyes": {
+       "le_plus_dense": 17,
+       "lamplitude": 0.18,
+       "les_points_juges": 1364
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1562,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.36,
+       "les_points_juges": 1562
+      },
+      "non_appuyes": {
+       "le_plus_dense": -14,
+       "lamplitude": 0.15,
+       "les_points_juges": 1247
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1475,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.46,
+       "les_points_juges": 1475
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.18,
+       "les_points_juges": 1126
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1343,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.43,
+       "les_points_juges": 1343
+      },
+      "non_appuyes": {
+       "le_plus_dense": -18,
+       "lamplitude": 0.26,
+       "les_points_juges": 1058
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1232,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.44,
+       "les_points_juges": 1232
+      },
+      "non_appuyes": {
+       "le_plus_dense": -14,
+       "lamplitude": 0.17,
+       "les_points_juges": 977
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1116,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.48,
+       "les_points_juges": 1116
+      },
+      "non_appuyes": {
+       "le_plus_dense": 17,
+       "lamplitude": 0.2,
+       "les_points_juges": 909
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 1015,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.52,
+       "les_points_juges": 1015
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.24,
+       "les_points_juges": 834
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 954,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.42,
+       "les_points_juges": 954
+      },
+      "non_appuyes": {
+       "le_plus_dense": -18,
+       "lamplitude": 0.23,
+       "les_points_juges": 727
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 823,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.42,
+       "les_points_juges": 823
+      },
+      "non_appuyes": {
+       "le_plus_dense": -18,
+       "lamplitude": 0.29,
+       "les_points_juges": 698
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 789,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.53,
+       "les_points_juges": 789
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.13,
+       "les_points_juges": 580
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 675,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.38,
+       "les_points_juges": 675
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.36,
+       "les_points_juges": 550
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 593,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.45,
+       "les_points_juges": 593
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.24,
+       "les_points_juges": 496
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 543,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.46,
+       "les_points_juges": 543
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.25,
+       "les_points_juges": 418
+      }
+     }
+    ],
+    "20": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 2503,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.38,
+       "les_points_juges": 2503
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.2,
+       "les_points_juges": 1218
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2292,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.42,
+       "les_points_juges": 2292
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.14,
+       "les_points_juges": 1189
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 2068,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.5,
+       "les_points_juges": 2068
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.17,
+       "les_points_juges": 1181
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 1892,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.48,
+       "les_points_juges": 1892
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.15,
+       "les_points_juges": 1133
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1792,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.42,
+       "les_points_juges": 1792
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.3,
+       "les_points_juges": 1017
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1644,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.46,
+       "les_points_juges": 1644
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.32,
+       "les_points_juges": 957
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1480,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.42,
+       "les_points_juges": 1480
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.34,
+       "les_points_juges": 921
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1377,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.39,
+       "les_points_juges": 1377
+      },
+      "non_appuyes": {
+       "le_plus_dense": -11,
+       "lamplitude": 0.17,
+       "les_points_juges": 832
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1263,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.4,
+       "les_points_juges": 1263
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.3,
+       "les_points_juges": 762
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 1124,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.44,
+       "les_points_juges": 1124
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.29,
+       "les_points_juges": 725
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 1070,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.43,
+       "les_points_juges": 1070
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.23,
+       "les_points_juges": 611
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 962,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.4,
+       "les_points_juges": 962
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.27,
+       "les_points_juges": 559
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 873,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.45,
+       "les_points_juges": 873
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.27,
+       "les_points_juges": 496
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 765,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.49,
+       "les_points_juges": 765
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.22,
+       "les_points_juges": 460
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 701,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.45,
+       "les_points_juges": 701
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.38,
+       "les_points_juges": 388
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 612,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.56,
+       "les_points_juges": 612
+      },
+      "non_appuyes": {
+       "le_plus_dense": -14,
+       "lamplitude": 0.3,
+       "les_points_juges": 349
+      }
+     }
+    ],
+    "24": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 2691,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.36,
+       "les_points_juges": 2691
+      },
+      "non_appuyes": {
+       "le_plus_dense": 18,
+       "lamplitude": 0.16,
+       "les_points_juges": 1030
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2513,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.42,
+       "les_points_juges": 2513
+      },
+      "non_appuyes": {
+       "le_plus_dense": -15,
+       "lamplitude": 0.18,
+       "les_points_juges": 968
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 2263,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.43,
+       "les_points_juges": 2263
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.25,
+       "les_points_juges": 986
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 2126,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.44,
+       "les_points_juges": 2126
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.22,
+       "les_points_juges": 899
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1910,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.37,
+       "les_points_juges": 1910
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.22,
+       "les_points_juges": 899
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1804,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.44,
+       "les_points_juges": 1804
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.27,
+       "les_points_juges": 797
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1617,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.37,
+       "les_points_juges": 1617
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.25,
+       "les_points_juges": 784
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1495,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.41,
+       "les_points_juges": 1495
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.19,
+       "les_points_juges": 714
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1365,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.36,
+       "les_points_juges": 1365
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.29,
+       "les_points_juges": 660
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 1269,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.43,
+       "les_points_juges": 1269
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.24,
+       "les_points_juges": 580
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 1117,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.39,
+       "les_points_juges": 1117
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.19,
+       "les_points_juges": 564
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 1015,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.42,
+       "les_points_juges": 1015
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.28,
+       "les_points_juges": 506
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 924,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.49,
+       "les_points_juges": 924
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.28,
+       "les_points_juges": 445
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 846,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.53,
+       "les_points_juges": 846
+      },
+      "non_appuyes": {
+       "le_plus_dense": 19,
+       "lamplitude": 0.15,
+       "les_points_juges": 379
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 771,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.46,
+       "les_points_juges": 771
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.42,
+       "les_points_juges": 318
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 688,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.51,
+       "les_points_juges": 688
+      },
+      "non_appuyes": {
+       "le_plus_dense": 17,
+       "lamplitude": 0.28,
+       "les_points_juges": 273
+      }
+     }
+    ]
+   },
+   "au_coeur": {
+    "16": {
+     "appuyes": false,
+     "non_appuyes": false
+    },
+    "20": {
+     "appuyes": false,
+     "non_appuyes": false
+    },
+    "24": {
+     "appuyes": false,
+     "non_appuyes": false
+    }
+   },
+   "la_lecture": "hors du cœur même à 20"
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_pas": {
+    "16": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 2628,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": 2,
+       "lamplitude": 0.4,
+       "les_points_juges": 2628
+      },
+      "non_appuyes": {
+       "le_plus_dense": -10,
+       "lamplitude": 0.15,
+       "les_points_juges": 1093
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2289,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.3,
+       "les_points_juges": 2289
+      },
+      "non_appuyes": {
+       "le_plus_dense": -18,
+       "lamplitude": 0.08,
+       "les_points_juges": 1192
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 1932,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.4,
+       "les_points_juges": 1932
+      },
+      "non_appuyes": {
+       "le_plus_dense": 12,
+       "lamplitude": 0.17,
+       "les_points_juges": 1317
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 1770,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.49,
+       "les_points_juges": 1770
+      },
+      "non_appuyes": {
+       "le_plus_dense": -18,
+       "lamplitude": 0.12,
+       "les_points_juges": 1255
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1604,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.36,
+       "les_points_juges": 1604
+      },
+      "non_appuyes": {
+       "le_plus_dense": -18,
+       "lamplitude": 0.24,
+       "les_points_juges": 1205
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1344,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.31,
+       "les_points_juges": 1344
+      },
+      "non_appuyes": {
+       "le_plus_dense": -18,
+       "lamplitude": 0.15,
+       "les_points_juges": 1257
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1271,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.36,
+       "les_points_juges": 1271
+      },
+      "non_appuyes": {
+       "le_plus_dense": -18,
+       "lamplitude": 0.25,
+       "les_points_juges": 1130
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1145,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.46,
+       "les_points_juges": 1145
+      },
+      "non_appuyes": {
+       "le_plus_dense": -19,
+       "lamplitude": 0.17,
+       "les_points_juges": 1064
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1060,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.39,
+       "les_points_juges": 1060
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.2,
+       "les_points_juges": 965
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 965,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.41,
+       "les_points_juges": 965
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.17,
+       "les_points_juges": 884
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 883,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.41,
+       "les_points_juges": 883
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.28,
+       "les_points_juges": 798
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 822,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.44,
+       "les_points_juges": 822
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.22,
+       "les_points_juges": 699
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 726,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.4,
+       "les_points_juges": 726
+      },
+      "non_appuyes": {
+       "le_plus_dense": 20,
+       "lamplitude": 0.21,
+       "les_points_juges": 643
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 673,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.39,
+       "les_points_juges": 673
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.25,
+       "les_points_juges": 552
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 614,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.45,
+       "les_points_juges": 614
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.17,
+       "les_points_juges": 475
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 546,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.4,
+       "les_points_juges": 546
+      },
+      "non_appuyes": {
+       "le_plus_dense": -20,
+       "lamplitude": 0.24,
+       "les_points_juges": 415
+      }
+     }
+    ],
+    "20": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 2870,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": 2,
+       "lamplitude": 0.39,
+       "les_points_juges": 2870
+      },
+      "non_appuyes": {
+       "le_plus_dense": 18,
+       "lamplitude": 0.15,
+       "les_points_juges": 851
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2531,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.32,
+       "les_points_juges": 2531
+      },
+      "non_appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.1,
+       "les_points_juges": 950
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 2154,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.37,
+       "les_points_juges": 2154
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.22,
+       "les_points_juges": 1095
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 1958,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.4,
+       "les_points_juges": 1958
+      },
+      "non_appuyes": {
+       "le_plus_dense": -18,
+       "lamplitude": 0.22,
+       "les_points_juges": 1067
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1760,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.45,
+       "les_points_juges": 1760
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.17,
+       "les_points_juges": 1049
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1560,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.39,
+       "les_points_juges": 1560
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.2,
+       "les_points_juges": 1041
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1446,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.36,
+       "les_points_juges": 1446
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.23,
+       "les_points_juges": 955
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1331,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.4,
+       "les_points_juges": 1331
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.24,
+       "les_points_juges": 878
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1214,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.44,
+       "les_points_juges": 1214
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.27,
+       "les_points_juges": 811
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 1122,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.45,
+       "les_points_juges": 1122
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.29,
+       "les_points_juges": 727
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 1050,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.34,
+       "les_points_juges": 1050
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.23,
+       "les_points_juges": 631
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 926,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.4,
+       "les_points_juges": 926
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.27,
+       "les_points_juges": 595
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 825,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.42,
+       "les_points_juges": 825
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.25,
+       "les_points_juges": 544
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 747,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.37,
+       "les_points_juges": 747
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.3,
+       "les_points_juges": 478
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 679,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.43,
+       "les_points_juges": 679
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.18,
+       "les_points_juges": 410
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 606,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.39,
+       "les_points_juges": 606
+      },
+      "non_appuyes": {
+       "le_plus_dense": 5,
+       "lamplitude": 0.36,
+       "les_points_juges": 355
+      }
+     }
+    ],
+    "24": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 3041,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": 2,
+       "lamplitude": 0.36,
+       "les_points_juges": 3041
+      },
+      "non_appuyes": {
+       "le_plus_dense": -20,
+       "lamplitude": 0.2,
+       "les_points_juges": 680
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2706,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.31,
+       "les_points_juges": 2706
+      },
+      "non_appuyes": {
+       "le_plus_dense": 15,
+       "lamplitude": 0.12,
+       "les_points_juges": 775
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 2399,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.37,
+       "les_points_juges": 2399
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.16,
+       "les_points_juges": 850
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 2155,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.47,
+       "les_points_juges": 2155
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.16,
+       "les_points_juges": 870
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1948,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.41,
+       "les_points_juges": 1948
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.16,
+       "les_points_juges": 861
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1756,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.36,
+       "les_points_juges": 1756
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.24,
+       "les_points_juges": 845
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1625,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.39,
+       "les_points_juges": 1625
+      },
+      "non_appuyes": {
+       "le_plus_dense": 13,
+       "lamplitude": 0.18,
+       "les_points_juges": 776
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1520,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.37,
+       "les_points_juges": 1520
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.3,
+       "les_points_juges": 689
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1355,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.41,
+       "les_points_juges": 1355
+      },
+      "non_appuyes": {
+       "le_plus_dense": 18,
+       "lamplitude": 0.25,
+       "les_points_juges": 670
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 1249,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.38,
+       "les_points_juges": 1249
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.19,
+       "les_points_juges": 600
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 1121,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.41,
+       "les_points_juges": 1121
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.21,
+       "les_points_juges": 560
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 1031,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.36,
+       "les_points_juges": 1031
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.35,
+       "les_points_juges": 490
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 951,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.45,
+       "les_points_juges": 951
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.25,
+       "les_points_juges": 418
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 851,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.46,
+       "les_points_juges": 851
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.4,
+       "les_points_juges": 374
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 766,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.42,
+       "les_points_juges": 766
+      },
+      "non_appuyes": {
+       "le_plus_dense": 13,
+       "lamplitude": 0.36,
+       "les_points_juges": 323
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 660,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": -1,
+       "lamplitude": 0.46,
+       "les_points_juges": 660
+      },
+      "non_appuyes": {
+       "le_plus_dense": 15,
+       "lamplitude": 0.41,
+       "les_points_juges": 301
+      }
+     }
+    ]
+   },
+   "au_coeur": {
+    "16": {
+     "appuyes": false,
+     "non_appuyes": false
+    },
+    "20": {
+     "appuyes": false,
+     "non_appuyes": false
+    },
+    "24": {
+     "appuyes": false,
+     "non_appuyes": false
+    }
+   },
+   "la_lecture": "hors du cœur même à 20"
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_pas": {
+    "16": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 2617,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.49,
+       "les_points_juges": 2617
+      },
+      "non_appuyes": {
+       "le_plus_dense": 16,
+       "lamplitude": 0.12,
+       "les_points_juges": 1104
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2233,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.4,
+       "les_points_juges": 2233
+      },
+      "non_appuyes": {
+       "le_plus_dense": 12,
+       "lamplitude": 0.11,
+       "les_points_juges": 1248
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 1976,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.38,
+       "les_points_juges": 1976
+      },
+      "non_appuyes": {
+       "le_plus_dense": -20,
+       "lamplitude": 0.12,
+       "les_points_juges": 1273
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 1754,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.29,
+       "les_points_juges": 1754
+      },
+      "non_appuyes": {
+       "le_plus_dense": 20,
+       "lamplitude": 0.15,
+       "les_points_juges": 1271
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1601,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.34,
+       "les_points_juges": 1601
+      },
+      "non_appuyes": {
+       "le_plus_dense": -20,
+       "lamplitude": 0.17,
+       "les_points_juges": 1208
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1473,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.3,
+       "les_points_juges": 1473
+      },
+      "non_appuyes": {
+       "le_plus_dense": -11,
+       "lamplitude": 0.17,
+       "les_points_juges": 1128
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1356,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.32,
+       "les_points_juges": 1356
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.26,
+       "les_points_juges": 1045
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1200,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.31,
+       "les_points_juges": 1200
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.18,
+       "les_points_juges": 1009
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1103,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.35,
+       "les_points_juges": 1103
+      },
+      "non_appuyes": {
+       "le_plus_dense": -12,
+       "lamplitude": 0.18,
+       "les_points_juges": 922
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 1002,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.29,
+       "les_points_juges": 1002
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.18,
+       "les_points_juges": 847
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 920,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.32,
+       "les_points_juges": 920
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.23,
+       "les_points_juges": 761
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 855,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.35,
+       "les_points_juges": 855
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.26,
+       "les_points_juges": 666
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 748,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.37,
+       "les_points_juges": 748
+      },
+      "non_appuyes": {
+       "le_plus_dense": 19,
+       "lamplitude": 0.21,
+       "les_points_juges": 621
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 685,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.47,
+       "les_points_juges": 685
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.2,
+       "les_points_juges": 540
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 617,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.37,
+       "les_points_juges": 617
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.25,
+       "les_points_juges": 472
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 532,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.4,
+       "les_points_juges": 532
+      },
+      "non_appuyes": {
+       "le_plus_dense": 17,
+       "lamplitude": 0.3,
+       "les_points_juges": 429
+      }
+     }
+    ],
+    "20": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 2844,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.48,
+       "les_points_juges": 2844
+      },
+      "non_appuyes": {
+       "le_plus_dense": -7,
+       "lamplitude": 0.11,
+       "les_points_juges": 877
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2496,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.37,
+       "les_points_juges": 2496
+      },
+      "non_appuyes": {
+       "le_plus_dense": 6,
+       "lamplitude": 0.19,
+       "les_points_juges": 985
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 2187,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.33,
+       "les_points_juges": 2187
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.16,
+       "les_points_juges": 1062
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 2025,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.32,
+       "les_points_juges": 2025
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.12,
+       "les_points_juges": 1000
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1842,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.32,
+       "les_points_juges": 1842
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.27,
+       "les_points_juges": 967
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1678,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.33,
+       "les_points_juges": 1678
+      },
+      "non_appuyes": {
+       "le_plus_dense": -10,
+       "lamplitude": 0.12,
+       "les_points_juges": 923
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1548,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.28,
+       "les_points_juges": 1548
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.21,
+       "les_points_juges": 853
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1437,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.3,
+       "les_points_juges": 1437
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.26,
+       "les_points_juges": 772
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1308,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.39,
+       "les_points_juges": 1308
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.23,
+       "les_points_juges": 717
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 1171,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.35,
+       "les_points_juges": 1171
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.22,
+       "les_points_juges": 678
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 1034,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.33,
+       "les_points_juges": 1034
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.27,
+       "les_points_juges": 647
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 975,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.33,
+       "les_points_juges": 975
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.25,
+       "les_points_juges": 546
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 874,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.44,
+       "les_points_juges": 874
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.22,
+       "les_points_juges": 495
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 776,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.39,
+       "les_points_juges": 776
+      },
+      "non_appuyes": {
+       "le_plus_dense": -19,
+       "lamplitude": 0.35,
+       "les_points_juges": 449
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 699,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.39,
+       "les_points_juges": 699
+      },
+      "non_appuyes": {
+       "le_plus_dense": -20,
+       "lamplitude": 0.31,
+       "les_points_juges": 390
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 583,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.43,
+       "les_points_juges": 583
+      },
+      "non_appuyes": {
+       "le_plus_dense": -19,
+       "lamplitude": 0.31,
+       "les_points_juges": 378
+      }
+     }
+    ],
+    "24": [
+     {
+      "le_saut": 1,
+      "les_appuyes": 3029,
+      "les_points": 3721,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.47,
+       "les_points_juges": 3029
+      },
+      "non_appuyes": {
+       "le_plus_dense": -11,
+       "lamplitude": 0.14,
+       "les_points_juges": 692
+      }
+     },
+     {
+      "le_saut": 2,
+      "les_appuyes": 2669,
+      "les_points": 3481,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.35,
+       "les_points_juges": 2669
+      },
+      "non_appuyes": {
+       "le_plus_dense": -19,
+       "lamplitude": 0.2,
+       "les_points_juges": 812
+      }
+     },
+     {
+      "le_saut": 3,
+      "les_appuyes": 2435,
+      "les_points": 3249,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.32,
+       "les_points_juges": 2435
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.15,
+       "les_points_juges": 814
+      }
+     },
+     {
+      "le_saut": 4,
+      "les_appuyes": 2210,
+      "les_points": 3025,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.29,
+       "les_points_juges": 2210
+      },
+      "non_appuyes": {
+       "le_plus_dense": 18,
+       "lamplitude": 0.15,
+       "les_points_juges": 815
+      }
+     },
+     {
+      "le_saut": 5,
+      "les_appuyes": 1992,
+      "les_points": 2809,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.29,
+       "les_points_juges": 1992
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.2,
+       "les_points_juges": 817
+      }
+     },
+     {
+      "le_saut": 6,
+      "les_appuyes": 1843,
+      "les_points": 2601,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.3,
+       "les_points_juges": 1843
+      },
+      "non_appuyes": {
+       "le_plus_dense": -15,
+       "lamplitude": 0.21,
+       "les_points_juges": 758
+      }
+     },
+     {
+      "le_saut": 7,
+      "les_appuyes": 1688,
+      "les_points": 2401,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.32,
+       "les_points_juges": 1688
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.2,
+       "les_points_juges": 713
+      }
+     },
+     {
+      "le_saut": 8,
+      "les_appuyes": 1559,
+      "les_points": 2209,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.3,
+       "les_points_juges": 1559
+      },
+      "non_appuyes": {
+       "le_plus_dense": -14,
+       "lamplitude": 0.29,
+       "les_points_juges": 650
+      }
+     },
+     {
+      "le_saut": 9,
+      "les_appuyes": 1384,
+      "les_points": 2025,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.32,
+       "les_points_juges": 1384
+      },
+      "non_appuyes": {
+       "le_plus_dense": 17,
+       "lamplitude": 0.13,
+       "les_points_juges": 641
+      }
+     },
+     {
+      "le_saut": 10,
+      "les_appuyes": 1293,
+      "les_points": 1849,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.33,
+       "les_points_juges": 1293
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.25,
+       "les_points_juges": 556
+      }
+     },
+     {
+      "le_saut": 11,
+      "les_appuyes": 1186,
+      "les_points": 1681,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.33,
+       "les_points_juges": 1186
+      },
+      "non_appuyes": {
+       "le_plus_dense": -17,
+       "lamplitude": 0.31,
+       "les_points_juges": 495
+      }
+     },
+     {
+      "le_saut": 12,
+      "les_appuyes": 1089,
+      "les_points": 1521,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.4,
+       "les_points_juges": 1089
+      },
+      "non_appuyes": {
+       "le_plus_dense": 17,
+       "lamplitude": 0.23,
+       "les_points_juges": 432
+      }
+     },
+     {
+      "le_saut": 13,
+      "les_appuyes": 964,
+      "les_points": 1369,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.39,
+       "les_points_juges": 964
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.35,
+       "les_points_juges": 405
+      }
+     },
+     {
+      "le_saut": 14,
+      "les_appuyes": 869,
+      "les_points": 1225,
+      "appuyes": {
+       "le_plus_dense": 0,
+       "lamplitude": 0.37,
+       "les_points_juges": 869
+      },
+      "non_appuyes": {
+       "le_plus_dense": 21,
+       "lamplitude": 0.26,
+       "les_points_juges": 356
+      }
+     },
+     {
+      "le_saut": 15,
+      "les_appuyes": 779,
+      "les_points": 1089,
+      "appuyes": {
+       "le_plus_dense": 1,
+       "lamplitude": 0.34,
+       "les_points_juges": 779
+      },
+      "non_appuyes": {
+       "le_plus_dense": -21,
+       "lamplitude": 0.25,
+       "les_points_juges": 310
+      }
+     },
+     {
+      "le_saut": 16,
+      "les_appuyes": 677,
+      "les_points": 961,
+      "appuyes": {
+       "le_plus_dense": 2,
+       "lamplitude": 0.41,
+       "les_points_juges": 677
+      },
+      "non_appuyes": {
+       "le_plus_dense": -18,
+       "lamplitude": 0.35,
+       "les_points_juges": 284
+      }
+     }
+    ]
+   },
+   "au_coeur": {
+    "16": {
+     "appuyes": false,
+     "non_appuyes": false
+    },
+    "20": {
+     "appuyes": false,
+     "non_appuyes": false
+    },
+    "24": {
+     "appuyes": false,
+     "non_appuyes": false
+    }
+   },
+   "la_lecture": "hors du cœur même à 20"
+  }
+ ],
+ "les_morceaux": {
+  "combien": 621
+ },
+ "le_verdict": {
+  "decidable": true,
+  "k": 0,
+  "n": 4,
+  "lissue": "sur 0 des 4 côtés, les points que m7 n'appuie pas disent l'empilement régulier au pas de 20"
+ },
+ "les_secondes": 70.6
+}
