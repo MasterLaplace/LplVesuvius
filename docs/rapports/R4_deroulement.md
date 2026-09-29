@@ -4423,6 +4423,12 @@ pour 71 à 100 % des rayons, sur les dix côtés et à chaque saut** — `R4-F49
 `m7`, chacune au plus dense du scan, au pas du rouleau. Qu'elles soient les spires consécutives du rouleau, `R4-P103` le demande
 encore : une chaîne qui fait un tour le dirait.
 
+**`314` · 2026-09-29 · la phase publiée avance-t-elle au même pas le long de la chaîne** — `R4-P103`
+
+⭐⭐⭐ **Non lisible : le cosinus de `lasagna` sur les neuf surfaces de chaque pile ne s'ajuste pas mieux à une sinusoïde que la pile
+permutée** — `R4-F495`. La phase publiée varie trop peu sur les graines 4, 7 et 8, et saute d'un coup autour de la nappe sur les
+graines 3 et 6. `R4-P103` reste ouverte : une chaîne qui fait un tour la trancherait.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

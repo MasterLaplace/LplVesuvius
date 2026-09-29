@@ -3336,6 +3336,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐ LA TRANCHE 314 : LA PHASE PUBLIÉE AVANCE-T-ELLE AU MÊME PAS LE LONG DE LA CHAÎNE
+    s314 = _source(racine, "la_phase_publiee_avance_t_elle_au_meme_pas_le_long_de_la_chaine.json")
+    if s314.exists():
+        d = json.loads(s314.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 314", d["le_verdict"]["lissue"].upper())]
+        for g_ in d["les_graines"]:
+            ecrits.append((f"la graine {g_['le_rang']} de 314",
+                           f"| {g_['le_rang']} | {g_['les_points']} | {f_(g_.get('le_r2_median'))} | "
+                           f"{f_(g_.get('le_r2_median_du_temoin'))} | {f_(g_.get('le_delta_median_degres'))} | "
+                           f"{f_(g_.get('lecart_interquartile_degres'))} | {g_['la_lecture']} |"))
+            ecrits.append((f"les cosinus de la graine {g_['le_rang']} de 314",
+                           f"| {g_['le_rang']} | " + " | ".join(f_(c) for c in g_["le_cosinus_median_par_rang"]) + " |"))
+        out.extend((nom, [x_], s314.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 313 : LA CHAÎNE SAUTE-T-ELLE DES SURFACES DE M7
     s313 = _source(racine, "la_chaine_saute_t_elle_des_surfaces_de_m7.json")
     if s313.exists():
