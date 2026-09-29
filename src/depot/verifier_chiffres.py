@@ -3336,6 +3336,20 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 303 : LA CHAÎNE TIRÉE DE M7 SUIT-ELLE SA FEUILLE AU-DELÀ DU PREMIER SAUT
+    s303 = _source(racine, "la_chaine_tiree_de_m7_suit_elle_sa_feuille_au_dela_du_premier_saut.json")
+    if s303.exists():
+        d = json.loads(s303.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("les morceaux de 303", f"**{d['les_morceaux']['combien']}** morceaux de PHerc0358")]
+        for c in d["les_cotes"]:
+            signe = "+" if c["le_cote"] == "plus" else "−"
+            ecrits.append((f"le côté {c['le_rang']} {c['le_cote']} de 303",
+                           f"| graine {c['le_rang']} {signe} | {c['le_dernier_saut_qui_suit']} | "
+                           + " · ".join(f_(s["le_z"]) for s in c["les_sauts"]) + " | "
+                           + " · ".join(f_(s["le_pas_median_des_appuyes_voxels"]) for s in c["les_sauts"]) + " |"))
+        out.extend((nom, [x_], s303.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐ LA TRANCHE 302 : LES NAPPES DE M7 TIENNENT-ELLES SUR UNE SEULE FEUILLE
     s302 = _source(racine, "les_nappes_de_m7_tiennent_elles_sur_une_seule_feuille.json")
     if s302.exists():

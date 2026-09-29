@@ -4349,6 +4349,13 @@ d'une seule pièce qui suit sa feuille ; mais sur trois d'entre elles, 10 à 14 
 au pas, par des sauts d'un peu plus d'un demi-pas** — `R4-F483`. La règle des pièces ne voit pas une coupure ouverte ; le relevé
 des boucles, ajouté après le premier compte, le voit. `R4-P102` s'ouvre : deux faces d'une feuille, ou deux feuilles.
 
+**`303` · 2026-09-29 · la chaîne tirée de m7 suit-elle sa feuille au-delà du premier saut** — #17
+
+⭐⭐⭐⭐⭐ **Sur PHerc0358, depuis les nappes de `m7` qui suivent leur feuille, la chaîne de `m7` suit sa feuille pendant quatre
+sauts sur cinq des dix côtés, par le juge sans référent de `301`** — `R4-F484`. Sur les graines 4 et 7, chaque saut avance de 18,5
+à 22,5 voxels, le pas du rouleau. Le juge ne dit pas sur quelle feuille tombe chaque saut. `R4-P103` s'ouvre : quatre spires
+consécutives, ou pas.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

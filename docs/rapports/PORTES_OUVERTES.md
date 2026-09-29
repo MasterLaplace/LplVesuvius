@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**156 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**157 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 118 portes
+## Grand Prize — 119 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -137,6 +137,7 @@
 - **R4-P100** *(le référent)* · **RÉPONDUE par `301` : oui, et oui.** Déclaré par taux sur vingt-quatre blocs, le juge sépare (tracé 0,9167, rampes 0,0417) ; sur PHerc0358, cinq nappes de `m7` sur huit graines neuves suivent leur feuille, avec leurs deux spires suivantes (`R4-F482`). La suite est `R4-P101`.
 - **R4-P101** *(le graal)* · **RÉPONDUE en partie par `302`.** Pour quatre nappes sur cinq, la nappe et ses deux spires tiennent d'une seule pièce qui suit sa feuille (`R4-F483`) ; mais trois d'entre elles ne ferment pas 10 à 14 % de leurs boucles, par des sauts d'un peu plus d'un demi-pas. Que la spire suivante soit la voisine reste ouvert. La suite est `R4-P102`.
 - **R4-P102** *(le graal)* · **LÀ OÙ UNE NAPPE DE `m7` SAUTE D'UN PEU PLUS D'UN DEMI-PAS, LE SCAN MONTRE-T-IL ENTRE LES DEUX CÔTÉS DU SAUT UN CREUX, QUI SÉPARE DEUX FEUILLES, OU LA MÊME MATIÈRE, QUI FAIT UNE SEULE FEUILLE VUE PAR SES DEUX FACES ?** ⭐⭐⭐⭐ C'EST CE QUE `302` DÉSIGNE. Les nappes qui suivent leur feuille sur PHerc0358 ne se coupent pas en îlots, mais trois d'entre elles ne ferment pas 10 à 14 % de leurs boucles au pas, par des sauts de 12 à 13,5 voxels pour un pas de 20. La réponse dit si une nappe reste sur sa feuille, et donc si la chaîne peut partir d'elle.
+- **R4-P103** *(le graal)* · **LES QUATRE SPIRES TIRÉES D'UNE NAPPE DE `m7` SUR PHerc0358 SONT-ELLES QUATRE SPIRES CONSÉCUTIVES ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `303` DÉSIGNE. La chaîne suit sa feuille jusqu'au quatrième saut sur cinq côtés sur dix, au pas du rouleau à chaque saut sur les graines 4 et 7. L'alignement ne voit ni le rang ni un saut de deux feuilles ; la fermeture des boucles à l'échelle d'une spire (`R4-F430`), ou la continuité de la phase `lasagna` publiée, le peuvent. ⚠ Une chaîne de 6 mm.
 
 ## Progress Prizes — 19 portes
 

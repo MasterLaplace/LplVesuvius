@@ -1,0 +1,827 @@
+{
+ "la_question": "Sur PHerc0358, la chaîne tirée de m7 suit-elle sa feuille au-delà du premier saut ?",
+ "les_constantes": {
+  "les_sauts": 4,
+  "le_z_minimum": 3.0
+ },
+ "les_premiers_sauts_se_redonnent": true,
+ "les_pannes": [],
+ "les_cotes": [
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_part_appuyee": 0.6443,
+     "le_pas_median_des_appuyes_voxels": 30.25,
+     "les_boucles": {
+      "les_carres": 3844,
+      "ceux_qui_ne_ferment_pas": 61,
+      "la_part": 0.01587,
+      "les_sauts_de_plus_dun_demi_pas": 312,
+      "leur_mediane_voxels": 17.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.3814
+     },
+     "le_z": 9.88,
+     "lalignement": 1.14,
+     "les_points_juges": 3721,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 2,
+     "la_part_appuyee": 0.4608,
+     "le_pas_median_des_appuyes_voxels": 14.0,
+     "les_boucles": {
+      "les_carres": 3600,
+      "ceux_qui_ne_ferment_pas": 80,
+      "la_part": 0.02222,
+      "les_sauts_de_plus_dun_demi_pas": 189,
+      "leur_mediane_voxels": 16.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.4286
+     },
+     "le_z": 1.161,
+     "lalignement": 0.33,
+     "les_points_juges": 3481,
+     "sans_matiere": 0,
+     "la_piece": "ne la suit pas"
+    },
+    {
+     "le_saut": 3,
+     "la_part_appuyee": 0.4985,
+     "le_pas_median_des_appuyes_voxels": 13.5,
+     "les_boucles": {
+      "les_carres": 3364,
+      "ceux_qui_ne_ferment_pas": 192,
+      "la_part": 0.05707,
+      "les_sauts_de_plus_dun_demi_pas": 372,
+      "leur_mediane_voxels": 16.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.4597
+     },
+     "le_z": 6.068,
+     "lalignement": 0.36,
+     "les_points_juges": 3249,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 4,
+     "la_part_appuyee": 0.5212,
+     "le_pas_median_des_appuyes_voxels": 15.0,
+     "les_boucles": {
+      "les_carres": 3136,
+      "ceux_qui_ne_ferment_pas": 247,
+      "la_part": 0.07876,
+      "les_sauts_de_plus_dun_demi_pas": 416,
+      "leur_mediane_voxels": 14.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.5024
+     },
+     "le_z": 16.027,
+     "lalignement": 0.36,
+     "les_points_juges": 3025,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    }
+   ],
+   "le_dernier_saut_qui_suit": 1
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_part_appuyee": 0.0428,
+     "le_pas_median_des_appuyes_voxels": 15.0,
+     "les_boucles": {
+      "les_carres": 3844,
+      "ceux_qui_ne_ferment_pas": 6,
+      "la_part": 0.00156,
+      "les_sauts_de_plus_dun_demi_pas": 6,
+      "leur_mediane_voxels": 12.25,
+      "leur_part_sous_trois_quarts_de_pas": 1.0
+     },
+     "le_z": 26.325,
+     "lalignement": 2.64,
+     "les_points_juges": 3649,
+     "sans_matiere": 72,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 2,
+     "la_part_appuyee": 0.0159,
+     "le_pas_median_des_appuyes_voxels": 20.5,
+     "les_boucles": {
+      "les_carres": 3600,
+      "ceux_qui_ne_ferment_pas": 0,
+      "la_part": 0.0,
+      "les_sauts_de_plus_dun_demi_pas": 0,
+      "leur_mediane_voxels": null,
+      "leur_part_sous_trois_quarts_de_pas": null
+     },
+     "le_z": 4.802,
+     "lalignement": 2.11,
+     "les_points_juges": 3315,
+     "sans_matiere": 166,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 3,
+     "la_part_appuyee": 0.0102,
+     "le_pas_median_des_appuyes_voxels": 19.0,
+     "les_boucles": {
+      "les_carres": 3364,
+      "ceux_qui_ne_ferment_pas": 0,
+      "la_part": 0.0,
+      "les_sauts_de_plus_dun_demi_pas": 0,
+      "leur_mediane_voxels": null,
+      "leur_part_sous_trois_quarts_de_pas": null
+     },
+     "le_z": 3.759,
+     "lalignement": 2.56,
+     "les_points_juges": 2041,
+     "sans_matiere": 1208,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 4,
+     "la_part_appuyee": 0.0099,
+     "le_pas_median_des_appuyes_voxels": 20.0,
+     "les_boucles": {
+      "les_carres": 3136,
+      "ceux_qui_ne_ferment_pas": 3,
+      "la_part": 0.00096,
+      "les_sauts_de_plus_dun_demi_pas": 2,
+      "leur_mediane_voxels": 11.25,
+      "leur_part_sous_trois_quarts_de_pas": 1.0
+     },
+     "le_z": -3.095,
+     "lalignement": 2.02,
+     "les_points_juges": 488,
+     "sans_matiere": 2537,
+     "la_piece": "ne la suit pas"
+    }
+   ],
+   "le_dernier_saut_qui_suit": 3
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_part_appuyee": 0.6383,
+     "le_pas_median_des_appuyes_voxels": 22.5,
+     "les_boucles": {
+      "les_carres": 3844,
+      "ceux_qui_ne_ferment_pas": 447,
+      "la_part": 0.11629,
+      "les_sauts_de_plus_dun_demi_pas": 459,
+      "leur_mediane_voxels": 13.0,
+      "leur_part_sous_trois_quarts_de_pas": 0.6993
+     },
+     "le_z": 21.422,
+     "lalignement": 0.38,
+     "les_points_juges": 3721,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 2,
+     "la_part_appuyee": 0.6069,
+     "le_pas_median_des_appuyes_voxels": 19.0,
+     "les_boucles": {
+      "les_carres": 3600,
+      "ceux_qui_ne_ferment_pas": 498,
+      "la_part": 0.13833,
+      "les_sauts_de_plus_dun_demi_pas": 473,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7632
+     },
+     "le_z": 7.247,
+     "lalignement": 0.34,
+     "les_points_juges": 3481,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 3,
+     "la_part_appuyee": 0.5278,
+     "le_pas_median_des_appuyes_voxels": 18.5,
+     "les_boucles": {
+      "les_carres": 3364,
+      "ceux_qui_ne_ferment_pas": 416,
+      "la_part": 0.12366,
+      "les_sauts_de_plus_dun_demi_pas": 347,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.8329
+     },
+     "le_z": 16.579,
+     "lalignement": 0.3,
+     "les_points_juges": 3249,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 4,
+     "la_part_appuyee": 0.4956,
+     "le_pas_median_des_appuyes_voxels": 19.5,
+     "les_boucles": {
+      "les_carres": 3136,
+      "ceux_qui_ne_ferment_pas": 413,
+      "la_part": 0.1317,
+      "les_sauts_de_plus_dun_demi_pas": 339,
+      "leur_mediane_voxels": 12.0,
+      "leur_part_sous_trois_quarts_de_pas": 0.8525
+     },
+     "le_z": 15.068,
+     "lalignement": 0.28,
+     "les_points_juges": 3025,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    }
+   ],
+   "le_dernier_saut_qui_suit": 4
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_part_appuyee": 0.6343,
+     "le_pas_median_des_appuyes_voxels": 22.0,
+     "les_boucles": {
+      "les_carres": 3844,
+      "ceux_qui_ne_ferment_pas": 446,
+      "la_part": 0.11602,
+      "les_sauts_de_plus_dun_demi_pas": 450,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7111
+     },
+     "le_z": 5.149,
+     "lalignement": 0.27,
+     "les_points_juges": 3721,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 2,
+     "la_part_appuyee": 0.5735,
+     "le_pas_median_des_appuyes_voxels": 19.0,
+     "les_boucles": {
+      "les_carres": 3600,
+      "ceux_qui_ne_ferment_pas": 391,
+      "la_part": 0.10861,
+      "les_sauts_de_plus_dun_demi_pas": 369,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.794
+     },
+     "le_z": 5.442,
+     "lalignement": 0.24,
+     "les_points_juges": 3481,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 3,
+     "la_part_appuyee": 0.5181,
+     "le_pas_median_des_appuyes_voxels": 20.5,
+     "les_boucles": {
+      "les_carres": 3364,
+      "ceux_qui_ne_ferment_pas": 456,
+      "la_part": 0.13555,
+      "les_sauts_de_plus_dun_demi_pas": 424,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7642
+     },
+     "le_z": 12.416,
+     "lalignement": 0.31,
+     "les_points_juges": 3249,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 4,
+     "la_part_appuyee": 0.4783,
+     "le_pas_median_des_appuyes_voxels": 19.0,
+     "les_boucles": {
+      "les_carres": 3136,
+      "ceux_qui_ne_ferment_pas": 431,
+      "la_part": 0.13744,
+      "les_sauts_de_plus_dun_demi_pas": 366,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.8005
+     },
+     "le_z": 4.704,
+     "lalignement": 0.27,
+     "les_points_juges": 3025,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    }
+   ],
+   "le_dernier_saut_qui_suit": 4
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_part_appuyee": 0.3884,
+     "le_pas_median_des_appuyes_voxels": 39.0,
+     "les_boucles": {
+      "les_carres": 3844,
+      "ceux_qui_ne_ferment_pas": 124,
+      "la_part": 0.03226,
+      "les_sauts_de_plus_dun_demi_pas": 388,
+      "leur_mediane_voxels": 18.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.3789
+     },
+     "le_z": 9.028,
+     "lalignement": 0.83,
+     "les_points_juges": 3721,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 2,
+     "la_part_appuyee": 0.457,
+     "le_pas_median_des_appuyes_voxels": 22.5,
+     "les_boucles": {
+      "les_carres": 3600,
+      "ceux_qui_ne_ferment_pas": 161,
+      "la_part": 0.04472,
+      "les_sauts_de_plus_dun_demi_pas": 479,
+      "leur_mediane_voxels": 20.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.3591
+     },
+     "le_z": 14.302,
+     "lalignement": 0.69,
+     "les_points_juges": 3481,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 3,
+     "la_part_appuyee": 0.5486,
+     "le_pas_median_des_appuyes_voxels": 21.5,
+     "les_boucles": {
+      "les_carres": 3364,
+      "ceux_qui_ne_ferment_pas": 216,
+      "la_part": 0.06421,
+      "les_sauts_de_plus_dun_demi_pas": 477,
+      "leur_mediane_voxels": 16.0,
+      "leur_part_sous_trois_quarts_de_pas": 0.413
+     },
+     "le_z": 20.601,
+     "lalignement": 0.61,
+     "les_points_juges": 3249,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 4,
+     "la_part_appuyee": 0.5015,
+     "le_pas_median_des_appuyes_voxels": 16.0,
+     "les_boucles": {
+      "les_carres": 3136,
+      "ceux_qui_ne_ferment_pas": 295,
+      "la_part": 0.09407,
+      "les_sauts_de_plus_dun_demi_pas": 268,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7724
+     },
+     "le_z": 15.513,
+     "lalignement": 0.5,
+     "les_points_juges": 3025,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    }
+   ],
+   "le_dernier_saut_qui_suit": 4
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_part_appuyee": 0.9186,
+     "le_pas_median_des_appuyes_voxels": 17.0,
+     "les_boucles": {
+      "les_carres": 3844,
+      "ceux_qui_ne_ferment_pas": 131,
+      "la_part": 0.03408,
+      "les_sauts_de_plus_dun_demi_pas": 238,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7395
+     },
+     "le_z": 3.398,
+     "lalignement": 1.28,
+     "les_points_juges": 3721,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 2,
+     "la_part_appuyee": 0.8137,
+     "le_pas_median_des_appuyes_voxels": 15.5,
+     "les_boucles": {
+      "les_carres": 3600,
+      "ceux_qui_ne_ferment_pas": 188,
+      "la_part": 0.05222,
+      "les_sauts_de_plus_dun_demi_pas": 228,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7237
+     },
+     "le_z": -1.097,
+     "lalignement": 0.58,
+     "les_points_juges": 3481,
+     "sans_matiere": 0,
+     "la_piece": "ne la suit pas"
+    },
+    {
+     "le_saut": 3,
+     "la_part_appuyee": 0.724,
+     "le_pas_median_des_appuyes_voxels": 13.0,
+     "les_boucles": {
+      "les_carres": 3364,
+      "ceux_qui_ne_ferment_pas": 192,
+      "la_part": 0.05707,
+      "les_sauts_de_plus_dun_demi_pas": 249,
+      "leur_mediane_voxels": 13.0,
+      "leur_part_sous_trois_quarts_de_pas": 0.7269
+     },
+     "le_z": 2.884,
+     "lalignement": 0.43,
+     "les_points_juges": 3249,
+     "sans_matiere": 0,
+     "la_piece": "ne la suit pas"
+    },
+    {
+     "le_saut": 4,
+     "la_part_appuyee": 0.6381,
+     "le_pas_median_des_appuyes_voxels": 14.5,
+     "les_boucles": {
+      "les_carres": 3136,
+      "ceux_qui_ne_ferment_pas": 276,
+      "la_part": 0.08801,
+      "les_sauts_de_plus_dun_demi_pas": 276,
+      "leur_mediane_voxels": 12.0,
+      "leur_part_sous_trois_quarts_de_pas": 0.8188
+     },
+     "le_z": 9.354,
+     "lalignement": 0.3,
+     "les_points_juges": 3025,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    }
+   ],
+   "le_dernier_saut_qui_suit": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_part_appuyee": 0.7378,
+     "le_pas_median_des_appuyes_voxels": 19.0,
+     "les_boucles": {
+      "les_carres": 3844,
+      "ceux_qui_ne_ferment_pas": 517,
+      "la_part": 0.1345,
+      "les_sauts_de_plus_dun_demi_pas": 523,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7744
+     },
+     "le_z": 6.166,
+     "lalignement": 0.31,
+     "les_points_juges": 3721,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 2,
+     "la_part_appuyee": 0.6372,
+     "le_pas_median_des_appuyes_voxels": 18.5,
+     "les_boucles": {
+      "les_carres": 3600,
+      "ceux_qui_ne_ferment_pas": 461,
+      "la_part": 0.12806,
+      "les_sauts_de_plus_dun_demi_pas": 411,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.781
+     },
+     "le_z": 6.352,
+     "lalignement": 0.26,
+     "les_points_juges": 3481,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 3,
+     "la_part_appuyee": 0.547,
+     "le_pas_median_des_appuyes_voxels": 18.5,
+     "les_boucles": {
+      "les_carres": 3364,
+      "ceux_qui_ne_ferment_pas": 475,
+      "la_part": 0.1412,
+      "les_sauts_de_plus_dun_demi_pas": 453,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.8057
+     },
+     "le_z": 5.238,
+     "lalignement": 0.25,
+     "les_points_juges": 3249,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 4,
+     "la_part_appuyee": 0.4966,
+     "le_pas_median_des_appuyes_voxels": 21.0,
+     "les_boucles": {
+      "les_carres": 3136,
+      "ceux_qui_ne_ferment_pas": 481,
+      "la_part": 0.15338,
+      "les_sauts_de_plus_dun_demi_pas": 438,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.8196
+     },
+     "le_z": 7.112,
+     "lalignement": 0.26,
+     "les_points_juges": 3025,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    }
+   ],
+   "le_dernier_saut_qui_suit": 4
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_part_appuyee": 0.734,
+     "le_pas_median_des_appuyes_voxels": 20.0,
+     "les_boucles": {
+      "les_carres": 3844,
+      "ceux_qui_ne_ferment_pas": 538,
+      "la_part": 0.13996,
+      "les_sauts_de_plus_dun_demi_pas": 521,
+      "leur_mediane_voxels": 12.0,
+      "leur_part_sous_trois_quarts_de_pas": 0.8273
+     },
+     "le_z": 12.657,
+     "lalignement": 0.34,
+     "les_points_juges": 3721,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 2,
+     "la_part_appuyee": 0.6331,
+     "le_pas_median_des_appuyes_voxels": 19.5,
+     "les_boucles": {
+      "les_carres": 3600,
+      "ceux_qui_ne_ferment_pas": 473,
+      "la_part": 0.13139,
+      "les_sauts_de_plus_dun_demi_pas": 454,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7555
+     },
+     "le_z": 9.991,
+     "lalignement": 0.27,
+     "les_points_juges": 3481,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 3,
+     "la_part_appuyee": 0.555,
+     "le_pas_median_des_appuyes_voxels": 18.5,
+     "les_boucles": {
+      "les_carres": 3364,
+      "ceux_qui_ne_ferment_pas": 485,
+      "la_part": 0.14417,
+      "les_sauts_de_plus_dun_demi_pas": 391,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.8005
+     },
+     "le_z": 7.948,
+     "lalignement": 0.18,
+     "les_points_juges": 3249,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 4,
+     "la_part_appuyee": 0.5127,
+     "le_pas_median_des_appuyes_voxels": 20.5,
+     "les_boucles": {
+      "les_carres": 3136,
+      "ceux_qui_ne_ferment_pas": 473,
+      "la_part": 0.15083,
+      "les_sauts_de_plus_dun_demi_pas": 446,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7937
+     },
+     "le_z": 8.881,
+     "lalignement": 0.21,
+     "les_points_juges": 3025,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    }
+   ],
+   "le_dernier_saut_qui_suit": 4
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_part_appuyee": 0.6798,
+     "le_pas_median_des_appuyes_voxels": 20.0,
+     "les_boucles": {
+      "les_carres": 3844,
+      "ceux_qui_ne_ferment_pas": 463,
+      "la_part": 0.12045,
+      "les_sauts_de_plus_dun_demi_pas": 561,
+      "leur_mediane_voxels": 13.0,
+      "leur_part_sous_trois_quarts_de_pas": 0.6934
+     },
+     "le_z": 5.069,
+     "lalignement": 0.14,
+     "les_points_juges": 3721,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 2,
+     "la_part_appuyee": 0.6178,
+     "le_pas_median_des_appuyes_voxels": 19.5,
+     "les_boucles": {
+      "les_carres": 3600,
+      "ceux_qui_ne_ferment_pas": 520,
+      "la_part": 0.14444,
+      "les_sauts_de_plus_dun_demi_pas": 482,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7697
+     },
+     "le_z": 3.219,
+     "lalignement": 0.12,
+     "les_points_juges": 3481,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 3,
+     "la_part_appuyee": 0.5361,
+     "le_pas_median_des_appuyes_voxels": 20.0,
+     "les_boucles": {
+      "les_carres": 3364,
+      "ceux_qui_ne_ferment_pas": 485,
+      "la_part": 0.14417,
+      "les_sauts_de_plus_dun_demi_pas": 433,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7898
+     },
+     "le_z": 1.543,
+     "lalignement": 0.11,
+     "les_points_juges": 3249,
+     "sans_matiere": 0,
+     "la_piece": "ne la suit pas"
+    },
+    {
+     "le_saut": 4,
+     "la_part_appuyee": 0.4935,
+     "le_pas_median_des_appuyes_voxels": 20.5,
+     "les_boucles": {
+      "les_carres": 3136,
+      "ceux_qui_ne_ferment_pas": 490,
+      "la_part": 0.15625,
+      "les_sauts_de_plus_dun_demi_pas": 425,
+      "leur_mediane_voxels": 12.0,
+      "leur_part_sous_trois_quarts_de_pas": 0.7718
+     },
+     "le_z": 4.112,
+     "lalignement": 0.13,
+     "les_points_juges": 3025,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    }
+   ],
+   "le_dernier_saut_qui_suit": 2
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_part_appuyee": 0.7157,
+     "le_pas_median_des_appuyes_voxels": 21.0,
+     "les_boucles": {
+      "les_carres": 3844,
+      "ceux_qui_ne_ferment_pas": 489,
+      "la_part": 0.12721,
+      "les_sauts_de_plus_dun_demi_pas": 633,
+      "leur_mediane_voxels": 13.0,
+      "leur_part_sous_trois_quarts_de_pas": 0.6698
+     },
+     "le_z": 4.511,
+     "lalignement": 0.23,
+     "les_points_juges": 3721,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    },
+    {
+     "le_saut": 2,
+     "la_part_appuyee": 0.6227,
+     "le_pas_median_des_appuyes_voxels": 19.0,
+     "les_boucles": {
+      "les_carres": 3600,
+      "ceux_qui_ne_ferment_pas": 492,
+      "la_part": 0.13667,
+      "les_sauts_de_plus_dun_demi_pas": 460,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.8
+     },
+     "le_z": 1.248,
+     "lalignement": 0.09,
+     "les_points_juges": 3481,
+     "sans_matiere": 0,
+     "la_piece": "ne la suit pas"
+    },
+    {
+     "le_saut": 3,
+     "la_part_appuyee": 0.5536,
+     "le_pas_median_des_appuyes_voxels": 19.5,
+     "les_boucles": {
+      "les_carres": 3364,
+      "ceux_qui_ne_ferment_pas": 466,
+      "la_part": 0.13853,
+      "les_sauts_de_plus_dun_demi_pas": 413,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.8184
+     },
+     "le_z": 2.602,
+     "lalignement": 0.14,
+     "les_points_juges": 3249,
+     "sans_matiere": 0,
+     "la_piece": "ne la suit pas"
+    },
+    {
+     "le_saut": 4,
+     "la_part_appuyee": 0.4959,
+     "le_pas_median_des_appuyes_voxels": 20.5,
+     "les_boucles": {
+      "les_carres": 3136,
+      "ceux_qui_ne_ferment_pas": 454,
+      "la_part": 0.14477,
+      "les_sauts_de_plus_dun_demi_pas": 419,
+      "leur_mediane_voxels": 12.5,
+      "leur_part_sous_trois_quarts_de_pas": 0.7947
+     },
+     "le_z": 5.924,
+     "lalignement": 0.17,
+     "les_points_juges": 3025,
+     "sans_matiere": 0,
+     "la_piece": "suit sa feuille"
+    }
+   ],
+   "le_dernier_saut_qui_suit": 1
+  }
+ ],
+ "les_morceaux": {
+  "combien": 628
+ },
+ "la_lecture_de_m7": {
+  "lus": 2212,
+  "absents": 0,
+  "octets": 968843031
+ },
+ "le_verdict": {
+  "decidable": true,
+  "H": 4,
+  "les_derniers": [
+   1,
+   3,
+   4,
+   4,
+   4,
+   1,
+   4,
+   4,
+   2,
+   1
+  ],
+  "lissue": "la chaîne suit sa feuille jusqu'au saut 4 sur au moins la moitié des 10 côtés"
+ },
+ "les_secondes": 173.5
+}

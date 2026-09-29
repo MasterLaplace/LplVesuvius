@@ -283,21 +283,29 @@ def tirer_une_nappe(graine_xyz, normale_xyz, lecteur, lire_valeurs=None, cote: i
     ok = np.isfinite(haut).reshape(forme)
     out = {"la_nappe": nappe, "valide": ok, "le_decalage": haut.reshape(forme), "appui": appui.reshape(forme),
            "les_tours": tours, "les_sauts": {}}
-    nn, nok = les_normales(nappe, ok)
-    q, nq = nappe.reshape(-1, 3), nn.reshape(-1, 3)
-    tt = np.arange(0.0, 3.0 * LE_PAS_0358 + 1.0)
     for nom, cote in (("plus", 1.0), ("moins", -1.0)):
-        ts = cote * tt
-        idx = np.floor((q[:, None, :] + ts[None, :, None] * nq[:, None, :])[..., ::-1]).astype(np.int64)
-        vu = lire_valeurs(idx) > 0
-        suivante = la_feuille_apres_la_sienne(ts, vu)
-        depart = np.where(np.isfinite(suivante), suivante, cote * LE_PAS_0358)
-        pas_, appui_s, tours_s = le_vote(les_plages(vu, ts), depart, forme, LE_PAS_0358 / 2.0)
-        spire = (q + pas_[:, None] * nq).reshape(forme + (3,))
-        ok_s = (nok & np.isfinite(pas_).reshape(forme))
-        out["les_sauts"][nom] = {"la_spire": spire, "valide": ok_s, "le_pas": pas_.reshape(forme),
-                                 "appui": appui_s.reshape(forme), "les_tours": tours_s}
+        out["les_sauts"][nom] = le_saut_suivant(nappe, ok, cote, lire_valeurs)
     return out
+
+
+def le_saut_suivant(surface: np.ndarray, valide: np.ndarray, cote: float, lire_valeurs) -> dict:
+    """De chaque point d'une surface, le long de sa normale recalculée, du côté `cote`, la première feuille de `m7` après la
+    sienne, sur trois pas, puis le vote ; le pas par défaut si le rayon ne voit rien."""
+    from la_spire_voisine_est_elle_a_un_pas import les_normales
+
+    forme = valide.shape
+    nn, nok = les_normales(surface, valide)
+    q, nq = surface.reshape(-1, 3), nn.reshape(-1, 3)
+    ts = cote * np.arange(0.0, 3.0 * LE_PAS_0358 + 1.0)
+    idx = np.floor((q[:, None, :] + ts[None, :, None] * nq[:, None, :])[..., ::-1]).astype(np.int64)
+    vu = lire_valeurs(idx) > 0
+    suivante = la_feuille_apres_la_sienne(ts, vu)
+    depart = np.where(np.isfinite(suivante), suivante, cote * LE_PAS_0358)
+    pas_, appui_s, tours_s = le_vote(les_plages(vu, ts), depart, forme, LE_PAS_0358 / 2.0)
+    spire = (q + pas_[:, None] * nq).reshape(forme + (3,))
+    ok_s = (nok & np.isfinite(pas_).reshape(forme))
+    return {"la_spire": spire, "valide": ok_s, "le_pas": pas_.reshape(forme), "appui": appui_s.reshape(forme),
+            "les_tours": tours_s}
 
 
 def tirer() -> dict:
