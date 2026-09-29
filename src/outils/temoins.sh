@@ -1781,6 +1781,8 @@ run "rayon par rayon le scan montre-t-il la feuille que m7 manque" uv run python
 run "figure rayon par rayon le scan montre-t-il la feuille que m7 manque" uv run python "$ROOT/src/figures/figure_rayon_par_rayon_le_scan_montre_t_il_la_feuille_que_m7_manque.py" --verifier
 run "la nappe de m7 retrouve-t-elle le tracé humain de PHercParis4" uv run python "$ROOT/src/nappe/la_nappe_de_m7_retrouve_t_elle_le_trace_humain_de_paris4.py" --verifier
 run "figure la nappe de m7 retrouve-t-elle le tracé humain de PHercParis4" uv run python "$ROOT/src/figures/figure_la_nappe_de_m7_retrouve_t_elle_le_trace_humain_de_paris4.py" --verifier
+run "la nappe qui croît tient-elle le tracé humain de PHercParis4" uv run python "$ROOT/src/nappe/la_nappe_qui_croit_tient_elle_le_trace_humain_de_paris4.py" --verifier
+run "figure la nappe qui croît tient-elle le tracé humain de PHercParis4" uv run python "$ROOT/src/figures/figure_la_nappe_qui_croit_tient_elle_le_trace_humain_de_paris4.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

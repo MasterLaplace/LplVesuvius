@@ -3336,6 +3336,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 322 : LA NAPPE QUI CROÎT TIENT-ELLE LE TRACÉ HUMAIN DE PHERCPARIS4
+    s322 = _source(racine, "la_nappe_qui_croit_tient_elle_le_trace_humain_de_paris4.json")
+    if s322.exists():
+        d = json.loads(s322.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 322", d["le_verdict"]["lissue"].upper())]
+        for g in d["les_graines"]:
+            n_ = g["la_nappe"]
+            ecrits.append((f"la graine {g['le_rang']} de 322",
+                           f"| {g['le_rang']} | {f_(g['la_part_posee'])} | {n_['les_sommets_en_face']} | "
+                           f"{f_(n_.get('lecart_median_voxels'))} | {f_(n_.get('la_part_a_un_quart_de_pas'))} | {n_['la_lecture']} | "
+                           + " | ".join(f"{f_(r.get('la_part_sur_la_feuille_du_trace'))} ({r['les_sommets_en_face']})"
+                                        for r in n_["par_anneau"]) + f" | {g['au_bord']} |"))
+        out.extend((nom, [x_], s322.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 321 : LA NAPPE DE M7 RETROUVE-T-ELLE LE TRACÉ HUMAIN DE PHERCPARIS4
     s321 = _source(racine, "la_nappe_de_m7_retrouve_t_elle_le_trace_humain_de_paris4.json")
     if s321.exists():

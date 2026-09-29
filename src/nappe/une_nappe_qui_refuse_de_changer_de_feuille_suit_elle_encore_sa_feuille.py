@@ -112,15 +112,18 @@ def croitre(centres: list[np.ndarray], forme: tuple, depart: tuple, tolerance: f
     return dec, pose
 
 
-def la_nappe_croissante(graine_xyz, normale_xyz, lire_valeurs) -> dict:
-    """Le plan de `300`, les feuilles de `m7` de chaque point, puis la croissance depuis le point central."""
+def la_nappe_croissante(graine_xyz, normale_xyz, lire_valeurs, tolerance: float = LA_TOLERANCE,
+                        demi_portee: float | None = None) -> dict:
+    """Le plan de `300`, les feuilles de `m7` de chaque point, puis la croissance depuis le point central. `tolerance` et
+    `demi_portee`, données par `322` pour le pas de PHercParis4, valent par défaut celles de PHerc0358."""
     grille, n = m300.le_plan(graine_xyz, normale_xyz)
     forme = grille.shape[:2]
     p = grille.reshape(-1, 3)
     t = np.arange(-np.floor(m300.LA_DEMI_PORTEE), np.floor(m300.LA_DEMI_PORTEE) + 1.0)
     idx = np.floor((p[:, None, :] + t[None, :, None] * n[None, None, :])[..., ::-1]).astype(np.int64)
     centres = m300.les_plages(lire_valeurs(idx) > 0, t)
-    dec, pose = croitre(centres, forme, (forme[0] // 2, forme[1] // 2))
+    kw = {"tolerance": tolerance} if demi_portee is None else {"tolerance": tolerance, "demi_portee": demi_portee}
+    dec, pose = croitre(centres, forme, (forme[0] // 2, forme[1] // 2), **kw)
     nappe = (p + np.nan_to_num(dec.ravel())[:, None] * n[None, :]).reshape(forme + (3,))
     return {"la_nappe": nappe, "valide": pose, "le_decalage": dec}
 

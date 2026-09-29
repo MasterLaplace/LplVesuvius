@@ -4472,6 +4472,13 @@ de la nappe, où aucune feuille ne passe, 71 à 93 % des profils ont le même ma
 spire du côté moins revient sur le tracé : la nappe change de feuille, pas la suite des surfaces de `m7`. `R4-P119` et `R4-P120`
 s'ouvrent.
 
+**`322` · 2026-09-29 · la nappe qui croît tient-elle le tracé humain de PHercParis4** — `R4-P119`
+
+⭐⭐⭐⭐⭐ **Sur cinq graines sur huit, jusqu'au bord de son plan, là où la nappe du vote la perdait** — `R4-F504`, `R4-F505`. Au bord,
+66,67 à 100 % des sommets en face sont à un quart de pas de la nappe qui croît, contre 9,38 à 66,67 % pour la nappe du vote. La feuille
+de `m7` continue le tracé humain sur 6 mm ; c'est le vote qui en changeait. `R4-P121` s'ouvre : la chaîne, jugée là où le segment
+repasse un tour plus loin.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
