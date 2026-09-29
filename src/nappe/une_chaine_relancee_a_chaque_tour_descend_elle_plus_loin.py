@@ -101,6 +101,22 @@ def la_chaine_relancee(nappe: dict, cote: float, relancer, sauter, sauts: int = 
     return out
 
 
+def la_tenue(k: dict, lire_valeurs, pas: float) -> dict:
+    """Le critère sans référent de `328` pour un saut `k` de la chaîne relancée : le saut pose au pas (la règle de `324`) et la nappe
+    relancée n'est pas posée dans un bloc de `m7` (la règle de `326`) ; un saut sans nappe relancée ne tient pas. Sorti de la mesure de
+    PHerc0358 pour `344`, qui l'applique à PHercParis4."""
+    e = m324.le_saut(k["le_saut"]["le_pas"], k["le_saut"]["valide"], pas)
+    rl = k["la_relance"]
+    if rl is None or not rl["valide"].any():
+        e.update({"la_part_relancee": None, "la_plage_en_pas": None, "tient": False})
+        return e
+    plage = m326.lire_les_plages(rl, lire_valeurs, pas)
+    e.update({"la_part_relancee": round(float(rl["valide"].mean()), 4), "la_plage_en_pas": plage["la_longueur_mediane_en_pas"],
+              "tient": bool(e["pose_au_pas"] and plage["la_lecture"] != "dans un bloc"),
+              **({"les_semis": rl["les_semis"]} if "les_semis" in rl else {})})
+    return e
+
+
 def le_verdict(d: dict) -> dict:
     if d.get("les_pannes"):
         return {"decidable": False, "lissue": f"indécidable : une lecture a échoué ({d['les_pannes'][0]})"}
@@ -215,19 +231,7 @@ def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False, lire_la
                     else relancer0(lv0))
             chaine = la_chaine_relancee(r, cote, rel0, lambda s_, o_, cote=cote: m306.le_saut_croissant(s_, o_, cote, lv0),
                                         avec_la_spire=avec_la_spire)
-            sauts = []
-            for k in chaine:
-                e_ = m324.le_saut(k["le_saut"]["le_pas"], k["le_saut"]["valide"], m300.LE_PAS_0358)
-                rl = k["la_relance"]
-                if rl is None or not rl["valide"].any():
-                    e_.update({"la_part_relancee": None, "la_plage_en_pas": None, "tient": False})
-                else:
-                    plage = m326.lire_les_plages(rl, lv0, m300.LE_PAS_0358)
-                    e_.update({"la_part_relancee": round(float(rl["valide"].mean()), 4),
-                               "la_plage_en_pas": plage["la_longueur_mediane_en_pas"],
-                               "tient": bool(e_["pose_au_pas"] and plage["la_lecture"] != "dans un bloc"),
-                               **({"les_semis": rl["les_semis"]} if "les_semis" in rl else {})})
-                sauts.append(e_)
+            sauts = [la_tenue(k, lv0, m300.LE_PAS_0358) for k in chaine]
             e = {"le_rang": rang, "le_cote": nom, "les_sauts": sauts, "tient": m328.combien(sauts)}
             cotes0.append(e)
             print("PHerc0358", json.dumps({"le_rang": rang, "le_cote": nom, "tient": e["tient"]}, ensure_ascii=False),
@@ -290,6 +294,14 @@ def verifier() -> int:
     vide = lambda idx: idx[..., 0] == 80  # noqa: E731
     ch = la_chaine_relancee(nappe, 1.0, relancer, lambda s_, o_: m306.le_saut_croissant(s_, o_, 1.0, vide), sauts=3)
     v("★★★ un saut qui ne pose rien arrête la chaîne, sans relance", len(ch) == 1 and ch[0]["la_relance"] is None)
+    pose = {"le_pas": np.full((9, 9), 20.0), "valide": np.ones((9, 9), dtype=bool)}
+    plan = {"la_nappe": grille, "valide": np.ones((9, 9), dtype=bool)}
+    bloc = lambda idx: (idx[..., 0] == 100) | ((idx[..., 0] >= 110) & (idx[..., 0] <= 130))  # noqa: E731
+    v("★★★★ la tenue : au pas et sur une feuille, le saut tient ; au pas dans un bloc de 21 voxels, il ne tient pas",
+      la_tenue({"le_saut": pose, "la_relance": plan}, feuilles, 20.0)["tient"]
+      and not la_tenue({"le_saut": pose, "la_relance": plan}, bloc, 20.0)["tient"])
+    v("★★★ la tenue : sans nappe relancée, le saut ne tient pas",
+      not la_tenue({"le_saut": pose, "la_relance": None}, feuilles, 20.0)["tient"])
     g_ = lambda h, t: {"la_descente": h, "le_tour_touche": t}  # noqa: E731
     c_ = lambda h: {"tient": h}  # noqa: E731
     base = {"les_pannes": []}

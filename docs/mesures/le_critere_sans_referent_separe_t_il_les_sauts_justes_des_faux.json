@@ -1,0 +1,5420 @@
+{
+ "la_question": "Sur les graines 4 à 8 de PHercParis4, où les tours publiés ne se recouvrent presque pas, le critère sans référent de 328 sépare-t-il les sauts que la lecture stricte dit justes de ceux qu'elle dit faux ?",
+ "les_constantes": {
+  "les_graines_propres": [
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "les_tours_juges": [
+   0,
+   -1,
+   -2,
+   -3,
+   -4,
+   -5,
+   -6
+  ],
+  "la_tenue_des_justes": 0.75,
+  "la_tenue_des_faux": 0.25,
+  "lecart_minimal": 0.25,
+  "le_minimum": 5
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "sans relance": {
+   "lus": 4834,
+   "absents": 0,
+   "octets": 2183616071
+  },
+  "relancée depuis un point": {
+   "PHercParis4": {
+    "lus": 11102,
+    "absents": 0,
+    "octets": 4912152531
+   }
+  },
+  "relancée depuis la spire": {
+   "PHercParis4": {
+    "lus": 11256,
+    "absents": 0,
+    "octets": 4946770014
+   }
+  },
+  "bornée": {
+   "PHercParis4": {
+    "lus": 9645,
+    "absents": 0,
+    "octets": 4318234316
+   }
+  }
+ },
+ "redonne_328": true,
+ "les_chaines": {
+  "sans relance": {
+   "redonne": true,
+   "les_graines": [
+    {
+     "le_rang": 1,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2949,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.258,
+         "le_pas_median_en_pas": 1.054,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2237,
+         "le_pas_median_en_pas": 0.943,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.191,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1579,
+         "le_pas_median_en_pas": 1.054,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1188,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0914,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0305,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2949,
+         "le_pas_median_en_pas": 1.346,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.258,
+         "le_pas_median_en_pas": 1.249,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2237,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1917,
+         "le_pas_median_en_pas": 1.11,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1614,
+         "le_pas_median_en_pas": 1.942,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0005,
+         "le_pas_median_en_pas": 1.887,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0,
+         "le_pas_median_en_pas": null,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 2,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.208,
+         "le_pas_median_en_pas": 1.498,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1548,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1257,
+         "le_pas_median_en_pas": 1.831,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0836,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0573,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0388,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.022,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0116,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2097,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.1614,
+         "le_pas_median_en_pas": 1.776,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1314,
+         "le_pas_median_en_pas": 1.332,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1013,
+         "le_pas_median_en_pas": 1.526,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0452,
+         "le_pas_median_en_pas": 2.275,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0002,
+         "le_pas_median_en_pas": 1.914,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0,
+         "le_pas_median_en_pas": null,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 3,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2947,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2518,
+         "le_pas_median_en_pas": 1.609,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2144,
+         "le_pas_median_en_pas": 1.554,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1782,
+         "le_pas_median_en_pas": 1.554,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1307,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.063,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0369,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0192,
+         "le_pas_median_en_pas": 1.11,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.2793,
+         "le_pas_median_en_pas": 1.72,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2338,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.1967,
+         "le_pas_median_en_pas": 1.332,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1108,
+         "le_pas_median_en_pas": 2.691,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.0497,
+         "le_pas_median_en_pas": 1.346,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0327,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0187,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0064,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 4,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3844,
+         "le_pas_median_en_pas": 1.249,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2613,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0942,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0381,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0062,
+         "le_pas_median_en_pas": 0.583,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0021,
+         "le_pas_median_en_pas": 0.472,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0002,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0,
+         "le_pas_median_en_pas": null,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4615,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.4088,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3581,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3129,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2672,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2185,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1725,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0388,
+         "le_pas_median_en_pas": 1.332,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 5,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2535,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1323,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0078,
+         "le_pas_median_en_pas": 0.583,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0007,
+         "le_pas_median_en_pas": 0.555,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0,
+         "le_pas_median_en_pas": null,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3508,
+         "le_pas_median_en_pas": 0.916,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3096,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2682,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2249,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1837,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1404,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1039,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0078,
+         "le_pas_median_en_pas": 1.609,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 6,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3851,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2724,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1475,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0192,
+         "le_pas_median_en_pas": 1.332,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0054,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0009,
+         "le_pas_median_en_pas": 0.555,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0,
+         "le_pas_median_en_pas": null,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.387,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3486,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3096,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2715,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2393,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2019,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1576,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1011,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 7,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2978,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1834,
+         "le_pas_median_en_pas": 0.499,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1333,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0762,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0447,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0308,
+         "le_pas_median_en_pas": 0.527,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0196,
+         "le_pas_median_en_pas": 0.583,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0111,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2604,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.156,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1176,
+         "le_pas_median_en_pas": 1.11,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.0682,
+         "le_pas_median_en_pas": 0.943,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0019,
+         "le_pas_median_en_pas": 3.052,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0,
+         "le_pas_median_en_pas": null,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 8,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3567,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.137,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0961,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0682,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.045,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0215,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0128,
+         "le_pas_median_en_pas": 0.583,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0062,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2968,
+         "le_pas_median_en_pas": 1.582,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1191,
+         "le_pas_median_en_pas": 1.11,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.0847,
+         "le_pas_median_en_pas": 2.164,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.0357,
+         "le_pas_median_en_pas": 1.942,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0211,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.0066,
+         "le_pas_median_en_pas": 0.916,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.0026,
+         "le_pas_median_en_pas": 1.554,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0002,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  "relancée depuis un point": {
+   "redonne": true,
+   "les_graines": [
+    {
+     "le_rang": 1,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2949,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3645,
+         "le_pas_median_en_pas": 0.971,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3209,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6535,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6731,
+         "le_pas_median_en_pas": 1.36,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.8452,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3335,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.8469,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2949,
+         "le_pas_median_en_pas": 1.346,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2828,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3004,
+         "le_pas_median_en_pas": 1.138,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3522,
+         "le_pas_median_en_pas": 0.971,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.4088,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3148,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2549,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2355,
+         "le_pas_median_en_pas": 1.054,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 2,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.208,
+         "le_pas_median_en_pas": 1.498,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3378,
+         "le_pas_median_en_pas": 1.443,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1905,
+         "le_pas_median_en_pas": 1.526,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4156,
+         "le_pas_median_en_pas": 1.054,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4069,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5439,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.537,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2466,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2097,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.2764,
+         "le_pas_median_en_pas": 1.748,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2279,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2544,
+         "le_pas_median_en_pas": 1.332,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1917,
+         "le_pas_median_en_pas": 2.331,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1695,
+         "le_pas_median_en_pas": 1.429,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2544,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2336,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 3,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2947,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1112,
+         "le_pas_median_en_pas": 1.554,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3643,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2585,
+         "le_pas_median_en_pas": 1.609,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2975,
+         "le_pas_median_en_pas": 1.027,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3366,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5008,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4346,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.2793,
+         "le_pas_median_en_pas": 1.72,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2606,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.2386,
+         "le_pas_median_en_pas": 1.36,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1115,
+         "le_pas_median_en_pas": 2.497,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.12,
+         "le_pas_median_en_pas": 1.498,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.1257,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2464,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0625,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 4,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3844,
+         "le_pas_median_en_pas": 1.249,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3882,
+         "le_pas_median_en_pas": 1.36,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7307,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6445,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7172,
+         "le_pas_median_en_pas": 0.555,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7318,
+         "le_pas_median_en_pas": 0.916,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6703,
+         "le_pas_median_en_pas": 0.499,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.546,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4615,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5856,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.6348,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5389,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.6002,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.511,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5541,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.426,
+         "le_pas_median_en_pas": 1.471,
+         "pose_au_pas": true,
+         "la_plage_en_pas": null,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 5,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2535,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1792,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4554,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6083,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7778,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6821,
+         "le_pas_median_en_pas": 0.971,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7347,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.742,
+         "le_pas_median_en_pas": 1.082,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3508,
+         "le_pas_median_en_pas": 0.916,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.4634,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5628,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.4708,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.4852,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "faux : un autre tour",
+         "la_part_du_plan": 0.5086,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3884,
+         "le_pas_median_en_pas": 2.22,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2114,
+         "le_pas_median_en_pas": 1.803,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 6,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3851,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5411,
+         "le_pas_median_en_pas": 1.249,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7096,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6213,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7101,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7612,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7531,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0743,
+         "le_pas_median_en_pas": 0.971,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.387,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5349,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5389,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5127,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.4869,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.507,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2854,
+         "le_pas_median_en_pas": 1.471,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2769,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 7,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2978,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3856,
+         "le_pas_median_en_pas": 1.332,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4175,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5716,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.533,
+         "le_pas_median_en_pas": 1.332,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6523,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4705,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7046,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2604,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2383,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3394,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.3011,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3524,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.3276,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.457,
+         "le_pas_median_en_pas": 1.027,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2769,
+         "le_pas_median_en_pas": 1.054,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 8,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3567,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2885,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3053,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3067,
+         "le_pas_median_en_pas": 1.304,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2521,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3517,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4201,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2847,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2968,
+         "le_pas_median_en_pas": 1.582,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.337,
+         "le_pas_median_en_pas": 0.943,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.4632,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2807,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.155,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1354,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1006,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0187,
+         "le_pas_median_en_pas": 2.858,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  "relancée depuis la spire": {
+   "redonne": true,
+   "les_graines": [
+    {
+     "le_rang": 1,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2949,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.368,
+         "le_pas_median_en_pas": 0.971,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.368,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6213,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5839,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6275,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4767,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5169,
+         "le_pas_median_en_pas": 1.054,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2949,
+         "le_pas_median_en_pas": 1.346,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2819,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3117,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "faux : le tour manqué",
+         "la_part_du_plan": 0.3472,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3744,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "faux : un autre tour",
+         "la_part_du_plan": 0.4717,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1678,
+         "le_pas_median_en_pas": 1.443,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2097,
+         "le_pas_median_en_pas": 1.36,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 2,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.208,
+         "le_pas_median_en_pas": 1.498,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3593,
+         "le_pas_median_en_pas": 1.443,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1991,
+         "le_pas_median_en_pas": 1.554,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.337,
+         "le_pas_median_en_pas": 1.027,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4433,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5309,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5138,
+         "le_pas_median_en_pas": 0.971,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5231,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2097,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.2847,
+         "le_pas_median_en_pas": 1.748,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2644,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.2372,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1247,
+         "le_pas_median_en_pas": 2.22,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1252,
+         "le_pas_median_en_pas": 1.526,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1602,
+         "le_pas_median_en_pas": 1.138,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1413,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 3,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2947,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1122,
+         "le_pas_median_en_pas": 1.554,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3756,
+         "le_pas_median_en_pas": 1.415,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2594,
+         "le_pas_median_en_pas": 1.609,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2989,
+         "le_pas_median_en_pas": 1.027,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4222,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5183,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4544,
+         "le_pas_median_en_pas": 1.054,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.2793,
+         "le_pas_median_en_pas": 1.72,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.276,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.2388,
+         "le_pas_median_en_pas": 1.36,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1169,
+         "le_pas_median_en_pas": 2.469,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1181,
+         "le_pas_median_en_pas": 1.554,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1385,
+         "le_pas_median_en_pas": 1.304,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1503,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1325,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 4,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3844,
+         "le_pas_median_en_pas": 1.249,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4873,
+         "le_pas_median_en_pas": 1.665,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6575,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0951,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6589,
+         "le_pas_median_en_pas": 0.943,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.568,
+         "le_pas_median_en_pas": 0.943,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5654,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.547,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4615,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5806,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.6286,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.6563,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.7084,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.649,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.6909,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2589,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 5,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2535,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1463,
+         "le_pas_median_en_pas": 1.304,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5676,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6303,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6776,
+         "le_pas_median_en_pas": 1.082,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4767,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.644,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2199,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3508,
+         "le_pas_median_en_pas": 0.916,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.4653,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5631,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.4826,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.507,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5262,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5657,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4073,
+         "le_pas_median_en_pas": 1.249,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 6,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3851,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5351,
+         "le_pas_median_en_pas": 1.249,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7198,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.7647,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6935,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.222,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0322,
+         "le_pas_median_en_pas": 1.027,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6819,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.222,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.013,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.387,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5351,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5524,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5257,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.525,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5032,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4073,
+         "le_pas_median_en_pas": 1.36,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2516,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 7,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2978,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4021,
+         "le_pas_median_en_pas": 1.304,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4431,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1314,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3176,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.5898,
+         "le_pas_median_en_pas": 0.943,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0504,
+         "le_pas_median_en_pas": 0.555,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.6914,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2604,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2312,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3056,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3572,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3531,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1929,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1278,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.0897,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 8,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3567,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2847,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3032,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3172,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2795,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2535,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3751,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3195,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2968,
+         "le_pas_median_en_pas": 1.582,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3103,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3271,
+         "le_pas_median_en_pas": 0.86,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2026,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2031,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.155,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.1309,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0178,
+         "le_pas_median_en_pas": 2.83,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    }
+   ]
+  },
+  "bornée": {
+   "redonne": true,
+   "les_graines": [
+    {
+     "le_rang": 1,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2949,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3217,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1302,
+         "le_pas_median_en_pas": 1.11,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1382,
+         "le_pas_median_en_pas": 1.11,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1467,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1704,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1872,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.209,
+         "le_pas_median_en_pas": 1.11,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2949,
+         "le_pas_median_en_pas": 1.346,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2014,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.1307,
+         "le_pas_median_en_pas": 1.165,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1136,
+         "le_pas_median_en_pas": 0.943,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.1008,
+         "le_pas_median_en_pas": 1.831,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1127,
+         "le_pas_median_en_pas": 1.054,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1018,
+         "le_pas_median_en_pas": 1.609,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1183,
+         "le_pas_median_en_pas": 1.471,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 2,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.208,
+         "le_pas_median_en_pas": 1.498,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2208,
+         "le_pas_median_en_pas": 1.443,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2194,
+         "le_pas_median_en_pas": 1.665,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2516,
+         "le_pas_median_en_pas": 1.138,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.28,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2054,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2364,
+         "le_pas_median_en_pas": 0.943,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2419,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2097,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.1837,
+         "le_pas_median_en_pas": 1.665,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1946,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.1886,
+         "le_pas_median_en_pas": 1.443,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1098,
+         "le_pas_median_en_pas": 2.511,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0795,
+         "le_pas_median_en_pas": 1.443,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.098,
+         "le_pas_median_en_pas": 1.193,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0831,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 3,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2947,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1072,
+         "le_pas_median_en_pas": 1.609,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.116,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1302,
+         "le_pas_median_en_pas": 1.498,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1666,
+         "le_pas_median_en_pas": 1.151,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1801,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2085,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2369,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.2793,
+         "le_pas_median_en_pas": 1.72,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2497,
+         "le_pas_median_en_pas": 1.221,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.2322,
+         "le_pas_median_en_pas": 1.332,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0622,
+         "le_pas_median_en_pas": 2.331,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0675,
+         "le_pas_median_en_pas": 1.443,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0831,
+         "le_pas_median_en_pas": 1.665,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0613,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0514,
+         "le_pas_median_en_pas": 1.471,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 4,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3844,
+         "le_pas_median_en_pas": 1.249,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.173,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0507,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0563,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0426,
+         "le_pas_median_en_pas": 0.555,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0611,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.04,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0364,
+         "le_pas_median_en_pas": 1.04,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.4615,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.4959,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.4973,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5266,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5262,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.5176,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.493,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3288,
+         "le_pas_median_en_pas": 1.637,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 5,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2535,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1311,
+         "le_pas_median_en_pas": 1.276,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1801,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1834,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2525,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2772,
+         "le_pas_median_en_pas": 0.583,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3143,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3569,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3508,
+         "le_pas_median_en_pas": 0.916,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3569,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3711,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3636,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3221,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3039,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2776,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2312,
+         "le_pas_median_en_pas": 1.36,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 6,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3851,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2656,
+         "le_pas_median_en_pas": 1.36,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2144,
+         "le_pas_median_en_pas": 0.943,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1543,
+         "le_pas_median_en_pas": 1.027,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.142,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1368,
+         "le_pas_median_en_pas": 0.555,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1515,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1801,
+         "le_pas_median_en_pas": 0.61,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.387,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.355,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3572,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3356,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3354,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.3262,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3288,
+         "le_pas_median_en_pas": 1.138,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1614,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 7,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2978,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2407,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2911,
+         "le_pas_median_en_pas": 0.832,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.213,
+         "le_pas_median_en_pas": 1.387,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2753,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2904,
+         "le_pas_median_en_pas": 1.027,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0002,
+         "le_pas_median_en_pas": 0.999,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2604,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1737,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1645,
+         "le_pas_median_en_pas": 1.054,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1484,
+         "le_pas_median_en_pas": 0.777,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1316,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1112,
+         "le_pas_median_en_pas": 0.916,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1053,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.0866,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        }
+       ]
+      }
+     }
+    },
+    {
+     "le_rang": 8,
+     "les_cotes": {
+      "plus": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.3567,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1851,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1744,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2116,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1917,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2028,
+         "le_pas_median_en_pas": 0.805,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2002,
+         "le_pas_median_en_pas": 0.666,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.186,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        }
+       ]
+      },
+      "moins": {
+       "les_sauts": [
+        {
+         "le_saut": 1,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.2968,
+         "le_pas_median_en_pas": 1.582,
+         "pose_au_pas": false,
+         "la_plage_en_pas": 0.166,
+         "tient": false
+        },
+        {
+         "le_saut": 2,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2388,
+         "le_pas_median_en_pas": 0.943,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 3,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.2814,
+         "le_pas_median_en_pas": 0.888,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 4,
+         "la_justesse": "faux : deux tours",
+         "la_part_du_plan": 0.1948,
+         "le_pas_median_en_pas": 0.749,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 5,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.1612,
+         "le_pas_median_en_pas": 0.721,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 6,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1463,
+         "le_pas_median_en_pas": 0.694,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 7,
+         "la_justesse": "juste",
+         "la_part_du_plan": 0.1236,
+         "le_pas_median_en_pas": 0.638,
+         "pose_au_pas": true,
+         "la_plage_en_pas": 0.166,
+         "tient": true
+        },
+        {
+         "le_saut": 8,
+         "la_justesse": "non jugé",
+         "la_part_du_plan": 0.0002,
+         "le_pas_median_en_pas": 1.692,
+         "pose_au_pas": false,
+         "la_plage_en_pas": null,
+         "tient": false
+        }
+       ]
+      }
+     }
+    }
+   ]
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "les_justes": 104,
+  "les_justes_qui_tiennent": 98,
+  "tj": 0.9423,
+  "les_faux": 6,
+  "les_faux_qui_tiennent": 5,
+  "tf": 0.8333,
+  "les_non_juges": 203,
+  "les_non_juges_qui_tiennent": 148,
+  "la_part_des_tenus_qui_sont_justes": 0.9515,
+  "lissue_courte": "ne sépare pas",
+  "lissue": "sur les graines 4 à 8, le critère sans référent dit tenir 98 des 104 sauts justes et 5 des 6 sauts faux ; il ne les sépare pas"
+ },
+ "les_bilans": {
+  "par_chaine": {
+   "sans relance": {
+    "les_justes": 24,
+    "les_justes_qui_tiennent": 20,
+    "tj": 0.8333,
+    "les_faux": 1,
+    "les_faux_qui_tiennent": 0,
+    "tf": 0.0,
+    "les_non_juges": 49,
+    "les_non_juges_qui_tiennent": 17,
+    "la_part_des_tenus_qui_sont_justes": 1.0
+   },
+   "relancée depuis un point": {
+    "les_justes": 23,
+    "les_justes_qui_tiennent": 23,
+    "tj": 1.0,
+    "les_faux": 3,
+    "les_faux_qui_tiennent": 3,
+    "tf": 1.0,
+    "les_non_juges": 54,
+    "les_non_juges_qui_tiennent": 48,
+    "la_part_des_tenus_qui_sont_justes": 0.8846
+   },
+   "relancée depuis la spire": {
+    "les_justes": 29,
+    "les_justes_qui_tiennent": 28,
+    "tj": 0.9655,
+    "les_faux": 1,
+    "les_faux_qui_tiennent": 1,
+    "tf": 1.0,
+    "les_non_juges": 50,
+    "les_non_juges_qui_tiennent": 43,
+    "la_part_des_tenus_qui_sont_justes": 0.9655
+   },
+   "bornée": {
+    "les_justes": 28,
+    "les_justes_qui_tiennent": 27,
+    "tj": 0.9643,
+    "les_faux": 1,
+    "les_faux_qui_tiennent": 1,
+    "tf": 1.0,
+    "les_non_juges": 50,
+    "les_non_juges_qui_tiennent": 40,
+    "la_part_des_tenus_qui_sont_justes": 0.9643
+   }
+  },
+  "graines_1_a_3": {
+   "les_justes": 10,
+   "les_justes_qui_tiennent": 8,
+   "tj": 0.8,
+   "les_faux": 21,
+   "les_faux_qui_tiennent": 11,
+   "tf": 0.5238,
+   "les_non_juges": 159,
+   "les_non_juges_qui_tiennent": 111,
+   "la_part_des_tenus_qui_sont_justes": 0.4211
+  }
+ },
+ "les_sauts_faux": [
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.1614,
+   "le_pas_median_en_pas": 1.776,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.2793,
+   "le_pas_median_en_pas": 1.72,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.1967,
+   "le_pas_median_en_pas": 1.332,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 5,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.0497,
+   "le_pas_median_en_pas": 1.346,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.0357,
+   "le_pas_median_en_pas": 1.942,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 5,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.4088,
+   "le_pas_median_en_pas": 0.832,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.2764,
+   "le_pas_median_en_pas": 1.748,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.2793,
+   "le_pas_median_en_pas": 1.72,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.2386,
+   "le_pas_median_en_pas": 1.36,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 6,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.1257,
+   "le_pas_median_en_pas": 1.221,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 5,
+   "le_cote": "moins",
+   "le_saut": 6,
+   "la_justesse": "faux : un autre tour",
+   "la_part_du_plan": 0.5086,
+   "le_pas_median_en_pas": 1.276,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.3011,
+   "le_pas_median_en_pas": 0.666,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_saut": 6,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.3276,
+   "le_pas_median_en_pas": 0.777,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "la_justesse": "faux : le tour manqué",
+   "la_part_du_plan": 0.3472,
+   "le_pas_median_en_pas": 0.888,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 6,
+   "la_justesse": "faux : un autre tour",
+   "la_part_du_plan": 0.4717,
+   "le_pas_median_en_pas": 0.832,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.2847,
+   "le_pas_median_en_pas": 1.748,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.2372,
+   "le_pas_median_en_pas": 1.387,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.2793,
+   "le_pas_median_en_pas": 1.72,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.2388,
+   "le_pas_median_en_pas": 1.36,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_saut": 7,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.1309,
+   "le_pas_median_en_pas": 0.61,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.1307,
+   "le_pas_median_en_pas": 1.165,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 5,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.1008,
+   "le_pas_median_en_pas": 1.831,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.1837,
+   "le_pas_median_en_pas": 1.665,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.1886,
+   "le_pas_median_en_pas": 1.443,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.2793,
+   "le_pas_median_en_pas": 1.72,
+   "pose_au_pas": false,
+   "la_plage_en_pas": 0.166,
+   "tient": false
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.2322,
+   "le_pas_median_en_pas": 1.332,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "la_justesse": "faux : deux tours",
+   "la_part_du_plan": 0.1948,
+   "le_pas_median_en_pas": 0.749,
+   "pose_au_pas": true,
+   "la_plage_en_pas": 0.166,
+   "tient": true
+  }
+ ],
+ "les_secondes": 605.7
+}

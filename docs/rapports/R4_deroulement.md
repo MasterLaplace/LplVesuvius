@@ -4602,6 +4602,12 @@ voit qu'une plage de 3 voxels, comme sous un tour seul ; toutes ses plages ont i
 simple, 0,91 fois la largeur de celle d'ailleurs ; le référent se trompe de feuille autour des graines 1 à 3, et les chaînes n'y sont pas
 en cause. `R4-P140` s'ouvre : étalonner sur les graines propres un critère sans référent.
 
+**`344` · 2026-09-29 · le critère sans référent sépare-t-il les sauts justes des faux** — `R4-P140`
+
+⭐⭐⭐⭐⭐ **Non : il accepte presque tout** — `R4-F530`. Sur les graines 4 à 8, le critère de `328` tient 98 des 104 sauts justes des
+quatre chaînes de `340` et 5 des 6 faux ; ce qu'il tient est juste à 95,15 %, tout ce qui est jugé à 94,55 %. Sur PHerc0358, les sauts
+qu'il tient ne sont donc validés par rien. `R4-P141` s'ouvre : compter les feuilles de `m7` qu'un saut franchit.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

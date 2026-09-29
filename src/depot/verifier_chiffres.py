@@ -3336,6 +3336,43 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 344 : LE CRITÈRE SANS RÉFÉRENT SÉPARE-T-IL LES SAUTS JUSTES DES FAUX
+    s344 = _source(racine, "le_critere_sans_referent_separe_t_il_les_sauts_justes_des_faux.json")
+    if s344.exists():
+        import statistics
+        d = json.loads(s344.read_text())
+        v_ = d["le_verdict"]
+        c2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        propres = [s_ for ch_ in d["les_chaines"].values() for g in ch_["les_graines"] if g["le_rang"] >= 4
+                   for x_ in g["les_cotes"].values() for s_ in x_["les_sauts"] if s_["la_justesse"] != "non jugé"]
+        justes = sorted(s_["le_pas_median_en_pas"] for s_ in propres if s_["la_justesse"] == "juste")
+        faux_tenus = [s_ for s_ in propres if s_["la_justesse"].startswith("faux") and s_["tient"]]
+        faux_refuses = [s_ for s_ in propres if s_["la_justesse"].startswith("faux") and not s_["tient"]]
+        b13 = d["les_bilans"]["graines_1_a_3"]
+        lus = sum(x_["lus"] if "lus" in x_ else x_["PHercParis4"]["lus"] for x_ in d["la_lecture_de_m7"].values())
+        ecrits = [("le verdict de 344", v_["lissue"].upper()),
+                  ("les chunks de m7 lus de 344", f"`m7` a été lu en {lus:,}".replace(",", " ")),
+                  ("les parts tenues de 344", f"Il tient {c2(100 * v_['tj'])} % des sauts justes et {c2(100 * v_['tf'])} % des"),
+                  ("la précision de 344", f"sont justes à {c2(100 * v_['la_part_des_tenus_qui_sont_justes'])} % ; tous"),
+                  ("la part des justes jugés de 344",
+                   f"le sont à {c2(100 * v_['les_justes'] / (v_['les_justes'] + v_['les_faux']))} %"),
+                  ("les graines 1 à 3 de 344", f"{b13['les_justes_qui_tiennent']} sauts justes tenus sur {b13['les_justes']} et "
+                                              f"{b13['les_faux_qui_tiennent']} faux sur {b13['les_faux']}"),
+                  ("le pas médian des justes de 344", f"au pas médian de {c2(statistics.median(justes))} pas, de"),
+                  ("les pas extrêmes des justes de 344", f"{c2(justes[0])} à {c2(justes[-1])}. Quatre"),
+                  ("les faux tenus de 344",
+                   f"posent {round(100 * min(s_['la_part_du_plan'] for s_ in faux_tenus))} à "
+                   f"{round(100 * max(s_['la_part_du_plan'] for s_ in faux_tenus))} % du plan à "
+                   f"{c2(min(s_['le_pas_median_en_pas'] for s_ in faux_tenus))} à {c2(max(s_['le_pas_median_en_pas'] for s_ in faux_tenus))} pas"),
+                  ("le faux refusé de 344", f"refuse pose {c2(100 * faux_refuses[0]['la_part_du_plan'])} % du plan à "
+                                            f"{c2(faux_refuses[0]['le_pas_median_en_pas'])} pas"),
+                  ("les quatre chaînes de 344", f"| **les quatre** | **{v_['les_justes_qui_tiennent']} sur {v_['les_justes']}** | "
+                                                f"**{v_['les_faux_qui_tiennent']} sur {v_['les_faux']}** |")]
+        for n_, b_ in d["les_bilans"]["par_chaine"].items():
+            ecrits.append((f"la chaîne {n_} de 344", f"| {n_} | {b_['les_justes_qui_tiennent']} sur {b_['les_justes']} | "
+                                                     f"{b_['les_faux_qui_tiennent']} sur {b_['les_faux']} |"))
+        out.extend((nom, [x_], s344.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 343 : SOUS LE RECOUVREMENT, LE SCAN MONTRE-T-IL DEUX FEUILLES
     s343 = _source(racine, "sous_le_recouvrement_le_scan_montre_t_il_deux_feuilles.json")
     if s343.exists():
