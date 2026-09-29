@@ -1,0 +1,1099 @@
+{
+ "la_question": "Jugée strictement, une surface n'étant juste que si elle retrouve le seul tour publié attendu, jusqu'où la chaîne bornée de 335 descend-elle, et reste-t-elle devant la chaîne sans relance ?",
+ "les_sources": {
+  "sans relance": "jusqua_quel_tour_publie_la_chaine_qui_croit_descend_elle.json",
+  "relancée depuis un point": "une_chaine_relancee_a_chaque_tour_descend_elle_plus_loin.json",
+  "relancée depuis la spire": "la_relance_partie_de_la_spire_entiere_garde_t_elle_la_justesse.json",
+  "bornée": "pourquoi_aucune_chaine_ne_retrouve_t_elle_le_septieme_tour.json"
+ },
+ "les_nappes_saccordent": true,
+ "les_chaines": {
+  "sans relance": {
+   "redonne": true,
+   "les_graines": [
+    {
+     "le_rang": 1,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 3,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 3,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 3,
+     "la_descente_stricte": 3,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 2,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 4,
+        "larret": "non lue"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 4,
+     "la_descente_stricte": 0,
+     "larret_strict": "deux tours"
+    },
+    {
+     "le_rang": 3,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un saut faux"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 0,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 4,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 5,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 6,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 7,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 2,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 2,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 2,
+     "la_descente_stricte": 2,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 8,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "non lue"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 2,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 2,
+     "larret_strict": "deux tours"
+    }
+   ],
+   "la_mediane_stricte": 2.5
+  },
+  "relancée depuis un point": {
+   "redonne": true,
+   "les_graines": [
+    {
+     "le_rang": 1,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": -1,
+        "la_descente": 5,
+        "larret": "le bout de la chaîne"
+       },
+       "stricte": {
+        "le_tour_de_depart": -1,
+        "la_descente": 1,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 5,
+     "la_descente_stricte": 1,
+     "larret_strict": "deux tours"
+    },
+    {
+     "le_rang": 2,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un saut faux"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 0,
+     "larret_strict": "deux tours"
+    },
+    {
+     "le_rang": 3,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 4,
+        "larret": "un saut faux"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 4,
+     "la_descente_stricte": 0,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 4,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 5,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 4,
+        "larret": "un saut faux"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 4,
+        "larret": "un saut faux"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 4,
+     "la_descente_stricte": 4,
+     "larret_strict": "un saut faux"
+    },
+    {
+     "le_rang": 6,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 7,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 5,
+        "larret": "un saut faux"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 1,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 5,
+     "la_descente_stricte": 1,
+     "larret_strict": "deux tours"
+    },
+    {
+     "le_rang": 8,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    }
+   ],
+   "la_mediane_stricte": 2.5
+  },
+  "relancée depuis la spire": {
+   "redonne": true,
+   "les_graines": [
+    {
+     "le_rang": 1,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 0,
+     "la_descente_stricte": 0,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 2,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un saut faux"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 0,
+     "larret_strict": "deux tours"
+    },
+    {
+     "le_rang": 3,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un saut faux"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 0,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 4,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un saut faux"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un saut faux"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un saut faux"
+    },
+    {
+     "le_rang": 5,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 6,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 7,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "le bout de la chaîne"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "le bout de la chaîne"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "le bout de la chaîne"
+    },
+    {
+     "le_rang": 8,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 5,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 5,
+     "larret_strict": "deux tours"
+    }
+   ],
+   "la_mediane_stricte": 5.5
+  },
+  "bornée": {
+   "redonne": true,
+   "les_graines": [
+    {
+     "le_rang": 1,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "le bout de la chaîne"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 0,
+     "larret_strict": "deux tours"
+    },
+    {
+     "le_rang": 2,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 0,
+     "larret_strict": "deux tours"
+    },
+    {
+     "le_rang": 3,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 0,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 4,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 5,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 6,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 0,
+        "larret": "un tour manqué"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "un tour manqué"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "un tour manqué"
+    },
+    {
+     "le_rang": 7,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "le bout de la chaîne"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "le bout de la chaîne"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 6,
+     "larret_strict": "le bout de la chaîne"
+    },
+    {
+     "le_rang": 8,
+     "les_cotes": {
+      "plus": {
+       "souple": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       },
+       "stricte": {
+        "le_tour_de_depart": null,
+        "la_descente": 0,
+        "larret": "aucun tour touché"
+       }
+      },
+      "moins": {
+       "souple": {
+        "le_tour_de_depart": 0,
+        "la_descente": 6,
+        "larret": "non lue"
+       },
+       "stricte": {
+        "le_tour_de_depart": 0,
+        "la_descente": 2,
+        "larret": "deux tours"
+       }
+      }
+     },
+     "le_tour_touche": true,
+     "la_descente_souple": 6,
+     "la_descente_stricte": 2,
+     "larret_strict": "deux tours"
+    }
+   ],
+   "la_mediane_stricte": 4.0
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "h": 4.0,
+  "h0": 2.5,
+  "lissue": "jugée strictement, la chaîne bornée descend 4 tours publiés en médiane, contre 2,5 tours publiés pour la chaîne sans relance ; elle reste devant la chaîne sans relance"
+ },
+ "les_secondes": 0.0
+}

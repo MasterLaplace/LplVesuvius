@@ -3336,6 +3336,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 340 : JUGÉE STRICTEMENT, JUSQU'OÙ LA CHAÎNE BORNÉE DESCEND-ELLE
+    s340 = _source(racine, "jugee_strictement_jusquou_la_chaine_bornee_descend_elle.json")
+    if s340.exists():
+        import statistics
+        d = json.loads(s340.read_text())
+        f_ = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        ecrits = [("le verdict de 340", d["le_verdict"]["lissue"].upper())]
+        for gs, gb in zip(d["les_chaines"]["sans relance"]["les_graines"], d["les_chaines"]["bornée"]["les_graines"]):
+            ecrits.append((f"la graine {gs['le_rang']} de 340",
+                           f"| {gs['le_rang']} | {gs['la_descente_souple']} | {gs['la_descente_stricte']} | {gb['la_descente_souple']} | "
+                           f"{gb['la_descente_stricte']} | {gb['larret_strict']} |"))
+        for n_, c_ in d["les_chaines"].items():
+            souple = float(statistics.median([g["la_descente_souple"] for g in c_["les_graines"] if g["le_tour_touche"]]))
+            ecrits.append((f"la médiane de la chaîne {n_} de 340", f"| {n_} | {f_(souple)} | {f_(c_['la_mediane_stricte'])} |"))
+        out.extend((nom, [x_], s340.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 339 : LES SURFACES À DEUX TOURS VONT-ELLES JUSQU'AU BOUT DE LEURS TOURS
     s339 = _source(racine, "les_surfaces_a_deux_tours_vont_elles_jusquau_bout_de_leurs_tours.json")
     if s339.exists():

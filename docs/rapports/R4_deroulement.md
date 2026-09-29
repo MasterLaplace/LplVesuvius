@@ -4579,6 +4579,12 @@ de chacun des deux tours.
 ⭐⭐⭐⭐ **Aucune des douze : elles ne traversent pas la couture** — `R4-F525`. Ce sont des surfaces à un tour qui vont jusqu'au bout de leur
 tour. Ce qui fait retrouver deux tours aux douze n'est ni l'écart ni la couture. `R4-P136` s'ouvre : la descente jugée strictement.
 
+**`340` · 2026-09-29 · jugée strictement, jusqu'où la chaîne bornée descend-elle** — `R4-P136`
+
+⭐⭐⭐⭐⭐ **Quatre tours en médiane, et non six** — `R4-F526`. Relues strictement, les descentes publiées tombent : la chaîne bornée descend six
+tours sur les graines 4 à 7 et reste devant la chaîne sans relance (2,5) ; sur les graines 2 et 3, aucune chaîne ne descend strictement un
+seul tour. `R4-P137` s'ouvre : un recouvrement des tours publiés autour des graines 1 à 3.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
