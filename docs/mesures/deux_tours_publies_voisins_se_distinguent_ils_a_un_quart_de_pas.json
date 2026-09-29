@@ -1,0 +1,979 @@
+{
+ "la_question": "Là où la chaîne les descend, à quel écart les tours publiés consécutifs 5753_0 à 5753_-7 sont-ils l'un de l'autre, et la lecture « retrouve » à un quart du pas nominal peut-elle attribuer une même surface à deux tours voisins ?",
+ "les_constantes": {
+  "la_demi_boite_voxels": 1280.0,
+  "le_maximum": 20000,
+  "le_quart_voxels": 18.021
+ },
+ "les_graines": [
+  {
+   "le_rang": 1,
+   "le_centre": [
+    19864.5,
+    17028.1,
+    59054.4
+   ],
+   "les_paires": [
+    {
+     "les_tours": [
+      0,
+      -1
+     ],
+     "les_sommets_en_face": 18236,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.66,
+     "la_part_sous_un_demi_pas": 0.4436,
+     "a_mi_chemin": {
+      "0": "ne retrouve pas",
+      "-1": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "les_sommets_en_face": 19555,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.63,
+     "la_part_sous_un_demi_pas": 0.416,
+     "a_mi_chemin": {
+      "-1": "ne retrouve pas",
+      "-2": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "les_sommets_en_face": 18810,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.532,
+     "la_part_sous_un_demi_pas": 0.4818,
+     "a_mi_chemin": {
+      "-2": "ne retrouve pas",
+      "-3": "retrouve"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "les_sommets_en_face": 17220,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.593,
+     "la_part_sous_un_demi_pas": 0.4697,
+     "a_mi_chemin": {
+      "-3": "ne retrouve pas",
+      "-4": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "les_sommets_en_face": 18531,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.721,
+     "la_part_sous_un_demi_pas": 0.4149,
+     "a_mi_chemin": {
+      "-4": "ne retrouve pas",
+      "-5": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "les_sommets_en_face": 17656,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.724,
+     "la_part_sous_un_demi_pas": 0.4018,
+     "a_mi_chemin": {
+      "-5": "ne retrouve pas",
+      "-6": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "les_sommets_en_face": 2624,
+     "mesuree": true,
+     "lecart_median_en_pas": 3.747,
+     "la_part_sous_un_demi_pas": 0.0,
+     "a_mi_chemin": {
+      "-6": "ne retrouve pas",
+      "-7": "ne retrouve pas"
+     },
+     "confondus": false
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_centre": [
+    19970.9,
+    17754.1,
+    59011.3
+   ],
+   "les_paires": [
+    {
+     "les_tours": [
+      0,
+      -1
+     ],
+     "les_sommets_en_face": 18489,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.758,
+     "la_part_sous_un_demi_pas": 0.3611,
+     "a_mi_chemin": {
+      "0": "ne retrouve pas",
+      "-1": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "les_sommets_en_face": 19048,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.617,
+     "la_part_sous_un_demi_pas": 0.3853,
+     "a_mi_chemin": {
+      "-1": "ne retrouve pas",
+      "-2": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "les_sommets_en_face": 18896,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.665,
+     "la_part_sous_un_demi_pas": 0.3985,
+     "a_mi_chemin": {
+      "-2": "ne retrouve pas",
+      "-3": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "les_sommets_en_face": 17451,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.713,
+     "la_part_sous_un_demi_pas": 0.3893,
+     "a_mi_chemin": {
+      "-3": "ne retrouve pas",
+      "-4": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "les_sommets_en_face": 18314,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.812,
+     "la_part_sous_un_demi_pas": 0.3515,
+     "a_mi_chemin": {
+      "-4": "ne retrouve pas",
+      "-5": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "les_sommets_en_face": 19370,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.66,
+     "la_part_sous_un_demi_pas": 0.374,
+     "a_mi_chemin": {
+      "-5": "ne retrouve pas",
+      "-6": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "les_sommets_en_face": 4481,
+     "mesuree": true,
+     "lecart_median_en_pas": 2.565,
+     "la_part_sous_un_demi_pas": 0.0,
+     "a_mi_chemin": {
+      "-6": "ne retrouve pas",
+      "-7": "ne retrouve pas"
+     },
+     "confondus": false
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_centre": [
+    19842.3,
+    17719.9,
+    59168.7
+   ],
+   "les_paires": [
+    {
+     "les_tours": [
+      0,
+      -1
+     ],
+     "les_sommets_en_face": 18454,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.758,
+     "la_part_sous_un_demi_pas": 0.3623,
+     "a_mi_chemin": {
+      "0": "ne retrouve pas",
+      "-1": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "les_sommets_en_face": 19037,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.642,
+     "la_part_sous_un_demi_pas": 0.3615,
+     "a_mi_chemin": {
+      "-1": "ne retrouve pas",
+      "-2": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "les_sommets_en_face": 19085,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.668,
+     "la_part_sous_un_demi_pas": 0.3877,
+     "a_mi_chemin": {
+      "-2": "ne retrouve pas",
+      "-3": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "les_sommets_en_face": 17459,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.742,
+     "la_part_sous_un_demi_pas": 0.3751,
+     "a_mi_chemin": {
+      "-3": "ne retrouve pas",
+      "-4": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "les_sommets_en_face": 18662,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.855,
+     "la_part_sous_un_demi_pas": 0.3293,
+     "a_mi_chemin": {
+      "-4": "ne retrouve pas",
+      "-5": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "les_sommets_en_face": 19485,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.692,
+     "la_part_sous_un_demi_pas": 0.3412,
+     "a_mi_chemin": {
+      "-5": "ne retrouve pas",
+      "-6": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "les_sommets_en_face": 5729,
+     "mesuree": true,
+     "lecart_median_en_pas": 2.282,
+     "la_part_sous_un_demi_pas": 0.0028,
+     "a_mi_chemin": {
+      "-6": "ne retrouve pas",
+      "-7": "ne retrouve pas"
+     },
+     "confondus": false
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_centre": [
+    20373.0,
+    14304.9,
+    45591.2
+   ],
+   "les_paires": [
+    {
+     "les_tours": [
+      0,
+      -1
+     ],
+     "les_sommets_en_face": 19466,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.719,
+     "la_part_sous_un_demi_pas": 0.2045,
+     "a_mi_chemin": {
+      "0": "ne retrouve pas",
+      "-1": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "les_sommets_en_face": 19874,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.689,
+     "la_part_sous_un_demi_pas": 0.111,
+     "a_mi_chemin": {
+      "-1": "ne retrouve pas",
+      "-2": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "les_sommets_en_face": 19762,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.612,
+     "la_part_sous_un_demi_pas": 0.2238,
+     "a_mi_chemin": {
+      "-2": "ne retrouve pas",
+      "-3": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "les_sommets_en_face": 19517,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.699,
+     "la_part_sous_un_demi_pas": 0.0858,
+     "a_mi_chemin": {
+      "-3": "ne retrouve pas",
+      "-4": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "les_sommets_en_face": 19563,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.602,
+     "la_part_sous_un_demi_pas": 0.2455,
+     "a_mi_chemin": {
+      "-4": "ne retrouve pas",
+      "-5": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "les_sommets_en_face": 19319,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.576,
+     "la_part_sous_un_demi_pas": 0.3088,
+     "a_mi_chemin": {
+      "-5": "ne retrouve pas",
+      "-6": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "les_sommets_en_face": 10430,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.649,
+     "la_part_sous_un_demi_pas": 0.2225,
+     "a_mi_chemin": {
+      "-6": "ne retrouve pas",
+      "-7": "ne retrouve pas"
+     },
+     "confondus": false
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_centre": [
+    20725.3,
+    14881.8,
+    45614.5
+   ],
+   "les_paires": [
+    {
+     "les_tours": [
+      0,
+      -1
+     ],
+     "les_sommets_en_face": 19535,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.699,
+     "la_part_sous_un_demi_pas": 0.2944,
+     "a_mi_chemin": {
+      "0": "ne retrouve pas",
+      "-1": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "les_sommets_en_face": 19261,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.783,
+     "la_part_sous_un_demi_pas": 0.1443,
+     "a_mi_chemin": {
+      "-1": "ne retrouve pas",
+      "-2": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "les_sommets_en_face": 19544,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.616,
+     "la_part_sous_un_demi_pas": 0.2972,
+     "a_mi_chemin": {
+      "-2": "ne retrouve pas",
+      "-3": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "les_sommets_en_face": 18941,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.692,
+     "la_part_sous_un_demi_pas": 0.1372,
+     "a_mi_chemin": {
+      "-3": "ne retrouve pas",
+      "-4": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "les_sommets_en_face": 19168,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.616,
+     "la_part_sous_un_demi_pas": 0.266,
+     "a_mi_chemin": {
+      "-4": "ne retrouve pas",
+      "-5": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "les_sommets_en_face": 16320,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.585,
+     "la_part_sous_un_demi_pas": 0.2765,
+     "a_mi_chemin": {
+      "-5": "ne retrouve pas",
+      "-6": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "les_sommets_en_face": 6777,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.682,
+     "la_part_sous_un_demi_pas": 0.2408,
+     "a_mi_chemin": {
+      "-6": "ne retrouve pas",
+      "-7": "ne retrouve pas"
+     },
+     "confondus": false
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_centre": [
+    20556.9,
+    14838.1,
+    45723.9
+   ],
+   "les_paires": [
+    {
+     "les_tours": [
+      0,
+      -1
+     ],
+     "les_sommets_en_face": 19606,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.675,
+     "la_part_sous_un_demi_pas": 0.2907,
+     "a_mi_chemin": {
+      "0": "ne retrouve pas",
+      "-1": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "les_sommets_en_face": 19396,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.725,
+     "la_part_sous_un_demi_pas": 0.1539,
+     "a_mi_chemin": {
+      "-1": "ne retrouve pas",
+      "-2": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "les_sommets_en_face": 19741,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.61,
+     "la_part_sous_un_demi_pas": 0.3018,
+     "a_mi_chemin": {
+      "-2": "ne retrouve pas",
+      "-3": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "les_sommets_en_face": 19013,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.696,
+     "la_part_sous_un_demi_pas": 0.145,
+     "a_mi_chemin": {
+      "-3": "ne retrouve pas",
+      "-4": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "les_sommets_en_face": 19280,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.609,
+     "la_part_sous_un_demi_pas": 0.2773,
+     "a_mi_chemin": {
+      "-4": "ne retrouve pas",
+      "-5": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "les_sommets_en_face": 16418,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.583,
+     "la_part_sous_un_demi_pas": 0.2975,
+     "a_mi_chemin": {
+      "-5": "ne retrouve pas",
+      "-6": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "les_sommets_en_face": 8588,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.676,
+     "la_part_sous_un_demi_pas": 0.204,
+     "a_mi_chemin": {
+      "-6": "ne retrouve pas",
+      "-7": "ne retrouve pas"
+     },
+     "confondus": false
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_centre": [
+    19833.8,
+    13028.9,
+    29947.7
+   ],
+   "les_paires": [
+    {
+     "les_tours": [
+      0,
+      -1
+     ],
+     "les_sommets_en_face": 16580,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.911,
+     "la_part_sous_un_demi_pas": 0.0,
+     "a_mi_chemin": {
+      "0": "ne retrouve pas",
+      "-1": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "les_sommets_en_face": 15437,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.76,
+     "la_part_sous_un_demi_pas": 0.0316,
+     "a_mi_chemin": {
+      "-1": "ne retrouve pas",
+      "-2": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "les_sommets_en_face": 13113,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.769,
+     "la_part_sous_un_demi_pas": 0.0501,
+     "a_mi_chemin": {
+      "-2": "ne retrouve pas",
+      "-3": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "les_sommets_en_face": 13946,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.871,
+     "la_part_sous_un_demi_pas": 0.0194,
+     "a_mi_chemin": {
+      "-3": "ne retrouve pas",
+      "-4": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "les_sommets_en_face": 14533,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.701,
+     "la_part_sous_un_demi_pas": 0.0241,
+     "a_mi_chemin": {
+      "-4": "ne retrouve pas",
+      "-5": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "les_sommets_en_face": 13685,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.787,
+     "la_part_sous_un_demi_pas": 0.0477,
+     "a_mi_chemin": {
+      "-5": "ne retrouve pas",
+      "-6": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "les_sommets_en_face": 8683,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.853,
+     "la_part_sous_un_demi_pas": 0.1368,
+     "a_mi_chemin": {
+      "-6": "ne retrouve pas",
+      "-7": "ne retrouve pas"
+     },
+     "confondus": false
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_centre": [
+    20167.8,
+    13721.5,
+    29971.0
+   ],
+   "les_paires": [
+    {
+     "les_tours": [
+      0,
+      -1
+     ],
+     "les_sommets_en_face": 17175,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.929,
+     "la_part_sous_un_demi_pas": 0.0,
+     "a_mi_chemin": {
+      "0": "ne retrouve pas",
+      "-1": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "les_sommets_en_face": 18150,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.832,
+     "la_part_sous_un_demi_pas": 0.0178,
+     "a_mi_chemin": {
+      "-1": "ne retrouve pas",
+      "-2": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "les_sommets_en_face": 15326,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.793,
+     "la_part_sous_un_demi_pas": 0.0675,
+     "a_mi_chemin": {
+      "-2": "ne retrouve pas",
+      "-3": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "les_sommets_en_face": 16883,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.853,
+     "la_part_sous_un_demi_pas": 0.0691,
+     "a_mi_chemin": {
+      "-3": "ne retrouve pas",
+      "-4": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "les_sommets_en_face": 18084,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.799,
+     "la_part_sous_un_demi_pas": 0.0222,
+     "a_mi_chemin": {
+      "-4": "ne retrouve pas",
+      "-5": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "les_sommets_en_face": 16983,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.897,
+     "la_part_sous_un_demi_pas": 0.0546,
+     "a_mi_chemin": {
+      "-5": "ne retrouve pas",
+      "-6": "ne retrouve pas"
+     },
+     "confondus": false
+    },
+    {
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "les_sommets_en_face": 6154,
+     "mesuree": true,
+     "lecart_median_en_pas": 0.866,
+     "la_part_sous_un_demi_pas": 0.1282,
+     "a_mi_chemin": {
+      "-6": "ne retrouve pas",
+      "-7": "ne retrouve pas"
+     },
+     "confondus": false
+    }
+   ]
+  }
+ ],
+ "les_descentes_de_336": [
+  {
+   "le_rang": 1,
+   "comptees": 6,
+   "a_deux_tours": 4
+  },
+  {
+   "le_rang": 2,
+   "comptees": 6,
+   "a_deux_tours": 3
+  },
+  {
+   "le_rang": 3,
+   "comptees": 6,
+   "a_deux_tours": 4
+  },
+  {
+   "le_rang": 4,
+   "comptees": 6,
+   "a_deux_tours": 0
+  },
+  {
+   "le_rang": 5,
+   "comptees": 6,
+   "a_deux_tours": 0
+  },
+  {
+   "le_rang": 6,
+   "comptees": 6,
+   "a_deux_tours": 0
+  },
+  {
+   "le_rang": 7,
+   "comptees": 6,
+   "a_deux_tours": 0
+  },
+  {
+   "le_rang": 8,
+   "comptees": 6,
+   "a_deux_tours": 1
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "N": 56,
+  "m": 0,
+  "lissue": "sur les 56 paires de tours voisins mesurées autour des 8 graines, une surface à mi-chemin retrouve les deux tours 0 fois ; la lecture sépare toujours deux tours voisins"
+ },
+ "les_secondes": 19.8
+}

@@ -3336,6 +3336,17 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 337 : DEUX TOURS PUBLIÉS VOISINS SE DISTINGUENT-ILS À UN QUART DE PAS
+    s337 = _source(racine, "deux_tours_publies_voisins_se_distinguent_ils_a_un_quart_de_pas.json")
+    if s337.exists():
+        d = json.loads(s337.read_text())
+        ps = [p_ for g in d["les_graines"] for p_ in g["les_paires"] if p_["mesuree"]]
+        ecrits = [("le verdict de 337", d["le_verdict"]["lissue"].upper()),
+                  ("le minimum de sommets en face de 337", f"au moins {min(p_['les_sommets_en_face'] for p_ in ps)} sommets en face")]
+        for x in d["les_descentes_de_336"]:
+            ecrits.append((f"la descente de la graine {x['le_rang']} en 337", f"| {x['le_rang']} | {x['comptees']} | {x['a_deux_tours']} |"))
+        out.extend((nom, [x_], s337.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 336 : POURQUOI AUCUNE CHAÎNE NE RETROUVE-T-ELLE LE SEPTIÈME TOUR
     s336 = _source(racine, "pourquoi_aucune_chaine_ne_retrouve_t_elle_le_septieme_tour.json")
     if s336.exists():

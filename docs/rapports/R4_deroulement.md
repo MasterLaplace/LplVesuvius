@@ -4562,6 +4562,12 @@ sauts en médiane contre 1. `R4-P132` s'ouvre : pourquoi aucune chaîne ne retro
 des plages de `m7`, contre 0,5 à 2 pour `5753_-6`. Et les tours publiés consécutifs y sont à un demi-pas nominal l'un de l'autre, ce qui
 met en question la lecture « retrouve » à un quart de pas. `R4-P133` s'ouvre.
 
+**`337` · 2026-09-29 · deux tours publiés voisins se distinguent-ils à un quart de pas** — `R4-P133`
+
+⭐⭐⭐⭐⭐ **Oui : aucune surface à mi-chemin ne retrouve deux tours voisins** — `R4-F523`. Les tours publiés consécutifs sont à 0,70 pas nominal
+l'un de l'autre en médiane autour des graines ; les descentes de `329` à `336` ne sont pas gonflées par leur écart. 12 surfaces de la
+descente retrouvent pourtant deux tours : `R4-P134` s'ouvre.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
