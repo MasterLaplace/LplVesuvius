@@ -1797,6 +1797,8 @@ run "combien de sauts la chaîne qui croît tient-elle au pas" uv run python "$R
 run "figure combien de sauts la chaîne qui croît tient-elle au pas" uv run python "$ROOT/src/figures/figure_combien_de_sauts_la_chaine_qui_croit_tient_elle_au_pas.py" --verifier
 run "la chaîne qui croît tombe-t-elle sur les tours publiés" uv run python "$ROOT/src/nappe/la_chaine_qui_croit_tombe_t_elle_sur_les_tours_publies.py" --verifier
 run "figure la chaîne qui croît tombe-t-elle sur les tours publiés" uv run python "$ROOT/src/figures/figure_la_chaine_qui_croit_tombe_t_elle_sur_les_tours_publies.py" --verifier
+run "jusqu'à quel tour publié la chaîne qui croît descend-elle" uv run python "$ROOT/src/nappe/jusqua_quel_tour_publie_la_chaine_qui_croit_descend_elle.py" --verifier
+run "figure jusqu'à quel tour publié la chaîne qui croît descend-elle" uv run python "$ROOT/src/figures/figure_jusqua_quel_tour_publie_la_chaine_qui_croit_descend_elle.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

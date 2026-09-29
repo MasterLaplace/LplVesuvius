@@ -3336,6 +3336,25 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 330 : JUSQU'À QUEL TOUR PUBLIÉ LA CHAÎNE QUI CROÎT DESCEND-ELLE
+    s330 = _source(racine, "jusqua_quel_tour_publie_la_chaine_qui_croit_descend_elle.json")
+    if s330.exists():
+        d = json.loads(s330.read_text())
+        ecrits = [("le verdict de 330", d["le_verdict"]["lissue"].upper())]
+        for g in d["les_graines"]:
+            c = g["les_cotes"]["moins"]
+            surf = [g["la_nappe"]] + [s_["les_tours"] for s_ in c["les_spires"]]
+            k0 = next(k for k, s_ in enumerate(surf) if sum(1 for x in s_.values() if x["la_lecture"] == "retrouve") == 1)
+            fin = k0 + c["la_descente"]
+            part = c["les_spires"][fin - 1]["la_part_du_plan"] if fin >= 1 else None
+            suite = c["les_spires"][fin]["les_tours"] if fin < len(c["les_spires"]) else {}
+            attendu = str(c["le_tour_de_depart"] - c["la_descente"] - 1)
+            face = suite[attendu]["les_sommets_en_face"] if attendu in suite else None
+            ecrits.append((f"la graine {g['le_rang']} de 330",
+                           f"| {g['le_rang']} | {'la nappe' if k0 == 0 else f'saut {k0}'} | {c['la_descente']} | "
+                           f"{str(round(part * 100, 2)).replace('.', ',') if part is not None else '—'} % | {c['larret']} | {face} |"))
+        out.extend((nom, [x_], s330.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 329 : LA CHAÎNE QUI CROÎT TOMBE-T-ELLE SUR LES TOURS PUBLIÉS
     s329 = _source(racine, "la_chaine_qui_croit_tombe_t_elle_sur_les_tours_publies.json")
     if s329.exists():

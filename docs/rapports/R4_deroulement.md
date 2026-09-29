@@ -4521,6 +4521,12 @@ deuxième ou le troisième saut ; sur PHercParis4, quatre côtés tiennent six �
 chaque saut de la chaîne tirée de `m7` tombe sur le tour suivant ; le segment de `296` est un ou deux tours à l'extérieur de `5753_0` sur
 six graines. `R4-P127` s'ouvre : au-delà du troisième saut.
 
+**`330` · 2026-09-29 · jusqu'à quel tour publié la chaîne qui croît descend-elle** — `R4-P127`
+
+⭐⭐⭐⭐⭐ **Six tours d'affilée en médiane, de `5753_0` à `5753_-6`** — `R4-F516`. Sur les huit graines la chaîne touche `5753_0`, et sur
+cinq elle descend six tours consécutifs publiés, un par saut ; elle s'arrête quand sa spire s'épuise ou que `5753_-7` ne passe pas là.
+`R4-P128` s'ouvre : relancer chaque saut sur la surface entière atteinte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

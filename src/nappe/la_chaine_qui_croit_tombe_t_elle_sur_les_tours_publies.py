@@ -74,20 +74,21 @@ LES_SAUTS = 3
 LA_MARGE = 100.0
 
 
-def le_dossier_du_tour(rang: int) -> Path:
-    return LE_DOSSIER / LES_TOURS[rang]
+def le_dossier_du_tour(rang: int, tours: dict = LES_TOURS) -> Path:
+    return LE_DOSSIER / tours[rang]
 
 
-def telecharger() -> dict:
-    """Les quatre tours, leur maillage au pas de 2,4 µm seulement, un fichier après l'autre ; un fichier déjà là n'est pas relu."""
+def telecharger(tours: dict = LES_TOURS) -> dict:
+    """Les tours, leur maillage au pas de 2,4 µm seulement, un fichier après l'autre ; un fichier déjà là n'est pas relu. `330` en
+    demande quatre de plus."""
     import urllib.request
 
     from zarr_depth import BUCKET
 
     out = {}
-    for rang, nom in LES_TOURS.items():
+    for rang, nom in tours.items():
         id_ = nom.split("-")[0]
-        dossier = le_dossier_du_tour(rang)
+        dossier = le_dossier_du_tour(rang, tours)
         dossier.mkdir(parents=True, exist_ok=True)
         for f in ("meta.json", "x.tif", "y.tif", "z.tif"):
             cible = dossier / f
@@ -144,10 +145,10 @@ def les_sommets_proches(tour: dict, pts: np.ndarray, marge: float = LA_MARGE) ->
     return tour["points"][m], tour["normales"][m]
 
 
-def lire_un_tour(rang: int) -> dict:
+def lire_un_tour(rang: int, tours: dict = LES_TOURS) -> dict:
     from la_spire_voisine_est_elle_a_un_pas import les_normales, lire_tifxyz
 
-    p, ok, esp = lire_tifxyz(le_dossier_du_tour(rang))
+    p, ok, esp = lire_tifxyz(le_dossier_du_tour(rang, tours))
     n, nok = les_normales(p, ok)
     m = ok & nok
     return {"points": p[m], "normales": n[m], "lespacement": esp, "les_sommets": int(m.sum())}
