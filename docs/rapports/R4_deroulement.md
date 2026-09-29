@@ -4397,6 +4397,13 @@ de −16 à +12 voxels de son plus dense : il ne peut étalonner aucun juge de p
 appuyées sur la prédiction sont à 0 à 2 voxels de leur plus dense, sauf les trois que `304` et `306` désignaient. `R4-P110`
 s'ouvre : la chaîne relue au plus dense.
 
+**`310` · 2026-09-29 · la chaîne relue au plus dense reste-t-elle au cœur d'une feuille** — `R4-P110`
+
+⭐⭐⭐⭐⭐ **Oui pour la chaîne du vote : sur PHerc0358, ses 32 spires sur huit côtés sur dix restent à au plus 2 voxels du plus
+dense du scan pendant quatre sauts, et sur les graines 4, 7 et 8 chaque saut avance d'un pas du rouleau** — `R4-F491`. Neuf
+surfaces empilées au cœur d'une feuille, tirées de la seule prédiction publiée, sans référent. Qu'elles soient chacune d'une seule
+feuille, et consécutives, reste ouvert : `R4-P111`.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

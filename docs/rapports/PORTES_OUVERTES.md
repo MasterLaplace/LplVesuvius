@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**164 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**165 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 126 portes
+## Grand Prize — 127 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -144,7 +144,8 @@
 - **R4-P107** *(le référent)* · **RÉPONDUE par `307` : non au demi-pas.** Sur PHercParis4, le tracé humain décalé d'un demi-pas passe le juge dans 47 des 48 comparaisons, et la part des blocs qui passent reste entre 91,67 et 100 % de −1 à +1 pas (`R4-F488`) : le juge sépare l'orientation, pas la position. La suite est `R4-P108`.
 - **R4-P108** *(le référent)* · **RÉPONDUE par `308` : non par sa règle, mais il voit la position.** Le contraste de position oscille au pas du rouleau avec un sommet à un quart de pas du tracé humain, posé sur la face de sa feuille (`R4-F489`) ; les nappes de `m7` des graines 3 et 6 ont leur sommet à leur place. La suite est `R4-P109`.
 - **R4-P109** *(le référent)* · **RÉPONDUE par `309` : non.** Sur vingt-quatre blocs neufs, le tracé humain est posé dans 16 blocs et décalé d'un demi-pas dans 13 comparaisons sur 48, parce que sa place dans sa feuille varie de −16 à +12 voxels (`R4-F490`) : il ne peut pas étalonner un juge de position. Rapporté : les surfaces de `m7` appuyées sur la prédiction sont à 0 à 2 voxels de leur plus dense. La suite est `R4-P110`.
-- **R4-P110** *(le graal)* · **LES SPIRES DE LA CHAÎNE DE `303`, RELUES AU PLUS DENSE, SONT-ELLES CHACUNE AU CŒUR D'UNE FEUILLE ET À UN PAS DE LA PRÉCÉDENTE ?** ⭐⭐⭐⭐ C'EST CE QUE `309` DÉSIGNE. Sans référent de position, la place du plus dense et le pas se lisent sans juge ; spire par spire, ils disent où la chaîne quitte sa feuille, et si deux spires consécutives en sautent une. ⚠ `R4-P103` reste ouverte : un pas juste ne prouve pas que la spire suivante est la voisine.
+- **R4-P110** *(le graal)* · **RÉPONDUE par `310` : oui pour la chaîne du vote.** Ses 32 spires sur huit côtés sur dix restent à au plus 2 voxels du plus dense du scan pendant quatre sauts, et sur les graines 4, 7 et 8 chaque saut avance de 18,5 à 22,5 voxels (`R4-F491`). La chaîne croissante de `306` sort du cœur dès le premier saut. La suite est `R4-P111`.
+- **R4-P111** *(le graal)* · **LES SPIRES DE LA CHAÎNE DU VOTE DES GRAINES 4, 7 ET 8, DÉCOUPÉES EN PIÈCES D'UNE SEULE FEUILLE PAR LES SAUTS DE `302`, RESTENT-ELLES AU CŒUR D'UNE FEUILLE PIÈCE PAR PIÈCE, ET LA PLUS GRANDE PIÈCE DE CHAQUE SPIRE EST-ELLE EN FACE DE LA PLUS GRANDE PIÈCE DE LA PRÉCÉDENTE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `310` DÉSIGNE. La chaîne reste au plus dense pendant quatre sauts, mais `304` montre ses nappes passant à la feuille voisine sur un carré de voisins sur dix : c'est la question qui sépare une chaîne de spires d'un empilement de morceaux.
 
 ## Progress Prizes — 19 portes
 

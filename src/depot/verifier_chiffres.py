@@ -3336,6 +3336,20 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 310 : LA CHAÎNE RELUE AU PLUS DENSE RESTE-T-ELLE AU CŒUR D'UNE FEUILLE
+    s310 = _source(racine, "la_chaine_relue_au_plus_dense_reste_t_elle_au_coeur_dune_feuille.json")
+    if s310.exists():
+        d = json.loads(s310.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 310", d["le_verdict"]["lissue"].upper())]
+        for nom, cotes in d["les_chaines"].items():
+            for c in cotes:
+                ecrits.append((f"la chaîne {nom}, graine {c['le_rang']} côté {c['le_cote']} de 310",
+                               f"| {nom} | {c['le_rang']} | {c['le_cote']} | "
+                               + " | ".join(f"{f_(x_['le_plus_dense'])} ({f_(x_['le_pas_median_voxels'])})"
+                                            for x_ in c["les_sauts"]) + f" | {c['le_dernier_saut_au_coeur']} |"))
+        out.extend((nom, [x_], s310.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 309 : LE PLUS DENSE DIT-IL SI UNE SURFACE EST SUR SA FEUILLE
     s309 = _source(racine, "le_plus_dense_dit_il_si_une_surface_est_sur_sa_feuille.json")
     if s309.exists():
