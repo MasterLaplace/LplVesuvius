@@ -1,0 +1,827 @@
+{
+ "la_question": "Déclaré par taux et sur vingt-quatre blocs, le juge sépare-t-il, et les nappes de m7 tirées de graines neuves suivent-elles leur feuille ?",
+ "les_constantes": {
+  "les_blocs": 24,
+  "les_hauteurs": [
+   0.25,
+   0.75
+  ],
+  "les_graines_par_hauteur": 4,
+  "le_taux_du_trace": 0.9,
+  "le_taux_des_rampes": 0.05,
+  "le_z_minimum": 3.0
+ },
+ "letalonnage": {
+  "les_blocs": [
+   {
+    "le_bloc": [
+     16,
+     240
+    ],
+    "lalignement": {
+     "le_segment": 0.67,
+     "saut_1": 0.59,
+     "rampe_douce": 0.15,
+     "rampe_raide": 0.15
+    },
+    "le_segment": 11.363,
+    "saut_1": 6.596,
+    "rampe_douce": -0.199,
+    "rampe_raide": -0.395
+   },
+   {
+    "le_bloc": [
+     32,
+     192
+    ],
+    "lalignement": {
+     "le_segment": 0.93,
+     "saut_1": 1.29,
+     "rampe_douce": 0.18,
+     "rampe_raide": 0.17
+    },
+    "le_segment": 20.166,
+    "saut_1": 16.265,
+    "rampe_douce": -0.296,
+    "rampe_raide": -0.38
+   },
+   {
+    "le_bloc": [
+     48,
+     144
+    ],
+    "lalignement": {
+     "le_segment": 0.67,
+     "saut_1": 0.15,
+     "rampe_douce": 0.17,
+     "rampe_raide": 0.13
+    },
+    "le_segment": 17.459,
+    "saut_1": -0.876,
+    "rampe_douce": -0.045,
+    "rampe_raide": -0.183
+   },
+   {
+    "le_bloc": [
+     64,
+     112
+    ],
+    "lalignement": {
+     "le_segment": 0.86,
+     "saut_1": 0.49,
+     "rampe_douce": 0.3,
+     "rampe_raide": 0.26
+    },
+    "le_segment": 11.198,
+    "saut_1": 6.328,
+    "rampe_douce": 1.268,
+    "rampe_raide": 3.161
+   },
+   {
+    "le_bloc": [
+     80,
+     64
+    ],
+    "lalignement": {
+     "le_segment": 1.13,
+     "saut_1": 0.95,
+     "rampe_douce": 0.16,
+     "rampe_raide": 0.2
+    },
+    "le_segment": 33.021,
+    "saut_1": 9.776,
+    "rampe_douce": -0.185,
+    "rampe_raide": 0.558
+   },
+   {
+    "le_bloc": [
+     96,
+     16
+    ],
+    "lalignement": {
+     "le_segment": 1.31,
+     "saut_1": 0.83,
+     "rampe_douce": 0.21,
+     "rampe_raide": 0.25
+    },
+    "le_segment": 17.861,
+    "saut_1": 13.622,
+    "rampe_douce": -0.528,
+    "rampe_raide": 0.511
+   },
+   {
+    "le_bloc": [
+     96,
+     224
+    ],
+    "lalignement": {
+     "le_segment": 1.31,
+     "saut_1": 1.2,
+     "rampe_douce": 0.38,
+     "rampe_raide": 0.28
+    },
+    "le_segment": 13.262,
+    "saut_1": 12.419,
+    "rampe_douce": 0.545,
+    "rampe_raide": 0.15
+   },
+   {
+    "le_bloc": [
+     112,
+     208
+    ],
+    "lalignement": {
+     "le_segment": 0.95,
+     "saut_1": 0.74,
+     "rampe_douce": 0.16,
+     "rampe_raide": 0.13
+    },
+    "le_segment": 15.554,
+    "saut_1": 12.757,
+    "rampe_douce": -0.307,
+    "rampe_raide": -0.483
+   },
+   {
+    "le_bloc": [
+     128,
+     176
+    ],
+    "lalignement": {
+     "le_segment": 1.13,
+     "saut_1": 0.98,
+     "rampe_douce": 0.24,
+     "rampe_raide": 0.2
+    },
+    "le_segment": 30.405,
+    "saut_1": 18.243,
+    "rampe_douce": 0.234,
+    "rampe_raide": 0.185
+   },
+   {
+    "le_bloc": [
+     144,
+     128
+    ],
+    "lalignement": {
+     "le_segment": 1.05,
+     "saut_1": 0.97,
+     "rampe_douce": 0.39,
+     "rampe_raide": 0.38
+    },
+    "le_segment": 14.931,
+    "saut_1": 9.557,
+    "rampe_douce": 0.508,
+    "rampe_raide": 1.817
+   },
+   {
+    "le_bloc": [
+     160,
+     160
+    ],
+    "lalignement": {
+     "le_segment": 0.76,
+     "saut_1": 0.6,
+     "rampe_douce": 0.22,
+     "rampe_raide": 0.37
+    },
+    "le_segment": 6.98,
+    "saut_1": 21.047,
+    "rampe_douce": 0.325,
+    "rampe_raide": 2.848
+   },
+   {
+    "le_bloc": [
+     176,
+     160
+    ],
+    "lalignement": {
+     "le_segment": 0.62,
+     "saut_1": 0.64,
+     "rampe_douce": 0.22,
+     "rampe_raide": 0.29
+    },
+    "le_segment": 7.271,
+    "saut_1": 18.123,
+    "rampe_douce": 0.139,
+    "rampe_raide": 1.895
+   },
+   {
+    "le_bloc": [
+     192,
+     176
+    ],
+    "lalignement": {
+     "le_segment": 0.63,
+     "saut_1": 0.28,
+     "rampe_douce": 0.16,
+     "rampe_raide": 0.12
+    },
+    "le_segment": 11.858,
+    "saut_1": 3.632,
+    "rampe_douce": 0.142,
+    "rampe_raide": -0.533
+   },
+   {
+    "le_bloc": [
+     208,
+     160
+    ],
+    "lalignement": {
+     "le_segment": 0.34,
+     "saut_1": 0.49,
+     "rampe_douce": 0.17,
+     "rampe_raide": 0.17
+    },
+    "le_segment": 5.987,
+    "saut_1": 6.231,
+    "rampe_douce": -0.031,
+    "rampe_raide": 1.708
+   },
+   {
+    "le_bloc": [
+     224,
+     160
+    ],
+    "lalignement": {
+     "le_segment": 0.65,
+     "saut_1": 0.61,
+     "rampe_douce": 0.3,
+     "rampe_raide": 0.12
+    },
+    "le_segment": 6.562,
+    "saut_1": 6.682,
+    "rampe_douce": 1.467,
+    "rampe_raide": -0.518
+   },
+   {
+    "le_bloc": [
+     240,
+     128
+    ],
+    "lalignement": {
+     "le_segment": 0.89,
+     "saut_1": 0.79,
+     "rampe_douce": 0.41,
+     "rampe_raide": 0.36
+    },
+    "le_segment": 7.117,
+    "saut_1": 12.16,
+    "rampe_douce": 2.642,
+    "rampe_raide": 6.35
+   },
+   {
+    "le_bloc": [
+     256,
+     96
+    ],
+    "lalignement": {
+     "le_segment": 0.5,
+     "saut_1": 0.35,
+     "rampe_douce": 0.16,
+     "rampe_raide": 0.18
+    },
+    "le_segment": 7.039,
+    "saut_1": 5.118,
+    "rampe_douce": -0.379,
+    "rampe_raide": 0.197
+   },
+   {
+    "le_bloc": [
+     272,
+     112
+    ],
+    "lalignement": {
+     "le_segment": 0.5,
+     "saut_1": 0.44,
+     "rampe_douce": 0.12,
+     "rampe_raide": 0.18
+    },
+    "le_segment": 2.991,
+    "saut_1": 4.7,
+    "rampe_douce": -0.696,
+    "rampe_raide": 1.02
+   },
+   {
+    "le_bloc": [
+     288,
+     96
+    ],
+    "lalignement": {
+     "le_segment": 0.7,
+     "saut_1": 0.4,
+     "rampe_douce": 0.15,
+     "rampe_raide": 0.1
+    },
+    "le_segment": 13.232,
+    "saut_1": 3.004,
+    "rampe_douce": -0.704,
+    "rampe_raide": -1.432
+   },
+   {
+    "le_bloc": [
+     304,
+     80
+    ],
+    "lalignement": {
+     "le_segment": 0.5,
+     "saut_1": 0.54,
+     "rampe_douce": 0.11,
+     "rampe_raide": 0.13
+    },
+    "le_segment": 11.97,
+    "saut_1": 9.599,
+    "rampe_douce": -3.046,
+    "rampe_raide": -1.332
+   },
+   {
+    "le_bloc": [
+     320,
+     64
+    ],
+    "lalignement": {
+     "le_segment": 0.78,
+     "saut_1": 0.75,
+     "rampe_douce": 0.18,
+     "rampe_raide": 0.33
+    },
+    "le_segment": 9.559,
+    "saut_1": 21.475,
+    "rampe_douce": -0.649,
+    "rampe_raide": 2.613
+   },
+   {
+    "le_bloc": [
+     336,
+     64
+    ],
+    "lalignement": {
+     "le_segment": 1.02,
+     "saut_1": 1.16,
+     "rampe_douce": 0.24,
+     "rampe_raide": 0.25
+    },
+    "le_segment": 12.507,
+    "saut_1": 9.716,
+    "rampe_douce": -0.079,
+    "rampe_raide": -0.113
+   },
+   {
+    "le_bloc": [
+     352,
+     48
+    ],
+    "lalignement": {
+     "le_segment": 0.81,
+     "saut_1": 0.76,
+     "rampe_douce": 0.23,
+     "rampe_raide": 0.23
+    },
+    "le_segment": 9.192,
+    "saut_1": 12.613,
+    "rampe_douce": 0.151,
+    "rampe_raide": 1.24
+   },
+   {
+    "le_bloc": [
+     368,
+     32
+    ],
+    "lalignement": {
+     "le_segment": 0.44,
+     "saut_1": 0.3,
+     "rampe_douce": 0.45,
+     "rampe_raide": 0.32
+    },
+    "le_segment": 1.576,
+    "saut_1": 0.245,
+    "rampe_douce": 1.825,
+    "rampe_raide": 1.738
+   }
+  ],
+  "le_verdict": {
+   "separe": true,
+   "le_taux_du_trace": 0.9167,
+   "le_taux_des_rampes": 0.0417,
+   "les_absents": 0,
+   "les_blocs": 24
+  },
+  "le_premier_saut_rapporte": {
+   "au_moins_3": 22,
+   "sur": 24
+  }
+ },
+ "le_rouleau": {
+  "les_graines": [
+   {
+    "le_rang": 1,
+    "la_hauteur": 0.25,
+    "la_graine": [
+     748,
+     2348,
+     3884
+    ],
+    "la_part_appuyee": 0.093,
+    "les_dechirures": 0.0,
+    "les_sauts": {
+     "plus": "non jugée",
+     "moins": "non jugée"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": null,
+      "lalignement": null,
+      "la_moyenne_des_temoins": null,
+      "les_points_juges": 0,
+      "sans_matiere": 3969,
+      "la_piece": "non jugée"
+     },
+     "plus": {
+      "le_z": null,
+      "lalignement": null,
+      "la_moyenne_des_temoins": null,
+      "les_points_juges": 0,
+      "sans_matiere": 3721,
+      "la_piece": "non jugée",
+      "la_part_appuyee": 0.0187,
+      "le_pas_median_des_appuyes_voxels": 40.0,
+      "les_dechirures": 0.0027
+     },
+     "moins": {
+      "le_z": null,
+      "lalignement": null,
+      "la_moyenne_des_temoins": null,
+      "les_points_juges": 0,
+      "sans_matiere": 3721,
+      "la_piece": "non jugée",
+      "la_part_appuyee": 0.0,
+      "le_pas_median_des_appuyes_voxels": null,
+      "les_dechirures": 0.0
+     }
+    },
+    "la_nappe": "non jugée"
+   },
+   {
+    "le_rang": 2,
+    "la_hauteur": 0.25,
+    "la_graine": [
+     4908,
+     2572,
+     3916
+    ],
+    "la_part_appuyee": 0.2632,
+    "les_dechirures": 0.0001,
+    "les_sauts": {
+     "plus": "ne la suit pas",
+     "moins": "suit sa feuille"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": -0.696,
+      "lalignement": 0.24,
+      "la_moyenne_des_temoins": 0.348,
+      "les_points_juges": 375,
+      "sans_matiere": 3594,
+      "la_piece": "ne la suit pas"
+     },
+     "plus": {
+      "le_z": -0.643,
+      "lalignement": 0.34,
+      "la_moyenne_des_temoins": 0.425,
+      "les_points_juges": 326,
+      "sans_matiere": 3395,
+      "la_piece": "ne la suit pas",
+      "la_part_appuyee": 0.0144,
+      "le_pas_median_des_appuyes_voxels": 17.5,
+      "les_dechirures": 0.0015
+     },
+     "moins": {
+      "le_z": 3.288,
+      "lalignement": 0.47,
+      "la_moyenne_des_temoins": 0.241,
+      "les_points_juges": 312,
+      "sans_matiere": 3409,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.0059,
+      "le_pas_median_des_appuyes_voxels": 19.0,
+      "les_dechirures": 0.0004
+     }
+    },
+    "la_nappe": "ne la suit pas"
+   },
+   {
+    "le_rang": 3,
+    "la_hauteur": 0.25,
+    "la_graine": [
+     2744,
+     5252,
+     4524
+    ],
+    "la_part_appuyee": 0.7283,
+    "les_dechirures": 0.0017,
+    "les_sauts": {
+     "plus": "suit sa feuille",
+     "moins": "suit sa feuille"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": 13.273,
+      "lalignement": 2.0,
+      "la_moyenne_des_temoins": 0.485,
+      "les_points_juges": 3968,
+      "sans_matiere": 1,
+      "la_piece": "suit sa feuille"
+     },
+     "plus": {
+      "le_z": 9.88,
+      "lalignement": 1.14,
+      "la_moyenne_des_temoins": 0.295,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.6443,
+      "le_pas_median_des_appuyes_voxels": 30.25,
+      "les_dechirures": 0.0399
+     },
+     "moins": {
+      "le_z": 26.325,
+      "lalignement": 2.64,
+      "la_moyenne_des_temoins": 0.66,
+      "les_points_juges": 3649,
+      "sans_matiere": 72,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.0428,
+      "le_pas_median_des_appuyes_voxels": 15.0,
+      "les_dechirures": 0.0008
+     }
+    },
+    "la_nappe": "suit sa feuille"
+   },
+   {
+    "le_rang": 4,
+    "la_hauteur": 0.25,
+    "la_graine": [
+     4692,
+     5268,
+     4144
+    ],
+    "la_part_appuyee": 0.6201,
+    "les_dechirures": 0.0542,
+    "les_sauts": {
+     "plus": "suit sa feuille",
+     "moins": "suit sa feuille"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": 4.767,
+      "lalignement": 0.26,
+      "la_moyenne_des_temoins": 0.114,
+      "les_points_juges": 3969,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille"
+     },
+     "plus": {
+      "le_z": 21.422,
+      "lalignement": 0.38,
+      "la_moyenne_des_temoins": 0.082,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.6383,
+      "le_pas_median_des_appuyes_voxels": 22.5,
+      "les_dechirures": 0.0588
+     },
+     "moins": {
+      "le_z": 5.149,
+      "lalignement": 0.27,
+      "la_moyenne_des_temoins": 0.113,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.6343,
+      "le_pas_median_des_appuyes_voxels": 22.0,
+      "les_dechirures": 0.0576
+     }
+    },
+    "la_nappe": "suit sa feuille"
+   },
+   {
+    "le_rang": 5,
+    "la_hauteur": 0.75,
+    "la_graine": [
+     4940,
+     2540,
+     10892
+    ],
+    "la_part_appuyee": 0.3335,
+    "les_dechirures": 0.0,
+    "les_sauts": {
+     "plus": "non jugée",
+     "moins": "non jugée"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": null,
+      "lalignement": null,
+      "la_moyenne_des_temoins": null,
+      "les_points_juges": 0,
+      "sans_matiere": 3969,
+      "la_piece": "non jugée"
+     },
+     "plus": {
+      "le_z": null,
+      "lalignement": null,
+      "la_moyenne_des_temoins": null,
+      "les_points_juges": 0,
+      "sans_matiere": 3721,
+      "la_piece": "non jugée",
+      "la_part_appuyee": 0.2923,
+      "le_pas_median_des_appuyes_voxels": 25.5,
+      "les_dechirures": 0.0
+     },
+     "moins": {
+      "le_z": null,
+      "lalignement": null,
+      "la_moyenne_des_temoins": null,
+      "les_points_juges": 0,
+      "sans_matiere": 3721,
+      "la_piece": "non jugée",
+      "la_part_appuyee": 0.0109,
+      "le_pas_median_des_appuyes_voxels": 26.5,
+      "les_dechirures": 0.0001
+     }
+    },
+    "la_nappe": "non jugée"
+   },
+   {
+    "le_rang": 6,
+    "la_hauteur": 0.75,
+    "la_graine": [
+     2844,
+     5016,
+     10960
+    ],
+    "la_part_appuyee": 0.5183,
+    "les_dechirures": 0.0107,
+    "les_sauts": {
+     "plus": "suit sa feuille",
+     "moins": "suit sa feuille"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": 8.115,
+      "lalignement": 1.18,
+      "la_moyenne_des_temoins": 0.365,
+      "les_points_juges": 3969,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille"
+     },
+     "plus": {
+      "le_z": 9.028,
+      "lalignement": 0.83,
+      "la_moyenne_des_temoins": 0.174,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.3884,
+      "le_pas_median_des_appuyes_voxels": 39.0,
+      "les_dechirures": 0.0497
+     },
+     "moins": {
+      "le_z": 3.398,
+      "lalignement": 1.28,
+      "la_moyenne_des_temoins": 0.797,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.9186,
+      "le_pas_median_des_appuyes_voxels": 17.0,
+      "les_dechirures": 0.0305
+     }
+    },
+    "la_nappe": "suit sa feuille"
+   },
+   {
+    "le_rang": 7,
+    "la_hauteur": 0.75,
+    "la_graine": [
+     2416,
+     2888,
+     11368
+    ],
+    "la_part_appuyee": 0.7269,
+    "les_dechirures": 0.0575,
+    "les_sauts": {
+     "plus": "suit sa feuille",
+     "moins": "suit sa feuille"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": 10.784,
+      "lalignement": 0.39,
+      "la_moyenne_des_temoins": 0.126,
+      "les_points_juges": 3969,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille"
+     },
+     "plus": {
+      "le_z": 6.166,
+      "lalignement": 0.31,
+      "la_moyenne_des_temoins": 0.108,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.7378,
+      "le_pas_median_des_appuyes_voxels": 19.0,
+      "les_dechirures": 0.0669
+     },
+     "moins": {
+      "le_z": 12.657,
+      "lalignement": 0.34,
+      "la_moyenne_des_temoins": 0.106,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.734,
+      "le_pas_median_des_appuyes_voxels": 20.0,
+      "les_dechirures": 0.0667
+     }
+    },
+    "la_nappe": "suit sa feuille"
+   },
+   {
+    "le_rang": 8,
+    "la_hauteur": 0.75,
+    "la_graine": [
+     5164,
+     4816,
+     11404
+    ],
+    "la_part_appuyee": 0.6772,
+    "les_dechirures": 0.0577,
+    "les_sauts": {
+     "plus": "suit sa feuille",
+     "moins": "suit sa feuille"
+    },
+    "le_detail": {
+     "nappe": {
+      "le_z": 4.095,
+      "lalignement": 0.18,
+      "la_moyenne_des_temoins": 0.091,
+      "les_points_juges": 3969,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille"
+     },
+     "plus": {
+      "le_z": 5.069,
+      "lalignement": 0.14,
+      "la_moyenne_des_temoins": 0.071,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.6798,
+      "le_pas_median_des_appuyes_voxels": 20.0,
+      "les_dechirures": 0.0718
+     },
+     "moins": {
+      "le_z": 4.511,
+      "lalignement": 0.23,
+      "la_moyenne_des_temoins": 0.113,
+      "les_points_juges": 3721,
+      "sans_matiere": 0,
+      "la_piece": "suit sa feuille",
+      "la_part_appuyee": 0.7157,
+      "le_pas_median_des_appuyes_voxels": 21.0,
+      "les_dechirures": 0.081
+     }
+    },
+    "la_nappe": "suit sa feuille"
+   }
+  ]
+ },
+ "la_lecture_de_m7": {
+  "lus": 726,
+  "absents": 46,
+  "octets": 251756922,
+  "pannes": []
+ },
+ "les_morceaux": {
+  "PHercParis4": {
+   "combien": 1402,
+   "les_octets": 2940207104
+  },
+  "PHerc0358": {
+   "combien": 672,
+   "les_octets": 1409286144
+  }
+ },
+ "les_pannes": [],
+ "le_verdict": {
+  "decidable": true,
+  "separe": true,
+  "k": 5,
+  "j": 5,
+  "n": 8,
+  "lissue": "sur 5 des 8 graines neuves, la nappe tirée de m7 suit sa feuille, et sur 5 d'entre elles une spire suivante aussi"
+ },
+ "les_secondes": 474.9
+}

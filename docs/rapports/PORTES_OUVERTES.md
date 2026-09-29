@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**154 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**155 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 116 portes
+## Grand Prize — 117 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -134,7 +134,8 @@
 - **R4-P97** *(le graal)* · **LÀ OÙ LE SEGMENT NE REPASSE PLUS QU'UNE FOIS PRÈS DE LA CHAÎNE, QU'EST-CE QUI DIT QU'UN SAUT A AVANCÉ D'UNE FEUILLE SUR LE PRÉCÉDENT ?** ⭐⭐⭐ C'EST CE QUE `297` DÉSIGNE. Au deuxième saut, le texte suit (0,8749 contre 0,2914 au plus) ; au troisième, 0,4459 contre 0,3992, mais 0,9888 des pixels jugés font face à la même feuille du segment que le saut précédent, et le témoin du texte un tour en arrière ne départage plus. L'écart entre les deux surfaces, là où elles sont jugées, le peut sans l'encre. ⚠ Le juge d'encre ne vaut que là où le segment repasse.
 - **R4-P98** *(le référent)* · **RÉPONDUE par `299` : non, par la règle déclarée.** L'alignement rapporté à deux rampes plantées ne sépare pas bloc par bloc (le premier saut à 1,911, deux rampes à 2,0, `R4-F480`), alors que le tracé humain passe sur les six blocs ; sur PHerc0358, quatre surfaces neuves du traceur ont en médiane l'alignement de leurs rampes. La suite est `R4-P99`.
 - **R4-P99** *(le référent)* · **RÉPONDUE par `300` : presque, et pas par la règle.** Contre huit rampes (Z ≥ 3), onze des douze surfaces justes passent et aucune des douze rampes ; le premier saut tombe à 2,842 sur un bloc où il est juste (`R4-F481`). Rapportées, deux des quatre nappes tirées de `m7` sur PHerc0358 et leurs spires suivantes dépassent 3, les pièces du traceur restent à −0,102 en médiane. La suite est `R4-P100`.
-- **R4-P100** *(le référent)* · **UN ÉTALONNAGE DÉCLARÉ PAR TAUX, SUR PLUS DE BLOCS, SÉPARE-T-IL AU PAS DU PRIX, ET QUE DIT-IL ALORS DES NAPPES DE `m7` ET DE LEURS SPIRES SUIVANTES, TIRÉES DEPUIS DES GRAINES QU'ON N'A PAS VUES ?** ⭐⭐⭐⭐ C'EST CE QUE `300` DÉSIGNE. Le juge contre huit rampes manque sa règle tout-ou-rien d'une comparaison sur vingt-quatre (2,842, sur une surface juste), et, rapportées, deux nappes de `m7` sur quatre et leurs spires suivantes se calent sur l'empilement. ⚠ Aucun juge ne dit encore quelle feuille.
+- **R4-P100** *(le référent)* · **RÉPONDUE par `301` : oui, et oui.** Déclaré par taux sur vingt-quatre blocs, le juge sépare (tracé 0,9167, rampes 0,0417) ; sur PHerc0358, cinq nappes de `m7` sur huit graines neuves suivent leur feuille, avec leurs deux spires suivantes (`R4-F482`). La suite est `R4-P101`.
+- **R4-P101** *(le graal)* · **LES NAPPES DE `m7` QUI SUIVENT LEUR FEUILLE SUR PHerc0358 RESTENT-ELLES SUR UNE SEULE FEUILLE, ET LEUR SPIRE SUIVANTE EST-ELLE LA VOISINE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `301` DÉSIGNE. Cinq nappes sur huit suivent leur feuille, et leurs deux spires suivantes, au pas du rouleau pour trois d'entre elles ; mais 5,4 à 5,8 % de leurs paires de voisins sautent de plus d'un demi-pas, et l'alignement ne voit pas le rang. Les juges qui le voient : la fermeture des boucles (`R4-F430`) au pas du prix, ou la continuité de la phase `lasagna` publiée.
 
 ## Progress Prizes — 19 portes
 

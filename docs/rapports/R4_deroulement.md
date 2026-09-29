@@ -4334,6 +4334,14 @@ première surface tirée de `m7` seule, sans traceur, par le vote de `247`, se c
 (Z 12,79 et 23,677), avec ses deux spires suivantes, à des pas médians proches du pas du rouleau ; les pièces du traceur restent à
 −0,102 en médiane. `R4-P100` s'ouvre : un étalonnage par taux, et des graines neuves.
 
+**`301` · 2026-09-29 · les nappes de m7 suivent-elles leur feuille sur des graines neuves** — `R4-P100`, #5, #17
+
+⭐⭐⭐⭐⭐ **Sur PHerc0358, un rouleau du prix sans aucun tracé humain, une première surface tirée de la seule prédiction `m7`
+suit sa feuille pour cinq des huit graines neuves, et ses deux spires suivantes aussi** — `R4-F482`. Le juge, sans référent, sépare
+par sa règle déclarée par taux sur vingt-quatre blocs neufs de PHercParis4 : le tracé humain à Z ≥ 3 sur 0,9167, les rampes sur
+0,0417. C'est le premier fait établi sur un rouleau sans tracé. Le juge ne dit pas quelle feuille, et les marges sont d'une
+comparaison. `R4-P101` s'ouvre : une seule feuille, et la voisine.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

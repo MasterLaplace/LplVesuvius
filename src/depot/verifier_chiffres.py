@@ -3336,6 +3336,32 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 301 : LES NAPPES DE M7 SUIVENT-ELLES LEUR FEUILLE SUR DES GRAINES NEUVES
+    s301 = _source(racine, "les_nappes_de_m7_suivent_elles_leur_feuille_sur_des_graines_neuves.json")
+    if s301.exists():
+        d = json.loads(s301.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        e_ = d["letalonnage"]
+        ev = e_["le_verdict"]
+        blocs = e_["les_blocs"]
+        trace_ok = sum(1 for b in blocs if b["le_segment"] is not None and b["le_segment"] >= 3.0)
+        rampes_ok = sum(1 for b in blocs for n in ("rampe_douce", "rampe_raide") if b[n] is not None and b[n] >= 3.0)
+        ecrits = [("le tracé de 301", f"Le tracé humain a Z ≥ 3 sur **{trace_ok}** des {len(blocs)} blocs "
+                                      f"(**{f_(ev['le_taux_du_trace'])}**)"),
+                  ("les rampes de 301", f"rampes ont Z ≥ 3 sur **{rampes_ok}** des {2 * len(blocs)} comparaisons "
+                                        f"(**{f_(ev['le_taux_des_rampes'])}**)"),
+                  ("les morceaux de 301", f"**{d['les_morceaux']['PHercParis4']['combien']}** morceaux de PHercParis4 et "
+                                          f"**{d['les_morceaux']['PHerc0358']['combien']}** de PHerc0358")]
+        for g in d["le_rouleau"]["les_graines"]:
+            x_ = g["le_detail"]
+            ecrits.append((f"la graine {g['le_rang']} de 301",
+                           f"| {g['le_rang']} | {f_(g['la_hauteur'])} | {g['la_graine'][0]} {g['la_graine'][1]} "
+                           f"{g['la_graine'][2]} | {f_(g['la_part_appuyee'])} | {f_(x_['nappe']['le_z'])} | "
+                           f"{f_(x_['plus']['le_z'])} | {f_(x_['moins']['le_z'])} | {x_['nappe']['les_points_juges']} | "
+                           f"{f_(g['les_dechirures'])} | {f_(x_['plus']['le_pas_median_des_appuyes_voxels'])} / "
+                           f"{f_(x_['moins']['le_pas_median_des_appuyes_voxels'])} |"))
+        out.extend((nom, [x_], s301.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 300 : UNE NAPPE TIRÉE DE M7 SUIT-ELLE SA FEUILLE
     s300 = _source(racine, "une_nappe_tiree_de_m7_suit_elle_sa_feuille.json")
     if s300.exists():

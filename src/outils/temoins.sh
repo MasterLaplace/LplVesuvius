@@ -1739,6 +1739,8 @@ run "l alignement des profils dit-il si une premiere surface suit sa feuille" uv
 run "figure l alignement des profils dit-il si une premiere surface suit sa feuille" uv run python "$ROOT/src/figures/figure_lalignement_des_profils_dit_il_si_une_premiere_surface_suit_sa_feuille.py" --verifier
 run "une nappe tiree de m7 suit-elle sa feuille" uv run python "$ROOT/src/nappe/une_nappe_tiree_de_m7_suit_elle_sa_feuille.py" --verifier
 run "figure une nappe tiree de m7 suit-elle sa feuille" uv run python "$ROOT/src/figures/figure_une_nappe_tiree_de_m7_suit_elle_sa_feuille.py" --verifier
+run "les nappes de m7 suivent-elles leur feuille sur des graines neuves" uv run python "$ROOT/src/nappe/les_nappes_de_m7_suivent_elles_leur_feuille_sur_des_graines_neuves.py" --verifier
+run "figure les nappes de m7 suivent-elles leur feuille sur des graines neuves" uv run python "$ROOT/src/figures/figure_les_nappes_de_m7_suivent_elles_leur_feuille_sur_des_graines_neuves.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
