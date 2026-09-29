@@ -3336,6 +3336,23 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 343 : SOUS LE RECOUVREMENT, LE SCAN MONTRE-T-IL DEUX FEUILLES
+    s343 = _source(racine, "sous_le_recouvrement_le_scan_montre_t_il_deux_feuilles.json")
+    if s343.exists():
+        d = json.loads(s343.read_text())
+        g_ = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        ecrits = [("le verdict de 343", d["le_verdict"]["lissue"].upper()),
+                  ("les morceaux du scan de 343", f"Il a fallu {d['les_morceaux']} morceaux du scan"),
+                  ("les profils mesurés de 343",
+                   f"{sum(p_['les_recouverts']['mesures'] for p_ in d['les_paires']):,} profils recouverts et "
+                   f"{sum(p_['les_separes']['mesures'] for p_ in d['les_paires']):,} séparés".replace(",", " "))]
+        for p_ in d["les_paires"]:
+            a_, b_ = p_["les_tours"]
+            ecrits.append((f"la paire g{p_['le_rang']} {a_}/{b_} de 343",
+                           f"| {p_['le_rang']}, `5753_{a_}` et `5753_{b_}` | {g_(p_['les_recouverts']['la_largeur_mediane_l2'])} | "
+                           f"{g_(p_['les_separes']['la_largeur_mediane_l2'])} | {g_(p_['le_rapport'])} |"))
+        out.extend((nom, [x_], s343.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 342 : SOUS LE RECOUVREMENT, m7 VOIT-IL DEUX FEUILLES COLLÉES
     s342 = _source(racine, "sous_le_recouvrement_m7_voit_il_deux_feuilles_collees.json")
     if s342.exists():

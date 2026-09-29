@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**193 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**194 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 155 portes
+## Grand Prize — 156 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -173,7 +173,8 @@
 - **R4-P136** *(le graal)* · **RÉPONDUE par `340` : quatre tours en médiane, et non six.** Jugée strictement, la chaîne bornée descend six tours sur les graines 4 à 7, deux sur la graine 8, aucun sur les graines 1 à 3 ; la chaîne sans relance 2,5 en médiane (`R4-F526`). La suite est `R4-P137`.
 - **R4-P137** *(le référent)* · **RÉPONDUE par `341` : oui.** Autour des graines 1 à 3, deux tours publiés voisins sont sur la même feuille sur 27 à 46 % de leurs sommets en face, contre 2 à 15 % autour des graines 4 à 6 et 0 à 5 % autour des graines 7 et 8 (`R4-F527`). La suite est `R4-P138`.
 - **R4-P138** *(le référent)* · **RÉPONDUE par `342` : par la règle, un tour posé sur la feuille de son voisin ; pas établi.** Sous le recouvrement, `m7` voit la même plage de 3 voxels qu'ailleurs, mais toutes ses plages ont ici 2 à 4 voxels (`R4-F528`). La suite est `R4-P139`.
-- **R4-P139** *(le référent)* · **LÀ OÙ DEUX TOURS PUBLIÉS SE RECOUVRENT, LA MATIÈRE DU SCAN MONTRE-T-ELLE UNE BANDE DE PAPYRUS DEUX FOIS PLUS ÉPAISSE QU'AILLEURS, DEUX FEUILLES COLLÉES, OU SIMPLE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `342` DÉSIGNE. `m7` dessine toutes ses feuilles avec la même épaisseur (`R4-F528`) ; le volume de PHercParis4 porte l'épaisseur réelle du papyrus.
+- **R4-P139** *(le référent)* · **RÉPONDUE par `343` : un tour posé sur la feuille de son voisin.** Sous le recouvrement, la bande du scan a 0,91 fois la largeur de celle d'où les tours sont séparés, jamais le double : le référent se trompe de feuille autour des graines 1 à 3 (`R4-F529`). La suite est `R4-P140`.
+- **R4-P140** *(le graal)* · **SUR LES GRAINES 4 À 8, OÙ LES TOURS PUBLIÉS NE SE RECOUVRENT PRESQUE PAS, LE CRITÈRE SANS RÉFÉRENT DE `328` — LE SAUT POSE AU PAS ET LA NAPPE N'EST PAS DANS UN BLOC — SÉPARE-T-IL LES SAUTS QUE LA LECTURE STRICTE DIT JUSTES DE CEUX QU'ELLE DIT FAUX ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `343` DÉSIGNE, ET C'EST LA QUESTION DE `#5`. Là où le référent est propre, il peut étalonner un critère qui s'en passe ; si ce critère dit juste là où le référent dit juste, il vaut pour PHerc0358, qui n'a pas de référent (`R4-F526`, `R4-F529`).
 
 ## Progress Prizes — 19 portes
 

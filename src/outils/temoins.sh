@@ -1823,6 +1823,8 @@ run "les tours publiés voisins se recouvrent-ils" uv run python "$ROOT/src/napp
 run "figure les tours publiés voisins se recouvrent-ils" uv run python "$ROOT/src/figures/figure_les_tours_publies_voisins_se_recouvrent_ils.py" --verifier
 run "sous le recouvrement, m7 voit-il deux feuilles collées" uv run python "$ROOT/src/nappe/sous_le_recouvrement_m7_voit_il_deux_feuilles_collees.py" --verifier
 run "figure sous le recouvrement, m7 voit-il deux feuilles collées" uv run python "$ROOT/src/figures/figure_sous_le_recouvrement_m7_voit_il_deux_feuilles_collees.py" --verifier
+run "sous le recouvrement, le scan montre-t-il deux feuilles" uv run python "$ROOT/src/nappe/sous_le_recouvrement_le_scan_montre_t_il_deux_feuilles.py" --verifier
+run "figure sous le recouvrement, le scan montre-t-il deux feuilles" uv run python "$ROOT/src/figures/figure_sous_le_recouvrement_le_scan_montre_t_il_deux_feuilles.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

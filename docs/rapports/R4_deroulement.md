@@ -4596,6 +4596,12 @@ deux feuilles collées ou un tour mal posé.
 ⭐⭐⭐ **Non, la même plage mince qu'ailleurs ; mais `m7` ne saurait pas le dire** — `R4-F528`. Sous deux tours publiés recouverts, `m7` ne
 voit qu'une plage de 3 voxels, comme sous un tour seul ; toutes ses plages ont ici 2 à 4 voxels. `R4-P139` s'ouvre : la matière du scan.
 
+**`343` · 2026-09-29 · sous le recouvrement, le scan montre-t-il deux feuilles** — `R4-P139`
+
+⭐⭐⭐⭐⭐ **Non : un tour publié y est posé sur la feuille de son voisin** — `R4-F529`. Sous le recouvrement, la bande de papyrus du scan est
+simple, 0,91 fois la largeur de celle d'ailleurs ; le référent se trompe de feuille autour des graines 1 à 3, et les chaînes n'y sont pas
+en cause. `R4-P140` s'ouvre : étalonner sur les graines propres un critère sans référent.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
