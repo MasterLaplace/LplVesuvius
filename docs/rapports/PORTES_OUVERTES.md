@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**166 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**167 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 128 portes
+## Grand Prize — 129 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -147,6 +147,7 @@
 - **R4-P110** *(le graal)* · **RÉPONDUE par `310` : oui pour la chaîne du vote.** Ses 32 spires sur huit côtés sur dix restent à au plus 2 voxels du plus dense du scan pendant quatre sauts, et sur les graines 4, 7 et 8 chaque saut avance de 18,5 à 22,5 voxels (`R4-F491`). La chaîne croissante de `306` sort du cœur dès le premier saut. La suite est `R4-P111`.
 - **R4-P111** *(le graal)* · **LES SPIRES DE LA CHAÎNE DU VOTE DES GRAINES 4, 7 ET 8, DÉCOUPÉES EN PIÈCES D'UNE SEULE FEUILLE PAR LES SAUTS DE `302`, RESTENT-ELLES AU CŒUR D'UNE FEUILLE PIÈCE PAR PIÈCE, ET LA PLUS GRANDE PIÈCE DE CHAQUE SPIRE EST-ELLE EN FACE DE LA PLUS GRANDE PIÈCE DE LA PRÉCÉDENTE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `310` DÉSIGNE. La chaîne reste au plus dense pendant quatre sauts, mais `304` montre ses nappes passant à la feuille voisine sur un carré de voisins sur dix : c'est la question qui sépare une chaîne de spires d'un empilement de morceaux.
 - **R4-P112** *(le graal)* · **POINT PAR POINT, SUR LA NAPPE CROISSANTE DE LA GRAINE 6 ET SUR CELLES DU VOTE DES GRAINES 4, 7 ET 8 DE PHerc0358, L'ÉCART ENTRE LE PLUS DENSE DU PROFIL ET LE MAXIMUM VOISIN LE PLUS PROCHE SE RÉPARTIT-IL AUTOUR DU PAS, OU EN DEUX MODES, UN COURT ET UN LONG, DONT LA SOMME VAUT LE PAS ?** ⭐⭐⭐⭐ C'EST CE QUE `311` DÉSIGNE. Le profil moyen sur 6 mm ne garde que deux maxima (`R4-F492`) ; les sauts de 12 à 13,5 voxels de `304` sont soit le passage à une spire écrasée contre la sienne, soit à la seconde couche de fibres de la même feuille, et seule une lecture locale peut les séparer.
+- **R4-P113** *(le graal)* · **ENTRE CHAQUE SURFACE DE LA CHAÎNE DE `303` ET SA SPIRE SUIVANTE, LE LONG DE LA NORMALE, COMBIEN DE PLAGES DE `m7` LE RAYON TRAVERSE-T-IL ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `312` DÉSIGNE. Les surfaces de `m7` sont au plus à 10 à 17,5 voxels l'une de l'autre (`R4-F493`), et la chaîne avance de 18,5 à 22,5 voxels par saut : si le rayon en traverse une, la chaîne saute une surface de `m7` à chaque saut, et ses « spires » en sont une sur deux.
 
 ## Progress Prizes — 19 portes
 

@@ -3336,6 +3336,19 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 312 : M7 MARQUE-T-IL UNE OU DEUX SURFACES PAR SPIRE
+    s312 = _source(racine, "m7_marque_t_il_une_ou_deux_surfaces_par_spire.json")
+    if s312.exists():
+        d = json.loads(s312.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 312", d["le_verdict"]["lissue"].upper())]
+        for g_ in d["les_graines"]:
+            ecrits.append((f"la graine {g_['le_rang']} de 312",
+                           f"| {g_['le_rang']} | {g_['les_ecarts']} | {f_(g_.get('au_pas'))} | {f_(g_.get('courts'))} | "
+                           f"{f_(g_.get('longs'))} | {f_(g_.get('des_courts_font_paire'))} | {f_(g_.get('lecart_median'))} | "
+                           f"{g_['la_lecture']} |"))
+        out.extend((nom, [x_], s312.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐ LA TRANCHE 311 : LES MAXIMA DU SCAN SONT-ILS AU PAS OU PAR PAIRES
     s311 = _source(racine, "les_maxima_du_scan_sont_ils_au_pas_ou_par_paires.json")
     if s311.exists():

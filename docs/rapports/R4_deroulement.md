@@ -4410,6 +4410,12 @@ feuille, et consécutives, reste ouvert : `R4-P111`.
 Sur PHercParis4 aussi, bloc par bloc, il est indécidable dans 19 blocs sur 24. La question de `304`, feuille voisine ou seconde
 couche d'une même feuille, reste ouverte : `R4-P112`, une lecture point par point.
 
+**`312` · 2026-09-29 · m7 marque-t-il une ou deux surfaces par spire**
+
+⭐⭐⭐⭐ **Ni l'un ni l'autre : le long des rayons, les plages de `m7` se suivent en un seul mode, à 10 à 17,5 voxels selon la graine,
+sous le pas médian du rouleau** — `R4-F493`. Au plus 30 % des écarts courts font paire. La chaîne de `303`, qui avance de 18,5 à
+22,5 voxels par saut, peut sauter une surface de `m7` : `R4-P113`.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
