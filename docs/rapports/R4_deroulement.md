@@ -4608,6 +4608,12 @@ en cause. `R4-P140` s'ouvre : étalonner sur les graines propres un critère san
 quatre chaînes de `340` et 5 des 6 faux ; ce qu'il tient est juste à 95,15 %, tout ce qui est jugé à 94,55 %. Sur PHerc0358, les sauts
 qu'il tient ne sont donc validés par rien. `R4-P141` s'ouvre : compter les feuilles de `m7` qu'un saut franchit.
 
+**`345` · 2026-09-29 · les feuilles de m7 franchies séparent-elles les sauts justes des faux** — `R4-P141`
+
+⭐⭐⭐⭐ **En partie** — `R4-F531`. Compter les feuilles de `m7` qu'un saut passe tient 95 des 104 sauts justes et 3 des 6 faux sur les
+graines 4 à 8. Il refuse le saut qui passe par-dessus `5753_-5`, que le pas nominal tenait ; mais une surface qui retrouve deux tours
+passe pour lui à la feuille suivante. `R4-P142` s'ouvre : ces surfaces sont-elles là où les deux tours publiés se recouvrent ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3336,6 +3336,50 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 345 : LES FEUILLES DE m7 FRANCHIES SÉPARENT-ELLES LES SAUTS JUSTES DES FAUX
+    s345 = _source(racine, "les_feuilles_de_m7_franchies_separent_elles_les_sauts_justes_des_faux.json")
+    if s345.exists():
+        import statistics
+        d = json.loads(s345.read_text())
+        v_ = d["le_verdict"]
+        c2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        pc = lambda x: f"{round(100 * x)} %"  # noqa: E731
+        propres = [s_ for ch_ in d["les_chaines"].values() for g in ch_["les_graines"] if g["le_rang"] >= 4
+                   for x_ in g["les_cotes"].values() for s_ in x_["les_sauts"] if s_["la_justesse"] != "non jugé"]
+        parts = sorted(s_["les_feuilles"]["la_part_dune_feuille"] for s_ in propres if s_["la_justesse"] == "juste")
+        faux_ = [s_ for s_ in propres if s_["la_justesse"].startswith("faux")]
+        tenus = [s_["les_feuilles"]["la_part_dune_feuille"] for s_ in faux_ if s_["tient"]]
+        saute = next(s_ for s_ in faux_ if s_["la_justesse"] == "faux : un autre tour")
+        zeros = [s_["les_feuilles"]["les_comptes"].get("0", 0) / s_["les_feuilles"]["les_mesures"] for s_ in propres
+                 if s_["la_justesse"] == "juste" and not s_["tient"] and s_["les_feuilles"]["les_mesures"] >= 50]
+        b13, bs = d["les_bilans"]["graines_1_a_3"], d["les_bilans"]["par_seuil"]
+        lus = sum(x_["lus"] if "lus" in x_ else x_["PHercParis4"]["lus"] for x_ in d["la_lecture_de_m7"].values())
+        ecrits = [("le verdict de 345", v_["lissue"].upper()),
+                  ("les chunks de m7 lus de 345", f"`m7` a été lu en {lus:,} chunks, sans panne".replace(",", " ", 1)),
+                  ("la précision de 345", f"juste à {c2(100 * v_['la_part_des_tenus_qui_sont_justes'])} %, contre "
+                                          f"{c2(100 * v_['les_justes'] / (v_['les_justes'] + v_['les_faux']))} %"),
+                  ("les graines 1 à 3 de 345", f"{b13['les_justes_qui_tiennent']} sauts justes tenus sur {b13['les_justes']} et "
+                                              f"{b13['les_faux_qui_tiennent']} faux sur {b13['les_faux']}"),
+                  ("le saut par-dessus un tour de 345",
+                   f"{saute['les_feuilles']['les_comptes']['2']} de ses {saute['les_feuilles']['les_mesures']} points comptés passent deux"),
+                  ("la part d'une feuille du saut de 345", f"{pc(saute['les_feuilles']['la_part_dune_feuille'])} seulement n'en passent"),
+                  ("les faux tenus de 345", f"sur {round(100 * min(tenus))} à {round(100 * max(tenus))} % de leurs points"),
+                  ("les justes de 345", f"sur {pc(statistics.median(parts))} de leurs points en médiane, de {pc(parts[0])} à "
+                                        f"{pc(parts[-1])}"),
+                  ("les points restés de 345", f"où {round(100 * min(zeros))} à {round(100 * max(zeros))} % des points restent"),
+                  ("le seuil de la moitié de 345", f"le compte tient {bs['0.5']['les_justes_qui_tiennent']} des {bs['0.5']['les_justes']} "
+                                                   f"justes et {bs['0.5']['les_faux_qui_tiennent']} des {bs['0.5']['les_faux']} faux"),
+                  ("le seuil des neuf dixièmes de 345", f"à neuf dixièmes, {bs['0.9']['les_justes_qui_tiennent']} et "
+                                                        + ("aucun" if bs["0.9"]["les_faux_qui_tiennent"] == 0 else str(bs["0.9"]["les_faux_qui_tiennent"]))),
+                  ("avec 328 de 345", f"en plus, {d['les_bilans']['avec_328']['les_justes_qui_tiennent']} et "
+                                      f"{d['les_bilans']['avec_328']['les_faux_qui_tiennent']}"),
+                  ("les quatre chaînes de 345", f"| **les quatre** | **{v_['les_justes_qui_tiennent']} sur {v_['les_justes']}** | "
+                                                f"**{v_['les_faux_qui_tiennent']} sur {v_['les_faux']}** |")]
+        for n_, b_ in d["les_bilans"]["par_chaine"].items():
+            ecrits.append((f"la chaîne {n_} de 345", f"| {n_} | {b_['les_justes_qui_tiennent']} sur {b_['les_justes']} | "
+                                                     f"{b_['les_faux_qui_tiennent']} sur {b_['les_faux']} |"))
+        out.extend((nom, [x_], s345.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 344 : LE CRITÈRE SANS RÉFÉRENT SÉPARE-T-IL LES SAUTS JUSTES DES FAUX
     s344 = _source(racine, "le_critere_sans_referent_separe_t_il_les_sauts_justes_des_faux.json")
     if s344.exists():

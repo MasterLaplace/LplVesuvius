@@ -84,17 +84,18 @@ def la_graine_de_la_relance(spire: np.ndarray, valide: np.ndarray):
 def la_chaine_relancee(nappe: dict, cote: float, relancer, sauter, sauts: int = LES_SAUTS, avec_la_spire: bool = False) -> list[dict]:
     """Jusqu'à `sauts` sauts, chacun parti de la nappe relancée sur la spire du précédent ; `sauter(surface, valide)` rend le saut,
     `relancer(point, normale)` la nappe. Avec `avec_la_spire`, écrit pour `333`, `relancer(point, normale, spire, valide)` reçoit
-    aussi la spire entière et ses points posés."""
+    aussi la spire entière et ses points posés. Chaque saut porte aussi, pour `345`, la surface d'où il part."""
     surf, ok = nappe["la_nappe"], nappe["valide"]
     out = []
     for _ in range(sauts):
         s = sauter(surf, ok)
+        depart = {"la_nappe": surf, "valide": ok}
         g = la_graine_de_la_relance(s["la_spire"], s["valide"]) if s["valide"].any() else None
         if g is None:
-            out.append({"le_saut": s, "la_relance": None})
+            out.append({"le_saut": s, "la_relance": None, "le_depart": depart})
             break
         r = relancer(*g, s["la_spire"], s["valide"]) if avec_la_spire else relancer(*g)
-        out.append({"le_saut": s, "la_relance": r})
+        out.append({"le_saut": s, "la_relance": r, "le_depart": depart})
         if not r["valide"].any():
             break
         surf, ok = r["la_nappe"], r["valide"]
@@ -289,6 +290,9 @@ def verifier() -> int:
     ch = la_chaine_relancee(nappe, 1.0, relancer, sauter, sauts=3)
     v("★★★★ chaque saut part de la nappe relancée, pas de la spire", len(departs) == 3
       and np.array_equal(departs[1], ch[0]["la_relance"]["la_nappe"]) and not np.array_equal(departs[1], ch[0]["le_saut"]["la_spire"]))
+    v("★★★ chaque saut porte la surface d'où il part : la nappe, puis la nappe relancée du saut d'avant",
+      np.array_equal(ch[0]["le_depart"]["la_nappe"], nappe["la_nappe"])
+      and all(np.array_equal(ch[h]["le_depart"]["la_nappe"], ch[h - 1]["la_relance"]["la_nappe"]) for h in (1, 2)))
     v("★★★★ trois sauts, chacun relancé en une nappe entière sur la feuille suivante", len(ch) == 3 and len(appels) == 3
       and all(k["la_relance"]["valide"].mean() > 0.9 for k in ch) and [a[2] for a in appels] == [120.0, 140.0, 160.0], str(appels))
     vide = lambda idx: idx[..., 0] == 80  # noqa: E731

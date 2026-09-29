@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**195 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**196 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 157 portes
+## Grand Prize — 158 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -175,7 +175,8 @@
 - **R4-P138** *(le référent)* · **RÉPONDUE par `342` : par la règle, un tour posé sur la feuille de son voisin ; pas établi.** Sous le recouvrement, `m7` voit la même plage de 3 voxels qu'ailleurs, mais toutes ses plages ont ici 2 à 4 voxels (`R4-F528`). La suite est `R4-P139`.
 - **R4-P139** *(le référent)* · **RÉPONDUE par `343` : un tour posé sur la feuille de son voisin.** Sous le recouvrement, la bande du scan a 0,91 fois la largeur de celle d'où les tours sont séparés, jamais le double : le référent se trompe de feuille autour des graines 1 à 3 (`R4-F529`). La suite est `R4-P140`.
 - **R4-P140** *(le graal)* · **RÉPONDUE par `344` : non.** Sur les graines 4 à 8, le critère sans référent de `328` tient 98 des 104 sauts justes et 5 des 6 faux des quatre chaînes de `340` ; ce qu'il tient est juste à 95,15 %, tout ce qui est jugé à 94,55 % (`R4-F530`). La suite est `R4-P141`.
-- **R4-P141** *(le graal)* · **SUR LES GRAINES 4 À 8, UN CRITÈRE SANS RÉFÉRENT QUI COMPTE, POINT PAR POINT, LES FEUILLES DE `m7` QU'UN SAUT FRANCHIT, AU LIEU DE MESURER SON PAS EN PAS NOMINAL, SÉPARE-T-IL LES SAUTS QUE LA LECTURE STRICTE DIT JUSTES DE CEUX QU'ELLE DIT FAUX ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `344` DÉSIGNE, ET C'EST TOUJOURS LA QUESTION DE `#5`. Les tours publiés consécutifs sont ici à 0,53 à 0,93 pas nominal l'un de l'autre (`R4-F523`) : la fenêtre d'un demi-pas à un pas et demi en contient jusqu'à deux, et un saut faux y tient. Compter les feuilles se passe du pas nominal comme du référent. ⚠ Six sauts faux seulement pour l'étalonner (`R4-F530`).
+- **R4-P141** *(le graal)* · **RÉPONDUE par `345` : en partie.** Compter les feuilles de `m7` qu'un saut franchit tient 95 des 104 sauts justes et 3 des 6 faux ; il refuse le saut par-dessus `5753_-5` que le pas nominal tenait, mais tient trois des quatre sauts qui retrouvent deux tours (`R4-F531`). La suite est `R4-P142`.
+- **R4-P142** *(le référent)* · **LES TROIS SAUTS À DEUX TOURS QUE LE COMPTE DES FEUILLES TIENT SUR LES GRAINES 4 À 8 SONT-ILS POSÉS LÀ OÙ LES DEUX TOURS PUBLIÉS QU'ILS RETROUVENT SE RECOUVRENT, COMME AUTOUR DES GRAINES 1 À 3 ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `345` DÉSIGNE. Si oui, le compte ne manque que des sauts que le référent dit faux à tort, et il vaut pour `#5` ; sinon, une surface peut passer à la feuille suivante et retrouver deux tours, et il faut autre chose. Autour des graines 4 à 6, les tours voisins se recouvrent sur 2 à 15 % de leurs sommets (`R4-F527`) : c'est peu en tout, mais peut-être là où ces surfaces sont posées.
 
 ## Progress Prizes — 19 portes
 

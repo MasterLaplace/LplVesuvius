@@ -112,31 +112,36 @@ def la_justesse(avant: dict, apres: dict, sens: int) -> str:
     return "faux : le tour manqué" if lu == "ne retrouve pas" else "non jugé"
 
 
-def les_sauts(surfaces: list[dict], tenues: list[dict], cote: str) -> list[dict]:
+def les_sauts(surfaces: list[dict], tenues: list[dict], cote: str, en_plus: list | None = None) -> list[dict]:
     """Chaque saut h d'un côté, de la surface h − 1 à la surface h (la nappe en tête), avec ce que dit la lecture stricte et ce que dit le
-    critère sans référent."""
-    if len(surfaces) != len(tenues) + 1:
+    critère sans référent ; avec `en_plus`, écrit pour `345`, ce qu'une autre mesure dit de chaque saut."""
+    if len(surfaces) != len(tenues) + 1 or (en_plus is not None and len(en_plus) != len(tenues)):
         raise ValueError(f"{len(surfaces)} surfaces pour {len(tenues)} sauts")
     return [{"le_saut": h, "la_justesse": la_justesse(surfaces[h - 1], surfaces[h], LE_SENS[cote]),
-             **{k: t.get(k) for k in LES_CLES_DE_LA_TENUE}} for h, t in enumerate(tenues, 1)]
+             **{k: t.get(k) for k in LES_CLES_DE_LA_TENUE}, **({"en_plus": en_plus[h - 1]} if en_plus is not None else {})}
+            for h, t in enumerate(tenues, 1)]
 
 
 def un_cote_sans_relance(nappe: dict, cote: float, lire_valeurs, lire_les_tours, pas: float, tolerance: float,
-                         sauts: int = m330.LES_SAUTS) -> tuple[list[dict], list[dict]]:
-    """La chaîne de `330` sur un côté, avec la tenue de `328` à chaque saut : la tenue et la lecture de chaque spire par `lire_les_tours`."""
+                         sauts: int = m330.LES_SAUTS, en_plus=None) -> tuple[list[dict], list[dict]]:
+    """La chaîne de `330` sur un côté, avec la tenue de `328` à chaque saut : la tenue et la lecture de chaque spire par `lire_les_tours` ;
+    avec `en_plus(depart, arrivee, lire_valeurs)`, écrit pour `345`, ce qu'il rend de la surface de départ et de la spire."""
     surf, ok = nappe["la_nappe"], nappe["valide"]
     tenues, lectures = [], []
     for _ in range(sauts):
         s = m306.le_saut_croissant(surf, ok, cote, lire_valeurs, tolerance=tolerance)
         tenues.append(m328.un_saut(s, lire_valeurs, pas))
         lectures.append({"la_part_du_plan": round(float(s["valide"].mean()), 4), "les_tours": lire_les_tours(s["la_spire"][s["valide"]])})
+        if en_plus is not None:
+            lectures[-1]["en_plus"] = en_plus({"la_nappe": surf, "valide": ok}, {"la_nappe": s["la_spire"], "valide": s["valide"]},
+                                              lire_valeurs)
         if not s["valide"].any():
             break
         surf, ok = s["la_spire"], s["valide"]
     return tenues, lectures
 
 
-def la_chaine_sans_relance() -> dict:
+def la_chaine_sans_relance(en_plus=None) -> dict:
     """La chaîne de `330` rejouée graine par graine, avec ses lectures et la tenue de `328`."""
     import le_tour_produit_porte_t_il_le_texte_du_segment as j296
     from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot
@@ -157,7 +162,8 @@ def la_chaine_sans_relance() -> dict:
         e = {"le_rang": rang, "la_nappe": lire_les_tours(r["la_nappe"][r["valide"]]), "les_cotes": {}}
         for nom, cote in m306.LES_COTES:
             with m321.le_rouleau_de_paris4():
-                tenues, spires = un_cote_sans_relance(r, cote, lv4, lire_les_tours, m321.LE_PAS_L2, m322.LA_TOLERANCE_L2)
+                tenues, spires = un_cote_sans_relance(r, cote, lv4, lire_les_tours, m321.LE_PAS_L2, m322.LA_TOLERANCE_L2,
+                                                      en_plus=en_plus)
             e["les_cotes"][nom] = {"les_tenues": tenues, "les_spires": spires}
         graines.append(e)
         print("sans relance", rang, {c: [t["tient"] for t in v["les_tenues"]] for c, v in e["les_cotes"].items()}, flush=True)
@@ -165,9 +171,10 @@ def la_chaine_sans_relance() -> dict:
             "la_lecture_de_m7": {k: v for k, v in stats4.items() if k != "pannes"}}
 
 
-def une_chaine_relancee(fabrique, avec_la_spire: bool) -> dict:
-    """Une chaîne relancée de `331`, rejouée sur PHercParis4, avec la tenue de chaque saut par `m331.la_tenue`."""
-    lv, tenues = {}, {}
+def une_chaine_relancee(fabrique, avec_la_spire: bool, en_plus=None) -> dict:
+    """Une chaîne relancée de `331`, rejouée sur PHercParis4, avec la tenue de chaque saut par `m331.la_tenue` ; avec `en_plus`, écrit pour
+    `345`, ce qu'il rend de la surface d'où part chaque saut et de sa nappe relancée."""
+    lv, tenues, plus = {}, {}, {}
 
     def relancer4(lv4):
         lv["m7"] = lv4
@@ -175,12 +182,16 @@ def une_chaine_relancee(fabrique, avec_la_spire: bool) -> dict:
 
     def observer(rang, nom, h, k):
         tenues[(rang, nom, h)] = m331.la_tenue(k, lv["m7"], m321.LE_PAS_L2)
+        if en_plus is not None:
+            plus[(rang, nom, h)] = en_plus(k["le_depart"], k["la_relance"], lv["m7"])
         return {}
 
     d = m331.mesurer(relancer4=relancer4, avec_la_spire=avec_la_spire, rouleaux=("PHercParis4",), observer=observer)
     for g in d["les_graines"]["PHercParis4"]:
         for nom, c in g["les_cotes"].items():
             c["les_tenues"] = [tenues[(g["le_rang"], nom, h)] for h in range(1, len(c["les_surfaces"]) + 1)]
+            if en_plus is not None:
+                c["les_en_plus"] = [plus[(g["le_rang"], nom, h)] for h in range(1, len(c["les_surfaces"]) + 1)]
         print(g["le_rang"], {c: [t["tient"] for t in v["les_tenues"]] for c, v in g["les_cotes"].items()}, flush=True)
     return d
 
@@ -196,6 +207,14 @@ def les_lectures_rejouees(nom: str, d: dict, nappes: dict, rang: int, cote: str)
 def les_tenues(nom: str, d: dict, rang: int, cote: str) -> list[dict]:
     g = next(x for x in m340.les_graines_de(nom, d) if x["le_rang"] == rang)
     return g["les_cotes"][cote]["les_tenues"]
+
+
+def les_en_plus(nom: str, d: dict, rang: int, cote: str) -> list | None:
+    g = next(x for x in m340.les_graines_de(nom, d) if x["le_rang"] == rang)
+    if nom == "sans relance":
+        ep = [s.get("en_plus") for s in g["les_cotes"][cote]["les_spires"]]
+        return ep if all(x is not None for x in ep) else None
+    return g["les_cotes"][cote].get("les_en_plus")
 
 
 def redonne_328(d: dict, publie: dict) -> bool:
@@ -255,12 +274,13 @@ def les_parts_publiees(nom: str, publiee: dict, rang: int, cote: str) -> list[tu
     return [(s["la_part_de_la_spire"], s["la_part_relancee"]) for s in g["les_cotes"][cote]["les_surfaces"]]
 
 
-def mesurer() -> dict:
+def mesurer(en_plus=None) -> dict:
+    """La mesure de `344` ; avec `en_plus(depart, arrivee, lire_valeurs)`, écrit pour `345`, chaque saut porte aussi ce qu'il rend."""
     t0 = time.monotonic()
-    rejouees = {"sans relance": la_chaine_sans_relance()}
+    rejouees = {"sans relance": la_chaine_sans_relance(en_plus)}
     for nom, (fabrique, avec) in LES_RELANCES.items():
         print("==", nom, flush=True)
-        rejouees[nom] = une_chaine_relancee(fabrique, avec)
+        rejouees[nom] = une_chaine_relancee(fabrique, avec, en_plus)
     publiees = {n: json.loads((LES_MESURES / f).read_text()) for n, f in m340.LES_CHAINES.items()}
     lecture = lambda g: {t: x["la_lecture"] for t, x in g["la_nappe"].items()}  # noqa: E731
     nappes = {g["le_rang"]: lecture(g) for g in publiees["sans relance"]["les_graines"]}
@@ -279,7 +299,7 @@ def mesurer() -> dict:
                 redonne &= [{str(t): x for t, x in s.items()} for s in rej] == [{str(t): x for t, x in s.items()} for s in pub]
                 redonne &= [(t["la_part_du_plan"], t.get("la_part_relancee")) for t in ten] == les_parts_publiees(
                     nom, publiees[nom], g["le_rang"], cote)
-                cotes[cote] = {"les_sauts": les_sauts(rej, ten, cote)}
+                cotes[cote] = {"les_sauts": les_sauts(rej, ten, cote, les_en_plus(nom, dr, g["le_rang"], cote))}
             graines.append({"le_rang": g["le_rang"], "les_cotes": cotes})
         chaines[nom] = {"redonne": bool(redonne), "les_graines": graines}
     d = {"la_question": __doc__.splitlines()[0],
@@ -347,6 +367,12 @@ def verifier() -> int:
     v("★★★★ sans relance : la tenue de 328 à chaque saut, et chaque spire lue à sa place",
       tenues == m328.la_chaine(nappe, 1.0, feuilles, 20.0, 5.0, sauts=3) and [s["les_tours"]["z"] for s in spires] == [120.0, 140.0, 160.0],
       str(spires))
+    z_ = lambda s: float(np.median(s["la_nappe"][s["valide"]][:, 2]))  # noqa: E731
+    _, spires = un_cote_sans_relance(nappe, 1.0, feuilles, hauteur, 20.0, 5.0, sauts=3, en_plus=lambda a, b, lv: (z_(a), z_(b)))
+    v("★★★★ en plus, chaque saut reçoit la surface d'où il part et la spire où il arrive",
+      [s["en_plus"] for s in spires] == [(100.0, 120.0), (120.0, 140.0), (140.0, 160.0)], str([s["en_plus"] for s in spires]))
+    ss = les_sauts([lect(t0=R), lect(t1=R), lect(t2=R)], [t_(True), t_(False)], "moins", en_plus=["a", "b"])
+    v("★★★ en plus, chaque saut porte ce qu'on a mesuré de lui", [s["en_plus"] for s in ss] == ["a", "b"])
 
     s_ = lambda j, t: {"la_justesse": j, "tient": t}  # noqa: E731
     def d_(sauts_propres, sauts_sales=(), **kw):
