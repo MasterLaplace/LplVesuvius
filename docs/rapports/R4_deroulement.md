@@ -4642,6 +4642,12 @@ surface dont au moins 50 points sont sur le tour voisin et pas sur le tour atten
 compte de `345` ne voit le changement que sous 3. `R4-P146` s'ouvre : le retard naît-il au saut qui le montre, ou vient-il de plus
 haut ?
 
+**`350` · 2026-09-29 · le retard des surfaces à cheval naît-il au saut qui le montre** — `R4-P146`
+
+⭐⭐⭐⭐ **L'un et l'autre : il naît au premier saut à cheval, puis il s'hérite** — `R4-F536`. Au premier saut à cheval de chaque
+chaîne, les pieds des points restés sont surtout sur le tour de départ (427 contre 136) ; aux sauts suivants, surtout sur le tour
+d'avant (1678 contre 3397). `R4-P147` s'ouvre : le compte voit-il le retard là où il naît ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

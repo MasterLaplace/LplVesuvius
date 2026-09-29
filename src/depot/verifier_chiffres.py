@@ -3336,6 +3336,44 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 350 : LE RETARD DES SURFACES À CHEVAL NAÎT-IL AU SAUT QUI LE MONTRE
+    s350 = _source(racine, "le_retard_des_surfaces_a_cheval_nait_il_au_saut_qui_le_montre.json")
+    if s350.exists():
+        d = json.loads(s350.read_text())
+        v_ = d["le_verdict"]
+        m_ = d["les_constantes"]["le_minimum"]
+        cheval = [s_ for s_ in d["les_surfaces"] if s_["le_rang"] >= 4 and s_["la_justesse"] == "juste" and s_["la_surface"] is not None
+                  and s_["la_surface"]["les_restes"] >= m_]
+        prem = {(p["la_chaine"], p["le_rang"], p["le_cote"]): p["le_premier_saut"] for p in d["les_premiers"] if p["le_rang"] >= 4}
+        pr = [s_ for s_ in cheval if prem[(s_["la_chaine"], s_["le_rang"], s_["le_cote"])] == s_["le_saut"]]
+        su = [s_ for s_ in cheval if s_ not in pr]
+        pieds = lambda L, k: sum(s_["la_surface"][k] for s_ in L)  # noqa: E731
+        lus = sum(x_["lus"] if "lus" in x_ else x_["PHercParis4"]["lus"] for x_ in d["la_lecture_de_m7"].values())
+        rangs = {}
+        for x_ in prem.values():
+            rangs[x_] = rangs.get(x_, 0) + 1
+        mots = {2: "deuxième", 3: "troisième", 4: "quatrième", 7: "septième"}
+        nonlus = [s_ for s_ in cheval if s_["la_surface"]["la_lecture"] == "non lu"]
+        lues = [s_ for s_ in cheval if s_["la_surface"]["la_lecture"] != "non lu"]
+        ecrits = [("le verdict de 350", v_["lissue"].upper()),
+                  ("les chunks de m7 lus de 350", f"`m7` a été lu en {lus:,} chunks, sans panne".replace(",", " ", 1)),
+                  ("le contrôle de 350", f"sous les {sum(1 for s_ in lues if (s_['la_surface']['le_controle']['la_part'] or 0) >= 0.5)} surfaces"),
+                  ("les premiers de 350", f"de chaque graine, {len(pr)} surfaces, les pieds des points restés sont "
+                                          f"{pieds(pr, 'pieds_sur_le_tour_de_depart')} sur le tour de départ contre "
+                                          f"{pieds(pr, 'pieds_sur_le_tour_davant')} sur le tour d'avant"),
+                  ("les suivants de 350", f"Aux {len(su)} sauts suivants, ils sont {pieds(su, 'pieds_sur_le_tour_de_depart')} contre "
+                                          f"{pieds(su, 'pieds_sur_le_tour_davant')}"),
+                  ("les rangs des premiers de 350", f"le {mots[2]} de la chaîne dans {rangs.get(2, 0)} des {len(prem)} cas, le {mots[3]} "
+                                                    f"dans {rangs.get(3, 0)}, le {mots[4]} dans {rangs.get(4, 0)} et le {mots[7]} dans "
+                                                    f"{rangs.get(7, 0)}"),
+                  ("les non lues de 350", f"{len(nonlus)} des {len(cheval)} surfaces ne sont pas lues")]
+        for n_ in ("relancée depuis un point", "relancée depuis la spire", "bornée"):
+            c_ = [s_ for s_ in cheval if s_["la_chaine"] == n_]
+            k_ = lambda x: sum(1 for s_ in c_ if s_["la_surface"]["la_lecture"] == x)  # noqa: E731
+            ecrits.append((f"la chaîne {n_} de 350", f"| {n_} | {len(c_)} | {len(c_) - k_('non lu')} | {k_('hérité')} | {k_('né ici')} | "
+                                                      f"{k_('mêlé')} |"))
+        out.extend((nom, [x_], s350.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 349 : LES SAUTS JUSTES DONNENT-ILS DES SURFACES À CHEVAL
     s349 = _source(racine, "les_sauts_justes_donnent_ils_des_surfaces_a_cheval.json")
     if s349.exists():

@@ -1837,6 +1837,8 @@ run "la surface de départ est-elle sur son tour sous la surface bornée" uv run
 run "figure la surface de départ est-elle sur son tour sous la surface bornée" uv run python "$ROOT/src/figures/figure_la_surface_de_depart_est_elle_sur_son_tour_sous_la_surface_bornee.py" --verifier
 run "les sauts justes donnent-ils des surfaces à cheval" uv run python "$ROOT/src/nappe/les_sauts_justes_donnent_ils_des_surfaces_a_cheval.py" --verifier
 run "figure les sauts justes donnent-ils des surfaces à cheval" uv run python "$ROOT/src/figures/figure_les_sauts_justes_donnent_ils_des_surfaces_a_cheval.py" --verifier
+run "le retard des surfaces à cheval naît-il au saut qui le montre" uv run python "$ROOT/src/nappe/le_retard_des_surfaces_a_cheval_nait_il_au_saut_qui_le_montre.py" --verifier
+run "figure le retard des surfaces à cheval naît-il au saut qui le montre" uv run python "$ROOT/src/figures/figure_le_retard_des_surfaces_a_cheval_nait_il_au_saut_qui_le_montre.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
