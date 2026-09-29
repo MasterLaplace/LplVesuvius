@@ -4635,6 +4635,13 @@ d'où part le saut, la surface de départ est posée sur `5753_-1` : 1 pied sur 
 est déjà à cheval sur deux tours voisins ; l'erreur commence un saut plus tôt. `R4-P145` s'ouvre : combien de sauts justes sont ainsi
 à cheval sans le dire ?
 
+**`349` · 2026-09-29 · les sauts justes donnent-ils des surfaces à cheval** — `R4-P145`
+
+⭐⭐⭐⭐⭐ **60 des 104, tous dans les chaînes relancées** — `R4-F535`. Sur les graines 4 à 8, 60 des 104 sauts justes donnent une
+surface dont au moins 50 points sont sur le tour voisin et pas sur le tour attendu ; la chaîne sans relance n'en donne aucune. Le
+compte de `345` ne voit le changement que sous 3. `R4-P146` s'ouvre : le retard naît-il au saut qui le montre, ou vient-il de plus
+haut ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

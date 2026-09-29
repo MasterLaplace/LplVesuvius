@@ -3336,6 +3336,51 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 349 : LES SAUTS JUSTES DONNENT-ILS DES SURFACES À CHEVAL
+    s349 = _source(racine, "les_sauts_justes_donnent_ils_des_surfaces_a_cheval.json")
+    if s349.exists():
+        import statistics
+        d = json.loads(s349.read_text())
+        v_ = d["le_verdict"]
+        justes = [s_ for s_ in d["les_surfaces"] if s_["le_rang"] >= 4 and s_["la_justesse"] == "juste"]
+        cheval = [s_ for s_ in justes if s_["la_surface"] is not None and s_["la_surface"]["a_cheval"]]
+        r_ = lambda s_: s_["la_surface"]["restes"]["les_points"] >= 50  # noqa: E731
+        a_ = lambda s_: s_["la_surface"]["au_dela"]["les_points"] >= 50  # noqa: E731
+        hors = sorted((s_["la_surface"]["restes"]["les_points"] + s_["la_surface"]["au_dela"]["les_points"])
+                      / s_["la_surface"]["les_points_poses"] for s_ in cheval)
+        tot = {}
+        for s_ in cheval:
+            for k, n in s_["la_surface"]["restes"]["les_comptes"].items():
+                tot[k] = tot.get(k, 0) + n
+        plus = sum(n for k, n in tot.items() if k not in ("0", "1", "non compté"))
+        lues = [s_["la_surface"] for s_ in justes if s_["la_surface"] is not None and s_["la_surface"]["les_points_poses"] >= 50]
+        c348 = d["les_constantes"]["la_surface_de_348"]
+        a348 = next(s_ for s_ in d["les_surfaces"] if all(s_[k] == x_ for k, x_ in c348.items()))["la_surface"]
+        j13 = [s_ for s_ in d["les_surfaces"] if s_["le_rang"] < 4 and s_["la_justesse"] == "juste"]
+        lus = sum(x_["lus"] if "lus" in x_ else x_["PHercParis4"]["lus"] for x_ in d["la_lecture_de_m7"].values())
+        ecrits = [("le verdict de 349", v_["lissue"].upper()),
+                  ("les chunks de m7 lus de 349", f"`m7` a été lu en {lus:,} chunks, sans panne".replace(",", " ", 1)),
+                  ("le contrôle de 349", f"sous {sum(1 for a in lues if a['sur_le_tour_attendu'] >= 0.5 * a['les_points_poses'])} des {len(lues)}"),
+                  ("les genres de 349", f"{sum(map(r_, cheval))} le sont par des points restés sur le tour de départ, {sum(map(a_, cheval))} par "
+                                        f"des points partis au-delà, {sum(1 for s_ in cheval if r_(s_) and a_(s_))} par les deux"),
+                  ("les parts hors de l'attendu de 349", f"va de {round(100 * hors[0])} à {round(100 * hors[-1])} %, "
+                                                         f"{round(100 * statistics.median(hors))} % en médiane ; elle passe 10 % sous "
+                                                         f"{sum(p >= 0.1 for p in hors)} surfaces et 25 % sous {sum(p >= 0.25 for p in hors)}"),
+                  ("les points restés de 349", f"Des {sum(tot.values())} points restés sous ces surfaces, {tot.get('1', 0)} franchissent une"),
+                  ("les comptes restés de 349", f"feuille, {tot.get('0', 0)} aucune, {plus} deux ou plus, et {tot.get('non compté', 0)} ne sont "
+                                                f"pas comptés"),
+                  ("les vus de 349", f"sous {v_['k']} des {v_['n']}"),
+                  ("les tenus de 349", f"`345` tient {sum(s_['tient_par_345'] for s_ in cheval)} des {len(cheval)} sauts à cheval"),
+                  ("la surface de 348 dans 349", f"a {a348['restes']['les_points']} points restés"),
+                  ("les posés de la surface de 348 dans 349", f"sur {a348['les_points_poses']} posés, dont {a348['restes']['les_comptes'].get('0', 0)} "
+                                                             f"comptés à zéro"),
+                  ("les graines 1 à 3 de 349", f"{sum(1 for s_ in j13 if s_['la_surface'] is not None and s_['la_surface']['a_cheval'])} des "
+                                               f"{len(j13)} sauts justes")]
+        for n_ in ("sans relance", "relancée depuis un point", "relancée depuis la spire", "bornée"):
+            ecrits.append((f"la chaîne {n_} de 349", f"| {n_} | {sum(1 for s_ in justes if s_['la_chaine'] == n_)} | "
+                                                      f"{sum(1 for s_ in cheval if s_['la_chaine'] == n_)} |"))
+        out.extend((nom, [x_], s349.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 348 : LA SURFACE DE DÉPART EST-ELLE SUR SON TOUR SOUS LA SURFACE BORNÉE
     s348 = _source(racine, "la_surface_de_depart_est_elle_sur_son_tour_sous_la_surface_bornee.json")
     s348_345 = _source(racine, "les_feuilles_de_m7_franchies_separent_elles_les_sauts_justes_des_faux.json")
