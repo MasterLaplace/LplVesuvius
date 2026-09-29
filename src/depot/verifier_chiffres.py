@@ -3336,6 +3336,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 326 : LA NAPPE PLATE EST-ELLE POSÉE DANS UN BLOC DE M7
+    s326 = _source(racine, "la_nappe_plate_est_elle_posee_dans_un_bloc_de_m7.json")
+    if s326.exists():
+        d = json.loads(s326.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 326", d["le_verdict"]["lissue"].upper()),
+                  ("la lecture de m7 de PHerc0358 en 326", f"{d['la_lecture_de_m7']['PHerc0358']['lus']} chunks")]
+        for n in d["les_nappes"]["PHerc0358"]:
+            ecrits.append((f"la graine {n['le_rang']} de 326",
+                           f"| {n['le_rang']} | {f_(n['la_longueur_mediane_en_pas'])} | {f_(n['la_part_qui_remplit_la_portee'])} | "
+                           f"{f_(n['la_part_a_ce_decalage'])} | {n['la_lecture']} |"))
+        p4 = d["les_nappes"]["PHercParis4"]
+        if len({n["la_longueur_mediane_en_pas"] for n in p4}) == 1:
+            ecrits.append(("PHercParis4 en 326", f"une plage médiane de {f_(p4[0]['la_longueur_mediane_en_pas'])} pas"))
+        out.extend((nom, [x_], s326.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 325 : À QUELLE DISTANCE M7 MONTRE-T-IL LA FEUILLE SUIVANTE
     s325 = _source(racine, "a_quelle_distance_m7_montre_t_il_la_feuille_suivante.json")
     if s325.exists():

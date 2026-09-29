@@ -4498,6 +4498,12 @@ PHerc0358, cinq côtés ne posent rien et six posent à 1,7 à 2,85 pas ; les na
 feuille après la leur ; ailleurs, `m7` montre la suivante à un pas sur PHerc0358 aussi. `R4-P124` s'ouvre : ce qu'est `m7` sous une
 nappe plate.
 
+**`326` · 2026-09-29 · la nappe plate est-elle posée dans un bloc de m7** — `R4-P124`
+
+⭐⭐⭐⭐⭐ **Oui, les trois : leur plage de `m7` fait 3,9 à 6,05 pas, celle des autres 0,15 à 0,25** — `R4-F511`. Un facteur 15 sépare le
+bloc le plus mince de la feuille la plus épaisse : un critère de départ sans référent. `R4-P125` s'ouvre : un saut parti de la médiane,
+qui refuse les blocs.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

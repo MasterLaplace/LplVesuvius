@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**178 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**179 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 140 portes
+## Grand Prize — 141 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -158,7 +158,8 @@
 - **R4-P121** *(le référent)* · **RÉPONDUE par `323` : oui, sur quatre graines sur huit.** Sur les graines 2, 3 et 6, 98,18 à 99,08 % des sommets du tour suivant en face de la spire sont à un quart de pas d'elle, 69 % sur la graine 5, pendant que la nappe elle-même n'en a que 0 à 7,35 % (`R4-F506`) ; sur la graine 4, la nappe est déjà sur le tour suivant (`R4-F507`). La suite est `R4-P122`.
 - **R4-P122** *(le graal)* · **RÉPONDUE par `324` : le saut, pas le juge.** Avec le même code, le premier saut qui croît pose au pas sur 14 côtés sur 16 de PHercParis4 et sur 5 sur 16 de PHerc0358, où cinq côtés ne posent rien et six posent à 1,7 à 2,85 pas (`R4-F508`). La suite est `R4-P123`.
 - **R4-P123** *(le graal)* · **RÉPONDUE par `325` : à un pas là où la nappe suit une feuille.** Sur PHerc0358, la feuille suivante est vue à un pas sur 7 des 16 côtés, sur 14 de PHercParis4 ; les six côtés aveugles de PHerc0358 sont ceux de trois nappes plates, qui ne suivent pas de feuille (`R4-F510`), et le départ s'écarte aussi souvent sur les deux rouleaux (`R4-F509`). La suite est `R4-P124`.
-- **R4-P124** *(le graal)* · **LÀ OÙ LA NAPPE QUI CROÎT DE PHerc0358 EST PLATE, GRAINES 1, 2 ET 5, QUE MARQUE `m7` LE LONG DE LA NORMALE, ET SUR QUELLE LONGUEUR ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `325` DÉSIGNE. Ces nappes gardent le même décalage sur 68 à 99 % de leurs points et ne voient aucune feuille après la leur (`R4-F510`). Si `m7` y est une plage qui remplit toute la portée, la nappe est posée dans un bloc et non sur une feuille, et une graine doit refuser de partir d'un bloc : c'est un critère de départ qu'un rouleau sans tracé peut appliquer seul.
+- **R4-P124** *(le graal)* · **RÉPONDUE par `326` : un bloc.** Sous les trois nappes plates de PHerc0358, la plage de `m7` fait 3,9 à 6,05 pas en médiane, contre 0,15 à 0,25 sous les cinq autres et 0,166 sur PHercParis4 (`R4-F511`). La suite est `R4-P125`.
+- **R4-P125** *(le graal)* · **UN SAUT QUI CROÎT PARTI DE LA DISTANCE MÉDIANE QUE SA NAPPE VOIT, PLUTÔT QUE DE CE QU'UN SEUL POINT A VU, ET QUI REFUSE DE PARTIR D'UN BLOC DE `m7`, POSE-T-IL AU PAS PLUS SOUVENT SUR PHerc0358, ET TOMBE-T-IL AU MOINS AUSSI SOUVENT SUR LE TOUR SUIVANT DE PHercParis4 ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `326` DÉSIGNE. Le départ d'un seul point déplace le saut quand il est loin de sa médiane, sur les deux rouleaux (`R4-F509`), et trois nappes de PHerc0358 sont posées dans des blocs (`R4-F511`). Les deux corrections sont écrivables sans référent ; PHercParis4 dira si elles ne dégradent pas ce qui tombait juste.
 
 ## Progress Prizes — 19 portes
 
