@@ -1769,6 +1769,8 @@ run "la phase publiee avance-t-elle au meme pas le long de la chaine" uv run pyt
 run "figure la phase publiee avance-t-elle au meme pas le long de la chaine" uv run python "$ROOT/src/figures/figure_la_phase_publiee_avance_t_elle_au_meme_pas_le_long_de_la_chaine.py" --verifier
 run "la chaine tient-elle au-dela de quatre sauts" uv run python "$ROOT/src/nappe/la_chaine_tient_elle_au_dela_de_quatre_sauts.py" --verifier
 run "figure la chaine tient-elle au-dela de quatre sauts" uv run python "$ROOT/src/figures/figure_la_chaine_tient_elle_au_dela_de_quatre_sauts.py" --verifier
+run "le pas de la chaine vient-il de m7 ou du pas par defaut" uv run python "$ROOT/src/nappe/le_pas_de_la_chaine_vient_il_de_m7_ou_du_pas_par_defaut.py" --verifier
+run "figure le pas de la chaine vient-il de m7 ou du pas par defaut" uv run python "$ROOT/src/figures/figure_le_pas_de_la_chaine_vient_il_de_m7_ou_du_pas_par_defaut.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

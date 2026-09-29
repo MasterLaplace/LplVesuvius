@@ -4435,6 +4435,12 @@ graines 3 et 6. `R4-P103` reste ouverte : une chaîne qui fait un tour la tranch
 trente-trois surfaces empilées au plus dense du scan, sur 6 mm** — `R4-F496`. Mais `m7` n'appuie plus que 15 à 16 % des points au
 seizième saut : ce qui tient loin est surtout extrapolé au pas par défaut, et le scan dit que l'empilement y est régulier.
 
+**`316` · 2026-09-29 · le pas de la chaîne vient-il de m7 ou du pas par défaut**
+
+⭐⭐⭐⭐⭐ **Du pas donné : aux pas par défaut de 16, 20 et 24 voxels, la chaîne avance de 16,5 à 18,5, de 20 à 20,75 et de 23,5 à 24
+voxels, et le plus dense du scan reste à 0 à 2 voxels de chaque spire pour les trois** — `R4-F497`. Le juge du plus dense lit les
+points que `m7` appuie, pas la spire : réserves sur `R4-F491` et `R4-F496`. `R4-P114` s'ouvre.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

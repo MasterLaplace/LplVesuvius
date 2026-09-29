@@ -3336,6 +3336,19 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 316 : LE PAS DE LA CHAÎNE VIENT-IL DE M7 OU DU PAS PAR DÉFAUT
+    s316 = _source(racine, "le_pas_de_la_chaine_vient_il_de_m7_ou_du_pas_par_defaut.json")
+    if s316.exists():
+        d = json.loads(s316.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 316", d["le_verdict"]["lissue"].upper())]
+        for c in d["les_cotes"]:
+            t_ = c["le_pas_tardif"]
+            ecrits.append((f"la graine {c['le_rang']} côté {c['le_cote']} de 316",
+                           f"| {c['le_rang']} | {c['le_cote']} | {f_(t_['16'])} | {f_(t_['20'])} | {f_(t_['24'])} | "
+                           f"{c['la_lecture']} |"))
+        out.extend((nom, [x_], s316.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 315 : LA CHAÎNE TIENT-ELLE AU-DELÀ DE QUATRE SAUTS
     s315 = _source(racine, "la_chaine_tient_elle_au_dela_de_quatre_sauts.json")
     if s315.exists():
