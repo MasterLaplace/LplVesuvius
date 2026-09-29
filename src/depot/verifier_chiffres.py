@@ -3336,6 +3336,30 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 353 : LES SURFACES À CHEVAL TENUES SONT-ELLES PRESQUE ENTIÈREMENT SUR LEUR TOUR
+    s353 = _source(racine, "les_surfaces_a_cheval_tenues_sont_elles_presque_entierement_sur_leur_tour.json")
+    if s353.exists():
+        import statistics
+        d = json.loads(s353.read_text())
+        v_, p_ = d["le_verdict"], d["les_parts"]
+        pc = lambda x: f"{round(100 * x)} %"  # noqa: E731
+        t_ = p_["tout_ce_qui_est_tenu"]
+        tenues = sum(len(p_[k]) for k in ("les_sains_tenus", "les_a_cheval_tenus", "les_faux_tenus"))
+        ecrits = [("le verdict de 353", v_["lissue"].upper()),
+                  ("tout ce qui est tenu de 353", f"Des {t_['les_points_poses']} points posés des {tenues} surfaces qu'il tient, "
+                                                  f"{t_['sur_le_tour_attendu']} le sont sur le tour"),
+                  ("la part tenue de 353", f"Ce que le critère tient est sur son tour à {pc(t_['la_part'])}"),
+                  ("les sains tenus de 353", f"Les {len(p_['les_sains_tenus'])} surfaces saines tenues le sont toutes à "
+                                             f"{pc(min(p_['les_sains_tenus']))} au moins"),
+                  ("les médianes de 353", f"sont sur leur tour à {pc(statistics.median(p_['les_a_cheval_tenus']))} en médiane, celles qu'il refuse "
+                                          f"à {pc(statistics.median(p_['les_a_cheval_refuses']))}")]
+        noms = {"les_sains_tenus": "saines, tenues", "les_sains_refuses": "saines, refusées", "les_a_cheval_tenus": "à cheval, tenues",
+                "les_a_cheval_refuses": "à cheval, refusées", "les_faux_tenus": "fausses, tenues", "les_faux_refuses": "fausses, refusées"}
+        for k, n_ in noms.items():
+            xs = p_[k]
+            ecrits.append((f"la ligne {k} de 353", f"| {n_} | {len(xs)} | {pc(statistics.median(xs))} | {pc(min(xs))} |"))
+        out.extend((nom, [x_], s353.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 352 : LE COMPTE ET LE SEUIL ENSEMBLE SÉPARENT-ILS LES SAUTS SAINS
     s352 = _source(racine, "le_compte_et_le_seuil_ensemble_separent_ils_les_sauts_sains.json")
     if s352.exists():

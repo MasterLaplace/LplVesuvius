@@ -4660,6 +4660,12 @@ ensemble séparent-ils les sauts justes sains de tous les autres ?
 autres, presque tous à cheval ; le seuil fait presque tout le travail. `R4-P149` s'ouvre : les surfaces à cheval qu'ils tiennent
 sont-elles presque entièrement sur le tour attendu ?
 
+**`353` · 2026-09-29 · les surfaces à cheval tenues sont-elles presque entièrement sur leur tour** — `R4-P149`
+
+⭐⭐⭐⭐ **Non : 84 % en médiane ; mais ce qui est tenu est sur son tour à 92 %** — `R4-F539`. Les surfaces à cheval que le critère
+tient sont moins atteintes que celles qu'il refuse (72 %), sans l'être à peine ; les surfaces saines tenues le sont toutes à 91 % au
+moins. `R4-P150` s'ouvre : le critère porté sur PHerc0358.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -1843,6 +1843,8 @@ run "un seuil de points restés refuse-t-il les sauts où le retard naît" uv ru
 run "figure un seuil de points restés refuse-t-il les sauts où le retard naît" uv run python "$ROOT/src/figures/figure_un_seuil_de_points_restes_refuse_t_il_les_sauts_ou_le_retard_nait.py" --verifier
 run "le compte et le seuil ensemble séparent-ils les sauts sains" uv run python "$ROOT/src/nappe/le_compte_et_le_seuil_ensemble_separent_ils_les_sauts_sains.py" --verifier
 run "figure le compte et le seuil ensemble séparent-ils les sauts sains" uv run python "$ROOT/src/figures/figure_le_compte_et_le_seuil_ensemble_separent_ils_les_sauts_sains.py" --verifier
+run "les surfaces à cheval tenues sont-elles presque entièrement sur leur tour" uv run python "$ROOT/src/nappe/les_surfaces_a_cheval_tenues_sont_elles_presque_entierement_sur_leur_tour.py" --verifier
+run "figure les surfaces à cheval tenues sont-elles presque entièrement sur leur tour" uv run python "$ROOT/src/figures/figure_les_surfaces_a_cheval_tenues_sont_elles_presque_entierement_sur_leur_tour.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
