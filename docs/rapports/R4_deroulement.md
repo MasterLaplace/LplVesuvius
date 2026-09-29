@@ -4538,6 +4538,12 @@ s'ouvre : relancer depuis la spire entière, chaque point gardant sa feuille.
 ⭐⭐⭐ **La mesure ne les sépare pas du tracé humain** — `R4-F518`. Tours et tracé passent à un voxel médian du centre des plages de `m7` ;
 63 à 71 % des sommets des tours à un voxel, 55 % du tracé. La provenance des tours est à demander à ceux qui les publient.
 
+**`333` · 2026-09-29 · la relance partie de la spire entière garde-t-elle la justesse** — `R4-P129`
+
+⭐⭐⭐⭐ **Elle rend la surface et va jusqu'à `5753_-6` sur sept graines, mais se trompe trois fois au septième saut** — `R4-F519`.
+Chaque point de la spire semé sur sa propre feuille, la chaîne descend six tours publiés en médiane sans saut faux avant `5753_-6` ;
+sur PHerc0358 elle tient 4 sauts en médiane contre 1. `R4-P130` s'ouvre : au septième saut, la spire ou la croissance.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

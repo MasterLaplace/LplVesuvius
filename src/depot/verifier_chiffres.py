@@ -3336,6 +3336,31 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 333 : LA RELANCE PARTIE DE LA SPIRE ENTIÈRE GARDE-T-ELLE LA JUSTESSE
+    s333 = _source(racine, "la_relance_partie_de_la_spire_entiere_garde_t_elle_la_justesse.json")
+    s331_ = _source(racine, "une_chaine_relancee_a_chaque_tour_descend_elle_plus_loin.json")
+    s330_ = _source(racine, "jusqua_quel_tour_publie_la_chaine_qui_croit_descend_elle.json")
+    s328_ = _source(racine, "combien_de_sauts_la_chaine_qui_croit_tient_elle_au_pas.json")
+    if s333.exists() and s331_.exists() and s330_.exists() and s328_.exists():
+        d = json.loads(s333.read_text())
+        d331 = json.loads(s331_.read_text())
+        sans4 = {g["le_rang"]: g["la_descente"] for g in json.loads(s330_.read_text())["les_graines"]}
+        point4 = {g["le_rang"]: g["la_descente"] for g in d331["les_graines"]["PHercParis4"]}
+        sans0 = {(c["le_rang"], c["le_cote"]): c["tient"] for c in json.loads(s328_.read_text())["les_cotes"]["PHerc0358"]}
+        point0 = {(c["le_rang"], c["le_cote"]): c["tient"] for c in d331["les_cotes"]["PHerc0358"]}
+        ecrits = [("le verdict de 333", d["le_verdict"]["lissue"].upper()),
+                  ("les chunks de m7 lus de 333", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks sur "
+                                                   f"PHercParis4 et {d['la_lecture_de_m7']['PHerc0358']['lus']} sur PHerc0358")]
+        for g in d["les_graines"]["PHercParis4"]:
+            r_ = g["le_rang"]
+            ecrits.append((f"la graine {r_} de 333", f"| {r_} | {sans4[r_]} | {point4[r_]} | {g['la_descente']} | "
+                                                     f"{g['les_cotes']['moins']['larret']} |"))
+        for c in d["les_cotes"]["PHerc0358"]:
+            k_ = (c["le_rang"], c["le_cote"])
+            ecrits.append((f"g{c['le_rang']} {c['le_cote']} de 333",
+                           f"| g{c['le_rang']} {c['le_cote']} | {sans0[k_]} | {point0[k_]} | {c['tient']} |"))
+        out.extend((nom, [x_], s333.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐ LA TRANCHE 332 : LES TOURS PUBLIÉS SONT-ILS POSÉS AU CŒUR DE M7
     s332 = _source(racine, "les_tours_publies_sont_ils_poses_au_coeur_de_m7.json")
     if s332.exists():

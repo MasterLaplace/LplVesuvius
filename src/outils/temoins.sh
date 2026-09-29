@@ -1803,6 +1803,8 @@ run "une chaîne relancée à chaque tour descend-elle plus loin" uv run python 
 run "figure une chaîne relancée à chaque tour descend-elle plus loin" uv run python "$ROOT/src/figures/figure_une_chaine_relancee_a_chaque_tour_descend_elle_plus_loin.py" --verifier
 run "les tours publiés sont-ils posés au cœur de m7" uv run python "$ROOT/src/nappe/les_tours_publies_sont_ils_poses_au_coeur_de_m7.py" --verifier
 run "figure les tours publiés sont-ils posés au cœur de m7" uv run python "$ROOT/src/figures/figure_les_tours_publies_sont_ils_poses_au_coeur_de_m7.py" --verifier
+run "la relance partie de la spire entière garde-t-elle la justesse" uv run python "$ROOT/src/nappe/la_relance_partie_de_la_spire_entiere_garde_t_elle_la_justesse.py" --verifier
+run "figure la relance partie de la spire entière garde-t-elle la justesse" uv run python "$ROOT/src/figures/figure_la_relance_partie_de_la_spire_entiere_garde_t_elle_la_justesse.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

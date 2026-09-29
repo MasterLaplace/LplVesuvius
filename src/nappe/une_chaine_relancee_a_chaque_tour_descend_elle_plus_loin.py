@@ -81,9 +81,10 @@ def la_graine_de_la_relance(spire: np.ndarray, valide: np.ndarray):
     return pts[k], nn[m][k]
 
 
-def la_chaine_relancee(nappe: dict, cote: float, relancer, sauter, sauts: int = LES_SAUTS) -> list[dict]:
+def la_chaine_relancee(nappe: dict, cote: float, relancer, sauter, sauts: int = LES_SAUTS, avec_la_spire: bool = False) -> list[dict]:
     """Jusqu'à `sauts` sauts, chacun parti de la nappe relancée sur la spire du précédent ; `sauter(surface, valide)` rend le saut,
-    `relancer(point, normale)` la nappe."""
+    `relancer(point, normale)` la nappe. Avec `avec_la_spire`, écrit pour `333`, `relancer(point, normale, spire, valide)` reçoit
+    aussi la spire entière et ses points posés."""
     surf, ok = nappe["la_nappe"], nappe["valide"]
     out = []
     for _ in range(sauts):
@@ -92,7 +93,7 @@ def la_chaine_relancee(nappe: dict, cote: float, relancer, sauter, sauts: int = 
         if g is None:
             out.append({"le_saut": s, "la_relance": None})
             break
-        r = relancer(*g)
+        r = relancer(*g, s["la_spire"], s["valide"]) if avec_la_spire else relancer(*g)
         out.append({"le_saut": s, "la_relance": r})
         if not r["valide"].any():
             break
@@ -120,7 +121,9 @@ def le_verdict(d: dict) -> dict:
     return {"decidable": True, "h": h, "h0": h0, "lissue": f"{tete} ; {suite}"}
 
 
-def mesurer() -> dict:
+def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False) -> dict:
+    """La mesure de `331`. Avec `relancer4(lire_valeurs)` et `relancer0(lire_valeurs)`, écrits pour `333`, les relances de
+    PHercParis4 et de PHerc0358 sont fabriquées par l'appelant, et reçoivent la spire si `avec_la_spire`."""
     import le_tour_produit_porte_t_il_le_texte_du_segment as j296
     from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot, lire_les_valeurs
     from la_spire_voisine_est_elle_a_un_pas import les_normales, lire_tifxyz
@@ -143,7 +146,8 @@ def mesurer() -> dict:
             def sauter(s_, o_, cote=cote):
                 with m321.le_rouleau_de_paris4():
                     return m306.le_saut_croissant(s_, o_, cote, lv4, tolerance=m322.LA_TOLERANCE_L2)
-            chaine = la_chaine_relancee(r, cote, lambda p_, n_: m322.la_nappe_de_paris4(p_, n_, lv4), sauter)
+            rel4 = (lambda p_, n_: m322.la_nappe_de_paris4(p_, n_, lv4)) if relancer4 is None else relancer4(lv4)
+            chaine = la_chaine_relancee(r, cote, rel4, sauter, avec_la_spire=avec_la_spire)
             surfaces = [{t: x["la_lecture"] for t, x in lect_nappe.items()}]
             detail = []
             for k in chaine:
@@ -156,7 +160,8 @@ def mesurer() -> dict:
                 surfaces.append({t: x["la_lecture"] for t, x in lect.items()})
                 detail.append({"la_part_de_la_spire": round(float(k["le_saut"]["valide"].mean()), 4),
                                "la_part_relancee": round(float(rl["valide"].mean()), 4),
-                               "les_tours": {str(t): x["la_lecture"] for t, x in lect.items()}})
+                               "les_tours": {str(t): x["la_lecture"] for t, x in lect.items()},
+                               **({"les_semis": rl["les_semis"]} if "les_semis" in rl else {})})
             e["les_cotes"][nom] = dict({"les_surfaces": detail}, **m330.la_descente(surfaces))
         e["la_descente"] = max(c["la_descente"] for c in e["les_cotes"].values())
         e["le_tour_touche"] = any(c["le_tour_de_depart"] is not None for c in e["les_cotes"].values())
@@ -184,8 +189,10 @@ def mesurer() -> dict:
         for nom, cote in m306.LES_COTES:
             if (rang, nom) not in a_suivre:
                 continue
-            chaine = la_chaine_relancee(r, cote, lambda p_, n_: m305.la_nappe_croissante(tuple(p_), tuple(n_), lv0),
-                                        lambda s_, o_, cote=cote: m306.le_saut_croissant(s_, o_, cote, lv0))
+            rel0 = ((lambda p_, n_: m305.la_nappe_croissante(tuple(p_), tuple(n_), lv0)) if relancer0 is None
+                    else relancer0(lv0))
+            chaine = la_chaine_relancee(r, cote, rel0, lambda s_, o_, cote=cote: m306.le_saut_croissant(s_, o_, cote, lv0),
+                                        avec_la_spire=avec_la_spire)
             sauts = []
             for k in chaine:
                 e_ = m324.le_saut(k["le_saut"]["le_pas"], k["le_saut"]["valide"], m300.LE_PAS_0358)
@@ -196,7 +203,8 @@ def mesurer() -> dict:
                     plage = m326.lire_les_plages(rl, lv0, m300.LE_PAS_0358)
                     e_.update({"la_part_relancee": round(float(rl["valide"].mean()), 4),
                                "la_plage_en_pas": plage["la_longueur_mediane_en_pas"],
-                               "tient": bool(e_["pose_au_pas"] and plage["la_lecture"] != "dans un bloc")})
+                               "tient": bool(e_["pose_au_pas"] and plage["la_lecture"] != "dans un bloc"),
+                               **({"les_semis": rl["les_semis"]} if "les_semis" in rl else {})})
                 sauts.append(e_)
             e = {"le_rang": rang, "le_cote": nom, "les_sauts": sauts, "tient": m328.combien(sauts)}
             cotes0.append(e)

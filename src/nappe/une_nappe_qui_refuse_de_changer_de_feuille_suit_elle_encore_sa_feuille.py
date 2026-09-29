@@ -91,7 +91,15 @@ def croitre(centres: list[np.ndarray], forme: tuple, depart: tuple, tolerance: f
     if abs(c0[k] - cible_de_depart) > demi_portee:
         return dec, pose
     dec[i0, j0], pose[i0, j0] = c0[k], True
-    file = deque([(i0, j0)])
+    return etendre(centres, forme, dec, pose, tolerance)
+
+
+def etendre(centres: list[np.ndarray], forme: tuple, dec: np.ndarray, pose: np.ndarray,
+            tolerance: float = LA_TOLERANCE) -> tuple[np.ndarray, np.ndarray]:
+    """La croissance en largeur de `croitre`, depuis tous les points déjà posés à la fois, pris dans l'ordre de la grille ; écrit
+    pour `333`, qui la fait partir d'une spire entière. Modifie et rend `dec` et `pose`."""
+    h, w = forme
+    file = deque((int(a), int(b)) for a, b in zip(*np.nonzero(pose)))
     voisins = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
     while file:
         i, j = file.popleft()
