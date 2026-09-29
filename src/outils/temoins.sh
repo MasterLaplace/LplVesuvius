@@ -1819,6 +1819,8 @@ run "les surfaces à deux tours vont-elles jusqu'au bout de leurs tours" uv run 
 run "figure les surfaces à deux tours vont-elles jusqu'au bout de leurs tours" uv run python "$ROOT/src/figures/figure_les_surfaces_a_deux_tours_vont_elles_jusquau_bout_de_leurs_tours.py" --verifier
 run "jugée strictement, jusqu'où la chaîne bornée descend-elle" uv run python "$ROOT/src/nappe/jugee_strictement_jusquou_la_chaine_bornee_descend_elle.py" --verifier
 run "figure jugée strictement, jusqu'où la chaîne bornée descend-elle" uv run python "$ROOT/src/figures/figure_jugee_strictement_jusquou_la_chaine_bornee_descend_elle.py" --verifier
+run "les tours publiés voisins se recouvrent-ils" uv run python "$ROOT/src/nappe/les_tours_publies_voisins_se_recouvrent_ils.py" --verifier
+run "figure les tours publiés voisins se recouvrent-ils" uv run python "$ROOT/src/figures/figure_les_tours_publies_voisins_se_recouvrent_ils.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

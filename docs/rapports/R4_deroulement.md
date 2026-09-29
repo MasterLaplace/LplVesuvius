@@ -4585,6 +4585,12 @@ tour. Ce qui fait retrouver deux tours aux douze n'est ni l'écart ni la couture
 tours sur les graines 4 à 7 et reste devant la chaîne sans relance (2,5) ; sur les graines 2 et 3, aucune chaîne ne descend strictement un
 seul tour. `R4-P137` s'ouvre : un recouvrement des tours publiés autour des graines 1 à 3.
 
+**`341` · 2026-09-29 · les tours publiés voisins se recouvrent-ils** — `R4-P137`
+
+⭐⭐⭐⭐⭐ **Oui, autour des graines 1 à 3, sur un tiers de leur surface** — `R4-F527`. 27 à 46 % des sommets d'un tour publié y sont à un
+quart de pas du suivant, contre 2 à 15 % autour des graines 4 à 6 : c'est là qu'aucune chaîne ne descend strictement. `R4-P138` s'ouvre :
+deux feuilles collées ou un tour mal posé.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

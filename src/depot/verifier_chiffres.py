@@ -3336,6 +3336,16 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 341 : LES TOURS PUBLIÉS VOISINS SE RECOUVRENT-ILS
+    s341 = _source(racine, "les_tours_publies_voisins_se_recouvrent_ils.json")
+    if s341.exists():
+        d = json.loads(s341.read_text())
+        p_ = lambda x: "—" if x is None else f"{x * 100:.1f} %".replace(".", ",")  # noqa: E731
+        ecrits = [("le verdict de 341", d["le_verdict"]["lissue"].upper())]
+        for g in d["les_graines"]:
+            ecrits.append((f"la graine {g['le_rang']} de 341", f"| {g['le_rang']} | " + " | ".join(p_(x["la_part"]) for x in g["les_paires"]) + " |"))
+        out.extend((nom, [x_], s341.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 340 : JUGÉE STRICTEMENT, JUSQU'OÙ LA CHAÎNE BORNÉE DESCEND-ELLE
     s340 = _source(racine, "jugee_strictement_jusquou_la_chaine_bornee_descend_elle.json")
     if s340.exists():

@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**191 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**192 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 153 portes
+## Grand Prize — 154 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -171,7 +171,8 @@
 - **R4-P134** *(le référent)* · **RÉPONDUE par `338` : par la règle, oui ; par la mesure, pas établi.** Dix des douze surfaces à deux tours ont leurs deux tours à moins de 1280 voxels de leur bout, mais vingt des trente-six surfaces à un tour aussi (`R4-F524`). La suite est `R4-P135`.
 - **R4-P135** *(le référent)* · **RÉPONDUE par `339` : non.** Aucune des douze surfaces à deux tours ne touche le bout de ses deux tours ; vingt des trente-six surfaces à un tour vont jusqu'au bout du leur (`R4-F525`). La suite est `R4-P136`.
 - **R4-P136** *(le graal)* · **RÉPONDUE par `340` : quatre tours en médiane, et non six.** Jugée strictement, la chaîne bornée descend six tours sur les graines 4 à 7, deux sur la graine 8, aucun sur les graines 1 à 3 ; la chaîne sans relance 2,5 en médiane (`R4-F526`). La suite est `R4-P137`.
-- **R4-P137** *(le référent)* · **AUTOUR DES GRAINES 1 À 3, LES TOURS PUBLIÉS VOISINS SE RECOUVRENT-ILS PAR ENDROITS, DEUX TOURS POSÉS SUR LA MÊME FEUILLE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `340` DÉSIGNE. Sur ces graines, toutes les chaînes échouent strictement dès les premières surfaces (`R4-F526`) ; ni l'écart médian entre tours (`R4-F523`) ni la couture (`R4-F525`) ne l'expliquent, mais un recouvrement partiel de deux tours voisins ferait retrouver les deux à une surface posée sur la feuille commune.
+- **R4-P137** *(le référent)* · **RÉPONDUE par `341` : oui.** Autour des graines 1 à 3, deux tours publiés voisins sont sur la même feuille sur 27 à 46 % de leurs sommets en face, contre 2 à 15 % autour des graines 4 à 6 et 0 à 5 % autour des graines 7 et 8 (`R4-F527`). La suite est `R4-P138`.
+- **R4-P138** *(le référent)* · **LÀ OÙ DEUX TOURS PUBLIÉS SE RECOUVRENT, LA PLAGE DE `m7` SOUS EUX EST-ELLE DEUX FOIS PLUS ÉPAISSE QU'AILLEURS, DEUX FEUILLES COLLÉES, OU D'ÉPAISSEUR SIMPLE, UN TOUR POSÉ SUR LA FEUILLE DE SON VOISIN ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `341` DÉSIGNE. Autour des graines 1 à 3, les tours publiés voisins se recouvrent sur un tiers de leur surface (`R4-F527`) ; si c'est le rouleau écrasé, le référent est juste et la lecture doit l'accepter, si c'est un tour mal posé, le référent y est faux.
 
 ## Progress Prizes — 19 portes
 

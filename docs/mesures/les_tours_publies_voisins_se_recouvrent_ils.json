@@ -1,0 +1,620 @@
+{
+ "la_question": "Autour des graines 1 à 3, les tours publiés voisins se recouvrent-ils par endroits, deux tours posés sur la même feuille, et pas autour des autres graines ?",
+ "les_constantes": {
+  "la_part": 0.05,
+  "le_minimum": 200,
+  "le_quart_voxels": 18.021,
+  "la_demi_boite_voxels": 1280.0
+ },
+ "les_graines": [
+  {
+   "le_rang": 1,
+   "les_paires": [
+    {
+     "les_sommets_en_face": 18236,
+     "a_un_quart": 7823,
+     "la_part": 0.429,
+     "les_tours": [
+      0,
+      -1
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19555,
+     "a_un_quart": 7328,
+     "la_part": 0.3747,
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 18810,
+     "a_un_quart": 8192,
+     "la_part": 0.4355,
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 17220,
+     "a_un_quart": 7888,
+     "la_part": 0.4581,
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 18531,
+     "a_un_quart": 7482,
+     "la_part": 0.4038,
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 17656,
+     "a_un_quart": 6351,
+     "la_part": 0.3597,
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 2624,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "se_recouvrent": false
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "les_paires": [
+    {
+     "les_sommets_en_face": 18489,
+     "a_un_quart": 6499,
+     "la_part": 0.3515,
+     "les_tours": [
+      0,
+      -1
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19048,
+     "a_un_quart": 6074,
+     "la_part": 0.3189,
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 18896,
+     "a_un_quart": 6837,
+     "la_part": 0.3618,
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 17451,
+     "a_un_quart": 6610,
+     "la_part": 0.3788,
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 18314,
+     "a_un_quart": 6282,
+     "la_part": 0.343,
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19370,
+     "a_un_quart": 5955,
+     "la_part": 0.3074,
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 4481,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "se_recouvrent": false
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "les_paires": [
+    {
+     "les_sommets_en_face": 18454,
+     "a_un_quart": 6434,
+     "la_part": 0.3487,
+     "les_tours": [
+      0,
+      -1
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19037,
+     "a_un_quart": 5863,
+     "la_part": 0.308,
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19085,
+     "a_un_quart": 6935,
+     "la_part": 0.3634,
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 17459,
+     "a_un_quart": 6389,
+     "la_part": 0.3659,
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 18662,
+     "a_un_quart": 6018,
+     "la_part": 0.3225,
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19485,
+     "a_un_quart": 5346,
+     "la_part": 0.2744,
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 5729,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "se_recouvrent": false
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "les_paires": [
+    {
+     "les_sommets_en_face": 19466,
+     "a_un_quart": 2351,
+     "la_part": 0.1208,
+     "les_tours": [
+      0,
+      -1
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19874,
+     "a_un_quart": 727,
+     "la_part": 0.0366,
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 19762,
+     "a_un_quart": 1446,
+     "la_part": 0.0732,
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19517,
+     "a_un_quart": 682,
+     "la_part": 0.0349,
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 19563,
+     "a_un_quart": 410,
+     "la_part": 0.021,
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 19319,
+     "a_un_quart": 2717,
+     "la_part": 0.1406,
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 10430,
+     "a_un_quart": 1,
+     "la_part": 0.0001,
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "se_recouvrent": false
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "les_paires": [
+    {
+     "les_sommets_en_face": 19535,
+     "a_un_quart": 2855,
+     "la_part": 0.1461,
+     "les_tours": [
+      0,
+      -1
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19261,
+     "a_un_quart": 1010,
+     "la_part": 0.0524,
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19544,
+     "a_un_quart": 2236,
+     "la_part": 0.1144,
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 18941,
+     "a_un_quart": 1172,
+     "la_part": 0.0619,
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19168,
+     "a_un_quart": 1659,
+     "la_part": 0.0866,
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 16320,
+     "a_un_quart": 1185,
+     "la_part": 0.0726,
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 6777,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "se_recouvrent": false
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "les_paires": [
+    {
+     "les_sommets_en_face": 19606,
+     "a_un_quart": 2834,
+     "la_part": 0.1445,
+     "les_tours": [
+      0,
+      -1
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19396,
+     "a_un_quart": 991,
+     "la_part": 0.0511,
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19741,
+     "a_un_quart": 2266,
+     "la_part": 0.1148,
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19013,
+     "a_un_quart": 1236,
+     "la_part": 0.065,
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 19280,
+     "a_un_quart": 1709,
+     "la_part": 0.0886,
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 16418,
+     "a_un_quart": 1858,
+     "la_part": 0.1132,
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 8588,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "se_recouvrent": false
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "les_paires": [
+    {
+     "les_sommets_en_face": 16580,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      0,
+      -1
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 15437,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 13113,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 13946,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 14533,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 13685,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 8683,
+     "a_un_quart": 13,
+     "la_part": 0.0015,
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "se_recouvrent": false
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "les_paires": [
+    {
+     "les_sommets_en_face": 17175,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      0,
+      -1
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 18150,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -1,
+      -2
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 15326,
+     "a_un_quart": 608,
+     "la_part": 0.0397,
+     "les_tours": [
+      -2,
+      -3
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 16883,
+     "a_un_quart": 886,
+     "la_part": 0.0525,
+     "les_tours": [
+      -3,
+      -4
+     ],
+     "se_recouvrent": true
+    },
+    {
+     "les_sommets_en_face": 18084,
+     "a_un_quart": 134,
+     "la_part": 0.0074,
+     "les_tours": [
+      -4,
+      -5
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 16983,
+     "a_un_quart": 256,
+     "la_part": 0.0151,
+     "les_tours": [
+      -5,
+      -6
+     ],
+     "se_recouvrent": false
+    },
+    {
+     "les_sommets_en_face": 6154,
+     "a_un_quart": 0,
+     "la_part": 0.0,
+     "les_tours": [
+      -6,
+      -7
+     ],
+     "se_recouvrent": false
+    }
+   ]
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "a": 18,
+  "n1": 21,
+  "b": 16,
+  "n2": 35,
+  "lissue": "autour des graines 1 à 3, 18 des 21 paires mesurées se recouvrent ; autour des graines 4 à 8, 16 des 35 ; les tours se recouvrent autour des graines 1 à 3 et pas ailleurs"
+ },
+ "les_secondes": 12.3
+}
