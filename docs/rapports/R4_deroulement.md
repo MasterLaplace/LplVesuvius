@@ -4574,6 +4574,11 @@ descente retrouvent pourtant deux tours : `R4-P134` s'ouvre.
 près du bout des tours publiés ; être près du bout ne dit pas qu'une surface traverse la couture. `R4-P135` s'ouvre : aller jusqu'au bout
 de chacun des deux tours.
 
+**`339` · 2026-09-29 · les surfaces à deux tours vont-elles jusqu'au bout de leurs tours** — `R4-P135`
+
+⭐⭐⭐⭐ **Aucune des douze : elles ne traversent pas la couture** — `R4-F525`. Ce sont des surfaces à un tour qui vont jusqu'au bout de leur
+tour. Ce qui fait retrouver deux tours aux douze n'est ni l'écart ni la couture. `R4-P136` s'ouvre : la descente jugée strictement.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

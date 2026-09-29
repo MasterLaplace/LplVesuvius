@@ -3336,6 +3336,19 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 339 : LES SURFACES À DEUX TOURS VONT-ELLES JUSQU'AU BOUT DE LEURS TOURS
+    s339 = _source(racine, "les_surfaces_a_deux_tours_vont_elles_jusquau_bout_de_leurs_tours.json")
+    if s339.exists():
+        d = json.loads(s339.read_text())
+        ecrits = [("le verdict de 339", d["le_verdict"]["lissue"].upper()),
+                  ("les chunks de m7 lus de 339", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne")]
+        for x in d["les_surfaces_a_deux_tours"]:
+            a_, b_ = x["les_tours_retrouves"]
+            ecrits.append((f"la surface à deux tours g{x['le_rang']} saut {x['le_saut']} de 339",
+                           f"| {x['le_rang']} | {x['le_saut']} | `5753_{a_}` et `5753_{b_}` | {x['au_bout'][str(a_)]} | "
+                           f"{x['au_bout'][str(b_)]} |"))
+        out.extend((nom, [x_], s339.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐ LA TRANCHE 338 : LES SURFACES À DEUX TOURS PASSENT-ELLES PAR LA COUTURE
     s338 = _source(racine, "les_surfaces_a_deux_tours_passent_elles_par_la_couture.json")
     if s338.exists():
