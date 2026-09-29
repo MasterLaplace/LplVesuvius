@@ -4383,6 +4383,13 @@ couvre le plan, le juge ne l'y voit pas posé. Les spires − de la graine 3 de 
 l'empilement d'une surface qui le traverse, pas une surface posée sur une feuille d'une surface posée entre deux : ce que `300` à
 `306` disent « suit sa feuille » se lit « est parallèle à l'empilement ». `R4-P108` s'ouvre : un juge de position.
 
+**`308` · 2026-09-29 · un juge de position sépare-t-il la feuille de l'entre-deux** — `R4-P108`
+
+⭐⭐⭐⭐ **Non par sa règle, mais il voit la position** — `R4-F489`. Sur PHercParis4, la part des blocs posés oscille au pas du
+rouleau avec un sommet à un quart de pas du tracé humain : la main pose sa surface sur la face de la feuille, à 3 voxels de son plus
+dense. Les nappes de `m7` des graines 3 et 6 de PHerc0358 ont leur contraste le plus haut à leur place exacte. `R4-P109` s'ouvre :
+un juge du plus dense, étalonné sur des blocs neufs.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

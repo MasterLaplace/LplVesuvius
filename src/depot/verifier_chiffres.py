@@ -3336,6 +3336,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 308 : UN JUGE DE POSITION SÉPARE-T-IL LA FEUILLE DE L'ENTRE-DEUX
+    s308 = _source(racine, "un_juge_de_position_separe_t_il_la_feuille_de_lentre_deux.json")
+    if s308.exists():
+        d = json.loads(s308.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        noms = ["m1", "m0_75", "m0_5", "m0_25", "p0", "p0_25", "p0_5", "p0_75", "p1"]
+        ecrits = [("le verdict de 308", d["le_verdict"]["lissue"].upper())]
+        for e in d["paris4"]["la_courbe"]:
+            ecrits.append((f"le décalage {e['le_decalage_en_pas']} de 308",
+                           f"| {f_(e['le_decalage_en_pas'])} | {f_(e['la_part_posee'])} |"))
+        for n in d["phercs0358"]["les_nappes"]:
+            ecrits.append((f"la graine {n['le_rang']} de 308",
+                           f"| {n['le_rang']} | " + " | ".join(f_(n["les_contrastes"][k]) for k in noms)
+                           + f" | {f_(n['le_relief']['le_plus_dense'])} |"))
+        out.extend((nom, [x_], s308.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 307 : LE JUGE VOIT-IL L'ENTRE-DEUX FEUILLES
     s307 = _source(racine, "le_juge_voit_il_lentre_deux_feuilles.json")
     if s307.exists():

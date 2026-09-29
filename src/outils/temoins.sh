@@ -1753,6 +1753,8 @@ run "la chaine d une seule feuille suit-elle sa feuille sur quatre spires" uv ru
 run "figure la chaine d une seule feuille suit-elle sa feuille sur quatre spires" uv run python "$ROOT/src/figures/figure_la_chaine_dune_seule_feuille_suit_elle_sa_feuille_sur_quatre_spires.py" --verifier
 run "le juge voit-il l entre-deux feuilles" uv run python "$ROOT/src/nappe/le_juge_voit_il_lentre_deux_feuilles.py" --verifier
 run "figure le juge voit-il l entre-deux feuilles" uv run python "$ROOT/src/figures/figure_le_juge_voit_il_lentre_deux_feuilles.py" --verifier
+run "un juge de position separe-t-il la feuille de l entre-deux" uv run python "$ROOT/src/nappe/un_juge_de_position_separe_t_il_la_feuille_de_lentre_deux.py" --verifier
+run "figure un juge de position separe-t-il la feuille de l entre-deux" uv run python "$ROOT/src/figures/figure_un_juge_de_position_separe_t_il_la_feuille_de_lentre_deux.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

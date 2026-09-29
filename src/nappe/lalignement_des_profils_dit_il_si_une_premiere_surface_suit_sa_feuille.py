@@ -395,7 +395,8 @@ def juger(vol, fichier: Path, facteur: float, T: int) -> list[dict]:
     for i, g in enumerate(groupes):
         m = groupe == i
         out.append({"le_groupe": g, "lalignement": lalignement(profils[m & juge]), "les_points_juges": int((m & juge).sum()),
-                    "sans_matiere": int((m & vide).sum()), "hors_du_volume": int((m & ~dedans).sum())})
+                    "sans_matiere": int((m & vide).sum()), "hors_du_volume": int((m & ~dedans).sum()),
+                    "le_profil_moyen": m298.le_profil_moyen(profils[m & juge])})
     return out
 
 
