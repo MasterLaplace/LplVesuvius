@@ -4510,6 +4510,17 @@ qui refuse les blocs.
 de la médiane rend les mêmes comptes que le témoin, 4 graines et 5 côtés. `R4-P126` s'ouvre : combien de sauts la chaîne qui croît
 tient-elle au pas sur PHerc0358 ?
 
+**`328` · 2026-09-29 · combien de sauts la chaîne qui croît tient-elle au pas** — `R4-P126`
+
+⭐⭐⭐⭐ **Un saut en médiane sur PHerc0358, 2,5 sur PHercParis4** — `R4-F513`. Sur PHerc0358, la spire rétrécit sous 10 % du plan dès le
+deuxième ou le troisième saut ; sur PHercParis4, quatre côtés tiennent six à huit sauts.
+
+**`329` · 2026-09-29 · la chaîne qui croît tombe-t-elle sur les tours publiés** — `R4-P126`
+
+⭐⭐⭐⭐⭐ **Côté intérieur, elle passe d'un tour publié au suivant 14 fois sur 14** — `R4-F514`, `R4-F515`. Contre `5753_0` à `5753_-3`,
+chaque saut de la chaîne tirée de `m7` tombe sur le tour suivant ; le segment de `296` est un ou deux tours à l'extérieur de `5753_0` sur
+six graines. `R4-P127` s'ouvre : au-delà du troisième saut.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

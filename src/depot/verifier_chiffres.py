@@ -3336,6 +3336,37 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 329 : LA CHAÎNE QUI CROÎT TOMBE-T-ELLE SUR LES TOURS PUBLIÉS
+    s329 = _source(racine, "la_chaine_qui_croit_tombe_t_elle_sur_les_tours_publies.json")
+    if s329.exists():
+        d = json.loads(s329.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 329", d["le_verdict"]["lissue"].upper())]
+        for g in d["les_graines"]:
+            n0 = g["la_nappe"]["0"]
+            cases = [f"{f_(n0.get('lecart_median_voxels'))} · {f_(n0.get('la_part_a_un_quart_de_pas'))}"]
+            for sp in g["les_cotes"]["moins"]["les_spires"]:
+                r_ = sorted((int(t) for t, x in sp["les_tours"].items() if x["la_lecture"] == "retrouve"), reverse=True)
+                cases.append("/".join(f_(t) for t in r_) if r_ else "—")
+            ecrits.append((f"la graine {g['le_rang']} de 329",
+                           f"| {g['le_rang']} | " + " | ".join(cases) + f" | {g['les_cotes']['moins']['les_passages']['reussis']} | "
+                           f"{g['la_descente']} |"))
+        moins = sum(g["les_cotes"]["moins"]["les_passages"]["reussis"] for g in d["les_graines"])
+        ecrits.append(("les passages de 329", f"{moins} passages sur {moins}" if not sum(
+            g["les_cotes"]["moins"]["les_passages"]["echoues"] for g in d["les_graines"]) else "échecs côté moins"))
+        out.extend((nom, [x_], s329.name) for nom, x_ in ecrits)
+
+    # ⭐⭐⭐⭐ LA TRANCHE 328 : COMBIEN DE SAUTS LA CHAÎNE QUI CROÎT TIENT-ELLE AU PAS
+    s328 = _source(racine, "combien_de_sauts_la_chaine_qui_croit_tient_elle_au_pas.json")
+    if s328.exists():
+        d = json.loads(s328.read_text())
+        ecrits = [("le verdict de 328", d["le_verdict"]["lissue"].upper()),
+                  ("PHercParis4 en 328", ", ".join(str(c["tient"]) for c in d["les_cotes"]["PHercParis4"][:-1])
+                   + f" et {d['les_cotes']['PHercParis4'][-1]['tient']} sauts")]
+        for c in d["les_cotes"]["PHerc0358"]:
+            ecrits.append((f"g{c['le_rang']} {c['le_cote']} de 328", f"| PHerc0358 | g{c['le_rang']} {c['le_cote']} | {c['tient']} |"))
+        out.extend((nom, [x_], s328.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 327 : UN SAUT PARTI DE LA MÉDIANE TOMBE-T-IL PLUS SOUVENT AU PAS
     s327 = _source(racine, "un_saut_parti_de_la_mediane_tombe_t_il_plus_souvent_au_pas.json")
     if s327.exists():

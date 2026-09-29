@@ -1,0 +1,1146 @@
+{
+ "la_question": "Combien de sauts la chaîne qui croît tient-elle au pas, sur PHerc0358 depuis les cinq côtés dont le premier saut pose au pas, et sur PHercParis4 depuis les quatorze ?",
+ "les_constantes": {
+  "les_sauts": 8
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHerc0358": {
+   "lus": 1413,
+   "absents": 0,
+   "octets": 684622965
+  },
+  "PHercParis4": {
+   "lus": 4280,
+   "absents": 0,
+   "octets": 1947772162
+  }
+ },
+ "les_cotes": {
+  "PHerc0358": [
+   {
+    "le_rang": 6,
+    "le_cote": "moins",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.7924,
+      "le_pas_median_en_pas": 0.9,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.15,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.6987,
+      "le_pas_median_en_pas": 1.025,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.15,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.5844,
+      "le_pas_median_en_pas": 0.675,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.15,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0066,
+      "le_pas_median_en_pas": 0.787,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.2,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0012,
+      "le_pas_median_en_pas": 0.65,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0,
+      "le_pas_median_en_pas": null,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 3
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "plus",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.1522,
+      "le_pas_median_en_pas": 0.8,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.15,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.112,
+      "le_pas_median_en_pas": 0.375,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0701,
+      "le_pas_median_en_pas": 0.95,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.018,
+      "le_pas_median_en_pas": 1.1,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0052,
+      "le_pas_median_en_pas": 1.05,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0007,
+      "le_pas_median_en_pas": 0.9,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0,
+      "le_pas_median_en_pas": null,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 1
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "moins",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.1702,
+      "le_pas_median_en_pas": 0.875,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.15,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1299,
+      "le_pas_median_en_pas": 1.025,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.15,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0809,
+      "le_pas_median_en_pas": 0.675,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0244,
+      "le_pas_median_en_pas": 1.4,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.2,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0007,
+      "le_pas_median_en_pas": 0.65,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0,
+      "le_pas_median_en_pas": null,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 2
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "plus",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.1444,
+      "le_pas_median_en_pas": 0.575,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.15,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0578,
+      "le_pas_median_en_pas": 0.8,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0393,
+      "le_pas_median_en_pas": 0.6,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0263,
+      "le_pas_median_en_pas": 1.15,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0156,
+      "le_pas_median_en_pas": 0.85,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0078,
+      "le_pas_median_en_pas": 0.75,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.2,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0031,
+      "le_pas_median_en_pas": 1.125,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.25,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0007,
+      "le_pas_median_en_pas": 0.55,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 1
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "moins",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.2038,
+      "le_pas_median_en_pas": 1.0,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.15,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0838,
+      "le_pas_median_en_pas": 1.05,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0514,
+      "le_pas_median_en_pas": 0.65,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.15,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0121,
+      "le_pas_median_en_pas": 0.55,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.2,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0014,
+      "le_pas_median_en_pas": 0.6,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0,
+      "le_pas_median_en_pas": null,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 1
+   }
+  ],
+  "PHercParis4": [
+   {
+    "le_rang": 1,
+    "le_cote": "plus",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.2949,
+      "le_pas_median_en_pas": 1.165,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.258,
+      "le_pas_median_en_pas": 1.054,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2237,
+      "le_pas_median_en_pas": 0.943,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.191,
+      "le_pas_median_en_pas": 0.86,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1579,
+      "le_pas_median_en_pas": 1.054,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1188,
+      "le_pas_median_en_pas": 0.666,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0914,
+      "le_pas_median_en_pas": 0.777,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0305,
+      "le_pas_median_en_pas": 0.86,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     }
+    ],
+    "tient": 6
+   },
+   {
+    "le_rang": 1,
+    "le_cote": "moins",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.2949,
+      "le_pas_median_en_pas": 1.346,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.258,
+      "le_pas_median_en_pas": 1.249,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2237,
+      "le_pas_median_en_pas": 1.276,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1917,
+      "le_pas_median_en_pas": 1.11,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1614,
+      "le_pas_median_en_pas": 1.942,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0005,
+      "le_pas_median_en_pas": 1.887,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0,
+      "le_pas_median_en_pas": null,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 4
+   },
+   {
+    "le_rang": 2,
+    "le_cote": "plus",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.208,
+      "le_pas_median_en_pas": 1.498,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1548,
+      "le_pas_median_en_pas": 1.387,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1257,
+      "le_pas_median_en_pas": 1.831,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0836,
+      "le_pas_median_en_pas": 1.165,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0573,
+      "le_pas_median_en_pas": 0.777,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0388,
+      "le_pas_median_en_pas": 0.666,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.022,
+      "le_pas_median_en_pas": 0.666,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0116,
+      "le_pas_median_en_pas": 0.638,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     }
+    ],
+    "tient": 2
+   },
+   {
+    "le_rang": 2,
+    "le_cote": "moins",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.2097,
+      "le_pas_median_en_pas": 1.276,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1614,
+      "le_pas_median_en_pas": 1.776,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.1314,
+      "le_pas_median_en_pas": 1.332,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1013,
+      "le_pas_median_en_pas": 1.526,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0452,
+      "le_pas_median_en_pas": 2.275,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0002,
+      "le_pas_median_en_pas": 1.914,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0,
+      "le_pas_median_en_pas": null,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 1
+   },
+   {
+    "le_rang": 3,
+    "le_cote": "plus",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.2947,
+      "le_pas_median_en_pas": 1.387,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2518,
+      "le_pas_median_en_pas": 1.609,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.2144,
+      "le_pas_median_en_pas": 1.554,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.1782,
+      "le_pas_median_en_pas": 1.554,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.1307,
+      "le_pas_median_en_pas": 1.165,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.063,
+      "le_pas_median_en_pas": 0.777,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0369,
+      "le_pas_median_en_pas": 0.721,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0192,
+      "le_pas_median_en_pas": 1.11,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     }
+    ],
+    "tient": 1
+   },
+   {
+    "le_rang": 4,
+    "le_cote": "plus",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.3844,
+      "le_pas_median_en_pas": 1.249,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2613,
+      "le_pas_median_en_pas": 0.888,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0942,
+      "le_pas_median_en_pas": 0.721,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0381,
+      "le_pas_median_en_pas": 0.805,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0062,
+      "le_pas_median_en_pas": 0.583,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0021,
+      "le_pas_median_en_pas": 0.472,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0002,
+      "le_pas_median_en_pas": 0.61,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0,
+      "le_pas_median_en_pas": null,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 2
+   },
+   {
+    "le_rang": 4,
+    "le_cote": "moins",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.4615,
+      "le_pas_median_en_pas": 0.888,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.4088,
+      "le_pas_median_en_pas": 0.721,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.3581,
+      "le_pas_median_en_pas": 0.61,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.3129,
+      "le_pas_median_en_pas": 0.61,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2672,
+      "le_pas_median_en_pas": 0.694,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2185,
+      "le_pas_median_en_pas": 0.666,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1725,
+      "le_pas_median_en_pas": 0.61,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0388,
+      "le_pas_median_en_pas": 1.332,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     }
+    ],
+    "tient": 7
+   },
+   {
+    "le_rang": 5,
+    "le_cote": "plus",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.2535,
+      "le_pas_median_en_pas": 0.666,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1323,
+      "le_pas_median_en_pas": 1.165,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0078,
+      "le_pas_median_en_pas": 0.583,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0007,
+      "le_pas_median_en_pas": 0.555,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0,
+      "le_pas_median_en_pas": null,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 2
+   },
+   {
+    "le_rang": 5,
+    "le_cote": "moins",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.3508,
+      "le_pas_median_en_pas": 0.916,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.3096,
+      "le_pas_median_en_pas": 0.805,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2682,
+      "le_pas_median_en_pas": 0.721,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2249,
+      "le_pas_median_en_pas": 0.666,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1837,
+      "le_pas_median_en_pas": 0.721,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1404,
+      "le_pas_median_en_pas": 0.749,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1039,
+      "le_pas_median_en_pas": 0.749,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0078,
+      "le_pas_median_en_pas": 1.609,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     }
+    ],
+    "tient": 7
+   },
+   {
+    "le_rang": 6,
+    "le_cote": "plus",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.3851,
+      "le_pas_median_en_pas": 0.888,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2724,
+      "le_pas_median_en_pas": 0.694,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1475,
+      "le_pas_median_en_pas": 0.721,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0192,
+      "le_pas_median_en_pas": 1.332,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0054,
+      "le_pas_median_en_pas": 0.777,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0009,
+      "le_pas_median_en_pas": 0.555,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0,
+      "le_pas_median_en_pas": null,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 3
+   },
+   {
+    "le_rang": 6,
+    "le_cote": "moins",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.387,
+      "le_pas_median_en_pas": 0.805,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.3486,
+      "le_pas_median_en_pas": 0.694,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.3096,
+      "le_pas_median_en_pas": 0.638,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2715,
+      "le_pas_median_en_pas": 0.694,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2393,
+      "le_pas_median_en_pas": 0.721,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.2019,
+      "le_pas_median_en_pas": 0.749,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1576,
+      "le_pas_median_en_pas": 0.666,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1011,
+      "le_pas_median_en_pas": 0.86,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     }
+    ],
+    "tient": 8
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "plus",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.2978,
+      "le_pas_median_en_pas": 0.805,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1834,
+      "le_pas_median_en_pas": 0.499,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.1333,
+      "le_pas_median_en_pas": 0.805,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0762,
+      "le_pas_median_en_pas": 0.694,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0447,
+      "le_pas_median_en_pas": 0.888,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0308,
+      "le_pas_median_en_pas": 0.527,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0196,
+      "le_pas_median_en_pas": 0.583,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0111,
+      "le_pas_median_en_pas": 0.777,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     }
+    ],
+    "tient": 1
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "moins",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.2604,
+      "le_pas_median_en_pas": 0.749,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.156,
+      "le_pas_median_en_pas": 0.888,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.1176,
+      "le_pas_median_en_pas": 1.11,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0682,
+      "le_pas_median_en_pas": 0.943,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0019,
+      "le_pas_median_en_pas": 3.052,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0,
+      "le_pas_median_en_pas": null,
+      "pose_au_pas": false,
+      "la_plage_en_pas": null,
+      "tient": false
+     }
+    ],
+    "tient": 3
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "plus",
+    "les_sauts": [
+     {
+      "la_part_du_plan": 0.3567,
+      "le_pas_median_en_pas": 0.721,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.137,
+      "le_pas_median_en_pas": 0.86,
+      "pose_au_pas": true,
+      "la_plage_en_pas": 0.166,
+      "tient": true
+     },
+     {
+      "la_part_du_plan": 0.0961,
+      "le_pas_median_en_pas": 0.777,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0682,
+      "le_pas_median_en_pas": 0.666,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.045,
+      "le_pas_median_en_pas": 0.666,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0215,
+      "le_pas_median_en_pas": 0.832,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0128,
+      "le_pas_median_en_pas": 0.583,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     },
+     {
+      "la_part_du_plan": 0.0062,
+      "le_pas_median_en_pas": 0.86,
+      "pose_au_pas": false,
+      "la_plage_en_pas": 0.166,
+      "tient": false
+     }
+    ],
+    "tient": 2
+   }
+  ]
+ },
+ "le_verdict": {
+  "decidable": true,
+  "h0": [
+   3,
+   1,
+   2,
+   1,
+   1
+  ],
+  "h4": [
+   6,
+   4,
+   2,
+   1,
+   1,
+   2,
+   7,
+   2,
+   7,
+   3,
+   8,
+   1,
+   3,
+   2
+  ],
+  "plusieurs": false,
+  "lissue": "sur PHerc0358, la chaîne qui croît tient 1 saut en médiane sur les 5 côtés, et sur PHercParis4, 2,5 sauts sur les 14 ; elle ne produit pas plusieurs spires sur PHerc0358"
+ },
+ "les_secondes": 55.8
+}

@@ -1,0 +1,2013 @@
+{
+ "la_question": "Saut après saut, la chaîne qui croît de PHercParis4 tombe-t-elle sur les tours consécutifs que l'équipe publie, 5753_0, 5753_-1, 5753_-2 et 5753_-3 ?",
+ "les_constantes": {
+  "les_tours": {
+   "0": "20260602225659-5753_0",
+   "-1": "20260603005223-5753_-1",
+   "-2": "20260603024952-5753_-2",
+   "-3": "20260603042357-5753_-3"
+  },
+  "le_maillage": "on-20260411134726-2.4um.tifxyz",
+  "les_sauts": 3,
+  "la_marge_voxels": 100.0
+ },
+ "les_tours_lus": {
+  "0": {
+   "les_sommets": 2222727,
+   "lespacement": 19.99999970197678
+  },
+  "-1": {
+   "les_sommets": 2117104,
+   "lespacement": 19.99999970197678
+  },
+  "-2": {
+   "les_sommets": 2016974,
+   "lespacement": 19.99999970197678
+  },
+  "-3": {
+   "les_sommets": 1937463,
+   "lespacement": 19.99999970197678
+  }
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 1619,
+  "absents": 0,
+  "octets": 741810000
+ },
+ "les_graines": [
+  {
+   "le_rang": 1,
+   "la_nappe": {
+    "0": {
+     "les_sommets_en_face": 4059,
+     "lecart_median_voxels": 186.66,
+     "lecart_median_en_pas": 2.59,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-1": {
+     "les_sommets_en_face": 2234,
+     "lecart_median_voxels": 258.17,
+     "lecart_median_en_pas": 3.582,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-2": {
+     "les_sommets_en_face": 826,
+     "lecart_median_voxels": 305.45,
+     "lecart_median_en_pas": 4.237,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-3": {
+     "les_sommets_en_face": 86,
+     "lecart_median_voxels": 485.23,
+     "lecart_median_en_pas": 6.732,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    }
+   },
+   "le_tour_de_la_nappe": null,
+   "les_cotes": {
+    "plus": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.2949,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 2175,
+         "lecart_median_voxels": 262.41,
+         "lecart_median_en_pas": 3.64,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 1278,
+         "lecart_median_voxels": 324.93,
+         "lecart_median_en_pas": 4.508,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 473,
+         "lecart_median_voxels": 369.49,
+         "lecart_median_en_pas": 5.126,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 18,
+         "la_lecture": "non lue"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.258,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 1043,
+         "lecart_median_voxels": 330.86,
+         "lecart_median_en_pas": 4.59,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 636,
+         "lecart_median_voxels": 374.72,
+         "lecart_median_en_pas": 5.198,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 159,
+         "lecart_median_voxels": 422.5,
+         "lecart_median_en_pas": 5.861,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 1,
+         "la_lecture": "non lue"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.2237,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 385,
+         "lecart_median_voxels": 350.02,
+         "lecart_median_en_pas": 4.856,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 168,
+         "lecart_median_voxels": 466.29,
+         "lecart_median_en_pas": 6.469,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 11,
+         "la_lecture": "non lue"
+        },
+        "-3": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 0,
+      "echoues": 0
+     }
+    },
+    "moins": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.2949,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 6481,
+         "lecart_median_voxels": 99.17,
+         "lecart_median_en_pas": 1.376,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 3555,
+         "lecart_median_voxels": 183.68,
+         "lecart_median_en_pas": 2.548,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 1472,
+         "lecart_median_voxels": 253.06,
+         "lecart_median_en_pas": 3.511,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 314,
+         "lecart_median_voxels": 387.07,
+         "lecart_median_en_pas": 5.37,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.258,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 7191,
+         "lecart_median_voxels": 1.37,
+         "lecart_median_en_pas": 0.019,
+         "la_part_a_un_quart_de_pas": 0.5489,
+         "la_lecture": "retrouve"
+        },
+        "-1": {
+         "les_sommets_en_face": 5250,
+         "lecart_median_voxels": 102.15,
+         "lecart_median_en_pas": 1.417,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 2412,
+         "lecart_median_voxels": 169.03,
+         "lecart_median_en_pas": 2.345,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 572,
+         "lecart_median_voxels": 282.23,
+         "lecart_median_en_pas": 3.915,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.2237,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 6325,
+         "lecart_median_voxels": -52.36,
+         "lecart_median_en_pas": -0.726,
+         "la_part_a_un_quart_de_pas": 0.4999,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 5782,
+         "lecart_median_voxels": 6.09,
+         "lecart_median_en_pas": 0.084,
+         "la_part_a_un_quart_de_pas": 0.5406,
+         "la_lecture": "retrouve"
+        },
+        "-2": {
+         "les_sommets_en_face": 3292,
+         "lecart_median_voxels": 75.23,
+         "lecart_median_en_pas": 1.044,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 876,
+         "lecart_median_voxels": 193.23,
+         "lecart_median_en_pas": 2.681,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 1,
+      "echoues": 0
+     }
+    }
+   },
+   "la_descente": 0
+  },
+  {
+   "le_rang": 2,
+   "la_nappe": {
+    "0": {
+     "les_sommets_en_face": 4912,
+     "lecart_median_voxels": 104.99,
+     "lecart_median_en_pas": 1.456,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-1": {
+     "les_sommets_en_face": 1744,
+     "lecart_median_voxels": 230.25,
+     "lecart_median_en_pas": 3.194,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-2": {
+     "les_sommets_en_face": 757,
+     "lecart_median_voxels": 319.94,
+     "lecart_median_en_pas": 4.439,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-3": {
+     "les_sommets_en_face": 192,
+     "lecart_median_voxels": 406.24,
+     "lecart_median_en_pas": 5.636,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    }
+   },
+   "le_tour_de_la_nappe": null,
+   "les_cotes": {
+    "plus": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.208,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 1306,
+         "lecart_median_voxels": 193.38,
+         "lecart_median_en_pas": 2.683,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 528,
+         "lecart_median_voxels": 304.67,
+         "lecart_median_en_pas": 4.227,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 201,
+         "lecart_median_voxels": 384.47,
+         "lecart_median_en_pas": 5.334,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 9,
+         "la_lecture": "non lue"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1548,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 410,
+         "lecart_median_voxels": 268.36,
+         "lecart_median_en_pas": 3.723,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 11,
+         "la_lecture": "non lue"
+        },
+        "-2": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        },
+        "-3": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1257,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        },
+        "-1": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        },
+        "-2": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        },
+        "-3": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 0,
+      "echoues": 0
+     }
+    },
+    "moins": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.2097,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 5587,
+         "lecart_median_voxels": 2.6,
+         "lecart_median_en_pas": 0.036,
+         "la_part_a_un_quart_de_pas": 0.5572,
+         "la_lecture": "retrouve"
+        },
+        "-1": {
+         "les_sommets_en_face": 2914,
+         "lecart_median_voxels": 128.54,
+         "lecart_median_en_pas": 1.783,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 1284,
+         "lecart_median_voxels": 192.44,
+         "lecart_median_en_pas": 2.67,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 352,
+         "lecart_median_voxels": 273.65,
+         "lecart_median_en_pas": 3.796,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1614,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 4160,
+         "lecart_median_voxels": -2.96,
+         "lecart_median_en_pas": -0.041,
+         "la_part_a_un_quart_de_pas": 0.6048,
+         "la_lecture": "retrouve"
+        },
+        "-1": {
+         "les_sommets_en_face": 4120,
+         "lecart_median_voxels": 10.66,
+         "lecart_median_en_pas": 0.148,
+         "la_part_a_un_quart_de_pas": 0.5032,
+         "la_lecture": "retrouve"
+        },
+        "-2": {
+         "les_sommets_en_face": 2530,
+         "lecart_median_voxels": 92.47,
+         "lecart_median_en_pas": 1.283,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 649,
+         "lecart_median_voxels": 165.62,
+         "lecart_median_en_pas": 2.298,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1314,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 2112,
+         "lecart_median_voxels": -85.89,
+         "lecart_median_en_pas": -1.191,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 3544,
+         "lecart_median_voxels": -2.12,
+         "lecart_median_en_pas": -0.029,
+         "la_part_a_un_quart_de_pas": 0.5655,
+         "la_lecture": "retrouve"
+        },
+        "-2": {
+         "les_sommets_en_face": 3280,
+         "lecart_median_voxels": 2.5,
+         "lecart_median_en_pas": 0.035,
+         "la_part_a_un_quart_de_pas": 0.6012,
+         "la_lecture": "retrouve"
+        },
+        "-3": {
+         "les_sommets_en_face": 1380,
+         "lecart_median_voxels": 96.83,
+         "lecart_median_en_pas": 1.343,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 1,
+      "echoues": 0
+     }
+    }
+   },
+   "la_descente": 0
+  },
+  {
+   "le_rang": 3,
+   "la_nappe": {
+    "0": {
+     "les_sommets_en_face": 9640,
+     "lecart_median_voxels": 1.69,
+     "lecart_median_en_pas": 0.023,
+     "la_part_a_un_quart_de_pas": 0.6186,
+     "la_lecture": "retrouve"
+    },
+    "-1": {
+     "les_sommets_en_face": 5075,
+     "lecart_median_voxels": 128.43,
+     "lecart_median_en_pas": 1.782,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-2": {
+     "les_sommets_en_face": 1980,
+     "lecart_median_voxels": 199.25,
+     "lecart_median_en_pas": 2.764,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-3": {
+     "les_sommets_en_face": 428,
+     "lecart_median_voxels": 288.09,
+     "lecart_median_en_pas": 3.997,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    }
+   },
+   "le_tour_de_la_nappe": 0,
+   "les_cotes": {
+    "plus": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.2947,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 5492,
+         "lecart_median_voxels": 98.53,
+         "lecart_median_en_pas": 1.367,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 1864,
+         "lecart_median_voxels": 229.76,
+         "lecart_median_en_pas": 3.187,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 557,
+         "lecart_median_voxels": 274.52,
+         "lecart_median_en_pas": 3.808,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 34,
+         "la_lecture": "non lue"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.2518,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 1137,
+         "lecart_median_voxels": 160.57,
+         "lecart_median_en_pas": 2.228,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 153,
+         "lecart_median_voxels": 285.17,
+         "lecart_median_en_pas": 3.956,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        },
+        "-3": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.2144,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 240,
+         "lecart_median_voxels": 264.95,
+         "lecart_median_en_pas": 3.676,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        },
+        "-2": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        },
+        "-3": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 0,
+      "echoues": 1
+     }
+    },
+    "moins": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.2793,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 7916,
+         "lecart_median_voxels": -4.74,
+         "lecart_median_en_pas": -0.066,
+         "la_part_a_un_quart_de_pas": 0.5666,
+         "la_lecture": "retrouve"
+        },
+        "-1": {
+         "les_sommets_en_face": 7992,
+         "lecart_median_voxels": 4.33,
+         "lecart_median_en_pas": 0.06,
+         "la_part_a_un_quart_de_pas": 0.5504,
+         "la_lecture": "retrouve"
+        },
+        "-2": {
+         "les_sommets_en_face": 4648,
+         "lecart_median_voxels": 91.88,
+         "lecart_median_en_pas": 1.275,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 1348,
+         "lecart_median_voxels": 161.66,
+         "lecart_median_en_pas": 2.243,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.2338,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 4159,
+         "lecart_median_voxels": -91.56,
+         "lecart_median_en_pas": -1.27,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 6961,
+         "lecart_median_voxels": -18.47,
+         "lecart_median_en_pas": -0.256,
+         "la_part_a_un_quart_de_pas": 0.4998,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 6290,
+         "lecart_median_voxels": 2.19,
+         "lecart_median_en_pas": 0.03,
+         "la_part_a_un_quart_de_pas": 0.5771,
+         "la_lecture": "retrouve"
+        },
+        "-3": {
+         "les_sommets_en_face": 3093,
+         "lecart_median_voxels": 88.68,
+         "lecart_median_en_pas": 1.23,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1967,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 826,
+         "lecart_median_voxels": -168.83,
+         "lecart_median_en_pas": -2.342,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 3452,
+         "lecart_median_voxels": -98.17,
+         "lecart_median_en_pas": -1.362,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 5683,
+         "lecart_median_voxels": -10.37,
+         "lecart_median_en_pas": -0.144,
+         "la_part_a_un_quart_de_pas": 0.5191,
+         "la_lecture": "retrouve"
+        },
+        "-3": {
+         "les_sommets_en_face": 3718,
+         "lecart_median_voxels": 0.39,
+         "lecart_median_en_pas": 0.005,
+         "la_part_a_un_quart_de_pas": 0.7663,
+         "la_lecture": "retrouve"
+        }
+       }
+      }
+     ],
+     "la_descente": 3,
+     "les_passages": {
+      "reussis": 2,
+      "echoues": 0
+     }
+    }
+   },
+   "la_descente": 3
+  },
+  {
+   "le_rang": 4,
+   "la_nappe": {
+    "0": {
+     "les_sommets_en_face": 10096,
+     "lecart_median_voxels": 62.5,
+     "lecart_median_en_pas": 0.867,
+     "la_part_a_un_quart_de_pas": 0.044,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-1": {
+     "les_sommets_en_face": 8555,
+     "lecart_median_voxels": 116.42,
+     "lecart_median_en_pas": 1.615,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-2": {
+     "les_sommets_en_face": 7464,
+     "lecart_median_voxels": 160.02,
+     "lecart_median_en_pas": 2.22,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-3": {
+     "les_sommets_en_face": 6977,
+     "lecart_median_voxels": 200.72,
+     "lecart_median_en_pas": 2.785,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    }
+   },
+   "le_tour_de_la_nappe": null,
+   "les_cotes": {
+    "plus": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.3844,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 5958,
+         "lecart_median_voxels": 145.92,
+         "lecart_median_en_pas": 2.024,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 4193,
+         "lecart_median_voxels": 195.33,
+         "lecart_median_en_pas": 2.71,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 3157,
+         "lecart_median_voxels": 238.06,
+         "lecart_median_en_pas": 3.303,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 2839,
+         "lecart_median_voxels": 282.85,
+         "lecart_median_en_pas": 3.924,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.2613,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 4061,
+         "lecart_median_voxels": 208.97,
+         "lecart_median_en_pas": 2.899,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 3078,
+         "lecart_median_voxels": 260.64,
+         "lecart_median_en_pas": 3.616,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 2533,
+         "lecart_median_voxels": 302.04,
+         "lecart_median_en_pas": 4.19,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 2187,
+         "lecart_median_voxels": 340.87,
+         "lecart_median_en_pas": 4.729,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.0942,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 1059,
+         "lecart_median_voxels": 257.59,
+         "lecart_median_en_pas": 3.573,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 845,
+         "lecart_median_voxels": 306.69,
+         "lecart_median_en_pas": 4.255,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 645,
+         "lecart_median_voxels": 347.39,
+         "lecart_median_en_pas": 4.819,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 535,
+         "lecart_median_voxels": 393.89,
+         "lecart_median_en_pas": 5.464,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 0,
+      "echoues": 0
+     }
+    },
+    "moins": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.4615,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 8544,
+         "lecart_median_voxels": -0.7,
+         "lecart_median_en_pas": -0.01,
+         "la_part_a_un_quart_de_pas": 0.8919,
+         "la_lecture": "retrouve"
+        },
+        "-1": {
+         "les_sommets_en_face": 7982,
+         "lecart_median_voxels": 52.22,
+         "lecart_median_en_pas": 0.724,
+         "la_part_a_un_quart_de_pas": 0.0177,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 8017,
+         "lecart_median_voxels": 96.68,
+         "lecart_median_en_pas": 1.341,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 8192,
+         "lecart_median_voxels": 139.69,
+         "lecart_median_en_pas": 1.938,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.4088,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 7455,
+         "lecart_median_voxels": -54.24,
+         "lecart_median_en_pas": -0.752,
+         "la_part_a_un_quart_de_pas": 0.0016,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 7107,
+         "lecart_median_voxels": -0.67,
+         "lecart_median_en_pas": -0.009,
+         "la_part_a_un_quart_de_pas": 0.9872,
+         "la_lecture": "retrouve"
+        },
+        "-2": {
+         "les_sommets_en_face": 7258,
+         "lecart_median_voxels": 43.03,
+         "lecart_median_en_pas": 0.597,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 7825,
+         "lecart_median_voxels": 88.32,
+         "lecart_median_en_pas": 1.225,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.3581,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 6258,
+         "lecart_median_voxels": -98.99,
+         "lecart_median_en_pas": -1.373,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 6217,
+         "lecart_median_voxels": -45.26,
+         "lecart_median_en_pas": -0.628,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 6424,
+         "lecart_median_voxels": -2.27,
+         "lecart_median_en_pas": -0.031,
+         "la_part_a_un_quart_de_pas": 0.9875,
+         "la_lecture": "retrouve"
+        },
+        "-3": {
+         "les_sommets_en_face": 6985,
+         "lecart_median_voxels": 42.42,
+         "lecart_median_en_pas": 0.589,
+         "la_part_a_un_quart_de_pas": 0.0189,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 2,
+      "echoues": 0
+     }
+    }
+   },
+   "la_descente": 0
+  },
+  {
+   "le_rang": 5,
+   "la_nappe": {
+    "0": {
+     "les_sommets_en_face": 11098,
+     "lecart_median_voxels": 54.35,
+     "lecart_median_en_pas": 0.754,
+     "la_part_a_un_quart_de_pas": 0.1874,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-1": {
+     "les_sommets_en_face": 8701,
+     "lecart_median_voxels": 108.37,
+     "lecart_median_en_pas": 1.503,
+     "la_part_a_un_quart_de_pas": 0.0356,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-2": {
+     "les_sommets_en_face": 6545,
+     "lecart_median_voxels": 168.18,
+     "lecart_median_en_pas": 2.333,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-3": {
+     "les_sommets_en_face": 5742,
+     "lecart_median_voxels": 201.14,
+     "lecart_median_en_pas": 2.79,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    }
+   },
+   "le_tour_de_la_nappe": null,
+   "les_cotes": {
+    "plus": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.2535,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 6517,
+         "lecart_median_voxels": 102.24,
+         "lecart_median_en_pas": 1.418,
+         "la_part_a_un_quart_de_pas": 0.0566,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 4047,
+         "lecart_median_voxels": 157.69,
+         "lecart_median_en_pas": 2.188,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 2613,
+         "lecart_median_voxels": 216.95,
+         "lecart_median_en_pas": 3.01,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 2129,
+         "lecart_median_voxels": 247.39,
+         "lecart_median_en_pas": 3.432,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1323,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 3221,
+         "lecart_median_voxels": 160.79,
+         "lecart_median_en_pas": 2.231,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 2170,
+         "lecart_median_voxels": 220.5,
+         "lecart_median_en_pas": 3.059,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 1093,
+         "lecart_median_voxels": 296.25,
+         "lecart_median_en_pas": 4.11,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 842,
+         "lecart_median_voxels": 301.46,
+         "lecart_median_en_pas": 4.182,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.0078,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 183,
+         "lecart_median_voxels": 168.93,
+         "lecart_median_en_pas": 2.344,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 70,
+         "lecart_median_voxels": 237.85,
+         "lecart_median_en_pas": 3.3,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        },
+        "-3": {
+         "les_sommets_en_face": 0,
+         "la_lecture": "non lue"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 0,
+      "echoues": 0
+     }
+    },
+    "moins": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.3508,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 10117,
+         "lecart_median_voxels": -1.67,
+         "lecart_median_en_pas": -0.023,
+         "la_part_a_un_quart_de_pas": 0.5758,
+         "la_lecture": "retrouve"
+        },
+        "-1": {
+         "les_sommets_en_face": 9311,
+         "lecart_median_voxels": 50.3,
+         "lecart_median_en_pas": 0.698,
+         "la_part_a_un_quart_de_pas": 0.19,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 7469,
+         "lecart_median_voxels": 111.81,
+         "lecart_median_en_pas": 1.551,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 6645,
+         "lecart_median_voxels": 144.1,
+         "lecart_median_en_pas": 1.999,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.3096,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 8734,
+         "lecart_median_voxels": -78.33,
+         "lecart_median_en_pas": -1.087,
+         "la_part_a_un_quart_de_pas": 0.0016,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 8718,
+         "lecart_median_voxels": -1.94,
+         "lecart_median_en_pas": -0.027,
+         "la_part_a_un_quart_de_pas": 0.6203,
+         "la_lecture": "retrouve"
+        },
+        "-2": {
+         "les_sommets_en_face": 8257,
+         "lecart_median_voxels": 60.69,
+         "lecart_median_en_pas": 0.842,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 7375,
+         "lecart_median_voxels": 94.32,
+         "lecart_median_en_pas": 1.308,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.2682,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 5956,
+         "lecart_median_voxels": -119.72,
+         "lecart_median_en_pas": -1.661,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 7391,
+         "lecart_median_voxels": -62.0,
+         "lecart_median_en_pas": -0.86,
+         "la_part_a_un_quart_de_pas": 0.0031,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 7740,
+         "lecart_median_voxels": 2.26,
+         "lecart_median_en_pas": 0.031,
+         "la_part_a_un_quart_de_pas": 0.6832,
+         "la_lecture": "retrouve"
+        },
+        "-3": {
+         "les_sommets_en_face": 7887,
+         "lecart_median_voxels": 48.54,
+         "lecart_median_en_pas": 0.673,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 2,
+      "echoues": 0
+     }
+    }
+   },
+   "la_descente": 0
+  },
+  {
+   "le_rang": 6,
+   "la_nappe": {
+    "0": {
+     "les_sommets_en_face": 13424,
+     "lecart_median_voxels": -1.07,
+     "lecart_median_en_pas": -0.015,
+     "la_part_a_un_quart_de_pas": 0.544,
+     "la_lecture": "retrouve"
+    },
+    "-1": {
+     "les_sommets_en_face": 11765,
+     "lecart_median_voxels": 50.54,
+     "lecart_median_en_pas": 0.701,
+     "la_part_a_un_quart_de_pas": 0.1706,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-2": {
+     "les_sommets_en_face": 9270,
+     "lecart_median_voxels": 112.33,
+     "lecart_median_en_pas": 1.558,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-3": {
+     "les_sommets_en_face": 8173,
+     "lecart_median_voxels": 144.4,
+     "lecart_median_en_pas": 2.003,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    }
+   },
+   "le_tour_de_la_nappe": 0,
+   "les_cotes": {
+    "plus": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.3851,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 11066,
+         "lecart_median_voxels": 53.02,
+         "lecart_median_en_pas": 0.736,
+         "la_part_a_un_quart_de_pas": 0.2011,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 8920,
+         "lecart_median_voxels": 106.75,
+         "lecart_median_en_pas": 1.481,
+         "la_part_a_un_quart_de_pas": 0.0361,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 6767,
+         "lecart_median_voxels": 166.86,
+         "lecart_median_en_pas": 2.315,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 5985,
+         "lecart_median_voxels": 199.37,
+         "lecart_median_en_pas": 2.766,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.2724,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 7475,
+         "lecart_median_voxels": 97.71,
+         "lecart_median_en_pas": 1.355,
+         "la_part_a_un_quart_de_pas": 0.0476,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 4907,
+         "lecart_median_voxels": 150.79,
+         "lecart_median_en_pas": 2.092,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 3088,
+         "lecart_median_voxels": 215.72,
+         "lecart_median_en_pas": 2.993,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 2672,
+         "lecart_median_voxels": 246.67,
+         "lecart_median_en_pas": 3.422,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1475,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 4077,
+         "lecart_median_voxels": 150.78,
+         "lecart_median_en_pas": 2.092,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 2558,
+         "lecart_median_voxels": 203.32,
+         "lecart_median_en_pas": 2.821,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 1496,
+         "lecart_median_voxels": 264.73,
+         "lecart_median_en_pas": 3.672,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 1236,
+         "lecart_median_voxels": 291.02,
+         "lecart_median_en_pas": 4.037,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 0,
+      "echoues": 1
+     }
+    },
+    "moins": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.387,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 11122,
+         "lecart_median_voxels": -80.05,
+         "lecart_median_en_pas": -1.11,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 10745,
+         "lecart_median_voxels": -1.69,
+         "lecart_median_en_pas": -0.023,
+         "la_part_a_un_quart_de_pas": 0.6219,
+         "la_lecture": "retrouve"
+        },
+        "-2": {
+         "les_sommets_en_face": 10096,
+         "lecart_median_voxels": 59.52,
+         "lecart_median_en_pas": 0.826,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 8976,
+         "lecart_median_voxels": 93.25,
+         "lecart_median_en_pas": 1.294,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.3486,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 8111,
+         "lecart_median_voxels": -118.47,
+         "lecart_median_en_pas": -1.644,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 9588,
+         "lecart_median_voxels": -61.79,
+         "lecart_median_en_pas": -0.857,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 9680,
+         "lecart_median_voxels": 1.81,
+         "lecart_median_en_pas": 0.025,
+         "la_part_a_un_quart_de_pas": 0.6952,
+         "la_lecture": "retrouve"
+        },
+        "-3": {
+         "les_sommets_en_face": 9784,
+         "lecart_median_voxels": 48.51,
+         "lecart_median_en_pas": 0.673,
+         "la_part_a_un_quart_de_pas": 0.0006,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.3096,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 5575,
+         "lecart_median_voxels": -153.83,
+         "lecart_median_en_pas": -2.134,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 6317,
+         "lecart_median_voxels": -98.35,
+         "lecart_median_en_pas": -1.364,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 8781,
+         "lecart_median_voxels": -40.29,
+         "lecart_median_en_pas": -0.559,
+         "la_part_a_un_quart_de_pas": 0.1969,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 9381,
+         "lecart_median_voxels": -0.47,
+         "lecart_median_en_pas": -0.006,
+         "la_part_a_un_quart_de_pas": 0.9021,
+         "la_lecture": "retrouve"
+        }
+       }
+      }
+     ],
+     "la_descente": 3,
+     "les_passages": {
+      "reussis": 3,
+      "echoues": 0
+     }
+    }
+   },
+   "la_descente": 3
+  },
+  {
+   "le_rang": 7,
+   "la_nappe": {
+    "0": {
+     "les_sommets_en_face": 4145,
+     "lecart_median_voxels": 115.42,
+     "lecart_median_en_pas": 1.601,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-1": {
+     "les_sommets_en_face": 2360,
+     "lecart_median_voxels": 166.59,
+     "lecart_median_en_pas": 2.311,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-2": {
+     "les_sommets_en_face": 1592,
+     "lecart_median_voxels": 207.97,
+     "lecart_median_en_pas": 2.885,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-3": {
+     "les_sommets_en_face": 891,
+     "lecart_median_voxels": 283.11,
+     "lecart_median_en_pas": 3.928,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    }
+   },
+   "le_tour_de_la_nappe": null,
+   "les_cotes": {
+    "plus": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.2978,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 2216,
+         "lecart_median_voxels": 174.75,
+         "lecart_median_en_pas": 2.424,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 1338,
+         "lecart_median_voxels": 224.05,
+         "lecart_median_en_pas": 3.108,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 852,
+         "lecart_median_voxels": 268.01,
+         "lecart_median_en_pas": 3.718,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 514,
+         "lecart_median_voxels": 343.84,
+         "lecart_median_en_pas": 4.77,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1834,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 1118,
+         "lecart_median_voxels": 166.98,
+         "lecart_median_en_pas": 2.316,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 812,
+         "lecart_median_voxels": 220.61,
+         "lecart_median_en_pas": 3.06,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 457,
+         "lecart_median_voxels": 262.55,
+         "lecart_median_en_pas": 3.642,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 229,
+         "lecart_median_voxels": 309.98,
+         "lecart_median_en_pas": 4.3,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1333,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 587,
+         "lecart_median_voxels": 212.6,
+         "lecart_median_en_pas": 2.949,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 384,
+         "lecart_median_voxels": 273.99,
+         "lecart_median_en_pas": 3.801,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 208,
+         "lecart_median_voxels": 314.46,
+         "lecart_median_en_pas": 4.362,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 113,
+         "lecart_median_voxels": 373.4,
+         "lecart_median_en_pas": 5.18,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 0,
+      "echoues": 0
+     }
+    },
+    "moins": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.2604,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 3385,
+         "lecart_median_voxels": 60.15,
+         "lecart_median_en_pas": 0.834,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 2329,
+         "lecart_median_voxels": 124.12,
+         "lecart_median_en_pas": 1.722,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 1391,
+         "lecart_median_voxels": 160.61,
+         "lecart_median_en_pas": 2.228,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 822,
+         "lecart_median_voxels": 235.61,
+         "lecart_median_en_pas": 3.269,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.156,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 2657,
+         "lecart_median_voxels": -2.99,
+         "lecart_median_en_pas": -0.041,
+         "la_part_a_un_quart_de_pas": 0.9974,
+         "la_lecture": "retrouve"
+        },
+        "-1": {
+         "les_sommets_en_face": 2410,
+         "lecart_median_voxels": 71.83,
+         "lecart_median_en_pas": 0.996,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 1687,
+         "lecart_median_voxels": 118.11,
+         "lecart_median_en_pas": 1.639,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 848,
+         "lecart_median_voxels": 177.91,
+         "lecart_median_en_pas": 2.468,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1176,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 2070,
+         "lecart_median_voxels": -77.87,
+         "lecart_median_en_pas": -1.08,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 1927,
+         "lecart_median_voxels": -2.77,
+         "lecart_median_en_pas": -0.038,
+         "la_part_a_un_quart_de_pas": 1.0,
+         "la_lecture": "retrouve"
+        },
+        "-2": {
+         "les_sommets_en_face": 1515,
+         "lecart_median_voxels": 50.25,
+         "lecart_median_en_pas": 0.697,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 836,
+         "lecart_median_voxels": 104.6,
+         "lecart_median_en_pas": 1.451,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 1,
+      "echoues": 0
+     }
+    }
+   },
+   "la_descente": 0
+  },
+  {
+   "le_rang": 8,
+   "la_nappe": {
+    "0": {
+     "les_sommets_en_face": 4567,
+     "lecart_median_voxels": 133.4,
+     "lecart_median_en_pas": 1.851,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-1": {
+     "les_sommets_en_face": 2719,
+     "lecart_median_voxels": 205.0,
+     "lecart_median_en_pas": 2.844,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-2": {
+     "les_sommets_en_face": 1367,
+     "lecart_median_voxels": 291.07,
+     "lecart_median_en_pas": 4.038,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    },
+    "-3": {
+     "les_sommets_en_face": 684,
+     "lecart_median_voxels": 352.79,
+     "lecart_median_en_pas": 4.894,
+     "la_part_a_un_quart_de_pas": 0.0,
+     "la_lecture": "ne retrouve pas"
+    }
+   },
+   "le_tour_de_la_nappe": null,
+   "les_cotes": {
+    "plus": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.3567,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 2274,
+         "lecart_median_voxels": 144.81,
+         "lecart_median_en_pas": 2.009,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 1214,
+         "lecart_median_voxels": 255.6,
+         "lecart_median_en_pas": 3.546,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 641,
+         "lecart_median_voxels": 323.28,
+         "lecart_median_en_pas": 4.485,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 291,
+         "lecart_median_voxels": 440.84,
+         "lecart_median_en_pas": 6.116,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.137,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 565,
+         "lecart_median_voxels": 165.83,
+         "lecart_median_en_pas": 2.301,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 283,
+         "lecart_median_voxels": 233.76,
+         "lecart_median_en_pas": 3.243,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 139,
+         "lecart_median_voxels": 291.99,
+         "lecart_median_en_pas": 4.051,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 106,
+         "lecart_median_voxels": 518.82,
+         "lecart_median_en_pas": 7.198,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.0961,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 198,
+         "lecart_median_voxels": 238.58,
+         "lecart_median_en_pas": 3.31,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 104,
+         "lecart_median_voxels": 336.2,
+         "lecart_median_en_pas": 4.664,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 41,
+         "la_lecture": "non lue"
+        },
+        "-3": {
+         "les_sommets_en_face": 93,
+         "lecart_median_voxels": 584.31,
+         "lecart_median_en_pas": 8.106,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 0,
+      "echoues": 0
+     }
+    },
+    "moins": {
+     "les_spires": [
+      {
+       "la_part_du_plan": 0.2968,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 4952,
+         "lecart_median_voxels": 0.01,
+         "lecart_median_en_pas": 0.0,
+         "la_part_a_un_quart_de_pas": 0.7585,
+         "la_lecture": "retrouve"
+        },
+        "-1": {
+         "les_sommets_en_face": 4043,
+         "lecart_median_voxels": 71.85,
+         "lecart_median_en_pas": 0.997,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 2586,
+         "lecart_median_voxels": 117.87,
+         "lecart_median_en_pas": 1.635,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 1364,
+         "lecart_median_voxels": 162.09,
+         "lecart_median_en_pas": 2.249,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.1191,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 1902,
+         "lecart_median_voxels": -79.03,
+         "lecart_median_en_pas": -1.096,
+         "la_part_a_un_quart_de_pas": 0.0195,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 2096,
+         "lecart_median_voxels": -2.76,
+         "lecart_median_en_pas": -0.038,
+         "la_part_a_un_quart_de_pas": 1.0,
+         "la_lecture": "retrouve"
+        },
+        "-2": {
+         "les_sommets_en_face": 1221,
+         "lecart_median_voxels": 69.37,
+         "lecart_median_en_pas": 0.962,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-3": {
+         "les_sommets_en_face": 328,
+         "lecart_median_voxels": 231.63,
+         "lecart_median_en_pas": 3.213,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      },
+      {
+       "la_part_du_plan": 0.0847,
+       "les_tours": {
+        "0": {
+         "les_sommets_en_face": 599,
+         "lecart_median_voxels": -196.81,
+         "lecart_median_en_pas": -2.73,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-1": {
+         "les_sommets_en_face": 1057,
+         "lecart_median_voxels": -139.4,
+         "lecart_median_en_pas": -1.934,
+         "la_part_a_un_quart_de_pas": 0.0161,
+         "la_lecture": "ne retrouve pas"
+        },
+        "-2": {
+         "les_sommets_en_face": 1208,
+         "lecart_median_voxels": -3.21,
+         "lecart_median_en_pas": -0.044,
+         "la_part_a_un_quart_de_pas": 1.0,
+         "la_lecture": "retrouve"
+        },
+        "-3": {
+         "les_sommets_en_face": 414,
+         "lecart_median_voxels": 97.23,
+         "lecart_median_en_pas": 1.349,
+         "la_part_a_un_quart_de_pas": 0.0,
+         "la_lecture": "ne retrouve pas"
+        }
+       }
+      }
+     ],
+     "la_descente": 0,
+     "les_passages": {
+      "reussis": 2,
+      "echoues": 0
+     }
+    }
+   },
+   "la_descente": 0
+  }
+ ],
+ "les_passages": {
+  "reussis": 14,
+  "echoues": 2
+ },
+ "le_verdict": {
+  "decidable": true,
+  "k": 2,
+  "lues": 2,
+  "h": 3.0,
+  "lissue": "sur 2 des 2 graines lues, la chaîne qui croît tombe au premier saut sur le tour publié suivant, et elle descend les tours jusqu'au saut 3 en médiane sur ces graines"
+ },
+ "les_secondes": 49.7
+}

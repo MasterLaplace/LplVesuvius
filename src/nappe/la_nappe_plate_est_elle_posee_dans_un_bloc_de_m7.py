@@ -101,6 +101,8 @@ def lire_les_plages(nappe: dict, lire_valeurs, pas_du_rouleau: float) -> dict:
     nn, nok = les_normales(nappe["la_nappe"], nappe["valide"])
     m = nappe["valide"] & nok
     q, nq = nappe["la_nappe"][m], nn[m]
+    if not len(q):
+        return la_nappe([], [], 0, pas_du_rouleau)
     if len(q) > LE_MAXIMUM_DE_POINTS:
         k = np.linspace(0, len(q) - 1, LE_MAXIMUM_DE_POINTS).round().astype(int)
         q, nq = q[k], nq[k]
@@ -214,6 +216,9 @@ def verifier() -> int:
     v("★★★ entre un demi-pas et un pas : mêlée", la_nappe([15.0] * 10, [False] * 10, 10, 20.0)["la_lecture"] == "mêlée")
     v("★★★ moins de la moitié des points avec une plage : non lue", la_nappe([25.0] * 4, [True] * 4, 10, 20.0)["la_lecture"] == "non lue")
     v("★★★ la part qui remplit la portée", la_nappe([121.0, 7.0], [True, False], 2, 20.0)["la_part_qui_remplit_la_portee"] == 0.5)
+    vide = {"la_nappe": np.zeros((5, 5, 3)), "valide": np.zeros((5, 5), dtype=bool)}
+    v("★★★ une nappe sans point n'est pas lue, et rien n'est lu du dépôt",
+      lire_les_plages(vide, lambda idx: 1 / 0, 20.0)["la_lecture"] == "non lue")
     vd = le_verdict({"les_pannes": [], "les_nappes_de_0358_se_redonnent": True,
                      "les_nappes": {"PHerc0358": [{"la_lecture": "dans un bloc"}, {"la_lecture": "mêlée"}],
                                     "PHercParis4": [{"la_lecture": "sur une feuille"}]}})

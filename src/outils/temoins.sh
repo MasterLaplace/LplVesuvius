@@ -1793,6 +1793,10 @@ run "la nappe plate est-elle posée dans un bloc de m7" uv run python "$ROOT/src
 run "figure la nappe plate est-elle posée dans un bloc de m7" uv run python "$ROOT/src/figures/figure_la_nappe_plate_est_elle_posee_dans_un_bloc_de_m7.py" --verifier
 run "un saut parti de la médiane tombe-t-il plus souvent au pas" uv run python "$ROOT/src/nappe/un_saut_parti_de_la_mediane_tombe_t_il_plus_souvent_au_pas.py" --verifier
 run "figure un saut parti de la médiane tombe-t-il plus souvent au pas" uv run python "$ROOT/src/figures/figure_un_saut_parti_de_la_mediane_tombe_t_il_plus_souvent_au_pas.py" --verifier
+run "combien de sauts la chaîne qui croît tient-elle au pas" uv run python "$ROOT/src/nappe/combien_de_sauts_la_chaine_qui_croit_tient_elle_au_pas.py" --verifier
+run "figure combien de sauts la chaîne qui croît tient-elle au pas" uv run python "$ROOT/src/figures/figure_combien_de_sauts_la_chaine_qui_croit_tient_elle_au_pas.py" --verifier
+run "la chaîne qui croît tombe-t-elle sur les tours publiés" uv run python "$ROOT/src/nappe/la_chaine_qui_croit_tombe_t_elle_sur_les_tours_publies.py" --verifier
+run "figure la chaîne qui croît tombe-t-elle sur les tours publiés" uv run python "$ROOT/src/figures/figure_la_chaine_qui_croit_tombe_t_elle_sur_les_tours_publies.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
