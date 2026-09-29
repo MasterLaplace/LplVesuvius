@@ -1,0 +1,51 @@
+{
+ "la_question": "Les tours publiés 5753_k de PHercParis4 sont-ils posés au cœur des plages de m7, comme une surface qui en serait tirée, ou à côté, comme le tracé humain ?",
+ "les_constantes": {
+  "le_maximum": 3000,
+  "la_marge_voxels": 100.0,
+  "la_demi_portee_l2_voxels": 18.021
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 1757,
+  "absents": 0,
+  "octets": 749988924
+ },
+ "les_surfaces": {
+  "le_trace_humain": {
+   "les_sommets": 1822,
+   "la_part_qui_voit_une_plage": 0.9989,
+   "lecart_median_voxels": 1.0,
+   "la_part_a_un_voxel": 0.5511
+  },
+  "le_tour_0": {
+   "les_sommets": 3000,
+   "la_part_qui_voit_une_plage": 0.995,
+   "lecart_median_voxels": 1.0,
+   "la_part_a_un_voxel": 0.6626
+  },
+  "le_tour_-1": {
+   "les_sommets": 3000,
+   "la_part_qui_voit_une_plage": 0.9957,
+   "lecart_median_voxels": 1.0,
+   "la_part_a_un_voxel": 0.6294
+  },
+  "le_tour_-2": {
+   "les_sommets": 3000,
+   "la_part_qui_voit_une_plage": 0.9973,
+   "lecart_median_voxels": 1.0,
+   "la_part_a_un_voxel": 0.7092
+  },
+  "le_tour_-3": {
+   "les_sommets": 3000,
+   "la_part_qui_voit_une_plage": 0.996,
+   "lecart_median_voxels": 1.0,
+   "la_part_a_un_voxel": 0.7078
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "les tours publiés sont à 1 à 1 voxels du centre des plages de m7, le tracé humain à 1 ; entre les deux"
+ },
+ "les_secondes": 31.2
+}

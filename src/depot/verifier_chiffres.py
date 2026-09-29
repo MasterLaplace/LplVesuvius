@@ -3336,6 +3336,19 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐ LA TRANCHE 332 : LES TOURS PUBLIÉS SONT-ILS POSÉS AU CŒUR DE M7
+    s332 = _source(racine, "les_tours_publies_sont_ils_poses_au_coeur_de_m7.json")
+    if s332.exists():
+        d = json.loads(s332.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        noms = {"le_trace_humain": "le tracé humain", "le_tour_0": "5753_0", "le_tour_-1": "5753_-1", "le_tour_-2": "5753_-2",
+                "le_tour_-3": "5753_-3"}
+        ecrits = [("le verdict de 332", d["le_verdict"]["lissue"].upper())]
+        for k_, x_ in d["les_surfaces"].items():
+            ecrits.append((f"{k_} de 332", f"| {noms[k_]} | {x_['les_sommets']} | {f_(x_['la_part_qui_voit_une_plage'])} | "
+                                           f"{f_(x_['lecart_median_voxels'])} | {f_(x_['la_part_a_un_voxel'])} |"))
+        out.extend((nom, [x_], s332.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 331 : UNE CHAÎNE RELANCÉE À CHAQUE TOUR DESCEND-ELLE PLUS LOIN
     s331 = _source(racine, "une_chaine_relancee_a_chaque_tour_descend_elle_plus_loin.json")
     s330_ = _source(racine, "jusqua_quel_tour_publie_la_chaine_qui_croit_descend_elle.json")

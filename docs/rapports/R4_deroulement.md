@@ -4533,6 +4533,11 @@ cinq elle descend six tours consécutifs publiés, un par saut ; elle s'arrête 
 plan neuf prend parfois le même tour ou celui d'après ; sur PHerc0358, la relance allonge deux côtés et en raccourcit un. `R4-P129`
 s'ouvre : relancer depuis la spire entière, chaque point gardant sa feuille.
 
+**`332` · 2026-09-29 · les tours publiés sont-ils posés au cœur de m7** — la réserve de `329` et `330`
+
+⭐⭐⭐ **La mesure ne les sépare pas du tracé humain** — `R4-F518`. Tours et tracé passent à un voxel médian du centre des plages de `m7` ;
+63 à 71 % des sommets des tours à un voxel, 55 % du tracé. La provenance des tours est à demander à ceux qui les publient.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
