@@ -93,10 +93,20 @@ def les_cibles(spire: np.ndarray, valide: np.ndarray, grille: np.ndarray, n: np.
     return cible
 
 
+def les_mailles_permises(semes: np.ndarray, marge: int) -> np.ndarray:
+    """Les mailles à au plus `marge` mailles d'une maille semée, en comptant les diagonales ; écrit pour `335`."""
+    from scipy.ndimage import binary_dilation
+
+    if marge <= 0 or not semes.any():
+        return semes.copy()
+    return binary_dilation(semes, structure=np.ones((3, 3), dtype=bool), iterations=int(marge))
+
+
 def la_nappe_de_la_spire(spire: np.ndarray, valide: np.ndarray, graine_xyz, normale_xyz, lire_valeurs,
-                         tolerance: float = m305.LA_TOLERANCE) -> dict:
+                         tolerance: float = m305.LA_TOLERANCE, marge: int | None = None) -> dict:
     """Le plan de la relance de `331`, les feuilles de `m7` de chacun de ses points ; chaque maille où tombe un point posé de la spire
-    prend la feuille la plus proche de son décalage, à au plus `tolerance` ; puis la croissance de `305` depuis toutes ces mailles."""
+    prend la feuille la plus proche de son décalage, à au plus `tolerance` ; puis la croissance de `305` depuis toutes ces mailles.
+    Avec `marge`, écrit pour `335`, la croissance ne pose rien à plus de `marge` mailles d'une maille semée."""
     grille, n = m300.le_plan(graine_xyz, normale_xyz)
     forme = grille.shape[:2]
     p = grille.reshape(-1, 3)
@@ -114,16 +124,17 @@ def la_nappe_de_la_spire(spire: np.ndarray, valide: np.ndarray, graine_xyz, norm
         if abs(c[m] - cible[k]) <= tolerance:
             dec.flat[k], pose.flat[k] = c[m], True
     semes = pose.copy()
-    dec, pose = m305.etendre(centres, forme, dec, pose, tolerance)
+    permis = None if marge is None else les_mailles_permises(semes, marge)
+    dec, pose = m305.etendre(centres, forme, dec, pose, tolerance, permis=permis)
     nappe = (p + np.nan_to_num(dec.ravel())[:, None] * n[None, :]).reshape(forme + (3,))
     return {"la_nappe": nappe, "valide": pose, "le_decalage": dec, "les_semis": int(semes.sum()), "les_semes": semes,
             "les_mailles_touchees": int(np.isfinite(cible).sum())}
 
 
-def la_nappe_de_la_spire_de_paris4(spire, valide, graine_l2, normale, lire_valeurs) -> dict:
+def la_nappe_de_la_spire_de_paris4(spire, valide, graine_l2, normale, lire_valeurs, marge: int | None = None) -> dict:
     """La relance depuis la spire, au pas de PHercParis4 : sa tolérance et la demi-portée de son plan."""
     with m321.le_rouleau_de_paris4():
-        return la_nappe_de_la_spire(spire, valide, graine_l2, normale, lire_valeurs, tolerance=m322.LA_TOLERANCE_L2)
+        return la_nappe_de_la_spire(spire, valide, graine_l2, normale, lire_valeurs, tolerance=m322.LA_TOLERANCE_L2, marge=marge)
 
 
 def les_sauts_faux(graines: list[dict]) -> int:

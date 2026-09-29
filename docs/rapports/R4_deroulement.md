@@ -4550,6 +4550,12 @@ sur PHerc0358 elle tient 4 sauts en médiane contre 1. `R4-P130` s'ouvre : au se
 fois, là où la croissance hors des semis retrouve un tour publié ; jugée sur ses spires, la chaîne ne fait qu'un saut faux. `R4-P131`
 s'ouvre : borner la croissance autour des semis.
 
+**`335` · 2026-09-29 · la croissance bornée autour des semis garde-t-elle la justesse** — `R4-P131`
+
+⭐⭐⭐⭐⭐ **Oui : six tours publiés sur les huit graines, sans un saut faux** — `R4-F521`. Semée depuis la spire et bornée à deux mailles
+de ses semis, la relance garde chaque saut sur le tour suivant jusqu'à `5753_-6` et rend de la surface ; sur PHerc0358 la chaîne tient 3
+sauts en médiane contre 1. `R4-P132` s'ouvre : pourquoi aucune chaîne ne retrouve `5753_-7`.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

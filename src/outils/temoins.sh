@@ -1807,6 +1807,8 @@ run "la relance partie de la spire entière garde-t-elle la justesse" uv run pyt
 run "figure la relance partie de la spire entière garde-t-elle la justesse" uv run python "$ROOT/src/figures/figure_la_relance_partie_de_la_spire_entiere_garde_t_elle_la_justesse.py" --verifier
 run "au septième saut, la spire ou la croissance se trompe-t-elle" uv run python "$ROOT/src/nappe/au_septieme_saut_la_spire_ou_la_croissance_se_trompe_t_elle.py" --verifier
 run "figure au septième saut, la spire ou la croissance se trompe-t-elle" uv run python "$ROOT/src/figures/figure_au_septieme_saut_la_spire_ou_la_croissance_se_trompe_t_elle.py" --verifier
+run "la croissance bornée autour des semis garde-t-elle la justesse" uv run python "$ROOT/src/nappe/la_croissance_bornee_autour_des_semis_garde_t_elle_la_justesse.py" --verifier
+run "figure la croissance bornée autour des semis garde-t-elle la justesse" uv run python "$ROOT/src/figures/figure_la_croissance_bornee_autour_des_semis_garde_t_elle_la_justesse.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

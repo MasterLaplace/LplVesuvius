@@ -95,9 +95,10 @@ def croitre(centres: list[np.ndarray], forme: tuple, depart: tuple, tolerance: f
 
 
 def etendre(centres: list[np.ndarray], forme: tuple, dec: np.ndarray, pose: np.ndarray,
-            tolerance: float = LA_TOLERANCE) -> tuple[np.ndarray, np.ndarray]:
+            tolerance: float = LA_TOLERANCE, permis: np.ndarray | None = None) -> tuple[np.ndarray, np.ndarray]:
     """La croissance en largeur de `croitre`, depuis tous les points déjà posés à la fois, pris dans l'ordre de la grille ; écrit
-    pour `333`, qui la fait partir d'une spire entière. Modifie et rend `dec` et `pose`."""
+    pour `333`, qui la fait partir d'une spire entière. Avec `permis`, écrit pour `335`, elle ne pose que les points permis. Modifie
+    et rend `dec` et `pose`."""
     h, w = forme
     file = deque((int(a), int(b)) for a, b in zip(*np.nonzero(pose)))
     voisins = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
@@ -105,7 +106,7 @@ def etendre(centres: list[np.ndarray], forme: tuple, dec: np.ndarray, pose: np.n
         i, j = file.popleft()
         for di, dj in voisins:
             a, b = i + di, j + dj
-            if not (0 <= a < h and 0 <= b < w) or pose[a, b]:
+            if not (0 <= a < h and 0 <= b < w) or pose[a, b] or (permis is not None and not permis[a, b]):
                 continue
             poses = [dec[a + x, b + y] for x, y in voisins
                      if 0 <= a + x < h and 0 <= b + y < w and pose[a + x, b + y]]
