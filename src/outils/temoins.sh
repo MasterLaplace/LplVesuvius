@@ -1785,6 +1785,8 @@ run "la nappe qui croît tient-elle le tracé humain de PHercParis4" uv run pyth
 run "figure la nappe qui croît tient-elle le tracé humain de PHercParis4" uv run python "$ROOT/src/figures/figure_la_nappe_qui_croit_tient_elle_le_trace_humain_de_paris4.py" --verifier
 run "la spire qui croît tombe-t-elle sur le tour suivant du segment" uv run python "$ROOT/src/nappe/la_spire_qui_croit_tombe_t_elle_sur_le_tour_suivant_du_segment.py" --verifier
 run "figure la spire qui croît tombe-t-elle sur le tour suivant du segment" uv run python "$ROOT/src/figures/figure_la_spire_qui_croit_tombe_t_elle_sur_le_tour_suivant_du_segment.py" --verifier
+run "le saut qui croît pose-t-il au pas sur les deux rouleaux" uv run python "$ROOT/src/nappe/le_saut_qui_croit_pose_t_il_au_pas_sur_les_deux_rouleaux.py" --verifier
+run "figure le saut qui croît pose-t-il au pas sur les deux rouleaux" uv run python "$ROOT/src/figures/figure_le_saut_qui_croit_pose_t_il_au_pas_sur_les_deux_rouleaux.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

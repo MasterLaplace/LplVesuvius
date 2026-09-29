@@ -1,0 +1,436 @@
+{
+ "la_question": "Le saut qui croît de 306 pose-t-il sa spire au pas aussi souvent sur PHerc0358, sans tracé, que sur PHercParis4, où elle tombe sur le tour que la main humaine a tracé ?",
+ "les_constantes": {
+  "la_part_minimale": 0.1,
+  "le_pas_bas": 0.5,
+  "le_pas_haut": 1.5
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHerc0358": {
+   "lus": 685,
+   "absents": 40,
+   "octets": 234421116
+  },
+  "PHercParis4": {
+   "lus": 709,
+   "absents": 0,
+   "octets": 325822650
+  }
+ },
+ "les_nappes_de_0358_se_redonnent": true,
+ "les_nappes": {
+  "PHerc0358": [
+   {
+    "le_rang": 1,
+    "les_points_poses": 4141,
+    "la_part_du_plan": 0.9801,
+    "redonne_305": true
+   },
+   {
+    "le_rang": 2,
+    "les_points_poses": 1551,
+    "la_part_du_plan": 0.3671,
+    "redonne_305": true
+   },
+   {
+    "le_rang": 3,
+    "les_points_poses": 3791,
+    "la_part_du_plan": 0.8973,
+    "redonne_305": true
+   },
+   {
+    "le_rang": 4,
+    "les_points_poses": 1578,
+    "la_part_du_plan": 0.3735,
+    "redonne_305": true
+   },
+   {
+    "le_rang": 5,
+    "les_points_poses": 963,
+    "la_part_du_plan": 0.2279,
+    "redonne_305": true
+   },
+   {
+    "le_rang": 6,
+    "les_points_poses": 3656,
+    "la_part_du_plan": 0.8653,
+    "redonne_305": true
+   },
+   {
+    "le_rang": 7,
+    "les_points_poses": 2001,
+    "la_part_du_plan": 0.4736,
+    "redonne_305": true
+   },
+   {
+    "le_rang": 8,
+    "les_points_poses": 1909,
+    "la_part_du_plan": 0.4518,
+    "redonne_305": true
+   }
+  ],
+  "PHercParis4": [
+   {
+    "le_rang": 1,
+    "les_points_poses": 1416,
+    "la_part_du_plan": 0.3351
+   },
+   {
+    "le_rang": 2,
+    "les_points_poses": 1340,
+    "la_part_du_plan": 0.3172
+   },
+   {
+    "le_rang": 3,
+    "les_points_poses": 1432,
+    "la_part_du_plan": 0.3389
+   },
+   {
+    "le_rang": 4,
+    "les_points_poses": 2386,
+    "la_part_du_plan": 0.5647
+   },
+   {
+    "le_rang": 5,
+    "les_points_poses": 1775,
+    "la_part_du_plan": 0.4201
+   },
+   {
+    "le_rang": 6,
+    "les_points_poses": 2590,
+    "la_part_du_plan": 0.613
+   },
+   {
+    "le_rang": 7,
+    "les_points_poses": 2331,
+    "la_part_du_plan": 0.5517
+   },
+   {
+    "le_rang": 8,
+    "les_points_poses": 3179,
+    "la_part_du_plan": 0.7524
+   }
+  ]
+ },
+ "les_cotes": {
+  "PHerc0358": [
+   {
+    "le_rang": 1,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.0002,
+     "le_pas_median_en_pas": 1.825,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 1,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.0,
+     "le_pas_median_en_pas": null,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 2,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.0,
+     "le_pas_median_en_pas": null,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 2,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.0,
+     "le_pas_median_en_pas": null,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 3,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.0963,
+     "le_pas_median_en_pas": 2.85,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 3,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.0009,
+     "le_pas_median_en_pas": 2.075,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 4,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.1477,
+     "le_pas_median_en_pas": 1.7,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 4,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.1503,
+     "le_pas_median_en_pas": 1.875,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 5,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.0,
+     "le_pas_median_en_pas": null,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 5,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.0,
+     "le_pas_median_en_pas": null,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 6,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.1931,
+     "le_pas_median_en_pas": 2.25,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 6,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.7924,
+     "le_pas_median_en_pas": 0.9,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.1522,
+     "le_pas_median_en_pas": 0.8,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.1702,
+     "le_pas_median_en_pas": 0.875,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.1444,
+     "le_pas_median_en_pas": 0.575,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.2038,
+     "le_pas_median_en_pas": 1.0,
+     "pose_au_pas": true
+    }
+   }
+  ],
+  "PHercParis4": [
+   {
+    "le_rang": 1,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.2949,
+     "le_pas_median_en_pas": 1.165,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 1,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.2949,
+     "le_pas_median_en_pas": 1.346,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 2,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.208,
+     "le_pas_median_en_pas": 1.498,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 2,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.2097,
+     "le_pas_median_en_pas": 1.276,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 3,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.2947,
+     "le_pas_median_en_pas": 1.387,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 3,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.2793,
+     "le_pas_median_en_pas": 1.72,
+     "pose_au_pas": false
+    }
+   },
+   {
+    "le_rang": 4,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.3844,
+     "le_pas_median_en_pas": 1.249,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 4,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.4615,
+     "le_pas_median_en_pas": 0.888,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 5,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.2535,
+     "le_pas_median_en_pas": 0.666,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 5,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.3508,
+     "le_pas_median_en_pas": 0.916,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 6,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.3851,
+     "le_pas_median_en_pas": 0.888,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 6,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.387,
+     "le_pas_median_en_pas": 0.805,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.2978,
+     "le_pas_median_en_pas": 0.805,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.2604,
+     "le_pas_median_en_pas": 0.749,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "plus",
+    "le_saut": {
+     "la_part_du_plan": 0.3567,
+     "le_pas_median_en_pas": 0.721,
+     "pose_au_pas": true
+    }
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "moins",
+    "le_saut": {
+     "la_part_du_plan": 0.2968,
+     "le_pas_median_en_pas": 1.582,
+     "pose_au_pas": false
+    }
+   }
+  ]
+ },
+ "le_premier_saut_de_306": {
+  "3_plus": {
+   "306": 0.0963,
+   "ici": 0.0963
+  },
+  "3_moins": {
+   "306": 0.0009,
+   "ici": 0.0009
+  },
+  "6_plus": {
+   "306": 0.1931,
+   "ici": 0.1931
+  },
+  "6_moins": {
+   "306": 0.7924,
+   "ici": 0.7924
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "k": 5,
+  "m": 14,
+  "pareil": false,
+  "lissue": "le saut qui croît pose au pas sur 5 des 16 côtés de PHerc0358 et sur 14 des 16 de PHercParis4 ; il y pose moins au pas sur PHerc0358"
+ },
+ "les_secondes": 19.0
+}

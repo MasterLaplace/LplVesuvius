@@ -3336,6 +3336,31 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 324 : LE SAUT QUI CROÎT POSE-T-IL AU PAS SUR LES DEUX ROULEAUX
+    s324 = _source(racine, "le_saut_qui_croit_pose_t_il_au_pas_sur_les_deux_rouleaux.json")
+    if s324.exists():
+        d = json.loads(s324.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 324", d["le_verdict"]["lissue"].upper()),
+                  ("la lecture de m7 de PHerc0358 en 324", f"{d['la_lecture_de_m7']['PHerc0358']['lus']} chunks"),
+                  ("les premiers sauts de 306 redonnés en 324",
+                   "(" + ", ".join(f_(d["le_premier_saut_de_306"][k]["ici"]) for k in ("3_plus", "3_moins", "6_plus"))
+                   + f" et {f_(d['le_premier_saut_de_306']['6_moins']['ici'])})")]
+        for r_ in ("PHerc0358", "PHercParis4"):
+            cs = d["les_cotes"][r_]
+            nom_ = lambda c: f"g{c['le_rang']} {c['le_cote']}"  # noqa: E731
+            au = [nom_(c) for c in cs if c["le_saut"]["pose_au_pas"]]
+            loin = [nom_(c) for c in cs if not c["le_saut"]["pose_au_pas"] and c["le_saut"]["le_pas_median_en_pas"] is not None
+                    and c["le_saut"]["le_pas_median_en_pas"] > d["les_constantes"]["le_pas_haut"]]
+            rien = [nom_(c) for c in cs if c["le_saut"]["le_pas_median_en_pas"] is None]
+            if r_ == "PHerc0358":
+                ecrits.append((f"au pas sur {r_} en 324", f"{len(au)} : " + ", ".join(au)))
+                ecrits.append((f"au-delà sur {r_} en 324", f"{len(loin)} : " + ", ".join(loin)))
+                ecrits.append((f"rien sur {r_} en 324", f"{len(rien)} : " + ", ".join(rien)))
+            else:
+                ecrits.append((f"la ligne de {r_} en 324", f"| {r_} | {len(au)} | {len(loin)} : " + ", ".join(loin) + f" | {len(rien)} |"))
+        out.extend((nom, [x_], s324.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 323 : LA SPIRE QUI CROÎT TOMBE-T-ELLE SUR LE TOUR SUIVANT DU SEGMENT
     s323 = _source(racine, "la_spire_qui_croit_tombe_t_elle_sur_le_tour_suivant_du_segment.json")
     if s323.exists():

@@ -4485,6 +4485,12 @@ repasse un tour plus loin.
 `m7` par le saut qui croît, tombe sur le tour que la main humaine a tracé ensuite, pendant que la nappe elle-même n'y est pas. Sur la
 graine 4, la nappe était déjà sur le tour suivant, à 57 voxels du tracé. `R4-P122` s'ouvre : ce qui diffère sur PHerc0358.
 
+**`324` · 2026-09-29 · le saut qui croît pose-t-il au pas sur les deux rouleaux** — `R4-P122`
+
+⭐⭐⭐⭐⭐ **Non : sur 5 côtés sur 16 de PHerc0358 contre 14 sur 16 de PHercParis4, et c'est le saut, pas le juge** — `R4-F508`. Sur
+PHerc0358, cinq côtés ne posent rien et six posent à 1,7 à 2,85 pas ; les nappes les plus complètes ont les sauts les plus vides.
+`R4-P123` s'ouvre : à quelle distance `m7` montre-t-il la feuille après celle de la nappe, sur chaque rouleau ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
