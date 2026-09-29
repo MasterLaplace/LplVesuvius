@@ -1831,6 +1831,8 @@ run "les feuilles de m7 franchies séparent-elles les sauts justes des faux" uv 
 run "figure les feuilles de m7 franchies séparent-elles les sauts justes des faux" uv run python "$ROOT/src/figures/figure_les_feuilles_de_m7_franchies_separent_elles_les_sauts_justes_des_faux.py" --verifier
 run "les surfaces à deux tours tenues sont-elles là où leurs tours se recouvrent" uv run python "$ROOT/src/nappe/les_surfaces_a_deux_tours_tenues_sont_elles_la_ou_leurs_tours_se_recouvrent.py" --verifier
 run "figure les surfaces à deux tours tenues sont-elles là où leurs tours se recouvrent" uv run python "$ROOT/src/figures/figure_les_surfaces_a_deux_tours_tenues_sont_elles_la_ou_leurs_tours_se_recouvrent.py" --verifier
+run "les points posés sur le tour de trop franchissent-ils autre chose qu'une feuille" uv run python "$ROOT/src/nappe/les_points_poses_sur_le_tour_de_trop_franchissent_ils_autre_chose_quune_feuille.py" --verifier
+run "figure les points posés sur le tour de trop franchissent-ils autre chose qu'une feuille" uv run python "$ROOT/src/figures/figure_les_points_poses_sur_le_tour_de_trop_franchissent_ils_autre_chose_quune_feuille.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

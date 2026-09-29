@@ -4621,6 +4621,13 @@ tour publié sous une surface à deux tours n'a l'autre tour à un quart de pas 
 posées où leurs tours se recouvrent. Ce que disent les surfaces lues va vers la surface, et non vers le référent. `R4-P143` s'ouvre :
 le compte de `345` voit-il, point par point, l'endroit où la surface change de feuille ?
 
+**`347` · 2026-09-29 · les points posés sur le tour de trop franchissent-ils autre chose qu'une feuille** — `R4-P143`
+
+⭐⭐⭐⭐ **Sous certaines seulement** — `R4-F533`. Sous deux des trois surfaces tenues à tort, aucun point posé sur le tour de trop n'est
+compté : le compte de `345`, qui ne juge que ses points comptés, ne les pesait pas. Sous la surface bornée, le tour de trop est celui
+d'où part le saut, et 165 des 273 points posés dessus franchissent pourtant une feuille. `R4-P144` s'ouvre : la surface de départ
+y est-elle posée sur ce tour ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

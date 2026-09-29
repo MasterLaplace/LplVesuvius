@@ -87,19 +87,19 @@ def le_compte(vu: np.ndarray, t: np.ndarray, d: float, tolerance: float) -> int 
     return None if i is None or j is None else abs(j - i)
 
 
-def les_feuilles_franchies(depart: dict, arrivee: dict | None, lire_valeurs, pas: float) -> dict:
-    """Pour au plus `m326.LE_MAXIMUM_DE_POINTS` points posés de la surface d'arrivée, le nombre de feuilles de `m7` passées le long de sa
-    normale jusqu'à la surface de départ ; et la part des points comptés qui n'en passent qu'une."""
+def les_comptes_point_par_point(depart: dict, arrivee: dict | None, lire_valeurs, pas: float) -> dict | None:
+    """Les points posés de la surface d'arrivée que le compte prend, au plus `m326.LE_MAXIMUM_DE_POINTS`, avec leurs normales ; pour
+    chacun, s'il a la surface de départ en face et le nombre de feuilles de `m7` qu'il passe, None s'il n'est pas compté. None s'il n'y a
+    pas de tels points."""
     from la_spire_voisine_est_elle_a_un_pas import les_normales
 
-    vide = {"les_points": 0, "les_en_face": 0, "les_mesures": 0, "les_comptes": {}, "la_part_dune_feuille": None}
     if arrivee is None or not arrivee["valide"].any() or not depart["valide"].any():
-        return vide
+        return None
     nn, nok = les_normales(arrivee["la_nappe"], arrivee["valide"])
     m = arrivee["valide"] & nok
     q, nq = arrivee["la_nappe"][m], nn[m]
     if not len(q):
-        return vide
+        return None
     if len(q) > m326.LE_MAXIMUM_DE_POINTS:
         k = np.linspace(0, len(q) - 1, m326.LE_MAXIMUM_DE_POINTS).round().astype(int)
         q, nq = q[k], nq[k]
@@ -108,16 +108,28 @@ def les_feuilles_franchies(depart: dict, arrivee: dict | None, lire_valeurs, pas
     demi = float(np.ceil(LA_PORTEE_EN_PAS * pas))
     t = np.arange(-demi, demi + 1.0)
     en_face = np.isfinite(d) & (np.abs(d) + tol <= demi)
-    comptes = []
+    comptes: list[int | None] = [None] * len(q)
     if en_face.any():
         idx = np.floor((q[en_face][:, None, :] + t[None, :, None] * nq[en_face][:, None, :])[..., ::-1]).astype(np.int64)
         vu = lire_valeurs(idx) > 0
-        for rayon, dd in zip(vu, d[en_face]):
-            c = le_compte(rayon, t, float(dd), tol)
-            if c is not None:
-                comptes.append(c)
+        for i, rayon, dd in zip(np.flatnonzero(en_face), vu, d[en_face]):
+            comptes[i] = le_compte(rayon, t, float(dd), tol)
+    return {"les_points": q, "les_normales": nq, "en_face": en_face, "les_comptes": comptes}
+
+
+def les_feuilles_franchies(depart: dict, arrivee: dict | None, lire_valeurs, pas: float) -> dict:
+    """Pour au plus `m326.LE_MAXIMUM_DE_POINTS` points posés de la surface d'arrivée, le nombre de feuilles de `m7` passées le long de sa
+    normale jusqu'à la surface de départ ; et la part des points comptés qui n'en passent qu'une."""
+    return le_resume(les_comptes_point_par_point(depart, arrivee, lire_valeurs, pas))
+
+
+def le_resume(r: dict | None) -> dict:
+    """Ce que `les_feuilles_franchies` publie des comptes point par point."""
+    if r is None:
+        return {"les_points": 0, "les_en_face": 0, "les_mesures": 0, "les_comptes": {}, "la_part_dune_feuille": None}
+    comptes = [c for c in r["les_comptes"] if c is not None]
     n = Counter(comptes)
-    return {"les_points": int(len(q)), "les_en_face": int(en_face.sum()), "les_mesures": len(comptes),
+    return {"les_points": int(len(r["les_points"])), "les_en_face": int(r["en_face"].sum()), "les_mesures": len(comptes),
             "les_comptes": {str(k): v for k, v in sorted(n.items())},
             "la_part_dune_feuille": round(n[1] / len(comptes), 4) if comptes else None}
 
@@ -249,6 +261,15 @@ def verifier() -> int:
     v("★★★★ une surface de départ qui n'est pas en face : rien n'est compté",
       les_feuilles_franchies(loin, plan(120.0), feuilles, 20.0)["les_mesures"] == 0)
     v("★★★ un saut sans surface : rien n'est compté", les_feuilles_franchies(plan(100.0), None, feuilles, 20.0)["les_mesures"] == 0)
+    marche = plan(120.0)
+    marche["la_nappe"][:5, :, 2] = 140.0
+    marche["la_nappe"][:, 5:, 0] += 300.0
+    r = les_comptes_point_par_point(plan(100.0), marche, feuilles, 20.0)
+    par_z = {z: sorted({c for q_, c in zip(r["les_points"], r["les_comptes"]) if q_[2] == z and q_[0] < 300.0 and c is not None})
+             for z in (120.0, 140.0)}
+    loin_ = [c for q_, c in zip(r["les_points"], r["les_comptes"]) if q_[0] >= 300.0]
+    v("★★★★ point par point, chaque compte est celui du point qui le porte, et un point sans la surface en face n'est pas compté",
+      par_z == {120.0: [1], 140.0: [2]} and loin_ and all(c is None for c in loin_), str(par_z))
     ff = lambda n, p: {"les_mesures": n, "la_part_dune_feuille": p}  # noqa: E731
     v("★★★★ le critère : au moins 50 points comptés et les trois quarts, bornes comprises",
       tient(ff(50, 0.75)) and not tient(ff(49, 1.0)) and not tient(ff(80, 0.74)) and not tient(ff(0, None)))

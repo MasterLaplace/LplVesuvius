@@ -1,0 +1,830 @@
+{
+ "la_question": "Là où une surface tenue à tort sur les graines 4 à 8 est posée sur son tour de trop, les points du compte de 345 y franchissent-ils autre chose qu'une feuille ?",
+ "les_constantes": {
+  "la_part_au_plus": 0.25,
+  "la_part_au_moins": 0.75,
+  "le_minimum_de_points": 50,
+  "le_quart_voxels": 18.021
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "sans relance": {
+   "lus": 6023,
+   "absents": 0,
+   "octets": 2707477397
+  },
+  "relancée depuis un point": {
+   "PHercParis4": {
+    "lus": 13867,
+    "absents": 0,
+    "octets": 6160505777
+   }
+  },
+  "relancée depuis la spire": {
+   "PHercParis4": {
+    "lus": 14081,
+    "absents": 0,
+    "octets": 6212116064
+   }
+  },
+  "bornée": {
+   "PHercParis4": {
+    "lus": 11557,
+    "absents": 0,
+    "octets": 5185671971
+   }
+  }
+ },
+ "redonne_344": true,
+ "redonne_345": true,
+ "les_lectures_saccordent": true,
+ "les_surfaces": [
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 468,
+     "les_comptes": {
+      "1": 374,
+      "non compté": 94
+     },
+     "la_part_dune_feuille": 0.7991
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 555,
+     "les_comptes": {
+      "1": 459,
+      "non compté": 96
+     },
+     "la_part_dune_feuille": 0.827
+    },
+    "sur_les_deux": 468,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 999,
+     "les_comptes": {
+      "1": 767,
+      "non compté": 232
+     },
+     "la_part_dune_feuille": 0.7678
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 1005,
+     "les_comptes": {
+      "1": 773,
+      "non compté": 232
+     },
+     "la_part_dune_feuille": 0.7692
+    },
+    "sur_les_deux": 999,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 680,
+     "les_comptes": {
+      "1": 575,
+      "non compté": 105
+     },
+     "la_part_dune_feuille": 0.8456
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 680,
+     "les_comptes": {
+      "1": 575,
+      "non compté": 105
+     },
+     "la_part_dune_feuille": 0.8456
+    },
+    "sur_les_deux": 680,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 5,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -5,
+    "les_tours_de_trop": [
+     -4
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 139,
+     "les_comptes": {
+      "1": 119,
+      "non compté": 20
+     },
+     "la_part_dune_feuille": 0.8561
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 139,
+     "les_comptes": {
+      "1": 119,
+      "non compté": 20
+     },
+     "la_part_dune_feuille": 0.8561
+    },
+    "sur_les_deux": 139,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "sans relance",
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "tient_par_345": false,
+   "la_surface": {
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -1
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 99,
+     "les_comptes": {
+      "1": 26,
+      "non compté": 73
+     },
+     "la_part_dune_feuille": 0.2626
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 2,
+     "les_comptes": {
+      "non compté": 2
+     },
+     "la_part_dune_feuille": null
+    },
+    "sur_les_deux": 0,
+    "la_lecture": "non lue"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 5,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 940,
+     "les_comptes": {
+      "1": 772,
+      "2": 17,
+      "non compté": 151
+     },
+     "la_part_dune_feuille": 0.8213
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 761,
+     "les_comptes": {
+      "0": 113,
+      "1": 496,
+      "2": 16,
+      "non compté": 136
+     },
+     "la_part_dune_feuille": 0.6518
+    },
+    "sur_les_deux": 564,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 922,
+     "les_comptes": {
+      "1": 614,
+      "non compté": 308
+     },
+     "la_part_dune_feuille": 0.6659
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 964,
+     "les_comptes": {
+      "1": 623,
+      "non compté": 341
+     },
+     "la_part_dune_feuille": 0.6463
+    },
+    "sur_les_deux": 922,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 1054,
+     "les_comptes": {
+      "1": 718,
+      "non compté": 336
+     },
+     "la_part_dune_feuille": 0.6812
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 1104,
+     "les_comptes": {
+      "1": 736,
+      "non compté": 368
+     },
+     "la_part_dune_feuille": 0.6667
+    },
+    "sur_les_deux": 1054,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 822,
+     "les_comptes": {
+      "1": 611,
+      "non compté": 211
+     },
+     "la_part_dune_feuille": 0.7433
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 949,
+     "les_comptes": {
+      "0": 126,
+      "1": 612,
+      "non compté": 211
+     },
+     "la_part_dune_feuille": 0.6449
+    },
+    "sur_les_deux": 822,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 6,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -5,
+    "les_tours_de_trop": [
+     0
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 1078,
+     "les_comptes": {
+      "0": 18,
+      "1": 470,
+      "2": 33,
+      "non compté": 557
+     },
+     "la_part_dune_feuille": 0.436
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 1,
+     "les_comptes": {
+      "non compté": 1
+     },
+     "la_part_dune_feuille": null
+    },
+    "sur_les_deux": 0,
+    "la_lecture": "non lue"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -2,
+    "les_tours_de_trop": [
+     -6
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 699,
+     "les_comptes": {
+      "1": 570,
+      "non compté": 129
+     },
+     "la_part_dune_feuille": 0.8155
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 191,
+     "les_comptes": {
+      "non compté": 191
+     },
+     "la_part_dune_feuille": 0.0
+    },
+    "sur_les_deux": 0,
+    "la_lecture": "le compte voit le changement"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis un point",
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_saut": 6,
+   "tient_par_345": false,
+   "la_surface": {
+    "le_tour_attendu": -4,
+    "les_tours_de_trop": [
+     -3
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 560,
+     "les_comptes": {
+      "1": 218,
+      "2": 26,
+      "3": 6,
+      "non compté": 310
+     },
+     "la_part_dune_feuille": 0.3893
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 512,
+     "les_comptes": {
+      "0": 188,
+      "1": 7,
+      "3": 1,
+      "non compté": 316
+     },
+     "la_part_dune_feuille": 0.0137
+    },
+    "sur_les_deux": 0,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 1085,
+     "les_comptes": {
+      "1": 731,
+      "non compté": 354
+     },
+     "la_part_dune_feuille": 0.6737
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 1117,
+     "les_comptes": {
+      "1": 755,
+      "non compté": 362
+     },
+     "la_part_dune_feuille": 0.6759
+    },
+    "sur_les_deux": 1085,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 1019,
+     "les_comptes": {
+      "1": 552,
+      "non compté": 467
+     },
+     "la_part_dune_feuille": 0.5417
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 1019,
+     "les_comptes": {
+      "1": 552,
+      "non compté": 467
+     },
+     "la_part_dune_feuille": 0.5417
+    },
+    "sur_les_deux": 1019,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 1115,
+     "les_comptes": {
+      "1": 738,
+      "non compté": 377
+     },
+     "la_part_dune_feuille": 0.6619
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 1171,
+     "les_comptes": {
+      "1": 758,
+      "non compté": 413
+     },
+     "la_part_dune_feuille": 0.6473
+    },
+    "sur_les_deux": 1115,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 881,
+     "les_comptes": {
+      "1": 649,
+      "non compté": 232
+     },
+     "la_part_dune_feuille": 0.7367
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 967,
+     "les_comptes": {
+      "0": 85,
+      "1": 649,
+      "non compté": 233
+     },
+     "la_part_dune_feuille": 0.6711
+    },
+    "sur_les_deux": 881,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "relancée depuis la spire",
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_saut": 7,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -6,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 364,
+     "les_comptes": {
+      "0": 66,
+      "1": 288,
+      "non compté": 10
+     },
+     "la_part_dune_feuille": 0.7912
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 175,
+     "les_comptes": {
+      "non compté": 175
+     },
+     "la_part_dune_feuille": 0.0
+    },
+    "sur_les_deux": 0,
+    "la_lecture": "le compte voit le changement"
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 479,
+     "les_comptes": {
+      "1": 440,
+      "non compté": 39
+     },
+     "la_part_dune_feuille": 0.9186
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 481,
+     "les_comptes": {
+      "1": 442,
+      "non compté": 39
+     },
+     "la_part_dune_feuille": 0.9189
+    },
+    "sur_les_deux": 479,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 1,
+   "le_cote": "moins",
+   "le_saut": 5,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 505,
+     "les_comptes": {
+      "1": 311,
+      "non compté": 194
+     },
+     "la_part_dune_feuille": 0.6158
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 505,
+     "les_comptes": {
+      "1": 311,
+      "non compté": 194
+     },
+     "la_part_dune_feuille": 0.6158
+    },
+    "sur_les_deux": 505,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 2,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 802,
+     "les_comptes": {
+      "1": 559,
+      "non compté": 243
+     },
+     "la_part_dune_feuille": 0.697
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 822,
+     "les_comptes": {
+      "1": 575,
+      "non compté": 247
+     },
+     "la_part_dune_feuille": 0.6995
+    },
+    "sur_les_deux": 802,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 705,
+     "les_comptes": {
+      "1": 613,
+      "non compté": 92
+     },
+     "la_part_dune_feuille": 0.8695
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 705,
+     "les_comptes": {
+      "1": 613,
+      "non compté": 92
+     },
+     "la_part_dune_feuille": 0.8695
+    },
+    "sur_les_deux": 705,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 1,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -1,
+    "les_tours_de_trop": [
+     0
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 1049,
+     "les_comptes": {
+      "1": 727,
+      "non compté": 322
+     },
+     "la_part_dune_feuille": 0.693
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 1060,
+     "les_comptes": {
+      "1": 737,
+      "non compté": 323
+     },
+     "la_part_dune_feuille": 0.6953
+    },
+    "sur_les_deux": 1049,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 3,
+   "le_cote": "moins",
+   "le_saut": 3,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 686,
+     "les_comptes": {
+      "1": 552,
+      "non compté": 134
+     },
+     "la_part_dune_feuille": 0.8047
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 687,
+     "les_comptes": {
+      "0": 1,
+      "1": 552,
+      "non compté": 134
+     },
+     "la_part_dune_feuille": 0.8035
+    },
+    "sur_les_deux": 686,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  },
+  {
+   "la_chaine": "bornée",
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_saut": 4,
+   "tient_par_345": true,
+   "la_surface": {
+    "le_tour_attendu": -3,
+    "les_tours_de_trop": [
+     -2
+    ],
+    "sur_le_tour_attendu": {
+     "les_points": 378,
+     "les_comptes": {
+      "1": 361,
+      "2": 1,
+      "non compté": 16
+     },
+     "la_part_dune_feuille": 0.955
+    },
+    "sur_un_tour_de_trop": {
+     "les_points": 273,
+     "les_comptes": {
+      "0": 44,
+      "1": 165,
+      "2": 17,
+      "non compté": 47
+     },
+     "la_part_dune_feuille": 0.6044
+    },
+    "sur_les_deux": 1,
+    "la_lecture": "le compte ne le voit pas"
+   }
+  }
+ ],
+ "sur_tous_les_points": {
+  "graines_4_a_8": {
+   "les_justes": 104,
+   "les_justes_qui_tiennent": 69,
+   "tj": 0.6635,
+   "les_faux": 6,
+   "les_faux_qui_tiennent": 1,
+   "tf": 0.1667,
+   "les_non_juges": 203,
+   "les_non_juges_qui_tiennent": 61,
+   "la_part_des_tenus_qui_sont_justes": 0.9857
+  },
+  "graines_1_a_3": {
+   "les_justes": 10,
+   "les_justes_qui_tiennent": 4,
+   "tj": 0.4,
+   "les_faux": 21,
+   "les_faux_qui_tiennent": 7,
+   "tf": 0.3333,
+   "les_non_juges": 159,
+   "les_non_juges_qui_tiennent": 76,
+   "la_part_des_tenus_qui_sont_justes": 0.3636
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "k": 2,
+  "n": 3,
+  "lissue": "sur les graines 4 à 8, le compte voit le changement de tour sous 2 des 3 surfaces tenues à tort qui sont lues ; il le voit sous certaines seulement"
+ },
+ "les_secondes": 853.6
+}

@@ -3336,6 +3336,58 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 347 : LES POINTS POSÉS SUR LE TOUR DE TROP FRANCHISSENT-ILS AUTRE CHOSE QU'UNE FEUILLE
+    s347 = _source(racine, "les_points_poses_sur_le_tour_de_trop_franchissent_ils_autre_chose_quune_feuille.json")
+    if s347.exists():
+        d = json.loads(s347.read_text())
+        v_ = d["le_verdict"]
+        c2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        mot = {1: "un", 2: "deux", 3: "trois", 4: "quatre", 5: "cinq", 6: "six", 7: "sept"}
+        propres = [s_ for s_ in d["les_surfaces"] if s_["le_rang"] >= 4 and s_["la_surface"] is not None]
+        g13 = [s_["la_surface"] for s_ in d["les_surfaces"] if s_["le_rang"] < 4 and s_["la_surface"] is not None]
+        g13_lues = [a_ for a_ in g13 if a_["la_lecture"] != "non lue"]
+        n_ = lambda g, k: g["les_comptes"].get(k, 0)  # noqa: E731
+        lus = sum(x_["lus"] if "lus" in x_ else x_["PHercParis4"]["lus"] for x_ in d["la_lecture_de_m7"].values())
+        b48, b13 = d["sur_tous_les_points"]["graines_4_a_8"], d["sur_tous_les_points"]["graines_1_a_3"]
+        ecrits = [("le verdict de 347", v_["lissue"].upper()),
+                  ("les chunks de m7 lus de 347", f"`m7` a été lu en {lus:,} chunks, sans panne".replace(",", " ", 1)),
+                  ("les graines 1 à 3 de 347",
+                   f"de changement sous {'aucune' if not any(a_['la_lecture'] == 'le compte voit le changement' for a_ in g13_lues) else 'certaines'}"
+                   f" des {len(g13_lues)} surfaces lues"),
+                  ("tous les points de 347", f"tient {b48['les_justes_qui_tiennent']} des {b48['les_justes']} sauts justes et "
+                                             f"{b48['les_faux_qui_tiennent']} des {b48['les_faux']} faux sur les graines 4 à 8, justes à "
+                                             f"{c2(100 * b48['la_part_des_tenus_qui_sont_justes'])} %"),
+                  ("tous les points des graines 1 à 3 de 347", f"{b13['les_justes_qui_tiennent']} des {b13['les_justes']} justes et "
+                                                              f"{b13['les_faux_qui_tiennent']} des {b13['les_faux']} faux"),
+                  ("les faux tenus sur tous les points de 347",
+                   f"il ne tient qu'{mot[b48['les_faux_qui_tiennent']]} des {mot[b48['les_faux']]} sauts")]
+        for s_ in propres:
+            a_ = s_["la_surface"]
+            ga, gt = a_["sur_le_tour_attendu"], a_["sur_un_tour_de_trop"]
+            trop = ", ".join(str(t) for t in a_["les_tours_de_trop"])
+            ecrits.append((f"la surface {s_['la_chaine']} {s_['le_rang']}-{s_['le_saut']} de 347",
+                           f"| {s_['la_chaine']} | {s_['le_rang']}, saut {s_['le_saut']} | {a_['le_tour_attendu']} : {ga['les_points']}, "
+                           f"{n_(ga, '1')} | {trop} : {gt['les_points']}, {n_(gt, '1')}, {n_(gt, 'non compté')} | {a_['la_lecture']} |"))
+        vues = [s_["la_surface"]["sur_un_tour_de_trop"] for s_ in propres
+                if s_["tient_par_345"] and s_["la_surface"]["la_lecture"] == "le compte voit le changement"]
+        if len(vues) == 2:
+            ecrits += [("le premier tour de trop non compté de 347", f"Les {vues[0]['les_points']} points"),
+                       ("le second tour de trop non compté de 347", f"et les {vues[1]['les_points']} de la surface")]
+        manque = [s_["la_surface"] for s_ in propres if s_["tient_par_345"] and s_["la_surface"]["la_lecture"] == "le compte ne le voit pas"]
+        if len(manque) == 1:
+            gt = manque[0]["sur_un_tour_de_trop"]
+            deux = sum(v for k, v in gt["les_comptes"].items() if k not in ("0", "1", "non compté"))
+            ecrits += [("la surface non vue de 347", f"Des {gt['les_points']} points de la surface"),
+                       ("les comptes de la surface non vue de 347", f"{n_(gt, '1')} franchissent une feuille, {n_(gt, '0')} aucune, {deux} "
+                                                                    f"deux, et {n_(gt, 'non compté')} ne sont pas comptés"),
+                       ("la part de la surface non vue de 347", f"{round(100 * n_(gt, '1') / gt['les_points'])} % de ses points")]
+        ctl = [s_["la_surface"] for s_ in propres if not s_["tient_par_345"] and s_["la_surface"]["la_lecture"] != "non lue"]
+        if len(ctl) == 1:
+            ga, gt = ctl[0]["sur_le_tour_attendu"], ctl[0]["sur_un_tour_de_trop"]
+            ecrits.append(("le contrôle de 347", f"ne franchissent une feuille que pour {n_(gt, '1')} des {gt['les_points']}, contre "
+                                                 f"{n_(ga, '1')} des {ga['les_points']} sur le tour attendu ; {n_(gt, '0')} n'en franchissent aucune"))
+        out.extend((nom, [x_], s347.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 346 : LES SURFACES À DEUX TOURS TENUES SONT-ELLES LÀ OÙ LEURS TOURS SE RECOUVRENT
     s346 = _source(racine, "les_surfaces_a_deux_tours_tenues_sont_elles_la_ou_leurs_tours_se_recouvrent.json")
     if s346.exists():
