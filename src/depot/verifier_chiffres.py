@@ -3336,6 +3336,27 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐ LA TRANCHE 302 : LES NAPPES DE M7 TIENNENT-ELLES SUR UNE SEULE FEUILLE
+    s302 = _source(racine, "les_nappes_de_m7_tiennent_elles_sur_une_seule_feuille.json")
+    if s302.exists():
+        d = json.loads(s302.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ss = ("nappe", "plus", "moins")
+        ecrits = []
+        for n in d["les_nappes"]:
+            x_ = n["les_surfaces"]
+            ecrits.append((f"les pièces de la graine {n['le_rang']} dans 302",
+                           f"| {n['le_rang']} | " + " | ".join(f_(x_[s]["la_plus_grande"]) for s in ss) + " | "
+                           + " · ".join(f_(x_[s]["le_z_de_la_plus_grande"]) for s in ss) + " |"))
+            ecrits.append((f"les boucles de la graine {n['le_rang']} dans 302",
+                           f"| {n['le_rang']} | " + " · ".join(f_(x_[s]["les_boucles"]["la_part"]) for s in ss) + " | "
+                           + " · ".join(f_(x_[s]["les_boucles"]["leur_mediane_voxels"]) for s in ss) + " |"))
+        parts = [n["les_surfaces"][s]["les_boucles"]["leur_part_sous_trois_quarts_de_pas"] for n in d["les_nappes"]
+                 if n["le_rang"] in (4, 7, 8) for s in ss]
+        ecrits.append(("les sauts de moins de trois quarts de pas dans 302",
+                       f"de {f_(min(parts))} à {f_(max(parts))}"))
+        out.extend((nom, [x_], s302.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 301 : LES NAPPES DE M7 SUIVENT-ELLES LEUR FEUILLE SUR DES GRAINES NEUVES
     s301 = _source(racine, "les_nappes_de_m7_suivent_elles_leur_feuille_sur_des_graines_neuves.json")
     if s301.exists():

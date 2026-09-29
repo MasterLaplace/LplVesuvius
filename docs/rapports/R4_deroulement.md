@@ -4342,6 +4342,13 @@ par sa règle déclarée par taux sur vingt-quatre blocs neufs de PHercParis4 : 
 0,0417. C'est le premier fait établi sur un rouleau sans tracé. Le juge ne dit pas quelle feuille, et les marges sont d'une
 comparaison. `R4-P101` s'ouvre : une seule feuille, et la voisine.
 
+**`302` · 2026-09-29 · les nappes de m7 tiennent-elles sur une seule feuille** — `R4-P101`
+
+⭐⭐⭐ **Pour quatre des cinq nappes de `m7` qui suivent leur feuille sur PHerc0358, la nappe et ses deux spires suivantes tiennent
+d'une seule pièce qui suit sa feuille ; mais sur trois d'entre elles, 10 à 14 % des carrés de voisins ne ferment pas leur boucle
+au pas, par des sauts d'un peu plus d'un demi-pas** — `R4-F483`. La règle des pièces ne voit pas une coupure ouverte ; le relevé
+des boucles, ajouté après le premier compte, le voit. `R4-P102` s'ouvre : deux faces d'une feuille, ou deux feuilles.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
