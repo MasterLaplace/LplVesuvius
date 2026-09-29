@@ -1787,6 +1787,8 @@ run "la spire qui croît tombe-t-elle sur le tour suivant du segment" uv run pyt
 run "figure la spire qui croît tombe-t-elle sur le tour suivant du segment" uv run python "$ROOT/src/figures/figure_la_spire_qui_croit_tombe_t_elle_sur_le_tour_suivant_du_segment.py" --verifier
 run "le saut qui croît pose-t-il au pas sur les deux rouleaux" uv run python "$ROOT/src/nappe/le_saut_qui_croit_pose_t_il_au_pas_sur_les_deux_rouleaux.py" --verifier
 run "figure le saut qui croît pose-t-il au pas sur les deux rouleaux" uv run python "$ROOT/src/figures/figure_le_saut_qui_croit_pose_t_il_au_pas_sur_les_deux_rouleaux.py" --verifier
+run "à quelle distance m7 montre-t-il la feuille suivante" uv run python "$ROOT/src/nappe/a_quelle_distance_m7_montre_t_il_la_feuille_suivante.py" --verifier
+run "figure à quelle distance m7 montre-t-il la feuille suivante" uv run python "$ROOT/src/figures/figure_a_quelle_distance_m7_montre_t_il_la_feuille_suivante.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

@@ -4491,6 +4491,13 @@ graine 4, la nappe était déjà sur le tour suivant, à 57 voxels du tracé. `R
 PHerc0358, cinq côtés ne posent rien et six posent à 1,7 à 2,85 pas ; les nappes les plus complètes ont les sauts les plus vides.
 `R4-P123` s'ouvre : à quelle distance `m7` montre-t-il la feuille après celle de la nappe, sur chaque rouleau ?
 
+**`325` · 2026-09-29 · à quelle distance m7 montre-t-il la feuille suivante** — `R4-P123`
+
+⭐⭐⭐⭐⭐ **À un pas sur 7 côtés sur 16 de PHerc0358 contre 14, et les six côtés aveugles sont ceux de trois nappes plates** —
+`R4-F509`, `R4-F510`. Les nappes des graines 1, 2 et 5 gardent le même décalage sur 68 à 99 % de leurs points et ne voient aucune
+feuille après la leur ; ailleurs, `m7` montre la suivante à un pas sur PHerc0358 aussi. `R4-P124` s'ouvre : ce qu'est `m7` sous une
+nappe plate.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

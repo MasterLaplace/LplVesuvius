@@ -93,7 +93,8 @@ def le_depart(suivante: np.ndarray, forme: tuple) -> tuple[int, int] | None:
 def le_saut_croissant(surface: np.ndarray, valide: np.ndarray, cote: float, lire_valeurs,
                       tolerance: float = m305.LA_TOLERANCE) -> dict:
     """De chaque point posé d'une surface, le long de sa normale recalculée, du côté `cote`, les feuilles de `m7` sur trois
-    pas ; le départ prend la première après la sienne, puis la croissance de `305`."""
+    pas ; le départ prend la première après la sienne, puis la croissance de `305`. Rend aussi, pour `325`, la première feuille
+    après la sienne que chaque point voit (NaN s'il n'en voit aucune)."""
     from la_spire_voisine_est_elle_a_un_pas import les_normales
 
     forme = valide.shape
@@ -106,12 +107,13 @@ def le_saut_croissant(surface: np.ndarray, valide: np.ndarray, cote: float, lire
     depart = le_depart(suivante, forme)
     if depart is None:
         vide = np.zeros(forme, dtype=bool)
-        return {"la_spire": surface.copy(), "valide": vide, "le_pas": np.full(forme, np.nan), "le_depart": None}
+        return {"la_spire": surface.copy(), "valide": vide, "le_pas": np.full(forme, np.nan), "le_depart": None,
+                "les_suivantes": suivante.reshape(forme)}
     centres = m300.les_plages(vu, ts)
     pas_, pose = m305.croitre(centres, forme, depart, tolerance, demi_portee=tolerance,
                               cible_de_depart=float(suivante[depart[0] * forme[1] + depart[1]]))
     spire = (q + np.nan_to_num(pas_.ravel())[:, None] * nq).reshape(forme + (3,))
-    return {"la_spire": spire, "valide": pose, "le_pas": pas_, "le_depart": list(depart)}
+    return {"la_spire": spire, "valide": pose, "le_pas": pas_, "le_depart": list(depart), "les_suivantes": suivante.reshape(forme)}
 
 
 def enchainer(nappe: np.ndarray, valide: np.ndarray, cote: float, lire_valeurs, sauts: int = LES_SAUTS) -> list[dict]:

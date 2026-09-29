@@ -3336,6 +3336,23 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 325 : À QUELLE DISTANCE M7 MONTRE-T-IL LA FEUILLE SUIVANTE
+    s325 = _source(racine, "a_quelle_distance_m7_montre_t_il_la_feuille_suivante.json")
+    if s325.exists():
+        d = json.loads(s325.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 325", d["le_verdict"]["lissue"].upper())]
+        plates = [n for n in d["les_nappes"]["PHerc0358"] if n["le_rang"] in (1, 2, 5)]
+        ecrits.append(("les nappes plates de 325", ", ".join(f"{n['la_part_a_ce_decalage'] * 100:.2f}".replace(".", ",")
+                                                              for n in plates[:2]) + " et "
+                       + f"{plates[2]['la_part_a_ce_decalage'] * 100:.2f}".replace(".", ",") + " %"))
+        for r_ in ("PHerc0358", "PHercParis4"):
+            for c in d["les_cotes"][r_]:
+                ecrits.append((f"g{c['le_rang']} {c['le_cote']} de {r_} en 325",
+                               f"| {c['le_rang']} | {c['le_cote']} | {f_(c['la_part_qui_voit'])} | {f_(c['la_distance_mediane_en_pas'])} | "
+                               f"{f_(c['le_depart_en_pas'])} | {c['la_lecture']} | {'oui' if c['le_depart_secarte'] else 'non'} |"))
+        out.extend((nom, [x_], s325.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 324 : LE SAUT QUI CROÎT POSE-T-IL AU PAS SUR LES DEUX ROULEAUX
     s324 = _source(racine, "le_saut_qui_croit_pose_t_il_au_pas_sur_les_deux_rouleaux.json")
     if s324.exists():

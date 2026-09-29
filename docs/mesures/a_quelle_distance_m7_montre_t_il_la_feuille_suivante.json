@@ -1,0 +1,890 @@
+{
+ "la_question": "À quelle distance, en pas du rouleau, chaque point de la nappe qui croît voit-il la feuille de m7 après la sienne, sur PHerc0358 et sur PHercParis4, et le départ du saut prend-il la distance typique ?",
+ "les_constantes": {
+  "le_pas_bas": 0.5,
+  "le_pas_haut": 1.5,
+  "la_part_qui_voit": 0.5,
+  "les_bornes_en_pas": [
+   0.0,
+   0.25,
+   0.5,
+   0.75,
+   1.0,
+   1.25,
+   1.5,
+   1.75,
+   2.0,
+   2.25,
+   2.5,
+   2.75,
+   3.0
+  ]
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHerc0358": {
+   "lus": 685,
+   "absents": 40,
+   "octets": 234421116
+  },
+  "PHercParis4": {
+   "lus": 709,
+   "absents": 0,
+   "octets": 325822650
+  }
+ },
+ "les_nappes_de_0358_se_redonnent": true,
+ "les_nappes": {
+  "PHerc0358": [
+   {
+    "le_rang": 1,
+    "la_part_du_plan": 0.9801,
+    "le_decalage_le_plus_frequent": -10.0,
+    "la_part_a_ce_decalage": 0.9058
+   },
+   {
+    "le_rang": 2,
+    "la_part_du_plan": 0.3671,
+    "le_decalage_le_plus_frequent": 0.0,
+    "la_part_a_ce_decalage": 0.6841
+   },
+   {
+    "le_rang": 3,
+    "la_part_du_plan": 0.8973,
+    "le_decalage_le_plus_frequent": 4.0,
+    "la_part_a_ce_decalage": 0.0849
+   },
+   {
+    "le_rang": 4,
+    "la_part_du_plan": 0.3735,
+    "le_decalage_le_plus_frequent": 29.0,
+    "la_part_a_ce_decalage": 0.0342
+   },
+   {
+    "le_rang": 5,
+    "la_part_du_plan": 0.2279,
+    "le_decalage_le_plus_frequent": 13.0,
+    "la_part_a_ce_decalage": 0.9907
+   },
+   {
+    "le_rang": 6,
+    "la_part_du_plan": 0.8653,
+    "le_decalage_le_plus_frequent": -3.0,
+    "la_part_a_ce_decalage": 0.046
+   },
+   {
+    "le_rang": 7,
+    "la_part_du_plan": 0.4736,
+    "le_decalage_le_plus_frequent": 29.0,
+    "la_part_a_ce_decalage": 0.0275
+   },
+   {
+    "le_rang": 8,
+    "la_part_du_plan": 0.4518,
+    "le_decalage_le_plus_frequent": -7.0,
+    "la_part_a_ce_decalage": 0.0183
+   }
+  ],
+  "PHercParis4": [
+   {
+    "le_rang": 1,
+    "la_part_du_plan": 0.3351,
+    "le_decalage_le_plus_frequent": -5.0,
+    "la_part_a_ce_decalage": 0.029
+   },
+   {
+    "le_rang": 2,
+    "la_part_du_plan": 0.3172,
+    "le_decalage_le_plus_frequent": -27.0,
+    "la_part_a_ce_decalage": 0.0313
+   },
+   {
+    "le_rang": 3,
+    "la_part_du_plan": 0.3389,
+    "le_decalage_le_plus_frequent": 11.0,
+    "la_part_a_ce_decalage": 0.0335
+   },
+   {
+    "le_rang": 4,
+    "la_part_du_plan": 0.5647,
+    "le_decalage_le_plus_frequent": 7.0,
+    "la_part_a_ce_decalage": 0.0335
+   },
+   {
+    "le_rang": 5,
+    "la_part_du_plan": 0.4201,
+    "le_decalage_le_plus_frequent": -1.0,
+    "la_part_a_ce_decalage": 0.0265
+   },
+   {
+    "le_rang": 6,
+    "la_part_du_plan": 0.613,
+    "le_decalage_le_plus_frequent": -1.0,
+    "la_part_a_ce_decalage": 0.0236
+   },
+   {
+    "le_rang": 7,
+    "la_part_du_plan": 0.5517,
+    "le_decalage_le_plus_frequent": -27.0,
+    "la_part_a_ce_decalage": 0.0489
+   },
+   {
+    "le_rang": 8,
+    "la_part_du_plan": 0.7524,
+    "le_decalage_le_plus_frequent": -26.0,
+    "la_part_a_ce_decalage": 0.0488
+   }
+  ]
+ },
+ "les_cotes": {
+  "PHerc0358": [
+   {
+    "le_rang": 1,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.0005,
+    "la_distance_mediane_en_pas": 1.987,
+    "le_depart_en_pas": 1.825,
+    "la_lecture": "rarement vue",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     1,
+     1,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 1,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.0,
+    "la_distance_mediane_en_pas": null,
+    "le_depart_en_pas": null,
+    "la_lecture": "rarement vue",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 2,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.0,
+    "la_distance_mediane_en_pas": null,
+    "le_depart_en_pas": null,
+    "la_lecture": "rarement vue",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 2,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.0,
+    "la_distance_mediane_en_pas": null,
+    "le_depart_en_pas": null,
+    "la_lecture": "rarement vue",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 3,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.4999,
+    "la_distance_mediane_en_pas": 1.675,
+    "le_depart_en_pas": 2.95,
+    "la_lecture": "rarement vue",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     0,
+     25,
+     107,
+     176,
+     171,
+     245,
+     301,
+     215,
+     208,
+     168,
+     106,
+     173
+    ]
+   },
+   {
+    "le_rang": 3,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.0694,
+    "la_distance_mediane_en_pas": 0.75,
+    "le_depart_en_pas": 2.025,
+    "la_lecture": "rarement vue",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     0,
+     1,
+     115,
+     32,
+     17,
+     16,
+     7,
+     5,
+     11,
+     30,
+     13,
+     16
+    ]
+   },
+   {
+    "le_rang": 4,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.533,
+    "la_distance_mediane_en_pas": 1.5,
+    "le_depart_en_pas": 2.225,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     2,
+     6,
+     38,
+     99,
+     128,
+     141,
+     84,
+     78,
+     78,
+     89,
+     46,
+     52
+    ]
+   },
+   {
+    "le_rang": 4,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.5311,
+    "la_distance_mediane_en_pas": 1.475,
+    "le_depart_en_pas": 2.25,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     1,
+     42,
+     97,
+     89,
+     97,
+     97,
+     89,
+     120,
+     115,
+     72,
+     7,
+     12
+    ]
+   },
+   {
+    "le_rang": 5,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.0,
+    "la_distance_mediane_en_pas": null,
+    "le_depart_en_pas": null,
+    "la_lecture": "rarement vue",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 5,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.0,
+    "la_distance_mediane_en_pas": null,
+    "le_depart_en_pas": null,
+    "la_lecture": "rarement vue",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 6,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.2319,
+    "la_distance_mediane_en_pas": 2.25,
+    "le_depart_en_pas": 3.0,
+    "la_lecture": "rarement vue",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     0,
+     0,
+     4,
+     31,
+     70,
+     85,
+     84,
+     72,
+     74,
+     95,
+     127,
+     206
+    ]
+   },
+   {
+    "le_rang": 6,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.9376,
+    "la_distance_mediane_en_pas": 0.8,
+    "le_depart_en_pas": 0.9,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     180,
+     1089,
+     1725,
+     379,
+     53,
+     2,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.6207,
+    "la_distance_mediane_en_pas": 0.85,
+    "le_depart_en_pas": 1.025,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     6,
+     18,
+     311,
+     491,
+     194,
+     81,
+     57,
+     42,
+     13,
+     21,
+     4,
+     4
+    ]
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.6257,
+    "la_distance_mediane_en_pas": 0.875,
+    "le_depart_en_pas": 0.875,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     5,
+     26,
+     213,
+     735,
+     141,
+     57,
+     27,
+     13,
+     15,
+     8,
+     7,
+     5
+    ]
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.5951,
+    "la_distance_mediane_en_pas": 0.65,
+    "le_depart_en_pas": 0.5,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     1,
+     141,
+     587,
+     190,
+     88,
+     57,
+     28,
+     18,
+     13,
+     3,
+     4,
+     6
+    ]
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.5972,
+    "la_distance_mediane_en_pas": 0.8,
+    "le_depart_en_pas": 1.125,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     1,
+     77,
+     411,
+     322,
+     180,
+     69,
+     33,
+     13,
+     11,
+     15,
+     4,
+     4
+    ]
+   }
+  ],
+  "PHercParis4": [
+   {
+    "le_rang": 1,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.8799,
+    "la_distance_mediane_en_pas": 1.165,
+    "le_depart_en_pas": 0.805,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     0,
+     0,
+     80,
+     332,
+     341,
+     306,
+     120,
+     35,
+     32,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 1,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.8799,
+    "la_distance_mediane_en_pas": 1.346,
+    "le_depart_en_pas": 0.916,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     0,
+     0,
+     249,
+     186,
+     132,
+     208,
+     297,
+     84,
+     41,
+     27,
+     19,
+     3
+    ]
+   },
+   {
+    "le_rang": 2,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.7701,
+    "la_distance_mediane_en_pas": 1.554,
+    "le_depart_en_pas": 1.304,
+    "la_lecture": "plus loin",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     0,
+     16,
+     162,
+     136,
+     178,
+     231,
+     159,
+     86,
+     36,
+     23,
+     5
+    ]
+   },
+   {
+    "le_rang": 2,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.7687,
+    "la_distance_mediane_en_pas": 1.249,
+    "le_depart_en_pas": 0.971,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     1,
+     0,
+     0,
+     176,
+     353,
+     260,
+     120,
+     55,
+     13,
+     23,
+     28,
+     1
+    ]
+   },
+   {
+    "le_rang": 3,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.8715,
+    "la_distance_mediane_en_pas": 1.387,
+    "le_depart_en_pas": 1.276,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     0,
+     3,
+     155,
+     308,
+     290,
+     152,
+     143,
+     83,
+     82,
+     32,
+     0
+    ]
+   },
+   {
+    "le_rang": 3,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.8387,
+    "la_distance_mediane_en_pas": 1.748,
+    "le_depart_en_pas": 1.498,
+    "la_lecture": "plus loin",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     0,
+     0,
+     23,
+     130,
+     237,
+     212,
+     225,
+     162,
+     124,
+     60,
+     28
+    ]
+   },
+   {
+    "le_rang": 4,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.8671,
+    "la_distance_mediane_en_pas": 0.749,
+    "le_depart_en_pas": 1.027,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     1,
+     112,
+     983,
+     395,
+     286,
+     116,
+     52,
+     54,
+     42,
+     3,
+     20,
+     5
+    ]
+   },
+   {
+    "le_rang": 4,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.8671,
+    "la_distance_mediane_en_pas": 0.888,
+    "le_depart_en_pas": 0.916,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     9,
+     432,
+     1325,
+     291,
+     6,
+     6,
+     0,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 5,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.8473,
+    "la_distance_mediane_en_pas": 0.721,
+    "le_depart_en_pas": 0.694,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     73,
+     728,
+     202,
+     183,
+     157,
+     34,
+     71,
+     43,
+     6,
+     2,
+     5
+    ]
+   },
+   {
+    "le_rang": 5,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.8473,
+    "la_distance_mediane_en_pas": 0.916,
+    "le_depart_en_pas": 0.721,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     6,
+     273,
+     855,
+     256,
+     84,
+     28,
+     1,
+     1,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 6,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.7425,
+    "la_distance_mediane_en_pas": 0.888,
+    "le_depart_en_pas": 0.888,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     3,
+     28,
+     459,
+     962,
+     282,
+     133,
+     41,
+     8,
+     7,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 6,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.7425,
+    "la_distance_mediane_en_pas": 0.805,
+    "le_depart_en_pas": 0.694,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     16,
+     789,
+     654,
+     272,
+     103,
+     64,
+     23,
+     0,
+     1,
+     0,
+     1
+    ]
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.6469,
+    "la_distance_mediane_en_pas": 0.777,
+    "le_depart_en_pas": 1.054,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     3,
+     111,
+     604,
+     562,
+     190,
+     26,
+     8,
+     4,
+     0,
+     0,
+     0,
+     0
+    ]
+   },
+   {
+    "le_rang": 7,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.6469,
+    "la_distance_mediane_en_pas": 0.832,
+    "le_depart_en_pas": 1.165,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     1,
+     117,
+     459,
+     607,
+     217,
+     72,
+     18,
+     10,
+     6,
+     0,
+     1,
+     0
+    ]
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "plus",
+    "la_part_qui_voit": 0.642,
+    "la_distance_mediane_en_pas": 0.694,
+    "le_depart_en_pas": 0.943,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": false,
+    "lhistogramme": [
+     0,
+     235,
+     1018,
+     563,
+     167,
+     42,
+     9,
+     3,
+     2,
+     1,
+     1,
+     0
+    ]
+   },
+   {
+    "le_rang": 8,
+    "le_cote": "moins",
+    "la_part_qui_voit": 0.625,
+    "la_distance_mediane_en_pas": 0.943,
+    "le_depart_en_pas": 2.664,
+    "la_lecture": "à un pas",
+    "le_depart_secarte": true,
+    "lhistogramme": [
+     0,
+     93,
+     552,
+     484,
+     273,
+     162,
+     97,
+     88,
+     79,
+     58,
+     47,
+     54
+    ]
+   }
+  ]
+ },
+ "le_verdict": {
+  "decidable": true,
+  "k": 7,
+  "a": 6,
+  "m": 14,
+  "b": 7,
+  "lissue": "sur PHerc0358, la feuille suivante est vue à un pas sur 7 des 16 côtés, et le départ s'écarte sur 6 ; sur PHercParis4, sur 14 des 16 et sur 7"
+ },
+ "les_secondes": 20.0
+}
