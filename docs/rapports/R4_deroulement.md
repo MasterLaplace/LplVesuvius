@@ -4654,6 +4654,12 @@ d'avant (1678 contre 3397). `R4-P147` s'ouvre : le compte voit-il le retard là 
 retard refusées, 3 des 44 sauts justes sains, 30 des 46 sauts à cheval hérités. `R4-P148` s'ouvre : le compte de `345` et ce seuil
 ensemble séparent-ils les sauts justes sains de tous les autres ?
 
+**`352` · 2026-09-29 · le compte et le seuil ensemble séparent-ils les sauts sains** — `R4-P148`
+
+⭐⭐⭐⭐ **En partie** — `R4-F538`. Ensemble, `345` et le seuil de 50 points à zéro tiennent 39 des 44 sauts justes sains et 24 des 66
+autres, presque tous à cheval ; le seuil fait presque tout le travail. `R4-P149` s'ouvre : les surfaces à cheval qu'ils tiennent
+sont-elles presque entièrement sur le tour attendu ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

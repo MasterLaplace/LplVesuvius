@@ -1,0 +1,827 @@
+{
+ "la_question": "Le compte des feuilles de 345, auquel s'ajoute le seuil de 50 points à zéro, sépare-t-il sur les graines 4 à 8 les sauts justes qui ne sont pas à cheval de tous les autres ?",
+ "les_constantes": {
+  "le_seuil": 50,
+  "la_tenue_des_sains": 0.75,
+  "la_tenue_des_autres": 0.25,
+  "lecart_minimal": 0.25,
+  "le_minimum": 5
+ },
+ "le_controle": true,
+ "les_groupes": {
+  "les_sains": [
+   [
+    "bornée",
+    5,
+    "moins",
+    2
+   ],
+   [
+    "bornée",
+    5,
+    "moins",
+    3
+   ],
+   [
+    "bornée",
+    5,
+    "moins",
+    4
+   ],
+   [
+    "bornée",
+    5,
+    "moins",
+    5
+   ],
+   [
+    "bornée",
+    5,
+    "moins",
+    6
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    1
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    2
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    1
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis un point",
+    5,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis un point",
+    5,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    1
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis un point",
+    7,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    5
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    2
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    3
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    4
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    5
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    6
+   ],
+   [
+    "sans relance",
+    4,
+    "moins",
+    7
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    2
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    3
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    4
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    5
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    6
+   ],
+   [
+    "sans relance",
+    5,
+    "moins",
+    7
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    1
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    2
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    3
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    4
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    5
+   ],
+   [
+    "sans relance",
+    6,
+    "moins",
+    6
+   ],
+   [
+    "sans relance",
+    7,
+    "moins",
+    3
+   ],
+   [
+    "sans relance",
+    7,
+    "moins",
+    4
+   ],
+   [
+    "sans relance",
+    8,
+    "moins",
+    2
+   ],
+   [
+    "sans relance",
+    8,
+    "moins",
+    3
+   ],
+   [
+    "sans relance",
+    8,
+    "moins",
+    6
+   ],
+   [
+    "sans relance",
+    8,
+    "moins",
+    7
+   ]
+  ],
+  "les_a_cheval": [
+   [
+    "bornée",
+    4,
+    "moins",
+    2
+   ],
+   [
+    "bornée",
+    4,
+    "moins",
+    3
+   ],
+   [
+    "bornée",
+    4,
+    "moins",
+    4
+   ],
+   [
+    "bornée",
+    4,
+    "moins",
+    5
+   ],
+   [
+    "bornée",
+    4,
+    "moins",
+    6
+   ],
+   [
+    "bornée",
+    4,
+    "moins",
+    7
+   ],
+   [
+    "bornée",
+    5,
+    "moins",
+    7
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    3
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    4
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    5
+   ],
+   [
+    "bornée",
+    6,
+    "moins",
+    6
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    4
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    5
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    6
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    7
+   ],
+   [
+    "bornée",
+    7,
+    "moins",
+    8
+   ],
+   [
+    "bornée",
+    8,
+    "moins",
+    2
+   ],
+   [
+    "bornée",
+    8,
+    "moins",
+    3
+   ],
+   [
+    "bornée",
+    8,
+    "moins",
+    6
+   ],
+   [
+    "bornée",
+    8,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis la spire",
+    4,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis la spire",
+    5,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis la spire",
+    6,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis la spire",
+    7,
+    "moins",
+    8
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    5
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    2
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis un point",
+    4,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis un point",
+    5,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis un point",
+    5,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis un point",
+    6,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    3
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis un point",
+    8,
+    "moins",
+    7
+   ]
+  ],
+  "les_faux": [
+   [
+    "bornée",
+    8,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis la spire",
+    8,
+    "moins",
+    7
+   ],
+   [
+    "relancée depuis un point",
+    5,
+    "moins",
+    6
+   ],
+   [
+    "relancée depuis un point",
+    7,
+    "moins",
+    4
+   ],
+   [
+    "relancée depuis un point",
+    7,
+    "moins",
+    6
+   ],
+   [
+    "sans relance",
+    8,
+    "moins",
+    4
+   ]
+  ]
+ },
+ "les_bilans": {
+  "graines_4_a_8": {
+   "les_deux": {
+    "les_sains": {
+     "les_sauts": 44,
+     "les_tenus": 39,
+     "la_part": 0.8864
+    },
+    "les_a_cheval": {
+     "les_sauts": 60,
+     "les_tenus": 23,
+     "la_part": 0.3833
+    },
+    "les_faux": {
+     "les_sauts": 6,
+     "les_tenus": 1,
+     "la_part": 0.1667
+    },
+    "les_autres": {
+     "les_sauts": 66,
+     "les_tenus": 24,
+     "la_part": 0.3636
+    },
+    "la_part_des_tenus_qui_sont_sains": 0.619
+   },
+   "345_seul": {
+    "les_sains": {
+     "les_sauts": 44,
+     "les_tenus": 42,
+     "la_part": 0.9545
+    },
+    "les_a_cheval": {
+     "les_sauts": 60,
+     "les_tenus": 53,
+     "la_part": 0.8833
+    },
+    "les_faux": {
+     "les_sauts": 6,
+     "les_tenus": 3,
+     "la_part": 0.5
+    },
+    "les_autres": {
+     "les_sauts": 66,
+     "les_tenus": 56,
+     "la_part": 0.8485
+    },
+    "la_part_des_tenus_qui_sont_sains": 0.4286
+   },
+   "le_seuil_seul": {
+    "les_sains": {
+     "les_sauts": 44,
+     "les_tenus": 41,
+     "la_part": 0.9318
+    },
+    "les_a_cheval": {
+     "les_sauts": 60,
+     "les_tenus": 23,
+     "la_part": 0.3833
+    },
+    "les_faux": {
+     "les_sauts": 6,
+     "les_tenus": 2,
+     "la_part": 0.3333
+    },
+    "les_autres": {
+     "les_sauts": 66,
+     "les_tenus": 25,
+     "la_part": 0.3788
+    },
+    "la_part_des_tenus_qui_sont_sains": 0.6212
+   }
+  },
+  "graines_1_a_3": {
+   "les_deux": {
+    "les_sains": {
+     "les_sauts": 7,
+     "les_tenus": 7,
+     "la_part": 1.0
+    },
+    "les_a_cheval": {
+     "les_sauts": 3,
+     "les_tenus": 3,
+     "la_part": 1.0
+    },
+    "les_faux": {
+     "les_sauts": 21,
+     "les_tenus": 17,
+     "la_part": 0.8095
+    },
+    "les_autres": {
+     "les_sauts": 24,
+     "les_tenus": 20,
+     "la_part": 0.8333
+    },
+    "la_part_des_tenus_qui_sont_sains": 0.2593
+   },
+   "345_seul": {
+    "les_sains": {
+     "les_sauts": 7,
+     "les_tenus": 7,
+     "la_part": 1.0
+    },
+    "les_a_cheval": {
+     "les_sauts": 3,
+     "les_tenus": 3,
+     "la_part": 1.0
+    },
+    "les_faux": {
+     "les_sauts": 21,
+     "les_tenus": 21,
+     "la_part": 1.0
+    },
+    "les_autres": {
+     "les_sauts": 24,
+     "les_tenus": 24,
+     "la_part": 1.0
+    },
+    "la_part_des_tenus_qui_sont_sains": 0.2258
+   },
+   "le_seuil_seul": {
+    "les_sains": {
+     "les_sauts": 7,
+     "les_tenus": 7,
+     "la_part": 1.0
+    },
+    "les_a_cheval": {
+     "les_sauts": 3,
+     "les_tenus": 3,
+     "la_part": 1.0
+    },
+    "les_faux": {
+     "les_sauts": 21,
+     "les_tenus": 17,
+     "la_part": 0.8095
+    },
+    "les_autres": {
+     "les_sauts": 24,
+     "les_tenus": 20,
+     "la_part": 0.8333
+    },
+    "la_part_des_tenus_qui_sont_sains": 0.2593
+   }
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "sur les graines 4 à 8, le compte et le seuil ensemble tiennent 39 des 44 sauts justes sains et 24 des 66 autres ; ils ne les séparent qu'en partie"
+ }
+}

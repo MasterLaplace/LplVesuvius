@@ -3336,6 +3336,29 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 352 : LE COMPTE ET LE SEUIL ENSEMBLE SÉPARENT-ILS LES SAUTS SAINS
+    s352 = _source(racine, "le_compte_et_le_seuil_ensemble_separent_ils_les_sauts_sains.json")
+    if s352.exists():
+        d = json.loads(s352.read_text())
+        v_, b8, b3 = d["le_verdict"], d["les_bilans"]["graines_4_a_8"], d["les_bilans"]["graines_1_a_3"]
+        pc = lambda x: f"{round(100 * x)} %"  # noqa: E731
+        t_ = lambda b, g: f"{b[g]['les_tenus']} sur {b[g]['les_sauts']}"  # noqa: E731
+        ecrits = [("le verdict de 352", v_["lissue"].upper()),
+                  ("les sains à part de 352", f"Les sauts sains sont tenus à {pc(b8['les_deux']['les_sains']['la_part'])}"),
+                  ("les autres à part de 352", f"les autres à {pc(b8['les_deux']['les_autres']['la_part'])}"),
+                  ("la précision de 352", f"sain à {pc(b8['les_deux']['la_part_des_tenus_qui_sont_sains'])}, contre "
+                                          f"{pc(b8['345_seul']['la_part_des_tenus_qui_sont_sains'])} pour `345` seul"),
+                  ("le seuil seul de 352", f"seul, il tient {b8['le_seuil_seul']['les_sains']['les_tenus']} sains et "
+                                           f"{b8['le_seuil_seul']['les_autres']['les_tenus']}"),
+                  ("345 seul de 352", f"`345` seul tient {b8['345_seul']['les_sains']['les_tenus']} sains et "
+                                      f"{b8['345_seul']['les_autres']['les_tenus']} autres"),
+                  ("les graines 1 à 3 de 352", f"ensemble tiennent les {b3['les_deux']['les_sains']['les_sauts']} sauts sains, les "
+                                               f"{b3['les_deux']['les_a_cheval']['les_sauts']} sauts à cheval et "
+                                               f"{b3['les_deux']['les_faux']['les_tenus']} des {b3['les_deux']['les_faux']['les_sauts']} sauts faux")]
+        for g, n_ in (("les_sains", "sauts justes sains"), ("les_a_cheval", "sauts justes à cheval"), ("les_faux", "sauts faux")):
+            ecrits.append((f"la ligne {g} de 352", f"| {n_} | {t_(b8['les_deux'], g)} | {t_(b8['345_seul'], g)} | {t_(b8['le_seuil_seul'], g)} |"))
+        out.extend((nom, [x_], s352.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 351 : UN SEUIL DE POINTS RESTÉS REFUSE-T-IL LES SAUTS OÙ LE RETARD NAÎT
     s351 = _source(racine, "un_seuil_de_points_restes_refuse_t_il_les_sauts_ou_le_retard_nait.json")
     if s351.exists():
