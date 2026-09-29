@@ -91,10 +91,11 @@ def le_depart(suivante: np.ndarray, forme: tuple) -> tuple[int, int] | None:
 
 
 def le_saut_croissant(surface: np.ndarray, valide: np.ndarray, cote: float, lire_valeurs,
-                      tolerance: float = m305.LA_TOLERANCE) -> dict:
+                      tolerance: float = m305.LA_TOLERANCE, au_median: bool = False) -> dict:
     """De chaque point posé d'une surface, le long de sa normale recalculée, du côté `cote`, les feuilles de `m7` sur trois
     pas ; le départ prend la première après la sienne, puis la croissance de `305`. Rend aussi, pour `325`, la première feuille
-    après la sienne que chaque point voit (NaN s'il n'en voit aucune)."""
+    après la sienne que chaque point voit (NaN s'il n'en voit aucune). Avec `au_median`, écrit pour `327`, le départ est le point
+    le plus proche du centre dont la feuille suivante est à au plus `tolerance` de la médiane de celles que tous les points voient."""
     from la_spire_voisine_est_elle_a_un_pas import les_normales
 
     forme = valide.shape
@@ -104,7 +105,12 @@ def le_saut_croissant(surface: np.ndarray, valide: np.ndarray, cote: float, lire
     idx = np.floor((q[:, None, :] + ts[None, :, None] * nq[:, None, :])[..., ::-1]).astype(np.int64)
     vu = (lire_valeurs(idx) > 0) & nok.reshape(-1)[:, None]
     suivante = m300.la_feuille_apres_la_sienne(ts, vu)
-    depart = le_depart(suivante, forme)
+    pour_le_depart = suivante
+    if au_median and np.isfinite(suivante).any():
+        med = float(np.median(suivante[np.isfinite(suivante)]))
+        with np.errstate(invalid="ignore"):
+            pour_le_depart = np.where(np.abs(suivante - med) <= tolerance, suivante, np.nan)
+    depart = le_depart(pour_le_depart, forme)
     if depart is None:
         vide = np.zeros(forme, dtype=bool)
         return {"la_spire": surface.copy(), "valide": vide, "le_pas": np.full(forme, np.nan), "le_depart": None,

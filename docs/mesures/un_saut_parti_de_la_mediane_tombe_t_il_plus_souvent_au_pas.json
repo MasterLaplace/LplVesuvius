@@ -1,0 +1,823 @@
+{
+ "la_question": "Un saut qui croît parti de la distance médiane que sa nappe voit, et qui refuse de partir d'un bloc de m7, pose-t-il au pas plus souvent sur PHerc0358, sans tomber moins souvent sur le tour suivant de PHercParis4 ?",
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHerc0358": {
+   "lus": 1210,
+   "absents": 43,
+   "octets": 437197287
+  },
+  "PHercParis4": {
+   "lus": 1349,
+   "absents": 0,
+   "octets": 618793421
+  }
+ },
+ "les_nappes_de_0358_se_redonnent": true,
+ "les_graines": {
+  "PHerc0358": [
+   {
+    "le_rang": 1,
+    "refusee": true,
+    "la_plage_en_pas": 4.05,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.0002,
+        "le_pas_median_en_pas": 1.825,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       }
+      }
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       }
+      }
+     }
+    }
+   },
+   {
+    "le_rang": 2,
+    "refusee": true,
+    "la_plage_en_pas": 6.05,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       }
+      }
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       }
+      }
+     }
+    }
+   },
+   {
+    "le_rang": 3,
+    "refusee": false,
+    "la_plage_en_pas": 0.25,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.0963,
+        "le_pas_median_en_pas": 2.85,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.0009,
+        "le_pas_median_en_pas": 2.075,
+        "pose_au_pas": false
+       }
+      }
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.2942,
+        "le_pas_median_en_pas": 1.675,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.0007,
+        "le_pas_median_en_pas": 0.725,
+        "pose_au_pas": false
+       }
+      }
+     }
+    }
+   },
+   {
+    "le_rang": 4,
+    "refusee": false,
+    "la_plage_en_pas": 0.15,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.1477,
+        "le_pas_median_en_pas": 1.7,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.1503,
+        "le_pas_median_en_pas": 1.875,
+        "pose_au_pas": false
+       }
+      }
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.1484,
+        "le_pas_median_en_pas": 1.7,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.1503,
+        "le_pas_median_en_pas": 1.875,
+        "pose_au_pas": false
+       }
+      }
+     }
+    }
+   },
+   {
+    "le_rang": 5,
+    "refusee": true,
+    "la_plage_en_pas": 3.9,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       }
+      }
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.0,
+        "le_pas_median_en_pas": null,
+        "pose_au_pas": false
+       }
+      }
+     }
+    }
+   },
+   {
+    "le_rang": 6,
+    "refusee": false,
+    "la_plage_en_pas": 0.15,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.1931,
+        "le_pas_median_en_pas": 2.25,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.7924,
+        "le_pas_median_en_pas": 0.9,
+        "pose_au_pas": true
+       }
+      }
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.1929,
+        "le_pas_median_en_pas": 2.25,
+        "pose_au_pas": false
+       },
+       "moins": {
+        "la_part_du_plan": 0.7924,
+        "le_pas_median_en_pas": 0.9,
+        "pose_au_pas": true
+       }
+      }
+     }
+    }
+   },
+   {
+    "le_rang": 7,
+    "refusee": false,
+    "la_plage_en_pas": 0.2,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.1522,
+        "le_pas_median_en_pas": 0.8,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.1702,
+        "le_pas_median_en_pas": 0.875,
+        "pose_au_pas": true
+       }
+      }
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.1522,
+        "le_pas_median_en_pas": 0.8,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.1702,
+        "le_pas_median_en_pas": 0.875,
+        "pose_au_pas": true
+       }
+      }
+     }
+    }
+   },
+   {
+    "le_rang": 8,
+    "refusee": false,
+    "la_plage_en_pas": 0.2,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.1444,
+        "le_pas_median_en_pas": 0.575,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2038,
+        "le_pas_median_en_pas": 1.0,
+        "pose_au_pas": true
+       }
+      }
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.1444,
+        "le_pas_median_en_pas": 0.575,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2038,
+        "le_pas_median_en_pas": 1.0,
+        "pose_au_pas": true
+       }
+      }
+     }
+    }
+   }
+  ],
+  "PHercParis4": [
+   {
+    "le_rang": 1,
+    "refusee": false,
+    "la_plage_en_pas": 0.166,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.2949,
+        "le_pas_median_en_pas": 1.165,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2949,
+        "le_pas_median_en_pas": 1.346,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 32,
+        "la_lecture": "non lue"
+       },
+       "moins": {
+        "les_sommets_en_face": 44,
+        "la_lecture": "non lue"
+       }
+      },
+      "la_lecture": "non lue"
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.2949,
+        "le_pas_median_en_pas": 1.165,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2949,
+        "le_pas_median_en_pas": 1.346,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 32,
+        "la_lecture": "non lue"
+       },
+       "moins": {
+        "les_sommets_en_face": 44,
+        "la_lecture": "non lue"
+       }
+      },
+      "la_lecture": "non lue"
+     }
+    }
+   },
+   {
+    "le_rang": 2,
+    "refusee": false,
+    "la_plage_en_pas": 0.166,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.208,
+        "le_pas_median_en_pas": 1.498,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2097,
+        "le_pas_median_en_pas": 1.276,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 26,
+        "la_lecture": "non lue"
+       },
+       "moins": {
+        "les_sommets_en_face": 55,
+        "lecart_median_voxels": 4.35,
+        "lecart_median_en_pas": 0.06,
+        "la_part_a_un_quart_de_pas": 0.9818,
+        "la_lecture": "retrouve"
+       }
+      },
+      "la_lecture": "tombe sur le tour suivant"
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.208,
+        "le_pas_median_en_pas": 1.498,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2097,
+        "le_pas_median_en_pas": 1.276,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 26,
+        "la_lecture": "non lue"
+       },
+       "moins": {
+        "les_sommets_en_face": 55,
+        "lecart_median_voxels": 4.35,
+        "lecart_median_en_pas": 0.06,
+        "la_part_a_un_quart_de_pas": 0.9818,
+        "la_lecture": "retrouve"
+       }
+      },
+      "la_lecture": "tombe sur le tour suivant"
+     }
+    }
+   },
+   {
+    "le_rang": 3,
+    "refusee": false,
+    "la_plage_en_pas": 0.166,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.2947,
+        "le_pas_median_en_pas": 1.387,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2793,
+        "le_pas_median_en_pas": 1.72,
+        "pose_au_pas": false
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 78,
+        "lecart_median_voxels": 3.77,
+        "lecart_median_en_pas": 0.052,
+        "la_part_a_un_quart_de_pas": 0.9872,
+        "la_lecture": "retrouve"
+       },
+       "moins": {
+        "les_sommets_en_face": 40,
+        "la_lecture": "non lue"
+       }
+      },
+      "la_lecture": "tombe sur le tour suivant"
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.2947,
+        "le_pas_median_en_pas": 1.387,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2793,
+        "le_pas_median_en_pas": 1.72,
+        "pose_au_pas": false
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 78,
+        "lecart_median_voxels": 3.77,
+        "lecart_median_en_pas": 0.052,
+        "la_part_a_un_quart_de_pas": 0.9872,
+        "la_lecture": "retrouve"
+       },
+       "moins": {
+        "les_sommets_en_face": 40,
+        "la_lecture": "non lue"
+       }
+      },
+      "la_lecture": "tombe sur le tour suivant"
+     }
+    }
+   },
+   {
+    "le_rang": 4,
+    "refusee": false,
+    "la_plage_en_pas": 0.166,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.3844,
+        "le_pas_median_en_pas": 1.249,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.4615,
+        "le_pas_median_en_pas": 0.888,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 94,
+        "lecart_median_voxels": 80.75,
+        "lecart_median_en_pas": 1.12,
+        "la_part_a_un_quart_de_pas": 0.0,
+        "la_lecture": "ne retrouve pas"
+       },
+       "moins": {
+        "les_sommets_en_face": 108,
+        "lecart_median_voxels": -68.14,
+        "lecart_median_en_pas": -0.945,
+        "la_part_a_un_quart_de_pas": 0.037,
+        "la_lecture": "ne retrouve pas"
+       }
+      },
+      "la_lecture": "ne tombe pas sur le tour suivant"
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.3846,
+        "le_pas_median_en_pas": 1.249,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.4615,
+        "le_pas_median_en_pas": 0.888,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 94,
+        "lecart_median_voxels": 80.75,
+        "lecart_median_en_pas": 1.12,
+        "la_part_a_un_quart_de_pas": 0.0,
+        "la_lecture": "ne retrouve pas"
+       },
+       "moins": {
+        "les_sommets_en_face": 108,
+        "lecart_median_voxels": -68.14,
+        "lecart_median_en_pas": -0.945,
+        "la_part_a_un_quart_de_pas": 0.037,
+        "la_lecture": "ne retrouve pas"
+       }
+      },
+      "la_lecture": "ne tombe pas sur le tour suivant"
+     }
+    }
+   },
+   {
+    "le_rang": 5,
+    "refusee": false,
+    "la_plage_en_pas": 0.166,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.2535,
+        "le_pas_median_en_pas": 0.666,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.3508,
+        "le_pas_median_en_pas": 0.916,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 70,
+        "lecart_median_voxels": 94.16,
+        "lecart_median_en_pas": 1.306,
+        "la_part_a_un_quart_de_pas": 0.2143,
+        "la_lecture": "ne retrouve pas"
+       },
+       "moins": {
+        "les_sommets_en_face": 100,
+        "lecart_median_voxels": -6.14,
+        "lecart_median_en_pas": -0.085,
+        "la_part_a_un_quart_de_pas": 0.69,
+        "la_lecture": "retrouve"
+       }
+      },
+      "la_lecture": "tombe sur le tour suivant"
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.2535,
+        "le_pas_median_en_pas": 0.666,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.3508,
+        "le_pas_median_en_pas": 0.916,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 70,
+        "lecart_median_voxels": 94.16,
+        "lecart_median_en_pas": 1.306,
+        "la_part_a_un_quart_de_pas": 0.2143,
+        "la_lecture": "ne retrouve pas"
+       },
+       "moins": {
+        "les_sommets_en_face": 100,
+        "lecart_median_voxels": -6.14,
+        "lecart_median_en_pas": -0.085,
+        "la_part_a_un_quart_de_pas": 0.69,
+        "la_lecture": "retrouve"
+       }
+      },
+      "la_lecture": "tombe sur le tour suivant"
+     }
+    }
+   },
+   {
+    "le_rang": 6,
+    "refusee": false,
+    "la_plage_en_pas": 0.166,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.3851,
+        "le_pas_median_en_pas": 0.888,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.387,
+        "le_pas_median_en_pas": 0.805,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 109,
+        "lecart_median_voxels": -4.17,
+        "lecart_median_en_pas": -0.058,
+        "la_part_a_un_quart_de_pas": 0.9908,
+        "la_lecture": "retrouve"
+       },
+       "moins": {
+        "les_sommets_en_face": 104,
+        "lecart_median_voxels": -120.31,
+        "lecart_median_en_pas": -1.669,
+        "la_part_a_un_quart_de_pas": 0.0,
+        "la_lecture": "ne retrouve pas"
+       }
+      },
+      "la_lecture": "tombe sur le tour suivant"
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.3851,
+        "le_pas_median_en_pas": 0.888,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.387,
+        "le_pas_median_en_pas": 0.805,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 109,
+        "lecart_median_voxels": -4.17,
+        "lecart_median_en_pas": -0.058,
+        "la_part_a_un_quart_de_pas": 0.9908,
+        "la_lecture": "retrouve"
+       },
+       "moins": {
+        "les_sommets_en_face": 104,
+        "lecart_median_voxels": -120.31,
+        "lecart_median_en_pas": -1.669,
+        "la_part_a_un_quart_de_pas": 0.0,
+        "la_lecture": "ne retrouve pas"
+       }
+      },
+      "la_lecture": "tombe sur le tour suivant"
+     }
+    }
+   },
+   {
+    "le_rang": 7,
+    "refusee": false,
+    "la_plage_en_pas": 0.166,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.2978,
+        "le_pas_median_en_pas": 0.805,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2604,
+        "le_pas_median_en_pas": 0.749,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 35,
+        "la_lecture": "non lue"
+       },
+       "moins": {
+        "les_sommets_en_face": 33,
+        "la_lecture": "non lue"
+       }
+      },
+      "la_lecture": "non lue"
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.2978,
+        "le_pas_median_en_pas": 0.832,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2604,
+        "le_pas_median_en_pas": 0.749,
+        "pose_au_pas": true
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 35,
+        "la_lecture": "non lue"
+       },
+       "moins": {
+        "les_sommets_en_face": 33,
+        "la_lecture": "non lue"
+       }
+      },
+      "la_lecture": "non lue"
+     }
+    }
+   },
+   {
+    "le_rang": 8,
+    "refusee": false,
+    "la_plage_en_pas": 0.166,
+    "les_sauts": {
+     "le_temoin": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.3567,
+        "le_pas_median_en_pas": 0.721,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2968,
+        "le_pas_median_en_pas": 1.582,
+        "pose_au_pas": false
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 29,
+        "la_lecture": "non lue"
+       },
+       "moins": {
+        "les_sommets_en_face": 26,
+        "la_lecture": "non lue"
+       }
+      },
+      "la_lecture": "non lue"
+     },
+     "parti_de_la_mediane": {
+      "les_cotes": {
+       "plus": {
+        "la_part_du_plan": 0.3567,
+        "le_pas_median_en_pas": 0.721,
+        "pose_au_pas": true
+       },
+       "moins": {
+        "la_part_du_plan": 0.2949,
+        "le_pas_median_en_pas": 1.554,
+        "pose_au_pas": false
+       }
+      },
+      "les_spires": {
+       "plus": {
+        "les_sommets_en_face": 29,
+        "la_lecture": "non lue"
+       },
+       "moins": {
+        "les_sommets_en_face": 26,
+        "la_lecture": "non lue"
+       }
+      },
+      "la_lecture": "non lue"
+     }
+    }
+   }
+  ]
+ },
+ "les_comptes": {
+  "k": 4,
+  "k0": 4,
+  "m": 5,
+  "m0": 5
+ },
+ "le_temoin_redonne": true,
+ "le_verdict": {
+  "decidable": true,
+  "k": 4,
+  "k0": 4,
+  "m": 5,
+  "m0": 5,
+  "lissue": "le saut parti de la médiane tombe sur le tour suivant de PHercParis4 sur 4 graines, contre 4 pour le témoin, et pose au pas sur 5 côtés de PHerc0358, contre 5 ; il ne change rien"
+ },
+ "les_secondes": 46.2
+}

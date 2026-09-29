@@ -1791,6 +1791,8 @@ run "à quelle distance m7 montre-t-il la feuille suivante" uv run python "$ROOT
 run "figure à quelle distance m7 montre-t-il la feuille suivante" uv run python "$ROOT/src/figures/figure_a_quelle_distance_m7_montre_t_il_la_feuille_suivante.py" --verifier
 run "la nappe plate est-elle posée dans un bloc de m7" uv run python "$ROOT/src/nappe/la_nappe_plate_est_elle_posee_dans_un_bloc_de_m7.py" --verifier
 run "figure la nappe plate est-elle posée dans un bloc de m7" uv run python "$ROOT/src/figures/figure_la_nappe_plate_est_elle_posee_dans_un_bloc_de_m7.py" --verifier
+run "un saut parti de la médiane tombe-t-il plus souvent au pas" uv run python "$ROOT/src/nappe/un_saut_parti_de_la_mediane_tombe_t_il_plus_souvent_au_pas.py" --verifier
+run "figure un saut parti de la médiane tombe-t-il plus souvent au pas" uv run python "$ROOT/src/figures/figure_un_saut_parti_de_la_mediane_tombe_t_il_plus_souvent_au_pas.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

@@ -3336,6 +3336,16 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 327 : UN SAUT PARTI DE LA MÉDIANE TOMBE-T-IL PLUS SOUVENT AU PAS
+    s327 = _source(racine, "un_saut_parti_de_la_mediane_tombe_t_il_plus_souvent_au_pas.json")
+    if s327.exists():
+        d = json.loads(s327.read_text())
+        c = d["les_comptes"]
+        ecrits = [("le verdict de 327", d["le_verdict"]["lissue"].upper()),
+                  ("PHercParis4 en 327", f"| PHercParis4 | graines dont une spire tombe sur le tour suivant | {c['k0']} | {c['k']} |"),
+                  ("PHerc0358 en 327", f"| PHerc0358 | côtés qui posent au pas | {c['m0']} | {c['m']} |")]
+        out.extend((nom, [x_], s327.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 326 : LA NAPPE PLATE EST-ELLE POSÉE DANS UN BLOC DE M7
     s326 = _source(racine, "la_nappe_plate_est_elle_posee_dans_un_bloc_de_m7.json")
     if s326.exists():

@@ -4504,6 +4504,12 @@ nappe plate.
 bloc le plus mince de la feuille la plus épaisse : un critère de départ sans référent. `R4-P125` s'ouvre : un saut parti de la médiane,
 qui refuse les blocs.
 
+**`327` · 2026-09-29 · un saut parti de la médiane pose-t-il plus souvent au pas** — `R4-P125`
+
+⭐⭐⭐⭐ **Non : il ne change rien, et c'est `m7` qui montre la feuille suivante loin** — `R4-F512`. Sur les deux rouleaux, le saut parti
+de la médiane rend les mêmes comptes que le témoin, 4 graines et 5 côtés. `R4-P126` s'ouvre : combien de sauts la chaîne qui croît
+tient-elle au pas sur PHerc0358 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
