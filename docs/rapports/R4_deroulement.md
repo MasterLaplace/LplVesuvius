@@ -4356,6 +4356,12 @@ sauts sur cinq des dix côtés, par le juge sans référent de `301`** — `R4-F
 à 22,5 voxels, le pas du rouleau. Le juge ne dit pas sur quelle feuille tombe chaque saut. `R4-P103` s'ouvre : quatre spires
 consécutives, ou pas.
 
+**`304` · 2026-09-29 · les sauts d'un demi-pas passent-ils d'une feuille à l'autre** — `R4-P102`
+
+⭐⭐⭐⭐ **En travers des sauts d'un demi-pas des nappes de `m7`, le scan brut montre un creux pour trois nappes sur cinq : le
+profil a la forme du passage à la spire suivante** — `R4-F485`. Les nappes de `301` suivent l'empilement, et passent d'une feuille à
+la voisine sur un carré de voisins sur dix, là où les feuilles sont serrées. `R4-P104` s'ouvre : une nappe d'une seule feuille.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

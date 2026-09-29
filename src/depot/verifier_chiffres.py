@@ -3336,6 +3336,18 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐ LA TRANCHE 304 : LES SAUTS D'UN DEMI-PAS PASSENT-ILS D'UNE FEUILLE À L'AUTRE
+    s304 = _source(racine, "les_sauts_dun_demi_pas_passent_ils_dune_feuille_a_lautre.json")
+    if s304.exists():
+        d = json.loads(s304.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = []
+        for n in d["les_nappes"]:
+            ecrits.append((f"la graine {n['le_rang']} de 304",
+                           f"| {n['le_rang']} | {n['les_sauts_lus']} | {f_(n['la_taille_mediane_des_sauts_voxels'])} | "
+                           f"{n['la_forme']} | {n['la_forme_du_temoin']} | {f_(n['le_pas_median_du_temoin_voxels'])} |"))
+        out.extend((nom, [x_], s304.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 303 : LA CHAÎNE TIRÉE DE M7 SUIT-ELLE SA FEUILLE AU-DELÀ DU PREMIER SAUT
     s303 = _source(racine, "la_chaine_tiree_de_m7_suit_elle_sa_feuille_au_dela_du_premier_saut.json")
     if s303.exists():

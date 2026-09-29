@@ -1745,6 +1745,8 @@ run "les nappes de m7 tiennent-elles sur une seule feuille" uv run python "$ROOT
 run "figure les nappes de m7 tiennent-elles sur une seule feuille" uv run python "$ROOT/src/figures/figure_les_nappes_de_m7_tiennent_elles_sur_une_seule_feuille.py" --verifier
 run "la chaine tiree de m7 suit-elle sa feuille au-dela du premier saut" uv run python "$ROOT/src/nappe/la_chaine_tiree_de_m7_suit_elle_sa_feuille_au_dela_du_premier_saut.py" --verifier
 run "figure la chaine tiree de m7 suit-elle sa feuille au-dela du premier saut" uv run python "$ROOT/src/figures/figure_la_chaine_tiree_de_m7_suit_elle_sa_feuille_au_dela_du_premier_saut.py" --verifier
+run "les sauts d un demi-pas passent-ils d une feuille a l autre" uv run python "$ROOT/src/nappe/les_sauts_dun_demi_pas_passent_ils_dune_feuille_a_lautre.py" --verifier
+run "figure les sauts d un demi-pas passent-ils d une feuille a l autre" uv run python "$ROOT/src/figures/figure_les_sauts_dun_demi_pas_passent_ils_dune_feuille_a_lautre.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
