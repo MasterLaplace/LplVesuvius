@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**169 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**170 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 131 portes
+## Grand Prize — 132 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -149,7 +149,8 @@
 - **R4-P112** *(le graal)* · **POINT PAR POINT, SUR LA NAPPE CROISSANTE DE LA GRAINE 6 ET SUR CELLES DU VOTE DES GRAINES 4, 7 ET 8 DE PHerc0358, L'ÉCART ENTRE LE PLUS DENSE DU PROFIL ET LE MAXIMUM VOISIN LE PLUS PROCHE SE RÉPARTIT-IL AUTOUR DU PAS, OU EN DEUX MODES, UN COURT ET UN LONG, DONT LA SOMME VAUT LE PAS ?** ⭐⭐⭐⭐ C'EST CE QUE `311` DÉSIGNE. Le profil moyen sur 6 mm ne garde que deux maxima (`R4-F492`) ; les sauts de 12 à 13,5 voxels de `304` sont soit le passage à une spire écrasée contre la sienne, soit à la seconde couche de fibres de la même feuille, et seule une lecture locale peut les séparer.
 - **R4-P113** *(le graal)* · **RÉPONDUE par `313` : aucune, sur 71 à 100 % des rayons.** La chaîne de `303` passe d'une surface de `m7` à la suivante sur ses dix côtés et à chaque saut ; les graines 4, 7 et 8 en sautent une sur 14 à 26 % des rayons (`R4-F494`). La suite est `R4-P103`, et une chaîne assez longue pour faire un tour.
 - **R4-P114** *(le graal)* · **RÉPONDUE par `317` : non, à aucun pas.** Les points que `m7` n'appuie pas ont leur plus dense à 13 à 21 voxels et un profil presque plat aux pas donnés de 16, 20 et 24 ; les points appuyés restent à 0 ou 1 voxel (`R4-F498`). La suite est `R4-P115`.
-- **R4-P115** *(le graal)* · **UNE CHAÎNE DONT CHAQUE SAUT NE GARDE QUE SES POINTS APPUYÉS SUR `m7`, ET LES ÉTEND D'UN PAS DE GRILLE À LA FOIS LE LONG DE LA FEUILLE QU'ILS PORTENT, COMME `305` FAIT CROÎTRE UNE NAPPE, TIENT-ELLE PLUS LOIN QUE LA CHAÎNE CROISSANTE DE `306` ?** ⭐⭐⭐⭐ C'EST CE QUE `317` DÉSIGNE. La chaîne du vote ne tient loin que par des morceaux appuyés sur `m7` reliés par un vote qui ne suit pas l'empilement (`R4-F498`) ; une chaîne qui ne se prolonge que par ce qu'elle voit dirait jusqu'où `m7` porte réellement une pile de spires.
+- **R4-P115** *(le graal)* · **RÉPONDUE par `318` : non.** Ne posant que ce que `m7` voit, depuis chaque région où il voit une feuille après la sienne, la chaîne ne tient sur aucun côté : ses régions ne s'accordent pas sur le pas dès le premier saut, et elle se vide en trois à neuf sauts (`R4-F499`). La suite est `R4-P116`.
+- **R4-P116** *(le graal)* · **LÀ OÙ `m7` MANQUE LA FEUILLE SUIVANTE D'UNE SURFACE DE LA CHAÎNE, LE SCAN LA MONTRE-T-IL, UN MAXIMUM DE DENSITÉ À UN PAS DE LA SURFACE QUE `m7` N'A PAS MARQUÉ ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `318` DÉSIGNE. `m7` manque la feuille suivante sur 14 à 26 % des rayons des graines 4, 7 et 8 (`R4-F494`), et une chaîne qui ne pose que ce qu'il voit ne tient pas (`R4-F499`). Si le scan montre ces feuilles, c'est une prédiction à compléter par le scan ; sinon, c'est le scan qui les colle à 9,362 µm.
 
 ## Progress Prizes — 19 portes
 

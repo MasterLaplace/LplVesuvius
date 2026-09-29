@@ -1,0 +1,725 @@
+{
+ "la_question": "Une chaîne de m7 qui ne pose que ce que m7 voit, et fait croître chaque saut depuis toutes les régions où m7 voit la feuille suivante, tient-elle ?",
+ "les_constantes": {
+  "les_sauts": 12,
+  "la_plus_petite_region": 20,
+  "la_coherence_minimale": 0.9,
+  "la_tolerance_voxels": 5.0,
+  "le_quart_de_pas_voxels": 5
+ },
+ "les_nappes_se_redonnent": true,
+ "les_pannes": [],
+ "les_cotes": [
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_points_de_depart": 3077,
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "les_regions": 6,
+     "les_points_poses": 1532,
+     "la_part_posee": 0.4979,
+     "le_pas_median_voxels": 53.0,
+     "la_coherence": 0.4478,
+     "le_plus_dense": 8,
+     "les_points_juges": 1107
+    },
+    {
+     "le_saut": 2,
+     "les_regions": 3,
+     "les_points_poses": 1011,
+     "la_part_posee": 0.6599,
+     "le_pas_median_voxels": 13.5,
+     "la_coherence": 0.6696,
+     "le_plus_dense": -2,
+     "les_points_juges": 599
+    },
+    {
+     "le_saut": 3,
+     "les_regions": 3,
+     "les_points_poses": 556,
+     "la_part_posee": 0.55,
+     "le_pas_median_voxels": 16.0,
+     "la_coherence": 0.6853,
+     "le_plus_dense": -1,
+     "les_points_juges": 282
+    },
+    {
+     "le_saut": 4,
+     "les_regions": 3,
+     "les_points_poses": 211,
+     "la_part_posee": 0.3795,
+     "le_pas_median_voxels": 16.0,
+     "la_coherence": 0.7251,
+     "le_plus_dense": -2,
+     "les_points_juges": 100
+    },
+    {
+     "le_saut": 5,
+     "les_regions": 2,
+     "les_points_poses": 67,
+     "la_part_posee": 0.3175,
+     "le_pas_median_voxels": 15.0,
+     "la_coherence": 0.9701,
+     "le_plus_dense": 16,
+     "les_points_juges": 28
+    },
+    {
+     "le_saut": 6,
+     "les_regions": 0,
+     "les_points_poses": 0,
+     "la_part_posee": 0.0,
+     "le_pas_median_voxels": null,
+     "la_coherence": null,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    }
+   ],
+   "le_dernier_saut_qui_tient": 0
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "les_points_de_depart": 3077,
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "les_regions": 4,
+     "les_points_poses": 126,
+     "la_part_posee": 0.0409,
+     "le_pas_median_voxels": 14.5,
+     "la_coherence": 0.8016,
+     "le_plus_dense": 16,
+     "les_points_juges": 53
+    },
+    {
+     "le_saut": 2,
+     "les_regions": 0,
+     "les_points_poses": 0,
+     "la_part_posee": 0.0,
+     "le_pas_median_voxels": null,
+     "la_coherence": null,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    }
+   ],
+   "le_dernier_saut_qui_tient": 0
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_points_de_depart": 2620,
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "les_regions": 7,
+     "les_points_poses": 958,
+     "la_part_posee": 0.3656,
+     "le_pas_median_voxels": 41.0,
+     "la_coherence": 0.2829,
+     "le_plus_dense": -1,
+     "les_points_juges": 526
+    },
+    {
+     "le_saut": 2,
+     "les_regions": 4,
+     "les_points_poses": 380,
+     "la_part_posee": 0.3967,
+     "le_pas_median_voxels": 19.0,
+     "la_coherence": 0.6237,
+     "le_plus_dense": 0,
+     "les_points_juges": 258
+    },
+    {
+     "le_saut": 3,
+     "les_regions": 1,
+     "les_points_poses": 241,
+     "la_part_posee": 0.6342,
+     "le_pas_median_voxels": 17.5,
+     "la_coherence": 0.5809,
+     "le_plus_dense": 1,
+     "les_points_juges": 185
+    },
+    {
+     "le_saut": 4,
+     "les_regions": 1,
+     "les_points_poses": 185,
+     "la_part_posee": 0.7676,
+     "le_pas_median_voxels": 19.5,
+     "la_coherence": 0.5568,
+     "le_plus_dense": -1,
+     "les_points_juges": 137
+    },
+    {
+     "le_saut": 5,
+     "les_regions": 1,
+     "les_points_poses": 137,
+     "la_part_posee": 0.7405,
+     "le_pas_median_voxels": 20.0,
+     "la_coherence": 0.4599,
+     "le_plus_dense": -1,
+     "les_points_juges": 97
+    },
+    {
+     "le_saut": 6,
+     "les_regions": 1,
+     "les_points_poses": 97,
+     "la_part_posee": 0.708,
+     "le_pas_median_voxels": 18.0,
+     "la_coherence": 1.0,
+     "le_plus_dense": 0,
+     "les_points_juges": 62
+    },
+    {
+     "le_saut": 7,
+     "les_regions": 1,
+     "les_points_poses": 46,
+     "la_part_posee": 0.4742,
+     "le_pas_median_voxels": 24.0,
+     "la_coherence": 0.4565,
+     "le_plus_dense": 17,
+     "les_points_juges": 24
+    },
+    {
+     "le_saut": 8,
+     "les_regions": 0,
+     "les_points_poses": 0,
+     "la_part_posee": 0.0,
+     "le_pas_median_voxels": null,
+     "la_coherence": null,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    }
+   ],
+   "le_dernier_saut_qui_tient": 0
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_points_de_depart": 2620,
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "les_regions": 7,
+     "les_points_poses": 1098,
+     "la_part_posee": 0.4191,
+     "le_pas_median_voxels": 32.0,
+     "la_coherence": 0.2204,
+     "le_plus_dense": 21,
+     "les_points_juges": 601
+    },
+    {
+     "le_saut": 2,
+     "les_regions": 5,
+     "les_points_poses": 466,
+     "la_part_posee": 0.4244,
+     "le_pas_median_voxels": 13.0,
+     "la_coherence": 0.633,
+     "le_plus_dense": -1,
+     "les_points_juges": 300
+    },
+    {
+     "le_saut": 3,
+     "les_regions": 1,
+     "les_points_poses": 230,
+     "la_part_posee": 0.4936,
+     "le_pas_median_voxels": 24.0,
+     "la_coherence": 0.3304,
+     "le_plus_dense": -1,
+     "les_points_juges": 172
+    },
+    {
+     "le_saut": 4,
+     "les_regions": 1,
+     "les_points_poses": 170,
+     "la_part_posee": 0.7391,
+     "le_pas_median_voxels": 14.0,
+     "la_coherence": 0.8647,
+     "le_plus_dense": -1,
+     "les_points_juges": 120
+    },
+    {
+     "le_saut": 5,
+     "les_regions": 1,
+     "les_points_poses": 119,
+     "la_part_posee": 0.7,
+     "le_pas_median_voxels": 21.5,
+     "la_coherence": 0.5294,
+     "le_plus_dense": -1,
+     "les_points_juges": 75
+    },
+    {
+     "le_saut": 6,
+     "les_regions": 1,
+     "les_points_poses": 55,
+     "la_part_posee": 0.4622,
+     "le_pas_median_voxels": 12.0,
+     "la_coherence": 1.0,
+     "le_plus_dense": 10,
+     "les_points_juges": 27
+    },
+    {
+     "le_saut": 7,
+     "les_regions": 1,
+     "les_points_poses": 27,
+     "la_part_posee": 0.4909,
+     "le_pas_median_voxels": 14.0,
+     "la_coherence": 1.0,
+     "le_plus_dense": 8,
+     "les_points_juges": 10
+    },
+    {
+     "le_saut": 8,
+     "les_regions": 0,
+     "les_points_poses": 0,
+     "la_part_posee": 0.0,
+     "le_pas_median_voxels": null,
+     "la_coherence": null,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    }
+   ],
+   "le_dernier_saut_qui_tient": 0
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_points_de_depart": 2190,
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "les_regions": 7,
+     "les_points_poses": 556,
+     "la_part_posee": 0.2539,
+     "le_pas_median_voxels": 38.5,
+     "la_coherence": 0.1097,
+     "le_plus_dense": 1,
+     "les_points_juges": 309
+    },
+    {
+     "le_saut": 2,
+     "les_regions": 2,
+     "les_points_poses": 250,
+     "la_part_posee": 0.4496,
+     "le_pas_median_voxels": 13.0,
+     "la_coherence": 0.736,
+     "le_plus_dense": 0,
+     "les_points_juges": 152
+    },
+    {
+     "le_saut": 3,
+     "les_regions": 1,
+     "les_points_poses": 124,
+     "la_part_posee": 0.496,
+     "le_pas_median_voxels": 26.0,
+     "la_coherence": 0.9919,
+     "le_plus_dense": -1,
+     "les_points_juges": 69
+    },
+    {
+     "le_saut": 4,
+     "les_regions": 1,
+     "les_points_poses": 69,
+     "la_part_posee": 0.5565,
+     "le_pas_median_voxels": 17.0,
+     "la_coherence": 0.6667,
+     "le_plus_dense": 8,
+     "les_points_juges": 24
+    },
+    {
+     "le_saut": 5,
+     "les_regions": 1,
+     "les_points_poses": 23,
+     "la_part_posee": 0.3333,
+     "le_pas_median_voxels": 38.5,
+     "la_coherence": 1.0,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    },
+    {
+     "le_saut": 6,
+     "les_regions": 0,
+     "les_points_poses": 0,
+     "la_part_posee": 0.0,
+     "le_pas_median_voxels": null,
+     "la_coherence": null,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    }
+   ],
+   "le_dernier_saut_qui_tient": 0
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_points_de_depart": 2190,
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "les_regions": 6,
+     "les_points_poses": 1525,
+     "la_part_posee": 0.6963,
+     "le_pas_median_voxels": 18.0,
+     "la_coherence": 0.8249,
+     "le_plus_dense": 9,
+     "les_points_juges": 1165
+    },
+    {
+     "le_saut": 2,
+     "les_regions": 2,
+     "les_points_poses": 1102,
+     "la_part_posee": 0.7226,
+     "le_pas_median_voxels": 19.5,
+     "la_coherence": 0.6298,
+     "le_plus_dense": 9,
+     "les_points_juges": 864
+    },
+    {
+     "le_saut": 3,
+     "les_regions": 2,
+     "les_points_poses": 809,
+     "la_part_posee": 0.7341,
+     "le_pas_median_voxels": 12.0,
+     "la_coherence": 0.7874,
+     "le_plus_dense": 7,
+     "les_points_juges": 581
+    },
+    {
+     "le_saut": 4,
+     "les_regions": 4,
+     "les_points_poses": 570,
+     "la_part_posee": 0.7046,
+     "le_pas_median_voxels": 19.0,
+     "la_coherence": 0.6632,
+     "le_plus_dense": 13,
+     "les_points_juges": 379
+    },
+    {
+     "le_saut": 5,
+     "les_regions": 3,
+     "les_points_poses": 368,
+     "la_part_posee": 0.6456,
+     "le_pas_median_voxels": 13.0,
+     "la_coherence": 0.8207,
+     "le_plus_dense": 1,
+     "les_points_juges": 225
+    },
+    {
+     "le_saut": 6,
+     "les_regions": 2,
+     "les_points_poses": 199,
+     "la_part_posee": 0.5408,
+     "le_pas_median_voxels": 15.5,
+     "la_coherence": 0.8693,
+     "le_plus_dense": 0,
+     "les_points_juges": 114
+    },
+    {
+     "le_saut": 7,
+     "les_regions": 1,
+     "les_points_poses": 83,
+     "la_part_posee": 0.4171,
+     "le_pas_median_voxels": 11.5,
+     "la_coherence": 0.8434,
+     "le_plus_dense": 3,
+     "les_points_juges": 44
+    },
+    {
+     "le_saut": 8,
+     "les_regions": 1,
+     "les_points_poses": 44,
+     "la_part_posee": 0.5301,
+     "le_pas_median_voxels": 19.75,
+     "la_coherence": 0.9773,
+     "le_plus_dense": 16,
+     "les_points_juges": 22
+    },
+    {
+     "le_saut": 9,
+     "les_regions": 1,
+     "les_points_poses": 22,
+     "la_part_posee": 0.5,
+     "le_pas_median_voxels": 13.5,
+     "la_coherence": 1.0,
+     "le_plus_dense": 3,
+     "les_points_juges": 7
+    },
+    {
+     "le_saut": 10,
+     "les_regions": 0,
+     "les_points_poses": 0,
+     "la_part_posee": 0.0,
+     "le_pas_median_voxels": null,
+     "la_coherence": null,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    }
+   ],
+   "le_dernier_saut_qui_tient": 0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_points_de_depart": 3071,
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "les_regions": 4,
+     "les_points_poses": 1398,
+     "la_part_posee": 0.4552,
+     "le_pas_median_voxels": 14.5,
+     "la_coherence": 0.1731,
+     "le_plus_dense": -15,
+     "les_points_juges": 829
+    },
+    {
+     "le_saut": 2,
+     "les_regions": 5,
+     "les_points_poses": 681,
+     "la_part_posee": 0.4871,
+     "le_pas_median_voxels": 15.5,
+     "la_coherence": 0.5507,
+     "le_plus_dense": 0,
+     "les_points_juges": 377
+    },
+    {
+     "le_saut": 3,
+     "les_regions": 5,
+     "les_points_poses": 318,
+     "la_part_posee": 0.467,
+     "le_pas_median_voxels": 11.0,
+     "la_coherence": 0.4843,
+     "le_plus_dense": -2,
+     "les_points_juges": 153
+    },
+    {
+     "le_saut": 4,
+     "les_regions": 3,
+     "les_points_poses": 124,
+     "la_part_posee": 0.3899,
+     "le_pas_median_voxels": 16.0,
+     "la_coherence": 0.4274,
+     "le_plus_dense": 2,
+     "les_points_juges": 58
+    },
+    {
+     "le_saut": 5,
+     "les_regions": 2,
+     "les_points_poses": 50,
+     "la_part_posee": 0.4032,
+     "le_pas_median_voxels": 4.25,
+     "la_coherence": 0.54,
+     "le_plus_dense": 5,
+     "les_points_juges": 24
+    },
+    {
+     "le_saut": 6,
+     "les_regions": 1,
+     "les_points_poses": 22,
+     "la_part_posee": 0.44,
+     "le_pas_median_voxels": 1.0,
+     "la_coherence": 0.9545,
+     "le_plus_dense": 21,
+     "les_points_juges": 4
+    },
+    {
+     "le_saut": 7,
+     "les_regions": 0,
+     "les_points_poses": 0,
+     "la_part_posee": 0.0,
+     "le_pas_median_voxels": null,
+     "la_coherence": null,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    }
+   ],
+   "le_dernier_saut_qui_tient": 0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_points_de_depart": 3071,
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "les_regions": 9,
+     "les_points_poses": 1147,
+     "la_part_posee": 0.3735,
+     "le_pas_median_voxels": 20.0,
+     "la_coherence": 0.4891,
+     "le_plus_dense": 0,
+     "les_points_juges": 584
+    },
+    {
+     "le_saut": 2,
+     "les_regions": 5,
+     "les_points_poses": 462,
+     "la_part_posee": 0.4028,
+     "le_pas_median_voxels": 17.5,
+     "la_coherence": 0.5736,
+     "le_plus_dense": 1,
+     "les_points_juges": 254
+    },
+    {
+     "le_saut": 3,
+     "les_regions": 2,
+     "les_points_poses": 216,
+     "la_part_posee": 0.4675,
+     "le_pas_median_voxels": 10.5,
+     "la_coherence": 0.4491,
+     "le_plus_dense": 1,
+     "les_points_juges": 124
+    },
+    {
+     "le_saut": 4,
+     "les_regions": 1,
+     "les_points_poses": 123,
+     "la_part_posee": 0.5694,
+     "le_pas_median_voxels": 0.5,
+     "la_coherence": 0.9837,
+     "le_plus_dense": 1,
+     "les_points_juges": 46
+    },
+    {
+     "le_saut": 5,
+     "les_regions": 0,
+     "les_points_poses": 0,
+     "la_part_posee": 0.0,
+     "le_pas_median_voxels": null,
+     "la_coherence": null,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    }
+   ],
+   "le_dernier_saut_qui_tient": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_points_de_depart": 2861,
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "les_regions": 6,
+     "les_points_poses": 1005,
+     "la_part_posee": 0.3513,
+     "le_pas_median_voxels": 15.0,
+     "la_coherence": 0.604,
+     "le_plus_dense": -3,
+     "les_points_juges": 484
+    },
+    {
+     "le_saut": 2,
+     "les_regions": 5,
+     "les_points_poses": 289,
+     "la_part_posee": 0.2876,
+     "le_pas_median_voxels": 17.0,
+     "la_coherence": 0.5882,
+     "le_plus_dense": -20,
+     "les_points_juges": 120
+    },
+    {
+     "le_saut": 3,
+     "les_regions": 1,
+     "les_points_poses": 111,
+     "la_part_posee": 0.3841,
+     "le_pas_median_voxels": 13.0,
+     "la_coherence": 0.8559,
+     "le_plus_dense": 0,
+     "les_points_juges": 51
+    },
+    {
+     "le_saut": 4,
+     "les_regions": 1,
+     "les_points_poses": 45,
+     "la_part_posee": 0.4054,
+     "le_pas_median_voxels": 26.5,
+     "la_coherence": 0.2889,
+     "le_plus_dense": -11,
+     "les_points_juges": 11
+    },
+    {
+     "le_saut": 5,
+     "les_regions": 0,
+     "les_points_poses": 0,
+     "la_part_posee": 0.0,
+     "le_pas_median_voxels": null,
+     "la_coherence": null,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    }
+   ],
+   "le_dernier_saut_qui_tient": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_points_de_depart": 2861,
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "les_regions": 4,
+     "les_points_poses": 1020,
+     "la_part_posee": 0.3565,
+     "le_pas_median_voxels": 22.0,
+     "la_coherence": 0.4961,
+     "le_plus_dense": -1,
+     "les_points_juges": 515
+    },
+    {
+     "le_saut": 2,
+     "les_regions": 2,
+     "les_points_poses": 328,
+     "la_part_posee": 0.3216,
+     "le_pas_median_voxels": 19.5,
+     "la_coherence": 0.7896,
+     "le_plus_dense": -17,
+     "les_points_juges": 152
+    },
+    {
+     "le_saut": 3,
+     "les_regions": 3,
+     "les_points_poses": 119,
+     "la_part_posee": 0.3628,
+     "le_pas_median_voxels": 15.0,
+     "la_coherence": 0.7059,
+     "le_plus_dense": -1,
+     "les_points_juges": 40
+    },
+    {
+     "le_saut": 4,
+     "les_regions": 0,
+     "les_points_poses": 0,
+     "la_part_posee": 0.0,
+     "le_pas_median_voxels": null,
+     "la_coherence": null,
+     "le_plus_dense": null,
+     "les_points_juges": 0
+    }
+   ],
+   "le_dernier_saut_qui_tient": 0
+  }
+ ],
+ "les_morceaux": {
+  "combien": 225
+ },
+ "le_verdict": {
+  "decidable": true,
+  "H": 0,
+  "les_derniers": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "lissue": "la chaîne qui n'étend que ce qu'elle voit ne tient pas dès le premier saut sur plus de la moitié des 10 côtés"
+ },
+ "les_secondes": 2.8
+}

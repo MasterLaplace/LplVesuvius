@@ -3336,6 +3336,21 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 318 : UNE CHAÎNE QUI N'ÉTEND QUE CE QU'ELLE VOIT TIENT-ELLE
+    s318 = _source(racine, "une_chaine_qui_netend_que_ce_quelle_voit_tient_elle.json")
+    if s318.exists():
+        d = json.loads(s318.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 318", d["le_verdict"]["lissue"].upper())]
+        for c in d["les_cotes"]:
+            s1 = c["les_sauts"][0]
+            nv = sum(1 for x_ in c["les_sauts"] if x_["les_points_poses"])
+            ecrits.append((f"la graine {c['le_rang']} côté {c['le_cote']} de 318",
+                           f"| {c['le_rang']} | {c['le_cote']} | {c['les_points_de_depart']} | {s1['les_regions']} | "
+                           f"{f_(s1['la_part_posee'])} | {f_(s1['le_pas_median_voxels'])} | {f_(s1['la_coherence'])} | "
+                           f"{f_(s1['le_plus_dense'])} | {nv} |"))
+        out.extend((nom, [x_], s318.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 317 : LES POINTS QUE M7 N'APPUIE PAS SONT-ILS AU CŒUR D'UNE FEUILLE
     s317 = _source(racine, "les_points_que_m7_nappuie_pas_sont_ils_au_coeur_dune_feuille.json")
     if s317.exists():

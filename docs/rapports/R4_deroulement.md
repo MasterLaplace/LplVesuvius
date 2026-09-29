@@ -4447,6 +4447,12 @@ points que `m7` appuie, pas la spire : réserves sur `R4-F491` et `R4-F496`. `R4
 fenêtre, aux pas de 16, 20 et 24 ; les points appuyés restent au plus dense** — `R4-F498`. La chaîne n'est une pile de feuilles que
 là où `m7` la porte, 15 à 16 % des points au seizième saut. `R4-P115` s'ouvre.
 
+**`318` · 2026-09-29 · une chaîne qui n'étend que ce qu'elle voit tient-elle** — `R4-P115`
+
+⭐⭐⭐⭐⭐ **Non : sans le vote, ne posant que ce que `m7` voit, la chaîne ne tient sur aucun côté ; ses régions ne s'accordent pas
+sur le pas dès le premier saut, et elle se vide en trois à neuf sauts** — `R4-F499`. `m7` est juste là où il voit, mais il manque trop
+de feuilles pour qu'une chaîne ne tienne que par lui. `R4-P116` s'ouvre : le scan montre-t-il ce que `m7` manque ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

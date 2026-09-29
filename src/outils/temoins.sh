@@ -1773,6 +1773,8 @@ run "le pas de la chaine vient-il de m7 ou du pas par defaut" uv run python "$RO
 run "figure le pas de la chaine vient-il de m7 ou du pas par defaut" uv run python "$ROOT/src/figures/figure_le_pas_de_la_chaine_vient_il_de_m7_ou_du_pas_par_defaut.py" --verifier
 run "les points que m7 n appuie pas sont-ils au coeur d une feuille" uv run python "$ROOT/src/nappe/les_points_que_m7_nappuie_pas_sont_ils_au_coeur_dune_feuille.py" --verifier
 run "figure les points que m7 n appuie pas sont-ils au coeur d une feuille" uv run python "$ROOT/src/figures/figure_les_points_que_m7_nappuie_pas_sont_ils_au_coeur_dune_feuille.py" --verifier
+run "une chaine qui n etend que ce qu elle voit tient-elle" uv run python "$ROOT/src/nappe/une_chaine_qui_netend_que_ce_quelle_voit_tient_elle.py" --verifier
+run "figure une chaine qui n etend que ce qu elle voit tient-elle" uv run python "$ROOT/src/figures/figure_une_chaine_qui_netend_que_ce_quelle_voit_tient_elle.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
