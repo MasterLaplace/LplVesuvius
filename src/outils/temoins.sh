@@ -1813,6 +1813,8 @@ run "pourquoi aucune chaîne ne retrouve-t-elle le septième tour" uv run python
 run "figure pourquoi aucune chaîne ne retrouve-t-elle le septième tour" uv run python "$ROOT/src/figures/figure_pourquoi_aucune_chaine_ne_retrouve_t_elle_le_septieme_tour.py" --verifier
 run "deux tours publiés voisins se distinguent-ils à un quart de pas" uv run python "$ROOT/src/nappe/deux_tours_publies_voisins_se_distinguent_ils_a_un_quart_de_pas.py" --verifier
 run "figure deux tours publiés voisins se distinguent-ils à un quart de pas" uv run python "$ROOT/src/figures/figure_deux_tours_publies_voisins_se_distinguent_ils_a_un_quart_de_pas.py" --verifier
+run "les surfaces à deux tours passent-elles par la couture" uv run python "$ROOT/src/nappe/les_surfaces_a_deux_tours_passent_elles_par_la_couture.py" --verifier
+run "figure les surfaces à deux tours passent-elles par la couture" uv run python "$ROOT/src/figures/figure_les_surfaces_a_deux_tours_passent_elles_par_la_couture.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

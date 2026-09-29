@@ -4568,6 +4568,12 @@ met en question la lecture « retrouve » à un quart de pas. `R4-P133` s'ouvre.
 l'un de l'autre en médiane autour des graines ; les descentes de `329` à `336` ne sont pas gonflées par leur écart. 12 surfaces de la
 descente retrouvent pourtant deux tours : `R4-P134` s'ouvre.
 
+**`338` · 2026-09-29 · les surfaces à deux tours passent-elles par la couture** — `R4-P134`
+
+⭐⭐⭐ **Par la règle, dix sur douze ; mais la règle ne les sépare pas des surfaces à un tour** — `R4-F524`. Toutes les surfaces comptées sont
+près du bout des tours publiés ; être près du bout ne dit pas qu'une surface traverse la couture. `R4-P135` s'ouvre : aller jusqu'au bout
+de chacun des deux tours.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

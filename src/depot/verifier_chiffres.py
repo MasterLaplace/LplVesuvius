@@ -3336,6 +3336,22 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐ LA TRANCHE 338 : LES SURFACES À DEUX TOURS PASSENT-ELLES PAR LA COUTURE
+    s338 = _source(racine, "les_surfaces_a_deux_tours_passent_elles_par_la_couture.json")
+    if s338.exists():
+        d = json.loads(s338.read_text())
+        un = d["les_surfaces_a_un_tour"]
+        sous = sum(1 for x in un if all(y is not None and y <= 1280.0 for y in x["les_distances_au_bout"].values()))
+        ecrits = [("le verdict de 338", d["le_verdict"]["lissue"].upper()),
+                  ("les surfaces à un tour sous la ligne de 338", f"et {sous} d'entre elles sont sous 1280 voxels")]
+        for x in d["les_surfaces_a_deux_tours"]:
+            a_, b_ = x["les_tours_retrouves"]
+            da, db = x["les_distances_au_bout"][str(a_)], x["les_distances_au_bout"][str(b_)]
+            ecrits.append((f"la surface à deux tours g{x['le_rang']} saut {x['le_saut']} de 338",
+                           f"| {x['le_rang']} | {x['le_saut']} | `5753_{a_}` et `5753_{b_}` | {da:g} | {db:g} | "
+                           f"{'oui' if x['passe_par_la_couture'] else 'non'} |"))
+        out.extend((nom, [x_], s338.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 337 : DEUX TOURS PUBLIÉS VOISINS SE DISTINGUENT-ILS À UN QUART DE PAS
     s337 = _source(racine, "deux_tours_publies_voisins_se_distinguent_ils_a_un_quart_de_pas.json")
     if s337.exists():

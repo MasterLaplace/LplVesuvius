@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**188 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**189 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 150 portes
+## Grand Prize — 151 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -168,7 +168,8 @@
 - **R4-P131** *(le graal)* · **RÉPONDUE par `335` : oui.** Bornée à deux mailles de ses semis, la chaîne relancée depuis sa spire descend six tours publiés sur les huit graines de PHercParis4 sans un saut faux, et tient 3 sauts en médiane sur PHerc0358 contre 1 (`R4-F521`). La suite est `R4-P132`.
 - **R4-P132** *(le référent)* · **RÉPONDUE par `336` : le référent, avec une réserve sur la règle.** Là où la chaîne bornée l'attend, `5753_-7` est plus loin des plages de `m7` que `5753_-6` sur les cinq graines, et aucune septième surface n'est à un quart de pas de lui ; mais les tours publiés consécutifs sont à 0,45 à 0,59 pas nominal l'un de l'autre, ce qui ôte son sens au critère d'écart entre tours (`R4-F522`). La suite est `R4-P133`.
 - **R4-P133** *(le référent)* · **RÉPONDUE par `337` : oui, elle les sépare.** Autour des huit graines, les tours publiés consécutifs sont à 0,53 à 0,93 pas nominal l'un de l'autre, et aucune surface à mi-chemin n'est retrouvée des deux ; les 12 surfaces de la descente qui retrouvent deux tours ne le font pas à cause de leur écart (`R4-F523`). La suite est `R4-P134`.
-- **R4-P134** *(le référent)* · **LES SURFACES DE LA DESCENTE QUI RETROUVENT DEUX TOURS VOISINS PASSENT-ELLES LÀ OÙ UN TOUR PUBLIÉ FINIT ET LE SUIVANT COMMENCE ?** ⭐⭐⭐⭐ C'EST CE QUE `337` DÉSIGNE. Leur écart ne peut pas en être la cause (`R4-F523`) ; elles sont sur les graines 1, 2 et 3, les mêmes autour desquelles `5753_-7` est à plus de deux pas de `5753_-6`, ce qui serait le cas près du bout d'un tour.
+- **R4-P134** *(le référent)* · **RÉPONDUE par `338` : par la règle, oui ; par la mesure, pas établi.** Dix des douze surfaces à deux tours ont leurs deux tours à moins de 1280 voxels de leur bout, mais vingt des trente-six surfaces à un tour aussi (`R4-F524`). La suite est `R4-P135`.
+- **R4-P135** *(le référent)* · **LES SOMMETS POSÉS D'UNE SURFACE À DEUX TOURS VONT-ILS JUSQU'AU BOUT DE CHACUN DE SES DEUX TOURS, LÀ OÙ CEUX D'UNE SURFACE À UN TOUR S'ARRÊTENT AVANT ?** ⭐⭐⭐⭐ C'EST CE QUE `338` DÉSIGNE. Une surface qui traverse la couture est posée sur chacun des deux tours jusqu'à son bout ; la distance médiane de `338` ne le voit pas, toutes les surfaces comptées étant près du bout des tours (`R4-F524`).
 
 ## Progress Prizes — 19 portes
 
