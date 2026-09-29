@@ -3336,6 +3336,52 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐ LA TRANCHE 298 : AU PAS DU PRIX, LA MATIÈRE DIT-ELLE SI UNE SURFACE EST POSÉE SUR SA FEUILLE
+    s298 = _source(racine, "la_matiere_dit_elle_si_la_surface_est_sur_sa_feuille.json")
+    if s298.exists():
+        d = json.loads(s298.read_text())
+        f_ = lambda x: "—" if x is None else str(x).replace(".", ",").replace("-", "−")  # noqa: E731
+        f2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        sg = lambda n: f"+{n}" if n > 0 else f_(n)  # noqa: E731
+        e_, r_ = d["letalonnage"], d["le_rouleau"]
+        cols = ("le_segment", "saut_1", "saut_2", "saut_3", "saut_4", "decale_dun_demi_pas", "rampe_douce", "rampe_raide")
+        noms = ("tracé humain", "saut 1", "saut 2", "saut 3", "saut 4", "décalé ½ pas", "rampe 14°", "rampe 45°")
+        m_ = d["les_morceaux_sur_disque"]
+        s24 = r_["les_details"]["la_surface_de_24"]
+        ecrits = [("le titre de 298", f"le tracé humain est noté {f2(e_['reunis']['le_segment'])}, ses deux rampes "
+                                      f"{f2(e_['reunis']['rampe_douce'])} et {f2(e_['reunis']['rampe_raide'])}"),
+                  ("le seuil de 298", f"Le seuil vaut τ = **{f_(e_['le_verdict']['le_seuil'])}**"),
+                  ("les points de 298", f"Chaque surface a **{e_['les_details']['le_segment']['les_points_juges']}** points "
+                                        f"jugés, chaque défaut **{e_['les_details']['rampe_douce']['les_points_juges']}**"),
+                  ("les réunis de 298", "| **réunis** | " + " | ".join(f"**{f_(e_['reunis'][c])}**" for c in cols) + " |"),
+                  ("le vide de PHerc0358 dans 298",
+                   f"**{s24['sans_matiere']}** des **{s24['les_points_juges'] + s24['sans_matiere'] + s24['hors_du_volume']}**"
+                   " points de la surface de `24`"),
+                  ("les morceaux absents de 298", f"(**{m_['PHerc0358']['absents']}** des **{m_['PHerc0358']['demandes']}**"),
+                  ("la surface de 24 dans 298", f"Sur les **{s24['les_points_juges']}** autres, la note vaut "
+                                               f"**{f_(s24['la_note'])}** et le profil moyen a une amplitude de "
+                                               f"**{f_(s24['le_relief_du_profil']['lamplitude'])}**"),
+                  ("les rampes de PHerc0358 dans 298",
+                   f"({f_(r_['les_details']['rampe_douce']['le_relief_du_profil']['lamplitude'])} et "
+                   f"{f_(r_['les_details']['rampe_raide']['le_relief_du_profil']['lamplitude'])})"),
+                  ("les croisements de 298", f"tombent dans **{r_['les_croisements_de_24']['les_pieces_touchees']}** pièces"),
+                  ("les morceaux de 298", f"**{m_['PHercParis4']['demandes']}** morceaux de PHercParis4 au niveau 2")]
+        for b in e_["les_blocs"]:
+            ecrits.append((f"le bloc {b['le_bloc'][0]}_{b['le_bloc'][1]} de 298",
+                           f"| `{b['le_bloc'][0]}_{b['le_bloc'][1]}` | " + " | ".join(f_(b[c]) for c in cols) + " |"))
+        for c, nom in zip(cols, noms):
+            rl = e_["les_details"][c]["le_relief_du_profil"]
+            plat = c in ("rampe_douce", "rampe_raide")
+            ecrits.append((f"le profil moyen « {nom} » de 298",
+                           f"| {nom} | {f_(rl['lamplitude'])} | {'—' if plat else sg(rl['le_plus_dense'])} | "
+                           f"{'—' if plat else sg(rl['le_plus_creux'])} | {f_(rl['au_point'])} |"))
+        for h in ("1", "2"):
+            j_ = e_["sous_le_juge_de_248"][f"saut_{h}"]
+            ecrits.append((f"le saut {h} sous le juge de 248 dans 298",
+                           f"| {h} | {f_(j_['juste']['la_note'])} | {j_['juste']['les_points']} | "
+                           f"{f_(j_['rate']['la_note'])} | {j_['rate']['les_points']} |"))
+        out.extend((nom, [x_], s298.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐ LA TRANCHE 294 : QUATRE VOISINS SUR LA RANGÉE
     s294 = _source(racine, "quatre_voisins_sur_la_rangee_rendent_ils_son_gain_a_la_bande.json")
     # ⚠ Cherchée hors du `if` : le registre des sources doit compter la même chose sur un arbre vide.

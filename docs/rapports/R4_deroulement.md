@@ -4309,6 +4309,15 @@ vis-à-vis sont corrélées à 0,8749, contre 0,1761, 0,0016 et 0,2914 pour ses 
 saut précédent : le troisième témoin ne départage plus, et ce saut n'est pas établi. Le quatrième n'est pas vu. `R4-P97` s'ouvre :
 ce qui dit qu'un saut a avancé là où le segment ne repasse plus qu'une fois.
 
+**`298` · 2026-09-29 · au pas du prix, la matière dit-elle si une surface est sur sa feuille** — #5, `R4-P16`, `R4-P17`
+
+⭐⭐⭐ **Au pas du prix (9,6 µm), la place d'une surface dans le profil du scan le long de sa normale ne sépare pas le tracé humain
+des défauts plantés dans ses propres points : 0,5308 contre 0,5038 et 0,5077 pour deux rampes qui traversent l'empilement** —
+`R4-F479`. Le profil moyen dit pourquoi : le tracé suit sa feuille (amplitude 0,74 contre 0,1 et 0,13), mais il est posé sur sa
+face, à 3 pas de ce qu'elle a de plus dense. Le rouleau du prix, PHerc0358, n'est pas jugé ; les deux tiers de sa première surface
+sont dans le vide masqué. La liste des juges sans référent est écrite, avec ce qui ferait échouer chacun. `R4-P98` s'ouvre :
+l'alignement des profils, déclaré avant d'être mesuré, sur des surfaces qu'on n'a pas vues.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

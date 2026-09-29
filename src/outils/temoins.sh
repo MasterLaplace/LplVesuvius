@@ -1733,6 +1733,8 @@ run "le tour produit porte-t-il le texte du segment" uv run python "$ROOT/src/na
 run "figure le tour produit porte-t-il le texte du segment" uv run python "$ROOT/src/figures/figure_le_tour_produit_porte_t_il_le_texte_du_segment.py" --verifier
 run "le texte suit-il la chaine au-dela du premier saut" uv run python "$ROOT/src/nappe/le_texte_suit_il_la_chaine_au_dela_du_premier_saut.py" --verifier
 run "figure le texte suit-il la chaine au-dela du premier saut" uv run python "$ROOT/src/figures/figure_le_texte_suit_il_la_chaine_au_dela_du_premier_saut.py" --verifier
+run "la matiere dit-elle si la surface est sur sa feuille" uv run python "$ROOT/src/nappe/la_matiere_dit_elle_si_la_surface_est_sur_sa_feuille.py" --verifier
+run "figure la matiere dit-elle si la surface est sur sa feuille" uv run python "$ROOT/src/figures/figure_la_matiere_dit_elle_si_la_surface_est_sur_sa_feuille.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
