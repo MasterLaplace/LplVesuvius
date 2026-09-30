@@ -1,0 +1,3144 @@
+{
+ "la_question": "Sur PHercParis4, graines 4 à 8, une chaîne qui regrandit sa spire tenue d'une seule maille au lieu de deux rend-elle de la surface sans faire naître le décalage ?",
+ "les_constantes": {
+  "la_marge_en_mailles": 1
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHercParis4": {
+   "lus": 13661,
+   "absents": 0,
+   "octets": 6234386632
+  }
+ },
+ "le_controle": true,
+ "les_cotes": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1405,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 529,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 440
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 523,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 440
+      },
+      "la_gardee": {
+       "": 433
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 541,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 433
+      },
+      "la_gardee": {
+       "": 456
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 519,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 456
+      },
+      "la_gardee": {
+       "": 434
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 520,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 434
+      },
+      "la_gardee": {
+       "": 434
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 534,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 434
+      },
+      "la_gardee": {
+       "": 446
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 480,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 446
+      },
+      "la_gardee": {
+       "": 403
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 916,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 778
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 553,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 778
+      },
+      "la_gardee": {
+       "0": 450
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 482,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 1,
+     "au_dela": 0,
+     "les_points_poses": 385,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "le_depart": {
+       "0": 450
+      },
+      "la_gardee": {
+       "-1,0": 384,
+       "0": 1
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 427,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-1,0": 384,
+       "0": 1
+      },
+      "la_gardee": {
+       "-2": 102,
+       "-2,-1": 235
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 394,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 305,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "le_depart": {
+       "-2": 102,
+       "-2,-1": 235
+      },
+      "la_gardee": {
+       "-3,-2": 305
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 375,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-3,-2": 305
+      },
+      "la_gardee": {
+       "-4,-3": 301
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 364,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-4,-3": 301
+      },
+      "la_gardee": {
+       "-5": 1,
+       "-5,-4": 290
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 365,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-5": 1,
+       "-5,-4": 290
+      },
+      "la_gardee": {
+       "-6": 15,
+       "-6,-5": 274
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1034,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1033
+      },
+      "la_gardee": {
+       "": 875
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 889,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 875
+      },
+      "la_gardee": {
+       "": 750
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 915,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 750
+      },
+      "la_gardee": {
+       "": 788
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 953,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 788
+      },
+      "la_gardee": {
+       "": 827
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 901,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 827
+      },
+      "la_gardee": {
+       "": 785
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 860,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 785
+      },
+      "la_gardee": {
+       "": 749
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 727,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 749
+      },
+      "la_gardee": {
+       "": 617
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 650,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 617
+      },
+      "la_gardee": {
+       "": 542
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 828,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1033
+      },
+      "la_gardee": {
+       "0": 658
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 735,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 14,
+     "au_dela": 0,
+     "les_points_poses": 594,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "le_depart": {
+       "0": 658
+      },
+      "la_gardee": {
+       "-1,0": 580,
+       "0": 14
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 708,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-1,0": 580,
+       "0": 14
+      },
+      "la_gardee": {
+       "-2,-1": 572
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 459,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-2,-1": 572
+      },
+      "la_gardee": {
+       "-3,-2": 364
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "les_points": 232,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-3,-2": 364
+      },
+      "la_gardee": {
+       "-4,-3": 181
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 179,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-4,-3": 181
+      },
+      "la_gardee": {
+       "-5,-4": 131
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 506,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-5,-4": 131
+      },
+      "la_gardee": {
+       "": 4,
+       "-5": 3,
+       "-6": 8,
+       "-6,-5": 328
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 343,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 274,
+     "au_dela": 0,
+     "les_points_poses": 274,
+     "le_tour_de_depart": -6,
+     "en_plus": {
+      "le_depart": {
+       "": 4,
+       "-5": 3,
+       "-6": 8,
+       "-6,-5": 328
+      },
+      "la_gardee": {
+       "-6": 274
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 491,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 0,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "le_depart": {
+       "0": 1200
+      },
+      "la_gardee": {
+       "": 407
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 456,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 407
+      },
+      "la_gardee": {
+       "": 377
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 491,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 377
+      },
+      "la_gardee": {
+       "": 411
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 555,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 411
+      },
+      "la_gardee": {
+       "": 470
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 466,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 470
+      },
+      "la_gardee": {
+       "": 387
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 506,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 387
+      },
+      "la_gardee": {
+       "": 428
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 536,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 428
+      },
+      "la_gardee": {
+       "": 455
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 543,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 455
+      },
+      "la_gardee": {
+       "": 464
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 1133,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 9,
+     "au_dela": 0,
+     "les_points_poses": 971,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "le_depart": {
+       "0": 1200
+      },
+      "la_gardee": {
+       "-1,0": 962,
+       "0": 9
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 998,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-1,0": 962,
+       "0": 9
+      },
+      "la_gardee": {
+       "": 3,
+       "-1,0": 1,
+       "-2": 29,
+       "-2,-1": 821
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 784,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 632,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "le_depart": {
+       "": 3,
+       "-1,0": 1,
+       "-2": 29,
+       "-2,-1": 821
+      },
+      "la_gardee": {
+       "-3,-2": 632
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 896,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-3,-2": 632
+      },
+      "la_gardee": {
+       "-1,0": 7,
+       "-3,-2,-1": 3,
+       "-4,-3": 532,
+       "-5,-4": 3
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 506,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-1,0": 7,
+       "-3,-2,-1": 3,
+       "-4,-3": 532,
+       "-5,-4": 3
+      },
+      "la_gardee": {
+       "-5,-4": 419
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 488,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-5,-4": 419
+      },
+      "la_gardee": {
+       "-5": 2,
+       "-6": 50,
+       "-6,-5": 345
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 376,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 260,
+     "au_dela": 0,
+     "les_points_poses": 260,
+     "le_tour_de_depart": -6,
+     "en_plus": {
+      "le_depart": {
+       "-5": 2,
+       "-6": 50,
+       "-6,-5": 345
+      },
+      "la_gardee": {
+       "": 19,
+       "-6": 258,
+       "-6,-5": 2
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 269,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 19,
+       "-6": 258,
+       "-6,-5": 2
+      },
+      "la_gardee": {
+       "": 206
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2954,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1144,
+       "0": 56
+      },
+      "la_gardee": {
+       "": 1151,
+       "0": 49
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3666,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1151,
+       "0": 49
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3267,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 2568,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3759,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 2941,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2130,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3131,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 2111,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1144,
+       "0": 56
+      },
+      "la_gardee": {
+       "": 24,
+       "-1,0": 29,
+       "0": 1147
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 2015,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 26,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "le_depart": {
+       "": 24,
+       "-1,0": 29,
+       "0": 1147
+      },
+      "la_gardee": {
+       "-1": 1174,
+       "0": 26
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1943,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 32,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -1,
+     "en_plus": {
+      "le_depart": {
+       "-1": 1174,
+       "0": 26
+      },
+      "la_gardee": {
+       "-1": 32,
+       "-2": 1168
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1858,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 19,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "le_depart": {
+       "-1": 32,
+       "-2": 1168
+      },
+      "la_gardee": {
+       "-2": 19,
+       "-3": 1169,
+       "-3,-2": 12
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1786,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "le_depart": {
+       "-2": 19,
+       "-3": 1169,
+       "-3,-2": 12
+      },
+      "la_gardee": {
+       "-4": 1160,
+       "-4,-3": 40
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1589,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 2,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -4,
+     "en_plus": {
+      "le_depart": {
+       "-4": 1160,
+       "-4,-3": 40
+      },
+      "la_gardee": {
+       "-4": 2,
+       "-5": 1195,
+       "-5,-4": 3
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1466,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 3,
+     "au_dela": 2,
+     "les_points_poses": 1181,
+     "le_tour_de_depart": -5,
+     "en_plus": {
+      "le_depart": {
+       "-4": 2,
+       "-5": 1195,
+       "-5,-4": 3
+      },
+      "la_gardee": {
+       "": 19,
+       "-5": 3,
+       "-6": 1120,
+       "-7": 2,
+       "-7,-6": 56
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1045,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 0,
+     "le_tour_de_depart": -6,
+     "en_plus": {
+      "le_depart": {
+       "": 19,
+       "-5": 3,
+       "-6": 1120,
+       "-7": 2,
+       "-7,-6": 56
+      },
+      "la_gardee": {
+       "": 870
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1258,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 750,
+       "-1": 50,
+       "-1,0": 6,
+       "0": 394
+      },
+      "la_gardee": {
+       "": 853,
+       "0": 39
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2948,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 853,
+       "0": 39
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "les_points": 2222,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3680,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3868,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3186,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1194,
+       "0": 6
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3669,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1194,
+       "0": 6
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 2904,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1526,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 750,
+       "-1": 50,
+       "-1,0": 6,
+       "0": 394
+      },
+      "la_gardee": {
+       "": 5,
+       "-1,0": 400,
+       "0": 795
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1487,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1183,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "le_depart": {
+       "": 5,
+       "-1,0": 400,
+       "0": 795
+      },
+      "la_gardee": {
+       "": 17,
+       "-1": 1183
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1419,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -1,
+     "en_plus": {
+      "le_depart": {
+       "": 17,
+       "-1": 1183
+      },
+      "la_gardee": {
+       "-2": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1231,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1092,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "le_depart": {
+       "-2": 1200
+      },
+      "la_gardee": {
+       "-3": 674,
+       "-3,-2": 418
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1122,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 993,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "le_depart": {
+       "-3": 674,
+       "-3,-2": 418
+      },
+      "la_gardee": {
+       "-4": 979,
+       "-4,-3": 14
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 992,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 853,
+     "le_tour_de_depart": -4,
+     "en_plus": {
+      "le_depart": {
+       "-4": 979,
+       "-4,-3": 14
+      },
+      "la_gardee": {
+       "": 12,
+       "-5": 841,
+       "-5,-4": 12
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 891,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 17,
+     "au_dela": 0,
+     "les_points_poses": 715,
+     "le_tour_de_depart": -5,
+     "en_plus": {
+      "le_depart": {
+       "": 12,
+       "-5": 841,
+       "-5,-4": 12
+      },
+      "la_gardee": {
+       "": 41,
+       "-5": 17,
+       "-6": 664,
+       "-6,-5": 34
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 1574,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 0,
+     "le_tour_de_depart": -6,
+     "en_plus": {
+      "le_depart": {
+       "": 41,
+       "-5": 17,
+       "-6": 664,
+       "-6,-5": 34
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1416,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 499,
+     "au_dela": 0,
+     "les_points_poses": 564,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "le_depart": {
+       "": 183,
+       "-1,0": 307,
+       "0": 710
+      },
+      "la_gardee": {
+       "": 636,
+       "-1": 65,
+       "-1,0": 14,
+       "0": 485
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2452,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 636,
+       "-1": 65,
+       "-1,0": 14,
+       "0": 485
+      },
+      "la_gardee": {
+       "": 1094,
+       "-1": 6,
+       "-1,0": 22,
+       "0": 78
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1342,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1094,
+       "-1": 6,
+       "-1,0": 22,
+       "0": 78
+      },
+      "la_gardee": {
+       "": 973
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 986,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 973
+      },
+      "la_gardee": {
+       "": 725
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 627,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 725
+      },
+      "la_gardee": {
+       "": 438
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3105,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 438
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2968,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3675,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1535,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 1,
+     "au_dela": 0,
+     "les_points_poses": 1176,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "le_depart": {
+       "": 183,
+       "-1,0": 307,
+       "0": 710
+      },
+      "la_gardee": {
+       "": 24,
+       "-1": 1175,
+       "0": 1
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1468,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 27,
+     "les_points_poses": 1199,
+     "le_tour_de_depart": -1,
+     "en_plus": {
+      "le_depart": {
+       "": 24,
+       "-1": 1175,
+       "0": 1
+      },
+      "la_gardee": {
+       "": 1,
+       "-2": 1170,
+       "-3": 27,
+       "-3,-2": 2
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1343,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 29,
+     "les_points_poses": 1186,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "le_depart": {
+       "": 1,
+       "-2": 1170,
+       "-3": 27,
+       "-3,-2": 2
+      },
+      "la_gardee": {
+       "-3": 689,
+       "-3,-2": 457,
+       "-4": 29,
+       "-4,-3": 11
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1247,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 35,
+     "les_points_poses": 1103,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "le_depart": {
+       "-3": 689,
+       "-3,-2": 457,
+       "-4": 29,
+       "-4,-3": 11
+      },
+      "la_gardee": {
+       "-4": 1028,
+       "-4,-3": 24,
+       "-5": 35,
+       "-5,-4": 16
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1180,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 23,
+     "les_points_poses": 1028,
+     "le_tour_de_depart": -4,
+     "en_plus": {
+      "le_depart": {
+       "-4": 1028,
+       "-4,-3": 24,
+       "-5": 35,
+       "-5,-4": 16
+      },
+      "la_gardee": {
+       "": 13,
+       "-5": 977,
+       "-5,-4": 15,
+       "-6": 23,
+       "-6,-5": 13
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 983,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 16,
+     "au_dela": 0,
+     "les_points_poses": 802,
+     "le_tour_de_depart": -5,
+     "en_plus": {
+      "le_depart": {
+       "": 13,
+       "-5": 977,
+       "-5,-4": 15,
+       "-6": 23,
+       "-6,-5": 13
+      },
+      "la_gardee": {
+       "": 38,
+       "-5": 16,
+       "-6": 760,
+       "-6,-5": 26
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 1649,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 0,
+     "le_tour_de_depart": -6,
+     "en_plus": {
+      "le_depart": {
+       "": 38,
+       "-5": 16,
+       "-6": 760,
+       "-6,-5": 26
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 1258,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 946
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1247,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 939
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2953,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 939
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1919,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2845,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1045,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 851
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 879,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 851
+      },
+      "la_gardee": {
+       "": 718
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2227,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 718
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "les_points": 1701,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2797,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 959,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 32,
+       "-1": 117,
+       "0": 645
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 884,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 25,
+     "au_dela": 137,
+     "les_points_poses": 733,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "le_depart": {
+       "": 32,
+       "-1": 117,
+       "0": 645
+      },
+      "la_gardee": {
+       "-1": 571,
+       "-2": 137,
+       "0": 25
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 816,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 17,
+     "au_dela": 153,
+     "les_points_poses": 668,
+     "le_tour_de_depart": -1,
+     "en_plus": {
+      "le_depart": {
+       "-1": 571,
+       "-2": 137,
+       "0": 25
+      },
+      "la_gardee": {
+       "-1": 17,
+       "-2": 498,
+       "-3": 153
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 626,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 10,
+     "au_dela": 164,
+     "les_points_poses": 487,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "le_depart": {
+       "-1": 17,
+       "-2": 498,
+       "-3": 153
+      },
+      "la_gardee": {
+       "-2": 10,
+       "-3": 313,
+       "-4": 164
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "faux : un autre tour",
+     "depuis": "la relance",
+     "les_points": 2001,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 45,
+     "les_points_poses": 1189,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "le_depart": {
+       "-2": 10,
+       "-3": 313,
+       "-4": 164
+      },
+      "la_gardee": {
+       "": 11,
+       "-4": 85,
+       "-5": 41,
+       "-6": 1056,
+       "-6,-5": 4,
+       "-7,-6": 3
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 99,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 50,
+     "le_tour_de_depart": -6,
+     "en_plus": {
+      "le_depart": {
+       "": 11,
+       "-4": 85,
+       "-5": 41,
+       "-6": 1056,
+       "-6,-5": 4,
+       "-7,-6": 3
+      },
+      "la_gardee": {
+       "": 4,
+       "-7": 50
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 306,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 0,
+     "le_tour_de_depart": -7,
+     "en_plus": {
+      "le_depart": {
+       "": 4,
+       "-7": 50
+      },
+      "la_gardee": {
+       "": 239
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 929,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 726
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 848,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 726
+      },
+      "la_gardee": {
+       "": 681
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 794,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 681
+      },
+      "la_gardee": {
+       "": 651
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 784,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 651
+      },
+      "la_gardee": {
+       "": 641
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 777,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 641
+      },
+      "la_gardee": {
+       "": 617
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 773,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 617
+      },
+      "la_gardee": {
+       "": 623
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 673,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 623
+      },
+      "la_gardee": {
+       "": 562
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 685,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 562
+      },
+      "la_gardee": {
+       "": 569
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 1647,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "": 1200
+      },
+      "la_gardee": {
+       "": 1,
+       "0": 1199
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1499,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "le_depart": {
+       "": 1,
+       "0": 1199
+      },
+      "la_gardee": {
+       "-1": 1200
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1228,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1083,
+     "le_tour_de_depart": -1,
+     "en_plus": {
+      "le_depart": {
+       "-1": 1200
+      },
+      "la_gardee": {
+       "-2": 1083
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 836,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 721,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "le_depart": {
+       "-2": 1083
+      },
+      "la_gardee": {
+       "-3": 721
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 686,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 2,
+     "les_points_poses": 565,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "le_depart": {
+       "-3": 721
+      },
+      "la_gardee": {
+       "-4": 563,
+       "-5": 2
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 581,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 485,
+     "le_tour_de_depart": -4,
+     "en_plus": {
+      "le_depart": {
+       "-4": 563,
+       "-5": 2
+      },
+      "la_gardee": {
+       "-5": 485
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 470,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 367,
+     "le_tour_de_depart": -5,
+     "en_plus": {
+      "le_depart": {
+       "-5": 485
+      },
+      "la_gardee": {
+       "-6": 367
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": null,
+     "les_points": 0,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "le_depart": {
+       "-6": 367
+      },
+      "la_gardee": {}
+     }
+    }
+   ]
+  }
+ ],
+ "les_bilans": {
+  "dune_maille": {
+   "les_juges": 28,
+   "les_justes": 27,
+   "les_justes_a_cheval": 3,
+   "j": 0.9643,
+   "c": 0.1111,
+   "la_surface": 1231.0,
+   "la_naissance": {
+    "les_cotes_juges": 5,
+    "ou_il_nait": 1,
+    "dans_la_reference": 1,
+    "apres_elle": 0
+   },
+   "les_suites": [
+    {
+     "le_rang": 4,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      26,
+      32,
+      19,
+      0,
+      2,
+      5,
+      0
+     ],
+     "la_naissance": null
+    },
+    {
+     "le_rang": 5,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      17,
+      0
+     ],
+     "la_naissance": null
+    },
+    {
+     "le_rang": 6,
+     "la_reference": 0,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      1,
+      27,
+      29,
+      35,
+      23,
+      16,
+      0,
+      0
+     ],
+     "la_naissance": null
+    },
+    {
+     "le_rang": 7,
+     "la_reference": 2,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      117,
+      162,
+      170,
+      174,
+      1104,
+      50,
+      0
+     ],
+     "la_naissance": 0
+    },
+    {
+     "le_rang": 8,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      0,
+      0,
+      2,
+      0,
+      0
+     ],
+     "la_naissance": null
+    }
+   ]
+  },
+  "la_chaine_mixte": {
+   "les_juges": 30,
+   "les_justes": 30,
+   "les_justes_a_cheval": 1,
+   "j": 1.0,
+   "c": 0.0333,
+   "la_surface": 980.5,
+   "la_naissance": {
+    "les_cotes_juges": 5,
+    "ou_il_nait": 2,
+    "dans_la_reference": 1,
+    "apres_elle": 1
+   },
+   "les_suites": [
+    {
+     "le_rang": 4,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      18,
+      13,
+      6,
+      0,
+      9,
+      0
+     ],
+     "la_naissance": null
+    },
+    {
+     "le_rang": 5,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      2,
+      2,
+      3,
+      0,
+      0,
+      3,
+      8
+     ],
+     "la_naissance": null
+    },
+    {
+     "le_rang": 6,
+     "la_reference": 0,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      10,
+      984,
+      0
+     ],
+     "la_naissance": 7
+    },
+    {
+     "le_rang": 7,
+     "la_reference": 2,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      76,
+      60,
+      0,
+      0,
+      0,
+      0,
+      466
+     ],
+     "la_naissance": 0
+    },
+    {
+     "le_rang": 8,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      0,
+      12,
+      1,
+      0,
+      0,
+      0
+     ],
+     "la_naissance": null
+    }
+   ]
+  },
+  "de_deux_mailles": {
+   "les_juges": 29,
+   "les_justes": 29,
+   "les_justes_a_cheval": 15,
+   "j": 1.0,
+   "c": 0.5172,
+   "la_surface": 1600.0,
+   "la_naissance": {
+    "les_cotes_juges": 5,
+    "ou_il_nait": 4,
+    "dans_la_reference": 1,
+    "apres_elle": 3
+   },
+   "les_suites": [
+    {
+     "le_rang": 4,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      57,
+      87,
+      57,
+      63,
+      100,
+      24,
+      183
+     ],
+     "la_naissance": 1
+    },
+    {
+     "le_rang": 5,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      0,
+      17,
+      19,
+      41,
+      79,
+      56
+     ],
+     "la_naissance": 6
+    },
+    {
+     "le_rang": 6,
+     "la_reference": 0,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      17,
+      40,
+      74,
+      113,
+      147,
+      91,
+      36,
+      0
+     ],
+     "la_naissance": 3
+    },
+    {
+     "le_rang": 7,
+     "la_reference": 2,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      147,
+      266,
+      216,
+      305,
+      230,
+      125
+     ],
+     "la_naissance": 0
+    },
+    {
+     "le_rang": 8,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      15,
+      10,
+      17,
+      20,
+      4
+     ],
+     "la_naissance": null
+    }
+   ]
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "regrandie d'une maille, la chaîne garde 1231 mailles en médiane sous ses sauts justes, contre 980,5 pour la chaîne mixte, et le décalage naît après la première surface lisible sur 0 côtés, contre 1 sous la chaîne mixte ; oui, elle rend de la surface sans faire naître le décalage"
+ },
+ "les_secondes": 312.4
+}

@@ -1867,6 +1867,8 @@ run "où naît le décalage que la chaîne qui regrandit hérite" uv run python 
 run "figure où naît le décalage que la chaîne qui regrandit hérite" uv run python "$ROOT/src/figures/figure_ou_nait_le_decalage_que_la_chaine_qui_regrandit_herite.py" --verifier
 run "le décalage naît-il après la première surface lisible" uv run python "$ROOT/src/nappe/le_decalage_nait_il_apres_la_premiere_surface_lisible.py" --verifier
 run "figure le décalage naît-il après la première surface lisible" uv run python "$ROOT/src/figures/figure_le_decalage_nait_il_apres_la_premiere_surface_lisible.py" --verifier
+run "regrandir d'une seule maille évite-t-il le décalage" uv run python "$ROOT/src/nappe/regrandir_dune_seule_maille_evite_il_le_decalage.py" --verifier
+run "figure regrandir d'une seule maille évite-t-il le décalage" uv run python "$ROOT/src/figures/figure_regrandir_dune_seule_maille_evite_il_le_decalage.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

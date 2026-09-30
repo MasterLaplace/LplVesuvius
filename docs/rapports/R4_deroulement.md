@@ -4732,6 +4732,12 @@ même question, en prenant pour référence la première surface lisible de chaq
 première surface lisible est propre, la croissance bornée de `335` fait naître le décalage que la chaîne propage. `R4-P162` s'ouvre :
 une croissance d'une seule maille.
 
+**`365` · 2026-09-30 · regrandir d'une seule maille évite-t-il le décalage** — `R4-P162`
+
+⭐⭐⭐⭐⭐ **Oui : 1231 mailles, et le décalage ne naît sur aucun côté** — `R4-F551`. Le décalage suit la marge : une maille rend 26 %
+de surface à la chaîne mixte sans le faire naître ; ce que la chaîne perd, elle le perd sur la graine 7, qui le portait déjà. `R4-P163`
+s'ouvre : la même chaîne sur PHerc0358.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

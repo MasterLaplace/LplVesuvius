@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**216 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**217 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 178 portes
+## Grand Prize — 179 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -196,7 +196,8 @@
 - **R4-P159** *(le graal)* · **RÉPONDUE par `362` : déjà sur un autre.** 4 % des 870 pieds posés sont sur le tour de départ, 605 sur le tour attendu et 230 sur le tour d'avant : la surface de départ était déjà hors de son tour, et le cheval s'hérite (`R4-F548`). La suite est `R4-P160`.
 - **R4-P160** *(le graal)* · **RÉPONDUE par `363` : indécidable par la règle.** Seule la nappe de la graine 6 retrouve un seul tour ; sur son côté moins, la nappe est propre et le décalage naît dans la croissance, 17 puis 40 puis 74 points aux premiers sauts (`R4-F549`). La suite est `R4-P161`.
 - **R4-P161** *(le graal)* · **RÉPONDUE par `364` : il naît dans une croissance après elle.** Sur 3 des 4 côtés où il naît, la première surface lisible est propre et la croissance le fait naître ; sur la graine 7, la référence le porte déjà (`R4-F550`). La suite est `R4-P162`.
-- **R4-P162** *(le graal)* · **SUR PHERCPARIS4, GRAINES 4 À 8, UNE CHAÎNE QUI REGRANDIT SA SPIRE TENUE D'UNE SEULE MAILLE AU LIEU DE DEUX REND-ELLE DE LA SURFACE SANS FAIRE NAÎTRE LE DÉCALAGE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `364` DÉSIGNE. La croissance bornée à deux mailles fait naître le décalage que la chaîne propage (`R4-F550`) et passe à cheval sous 15 des 29 sauts justes (`R4-F544`) ; la chaîne mixte, sans croissance, ne le fait pas naître mais rétrécit. Une croissance plus courte dit si le décalage suit la marge.
+- **R4-P162** *(le graal)* · **RÉPONDUE par `365` : oui.** Regrandie d'une maille, la chaîne garde 1231 mailles en médiane contre 980,5 pour la chaîne mixte, et le décalage ne naît sur aucun côté ; ses 3 sauts à cheval et son saut faux sont sur la graine 7, qui le portait déjà (`R4-F551`). La suite est `R4-P163`.
+- **R4-P163** *(le graal)* · **SUR PHERC0358, LA CHAÎNE QUI REGRANDIT SA SPIRE TENUE D'UNE MAILLE TIENT-ELLE PLUS DE SAUTS À LA SUITE QUE LA CHAÎNE MIXTE, PAR LE CRITÈRE DE `352` ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `365` DÉSIGNE. Sur PHercParis4, regrandir d'une maille rend un quart de surface sans faire naître le décalage (`R4-F551`) ; sur PHerc0358, la chaîne mixte tient 3 sauts à la suite en médiane et ses spires rétrécissent jusqu'à 115 points (`R4-F542`). Une chaîne qui ne rétrécit pas peut aller plus loin.
 
 ## Progress Prizes — 19 portes
 

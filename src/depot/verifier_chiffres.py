@@ -3336,6 +3336,39 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 365 : REGRANDIR D'UNE SEULE MAILLE ÉVITE-T-IL LE DÉCALAGE
+    s365 = _source(racine, "regrandir_dune_seule_maille_evite_il_le_decalage.json")
+    if s365.exists():
+        d = json.loads(s365.read_text())
+        bs = d["les_bilans"]
+        m, u, x2 = bs["la_chaine_mixte"], bs["dune_maille"], bs["de_deux_mailles"]
+        v_ = lambda s_: f"{s_:g}".replace(".", ",")  # noqa: E731
+        juges = [(c["le_rang"], s_) for c in d["les_cotes"] if c["le_rang"] >= 4 for s_ in c["les_sauts"] if s_["la_justesse"] != "non jugé"]
+        hors7 = [s_ for r, s_ in juges if r != 7]
+        fautes = sorted({r for r, s_ in juges if s_["la_justesse"] != "juste" or s_["a_cheval"]})
+        suites = {x["le_rang"]: x for x in u["les_suites"]}
+        ecrits = [("le verdict de 365", d["le_verdict"]["lissue"].rpartition(" ; ")[2].upper()),
+                  ("les chunks de m7 lus de 365", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne"),
+                  ("la ligne des mailles de 365", f"| mailles gardées, en médiane, sous les sauts justes | {v_(m['la_surface'])} | "
+                                                  f"{v_(u['la_surface'])} | {v_(x2['la_surface'])} |"),
+                  ("la ligne des justes de 365", f"| sauts justes sur les sauts jugés | {m['les_justes']} sur {m['les_juges']} | "
+                                                 f"{u['les_justes']} sur {u['les_juges']} | {x2['les_justes']} sur {x2['les_juges']} |"),
+                  ("la ligne à cheval de 365", f"| sauts justes à cheval | {m['les_justes_a_cheval']} sur {m['les_justes']} | "
+                                               f"{u['les_justes_a_cheval']} sur {u['les_justes']} | {x2['les_justes_a_cheval']} sur "
+                                               f"{x2['les_justes']} |"),
+                  ("la ligne des naissances de 365", f"| côtés où le décalage naît après la première surface lisible | "
+                                                     f"{m['la_naissance']['apres_elle']} sur {m['la_naissance']['les_cotes_juges']} | "
+                                                     f"{u['la_naissance']['apres_elle']} sur {u['la_naissance']['les_cotes_juges']} | "
+                                                     f"{x2['la_naissance']['apres_elle']} sur {x2['la_naissance']['les_cotes_juges']} |"),
+                  ("le gain de 365", f"médiane sous ses sauts justes, {round(100 * (u['la_surface'] / m['la_surface'] - 1))} % de plus que la "
+                                     f"chaîne mixte"),
+                  ("les graines hors 7 de 365", f"jamais {max(max(x['hors_de_son_tour']) for r, x in suites.items() if r != 7)}, et ses "
+                                                f"{len(hors7)} sauts jugés y sont justes, sans un seul à cheval"
+                   if all(s_["la_justesse"] == "juste" and not s_["a_cheval"] for s_ in hors7) else "graines hors 7 changées"),
+                  ("les fautes de 365", f"la graine 7, dont la première surface lisible a déjà {suites[7]['hors_de_son_tour'][0]} points hors "
+                                        f"de son tour" if fautes == [7] else "fautes changées")]
+        out.extend((nom, [x_], s365.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 364 : LE DÉCALAGE NAÎT-IL APRÈS LA PREMIÈRE SURFACE LISIBLE
     s364 = _source(racine, "le_decalage_nait_il_apres_la_premiere_surface_lisible.json")
     if s364.exists():
