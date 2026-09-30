@@ -1,0 +1,1402 @@
+{
+ "la_question": "Sur PHercParis4, graines 4 à 8, la chaîne mixte, qui garde la spire quand le critère de 352 la tient et ne relance que sinon, tient-elle ses sauts justes, et donne-t-elle moins de surfaces à cheval que la chaîne relancée depuis un point ?",
+ "les_constantes": {
+  "le_temoin": "relancée depuis un point",
+  "le_minimum": 5
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHercParis4": {
+   "lus": 8915,
+   "absents": 0,
+   "octets": 4125173517
+  }
+ },
+ "le_controle": true,
+ "les_cotes": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    }
+   ]
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 4,
+     "au_dela": 0,
+     "les_points_poses": 810
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 684
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 563
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": null,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 87,
+     "au_dela": 0,
+     "les_points_poses": 555
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 208,
+     "au_dela": 0,
+     "les_points_poses": 208
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 0
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 6,
+     "au_dela": 0,
+     "les_points_poses": 1005
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 680
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 430
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 173,
+     "au_dela": 0,
+     "les_points_poses": 173
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1200
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 18,
+     "les_points_poses": 1200
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 13,
+     "les_points_poses": 1131
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 6,
+     "les_points_poses": 940
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 768
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 9,
+     "les_points_poses": 526
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 0
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 2,
+     "au_dela": 0,
+     "les_points_poses": 1133
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 2,
+     "au_dela": 0,
+     "les_points_poses": 957
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 3,
+     "les_points_poses": 777
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 610
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 420
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 3,
+     "au_dela": 0,
+     "les_points_poses": 253
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 7,
+     "au_dela": 0,
+     "les_points_poses": 8
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 414,
+     "au_dela": 0,
+     "les_points_poses": 471
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1182
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1200
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1160
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1014
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 843
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 10,
+     "au_dela": 0,
+     "les_points_poses": 658
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": true,
+     "restes": 835,
+     "au_dela": 0,
+     "les_points_poses": 984
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 0
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 12,
+     "au_dela": 48,
+     "les_points_poses": 614
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 418
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 250
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 153
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 71
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "juste",
+     "depuis": "la relance",
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 199,
+     "au_dela": 0,
+     "les_points_poses": 1197
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1200
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1158
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 4,
+     "les_points_poses": 916
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 1,
+     "les_points_poses": 723
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 590
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 419
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 0
+    }
+   ]
+  }
+ ],
+ "les_bilans": {
+  "la_chaine_mixte": {
+   "les_juges": 30,
+   "les_justes": 30,
+   "les_justes_a_cheval": 1,
+   "j": 1.0,
+   "c": 0.0333
+  },
+  "le_temoin": {
+   "les_juges": 26,
+   "les_justes": 23,
+   "les_justes_a_cheval": 13,
+   "j": 0.8846,
+   "c": 0.5652
+  },
+  "graines_1_a_3": {
+   "les_juges": 7,
+   "les_justes": 3,
+   "les_justes_a_cheval": 0,
+   "j": 0.4286,
+   "c": 0.0
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "sur les graines 4 à 8, la chaîne mixte est juste sous 30 des 30 sauts jugés et à cheval sous 1 de ses 30 sauts justes, contre 23 des 26 et 13 des 23 pour la chaîne relancée depuis un point ; oui, elle est au moins aussi juste et moins à cheval"
+ },
+ "les_secondes": 304.9
+}

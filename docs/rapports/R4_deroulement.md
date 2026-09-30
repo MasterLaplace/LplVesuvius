@@ -4684,6 +4684,12 @@ là où la spire est refusée.
 `352` la tient et ne relance que sinon ; elle tient 22 des 40 sauts, dont 20 spires gardées. `R4-P154` s'ouvre : la juger sur Paris4,
 où les tours publiés disent si ses surfaces sont sur leur feuille.
 
+**`357` · 2026-09-30 · la chaîne mixte tient-elle ses sauts justes sur Paris4** — `R4-P154`
+
+⭐⭐⭐⭐⭐ **Oui : 30 sauts justes sur 30, 1 à cheval, contre 23 sur 26 et 13 à cheval** — `R4-F543`. Sur les graines 4 à 8, le seul
+saut à cheval de la chaîne mixte est le seul qu'elle a relancé ; ses spires gardées restent sur leur feuille, mais rétrécissent.
+`R4-P155` s'ouvre : relancer depuis toute la spire tenue rend-il de la surface sans passer à cheval ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

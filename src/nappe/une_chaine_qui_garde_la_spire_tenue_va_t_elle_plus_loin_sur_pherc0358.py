@@ -68,7 +68,8 @@ DEPUIS_LA_SPIRE, DEPUIS_LA_RELANCE = "la spire", "la relance"
 
 def la_chaine_mixte(nappe: dict, relancer, sauter, lire_valeurs, sauts: int = m331.LES_SAUTS, compter=m355.le_compte_de) -> list[dict]:
     """Jusqu'à `sauts` sauts ; chacun garde sa spire si le critère de `352` la tient contre la surface de départ, relance une nappe depuis
-    elle sinon, et part de ce qu'il a gardé. Chaque saut porte le compte de la surface gardée."""
+    elle sinon, et part de ce qu'il a gardé. Chaque saut porte le compte de la surface gardée, et, pour `357`, la surface d'où il part et la
+    surface gardée sous les noms `le_depart` et `la_relance` que la mesure de `331` lit."""
     surf, ok = nappe["la_nappe"], nappe["valide"]
     out = []
     for _ in range(sauts):
@@ -78,17 +79,18 @@ def la_chaine_mixte(nappe: dict, relancer, sauter, lire_valeurs, sauts: int = m3
         f_sp = compter(depart, spire, lire_valeurs)
         if s["valide"].any() and m355.tenue(f_sp):
             out.append({"le_saut": s, "depuis": DEPUIS_LA_SPIRE, "le_compte_de_la_spire": f_sp, "le_compte": f_sp,
-                        "les_points": int(s["valide"].sum())})
+                        "les_points": int(s["valide"].sum()), "le_depart": depart, "la_relance": spire})
             surf, ok = s["la_spire"], s["valide"]
             continue
         g = m331.la_graine_de_la_relance(s["la_spire"], s["valide"]) if s["valide"].any() else None
         if g is None:
-            out.append({"le_saut": s, "depuis": None, "le_compte_de_la_spire": f_sp, "le_compte": m345.le_resume(None), "les_points": 0})
+            out.append({"le_saut": s, "depuis": None, "le_compte_de_la_spire": f_sp, "le_compte": m345.le_resume(None), "les_points": 0,
+                        "le_depart": depart, "la_relance": None})
             break
         r = relancer(*g)
         f_r = compter(depart, r, lire_valeurs)
         out.append({"le_saut": s, "depuis": DEPUIS_LA_RELANCE, "le_compte_de_la_spire": f_sp, "le_compte": f_r,
-                    "les_points": int(r["valide"].sum())})
+                    "les_points": int(r["valide"].sum()), "le_depart": depart, "la_relance": r})
         if not r["valide"].any():
             break
         surf, ok = r["la_nappe"], r["valide"]

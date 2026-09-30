@@ -174,13 +174,14 @@ def les_chaines_de_0358(relancer0=None, avec_la_spire: bool = False, chainer=Non
 
 
 def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False, lire_la_spire: bool = False,
-            rouleaux: tuple = ("PHercParis4", "PHerc0358"), observer=None) -> dict:
+            rouleaux: tuple = ("PHercParis4", "PHerc0358"), observer=None, chainer4=None) -> dict:
     """La mesure de `331`. Avec `relancer4(lire_valeurs)` et `relancer0(lire_valeurs)`, écrits pour `333`, les relances de
     PHercParis4 et de PHerc0358 sont fabriquées par l'appelant, et reçoivent la spire si `avec_la_spire`. Avec `lire_la_spire`, écrit
     pour `334`, PHercParis4 rapporte aussi ce que les tours publiés disent de la nappe de départ, de chaque spire, et de la part de
     chaque nappe relancée que la croissance a posée hors de ses semis ; PHerc0358 n'est mesuré que s'il est dans `rouleaux`. Avec
     `observer(rang, cote, h, k)`, écrit pour `336`, chaque saut `h` d'un côté de PHercParis4 est montré à l'appelant, et ce qu'il rend
-    est ajouté à son relevé."""
+    est ajouté à son relevé. Avec `chainer4(nappe, relancer, sauter, lire_valeurs)`, écrit pour `357`, la chaîne de PHercParis4 est
+    construite par l'appelant depuis les mêmes nappes ; chaque saut qu'elle rend doit porter `le_saut`, `la_relance` et `le_depart`."""
     import le_tour_produit_porte_t_il_le_texte_du_segment as j296
     from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot
     from la_spire_voisine_est_elle_a_un_pas import les_normales, lire_tifxyz
@@ -204,7 +205,8 @@ def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False, lire_la
                 with m321.le_rouleau_de_paris4():
                     return m306.le_saut_croissant(s_, o_, cote, lv4, tolerance=m322.LA_TOLERANCE_L2)
             rel4 = (lambda p_, n_: m322.la_nappe_de_paris4(p_, n_, lv4)) if relancer4 is None else relancer4(lv4)
-            chaine = la_chaine_relancee(r, cote, rel4, sauter, avec_la_spire=avec_la_spire)
+            chaine = (la_chaine_relancee(r, cote, rel4, sauter, avec_la_spire=avec_la_spire) if chainer4 is None
+                      else chainer4(r, rel4, sauter, lv4))
             surfaces = [{t: x["la_lecture"] for t, x in lect_nappe.items()}]
             detail = []
             for h, k in enumerate(chaine, 1):

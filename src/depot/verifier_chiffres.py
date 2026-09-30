@@ -3336,6 +3336,49 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 357 : LA CHAÎNE MIXTE TIENT-ELLE SES SAUTS JUSTES SUR PARIS4
+    s357 = _source(racine, "la_chaine_mixte_tient_elle_ses_sauts_justes_sur_paris4.json")
+    s357_344 = _source(racine, "le_critere_sans_referent_separe_t_il_les_sauts_justes_des_faux.json")
+    s357_349 = _source(racine, "les_sauts_justes_donnent_ils_des_surfaces_a_cheval.json")
+    if s357.exists() and s357_344.exists() and s357_349.exists():
+        import statistics
+        d = json.loads(s357.read_text())
+        d344, d349 = json.loads(s357_344.read_text()), json.loads(s357_349.read_text())
+        v_, bm, bt, b13 = d["le_verdict"], d["les_bilans"]["la_chaine_mixte"], d["les_bilans"]["le_temoin"], d["les_bilans"]["graines_1_a_3"]
+        temoin = "relancée depuis un point"
+        juges = [s_ for c in d["les_cotes"] if c["le_rang"] >= 4 for s_ in c["les_sauts"] if s_["la_justesse"] != "non jugé"]
+        justes = [s_ for s_ in juges if s_["la_justesse"] == "juste"]
+        gardes = sum(s_["depuis"] == "la spire" for s_ in juges)
+        relances = sum(s_["depuis"] == "la relance" for s_ in juges)
+        tj = [x for x in d349["les_surfaces"] if x["la_chaine"] == temoin and x["le_rang"] >= 4 and x["la_surface"] is not None
+              and x["la_justesse"] == "juste"]
+        tp = [x["la_surface"]["les_points_poses"] for x in tj]
+        grands = [s_ for s_ in justes if s_["les_points_poses"] >= min(tp)]
+        pp = [s_["les_points_poses"] for s_ in justes]
+        cheval_t = {(x["le_rang"], x["le_cote"], x["le_saut"]) for x in tj if x["la_surface"]["a_cheval"]}
+        ecrits = [("le verdict de 357", f"SUR PHERCPARIS4, GRAINES 4 À 8 : {v_['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les chunks de m7 lus de 357", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne"),
+                  ("les justes de la chaîne mixte de 357", f"est juste sous ses {bm['les_juges']} sauts jugés et à cheval sous "
+                                                          f"{bm['les_justes_a_cheval']} seul"),
+                  ("les justes du témoin de 357", f"juste sous {bt['les_justes']} des {bt['les_juges']} et à cheval sous "
+                                                  f"{bt['les_justes_a_cheval']} de ses {bt['les_justes']} sauts justes"),
+                  ("les spires et relances de 357", f"Des {len(juges)} sauts jugés, {gardes} gardent leur spire et {relances} est relancé"),
+                  ("les graines 1 à 3 de 357", f"Sur les graines 1 à 3, {b13['les_justes']} des {b13['les_juges']} sauts jugés"),
+                  ("les points posés de 357", f"{round(statistics.median(pp))} en médiane et {min(pp)} au moins, contre "
+                                              f"{round(statistics.median(tp))} et {min(tp)} pour le témoin"),
+                  ("les grandes surfaces de 357", f"des {len(grands)} surfaces justes qui ont au moins {min(tp)} points posés, "
+                                                  f"{sum(s_['a_cheval'] for s_ in grands)} seule est à cheval")]
+        for r in range(4, 9):
+            jm = [s_ for c in d["les_cotes"] if c["le_rang"] == r for s_ in c["les_sauts"] if s_["la_justesse"] != "non jugé"]
+            jt = [(cote, s_) for g in d344["les_chaines"][temoin]["les_graines"] if g["le_rang"] == r
+                  for cote, x in g["les_cotes"].items() for s_ in x["les_sauts"] if s_["la_justesse"] != "non jugé"]
+            ok_t = [(cote, s_) for cote, s_ in jt if s_["la_justesse"] == "juste"]
+            ecrits.append((f"la ligne de la graine {r} de 357",
+                           f"| {r} | {sum(s_['la_justesse'] == 'juste' for s_ in jm)} sur {len(jm)} | "
+                           f"{sum(s_['a_cheval'] for s_ in jm if s_['la_justesse'] == 'juste')} | {len(ok_t)} sur {len(jt)} | "
+                           f"{sum((r, cote, s_['le_saut']) in cheval_t for cote, s_ in ok_t)} |"))
+        out.extend((nom, [x_], s357.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 356 : UNE CHAÎNE QUI GARDE LA SPIRE TENUE VA-T-ELLE PLUS LOIN SUR PHERC0358
     s356 = _source(racine, "une_chaine_qui_garde_la_spire_tenue_va_t_elle_plus_loin_sur_pherc0358.json")
     if s356.exists():
