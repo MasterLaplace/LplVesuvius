@@ -4750,6 +4750,12 @@ comme juge sans référent, étalonné sur PHercParis4.
 même feuille exactement quand elles sont sur le même tour publié, à 0,285 voxel contre 11,95. Un juge sans référent, étalonné sans une
 erreur. `R4-P165` s'ouvre : sur PHerc0358, le même décalage de sauts sous toutes les surfaces que l'accord met ensemble.
 
+**`368` · 2026-09-30 · deux chaînes voisines comptent-elles les mêmes tours sur PHerc0358** — `R4-P165`
+
+⭐⭐⭐⭐⭐ **Non : 77 paires sur 134 tiennent les comptes** — `R4-F554`. Une chaîne compagne partie de la même nappe se décale d'un saut
+sur trois côtés sur cinq : le juge de `367` montre, sans tracé, des erreurs de compte que les sauts jugés un à un ne montrent pas.
+`R4-P166` s'ouvre : le glissement se voit-il dans la chaîne seule ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

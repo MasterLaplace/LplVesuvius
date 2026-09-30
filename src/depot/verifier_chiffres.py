@@ -3336,6 +3336,27 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 368 : DEUX CHAÎNES VOISINES COMPTENT-ELLES LES MÊMES TOURS SUR PHERC0358
+    s368 = _source(racine, "deux_chaines_voisines_comptent_elles_les_memes_tours_sur_pherc0358.json")
+    if s368.exists():
+        from collections import Counter as Compte
+        d = json.loads(s368.read_text())
+        b = d["le_bilan"]
+        signe = lambda k: "0" if k == 0 else (f"+{k}" if k > 0 else f"−{-k}")  # noqa: E731
+        ecrits = [("le verdict de 368", f"{b['tiennent']} PAIRES SUR {b['les_paires']} TIENNENT LES COMPTES : "
+                                        f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les chunks de m7 lus de 368", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne"),
+                  ("les paires de 368", f"sur les {b['meme_feuille']} paires « même feuille », {b['la_table']['meme_saut_meme_feuille']} "
+                                        f"seulement sont au même saut")]
+        for c in d["les_cotes"]:
+            m = [p for p in c["les_paires"] if p["meme_feuille"]]
+            n = Compte(p["le_saut_compagnon"] - p["le_saut_suivi"] for p in m)
+            dec = ", ".join(f"{signe(k)} : {v}" for k, v in sorted(n.items(), key=lambda x: (-x[1], -x[0])))
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 368",
+                           f"| graine {c['le_rang']}, {c['le_cote']} | {len(c['les_paires'])} | {sum(p['meme_saut'] for p in m)} | "
+                           f"{len(m)} | {dec} |"))
+        out.extend((nom, [x_], s368.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 367 : DEUX CHAÎNES QUI SE CROISENT DISENT-ELLES LE TOUR
     s367 = _source(racine, "deux_chaines_qui_se_croisent_disent_elles_le_tour.json")
     if s367.exists():
