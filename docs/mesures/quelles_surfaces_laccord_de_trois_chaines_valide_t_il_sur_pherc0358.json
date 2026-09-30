@@ -1,0 +1,1331 @@
+{
+ "la_question": "Sur PHerc0358, quelles surfaces l'accord de trois chaînes valide-t-il, sur la même feuille et au même compte corrigé que des surfaces des deux autres chaînes, et jusqu'à combien de sauts de la nappe de départ ?",
+ "redonne_373": true,
+ "les_cotes": [
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_vote": null,
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    }
+   ],
+   "le_controle": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_vote": "suivie",
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": []
+    }
+   ],
+   "le_controle": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_vote": null,
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    }
+   ],
+   "le_controle": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_vote": null,
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": []
+    }
+   ],
+   "le_controle": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_vote": null,
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ]
+    }
+   ],
+   "le_controle": null
+  }
+ ],
+ "le_bilan": {
+  "les_surfaces": 120,
+  "validees": 25,
+  "les_cotes_valides": 3,
+  "le_plus_loin": 6,
+  "par_statut": {
+   "validée": 25,
+   "confirmée une fois": 5,
+   "contredite": 76,
+   "sans témoin": 14
+  },
+  "les_controles": {
+   "7 plus": true
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "l'accord de trois chaînes valide 25 surfaces sur 120, sur 3 côtés, jusqu'à 6 tours de la nappe de départ ; oui, l'accord de trois chaînes valide des surfaces sans tracé"
+ }
+}

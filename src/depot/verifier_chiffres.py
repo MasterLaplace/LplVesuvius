@@ -3336,6 +3336,42 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 374 : QUELLES SURFACES L'ACCORD DE TROIS CHAÎNES VALIDE-T-IL SUR PHERC0358
+    s374 = _source(racine, "quelles_surfaces_laccord_de_trois_chaines_valide_t_il_sur_pherc0358.json")
+    if s374.exists():
+        d = json.loads(s374.read_text())
+        b = d["le_bilan"]
+        cote = {(c["le_rang"], c["le_cote"]): c for c in d["les_cotes"]}
+        g6, g7, g8 = cote[(6, "moins")], cote[(7, "plus")], [cote[(8, "plus")], cote[(8, "moins")]]
+        sv = lambda c, x, h: next(s for s in c["les_surfaces"] if s["la_chaine"] == x and s["le_saut"] == h)  # noqa: E731
+        six = [(x, s["le_saut"]) for s in g6["les_surfaces"] for x in (s["la_chaine"],) if s["le_statut"] == "validée" and s["le_compte"] == 6]
+        a2 = [s for s in g6["les_surfaces"] if s["le_compte"] == 2]
+        a3 = [s for s in g6["les_surfaces"] if s["le_compte"] == 3 and s["le_statut"] != "contredite"]
+        ecrits = [("le verdict de 374", f"{b['validees']} SURFACES SUR {b['les_surfaces']} VALIDÉES, JUSQU'À {b['le_plus_loin']} TOURS : "
+                                        f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("le bilan de 374", f"{b['validees']} des {b['les_surfaces']} surfaces sont validées, sur"),
+                  ("les six tours de 374", "la huitième de la" if sorted(six) == [("compagne", 7), ("suivie", 8), ("tierce", 6)] else "changé"),
+                  ("les deux tours de 374", "les surfaces à 2 tours sont contredites dans les trois chaînes"
+                   if all(s["le_statut"] == "contredite" for s in a2) and {s["la_chaine"] for s in a2} == {"suivie", "compagne", "tierce"}
+                   else "changé"),
+                  ("les trois tours de 374", "sauf la cinquième de la" if [(s["la_chaine"], s["le_saut"]) for s in a3] == [("suivie", 5)]
+                   else "changé"),
+                  ("la graine 7 de 374", "seules les trois premières surfaces sont validées"
+                   if sorted((s["la_chaine"], s["le_saut"]) for s in g7["les_surfaces"] if s["le_statut"] == "validée")
+                   == [("compagne", 1), ("suivie", 1), ("tierce", 1)] else "changé"),
+                  ("le contrôle de 374", "contredite par les deux autres dès sa deuxième surface"
+                   if g7["le_controle"] and len(sv(g7, "suivie", 2)["contredite_par"]) == 2 else "changé"),
+                  ("la graine 8 de 374", f"Sur la graine 8, "
+                                         f"{sum(s['le_statut'] == 'contredite' for c in g8 for s in c['les_surfaces'])} des "
+                                         f"{sum(len(c['les_surfaces']) for c in g8)} surfaces sont")]
+        for c in d["les_cotes"]:
+            n = {k: sum(s["le_statut"] == k for s in c["les_surfaces"]) for k in ("validée", "confirmée une fois", "contredite", "sans témoin")}
+            loin = max((s["le_compte"] for s in c["les_surfaces"] if s["le_statut"] == "validée"), default=None)
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 374",
+                           f"| graine {c['le_rang']}, {c['le_cote']} | {n['validée']} | {n['confirmée une fois']} | {n['contredite']} | "
+                           f"{n['sans témoin']} | " + ("aucune" if loin is None else f"{loin} tour{'s' if loin > 1 else ''}") + " |"))
+        out.extend((nom_, [x_], s374.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 373 : TROIS CHAÎNES AUX COMPTES CORRIGÉS DÉSIGNENT-ELLES CELLE QUI A GLISSÉ
     s373 = _source(racine, "trois_chaines_aux_comptes_corriges_designent_elles_celle_qui_a_glisse.json")
     if s373.exists():

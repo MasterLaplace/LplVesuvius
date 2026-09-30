@@ -4786,6 +4786,12 @@ deuxième saut s'écarte de 23,438 voxels. `R4-P170` s'ouvre : une tierce ailleu
 graine 6, côté moins, tiennent les comptes deux à deux ; la suivie de la graine 7, côté plus, est désignée ; sur la graine 8, aucun
 couple ne tient. `R4-P171` s'ouvre : les surfaces que l'accord de trois chaînes valide.
 
+**`374` · 2026-09-30 · quelles surfaces l'accord de trois chaînes valide-t-il sur PHerc0358** — `R4-P171`
+
+⭐⭐⭐⭐⭐ **25 surfaces sur 120, jusqu'à 6 tours de la nappe de départ** — `R4-F560`. Une surface que les deux autres chaînes mettent sur
+la même feuille au même compte corrigé, sans que rien ne la contredise, est validée sans tracé : sur la graine 6, côté moins, les trois
+chaînes en ont une à 6 tours. Aucune sur la graine 8. `R4-P172` s'ouvre : des feuilles qui se touchent sous le juge de feuille ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
