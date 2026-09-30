@@ -1,0 +1,1033 @@
+{
+ "la_question": "Sur PHerc0358, quand une surface relancée garde au moins 50 points sur la feuille de départ, est-ce le saut qui ne la quitte pas, ou la relance qui y retombe ?",
+ "les_constantes": {
+  "le_seuil": 50,
+  "le_minimum": 5,
+  "la_part": 0.75,
+  "le_pas": 20.0,
+  "le_lateral_en_pas": 0.5549
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 3533,
+  "absents": 0,
+  "octets": 1730880274
+ },
+ "redonne_354": true,
+ "les_cotes": [
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1197,
+      "les_mesures": 1197,
+      "les_comptes": {
+       "1": 876,
+       "2": 321
+      },
+      "la_part_dune_feuille": 0.7318
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 1129,
+      "les_mesures": 1126,
+      "les_comptes": {
+       "1": 855,
+       "2": 271
+      },
+      "la_part_dune_feuille": 0.7593
+     },
+     "la_lecture": null,
+     "la_spire_tenue": false,
+     "la_relance_tenue": true
+    },
+    {
+     "le_saut": 2,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 2,
+      "les_en_face": 2,
+      "les_mesures": 2,
+      "les_comptes": {
+       "1": 2
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 1157,
+      "les_mesures": 1157,
+      "les_comptes": {
+       "0": 1125,
+       "1": 31,
+       "2": 1
+      },
+      "la_part_dune_feuille": 0.0268
+     },
+     "la_lecture": "non lue",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 3,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1124,
+      "les_mesures": 1117,
+      "les_comptes": {
+       "0": 167,
+       "1": 380,
+       "2": 555,
+       "3": 15
+      },
+      "la_part_dune_feuille": 0.3402
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 801,
+      "les_mesures": 774,
+      "les_comptes": {
+       "0": 124,
+       "1": 291,
+       "2": 244,
+       "3": 77,
+       "4": 33,
+       "5": 5
+      },
+      "la_part_dune_feuille": 0.376
+     },
+     "la_lecture": "restée",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 4,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 907,
+      "les_en_face": 848,
+      "les_mesures": 843,
+      "les_comptes": {
+       "0": 87,
+       "1": 683,
+       "2": 71,
+       "3": 2
+      },
+      "la_part_dune_feuille": 0.8102
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 633,
+      "les_mesures": 627,
+      "les_comptes": {
+       "0": 172,
+       "1": 300,
+       "2": 113,
+       "3": 33,
+       "4": 7,
+       "5": 2
+      },
+      "la_part_dune_feuille": 0.4785
+     },
+     "la_lecture": "restée",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 5,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1164,
+      "les_mesures": 1158,
+      "les_comptes": {
+       "0": 640,
+       "1": 459,
+       "2": 51,
+       "3": 8
+      },
+      "la_part_dune_feuille": 0.3964
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 1138,
+      "les_mesures": 1128,
+      "les_comptes": {
+       "0": 589,
+       "1": 488,
+       "2": 42,
+       "3": 9
+      },
+      "la_part_dune_feuille": 0.4326
+     },
+     "la_lecture": "restée",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 6,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1130,
+      "les_mesures": 1126,
+      "les_comptes": {
+       "0": 86,
+       "1": 887,
+       "2": 152,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.7877
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 921,
+      "les_mesures": 887,
+      "les_comptes": {
+       "0": 151,
+       "1": 471,
+       "2": 197,
+       "3": 60,
+       "4": 8
+      },
+      "la_part_dune_feuille": 0.531
+     },
+     "la_lecture": "restée",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 7,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1135,
+      "les_mesures": 1130,
+      "les_comptes": {
+       "0": 134,
+       "1": 863,
+       "2": 94,
+       "3": 39
+      },
+      "la_part_dune_feuille": 0.7637
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 1123,
+      "les_mesures": 1104,
+      "les_comptes": {
+       "0": 450,
+       "1": 620,
+       "2": 34
+      },
+      "la_part_dune_feuille": 0.5616
+     },
+     "la_lecture": "restée",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 8,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1173,
+      "les_mesures": 1167,
+      "les_comptes": {
+       "0": 8,
+       "1": 1138,
+       "2": 21
+      },
+      "la_part_dune_feuille": 0.9751
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 828,
+      "les_mesures": 823,
+      "les_comptes": {
+       "0": 223,
+       "1": 566,
+       "2": 33,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.6877
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 482,
+      "les_en_face": 482,
+      "les_mesures": 482,
+      "les_comptes": {
+       "1": 482
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 969,
+      "les_mesures": 917,
+      "les_comptes": {
+       "0": 157,
+       "1": 705,
+       "2": 44,
+       "3": 8,
+       "4": 3
+      },
+      "la_part_dune_feuille": 0.7688
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 2,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 647,
+      "les_en_face": 581,
+      "les_mesures": 580,
+      "les_comptes": {
+       "1": 247,
+       "2": 329,
+       "3": 4
+      },
+      "la_part_dune_feuille": 0.4259
+     },
+     "la_relance": {
+      "les_points": 1160,
+      "les_en_face": 911,
+      "les_mesures": 870,
+      "les_comptes": {
+       "0": 184,
+       "1": 401,
+       "2": 282,
+       "3": 3
+      },
+      "la_part_dune_feuille": 0.4609
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 3,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 472,
+      "les_en_face": 468,
+      "les_mesures": 468,
+      "les_comptes": {
+       "0": 12,
+       "1": 456
+      },
+      "la_part_dune_feuille": 0.9744
+     },
+     "la_relance": {
+      "les_points": 988,
+      "les_en_face": 761,
+      "les_mesures": 728,
+      "les_comptes": {
+       "0": 182,
+       "1": 532,
+       "2": 13,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.7308
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 4,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 429,
+      "les_en_face": 423,
+      "les_mesures": 421,
+      "les_comptes": {
+       "1": 411,
+       "2": 10
+      },
+      "la_part_dune_feuille": 0.9762
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 628,
+      "les_mesures": 601,
+      "les_comptes": {
+       "0": 11,
+       "1": 484,
+       "2": 86,
+       "3": 14,
+       "4": 4,
+       "5": 1,
+       "6": 1
+      },
+      "la_part_dune_feuille": 0.8053
+     },
+     "la_lecture": null,
+     "la_spire_tenue": true,
+     "la_relance_tenue": true
+    },
+    {
+     "le_saut": 5,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 522,
+      "les_en_face": 513,
+      "les_mesures": 510,
+      "les_comptes": {
+       "0": 3,
+       "1": 501,
+       "2": 6
+      },
+      "la_part_dune_feuille": 0.9824
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 910,
+      "les_mesures": 887,
+      "les_comptes": {
+       "0": 368,
+       "1": 373,
+       "2": 146
+      },
+      "la_part_dune_feuille": 0.4205
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 6,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 556,
+      "les_en_face": 551,
+      "les_mesures": 549,
+      "les_comptes": {
+       "0": 265,
+       "1": 282,
+       "2": 2
+      },
+      "la_part_dune_feuille": 0.5137
+     },
+     "la_relance": {
+      "les_points": 1144,
+      "les_en_face": 852,
+      "les_mesures": 807,
+      "les_comptes": {
+       "0": 265,
+       "1": 492,
+       "2": 44,
+       "3": 5,
+       "4": 1
+      },
+      "la_part_dune_feuille": 0.6097
+     },
+     "la_lecture": "restée",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 7,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 419,
+      "les_en_face": 410,
+      "les_mesures": 406,
+      "les_comptes": {
+       "0": 33,
+       "1": 372,
+       "2": 1
+      },
+      "la_part_dune_feuille": 0.9163
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 819,
+      "les_mesures": 766,
+      "les_comptes": {
+       "0": 151,
+       "1": 510,
+       "2": 95,
+       "3": 9,
+       "4": 1
+      },
+      "la_part_dune_feuille": 0.6658
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 8,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 497,
+      "les_en_face": 484,
+      "les_mesures": 481,
+      "les_comptes": {
+       "0": 11,
+       "1": 457,
+       "2": 12,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.9501
+     },
+     "la_relance": {
+      "les_points": 1133,
+      "les_en_face": 1006,
+      "les_mesures": 955,
+      "les_comptes": {
+       "0": 340,
+       "1": 581,
+       "2": 34
+      },
+      "la_part_dune_feuille": 0.6084
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 566,
+      "les_en_face": 565,
+      "les_mesures": 564,
+      "les_comptes": {
+       "1": 564
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 833,
+      "les_mesures": 811,
+      "les_comptes": {
+       "0": 219,
+       "1": 564,
+       "2": 22,
+       "3": 4,
+       "4": 1,
+       "5": 1
+      },
+      "la_part_dune_feuille": 0.6954
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 2,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 786,
+      "les_en_face": 781,
+      "les_mesures": 778,
+      "les_comptes": {
+       "0": 2,
+       "1": 758,
+       "2": 16,
+       "3": 2
+      },
+      "la_part_dune_feuille": 0.9743
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 1062,
+      "les_mesures": 1046,
+      "les_comptes": {
+       "0": 438,
+       "1": 586,
+       "2": 22
+      },
+      "la_part_dune_feuille": 0.5602
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 3,
+     "a_une_surface": false,
+     "la_spire": {
+      "les_points": 0,
+      "les_en_face": 0,
+      "les_mesures": 0,
+      "les_comptes": {},
+      "la_part_dune_feuille": null
+     },
+     "la_relance": {
+      "les_points": 0,
+      "les_en_face": 0,
+      "les_mesures": 0,
+      "les_comptes": {},
+      "la_part_dune_feuille": null
+     },
+     "la_lecture": null,
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 439,
+      "les_en_face": 439,
+      "les_mesures": 439,
+      "les_comptes": {
+       "0": 28,
+       "1": 411
+      },
+      "la_part_dune_feuille": 0.9362
+     },
+     "la_relance": {
+      "les_points": 825,
+      "les_en_face": 493,
+      "les_mesures": 472,
+      "les_comptes": {
+       "0": 32,
+       "1": 374,
+       "2": 52,
+       "3": 13,
+       "4": 1
+      },
+      "la_part_dune_feuille": 0.7924
+     },
+     "la_lecture": null,
+     "la_spire_tenue": true,
+     "la_relance_tenue": true
+    },
+    {
+     "le_saut": 2,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 90,
+      "les_en_face": 90,
+      "les_mesures": 90,
+      "les_comptes": {
+       "1": 90
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "la_relance": {
+      "les_points": 683,
+      "les_en_face": 610,
+      "les_mesures": 591,
+      "les_comptes": {
+       "0": 135,
+       "1": 447,
+       "2": 7,
+       "3": 2
+      },
+      "la_part_dune_feuille": 0.7563
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 3,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 169,
+      "les_en_face": 164,
+      "les_mesures": 164,
+      "les_comptes": {
+       "1": 163,
+       "2": 1
+      },
+      "la_part_dune_feuille": 0.9939
+     },
+     "la_relance": {
+      "les_points": 1141,
+      "les_en_face": 454,
+      "les_mesures": 434,
+      "les_comptes": {
+       "0": 101,
+       "1": 211,
+       "2": 72,
+       "3": 46,
+       "4": 4
+      },
+      "la_part_dune_feuille": 0.4862
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 4,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 458,
+      "les_en_face": 451,
+      "les_mesures": 449,
+      "les_comptes": {
+       "0": 182,
+       "1": 263,
+       "2": 4
+      },
+      "la_part_dune_feuille": 0.5857
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 926,
+      "les_mesures": 899,
+      "les_comptes": {
+       "0": 690,
+       "1": 189,
+       "2": 19,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.2102
+     },
+     "la_lecture": "restée",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 5,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 686,
+      "les_en_face": 629,
+      "les_mesures": 623,
+      "les_comptes": {
+       "0": 173,
+       "1": 327,
+       "2": 100,
+       "3": 23
+      },
+      "la_part_dune_feuille": 0.5249
+     },
+     "la_relance": {
+      "les_points": 779,
+      "les_en_face": 366,
+      "les_mesures": 358,
+      "les_comptes": {
+       "0": 182,
+       "1": 84,
+       "2": 61,
+       "3": 28,
+       "4": 3
+      },
+      "la_part_dune_feuille": 0.2346
+     },
+     "la_lecture": "restée",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 6,
+     "a_une_surface": false,
+     "la_spire": {
+      "les_points": 0,
+      "les_en_face": 0,
+      "les_mesures": 0,
+      "les_comptes": {},
+      "la_part_dune_feuille": null
+     },
+     "la_relance": {
+      "les_points": 0,
+      "les_en_face": 0,
+      "les_mesures": 0,
+      "les_comptes": {},
+      "la_part_dune_feuille": null
+     },
+     "la_lecture": null,
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 579,
+      "les_en_face": 484,
+      "les_mesures": 483,
+      "les_comptes": {
+       "0": 1,
+       "1": 379,
+       "2": 102,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.7847
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 556,
+      "les_mesures": 550,
+      "les_comptes": {
+       "0": 82,
+       "1": 400,
+       "2": 62,
+       "3": 6
+      },
+      "la_part_dune_feuille": 0.7273
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 2,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 494,
+      "les_en_face": 432,
+      "les_mesures": 429,
+      "les_comptes": {
+       "1": 354,
+       "2": 75
+      },
+      "la_part_dune_feuille": 0.8252
+     },
+     "la_relance": {
+      "les_points": 1064,
+      "les_en_face": 635,
+      "les_mesures": 606,
+      "les_comptes": {
+       "0": 5,
+       "1": 440,
+       "2": 155,
+       "3": 2,
+       "4": 1,
+       "5": 3
+      },
+      "la_part_dune_feuille": 0.7261
+     },
+     "la_lecture": null,
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 3,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 422,
+      "les_en_face": 414,
+      "les_mesures": 413,
+      "les_comptes": {
+       "1": 407,
+       "2": 6
+      },
+      "la_part_dune_feuille": 0.9855
+     },
+     "la_relance": {
+      "les_points": 1200,
+      "les_en_face": 837,
+      "les_mesures": 811,
+      "les_comptes": {
+       "0": 133,
+       "1": 513,
+       "2": 165
+      },
+      "la_part_dune_feuille": 0.6326
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 4,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 458,
+      "les_en_face": 444,
+      "les_mesures": 443,
+      "les_comptes": {
+       "0": 33,
+       "1": 373,
+       "2": 37
+      },
+      "la_part_dune_feuille": 0.842
+     },
+     "la_relance": {
+      "les_points": 723,
+      "les_en_face": 585,
+      "les_mesures": 560,
+      "les_comptes": {
+       "0": 119,
+       "1": 418,
+       "2": 23
+      },
+      "la_part_dune_feuille": 0.7464
+     },
+     "la_lecture": "partie",
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 5,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 463,
+      "les_en_face": 445,
+      "les_mesures": 442,
+      "les_comptes": {
+       "0": 54,
+       "1": 322,
+       "2": 62,
+       "3": 3,
+       "4": 1
+      },
+      "la_part_dune_feuille": 0.7285
+     },
+     "la_relance": {
+      "les_points": 1184,
+      "les_en_face": 695,
+      "les_mesures": 674,
+      "les_comptes": {
+       "0": 181,
+       "1": 354,
+       "2": 120,
+       "3": 17,
+       "4": 2
+      },
+      "la_part_dune_feuille": 0.5252
+     },
+     "la_lecture": "restée",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 6,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 417,
+      "les_en_face": 361,
+      "les_mesures": 356,
+      "les_comptes": {
+       "0": 1,
+       "1": 289,
+       "2": 58,
+       "3": 8
+      },
+      "la_part_dune_feuille": 0.8118
+     },
+     "la_relance": {
+      "les_points": 190,
+      "les_en_face": 4,
+      "les_mesures": 4,
+      "les_comptes": {
+       "0": 1,
+       "1": 2,
+       "2": 1
+      },
+      "la_part_dune_feuille": 0.5
+     },
+     "la_lecture": null,
+     "la_spire_tenue": true,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 7,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 39,
+      "les_en_face": 37,
+      "les_mesures": 37,
+      "les_comptes": {
+       "1": 9,
+       "2": 28
+      },
+      "la_part_dune_feuille": 0.2432
+     },
+     "la_relance": {
+      "les_points": 566,
+      "les_en_face": 290,
+      "les_mesures": 278,
+      "les_comptes": {
+       "0": 128,
+       "1": 99,
+       "2": 46,
+       "3": 5
+      },
+      "la_part_dune_feuille": 0.3561
+     },
+     "la_lecture": "non lue",
+     "la_spire_tenue": false,
+     "la_relance_tenue": false
+    },
+    {
+     "le_saut": 8,
+     "a_une_surface": true,
+     "la_spire": {
+      "les_points": 183,
+      "les_en_face": 174,
+      "les_mesures": 172,
+      "les_comptes": {
+       "1": 163,
+       "2": 9
+      },
+      "la_part_dune_feuille": 0.9477
+     },
+     "la_relance": {
+      "les_points": 462,
+      "les_en_face": 237,
+      "les_mesures": 228,
+      "les_comptes": {
+       "0": 8,
+       "1": 197,
+       "2": 19,
+       "3": 4
+      },
+      "la_part_dune_feuille": 0.864
+     },
+     "la_lecture": null,
+     "la_spire_tenue": true,
+     "la_relance_tenue": true
+    }
+   ]
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "p": 14,
+  "r": 9,
+  "n": 23,
+  "lissue": "sur PHerc0358, sous 23 sauts dont la surface relancée garde 50 points sur la feuille de départ, la spire est partie sous 14 et restée sous 9 ; l'un et l'autre"
+ },
+ "les_secondes": 37.6
+}

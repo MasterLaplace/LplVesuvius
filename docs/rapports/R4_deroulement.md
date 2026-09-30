@@ -4672,6 +4672,12 @@ moins. `R4-P150` s'ouvre : le critère porté sur PHerc0358.
 surface de la graine 6, côté moins, et de la graine 8, côté plus ; ce sont les deux premières surfaces que le projet peut proposer sur
 un rouleau sans tracé avec une précision connue ailleurs. `R4-P151` s'ouvre : l'encre les distingue-t-elle ?
 
+**`355` · 2026-09-30 · sur PHerc0358, est-ce le saut ou la relance qui reste sur la feuille de départ** — `R4-P152`
+
+⭐⭐⭐⭐ **L'un et l'autre, la relance le plus souvent** — `R4-F541`. Sous 14 des 23 sauts jugés, la spire avait quitté la feuille de
+départ et la nappe relancée depuis un de ses points y retombe. `R4-P151`, l'encre, attend l'auteur ; `R4-P153` s'ouvre : ne relancer que
+là où la spire est refusée.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

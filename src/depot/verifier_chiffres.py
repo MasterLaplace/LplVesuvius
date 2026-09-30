@@ -3336,6 +3336,32 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 355 : SUR PHERC0358, EST-CE LE SAUT OU LA RELANCE QUI RESTE SUR LA FEUILLE DE DÉPART
+    s355 = _source(racine, "sur_pherc0358_est_ce_le_saut_ou_la_relance_qui_reste_sur_la_feuille_de_depart.json")
+    if s355.exists():
+        import statistics
+        d = json.loads(s355.read_text())
+        v_ = d["le_verdict"]
+        tous = [s_ for c in d["les_cotes"] for s_ in c["les_sauts"] if s_["a_une_surface"]]
+        lect = [s_["la_lecture"] for s_ in tous]
+        c6 = next(c for c in d["les_cotes"] if (c["le_rang"], c["le_cote"]) == (6, "moins"))["les_sauts"][1]
+        ecrits = [("le verdict de 355", v_["lissue"].upper()),
+                  ("les chunks de m7 lus de 355", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne"),
+                  ("les retombées de 355", f"| la surface relancée garde 50 points à zéro ou plus | {sum(1 for x in lect if x is not None)} |"),
+                  ("les parties de 355", f"| dont la spire est partie | {lect.count('partie')} |"),
+                  ("les restées de 355", f"| dont la spire est restée | {lect.count('restée')} |"),
+                  ("les non lues de 355", f"| dont la spire n'est pas lue | {lect.count('non lue')} |"),
+                  ("la spire de la graine 6 de 355", f"la spire n'a que {c6['la_spire']['les_points']} points"),
+                  ("la relance de la graine 6 de 355", f"en a {c6['la_relance']['les_points']}, dont {c6['la_relance']['les_comptes'].get('0', 0)} "
+                                                      f"des {c6['la_relance']['les_mesures']} comptés"),
+                  ("les spires tenues de 355", f"tiendrait {sum(s_['la_spire_tenue'] for s_ in tous)} des {len(tous)} spires et "
+                                               f"{sum(s_['la_relance_tenue'] for s_ in tous)} des {len(tous)} surfaces relancées"),
+                  ("les spires tenues et relances refusées de 355",
+                   f"{sum(1 for s_ in tous if s_['la_spire_tenue'] and not s_['la_relance_tenue'])} sauts, il tiendrait la spire"),
+                  ("la médiane des spires de 355", f"Une spire a {round(statistics.median(s_['la_spire']['les_points'] for s_ in tous))} points "
+                                                  f"en médiane")]
+        out.extend((nom, [x_], s355.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 354 : LE COMPTE ET LE SEUIL TIENNENT-ILS UNE PREMIÈRE SURFACE SUR PHERC0358
     s354 = _source(racine, "le_compte_et_le_seuil_tiennent_ils_une_premiere_surface_sur_pherc0358.json")
     if s354.exists():
