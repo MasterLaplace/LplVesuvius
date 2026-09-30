@@ -125,8 +125,10 @@ def le_verdict(d: dict) -> dict:
     return {"decidable": True, "lissue": f"{tete} ; {suite}"}
 
 
-def mesurer() -> dict:
-    t0 = time.monotonic()
+def la_chaine_jugee(chainer=None) -> dict:
+    """La chaîne de PHercParis4 jugée saut par saut : justesse, tenue, à cheval, points posés et taille de la surface gardée. Sans
+    `chainer(nappe, relancer, sauter, lire_valeurs)`, la chaîne mixte de `356` ; avec, écrit pour `358`, celle de l'appelant, dont chaque
+    saut doit porter ce que la chaîne mixte porte. Rend les côtés, le contrôle, les pannes et la lecture de `m7`."""
     tours = {r: m329.lire_un_tour(r, m330.LES_TOURS) for r in m330.LES_TOURS}
     lv = {}
 
@@ -135,10 +137,12 @@ def mesurer() -> dict:
         return lambda p_, n_: m322.la_nappe_de_paris4(p_, n_, lv4)
 
     def chainer4(r, rel4, sauter, lv4):
-        return m356.la_chaine_mixte(r, rel4, sauter, lv4, compter=compter4)
+        if chainer is None:
+            return m356.la_chaine_mixte(r, rel4, sauter, lv4, compter=compter4)
+        return chainer(r, rel4, sauter, lv4)
 
     def observer(rang, nom, h, k):
-        out = {"depuis": k["depuis"], "le_compte": k["le_compte"]}
+        out = {"depuis": k["depuis"], "le_compte": k["le_compte"], "les_points": k["les_points"]}
         rl = k["la_relance"]
         if rl is None or not rl["valide"].any():
             return out
@@ -163,16 +167,23 @@ def mesurer() -> dict:
                 if "_comptes" in s:
                     en_plus.update({"les_comptes": s["_comptes"], "les_poses": s["_poses"]})
                 a = m349.la_lecture(lect[h - 1], en_plus, m344.LE_SENS[cote]) if "_poses" in s else None
-                sauts.append({"le_saut": h, "la_justesse": j, "depuis": s.get("depuis"), "tenu": m355.tenue(s["le_compte"]),
+                sauts.append({"le_saut": h, "la_justesse": j, "depuis": s.get("depuis"), "les_points": s.get("les_points"),
+                              "tenu": m355.tenue(s["le_compte"]),
                               "a_cheval": bool(a is not None and a["a_cheval"]),
                               "restes": a["restes"]["les_points"] if a else None, "au_dela": a["au_dela"]["les_points"] if a else None,
                               "les_points_poses": a["les_points_poses"] if a else None})
             cotes.append({"le_rang": g["le_rang"], "le_cote": cote, "les_sauts": sauts})
             print(json.dumps({"le_rang": g["le_rang"], "le_cote": cote}, ensure_ascii=False),
                   [(s["depuis"], s["la_justesse"], s["tenu"], s["a_cheval"]) for s in sauts], flush=True)
+    return {"les_pannes": d331["les_pannes"], "la_lecture_de_m7": d331["la_lecture_de_m7"], "le_controle": bool(controle),
+            "les_cotes": cotes}
+
+
+def mesurer() -> dict:
+    t0 = time.monotonic()
     d = {"la_question": __doc__.splitlines()[0], "les_constantes": {"le_temoin": LE_TEMOIN, "le_minimum": LE_MINIMUM},
-         "les_pannes": d331["les_pannes"], "la_lecture_de_m7": d331["la_lecture_de_m7"], "le_controle": bool(controle),
-         "les_cotes": cotes}
+         **la_chaine_jugee()}
+    cotes = d["les_cotes"]
     temoin = le_temoin(json.loads(CE_QUE_344_A_PUBLIE.read_text()), json.loads(CE_QUE_349_A_PUBLIE.read_text()))
     d["les_bilans"] = {"la_chaine_mixte": le_bilan(les_sauts_juges(cotes)), "le_temoin": temoin,
                        "graines_1_a_3": le_bilan(les_sauts_juges(cotes, (1, 2, 3)))}

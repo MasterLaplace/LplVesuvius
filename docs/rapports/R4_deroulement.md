@@ -4690,6 +4690,12 @@ où les tours publiés disent si ses surfaces sont sur leur feuille.
 saut à cheval de la chaîne mixte est le seul qu'elle a relancé ; ses spires gardées restent sur leur feuille, mais rétrécissent.
 `R4-P155` s'ouvre : relancer depuis toute la spire tenue rend-il de la surface sans passer à cheval ?
 
+**`358` · 2026-09-30 · regrandir la spire tenue rend-il de la surface sans passer à cheval** — `R4-P155`
+
+⭐⭐⭐⭐⭐ **En partie : la surface revient, le cheval aussi** — `R4-F544`. Regrandie par la croissance bornée de `335`, la chaîne garde
+1600 mailles en médiane contre 980,5 et reste juste sous ses 29 sauts jugés, mais 15 sont à cheval, contre 1 sur 30. Le critère de `352`
+ne le voit pas. `R4-P156` s'ouvre : le même critère, sur la seule partie regrandie ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

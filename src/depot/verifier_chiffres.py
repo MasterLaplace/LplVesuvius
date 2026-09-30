@@ -3336,6 +3336,44 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 358 : REGRANDIR LA SPIRE TENUE REND-IL DE LA SURFACE SANS PASSER À CHEVAL
+    s358 = _source(racine, "regrandir_la_spire_tenue_rend_il_de_la_surface_sans_passer_a_cheval.json")
+    if s358.exists():
+        d = json.loads(s358.read_text())
+        v_, bm, br = d["le_verdict"], d["les_bilans"]["la_chaine_mixte"], d["les_bilans"]["la_chaine_qui_regrandit"]
+        f_ = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+
+        def juges(cle, graines=(4, 5, 6, 7, 8)):
+            return [s_ for c in d["les_cotes"][cle] if c["le_rang"] in graines for s_ in c["les_sauts"] if s_["la_justesse"] != "non jugé"]
+        jr = juges("la_chaine_qui_regrandit")
+        reg = [s_ for s_ in jr if s_["depuis"] == "la croissance"]
+        suivent, autres = 0, [s_ for s_ in jr if s_["a_cheval"] and s_["la_justesse"] == "juste" and s_["depuis"] != "la croissance"]
+        for c in d["les_cotes"]["la_chaine_qui_regrandit"]:
+            for a, b in zip(c["les_sauts"], c["les_sauts"][1:]):
+                suivent += int(b in autres and a["depuis"] == "la croissance" and a["a_cheval"])
+        r13, m13 = juges("la_chaine_qui_regrandit", (1, 2, 3)), juges("la_chaine_mixte", (1, 2, 3))
+        lm = d["la_lecture_de_m7"]
+        ecrits = [("le verdict de 358", v_["lissue"].rpartition(" ; ")[2].upper()),
+                  ("les chunks de m7 lus de 358", f"`m7` a été lu en {lm['la_chaine_mixte']['PHercParis4']['lus']} chunks pour la chaîne "
+                                                  f"mixte et en {lm['la_chaine_qui_regrandit']['PHercParis4']['lus']} pour la chaîne"),
+                  ("la ligne des mailles de 358", f"| mailles gardées, en médiane, sous les sauts justes | {f_(bm['la_surface'])} | "
+                                                  f"{f_(br['la_surface'])} |"),
+                  ("la ligne des justes de 358", f"| sauts justes sur les sauts jugés | {bm['les_justes']} sur {bm['les_juges']} | "
+                                                 f"{br['les_justes']} sur {br['les_juges']} |"),
+                  ("la ligne à cheval de 358", f"| sauts justes à cheval | {bm['les_justes_a_cheval']} sur {bm['les_justes']} | "
+                                               f"{br['les_justes_a_cheval']} sur {br['les_justes']} |"),
+                  ("la surface regagnée de 358", f"La chaîne qui regrandit garde {f_(br['la_surface'])} mailles en médiane"),
+                  ("la surface de la chaîne mixte de 358", f"sous ses sauts justes, contre {f_(bm['la_surface'])}, et reste juste sous ses "
+                                                           f"{br['les_juges']} sauts jugés"),
+                  ("les regrandies de 358", f"Des {len(jr)} sauts jugés, {len(reg)} gardent la surface regrandie,"),
+                  ("les regrandies à cheval de 358", f"dont {sum(s_['a_cheval'] for s_ in reg)} sont à cheval, et une surface regrandie"),
+                  ("les sauts qui suivent de 358", f"Les {suivent} autres sauts à cheval suivent"),
+                  ("les héritées de 358", f"chacun une surface regrandie déjà à cheval : {sum(s_['depuis'] == 'la spire' for s_ in autres)} "
+                                          f"spires gardées et {sum(s_['depuis'] == 'la relance' for s_ in autres)} relance"),
+                  ("les graines 1 à 3 de 358", f"juste sous {sum(s_['la_justesse'] == 'juste' for s_ in r13)} des {len(r13)} sauts jugés, contre "
+                                               f"{sum(s_['la_justesse'] == 'juste' for s_ in m13)} des {len(m13)} pour la chaîne mixte")]
+        out.extend((nom, [x_], s358.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 357 : LA CHAÎNE MIXTE TIENT-ELLE SES SAUTS JUSTES SUR PARIS4
     s357 = _source(racine, "la_chaine_mixte_tient_elle_ses_sauts_justes_sur_paris4.json")
     s357_344 = _source(racine, "le_critere_sans_referent_separe_t_il_les_sauts_justes_des_faux.json")

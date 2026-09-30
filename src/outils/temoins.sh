@@ -1853,6 +1853,8 @@ run "une chaîne qui garde la spire tenue va-t-elle plus loin sur PHerc0358" uv 
 run "figure une chaîne qui garde la spire tenue va-t-elle plus loin sur PHerc0358" uv run python "$ROOT/src/figures/figure_une_chaine_qui_garde_la_spire_tenue_va_t_elle_plus_loin_sur_pherc0358.py" --verifier
 run "la chaîne mixte tient-elle ses sauts justes sur Paris4" uv run python "$ROOT/src/nappe/la_chaine_mixte_tient_elle_ses_sauts_justes_sur_paris4.py" --verifier
 run "figure la chaîne mixte tient-elle ses sauts justes sur Paris4" uv run python "$ROOT/src/figures/figure_la_chaine_mixte_tient_elle_ses_sauts_justes_sur_paris4.py" --verifier
+run "regrandir la spire tenue rend-il de la surface sans passer à cheval" uv run python "$ROOT/src/nappe/regrandir_la_spire_tenue_rend_il_de_la_surface_sans_passer_a_cheval.py" --verifier
+run "figure regrandir la spire tenue rend-il de la surface sans passer à cheval" uv run python "$ROOT/src/figures/figure_regrandir_la_spire_tenue_rend_il_de_la_surface_sans_passer_a_cheval.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
