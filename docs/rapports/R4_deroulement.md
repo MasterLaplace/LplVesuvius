@@ -4768,6 +4768,12 @@ saut qui franchit deux feuilles minces reste sous le pas et demi. `R4-P167` s'ou
 un tour, de 20,978 à 24,527 à deux tours et de 31,091 à 34,759 à trois : l'écart compte les tours. Le pas et demi de `369` ne voyait
 aucune des 17 paires à deux tours. `R4-P168` s'ouvre : sur PHerc0358, compter les sauts en tours au seuil étalonné.
 
+**`371` · 2026-09-30 · compter les sauts en tours fait-il voir le glissement sur PHerc0358** — `R4-P168`
+
+⭐⭐⭐⭐ **En partie : 95 paires sur 134 tiennent les comptes en tours, contre 90** — `R4-F557`. Au seuil de `370` rapporté à la chaîne,
+deux sauts doubles de compagnes sont rattrapés, mais le saut où glisse la graine 7, côté plus, reste sous le seuil ; les feuilles de
+PHerc0358 sont trop inégalement espacées. `R4-P169` s'ouvre : une troisième chaîne, pour désigner par la majorité celle qui a glissé.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

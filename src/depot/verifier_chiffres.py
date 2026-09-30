@@ -3336,6 +3336,48 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 371 : COMPTER LES SAUTS EN TOURS FAIT-IL VOIR LE GLISSEMENT SUR PHERC0358
+    s371 = _source(racine, "compter_les_sauts_en_tours_fait_il_voir_le_glissement_sur_pherc0358.json")
+    s371_370 = _source(racine, "lecart_dun_saut_separe_t_il_un_tour_de_deux_sur_paris4.json")
+    if s371.exists() and s371_370.exists():
+        d, d0 = json.loads(s371.read_text()), json.loads(s371_370.read_text())
+        b, s_ = d["le_bilan"], d["les_seuils"]
+        virg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        cote = {(c["le_rang"], c["le_cote"]): c for c in d["les_cotes"]}
+        g7, g8, g8m = cote[(7, "plus")], cote[(8, "plus")], cote[(8, "moins")]
+        un = [x["le_rapport"] for c in d["les_cotes"] for k in ("suivie", "compagne") for x in c[k]
+              if x["les_tours"] == 1 and x["le_rapport"] is not None]
+        p1 = d0["le_bilan"]["par_tours"]["1"]
+        doubles = [(c["le_rang"], c["le_cote"], k, x["le_saut"], x["le_rapport"]) for c in d["les_cotes"] for k in ("suivie", "compagne")
+                   for x in c[k] if x["les_tours"] == 2]
+        ecrits = [("le verdict de 371", f"{b['tiennent']} PAIRES SUR {b['les_paires']} TIENNENT LES COMPTES EN TOURS, CONTRE "
+                                        f"{b['tiennent_369']} : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les seuils de 371", f"au plus à {virg(s_['deux'])}, le seuil de `370` entre un et deux tours, 2 au plus à "
+                                        f"{virg(s_['trois'])}"),
+                  ("le bilan de 371", f"{b['tiennent']} des {b['les_paires']} paires"),
+                  ("les comptes de 369 et bruts de 371", f"contre {b['tiennent_369']} sous les comptes corrigés de `369` et "
+                                                         f"{b['tiennent_brut']} sans correction"),
+                  ("les deux doubles de 371", f"de compagnes : le cinquième de la graine 8, côté plus, à {virg(doubles[0][4])} fois"
+                   if [x[:4] for x in doubles] == [(8, "plus", "compagne", 5), (8, "moins", "compagne", 8)] else "changé"),
+                  ("le double de 8 moins de 371", f"le huitième de la graine 8, côté moins, à {virg(doubles[1][4])}"
+                   if len(doubles) == 2 else "changé"),
+                  ("la graine 8 plus de 371", f"qui fait passer ce côté de {g8['tiennent_369']} à {g8['tiennent']} paires"),
+                  ("le saut de la graine 7 de 371", f"chaîne, sous le seuil de {virg(s_['deux'])}. Sur PHerc0358, les {len(un)} sauts lisibles"
+                   if g7["suivie"][1]["les_tours"] == 1 else "changé"),
+                  ("le rapport de la graine 7 de 371", f"s'écarte de {virg(g7['suivie'][1]['le_rapport'])} fois la médiane de sa"),
+                  ("l'étendue de 371", f"s'écartent de {virg(min(un))} à {virg(max(un))} fois la médiane"),
+                  ("l'étendue de Paris4 de 371", f"contre {virg(p1['rapporte_plus_petit'])} à {virg(p1['rapporte_plus_grand'])} sur PHercParis4"),
+                  ("en pas de 371", f"au seuil de `370` en pas, {virg(s_['deux_en_pas'])} pas sans rapporter à la chaîne, "
+                                    f"{b['tiennent_en_pas']} paires tiennent les comptes"),
+                  ("la graine 7 en pas de 371", f"passe de {g7['tiennent']} à {g7['tiennent_en_pas']} paires sur {g7['les_paires']}"),
+                  ("l'intro de 371", f"à {virg(g7['suivie'][1]['le_rapport'])} fois la médiane de sa chaîne"),
+                  ("la graine 8 moins de 371", "graine 8, côté moins" if g8m["tiennent"] == g8m["tiennent_369"] else "changé")]
+        for c in d["les_cotes"]:
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 371",
+                           f"| graine {c['le_rang']}, {c['le_cote']} | {c['les_paires']} | {c['tiennent_369']} | {c['tiennent']} | "
+                           f"{sum(x['les_tours'] >= 2 for k in ('suivie', 'compagne') for x in c[k])} | {c['tiennent_en_pas']} |"))
+        out.extend((nom, [x_], s371.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 370 : L'ÉCART D'UN SAUT SÉPARE-T-IL UN TOUR DE DEUX SUR PHERCPARIS4
     s370 = _source(racine, "lecart_dun_saut_separe_t_il_un_tour_de_deux_sur_paris4.json")
     if s370.exists():

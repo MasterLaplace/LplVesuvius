@@ -1,0 +1,657 @@
+{
+ "la_question": "Sur PHerc0358, un saut compté en tours au seuil que `370` étalonne, rapporté aux sauts de sa chaîne, fait-il voir dans la chaîne seule le glissement que l'accord de deux chaînes révèle ?",
+ "les_seuils": {
+  "deux": 1.4644,
+  "trois": 2.405,
+  "deux_en_pas": 0.9436,
+  "trois_en_pas": 1.5431
+ },
+ "le_quart": 5.0,
+ "le_pas": 20.0,
+ "369_decidable": true,
+ "les_cotes": [
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "suivie": [
+    {
+     "le_saut": 1,
+     "lecart_median": 17.911,
+     "le_rapport": 1.0815,
+     "les_tours": 1,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 2,
+     "lecart_median": 0.345,
+     "le_rapport": 0.0208,
+     "les_tours": 0,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 3,
+     "lecart_median": 18.773,
+     "le_rapport": 1.1336,
+     "les_tours": 1,
+     "le_compte": 2
+    },
+    {
+     "le_saut": 4,
+     "lecart_median": 12.137,
+     "le_rapport": 0.7329,
+     "les_tours": 1,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 5,
+     "lecart_median": 4.48,
+     "le_rapport": 0.2705,
+     "les_tours": 0,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 6,
+     "lecart_median": 17.657,
+     "le_rapport": 1.0662,
+     "les_tours": 1,
+     "le_compte": 4
+    },
+    {
+     "le_saut": 7,
+     "lecart_median": 10.305,
+     "le_rapport": 0.6223,
+     "les_tours": 1,
+     "le_compte": 5
+    },
+    {
+     "le_saut": 8,
+     "lecart_median": 15.464,
+     "le_rapport": 0.9338,
+     "les_tours": 1,
+     "le_compte": 6
+    }
+   ],
+   "compagne": [
+    {
+     "le_saut": 1,
+     "lecart_median": 17.564,
+     "le_rapport": 1.0013,
+     "les_tours": 1,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 2,
+     "lecart_median": 0.851,
+     "le_rapport": 0.0485,
+     "les_tours": 0,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 3,
+     "lecart_median": 17.59,
+     "le_rapport": 1.0028,
+     "les_tours": 1,
+     "le_compte": 2
+    },
+    {
+     "le_saut": 4,
+     "lecart_median": 11.663,
+     "le_rapport": 0.6649,
+     "les_tours": 1,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 5,
+     "lecart_median": 15.398,
+     "le_rapport": 0.8778,
+     "les_tours": 1,
+     "le_compte": 4
+    },
+    {
+     "le_saut": 6,
+     "lecart_median": 12.813,
+     "le_rapport": 0.7305,
+     "les_tours": 1,
+     "le_compte": 5
+    },
+    {
+     "le_saut": 7,
+     "lecart_median": 17.541,
+     "le_rapport": 1.0,
+     "les_tours": 1,
+     "le_compte": 6
+    },
+    {
+     "le_saut": 8,
+     "lecart_median": 19.477,
+     "le_rapport": 1.1104,
+     "les_tours": 1,
+     "le_compte": 7
+    }
+   ],
+   "les_paires": 41,
+   "tiennent": 38,
+   "tiennent_369": 38,
+   "tiennent_brut": 28,
+   "tiennent_en_pas": 38
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "suivie": [
+    {
+     "le_saut": 1,
+     "lecart_median": 15.639,
+     "le_rapport": 0.9664,
+     "les_tours": 1,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 2,
+     "lecart_median": 23.438,
+     "le_rapport": 1.4484,
+     "les_tours": 1,
+     "le_compte": 2
+    },
+    {
+     "le_saut": 3,
+     "lecart_median": 12.061,
+     "le_rapport": 0.7453,
+     "les_tours": 1,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 4,
+     "lecart_median": 17.822,
+     "le_rapport": 1.1013,
+     "les_tours": 1,
+     "le_compte": 4
+    },
+    {
+     "le_saut": 5,
+     "lecart_median": 17.407,
+     "le_rapport": 1.0757,
+     "les_tours": 1,
+     "le_compte": 5
+    },
+    {
+     "le_saut": 6,
+     "lecart_median": 15.955,
+     "le_rapport": 0.986,
+     "les_tours": 1,
+     "le_compte": 6
+    },
+    {
+     "le_saut": 7,
+     "lecart_median": 16.409,
+     "le_rapport": 1.014,
+     "les_tours": 1,
+     "le_compte": 7
+    },
+    {
+     "le_saut": 8,
+     "lecart_median": 14.98,
+     "le_rapport": 0.9257,
+     "les_tours": 1,
+     "le_compte": 8
+    }
+   ],
+   "compagne": [
+    {
+     "le_saut": 1,
+     "lecart_median": 14.719,
+     "le_rapport": 0.8816,
+     "les_tours": 1,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 2,
+     "lecart_median": 16.777,
+     "le_rapport": 1.0049,
+     "les_tours": 1,
+     "le_compte": 2
+    },
+    {
+     "le_saut": 3,
+     "lecart_median": 11.284,
+     "le_rapport": 0.6759,
+     "les_tours": 1,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 4,
+     "lecart_median": 14.994,
+     "le_rapport": 0.8981,
+     "les_tours": 1,
+     "le_compte": 4
+    },
+    {
+     "le_saut": 5,
+     "lecart_median": 16.613,
+     "le_rapport": 0.9951,
+     "les_tours": 1,
+     "le_compte": 5
+    },
+    {
+     "le_saut": 6,
+     "lecart_median": 20.974,
+     "le_rapport": 1.2563,
+     "les_tours": 1,
+     "le_compte": 6
+    },
+    {
+     "le_saut": 7,
+     "lecart_median": 19.082,
+     "le_rapport": 1.143,
+     "les_tours": 1,
+     "le_compte": 7
+    },
+    {
+     "le_saut": 8,
+     "lecart_median": 18.58,
+     "le_rapport": 1.1129,
+     "les_tours": 1,
+     "le_compte": 8
+    }
+   ],
+   "les_paires": 22,
+   "tiennent": 9,
+   "tiennent_369": 9,
+   "tiennent_brut": 9,
+   "tiennent_en_pas": 18
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "suivie": [
+    {
+     "le_saut": 1,
+     "lecart_median": 17.381,
+     "le_rapport": 1.0235,
+     "les_tours": 1,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 2,
+     "lecart_median": 18.995,
+     "le_rapport": 1.1185,
+     "les_tours": 1,
+     "le_compte": 2
+    },
+    {
+     "le_saut": 3,
+     "lecart_median": 13.452,
+     "le_rapport": 0.7921,
+     "les_tours": 1,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 4,
+     "lecart_median": 21.23,
+     "le_rapport": 1.2501,
+     "les_tours": 1,
+     "le_compte": 4
+    },
+    {
+     "le_saut": 5,
+     "lecart_median": 16.584,
+     "le_rapport": 0.9765,
+     "les_tours": 1,
+     "le_compte": 5
+    },
+    {
+     "le_saut": 6,
+     "lecart_median": 13.794,
+     "le_rapport": 0.8122,
+     "les_tours": 1,
+     "le_compte": 6
+    },
+    {
+     "le_saut": 7,
+     "lecart_median": 14.919,
+     "le_rapport": 0.8785,
+     "les_tours": 1,
+     "le_compte": 7
+    },
+    {
+     "le_saut": 8,
+     "lecart_median": 18.3,
+     "le_rapport": 1.0776,
+     "les_tours": 1,
+     "le_compte": 8
+    }
+   ],
+   "compagne": [
+    {
+     "le_saut": 1,
+     "lecart_median": 17.155,
+     "le_rapport": 1.1716,
+     "les_tours": 1,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 2,
+     "lecart_median": 19.068,
+     "le_rapport": 1.3023,
+     "les_tours": 1,
+     "le_compte": 2
+    },
+    {
+     "le_saut": 3,
+     "lecart_median": 12.792,
+     "le_rapport": 0.8737,
+     "les_tours": 1,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 4,
+     "lecart_median": 14.895,
+     "le_rapport": 1.0173,
+     "les_tours": 1,
+     "le_compte": 4
+    },
+    {
+     "le_saut": 5,
+     "lecart_median": 14.389,
+     "le_rapport": 0.9827,
+     "les_tours": 1,
+     "le_compte": 5
+    },
+    {
+     "le_saut": 6,
+     "lecart_median": 13.031,
+     "le_rapport": 0.89,
+     "les_tours": 1,
+     "le_compte": 6
+    },
+    {
+     "le_saut": 7,
+     "lecart_median": 17.352,
+     "le_rapport": 1.1851,
+     "les_tours": 1,
+     "le_compte": 7
+    },
+    {
+     "le_saut": 8,
+     "lecart_median": 12.477,
+     "le_rapport": 0.8521,
+     "les_tours": 1,
+     "le_compte": 8
+    }
+   ],
+   "les_paires": 10,
+   "tiennent": 9,
+   "tiennent_369": 9,
+   "tiennent_brut": 9,
+   "tiennent_en_pas": 9
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "suivie": [
+    {
+     "le_saut": 1,
+     "lecart_median": 11.158,
+     "le_rapport": 0.7075,
+     "les_tours": 1,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 2,
+     "lecart_median": 15.58,
+     "le_rapport": 0.9879,
+     "les_tours": 1,
+     "le_compte": 2
+    },
+    {
+     "le_saut": 3,
+     "lecart_median": 11.277,
+     "le_rapport": 0.7151,
+     "les_tours": 1,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 4,
+     "lecart_median": 15.454,
+     "le_rapport": 0.9799,
+     "les_tours": 1,
+     "le_compte": 4
+    },
+    {
+     "le_saut": 5,
+     "lecart_median": 15.961,
+     "le_rapport": 1.0121,
+     "les_tours": 1,
+     "le_compte": 5
+    },
+    {
+     "le_saut": 6,
+     "lecart_median": 19.368,
+     "le_rapport": 1.2281,
+     "les_tours": 1,
+     "le_compte": 6
+    },
+    {
+     "le_saut": 7,
+     "lecart_median": 17.138,
+     "le_rapport": 1.0867,
+     "les_tours": 1,
+     "le_compte": 7
+    },
+    {
+     "le_saut": 8,
+     "lecart_median": 16.155,
+     "le_rapport": 1.0244,
+     "les_tours": 1,
+     "le_compte": 8
+    }
+   ],
+   "compagne": [
+    {
+     "le_saut": 1,
+     "lecart_median": 11.98,
+     "le_rapport": 0.8527,
+     "les_tours": 1,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 2,
+     "lecart_median": 14.57,
+     "le_rapport": 1.0371,
+     "les_tours": 1,
+     "le_compte": 2
+    },
+    {
+     "le_saut": 3,
+     "lecart_median": 13.851,
+     "le_rapport": 0.9859,
+     "les_tours": 1,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 4,
+     "lecart_median": 13.873,
+     "le_rapport": 0.9875,
+     "les_tours": 1,
+     "le_compte": 4
+    },
+    {
+     "le_saut": 5,
+     "lecart_median": 26.579,
+     "le_rapport": 1.8919,
+     "les_tours": 2,
+     "le_compte": 6
+    },
+    {
+     "le_saut": 6,
+     "lecart_median": 13.517,
+     "le_rapport": 0.9621,
+     "les_tours": 1,
+     "le_compte": 7
+    },
+    {
+     "le_saut": 7,
+     "lecart_median": 14.225,
+     "le_rapport": 1.0125,
+     "les_tours": 1,
+     "le_compte": 8
+    },
+    {
+     "le_saut": 8,
+     "lecart_median": 14.911,
+     "le_rapport": 1.0614,
+     "les_tours": 1,
+     "le_compte": 9
+    }
+   ],
+   "les_paires": 35,
+   "tiennent": 26,
+   "tiennent_369": 21,
+   "tiennent_brut": 21,
+   "tiennent_en_pas": 22
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "suivie": [
+    {
+     "le_saut": 1,
+     "lecart_median": 16.111,
+     "le_rapport": 1.0064,
+     "les_tours": 1,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 2,
+     "lecart_median": 21.175,
+     "le_rapport": 1.3227,
+     "les_tours": 1,
+     "le_compte": 2
+    },
+    {
+     "le_saut": 3,
+     "lecart_median": 12.878,
+     "le_rapport": 0.8044,
+     "les_tours": 1,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 4,
+     "lecart_median": 12.17,
+     "le_rapport": 0.7602,
+     "les_tours": 1,
+     "le_compte": 4
+    },
+    {
+     "le_saut": 5,
+     "lecart_median": 16.009,
+     "le_rapport": 1.0,
+     "les_tours": 1,
+     "le_compte": 5
+    },
+    {
+     "le_saut": 6,
+     "lecart_median": 14.667,
+     "le_rapport": 0.9162,
+     "les_tours": 1,
+     "le_compte": 6
+    },
+    {
+     "le_saut": 7,
+     "lecart_median": 16.708,
+     "le_rapport": 1.0437,
+     "les_tours": 1,
+     "le_compte": 7
+    },
+    {
+     "le_saut": 8,
+     "lecart_median": 2.469,
+     "le_rapport": 0.1542,
+     "les_tours": 0,
+     "le_compte": 7
+    }
+   ],
+   "compagne": [
+    {
+     "le_saut": 1,
+     "lecart_median": 20.58,
+     "le_rapport": null,
+     "les_tours": 1,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 2,
+     "lecart_median": 0.751,
+     "le_rapport": 0.0479,
+     "les_tours": 0,
+     "le_compte": 1
+    },
+    {
+     "le_saut": 3,
+     "lecart_median": 14.435,
+     "le_rapport": 0.9214,
+     "les_tours": 1,
+     "le_compte": 2
+    },
+    {
+     "le_saut": 4,
+     "lecart_median": 15.667,
+     "le_rapport": 1.0,
+     "les_tours": 1,
+     "le_compte": 3
+    },
+    {
+     "le_saut": 5,
+     "lecart_median": 17.558,
+     "le_rapport": 1.1207,
+     "les_tours": 1,
+     "le_compte": 4
+    },
+    {
+     "le_saut": 6,
+     "lecart_median": 15.448,
+     "le_rapport": 0.986,
+     "les_tours": 1,
+     "le_compte": 5
+    },
+    {
+     "le_saut": 7,
+     "lecart_median": 0.906,
+     "le_rapport": 0.0578,
+     "les_tours": 0,
+     "le_compte": 5
+    },
+    {
+     "le_saut": 8,
+     "lecart_median": 32.052,
+     "le_rapport": 2.0458,
+     "les_tours": 2,
+     "le_compte": 7
+    }
+   ],
+   "les_paires": 26,
+   "tiennent": 13,
+   "tiennent_369": 13,
+   "tiennent_brut": 10,
+   "tiennent_en_pas": 15
+  }
+ ],
+ "le_bilan": {
+  "les_paires": 134,
+  "tiennent": 95,
+  "tiennent_369": 90,
+  "tiennent_brut": 77,
+  "tiennent_en_pas": 102,
+  "les_sauts_par_tours": {
+   "0": 6,
+   "1": 72,
+   "2": 2,
+   "3": 0
+  }
+ },
+ "redonne_369": true,
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "comptés en tours, 95 des 134 paires tiennent les comptes, contre 90 sous les comptes corrigés de 369 ; en partie"
+ }
+}
