@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**228 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**229 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 190 portes
+## Grand Prize — 191 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -208,7 +208,8 @@
 - **R4-P171** *(le graal)* · **RÉPONDUE par `374` : oui.** 25 des 120 surfaces des trois chaînes sont validées, sur les graines 6, côté moins, et 7, jusqu'à 6 tours de la nappe de départ ; aucune sur la graine 8, où 47 des 48 surfaces sont contredites (`R4-F560`). La suite est `R4-P172`.
 - **R4-P172** *(le graal)* · **RÉPONDUE par `375` : non.** 12 des 27 paires « même feuille » à deux tours ou plus d'écart ont au moins un quart de leurs points en face à plus d'un demi-pas, contre 7 des 38 au même compte ; pour 15 des 27, plus des trois quarts des points en face sont à moins d'un demi-pas : c'est le compte des sauts qui fait s'écarter les chaînes (`R4-F561`). La suite est `R4-P173`.
 - **R4-P173** *(le graal)* · **RÉPONDUE par `376` : indécidable.** Le contrôle échoue de peu : 34 des 38 paires « même feuille » au même compte sont à la même distance de leurs nappes, il en fallait 35 ; aucune des 27 paires à deux tours ou plus ne l'est, et les 27 s'écartent dans le sens de leurs comptes (`R4-F562`). La suite est `R4-P174`.
-- **R4-P174** *(le graal)* · **SUR PHERC0358, GRAINE 8, LES NAPPES DE DÉPART DES TROIS CHAÎNES SONT-ELLES SUR DES FEUILLES DIFFÉRENTES, À AUTANT DE TOURS QUE L'ÉCART DE LEURS COMPTES AU PREMIER SAUT ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `376` DÉSIGNE. Là où les comptes des chaînes de la graine 8 s'écartent, la distance à leurs nappes s'écarte avec eux (`R4-F562`) : ou les nappes ne partent pas de la même feuille, ou des surfaces y sont à cheval sur deux feuilles. Comparer les nappes entre elles le dit sans passer par les sauts.
+- **R4-P174** *(le graal)* · **RÉPONDUE par `377` : en partie.** Sur la graine 8, la nappe de la tierce est à 8,83 voxels de celle de la suivie en médiane, 44 % des points en face au loin : elle est à cheval, pas à autant de tours que l'écart des comptes ; les deux autres couples sont sur la même feuille, comme les six des graines 6 et 7 (`R4-F563`). La suite est `R4-P175`.
+- **R4-P175** *(le graal)* · **SUR PHERC0358, LES SAUTS DES CHAÎNES DE LA GRAINE 8 SONT-ILS À CHEVAL, UN QUART AU MOINS DE LEURS POINTS À PLUS D'UN DEMI-PAS DE L'ÉCART MÉDIAN DU SAUT, PLUS SOUVENT QUE CEUX DES GRAINES 6 ET 7 ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `377` DÉSIGNE. Une nappe regrandie depuis un point d'une autre peut se mettre à cheval sur deux feuilles (`R4-F563`) ; chaque surface d'une chaîne est regrandie à chaque saut, et la suivie et la compagne de la graine 8, parties de la même feuille, s'écartent dès leurs premiers sauts.
 
 ## Progress Prizes — 19 portes
 

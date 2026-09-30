@@ -1,0 +1,277 @@
+{
+ "la_question": "Sur PHerc0358, graine 8, les nappes de départ des trois chaînes sont-elles sur des feuilles différentes, à autant de tours que l'écart de leurs comptes au premier saut ?",
+ "les_constantes": {
+  "le_quart": 5.0,
+  "le_demi_pas": 10.0,
+  "la_portee": 60.0,
+  "le_saut": 15.667,
+  "le_minimum_en_face": 50,
+  "le_minimum_de_couples": 2
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 11767,
+  "absents": 0,
+  "octets": 5797937786
+ },
+ "redonne": true,
+ "les_memes_nappes": true,
+ "les_cotes": [
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_couples": {
+    "suivie|compagne": {
+     "en_face": 795,
+     "lecart_median": 0.346,
+     "la_part_lointaine": 0.0,
+     "differentes": false,
+     "en_sauts": 0.022,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    },
+    "suivie|tierce": {
+     "en_face": 895,
+     "lecart_median": 0.305,
+     "la_part_lointaine": 0.0034,
+     "differentes": false,
+     "en_sauts": 0.019,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    },
+    "compagne|tierce": {
+     "en_face": 726,
+     "lecart_median": 0.309,
+     "la_part_lointaine": 0.0,
+     "differentes": false,
+     "en_sauts": 0.02,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    }
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_couples": {
+    "suivie|compagne": {
+     "en_face": 292,
+     "lecart_median": 0.296,
+     "la_part_lointaine": 0.0,
+     "differentes": false,
+     "en_sauts": 0.019,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    },
+    "suivie|tierce": {
+     "en_face": 709,
+     "lecart_median": 0.398,
+     "la_part_lointaine": 0.141,
+     "differentes": false,
+     "en_sauts": 0.025,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    },
+    "compagne|tierce": {
+     "en_face": 168,
+     "lecart_median": 0.289,
+     "la_part_lointaine": 0.0,
+     "differentes": false,
+     "en_sauts": 0.018,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    }
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_couples": {
+    "suivie|compagne": {
+     "en_face": 292,
+     "lecart_median": 0.296,
+     "la_part_lointaine": 0.0,
+     "differentes": false,
+     "en_sauts": 0.019,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    },
+    "suivie|tierce": {
+     "en_face": 709,
+     "lecart_median": 0.398,
+     "la_part_lointaine": 0.141,
+     "differentes": false,
+     "en_sauts": 0.025,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    },
+    "compagne|tierce": {
+     "en_face": 168,
+     "lecart_median": 0.289,
+     "la_part_lointaine": 0.0,
+     "differentes": false,
+     "en_sauts": 0.018,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    }
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_couples": {
+    "suivie|compagne": {
+     "en_face": 877,
+     "lecart_median": 0.401,
+     "la_part_lointaine": 0.0513,
+     "differentes": false,
+     "en_sauts": 0.026,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    },
+    "suivie|tierce": {
+     "en_face": 896,
+     "lecart_median": 8.83,
+     "la_part_lointaine": 0.4442,
+     "differentes": true,
+     "en_sauts": 0.564,
+     "la_premiere_paire": {
+      "les_sauts": [
+       3,
+       1
+      ],
+      "lecart_de_comptes": 2
+     }
+    },
+    "compagne|tierce": {
+     "en_face": 913,
+     "lecart_median": 1.531,
+     "la_part_lointaine": 0.3724,
+     "differentes": false,
+     "en_sauts": 0.098,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       1
+      ],
+      "lecart_de_comptes": 0
+     }
+    }
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_couples": {
+    "suivie|compagne": {
+     "en_face": 877,
+     "lecart_median": 0.401,
+     "la_part_lointaine": 0.0513,
+     "differentes": false,
+     "en_sauts": 0.026,
+     "la_premiere_paire": {
+      "les_sauts": [
+       2,
+       1
+      ],
+      "lecart_de_comptes": 1
+     }
+    },
+    "suivie|tierce": {
+     "en_face": 896,
+     "lecart_median": 8.83,
+     "la_part_lointaine": 0.4442,
+     "differentes": true,
+     "en_sauts": 0.564,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       2
+      ],
+      "lecart_de_comptes": 1
+     }
+    },
+    "compagne|tierce": {
+     "en_face": 913,
+     "lecart_median": 1.531,
+     "la_part_lointaine": 0.3724,
+     "differentes": false,
+     "en_sauts": 0.098,
+     "la_premiere_paire": {
+      "les_sauts": [
+       1,
+       4
+      ],
+      "lecart_de_comptes": 3
+     }
+    }
+   }
+  }
+ ],
+ "le_bilan": {
+  "la_graine_8": {
+   "lus": 3,
+   "differentes": 1
+  },
+  "les_temoins": {
+   "lus": 6,
+   "differentes": 0
+  },
+  "le_controle": true
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "sur la graine 8, 1 des 3 couples de nappes lus sont sur des feuilles différentes, contre 0 des 6 sur les graines 6 et 7 ; en partie"
+ },
+ "les_secondes": 137.5
+}

@@ -3336,8 +3336,45 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 377 : LES NAPPES DE DÉPART DE LA GRAINE 8 SONT-ELLES SUR DES FEUILLES DIFFÉRENTES
+    s377 = _source(racine, "les_nappes_de_depart_de_la_graine_8_sont_elles_sur_des_feuilles_differentes.json")
+    if s377.exists():
+        d = json.loads(s377.read_text())
+        b = d["le_bilan"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        vx = lambda x: f"{vg(x)} voxel{'s' if x >= 2 else ''}"  # noqa: E731
+        gr = {}
+        for c in d["les_cotes"]:
+            gr.setdefault(c["le_rang"], c["les_couples"])
+        cote = {(c["le_rang"], c["le_cote"]): c["les_couples"] for c in d["les_cotes"]}
+        st, ct, sc = gr[8]["suivie|tierce"], gr[8]["compagne|tierce"], gr[8]["suivie|compagne"]
+        temoins = [x for r in (6, 7) for x in gr[r].values()]
+        g8, t = b["la_graine_8"], b["les_temoins"]
+        ecrits = [("le verdict de 377", f"SUR LA GRAINE 8, {g8['differentes']} DES {g8['lus']} COUPLES DE NAPPES LUS SONT SUR DES FEUILLES "
+                                        f"DIFFÉRENTES, CONTRE {t['differentes']} DES {t['lus']} SUR LES GRAINES 6 ET 7 : "
+                                        f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("la lecture de 377", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne, en {vg(d['les_secondes'])} "
+                                        "secondes" if not d["les_pannes"] else "changé"),
+                  ("la tierce de 377", f"{vx(st['lecart_median'])} de celle de la suivie en médiane, au-delà du quart de pas"
+                   if st["differentes"] and not sc["differentes"] and not ct["differentes"] else "changé"),
+                  ("les témoins de 377", "0,4 voxel. Le contrôle tient"
+                   if b["le_controle"] and max(x["lecart_median"] for x in temoins) < 0.4 else "changé"),
+                  ("le saut de 377", f"{vx(st['lecart_median'])}, c'est {vg(st['en_sauts'])} saut simple, et "
+                                     f"{round(100 * st['la_part_lointaine'])} % des points"),
+                  ("la compagne de 377", f"{vx(ct['lecart_median'])}, mais {round(100 * ct['la_part_lointaine'])} % des points sont au loin"),
+                  ("la suivie et la compagne de 377", f"{vx(sc['lecart_median'])} en médiane et {round(100 * sc['la_part_lointaine'])} % au loin"),
+                  ("la première paire de 377", "leur première" if cote[(8, "moins")]["suivie|compagne"]["la_premiere_paire"]
+                   == {"les_sauts": [2, 1], "lecart_de_comptes": 1} else "changé"),
+                  ("les deux tours de 377", f"sont à {vg(st['en_sauts'])} saut, quand leur première paire « même feuille » est à "
+                                            f"{cote[(8, 'plus')]['suivie|tierce']['la_premiere_paire']['lecart_de_comptes']} tours côté plus")]
+        for r in (6, 7, 8):
+            cel = [f"{vx(gr[r][k]['lecart_median'])}, {round(100 * gr[r][k]['la_part_lointaine'])} % au loin"
+                   for k in ("suivie|compagne", "suivie|tierce", "compagne|tierce")]
+            ecrits.append((f"la ligne {r} de 377", f"| {r} | " + " | ".join(cel) + " |"))
+        out.extend((nom_, [x_], s377.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 376 : UNE PAIRE À PLUSIEURS TOURS EST-ELLE À LA MÊME DISTANCE DE LA NAPPE
-    s376 = _source(racine, "une_paire_a_plusieurs_tours_est_elle_a_la_meme_distance_de_la_nappe.json")
+    s376 =_source(racine, "une_paire_a_plusieurs_tours_est_elle_a_la_meme_distance_de_la_nappe.json")
     if s376.exists():
         d = json.loads(s376.read_text())
         b = d["le_bilan"]

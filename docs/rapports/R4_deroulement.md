@@ -4804,6 +4804,12 @@ chaînes qui s'écartent. `R4-P173` s'ouvre : la même distance de la nappe, att
 deux tours ou plus n'est à la même distance, et les 27 s'écartent dans le sens de leurs comptes. `R4-P174` s'ouvre : les nappes de
 départ de la graine 8 sur des feuilles différentes ?
 
+**`377` · 2026-09-30 · les nappes de départ de la graine 8 sont-elles sur des feuilles différentes** — `R4-P174`
+
+⭐⭐⭐⭐ **En partie : 1 couple de nappes sur 3, la nappe de la tierce à cheval** — `R4-F563`. Sur la graine 8, la nappe de la tierce est
+à 8,83 voxels de celle de la suivie en médiane, 44 % des points au loin ; la suivie et la compagne partent de la même feuille, et leurs
+comptes s'écartent quand même. `R4-P175` s'ouvre : les sauts de la graine 8 à cheval plus souvent ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

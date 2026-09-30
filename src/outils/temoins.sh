@@ -1891,6 +1891,8 @@ run "les paires « même feuille » à plusieurs tours sont-elles deux feuilles 
 run "figure les paires « même feuille » à plusieurs tours sont-elles deux feuilles qui se touchent" uv run python "$ROOT/src/figures/figure_les_paires_meme_feuille_a_plusieurs_tours_sont_elles_deux_feuilles_qui_se_touchent.py" --verifier
 run "une paire à plusieurs tours est-elle à la même distance de la nappe" uv run python "$ROOT/src/nappe/une_paire_a_plusieurs_tours_est_elle_a_la_meme_distance_de_la_nappe.py" --verifier
 run "figure une paire à plusieurs tours est-elle à la même distance de la nappe" uv run python "$ROOT/src/figures/figure_une_paire_a_plusieurs_tours_est_elle_a_la_meme_distance_de_la_nappe.py" --verifier
+run "les nappes de départ de la graine 8 sont-elles sur des feuilles différentes" uv run python "$ROOT/src/nappe/les_nappes_de_depart_de_la_graine_8_sont_elles_sur_des_feuilles_differentes.py" --verifier
+run "figure les nappes de départ de la graine 8 sont-elles sur des feuilles différentes" uv run python "$ROOT/src/figures/figure_les_nappes_de_depart_de_la_graine_8_sont_elles_sur_des_feuilles_differentes.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
