@@ -138,9 +138,10 @@ def le_verdict(d: dict) -> dict:
     return {"decidable": True, "h": h, "h0": h0, "lissue": f"{tete} ; {suite}"}
 
 
-def les_chaines_de_0358(relancer0=None, avec_la_spire: bool = False) -> tuple[list[dict], object, dict]:
+def les_chaines_de_0358(relancer0=None, avec_la_spire: bool = False, chainer=None) -> tuple[list[dict], object, dict]:
     """Les chaînes relancées de PHerc0358 que `331` suit, une par côté de graine dont le saut de `324` pose au pas, avec le lecteur de
-    `m7` qui les a lues et ses statistiques de lecture. Sorti de la mesure de `331` pour `354`, qui y porte le compte de `345`."""
+    `m7` qui les a lues et ses statistiques de lecture. Sorti de la mesure de `331` pour `354`, qui y porte le compte de `345`. Avec
+    `chainer(nappe, relancer, sauter, lire_valeurs)`, écrit pour `356`, la chaîne est construite par l'appelant depuis les mêmes nappes."""
     from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot, lire_les_valeurs
 
     from zarr_depth import BUCKET, array_meta
@@ -165,8 +166,9 @@ def les_chaines_de_0358(relancer0=None, avec_la_spire: bool = False) -> tuple[li
                 continue
             rel0 = ((lambda p_, n_: m305.la_nappe_croissante(tuple(p_), tuple(n_), lv0)) if relancer0 is None
                     else relancer0(lv0))
-            chaine = la_chaine_relancee(r, cote, rel0, lambda s_, o_, cote=cote: m306.le_saut_croissant(s_, o_, cote, lv0),
-                                        avec_la_spire=avec_la_spire)
+            sauter = lambda s_, o_, cote=cote: m306.le_saut_croissant(s_, o_, cote, lv0)  # noqa: E731
+            chaine = (la_chaine_relancee(r, cote, rel0, sauter, avec_la_spire=avec_la_spire) if chainer is None
+                      else chainer(r, rel0, sauter, lv0))
             out.append({"le_rang": rang, "le_cote": nom, "la_chaine": chaine})
     return out, lv0, stats0
 

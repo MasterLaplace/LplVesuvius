@@ -4678,6 +4678,12 @@ un rouleau sans tracé avec une précision connue ailleurs. `R4-P151` s'ouvre : 
 départ et la nappe relancée depuis un de ses points y retombe. `R4-P151`, l'encre, attend l'auteur ; `R4-P153` s'ouvre : ne relancer que
 là où la spire est refusée.
 
+**`356` · 2026-09-30 · une chaîne qui garde la spire tenue va-t-elle plus loin sur PHerc0358** — `R4-P153`
+
+⭐⭐⭐⭐⭐ **Oui : trois sauts à la suite en médiane, contre aucun** — `R4-F542`. La chaîne mixte garde sa spire quand le critère de
+`352` la tient et ne relance que sinon ; elle tient 22 des 40 sauts, dont 20 spires gardées. `R4-P154` s'ouvre : la juger sur Paris4,
+où les tours publiés disent si ses surfaces sont sur leur feuille.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -1849,6 +1849,8 @@ run "le compte et le seuil tiennent-ils une première surface sur PHerc0358" uv 
 run "figure le compte et le seuil tiennent-ils une première surface sur PHerc0358" uv run python "$ROOT/src/figures/figure_le_compte_et_le_seuil_tiennent_ils_une_premiere_surface_sur_pherc0358.py" --verifier
 run "sur PHerc0358 est-ce le saut ou la relance qui reste sur la feuille de départ" uv run python "$ROOT/src/nappe/sur_pherc0358_est_ce_le_saut_ou_la_relance_qui_reste_sur_la_feuille_de_depart.py" --verifier
 run "figure sur PHerc0358 est-ce le saut ou la relance qui reste sur la feuille de départ" uv run python "$ROOT/src/figures/figure_sur_pherc0358_est_ce_le_saut_ou_la_relance_qui_reste_sur_la_feuille_de_depart.py" --verifier
+run "une chaîne qui garde la spire tenue va-t-elle plus loin sur PHerc0358" uv run python "$ROOT/src/nappe/une_chaine_qui_garde_la_spire_tenue_va_t_elle_plus_loin_sur_pherc0358.py" --verifier
+run "figure une chaîne qui garde la spire tenue va-t-elle plus loin sur PHerc0358" uv run python "$ROOT/src/figures/figure_une_chaine_qui_garde_la_spire_tenue_va_t_elle_plus_loin_sur_pherc0358.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

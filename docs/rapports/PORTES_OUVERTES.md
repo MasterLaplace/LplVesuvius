@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**207 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**208 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 169 portes
+## Grand Prize — 170 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -187,7 +187,8 @@
 - **R4-P150** *(le graal)* · **RÉPONDUE par `354` : sur certains côtés seulement.** Le critère tient le premier saut de 2 des 5 côtés suivis sur PHerc0358, et jamais le saut suivant (`R4-F540`). La suite est `R4-P151`.
 - **R4-P151** *(le graal)* · **SUR PHERC0358, LES DEUX PREMIÈRES SURFACES QUE LE CRITÈRE TIENT PORTENT-ELLES PLUS D'ENCRE, AU DÉTECTEUR DE `296`, QUE LES SURFACES QU'IL REFUSE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `354` DÉSIGNE. Les 92 % de Paris4 ne sont qu'un étalon (`R4-F540`) ; l'encre est un témoin indépendant du compte des feuilles, et le seul qu'un rouleau sans tracé offre ⚠ EN ATTENTE DE L'AUTEUR (`355`) : le détecteur de `296` est étalonné à 2,4 µm, PHerc0358 est scanné à 9,362 µm, et la lire demande des lectures neuves du volume
 - **R4-P152** *(le graal)* · **RÉPONDUE par `355`, qui l'a ouverte : l'un et l'autre.** Sur PHerc0358, sous 23 sauts dont la surface relancée garde 50 points sur la feuille de départ, la spire était partie sous 14 et c'est la relance qui retombe, restée sous 9 (`R4-F541`). La suite est `R4-P153`.
-- **R4-P153** *(le graal)* · **SUR PHERC0358, UNE CHAÎNE QUI SAUTE DEPUIS LA SPIRE QUAND LE CRITÈRE DE `352` LA TIENT, ET NE RELANCE QUE SINON, TIENT-ELLE PLUS DE SAUTS À LA SUITE QUE LA CHAÎNE RELANCÉE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `355` DÉSIGNE. La spire est plus souvent une bonne surface que la nappe relancée depuis un de ses points (`R4-F541`), mais une chaîne sans relance rétrécit (`328`) : ne relancer que là où la spire est refusée garde le meilleur des deux
+- **R4-P153** *(le graal)* · **RÉPONDUE par `356` : oui.** Sur PHerc0358, la chaîne mixte tient 3 sauts à la suite en médiane, contre 0 pour la chaîne relancée ; 22 des 40 sauts, dont 20 spires gardées (`R4-F542`). La suite est `R4-P154`.
+- **R4-P154** *(le graal)* · **SUR PHERCPARIS4, GRAINES 4 À 8, LA CHAÎNE MIXTE TIENT-ELLE SES SAUTS JUSTES, ET DONNE-T-ELLE MOINS DE SURFACES À CHEVAL QUE LES CHAÎNES RELANCÉES ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `356` DÉSIGNE. Sur PHerc0358, la chaîne mixte va plus loin (`R4-F542`), mais rien n'y dit si ses surfaces sont sur leur feuille ; sur Paris4, les tours publiés le disent, et les chaînes relancées y donnent des surfaces à cheval sous 60 des 104 sauts justes (`R4-F535`)
 
 ## Progress Prizes — 19 portes
 

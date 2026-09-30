@@ -3336,6 +3336,31 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 356 : UNE CHAÎNE QUI GARDE LA SPIRE TENUE VA-T-ELLE PLUS LOIN SUR PHERC0358
+    s356 = _source(racine, "une_chaine_qui_garde_la_spire_tenue_va_t_elle_plus_loin_sur_pherc0358.json")
+    if s356.exists():
+        d = json.loads(s356.read_text())
+        v_, cotes = d["le_verdict"], d["les_cotes"]
+        tous = [s_ for c in cotes for s_ in c["les_sauts"]]
+        suites = ", ".join(str(c["la_suite"]) for c in cotes[:-1]) + f" et {cotes[-1]['la_suite']}"
+        rel = ", ".join(str(x) for x in d["les_suites_relancees"][:-1]) + f" et {d['les_suites_relancees'][-1]}"
+        ecrits = [("le verdict de 356", v_["lissue"].upper()),
+                  ("les chunks de m7 lus de 356", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne"),
+                  ("les suites de 356", f"tient {suites} sauts à la suite"),
+                  ("les suites relancées de 356", f"contre {rel} pour la chaîne relancée"),
+                  ("les sauts tenus de 356", f"Sur {len(tous)} sauts, elle en tient {sum(s_['tenu'] for s_ in tous)}, dont "
+                                             f"{sum(s_['tenu'] and s_['depuis'] == 'la spire' for s_ in tous)} où"),
+                  ("les spires et relances de 356", f"elle a gardé sa spire {sum(s_['depuis'] == 'la spire' for s_ in tous)} fois et relancé "
+                                                    f"{sum(s_['depuis'] == 'la relance' for s_ in tous)} fois"),
+                  ("les relances tenues de 356", f"et {sum(s_['tenu'] and s_['depuis'] == 'la relance' for s_ in tous)} seulement des nappes"),
+                  ("la plus petite spire de 356", f"La spire gardée la plus petite a {min(s_['les_points'] for s_ in tous if s_['depuis'] == 'la spire')} "
+                                                  f"points")]
+        for c, r in zip(cotes, d["les_suites_relancees"]):
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 356",
+                           f"| graine {c['le_rang']}, {c['le_cote']} | {c['la_suite']} | {r} | {sum(s_['tenu'] for s_ in c['les_sauts'])} sur "
+                           f"{len(c['les_sauts'])} |"))
+        out.extend((nom, [x_], s356.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 355 : SUR PHERC0358, EST-CE LE SAUT OU LA RELANCE QUI RESTE SUR LA FEUILLE DE DÉPART
     s355 = _source(racine, "sur_pherc0358_est_ce_le_saut_ou_la_relance_qui_reste_sur_la_feuille_de_depart.json")
     if s355.exists():
