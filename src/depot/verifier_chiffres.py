@@ -3336,6 +3336,51 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 362 : LE PIED DES POINTS HORS DU TOUR ATTENDU EST-IL SUR LE TOUR DE DÉPART
+    s362 = _source(racine, "le_pied_des_points_hors_du_tour_attendu_est_il_sur_le_tour_de_depart.json")
+    if s362.exists():
+        from collections import Counter as Compte
+
+        import les_points_hors_du_tour_attendu_sont_ils_a_lecart_de_leur_spire as m361_
+        import figure_le_pied_des_points_hors_du_tour_attendu_est_il_sur_le_tour_de_depart as f362_
+        d = json.loads(s362.read_text())
+        b, pieds = d["le_bilan"], f362_.les_pieds(d)
+        restes, dela = Compte(), Compte()
+        for s_, sens in m361_.les_croissances_a_cheval(d["les_cotes"]):
+            lu = m361_.la_lecture(s_, sens)
+            if lu is None or m361_.le_cote_de(lu)[3] < m361_.LE_MINIMUM_DE_POINTS:
+                continue
+            w0 = s_["le_tour_de_depart"]
+            for cle, n in s_["en_plus"]["les_comptes"].items():
+                tours, zone, _, pied = cle.split("|")
+                w = {int(t) for t in tours.split(",") if t}
+                t_ = f362_.le_tour_du_pied(pied, w0, sens)
+                if zone != m361_.SPIRE or w0 + sens in w or t_ is None:
+                    continue
+                (restes if w0 in w else dela if w0 + 2 * sens in w else Compte())[t_] += n
+
+        def suite(rang):
+            co = next(c for c in d["les_cotes"] if (c["le_rang"], c["le_cote"]) == (rang, "moins"))
+            return [s_["restes"] for s_ in co["les_sauts"] if s_["restes"] is not None]
+        virgules = lambda xs: ", ".join(str(x) for x in xs[:-1]) + f" puis {xs[-1]}"  # noqa: E731
+        h, a = b["hors"], b["attendu"]
+        ecrits = [("le verdict de 362", f"{round(100 * h['sur_le_depart'] / h['poses'])} % DES PIEDS SUR LE TOUR DE DÉPART : "
+                                        f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les chunks de m7 lus de 362", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne"),
+                  ("le contrôle de 362", f"Il tient : {a['sur_le_depart']} des"),
+                  ("la ligne hors de 362", f"| des points hors du tour attendu, {h['poses']} | {pieds['hors'].get('depart', 0)} | "
+                                           f"{pieds['hors'].get('avant', 0)} | {pieds['hors'].get('attendu', 0)} |"),
+                  ("la ligne sur l'attendu de 362", f"| des points sur le tour attendu, {a['poses']} | {pieds['attendu'].get('depart', 0)} | "
+                                                    f"{pieds['attendu'].get('avant', 0)} | {pieds['attendu'].get('attendu', 0)} |"),
+                  ("les pieds sur le départ de 362", f"Des {h['poses']} pieds posés des points hors du tour attendu, {h['sur_le_depart']} sont"),
+                  ("les pieds au-delà de 362", f"points partis au-delà, {dela['attendu']} sont sur le tour attendu"),
+                  ("les pieds restés de 362", f"des {sum(restes.values())} pieds des points restés sur le tour de départ, {restes['avant']} sont "
+                                              f"sur le tour d'avant"),
+                  ("le compte des pieds au-delà de 362", f"Des {sum(dela.values())} pieds des"),
+                  ("la suite de la graine 6 de 362", f"sont {virgules(suite(6)[:5])} aux cinq premiers sauts"),
+                  ("la suite de la graine 5 de 362", f"sur la graine 5, {virgules(suite(5)[:6])}.")]
+        out.extend((nom, [x_], s362.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 361 : LES POINTS HORS DU TOUR ATTENDU SONT-ILS À L'ÉCART DE LEUR SPIRE
     s361 = _source(racine, "les_points_hors_du_tour_attendu_sont_ils_a_lecart_de_leur_spire.json")
     if s361.exists():

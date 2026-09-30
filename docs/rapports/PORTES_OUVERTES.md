@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**213 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**214 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 175 portes
+## Grand Prize — 176 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -193,7 +193,8 @@
 - **R4-P156** *(le graal)* · **RÉPONDUE par `359` : non.** Lu sur la seule croissance, le critère de `352` refuse 0 des 12 croissances à cheval et 3 des 13 saines (`R4-F545`) ; une première passe, qui comptait la croissance à part, manquait de normales. La suite est `R4-P157`.
 - **R4-P157** *(le graal)* · **RÉPONDUE par `360` : en partie par la règle, non en substance.** L'écart à la spire refuse 1 des 12 croissances à cheval et 1 des 13 saines ; les points écartés font 19 % d'une croissance à cheval et 23 % d'une saine (`R4-F546`). La suite est `R4-P158`.
 - **R4-P158** *(le graal)* · **RÉPONDUE par `361` : à l'écart de leur spire.** Sous 10 des 12 croissances à cheval, les points hors du tour attendu sont à l'écart de leur spire, comme 93 % des points de l'attendu (`R4-F547`) ; la règle en concluait que les tours publiés se trompent, ce qu'elle ne pouvait pas séparer d'une surface de départ déjà en retard. La suite est `R4-P159`.
-- **R4-P159** *(le graal)* · **SUR PHERCPARIS4, GRAINES 4 À 8, SOUS LES CROISSANCES À CHEVAL, LE PIED DE CHAQUE POINT HORS DU TOUR ATTENDU SUR LA SURFACE DE DÉPART EST-IL POSÉ SUR LE TOUR DE DÉPART, OU DÉJÀ SUR UN AUTRE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `361` DÉSIGNE. La surface et les tours publiés se contredisent sous ces points (`R4-F547`). Un pied sur le tour de départ, à une spire d'un point lui aussi posé sur le tour de départ, désigne le tour publié ; un pied déjà sur un autre tour désigne un retard de la surface qui s'hérite, comme dans `348` et `350`.
+- **R4-P159** *(le graal)* · **RÉPONDUE par `362` : déjà sur un autre.** 4 % des 870 pieds posés sont sur le tour de départ, 605 sur le tour attendu et 230 sur le tour d'avant : la surface de départ était déjà hors de son tour, et le cheval s'hérite (`R4-F548`). La suite est `R4-P160`.
+- **R4-P160** *(le graal)* · **SUR PHERCPARIS4, GRAINES 4 À 8, LE DÉCALAGE D'UN TOUR DONT LA CHAÎNE QUI REGRANDIT HÉRITE EST-IL DÉJÀ DANS SA NAPPE DE DÉPART, OU NAÎT-IL DANS UNE CROISSANCE, ET À QUEL SAUT ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `362` DÉSIGNE. Chaque saut est juste là où la chaîne est, et le décalage grandit de saut en saut (`R4-F548`) ; aucun juge local ne le voit. Savoir où il naît dit où un juge doit regarder : dans la nappe, avant la première croissance, ou dans la croissance d'un saut où il reste sous les 50 points d'un cheval.
 
 ## Progress Prizes — 19 portes
 

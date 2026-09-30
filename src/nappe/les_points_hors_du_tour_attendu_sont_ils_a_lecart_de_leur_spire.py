@@ -118,14 +118,15 @@ def les_points_lus(k: dict, lire_valeurs, comptes=m359.les_comptes4, poser=None)
 
 def la_lecture(saut: dict, sens: int, partie: str | None = None) -> dict | None:
     """Sous un saut dont le tour de départ est lu : ses points posés sur le tour attendu, restés sur le tour de départ, partis au-delà,
-    par zone ; seulement ceux de `partie` si elle est donnée. None sans tour de départ ou sans lecture."""
+    par zone ; seulement ceux de `partie` si elle est donnée. None sans tour de départ ou sans lecture. Une clé peut porter, après sa
+    partie, ce qu'une tranche suivante y ajoute : `362` y met le tour du pied."""
     w0 = saut.get("le_tour_de_depart")
     if w0 is None or not saut.get("en_plus"):
         return None
     wa, wd = w0 + sens, w0 + 2 * sens
     out = {g: Counter() for g in ("attendu", "restes", "au_dela")}
     for cle, n in saut["en_plus"]["les_comptes"].items():
-        tours, zone, part = cle.split("|")
+        tours, zone, part = cle.split("|")[:3]
         w = {int(t) for t in tours.split(",") if t}
         if partie is not None and part != partie:
             continue

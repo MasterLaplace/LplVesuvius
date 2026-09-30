@@ -4714,6 +4714,12 @@ tours publiés posent sur le tour de départ sont-ils près du départ, ou à l'
 la chaîne est cohérente avec elle-même, et c'est contre les tours publiés qu'elle est à cheval. La règle concluait au tour publié fautif ;
 elle ne pouvait pas l'écarter d'un retard hérité de la surface de départ. `R4-P159` s'ouvre : le pied de ces points sur le départ.
 
+**`362` · 2026-09-30 · le pied des points hors du tour attendu est-il sur le tour de départ** — `R4-P159`
+
+⭐⭐⭐⭐⭐ **Non : 4 % seulement, la surface de départ était déjà hors de son tour** — `R4-F548`. Chaque saut de la chaîne qui regrandit
+est juste là où elle est ; elle propage un décalage d'un tour, en avant ou en arrière, que la croissance étend de saut en saut. Ce ne sont
+pas les tours publiés. `R4-P160` s'ouvre : où naît ce décalage.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

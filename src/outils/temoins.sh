@@ -1861,6 +1861,8 @@ run "l'écart de la croissance à son départ sépare-t-il les croissances à ch
 run "figure l'écart de la croissance à son départ sépare-t-il les croissances à cheval" uv run python "$ROOT/src/figures/figure_lecart_de_la_croissance_a_son_depart_separe_t_il_les_croissances_a_cheval.py" --verifier
 run "les points hors du tour attendu sont-ils à l'écart de leur spire" uv run python "$ROOT/src/nappe/les_points_hors_du_tour_attendu_sont_ils_a_lecart_de_leur_spire.py" --verifier
 run "figure les points hors du tour attendu sont-ils à l'écart de leur spire" uv run python "$ROOT/src/figures/figure_les_points_hors_du_tour_attendu_sont_ils_a_lecart_de_leur_spire.py" --verifier
+run "le pied des points hors du tour attendu est-il sur le tour de départ" uv run python "$ROOT/src/nappe/le_pied_des_points_hors_du_tour_attendu_est_il_sur_le_tour_de_depart.py" --verifier
+run "figure le pied des points hors du tour attendu est-il sur le tour de départ" uv run python "$ROOT/src/figures/figure_le_pied_des_points_hors_du_tour_attendu_est_il_sur_le_tour_de_depart.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
