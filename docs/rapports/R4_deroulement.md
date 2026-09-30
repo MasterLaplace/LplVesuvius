@@ -4792,6 +4792,12 @@ couple ne tient. `R4-P171` s'ouvre : les surfaces que l'accord de trois chaînes
 la même feuille au même compte corrigé, sans que rien ne la contredise, est validée sans tracé : sur la graine 6, côté moins, les trois
 chaînes en ont une à 6 tours. Aucune sur la graine 8. `R4-P172` s'ouvre : des feuilles qui se touchent sous le juge de feuille ?
 
+**`375` · 2026-09-30 · les paires « même feuille » à plusieurs tours sont-elles deux feuilles qui se touchent** — `R4-P172`
+
+⭐⭐⭐⭐ **Non : 12 des 27 paires à deux tours ou plus touchent, contre 7 des 38 au même compte** — `R4-F561`. Pour 15 des 27, plus des
+trois quarts des points en face sont à moins d'un demi-pas : les deux surfaces sont sur la même feuille, et ce sont les comptes des
+chaînes qui s'écartent. `R4-P173` s'ouvre : la même distance de la nappe, atteinte en plus de sauts ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

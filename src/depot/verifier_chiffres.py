@@ -3336,8 +3336,46 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 375 : LES PAIRES « MÊME FEUILLE » À PLUSIEURS TOURS SONT-ELLES DEUX FEUILLES QUI SE TOUCHENT
+    s375 = _source(racine, "les_paires_meme_feuille_a_plusieurs_tours_sont_elles_deux_feuilles_qui_se_touchent.json")
+    if s375.exists():
+        d = json.loads(s375.read_text())
+        b = d["le_bilan"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        mc, un, pl = b["même compte"], b["un tour"], b["deux tours ou plus"]
+        ps = [p for p in d["les_paires"] if p["le_groupe"] == "deux tours ou plus"]
+        quart = d["les_constantes"]["le_quart_de_points"]
+        restent = [p["lecart_de_comptes"] for p in ps if p["la_part_lointaine"] < quart]
+        quatre = [p for p in ps if p["lecart_de_comptes"] == 4]
+        graines = {p["le_rang"] for p in ps}
+        ecrits = [("le verdict de 375", f"{pl['touchent']} DES {pl['les_paires']} PAIRES À DEUX TOURS OU PLUS TOUCHENT, CONTRE "
+                                        f"{mc['touchent']} DES {mc['les_paires']} AU MÊME COMPTE : "
+                                        f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("le résumé de 375", f"{pl['touchent']} des {pl['les_paires']} paires à deux tours ou plus en ont au moins un quart,"),
+                  ("les paires vues avant 375", f"{mc['les_paires']} paires « même feuille » au même compte, {un['les_paires']} à un tour d'écart "
+                                                f"et {pl['les_paires']} à deux tours ou plus, toutes les {pl['les_paires']} sur la graine 8"
+                   if graines == {8} else "changé"),
+                  ("la lecture de 375", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne, en "
+                                        f"{vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("la moitié de 375", f"{pl['touchent']} des {pl['les_paires']} touchent, soit moins de la moitié"
+                   if pl["touchent"] < pl["les_paires"] / 2 else "changé"),
+                  ("le plus loin de 375", f"{vg(max(p['la_part_lointaine'] for p in ps))}, et l'écart médian le plus grand du groupe "
+                                          f"{vg(max(p['lecart_median'] for p in ps))} voxels"),
+                  ("la comparaison de 375", f"{pl['touchent']} sur {pl['les_paires']} contre {mc['touchent']} sur {mc['les_paires']}, et leur "
+                                            + ("part lointaine médiane est trois fois"
+                                               if round(pl["la_part_lointaine_mediane"] / mc["la_part_lointaine_mediane"]) == 3 else "changé")),
+                  ("le fond de 375", f"arrive aussi à {mc['touchent']} paires au même compte"),
+                  ("les autres de 375", f"Pour les {len(restent)} autres paires à deux tours ou plus, plus des trois quarts"),
+                  ("les écarts de 375", f"{restent.count(2)} de ces paires à 2 tours, {restent.count(3)} à 3 et {restent.count(5)} à 5. Les "
+                                        f"{len(quatre)} paires à 4 tours, elles, touchent toutes"
+                   if restent.count(4) == 0 and all(p["la_part_lointaine"] >= quart for p in quatre)
+                   and len(restent) == restent.count(2) + restent.count(3) + restent.count(5) else "changé")]
+        for g, x in (("même compte", mc), ("un tour", un), ("deux tours ou plus", pl)):
+            ecrits.append((f"la ligne {g} de 375", f"| {g} | {x['les_paires']} | {x['touchent']} | {vg(x['la_part_lointaine_mediane'])} |"))
+        out.extend((nom_, [x_], s375.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 374 : QUELLES SURFACES L'ACCORD DE TROIS CHAÎNES VALIDE-T-IL SUR PHERC0358
-    s374 = _source(racine, "quelles_surfaces_laccord_de_trois_chaines_valide_t_il_sur_pherc0358.json")
+    s374 =_source(racine, "quelles_surfaces_laccord_de_trois_chaines_valide_t_il_sur_pherc0358.json")
     if s374.exists():
         d = json.loads(s374.read_text())
         b = d["le_bilan"]

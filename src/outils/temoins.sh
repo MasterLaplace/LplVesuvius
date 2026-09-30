@@ -1887,6 +1887,8 @@ run "trois chaînes aux comptes corrigés désignent-elles celle qui a glissé" 
 run "figure trois chaînes aux comptes corrigés désignent-elles celle qui a glissé" uv run python "$ROOT/src/figures/figure_trois_chaines_aux_comptes_corriges_designent_elles_celle_qui_a_glisse.py" --verifier
 run "quelles surfaces l'accord de trois chaînes valide-t-il sur PHerc0358" uv run python "$ROOT/src/nappe/quelles_surfaces_laccord_de_trois_chaines_valide_t_il_sur_pherc0358.py" --verifier
 run "figure quelles surfaces l'accord de trois chaînes valide-t-il sur PHerc0358" uv run python "$ROOT/src/figures/figure_quelles_surfaces_laccord_de_trois_chaines_valide_t_il_sur_pherc0358.py" --verifier
+run "les paires « même feuille » à plusieurs tours sont-elles deux feuilles qui se touchent" uv run python "$ROOT/src/nappe/les_paires_meme_feuille_a_plusieurs_tours_sont_elles_deux_feuilles_qui_se_touchent.py" --verifier
+run "figure les paires « même feuille » à plusieurs tours sont-elles deux feuilles qui se touchent" uv run python "$ROOT/src/figures/figure_les_paires_meme_feuille_a_plusieurs_tours_sont_elles_deux_feuilles_qui_se_touchent.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

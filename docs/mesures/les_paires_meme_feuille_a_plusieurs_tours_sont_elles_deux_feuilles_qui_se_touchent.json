@@ -1,0 +1,1383 @@
+{
+ "la_question": "Sur PHerc0358, les paires « même feuille » à plusieurs tours d'écart sont-elles deux feuilles qui se touchent, une part de leurs points à moins d'un quart de pas et le reste à plus d'un demi-pas ?",
+ "les_constantes": {
+  "le_demi_pas": 10.0,
+  "le_quart_de_points": 0.25,
+  "le_minimum": 5
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 11767,
+  "absents": 0,
+  "octets": 5797937786
+ },
+ "redonne": true,
+ "les_paires": [
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 833,
+   "lecart_median": 0.366,
+   "la_part_lointaine": 0.0048
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    1,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 587,
+   "lecart_median": 0.674,
+   "la_part_lointaine": 0.3101
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    2,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 859,
+   "lecart_median": 0.36,
+   "la_part_lointaine": 0.0105
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    2,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 601,
+   "lecart_median": 0.668,
+   "la_part_lointaine": 0.3478
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    4,
+    3
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 739,
+   "lecart_median": 0.757,
+   "la_part_lointaine": 0.2476
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    5,
+    4
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 860,
+   "lecart_median": 0.377,
+   "la_part_lointaine": 0.0419
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    5
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 562,
+   "lecart_median": 0.45,
+   "la_part_lointaine": 0.169
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    7,
+    6
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 669,
+   "lecart_median": 0.373,
+   "la_part_lointaine": 0.1674
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    8,
+    7
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 810,
+   "lecart_median": 0.449,
+   "la_part_lointaine": 0.2333
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 510,
+   "lecart_median": 0.716,
+   "la_part_lointaine": 0.2667
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    2,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 452,
+   "lecart_median": 0.598,
+   "la_part_lointaine": 0.2434
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    4,
+    2
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 717,
+   "lecart_median": 1.237,
+   "la_part_lointaine": 0.3543
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    5,
+    3
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 918,
+   "lecart_median": 0.455,
+   "la_part_lointaine": 0.1155
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    6,
+    4
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 697,
+   "lecart_median": 0.43,
+   "la_part_lointaine": 0.2052
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    7,
+    5
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 1141,
+   "lecart_median": 0.301,
+   "la_part_lointaine": 0.0009
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    8,
+    6
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 1147,
+   "lecart_median": 0.349,
+   "la_part_lointaine": 0.048
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 459,
+   "lecart_median": 0.575,
+   "la_part_lointaine": 0.1895
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    2,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 401,
+   "lecart_median": 0.787,
+   "la_part_lointaine": 0.2569
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    3,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 599,
+   "lecart_median": 1.44,
+   "la_part_lointaine": 0.3706
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    4,
+    3
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 834,
+   "lecart_median": 0.428,
+   "la_part_lointaine": 0.1067
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    5,
+    4
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 845,
+   "lecart_median": 0.398,
+   "la_part_lointaine": 0.084
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    6,
+    5
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 622,
+   "lecart_median": 0.34,
+   "la_part_lointaine": 0.1495
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    7,
+    6
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 903,
+   "lecart_median": 0.461,
+   "la_part_lointaine": 0.2503
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    8,
+    7
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 980,
+   "lecart_median": 0.468,
+   "la_part_lointaine": 0.1643
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 233,
+   "lecart_median": 0.28,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    2,
+    3
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 183,
+   "lecart_median": 0.389,
+   "la_part_lointaine": 0.1803
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    3,
+    4
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 114,
+   "lecart_median": 0.382,
+   "la_part_lointaine": 0.1228
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    4,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 116,
+   "lecart_median": 0.269,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    5,
+    6
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 85,
+   "lecart_median": 0.286,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    7
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 94,
+   "lecart_median": 0.338,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    7,
+    8
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 106,
+   "lecart_median": 0.265,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 362,
+   "lecart_median": 0.279,
+   "la_part_lointaine": 0.0166
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    2,
+    3
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 559,
+   "lecart_median": 0.355,
+   "la_part_lointaine": 0.0966
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    3,
+    4
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 277,
+   "lecart_median": 0.364,
+   "la_part_lointaine": 0.0072
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    4,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 194,
+   "lecart_median": 0.318,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    5,
+    6
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 191,
+   "lecart_median": 0.306,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    6,
+    7
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 189,
+   "lecart_median": 0.256,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    8,
+    8
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 93,
+   "lecart_median": 0.346,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 94,
+   "lecart_median": 0.318,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    3,
+    3
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 56,
+   "lecart_median": 0.231,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 182,
+   "lecart_median": 0.285,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    2,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 153,
+   "lecart_median": 0.251,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    3,
+    3
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 124,
+   "lecart_median": 0.282,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 420,
+   "lecart_median": 0.337,
+   "la_part_lointaine": 0.0048
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    2,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 408,
+   "lecart_median": 0.33,
+   "la_part_lointaine": 0.0098
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    3,
+    3
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 249,
+   "lecart_median": 0.314,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    4,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 149,
+   "lecart_median": 0.614,
+   "la_part_lointaine": 0.0738
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 75,
+   "lecart_median": 0.328,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    2,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 56,
+   "lecart_median": 0.277,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 362,
+   "lecart_median": 0.354,
+   "la_part_lointaine": 0.0166
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    3,
+    2
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 150,
+   "lecart_median": 0.299,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    4,
+    3
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 562,
+   "lecart_median": 0.42,
+   "la_part_lointaine": 0.0925
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    5,
+    3
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 170,
+   "lecart_median": 2.712,
+   "la_part_lointaine": 0.3882
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    1
+   ],
+   "lecart_de_comptes": 5,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 227,
+   "lecart_median": 0.397,
+   "la_part_lointaine": 0.2026
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    2
+   ],
+   "lecart_de_comptes": 4,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 455,
+   "lecart_median": 1.049,
+   "la_part_lointaine": 0.3407
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 441,
+   "lecart_median": 0.476,
+   "la_part_lointaine": 0.1156
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    7,
+    6
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 186,
+   "lecart_median": 0.815,
+   "la_part_lointaine": 0.1774
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    8,
+    7
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 98,
+   "lecart_median": 0.853,
+   "la_part_lointaine": 0.2551
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    8,
+    8
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 291,
+   "lecart_median": 0.808,
+   "la_part_lointaine": 0.2062
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    3,
+    1
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 91,
+   "lecart_median": 0.274,
+   "la_part_lointaine": 0.0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    6,
+    1
+   ],
+   "lecart_de_comptes": 5,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 338,
+   "lecart_median": 0.626,
+   "la_part_lointaine": 0.3077
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    7,
+    3
+   ],
+   "lecart_de_comptes": 4,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 80,
+   "lecart_median": 0.734,
+   "la_part_lointaine": 0.3625
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    7,
+    5
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 496,
+   "lecart_median": 2.474,
+   "la_part_lointaine": 0.3669
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    8,
+    6
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 257,
+   "lecart_median": 4.139,
+   "la_part_lointaine": 0.3774
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "en_face": 345,
+   "lecart_median": 0.512,
+   "la_part_lointaine": 0.3014
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    2,
+    1
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 596,
+   "lecart_median": 0.404,
+   "la_part_lointaine": 0.1477
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    2,
+    5
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 117,
+   "lecart_median": 0.476,
+   "la_part_lointaine": 0.1197
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    3,
+    2
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 78,
+   "lecart_median": 0.856,
+   "la_part_lointaine": 0.1795
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    6,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 169,
+   "lecart_median": 1.002,
+   "la_part_lointaine": 0.142
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    7,
+    6
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 119,
+   "lecart_median": 0.822,
+   "la_part_lointaine": 0.2017
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    8,
+    4
+   ],
+   "lecart_de_comptes": 4,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 121,
+   "lecart_median": 1.436,
+   "la_part_lointaine": 0.3388
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    8,
+    5
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 633,
+   "lecart_median": 2.066,
+   "la_part_lointaine": 0.3712
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    8,
+    7
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 80,
+   "lecart_median": 0.631,
+   "la_part_lointaine": 0.15
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    2,
+    1
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 50,
+   "lecart_median": 2.98,
+   "la_part_lointaine": 0.36
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    3,
+    1
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 61,
+   "lecart_median": 0.636,
+   "la_part_lointaine": 0.2459
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    3,
+    2
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 111,
+   "lecart_median": 0.325,
+   "la_part_lointaine": 0.0721
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    4,
+    3
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 323,
+   "lecart_median": 0.402,
+   "la_part_lointaine": 0.1084
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    5,
+    4
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 295,
+   "lecart_median": 0.581,
+   "la_part_lointaine": 0.1356
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    5
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 393,
+   "lecart_median": 0.504,
+   "la_part_lointaine": 0.1603
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    7,
+    6
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 350,
+   "lecart_median": 0.384,
+   "la_part_lointaine": 0.08
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    8,
+    6
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 390,
+   "lecart_median": 0.659,
+   "la_part_lointaine": 0.3821
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    8,
+    7
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 836,
+   "lecart_median": 0.339,
+   "la_part_lointaine": 0.0215
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    1,
+    2
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 332,
+   "lecart_median": 0.5,
+   "la_part_lointaine": 0.2952
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    2,
+    3
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 279,
+   "lecart_median": 0.457,
+   "la_part_lointaine": 0.0502
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    3,
+    1
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 58,
+   "lecart_median": 0.785,
+   "la_part_lointaine": 0.1207
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    3,
+    4
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 409,
+   "lecart_median": 0.349,
+   "la_part_lointaine": 0.0562
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    4,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 368,
+   "lecart_median": 0.357,
+   "la_part_lointaine": 0.0027
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    5,
+    6
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 291,
+   "lecart_median": 0.475,
+   "la_part_lointaine": 0.0412
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    5,
+    8
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 299,
+   "lecart_median": 1.553,
+   "la_part_lointaine": 0.3645
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    6,
+    7
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "en_face": 249,
+   "lecart_median": 0.465,
+   "la_part_lointaine": 0.1165
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    1,
+    4
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 53,
+   "lecart_median": 2.024,
+   "la_part_lointaine": 0.3396
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    2,
+    4
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 75,
+   "lecart_median": 0.33,
+   "la_part_lointaine": 0.08
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    3,
+    5
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 327,
+   "lecart_median": 0.466,
+   "la_part_lointaine": 0.1101
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    4,
+    6
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 330,
+   "lecart_median": 0.574,
+   "la_part_lointaine": 0.1727
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    5,
+    7
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 247,
+   "lecart_median": 0.681,
+   "la_part_lointaine": 0.1781
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    5,
+    8
+   ],
+   "lecart_de_comptes": 4,
+   "le_groupe": "deux tours ou plus",
+   "en_face": 612,
+   "lecart_median": 0.51,
+   "la_part_lointaine": 0.281
+  }
+ ],
+ "le_bilan": {
+  "même compte": {
+   "les_paires": 38,
+   "touchent": 7,
+   "la_part_lointaine_mediane": 0.066
+  },
+  "un tour": {
+   "les_paires": 31,
+   "touchent": 4,
+   "la_part_lointaine_mediane": 0.0966
+  },
+  "deux tours ou plus": {
+   "les_paires": 27,
+   "touchent": 12,
+   "la_part_lointaine_mediane": 0.2026
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "12 des 27 paires « même feuille » à deux tours ou plus touchent, contre 7 des 38 au même compte ; non"
+ },
+ "les_secondes": 89.2
+}

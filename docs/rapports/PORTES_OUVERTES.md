@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**226 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**227 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 188 portes
+## Grand Prize — 189 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -206,7 +206,8 @@
 - **R4-P169** *(le graal)* · **RÉPONDUE par `372` : indécidable.** Sur 4 côtés où la suivie et la compagne ne tiennent pas les comptes, 2 n'ont pas de tierce, la nappe de la graine 8 n'offrant pas d'autre direction à 15 mailles ; sur la graine 7, côté plus, le vote désigne la suivie, dont le deuxième saut s'écarte de 23,438 voxels (`R4-F558`). La suite est `R4-P170`.
 - **R4-P170** *(le graal)* · **RÉPONDUE par `373` : en partie.** Sous les comptes corrigés, la graine 6, côté moins, n'est plus en désaccord ; sur les 3 côtés qui le restent, le vote désigne la suivie de la graine 7, côté plus, et rien sur la graine 8, où aucun couple ne tient (`R4-F559`). La suite est `R4-P171`.
 - **R4-P171** *(le graal)* · **RÉPONDUE par `374` : oui.** 25 des 120 surfaces des trois chaînes sont validées, sur les graines 6, côté moins, et 7, jusqu'à 6 tours de la nappe de départ ; aucune sur la graine 8, où 47 des 48 surfaces sont contredites (`R4-F560`). La suite est `R4-P172`.
-- **R4-P172** *(le graal)* · **SUR PHERC0358, LES PAIRES « MÊME FEUILLE » DE LA GRAINE 8, À PLUSIEURS SAUTS D'ÉCART, SONT-ELLES DEUX FEUILLES QUI SE TOUCHENT, UNE PART DE LEURS POINTS À MOINS D'UN QUART DE PAS ET LE RESTE À UN TOUR ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `374` DÉSIGNE. L'accord de trois chaînes valide des surfaces sans tracé (`R4-F560`), mais il repose sur un juge de feuille par la médiane, étalonné sur PHercParis4 ; sur la graine 8, il met sur la même feuille des surfaces que les comptes disent à plusieurs tours.
+- **R4-P172** *(le graal)* · **RÉPONDUE par `375` : non.** 12 des 27 paires « même feuille » à deux tours ou plus d'écart ont au moins un quart de leurs points en face à plus d'un demi-pas, contre 7 des 38 au même compte ; pour 15 des 27, plus des trois quarts des points en face sont à moins d'un demi-pas : c'est le compte des sauts qui fait s'écarter les chaînes (`R4-F561`). La suite est `R4-P173`.
+- **R4-P173** *(le graal)* · **SUR PHERC0358, GRAINE 8, LES DEUX SURFACES D'UNE PAIRE « MÊME FEUILLE » À DEUX TOURS OU PLUS D'ÉCART SONT-ELLES À LA MÊME DISTANCE DE LA NAPPE, LA SOMME DES ÉCARTS DE LEURS SAUTS, L'UNE ATTEINTE EN PLUS DE SAUTS QUE L'AUTRE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `375` DÉSIGNE. Le juge de feuille n'est pas, pour l'essentiel, trompé sur la graine 8 (`R4-F561`) : les chaînes arrivent sur la même feuille et la comptent à des nombres de sauts différents ; si la distance parcourue est la même, c'est un saut trop court qui compte pour un tour.
 
 ## Progress Prizes — 19 portes
 
