@@ -4702,6 +4702,12 @@ ne le voit pas. `R4-P156` s'ouvre : le même critère, sur la seule partie regra
 voit pas la croissance qui passe à cheval. Une première passe manquait de normales et ne mesurait pas ce qu'elle nommait ; elle est gardée.
 `R4-P157` s'ouvre : l'écart de la croissance au départ, comparé à celui de sa spire.
 
+**`360` · 2026-09-30 · l'écart de la croissance à son départ sépare-t-il les croissances à cheval** — `R4-P157`
+
+⭐⭐⭐⭐ **En partie par la règle, non en substance : 1 refusée sur 12, 1 sur 13** — `R4-F546`. Sans `m7` ni tracé, l'écart des
+points de la croissance au départ, rapporté à celui de sa spire, ne voit pas le cheval non plus. `R4-P158` s'ouvre : les points que les
+tours publiés posent sur le tour de départ sont-ils près du départ, ou à l'écart de leur spire ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

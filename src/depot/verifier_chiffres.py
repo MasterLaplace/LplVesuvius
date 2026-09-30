@@ -3336,6 +3336,35 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 360 : L'ÉCART DE LA CROISSANCE À SON DÉPART SÉPARE-T-IL LES CROISSANCES À CHEVAL
+    s360 = _source(racine, "lecart_de_la_croissance_a_son_depart_separe_t_il_les_croissances_a_cheval.json")
+    if s360.exists():
+        import statistics
+
+        import la_nappe_de_m7_retrouve_t_elle_le_trace_humain_de_paris4 as m321_
+        d = json.loads(s360.read_text())
+        v_, sc, ss = d["le_verdict"], d["la_separation"]["a_cheval"], d["la_separation"]["saines"]
+        c = [s_ for co in d["les_cotes"] if co["le_rang"] >= 4 for s_ in co["les_sauts"]
+             if s_["la_justesse"] == "juste" and s_["depuis"] == "la croissance" and s_.get("en_plus")]
+        part = lambda a: round(100 * statistics.median(s_["en_plus"]["les_ecartes"] / s_["en_plus"]["les_en_face"]  # noqa: E731
+                                                       for s_ in c if s_["a_cheval"] == a and s_["en_plus"]["les_en_face"]))
+        es = statistics.median(s_["en_plus"]["lecart_de_la_spire"] for s_ in c if s_["en_plus"]["lue"])
+        virgule = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        ecrits = [("le verdict de 360", f"L'ÉCART À LA SPIRE REFUSE {sc['les_refusees']} DES {sc['les_croissances']} CROISSANCES À "
+                                        f"CHEVAL ET {ss['les_refusees']} DES {ss['les_croissances']} SAINES : "
+                                        f"{v_['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les chunks de m7 lus de 360", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne"),
+                  ("la ligne à cheval de 360", f"| à cheval | {sc['les_refusees']} sur {sc['les_croissances']} | {part(True)} % |"),
+                  ("la ligne des saines de 360", f"| saines | {ss['les_refusees']} sur {ss['les_croissances']} | {part(False)} % |"),
+                  ("les parts écartées de 360", f"points écartés font {part(True)} % d'une croissance à cheval et {part(False)} % d'une "
+                                                f"saine"),
+                  ("les non lues de 360", "Aucune croissance n'est restée sans lecture" if all(s_["en_plus"]["lue"] for s_ in c)
+                   else "au moins une croissance non lue"),
+                  ("l'écart de la spire de 360", f"La spire est à {virgule(round(es, 1))} voxels du départ en médiane**, soit "
+                                                 f"{virgule(round(es / m321_.LE_PAS_L2, 2))} du pas nominal de "
+                                                 f"{virgule(round(m321_.LE_PAS_L2, 2))} voxels")]
+        out.extend((nom, [x_], s360.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 359 : LE CRITÈRE SUR LA SEULE CROISSANCE SÉPARE-T-IL LES CROISSANCES À CHEVAL
     s359 = _source(racine, "le_critere_sur_la_seule_croissance_separe_t_il_les_croissances_a_cheval.json")
     s359p = _source(racine, "le_critere_sur_la_seule_croissance_separe_t_il_les_croissances_a_cheval_premiere_passe.json")

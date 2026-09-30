@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**211 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**212 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 173 portes
+## Grand Prize — 174 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -191,7 +191,8 @@
 - **R4-P154** *(le graal)* · **RÉPONDUE par `357` : oui.** Sur PHercParis4, graines 4 à 8, la chaîne mixte est juste sous ses 30 sauts jugés et à cheval sous 1 de ses 30 sauts justes, contre 23 des 26 et 13 des 23 pour la chaîne relancée depuis un point ; le seul saut à cheval est le seul qu'elle a relancé (`R4-F543`). La suite est `R4-P155`.
 - **R4-P155** *(le graal)* · **RÉPONDUE par `358` : en partie.** Regrandie par la croissance bornée de `335` et gardée quand le critère de `352` la tient, la spire rend la surface (1600 mailles en médiane contre 980,5) et la justesse tient (29 sur 29), mais 15 des 29 sauts justes passent à cheval, contre 1 sur 30 (`R4-F544`). La suite est `R4-P156`.
 - **R4-P156** *(le graal)* · **RÉPONDUE par `359` : non.** Lu sur la seule croissance, le critère de `352` refuse 0 des 12 croissances à cheval et 3 des 13 saines (`R4-F545`) ; une première passe, qui comptait la croissance à part, manquait de normales. La suite est `R4-P157`.
-- **R4-P157** *(le graal)* · **SUR PHERCPARIS4, GRAINES 4 À 8, LES POINTS D'UNE CROISSANCE À CHEVAL S'ÉCARTENT-ILS DE LA SURFACE DE DÉPART AUTREMENT QUE LES POINTS DE SA SPIRE, ET CET ÉCART, SANS RÉFÉRENT, LES SÉPARE-T-IL DES SAINES ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `359` DÉSIGNE. Compter les feuilles de `m7` ne voit pas la croissance à cheval (`R4-F545`) ; l'écart des points à la surface de départ, comparé à celui de leur propre spire, ne demande pas à `m7` de voir une feuille : une croissance restée sur le tour de départ devrait s'en approcher, une croissance passée au-delà s'en éloigner.
+- **R4-P157** *(le graal)* · **RÉPONDUE par `360` : en partie par la règle, non en substance.** L'écart à la spire refuse 1 des 12 croissances à cheval et 1 des 13 saines ; les points écartés font 19 % d'une croissance à cheval et 23 % d'une saine (`R4-F546`). La suite est `R4-P158`.
+- **R4-P158** *(le graal)* · **SUR PHERCPARIS4, GRAINES 4 À 8, SOUS LES CROISSANCES À CHEVAL, LES POINTS QUE LES TOURS PUBLIÉS POSENT SUR LE TOUR DE DÉPART SONT-ILS PRÈS DE LA SURFACE DE DÉPART, OU À L'ÉCART DE LEUR SPIRE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `360` DÉSIGNE. Ni le compte des feuilles de `m7` (`R4-F545`) ni l'écart à la spire (`R4-F546`) ne voient le cheval que les tours publiés disent. Si les points posés sur le tour de départ sont à l'écart de leur spire, c'est le tour publié qui les place mal, comme autour des graines 1 à 3 (`R4-F529`) ; s'ils sont près du départ, c'est la croissance qui y est revenue.
 
 ## Progress Prizes — 19 portes
 
