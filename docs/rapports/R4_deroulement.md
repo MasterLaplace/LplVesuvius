@@ -4756,6 +4756,12 @@ erreur. `R4-P165` s'ouvre : sur PHerc0358, le même décalage de sauts sous tout
 sur trois côtés sur cinq : le juge de `367` montre, sans tracé, des erreurs de compte que les sauts jugés un à un ne montrent pas.
 `R4-P166` s'ouvre : le glissement se voit-il dans la chaîne seule ?
 
+**`369` · 2026-09-30 · le glissement se voit-il dans la chaîne seule** — `R4-P166`
+
+⭐⭐⭐⭐⭐ **En partie : 90 paires sur 134 tiennent les comptes corrigés, contre 77** — `R4-F555`. Un saut qui reste à un quart de pas de
+la surface d'où il part se voit dans la chaîne seule : le compter pour rien fait tenir 38 des 41 paires de la graine 6, côté moins. Un
+saut qui franchit deux feuilles minces reste sous le pas et demi. `R4-P167` s'ouvre : l'écart d'un saut, étalonné sur PHercParis4.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

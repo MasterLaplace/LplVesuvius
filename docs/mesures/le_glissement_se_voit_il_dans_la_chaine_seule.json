@@ -1,0 +1,1849 @@
+{
+ "la_question": "Sur PHerc0358, un glissement que l'accord de deux chaînes révèle se voit-il dans la chaîne seule, comme un saut qui garde la même feuille ou qui en saute une ?",
+ "les_constantes": {
+  "la_portee": 60.0,
+  "le_quart": 5.0,
+  "le_double": 30.0
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 7864,
+  "absents": 0,
+  "octets": 3862188840
+ },
+ "redonne_368": true,
+ "les_cotes": [
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "suivie": [
+    {
+     "le_saut": 1,
+     "en_face": 835,
+     "lecart_median": 17.911,
+     "le_genre": "simple",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 2,
+     "en_face": 1010,
+     "lecart_median": 0.345,
+     "le_genre": "nul",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 3,
+     "en_face": 644,
+     "lecart_median": 18.773,
+     "le_genre": "simple",
+     "le_compte_corrige": 2
+    },
+    {
+     "le_saut": 4,
+     "en_face": 526,
+     "lecart_median": 12.137,
+     "le_genre": "simple",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 5,
+     "en_face": 936,
+     "lecart_median": 4.48,
+     "le_genre": "nul",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 6,
+     "en_face": 767,
+     "lecart_median": 17.657,
+     "le_genre": "simple",
+     "le_compte_corrige": 4
+    },
+    {
+     "le_saut": 7,
+     "en_face": 998,
+     "lecart_median": 10.305,
+     "le_genre": "simple",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 8,
+     "en_face": 1066,
+     "lecart_median": 15.464,
+     "le_genre": "simple",
+     "le_compte_corrige": 6
+    }
+   ],
+   "compagne": [
+    {
+     "le_saut": 1,
+     "en_face": 910,
+     "lecart_median": 17.564,
+     "le_genre": "simple",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 2,
+     "en_face": 855,
+     "lecart_median": 0.851,
+     "le_genre": "nul",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 3,
+     "en_face": 587,
+     "lecart_median": 17.59,
+     "le_genre": "simple",
+     "le_compte_corrige": 2
+    },
+    {
+     "le_saut": 4,
+     "en_face": 832,
+     "lecart_median": 11.663,
+     "le_genre": "simple",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 5,
+     "en_face": 889,
+     "lecart_median": 15.398,
+     "le_genre": "simple",
+     "le_compte_corrige": 4
+    },
+    {
+     "le_saut": 6,
+     "en_face": 866,
+     "lecart_median": 12.813,
+     "le_genre": "simple",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 7,
+     "en_face": 1057,
+     "lecart_median": 17.541,
+     "le_genre": "simple",
+     "le_compte_corrige": 6
+    },
+    {
+     "le_saut": 8,
+     "en_face": 677,
+     "lecart_median": 19.477,
+     "le_genre": "simple",
+     "le_compte_corrige": 7
+    }
+   ],
+   "les_paires": [
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 1,
+     "en_face": 833,
+     "lecart_median": 0.366,
+     "meme_feuille": true,
+     "meme_saut": true,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 2,
+     "en_face": 587,
+     "lecart_median": 0.674,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 3,
+     "en_face": 498,
+     "lecart_median": 19.239,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 4,
+     "en_face": 70,
+     "lecart_median": 25.249,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 1,
+     "en_face": 859,
+     "lecart_median": 0.36,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 2,
+     "en_face": 601,
+     "lecart_median": 0.668,
+     "meme_feuille": true,
+     "meme_saut": true,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 3,
+     "en_face": 523,
+     "lecart_median": 19.395,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 4,
+     "en_face": 87,
+     "lecart_median": 24.638,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 1,
+     "en_face": 495,
+     "lecart_median": 15.618,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 2,
+     "en_face": 406,
+     "lecart_median": 13.484,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 3,
+     "en_face": 712,
+     "lecart_median": 10.747,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 4,
+     "en_face": 604,
+     "lecart_median": 13.557,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 5,
+     "en_face": 236,
+     "lecart_median": 14.213,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 1,
+     "en_face": 305,
+     "lecart_median": 19.859,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 2,
+     "en_face": 320,
+     "lecart_median": 17.554,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 3,
+     "en_face": 739,
+     "lecart_median": 0.757,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 4,
+     "en_face": 810,
+     "lecart_median": 8.03,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 5,
+     "en_face": 481,
+     "lecart_median": 20.196,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 6,
+     "en_face": 125,
+     "lecart_median": 12.46,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 1,
+     "en_face": 59,
+     "lecart_median": 24.735,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 2,
+     "en_face": 213,
+     "lecart_median": 17.828,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 3,
+     "en_face": 662,
+     "lecart_median": 11.917,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 4,
+     "en_face": 860,
+     "lecart_median": 0.377,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 5,
+     "en_face": 730,
+     "lecart_median": 14.461,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 6,
+     "en_face": 283,
+     "lecart_median": 12.367,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 1,
+     "en_face": 72,
+     "lecart_median": 14.261,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 3,
+     "en_face": 274,
+     "lecart_median": 16.59,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 4,
+     "en_face": 532,
+     "lecart_median": 16.183,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 5,
+     "en_face": 562,
+     "lecart_median": 0.45,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 6,
+     "en_face": 480,
+     "lecart_median": 11.799,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 7,
+     "en_face": 386,
+     "lecart_median": 14.457,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 8,
+     "en_face": 190,
+     "lecart_median": 19.982,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 4,
+     "en_face": 263,
+     "lecart_median": 19.63,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 5,
+     "en_face": 634,
+     "lecart_median": 11.599,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 6,
+     "en_face": 669,
+     "lecart_median": 0.373,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 7,
+     "en_face": 685,
+     "lecart_median": 14.227,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 8,
+     "en_face": 415,
+     "lecart_median": 19.72,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 5,
+     "en_face": 194,
+     "lecart_median": 24.398,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 6,
+     "en_face": 709,
+     "lecart_median": 16.076,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 7,
+     "en_face": 810,
+     "lecart_median": 0.449,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 8,
+     "en_face": 1001,
+     "lecart_median": 12.898,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "suivie": [
+    {
+     "le_saut": 1,
+     "en_face": 542,
+     "lecart_median": 15.639,
+     "le_genre": "simple",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 2,
+     "en_face": 403,
+     "lecart_median": 23.438,
+     "le_genre": "simple",
+     "le_compte_corrige": 2
+    },
+    {
+     "le_saut": 3,
+     "en_face": 471,
+     "lecart_median": 12.061,
+     "le_genre": "simple",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 4,
+     "en_face": 388,
+     "lecart_median": 17.822,
+     "le_genre": "simple",
+     "le_compte_corrige": 4
+    },
+    {
+     "le_saut": 5,
+     "en_face": 296,
+     "lecart_median": 17.407,
+     "le_genre": "simple",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 6,
+     "en_face": 280,
+     "lecart_median": 15.955,
+     "le_genre": "simple",
+     "le_compte_corrige": 6
+    },
+    {
+     "le_saut": 7,
+     "en_face": 156,
+     "lecart_median": 16.409,
+     "le_genre": "simple",
+     "le_compte_corrige": 7
+    },
+    {
+     "le_saut": 8,
+     "en_face": 151,
+     "lecart_median": 14.98,
+     "le_genre": "simple",
+     "le_compte_corrige": 8
+    }
+   ],
+   "compagne": [
+    {
+     "le_saut": 1,
+     "en_face": 499,
+     "lecart_median": 14.719,
+     "le_genre": "simple",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 2,
+     "en_face": 327,
+     "lecart_median": 16.777,
+     "le_genre": "simple",
+     "le_compte_corrige": 2
+    },
+    {
+     "le_saut": 3,
+     "en_face": 235,
+     "lecart_median": 11.284,
+     "le_genre": "simple",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 4,
+     "en_face": 171,
+     "lecart_median": 14.994,
+     "le_genre": "simple",
+     "le_compte_corrige": 4
+    },
+    {
+     "le_saut": 5,
+     "en_face": 114,
+     "lecart_median": 16.613,
+     "le_genre": "simple",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 6,
+     "en_face": 107,
+     "lecart_median": 20.974,
+     "le_genre": "simple",
+     "le_compte_corrige": 6
+    },
+    {
+     "le_saut": 7,
+     "en_face": 116,
+     "lecart_median": 19.082,
+     "le_genre": "simple",
+     "le_compte_corrige": 7
+    },
+    {
+     "le_saut": 8,
+     "en_face": 121,
+     "lecart_median": 18.58,
+     "le_genre": "simple",
+     "le_compte_corrige": 8
+    }
+   ],
+   "les_paires": [
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 1,
+     "en_face": 233,
+     "lecart_median": 0.28,
+     "meme_feuille": true,
+     "meme_saut": true,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 2,
+     "en_face": 191,
+     "lecart_median": 16.172,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 3,
+     "en_face": 84,
+     "lecart_median": 25.44,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 1,
+     "en_face": 128,
+     "lecart_median": 23.782,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 2,
+     "en_face": 196,
+     "lecart_median": 11.01,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 3,
+     "en_face": 183,
+     "lecart_median": 0.389,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 4,
+     "en_face": 169,
+     "lecart_median": 20.914,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 3,
+     "en_face": 106,
+     "lecart_median": 16.466,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 4,
+     "en_face": 114,
+     "lecart_median": 0.382,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 5,
+     "en_face": 129,
+     "lecart_median": 18.568,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 4,
+     "en_face": 100,
+     "lecart_median": 16.716,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 5,
+     "en_face": 116,
+     "lecart_median": 0.269,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 6,
+     "en_face": 129,
+     "lecart_median": 19.726,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 5,
+     "en_face": 78,
+     "lecart_median": 18.47,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 6,
+     "en_face": 85,
+     "lecart_median": 0.286,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 7,
+     "en_face": 111,
+     "lecart_median": 18.678,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 6,
+     "en_face": 78,
+     "lecart_median": 18.379,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 7,
+     "en_face": 94,
+     "lecart_median": 0.338,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 8,
+     "en_face": 114,
+     "lecart_median": 17.448,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 7,
+     "en_face": 98,
+     "lecart_median": 17.606,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 8,
+     "en_face": 106,
+     "lecart_median": 0.265,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 8,
+     "en_face": 89,
+     "lecart_median": 13.697,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "suivie": [
+    {
+     "le_saut": 1,
+     "en_face": 643,
+     "lecart_median": 17.381,
+     "le_genre": "simple",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 2,
+     "en_face": 610,
+     "lecart_median": 18.995,
+     "le_genre": "simple",
+     "le_compte_corrige": 2
+    },
+    {
+     "le_saut": 3,
+     "en_face": 443,
+     "lecart_median": 13.452,
+     "le_genre": "simple",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 4,
+     "en_face": 264,
+     "lecart_median": 21.23,
+     "le_genre": "simple",
+     "le_compte_corrige": 4
+    },
+    {
+     "le_saut": 5,
+     "en_face": 267,
+     "lecart_median": 16.584,
+     "le_genre": "simple",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 6,
+     "en_face": 149,
+     "lecart_median": 13.794,
+     "le_genre": "simple",
+     "le_compte_corrige": 6
+    },
+    {
+     "le_saut": 7,
+     "en_face": 126,
+     "lecart_median": 14.919,
+     "le_genre": "simple",
+     "le_compte_corrige": 7
+    },
+    {
+     "le_saut": 8,
+     "en_face": 139,
+     "lecart_median": 18.3,
+     "le_genre": "simple",
+     "le_compte_corrige": 8
+    }
+   ],
+   "compagne": [
+    {
+     "le_saut": 1,
+     "en_face": 592,
+     "lecart_median": 17.155,
+     "le_genre": "simple",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 2,
+     "en_face": 641,
+     "lecart_median": 19.068,
+     "le_genre": "simple",
+     "le_compte_corrige": 2
+    },
+    {
+     "le_saut": 3,
+     "en_face": 651,
+     "lecart_median": 12.792,
+     "le_genre": "simple",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 4,
+     "en_face": 600,
+     "lecart_median": 14.895,
+     "le_genre": "simple",
+     "le_compte_corrige": 4
+    },
+    {
+     "le_saut": 5,
+     "en_face": 551,
+     "lecart_median": 14.389,
+     "le_genre": "simple",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 6,
+     "en_face": 462,
+     "lecart_median": 13.031,
+     "le_genre": "simple",
+     "le_compte_corrige": 6
+    },
+    {
+     "le_saut": 7,
+     "en_face": 307,
+     "lecart_median": 17.352,
+     "le_genre": "simple",
+     "le_compte_corrige": 7
+    },
+    {
+     "le_saut": 8,
+     "en_face": 249,
+     "lecart_median": 12.477,
+     "le_genre": "simple",
+     "le_compte_corrige": 8
+    }
+   ],
+   "les_paires": [
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 1,
+     "en_face": 182,
+     "lecart_median": 0.285,
+     "meme_feuille": true,
+     "meme_saut": true,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 2,
+     "en_face": 130,
+     "lecart_median": 23.78,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 1,
+     "en_face": 197,
+     "lecart_median": 22.23,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 2,
+     "en_face": 153,
+     "lecart_median": 0.251,
+     "meme_feuille": true,
+     "meme_saut": true,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 3,
+     "en_face": 126,
+     "lecart_median": 11.701,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 2,
+     "en_face": 150,
+     "lecart_median": 12.023,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 3,
+     "en_face": 124,
+     "lecart_median": 0.282,
+     "meme_feuille": true,
+     "meme_saut": true,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 4,
+     "en_face": 60,
+     "lecart_median": 12.208,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 4,
+     "en_face": 78,
+     "lecart_median": 22.549,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 5,
+     "en_face": 72,
+     "lecart_median": 10.778,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "suivie": [
+    {
+     "le_saut": 1,
+     "en_face": 399,
+     "lecart_median": 11.158,
+     "le_genre": "simple",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 2,
+     "en_face": 160,
+     "lecart_median": 15.58,
+     "le_genre": "simple",
+     "le_compte_corrige": 2
+    },
+    {
+     "le_saut": 3,
+     "en_face": 144,
+     "lecart_median": 11.277,
+     "le_genre": "simple",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 4,
+     "en_face": 131,
+     "lecart_median": 15.454,
+     "le_genre": "simple",
+     "le_compte_corrige": 4
+    },
+    {
+     "le_saut": 5,
+     "en_face": 144,
+     "lecart_median": 15.961,
+     "le_genre": "simple",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 6,
+     "en_face": 235,
+     "lecart_median": 19.368,
+     "le_genre": "simple",
+     "le_compte_corrige": 6
+    },
+    {
+     "le_saut": 7,
+     "en_face": 388,
+     "lecart_median": 17.138,
+     "le_genre": "simple",
+     "le_compte_corrige": 7
+    },
+    {
+     "le_saut": 8,
+     "en_face": 282,
+     "lecart_median": 16.155,
+     "le_genre": "simple",
+     "le_compte_corrige": 8
+    }
+   ],
+   "compagne": [
+    {
+     "le_saut": 1,
+     "en_face": 651,
+     "lecart_median": 11.98,
+     "le_genre": "simple",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 2,
+     "en_face": 524,
+     "lecart_median": 14.57,
+     "le_genre": "simple",
+     "le_compte_corrige": 2
+    },
+    {
+     "le_saut": 3,
+     "en_face": 697,
+     "lecart_median": 13.851,
+     "le_genre": "simple",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 4,
+     "en_face": 323,
+     "lecart_median": 13.873,
+     "le_genre": "simple",
+     "le_compte_corrige": 4
+    },
+    {
+     "le_saut": 5,
+     "en_face": 116,
+     "lecart_median": 26.579,
+     "le_genre": "simple",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 6,
+     "en_face": 158,
+     "lecart_median": 13.517,
+     "le_genre": "simple",
+     "le_compte_corrige": 6
+    },
+    {
+     "le_saut": 7,
+     "en_face": 121,
+     "lecart_median": 14.225,
+     "le_genre": "simple",
+     "le_compte_corrige": 7
+    },
+    {
+     "le_saut": 8,
+     "en_face": 71,
+     "lecart_median": 14.911,
+     "le_genre": "simple",
+     "le_compte_corrige": 8
+    }
+   ],
+   "les_paires": [
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 1,
+     "en_face": 362,
+     "lecart_median": 0.354,
+     "meme_feuille": true,
+     "meme_saut": true,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 2,
+     "en_face": 226,
+     "lecart_median": 20.371,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 1,
+     "en_face": 159,
+     "lecart_median": 15.722,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 2,
+     "en_face": 155,
+     "lecart_median": 11.334,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 3,
+     "en_face": 59,
+     "lecart_median": 22.7,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 1,
+     "en_face": 74,
+     "lecart_median": 25.231,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 2,
+     "en_face": 150,
+     "lecart_median": 0.299,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 3,
+     "en_face": 131,
+     "lecart_median": 16.797,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 1,
+     "en_face": 161,
+     "lecart_median": 18.262,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 2,
+     "en_face": 514,
+     "lecart_median": 13.752,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 3,
+     "en_face": 562,
+     "lecart_median": 0.42,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 4,
+     "en_face": 371,
+     "lecart_median": 14.542,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 5,
+     "en_face": 69,
+     "lecart_median": 21.942,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 1,
+     "en_face": 89,
+     "lecart_median": 12.677,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 2,
+     "en_face": 173,
+     "lecart_median": 12.16,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 3,
+     "en_face": 170,
+     "lecart_median": 2.712,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 4,
+     "en_face": 116,
+     "lecart_median": 10.56,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 5,
+     "en_face": 66,
+     "lecart_median": 20.983,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 1,
+     "en_face": 227,
+     "lecart_median": 0.397,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 2,
+     "en_face": 455,
+     "lecart_median": 1.049,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 3,
+     "en_face": 308,
+     "lecart_median": 15.998,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 4,
+     "en_face": 116,
+     "lecart_median": 16.452,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 5,
+     "en_face": 441,
+     "lecart_median": 0.476,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 6,
+     "en_face": 159,
+     "lecart_median": 11.721,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 8,
+     "en_face": 96,
+     "lecart_median": 11.407,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 1,
+     "en_face": 62,
+     "lecart_median": 18.887,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 2,
+     "en_face": 111,
+     "lecart_median": 6.381,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 3,
+     "en_face": 90,
+     "lecart_median": 11.327,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 5,
+     "en_face": 153,
+     "lecart_median": 17.299,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 6,
+     "en_face": 186,
+     "lecart_median": 0.815,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 7,
+     "en_face": 159,
+     "lecart_median": 10.577,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 8,
+     "en_face": 340,
+     "lecart_median": 15.363,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 6,
+     "en_face": 81,
+     "lecart_median": 19.597,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 7,
+     "en_face": 98,
+     "lecart_median": 0.853,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 8,
+     "en_face": 291,
+     "lecart_median": 0.808,
+     "meme_feuille": true,
+     "meme_saut": true,
+     "tient_les_comptes": true
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "suivie": [
+    {
+     "le_saut": 1,
+     "en_face": 457,
+     "lecart_median": 16.111,
+     "le_genre": "simple",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 2,
+     "en_face": 313,
+     "lecart_median": 21.175,
+     "le_genre": "simple",
+     "le_compte_corrige": 2
+    },
+    {
+     "le_saut": 3,
+     "en_face": 157,
+     "lecart_median": 12.878,
+     "le_genre": "simple",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 4,
+     "en_face": 356,
+     "lecart_median": 12.17,
+     "le_genre": "simple",
+     "le_compte_corrige": 4
+    },
+    {
+     "le_saut": 5,
+     "en_face": 282,
+     "lecart_median": 16.009,
+     "le_genre": "simple",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 6,
+     "en_face": 240,
+     "lecart_median": 14.667,
+     "le_genre": "simple",
+     "le_compte_corrige": 6
+    },
+    {
+     "le_saut": 7,
+     "en_face": 390,
+     "lecart_median": 16.708,
+     "le_genre": "simple",
+     "le_compte_corrige": 7
+    },
+    {
+     "le_saut": 8,
+     "en_face": 468,
+     "lecart_median": 2.469,
+     "le_genre": "nul",
+     "le_compte_corrige": 7
+    }
+   ],
+   "compagne": [
+    {
+     "le_saut": 1,
+     "en_face": 32,
+     "lecart_median": 20.58,
+     "le_genre": "simple",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 2,
+     "en_face": 70,
+     "lecart_median": 0.751,
+     "le_genre": "nul",
+     "le_compte_corrige": 1
+    },
+    {
+     "le_saut": 3,
+     "en_face": 109,
+     "lecart_median": 14.435,
+     "le_genre": "simple",
+     "le_compte_corrige": 2
+    },
+    {
+     "le_saut": 4,
+     "en_face": 401,
+     "lecart_median": 15.667,
+     "le_genre": "simple",
+     "le_compte_corrige": 3
+    },
+    {
+     "le_saut": 5,
+     "en_face": 592,
+     "lecart_median": 17.558,
+     "le_genre": "simple",
+     "le_compte_corrige": 4
+    },
+    {
+     "le_saut": 6,
+     "en_face": 517,
+     "lecart_median": 15.448,
+     "le_genre": "simple",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 7,
+     "en_face": 457,
+     "lecart_median": 0.906,
+     "le_genre": "nul",
+     "le_compte_corrige": 5
+    },
+    {
+     "le_saut": 8,
+     "en_face": 299,
+     "lecart_median": 32.052,
+     "le_genre": "double",
+     "le_compte_corrige": 7
+    }
+   ],
+   "les_paires": [
+    {
+     "le_saut_suivi": 1,
+     "le_saut_compagnon": 1,
+     "en_face": 72,
+     "lecart_median": 5.91,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 1,
+     "en_face": 50,
+     "lecart_median": 2.98,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 2,
+     "le_saut_compagnon": 3,
+     "en_face": 68,
+     "lecart_median": 23.302,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 1,
+     "en_face": 61,
+     "lecart_median": 0.636,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 2,
+     "en_face": 111,
+     "lecart_median": 0.325,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 3,
+     "en_face": 347,
+     "lecart_median": 11.413,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 3,
+     "le_saut_compagnon": 4,
+     "en_face": 98,
+     "lecart_median": 20.693,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 1,
+     "en_face": 55,
+     "lecart_median": 13.363,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 2,
+     "en_face": 112,
+     "lecart_median": 14.812,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 3,
+     "en_face": 323,
+     "lecart_median": 0.402,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 4,
+     "le_saut_compagnon": 4,
+     "en_face": 313,
+     "lecart_median": 16.261,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 3,
+     "en_face": 232,
+     "lecart_median": 16.397,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 4,
+     "en_face": 295,
+     "lecart_median": 0.581,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 5,
+     "le_saut_compagnon": 5,
+     "en_face": 193,
+     "lecart_median": 14.569,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 3,
+     "en_face": 71,
+     "lecart_median": 15.389,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 4,
+     "en_face": 300,
+     "lecart_median": 13.683,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 5,
+     "en_face": 393,
+     "lecart_median": 0.504,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 6,
+     "en_face": 270,
+     "lecart_median": 15.354,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 6,
+     "le_saut_compagnon": 7,
+     "en_face": 149,
+     "lecart_median": 19.529,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 5,
+     "en_face": 316,
+     "lecart_median": 14.819,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 6,
+     "en_face": 350,
+     "lecart_median": 0.384,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 7,
+     "le_saut_compagnon": 7,
+     "en_face": 373,
+     "lecart_median": 10.621,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 5,
+     "en_face": 230,
+     "lecart_median": 18.677,
+     "meme_feuille": false,
+     "meme_saut": false,
+     "tient_les_comptes": true
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 6,
+     "en_face": 390,
+     "lecart_median": 0.659,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 7,
+     "en_face": 836,
+     "lecart_median": 0.339,
+     "meme_feuille": true,
+     "meme_saut": false,
+     "tient_les_comptes": false
+    },
+    {
+     "le_saut_suivi": 8,
+     "le_saut_compagnon": 8,
+     "en_face": 120,
+     "lecart_median": 16.484,
+     "meme_feuille": false,
+     "meme_saut": true,
+     "tient_les_comptes": false
+    }
+   ]
+  }
+ ],
+ "le_bilan": {
+  "les_paires": 134,
+  "tiennent_brut": 77,
+  "tiennent_corrige": 90,
+  "les_genres": {
+   "nul": 6,
+   "simple": 73,
+   "double": 1
+  }
+ },
+ "lecart_median_des_sauts_simples": 15.667,
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "corrigés des sauts nuls et doubles, 90 des 134 paires tiennent les comptes, contre 77 sans correction ; en partie"
+ },
+ "les_secondes": 49.6
+}

@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**220 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**221 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 182 portes
+## Grand Prize — 183 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -200,7 +200,8 @@
 - **R4-P163** *(le graal)* · **RÉPONDUE par `366` : pas plus, en médiane.** La chaîne d'une maille tient 1, 1, 3, 4 et 5 sauts à la suite, 3 en médiane comme la chaîne mixte ; elle tient 26 sauts sur 40 contre 22, et des surfaces de 561 mailles en médiane contre 394,5 (`R4-F552`). La suite est `R4-P164`.
 - **R4-P164** *(le graal)* · **RÉPONDUE par `367` : oui.** Sur 56 paires de surfaces qui se recouvrent, « même feuille » et « même tour » s'accordent sous les 56 ; 0,285 voxel en médiane sur le même tour, 11,95 sur des tours voisins (`R4-F553`). La suite est `R4-P165`.
 - **R4-P165** *(le graal)* · **RÉPONDUE par `368` : non.** Les graines de PHerc0358 ne se recouvrent pas ; avec une chaîne compagne sur chaque nappe de départ, 77 des 134 paires tiennent les comptes, et sur trois côtés l'une des chaînes prend un saut d'avance ou de retard qu'elle garde (`R4-F554`). La suite est `R4-P166`.
-- **R4-P166** *(le graal)* · **SUR PHERC0358, UN GLISSEMENT QUE L'ACCORD DE DEUX CHAÎNES RÉVÈLE SE VOIT-IL DANS LA CHAÎNE SEULE, COMME UN SAUT QUI GARDE LA MÊME FEUILLE OU QUI EN SAUTE UNE, LÀ OÙ L'ACCORD PLACE LE DÉCALAGE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `368` DÉSIGNE. Deux chaînes voisines se décalent d'un saut (`R4-F554`) ; si le saut fautif se voit en comparant deux surfaces successives d'une même chaîne, une chaîne peut le refuser seule, sans compagne ni tracé.
+- **R4-P166** *(le graal)* · **RÉPONDUE par `369` : en partie.** Corrigés des sauts nuls et doubles que la chaîne voit seule, en comparant chaque surface à celle d'où elle part, 90 des 134 paires tiennent les comptes, contre 77 ; un saut nul se voit, un saut qui franchit deux feuilles minces reste sous le pas et demi (`R4-F555`). La suite est `R4-P167`.
+- **R4-P167** *(le graal)* · **SUR PHERCPARIS4, OÙ LES TOURS PUBLIÉS DISENT QUELS SAUTS GARDENT LE TOUR OU EN SAUTENT UN, L'ÉCART D'UN SAUT À LA SURFACE D'OÙ IL PART LES SÉPARE-T-IL DES SAUTS JUSTES, ET À QUEL SEUIL ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `369` DÉSIGNE. Sur PHerc0358, un saut nul se voit dans la chaîne seule, mais un saut qui franchit deux feuilles reste sous le seuil d'un pas et demi (`R4-F555`) ; étalonné là où le tour est connu, le seuil dirait ce qu'une chaîne peut compter seule.
 
 ## Progress Prizes — 19 portes
 

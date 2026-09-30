@@ -3336,6 +3336,47 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 369 : LE GLISSEMENT SE VOIT-IL DANS LA CHAÎNE SEULE
+    s369 = _source(racine, "le_glissement_se_voit_il_dans_la_chaine_seule.json")
+    if s369.exists():
+        d = json.loads(s369.read_text())
+        b, k_ = d["le_bilan"], d["les_constantes"]
+        virg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        cote = {(c["le_rang"], c["le_cote"]): c for c in d["les_cotes"]}
+        genre = lambda c, g: [s_ for k in ("suivie", "compagne") for s_ in c[k] if s_["le_genre"] == g]  # noqa: E731
+
+        def corrige(c, p):
+            return p["meme_feuille"] == (c["suivie"][p["le_saut_suivi"] - 1]["le_compte_corrige"]
+                                         == c["compagne"][p["le_saut_compagnon"] - 1]["le_compte_corrige"])
+        g6, g7, g8, g8m = cote[(6, "moins")], cote[(7, "plus")], cote[(8, "plus")], cote[(8, "moins")]
+        e7 = max(s_["lecart_median"] for k in ("suivie", "compagne") for s_ in g7[k])
+        ecrits = [("le verdict de 369", f"{b['tiennent_corrige']} PAIRES SUR {b['les_paires']} TIENNENT LES COMPTES CORRIGÉS, CONTRE "
+                                        f"{b['tiennent_brut']} : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les chunks de m7 lus de 369", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne"),
+                  ("les seuils de 369", f"quart de pas, {virg(k_['le_quart'])} voxels ; **double** au-delà d'un pas et demi, "
+                                        f"{virg(k_['le_double'])} voxels"),
+                  ("le bilan de 369", f"Corrigées des sauts nuls et doubles, {b['tiennent_corrige']} des {b['les_paires']}"),
+                  ("le brut de 369", f"paires tiennent les comptes, contre {b['tiennent_brut']} sans correction"),
+                  ("les nuls de la graine 6 de 369", f"{virg(g6['suivie'][1]['lecart_median'])} et {virg(g6['compagne'][1]['lecart_median'])} "
+                                                     f"voxel de la surface"
+                                                     if g6["suivie"][1]["le_genre"] == g6["compagne"][1]["le_genre"] == "nul" else "changé"),
+                  ("le cinquième de la graine 6 de 369", f"un cinquième, à {virg(g6['suivie'][4]['lecart_median'])} : corrigées, "
+                                                         f"{sum(corrige(g6, p) for p in g6['les_paires'])} paires sur {len(g6['les_paires'])}"),
+                  ("la graine 8 moins de 369", f"un double, à {virg(genre(g8m, 'double')[0]['lecart_median'])} voxels, et la suivie un nul : "
+                                               f"{sum(corrige(g8m, p) for p in g8m['les_paires'])} paires sur {len(g8m['les_paires'])}"),
+                  ("la graine 7 plus de 369", f"l'écart, {virg(e7)} voxels, est le plus grand du côté"
+                                              if e7 == g7["suivie"][1]["lecart_median"] else "changé"),
+                  ("la graine 8 plus de 369", f"de {virg(g8['suivie'][1]['lecart_median'])} et {virg(g8['suivie'][2]['lecart_median'])} "
+                                              f"voxels, là où la compagne en fait un, de {virg(g8['compagne'][1]['lecart_median'])}"),
+                  ("l'écart des sauts simples de 369", f"s'écartent de {virg(d['lecart_median_des_sauts_simples'])} voxels en"),
+                  ("le premier saut de la compagne 8 moins de 369", f"n'a que {g8m['compagne'][0]['en_face']} points en face")]
+        for c in d["les_cotes"]:
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 369",
+                           f"| graine {c['le_rang']}, {c['le_cote']} | {len(c['les_paires'])} | "
+                           f"{sum(p['tient_les_comptes'] for p in c['les_paires'])} | {sum(corrige(c, p) for p in c['les_paires'])} | "
+                           f"{len(genre(c, 'nul'))} | {len(genre(c, 'double'))} |"))
+        out.extend((nom, [x_], s369.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 368 : DEUX CHAÎNES VOISINES COMPTENT-ELLES LES MÊMES TOURS SUR PHERC0358
     s368 = _source(racine, "deux_chaines_voisines_comptent_elles_les_memes_tours_sur_pherc0358.json")
     if s368.exists():

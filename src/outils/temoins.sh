@@ -1875,6 +1875,8 @@ run "deux chaînes qui se croisent disent-elles le tour" uv run python "$ROOT/sr
 run "figure deux chaînes qui se croisent disent-elles le tour" uv run python "$ROOT/src/figures/figure_deux_chaines_qui_se_croisent_disent_elles_le_tour.py" --verifier
 run "deux chaînes voisines comptent-elles les mêmes tours sur PHerc0358" uv run python "$ROOT/src/nappe/deux_chaines_voisines_comptent_elles_les_memes_tours_sur_pherc0358.py" --verifier
 run "figure deux chaînes voisines comptent-elles les mêmes tours sur PHerc0358" uv run python "$ROOT/src/figures/figure_deux_chaines_voisines_comptent_elles_les_memes_tours_sur_pherc0358.py" --verifier
+run "le glissement se voit-il dans la chaîne seule" uv run python "$ROOT/src/nappe/le_glissement_se_voit_il_dans_la_chaine_seule.py" --verifier
+run "figure le glissement se voit-il dans la chaîne seule" uv run python "$ROOT/src/figures/figure_le_glissement_se_voit_il_dans_la_chaine_seule.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
