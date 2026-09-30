@@ -1881,6 +1881,8 @@ run "l'écart d'un saut sépare-t-il un tour de deux sur PHercParis4" uv run pyt
 run "figure l'écart d'un saut sépare-t-il un tour de deux sur PHercParis4" uv run python "$ROOT/src/figures/figure_lecart_dun_saut_separe_t_il_un_tour_de_deux_sur_paris4.py" --verifier
 run "compter les sauts en tours fait-il voir le glissement sur PHerc0358" uv run python "$ROOT/src/nappe/compter_les_sauts_en_tours_fait_il_voir_le_glissement_sur_pherc0358.py" --verifier
 run "figure compter les sauts en tours fait-il voir le glissement sur PHerc0358" uv run python "$ROOT/src/figures/figure_compter_les_sauts_en_tours_fait_il_voir_le_glissement_sur_pherc0358.py" --verifier
+run "une troisième chaîne dit-elle laquelle a glissé sur PHerc0358" uv run python "$ROOT/src/nappe/une_troisieme_chaine_dit_elle_laquelle_a_glisse_sur_pherc0358.py" --verifier
+run "figure une troisième chaîne dit-elle laquelle a glissé sur PHerc0358" uv run python "$ROOT/src/figures/figure_une_troisieme_chaine_dit_elle_laquelle_a_glisse_sur_pherc0358.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

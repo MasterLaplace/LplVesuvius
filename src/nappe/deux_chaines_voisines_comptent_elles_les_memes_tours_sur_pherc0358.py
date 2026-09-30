@@ -70,15 +70,19 @@ LE_MINIMUM = 10
 _LES_PAIRES_DE_CHAINES: list = []
 
 
-def la_graine_compagne(nappe: dict, decalage: int = LE_DECALAGE_EN_MAILLES) -> tuple[np.ndarray, np.ndarray] | None:
-    """Le point de la nappe à `decalage` mailles de son centre, dans la première direction où il est posé à normale connue, et sa
+LES_DIRECTIONS = ((0, 1), (1, 0), (0, -1), (-1, 0))
+
+
+def la_graine_compagne(nappe: dict, decalage: int = LE_DECALAGE_EN_MAILLES,
+                       directions: tuple = LES_DIRECTIONS) -> tuple[np.ndarray, np.ndarray] | None:
+    """Le point de la nappe à `decalage` mailles de son centre, dans la première des directions où il est posé à normale connue, et sa
     normale ; None s'il n'y en a pas."""
     from la_spire_voisine_est_elle_a_un_pas import les_normales
 
     nn, ok = les_normales(nappe["la_nappe"], nappe["valide"])
     c0, c1 = nappe["valide"].shape[0] // 2, nappe["valide"].shape[1] // 2
-    for d0, d1 in ((0, decalage), (decalage, 0), (0, -decalage), (-decalage, 0)):
-        i, j = c0 + d0, c1 + d1
+    for u0, u1 in directions:
+        i, j = c0 + u0 * decalage, c1 + u1 * decalage
         if 0 <= i < ok.shape[0] and 0 <= j < ok.shape[1] and ok[i, j]:
             return nappe["la_nappe"][i, j], nn[i, j]
     return None

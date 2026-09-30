@@ -3336,6 +3336,37 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 372 : UNE TROISIÈME CHAÎNE DIT-ELLE LAQUELLE A GLISSÉ SUR PHERC0358
+    s372 = _source(racine, "une_troisieme_chaine_dit_elle_laquelle_a_glisse_sur_pherc0358.json")
+    s372_369 = _source(racine, "le_glissement_se_voit_il_dans_la_chaine_seule.json")
+    if s372.exists() and s372_369.exists():
+        d, d9 = json.loads(s372.read_text()), json.loads(s372_369.read_text())
+        b = d["le_bilan"]
+        cote = {(c["le_rang"], c["le_cote"]): c for c in d["les_cotes"]}
+        g7, g7_9 = cote[(7, "plus")], next(c for c in d9["les_cotes"] if (c["le_rang"], c["le_cote"]) == (7, "plus"))
+        nom = {"suivie": "la suivie", "compagne": "la compagne", "tierce": "la tierce", None: "aucune"}
+        st = [(p["le_saut_suivi"], p["le_saut_compagnon"]) for p in g7["les_paires"]["suivie|tierce"] if p["meme_feuille"]]
+        sc = [(p["le_saut_suivi"], p["le_saut_compagnon"]) for p in g7_9["les_paires"] if p["meme_feuille"]]
+        ecrits = [("le verdict de 372", f"UNE TROISIÈME CHAÎNE SUR PHERC0358 : {d['le_verdict']['lissue'].upper()}"),
+                  ("les chunks de m7 lus de 372", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne"),
+                  ("le désaccord de 372", f"Sur {b['en_desaccord']} côtés où la suivie et la"),
+                  ("les côtés sans tierce de 372", f"compagne ne tiennent pas les comptes, {b['sans_tierce']} n'ont pas de tierce"),
+                  ("la graine 8 de 372", "la nappe de départ de la graine 8 n'a de point"
+                   if not cote[(8, "plus")]["la_tierce"] and not cote[(8, "moins")]["la_tierce"] else "changé"),
+                  ("le vote de la graine 7 de 372", "le vote désigne la suivie" if g7["le_vote"] == "suivie" else "changé"),
+                  ("les paires de la graine 7 de 372", f"tiennent les comptes sous leurs {g7['les_couples']['compagne|tierce']['les_paires']} "
+                                                       f"paires" if g7["les_couples"]["compagne|tierce"]["tient"] else "changé"),
+                  ("la deuxième surface de 372", "deuxième surface de la suivie est sur la même feuille que la"
+                   if (2, 3) in st and (2, 3) in sc else "changé"),
+                  ("le saut de 369 de 372", f"c'est le saut de {g7_9['suivie'][1]['lecart_median']:g} voxels".replace(".", ","))]
+        for c in d["les_cotes"]:
+            k = c["les_couples"]
+            cell = lambda x: f"{k[x]['tiennent']} / {k[x]['les_paires']}" if c["la_tierce"] or x == "suivie|compagne" else "sans tierce"  # noqa: E731
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 372",
+                           f"| graine {c['le_rang']}, {c['le_cote']} | {cell('suivie|compagne')} | {cell('suivie|tierce')} | "
+                           f"{cell('compagne|tierce')} | {nom[c['le_vote']]} |"))
+        out.extend((nom_, [x_], s372.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 371 : COMPTER LES SAUTS EN TOURS FAIT-IL VOIR LE GLISSEMENT SUR PHERC0358
     s371 = _source(racine, "compter_les_sauts_en_tours_fait_il_voir_le_glissement_sur_pherc0358.json")
     s371_370 = _source(racine, "lecart_dun_saut_separe_t_il_un_tour_de_deux_sur_paris4.json")

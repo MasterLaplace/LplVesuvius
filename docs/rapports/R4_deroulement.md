@@ -4774,6 +4774,12 @@ aucune des 17 paires à deux tours. `R4-P168` s'ouvre : sur PHerc0358, compter l
 deux sauts doubles de compagnes sont rattrapés, mais le saut où glisse la graine 7, côté plus, reste sous le seuil ; les feuilles de
 PHerc0358 sont trop inégalement espacées. `R4-P169` s'ouvre : une troisième chaîne, pour désigner par la majorité celle qui a glissé.
 
+**`372` · 2026-09-30 · une troisième chaîne dit-elle laquelle a glissé sur PHerc0358** — `R4-P169`
+
+⭐⭐⭐⭐ **Indécidable : 4 côtés en désaccord, dont 2 sans tierce** — `R4-F558`. La nappe de la graine 8 n'offre pas de place à une tierce
+à 15 mailles ; sur la graine 7, côté plus, la compagne et la tierce tiennent les comptes ensemble et le vote désigne la suivie, dont le
+deuxième saut s'écarte de 23,438 voxels. `R4-P170` s'ouvre : une tierce ailleurs, et des comptes corrigés des sauts nuls.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
