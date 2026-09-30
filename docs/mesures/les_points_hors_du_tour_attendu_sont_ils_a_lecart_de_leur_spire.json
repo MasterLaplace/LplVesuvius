@@ -1,0 +1,3243 @@
+{
+ "la_question": "Sur PHercParis4, graines 4 à 8, sous les croissances à cheval, les points que les tours publiés posent hors du tour attendu sont-ils là où leur tour publié les met, ou à l'écart de leur spire ?",
+ "les_constantes": {
+  "le_minimum_de_points": 10,
+  "le_minimum": 5
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHercParis4": {
+   "lus": 15962,
+   "absents": 0,
+   "octets": 7241613882
+  }
+ },
+ "le_controle": true,
+ "redonne_358": true,
+ "les_cotes": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1531,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -19.694,
+      "les_comptes": {
+       "|au-delà|croissance": 20,
+       "|au-delà|semis": 34,
+       "|inconnu|croissance": 35,
+       "|inconnu|semis": 21,
+       "|à l'écart de la spire|croissance": 188,
+       "|à l'écart de la spire|semis": 902
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 665,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -18.0,
+      "les_comptes": {
+       "|au-delà|croissance": 10,
+       "|au-delà|semis": 62,
+       "|inconnu|croissance": 9,
+       "|inconnu|semis": 53,
+       "|à l'écart de la spire|croissance": 55,
+       "|à l'écart de la spire|semis": 361
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 688,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -19.861,
+      "les_comptes": {
+       "|au-delà|semis": 3,
+       "|inconnu|croissance": 14,
+       "|inconnu|semis": 7,
+       "|près du départ|croissance": 2,
+       "|à l'écart de la spire|croissance": 116,
+       "|à l'écart de la spire|semis": 442
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 808,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -18.147,
+      "les_comptes": {
+       "|au-delà|croissance": 7,
+       "|au-delà|semis": 25,
+       "|inconnu|croissance": 21,
+       "|inconnu|semis": 16,
+       "|à l'écart de la spire|croissance": 153,
+       "|à l'écart de la spire|semis": 484
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 854,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -16.668,
+      "les_comptes": {
+       "|au-delà|croissance": 68,
+       "|au-delà|semis": 161,
+       "|inconnu|croissance": 20,
+       "|inconnu|semis": 28,
+       "|près du départ|semis": 2,
+       "|à l'écart de la spire|croissance": 72,
+       "|à l'écart de la spire|semis": 370
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 928,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -12.163,
+      "les_comptes": {
+       "|au-delà|croissance": 52,
+       "|au-delà|semis": 76,
+       "|inconnu|croissance": 17,
+       "|près du départ|croissance": 8,
+       "|à l'écart de la spire|croissance": 92,
+       "|à l'écart de la spire|semis": 549
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1037,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -13.437,
+      "les_comptes": {
+       "|au-delà|croissance": 15,
+       "|au-delà|semis": 13,
+       "|inconnu|croissance": 27,
+       "|inconnu|semis": 8,
+       "|près du départ|croissance": 1,
+       "|près du départ|semis": 3,
+       "|à l'écart de la spire|croissance": 149,
+       "|à l'écart de la spire|semis": 675
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1060,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -17.914,
+      "les_comptes": {
+       "|au-delà|croissance": 26,
+       "|au-delà|semis": 87,
+       "|inconnu|croissance": 47,
+       "|inconnu|semis": 101,
+       "|près du départ|croissance": 28,
+       "|près du départ|semis": 17,
+       "|à l'écart de la spire|croissance": 151,
+       "|à l'écart de la spire|semis": 477
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 993,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 20.558,
+      "les_comptes": {
+       "|au-delà|croissance": 3,
+       "|au-delà|semis": 16,
+       "|inconnu|croissance": 34,
+       "|inconnu|semis": 61,
+       "|près du départ|croissance": 1,
+       "|près du départ|semis": 2,
+       "|à l'écart de la spire|croissance": 111,
+       "|à l'écart de la spire|semis": 623
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 666,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 22.083,
+      "les_comptes": {
+       "0|inconnu|croissance": 10,
+       "0|inconnu|semis": 3,
+       "0|à l'écart de la spire|croissance": 108,
+       "0|à l'écart de la spire|semis": 433
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 583,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 2,
+     "au_dela": 0,
+     "les_points_poses": 481,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "lecart_de_la_spire": 20.463,
+      "les_comptes": {
+       "-1,0|au-delà|croissance": 2,
+       "-1,0|au-delà|semis": 17,
+       "-1,0|inconnu|croissance": 20,
+       "-1,0|inconnu|semis": 19,
+       "-1,0|à l'écart de la spire|croissance": 71,
+       "-1,0|à l'écart de la spire|semis": 350,
+       "0|à l'écart de la spire|semis": 2
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 525,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 14.862,
+      "les_comptes": {
+       "-2,-1|au-delà|semis": 6,
+       "-2,-1|inconnu|croissance": 5,
+       "-2,-1|inconnu|semis": 12,
+       "-2,-1|à l'écart de la spire|croissance": 34,
+       "-2,-1|à l'écart de la spire|semis": 209,
+       "-2|au-delà|semis": 3,
+       "-2|inconnu|croissance": 4,
+       "-2|à l'écart de la spire|croissance": 24,
+       "-2|à l'écart de la spire|semis": 132
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 602,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 505,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "lecart_de_la_spire": 17.61,
+      "les_comptes": {
+       "-3,-2|au-delà|croissance": 53,
+       "-3,-2|au-delà|semis": 73,
+       "-3,-2|inconnu|croissance": 70,
+       "-3,-2|inconnu|semis": 121,
+       "-3,-2|près du départ|croissance": 2,
+       "-3,-2|à l'écart de la spire|croissance": 43,
+       "-3,-2|à l'écart de la spire|semis": 143
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 519,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 15.889,
+      "les_comptes": {
+       "-4,-3|au-delà|croissance": 17,
+       "-4,-3|au-delà|semis": 34,
+       "-4,-3|inconnu|croissance": 31,
+       "-4,-3|inconnu|semis": 59,
+       "-4,-3|à l'écart de la spire|croissance": 21,
+       "-4,-3|à l'écart de la spire|semis": 263,
+       "-4|à l'écart de la spire|croissance": 3,
+       "-4|à l'écart de la spire|semis": 2
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 597,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 21.28,
+      "les_comptes": {
+       "-5,-4|au-delà|croissance": 15,
+       "-5,-4|au-delà|semis": 51,
+       "-5,-4|inconnu|croissance": 34,
+       "-5,-4|inconnu|semis": 89,
+       "-5,-4|près du départ|croissance": 9,
+       "-5,-4|près du départ|semis": 16,
+       "-5,-4|à l'écart de la spire|croissance": 99,
+       "-5,-4|à l'écart de la spire|semis": 151,
+       "-5|au-delà|croissance": 3,
+       "-5|au-delà|semis": 7,
+       "-5|inconnu|croissance": 2,
+       "-5|inconnu|semis": 14,
+       "-5|à l'écart de la spire|croissance": 1,
+       "-5|à l'écart de la spire|semis": 10
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 686,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 24.988,
+      "les_comptes": {
+       "-6,-5|au-delà|croissance": 1,
+       "-6,-5|au-delà|semis": 2,
+       "-6,-5|inconnu|croissance": 35,
+       "-6,-5|inconnu|semis": 48,
+       "-6,-5|à l'écart de la spire|croissance": 78,
+       "-6,-5|à l'écart de la spire|semis": 287,
+       "-6|inconnu|croissance": 14,
+       "-6|inconnu|semis": 9,
+       "-6|à l'écart de la spire|croissance": 38,
+       "-6|à l'écart de la spire|semis": 71
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1183,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -22.971,
+      "les_comptes": {
+       "|au-delà|croissance": 13,
+       "|au-delà|semis": 38,
+       "|inconnu|croissance": 83,
+       "|inconnu|semis": 160,
+       "|près du départ|croissance": 38,
+       "|à l'écart de la spire|croissance": 201,
+       "|à l'écart de la spire|semis": 475
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1077,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -24.584,
+      "les_comptes": {
+       "|au-delà|croissance": 2,
+       "|au-delà|semis": 4,
+       "|inconnu|croissance": 49,
+       "|inconnu|semis": 48,
+       "|à l'écart de la spire|croissance": 167,
+       "|à l'écart de la spire|semis": 658
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1245,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -25.065,
+      "les_comptes": {
+       "|au-delà|croissance": 34,
+       "|au-delà|semis": 74,
+       "|inconnu|croissance": 140,
+       "|inconnu|semis": 208,
+       "|à l'écart de la spire|croissance": 139,
+       "|à l'écart de la spire|semis": 473
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1375,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -19.754,
+      "les_comptes": {
+       "|au-delà|croissance": 14,
+       "|au-delà|semis": 73,
+       "|inconnu|croissance": 45,
+       "|inconnu|semis": 67,
+       "|près du départ|croissance": 1,
+       "|à l'écart de la spire|croissance": 193,
+       "|à l'écart de la spire|semis": 794
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1098,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -14.2,
+      "les_comptes": {
+       "|au-delà|croissance": 8,
+       "|au-delà|semis": 24,
+       "|inconnu|croissance": 26,
+       "|inconnu|semis": 8,
+       "|à l'écart de la spire|croissance": 121,
+       "|à l'écart de la spire|semis": 735
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1185,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -11.686,
+      "les_comptes": {
+       "|au-delà|croissance": 41,
+       "|au-delà|semis": 38,
+       "|inconnu|croissance": 31,
+       "|inconnu|semis": 4,
+       "|près du départ|croissance": 12,
+       "|à l'écart de la spire|croissance": 143,
+       "|à l'écart de la spire|semis": 775
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1224,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -13.712,
+      "les_comptes": {
+       "|au-delà|croissance": 58,
+       "|au-delà|semis": 196,
+       "|inconnu|croissance": 54,
+       "|inconnu|semis": 68,
+       "|près du départ|croissance": 20,
+       "|près du départ|semis": 2,
+       "|à l'écart de la spire|croissance": 95,
+       "|à l'écart de la spire|semis": 581
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1000,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -11.759,
+      "les_comptes": {
+       "|au-delà|croissance": 69,
+       "|au-delà|semis": 57,
+       "|inconnu|croissance": 30,
+       "|inconnu|semis": 17,
+       "|près du départ|croissance": 12,
+       "|près du départ|semis": 1,
+       "|à l'écart de la spire|croissance": 116,
+       "|à l'écart de la spire|semis": 513
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 978,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 21.793,
+      "les_comptes": {
+       "0|au-delà|croissance": 22,
+       "0|au-delà|semis": 22,
+       "0|inconnu|croissance": 67,
+       "0|inconnu|semis": 69,
+       "0|à l'écart de la spire|croissance": 130,
+       "0|à l'écart de la spire|semis": 495
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 982,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 20,
+     "au_dela": 0,
+     "les_points_poses": 822,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "lecart_de_la_spire": 27.56,
+      "les_comptes": {
+       "-1,0|au-delà|semis": 11,
+       "-1,0|inconnu|croissance": 92,
+       "-1,0|inconnu|semis": 151,
+       "-1,0|à l'écart de la spire|croissance": 119,
+       "-1,0|à l'écart de la spire|semis": 429,
+       "0|inconnu|croissance": 3,
+       "0|inconnu|semis": 1,
+       "0|à l'écart de la spire|croissance": 4,
+       "0|à l'écart de la spire|semis": 12
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 950,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 17.773,
+      "les_comptes": {
+       "-2,-1|au-delà|croissance": 24,
+       "-2,-1|au-delà|semis": 84,
+       "-2,-1|inconnu|croissance": 51,
+       "-2,-1|inconnu|semis": 113,
+       "-2,-1|à l'écart de la spire|croissance": 77,
+       "-2,-1|à l'écart de la spire|semis": 435,
+       "-2|inconnu|croissance": 2,
+       "-2|inconnu|semis": 1,
+       "-2|à l'écart de la spire|croissance": 7,
+       "-2|à l'écart de la spire|semis": 5
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 843,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 705,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "lecart_de_la_spire": 21.261,
+      "les_comptes": {
+       "-3,-2|au-delà|croissance": 25,
+       "-3,-2|au-delà|semis": 61,
+       "-3,-2|inconnu|croissance": 28,
+       "-3,-2|inconnu|semis": 64,
+       "-3,-2|à l'écart de la spire|croissance": 92,
+       "-3,-2|à l'écart de la spire|semis": 435
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 1337,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 606,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 510,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "lecart_de_la_spire": 20.433,
+      "les_comptes": {
+       "-4|au-delà|croissance": 2,
+       "-5,-4|au-delà|croissance": 20,
+       "-5,-4|au-delà|semis": 39,
+       "-5,-4|inconnu|croissance": 39,
+       "-5,-4|inconnu|semis": 86,
+       "-5,-4|près du départ|croissance": 4,
+       "-5,-4|près du départ|semis": 5,
+       "-5,-4|à l'écart de la spire|croissance": 55,
+       "-5,-4|à l'écart de la spire|semis": 260
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 646,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 18.908,
+      "les_comptes": {
+       "-5|inconnu|croissance": 1,
+       "-5|à l'écart de la spire|croissance": 4,
+       "-5|à l'écart de la spire|semis": 2,
+       "-6,-5|au-delà|croissance": 2,
+       "-6,-5|au-delà|semis": 26,
+       "-6,-5|inconnu|croissance": 40,
+       "-6,-5|inconnu|semis": 70,
+       "-6,-5|à l'écart de la spire|croissance": 87,
+       "-6,-5|à l'écart de la spire|semis": 321
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "faux : le tour manqué",
+     "depuis": "la croissance",
+     "les_points": 615,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 445,
+     "le_tour_de_depart": -5,
+     "en_plus": {
+      "lecart_de_la_spire": 12.554,
+      "les_comptes": {
+       "-6|au-delà|croissance": 6,
+       "-6|au-delà|semis": 14,
+       "-6|inconnu|croissance": 17,
+       "-6|inconnu|semis": 1,
+       "-6|près du départ|croissance": 1,
+       "-6|près du départ|semis": 3,
+       "-6|à l'écart de la spire|croissance": 37,
+       "-6|à l'écart de la spire|semis": 366,
+       "|au-delà|croissance": 1,
+       "|au-delà|semis": 12,
+       "|inconnu|croissance": 2,
+       "|inconnu|semis": 5,
+       "|à l'écart de la spire|semis": 2
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 545,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 0,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "lecart_de_la_spire": -23.725,
+      "les_comptes": {
+       "|inconnu|croissance": 18,
+       "|inconnu|semis": 23,
+       "|à l'écart de la spire|croissance": 85,
+       "|à l'écart de la spire|semis": 327
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 580,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -22.384,
+      "les_comptes": {
+       "|au-delà|croissance": 17,
+       "|au-delà|semis": 25,
+       "|inconnu|croissance": 50,
+       "|inconnu|semis": 78,
+       "|à l'écart de la spire|croissance": 109,
+       "|à l'écart de la spire|semis": 211
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 645,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -23.629,
+      "les_comptes": {
+       "|au-delà|croissance": 1,
+       "|au-delà|semis": 6,
+       "|inconnu|croissance": 16,
+       "|inconnu|semis": 14,
+       "|à l'écart de la spire|croissance": 106,
+       "|à l'écart de la spire|semis": 407
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 811,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -22.846,
+      "les_comptes": {
+       "|au-delà|croissance": 35,
+       "|au-delà|semis": 78,
+       "|inconnu|croissance": 73,
+       "|inconnu|semis": 118,
+       "|à l'écart de la spire|croissance": 98,
+       "|à l'écart de la spire|semis": 302
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 873,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -19.143,
+      "les_comptes": {
+       "|au-delà|croissance": 5,
+       "|au-delà|semis": 50,
+       "|inconnu|croissance": 29,
+       "|inconnu|semis": 68,
+       "|près du départ|croissance": 4,
+       "|près du départ|semis": 5,
+       "|à l'écart de la spire|croissance": 132,
+       "|à l'écart de la spire|semis": 468
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1019,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -13.613,
+      "les_comptes": {
+       "|au-delà|croissance": 20,
+       "|au-delà|semis": 14,
+       "|inconnu|croissance": 14,
+       "|inconnu|semis": 1,
+       "|près du départ|croissance": 1,
+       "|à l'écart de la spire|croissance": 126,
+       "|à l'écart de la spire|semis": 713
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1140,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -11.387,
+      "les_comptes": {
+       "|au-delà|croissance": 26,
+       "|au-delà|semis": 32,
+       "|inconnu|croissance": 14,
+       "|inconnu|semis": 3,
+       "|près du départ|croissance": 15,
+       "|près du départ|semis": 1,
+       "|à l'écart de la spire|croissance": 135,
+       "|à l'écart de la spire|semis": 782
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1322,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -14.218,
+      "les_comptes": {
+       "|au-delà|croissance": 60,
+       "|au-delà|semis": 172,
+       "|inconnu|croissance": 43,
+       "|inconnu|semis": 61,
+       "|près du départ|croissance": 4,
+       "|près du départ|semis": 8,
+       "|à l'écart de la spire|croissance": 147,
+       "|à l'écart de la spire|semis": 661
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 1221,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 11,
+     "au_dela": 0,
+     "les_points_poses": 1060,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "lecart_de_la_spire": 27.532,
+      "les_comptes": {
+       "-1,0|au-delà|croissance": 2,
+       "-1,0|au-delà|semis": 13,
+       "-1,0|inconnu|croissance": 94,
+       "-1,0|inconnu|semis": 228,
+       "-1,0|à l'écart de la spire|croissance": 100,
+       "-1,0|à l'écart de la spire|semis": 612,
+       "0|inconnu|croissance": 1,
+       "0|à l'écart de la spire|croissance": 2,
+       "0|à l'écart de la spire|semis": 8
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1137,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 17.712,
+      "les_comptes": {
+       "-1|inconnu|croissance": 1,
+       "-2,-1|au-delà|croissance": 24,
+       "-2,-1|au-delà|semis": 112,
+       "-2,-1|inconnu|croissance": 34,
+       "-2,-1|inconnu|semis": 136,
+       "-2,-1|près du départ|semis": 3,
+       "-2,-1|à l'écart de la spire|croissance": 74,
+       "-2,-1|à l'écart de la spire|semis": 545,
+       "-2|au-delà|semis": 2,
+       "-2|inconnu|croissance": 9,
+       "-2|inconnu|semis": 12,
+       "-2|à l'écart de la spire|croissance": 9,
+       "-2|à l'écart de la spire|semis": 10,
+       "|au-delà|semis": 2,
+       "|inconnu|croissance": 2,
+       "|inconnu|semis": 1,
+       "|à l'écart de la spire|croissance": 4,
+       "|à l'écart de la spire|semis": 3
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "faux : deux tours",
+     "depuis": "la croissance",
+     "les_points": 845,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 1,
+     "au_dela": 0,
+     "les_points_poses": 687,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "lecart_de_la_spire": 18.736,
+      "les_comptes": {
+       "-2,-1|près du départ|croissance": 1,
+       "-3,-2|au-delà|croissance": 30,
+       "-3,-2|au-delà|semis": 87,
+       "-3,-2|inconnu|croissance": 32,
+       "-3,-2|inconnu|semis": 102,
+       "-3,-2|près du départ|semis": 2,
+       "-3,-2|à l'écart de la spire|croissance": 49,
+       "-3,-2|à l'écart de la spire|semis": 384,
+       "|près du départ|croissance": 1
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 359,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 35.927,
+      "les_comptes": {
+       "-4,-3|inconnu|croissance": 74,
+       "-4,-3|inconnu|semis": 100,
+       "-4,-3|près du départ|croissance": 5,
+       "-4,-3|près du départ|semis": 5,
+       "-4,-3|à l'écart de la spire|croissance": 29,
+       "-4,-3|à l'écart de la spire|semis": 72,
+       "-5,-4|inconnu|semis": 1
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 445,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 20.289,
+      "les_comptes": {
+       "-5,-4|au-delà|croissance": 6,
+       "-5,-4|au-delà|semis": 16,
+       "-5,-4|inconnu|croissance": 34,
+       "-5,-4|inconnu|semis": 62,
+       "-5,-4|près du départ|croissance": 4,
+       "-5,-4|près du départ|semis": 8,
+       "-5,-4|à l'écart de la spire|croissance": 69,
+       "-5,-4|à l'écart de la spire|semis": 164
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 1146,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 720,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 547,
+     "au_dela": 0,
+     "les_points_poses": 547,
+     "le_tour_de_depart": -6,
+     "en_plus": {
+      "lecart_de_la_spire": 13.108,
+      "les_comptes": {
+       "-6,-5|près du départ|croissance": 3,
+       "-6|au-delà|croissance": 7,
+       "-6|au-delà|semis": 34,
+       "-6|inconnu|croissance": 15,
+       "-6|inconnu|semis": 9,
+       "-6|près du départ|croissance": 39,
+       "-6|à l'écart de la spire|croissance": 42,
+       "-6|à l'écart de la spire|semis": 398,
+       "|au-delà|croissance": 1,
+       "|au-delà|semis": 7,
+       "|inconnu|croissance": 3,
+       "|inconnu|semis": 1,
+       "|à l'écart de la spire|semis": 3
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 393,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 24.802,
+      "les_comptes": {
+       "|au-delà|semis": 1,
+       "|inconnu|croissance": 21,
+       "|inconnu|semis": 36,
+       "|près du départ|croissance": 3,
+       "|à l'écart de la spire|croissance": 44,
+       "|à l'écart de la spire|semis": 209
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2954,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3666,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3267,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 2795,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -11.028,
+      "les_comptes": {
+       "|au-delà|croissance": 19,
+       "|au-delà|semis": 75,
+       "|inconnu|croissance": 34,
+       "|inconnu|semis": 19,
+       "|près du départ|croissance": 45,
+       "|près du départ|semis": 6,
+       "|à l'écart de la spire|croissance": 152,
+       "|à l'écart de la spire|semis": 850
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3759,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 3187,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -15.728,
+      "les_comptes": {
+       "|au-delà|croissance": 13,
+       "|au-delà|semis": 12,
+       "|inconnu|croissance": 32,
+       "|inconnu|semis": 27,
+       "|près du départ|croissance": 5,
+       "|près du départ|semis": 3,
+       "|à l'écart de la spire|croissance": 147,
+       "|à l'écart de la spire|semis": 961
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3469,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 3243,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -12.462,
+      "les_comptes": {
+       "|au-delà|croissance": 29,
+       "|au-delà|semis": 141,
+       "|inconnu|croissance": 44,
+       "|inconnu|semis": 29,
+       "|près du départ|croissance": 44,
+       "|près du départ|semis": 1,
+       "|à l'écart de la spire|croissance": 172,
+       "|à l'écart de la spire|semis": 740
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 2296,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 15.946,
+      "les_comptes": {
+       "-1,0|inconnu|croissance": 5,
+       "-1,0|à l'écart de la spire|croissance": 15,
+       "-1,0|à l'écart de la spire|semis": 22,
+       "0|au-delà|croissance": 7,
+       "0|au-delà|semis": 18,
+       "0|inconnu|croissance": 20,
+       "0|inconnu|semis": 8,
+       "0|près du départ|croissance": 1,
+       "0|à l'écart de la spire|croissance": 129,
+       "0|à l'écart de la spire|semis": 940,
+       "|inconnu|croissance": 3,
+       "|inconnu|semis": 1,
+       "|près du départ|croissance": 3,
+       "|près du départ|semis": 1,
+       "|à l'écart de la spire|croissance": 13,
+       "|à l'écart de la spire|semis": 14
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 2385,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 57,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "lecart_de_la_spire": 12.998,
+      "les_comptes": {
+       "-1|au-delà|croissance": 5,
+       "-1|au-delà|semis": 34,
+       "-1|inconnu|croissance": 19,
+       "-1|inconnu|semis": 1,
+       "-1|à l'écart de la spire|croissance": 130,
+       "-1|à l'écart de la spire|semis": 954,
+       "0|inconnu|croissance": 2,
+       "0|inconnu|semis": 5,
+       "0|près du départ|croissance": 20,
+       "0|à l'écart de la spire|croissance": 8,
+       "0|à l'écart de la spire|semis": 22
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 2514,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 87,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -1,
+     "en_plus": {
+      "lecart_de_la_spire": 11.215,
+      "les_comptes": {
+       "-1|au-delà|croissance": 3,
+       "-1|inconnu|croissance": 6,
+       "-1|inconnu|semis": 3,
+       "-1|près du départ|croissance": 18,
+       "-1|près du départ|semis": 3,
+       "-1|à l'écart de la spire|croissance": 21,
+       "-1|à l'écart de la spire|semis": 33,
+       "-2|au-delà|croissance": 7,
+       "-2|au-delà|semis": 17,
+       "-2|inconnu|croissance": 21,
+       "-2|inconnu|semis": 2,
+       "-2|près du départ|semis": 1,
+       "-2|à l'écart de la spire|croissance": 107,
+       "-2|à l'écart de la spire|semis": 958
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "les_points": 2225,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 57,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -2,
+     "en_plus": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 2178,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 63,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "lecart_de_la_spire": 12.162,
+      "les_comptes": {
+       "-3|inconnu|croissance": 2,
+       "-3|près du départ|croissance": 32,
+       "-3|près du départ|semis": 1,
+       "-3|à l'écart de la spire|croissance": 9,
+       "-3|à l'écart de la spire|semis": 19,
+       "-4,-3|inconnu|croissance": 2,
+       "-4,-3|à l'écart de la spire|croissance": 10,
+       "-4,-3|à l'écart de la spire|semis": 40,
+       "-4|au-delà|semis": 2,
+       "-4|inconnu|croissance": 27,
+       "-4|inconnu|semis": 10,
+       "-4|à l'écart de la spire|croissance": 133,
+       "-4|à l'écart de la spire|semis": 913
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 2066,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 100,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -4,
+     "en_plus": {
+      "lecart_de_la_spire": 11.683,
+      "les_comptes": {
+       "-4|au-delà|croissance": 12,
+       "-4|au-delà|semis": 35,
+       "-4|inconnu|croissance": 8,
+       "-4|près du départ|croissance": 35,
+       "-4|à l'écart de la spire|croissance": 4,
+       "-4|à l'écart de la spire|semis": 6,
+       "-5,-4|à l'écart de la spire|semis": 3,
+       "-5|au-delà|croissance": 14,
+       "-5|au-delà|semis": 34,
+       "-5|inconnu|croissance": 19,
+       "-5|près du départ|semis": 5,
+       "-5|à l'écart de la spire|croissance": 98,
+       "-5|à l'écart de la spire|semis": 927
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "les_points": 1644,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 8,
+     "au_dela": 16,
+     "les_points_poses": 1182,
+     "le_tour_de_depart": -5,
+     "en_plus": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3003,
+     "tenu": false,
+     "a_cheval": true,
+     "restes": 63,
+     "au_dela": 0,
+     "les_points_poses": 183,
+     "le_tour_de_depart": -6,
+     "en_plus": null
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1387,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -12.192,
+      "les_comptes": {
+       "0|près du départ|croissance": 2,
+       "0|à l'écart de la spire|croissance": 2,
+       "0|à l'écart de la spire|semis": 35,
+       "|au-delà|croissance": 43,
+       "|au-delà|semis": 93,
+       "|inconnu|croissance": 24,
+       "|inconnu|semis": 6,
+       "|près du départ|croissance": 20,
+       "|près du départ|semis": 3,
+       "|à l'écart de la spire|croissance": 113,
+       "|à l'écart de la spire|semis": 647
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2948,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "les_points": 2222,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3680,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3868,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3186,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3669,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 3154,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -12.038,
+      "les_comptes": {
+       "|au-delà|croissance": 22,
+       "|au-delà|semis": 63,
+       "|inconnu|croissance": 26,
+       "|inconnu|semis": 18,
+       "|près du départ|croissance": 26,
+       "|près du départ|semis": 4,
+       "|à l'écart de la spire|croissance": 125,
+       "|à l'écart de la spire|semis": 916
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1664,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 16.148,
+      "les_comptes": {
+       "-1,0|au-delà|croissance": 1,
+       "-1,0|inconnu|croissance": 4,
+       "-1,0|inconnu|semis": 5,
+       "-1,0|à l'écart de la spire|croissance": 40,
+       "-1,0|à l'écart de la spire|semis": 334,
+       "0|au-delà|croissance": 15,
+       "0|au-delà|semis": 45,
+       "0|inconnu|croissance": 16,
+       "0|inconnu|semis": 6,
+       "0|à l'écart de la spire|croissance": 99,
+       "0|à l'écart de la spire|semis": 624,
+       "|à l'écart de la spire|croissance": 5,
+       "|à l'écart de la spire|semis": 6
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1724,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1170,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "lecart_de_la_spire": 14.332,
+      "les_comptes": {
+       "-1|au-delà|croissance": 6,
+       "-1|au-delà|semis": 91,
+       "-1|inconnu|croissance": 17,
+       "-1|inconnu|semis": 15,
+       "-1|à l'écart de la spire|croissance": 114,
+       "-1|à l'écart de la spire|semis": 927,
+       "|à l'écart de la spire|croissance": 11,
+       "|à l'écart de la spire|semis": 19
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1715,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -1,
+     "en_plus": {
+      "lecart_de_la_spire": 12.545,
+      "les_comptes": {
+       "-2,-1|à l'écart de la spire|croissance": 2,
+       "-2|au-delà|croissance": 23,
+       "-2|au-delà|semis": 131,
+       "-2|inconnu|croissance": 7,
+       "-2|inconnu|semis": 4,
+       "-2|à l'écart de la spire|croissance": 69,
+       "-2|à l'écart de la spire|semis": 962,
+       "-3,-2|à l'écart de la spire|croissance": 2
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1575,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 17,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "lecart_de_la_spire": 10.908,
+      "les_comptes": {
+       "-3,-2|au-delà|semis": 54,
+       "-3,-2|inconnu|croissance": 1,
+       "-3,-2|à l'écart de la spire|croissance": 21,
+       "-3,-2|à l'écart de la spire|semis": 341,
+       "-3|au-delà|croissance": 1,
+       "-3|au-delà|semis": 65,
+       "-3|inconnu|croissance": 21,
+       "-3|inconnu|semis": 13,
+       "-3|près du départ|croissance": 2,
+       "-3|près du départ|semis": 1,
+       "-3|à l'écart de la spire|croissance": 72,
+       "-3|à l'écart de la spire|semis": 556,
+       "-4,-3|au-delà|croissance": 11,
+       "-4,-3|au-delà|semis": 12,
+       "-4,-3|inconnu|croissance": 1,
+       "-4,-3|à l'écart de la spire|croissance": 6,
+       "-4,-3|à l'écart de la spire|semis": 5,
+       "-4|au-delà|croissance": 7,
+       "-4|au-delà|semis": 9,
+       "-4|inconnu|semis": 1
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1547,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 15,
+     "au_dela": 4,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "lecart_de_la_spire": 11.533,
+      "les_comptes": {
+       "-3|près du départ|croissance": 15,
+       "-4,-3|inconnu|croissance": 3,
+       "-4,-3|près du départ|croissance": 5,
+       "-4,-3|à l'écart de la spire|croissance": 14,
+       "-4,-3|à l'écart de la spire|semis": 29,
+       "-4|au-delà|croissance": 1,
+       "-4|au-delà|semis": 58,
+       "-4|inconnu|croissance": 11,
+       "-4|inconnu|semis": 2,
+       "-4|près du départ|croissance": 3,
+       "-4|près du départ|semis": 3,
+       "-4|à l'écart de la spire|croissance": 39,
+       "-4|à l'écart de la spire|semis": 942,
+       "-5,-4|au-delà|croissance": 1,
+       "-5,-4|au-delà|semis": 2,
+       "-5,-4|inconnu|croissance": 2,
+       "-5,-4|près du départ|croissance": 2,
+       "-5,-4|près du départ|semis": 1,
+       "-5,-4|à l'écart de la spire|croissance": 16,
+       "-5,-4|à l'écart de la spire|semis": 47,
+       "-5|à l'écart de la spire|croissance": 3,
+       "-5|à l'écart de la spire|semis": 1
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1539,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 32,
+     "au_dela": 9,
+     "les_points_poses": 1190,
+     "le_tour_de_depart": -4,
+     "en_plus": {
+      "lecart_de_la_spire": 11.625,
+      "les_comptes": {
+       "-4,-3|inconnu|croissance": 1,
+       "-4|inconnu|croissance": 6,
+       "-4|inconnu|semis": 2,
+       "-4|près du départ|croissance": 4,
+       "-4|à l'écart de la spire|croissance": 12,
+       "-4|à l'écart de la spire|semis": 7,
+       "-5,-4|inconnu|croissance": 1,
+       "-5,-4|près du départ|croissance": 28,
+       "-5,-4|près du départ|semis": 4,
+       "-5,-4|à l'écart de la spire|croissance": 4,
+       "-5,-4|à l'écart de la spire|semis": 23,
+       "-5|au-delà|croissance": 13,
+       "-5|au-delà|semis": 79,
+       "-5|inconnu|croissance": 15,
+       "-5|inconnu|semis": 3,
+       "-5|près du départ|croissance": 1,
+       "-5|près du départ|semis": 1,
+       "-5|à l'écart de la spire|croissance": 81,
+       "-5|à l'écart de la spire|semis": 844,
+       "-6,-5|au-delà|croissance": 1,
+       "-6,-5|au-delà|semis": 2,
+       "-6,-5|inconnu|croissance": 1,
+       "-6,-5|à l'écart de la spire|croissance": 19,
+       "-6,-5|à l'écart de la spire|semis": 29,
+       "-6|au-delà|croissance": 2,
+       "-6|au-delà|semis": 1,
+       "-6|inconnu|croissance": 1,
+       "-6|inconnu|semis": 1,
+       "-6|à l'écart de la spire|croissance": 1,
+       "-6|à l'écart de la spire|semis": 3,
+       "|au-delà|croissance": 1,
+       "|au-delà|semis": 8,
+       "|inconnu|croissance": 1
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1344,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 78,
+     "au_dela": 0,
+     "les_points_poses": 1111,
+     "le_tour_de_depart": -5,
+     "en_plus": {
+      "lecart_de_la_spire": 12.527,
+      "les_comptes": {
+       "-4,-3|près du départ|croissance": 1,
+       "-5,-4,-3|de l'autre côté|croissance": 1,
+       "-5,-4|de l'autre côté|croissance": 1,
+       "-5,-4|près du départ|croissance": 5,
+       "-5,-4|près du départ|semis": 3,
+       "-5|inconnu|croissance": 1,
+       "-5|près du départ|croissance": 5,
+       "-5|près du départ|semis": 3,
+       "-5|à l'écart de la spire|croissance": 21,
+       "-5|à l'écart de la spire|semis": 38,
+       "-6,-4|à l'écart de la spire|semis": 1,
+       "-6,-5|inconnu|croissance": 4,
+       "-6,-5|inconnu|semis": 1,
+       "-6,-5|près du départ|croissance": 8,
+       "-6,-5|près du départ|semis": 1,
+       "-6,-5|à l'écart de la spire|croissance": 2,
+       "-6,-5|à l'écart de la spire|semis": 20,
+       "-6|au-delà|croissance": 2,
+       "-6|au-delà|semis": 35,
+       "-6|inconnu|croissance": 9,
+       "-6|inconnu|semis": 4,
+       "-6|près du départ|croissance": 2,
+       "-6|près du départ|semis": 1,
+       "-6|à l'écart de la spire|croissance": 64,
+       "-6|à l'écart de la spire|semis": 872,
+       "-7,-6|à l'écart de la spire|croissance": 4,
+       "-7,-6|à l'écart de la spire|semis": 2,
+       "|à l'écart de la spire|semis": 36
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1059,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 56,
+     "au_dela": 0,
+     "les_points_poses": 72,
+     "le_tour_de_depart": -6,
+     "en_plus": {
+      "lecart_de_la_spire": 23.476,
+      "les_comptes": {
+       "-6|inconnu|croissance": 3,
+       "-6|inconnu|semis": 2,
+       "-6|près du départ|croissance": 29,
+       "-6|près du départ|semis": 19,
+       "-6|à l'écart de la spire|croissance": 2,
+       "-6|à l'écart de la spire|semis": 1,
+       "-7,-6|près du départ|croissance": 10,
+       "-7,-6|près du départ|semis": 5,
+       "-7,-6|à l'écart de la spire|croissance": 1,
+       "|au-delà|croissance": 2,
+       "|inconnu|croissance": 42,
+       "|inconnu|semis": 20,
+       "|près du départ|croissance": 6,
+       "|près du départ|semis": 21,
+       "|à l'écart de la spire|croissance": 139,
+       "|à l'écart de la spire|semis": 528
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1530,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 477,
+     "au_dela": 0,
+     "les_points_poses": 540,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "lecart_de_la_spire": -15.363,
+      "les_comptes": {
+       "-1,0|à l'écart de la spire|croissance": 7,
+       "-1,0|à l'écart de la spire|semis": 12,
+       "-1|à l'écart de la spire|croissance": 3,
+       "-1|à l'écart de la spire|semis": 60,
+       "0|inconnu|croissance": 1,
+       "0|inconnu|semis": 1,
+       "0|à l'écart de la spire|croissance": 28,
+       "0|à l'écart de la spire|semis": 428,
+       "|au-delà|croissance": 5,
+       "|au-delà|semis": 4,
+       "|inconnu|croissance": 17,
+       "|inconnu|semis": 1,
+       "|près du départ|croissance": 2,
+       "|à l'écart de la spire|croissance": 67,
+       "|à l'écart de la spire|semis": 564
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2620,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2664,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3452,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2875,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3578,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 3321,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "les_points": 2849,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1729,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 17,
+     "au_dela": 0,
+     "les_points_poses": 1168,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "lecart_de_la_spire": 14.312,
+      "les_comptes": {
+       "-1|au-delà|croissance": 17,
+       "-1|au-delà|semis": 102,
+       "-1|inconnu|croissance": 20,
+       "-1|inconnu|semis": 19,
+       "-1|à l'écart de la spire|croissance": 101,
+       "-1|à l'écart de la spire|semis": 892,
+       "0|près du départ|croissance": 17,
+       "|à l'écart de la spire|croissance": 10,
+       "|à l'écart de la spire|semis": 22
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1685,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 31,
+     "au_dela": 9,
+     "les_points_poses": 1199,
+     "le_tour_de_depart": -1,
+     "en_plus": {
+      "lecart_de_la_spire": 12.693,
+      "les_comptes": {
+       "-1|inconnu|croissance": 8,
+       "-1|près du départ|croissance": 1,
+       "-1|à l'écart de la spire|croissance": 12,
+       "-1|à l'écart de la spire|semis": 10,
+       "-2,-1|à l'écart de la spire|croissance": 1,
+       "-2|au-delà|croissance": 5,
+       "-2|au-delà|semis": 111,
+       "-2|inconnu|croissance": 11,
+       "-2|inconnu|semis": 2,
+       "-2|à l'écart de la spire|croissance": 89,
+       "-2|à l'écart de la spire|semis": 938,
+       "-3,-2|à l'écart de la spire|croissance": 1,
+       "-3,-2|à l'écart de la spire|semis": 1,
+       "-3|au-delà|croissance": 3,
+       "-3|inconnu|croissance": 1,
+       "-3|à l'écart de la spire|croissance": 4,
+       "-3|à l'écart de la spire|semis": 1,
+       "|à l'écart de la spire|semis": 1
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1682,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 50,
+     "au_dela": 23,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "lecart_de_la_spire": 10.946,
+      "les_comptes": {
+       "-1|près du départ|croissance": 1,
+       "-2|inconnu|croissance": 13,
+       "-2|près du départ|croissance": 3,
+       "-2|près du départ|semis": 3,
+       "-2|à l'écart de la spire|croissance": 8,
+       "-2|à l'écart de la spire|semis": 23,
+       "-3,-2|au-delà|semis": 58,
+       "-3,-2|inconnu|croissance": 1,
+       "-3,-2|inconnu|semis": 1,
+       "-3,-2|à l'écart de la spire|croissance": 11,
+       "-3,-2|à l'écart de la spire|semis": 335,
+       "-3|au-delà|croissance": 7,
+       "-3|au-delà|semis": 101,
+       "-3|inconnu|croissance": 6,
+       "-3|inconnu|semis": 18,
+       "-3|près du départ|croissance": 2,
+       "-3|près du départ|semis": 1,
+       "-3|à l'écart de la spire|croissance": 31,
+       "-3|à l'écart de la spire|semis": 530,
+       "-4,-3|au-delà|croissance": 2,
+       "-4,-3|au-delà|semis": 11,
+       "-4,-3|inconnu|croissance": 1,
+       "-4,-3|à l'écart de la spire|croissance": 4,
+       "-4,-3|à l'écart de la spire|semis": 6,
+       "-4|au-delà|croissance": 2,
+       "-4|au-delà|semis": 7,
+       "-4|inconnu|semis": 2,
+       "-4|à l'écart de la spire|croissance": 3,
+       "-4|à l'écart de la spire|semis": 9
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1686,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 89,
+     "au_dela": 22,
+     "les_points_poses": 1199,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "lecart_de_la_spire": 11.496,
+      "les_comptes": {
+       "-2|inconnu|croissance": 2,
+       "-3|au-delà|croissance": 2,
+       "-3|inconnu|croissance": 10,
+       "-3|inconnu|semis": 3,
+       "-3|près du départ|croissance": 14,
+       "-3|près du départ|semis": 2,
+       "-3|à l'écart de la spire|croissance": 17,
+       "-3|à l'écart de la spire|semis": 41,
+       "-4,-3|inconnu|croissance": 1,
+       "-4,-3|près du départ|croissance": 3,
+       "-4,-3|près du départ|semis": 1,
+       "-4,-3|à l'écart de la spire|croissance": 13,
+       "-4,-3|à l'écart de la spire|semis": 32,
+       "-4|au-delà|semis": 63,
+       "-4|inconnu|croissance": 4,
+       "-4|inconnu|semis": 1,
+       "-4|près du départ|croissance": 5,
+       "-4|près du départ|semis": 6,
+       "-4|à l'écart de la spire|croissance": 33,
+       "-4|à l'écart de la spire|semis": 860,
+       "-5,-4,-3|près du départ|croissance": 1,
+       "-5,-4|inconnu|croissance": 2,
+       "-5,-4|inconnu|semis": 1,
+       "-5,-4|près du départ|croissance": 1,
+       "-5,-4|à l'écart de la spire|croissance": 23,
+       "-5,-4|à l'écart de la spire|semis": 36,
+       "-5|inconnu|croissance": 2,
+       "-5|inconnu|semis": 1,
+       "-5|à l'écart de la spire|croissance": 9,
+       "-5|à l'écart de la spire|semis": 10,
+       "|à l'écart de la spire|croissance": 1
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1639,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 106,
+     "au_dela": 38,
+     "les_points_poses": 1192,
+     "le_tour_de_depart": -4,
+     "en_plus": {
+      "lecart_de_la_spire": 11.589,
+      "les_comptes": {
+       "-3|inconnu|croissance": 2,
+       "-3|à l'écart de la spire|croissance": 1,
+       "-4,-3|près du départ|croissance": 1,
+       "-4|inconnu|croissance": 8,
+       "-4|inconnu|semis": 6,
+       "-4|près du départ|croissance": 2,
+       "-4|près du départ|semis": 6,
+       "-4|à l'écart de la spire|croissance": 32,
+       "-4|à l'écart de la spire|semis": 51,
+       "-5,-4,-3|près du départ|croissance": 2,
+       "-5,-4|inconnu|croissance": 1,
+       "-5,-4|inconnu|semis": 2,
+       "-5,-4|près du départ|croissance": 20,
+       "-5,-4|près du départ|semis": 6,
+       "-5,-4|à l'écart de la spire|croissance": 11,
+       "-5,-4|à l'écart de la spire|semis": 24,
+       "-5|au-delà|croissance": 3,
+       "-5|au-delà|semis": 67,
+       "-5|inconnu|croissance": 6,
+       "-5|inconnu|semis": 1,
+       "-5|près du départ|croissance": 5,
+       "-5|près du départ|semis": 1,
+       "-5|à l'écart de la spire|croissance": 81,
+       "-5|à l'écart de la spire|semis": 773,
+       "-6,-5|au-delà|croissance": 2,
+       "-6,-5|inconnu|croissance": 1,
+       "-6,-5|inconnu|semis": 1,
+       "-6,-5|près du départ|semis": 1,
+       "-6,-5|à l'écart de la spire|croissance": 11,
+       "-6,-5|à l'écart de la spire|semis": 26,
+       "-6|inconnu|croissance": 4,
+       "-6|à l'écart de la spire|croissance": 10,
+       "-6|à l'écart de la spire|semis": 24,
+       "|au-delà|semis": 8
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la relance",
+     "les_points": 2321,
+     "tenu": false,
+     "a_cheval": true,
+     "restes": 55,
+     "au_dela": 0,
+     "les_points_poses": 1164,
+     "le_tour_de_depart": -5,
+     "en_plus": null
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "les_points": 1607,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 28,
+     "au_dela": 0,
+     "les_points_poses": 37,
+     "le_tour_de_depart": -6,
+     "en_plus": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1346,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 13.921,
+      "les_comptes": {
+       "|au-delà|croissance": 62,
+       "|au-delà|semis": 165,
+       "|inconnu|croissance": 63,
+       "|inconnu|semis": 7,
+       "|à l'écart de la spire|croissance": 219,
+       "|à l'écart de la spire|semis": 672
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1461,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -15.265,
+      "les_comptes": {
+       "|au-delà|croissance": 13,
+       "|au-delà|semis": 17,
+       "|inconnu|croissance": 78,
+       "|inconnu|semis": 34,
+       "|près du départ|croissance": 28,
+       "|près du départ|semis": 7,
+       "|à l'écart de la spire|croissance": 204,
+       "|à l'écart de la spire|semis": 714
+      }
+     }
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2619,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "les_points": 1564,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2307,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "les_points": 1451,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1179,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -11.154,
+      "les_comptes": {
+       "|au-delà|croissance": 9,
+       "|au-delà|semis": 8,
+       "|inconnu|croissance": 59,
+       "|inconnu|semis": 11,
+       "|près du départ|croissance": 39,
+       "|près du départ|semis": 7,
+       "|à l'écart de la spire|croissance": 209,
+       "|à l'écart de la spire|semis": 695
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1330,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -15.85,
+      "les_comptes": {
+       "|au-delà|croissance": 10,
+       "|au-delà|semis": 20,
+       "|inconnu|croissance": 53,
+       "|inconnu|semis": 36,
+       "|près du départ|croissance": 24,
+       "|près du départ|semis": 1,
+       "|à l'écart de la spire|croissance": 197,
+       "|à l'écart de la spire|semis": 789
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1336,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -11.596,
+      "les_comptes": {
+       "|au-delà|croissance": 49,
+       "|au-delà|semis": 49,
+       "|inconnu|croissance": 41,
+       "|inconnu|semis": 16,
+       "|près du départ|croissance": 18,
+       "|près du départ|semis": 4,
+       "|à l'écart de la spire|croissance": 145,
+       "|à l'écart de la spire|semis": 794
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 2797,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1133,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": 14.116,
+      "les_comptes": {
+       "-1|au-delà|croissance": 38,
+       "-1|au-delà|semis": 83,
+       "-1|inconnu|croissance": 18,
+       "-1|inconnu|semis": 8,
+       "0|au-delà|croissance": 18,
+       "0|au-delà|semis": 12,
+       "0|inconnu|croissance": 40,
+       "0|inconnu|semis": 40,
+       "0|à l'écart de la spire|croissance": 97,
+       "0|à l'écart de la spire|semis": 509,
+       "|inconnu|croissance": 4,
+       "|près du départ|croissance": 7,
+       "|près du départ|semis": 9,
+       "|à l'écart de la spire|croissance": 4,
+       "|à l'écart de la spire|semis": 18
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1147,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 50,
+     "au_dela": 216,
+     "les_points_poses": 955,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "lecart_de_la_spire": 16.038,
+      "les_comptes": {
+       "-1|au-delà|croissance": 9,
+       "-1|au-delà|semis": 114,
+       "-1|inconnu|croissance": 25,
+       "-1|inconnu|semis": 5,
+       "-1|près du départ|croissance": 1,
+       "-1|à l'écart de la spire|croissance": 77,
+       "-1|à l'écart de la spire|semis": 458,
+       "-2|inconnu|croissance": 15,
+       "-2|à l'écart de la spire|croissance": 61,
+       "-2|à l'écart de la spire|semis": 140,
+       "0|inconnu|croissance": 4,
+       "0|inconnu|semis": 1,
+       "0|près du départ|croissance": 6,
+       "0|près du départ|semis": 8,
+       "0|à l'écart de la spire|croissance": 12,
+       "0|à l'écart de la spire|semis": 19
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1003,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 61,
+     "au_dela": 155,
+     "les_points_poses": 762,
+     "le_tour_de_depart": -1,
+     "en_plus": {
+      "lecart_de_la_spire": 12.583,
+      "les_comptes": {
+       "-1|inconnu|croissance": 4,
+       "-1|inconnu|semis": 5,
+       "-1|près du départ|croissance": 20,
+       "-1|près du départ|semis": 3,
+       "-1|à l'écart de la spire|croissance": 11,
+       "-1|à l'écart de la spire|semis": 18,
+       "-2|au-delà|croissance": 2,
+       "-2|au-delà|semis": 5,
+       "-2|inconnu|croissance": 22,
+       "-2|inconnu|semis": 30,
+       "-2|près du départ|croissance": 1,
+       "-2|près du départ|semis": 4,
+       "-2|à l'écart de la spire|croissance": 108,
+       "-2|à l'écart de la spire|semis": 372,
+       "-3,-2|inconnu|croissance": 1,
+       "-3,-2|à l'écart de la spire|croissance": 1,
+       "-3|au-delà|croissance": 2,
+       "-3|au-delà|semis": 5,
+       "-3|inconnu|croissance": 10,
+       "-3|inconnu|semis": 1,
+       "-3|à l'écart de la spire|croissance": 49,
+       "-3|à l'écart de la spire|semis": 88
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 867,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 64,
+     "au_dela": 235,
+     "les_points_poses": 688,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "lecart_de_la_spire": 12.307,
+      "les_comptes": {
+       "-1|près du départ|croissance": 6,
+       "-2,-1|près du départ|croissance": 4,
+       "-2,-1|près du départ|semis": 1,
+       "-2|inconnu|croissance": 8,
+       "-2|inconnu|semis": 5,
+       "-2|près du départ|croissance": 8,
+       "-2|près du départ|semis": 3,
+       "-2|à l'écart de la spire|croissance": 18,
+       "-2|à l'écart de la spire|semis": 17,
+       "-3,-2,-1|près du départ|croissance": 1,
+       "-3,-2|près du départ|croissance": 3,
+       "-3|au-delà|croissance": 7,
+       "-3|au-delà|semis": 31,
+       "-3|de l'autre côté|croissance": 1,
+       "-3|inconnu|croissance": 16,
+       "-3|inconnu|semis": 35,
+       "-3|près du départ|croissance": 11,
+       "-3|près du départ|semis": 4,
+       "-3|à l'écart de la spire|croissance": 36,
+       "-3|à l'écart de la spire|semis": 238,
+       "-4|au-delà|croissance": 4,
+       "-4|au-delà|semis": 15,
+       "-4|inconnu|croissance": 18,
+       "-4|près du départ|croissance": 1,
+       "-4|près du départ|semis": 1,
+       "-4|à l'écart de la spire|croissance": 77,
+       "-4|à l'écart de la spire|semis": 118,
+       "-5,-4|inconnu|croissance": 1
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 717,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 25,
+     "au_dela": 194,
+     "les_points_poses": 521,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "lecart_de_la_spire": 12.869,
+      "les_comptes": {
+       "-1|inconnu|croissance": 1,
+       "-1|près du départ|croissance": 2,
+       "-2,-1|inconnu|croissance": 1,
+       "-2,-1|à l'écart de la spire|croissance": 3,
+       "-2,-1|à l'écart de la spire|semis": 2,
+       "-2|près du départ|croissance": 1,
+       "-2|à l'écart de la spire|croissance": 1,
+       "-3,-2,-1|inconnu|croissance": 1,
+       "-3,-2,-1|près du départ|semis": 1,
+       "-3,-2,-1|à l'écart de la spire|croissance": 1,
+       "-3,-2,-1|à l'écart de la spire|semis": 1,
+       "-3,-2|près du départ|croissance": 1,
+       "-3,-2|à l'écart de la spire|croissance": 4,
+       "-3|inconnu|croissance": 1,
+       "-3|près du départ|croissance": 1,
+       "-3|près du départ|semis": 1,
+       "-3|à l'écart de la spire|croissance": 6,
+       "-3|à l'écart de la spire|semis": 7,
+       "-4|au-delà|croissance": 4,
+       "-4|au-delà|semis": 24,
+       "-4|inconnu|croissance": 14,
+       "-4|inconnu|semis": 6,
+       "-4|près du départ|croissance": 3,
+       "-4|à l'écart de la spire|croissance": 34,
+       "-4|à l'écart de la spire|semis": 206,
+       "-5|au-delà|semis": 1,
+       "-5|inconnu|croissance": 5,
+       "-5|à l'écart de la spire|croissance": 42,
+       "-5|à l'écart de la spire|semis": 146
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la spire",
+     "les_points": 459,
+     "tenu": true,
+     "a_cheval": true,
+     "restes": 7,
+     "au_dela": 118,
+     "les_points_poses": 331,
+     "le_tour_de_depart": -4,
+     "en_plus": null
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": null,
+     "les_points": 0,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "les_points": 1507,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 972,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -15.578,
+      "les_comptes": {
+       "|au-delà|croissance": 4,
+       "|inconnu|croissance": 59,
+       "|inconnu|semis": 13,
+       "|près du départ|croissance": 43,
+       "|près du départ|semis": 7,
+       "|à l'écart de la spire|croissance": 228,
+       "|à l'écart de la spire|semis": 456
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1098,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -12.812,
+      "les_comptes": {
+       "|au-delà|croissance": 24,
+       "|au-delà|semis": 45,
+       "|inconnu|croissance": 33,
+       "|inconnu|semis": 26,
+       "|près du départ|croissance": 26,
+       "|près du départ|semis": 3,
+       "|à l'écart de la spire|croissance": 125,
+       "|à l'écart de la spire|semis": 616
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "non jugé",
+     "depuis": "la spire",
+     "les_points": 753,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 934,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -11.941,
+      "les_comptes": {
+       "|au-delà|croissance": 5,
+       "|au-delà|semis": 5,
+       "|de l'autre côté|croissance": 5,
+       "|inconnu|croissance": 39,
+       "|inconnu|semis": 3,
+       "|près du départ|croissance": 32,
+       "|près du départ|semis": 9,
+       "|à l'écart de la spire|croissance": 204,
+       "|à l'écart de la spire|semis": 495
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1048,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -15.131,
+      "les_comptes": {
+       "|au-delà|croissance": 2,
+       "|au-delà|semis": 4,
+       "|inconnu|croissance": 33,
+       "|inconnu|semis": 12,
+       "|près du départ|croissance": 10,
+       "|près du départ|semis": 1,
+       "|à l'écart de la spire|croissance": 145,
+       "|à l'écart de la spire|semis": 653
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1018,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -11.17,
+      "les_comptes": {
+       "|au-delà|croissance": 4,
+       "|au-delà|semis": 1,
+       "|inconnu|croissance": 29,
+       "|inconnu|semis": 8,
+       "|près du départ|croissance": 22,
+       "|près du départ|semis": 1,
+       "|à l'écart de la spire|croissance": 100,
+       "|à l'écart de la spire|semis": 654
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": "la croissance",
+     "les_points": 1108,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": {
+      "lecart_de_la_spire": -13.227,
+      "les_comptes": {
+       "|au-delà|croissance": 8,
+       "|au-delà|semis": 1,
+       "|inconnu|croissance": 36,
+       "|inconnu|semis": 3,
+       "|près du départ|croissance": 17,
+       "|près du départ|semis": 2,
+       "|à l'écart de la spire|croissance": 156,
+       "|à l'écart de la spire|semis": 683
+      }
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "la_justesse": "non jugé",
+     "depuis": "la relance",
+     "les_points": 1647,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    },
+    {
+     "le_saut": 2,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1600,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 0,
+     "les_points_poses": 1200,
+     "le_tour_de_depart": 0,
+     "en_plus": {
+      "lecart_de_la_spire": 16.333,
+      "les_comptes": {
+       "-1|au-delà|croissance": 7,
+       "-1|au-delà|semis": 82,
+       "-1|inconnu|croissance": 27,
+       "-1|inconnu|semis": 48,
+       "-1|à l'écart de la spire|croissance": 225,
+       "-1|à l'écart de la spire|semis": 811
+      }
+     }
+    },
+    {
+     "le_saut": 3,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 1380,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 15,
+     "au_dela": 0,
+     "les_points_poses": 1175,
+     "le_tour_de_depart": -1,
+     "en_plus": {
+      "lecart_de_la_spire": 12.494,
+      "les_comptes": {
+       "-1|près du départ|croissance": 15,
+       "-2|au-delà|croissance": 7,
+       "-2|au-delà|semis": 87,
+       "-2|inconnu|croissance": 14,
+       "-2|inconnu|semis": 99,
+       "-2|à l'écart de la spire|croissance": 59,
+       "-2|à l'écart de la spire|semis": 894
+      }
+     }
+    },
+    {
+     "le_saut": 4,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 913,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 10,
+     "les_points_poses": 761,
+     "le_tour_de_depart": -2,
+     "en_plus": {
+      "lecart_de_la_spire": 13.099,
+      "les_comptes": {
+       "-3|au-delà|croissance": 1,
+       "-3|au-delà|semis": 16,
+       "-3|inconnu|croissance": 4,
+       "-3|inconnu|semis": 26,
+       "-3|à l'écart de la spire|croissance": 77,
+       "-3|à l'écart de la spire|semis": 627,
+       "-4|au-delà|croissance": 4,
+       "-4|inconnu|croissance": 4,
+       "-4|à l'écart de la spire|croissance": 2
+      }
+     }
+    },
+    {
+     "le_saut": 5,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 786,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 17,
+     "les_points_poses": 617,
+     "le_tour_de_depart": -3,
+     "en_plus": {
+      "lecart_de_la_spire": 10.972,
+      "les_comptes": {
+       "-4|au-delà|croissance": 6,
+       "-4|au-delà|semis": 48,
+       "-4|inconnu|croissance": 10,
+       "-4|inconnu|semis": 14,
+       "-4|près du départ|semis": 3,
+       "-4|à l'écart de la spire|croissance": 30,
+       "-4|à l'écart de la spire|semis": 489,
+       "-5|à l'écart de la spire|croissance": 13,
+       "-5|à l'écart de la spire|semis": 4
+      }
+     }
+    },
+    {
+     "le_saut": 6,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 654,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 0,
+     "au_dela": 20,
+     "les_points_poses": 530,
+     "le_tour_de_depart": -4,
+     "en_plus": {
+      "lecart_de_la_spire": 11.214,
+      "les_comptes": {
+       "-5|au-delà|semis": 6,
+       "-5|inconnu|croissance": 3,
+       "-5|inconnu|semis": 8,
+       "-5|près du départ|croissance": 12,
+       "-5|près du départ|semis": 3,
+       "-5|à l'écart de la spire|croissance": 36,
+       "-5|à l'écart de la spire|semis": 441,
+       "-6,-5|près du départ|croissance": 1,
+       "-6|inconnu|croissance": 3,
+       "-6|inconnu|semis": 1,
+       "-6|près du départ|croissance": 2,
+       "-6|à l'écart de la spire|croissance": 10,
+       "-6|à l'écart de la spire|semis": 4
+      }
+     }
+    },
+    {
+     "le_saut": 7,
+     "la_justesse": "juste",
+     "depuis": "la croissance",
+     "les_points": 561,
+     "tenu": true,
+     "a_cheval": false,
+     "restes": 1,
+     "au_dela": 3,
+     "les_points_poses": 444,
+     "le_tour_de_depart": -5,
+     "en_plus": {
+      "lecart_de_la_spire": 10.969,
+      "les_comptes": {
+       "-5|près du départ|croissance": 1,
+       "-6|au-delà|croissance": 3,
+       "-6|au-delà|semis": 39,
+       "-6|inconnu|croissance": 15,
+       "-6|inconnu|semis": 22,
+       "-6|près du départ|croissance": 13,
+       "-6|à l'écart de la spire|croissance": 23,
+       "-6|à l'écart de la spire|semis": 324,
+       "-7,-6|inconnu|croissance": 1,
+       "-7|inconnu|croissance": 3
+      }
+     }
+    },
+    {
+     "le_saut": 8,
+     "la_justesse": "non jugé",
+     "depuis": null,
+     "les_points": 0,
+     "tenu": false,
+     "a_cheval": false,
+     "restes": null,
+     "au_dela": null,
+     "les_points_poses": null,
+     "le_tour_de_depart": null,
+     "en_plus": null
+    }
+   ]
+  }
+ ],
+ "le_bilan": {
+  "les_jugees": 12,
+  "a_lecart_de_la_spire": 10,
+  "daccord_avec_le_tour": 1,
+  "le_detail": [
+   {
+    "le_cote_de": "la spire",
+    "daccord": 20,
+    "a_lecart": 30,
+    "lus": 50
+   },
+   {
+    "le_cote_de": "la spire",
+    "daccord": 21,
+    "a_lecart": 54,
+    "lus": 78
+   },
+   {
+    "le_cote_de": "le tour",
+    "daccord": 33,
+    "a_lecart": 28,
+    "lus": 61
+   },
+   {
+    "le_cote_de": null,
+    "daccord": 35,
+    "a_lecart": 10,
+    "lus": 92
+   },
+   {
+    "le_cote_de": "la spire",
+    "daccord": 16,
+    "a_lecart": 59,
+    "lus": 77
+   },
+   {
+    "le_cote_de": "la spire",
+    "daccord": 15,
+    "a_lecart": 43,
+    "lus": 58
+   },
+   {
+    "le_cote_de": "la spire",
+    "daccord": 16,
+    "a_lecart": 77,
+    "lus": 95
+   },
+   {
+    "le_cote_de": "la spire",
+    "daccord": 9,
+    "a_lecart": 117,
+    "lus": 126
+   },
+   {
+    "le_cote_de": "la spire",
+    "daccord": 14,
+    "a_lecart": 232,
+    "lus": 246
+   },
+   {
+    "le_cote_de": "la spire",
+    "daccord": 30,
+    "a_lecart": 166,
+    "lus": 196
+   },
+   {
+    "le_cote_de": "la spire",
+    "daccord": 35,
+    "a_lecart": 230,
+    "lus": 267
+   },
+   {
+    "le_cote_de": "la spire",
+    "daccord": 5,
+    "a_lecart": 207,
+    "lus": 212
+   }
+  ],
+  "lattendu": {
+   "au-delà": 660,
+   "inconnu": 321,
+   "à l'écart de la spire": 9608,
+   "près du départ": 101,
+   "de l'autre côté": 1
+  },
+  "le_controle": true
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "sous 10 des 12 croissances à cheval jugées, les points hors du tour attendu sont à l'écart de leur spire, et d'accord avec leur tour sous 1 ; ce sont les tours publiés qui les placent mal"
+ },
+ "les_secondes": 254.7
+}

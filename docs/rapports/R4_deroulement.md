@@ -4708,6 +4708,12 @@ voit pas la croissance qui passe à cheval. Une première passe manquait de norm
 points de la croissance au départ, rapporté à celui de sa spire, ne voit pas le cheval non plus. `R4-P158` s'ouvre : les points que les
 tours publiés posent sur le tour de départ sont-ils près du départ, ou à l'écart de leur spire ?
 
+**`361` · 2026-09-30 · les points hors du tour attendu sont-ils à l'écart de leur spire** — `R4-P158`
+
+⭐⭐⭐⭐⭐ **Oui, sous 10 des 12 croissances à cheval** — `R4-F547`. Les points posés hors du tour attendu sont où sont ceux de l'attendu :
+la chaîne est cohérente avec elle-même, et c'est contre les tours publiés qu'elle est à cheval. La règle concluait au tour publié fautif ;
+elle ne pouvait pas l'écarter d'un retard hérité de la surface de départ. `R4-P159` s'ouvre : le pied de ces points sur le départ.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

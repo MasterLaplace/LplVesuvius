@@ -175,6 +175,7 @@ def la_chaine_jugee(chainer=None, en_plus=None) -> dict:
                               "a_cheval": bool(a is not None and a["a_cheval"]),
                               "restes": a["restes"]["les_points"] if a else None, "au_dela": a["au_dela"]["les_points"] if a else None,
                               "les_points_poses": a["les_points_poses"] if a else None,
+                              "le_tour_de_depart": a["le_tour_de_depart"] if a else None,
                               **({"en_plus": s["en_plus"]} if "en_plus" in s else {})})
             cotes.append({"le_rang": g["le_rang"], "le_cote": cote, "les_sauts": sauts})
             print(json.dumps({"le_rang": g["le_rang"], "le_cote": cote}, ensure_ascii=False),

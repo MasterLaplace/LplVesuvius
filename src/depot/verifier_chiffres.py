@@ -3336,6 +3336,59 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 361 : LES POINTS HORS DU TOUR ATTENDU SONT-ILS À L'ÉCART DE LEUR SPIRE
+    s361 = _source(racine, "les_points_hors_du_tour_attendu_sont_ils_a_lecart_de_leur_spire.json")
+    if s361.exists():
+        from collections import Counter as Compte
+
+        import les_points_hors_du_tour_attendu_sont_ils_a_lecart_de_leur_spire as m361_
+        d = json.loads(s361.read_text())
+        b = d["le_bilan"]
+
+        def zones(cheval=True):
+            hors, att, sem, cro = Compte(), Compte(), Compte(), Compte()
+            cotes = Compte()
+            for s_, sens in m361_.les_croissances_a_cheval(d["les_cotes"], cheval):
+                lu = m361_.la_lecture(s_, sens)
+                if lu is None or m361_.le_cote_de(lu)[3] < m361_.LE_MINIMUM_DE_POINTS:
+                    continue
+                cotes[m361_.le_cote_de(lu)[0]] += 1
+                for g in ("restes", "au_dela"):
+                    hors.update(lu[g])
+                    sem.update(m361_.la_lecture(s_, sens, "semis")[g])
+                    cro.update(m361_.la_lecture(s_, sens, "croissance")[g])
+                att.update(lu["attendu"])
+            return hors, att, sem, cro, cotes
+        hors, att, sem, cro, _ = zones()
+        _, _, _, _, saines = zones(False)
+        seule = Compte()
+        for s_, sens in m361_.les_croissances_a_cheval(d["les_cotes"]):
+            lu = m361_.la_lecture(s_, sens)
+            if lu is not None and m361_.le_cote_de(lu)[3] >= m361_.LE_MINIMUM_DE_POINTS:
+                seule[m361_.le_cote_de(m361_.la_lecture(s_, sens, "croissance"))[0]] += 1
+        lus = lambda c: sum(n for z, n in c.items() if z != m361_.INCONNU)  # noqa: E731
+        pc = lambda c, z: round(100 * c.get(z, 0) / lus(c))  # noqa: E731
+        ligne = lambda nom, c: (f"| {nom} | {lus(c)} | {pc(c, m361_.PRES)} % | {pc(c, m361_.SPIRE)} % | "  # noqa: E731
+                                f"{pc(c, m361_.DELA)} % |")
+        aucun = b["les_jugees"] - b["a_lecart_de_la_spire"] - b["daccord_avec_le_tour"]
+        ecrits = [("le verdict de 361", f"SOUS {b['a_lecart_de_la_spire']} DES {b['les_jugees']} CROISSANCES À CHEVAL, LES POINTS HORS DE "
+                                        f"L'ATTENDU SONT À L'ÉCART DE LEUR SPIRE"),
+                  ("la suite du verdict de 361", f"par la règle déclarée, **{d['le_verdict']['lissue'].rpartition(' ; ')[2]}**"),
+                  ("les chunks de m7 lus de 361", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne"),
+                  ("le contrôle de 361", f"{pc(att, m361_.SPIRE)} % de {lus(att)} points lus" if b["le_controle"] else "contrôle tombé"),
+                  ("la ligne hors de l'attendu de 361", ligne("points hors du tour attendu", hors)),
+                  ("la ligne sur l'attendu de 361", ligne("points sur le tour attendu", att)),
+                  ("les jugées de 361", f"(`R4-F547`). Sous {b['a_lecart_de_la_spire']} des {b['les_jugees']}"),
+                  ("les d'accord de 361", f"ils sont d'accord avec leur tour ; sous {aucun},"
+                                          if b["daccord_avec_le_tour"] == 1 else "compte d'accord changé"),
+                  ("les semés de 361", f"à l'écart de la spire, {sem.get(m361_.SPIRE, 0)} sont semés"),
+                  ("la croissance de 361", f"depuis la spire et {cro.get(m361_.SPIRE, 0)} viennent de la croissance"),
+                  ("la seule croissance de 361", f"à l'écart de la spire sous {seule['la spire']} des {b['les_jugees']}"),
+                  ("la seule croissance d'accord de 361", f"d'accord avec son tour sous {seule['le tour']}."),
+                  ("les saines de 361", f"vont à la spire sous {saines['la spire']} et au"),
+                  ("les saines d'accord de 361", f"tour sous {saines['le tour']} des croissances qui en ont 10")]
+        out.extend((nom, [x_], s361.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 360 : L'ÉCART DE LA CROISSANCE À SON DÉPART SÉPARE-T-IL LES CROISSANCES À CHEVAL
     s360 = _source(racine, "lecart_de_la_croissance_a_son_depart_separe_t_il_les_croissances_a_cheval.json")
     if s360.exists():
