@@ -1,0 +1,190 @@
+{
+ "la_question": "Sur PHercParis4, graines 4 à 8, côtés moins, si l'on prend pour référence la première surface de chaque côté qui retrouve un seul tour, le décalage dont la chaîne qui regrandit hérite y est-il déjà, ou naît-il dans une croissance après elle ?",
+ "les_constantes": {
+  "le_seuil": 50,
+  "le_minimum": 3
+ },
+ "la_source": "ou_nait_le_decalage_que_la_chaine_qui_regrandit_herite.json",
+ "le_controle": true,
+ "les_bilans": {
+  "la_chaine_mixte": {
+   "les_cotes_juges": 5,
+   "ou_il_nait": 2,
+   "dans_la_reference": 1,
+   "apres_elle": 1,
+   "le_detail": [
+    {
+     "le_rang": 4,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      18,
+      13,
+      6,
+      0,
+      9,
+      0
+     ],
+     "la_naissance": null
+    },
+    {
+     "le_rang": 5,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      2,
+      2,
+      3,
+      0,
+      0,
+      3,
+      8
+     ],
+     "la_naissance": null
+    },
+    {
+     "le_rang": 6,
+     "la_reference": 0,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      10,
+      984,
+      0
+     ],
+     "la_naissance": 7
+    },
+    {
+     "le_rang": 7,
+     "la_reference": 2,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      76,
+      60,
+      0,
+      0,
+      0,
+      0,
+      466
+     ],
+     "la_naissance": 0
+    },
+    {
+     "le_rang": 8,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      0,
+      12,
+      1,
+      0,
+      0,
+      0
+     ],
+     "la_naissance": null
+    }
+   ]
+  },
+  "la_chaine_qui_regrandit": {
+   "les_cotes_juges": 5,
+   "ou_il_nait": 4,
+   "dans_la_reference": 1,
+   "apres_elle": 3,
+   "le_detail": [
+    {
+     "le_rang": 4,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      57,
+      87,
+      57,
+      63,
+      100,
+      24,
+      183
+     ],
+     "la_naissance": 1
+    },
+    {
+     "le_rang": 5,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      0,
+      17,
+      19,
+      41,
+      79,
+      56
+     ],
+     "la_naissance": 6
+    },
+    {
+     "le_rang": 6,
+     "la_reference": 0,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      17,
+      40,
+      74,
+      113,
+      147,
+      91,
+      36,
+      0
+     ],
+     "la_naissance": 3
+    },
+    {
+     "le_rang": 7,
+     "la_reference": 2,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      147,
+      266,
+      216,
+      305,
+      230,
+      125
+     ],
+     "la_naissance": 0
+    },
+    {
+     "le_rang": 8,
+     "la_reference": 1,
+     "son_tour": 0,
+     "hors_de_son_tour": [
+      0,
+      0,
+      15,
+      10,
+      17,
+      20,
+      4
+     ],
+     "la_naissance": null
+    }
+   ]
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "sur 5 côtés jugés, le décalage naît sur 4 ; dans la référence sur 1, après elle sur 3 ; il naît dans une croissance après elle"
+ },
+ "les_secondes": 0.0
+}

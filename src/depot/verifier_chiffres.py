@@ -3336,6 +3336,27 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 364 : LE DÉCALAGE NAÎT-IL APRÈS LA PREMIÈRE SURFACE LISIBLE
+    s364 = _source(racine, "le_decalage_nait_il_apres_la_premiere_surface_lisible.json")
+    if s364.exists():
+        d = json.loads(s364.read_text())
+        b, bm = d["les_bilans"]["la_chaine_qui_regrandit"], d["les_bilans"]["la_chaine_mixte"]
+        par = {x["le_rang"]: x for x in b["le_detail"]}
+        mix = {x["le_rang"]: x for x in bm["le_detail"]}
+        ecrits = [("le verdict de 364", f"LE DÉCALAGE NAÎT APRÈS LA PREMIÈRE SURFACE LISIBLE SUR {b['apres_elle']} DES {b['ou_il_nait']} "
+                                        f"CÔTÉS OÙ IL NAÎT"),
+                  ("le contrôle de 364", "Il tient." if d["le_controle"] else "contrôle tombé")]
+        for r, x in sorted(par.items()):
+            ecrits.append((f"la ligne de la graine {r} de 364", f"| graine {r} | surface {x['la_reference']} | "
+                                                                 + " | ".join(str(n) for n in x["hors_de_son_tour"][:8]) + " |"))
+        ecrits += [("les naissances de 364", "graine 4, au troisième sur la graine 6, au sixième sur la graine 5"
+                    if (par[4]["la_naissance"], par[6]["la_naissance"], par[5]["la_naissance"]) == (1, 3, 6) else "naissances changées"),
+                   ("la graine 8 de 364", "la graine 8 reste sous 50" if par[8]["la_naissance"] is None else "graine 8 changée"),
+                   ("la graine 7 de 364", f"dans sa référence, {par[7]['hors_de_son_tour'][0]} points"),
+                   ("la chaîne mixte de 364", f"il naît sur {bm['ou_il_nait']} des {bm['les_cotes_juges']} côtés"),
+                   ("la graine 7 mixte de 364", f"sa référence en a déjà {mix[7]['hors_de_son_tour'][0]}")]
+        out.extend((nom, [x_], s364.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 363 : OÙ NAÎT LE DÉCALAGE QUE LA CHAÎNE QUI REGRANDIT HÉRITE
     s363 = _source(racine, "ou_nait_le_decalage_que_la_chaine_qui_regrandit_herite.json")
     if s363.exists():

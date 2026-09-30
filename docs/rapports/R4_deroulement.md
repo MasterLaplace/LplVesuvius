@@ -4726,6 +4726,12 @@ pas les tours publiés. `R4-P160` s'ouvre : où naît ce décalage.
 un seul tour ; sur son côté moins, elle est propre, et la croissance fait naître le décalage dès le premier saut. `R4-P161` s'ouvre : la
 même question, en prenant pour référence la première surface lisible de chaque côté.
 
+**`364` · 2026-09-30 · le décalage naît-il après la première surface lisible** — `R4-P161`
+
+⭐⭐⭐⭐⭐ **Oui, sur 3 des 4 côtés où il naît : c'est la croissance qui le fait naître** — `R4-F550`. Relu sans mesure neuve : là où la
+première surface lisible est propre, la croissance bornée de `335` fait naître le décalage que la chaîne propage. `R4-P162` s'ouvre :
+une croissance d'une seule maille.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
