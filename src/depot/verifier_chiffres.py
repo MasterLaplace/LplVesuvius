@@ -3336,6 +3336,41 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 370 : L'ÉCART D'UN SAUT SÉPARE-T-IL UN TOUR DE DEUX SUR PHERCPARIS4
+    s370 = _source(racine, "lecart_dun_saut_separe_t_il_un_tour_de_deux_sur_paris4.json")
+    if s370.exists():
+        d = json.loads(s370.read_text())
+        b, s3 = d["le_bilan"], d["les_seuils_de_369"]
+        virg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        u, deux = b["par_tours"]["1"], b["par_tours"]["2"]
+        faux = d["les_sauts_faux"][0] if len(d["les_sauts_faux"]) == 1 else None
+        ecrits = [("le verdict de 370", f"UN TOUR OU DEUX, SUR PHERCPARIS4 : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les chunks de m7 lus de 370", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne"),
+                  ("les surfaces de 370", f"ses {len(d['les_surfaces'])} surfaces justes"),
+                  ("le titre de 370", f"de {virg(u['le_plus_petit'])} à {virg(u['le_plus_grand'])} voxels à un tour, de "
+                                      f"{virg(deux['le_plus_petit'])} à {virg(deux['le_plus_grand'])} à deux tours, au seuil de "
+                                      f"{virg(b['le_seuil'])}"),
+                  ("le plus grand à un tour de 370", f"Le plus grand écart à un tour, {virg(u['le_plus_grand'])} voxels, est"),
+                  ("le seuil de 370", f"sous le plus petit à deux tours, {virg(deux['le_plus_petit'])} : la règle les sépare au seuil de "
+                                      f"{virg(b['le_seuil'])} voxels, {virg(round(b['le_seuil'] / d['les_constantes']['le_pas'], 3))} pas"
+                                      if b["separe"] else "changé"),
+                  ("le seuil rapporté de 370", f"au seuil de {virg(b['le_seuil_rapporte'])} fois cette médiane"
+                                               if b["separe_rapporte"] else "changé"),
+                  ("les seuils de 369 de 370", f"Au pas et demi de `369`, {virg(s3['le_double'])} voxels sur PHercParis4, aucune des "
+                                               f"{deux['les_paires']} paires à deux tours n'aurait été dite double"
+                                               if s3["deux_tours_pas_dits_doubles"] == deux["les_paires"] else "changé"),
+                  ("le quart de 369 de 370", "aucune paire à un tour n'aurait été dite nulle" if s3["un_tour_dits_nuls"] == 0 else "changé"),
+                  ("l'intro de 370", f"Au pas et demi de `369`, aucune des {deux['les_paires']} paires à deux tours n'aurait été dite double"),
+                  ("le saut faux de 370", f"franchit {faux['les_tours']} tours, et s'écarte de {virg(faux['lecart_median'])} voxels"
+                                          if faux else "changé"),
+                  ("le saut faux en face de 370", f"sur {faux['en_face']} points en face" if faux else "changé")]
+        for k, mot in (("1", "un"), ("2", "deux"), ("3", "trois")):
+            x = b["par_tours"][k]
+            ecrits.append((f"la ligne à {mot} tours de 370",
+                           f"| {mot} | {x['les_paires']} | {virg(x['le_plus_petit'])} à {virg(x['le_plus_grand'])} | {virg(x['la_mediane'])} | "
+                           f"{virg(x['rapporte_plus_petit'])} à {virg(x['rapporte_plus_grand'])} |"))
+        out.extend((nom, [x_], s370.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 369 : LE GLISSEMENT SE VOIT-IL DANS LA CHAÎNE SEULE
     s369 = _source(racine, "le_glissement_se_voit_il_dans_la_chaine_seule.json")
     if s369.exists():

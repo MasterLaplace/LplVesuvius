@@ -67,8 +67,9 @@ LES_PAS = {NUL: 0, SIMPLE: 1, DOUBLE: 2}
 _LES_CHAINES: list = []
 
 
-def lecart_du_saut(surface, depart, lateral: float = m368.LE_LATERAL) -> dict:
-    """La médiane des écarts absolus des points de la surface qui ont la surface de départ en face, à trois pas au plus."""
+def lecart_du_saut(surface, depart, lateral: float = m368.LE_LATERAL, portee: float = LA_PORTEE) -> dict:
+    """La médiane des écarts absolus des points de la surface qui ont la surface de départ en face, à la portée au plus, trois pas de
+    PHerc0358 par défaut."""
     import numpy as np
 
     import la_nappe_de_m7_retrouve_t_elle_le_trace_humain_de_paris4 as m321
@@ -76,7 +77,7 @@ def lecart_du_saut(surface, depart, lateral: float = m368.LE_LATERAL) -> dict:
     if not len(surface[0]) or not len(depart[0]):
         return {"en_face": 0, "lecart_median": None}
     e = m321.les_ecarts(surface[0], surface[1], depart[0], lateral=lateral)
-    vus = np.isfinite(e) & (np.abs(e) <= LA_PORTEE)
+    vus = np.isfinite(e) & (np.abs(e) <= portee)
     return {"en_face": int(vus.sum()), "lecart_median": round(float(np.median(np.abs(e[vus]))), 3) if vus.any() else None}
 
 

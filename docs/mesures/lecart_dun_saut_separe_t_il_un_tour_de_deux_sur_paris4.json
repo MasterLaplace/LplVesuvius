@@ -1,0 +1,672 @@
+{
+ "la_question": "Sur PHercParis4, où les tours publiés disent de combien de tours deux surfaces justes d'une même chaîne sont l'une de l'autre, l'écart que `369` mesure à un saut sépare-t-il deux surfaces à un tour de deux surfaces à deux tours, et à quel seuil ?",
+ "les_constantes": {
+  "le_pas": 18.021,
+  "la_portee": 54.063,
+  "le_lateral": 10.0,
+  "le_minimum_en_face": 50,
+  "le_minimum": 10
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHercParis4": {
+   "lus": 13661,
+   "absents": 0,
+   "octets": 6234386632
+  }
+ },
+ "le_controle": true,
+ "redonne_367": true,
+ "les_surfaces": [
+  {
+   "le_rang": 4,
+   "le_saut": 2,
+   "le_tour": -1
+  },
+  {
+   "le_rang": 4,
+   "le_saut": 3,
+   "le_tour": -2
+  },
+  {
+   "le_rang": 4,
+   "le_saut": 4,
+   "le_tour": -3
+  },
+  {
+   "le_rang": 4,
+   "le_saut": 5,
+   "le_tour": -4
+  },
+  {
+   "le_rang": 4,
+   "le_saut": 6,
+   "le_tour": -5
+  },
+  {
+   "le_rang": 4,
+   "le_saut": 7,
+   "le_tour": -6
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 2,
+   "le_tour": -1
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 3,
+   "le_tour": -2
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 4,
+   "le_tour": -3
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 5,
+   "le_tour": -4
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 6,
+   "le_tour": -5
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 7,
+   "le_tour": -6
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 1,
+   "le_tour": -1
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 2,
+   "le_tour": -2
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 3,
+   "le_tour": -3
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 4,
+   "le_tour": -4
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 5,
+   "le_tour": -5
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 6,
+   "le_tour": -6
+  },
+  {
+   "le_rang": 7,
+   "le_saut": 3,
+   "le_tour": -1
+  },
+  {
+   "le_rang": 7,
+   "le_saut": 4,
+   "le_tour": -2
+  },
+  {
+   "le_rang": 7,
+   "le_saut": 5,
+   "le_tour": -3
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 2,
+   "le_tour": -1
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 3,
+   "le_tour": -2
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 4,
+   "le_tour": -3
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 5,
+   "le_tour": -4
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 6,
+   "le_tour": -5
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 7,
+   "le_tour": -6
+  }
+ ],
+ "les_paires": [
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 3,
+   "la_plus_proche": 2,
+   "les_tours": 1,
+   "en_face": 1160,
+   "lecart_median": 11.187,
+   "rapporte": 0.9512
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 4,
+   "la_plus_proche": 2,
+   "les_tours": 2,
+   "en_face": 1070,
+   "lecart_median": 21.996,
+   "rapporte": 1.8702
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 2,
+   "les_tours": 3,
+   "en_face": 1019,
+   "lecart_median": 34.133,
+   "rapporte": 2.9022
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 4,
+   "la_plus_proche": 3,
+   "les_tours": 1,
+   "en_face": 1155,
+   "lecart_median": 10.863,
+   "rapporte": 0.9236
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 3,
+   "les_tours": 2,
+   "en_face": 1083,
+   "lecart_median": 23.027,
+   "rapporte": 1.9579
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 3,
+   "les_tours": 3,
+   "en_face": 981,
+   "lecart_median": 34.649,
+   "rapporte": 2.9461
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 4,
+   "les_tours": 1,
+   "en_face": 1153,
+   "lecart_median": 12.226,
+   "rapporte": 1.0395
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 4,
+   "les_tours": 2,
+   "en_face": 1094,
+   "lecart_median": 24.214,
+   "rapporte": 2.0588
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 7,
+   "la_plus_proche": 4,
+   "les_tours": 3,
+   "en_face": 975,
+   "lecart_median": 34.759,
+   "rapporte": 2.9554
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 5,
+   "les_tours": 1,
+   "en_face": 1168,
+   "lecart_median": 11.767,
+   "rapporte": 1.0005
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 7,
+   "la_plus_proche": 5,
+   "les_tours": 2,
+   "en_face": 1103,
+   "lecart_median": 23.196,
+   "rapporte": 1.9723
+  },
+  {
+   "le_rang": 4,
+   "la_plus_lointaine": 7,
+   "la_plus_proche": 6,
+   "les_tours": 1,
+   "en_face": 1168,
+   "lecart_median": 11.761,
+   "rapporte": 1.0
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 3,
+   "la_plus_proche": 2,
+   "les_tours": 1,
+   "en_face": 1160,
+   "lecart_median": 12.624,
+   "rapporte": 1.0538
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 4,
+   "la_plus_proche": 2,
+   "les_tours": 2,
+   "en_face": 950,
+   "lecart_median": 22.723,
+   "rapporte": 1.8969
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 2,
+   "les_tours": 3,
+   "en_face": 767,
+   "lecart_median": 32.443,
+   "rapporte": 2.7083
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 4,
+   "la_plus_proche": 3,
+   "les_tours": 1,
+   "en_face": 1066,
+   "lecart_median": 10.809,
+   "rapporte": 0.9023
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 3,
+   "les_tours": 2,
+   "en_face": 870,
+   "lecart_median": 21.418,
+   "rapporte": 1.788
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 3,
+   "les_tours": 3,
+   "en_face": 637,
+   "lecart_median": 31.386,
+   "rapporte": 2.6201
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 4,
+   "les_tours": 1,
+   "en_face": 987,
+   "lecart_median": 11.816,
+   "rapporte": 0.9864
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 4,
+   "les_tours": 2,
+   "en_face": 783,
+   "lecart_median": 23.252,
+   "rapporte": 1.9411
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 7,
+   "la_plus_proche": 4,
+   "les_tours": 3,
+   "en_face": 581,
+   "lecart_median": 34.718,
+   "rapporte": 2.8982
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 5,
+   "les_tours": 1,
+   "en_face": 859,
+   "lecart_median": 11.979,
+   "rapporte": 1.0
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 7,
+   "la_plus_proche": 5,
+   "les_tours": 2,
+   "en_face": 701,
+   "lecart_median": 24.089,
+   "rapporte": 2.0109
+  },
+  {
+   "le_rang": 5,
+   "la_plus_lointaine": 7,
+   "la_plus_proche": 6,
+   "les_tours": 1,
+   "en_face": 739,
+   "lecart_median": 12.734,
+   "rapporte": 1.063
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 2,
+   "la_plus_proche": 1,
+   "les_tours": 1,
+   "en_face": 1171,
+   "lecart_median": 12.785,
+   "rapporte": 1.076
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 3,
+   "la_plus_proche": 1,
+   "les_tours": 2,
+   "en_face": 980,
+   "lecart_median": 23.259,
+   "rapporte": 1.9575
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 4,
+   "la_plus_proche": 1,
+   "les_tours": 3,
+   "en_face": 768,
+   "lecart_median": 32.46,
+   "rapporte": 2.7319
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 3,
+   "la_plus_proche": 2,
+   "les_tours": 1,
+   "en_face": 1152,
+   "lecart_median": 10.898,
+   "rapporte": 0.9172
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 4,
+   "la_plus_proche": 2,
+   "les_tours": 2,
+   "en_face": 921,
+   "lecart_median": 20.978,
+   "rapporte": 1.7655
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 2,
+   "les_tours": 3,
+   "en_face": 721,
+   "lecart_median": 31.506,
+   "rapporte": 2.6516
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 4,
+   "la_plus_proche": 3,
+   "les_tours": 1,
+   "en_face": 1083,
+   "lecart_median": 11.623,
+   "rapporte": 0.9782
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 3,
+   "les_tours": 2,
+   "en_face": 951,
+   "lecart_median": 23.374,
+   "rapporte": 1.9672
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 3,
+   "les_tours": 3,
+   "en_face": 645,
+   "lecart_median": 34.666,
+   "rapporte": 2.9175
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 4,
+   "les_tours": 1,
+   "en_face": 1020,
+   "lecart_median": 11.882,
+   "rapporte": 1.0
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 4,
+   "les_tours": 2,
+   "en_face": 741,
+   "lecart_median": 23.767,
+   "rapporte": 2.0003
+  },
+  {
+   "le_rang": 6,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 5,
+   "les_tours": 1,
+   "en_face": 826,
+   "lecart_median": 12.483,
+   "rapporte": 1.0506
+  },
+  {
+   "le_rang": 7,
+   "la_plus_lointaine": 4,
+   "la_plus_proche": 3,
+   "les_tours": 1,
+   "en_face": 618,
+   "lecart_median": 12.847,
+   "rapporte": 1.0088
+  },
+  {
+   "le_rang": 7,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 3,
+   "les_tours": 2,
+   "en_face": 349,
+   "lecart_median": 24.329,
+   "rapporte": 1.9105
+  },
+  {
+   "le_rang": 7,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 4,
+   "les_tours": 1,
+   "en_face": 433,
+   "lecart_median": 12.622,
+   "rapporte": 0.9912
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 3,
+   "la_plus_proche": 2,
+   "les_tours": 1,
+   "en_face": 971,
+   "lecart_median": 12.447,
+   "rapporte": 1.1113
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 4,
+   "la_plus_proche": 2,
+   "les_tours": 2,
+   "en_face": 602,
+   "lecart_median": 24.527,
+   "rapporte": 2.1899
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 2,
+   "les_tours": 3,
+   "en_face": 400,
+   "lecart_median": 34.589,
+   "rapporte": 3.0883
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 4,
+   "la_plus_proche": 3,
+   "les_tours": 1,
+   "en_face": 691,
+   "lecart_median": 13.029,
+   "rapporte": 1.1633
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 3,
+   "les_tours": 2,
+   "en_face": 490,
+   "lecart_median": 23.177,
+   "rapporte": 2.0694
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 3,
+   "les_tours": 3,
+   "en_face": 349,
+   "lecart_median": 32.454,
+   "rapporte": 2.8977
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 5,
+   "la_plus_proche": 4,
+   "les_tours": 1,
+   "en_face": 544,
+   "lecart_median": 10.972,
+   "rapporte": 0.9796
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 4,
+   "les_tours": 2,
+   "en_face": 430,
+   "lecart_median": 21.173,
+   "rapporte": 1.8904
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 7,
+   "la_plus_proche": 4,
+   "les_tours": 3,
+   "en_face": 260,
+   "lecart_median": 31.091,
+   "rapporte": 2.776
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 6,
+   "la_plus_proche": 5,
+   "les_tours": 1,
+   "en_face": 465,
+   "lecart_median": 11.2,
+   "rapporte": 1.0
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 7,
+   "la_plus_proche": 5,
+   "les_tours": 2,
+   "en_face": 304,
+   "lecart_median": 22.076,
+   "rapporte": 1.9711
+  },
+  {
+   "le_rang": 8,
+   "la_plus_lointaine": 7,
+   "la_plus_proche": 6,
+   "les_tours": 1,
+   "en_face": 350,
+   "lecart_median": 11.132,
+   "rapporte": 0.9939
+  }
+ ],
+ "les_sauts_faux": [
+  {
+   "le_rang": 7,
+   "le_saut": 6,
+   "la_justesse": "faux : un autre tour",
+   "les_tours": 3,
+   "en_face": 132,
+   "lecart_median": 30.595
+  }
+ ],
+ "le_bilan": {
+  "par_tours": {
+   "1": {
+    "les_paires": 22,
+    "le_plus_petit": 10.809,
+    "le_plus_grand": 13.029,
+    "la_mediane": 11.849,
+    "rapporte_plus_petit": 0.9023,
+    "rapporte_plus_grand": 1.1633
+   },
+   "2": {
+    "les_paires": 17,
+    "le_plus_petit": 20.978,
+    "le_plus_grand": 24.527,
+    "la_mediane": 23.196,
+    "rapporte_plus_petit": 1.7655,
+    "rapporte_plus_grand": 2.1899
+   },
+   "3": {
+    "les_paires": 12,
+    "le_plus_petit": 31.091,
+    "le_plus_grand": 34.759,
+    "la_mediane": 33.297,
+    "rapporte_plus_petit": 2.6201,
+    "rapporte_plus_grand": 3.0883
+   }
+  },
+  "separe": true,
+  "le_seuil": 17.004,
+  "separe_rapporte": true,
+  "le_seuil_rapporte": 1.4644
+ },
+ "les_seuils_de_369": {
+  "le_quart": 4.505,
+  "le_double": 27.031,
+  "un_tour_dits_nuls": 0,
+  "un_tour_dits_doubles": 0,
+  "deux_tours_pas_dits_doubles": 17
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "à un tour, 22 paires, de 10,809 à 13,029 voxels ; à deux tours, 17 paires, de 20,978 à 24,527 ; oui, l'écart sépare, au seuil de 17,004 voxels, 0,944 pas"
+ },
+ "les_secondes": 215.0
+}

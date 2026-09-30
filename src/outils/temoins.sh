@@ -1877,6 +1877,8 @@ run "deux chaînes voisines comptent-elles les mêmes tours sur PHerc0358" uv ru
 run "figure deux chaînes voisines comptent-elles les mêmes tours sur PHerc0358" uv run python "$ROOT/src/figures/figure_deux_chaines_voisines_comptent_elles_les_memes_tours_sur_pherc0358.py" --verifier
 run "le glissement se voit-il dans la chaîne seule" uv run python "$ROOT/src/nappe/le_glissement_se_voit_il_dans_la_chaine_seule.py" --verifier
 run "figure le glissement se voit-il dans la chaîne seule" uv run python "$ROOT/src/figures/figure_le_glissement_se_voit_il_dans_la_chaine_seule.py" --verifier
+run "l'écart d'un saut sépare-t-il un tour de deux sur PHercParis4" uv run python "$ROOT/src/nappe/lecart_dun_saut_separe_t_il_un_tour_de_deux_sur_paris4.py" --verifier
+run "figure l'écart d'un saut sépare-t-il un tour de deux sur PHercParis4" uv run python "$ROOT/src/figures/figure_lecart_dun_saut_separe_t_il_un_tour_de_deux_sur_paris4.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

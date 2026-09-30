@@ -4762,6 +4762,12 @@ sur trois côtés sur cinq : le juge de `367` montre, sans tracé, des erreurs d
 la surface d'où il part se voit dans la chaîne seule : le compter pour rien fait tenir 38 des 41 paires de la graine 6, côté moins. Un
 saut qui franchit deux feuilles minces reste sous le pas et demi. `R4-P167` s'ouvre : l'écart d'un saut, étalonné sur PHercParis4.
 
+**`370` · 2026-09-30 · l'écart d'un saut sépare-t-il un tour de deux sur PHercParis4** — `R4-P167`
+
+⭐⭐⭐⭐⭐ **Oui, au seuil de 17,004 voxels** — `R4-F556`. Deux surfaces justes d'une même chaîne s'écartent de 10,809 à 13,029 voxels à
+un tour, de 20,978 à 24,527 à deux tours et de 31,091 à 34,759 à trois : l'écart compte les tours. Le pas et demi de `369` ne voyait
+aucune des 17 paires à deux tours. `R4-P168` s'ouvre : sur PHerc0358, compter les sauts en tours au seuil étalonné.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
