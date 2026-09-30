@@ -1,0 +1,1075 @@
+{
+ "la_question": "Sur PHercParis4, les surfaces tenues de deux chaînes d'une maille parties de graines différentes se recouvrent-elles, et là où elles se recouvrent, sont-elles sur la même feuille exactement quand elles sont sur le même tour publié ?",
+ "les_constantes": {
+  "le_quart": 4.505,
+  "la_portee": 27.031,
+  "le_minimum_en_face": 50,
+  "le_minimum": 10
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHercParis4": {
+   "lus": 13661,
+   "absents": 0,
+   "octets": 6234386632
+  }
+ },
+ "le_controle": true,
+ "les_surfaces": [
+  {
+   "le_rang": 4,
+   "le_saut": 2,
+   "le_tour": -1
+  },
+  {
+   "le_rang": 4,
+   "le_saut": 3,
+   "le_tour": -2
+  },
+  {
+   "le_rang": 4,
+   "le_saut": 4,
+   "le_tour": -3
+  },
+  {
+   "le_rang": 4,
+   "le_saut": 5,
+   "le_tour": -4
+  },
+  {
+   "le_rang": 4,
+   "le_saut": 6,
+   "le_tour": -5
+  },
+  {
+   "le_rang": 4,
+   "le_saut": 7,
+   "le_tour": -6
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 2,
+   "le_tour": -1
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 3,
+   "le_tour": -2
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 4,
+   "le_tour": -3
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 5,
+   "le_tour": -4
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 6,
+   "le_tour": -5
+  },
+  {
+   "le_rang": 5,
+   "le_saut": 7,
+   "le_tour": -6
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 1,
+   "le_tour": -1
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 2,
+   "le_tour": -2
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 3,
+   "le_tour": -3
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 4,
+   "le_tour": -4
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 5,
+   "le_tour": -5
+  },
+  {
+   "le_rang": 6,
+   "le_saut": 6,
+   "le_tour": -6
+  },
+  {
+   "le_rang": 7,
+   "le_saut": 3,
+   "le_tour": -1
+  },
+  {
+   "le_rang": 7,
+   "le_saut": 4,
+   "le_tour": -2
+  },
+  {
+   "le_rang": 7,
+   "le_saut": 5,
+   "le_tour": -3
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 2,
+   "le_tour": -1
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 3,
+   "le_tour": -2
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 4,
+   "le_tour": -3
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 5,
+   "le_tour": -4
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 6,
+   "le_tour": -5
+  },
+  {
+   "le_rang": 8,
+   "le_saut": 7,
+   "le_tour": -6
+  }
+ ],
+ "les_paires": [
+  {
+   "a": [
+    4,
+    2,
+    -1
+   ],
+   "b": [
+    5,
+    2,
+    -1
+   ],
+   "en_face": 375,
+   "lecart_median": 0.273,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    2,
+    -1
+   ],
+   "b": [
+    5,
+    3,
+    -2
+   ],
+   "en_face": 356,
+   "lecart_median": 11.831,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    2,
+    -1
+   ],
+   "b": [
+    6,
+    1,
+    -1
+   ],
+   "en_face": 334,
+   "lecart_median": 0.298,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    2,
+    -1
+   ],
+   "b": [
+    6,
+    2,
+    -2
+   ],
+   "en_face": 347,
+   "lecart_median": 12.206,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    3,
+    -2
+   ],
+   "b": [
+    5,
+    2,
+    -1
+   ],
+   "en_face": 392,
+   "lecart_median": 11.791,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    3,
+    -2
+   ],
+   "b": [
+    5,
+    3,
+    -2
+   ],
+   "en_face": 370,
+   "lecart_median": 0.274,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    3,
+    -2
+   ],
+   "b": [
+    5,
+    4,
+    -3
+   ],
+   "en_face": 387,
+   "lecart_median": 9.967,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    3,
+    -2
+   ],
+   "b": [
+    6,
+    1,
+    -1
+   ],
+   "en_face": 339,
+   "lecart_median": 12.007,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    3,
+    -2
+   ],
+   "b": [
+    6,
+    2,
+    -2
+   ],
+   "en_face": 360,
+   "lecart_median": 0.285,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    3,
+    -2
+   ],
+   "b": [
+    6,
+    3,
+    -3
+   ],
+   "en_face": 380,
+   "lecart_median": 9.711,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    4,
+    -3
+   ],
+   "b": [
+    5,
+    3,
+    -2
+   ],
+   "en_face": 388,
+   "lecart_median": 10.042,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    4,
+    -3
+   ],
+   "b": [
+    5,
+    4,
+    -3
+   ],
+   "en_face": 404,
+   "lecart_median": 0.301,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    4,
+    -3
+   ],
+   "b": [
+    5,
+    5,
+    -4
+   ],
+   "en_face": 384,
+   "lecart_median": 11.499,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    4,
+    -3
+   ],
+   "b": [
+    6,
+    2,
+    -2
+   ],
+   "en_face": 380,
+   "lecart_median": 9.551,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    4,
+    -3
+   ],
+   "b": [
+    6,
+    3,
+    -3
+   ],
+   "en_face": 404,
+   "lecart_median": 0.309,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    4,
+    -3
+   ],
+   "b": [
+    6,
+    4,
+    -4
+   ],
+   "en_face": 393,
+   "lecart_median": 11.672,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    5,
+    -4
+   ],
+   "b": [
+    5,
+    4,
+    -3
+   ],
+   "en_face": 407,
+   "lecart_median": 11.658,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    5,
+    -4
+   ],
+   "b": [
+    5,
+    5,
+    -4
+   ],
+   "en_face": 389,
+   "lecart_median": 0.286,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    5,
+    -4
+   ],
+   "b": [
+    5,
+    6,
+    -5
+   ],
+   "en_face": 336,
+   "lecart_median": 12.07,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    5,
+    -4
+   ],
+   "b": [
+    6,
+    3,
+    -3
+   ],
+   "en_face": 414,
+   "lecart_median": 11.6,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    5,
+    -4
+   ],
+   "b": [
+    6,
+    4,
+    -4
+   ],
+   "en_face": 416,
+   "lecart_median": 0.317,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    5,
+    -4
+   ],
+   "b": [
+    6,
+    5,
+    -5
+   ],
+   "en_face": 428,
+   "lecart_median": 12.008,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    6,
+    -5
+   ],
+   "b": [
+    5,
+    5,
+    -4
+   ],
+   "en_face": 423,
+   "lecart_median": 12.133,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    6,
+    -5
+   ],
+   "b": [
+    5,
+    6,
+    -5
+   ],
+   "en_face": 370,
+   "lecart_median": 0.247,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    6,
+    -5
+   ],
+   "b": [
+    5,
+    7,
+    -6
+   ],
+   "en_face": 379,
+   "lecart_median": 11.956,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    6,
+    -5
+   ],
+   "b": [
+    6,
+    4,
+    -4
+   ],
+   "en_face": 444,
+   "lecart_median": 11.909,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    6,
+    -5
+   ],
+   "b": [
+    6,
+    5,
+    -5
+   ],
+   "en_face": 452,
+   "lecart_median": 0.29,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    6,
+    -5
+   ],
+   "b": [
+    6,
+    6,
+    -6
+   ],
+   "en_face": 449,
+   "lecart_median": 11.828,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    7,
+    -6
+   ],
+   "b": [
+    5,
+    6,
+    -5
+   ],
+   "en_face": 402,
+   "lecart_median": 11.958,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    7,
+    -6
+   ],
+   "b": [
+    5,
+    7,
+    -6
+   ],
+   "en_face": 421,
+   "lecart_median": 0.265,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    4,
+    7,
+    -6
+   ],
+   "b": [
+    6,
+    5,
+    -5
+   ],
+   "en_face": 494,
+   "lecart_median": 11.73,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    4,
+    7,
+    -6
+   ],
+   "b": [
+    6,
+    6,
+    -6
+   ],
+   "en_face": 496,
+   "lecart_median": 0.289,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    5,
+    2,
+    -1
+   ],
+   "b": [
+    6,
+    1,
+    -1
+   ],
+   "en_face": 1069,
+   "lecart_median": 0.258,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    5,
+    2,
+    -1
+   ],
+   "b": [
+    6,
+    2,
+    -2
+   ],
+   "en_face": 1072,
+   "lecart_median": 12.948,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    5,
+    3,
+    -2
+   ],
+   "b": [
+    6,
+    1,
+    -1
+   ],
+   "en_face": 1102,
+   "lecart_median": 12.729,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    5,
+    3,
+    -2
+   ],
+   "b": [
+    6,
+    2,
+    -2
+   ],
+   "en_face": 1088,
+   "lecart_median": 0.244,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    5,
+    3,
+    -2
+   ],
+   "b": [
+    6,
+    3,
+    -3
+   ],
+   "en_face": 996,
+   "lecart_median": 11.21,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    5,
+    4,
+    -3
+   ],
+   "b": [
+    6,
+    2,
+    -2
+   ],
+   "en_face": 979,
+   "lecart_median": 10.961,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    5,
+    4,
+    -3
+   ],
+   "b": [
+    6,
+    3,
+    -3
+   ],
+   "en_face": 1031,
+   "lecart_median": 0.27,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    5,
+    4,
+    -3
+   ],
+   "b": [
+    6,
+    4,
+    -4
+   ],
+   "en_face": 993,
+   "lecart_median": 12.118,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    5,
+    5,
+    -4
+   ],
+   "b": [
+    6,
+    3,
+    -3
+   ],
+   "en_face": 938,
+   "lecart_median": 11.95,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    5,
+    5,
+    -4
+   ],
+   "b": [
+    6,
+    4,
+    -4
+   ],
+   "en_face": 949,
+   "lecart_median": 0.255,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    5,
+    5,
+    -4
+   ],
+   "b": [
+    6,
+    5,
+    -5
+   ],
+   "en_face": 941,
+   "lecart_median": 12.23,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    5,
+    6,
+    -5
+   ],
+   "b": [
+    6,
+    4,
+    -4
+   ],
+   "en_face": 858,
+   "lecart_median": 11.971,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    5,
+    6,
+    -5
+   ],
+   "b": [
+    6,
+    5,
+    -5
+   ],
+   "en_face": 863,
+   "lecart_median": 0.268,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    5,
+    6,
+    -5
+   ],
+   "b": [
+    6,
+    6,
+    -6
+   ],
+   "en_face": 772,
+   "lecart_median": 12.692,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    5,
+    7,
+    -6
+   ],
+   "b": [
+    6,
+    5,
+    -5
+   ],
+   "en_face": 742,
+   "lecart_median": 12.738,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    5,
+    7,
+    -6
+   ],
+   "b": [
+    6,
+    6,
+    -6
+   ],
+   "en_face": 748,
+   "lecart_median": 0.307,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    7,
+    3,
+    -1
+   ],
+   "b": [
+    8,
+    2,
+    -1
+   ],
+   "en_face": 283,
+   "lecart_median": 0.3,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    7,
+    3,
+    -1
+   ],
+   "b": [
+    8,
+    3,
+    -2
+   ],
+   "en_face": 163,
+   "lecart_median": 14.201,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    7,
+    4,
+    -2
+   ],
+   "b": [
+    8,
+    2,
+    -1
+   ],
+   "en_face": 231,
+   "lecart_median": 13.886,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    7,
+    4,
+    -2
+   ],
+   "b": [
+    8,
+    3,
+    -2
+   ],
+   "en_face": 206,
+   "lecart_median": 0.262,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    7,
+    4,
+    -2
+   ],
+   "b": [
+    8,
+    4,
+    -3
+   ],
+   "en_face": 108,
+   "lecart_median": 11.677,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    7,
+    5,
+    -3
+   ],
+   "b": [
+    8,
+    3,
+    -2
+   ],
+   "en_face": 101,
+   "lecart_median": 11.237,
+   "meme_tour": false,
+   "meme_feuille": false
+  },
+  {
+   "a": [
+    7,
+    5,
+    -3
+   ],
+   "b": [
+    8,
+    4,
+    -3
+   ],
+   "en_face": 124,
+   "lecart_median": 0.313,
+   "meme_tour": true,
+   "meme_feuille": true
+  },
+  {
+   "a": [
+    7,
+    5,
+    -3
+   ],
+   "b": [
+    8,
+    5,
+    -4
+   ],
+   "en_face": 71,
+   "lecart_median": 12.442,
+   "meme_tour": false,
+   "meme_feuille": false
+  }
+ ],
+ "le_bilan": {
+  "les_paires": 56,
+  "daccord": 56,
+  "la_table": {
+   "meme_meme": 21,
+   "meme_autre": 0,
+   "voisin_meme": 0,
+   "voisin_autre": 35
+  },
+  "lecart_median": {
+   "meme_tour": 0.285,
+   "tours_voisins": 11.95
+  },
+  "sur_le_meme_tour": 21,
+  "sur_des_tours_voisins": 35
+ },
+ "le_verdict": {
+  "decidable": true,
+  "p": 1.0,
+  "lissue": "sur 56 paires de surfaces qui se recouvrent, la même feuille et le même tour s'accordent sous 56 ; oui, l'accord de deux chaînes dit le tour"
+ },
+ "les_secondes": 220.3
+}

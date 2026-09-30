@@ -70,6 +70,7 @@ LES_MESURES = RACINE / "docs" / "mesures"
 CE_QUE_344_A_PUBLIE = m345.CE_QUE_344_A_PUBLIE
 CE_QUE_349_A_PUBLIE = LES_MESURES / "les_sauts_justes_donnent_ils_des_surfaces_a_cheval.json"
 LE_TEMOIN = "relancée depuis un point"
+LE_SAUT_OBSERVE: dict = {}   # écrit pour `367` : la graine, le côté et le saut que `en_plus` est en train de lire
 LE_MINIMUM = 5
 
 
@@ -145,6 +146,7 @@ def la_chaine_jugee(chainer=None, en_plus=None) -> dict:
     def observer(rang, nom, h, k):
         out = {"depuis": k["depuis"], "le_compte": k["le_compte"], "les_points": k["les_points"]}
         if en_plus is not None:
+            LE_SAUT_OBSERVE.update({"le_rang": rang, "le_cote": nom, "le_saut": h})
             out["en_plus"] = en_plus(k, lv["m7"])
         rl = k["la_relance"]
         if rl is None or not rl["valide"].any():

@@ -4744,6 +4744,12 @@ s'ouvre : la même chaîne sur PHerc0358.
 40 contre 22 et garde des surfaces de 561 mailles en médiane contre 394,5. `R4-P164` s'ouvre : l'accord de deux chaînes qui se croisent,
 comme juge sans référent, étalonné sur PHercParis4.
 
+**`367` · 2026-09-30 · deux chaînes qui se croisent disent-elles le tour** — `R4-P164`
+
+⭐⭐⭐⭐⭐ **Oui : 56 paires sur 56** — `R4-F553`. Sur PHercParis4, deux chaînes d'une maille parties de graines différentes sont sur la
+même feuille exactement quand elles sont sur le même tour publié, à 0,285 voxel contre 11,95. Un juge sans référent, étalonné sans une
+erreur. `R4-P165` s'ouvre : sur PHerc0358, le même décalage de sauts sous toutes les surfaces que l'accord met ensemble.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

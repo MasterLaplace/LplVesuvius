@@ -1871,6 +1871,8 @@ run "regrandir d'une seule maille évite-t-il le décalage" uv run python "$ROOT
 run "figure regrandir d'une seule maille évite-t-il le décalage" uv run python "$ROOT/src/figures/figure_regrandir_dune_seule_maille_evite_il_le_decalage.py" --verifier
 run "la chaîne d'une maille va-t-elle plus loin sur PHerc0358" uv run python "$ROOT/src/nappe/la_chaine_dune_maille_va_t_elle_plus_loin_sur_pherc0358.py" --verifier
 run "figure la chaîne d'une maille va-t-elle plus loin sur PHerc0358" uv run python "$ROOT/src/figures/figure_la_chaine_dune_maille_va_t_elle_plus_loin_sur_pherc0358.py" --verifier
+run "deux chaînes qui se croisent disent-elles le tour" uv run python "$ROOT/src/nappe/deux_chaines_qui_se_croisent_disent_elles_le_tour.py" --verifier
+run "figure deux chaînes qui se croisent disent-elles le tour" uv run python "$ROOT/src/figures/figure_deux_chaines_qui_se_croisent_disent_elles_le_tour.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

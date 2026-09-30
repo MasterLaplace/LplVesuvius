@@ -3336,6 +3336,27 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 367 : DEUX CHAÎNES QUI SE CROISENT DISENT-ELLES LE TOUR
+    s367 = _source(racine, "deux_chaines_qui_se_croisent_disent_elles_le_tour.json")
+    if s367.exists():
+        d = json.loads(s367.read_text())
+        b, t_ = d["le_bilan"], d["le_bilan"]["la_table"]
+        virg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        meme = [p["lecart_median"] for p in d["les_paires"] if p["meme_tour"]]
+        voisins = [p["lecart_median"] for p in d["les_paires"] if not p["meme_tour"]]
+        ecrits = [("le verdict de 367", f"{b['daccord']} PAIRES SUR {b['les_paires']} : "
+                                        f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les chunks de m7 lus de 367", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne"),
+                  ("la ligne du même tour de 367", f"| sur le même tour publié | {t_['meme_meme']} | {t_['meme_autre']} |"),
+                  ("la ligne des tours voisins de 367", f"| sur des tours voisins | {t_['voisin_meme']} | {t_['voisin_autre']} |"),
+                  ("les surfaces de 367", f"forment {b['les_paires']} paires qui se recouvrent"),
+                  ("le compte des surfaces de 367", f"(`R4-F553`). Les {len(d['les_surfaces'])}"),
+                  ("les écarts du même tour de 367", f"{virg(min(meme))} à {virg(max(meme))} voxel"),
+                  ("les écarts voisins de 367", f"de {virg(min(voisins))} à {virg(max(voisins))}"),
+                  ("le quart de 367", f"un quart de pas nominal, {virg(d['les_constantes']['le_quart'])} voxels"),
+                  ("les médianes de 367", f"{virg(b['lecart_median']['tours_voisins'])}. Au quart de pas")]
+        out.extend((nom, [x_], s367.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 366 : LA CHAÎNE D'UNE MAILLE VA-T-ELLE PLUS LOIN SUR PHERC0358
     s366 = _source(racine, "la_chaine_dune_maille_va_t_elle_plus_loin_sur_pherc0358.json")
     s366_356 = _source(racine, "une_chaine_qui_garde_la_spire_tenue_va_t_elle_plus_loin_sur_pherc0358.json")
