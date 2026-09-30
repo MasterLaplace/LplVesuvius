@@ -4780,6 +4780,12 @@ PHerc0358 sont trop inégalement espacées. `R4-P169` s'ouvre : une troisième c
 à 15 mailles ; sur la graine 7, côté plus, la compagne et la tierce tiennent les comptes ensemble et le vote désigne la suivie, dont le
 deuxième saut s'écarte de 23,438 voxels. `R4-P170` s'ouvre : une tierce ailleurs, et des comptes corrigés des sauts nuls.
 
+**`373` · 2026-09-30 · trois chaînes aux comptes corrigés désignent-elles celle qui a glissé** — `R4-P170`
+
+⭐⭐⭐⭐ **En partie : le vote désigne l'une des deux sur 1 côté sur 3** — `R4-F559`. Sous les comptes corrigés, les trois chaînes de la
+graine 6, côté moins, tiennent les comptes deux à deux ; la suivie de la graine 7, côté plus, est désignée ; sur la graine 8, aucun
+couple ne tient. `R4-P171` s'ouvre : les surfaces que l'accord de trois chaînes valide.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

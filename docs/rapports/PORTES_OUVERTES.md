@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**224 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**225 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 186 portes
+## Grand Prize — 187 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -204,7 +204,8 @@
 - **R4-P167** *(le graal)* · **RÉPONDUE par `370` : oui.** Sur PHercParis4, deux surfaces justes d'une même chaîne s'écartent de 10,809 à 13,029 voxels à un tour, de 20,978 à 24,527 à deux tours : l'écart sépare au seuil de 17,004 voxels, 0,944 pas, ou de 1,4644 fois la médiane des écarts à un tour de la chaîne ; le pas et demi de `369` ne voyait aucune des 17 paires à deux tours (`R4-F556`). La suite est `R4-P168`.
 - **R4-P168** *(le graal)* · **RÉPONDUE par `371` : en partie.** Comptés en tours au seuil de `370` rapporté à la chaîne, 95 des 134 paires tiennent les comptes, contre 90 ; deux sauts doubles de compagnes sont rattrapés, mais le saut où glisse la graine 7, côté plus, reste à 1,4484 fois la médiane de sa chaîne, sous 1,4644, et les sauts simples de PHerc0358 s'étalent de 0,6223 à 1,4484 (`R4-F557`). La suite est `R4-P169`.
 - **R4-P169** *(le graal)* · **RÉPONDUE par `372` : indécidable.** Sur 4 côtés où la suivie et la compagne ne tiennent pas les comptes, 2 n'ont pas de tierce, la nappe de la graine 8 n'offrant pas d'autre direction à 15 mailles ; sur la graine 7, côté plus, le vote désigne la suivie, dont le deuxième saut s'écarte de 23,438 voxels (`R4-F558`). La suite est `R4-P170`.
-- **R4-P170** *(le graal)* · **SUR PHERC0358, AVEC UNE GRAINE TIERCE POSÉE AILLEURS LÀ OÙ LA NAPPE N'A PAS D'AUTRE DIRECTION À 15 MAILLES, ET LES COMPTES CORRIGÉS DES SAUTS NULS DE `369`, LE VOTE DÉSIGNE-T-IL SUR CHAQUE CÔTÉ EN DÉSACCORD CELLE QUI A GLISSÉ ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `372` DÉSIGNE. Là où il se tient, le vote de trois chaînes désigne sans tracé la chaîne qui a glissé (`R4-F558`) ; il lui manque une tierce sur la graine 8, et des comptes qui ne se laissent pas rompre par les sauts nuls sur la graine 6.
+- **R4-P170** *(le graal)* · **RÉPONDUE par `373` : en partie.** Sous les comptes corrigés, la graine 6, côté moins, n'est plus en désaccord ; sur les 3 côtés qui le restent, le vote désigne la suivie de la graine 7, côté plus, et rien sur la graine 8, où aucun couple ne tient (`R4-F559`). La suite est `R4-P171`.
+- **R4-P171** *(le graal)* · **SUR PHERC0358, QUELLES SURFACES L'ACCORD DE TROIS CHAÎNES VALIDE-T-IL, SUR LA MÊME FEUILLE ET AU MÊME COMPTE CORRIGÉ QUE DES SURFACES DES DEUX AUTRES CHAÎNES, ET JUSQU'À COMBIEN DE SAUTS DE LA NAPPE DE DÉPART ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `373` DÉSIGNE, ET C'EST `#5`. Trois chaînes aux comptes corrigés s'accordent sans tracé sur deux côtés (`R4-F559`) ; une surface que les trois mettent au même compte est ce qui validerait une première surface d'un rouleau sans tracé.
 
 ## Progress Prizes — 19 portes
 

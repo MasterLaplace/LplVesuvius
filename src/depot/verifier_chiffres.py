@@ -3336,6 +3336,42 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 373 : TROIS CHAÎNES AUX COMPTES CORRIGÉS DÉSIGNENT-ELLES CELLE QUI A GLISSÉ
+    s373 = _source(racine, "trois_chaines_aux_comptes_corriges_designent_elles_celle_qui_a_glisse.json")
+    if s373.exists():
+        d = json.loads(s373.read_text())
+        b = d["le_bilan"]
+        cote = {(c["le_rang"], c["le_cote"]): c for c in d["les_cotes"]}
+        g6, g8 = cote[(6, "moins")], cote[(8, "plus")]
+        nom = {"suivie": "la suivie", "compagne": "la compagne", "tierce": "la tierce", None: "aucune"}
+        cp = lambda c, k: f"{c[k]['tiennent']}"  # noqa: E731
+        brut6, corr6 = g6["les_couples_bruts"], g6["les_couples"]
+        st8 = [(p["le_saut_suivi"], p["le_saut_compagnon"]) for p in g8["les_paires"]["suivie|tierce"] if p["meme_feuille"]]
+        ecrits = [("le verdict de 373", f"LE VOTE DÉSIGNE L'UNE DES DEUX SUR {b['designent']} CÔTÉ{'S' if b['designent'] > 1 else ''} SUR "
+                                        f"{b['en_desaccord']} : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les chunks de m7 lus de 373", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne"),
+                  ("le bilan de 373", f"Sur {b['en_desaccord']} côtés en désaccord sous"),
+                  ("le vote de 373", f"les comptes corrigés, le vote désigne l'une des deux sur {b['designent']} : la suivie de la graine 7"
+                   if b["les_votes"]["7 plus"] == "suivie" else "changé"),
+                  ("les votes bruts de 373", "il désigne la même chaîne, et elle seule" if b["les_votes_bruts"] == b["les_votes"] else "changé"),
+                  ("la graine 6 corrigée de 373", f"{cp(corr6, 'suivie|compagne')} paires sur {corr6['suivie|compagne']['les_paires']}, "
+                                                  f"{cp(corr6, 'suivie|tierce')} sur {corr6['suivie|tierce']['les_paires']} et "
+                                                  f"{cp(corr6, 'compagne|tierce')} sur {corr6['compagne|tierce']['les_paires']}, contre"),
+                  ("la graine 6 brute de 373", f"{cp(brut6, 'suivie|compagne')}, {cp(brut6, 'suivie|tierce')} et "
+                                               f"{cp(brut6, 'compagne|tierce')} sur les comptes bruts"),
+                  ("le double de la tierce de 373", f"double, à {g6['les_sauts_de_la_tierce'][7]['lecart_median']:g} voxels".replace(".", ",")
+                   if g6["les_sauts_de_la_tierce"][7]["le_genre"] == "double" else "changé"),
+                  ("la graine 8 de 373", "la sixième surface de la suivie et la première de la tierce" if (6, 1) in st8 else "changé"),
+                  ("les tierces de la graine 8 de 373", "Sur la graine 8, elle est posée en diagonale"
+                   if cote[(8, "plus")]["ou"] == cote[(8, "moins")]["ou"] == "en diagonale" else "changé")]
+        for c in d["les_cotes"]:
+            k = c["les_couples"]
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 373",
+                           f"| graine {c['le_rang']}, {c['le_cote']} | {k['suivie|compagne']['tiennent']} / {k['suivie|compagne']['les_paires']} | "
+                           f"{k['suivie|tierce']['tiennent']} / {k['suivie|tierce']['les_paires']} | "
+                           f"{k['compagne|tierce']['tiennent']} / {k['compagne|tierce']['les_paires']} | {nom[c['le_vote']]} |"))
+        out.extend((nom_, [x_], s373.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 372 : UNE TROISIÈME CHAÎNE DIT-ELLE LAQUELLE A GLISSÉ SUR PHERC0358
     s372 = _source(racine, "une_troisieme_chaine_dit_elle_laquelle_a_glisse_sur_pherc0358.json")
     s372_369 = _source(racine, "le_glissement_se_voit_il_dans_la_chaine_seule.json")
