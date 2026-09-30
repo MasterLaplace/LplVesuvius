@@ -87,7 +87,8 @@ def le_compte(vu: np.ndarray, t: np.ndarray, d: float, tolerance: float) -> int 
     return None if i is None or j is None else abs(j - i)
 
 
-def les_comptes_point_par_point(depart: dict, arrivee: dict | None, lire_valeurs, pas: float) -> dict | None:
+def les_comptes_point_par_point(depart: dict, arrivee: dict | None, lire_valeurs, pas: float,
+                                lateral: float = LE_LATERAL_L2) -> dict | None:
     """Les points posés de la surface d'arrivée que le compte prend, au plus `m326.LE_MAXIMUM_DE_POINTS`, avec leurs normales ; pour
     chacun, son écart à la surface de départ le long de sa normale, s'il l'a en face, et le nombre de feuilles de `m7` qu'il passe, None
     s'il n'est pas compté. None s'il n'y a pas de tels points."""
@@ -103,7 +104,7 @@ def les_comptes_point_par_point(depart: dict, arrivee: dict | None, lire_valeurs
     if len(q) > m326.LE_MAXIMUM_DE_POINTS:
         k = np.linspace(0, len(q) - 1, m326.LE_MAXIMUM_DE_POINTS).round().astype(int)
         q, nq = q[k], nq[k]
-    d = m321.les_ecarts(q, nq, depart["la_nappe"][depart["valide"]], lateral=LE_LATERAL_L2)
+    d = m321.les_ecarts(q, nq, depart["la_nappe"][depart["valide"]], lateral=lateral)
     tol = LA_TOLERANCE_EN_PAS * pas
     demi = float(np.ceil(LA_PORTEE_EN_PAS * pas))
     t = np.arange(-demi, demi + 1.0)

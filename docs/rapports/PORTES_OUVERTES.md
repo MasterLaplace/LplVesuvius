@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**204 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**205 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 166 portes
+## Grand Prize — 167 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -184,7 +184,8 @@
 - **R4-P147** *(le graal)* · **RÉPONDUE par `351` : en partie.** Un seuil de 50 points à zéro refuse 7 des 14 naissances du retard et 3 des 44 sauts justes sains, et 30 des 46 sauts à cheval hérités (`R4-F537`). La suite est `R4-P148`.
 - **R4-P148** *(le graal)* · **RÉPONDUE par `352` : en partie.** Ensemble, le compte de `345` et le seuil de 50 points à zéro tiennent 39 des 44 sauts justes sains et 24 des 66 autres, presque tous des sauts à cheval (`R4-F538`). La suite est `R4-P149`.
 - **R4-P149** *(le graal)* · **RÉPONDUE par `353` : non.** Les surfaces à cheval tenues ont 84 % de leurs points sur le tour attendu en médiane, les refusées 72 % ; mais tout ce que le critère tient est sur son tour à 92 % (`R4-F539`). La suite est `R4-P150`.
-- **R4-P150** *(le graal)* · **SUR PHERC0358, LE COMPTE DE `345` ET LE SEUIL DE 50 POINTS À ZÉRO TIENNENT-ILS DES SAUTS DE LA CHAÎNE RELANCÉE, ET COMBIEN À LA SUITE DEPUIS LA SURFACE DE DÉPART ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `353` DÉSIGNE. Sur Paris4, ce que le critère tient est sur son tour à 92 % (`R4-F539`) : c'est l'étalon avec lequel lire, sans référent, les surfaces qu'il tient sur un rouleau sans tracé
+- **R4-P150** *(le graal)* · **RÉPONDUE par `354` : sur certains côtés seulement.** Le critère tient le premier saut de 2 des 5 côtés suivis sur PHerc0358, et jamais le saut suivant (`R4-F540`). La suite est `R4-P151`.
+- **R4-P151** *(le graal)* · **SUR PHERC0358, LES DEUX PREMIÈRES SURFACES QUE LE CRITÈRE TIENT PORTENT-ELLES PLUS D'ENCRE, AU DÉTECTEUR DE `296`, QUE LES SURFACES QU'IL REFUSE ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `354` DÉSIGNE. Les 92 % de Paris4 ne sont qu'un étalon (`R4-F540`) ; l'encre est un témoin indépendant du compte des feuilles, et le seul qu'un rouleau sans tracé offre
 
 ## Progress Prizes — 19 portes
 

@@ -4666,6 +4666,12 @@ sont-elles presque entièrement sur le tour attendu ?
 tient sont moins atteintes que celles qu'il refuse (72 %), sans l'être à peine ; les surfaces saines tenues le sont toutes à 91 % au
 moins. `R4-P150` s'ouvre : le critère porté sur PHerc0358.
 
+**`354` · 2026-09-30 · le compte et le seuil tiennent-ils une première surface sur PHerc0358** — `R4-P150`
+
+⭐⭐⭐⭐⭐ **Sur deux des cinq côtés, et jamais le saut suivant** — `R4-F540`. Sur PHerc0358, le critère sans référent tient la première
+surface de la graine 6, côté moins, et de la graine 8, côté plus ; ce sont les deux premières surfaces que le projet peut proposer sur
+un rouleau sans tracé avec une précision connue ailleurs. `R4-P151` s'ouvre : l'encre les distingue-t-elle ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

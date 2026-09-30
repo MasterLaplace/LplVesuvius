@@ -1,0 +1,725 @@
+{
+ "la_question": "Sur PHerc0358, le compte des feuilles de 345 et le seuil de 50 points à zéro tiennent-ils des sauts de la chaîne relancée, et combien à la suite depuis la surface de départ ?",
+ "les_constantes": {
+  "le_pas": 20.0,
+  "le_lateral_en_pas": 0.5549,
+  "le_seuil": 50,
+  "le_minimum_de_mesures": 50
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 3813,
+  "absents": 0,
+  "octets": 1882641352
+ },
+ "redonne_331": true,
+ "les_cotes": [
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 1129,
+      "les_mesures": 1126,
+      "les_comptes": {
+       "1": 855,
+       "2": 271
+      },
+      "la_part_dune_feuille": 0.7593
+     },
+     "les_zeros": 0,
+     "tient_345": true,
+     "tient": true,
+     "tient_328": true
+    },
+    {
+     "le_saut": 2,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 1157,
+      "les_mesures": 1157,
+      "les_comptes": {
+       "0": 1125,
+       "1": 31,
+       "2": 1
+      },
+      "la_part_dune_feuille": 0.0268
+     },
+     "les_zeros": 1125,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": false
+    },
+    {
+     "le_saut": 3,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 801,
+      "les_mesures": 774,
+      "les_comptes": {
+       "0": 124,
+       "1": 291,
+       "2": 244,
+       "3": 77,
+       "4": 33,
+       "5": 5
+      },
+      "la_part_dune_feuille": 0.376
+     },
+     "les_zeros": 124,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 4,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 633,
+      "les_mesures": 627,
+      "les_comptes": {
+       "0": 172,
+       "1": 300,
+       "2": 113,
+       "3": 33,
+       "4": 7,
+       "5": 2
+      },
+      "la_part_dune_feuille": 0.4785
+     },
+     "les_zeros": 172,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 5,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 1138,
+      "les_mesures": 1128,
+      "les_comptes": {
+       "0": 589,
+       "1": 488,
+       "2": 42,
+       "3": 9
+      },
+      "la_part_dune_feuille": 0.4326
+     },
+     "les_zeros": 589,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": false
+    },
+    {
+     "le_saut": 6,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 921,
+      "les_mesures": 887,
+      "les_comptes": {
+       "0": 151,
+       "1": 471,
+       "2": 197,
+       "3": 60,
+       "4": 8
+      },
+      "la_part_dune_feuille": 0.531
+     },
+     "les_zeros": 151,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 7,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 1123,
+      "les_mesures": 1104,
+      "les_comptes": {
+       "0": 450,
+       "1": 620,
+       "2": 34
+      },
+      "la_part_dune_feuille": 0.5616
+     },
+     "les_zeros": 450,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 8,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 828,
+      "les_mesures": 823,
+      "les_comptes": {
+       "0": 223,
+       "1": 566,
+       "2": 33,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.6877
+     },
+     "les_zeros": 223,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    }
+   ],
+   "la_suite": 1,
+   "la_suite_de_328": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 969,
+      "les_mesures": 917,
+      "les_comptes": {
+       "0": 157,
+       "1": 705,
+       "2": 44,
+       "3": 8,
+       "4": 3
+      },
+      "la_part_dune_feuille": 0.7688
+     },
+     "les_zeros": 157,
+     "tient_345": true,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 2,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1160,
+      "les_en_face": 911,
+      "les_mesures": 870,
+      "les_comptes": {
+       "0": 184,
+       "1": 401,
+       "2": 282,
+       "3": 3
+      },
+      "la_part_dune_feuille": 0.4609
+     },
+     "les_zeros": 184,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 3,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 988,
+      "les_en_face": 761,
+      "les_mesures": 728,
+      "les_comptes": {
+       "0": 182,
+       "1": 532,
+       "2": 13,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.7308
+     },
+     "les_zeros": 182,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 4,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 628,
+      "les_mesures": 601,
+      "les_comptes": {
+       "0": 11,
+       "1": 484,
+       "2": 86,
+       "3": 14,
+       "4": 4,
+       "5": 1,
+       "6": 1
+      },
+      "la_part_dune_feuille": 0.8053
+     },
+     "les_zeros": 11,
+     "tient_345": true,
+     "tient": true,
+     "tient_328": true
+    },
+    {
+     "le_saut": 5,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 910,
+      "les_mesures": 887,
+      "les_comptes": {
+       "0": 368,
+       "1": 373,
+       "2": 146
+      },
+      "la_part_dune_feuille": 0.4205
+     },
+     "les_zeros": 368,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 6,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1144,
+      "les_en_face": 852,
+      "les_mesures": 807,
+      "les_comptes": {
+       "0": 265,
+       "1": 492,
+       "2": 44,
+       "3": 5,
+       "4": 1
+      },
+      "la_part_dune_feuille": 0.6097
+     },
+     "les_zeros": 265,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": false
+    },
+    {
+     "le_saut": 7,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 819,
+      "les_mesures": 766,
+      "les_comptes": {
+       "0": 151,
+       "1": 510,
+       "2": 95,
+       "3": 9,
+       "4": 1
+      },
+      "la_part_dune_feuille": 0.6658
+     },
+     "les_zeros": 151,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 8,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1133,
+      "les_en_face": 1006,
+      "les_mesures": 955,
+      "les_comptes": {
+       "0": 340,
+       "1": 581,
+       "2": 34
+      },
+      "la_part_dune_feuille": 0.6084
+     },
+     "les_zeros": 340,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    }
+   ],
+   "la_suite": 0,
+   "la_suite_de_328": 5
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 833,
+      "les_mesures": 811,
+      "les_comptes": {
+       "0": 219,
+       "1": 564,
+       "2": 22,
+       "3": 4,
+       "4": 1,
+       "5": 1
+      },
+      "la_part_dune_feuille": 0.6954
+     },
+     "les_zeros": 219,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 2,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 1062,
+      "les_mesures": 1046,
+      "les_comptes": {
+       "0": 438,
+       "1": 586,
+       "2": 22
+      },
+      "la_part_dune_feuille": 0.5602
+     },
+     "les_zeros": 438,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 3,
+     "a_une_surface": false,
+     "les_feuilles": {
+      "les_points": 0,
+      "les_en_face": 0,
+      "les_mesures": 0,
+      "les_comptes": {},
+      "la_part_dune_feuille": null
+     },
+     "les_zeros": 0,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": false
+    }
+   ],
+   "la_suite": 0,
+   "la_suite_de_328": 2
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 825,
+      "les_en_face": 493,
+      "les_mesures": 472,
+      "les_comptes": {
+       "0": 32,
+       "1": 374,
+       "2": 52,
+       "3": 13,
+       "4": 1
+      },
+      "la_part_dune_feuille": 0.7924
+     },
+     "les_zeros": 32,
+     "tient_345": true,
+     "tient": true,
+     "tient_328": true
+    },
+    {
+     "le_saut": 2,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 683,
+      "les_en_face": 610,
+      "les_mesures": 591,
+      "les_comptes": {
+       "0": 135,
+       "1": 447,
+       "2": 7,
+       "3": 2
+      },
+      "la_part_dune_feuille": 0.7563
+     },
+     "les_zeros": 135,
+     "tient_345": true,
+     "tient": false,
+     "tient_328": false
+    },
+    {
+     "le_saut": 3,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1141,
+      "les_en_face": 454,
+      "les_mesures": 434,
+      "les_comptes": {
+       "0": 101,
+       "1": 211,
+       "2": 72,
+       "3": 46,
+       "4": 4
+      },
+      "la_part_dune_feuille": 0.4862
+     },
+     "les_zeros": 101,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": false
+    },
+    {
+     "le_saut": 4,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 926,
+      "les_mesures": 899,
+      "les_comptes": {
+       "0": 690,
+       "1": 189,
+       "2": 19,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.2102
+     },
+     "les_zeros": 690,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": false
+    },
+    {
+     "le_saut": 5,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 779,
+      "les_en_face": 366,
+      "les_mesures": 358,
+      "les_comptes": {
+       "0": 182,
+       "1": 84,
+       "2": 61,
+       "3": 28,
+       "4": 3
+      },
+      "la_part_dune_feuille": 0.2346
+     },
+     "les_zeros": 182,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 6,
+     "a_une_surface": false,
+     "les_feuilles": {
+      "les_points": 0,
+      "les_en_face": 0,
+      "les_mesures": 0,
+      "les_comptes": {},
+      "la_part_dune_feuille": null
+     },
+     "les_zeros": 0,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": false
+    }
+   ],
+   "la_suite": 1,
+   "la_suite_de_328": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 556,
+      "les_mesures": 550,
+      "les_comptes": {
+       "0": 82,
+       "1": 400,
+       "2": 62,
+       "3": 6
+      },
+      "la_part_dune_feuille": 0.7273
+     },
+     "les_zeros": 82,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 2,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1064,
+      "les_en_face": 635,
+      "les_mesures": 606,
+      "les_comptes": {
+       "0": 5,
+       "1": 440,
+       "2": 155,
+       "3": 2,
+       "4": 1,
+       "5": 3
+      },
+      "la_part_dune_feuille": 0.7261
+     },
+     "les_zeros": 5,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 3,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1200,
+      "les_en_face": 837,
+      "les_mesures": 811,
+      "les_comptes": {
+       "0": 133,
+       "1": 513,
+       "2": 165
+      },
+      "la_part_dune_feuille": 0.6326
+     },
+     "les_zeros": 133,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 4,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 723,
+      "les_en_face": 585,
+      "les_mesures": 560,
+      "les_comptes": {
+       "0": 119,
+       "1": 418,
+       "2": 23
+      },
+      "la_part_dune_feuille": 0.7464
+     },
+     "les_zeros": 119,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 5,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 1184,
+      "les_en_face": 695,
+      "les_mesures": 674,
+      "les_comptes": {
+       "0": 181,
+       "1": 354,
+       "2": 120,
+       "3": 17,
+       "4": 2
+      },
+      "la_part_dune_feuille": 0.5252
+     },
+     "les_zeros": 181,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 6,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 190,
+      "les_en_face": 4,
+      "les_mesures": 4,
+      "les_comptes": {
+       "0": 1,
+       "1": 2,
+       "2": 1
+      },
+      "la_part_dune_feuille": 0.5
+     },
+     "les_zeros": 1,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": true
+    },
+    {
+     "le_saut": 7,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 566,
+      "les_en_face": 290,
+      "les_mesures": 278,
+      "les_comptes": {
+       "0": 128,
+       "1": 99,
+       "2": 46,
+       "3": 5
+      },
+      "la_part_dune_feuille": 0.3561
+     },
+     "les_zeros": 128,
+     "tient_345": false,
+     "tient": false,
+     "tient_328": false
+    },
+    {
+     "le_saut": 8,
+     "a_une_surface": true,
+     "les_feuilles": {
+      "les_points": 462,
+      "les_en_face": 237,
+      "les_mesures": 228,
+      "les_comptes": {
+       "0": 8,
+       "1": 197,
+       "2": 19,
+       "3": 4
+      },
+      "la_part_dune_feuille": 0.864
+     },
+     "les_zeros": 8,
+     "tient_345": true,
+     "tient": true,
+     "tient_328": false
+    }
+   ],
+   "la_suite": 0,
+   "la_suite_de_328": 6
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "k": 2,
+  "n": 5,
+  "h": 0,
+  "lissue": "sur PHerc0358, le critère tient le premier saut de 2 des 5 côtés suivis, et 0 saut à la suite en médiane ; il en tient une sur certains côtés seulement"
+ },
+ "les_secondes": 40.3
+}

@@ -1845,6 +1845,8 @@ run "le compte et le seuil ensemble séparent-ils les sauts sains" uv run python
 run "figure le compte et le seuil ensemble séparent-ils les sauts sains" uv run python "$ROOT/src/figures/figure_le_compte_et_le_seuil_ensemble_separent_ils_les_sauts_sains.py" --verifier
 run "les surfaces à cheval tenues sont-elles presque entièrement sur leur tour" uv run python "$ROOT/src/nappe/les_surfaces_a_cheval_tenues_sont_elles_presque_entierement_sur_leur_tour.py" --verifier
 run "figure les surfaces à cheval tenues sont-elles presque entièrement sur leur tour" uv run python "$ROOT/src/figures/figure_les_surfaces_a_cheval_tenues_sont_elles_presque_entierement_sur_leur_tour.py" --verifier
+run "le compte et le seuil tiennent-ils une première surface sur PHerc0358" uv run python "$ROOT/src/nappe/le_compte_et_le_seuil_tiennent_ils_une_premiere_surface_sur_pherc0358.py" --verifier
+run "figure le compte et le seuil tiennent-ils une première surface sur PHerc0358" uv run python "$ROOT/src/figures/figure_le_compte_et_le_seuil_tiennent_ils_une_premiere_surface_sur_pherc0358.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

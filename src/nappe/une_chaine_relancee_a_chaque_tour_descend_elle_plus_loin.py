@@ -138,6 +138,39 @@ def le_verdict(d: dict) -> dict:
     return {"decidable": True, "h": h, "h0": h0, "lissue": f"{tete} ; {suite}"}
 
 
+def les_chaines_de_0358(relancer0=None, avec_la_spire: bool = False) -> tuple[list[dict], object, dict]:
+    """Les chaînes relancées de PHerc0358 que `331` suit, une par côté de graine dont le saut de `324` pose au pas, avec le lecteur de
+    `m7` qui les a lues et ses statistiques de lecture. Sorti de la mesure de `331` pour `354`, qui y porte le compte de `345`."""
+    from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot, lire_les_valeurs
+
+    from zarr_depth import BUCKET, array_meta
+
+    d324 = json.loads(m328.CE_QUE_324_A_PUBLIE.read_text())
+    a_suivre = {(c["le_rang"], c["le_cote"]) for c in d324["les_cotes"]["PHerc0358"] if c["le_saut"]["pose_au_pas"]}
+    pred0 = array_meta(f"{BUCKET}/{m299.LA_PREDICTION_0358}", 0, 120.0)
+    lire0, stats0 = lecteur_du_depot(pred0, m300.LE_CACHE_M7, "m7_L0", m299.LA_PREDICTION_0358, 0)
+    lv0 = lambda idx: lire_les_valeurs(idx, pred0, lire0)  # noqa: E731
+    d301 = {tuple(g["la_graine"]): g["le_rang"]
+            for g in json.loads(m305.CE_QUE_301_A_PUBLIE.read_text())["le_rouleau"]["les_graines"]}
+    out = []
+    for g in m301.les_graines_neuves():
+        cle = (g["x"], g["y"], g["z"])
+        rang = d301[cle]
+        if not any((rang, c) in a_suivre for c, _ in m306.LES_COTES):
+            continue
+        nz, ny, nx = g["normale_zyx"]
+        r = m305.la_nappe_croissante(cle, (nx, ny, nz), lv0)
+        for nom, cote in m306.LES_COTES:
+            if (rang, nom) not in a_suivre:
+                continue
+            rel0 = ((lambda p_, n_: m305.la_nappe_croissante(tuple(p_), tuple(n_), lv0)) if relancer0 is None
+                    else relancer0(lv0))
+            chaine = la_chaine_relancee(r, cote, rel0, lambda s_, o_, cote=cote: m306.le_saut_croissant(s_, o_, cote, lv0),
+                                        avec_la_spire=avec_la_spire)
+            out.append({"le_rang": rang, "le_cote": nom, "la_chaine": chaine})
+    return out, lv0, stats0
+
+
 def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False, lire_la_spire: bool = False,
             rouleaux: tuple = ("PHercParis4", "PHerc0358"), observer=None) -> dict:
     """La mesure de `331`. Avec `relancer4(lire_valeurs)` et `relancer0(lire_valeurs)`, écrits pour `333`, les relances de
@@ -147,7 +180,7 @@ def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False, lire_la
     `observer(rang, cote, h, k)`, écrit pour `336`, chaque saut `h` d'un côté de PHercParis4 est montré à l'appelant, et ce qu'il rend
     est ajouté à son relevé."""
     import le_tour_produit_porte_t_il_le_texte_du_segment as j296
-    from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot, lire_les_valeurs
+    from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot
     from la_spire_voisine_est_elle_a_un_pas import les_normales, lire_tifxyz
 
     from zarr_depth import BUCKET, array_meta
@@ -211,32 +244,13 @@ def mesurer(relancer4=None, relancer0=None, avec_la_spire: bool = False, lire_la
         d["le_verdict"] = le_verdict(d)
         d["les_secondes"] = round(time.monotonic() - t0, 1)
         return d
-    d324 = json.loads(m328.CE_QUE_324_A_PUBLIE.read_text())
-    a_suivre = {(c["le_rang"], c["le_cote"]) for c in d324["les_cotes"]["PHerc0358"] if c["le_saut"]["pose_au_pas"]}
-    pred0 = array_meta(f"{BUCKET}/{m299.LA_PREDICTION_0358}", 0, 120.0)
-    lire0, stats0 = lecteur_du_depot(pred0, m300.LE_CACHE_M7, "m7_L0", m299.LA_PREDICTION_0358, 0)
-    lv0 = lambda idx: lire_les_valeurs(idx, pred0, lire0)  # noqa: E731
-    d301 = {tuple(g["la_graine"]): g["le_rang"]
-            for g in json.loads(m305.CE_QUE_301_A_PUBLIE.read_text())["le_rouleau"]["les_graines"]}
-    for g in m301.les_graines_neuves():
-        cle = (g["x"], g["y"], g["z"])
-        rang = d301[cle]
-        if not any((rang, c) in a_suivre for c, _ in m306.LES_COTES):
-            continue
-        nz, ny, nx = g["normale_zyx"]
-        r = m305.la_nappe_croissante(cle, (nx, ny, nz), lv0)
-        for nom, cote in m306.LES_COTES:
-            if (rang, nom) not in a_suivre:
-                continue
-            rel0 = ((lambda p_, n_: m305.la_nappe_croissante(tuple(p_), tuple(n_), lv0)) if relancer0 is None
-                    else relancer0(lv0))
-            chaine = la_chaine_relancee(r, cote, rel0, lambda s_, o_, cote=cote: m306.le_saut_croissant(s_, o_, cote, lv0),
-                                        avec_la_spire=avec_la_spire)
-            sauts = [la_tenue(k, lv0, m300.LE_PAS_0358) for k in chaine]
-            e = {"le_rang": rang, "le_cote": nom, "les_sauts": sauts, "tient": m328.combien(sauts)}
-            cotes0.append(e)
-            print("PHerc0358", json.dumps({"le_rang": rang, "le_cote": nom, "tient": e["tient"]}, ensure_ascii=False),
-                  [(s["la_part_du_plan"], s["le_pas_median_en_pas"], s["la_part_relancee"]) for s in sauts], flush=True)
+    chaines0, lv0, stats0 = les_chaines_de_0358(relancer0, avec_la_spire)
+    for c in chaines0:
+        sauts = [la_tenue(k, lv0, m300.LE_PAS_0358) for k in c["la_chaine"]]
+        e = {"le_rang": c["le_rang"], "le_cote": c["le_cote"], "les_sauts": sauts, "tient": m328.combien(sauts)}
+        cotes0.append(e)
+        print("PHerc0358", json.dumps({"le_rang": e["le_rang"], "le_cote": e["le_cote"], "tient": e["tient"]}, ensure_ascii=False),
+              [(s["la_part_du_plan"], s["le_pas_median_en_pas"], s["la_part_relancee"]) for s in sauts], flush=True)
     pannes += list(stats0["pannes"])
     d = {"la_question": __doc__.splitlines()[0], "les_constantes": {"les_sauts": LES_SAUTS},
          "les_pannes": pannes, "la_lecture_de_m7": {"PHercParis4": {k: v for k, v in stats4.items() if k != "pannes"},

@@ -3336,6 +3336,38 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 354 : LE COMPTE ET LE SEUIL TIENNENT-ILS UNE PREMIÈRE SURFACE SUR PHERC0358
+    s354 = _source(racine, "le_compte_et_le_seuil_tiennent_ils_une_premiere_surface_sur_pherc0358.json")
+    if s354.exists():
+        d = json.loads(s354.read_text())
+        v_, cotes = d["le_verdict"], d["les_cotes"]
+        tous = [s_ for c in cotes for s_ in c["les_sauts"] if s_["a_une_surface"]]
+        mesures = sum(1 for s_ in tous if s_["les_feuilles"]["les_mesures"] >= 50)
+        moitie = sum(1 for s_ in tous if s_["les_feuilles"]["les_mesures"] and 2 * s_["les_zeros"] >= s_["les_feuilles"]["les_mesures"])
+        c6 = next(c for c in cotes if (c["le_rang"], c["le_cote"]) == (6, "moins"))
+        c8 = next(c for c in cotes if (c["le_rang"], c["le_cote"]) == (8, "plus"))
+        a6, b6, a8, b8 = c6["les_sauts"][0], c6["les_sauts"][1], c8["les_sauts"][0], c8["les_sauts"][1]
+        pc = lambda x: f"{round(100 * x)} %"  # noqa: E731
+        ecrits = [("le verdict de 354", v_["lissue"].upper()),
+                  ("les chunks de m7 lus de 354", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne"),
+                  ("le contrôle de 354", f"mesure au moins 50 sous {mesures} des {len(tous)}"),
+                  ("328 de 354", f"`328` tient {sum(s_['tient_328'] for s_ in tous)} des {len(tous)} sauts qui ont une"),
+                  ("les sauts à moitié à zéro de 354", f"sous {moitie} des {len(tous)}, la moitié au moins des points comptés"),
+                  ("la graine 6 de 354", f"dont {a6['les_feuilles']['les_comptes'].get('1', 0)} des {a6['les_feuilles']['les_mesures']} points "
+                                         f"comptés franchissent une feuille et aucun ne reste" if a6["les_zeros"] == 0 else "?"),
+                  ("la graine 8 de 354", f"dont {a8['les_feuilles']['les_comptes'].get('1', 0)} des {a8['les_feuilles']['les_mesures']} points en "
+                                         f"franchissent une et {a8['les_zeros']} restent"),
+                  ("le saut suivant de la graine 6 de 354", f"côté moins, {b6['les_zeros']} des {b6['les_feuilles']['les_mesures']}"),
+                  ("les deux feuilles de 354", f"sous le premier saut tenu de la graine 6, {a6['les_feuilles']['les_comptes'].get('2', 0)}")]
+        ligne6 = (f"| graine 6, moins | tenu : {pc(a6['les_feuilles']['la_part_dune_feuille'])} d'une feuille sur "
+                  f"{a6['les_feuilles']['les_mesures']} points, {a6['les_zeros']} à zéro | refusé : {b6['les_zeros']} points à zéro sur "
+                  f"{b6['les_feuilles']['les_mesures']} | {c6['la_suite']} | {c6['la_suite_de_328']} |")
+        ligne8 = (f"| graine 8, plus | tenu : {pc(a8['les_feuilles']['la_part_dune_feuille'])} d'une feuille sur "
+                  f"{a8['les_feuilles']['les_mesures']} points, {a8['les_zeros']} à zéro | refusé par le seuil : {b8['les_zeros']} à zéro | "
+                  f"{c8['la_suite']} | {c8['la_suite_de_328']} |")
+        ecrits += [("la ligne de la graine 6 de 354", ligne6), ("la ligne de la graine 8 de 354", ligne8)]
+        out.extend((nom, [x_], s354.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 353 : LES SURFACES À CHEVAL TENUES SONT-ELLES PRESQUE ENTIÈREMENT SUR LEUR TOUR
     s353 = _source(racine, "les_surfaces_a_cheval_tenues_sont_elles_presque_entierement_sur_leur_tour.json")
     if s353.exists():
