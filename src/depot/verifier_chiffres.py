@@ -3336,6 +3336,41 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 366 : LA CHAÎNE D'UNE MAILLE VA-T-ELLE PLUS LOIN SUR PHERC0358
+    s366 = _source(racine, "la_chaine_dune_maille_va_t_elle_plus_loin_sur_pherc0358.json")
+    s366_356 = _source(racine, "une_chaine_qui_garde_la_spire_tenue_va_t_elle_plus_loin_sur_pherc0358.json")
+    if s366.exists() and s366_356.exists():
+        import statistics
+        d, dm = json.loads(s366.read_text()), json.loads(s366_356.read_text())
+        v_ = d["le_verdict"]
+
+        def plus_longue(c):
+            meilleur = courant = 0
+            for s_ in c["les_sauts"]:
+                courant = courant + 1 if s_["tenu"] else 0
+                meilleur = max(meilleur, courant)
+            return meilleur
+        tu = [s_ for c in d["les_cotes"] for s_ in c["les_sauts"] if s_["tenu"]]
+        tm = [s_ for c in dm["les_cotes"] for s_ in c["les_sauts"] if s_["tenu"]]
+        mix = {(c["le_rang"], c["le_cote"]): c["la_suite"] for c in dm["les_cotes"]}
+        virg = lambda xs: ", ".join(str(x) for x in xs[:-1]) + f" et {xs[-1]}"  # noqa: E731
+        lu, lm = [plus_longue(c) for c in d["les_cotes"]], [plus_longue(c) for c in dm["les_cotes"]]
+        ecrits = [("le verdict de 366", f"{v_['u']:g} SAUTS À LA SUITE EN MÉDIANE, CONTRE {v_['m']:g} POUR LA CHAÎNE MIXTE : "
+                                        f"{v_['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les chunks de m7 lus de 366", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne"),
+                  ("les suites de 366", f"elle en tient {virg([c['la_suite'] for c in d['les_cotes']])}, {v_['u']:g} en médiane, contre "
+                                        f"{virg([c['la_suite'] for c in dm['les_cotes']])} pour la chaîne"),
+                  ("les tenus de 366", f"elle tient {len(tu)} sauts sur 40, contre {len(tm)}, dont "
+                                       f"{sum(s_['depuis'] == 'la croissance' for s_ in tu)}"),
+                  ("les surfaces de 366", f"{statistics.median(s_['les_points'] for s_ in tu):g} mailles en médiane, contre "
+                                          f"{statistics.median(s_['les_points'] for s_ in tm):g}".replace(".", ",")),
+                  ("les plus longues de 366", f"sont de {virg(lu)} sauts, {statistics.median(lu):g} en médiane, contre {virg(lm)} pour"),
+                  ("la graine 7 plus de 366", "côté plus, elle tient six sauts" if lu[1] == 6 else "graine 7 changée")]
+        for c in d["les_cotes"]:
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 366",
+                           f"| graine {c['le_rang']}, {c['le_cote']} | {mix[(c['le_rang'], c['le_cote'])]} | {c['la_suite']} |"))
+        out.extend((nom, [x_], s366.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 365 : REGRANDIR D'UNE SEULE MAILLE ÉVITE-T-IL LE DÉCALAGE
     s365 = _source(racine, "regrandir_dune_seule_maille_evite_il_le_decalage.json")
     if s365.exists():

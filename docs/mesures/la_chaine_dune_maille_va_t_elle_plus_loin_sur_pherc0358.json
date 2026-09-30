@@ -1,0 +1,1176 @@
+{
+ "la_question": "Sur PHerc0358, la chaîne qui regrandit sa spire tenue d'une maille tient-elle plus de sauts à la suite que la chaîne mixte, par le critère de 352 ?",
+ "les_constantes": {
+  "la_marge_en_mailles": 1,
+  "les_sauts": 8
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 3872,
+  "absents": 0,
+  "octets": 1900506083
+ },
+ "redonne_355": true,
+ "les_cotes": [
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1197,
+      "les_mesures": 1197,
+      "les_comptes": {
+       "1": 876,
+       "2": 321
+      },
+      "la_part_dune_feuille": 0.7318
+     },
+     "le_compte": {
+      "les_points": 1200,
+      "les_en_face": 1129,
+      "les_mesures": 1126,
+      "les_comptes": {
+       "1": 855,
+       "2": 271
+      },
+      "la_part_dune_feuille": 0.7593
+     },
+     "les_points": 3852,
+     "tenu": true
+    },
+    {
+     "le_saut": 2,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 2,
+      "les_en_face": 2,
+      "les_mesures": 2,
+      "les_comptes": {
+       "1": 2
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "le_compte": {
+      "les_points": 1200,
+      "les_en_face": 1157,
+      "les_mesures": 1157,
+      "les_comptes": {
+       "0": 1125,
+       "1": 31,
+       "2": 1
+      },
+      "la_part_dune_feuille": 0.0268
+     },
+     "les_points": 3879,
+     "tenu": false
+    },
+    {
+     "le_saut": 3,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1124,
+      "les_mesures": 1117,
+      "les_comptes": {
+       "0": 167,
+       "1": 380,
+       "2": 555,
+       "3": 15
+      },
+      "la_part_dune_feuille": 0.3402
+     },
+     "le_compte": {
+      "les_points": 1200,
+      "les_en_face": 801,
+      "les_mesures": 774,
+      "les_comptes": {
+       "0": 124,
+       "1": 291,
+       "2": 244,
+       "3": 77,
+       "4": 33,
+       "5": 5
+      },
+      "la_part_dune_feuille": 0.376
+     },
+     "les_points": 2571,
+     "tenu": false
+    },
+    {
+     "le_saut": 4,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 907,
+      "les_en_face": 848,
+      "les_mesures": 843,
+      "les_comptes": {
+       "0": 87,
+       "1": 683,
+       "2": 71,
+       "3": 2
+      },
+      "la_part_dune_feuille": 0.8102
+     },
+     "le_compte": {
+      "les_points": 1200,
+      "les_en_face": 633,
+      "les_mesures": 627,
+      "les_comptes": {
+       "0": 172,
+       "1": 300,
+       "2": 113,
+       "3": 33,
+       "4": 7,
+       "5": 2
+      },
+      "la_part_dune_feuille": 0.4785
+     },
+     "les_points": 3768,
+     "tenu": false
+    },
+    {
+     "le_saut": 5,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1164,
+      "les_mesures": 1158,
+      "les_comptes": {
+       "0": 640,
+       "1": 459,
+       "2": 51,
+       "3": 8
+      },
+      "la_part_dune_feuille": 0.3964
+     },
+     "le_compte": {
+      "les_points": 1200,
+      "les_en_face": 1138,
+      "les_mesures": 1128,
+      "les_comptes": {
+       "0": 589,
+       "1": 488,
+       "2": 42,
+       "3": 9
+      },
+      "la_part_dune_feuille": 0.4326
+     },
+     "les_points": 3693,
+     "tenu": false
+    },
+    {
+     "le_saut": 6,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1130,
+      "les_mesures": 1126,
+      "les_comptes": {
+       "0": 86,
+       "1": 887,
+       "2": 152,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.7877
+     },
+     "le_compte": {
+      "les_points": 1200,
+      "les_en_face": 921,
+      "les_mesures": 887,
+      "les_comptes": {
+       "0": 151,
+       "1": 471,
+       "2": 197,
+       "3": 60,
+       "4": 8
+      },
+      "la_part_dune_feuille": 0.531
+     },
+     "les_points": 3271,
+     "tenu": false
+    },
+    {
+     "le_saut": 7,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1135,
+      "les_mesures": 1130,
+      "les_comptes": {
+       "0": 134,
+       "1": 863,
+       "2": 94,
+       "3": 39
+      },
+      "la_part_dune_feuille": 0.7637
+     },
+     "le_compte": {
+      "les_points": 1200,
+      "les_en_face": 1123,
+      "les_mesures": 1104,
+      "les_comptes": {
+       "0": 450,
+       "1": 620,
+       "2": 34
+      },
+      "la_part_dune_feuille": 0.5616
+     },
+     "les_points": 2497,
+     "tenu": false
+    },
+    {
+     "le_saut": 8,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 1200,
+      "les_en_face": 1173,
+      "les_mesures": 1167,
+      "les_comptes": {
+       "0": 8,
+       "1": 1138,
+       "2": 21
+      },
+      "la_part_dune_feuille": 0.9751
+     },
+     "le_compte": {
+      "les_points": 1200,
+      "les_en_face": 1131,
+      "les_mesures": 1118,
+      "les_comptes": {
+       "0": 31,
+       "1": 1072,
+       "2": 15
+      },
+      "la_part_dune_feuille": 0.9589
+     },
+     "les_points": 1861,
+     "tenu": true
+    }
+   ],
+   "la_suite": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 482,
+      "les_en_face": 482,
+      "les_mesures": 482,
+      "les_comptes": {
+       "1": 482
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "le_compte": {
+      "les_points": 548,
+      "les_en_face": 546,
+      "les_mesures": 541,
+      "les_comptes": {
+       "0": 1,
+       "1": 540
+      },
+      "la_part_dune_feuille": 0.9982
+     },
+     "les_points": 716,
+     "tenu": true
+    },
+    {
+     "le_saut": 2,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 378,
+      "les_en_face": 347,
+      "les_mesures": 347,
+      "les_comptes": {
+       "1": 127,
+       "2": 220
+      },
+      "la_part_dune_feuille": 0.366
+     },
+     "le_compte": {
+      "les_points": 1130,
+      "les_en_face": 471,
+      "les_mesures": 463,
+      "les_comptes": {
+       "0": 23,
+       "1": 177,
+       "2": 263
+      },
+      "la_part_dune_feuille": 0.3823
+     },
+     "les_points": 1918,
+     "tenu": false
+    },
+    {
+     "le_saut": 3,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 509,
+      "les_en_face": 507,
+      "les_mesures": 506,
+      "les_comptes": {
+       "0": 13,
+       "1": 492,
+       "2": 1
+      },
+      "la_part_dune_feuille": 0.9723
+     },
+     "le_compte": {
+      "les_points": 501,
+      "les_en_face": 474,
+      "les_mesures": 471,
+      "les_comptes": {
+       "0": 34,
+       "1": 437
+      },
+      "la_part_dune_feuille": 0.9278
+     },
+     "les_points": 677,
+     "tenu": true
+    },
+    {
+     "le_saut": 4,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 345,
+      "les_en_face": 342,
+      "les_mesures": 342,
+      "les_comptes": {
+       "1": 342
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "le_compte": {
+      "les_points": 395,
+      "les_en_face": 391,
+      "les_mesures": 386,
+      "les_comptes": {
+       "1": 386
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "les_points": 528,
+     "tenu": true
+    },
+    {
+     "le_saut": 5,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 268,
+      "les_en_face": 268,
+      "les_mesures": 268,
+      "les_comptes": {
+       "1": 268
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "le_compte": {
+      "les_points": 305,
+      "les_en_face": 298,
+      "les_mesures": 298,
+      "les_comptes": {
+       "0": 3,
+       "1": 295
+      },
+      "la_part_dune_feuille": 0.9899
+     },
+     "les_points": 437,
+     "tenu": true
+    },
+    {
+     "le_saut": 6,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 184,
+      "les_en_face": 183,
+      "les_mesures": 183,
+      "les_comptes": {
+       "1": 183
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "le_compte": {
+      "les_points": 286,
+      "les_en_face": 280,
+      "les_mesures": 280,
+      "les_comptes": {
+       "0": 1,
+       "1": 279
+      },
+      "la_part_dune_feuille": 0.9964
+     },
+     "les_points": 408,
+     "tenu": true
+    },
+    {
+     "le_saut": 7,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 103,
+      "les_en_face": 103,
+      "les_mesures": 103,
+      "les_comptes": {
+       "1": 103
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "le_compte": {
+      "les_points": 157,
+      "les_en_face": 157,
+      "les_mesures": 157,
+      "les_comptes": {
+       "1": 157
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "les_points": 236,
+     "tenu": true
+    },
+    {
+     "le_saut": 8,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 86,
+      "les_en_face": 86,
+      "les_mesures": 86,
+      "les_comptes": {
+       "1": 86
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "le_compte": {
+      "les_points": 156,
+      "les_en_face": 155,
+      "les_mesures": 155,
+      "les_comptes": {
+       "1": 155
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "les_points": 235,
+     "tenu": true
+    }
+   ],
+   "la_suite": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 566,
+      "les_en_face": 565,
+      "les_mesures": 564,
+      "les_comptes": {
+       "1": 564
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "le_compte": {
+      "les_points": 651,
+      "les_en_face": 639,
+      "les_mesures": 635,
+      "les_comptes": {
+       "0": 6,
+       "1": 628,
+       "2": 1
+      },
+      "la_part_dune_feuille": 0.989
+     },
+     "les_points": 803,
+     "tenu": true
+    },
+    {
+     "le_saut": 2,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 478,
+      "les_en_face": 477,
+      "les_mesures": 477,
+      "les_comptes": {
+       "1": 471,
+       "2": 5,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.9874
+     },
+     "le_compte": {
+      "les_points": 623,
+      "les_en_face": 614,
+      "les_mesures": 611,
+      "les_comptes": {
+       "1": 605,
+       "2": 5,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.9902
+     },
+     "les_points": 807,
+     "tenu": true
+    },
+    {
+     "le_saut": 3,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 354,
+      "les_en_face": 353,
+      "les_mesures": 353,
+      "les_comptes": {
+       "1": 349,
+       "2": 4
+      },
+      "la_part_dune_feuille": 0.9887
+     },
+     "le_compte": {
+      "les_points": 450,
+      "les_en_face": 446,
+      "les_mesures": 445,
+      "les_comptes": {
+       "0": 1,
+       "1": 435,
+       "2": 9
+      },
+      "la_part_dune_feuille": 0.9775
+     },
+     "les_points": 651,
+     "tenu": true
+    },
+    {
+     "le_saut": 4,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 158,
+      "les_en_face": 132,
+      "les_mesures": 132,
+      "les_comptes": {
+       "1": 40,
+       "2": 91,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.303
+     },
+     "le_compte": {
+      "les_points": 1200,
+      "les_en_face": 329,
+      "les_mesures": 313,
+      "les_comptes": {
+       "0": 60,
+       "1": 109,
+       "2": 121,
+       "3": 23
+      },
+      "la_part_dune_feuille": 0.3482
+     },
+     "les_points": 2177,
+     "tenu": false
+    },
+    {
+     "le_saut": 5,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 292,
+      "les_en_face": 270,
+      "les_mesures": 270,
+      "les_comptes": {
+       "1": 222,
+       "2": 39,
+       "3": 7,
+       "4": 2
+      },
+      "la_part_dune_feuille": 0.8222
+     },
+     "le_compte": {
+      "les_points": 335,
+      "les_en_face": 271,
+      "les_mesures": 266,
+      "les_comptes": {
+       "0": 3,
+       "1": 206,
+       "2": 49,
+       "3": 8
+      },
+      "la_part_dune_feuille": 0.7744
+     },
+     "les_points": 627,
+     "tenu": true
+    },
+    {
+     "le_saut": 6,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 58,
+      "les_en_face": 57,
+      "les_mesures": 57,
+      "les_comptes": {
+       "0": 1,
+       "1": 56
+      },
+      "la_part_dune_feuille": 0.9825
+     },
+     "le_compte": {
+      "les_points": 156,
+      "les_en_face": 150,
+      "les_mesures": 149,
+      "les_comptes": {
+       "0": 1,
+       "1": 146,
+       "2": 2
+      },
+      "la_part_dune_feuille": 0.9799
+     },
+     "les_points": 232,
+     "tenu": true
+    },
+    {
+     "le_saut": 7,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 65,
+      "les_en_face": 58,
+      "les_mesures": 58,
+      "les_comptes": {
+       "1": 57,
+       "2": 1
+      },
+      "la_part_dune_feuille": 0.9828
+     },
+     "le_compte": {
+      "les_points": 132,
+      "les_en_face": 129,
+      "les_mesures": 124,
+      "les_comptes": {
+       "0": 1,
+       "1": 120,
+       "2": 3
+      },
+      "la_part_dune_feuille": 0.9677
+     },
+     "les_points": 220,
+     "tenu": true
+    },
+    {
+     "le_saut": 8,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 49,
+      "les_en_face": 46,
+      "les_mesures": 46,
+      "les_comptes": {
+       "1": 21,
+       "2": 25
+      },
+      "la_part_dune_feuille": 0.4565
+     },
+     "le_compte": {
+      "les_points": 1200,
+      "les_en_face": 174,
+      "les_mesures": 172,
+      "les_comptes": {
+       "0": 68,
+       "1": 46,
+       "2": 56,
+       "3": 2
+      },
+      "la_part_dune_feuille": 0.2674
+     },
+     "les_points": 2308,
+     "tenu": false
+    }
+   ],
+   "la_suite": 3
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 439,
+      "les_en_face": 439,
+      "les_mesures": 439,
+      "les_comptes": {
+       "0": 28,
+       "1": 411
+      },
+      "la_part_dune_feuille": 0.9362
+     },
+     "le_compte": {
+      "les_points": 404,
+      "les_en_face": 402,
+      "les_mesures": 399,
+      "les_comptes": {
+       "0": 7,
+       "1": 392
+      },
+      "la_part_dune_feuille": 0.9825
+     },
+     "les_points": 574,
+     "tenu": true
+    },
+    {
+     "le_saut": 2,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 140,
+      "les_en_face": 136,
+      "les_mesures": 136,
+      "les_comptes": {
+       "0": 4,
+       "1": 132
+      },
+      "la_part_dune_feuille": 0.9706
+     },
+     "le_compte": {
+      "les_points": 161,
+      "les_en_face": 161,
+      "les_mesures": 159,
+      "les_comptes": {
+       "0": 4,
+       "1": 155
+      },
+      "la_part_dune_feuille": 0.9748
+     },
+     "les_points": 247,
+     "tenu": true
+    },
+    {
+     "le_saut": 3,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 99,
+      "les_en_face": 99,
+      "les_mesures": 99,
+      "les_comptes": {
+       "1": 99
+      },
+      "la_part_dune_feuille": 1.0
+     },
+     "le_compte": {
+      "les_points": 150,
+      "les_en_face": 150,
+      "les_mesures": 149,
+      "les_comptes": {
+       "0": 5,
+       "1": 144
+      },
+      "la_part_dune_feuille": 0.9664
+     },
+     "les_points": 207,
+     "tenu": true
+    },
+    {
+     "le_saut": 4,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 93,
+      "les_en_face": 80,
+      "les_mesures": 78,
+      "les_comptes": {
+       "1": 51,
+       "2": 27
+      },
+      "la_part_dune_feuille": 0.6538
+     },
+     "le_compte": {
+      "les_points": 727,
+      "les_en_face": 158,
+      "les_mesures": 156,
+      "les_comptes": {
+       "1": 132,
+       "2": 24
+      },
+      "la_part_dune_feuille": 0.8462
+     },
+     "les_points": 1306,
+     "tenu": true
+    },
+    {
+     "le_saut": 5,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 369,
+      "les_en_face": 347,
+      "les_mesures": 345,
+      "les_comptes": {
+       "0": 86,
+       "1": 259
+      },
+      "la_part_dune_feuille": 0.7507
+     },
+     "le_compte": {
+      "les_points": 530,
+      "les_en_face": 185,
+      "les_mesures": 175,
+      "les_comptes": {
+       "0": 51,
+       "1": 54,
+       "2": 60,
+       "3": 7,
+       "4": 2,
+       "5": 1
+      },
+      "la_part_dune_feuille": 0.3086
+     },
+     "les_points": 1543,
+     "tenu": false
+    },
+    {
+     "le_saut": 6,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 34,
+      "les_en_face": 31,
+      "les_mesures": 31,
+      "les_comptes": {
+       "1": 29,
+       "2": 2
+      },
+      "la_part_dune_feuille": 0.9355
+     },
+     "le_compte": {
+      "les_points": 1123,
+      "les_en_face": 315,
+      "les_mesures": 297,
+      "les_comptes": {
+       "0": 64,
+       "1": 154,
+       "2": 55,
+       "3": 22,
+       "4": 2
+      },
+      "la_part_dune_feuille": 0.5185
+     },
+     "les_points": 2301,
+     "tenu": false
+    },
+    {
+     "le_saut": 7,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 162,
+      "les_en_face": 128,
+      "les_mesures": 127,
+      "les_comptes": {
+       "0": 31,
+       "1": 94,
+       "2": 2
+      },
+      "la_part_dune_feuille": 0.7402
+     },
+     "le_compte": {
+      "les_points": 977,
+      "les_en_face": 456,
+      "les_mesures": 442,
+      "les_comptes": {
+       "0": 89,
+       "1": 204,
+       "2": 116,
+       "3": 24,
+       "4": 8,
+       "5": 1
+      },
+      "la_part_dune_feuille": 0.4615
+     },
+     "les_points": 2009,
+     "tenu": false
+    },
+    {
+     "le_saut": 8,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 254,
+      "les_en_face": 231,
+      "les_mesures": 230,
+      "les_comptes": {
+       "0": 1,
+       "1": 173,
+       "2": 48,
+       "3": 7,
+       "4": 1
+      },
+      "la_part_dune_feuille": 0.7522
+     },
+     "le_compte": {
+      "les_points": 335,
+      "les_en_face": 283,
+      "les_mesures": 281,
+      "les_comptes": {
+       "0": 13,
+       "1": 225,
+       "2": 39,
+       "3": 2,
+       "4": 2
+      },
+      "la_part_dune_feuille": 0.8007
+     },
+     "les_points": 476,
+     "tenu": true
+    }
+   ],
+   "la_suite": 4
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_sauts": [
+    {
+     "le_saut": 1,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 579,
+      "les_en_face": 484,
+      "les_mesures": 483,
+      "les_comptes": {
+       "0": 1,
+       "1": 379,
+       "2": 102,
+       "3": 1
+      },
+      "la_part_dune_feuille": 0.7847
+     },
+     "le_compte": {
+      "les_points": 566,
+      "les_en_face": 459,
+      "les_mesures": 458,
+      "les_comptes": {
+       "0": 7,
+       "1": 358,
+       "2": 90,
+       "3": 3
+      },
+      "la_part_dune_feuille": 0.7817
+     },
+     "les_points": 784,
+     "tenu": true
+    },
+    {
+     "le_saut": 2,
+     "depuis": "la spire",
+     "le_compte_de_la_spire": {
+      "les_points": 359,
+      "les_en_face": 313,
+      "les_mesures": 309,
+      "les_comptes": {
+       "1": 266,
+       "2": 43
+      },
+      "la_part_dune_feuille": 0.8608
+     },
+     "le_compte": {
+      "les_points": 359,
+      "les_en_face": 313,
+      "les_mesures": 309,
+      "les_comptes": {
+       "1": 266,
+       "2": 43
+      },
+      "la_part_dune_feuille": 0.8608
+     },
+     "les_points": 512,
+     "tenu": true
+    },
+    {
+     "le_saut": 3,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 167,
+      "les_en_face": 156,
+      "les_mesures": 156,
+      "les_comptes": {
+       "0": 1,
+       "1": 115,
+       "2": 38,
+       "3": 2
+      },
+      "la_part_dune_feuille": 0.7372
+     },
+     "le_compte": {
+      "les_points": 541,
+      "les_en_face": 194,
+      "les_mesures": 190,
+      "les_comptes": {
+       "0": 4,
+       "1": 172,
+       "2": 14
+      },
+      "la_part_dune_feuille": 0.9053
+     },
+     "les_points": 1552,
+     "tenu": true
+    },
+    {
+     "le_saut": 4,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 226,
+      "les_en_face": 222,
+      "les_mesures": 222,
+      "les_comptes": {
+       "0": 1,
+       "1": 200,
+       "2": 21
+      },
+      "la_part_dune_feuille": 0.9009
+     },
+     "le_compte": {
+      "les_points": 384,
+      "les_en_face": 362,
+      "les_mesures": 361,
+      "les_comptes": {
+       "0": 13,
+       "1": 321,
+       "2": 27
+      },
+      "la_part_dune_feuille": 0.8892
+     },
+     "les_points": 548,
+     "tenu": true
+    },
+    {
+     "le_saut": 5,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 219,
+      "les_en_face": 199,
+      "les_mesures": 195,
+      "les_comptes": {
+       "0": 1,
+       "1": 171,
+       "2": 23
+      },
+      "la_part_dune_feuille": 0.8769
+     },
+     "le_compte": {
+      "les_points": 313,
+      "les_en_face": 287,
+      "les_mesures": 284,
+      "les_comptes": {
+       "0": 8,
+       "1": 241,
+       "2": 33,
+       "3": 2
+      },
+      "la_part_dune_feuille": 0.8486
+     },
+     "les_points": 465,
+     "tenu": true
+    },
+    {
+     "le_saut": 6,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 84,
+      "les_en_face": 72,
+      "les_mesures": 71,
+      "les_comptes": {
+       "0": 1,
+       "1": 50,
+       "2": 20
+      },
+      "la_part_dune_feuille": 0.7042
+     },
+     "le_compte": {
+      "les_points": 506,
+      "les_en_face": 296,
+      "les_mesures": 287,
+      "les_comptes": {
+       "0": 46,
+       "1": 204,
+       "2": 35,
+       "3": 2
+      },
+      "la_part_dune_feuille": 0.7108
+     },
+     "les_points": 1018,
+     "tenu": false
+    },
+    {
+     "le_saut": 7,
+     "depuis": "la croissance",
+     "le_compte_de_la_spire": {
+      "les_points": 200,
+      "les_en_face": 186,
+      "les_mesures": 184,
+      "les_comptes": {
+       "0": 3,
+       "1": 176,
+       "2": 5
+      },
+      "la_part_dune_feuille": 0.9565
+     },
+     "le_compte": {
+      "les_points": 466,
+      "les_en_face": 401,
+      "les_mesures": 382,
+      "les_comptes": {
+       "0": 20,
+       "1": 343,
+       "2": 19
+      },
+      "la_part_dune_feuille": 0.8979
+     },
+     "les_points": 619,
+     "tenu": true
+    },
+    {
+     "le_saut": 8,
+     "depuis": "la relance",
+     "le_compte_de_la_spire": {
+      "les_points": 258,
+      "les_en_face": 230,
+      "les_mesures": 227,
+      "les_comptes": {
+       "0": 4,
+       "1": 154,
+       "2": 63,
+       "3": 6
+      },
+      "la_part_dune_feuille": 0.6784
+     },
+     "le_compte": {
+      "les_points": 902,
+      "les_en_face": 537,
+      "les_mesures": 530,
+      "les_comptes": {
+       "0": 281,
+       "1": 177,
+       "2": 70,
+       "3": 2
+      },
+      "la_part_dune_feuille": 0.334
+     },
+     "les_points": 1427,
+     "tenu": false
+    }
+   ],
+   "la_suite": 5
+  }
+ ],
+ "les_suites_de_la_chaine_mixte": [
+  1,
+  1,
+  3,
+  3,
+  3
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "u": 3,
+  "m": 3,
+  "lissue": "sur PHerc0358, la chaîne d'une maille tient 3 sauts à la suite en médiane, contre 3 sauts pour la chaîne mixte ; pas plus"
+ },
+ "les_secondes": 24.8
+}

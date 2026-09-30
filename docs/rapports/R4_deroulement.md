@@ -4738,6 +4738,12 @@ une croissance d'une seule maille.
 de surface à la chaîne mixte sans le faire naître ; ce que la chaîne perd, elle le perd sur la graine 7, qui le portait déjà. `R4-P163`
 s'ouvre : la même chaîne sur PHerc0358.
 
+**`366` · 2026-09-30 · la chaîne d'une maille va-t-elle plus loin sur PHerc0358** — `R4-P163`
+
+⭐⭐⭐⭐ **Pas plus en médiane : 3 sauts à la suite de part et d'autre** — `R4-F552`. Elle allonge deux côtés sur cinq, tient 26 sauts sur
+40 contre 22 et garde des surfaces de 561 mailles en médiane contre 394,5. `R4-P164` s'ouvre : l'accord de deux chaînes qui se croisent,
+comme juge sans référent, étalonné sur PHercParis4.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
