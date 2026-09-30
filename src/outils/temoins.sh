@@ -1855,6 +1855,8 @@ run "la chaîne mixte tient-elle ses sauts justes sur Paris4" uv run python "$RO
 run "figure la chaîne mixte tient-elle ses sauts justes sur Paris4" uv run python "$ROOT/src/figures/figure_la_chaine_mixte_tient_elle_ses_sauts_justes_sur_paris4.py" --verifier
 run "regrandir la spire tenue rend-il de la surface sans passer à cheval" uv run python "$ROOT/src/nappe/regrandir_la_spire_tenue_rend_il_de_la_surface_sans_passer_a_cheval.py" --verifier
 run "figure regrandir la spire tenue rend-il de la surface sans passer à cheval" uv run python "$ROOT/src/figures/figure_regrandir_la_spire_tenue_rend_il_de_la_surface_sans_passer_a_cheval.py" --verifier
+run "le critère sur la seule croissance sépare-t-il les croissances à cheval" uv run python "$ROOT/src/nappe/le_critere_sur_la_seule_croissance_separe_t_il_les_croissances_a_cheval.py" --verifier
+run "figure le critère sur la seule croissance sépare-t-il les croissances à cheval" uv run python "$ROOT/src/figures/figure_le_critere_sur_la_seule_croissance_separe_t_il_les_croissances_a_cheval.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

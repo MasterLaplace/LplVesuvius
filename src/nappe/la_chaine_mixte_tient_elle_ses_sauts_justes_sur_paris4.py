@@ -125,10 +125,11 @@ def le_verdict(d: dict) -> dict:
     return {"decidable": True, "lissue": f"{tete} ; {suite}"}
 
 
-def la_chaine_jugee(chainer=None) -> dict:
+def la_chaine_jugee(chainer=None, en_plus=None) -> dict:
     """La chaîne de PHercParis4 jugée saut par saut : justesse, tenue, à cheval, points posés et taille de la surface gardée. Sans
     `chainer(nappe, relancer, sauter, lire_valeurs)`, la chaîne mixte de `356` ; avec, écrit pour `358`, celle de l'appelant, dont chaque
-    saut doit porter ce que la chaîne mixte porte. Rend les côtés, le contrôle, les pannes et la lecture de `m7`."""
+    saut doit porter ce que la chaîne mixte porte. Avec `en_plus(saut, lire_valeurs)`, écrit pour `359`, ce qu'il rend de chaque saut est
+    gardé sous `en_plus`. Rend les côtés, le contrôle, les pannes et la lecture de `m7`."""
     tours = {r: m329.lire_un_tour(r, m330.LES_TOURS) for r in m330.LES_TOURS}
     lv = {}
 
@@ -143,6 +144,8 @@ def la_chaine_jugee(chainer=None) -> dict:
 
     def observer(rang, nom, h, k):
         out = {"depuis": k["depuis"], "le_compte": k["le_compte"], "les_points": k["les_points"]}
+        if en_plus is not None:
+            out["en_plus"] = en_plus(k, lv["m7"])
         rl = k["la_relance"]
         if rl is None or not rl["valide"].any():
             return out
@@ -171,7 +174,8 @@ def la_chaine_jugee(chainer=None) -> dict:
                               "tenu": m355.tenue(s["le_compte"]),
                               "a_cheval": bool(a is not None and a["a_cheval"]),
                               "restes": a["restes"]["les_points"] if a else None, "au_dela": a["au_dela"]["les_points"] if a else None,
-                              "les_points_poses": a["les_points_poses"] if a else None})
+                              "les_points_poses": a["les_points_poses"] if a else None,
+                              **({"en_plus": s["en_plus"]} if "en_plus" in s else {})})
             cotes.append({"le_rang": g["le_rang"], "le_cote": cote, "les_sauts": sauts})
             print(json.dumps({"le_rang": g["le_rang"], "le_cote": cote}, ensure_ascii=False),
                   [(s["depuis"], s["la_justesse"], s["tenu"], s["a_cheval"]) for s in sauts], flush=True)

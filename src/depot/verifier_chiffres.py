@@ -3336,6 +3336,44 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 359 : LE CRITÈRE SUR LA SEULE CROISSANCE SÉPARE-T-IL LES CROISSANCES À CHEVAL
+    s359 = _source(racine, "le_critere_sur_la_seule_croissance_separe_t_il_les_croissances_a_cheval.json")
+    s359p = _source(racine, "le_critere_sur_la_seule_croissance_separe_t_il_les_croissances_a_cheval_premiere_passe.json")
+    if s359.exists() and s359p.exists():
+        import statistics
+
+        def croissances(d):
+            return [s_ for c in d["les_cotes"] if c["le_rang"] >= 4 for s_ in c["les_sauts"]
+                    if s_["la_justesse"] == "juste" and s_["depuis"] == "la croissance" and s_.get("en_plus")]
+        d, dp = json.loads(s359.read_text()), json.loads(s359p.read_text())
+        v_, sc, ss = d["le_verdict"], d["la_separation"]["a_cheval"], d["la_separation"]["saines"]
+        pc, ps = dp["la_separation"]["a_cheval"], dp["la_separation"]["saines"]
+        c, cp = croissances(d), croissances(dp)
+        med = lambda xs: f"{statistics.median(xs):g}".replace(".", ",")  # noqa: E731
+        part = lambda a: f"{round(statistics.median(s_['en_plus']['le_compte']['la_part_dune_feuille'] for s_ in c if s_['a_cheval'] == a), 3)}"  # noqa: E731
+        zeros = lambda a: med([s_["en_plus"]["le_compte"]["les_comptes"].get("0", 0) for s_ in c if s_["a_cheval"] == a])  # noqa: E731
+        ecrits = [("le verdict de 359", f"SUR LA SEULE CROISSANCE, LE CRITÈRE REFUSE {sc['les_refusees']} DES {sc['les_croissances']} "
+                                        f"CROISSANCES À CHEVAL ET {ss['les_refusees']} DES {ss['les_croissances']} SAINES : "
+                                        f"{v_['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les chunks de m7 lus de 359", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne"),
+                  ("la ligne à cheval de 359", f"| à cheval | {sc['les_refusees']} sur {sc['les_croissances']} | {sc['faute_de_mesures']} |"),
+                  ("la ligne des saines de 359", f"| saines | {ss['les_refusees']} sur {ss['les_croissances']} | {ss['faute_de_mesures']} |"),
+                  ("les normales de 359", f"une croissance a {med([s_['en_plus']['le_compte']['les_points'] for s_ in c])} points de normale "
+                                          f"pour {med([s_['en_plus']['les_mailles'] for s_ in c])} mailles, et "
+                                          f"{sum(s_['en_plus']['mesuree'] for s_ in c)} des {len(c)} croissances ont 50 points mesurés"),
+                  ("les normales de la première passe de 359",
+                   f"{med([s_['en_plus']['le_compte']['les_points'] for s_ in cp])} points de normale pour "
+                   f"{med([s_['en_plus']['les_mailles'] for s_ in cp])} mailles, en médiane"),
+                  ("les refus de la première passe de 359", f"Le critère refusait alors {pc['les_refusees']} des {pc['les_croissances']} "
+                                                            f"croissances à cheval et {ps['les_refusees']} des {ps['les_croissances']} saines, "
+                                                            f"dont {pc['faute_de_mesures']} et {ps['faute_de_mesures']} faute"),
+                  ("les parts d'une feuille de 359", f"passent en médiane {part(True).replace('.', ',')} de leurs points par une seule "
+                                                     f"feuille, les saines"),
+                  ("la part d'une feuille des saines de 359", f"{part(False).replace('.', ',')} : compter les feuilles de `m7`"),
+                  ("les points à zéro de 359", f"les croissances à cheval ont {zeros(True)} points à zéro en médiane, les saines "
+                                               f"{zeros(False)}")]
+        out.extend((nom, [x_], s359.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 358 : REGRANDIR LA SPIRE TENUE REND-IL DE LA SURFACE SANS PASSER À CHEVAL
     s358 = _source(racine, "regrandir_la_spire_tenue_rend_il_de_la_surface_sans_passer_a_cheval.json")
     if s358.exists():

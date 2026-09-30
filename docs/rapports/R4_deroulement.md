@@ -4696,6 +4696,12 @@ saut à cheval de la chaîne mixte est le seul qu'elle a relancé ; ses spires g
 1600 mailles en médiane contre 980,5 et reste juste sous ses 29 sauts jugés, mais 15 sont à cheval, contre 1 sur 30. Le critère de `352`
 ne le voit pas. `R4-P156` s'ouvre : le même critère, sur la seule partie regrandie ?
 
+**`359` · 2026-09-30 · le critère sur la seule croissance sépare-t-il les croissances à cheval** — `R4-P156`
+
+⭐⭐⭐⭐ **Non : 0 croissance à cheval refusée sur 12, 3 saines sur 13** — `R4-F545`. Compter les feuilles de `m7` jusqu'au départ ne
+voit pas la croissance qui passe à cheval. Une première passe manquait de normales et ne mesurait pas ce qu'elle nommait ; elle est gardée.
+`R4-P157` s'ouvre : l'écart de la croissance au départ, comparé à celui de sa spire.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
