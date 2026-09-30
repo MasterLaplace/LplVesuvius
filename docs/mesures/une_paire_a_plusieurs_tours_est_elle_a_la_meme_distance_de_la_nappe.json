@@ -1,0 +1,1934 @@
+{
+ "la_question": "Sur PHerc0358, graine 8, les deux surfaces d'une paire « même feuille » à deux tours ou plus d'écart sont-elles à la même distance de la nappe, la somme des écarts de leurs sauts, l'une atteinte en plus de sauts que l'autre ?",
+ "les_constantes": {
+  "le_saut": 15.667,
+  "la_moitie": 0.5,
+  "la_part": 0.9,
+  "le_minimum": 5
+ },
+ "les_cotes_lus": 5,
+ "redonne": true,
+ "les_paires": [
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 17.911,
+   "la_distance_b": 17.564,
+   "lecart_de_distance": 0.347,
+   "en_sauts": 0.022,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    1,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 17.911,
+   "la_distance_b": 18.415,
+   "lecart_de_distance": -0.504,
+   "en_sauts": 0.032,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    2,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 18.256,
+   "la_distance_b": 17.564,
+   "lecart_de_distance": 0.692,
+   "en_sauts": 0.044,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    2,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 18.256,
+   "la_distance_b": 18.415,
+   "lecart_de_distance": -0.159,
+   "en_sauts": 0.01,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    4,
+    3
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 49.166,
+   "la_distance_b": 36.005,
+   "lecart_de_distance": 13.161,
+   "en_sauts": 0.84,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    5,
+    4
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 53.646,
+   "la_distance_b": 47.668,
+   "lecart_de_distance": 5.978,
+   "en_sauts": 0.382,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    5
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 71.303,
+   "la_distance_b": 63.066,
+   "lecart_de_distance": 8.237,
+   "en_sauts": 0.526,
+   "meme_distance": false,
+   "meme_sens": null,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    7,
+    6
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 81.608,
+   "la_distance_b": 75.879,
+   "lecart_de_distance": 5.729,
+   "en_sauts": 0.366,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    8,
+    7
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 97.072,
+   "la_distance_b": 93.42,
+   "lecart_de_distance": 3.652,
+   "en_sauts": 0.233,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 17.911,
+   "la_distance_b": 18.739,
+   "lecart_de_distance": -0.828,
+   "en_sauts": 0.053,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    2,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 18.256,
+   "la_distance_b": 18.739,
+   "lecart_de_distance": -0.483,
+   "en_sauts": 0.031,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    4,
+    2
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 49.166,
+   "la_distance_b": 36.699,
+   "lecart_de_distance": 12.467,
+   "en_sauts": 0.796,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    5,
+    3
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 53.646,
+   "la_distance_b": 47.43,
+   "lecart_de_distance": 6.216,
+   "en_sauts": 0.397,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    6,
+    4
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 71.303,
+   "la_distance_b": 62.651,
+   "lecart_de_distance": 8.652,
+   "en_sauts": 0.552,
+   "meme_distance": false,
+   "meme_sens": null,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    7,
+    5
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 81.608,
+   "la_distance_b": 74.703,
+   "lecart_de_distance": 6.905,
+   "en_sauts": 0.441,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    8,
+    6
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 97.072,
+   "la_distance_b": 90.405,
+   "lecart_de_distance": 6.667,
+   "en_sauts": 0.426,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 17.564,
+   "la_distance_b": 18.739,
+   "lecart_de_distance": -1.175,
+   "en_sauts": 0.075,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    2,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 18.415,
+   "la_distance_b": 18.739,
+   "lecart_de_distance": -0.324,
+   "en_sauts": 0.021,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    3,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 36.005,
+   "la_distance_b": 36.699,
+   "lecart_de_distance": -0.694,
+   "en_sauts": 0.044,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    4,
+    3
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 47.668,
+   "la_distance_b": 47.43,
+   "lecart_de_distance": 0.238,
+   "en_sauts": 0.015,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    5,
+    4
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 63.066,
+   "la_distance_b": 62.651,
+   "lecart_de_distance": 0.415,
+   "en_sauts": 0.026,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    6,
+    5
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 75.879,
+   "la_distance_b": 74.703,
+   "lecart_de_distance": 1.176,
+   "en_sauts": 0.075,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    7,
+    6
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 93.42,
+   "la_distance_b": 90.405,
+   "lecart_de_distance": 3.015,
+   "en_sauts": 0.192,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    8,
+    7
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 112.897,
+   "la_distance_b": 103.782,
+   "lecart_de_distance": 9.115,
+   "en_sauts": 0.582,
+   "meme_distance": false,
+   "meme_sens": null,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 15.639,
+   "la_distance_b": 14.719,
+   "lecart_de_distance": 0.92,
+   "en_sauts": 0.059,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    2,
+    3
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 39.077,
+   "la_distance_b": 42.78,
+   "lecart_de_distance": -3.703,
+   "en_sauts": 0.236,
+   "meme_distance": true,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    3,
+    4
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 51.138,
+   "la_distance_b": 57.774,
+   "lecart_de_distance": -6.636,
+   "en_sauts": 0.424,
+   "meme_distance": true,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    4,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 68.96,
+   "la_distance_b": 74.387,
+   "lecart_de_distance": -5.427,
+   "en_sauts": 0.346,
+   "meme_distance": true,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    5,
+    6
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 86.367,
+   "la_distance_b": 95.361,
+   "lecart_de_distance": -8.994,
+   "en_sauts": 0.574,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    7
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 102.322,
+   "la_distance_b": 114.443,
+   "lecart_de_distance": -12.121,
+   "en_sauts": 0.774,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    7,
+    8
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 118.731,
+   "la_distance_b": 133.023,
+   "lecart_de_distance": -14.292,
+   "en_sauts": 0.912,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 15.639,
+   "la_distance_b": 15.687,
+   "lecart_de_distance": -0.048,
+   "en_sauts": 0.003,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    2,
+    3
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 39.077,
+   "la_distance_b": 39.21,
+   "lecart_de_distance": -0.133,
+   "en_sauts": 0.008,
+   "meme_distance": true,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    3,
+    4
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 51.138,
+   "la_distance_b": 50.45,
+   "lecart_de_distance": 0.688,
+   "en_sauts": 0.044,
+   "meme_distance": true,
+   "meme_sens": false,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    4,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 68.96,
+   "la_distance_b": 67.767,
+   "lecart_de_distance": 1.193,
+   "en_sauts": 0.076,
+   "meme_distance": true,
+   "meme_sens": false,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    5,
+    6
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 86.367,
+   "la_distance_b": 81.556,
+   "lecart_de_distance": 4.811,
+   "en_sauts": 0.307,
+   "meme_distance": true,
+   "meme_sens": false,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    6,
+    7
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 102.322,
+   "la_distance_b": 95.785,
+   "lecart_de_distance": 6.537,
+   "en_sauts": 0.417,
+   "meme_distance": true,
+   "meme_sens": false,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    8,
+    8
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 133.711,
+   "la_distance_b": 111.874,
+   "lecart_de_distance": 21.837,
+   "en_sauts": 1.394,
+   "meme_distance": false,
+   "meme_sens": null,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 14.719,
+   "la_distance_b": 15.687,
+   "lecart_de_distance": -0.968,
+   "en_sauts": 0.062,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    3,
+    3
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 42.78,
+   "la_distance_b": 39.21,
+   "lecart_de_distance": 3.57,
+   "en_sauts": 0.228,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 17.381,
+   "la_distance_b": 17.155,
+   "lecart_de_distance": 0.226,
+   "en_sauts": 0.014,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    2,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 36.376,
+   "la_distance_b": 36.223,
+   "lecart_de_distance": 0.153,
+   "en_sauts": 0.01,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    3,
+    3
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 49.828,
+   "la_distance_b": 49.015,
+   "lecart_de_distance": 0.813,
+   "en_sauts": 0.052,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 17.381,
+   "la_distance_b": 16.722,
+   "lecart_de_distance": 0.659,
+   "en_sauts": 0.042,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    2,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 36.376,
+   "la_distance_b": 36.677,
+   "lecart_de_distance": -0.301,
+   "en_sauts": 0.019,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    3,
+    3
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 49.828,
+   "la_distance_b": 50.674,
+   "lecart_de_distance": -0.846,
+   "en_sauts": 0.054,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    4,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 71.058,
+   "la_distance_b": 77.001,
+   "lecart_de_distance": -5.943,
+   "en_sauts": 0.379,
+   "meme_distance": true,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 17.155,
+   "la_distance_b": 16.722,
+   "lecart_de_distance": 0.433,
+   "en_sauts": 0.028,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    2,
+    2
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 36.223,
+   "la_distance_b": 36.677,
+   "lecart_de_distance": -0.454,
+   "en_sauts": 0.029,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 11.158,
+   "la_distance_b": 11.98,
+   "lecart_de_distance": -0.822,
+   "en_sauts": 0.052,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    3,
+    2
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 38.015,
+   "la_distance_b": 26.55,
+   "lecart_de_distance": 11.465,
+   "en_sauts": 0.732,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    4,
+    3
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 53.469,
+   "la_distance_b": 40.401,
+   "lecart_de_distance": 13.068,
+   "en_sauts": 0.834,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    5,
+    3
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 69.43,
+   "la_distance_b": 40.401,
+   "lecart_de_distance": 29.029,
+   "en_sauts": 1.853,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    1
+   ],
+   "lecart_de_comptes": 5,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 5,
+   "la_distance_a": 88.798,
+   "la_distance_b": 11.98,
+   "lecart_de_distance": 76.818,
+   "en_sauts": 4.903,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    2
+   ],
+   "lecart_de_comptes": 4,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 4,
+   "la_distance_a": 88.798,
+   "la_distance_b": 26.55,
+   "lecart_de_distance": 62.248,
+   "en_sauts": 3.973,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 88.798,
+   "la_distance_b": 80.853,
+   "lecart_de_distance": 7.945,
+   "en_sauts": 0.507,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    7,
+    6
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 105.936,
+   "la_distance_b": 94.37,
+   "lecart_de_distance": 11.566,
+   "en_sauts": 0.738,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    8,
+    7
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 122.091,
+   "la_distance_b": 108.595,
+   "lecart_de_distance": 13.496,
+   "en_sauts": 0.861,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    8,
+    8
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 122.091,
+   "la_distance_b": 123.506,
+   "lecart_de_distance": -1.415,
+   "en_sauts": 0.09,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    3,
+    1
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 38.015,
+   "la_distance_b": 15.937,
+   "lecart_de_distance": 22.078,
+   "en_sauts": 1.409,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    6,
+    1
+   ],
+   "lecart_de_comptes": 5,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 5,
+   "la_distance_a": 88.798,
+   "la_distance_b": 15.937,
+   "lecart_de_distance": 72.861,
+   "en_sauts": 4.651,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    7,
+    3
+   ],
+   "lecart_de_comptes": 4,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 4,
+   "la_distance_a": 105.936,
+   "la_distance_b": 44.173,
+   "lecart_de_distance": 61.763,
+   "en_sauts": 3.942,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    7,
+    5
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 105.936,
+   "la_distance_b": 72.273,
+   "lecart_de_distance": 33.663,
+   "en_sauts": 2.149,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    8,
+    6
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 122.091,
+   "la_distance_b": 86.473,
+   "lecart_de_distance": 35.618,
+   "en_sauts": 2.273,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    1,
+    1
+   ],
+   "lecart_de_comptes": 0,
+   "le_groupe": "même compte",
+   "lecart_de_comptes_signe": 0,
+   "la_distance_a": 11.98,
+   "la_distance_b": 15.937,
+   "lecart_de_distance": -3.957,
+   "en_sauts": 0.253,
+   "meme_distance": true,
+   "meme_sens": null,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    2,
+    1
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 26.55,
+   "la_distance_b": 15.937,
+   "lecart_de_distance": 10.613,
+   "en_sauts": 0.677,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    2,
+    5
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": -3,
+   "la_distance_a": 26.55,
+   "la_distance_b": 72.273,
+   "lecart_de_distance": -45.723,
+   "en_sauts": 2.918,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    3,
+    2
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 40.401,
+   "la_distance_b": 30.535,
+   "lecart_de_distance": 9.866,
+   "en_sauts": 0.63,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    6,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 94.37,
+   "la_distance_b": 72.273,
+   "lecart_de_distance": 22.097,
+   "en_sauts": 1.41,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    7,
+    6
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 108.595,
+   "la_distance_b": 86.473,
+   "lecart_de_distance": 22.122,
+   "en_sauts": 1.412,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    8,
+    4
+   ],
+   "lecart_de_comptes": 4,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 4,
+   "la_distance_a": 123.506,
+   "la_distance_b": 57.636,
+   "lecart_de_distance": 65.87,
+   "en_sauts": 4.204,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    8,
+    5
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 3,
+   "la_distance_a": 123.506,
+   "la_distance_b": 72.273,
+   "lecart_de_distance": 51.233,
+   "en_sauts": 3.27,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    8,
+    7
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 123.506,
+   "la_distance_b": 104.52,
+   "lecart_de_distance": 18.986,
+   "en_sauts": 1.212,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    2,
+    1
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": 1,
+   "la_distance_a": 37.286,
+   "la_distance_b": 20.58,
+   "lecart_de_distance": 16.706,
+   "en_sauts": 1.066,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    3,
+    1
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 50.164,
+   "la_distance_b": 20.58,
+   "lecart_de_distance": 29.584,
+   "en_sauts": 1.888,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    3,
+    2
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 50.164,
+   "la_distance_b": 21.331,
+   "lecart_de_distance": 28.833,
+   "en_sauts": 1.84,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    4,
+    3
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 62.334,
+   "la_distance_b": 35.766,
+   "lecart_de_distance": 26.568,
+   "en_sauts": 1.696,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    5,
+    4
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 78.343,
+   "la_distance_b": 51.433,
+   "lecart_de_distance": 26.91,
+   "en_sauts": 1.718,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    6,
+    5
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 93.01,
+   "la_distance_b": 68.991,
+   "lecart_de_distance": 24.019,
+   "en_sauts": 1.533,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    7,
+    6
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 109.718,
+   "la_distance_b": 84.439,
+   "lecart_de_distance": 25.279,
+   "en_sauts": 1.614,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    8,
+    6
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 112.187,
+   "la_distance_b": 84.439,
+   "lecart_de_distance": 27.748,
+   "en_sauts": 1.771,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|compagne",
+   "les_sauts": [
+    8,
+    7
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 112.187,
+   "la_distance_b": 85.345,
+   "lecart_de_distance": 26.842,
+   "en_sauts": 1.713,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    1,
+    2
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 16.111,
+   "la_distance_b": 25.643,
+   "lecart_de_distance": -9.532,
+   "en_sauts": 0.608,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    2,
+    3
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 37.286,
+   "la_distance_b": 45.619,
+   "lecart_de_distance": -8.333,
+   "en_sauts": 0.532,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    3,
+    1
+   ],
+   "lecart_de_comptes": 2,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": 2,
+   "la_distance_a": 50.164,
+   "la_distance_b": 11.852,
+   "lecart_de_distance": 38.312,
+   "en_sauts": 2.445,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    3,
+    4
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 50.164,
+   "la_distance_b": 58.72,
+   "lecart_de_distance": -8.556,
+   "en_sauts": 0.546,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    4,
+    5
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 62.334,
+   "la_distance_b": 70.311,
+   "lecart_de_distance": -7.977,
+   "en_sauts": 0.509,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    5,
+    6
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 78.343,
+   "la_distance_b": 86.389,
+   "lecart_de_distance": -8.046,
+   "en_sauts": 0.514,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    5,
+    8
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": -3,
+   "la_distance_a": 78.343,
+   "la_distance_b": 109.156,
+   "lecart_de_distance": -30.813,
+   "en_sauts": 1.967,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "suivie|tierce",
+   "les_sauts": [
+    6,
+    7
+   ],
+   "lecart_de_comptes": 1,
+   "le_groupe": "un tour",
+   "lecart_de_comptes_signe": -1,
+   "la_distance_a": 93.01,
+   "la_distance_b": 101.174,
+   "lecart_de_distance": -8.164,
+   "en_sauts": 0.521,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": true
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    1,
+    4
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": -3,
+   "la_distance_a": 20.58,
+   "la_distance_b": 58.72,
+   "lecart_de_distance": -38.14,
+   "en_sauts": 2.434,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    2,
+    4
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": -3,
+   "la_distance_a": 21.331,
+   "la_distance_b": 58.72,
+   "lecart_de_distance": -37.389,
+   "en_sauts": 2.386,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    3,
+    5
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": -3,
+   "la_distance_a": 35.766,
+   "la_distance_b": 70.311,
+   "lecart_de_distance": -34.545,
+   "en_sauts": 2.205,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    4,
+    6
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": -3,
+   "la_distance_a": 51.433,
+   "la_distance_b": 86.389,
+   "lecart_de_distance": -34.956,
+   "en_sauts": 2.231,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    5,
+    7
+   ],
+   "lecart_de_comptes": 3,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": -3,
+   "la_distance_a": 68.991,
+   "la_distance_b": 101.174,
+   "lecart_de_distance": -32.183,
+   "en_sauts": 2.054,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": false
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "le_couple": "compagne|tierce",
+   "les_sauts": [
+    5,
+    8
+   ],
+   "lecart_de_comptes": 4,
+   "le_groupe": "deux tours ou plus",
+   "lecart_de_comptes_signe": -4,
+   "la_distance_a": 68.991,
+   "la_distance_b": 109.156,
+   "lecart_de_distance": -40.165,
+   "en_sauts": 2.564,
+   "meme_distance": false,
+   "meme_sens": true,
+   "compte_les_tours": false
+  }
+ ],
+ "les_decalages": {
+  "6 moins compagne|tierce": {
+   "0": 1,
+   "1": 7
+  },
+  "6 moins suivie|compagne": {
+   "-1": 1,
+   "0": 2,
+   "1": 6
+  },
+  "6 moins suivie|tierce": {
+   "0": 1,
+   "1": 1,
+   "2": 5
+  },
+  "7 moins compagne|tierce": {
+   "0": 2
+  },
+  "7 moins suivie|compagne": {
+   "0": 3
+  },
+  "7 moins suivie|tierce": {
+   "-1": 1,
+   "0": 3
+  },
+  "7 plus compagne|tierce": {
+   "0": 2
+  },
+  "7 plus suivie|compagne": {
+   "-1": 6,
+   "0": 1
+  },
+  "7 plus suivie|tierce": {
+   "-1": 5,
+   "0": 2
+  },
+  "8 moins compagne|tierce": {
+   "-3": 2,
+   "-2": 4
+  },
+  "8 moins suivie|compagne": {
+   "1": 7,
+   "2": 2
+  },
+  "8 moins suivie|tierce": {
+   "-3": 1,
+   "-1": 6,
+   "2": 1
+  },
+  "8 plus compagne|tierce": {
+   "-3": 1,
+   "0": 1,
+   "1": 5,
+   "3": 1,
+   "4": 1
+  },
+  "8 plus suivie|compagne": {
+   "0": 2,
+   "1": 5,
+   "2": 1,
+   "4": 1,
+   "5": 1
+  },
+  "8 plus suivie|tierce": {
+   "2": 3,
+   "4": 1,
+   "5": 1
+  }
+ },
+ "le_bilan": {
+  "même compte": {
+   "les_paires": 38,
+   "lues": 38,
+   "meme_distance": 34,
+   "compte_les_tours": 34,
+   "meme_sens": 0
+  },
+  "un tour": {
+   "les_paires": 31,
+   "lues": 31,
+   "meme_distance": 9,
+   "compte_les_tours": 22,
+   "meme_sens": 27
+  },
+  "deux tours ou plus": {
+   "les_paires": 27,
+   "lues": 27,
+   "meme_distance": 0,
+   "compte_les_tours": 19,
+   "meme_sens": 27
+  },
+  "le_controle": false
+ },
+ "le_verdict": {
+  "decidable": false,
+  "lissue": "indécidable : 34 des 38 paires lues au même compte sont à la même distance, le contrôle échoue"
+ }
+}

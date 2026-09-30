@@ -3336,8 +3336,61 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 376 : UNE PAIRE À PLUSIEURS TOURS EST-ELLE À LA MÊME DISTANCE DE LA NAPPE
+    s376 = _source(racine, "une_paire_a_plusieurs_tours_est_elle_a_la_meme_distance_de_la_nappe.json")
+    if s376.exists():
+        d = json.loads(s376.read_text())
+        b = d["le_bilan"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        mc, pl = b["même compte"], b["deux tours ou plus"]
+        ps = d["les_paires"]
+        hors = sorted((p for p in ps if p["le_groupe"] == "même compte" and not p["meme_distance"]), key=lambda p: p["en_sauts"])
+        six = [p for p in hors if (p["le_rang"], p["le_cote"]) == (6, "moins")]
+        sept = [p for p in hors if (p["le_rang"], p["le_cote"]) == (7, "plus")]
+        loin = [p for p in ps if p["le_groupe"] == "deux tours ou plus"]
+        sc8 = [p for p in ps if (p["le_rang"], p["le_cote"], p["le_couple"]) == (8, "moins", "suivie|compagne")
+               and p["les_sauts"][0] - p["les_sauts"][1] == 1]
+        un8 = [p for p in sc8 if p["lecart_de_comptes"] == 1]
+        deux8 = [p for p in sc8 if p["lecart_de_comptes"] == 2]
+        fallait = -(-9 * mc["lues"] // 10)
+        ecrits = [("le verdict de 376", d["le_verdict"]["lissue"].upper()),
+                  ("le contrôle de 376", f"{mc['meme_distance']} des {mc['lues']} paires au même compte sont à la même distance, il en fallait "
+                                         f"{fallait}" if not b["le_controle"] else "changé"),
+                  ("les trois de 376", f"Trois des quatre autres sont sur la graine 6, côté moins, à {vg(six[0]['en_sauts'])}, "
+                                       f"{vg(six[1]['en_sauts'])} et {vg(six[2]['en_sauts'])} saut"
+                   if len(hors) == 4 and len(six) == 3 else "changé"),
+                  ("la quatrième de 376", f"la quatrième, à {vg(sept[0]['en_sauts'])} saut, est la huitième"
+                   if len(sept) == 1 and sept[0]["le_couple"].startswith("suivie|") and sept[0]["les_sauts"][0] == 8 else "changé"),
+                  ("le plus proche de 376", f"aucune des {pl['lues']} paires à deux tours ou plus n'est à la même distance, la plus proche à "
+                                            f"{vg(min(p['en_sauts'] for p in loin))}" if pl["meme_distance"] == 0 else "changé"),
+                  ("le sens de 376", f"Les {pl['lues']} s'écartent dans le sens de leurs comptes" if pl["meme_sens"] == pl["lues"] else "changé"),
+                  ("les tours de 376", f"Pour {pl['compte_les_tours']} des"),
+                  ("les paires de 376", f"chacune des {len(ps)} paires de `375`" if d["redonne"] else "changé"),
+                  ("la graine 8 de 376", f"à (2, 1), un tour d'écart et {vg(un8[0]['en_sauts'])} saut ; de (3, 2) à (8, 7), deux tours et de"
+                   if len(un8) == 1 and un8[0]["les_sauts"] == [2, 1] and [p["les_sauts"] for p in deux8][0] == [3, 2] else "changé"),
+                  ("l'étendue de 376", f"{vg(min(p['en_sauts'] for p in deux8))} à {vg(max(p['en_sauts'] for p in deux8))} saut, pour un seul"),
+                  ("le résumé de 376", f"Le contrôle échoue de peu : {mc['meme_distance']} des {mc['lues']} paires au même compte sont à la")]
+        for g in ("même compte", "un tour", "deux tours ou plus"):
+            x = b[g]
+            r = sorted(p["en_sauts"] for p in ps if p["le_groupe"] == g and p["en_sauts"] is not None)
+            med = (r[len(r) // 2] if len(r) % 2 else (r[len(r) // 2 - 1] + r[len(r) // 2]) / 2) if r else None
+            sens = "—" if g == "même compte" else str(x["meme_sens"])
+            ecrits.append((f"la ligne {g} de 376", f"| {g} | {x['lues']} | {x['meme_distance']} | {sens} | {x['compte_les_tours']} | "
+                                                     f"{vg(round(med, 4))} saut{'s' if med >= 2 else ''} |"))
+        out.extend((nom_, [x_], s376.name) for nom_, x_ in ecrits)
+    s376_369 = _source(racine, "le_glissement_se_voit_il_dans_la_chaine_seule.json")
+    if s376_369.exists():
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        c = next(c for c in json.loads(s376_369.read_text())["les_cotes"] if (c["le_rang"], c["le_cote"]) == (8, "moins"))
+        cs, cc = c["suivie"][2], c["compagne"][1]
+        out.append(("les sauts de la graine 8 dans 376",
+                    [f"la compagne fait un saut nul, de {vg(cc['lecart_median'])} voxel, que `369` compte pour zéro"
+                     if cc["le_genre"] == "nul" and cc["le_compte_corrige"] == c["compagne"][0]["le_compte_corrige"] else "changé"],
+                    s376_369.name))
+        out.append(("le saut de la suivie dans 376", [f"la suivie un saut de {vg(cs['lecart_median'])} voxels"], s376_369.name))
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 375 : LES PAIRES « MÊME FEUILLE » À PLUSIEURS TOURS SONT-ELLES DEUX FEUILLES QUI SE TOUCHENT
-    s375 = _source(racine, "les_paires_meme_feuille_a_plusieurs_tours_sont_elles_deux_feuilles_qui_se_touchent.json")
+    s375 =_source(racine, "les_paires_meme_feuille_a_plusieurs_tours_sont_elles_deux_feuilles_qui_se_touchent.json")
     if s375.exists():
         d = json.loads(s375.read_text())
         b = d["le_bilan"]
