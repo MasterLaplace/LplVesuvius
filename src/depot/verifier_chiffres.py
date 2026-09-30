@@ -3336,6 +3336,37 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 363 : OÙ NAÎT LE DÉCALAGE QUE LA CHAÎNE QUI REGRANDIT HÉRITE
+    s363 = _source(racine, "ou_nait_le_decalage_que_la_chaine_qui_regrandit_herite.json")
+    if s363.exists():
+        d = json.loads(s363.read_text())
+        lm = d["la_lecture_de_m7"]
+
+        def suite(chaine, rang, cote):
+            return next(x["hors_de_son_tour"] for x in d["les_bilans"][chaine]["le_detail"] if (x["le_rang"], x["le_cote"]) == (rang, cote))
+        b = d["les_bilans"]["la_chaine_qui_regrandit"]
+        premiers = {}
+        for c in d["les_cotes"]["la_chaine_qui_regrandit"]:
+            if c["le_rang"] >= 4 and c["le_cote"] == "moins":
+                premiers[c["le_rang"]] = next((h - 1 for h, s_ in enumerate(c["les_sauts"], 1) if s_.get("le_tour_de_depart") == 0), None)
+        sans_nappe = sorted(r for r, h in premiers.items() if h and h > 0)
+        ligne = lambda nom, xs: f"| {nom} | " + " | ".join(str(x) for x in xs[:8]) + " |"  # noqa: E731
+        m6, r6 = suite("la_chaine_mixte", 6, "moins"), suite("la_chaine_qui_regrandit", 6, "moins")
+        ecrits = [("le verdict de 363", d["le_verdict"]["lissue"].upper()),
+                  ("les chunks de m7 lus de 363", f"`m7` a été lu en {lm['la_chaine_mixte']['PHercParis4']['lus']} chunks pour la chaîne "
+                                                  f"mixte et en {lm['la_chaine_qui_regrandit']['PHercParis4']['lus']} pour la chaîne"),
+                  ("les côtés jugés de 363", "il n'y en a que deux, ceux de la graine 6" if b["les_cotes_juges"] == 2
+                   else "côtés jugés changés"),
+                  ("les nappes illisibles de 363", "Les nappes des graines " + ", ".join(str(r) for r in sans_nappe[:-1])
+                   + f" et {sans_nappe[-1]} n'en retrouvent aucun : leur chaîne atteint `5753_0` au premier ou au deuxième"
+                   if sorted({h for h in premiers.values() if h}) == [1, 2] else "premiers sauts changés"),
+                  ("le côté plus de 363", f"d'où les {suite('la_chaine_qui_regrandit', 6, 'plus')[1]} points de son premier saut"),
+                  ("la ligne mixte de 363", ligne("chaîne mixte", m6)),
+                  ("la ligne regrandie de 363", ligne("chaîne qui regrandit", r6)),
+                  ("les premiers sauts de 363", f"hors de leur tour dès le premier saut, {r6[3]} au troisième, {r6[5]} au cinquième"),
+                  ("le résumé de 363", f"{r6[1]}, {r6[2]}, {r6[3]} points hors de leur tour aux trois premiers sauts")]
+        out.extend((nom, [x_], s363.name) for nom, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 362 : LE PIED DES POINTS HORS DU TOUR ATTENDU EST-IL SUR LE TOUR DE DÉPART
     s362 = _source(racine, "le_pied_des_points_hors_du_tour_attendu_est_il_sur_le_tour_de_depart.json")
     if s362.exists():

@@ -4720,6 +4720,12 @@ elle ne pouvait pas l'écarter d'un retard hérité de la surface de départ. `R
 est juste là où elle est ; elle propage un décalage d'un tour, en avant ou en arrière, que la croissance étend de saut en saut. Ce ne sont
 pas les tours publiés. `R4-P160` s'ouvre : où naît ce décalage.
 
+**`363` · 2026-09-30 · où naît le décalage que la chaîne qui regrandit hérite** — `R4-P160`
+
+⭐⭐⭐ **Indécidable par la règle : 2 côtés jugés, dont un qui ne pouvait pas l'être** — `R4-F549`. Seule la nappe de la graine 6 retrouve
+un seul tour ; sur son côté moins, elle est propre, et la croissance fait naître le décalage dès le premier saut. `R4-P161` s'ouvre : la
+même question, en prenant pour référence la première surface lisible de chaque côté.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
