@@ -3336,6 +3336,33 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 388 : UN ÉCART PRIS SUR CINQ PAIRES QUI S'ACCORDENT ALIGNE-T-IL SANS DÉPLACER UNE SURFACE LUE
+    s388 = _source(racine, "un_ecart_pris_sur_cinq_paires_qui_saccordent_aligne_t_il_sans_deplacer_une_surface_lue.json")
+    if s388.exists():
+        d = json.loads(s388.read_text())
+        a = d["paris4_alignes"]["validée"]
+        rang = lambda k, r, c: next(x for x in d[k] if (x["le_rang"], x["le_cote"]) == (r, c))  # noqa: E731
+        p5, z6, z8 = rang("les_cotes_de_paris4", 5, "plus"), rang("les_cotes_de_0358", 6, "plus"), rang("les_cotes_de_0358", 8, "moins")
+        dec4 = [c for c in d["les_cotes_de_paris4"] if any(e["lecart"] for e in c["les_ecarts"].values())]
+        dec0 = [c for c in d["les_cotes_de_0358"] if any(e["lecart"] for e in c["les_ecarts"].values())]
+        e_ = lambda c, x: c["les_ecarts"][x]  # noqa: E731
+        sg = lambda n: f"{n:+d}".replace("-", "−")  # noqa: E731
+        ecrits = [("le verdict de 388", f"ALIGNÉS PAR L'ÉCART MAJORITAIRE, AUCUNE SURFACE LUE NE QUITTE SON TOUR, {a['sur_le_bon_tour']} DES "
+                   f"{a['lues']} VALIDÉES LUES SUR LE BON TOUR : {d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"
+                   if d["les_deplacees"] == 0 else "changé"),
+                  ("le côté plus de Paris4 dans 388", "que sur un côté plus, que les tours publiés ne lisent pas"
+                   if [(c["le_rang"], c["le_cote"]) for c in dec4] == [(5, "plus")] else "changé"),
+                  ("les deux côtés de 0358 dans 388", f"Sur PHerc0358, il fait valider {z8['validees'][1]} surfaces à la"
+                   if [(c["le_rang"], c["le_cote"]) for c in dec0] == [(6, "plus"), (8, "moins")] else "changé"),
+                  ("le plus loin de la graine 8 dans 388", f"{z8['le_plus_loin']} tours. À la graine 6, côté plus, la tierce est à −1 de la suivie sur {e_(z6, 'tierce')['porte_par']} de ses "
+                   f"{e_(z6, 'tierce')['les_paires_meme_feuille']} paires même feuille")]
+        for nom, c, ch in (("PHercParis4, graine 5, plus", p5, ["tierce"]), ("PHerc0358, graine 6, plus", z6, ["tierce"]),
+                           ("PHerc0358, graine 8, moins", z8, ["compagne", "tierce"])):
+            ecrits.append((f"la ligne {nom} de 388", f"| {nom} | {', '.join(ch)} | {', '.join(sg(e_(c, x)['lecart']) for x in ch)} | "
+                           f"{', '.join(str(e_(c, x)['porte_par']) + ' sur ' + str(e_(c, x)['les_paires_meme_feuille']) for x in ch)} | "
+                           f"{c['validees'][0]} | {c['validees'][1]} | aucune |"))
+        out.extend((nom_, [x_], s388.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 387 : ALIGNER LES COMPTES SUR LA PREMIÈRE PAIRE MÊME FEUILLE VALIDE-T-IL SUR LE BON TOUR
     s387 = _source(racine, "aligner_les_comptes_sur_la_premiere_paire_meme_feuille_valide_t_il_sur_le_bon_tour.json")
     if s387.exists():

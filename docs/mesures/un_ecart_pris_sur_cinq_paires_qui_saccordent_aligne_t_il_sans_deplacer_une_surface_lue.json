@@ -1,0 +1,1162 @@
+{
+ "la_question": "Un écart de comptes pris sur au moins cinq paires même feuille qui s'accordent aligne-t-il les comptes de deux chaînes sans mettre une surface lue de PHercParis4 hors de son tour, et que valide-t-il sur la graine 8 de PHerc0358 ?",
+ "les_constantes": {
+  "le_minimum_de_paires": 5,
+  "la_part_des_paires": 0.6667,
+  "la_part": 0.9,
+  "la_part_basse": 0.75,
+  "le_minimum": 10
+ },
+ "les_cotes_de_paris4": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 8
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 8
+    }
+   },
+   "validees": [
+    22,
+    22
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 8
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 8
+    }
+   },
+   "validees": [
+    24,
+    24
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 8
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    }
+   },
+   "validees": [
+    15,
+    15
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 4,
+     "les_paires_meme_feuille": 4
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 8
+    }
+   },
+   "validees": [
+    8,
+    8
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 4,
+     "les_paires_meme_feuille": 4
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 4,
+     "les_paires_meme_feuille": 4
+    }
+   },
+   "validees": [
+    4,
+    4
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 8
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    }
+   },
+   "validees": [
+    21,
+    21
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 3,
+     "les_paires_meme_feuille": 6
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 8
+    }
+   },
+   "validees": [
+    3,
+    3
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 8
+    }
+   },
+   "validees": [
+    11,
+    11
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    },
+    "tierce": {
+     "lecart": 2,
+     "porte_par": 5,
+     "les_paires_meme_feuille": 6
+    }
+   },
+   "validees": [
+    3,
+    12
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    }
+   },
+   "validees": [
+    20,
+    20
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 3,
+     "les_paires_meme_feuille": 5
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 2,
+     "les_paires_meme_feuille": 5
+    }
+   },
+   "validees": [
+    3,
+    3
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    }
+   },
+   "validees": [
+    21,
+    21
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 5,
+     "les_paires_meme_feuille": 7
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 2,
+     "les_paires_meme_feuille": 5
+    }
+   },
+   "validees": [
+    2,
+    2
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 2,
+     "les_paires_meme_feuille": 2
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 1,
+     "les_paires_meme_feuille": 1
+    }
+   },
+   "validees": [
+    3,
+    3
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 1,
+     "les_paires_meme_feuille": 2
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "les_deplacees": []
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 1,
+     "les_paires_meme_feuille": 1
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "les_deplacees": []
+  }
+ ],
+ "les_cotes_de_0358": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "le_plus_loin": null,
+   "les_validees_alignees": []
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "le_plus_loin": null,
+   "les_validees_alignees": []
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "le_plus_loin": null,
+   "les_validees_alignees": []
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "le_plus_loin": null,
+   "les_validees_alignees": []
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 2,
+     "les_paires_meme_feuille": 7
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "le_plus_loin": null,
+   "les_validees_alignees": []
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "le_plus_loin": null,
+   "les_validees_alignees": []
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    }
+   },
+   "validees": [
+    21,
+    21
+   ],
+   "le_plus_loin": 7,
+   "les_validees_alignees": [
+    [
+     "suivie",
+     1,
+     1
+    ],
+    [
+     "suivie",
+     2,
+     2
+    ],
+    [
+     "suivie",
+     3,
+     3
+    ],
+    [
+     "suivie",
+     4,
+     4
+    ],
+    [
+     "suivie",
+     5,
+     5
+    ],
+    [
+     "suivie",
+     6,
+     6
+    ],
+    [
+     "suivie",
+     7,
+     7
+    ],
+    [
+     "compagne",
+     1,
+     1
+    ],
+    [
+     "compagne",
+     2,
+     2
+    ],
+    [
+     "compagne",
+     3,
+     3
+    ],
+    [
+     "compagne",
+     4,
+     4
+    ],
+    [
+     "compagne",
+     5,
+     5
+    ],
+    [
+     "compagne",
+     6,
+     6
+    ],
+    [
+     "compagne",
+     7,
+     7
+    ],
+    [
+     "tierce",
+     1,
+     1
+    ],
+    [
+     "tierce",
+     2,
+     2
+    ],
+    [
+     "tierce",
+     3,
+     3
+    ],
+    [
+     "tierce",
+     4,
+     4
+    ],
+    [
+     "tierce",
+     5,
+     5
+    ],
+    [
+     "tierce",
+     6,
+     6
+    ],
+    [
+     "tierce",
+     7,
+     7
+    ]
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 9
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 9
+    }
+   },
+   "validees": [
+    19,
+    19
+   ],
+   "le_plus_loin": 7,
+   "les_validees_alignees": [
+    [
+     "suivie",
+     1,
+     1
+    ],
+    [
+     "suivie",
+     3,
+     3
+    ],
+    [
+     "suivie",
+     4,
+     4
+    ],
+    [
+     "suivie",
+     5,
+     5
+    ],
+    [
+     "suivie",
+     6,
+     6
+    ],
+    [
+     "suivie",
+     7,
+     7
+    ],
+    [
+     "compagne",
+     1,
+     1
+    ],
+    [
+     "compagne",
+     2,
+     2
+    ],
+    [
+     "compagne",
+     3,
+     3
+    ],
+    [
+     "compagne",
+     4,
+     4
+    ],
+    [
+     "compagne",
+     5,
+     5
+    ],
+    [
+     "compagne",
+     7,
+     7
+    ],
+    [
+     "tierce",
+     1,
+     1
+    ],
+    [
+     "tierce",
+     2,
+     2
+    ],
+    [
+     "tierce",
+     3,
+     3
+    ],
+    [
+     "tierce",
+     4,
+     4
+    ],
+    [
+     "tierce",
+     6,
+     5
+    ],
+    [
+     "tierce",
+     7,
+     6
+    ],
+    [
+     "tierce",
+     8,
+     7
+    ]
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "le_plus_loin": null,
+   "les_validees_alignees": []
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 0,
+     "les_paires_meme_feuille": 0
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "le_plus_loin": null,
+   "les_validees_alignees": []
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 2,
+     "les_paires_meme_feuille": 2
+    },
+    "tierce": {
+     "lecart": -1,
+     "porte_par": 5,
+     "les_paires_meme_feuille": 7
+    }
+   },
+   "validees": [
+    6,
+    0
+   ],
+   "le_plus_loin": null,
+   "les_validees_alignees": []
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 9
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 6,
+     "les_paires_meme_feuille": 7
+    }
+   },
+   "validees": [
+    15,
+    15
+   ],
+   "le_plus_loin": 6,
+   "les_validees_alignees": [
+    [
+     "suivie",
+     1,
+     1
+    ],
+    [
+     "suivie",
+     2,
+     1
+    ],
+    [
+     "suivie",
+     5,
+     3
+    ],
+    [
+     "suivie",
+     6,
+     4
+    ],
+    [
+     "suivie",
+     7,
+     5
+    ],
+    [
+     "suivie",
+     8,
+     6
+    ],
+    [
+     "compagne",
+     1,
+     1
+    ],
+    [
+     "compagne",
+     2,
+     1
+    ],
+    [
+     "compagne",
+     5,
+     4
+    ],
+    [
+     "compagne",
+     6,
+     5
+    ],
+    [
+     "compagne",
+     7,
+     6
+    ],
+    [
+     "tierce",
+     1,
+     1
+    ],
+    [
+     "tierce",
+     4,
+     4
+    ],
+    [
+     "tierce",
+     5,
+     5
+    ],
+    [
+     "tierce",
+     6,
+     6
+    ]
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 0,
+     "porte_par": 7,
+     "les_paires_meme_feuille": 7
+    },
+    "tierce": {
+     "lecart": 0,
+     "porte_par": 6,
+     "les_paires_meme_feuille": 7
+    }
+   },
+   "validees": [
+    10,
+    10
+   ],
+   "le_plus_loin": 7,
+   "les_validees_alignees": [
+    [
+     "suivie",
+     1,
+     1
+    ],
+    [
+     "suivie",
+     2,
+     3
+    ],
+    [
+     "suivie",
+     3,
+     4
+    ],
+    [
+     "suivie",
+     4,
+     5
+    ],
+    [
+     "suivie",
+     5,
+     6
+    ],
+    [
+     "suivie",
+     6,
+     7
+    ],
+    [
+     "compagne",
+     1,
+     1
+    ],
+    [
+     "compagne",
+     3,
+     3
+    ],
+    [
+     "tierce",
+     1,
+     1
+    ],
+    [
+     "tierce",
+     3,
+     3
+    ]
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 3,
+     "les_paires_meme_feuille": 3
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 4,
+     "les_paires_meme_feuille": 4
+    }
+   },
+   "validees": [
+    7,
+    7
+   ],
+   "le_plus_loin": 3,
+   "les_validees_alignees": [
+    [
+     "suivie",
+     1,
+     1
+    ],
+    [
+     "suivie",
+     2,
+     2
+    ],
+    [
+     "suivie",
+     3,
+     3
+    ],
+    [
+     "compagne",
+     1,
+     1
+    ],
+    [
+     "compagne",
+     2,
+     2
+    ],
+    [
+     "tierce",
+     1,
+     1
+    ],
+    [
+     "tierce",
+     2,
+     2
+    ]
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": null,
+     "porte_par": 5,
+     "les_paires_meme_feuille": 10
+    },
+    "tierce": {
+     "lecart": null,
+     "porte_par": 2,
+     "les_paires_meme_feuille": 5
+    }
+   },
+   "validees": [
+    0,
+    0
+   ],
+   "le_plus_loin": null,
+   "les_validees_alignees": []
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_ecarts": {
+    "compagne": {
+     "lecart": 2,
+     "porte_par": 8,
+     "les_paires_meme_feuille": 9
+    },
+    "tierce": {
+     "lecart": -1,
+     "porte_par": 6,
+     "les_paires_meme_feuille": 8
+    }
+   },
+   "validees": [
+    0,
+    9
+   ],
+   "le_plus_loin": 6,
+   "les_validees_alignees": [
+    [
+     "suivie",
+     4,
+     4
+    ],
+    [
+     "compagne",
+     2,
+     3
+    ],
+    [
+     "compagne",
+     3,
+     4
+    ],
+    [
+     "compagne",
+     4,
+     5
+    ],
+    [
+     "compagne",
+     5,
+     6
+    ],
+    [
+     "tierce",
+     4,
+     3
+    ],
+    [
+     "tierce",
+     5,
+     4
+    ],
+    [
+     "tierce",
+     6,
+     5
+    ],
+    [
+     "tierce",
+     7,
+     6
+    ]
+   ]
+  }
+ ],
+ "les_deplacees": 0,
+ "paris4_alignes": {
+  "validée": {
+   "les_surfaces": 169,
+   "lues": 66,
+   "sur_le_bon_tour": 66
+  },
+  "contredite": {
+   "les_surfaces": 65,
+   "lues": 2,
+   "sur_le_bon_tour": 2
+  },
+  "confirmée une fois": {
+   "les_surfaces": 64,
+   "lues": 14,
+   "sur_le_bon_tour": 14
+  },
+  "sans témoin": {
+   "les_surfaces": 80,
+   "lues": 31,
+   "sur_le_bon_tour": 29
+  }
+ },
+ "paris4_sans_alignement": {
+  "validée": {
+   "les_surfaces": 160,
+   "lues": 66,
+   "sur_le_bon_tour": 66
+  },
+  "contredite": {
+   "les_surfaces": 81,
+   "lues": 2,
+   "sur_le_bon_tour": 2
+  },
+  "confirmée une fois": {
+   "les_surfaces": 60,
+   "lues": 14,
+   "sur_le_bon_tour": 14
+  },
+  "sans témoin": {
+   "les_surfaces": 77,
+   "lues": 31,
+   "sur_le_bon_tour": 29
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "alignés par l'écart majoritaire, 0 surface lue de PHercParis4 quitte son tour, et 66 des 66 surfaces validées lues sont sur le bon tour, contre 66 des 66 ; oui, l'écart majoritaire aligne sans déplacer une surface lue"
+ }
+}

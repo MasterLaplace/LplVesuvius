@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**239 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**240 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 201 portes
+## Grand Prize — 202 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -219,7 +219,8 @@
 - **R4-P182** *(le graal)* · **RÉPONDUE par `385` : oui.** Sur PHercParis4, aux comptes de `m7`, l'accord de trois chaînes valide 160 surfaces au lieu de 109, et les 58 lues sont toutes sur le bon tour publié, contre 46 sur 46 ; les contredites tombent de 152 à 81 (`R4-F571`). La question était : **SUR PHERCPARIS4, L'ACCORD DE TROIS CHAÎNES AUX COMPTES DE `m7` VALIDE-T-IL DES SURFACES SUR LE BON TOUR PUBLIÉ, ET AUTANT QU'AUX COMPTES DE `369` ?** La suite est `R4-P183`.
 - **R4-P183** *(le graal)* · **RÉPONDUE par `386` : dès le premier saut.** Sur les 6 couples de la graine 8, 5 se contredisent dès leurs premières surfaces, aucun après un saut que `m7` compte deux ; côté moins, les trois chaînes suivent les mêmes feuilles à des écarts de comptes constants, 2, 1 et 3, qui s'accordent (`R4-F572`). La question était : **SUR LA GRAINE 8 DE PHERC0358, OÙ L'ACCORD DE TROIS CHAÎNES AUX COMPTES DE `m7` NE VALIDE TOUJOURS RIEN, LES PAIRES QUI SE CONTREDISENT LE FONT-ELLES DÈS LE PREMIER SAUT, OU À PARTIR D'UN SAUT QUE `m7` COMPTE DEUX ?** La suite est `R4-P184`.
 - **R4-P184** *(le graal)* · **RÉPONDUE par `387` : oui par la règle, non en substance.** Alignés sur leur première paire même feuille, 66 des 66 surfaces validées lues de PHercParis4 sont sur le bon tour du repère commun, autant que sans alignement ; mais sur la graine 8, côté moins, la seule paire même feuille de la suivie et de la tierce est fausse, et 6 surfaces lues de la tierce quittent leur tour (`R4-F573`). La question était : **LÀ OÙ DEUX CHAÎNES NE POSENT PAS LEUR PREMIÈRE SURFACE SUR LA MÊME FEUILLE, ALIGNER LEURS COMPTES SUR LEUR PREMIÈRE PAIRE MÊME FEUILLE FAIT-IL VALIDER DES SURFACES SUR LE BON TOUR DE PHERCPARIS4, ET QUE DONNE-T-IL SUR LA GRAINE 8 DE PHERC0358 ?** La suite est `R4-P185`.
-- **R4-P185** *(le graal)* · **UN ÉCART DE COMPTES PRIS SUR AU MOINS CINQ PAIRES MÊME FEUILLE QUI S'ACCORDENT ALIGNE-T-IL LES COMPTES DE DEUX CHAÎNES SANS METTRE UNE SURFACE LUE DE PHERCPARIS4 HORS DE SON TOUR, ET QUE VALIDE-T-IL SUR LA GRAINE 8 DE PHERC0358 ?** ⭐⭐⭐⭐ C'EST CE QUE `387` DÉSIGNE. Un écart pris sur une seule paire vient parfois d'une paire fausse (`R4-F573`) ; sur la graine 8, côté moins, de PHerc0358, les écarts tiennent sur 6 à 9 paires (`R4-F572`). ⚠ L'idée vient de la sortie de `387`.
+- **R4-P185** *(le graal)* · **RÉPONDUE par `388` : oui par la règle, sans que les tours publiés aient rien à juger.** Sur PHercParis4, aucune surface lue ne quitte son tour et 66 des 66 validées lues restent sur le bon tour, mais l'écart majoritaire n'y décale qu'un côté plus ; sur PHerc0358, il fait valider 9 surfaces à la graine 8, côté moins, et en retire 6 à la graine 6, côté plus (`R4-F574`). La question était : **UN ÉCART DE COMPTES PRIS SUR AU MOINS CINQ PAIRES MÊME FEUILLE QUI S'ACCORDENT ALIGNE-T-IL LES COMPTES DE DEUX CHAÎNES SANS METTRE UNE SURFACE LUE DE PHERCPARIS4 HORS DE SON TOUR, ET QUE VALIDE-T-IL SUR LA GRAINE 8 DE PHERC0358 ?** La suite est `R4-P186`.
+- **R4-P186** *(le graal)* · **SUR PHERC0358, AUX COMPTES DE `m7`, L'ACCORD DE TROIS CHAÎNES VALIDE-T-IL ENCORE DES SURFACES QUAND LES CHAÎNES SONT LANCÉES À SEIZE SAUTS AU LIEU DE HUIT ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `388` DÉSIGNE. Aux comptes de `m7`, l'accord choisit le bon tour là où une vérité existe (`R4-F571`, `R4-F573`) et valide sur six côtés de PHerc0358 jusqu'à 7 tours, au bout des huit sauts des chaînes (`R4-F570`) : la question devient jusqu'où il porte.
 
 ## Progress Prizes — 19 portes
 

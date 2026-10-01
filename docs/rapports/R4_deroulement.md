@@ -4871,6 +4871,13 @@ sur la même feuille. Côté moins, elles suivent pourtant les mêmes feuilles �
 juste sur PHercParis4, 66 sur 66, aligné ou non ; mais aligner sur une seule paire, fausse sur la graine 8, côté moins, fait quitter leur
 tour à 6 surfaces lues de la tierce. `R4-P185` s'ouvre : un écart pris sur au moins cinq paires qui s'accordent ?
 
+**`388` · 2026-10-01 · un écart pris sur cinq paires qui s'accordent aligne-t-il sans déplacer une surface lue** — `R4-P185`
+
+⭐⭐⭐ **Oui par la règle, sans que les tours publiés aient rien à juger** — `R4-F574`. Sur PHercParis4, les chaînes partent toutes de la même
+feuille là où les tours publiés les lisent : l'écart majoritaire n'y décale qu'un côté plus. Sur PHerc0358, il fait valider 9 surfaces à la
+graine 8, côté moins, et en retire 6 à la graine 6, côté plus. La piste de l'alignement s'arrête, faute de vérité. `R4-P186` s'ouvre : des
+chaînes à seize sauts ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

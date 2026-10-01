@@ -1913,6 +1913,8 @@ run "les contradictions de la graine 8 naissent-elles au premier saut ou à un s
 run "figure les contradictions de la graine 8 naissent-elles au premier saut ou à un saut de deux feuilles" uv run python "$ROOT/src/figures/figure_les_contradictions_de_la_graine_8_naissent_elles_au_premier_saut_ou_a_un_saut_de_deux_feuilles.py" --verifier
 run "aligner les comptes sur la première paire même feuille valide-t-il sur le bon tour" uv run python "$ROOT/src/nappe/aligner_les_comptes_sur_la_premiere_paire_meme_feuille_valide_t_il_sur_le_bon_tour.py" --verifier
 run "figure aligner les comptes sur la première paire même feuille valide-t-il sur le bon tour" uv run python "$ROOT/src/figures/figure_aligner_les_comptes_sur_la_premiere_paire_meme_feuille_valide_t_il_sur_le_bon_tour.py" --verifier
+run "un écart pris sur cinq paires qui s'accordent aligne-t-il sans déplacer une surface lue" uv run python "$ROOT/src/nappe/un_ecart_pris_sur_cinq_paires_qui_saccordent_aligne_t_il_sans_deplacer_une_surface_lue.py" --verifier
+run "figure un écart pris sur cinq paires qui s'accordent aligne-t-il sans déplacer une surface lue" uv run python "$ROOT/src/figures/figure_un_ecart_pris_sur_cinq_paires_qui_saccordent_aligne_t_il_sans_deplacer_une_surface_lue.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
