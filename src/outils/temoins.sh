@@ -1933,6 +1933,8 @@ run "les points d'un saut mélangé de m7 forment-ils deux plages sur pherc0358"
 run "figure les points d'un saut mélangé de m7 forment-ils deux plages sur pherc0358" uv run python "$ROOT/src/figures/figure_les_points_dun_saut_melange_de_m7_forment_ils_deux_plages_sur_pherc0358.py" --verifier
 run "une chaîne qui rogne la plage retombée se contredit-elle moins sur pherc0358" uv run python "$ROOT/src/nappe/une_chaine_qui_rogne_la_plage_retombee_se_contredit_elle_moins_sur_pherc0358.py" --verifier
 run "figure une chaîne qui rogne la plage retombée se contredit-elle moins sur pherc0358" uv run python "$ROOT/src/figures/figure_une_chaine_qui_rogne_la_plage_retombee_se_contredit_elle_moins_sur_pherc0358.py" --verifier
+run "le rognage fait-il changer de feuille les chaînes de la graine 6" uv run python "$ROOT/src/nappe/le_rognage_fait_il_changer_de_feuille_les_chaines_de_la_graine_6.py" --verifier
+run "figure le rognage fait-il changer de feuille les chaînes de la graine 6" uv run python "$ROOT/src/figures/figure_le_rognage_fait_il_changer_de_feuille_les_chaines_de_la_graine_6.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

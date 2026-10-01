@@ -4931,6 +4931,12 @@ une chaîne qui retire cette plage avant le saut suivant ?
 ⭐⭐⭐ **En partie : mélanges 96 → 53, contredites 161 → 131, validées 89 → 75** — `R4-F583`. Le rognage défait les contradictions des
 côtés en désaccord, mais la graine 6, côté moins, perd 14 validées à surfaces égales. `R4-P195` s'ouvre : y a-t-elle changé de feuille ?
 
+**`398` · 2026-10-01 · le rognage fait-il changer de feuille les chaînes de la graine 6** — `R4-P195`
+
+⭐⭐⭐⭐ **Non : 40 des 45 surfaces rognées comparées sont sur une feuille de `389`, mais 21 à un autre compte** — `R4-F584`. La compagne
+rognée compte une feuille de trop dès sa troisième surface, et ce sont ses quatre validées qui manquent. `R4-P196` s'ouvre : compter la
+surface entière et ne rogner que le départ du saut suivant ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

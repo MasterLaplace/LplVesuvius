@@ -3336,6 +3336,40 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 398 : LE ROGNAGE FAIT-IL CHANGER DE FEUILLE LES CHAÎNES DE LA GRAINE 6
+    s398 = _source(racine, "le_rognage_fait_il_changer_de_feuille_les_chaines_de_la_graine_6.json")
+    if s398.exists():
+        d = json.loads(s398.read_text())
+        b = d["le_bilan"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        cl = d["les_classes"]
+        compte = lambda x, k: sum(1 for s_ in cl[x] if s_["la_classe"] == k)  # noqa: E731
+        ligne = lambda x: (f"| {x} | {compte(x, 'meme_feuille_meme_compte')} | {compte(x, 'meme_feuille_autre_compte')} | "  # noqa: E731
+                           f"{compte(x, 'hors_des_feuilles')} | {compte(x, None)} |")
+        va = d["sur_les_validees_de_389"]
+        meme = [s_ for s_ in va if any(c == s_["le_compte_de_389"] for _, c in s_["les_rognees"])]
+        autre = [s_ for s_ in va if s_["les_rognees"] and s_ not in meme]
+        cg = cl["compagne"]
+        ecrits = [("le verdict de 398", f"SUR {b['comparees']} SURFACES ROGNÉES COMPARÉES, {b['sur_389']} SONT SUR UNE FEUILLE DE `389` ET {b['hors']} "
+                   f"HORS DE SES FEUILLES : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("le chapeau de 398", f"surfaces rognées comparées, {b['sur_389']} sont sur une feuille de `389`, dont {b['autre_compte']} avec un "
+                   f"autre compte, et {b['hors']} hors de ses feuilles"),
+                  ("la lecture de 398", f"lancées et lues sans panne, en {vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("la ligne suivie de 398", ligne("suivie")),
+                  ("la ligne compagne de 398", ligne("compagne")),
+                  ("la ligne tierce de 398", ligne("tierce")),
+                  ("la compagne de 398", "La compagne a les deux premiers comptes de `389`"
+                   if [s_["la_classe"] for s_ in cg[:3]] == ["meme_feuille_meme_compte"] * 2 + ["meme_feuille_autre_compte"]
+                   and cg[1]["les_sauts_de_389"] == [2, 3] else "changé"),
+                  ("la suivie de 398", "garde les comptes de `389` jusqu'à son huitième saut"
+                   if [s_["la_classe"] for s_ in cl["suivie"][:9]] == ["meme_feuille_meme_compte"] * 8 + ["meme_feuille_autre_compte"]
+                   and cl["suivie"][4]["les_sauts_de_389"] == [6] else "changé"),
+                  ("les validées de 398", f"Des {len(va)} surfaces que `389` validait, {len(meme)} ont une surface rognée sur leur\nfeuille".split("\n")[0]),
+                  ("les autres de 398", f"au même compte, {len(autre)} à un autre compte, et {len(va) - len(meme) - len(autre)} aucune"),
+                  ("les quatre de 398", "Les 4 sont les cinquième à huitième surfaces de la compagne"
+                   if sorted((s_["la_chaine"], s_["le_saut_de_389"]) for s_ in autre) == [("compagne", h) for h in (5, 6, 7, 8)] else "changé")]
+        out.extend((nom_, [x_], s398.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 397 : UNE CHAÎNE QUI ROGNE LA PLAGE RETOMBÉE SE CONTREDIT-ELLE MOINS SUR PHERC0358
     s397 = _source(racine, "une_chaine_qui_rogne_la_plage_retombee_se_contredit_elle_moins_sur_pherc0358.json")
     s389b = _source(racine, "laccord_aux_comptes_de_m7_valide_t_il_encore_a_seize_sauts_sur_pherc0358.json")

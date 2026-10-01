@@ -1,0 +1,1922 @@
+{
+ "la_question": "Sur la graine 6, côté moins, de PHerc0358, les surfaces des chaînes rognées sont-elles sur les mêmes feuilles que celles des chaînes de 389, ou le rognage les fait-il changer de feuille ?",
+ "le_cote": [
+  6,
+  "moins"
+ ],
+ "les_constantes": {
+  "la_part": 0.75,
+  "la_part_basse": 0.25,
+  "le_minimum": 10
+ },
+ "les_pannes": [],
+ "redonne": true,
+ "les_comptes_de_389": {
+  "suivie": [
+   1,
+   1,
+   2,
+   3,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14
+  ],
+  "compagne": [
+   1,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   13,
+   14,
+   15,
+   16
+  ],
+  "tierce": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   9,
+   11,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17
+  ]
+ },
+ "les_comptes_rognes": {
+  "suivie": [
+   1,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16
+  ],
+  "compagne": [
+   1,
+   2,
+   3,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17
+  ],
+  "tierce": [
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   13,
+   14,
+   15,
+   17,
+   19
+  ]
+ },
+ "les_paires": {
+  "suivie": [
+   {
+    "h": 1,
+    "k": 1,
+    "meme": true
+   },
+   {
+    "h": 1,
+    "k": 2,
+    "meme": true
+   },
+   {
+    "h": 1,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 1,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 1,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 1,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 2,
+    "k": 1,
+    "meme": true
+   },
+   {
+    "h": 2,
+    "k": 2,
+    "meme": true
+   },
+   {
+    "h": 2,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 2,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 2,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 2,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 1,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 2,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 3,
+    "meme": true
+   },
+   {
+    "h": 3,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 1,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 2,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 4,
+    "meme": true
+   },
+   {
+    "h": 4,
+    "k": 5,
+    "meme": true
+   },
+   {
+    "h": 4,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 1,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 2,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 6,
+    "meme": true
+   },
+   {
+    "h": 5,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 8,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 9,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 3,
+    "meme": true
+   },
+   {
+    "h": 6,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 7,
+    "meme": true
+   },
+   {
+    "h": 6,
+    "k": 8,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 9,
+    "meme": false
+   },
+   {
+    "h": 7,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 7,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 7,
+    "k": 8,
+    "meme": true
+   },
+   {
+    "h": 7,
+    "k": 9,
+    "meme": false
+   },
+   {
+    "h": 8,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 8,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 8,
+    "k": 8,
+    "meme": false
+   },
+   {
+    "h": 8,
+    "k": 9,
+    "meme": true
+   },
+   {
+    "h": 8,
+    "k": 10,
+    "meme": false
+   },
+   {
+    "h": 9,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 9,
+    "k": 9,
+    "meme": false
+   },
+   {
+    "h": 9,
+    "k": 10,
+    "meme": true
+   },
+   {
+    "h": 9,
+    "k": 11,
+    "meme": false
+   },
+   {
+    "h": 9,
+    "k": 12,
+    "meme": false
+   },
+   {
+    "h": 10,
+    "k": 10,
+    "meme": false
+   },
+   {
+    "h": 10,
+    "k": 11,
+    "meme": true
+   },
+   {
+    "h": 10,
+    "k": 12,
+    "meme": false
+   },
+   {
+    "h": 10,
+    "k": 13,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 10,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 11,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 12,
+    "meme": true
+   },
+   {
+    "h": 11,
+    "k": 13,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 14,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 15,
+    "meme": false
+   },
+   {
+    "h": 12,
+    "k": 12,
+    "meme": false
+   },
+   {
+    "h": 12,
+    "k": 13,
+    "meme": true
+   },
+   {
+    "h": 12,
+    "k": 14,
+    "meme": false
+   },
+   {
+    "h": 12,
+    "k": 15,
+    "meme": false
+   },
+   {
+    "h": 13,
+    "k": 11,
+    "meme": true
+   },
+   {
+    "h": 13,
+    "k": 12,
+    "meme": false
+   },
+   {
+    "h": 13,
+    "k": 13,
+    "meme": false
+   },
+   {
+    "h": 13,
+    "k": 14,
+    "meme": false
+   },
+   {
+    "h": 13,
+    "k": 15,
+    "meme": true
+   },
+   {
+    "h": 13,
+    "k": 16,
+    "meme": false
+   },
+   {
+    "h": 14,
+    "k": 15,
+    "meme": false
+   },
+   {
+    "h": 14,
+    "k": 16,
+    "meme": true
+   },
+   {
+    "h": 15,
+    "k": 11,
+    "meme": true
+   },
+   {
+    "h": 15,
+    "k": 12,
+    "meme": false
+   },
+   {
+    "h": 15,
+    "k": 13,
+    "meme": true
+   },
+   {
+    "h": 15,
+    "k": 14,
+    "meme": false
+   },
+   {
+    "h": 15,
+    "k": 15,
+    "meme": false
+   },
+   {
+    "h": 15,
+    "k": 16,
+    "meme": false
+   }
+  ],
+  "compagne": [
+   {
+    "h": 1,
+    "k": 1,
+    "meme": true
+   },
+   {
+    "h": 1,
+    "k": 2,
+    "meme": true
+   },
+   {
+    "h": 1,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 1,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 2,
+    "k": 1,
+    "meme": false
+   },
+   {
+    "h": 2,
+    "k": 2,
+    "meme": true
+   },
+   {
+    "h": 2,
+    "k": 3,
+    "meme": true
+   },
+   {
+    "h": 2,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 2,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 1,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 2,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 3,
+    "meme": true
+   },
+   {
+    "h": 3,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 2,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 5,
+    "meme": true
+   },
+   {
+    "h": 4,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 8,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 1,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 2,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 6,
+    "meme": true
+   },
+   {
+    "h": 5,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 8,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 9,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 7,
+    "meme": true
+   },
+   {
+    "h": 6,
+    "k": 8,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 9,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 11,
+    "meme": false
+   },
+   {
+    "h": 7,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 7,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 7,
+    "k": 8,
+    "meme": true
+   },
+   {
+    "h": 7,
+    "k": 9,
+    "meme": false
+   },
+   {
+    "h": 7,
+    "k": 10,
+    "meme": false
+   },
+   {
+    "h": 7,
+    "k": 11,
+    "meme": false
+   },
+   {
+    "h": 8,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 8,
+    "k": 8,
+    "meme": false
+   },
+   {
+    "h": 8,
+    "k": 9,
+    "meme": true
+   },
+   {
+    "h": 8,
+    "k": 10,
+    "meme": false
+   },
+   {
+    "h": 8,
+    "k": 11,
+    "meme": false
+   },
+   {
+    "h": 9,
+    "k": 9,
+    "meme": false
+   },
+   {
+    "h": 9,
+    "k": 10,
+    "meme": true
+   },
+   {
+    "h": 9,
+    "k": 11,
+    "meme": false
+   },
+   {
+    "h": 10,
+    "k": 10,
+    "meme": false
+   },
+   {
+    "h": 10,
+    "k": 11,
+    "meme": true
+   },
+   {
+    "h": 10,
+    "k": 12,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 11,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 12,
+    "meme": true
+   },
+   {
+    "h": 12,
+    "k": 12,
+    "meme": false
+   },
+   {
+    "h": 12,
+    "k": 13,
+    "meme": false
+   },
+   {
+    "h": 13,
+    "k": 13,
+    "meme": true
+   },
+   {
+    "h": 13,
+    "k": 14,
+    "meme": false
+   },
+   {
+    "h": 14,
+    "k": 13,
+    "meme": false
+   },
+   {
+    "h": 14,
+    "k": 14,
+    "meme": true
+   },
+   {
+    "h": 15,
+    "k": 14,
+    "meme": false
+   },
+   {
+    "h": 16,
+    "k": 13,
+    "meme": true
+   },
+   {
+    "h": 16,
+    "k": 14,
+    "meme": false
+   },
+   {
+    "h": 16,
+    "k": 15,
+    "meme": false
+   },
+   {
+    "h": 16,
+    "k": 16,
+    "meme": true
+   }
+  ],
+  "tierce": [
+   {
+    "h": 1,
+    "k": 1,
+    "meme": true
+   },
+   {
+    "h": 1,
+    "k": 2,
+    "meme": false
+   },
+   {
+    "h": 1,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 1,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 2,
+    "k": 1,
+    "meme": false
+   },
+   {
+    "h": 2,
+    "k": 2,
+    "meme": true
+   },
+   {
+    "h": 2,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 2,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 1,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 2,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 3,
+    "meme": true
+   },
+   {
+    "h": 3,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 3,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 1,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 2,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 4,
+    "meme": true
+   },
+   {
+    "h": 4,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 4,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 3,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 5,
+    "meme": true
+   },
+   {
+    "h": 5,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 5,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 4,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 6,
+    "k": 6,
+    "meme": true
+   },
+   {
+    "h": 6,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 7,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 7,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 9,
+    "k": 5,
+    "meme": false
+   },
+   {
+    "h": 9,
+    "k": 6,
+    "meme": false
+   },
+   {
+    "h": 9,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 9,
+    "k": 8,
+    "meme": false
+   },
+   {
+    "h": 10,
+    "k": 7,
+    "meme": false
+   },
+   {
+    "h": 10,
+    "k": 8,
+    "meme": true
+   },
+   {
+    "h": 10,
+    "k": 9,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 8,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 9,
+    "meme": true
+   },
+   {
+    "h": 11,
+    "k": 10,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 11,
+    "meme": false
+   },
+   {
+    "h": 11,
+    "k": 12,
+    "meme": false
+   },
+   {
+    "h": 12,
+    "k": 9,
+    "meme": false
+   },
+   {
+    "h": 12,
+    "k": 10,
+    "meme": false
+   },
+   {
+    "h": 12,
+    "k": 11,
+    "meme": true
+   },
+   {
+    "h": 12,
+    "k": 12,
+    "meme": false
+   },
+   {
+    "h": 12,
+    "k": 13,
+    "meme": false
+   },
+   {
+    "h": 13,
+    "k": 10,
+    "meme": false
+   },
+   {
+    "h": 13,
+    "k": 11,
+    "meme": false
+   },
+   {
+    "h": 13,
+    "k": 12,
+    "meme": true
+   },
+   {
+    "h": 13,
+    "k": 13,
+    "meme": false
+   },
+   {
+    "h": 13,
+    "k": 14,
+    "meme": false
+   },
+   {
+    "h": 13,
+    "k": 15,
+    "meme": false
+   },
+   {
+    "h": 14,
+    "k": 12,
+    "meme": false
+   },
+   {
+    "h": 14,
+    "k": 13,
+    "meme": true
+   },
+   {
+    "h": 14,
+    "k": 14,
+    "meme": false
+   },
+   {
+    "h": 14,
+    "k": 15,
+    "meme": true
+   },
+   {
+    "h": 14,
+    "k": 16,
+    "meme": false
+   },
+   {
+    "h": 15,
+    "k": 16,
+    "meme": false
+   }
+  ]
+ },
+ "les_classes": {
+  "suivie": [
+   {
+    "le_saut": 1,
+    "le_compte": 1,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     1
+    ],
+    "les_sauts_de_389": [
+     1,
+     2
+    ]
+   },
+   {
+    "le_saut": 2,
+    "le_compte": 1,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     1
+    ],
+    "les_sauts_de_389": [
+     1,
+     2
+    ]
+   },
+   {
+    "le_saut": 3,
+    "le_compte": 2,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     2
+    ],
+    "les_sauts_de_389": [
+     3
+    ]
+   },
+   {
+    "le_saut": 4,
+    "le_compte": 3,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     3
+    ],
+    "les_sauts_de_389": [
+     4,
+     5
+    ]
+   },
+   {
+    "le_saut": 5,
+    "le_compte": 4,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     4
+    ],
+    "les_sauts_de_389": [
+     6
+    ]
+   },
+   {
+    "le_saut": 6,
+    "le_compte": 5,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     2,
+     5
+    ],
+    "les_sauts_de_389": [
+     3,
+     7
+    ]
+   },
+   {
+    "le_saut": 7,
+    "le_compte": 6,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     6
+    ],
+    "les_sauts_de_389": [
+     8
+    ]
+   },
+   {
+    "le_saut": 8,
+    "le_compte": 7,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     7
+    ],
+    "les_sauts_de_389": [
+     9
+    ]
+   },
+   {
+    "le_saut": 9,
+    "le_compte": 9,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     8
+    ],
+    "les_sauts_de_389": [
+     10
+    ]
+   },
+   {
+    "le_saut": 10,
+    "le_compte": 10,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     9
+    ],
+    "les_sauts_de_389": [
+     11
+    ]
+   },
+   {
+    "le_saut": 11,
+    "le_compte": 11,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     10
+    ],
+    "les_sauts_de_389": [
+     12
+    ]
+   },
+   {
+    "le_saut": 12,
+    "le_compte": 12,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     11
+    ],
+    "les_sauts_de_389": [
+     13
+    ]
+   },
+   {
+    "le_saut": 13,
+    "le_compte": 13,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     9,
+     13
+    ],
+    "les_sauts_de_389": [
+     11,
+     15
+    ]
+   },
+   {
+    "le_saut": 14,
+    "le_compte": 14,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     14
+    ],
+    "les_sauts_de_389": [
+     16
+    ]
+   },
+   {
+    "le_saut": 15,
+    "le_compte": 15,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     9,
+     11
+    ],
+    "les_sauts_de_389": [
+     11,
+     13
+    ]
+   },
+   {
+    "le_saut": 16,
+    "le_compte": 16,
+    "la_classe": null,
+    "les_comptes_de_389": [],
+    "les_sauts_de_389": []
+   }
+  ],
+  "compagne": [
+   {
+    "le_saut": 1,
+    "le_compte": 1,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     1
+    ],
+    "les_sauts_de_389": [
+     1,
+     2
+    ]
+   },
+   {
+    "le_saut": 2,
+    "le_compte": 2,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     1,
+     2
+    ],
+    "les_sauts_de_389": [
+     2,
+     3
+    ]
+   },
+   {
+    "le_saut": 3,
+    "le_compte": 3,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     2
+    ],
+    "les_sauts_de_389": [
+     3
+    ]
+   },
+   {
+    "le_saut": 4,
+    "le_compte": 5,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     4
+    ],
+    "les_sauts_de_389": [
+     5
+    ]
+   },
+   {
+    "le_saut": 5,
+    "le_compte": 6,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     5
+    ],
+    "les_sauts_de_389": [
+     6
+    ]
+   },
+   {
+    "le_saut": 6,
+    "le_compte": 7,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     6
+    ],
+    "les_sauts_de_389": [
+     7
+    ]
+   },
+   {
+    "le_saut": 7,
+    "le_compte": 8,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     7
+    ],
+    "les_sauts_de_389": [
+     8
+    ]
+   },
+   {
+    "le_saut": 8,
+    "le_compte": 9,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     8
+    ],
+    "les_sauts_de_389": [
+     9
+    ]
+   },
+   {
+    "le_saut": 9,
+    "le_compte": 10,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     9
+    ],
+    "les_sauts_de_389": [
+     10
+    ]
+   },
+   {
+    "le_saut": 10,
+    "le_compte": 11,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     10
+    ],
+    "les_sauts_de_389": [
+     11
+    ]
+   },
+   {
+    "le_saut": 11,
+    "le_compte": 12,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     11
+    ],
+    "les_sauts_de_389": [
+     12
+    ]
+   },
+   {
+    "le_saut": 12,
+    "le_compte": 13,
+    "la_classe": "hors_des_feuilles",
+    "les_comptes_de_389": [],
+    "les_sauts_de_389": []
+   },
+   {
+    "le_saut": 13,
+    "le_compte": 14,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     13
+    ],
+    "les_sauts_de_389": [
+     13
+    ]
+   },
+   {
+    "le_saut": 14,
+    "le_compte": 15,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     14
+    ],
+    "les_sauts_de_389": [
+     14
+    ]
+   },
+   {
+    "le_saut": 15,
+    "le_compte": 16,
+    "la_classe": "hors_des_feuilles",
+    "les_comptes_de_389": [],
+    "les_sauts_de_389": []
+   },
+   {
+    "le_saut": 16,
+    "le_compte": 17,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     13,
+     16
+    ],
+    "les_sauts_de_389": [
+     13,
+     16
+    ]
+   }
+  ],
+  "tierce": [
+   {
+    "le_saut": 1,
+    "le_compte": 1,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     1
+    ],
+    "les_sauts_de_389": [
+     1
+    ]
+   },
+   {
+    "le_saut": 2,
+    "le_compte": 2,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     2
+    ],
+    "les_sauts_de_389": [
+     2
+    ]
+   },
+   {
+    "le_saut": 3,
+    "le_compte": 3,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     3
+    ],
+    "les_sauts_de_389": [
+     3
+    ]
+   },
+   {
+    "le_saut": 4,
+    "le_compte": 4,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     4
+    ],
+    "les_sauts_de_389": [
+     4
+    ]
+   },
+   {
+    "le_saut": 5,
+    "le_compte": 5,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     5
+    ],
+    "les_sauts_de_389": [
+     5
+    ]
+   },
+   {
+    "le_saut": 6,
+    "le_compte": 6,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     6
+    ],
+    "les_sauts_de_389": [
+     6
+    ]
+   },
+   {
+    "le_saut": 7,
+    "le_compte": 7,
+    "la_classe": "hors_des_feuilles",
+    "les_comptes_de_389": [],
+    "les_sauts_de_389": []
+   },
+   {
+    "le_saut": 8,
+    "le_compte": 8,
+    "la_classe": null,
+    "les_comptes_de_389": [],
+    "les_sauts_de_389": []
+   },
+   {
+    "le_saut": 9,
+    "le_compte": 9,
+    "la_classe": "hors_des_feuilles",
+    "les_comptes_de_389": [],
+    "les_sauts_de_389": []
+   },
+   {
+    "le_saut": 10,
+    "le_compte": 10,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     9
+    ],
+    "les_sauts_de_389": [
+     8
+    ]
+   },
+   {
+    "le_saut": 11,
+    "le_compte": 11,
+    "la_classe": "meme_feuille_meme_compte",
+    "les_comptes_de_389": [
+     11
+    ],
+    "les_sauts_de_389": [
+     9
+    ]
+   },
+   {
+    "le_saut": 12,
+    "le_compte": 13,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     12
+    ],
+    "les_sauts_de_389": [
+     11
+    ]
+   },
+   {
+    "le_saut": 13,
+    "le_compte": 14,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     13
+    ],
+    "les_sauts_de_389": [
+     12
+    ]
+   },
+   {
+    "le_saut": 14,
+    "le_compte": 15,
+    "la_classe": "meme_feuille_autre_compte",
+    "les_comptes_de_389": [
+     14,
+     16
+    ],
+    "les_sauts_de_389": [
+     13,
+     15
+    ]
+   },
+   {
+    "le_saut": 15,
+    "le_compte": 17,
+    "la_classe": "hors_des_feuilles",
+    "les_comptes_de_389": [],
+    "les_sauts_de_389": []
+   },
+   {
+    "le_saut": 16,
+    "le_compte": 19,
+    "la_classe": null,
+    "les_comptes_de_389": [],
+    "les_sauts_de_389": []
+   }
+  ]
+ },
+ "sur_les_validees_de_389": [
+  {
+   "la_chaine": "suivie",
+   "le_saut_de_389": 1,
+   "le_compte_de_389": 1,
+   "les_rognees": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ]
+  },
+  {
+   "la_chaine": "suivie",
+   "le_saut_de_389": 2,
+   "le_compte_de_389": 1,
+   "les_rognees": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     1
+    ]
+   ]
+  },
+  {
+   "la_chaine": "suivie",
+   "le_saut_de_389": 5,
+   "le_compte_de_389": 3,
+   "les_rognees": [
+    [
+     4,
+     3
+    ]
+   ]
+  },
+  {
+   "la_chaine": "suivie",
+   "le_saut_de_389": 6,
+   "le_compte_de_389": 4,
+   "les_rognees": [
+    [
+     5,
+     4
+    ]
+   ]
+  },
+  {
+   "la_chaine": "suivie",
+   "le_saut_de_389": 7,
+   "le_compte_de_389": 5,
+   "les_rognees": [
+    [
+     6,
+     5
+    ]
+   ]
+  },
+  {
+   "la_chaine": "suivie",
+   "le_saut_de_389": 8,
+   "le_compte_de_389": 6,
+   "les_rognees": [
+    [
+     7,
+     6
+    ]
+   ]
+  },
+  {
+   "la_chaine": "suivie",
+   "le_saut_de_389": 9,
+   "le_compte_de_389": 7,
+   "les_rognees": [
+    [
+     8,
+     7
+    ]
+   ]
+  },
+  {
+   "la_chaine": "compagne",
+   "le_saut_de_389": 1,
+   "le_compte_de_389": 1,
+   "les_rognees": [
+    [
+     1,
+     1
+    ]
+   ]
+  },
+  {
+   "la_chaine": "compagne",
+   "le_saut_de_389": 2,
+   "le_compte_de_389": 1,
+   "les_rognees": [
+    [
+     1,
+     1
+    ],
+    [
+     2,
+     2
+    ]
+   ]
+  },
+  {
+   "la_chaine": "compagne",
+   "le_saut_de_389": 5,
+   "le_compte_de_389": 4,
+   "les_rognees": [
+    [
+     4,
+     5
+    ]
+   ]
+  },
+  {
+   "la_chaine": "compagne",
+   "le_saut_de_389": 6,
+   "le_compte_de_389": 5,
+   "les_rognees": [
+    [
+     5,
+     6
+    ]
+   ]
+  },
+  {
+   "la_chaine": "compagne",
+   "le_saut_de_389": 7,
+   "le_compte_de_389": 6,
+   "les_rognees": [
+    [
+     6,
+     7
+    ]
+   ]
+  },
+  {
+   "la_chaine": "compagne",
+   "le_saut_de_389": 8,
+   "le_compte_de_389": 7,
+   "les_rognees": [
+    [
+     7,
+     8
+    ]
+   ]
+  },
+  {
+   "la_chaine": "tierce",
+   "le_saut_de_389": 1,
+   "le_compte_de_389": 1,
+   "les_rognees": [
+    [
+     1,
+     1
+    ]
+   ]
+  },
+  {
+   "la_chaine": "tierce",
+   "le_saut_de_389": 4,
+   "le_compte_de_389": 4,
+   "les_rognees": [
+    [
+     4,
+     4
+    ]
+   ]
+  },
+  {
+   "la_chaine": "tierce",
+   "le_saut_de_389": 5,
+   "le_compte_de_389": 5,
+   "les_rognees": [
+    [
+     5,
+     5
+    ]
+   ]
+  },
+  {
+   "la_chaine": "tierce",
+   "le_saut_de_389": 6,
+   "le_compte_de_389": 6,
+   "les_rognees": [
+    [
+     6,
+     6
+    ]
+   ]
+  },
+  {
+   "la_chaine": "tierce",
+   "le_saut_de_389": 7,
+   "le_compte_de_389": 7,
+   "les_rognees": []
+  }
+ ],
+ "le_bilan": {
+  "comparees": 45,
+  "sur_389": 40,
+  "autre_compte": 21,
+  "hors": 5
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "sur 45 surfaces rognées comparées, 40 sont sur une feuille de 389, dont 21 avec un autre compte, et 5 hors de ses feuilles ; oui, mêmes feuilles"
+ },
+ "les_secondes": 67.2
+}
