@@ -1,0 +1,1362 @@
+{
+ "la_question": "Sur PHercParis4, les sauts de deux feuilles de m7 qui partent du tour −6 finissent-ils un tour au-delà du tour −7, ou sur lui ?",
+ "les_constantes": {
+  "le_depart": -6,
+  "le_suivant": -7,
+  "le_minimum_en_face": 50,
+  "le_temoin_minimum": 5,
+  "la_part_du_temoin": 0.8,
+  "le_bas": 0.5,
+  "le_haut": 1.5,
+  "le_minimum_de_deux": 2,
+  "le_pas_l0": 72.083
+ },
+ "les_pannes": [],
+ "le_controle": true,
+ "les_cotes": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "385": [],
+   "rognees": []
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "385": [],
+   "rognees": []
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "385": [],
+   "rognees": []
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "385": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 271
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3321,
+      "en_face_du_suivant": 554,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.581,
+      "lecart_du_suivant_en_pas": -4.581,
+      "les_tours_franchis": 0.127
+     }
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 88
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 1512,
+      "en_face_du_suivant": 0,
+      "lue": false,
+      "les_tours_franchis": null
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 305
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3618,
+      "en_face_du_suivant": 556,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.598,
+      "lecart_du_suivant_en_pas": -4.581,
+      "les_tours_franchis": 0.131
+     }
+    }
+   ],
+   "rognees": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 271
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3321,
+      "en_face_du_suivant": 554,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.581,
+      "lecart_du_suivant_en_pas": -4.581,
+      "les_tours_franchis": 0.127
+     }
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 88
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 1512,
+      "en_face_du_suivant": 0,
+      "lue": false,
+      "les_tours_franchis": null
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 305
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3618,
+      "en_face_du_suivant": 556,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.598,
+      "lecart_du_suivant_en_pas": -4.581,
+      "les_tours_franchis": 0.131
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "385": [],
+   "rognees": []
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "385": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "0": 3,
+      "1": 268
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3455,
+      "en_face_du_suivant": 299,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.458,
+      "lecart_du_suivant_en_pas": -3.665,
+      "les_tours_franchis": 0.125
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 296
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3681,
+      "en_face_du_suivant": 88,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.546,
+      "lecart_du_suivant_en_pas": -3.68,
+      "les_tours_franchis": 0.148
+     }
+    }
+   ],
+   "rognees": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 265
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3456,
+      "en_face_du_suivant": 299,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.468,
+      "lecart_du_suivant_en_pas": -3.665,
+      "les_tours_franchis": 0.128
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 296
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3681,
+      "en_face_du_suivant": 88,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.546,
+      "lecart_du_suivant_en_pas": -3.68,
+      "les_tours_franchis": 0.148
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "385": [],
+   "rognees": []
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "385": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "0": 1,
+      "1": 787,
+      "2": 56
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 5093,
+      "en_face_du_suivant": 2372,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.461,
+      "lecart_du_suivant_en_pas": -0.504,
+      "les_tours_franchis": 2.897
+     }
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 64,
+      "2": 1
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 1095,
+      "en_face_du_suivant": 374,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.313,
+      "lecart_du_suivant_en_pas": -1.371,
+      "les_tours_franchis": 0.958
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 847,
+      "2": 260
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 6749,
+      "en_face_du_suivant": 11235,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.733,
+      "lecart_du_suivant_en_pas": -0.539,
+      "les_tours_franchis": 3.212
+     }
+    }
+   ],
+   "rognees": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 850,
+      "2": 96,
+      "3": 1
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 5312,
+      "en_face_du_suivant": 3799,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.519,
+      "lecart_du_suivant_en_pas": -0.555,
+      "les_tours_franchis": 2.738
+     }
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 197,
+      "2": 8
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 4532,
+      "en_face_du_suivant": 541,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.689,
+      "lecart_du_suivant_en_pas": -1.475,
+      "les_tours_franchis": 0.467
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 915,
+      "2": 205
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 6842,
+      "en_face_du_suivant": 10602,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.686,
+      "lecart_du_suivant_en_pas": -0.542,
+      "les_tours_franchis": 3.113
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "385": [],
+   "rognees": []
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "385": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 2,
+     "les_comptes": {
+      "1": 47,
+      "2": 198,
+      "3": 52
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 6989,
+      "en_face_du_suivant": 7758,
+      "lue": true,
+      "lecart_au_depart_en_pas": -2.297,
+      "lecart_du_suivant_en_pas": -0.753,
+      "les_tours_franchis": 3.05
+     }
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "0": 4,
+      "1": 180
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 2513,
+      "en_face_du_suivant": 81,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.765,
+      "lecart_du_suivant_en_pas": -1.994,
+      "les_tours_franchis": 0.384
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "0": 11,
+      "1": 493,
+      "2": 9
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3359,
+      "en_face_du_suivant": 1623,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.305,
+      "lecart_du_suivant_en_pas": -0.449,
+      "les_tours_franchis": 2.904
+     }
+    }
+   ],
+   "rognees": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 2,
+     "les_comptes": {
+      "1": 47,
+      "2": 198,
+      "3": 52
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 6989,
+      "en_face_du_suivant": 7758,
+      "lue": true,
+      "lecart_au_depart_en_pas": -2.297,
+      "lecart_du_suivant_en_pas": -0.753,
+      "les_tours_franchis": 3.05
+     }
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 169
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 5660,
+      "en_face_du_suivant": 3615,
+      "lue": true,
+      "lecart_au_depart_en_pas": -0.146,
+      "lecart_du_suivant_en_pas": -0.671,
+      "les_tours_franchis": 0.217
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 403,
+      "2": 6
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 2862,
+      "en_face_du_suivant": 319,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.384,
+      "lecart_du_suivant_en_pas": -0.433,
+      "les_tours_franchis": 3.197
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "385": [],
+   "rognees": []
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "385": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_nombre_de_feuilles": 2,
+     "les_comptes": {
+      "1": 16,
+      "2": 227,
+      "3": 73,
+      "4": 1
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 6345,
+      "en_face_du_suivant": 6530,
+      "lue": true,
+      "lecart_au_depart_en_pas": -2.402,
+      "lecart_du_suivant_en_pas": -0.545,
+      "les_tours_franchis": 4.406
+     }
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "0": 2,
+      "1": 856,
+      "2": 14
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 5422,
+      "en_face_du_suivant": 3903,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.433,
+      "lecart_du_suivant_en_pas": -0.798,
+      "les_tours_franchis": 1.795
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 489,
+      "2": 42
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3619,
+      "en_face_du_suivant": 616,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.399,
+      "lecart_du_suivant_en_pas": -0.42,
+      "les_tours_franchis": 3.329
+     }
+    }
+   ],
+   "rognees": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_nombre_de_feuilles": 2,
+     "les_comptes": {
+      "1": 32,
+      "2": 240,
+      "3": 42
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 5882,
+      "en_face_du_suivant": 3562,
+      "lue": true,
+      "lecart_au_depart_en_pas": -2.377,
+      "lecart_du_suivant_en_pas": -0.537,
+      "les_tours_franchis": 4.429
+     }
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "0": 1,
+      "1": 520,
+      "2": 47
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 4351,
+      "en_face_du_suivant": 1287,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.358,
+      "lecart_du_suivant_en_pas": -0.47,
+      "les_tours_franchis": 2.89
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 648,
+      "2": 70
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 5000,
+      "en_face_du_suivant": 1683,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.398,
+      "lecart_du_suivant_en_pas": -0.463,
+      "les_tours_franchis": 3.018
+     }
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "385": [],
+   "rognees": []
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "385": [],
+   "rognees": []
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "385": [],
+   "rognees": []
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "385": [
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "0": 6,
+      "1": 77,
+      "2": 29
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3366,
+      "en_face_du_suivant": 5994,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.372,
+      "lecart_du_suivant_en_pas": -0.831,
+      "les_tours_franchis": 1.65
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 103,
+      "2": 1
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 999,
+      "en_face_du_suivant": 453,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.38,
+      "lecart_du_suivant_en_pas": -0.849,
+      "les_tours_franchis": 1.626
+     }
+    }
+   ],
+   "rognees": [
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 70,
+      "2": 36
+     },
+     "le_tour_darrivee": [],
+     "la_lecture": {
+      "en_face": 3359,
+      "en_face_du_suivant": 5994,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.372,
+      "lecart_du_suivant_en_pas": -0.831,
+      "les_tours_franchis": 1.651
+     }
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_nombre_de_feuilles": 1,
+     "les_comptes": {
+      "1": 149,
+      "2": 2
+     },
+     "le_tour_darrivee": [
+      -7
+     ],
+     "la_lecture": {
+      "en_face": 1246,
+      "en_face_du_suivant": 917,
+      "lue": true,
+      "lecart_au_depart_en_pas": -1.715,
+      "lecart_du_suivant_en_pas": -1.105,
+      "les_tours_franchis": 1.552
+     }
+    }
+   ]
+  }
+ ],
+ "les_sauts": [
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 271
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 3321,
+    "en_face_du_suivant": 554,
+    "lue": true,
+    "lecart_au_depart_en_pas": -0.581,
+    "lecart_du_suivant_en_pas": -4.581,
+    "les_tours_franchis": 0.127
+   },
+   "les_familles": [
+    "385",
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 88
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 1512,
+    "en_face_du_suivant": 0,
+    "lue": false,
+    "les_tours_franchis": null
+   },
+   "les_familles": [
+    "385",
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 305
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 3618,
+    "en_face_du_suivant": 556,
+    "lue": true,
+    "lecart_au_depart_en_pas": -0.598,
+    "lecart_du_suivant_en_pas": -4.581,
+    "les_tours_franchis": 0.131
+   },
+   "les_familles": [
+    "385",
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 3,
+    "1": 268
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 3455,
+    "en_face_du_suivant": 299,
+    "lue": true,
+    "lecart_au_depart_en_pas": -0.458,
+    "lecart_du_suivant_en_pas": -3.665,
+    "les_tours_franchis": 0.125
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 296
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 3681,
+    "en_face_du_suivant": 88,
+    "lue": true,
+    "lecart_au_depart_en_pas": -0.546,
+    "lecart_du_suivant_en_pas": -3.68,
+    "les_tours_franchis": 0.148
+   },
+   "les_familles": [
+    "385",
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 265
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 3456,
+    "en_face_du_suivant": 299,
+    "lue": true,
+    "lecart_au_depart_en_pas": -0.468,
+    "lecart_du_suivant_en_pas": -3.665,
+    "les_tours_franchis": 0.128
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 1,
+    "1": 787,
+    "2": 56
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 5093,
+    "en_face_du_suivant": 2372,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.461,
+    "lecart_du_suivant_en_pas": -0.504,
+    "les_tours_franchis": 2.897
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 64,
+    "2": 1
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 1095,
+    "en_face_du_suivant": 374,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.313,
+    "lecart_du_suivant_en_pas": -1.371,
+    "les_tours_franchis": 0.958
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 847,
+    "2": 260
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 6749,
+    "en_face_du_suivant": 11235,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.733,
+    "lecart_du_suivant_en_pas": -0.539,
+    "les_tours_franchis": 3.212
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 850,
+    "2": 96,
+    "3": 1
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 5312,
+    "en_face_du_suivant": 3799,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.519,
+    "lecart_du_suivant_en_pas": -0.555,
+    "les_tours_franchis": 2.738
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 197,
+    "2": 8
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 4532,
+    "en_face_du_suivant": 541,
+    "lue": true,
+    "lecart_au_depart_en_pas": -0.689,
+    "lecart_du_suivant_en_pas": -1.475,
+    "les_tours_franchis": 0.467
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 915,
+    "2": 205
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 6842,
+    "en_face_du_suivant": 10602,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.686,
+    "lecart_du_suivant_en_pas": -0.542,
+    "les_tours_franchis": 3.113
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "1": 47,
+    "2": 198,
+    "3": 52
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 6989,
+    "en_face_du_suivant": 7758,
+    "lue": true,
+    "lecart_au_depart_en_pas": -2.297,
+    "lecart_du_suivant_en_pas": -0.753,
+    "les_tours_franchis": 3.05
+   },
+   "les_familles": [
+    "385",
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 4,
+    "1": 180
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 2513,
+    "en_face_du_suivant": 81,
+    "lue": true,
+    "lecart_au_depart_en_pas": -0.765,
+    "lecart_du_suivant_en_pas": -1.994,
+    "les_tours_franchis": 0.384
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 11,
+    "1": 493,
+    "2": 9
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 3359,
+    "en_face_du_suivant": 1623,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.305,
+    "lecart_du_suivant_en_pas": -0.449,
+    "les_tours_franchis": 2.904
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 169
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 5660,
+    "en_face_du_suivant": 3615,
+    "lue": true,
+    "lecart_au_depart_en_pas": -0.146,
+    "lecart_du_suivant_en_pas": -0.671,
+    "les_tours_franchis": 0.217
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 403,
+    "2": 6
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 2862,
+    "en_face_du_suivant": 319,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.384,
+    "lecart_du_suivant_en_pas": -0.433,
+    "les_tours_franchis": 3.197
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "1": 16,
+    "2": 227,
+    "3": 73,
+    "4": 1
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 6345,
+    "en_face_du_suivant": 6530,
+    "lue": true,
+    "lecart_au_depart_en_pas": -2.402,
+    "lecart_du_suivant_en_pas": -0.545,
+    "les_tours_franchis": 4.406
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 2,
+    "1": 856,
+    "2": 14
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 5422,
+    "en_face_du_suivant": 3903,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.433,
+    "lecart_du_suivant_en_pas": -0.798,
+    "les_tours_franchis": 1.795
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 489,
+    "2": 42
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 3619,
+    "en_face_du_suivant": 616,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.399,
+    "lecart_du_suivant_en_pas": -0.42,
+    "les_tours_franchis": 3.329
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "1": 32,
+    "2": 240,
+    "3": 42
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 5882,
+    "en_face_du_suivant": 3562,
+    "lue": true,
+    "lecart_au_depart_en_pas": -2.377,
+    "lecart_du_suivant_en_pas": -0.537,
+    "les_tours_franchis": 4.429
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 1,
+    "1": 520,
+    "2": 47
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 4351,
+    "en_face_du_suivant": 1287,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.358,
+    "lecart_du_suivant_en_pas": -0.47,
+    "les_tours_franchis": 2.89
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 648,
+    "2": 70
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 5000,
+    "en_face_du_suivant": 1683,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.398,
+    "lecart_du_suivant_en_pas": -0.463,
+    "les_tours_franchis": 3.018
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 6,
+    "1": 77,
+    "2": 29
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 3366,
+    "en_face_du_suivant": 5994,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.372,
+    "lecart_du_suivant_en_pas": -0.831,
+    "les_tours_franchis": 1.65
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 103,
+    "2": 1
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 999,
+    "en_face_du_suivant": 453,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.38,
+    "lecart_du_suivant_en_pas": -0.849,
+    "les_tours_franchis": 1.626
+   },
+   "les_familles": [
+    "385"
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 70,
+    "2": 36
+   },
+   "le_tour_darrivee": [],
+   "la_lecture": {
+    "en_face": 3359,
+    "en_face_du_suivant": 5994,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.372,
+    "lecart_du_suivant_en_pas": -0.831,
+    "les_tours_franchis": 1.651
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 149,
+    "2": 2
+   },
+   "le_tour_darrivee": [
+    -7
+   ],
+   "la_lecture": {
+    "en_face": 1246,
+    "en_face_du_suivant": 917,
+    "lue": true,
+    "lecart_au_depart_en_pas": -1.715,
+    "lecart_du_suivant_en_pas": -1.105,
+    "les_tours_franchis": 1.552
+   },
+   "les_familles": [
+    "rognees"
+   ]
+  }
+ ],
+ "les_ecartes": [
+  {
+   "la_famille": "385",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "en_face": 1512,
+   "en_face_du_suivant": 0,
+   "lue": false,
+   "les_tours_franchis": null
+  },
+  {
+   "la_famille": "rognees",
+   "le_rang": 2,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "en_face": 1512,
+   "en_face_du_suivant": 0,
+   "lue": false,
+   "les_tours_franchis": null
+  }
+ ],
+ "le_verdict": {
+  "decidable": false,
+  "lissue": "sauts de deux feuilles partis du tour −6 : 3 sur 3 à au moins 1,5 tour ; témoin : 1 sur 23 entre 0,5 et 1,5 ; indécidable, le témoin ne vaut pas"
+ },
+ "les_secondes": 1709.5
+}

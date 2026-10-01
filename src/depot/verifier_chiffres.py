@@ -3336,6 +3336,61 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 404 : UN SAUT DE DEUX FEUILLES PARTI DU TOUR −6 FINIT-IL AU-DELÀ DU SUIVANT SUR PARIS4
+    s404 = _source(racine, "un_saut_de_deux_feuilles_parti_du_tour_moins_six_finit_il_au_dela_du_suivant_sur_paris4.json")
+    if s404.exists():
+        d = json.loads(s404.read_text())
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        v2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        v3 = lambda x: f"{x:.3f}".replace(".", ",")  # noqa: E731
+        plage = lambda xs: "aucune" if not xs else v2(min(xs)) if v2(min(xs)) == v2(max(xs)) else f"{v2(min(xs))}-{v2(max(xs))}"  # noqa: E731
+        c = d["les_constantes"]
+        lus = [s for s in d["les_sauts"] if s["la_lecture"]["lue"]]
+        non_lus = [s for s in d["les_sauts"] if not s["la_lecture"]["lue"]]
+        ex = lambda s: abs(s["la_lecture"]["lecart_du_suivant_en_pas"])  # noqa: E731
+        ey = lambda s: abs(s["la_lecture"]["lecart_au_depart_en_pas"])  # noqa: E731
+        k = lambda s: s["la_lecture"]["les_tours_franchis"]  # noqa: E731
+        un = [s for s in lus if s["le_nombre_de_feuilles"] == 1]
+        deux = [s for s in lus if s["le_nombre_de_feuilles"] == 2]
+        sous = sum(k(s) < c["le_bas"] for s in un)
+        entre = sum(c["le_bas"] <= k(s) < c["le_haut"] for s in un)
+        dessus = sum(k(s) >= c["le_haut"] for s in un)
+        bas, haut = vg(c["le_bas"]), vg(c["le_haut"])
+        loin = [s for s in lus if s["le_rang"] in (2, 3)]
+        pres = [s for s in lus if s["le_rang"] not in (2, 3)]
+        un_pres = [s for s in un if s["le_rang"] not in (2, 3)]
+        rangs = sorted({s["le_rang"] for s in lus})
+        rangee = lambda r: (f"| {r} | {plage([ex(s) for s in lus if s['le_rang'] == r])} | "  # noqa: E731
+                            f"{plage([ey(s) for s in un if s['le_rang'] == r])} | {plage([ey(s) for s in deux if s['le_rang'] == r])} |")
+        rangs_ordinaux = {7: "septième", 8: "huitième"}
+        nl = non_lus[0] if len(non_lus) == 1 else None
+        ecrits = [("le verdict de 404", f"INDÉCIDABLE : LE TÉMOIN NE VAUT PAS, {entre} SAUT D'UNE FEUILLE SUR {len(un)} ENTRE {bas} ET {haut} TOUR"
+                   if not d["le_verdict"]["decidable"] and d["le_verdict"]["lissue"].endswith("le témoin ne vaut pas") else "changé"),
+                  ("la lecture de 404", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes ; le contrôle tient sur les deux "
+                   "familles et les seize côtés" if not d["les_pannes"] and d["le_controle"] and len(d["les_cotes"]) == 16 else "changé"),
+                  ("les sauts de 404", f"{len(d['les_sauts'])} sauts partent du seul tour −6 avec une ou deux feuilles ; {len(lus)} sont lus."),
+                  ("le non lu de 404", f"Le saut non lu est le {rangs_ordinaux.get(nl['le_saut'], '?')} de la {nl['la_chaine']} de la graine "
+                   f"{nl['le_rang']}," if nl and nl["la_lecture"]["en_face_du_suivant"] == 0 else "changé"),
+                  ("le résumé de 404", f"le témoin ne vaut pas : un seul sur {len(un)} franchit entre {bas} et {haut} tour"
+                   if entre == 1 else "changé"),
+                  ("le tour −7 du résumé de 404", f"le tour −7 est à {v2(min(map(ex, lus)))} à {v2(max(map(ex, lus)))} pas nominaux du tour −6"),
+                  ("le témoin en trois de 404", f"Des {len(un)} sauts d'une feuille lus, {sous} franchissent moins de {bas} tour, {entre} entre "
+                   f"{bas} et {haut}, et"),
+                  ("le témoin au-delà de 404", f"{dessus} au moins {haut}. Leurs rapports vont de {v3(min(map(k, un)))} à {v3(max(map(k, un)))} tours."),
+                  ("les graines 2 et 3 de 404", f"Sur les graines 2 et 3, il est à {plage([ex(s) for s in loin])} pas du tour −6 ; les "
+                   f"{sum(s['le_nombre_de_feuilles'] == 1 for s in loin)} sauts" if all(s["le_nombre_de_feuilles"] == 1 for s in loin) else "changé"),
+                  ("les rapports des graines 2 et 3 de 404", f"d'une feuille lus y franchissent {v3(min(map(k, loin)))} à {v3(max(map(k, loin)))} "
+                   f"tour. Ailleurs, il est à {plage([ex(s) for s in pres])} pas, et {sum(k(s) >= c['le_haut'] for s in un_pres)} des "
+                   f"{len(un_pres)} sauts d'une feuille lus y franchissent"),
+                  ("les deux feuilles de 404", f"les {len(deux)} sauts de deux feuilles lus franchissent "
+                   f"{', '.join(v2(x) for x in sorted(map(k, deux))[:-1])} et {v2(sorted(map(k, deux))[-1])} tours. Leurs arrivées sont à"),
+                  ("les arrivées de 404", f"{plage([ey(s) for s in deux])} pas du tour −6, plus loin que celles des {len(un)} sauts d'une feuille, "
+                   f"à {plage([ey(s) for s in un])}." if min(map(ey, deux)) > max(map(ey, un)) else "changé"),
+                  ("le verdict développé de 404", f"Les {len(deux)} sauts de deux feuilles lus sont à au moins {haut} tour, mais la même lecture met "
+                   f"{dessus} sauts d'une" if all(k(s) >= c["le_haut"] for s in deux) else "changé")]
+        ecrits += [(f"la graine {r} de 404", rangee(r)) for r in rangs]
+        out.extend((nom_, [x_], s404.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 403 : UN SAUT QUE M7 COMPTE DE DEUX FEUILLES FRANCHIT-IL DEUX TOURS SUR PARIS4
     s403 = _source(racine, "un_saut_que_m7_compte_de_deux_feuilles_franchit_il_deux_tours_sur_paris4.json")
     if s403.exists():

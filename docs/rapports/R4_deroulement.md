@@ -4967,6 +4967,12 @@ ne fait pas ce saut et descend d'un tour à chaque saut : le rognage a changé l
 sauts jugés comptent une feuille pour un tour ; leurs 7 sauts de plusieurs feuilles sont sur les côtés plus, sans tour, ou partent du tour −6.
 `R4-P201` s'ouvre : les sauts de deux feuilles partis du tour −6 finissent-ils un pas au-delà du tour −7 ?
 
+**`404` · 2026-10-01 · un saut de deux feuilles parti du tour moins six finit-il au-delà du suivant sur paris4** — `R4-P201`
+
+⭐⭐⭐⭐ **Indécidable : le témoin ne vaut pas, 1 saut d'une feuille sur 23 entre 0,5 et 1,5 tour** — `R4-F590`. Là où arrivent les sauts
+partis du tour −6, le tour −7 est à 0,42 à 4,58 pas nominaux du tour −6 ; la lecture qui le prend pour unité ne sépare rien.
+`R4-P202` s'ouvre : la même lecture donne-t-elle un tour là où le tour d'arrivée est retrouvé ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
