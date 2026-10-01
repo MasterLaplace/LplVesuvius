@@ -1957,6 +1957,7 @@ run "le détecteur de 296 lit-il encore l'encre de paris4 ramenée à 9 µm" uv 
 run "figure le détecteur de 296 lit-il encore l'encre de paris4 ramenée à 9 µm" uv run python "$ROOT/src/figures/figure_le_detecteur_de_296_lit_il_encore_lencre_de_paris4_ramenee_a_9um.py" --verifier
 run "le rendu de pherc0358 lit-il l'encre de paris4, et dans quel sens" uv run python "$ROOT/src/nappe/le_rendu_de_pherc0358_lit_il_lencre_de_paris4_et_dans_quel_sens.py" --verifier
 run "figure le rendu de pherc0358 lit-il l'encre de paris4, et dans quel sens" uv run python "$ROOT/src/figures/figure_le_rendu_de_pherc0358_lit_il_lencre_de_paris4_et_dans_quel_sens.py" --verifier
+run "les premières surfaces tenues portent-elles plus d'encre sur pherc0358" uv run python "$ROOT/src/nappe/les_premieres_surfaces_tenues_portent_elles_plus_dencre_sur_pherc0358.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

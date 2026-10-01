@@ -82,9 +82,9 @@ def la_grille_aux_indices(nappe: np.ndarray, valide: np.ndarray, ii: np.ndarray,
     return p, nn, couvert & (norme > 0)
 
 
-def le_sens_du_creux(nappe: np.ndarray, valide: np.ndarray) -> float:
-    """+1 si la normale de la grille pointe vers le creux de la surface, −1 sinon : le signe de la courbure moyenne, lu comme l'écart
-    des sommets au plan du centre, le long de la normale moyenne, ajusté en a·r²."""
+def la_courbure_moyenne(nappe: np.ndarray, valide: np.ndarray) -> tuple[float, np.ndarray, np.ndarray]:
+    """(a, la normale moyenne, le centre) : l'écart des sommets au plan du centre, le long de la normale moyenne de la grille, ajusté en
+    a·r². a > 0 si les bords remontent du côté où la normale pointe."""
     from la_spire_voisine_est_elle_a_un_pas import les_normales
 
     n, nok = les_normales(nappe, valide)
@@ -94,8 +94,12 @@ def le_sens_du_creux(nappe: np.ndarray, valide: np.ndarray) -> float:
     c = p.mean(axis=0)
     h = (p - c) @ nm
     r2 = np.sum((p - c - h[:, None] * nm) ** 2, axis=1)
-    a = np.polyfit(r2, h, 1)[0]
-    return 1.0 if a > 0 else -1.0
+    return float(np.polyfit(r2, h, 1)[0]), nm, c
+
+
+def le_sens_du_creux(nappe: np.ndarray, valide: np.ndarray) -> float:
+    """+1 si la normale de la grille pointe vers le creux de la surface, −1 sinon : le signe de la courbure moyenne."""
+    return 1.0 if la_courbure_moyenne(nappe, valide)[0] > 0 else -1.0
 
 
 def les_decalages_des_couches(pixel: float) -> np.ndarray:
