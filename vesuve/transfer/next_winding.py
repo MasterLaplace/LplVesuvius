@@ -186,6 +186,25 @@ def prediction(transport, rays: Rays) -> RemoteArray:
     return RemoteArray(f"{BUCKET}/{rays.path}", transport, rays.level)
 
 
+CHUNK_INDEX_BITS = 21
+
+
+def unique_chunks(indices: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """The distinct rows of `indices` (n, 3) in lexicographic order, and for each row which one it is.
+
+    The three indices are packed in one 63-bit integer before the sort, because sorting rows (`np.unique(axis=0)`) made the
+    cost of a whole reading. An index negative or beyond 2**21 - 1 is sorted as rows, which gives the same answer.
+    """
+    if len(indices) and (indices.min() < 0 or indices.max() >= 1 << CHUNK_INDEX_BITS):
+        keys, which = np.unique(indices, axis=0, return_inverse=True)
+        return keys, which.ravel()
+    bits = CHUNK_INDEX_BITS
+    packed = (indices[:, 0] << (2 * bits)) | (indices[:, 1] << bits) | indices[:, 2]
+    unique, which = np.unique(packed, return_inverse=True)
+    mask = (1 << bits) - 1
+    return np.stack([unique >> (2 * bits), (unique >> bits) & mask, unique & mask], axis=1), which.ravel()
+
+
 def read_samples(array: RemoteArray, points: np.ndarray, normals_: np.ndarray, rays: Rays,
                  threads: int = READ_THREADS) -> np.ndarray:
     """What `array` marks along the normal of each point, at the depths of `rays`, one chunk at a time.
@@ -199,9 +218,9 @@ def read_samples(array: RemoteArray, points: np.ndarray, normals_: np.ndarray, r
     shape, chunks = np.asarray(array.shape), np.asarray(array.chunks)
     inside = np.flatnonzero(np.all((flat >= 0) & (flat < shape), axis=1))
     values = np.zeros(len(flat), dtype=bool)
-    keys, which = np.unique(flat[inside] // chunks, axis=0, return_inverse=True)
-    order = np.argsort(which.ravel(), kind="stable")
-    members_of = np.split(inside[order], np.flatnonzero(np.diff(which.ravel()[order])) + 1)
+    keys, which = unique_chunks(flat[inside] // chunks)
+    order = np.argsort(which, kind="stable")
+    members_of = np.split(inside[order], np.flatnonzero(np.diff(which[order])) + 1)
 
     def read_one(k: int):
         key = tuple(int(x) for x in keys[k])

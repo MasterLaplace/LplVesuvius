@@ -301,3 +301,47 @@ def test_the_samples_read_from_the_bucket_are_the_embedded_ones(tmp_path):
         assert np.array_equal(nw.read_samples(nw.prediction(transport, r), p[some], n[some], r), r.seen[some])
     finally:
         transport.close()
+
+
+def _by_rows(indices):
+    keys, which = np.unique(indices, axis=0, return_inverse=True)
+    return keys, which.ravel()
+
+
+def _agrees_with_the_sort_of_rows(unique_chunks, indices) -> bool:
+    keys, which = unique_chunks(indices)
+    expected_keys, expected_which = _by_rows(indices)
+    return np.array_equal(keys, expected_keys) and np.array_equal(which, expected_which)
+
+
+def _chunk_indices(rng):
+    top = 2**21 - 1
+    bulk = rng.integers(0, 6, size=(4000, 3))
+    edges = rng.choice([0, 1, 2, top - 1, top], size=(500, 3))
+    return np.concatenate([bulk, edges, bulk[:200]]).astype(np.int64)
+
+
+def test_the_chunks_are_found_as_the_sort_of_rows_finds_them_boundaries_included():
+    indices = _chunk_indices(np.random.default_rng(3))
+    assert len(np.unique(indices, axis=0)) > 100
+    assert _agrees_with_the_sort_of_rows(nw.unique_chunks, indices)
+
+
+def test_an_index_the_key_cannot_hold_falls_back_on_the_sort_of_rows():
+    top = 2**21
+    for odd in (top, -1):
+        indices = np.array([[1, 2, 3], [odd, 0, 0], [1, 2, 3], [0, 0, top - 1]], dtype=np.int64)
+        assert _agrees_with_the_sort_of_rows(nw.unique_chunks, indices)
+    assert nw.unique_chunks(np.zeros((0, 3), dtype=np.int64))[0].shape == (0, 3)
+
+
+def test_a_key_with_two_axes_swapped_is_caught_by_that_comparison():
+    bits = nw.CHUNK_INDEX_BITS
+
+    def swapped(indices):
+        packed = (indices[:, 1] << (2 * bits)) | (indices[:, 0] << bits) | indices[:, 2]
+        unique, which = np.unique(packed, return_inverse=True)
+        mask = (1 << bits) - 1
+        return np.stack([(unique >> bits) & mask, unique >> (2 * bits), unique & mask], axis=1), which.ravel()
+
+    assert not _agrees_with_the_sort_of_rows(swapped, _chunk_indices(np.random.default_rng(3)))
