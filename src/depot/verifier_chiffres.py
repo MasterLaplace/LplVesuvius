@@ -3336,6 +3336,34 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 401 : QUEL SAUT DE LA SUIVIE DE LA GRAINE 7 COMPTAIT-IL DE TROP SUR PARIS4
+    s401 = _source(racine, "quel_saut_de_la_suivie_de_la_graine_7_comptait_il_de_trop_sur_paris4.json")
+    if s401.exists():
+        d = json.loads(s401.read_text())
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        su = d["les_chaines"]["suivie"]
+        tt = lambda r: ", ".join(str(x[0]).replace("-", "−") if len(x) == 1 else "–" for x in r[2:])  # noqa: E731
+        juges = lambda j: [x_ for x_ in su[j]["les_sauts"] if x_["dit"] is not None]  # noqa: E731
+        faux = [x_ for x_ in juges("385") if x_["dit"] != "juste"]
+        f6 = faux[0] if len(faux) == 1 else None
+        r385 = su["385"]["les_tours"]
+        ecrits = [("le verdict de 401", f"DANS `385`, LE SEUL SAUT FAUX DE LA SUIVIE EST LE SIXIÈME, {f6['le_nombre_de_feuilles']} FEUILLES POUR "
+                   f"{f6['les_tours']} TOURS : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper().replace('385', '`385`')}"
+                   if f6 and f6["le_saut"] == 6 else "changé"),
+                  ("la lecture de 401", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes" if not d["les_pannes"] and d["redonne_400"]
+                   else "changé"),
+                  ("la ligne 385 de 401", f"| `385` | {tt(r385)} | {sum(x_['dit'] == 'juste' for x_ in juges('385'))} sur {len(juges('385'))} | le sixième : "
+                   f"{f6['le_nombre_de_feuilles']} feuilles pour {f6['les_tours']} tours |" if f6 else "changé"),
+                  ("la ligne rognée de 401", f"| rognée | {tt(su['rognees']['les_tours'])} | {sum(x_['dit'] == 'juste' for x_ in juges('rognees'))} sur "
+                   f"{len(juges('rognees'))} | aucun |" if all(x_["dit"] == "juste" for x_ in juges("rognees")) else "changé"),
+                  ("le saut de 401", f"Son sixième saut va du tour {str(r385[5][0]).replace('-', '−')} au tour"),
+                  ("l'arrivée du saut de 401", f"{str(r385[6][0]).replace('-', '−')}, et `m7` lui donne {f6['le_nombre_de_feuilles']} feuilles"),
+                  ("les points de 401", f"{f6['les_comptes']['2']} de ses {sum(f6['les_comptes'].values())} points en comptent 2, "
+                   f"{f6['les_comptes']['3']} en comptent 3. C'est un mélange" if f6 and f6["a_cheval"] else "changé"),
+                  ("la rognée de 401", "Sa sixième surface est au tour {}, sa septième au {}, sa huitième au {}".format(
+                      *[str(su["rognees"]["les_tours"][h][0]).replace("-", "−") for h in (6, 7, 8)]))]
+        out.extend((nom_, [x_], s401.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 400 : DES CHAÎNES ROGNÉES LISENT-ELLES LEURS VALIDÉES SUR LE BON TOUR DE PARIS4
     s400 = _source(racine, "des_chaines_rognees_lisent_elles_leurs_validees_sur_le_bon_tour_de_paris4.json")
     s385b = _source(racine, "laccord_aux_comptes_de_m7_valide_t_il_des_surfaces_sur_le_bon_tour_de_paris4.json")

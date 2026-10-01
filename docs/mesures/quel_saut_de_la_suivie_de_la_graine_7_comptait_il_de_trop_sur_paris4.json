@@ -1,0 +1,722 @@
+{
+ "la_question": "Sur PHercParis4, quel saut de la suivie de la graine 7, côté moins, 385 comptait-il d'une feuille de trop, et sa surface était-elle à cheval ?",
+ "le_cote": [
+  7,
+  "moins"
+ ],
+ "les_pannes": [],
+ "redonne_400": true,
+ "les_chaines": {
+  "suivie": {
+   "385": {
+    "les_tours": [
+     [],
+     [],
+     [
+      0
+     ],
+     [
+      -1
+     ],
+     [
+      -2
+     ],
+     [
+      -3
+     ],
+     [
+      -6
+     ],
+     [
+      -7
+     ],
+     []
+    ],
+    "les_comptes": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     7,
+     8,
+     9
+    ],
+    "les_sauts": [
+     {
+      "le_saut": 1,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 106,
+       "1": 638,
+       "2": 43,
+       "3": 6
+      },
+      "la_part_majoritaire": 0.8045,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 2,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 7,
+       "1": 596,
+       "2": 115
+      },
+      "la_part_majoritaire": 0.8301,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 3,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 5,
+       "1": 713,
+       "2": 1
+      },
+      "la_part_majoritaire": 0.9917,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 4,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 4,
+       "1": 626
+      },
+      "la_part_majoritaire": 0.9937,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 5,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 5,
+       "1": 415
+      },
+      "la_part_majoritaire": 0.9881,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 6,
+      "les_tours": 3,
+      "le_nombre_de_feuilles": 2,
+      "les_comptes": {
+       "2": 105,
+       "3": 60,
+       "4": 1
+      },
+      "la_part_majoritaire": 0.6325,
+      "a_cheval": true,
+      "dit": "pas_assez"
+     },
+     {
+      "le_saut": 7,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": null,
+      "les_comptes": {
+       "1": 30
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 8,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 56
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": null
+     }
+    ]
+   },
+   "rognees": {
+    "les_tours": [
+     [],
+     [],
+     [
+      0
+     ],
+     [
+      -1
+     ],
+     [
+      -2
+     ],
+     [
+      -3
+     ],
+     [
+      -4
+     ],
+     [
+      -5
+     ],
+     [
+      -6
+     ]
+    ],
+    "les_comptes": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "les_sauts": [
+     {
+      "le_saut": 1,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 6,
+       "1": 701,
+       "2": 47,
+       "3": 5
+      },
+      "la_part_majoritaire": 0.9236,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 2,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 1,
+       "1": 673
+      },
+      "la_part_majoritaire": 0.9985,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 3,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 590
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 4,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 511
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 5,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 395
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 6,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 331
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 7,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 298
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 8,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 230
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     }
+    ]
+   }
+  },
+  "compagne": {
+   "385": {
+    "les_tours": [
+     [],
+     [],
+     [
+      0
+     ],
+     [
+      -1
+     ],
+     [
+      -2
+     ],
+     [
+      -3
+     ],
+     [
+      -4
+     ],
+     [
+      -5
+     ],
+     [
+      -6
+     ]
+    ],
+    "les_comptes": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "les_sauts": [
+     {
+      "le_saut": 1,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 10,
+       "1": 658,
+       "2": 2
+      },
+      "la_part_majoritaire": 0.9821,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 2,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 12,
+       "1": 520
+      },
+      "la_part_majoritaire": 0.9774,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 3,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 4,
+       "1": 432
+      },
+      "la_part_majoritaire": 0.9908,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 4,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 1,
+       "1": 417
+      },
+      "la_part_majoritaire": 0.9976,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 5,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 323
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 6,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 1,
+       "1": 272
+      },
+      "la_part_majoritaire": 0.9963,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 7,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 4,
+       "1": 251
+      },
+      "la_part_majoritaire": 0.9843,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 8,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 233
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     }
+    ]
+   },
+   "rognees": {
+    "les_tours": [
+     [],
+     [],
+     [
+      0
+     ],
+     [
+      -1
+     ],
+     [
+      -2
+     ],
+     [
+      -3
+     ],
+     [
+      -4
+     ],
+     [
+      -5
+     ],
+     [
+      -6
+     ]
+    ],
+    "les_comptes": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "les_sauts": [
+     {
+      "le_saut": 1,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 2,
+       "1": 638,
+       "2": 2
+      },
+      "la_part_majoritaire": 0.9938,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 2,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 1,
+       "1": 523
+      },
+      "la_part_majoritaire": 0.9981,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 3,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 418
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 4,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 407
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 5,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 296
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 6,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 256
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 7,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 237
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     },
+     {
+      "le_saut": 8,
+      "les_tours": 1,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "1": 215
+      },
+      "la_part_majoritaire": 1.0,
+      "a_cheval": false,
+      "dit": "juste"
+     }
+    ]
+   }
+  },
+  "tierce": {
+   "385": {
+    "les_tours": [
+     [],
+     [],
+     []
+    ],
+    "les_comptes": [
+     1,
+     2
+    ],
+    "les_sauts": [
+     {
+      "le_saut": 1,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 4,
+       "1": 398
+      },
+      "la_part_majoritaire": 0.99,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 2,
+      "les_tours": null,
+      "le_nombre_de_feuilles": null,
+      "les_comptes": {},
+      "la_part_majoritaire": null,
+      "a_cheval": false,
+      "dit": null
+     }
+    ]
+   },
+   "rognees": {
+    "les_tours": [
+     [],
+     [],
+     []
+    ],
+    "les_comptes": [
+     1,
+     2
+    ],
+    "les_sauts": [
+     {
+      "le_saut": 1,
+      "les_tours": null,
+      "le_nombre_de_feuilles": 1,
+      "les_comptes": {
+       "0": 1,
+       "1": 396
+      },
+      "la_part_majoritaire": 0.9975,
+      "a_cheval": false,
+      "dit": null
+     },
+     {
+      "le_saut": 2,
+      "les_tours": null,
+      "le_nombre_de_feuilles": null,
+      "les_comptes": {},
+      "la_part_majoritaire": null,
+      "a_cheval": false,
+      "dit": null
+     }
+    ]
+   }
+  }
+ },
+ "la_suivie_de_385": [
+  {
+   "le_saut": 1,
+   "les_tours": null,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 106,
+    "1": 638,
+    "2": 43,
+    "3": 6
+   },
+   "la_part_majoritaire": 0.8045,
+   "a_cheval": false,
+   "dit": null
+  },
+  {
+   "le_saut": 2,
+   "les_tours": null,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 7,
+    "1": 596,
+    "2": 115
+   },
+   "la_part_majoritaire": 0.8301,
+   "a_cheval": false,
+   "dit": null
+  },
+  {
+   "le_saut": 3,
+   "les_tours": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 5,
+    "1": 713,
+    "2": 1
+   },
+   "la_part_majoritaire": 0.9917,
+   "a_cheval": false,
+   "dit": "juste"
+  },
+  {
+   "le_saut": 4,
+   "les_tours": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 4,
+    "1": 626
+   },
+   "la_part_majoritaire": 0.9937,
+   "a_cheval": false,
+   "dit": "juste"
+  },
+  {
+   "le_saut": 5,
+   "les_tours": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 5,
+    "1": 415
+   },
+   "la_part_majoritaire": 0.9881,
+   "a_cheval": false,
+   "dit": "juste"
+  },
+  {
+   "le_saut": 6,
+   "les_tours": 3,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "2": 105,
+    "3": 60,
+    "4": 1
+   },
+   "la_part_majoritaire": 0.6325,
+   "a_cheval": true,
+   "dit": "pas_assez"
+  },
+  {
+   "le_saut": 7,
+   "les_tours": 1,
+   "le_nombre_de_feuilles": null,
+   "les_comptes": {
+    "1": 30
+   },
+   "la_part_majoritaire": 1.0,
+   "a_cheval": false,
+   "dit": null
+  },
+  {
+   "le_saut": 8,
+   "les_tours": null,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 56
+   },
+   "la_part_majoritaire": 1.0,
+   "a_cheval": false,
+   "dit": null
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "dans 385, les sauts faux de la suivie : saut 6, 2 feuilles pour 3 tours ; non, 385 ne comptait pas de trop"
+ },
+ "les_secondes": 257.7
+}

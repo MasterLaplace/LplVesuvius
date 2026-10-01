@@ -4949,6 +4949,12 @@ rognage contre les tours publiés de PHercParis4 ?
 tort là où la vérité est connue, et ramène sur le bon tour les deux surfaces que `385` lisait sur un mauvais. `R4-P198` s'ouvre : quel
 saut comptait une feuille de trop ?
 
+**`401` · 2026-10-01 · quel saut de la suivie de la graine 7 comptait-il de trop sur paris4** — `R4-P198`
+
+⭐⭐⭐⭐ **Aucun : `385` comptait une feuille de moins, sa suivie sautait du tour −3 au tour −6** — `R4-F587`, `R4-C48`. Rognée, la suivie
+ne fait pas ce saut et descend d'un tour à chaque saut : le rognage a changé la chaîne, il n'a pas corrigé un compte. Bandeau sur `400`.
+`R4-P199` s'ouvre : les chaînes rognées de PHerc0358 font-elles moins de sauts de plusieurs feuilles ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

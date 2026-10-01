@@ -4,7 +4,7 @@
 
 # Les contradictions, et qui a tranché
 
-**236 disputes** que ce dépôt a eues avec lui-même, et comment chacune s'est finie. Une ligne : *A a dit · B a dit · C tranche · statut*. Les lire coûte moins cher que de les repayer.
+**237 disputes** que ce dépôt a eues avec lui-même, et comment chacune s'est finie. Une ligne : *A a dit · B a dit · C tranche · statut*. Les lire coûte moins cher que de les repayer.
 
 ## R1 — 42 lignes
 
@@ -148,7 +148,7 @@
 | `R3-C50` | `53` : garde `find -path "*rendu*"` | prenait le maillage (119 px) | composant de chemin ; `GARDER_RENDU=1` | tranché |
 | `R3-C51` | `44` : pas 0,25 = 9 nappes = presque un tour | ~10 % d'un tour par nappe ; deux nappes consécutives séparées par la circonférence | colonne, pas bande | tranché |
 
-## R4 — 47 lignes
+## R4 — 48 lignes
 
 | id | A a dit | B a dit | C tranche | statut |
 |---|---|---|---|---|
@@ -199,6 +199,7 @@
 | `R4-C45` | `381` §3–4 : la suivie de la graine 4, côté plus, « comptait un tour de moins à son premier saut » ; recompté double, ce saut fait tenir ses deux couples, et **21** surfaces sont validées **jusqu'à 8 tours** | `383` : les trois premiers sauts franchissent **une** feuille de `m7`, la suivie à 1,40 pas comme la compagne et la tierce à 1,67 et 1,76 pas, et les trois nappes sont sur la même feuille ; ce sont la compagne et la tierce que `369` comptait un tour de trop | les deux mesures sont justes : le recompte fait tenir les paires ; c'est le SENS de la correction qui tombe, `381` ayant aligné la suivie sur l'erreur des deux autres | tranchée par `383` : `381` corrigé sur place par un renvoi ; ses surfaces validées sont à **1** à **7** tours, sa mesure intacte |
 | `R4-C46` | `373` et `374` §3 : sur la graine 7, côté plus, le vote désigne la suivie, qui « a glissé » ; seules **3** surfaces sont validées | `384` : le deuxième saut de la suivie, à 1,17 pas, que `369` compte simple, franchit **deux** feuilles de `m7` ; aux comptes de `m7`, le côté valide **10** surfaces, jusqu'à **7** tours | les deux mesures sont justes : le vote lit les comptes de `369` ; c'est la RÈGLE DES SAUTS DOUBLES qui se trompe d'un tour sur ce saut | tranchée par `384` : `374` précisé sur place par un renvoi, ses autres côtés et sa règle intacts |
 | `R4-C47` | `380` §3 : sur les graines 4, côté moins, et 6, côté plus, **25** surfaces validées, **jusqu'à 8 tours** et 3 tours | `384` : les premiers sauts de ces côtés, que `369` compte doubles, ne franchissent qu'**une** feuille de `m7` ; aux comptes de `m7`, les mêmes surfaces sont validées, jusqu'à **7** et **2** tours | les statuts sont justes ; c'est le COMPTE, donc le nombre de tours à la nappe, qui a un tour de trop | tranchée par `384` : `380` précisé sur place par un renvoi, ses statuts et ses paires intacts |
+| `R4-C48` | `400` §3 et `R4-P198` : le rognage « ramène sur le bon tour les deux surfaces que `385` lisait sur un mauvais » et « corrige deux comptes » ; la porte demande quel saut `385` comptait **de trop** | `401` : dans `385`, le sixième saut de la suivie de la graine 7, côté moins, va du tour −3 au tour −6 et `m7` lui donne **2** feuilles, donc un compte **par défaut** (ce que `R4-F580` disait déjà) ; rognée, la suivie ne fait pas ce saut, ses sixième à huitième surfaces sont aux tours −4, −5 et −6 | les mesures de `400` sont justes ; c'est la LECTURE qui tombe : ce ne sont pas les mêmes surfaces, le rognage a changé la chaîne au lieu de corriger un compte | tranché |
 
 ## R5 — 42 lignes
 

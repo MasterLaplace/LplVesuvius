@@ -1939,6 +1939,8 @@ run "compter la surface entière et rogner le départ garde-t-il les deux gains 
 run "figure compter la surface entière et rogner le départ garde-t-il les deux gains sur pherc0358" uv run python "$ROOT/src/figures/figure_compter_la_surface_entiere_et_rogner_le_depart_garde_t_il_les_deux_gains_sur_pherc0358.py" --verifier
 run "des chaînes rognées lisent-elles leurs validées sur le bon tour de paris4" uv run python "$ROOT/src/nappe/des_chaines_rognees_lisent_elles_leurs_validees_sur_le_bon_tour_de_paris4.py" --verifier
 run "figure des chaînes rognées lisent-elles leurs validées sur le bon tour de paris4" uv run python "$ROOT/src/figures/figure_des_chaines_rognees_lisent_elles_leurs_validees_sur_le_bon_tour_de_paris4.py" --verifier
+run "quel saut de la suivie de la graine 7 comptait-il de trop sur paris4" uv run python "$ROOT/src/nappe/quel_saut_de_la_suivie_de_la_graine_7_comptait_il_de_trop_sur_paris4.py" --verifier
+run "figure quel saut de la suivie de la graine 7 comptait-il de trop sur paris4" uv run python "$ROOT/src/figures/figure_quel_saut_de_la_suivie_de_la_graine_7_comptait_il_de_trop_sur_paris4.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

@@ -5,6 +5,13 @@ Cette tranche lance les trois chaînes de PHercParis4 en rognant chaque surface 
 publiés. Rognées, 62 des 62 surfaces validées lues sont sur le bon tour ; comptées entières, 60 des 60 : par la règle déclarée, oui. Le
 rognage ne fait aucun tort là où la vérité est connue, et il ramène sur le bon tour les deux surfaces que `385` lisait sur un mauvais.*
 
+> ⚠⚠⚠⚠ **CORRIGÉ PAR `401`, LE 2026-10-01.** Ce document dit que le rognage « ramène sur le bon tour les deux surfaces que `385`
+> lisait sur un mauvais » et « corrige deux comptes », et `R4-P198` demande quel saut `385` comptait de trop. `401` lit les tours de la
+> suivie de la graine 7, côté moins : dans `385`, son sixième saut va du tour −3 au tour −6 et `m7` lui donne 2 feuilles, donc **`385`
+> comptait une feuille de moins, pas de trop** (ce que `R4-F580` disait déjà). Rognée, la suivie ne fait pas ce saut : ses sixième à
+> huitième surfaces sont aux tours −4, −5 et −6. **Ce ne sont pas les mêmes surfaces** : le rognage a changé la chaîne, il n'a pas corrigé
+> un compte. ⭐ Les mesures de cette tranche sont intactes, et le verdict, oui, tient.
+
 ![Les surfaces lues et les surfaces validées et contredites de 385, des chaînes rognées et des chaînes rognées comptées entières](../images/400_des_chaines_rognees_lisent_elles_leurs_validees_sur_le_bon_tour_de_paris4.png)
 
 ## 0. Pourquoi cette tranche
