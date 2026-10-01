@@ -3336,6 +3336,34 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 387 : ALIGNER LES COMPTES SUR LA PREMIÈRE PAIRE MÊME FEUILLE VALIDE-T-IL SUR LE BON TOUR
+    s387 = _source(racine, "aligner_les_comptes_sur_la_premiere_paire_meme_feuille_valide_t_il_sur_le_bon_tour.json")
+    if s387.exists():
+        d = json.loads(s387.read_text())
+        a, b = d["paris4_alignes"], d["paris4_sans_alignement"]
+        agis = [c for c in d["les_cotes_de_paris4"] if any(e for e in c["les_ecarts"].values())]
+        c8 = next(c for c in d["les_cotes_de_paris4"] if (c["le_rang"], c["le_cote"]) == (8, "moins"))
+        t8 = [s_ for s_ in c8["les_surfaces_alignees"] if s_["la_chaine"] == "tierce" and s_["lue"]]
+        z8 = next(c for c in d["les_cotes_de_0358"] if (c["le_rang"], c["le_cote"]) == (8, "moins"))
+        autres0 = [c for c in d["les_cotes_de_0358"] if c["validees"][0] != c["validees"][1]]
+        va, vb = a["validée"], b["validée"]
+        ecrits = [("le verdict de 387", f"ALIGNÉS, {va['sur_le_bon_tour']} DES {va['lues']} SURFACES VALIDÉES LUES SONT SUR LE BON TOUR, CONTRE "
+                   f"{vb['sur_le_bon_tour']} DES {vb['lues']} SANS ALIGNEMENT : {d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"),
+                  ("le résumé de 387", f"PHercParis4 dans un seul repère pour les trois chaînes. Alignés, {va['sur_le_bon_tour']} des {va['lues']}"),
+                  ("les deux côtés de 387", "il n'agit que sur la graine 4, côté plus, que les tours publiés ne"
+                   if [(c["le_rang"], c["le_cote"]) for c in agis] == [(4, "plus"), (8, "moins")] else "changé"),
+                  ("le décalage de la tierce dans 387", f"l'alignement décale la tierce de {-c8['les_ecarts']['tierce']} : ses {len(t8)} surfaces lues "
+                   "quittent leur tour." if c8["les_ecarts"]["tierce"] == -2 and not any(s_["sur_le_bon_tour"] for s_ in t8) else "changé"),
+                  ("la graine 8 de 0358 dans 387", "Sur PHerc0358, il ne change que la graine 8, côté moins, où il" + (""
+                   if [(c["le_rang"], c["le_cote"]) for c in autres0] == [(8, "moins")] and z8["validees"] == [0, 1] else " changé")),
+                  ("les 66 sans alignement de 387", f"{vb['lues']} surfaces validées lues sont sur le tour que leur compte leur donne dans le repère de la suivie"
+                   if vb["lues"] == vb["sur_le_bon_tour"] else "changé")]
+        for st in ("validée", "contredite", "confirmée une fois", "sans témoin"):
+            x, y = b[st], a[st]
+            ecrits.append((f"la ligne {st} de 387", f"| {st} | {x['les_surfaces']} | {x['lues']} | {x['sur_le_bon_tour']} | {y['les_surfaces']} | "
+                                                     f"{y['lues']} | {y['sur_le_bon_tour']} |"))
+        out.extend((nom_, [x_], s387.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 386 : LES CONTRADICTIONS DE LA GRAINE 8 NAISSENT-ELLES AU PREMIER SAUT OU À UN SAUT DE DEUX FEUILLES
     s386 = _source(racine, "les_contradictions_de_la_graine_8_naissent_elles_au_premier_saut_ou_a_un_saut_de_deux_feuilles.json")
     if s386.exists():

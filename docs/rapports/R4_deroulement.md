@@ -4865,6 +4865,12 @@ le logiciel peut porter. `R4-P183` s'ouvre : où naissent les contradictions de 
 sur la même feuille. Côté moins, elles suivent pourtant les mêmes feuilles à des écarts de comptes constants qui s'accordent (2, 1 et 3).
 `R4-P184` s'ouvre : aligner les comptes sur la première paire même feuille ?
 
+**`387` · 2026-10-01 · aligner les comptes sur la première paire même feuille valide-t-il sur le bon tour** — `R4-P184`
+
+⭐⭐⭐⭐ **Oui par la règle, non en substance** — `R4-F573`. Dans un seul repère pour les trois chaînes, l'accord aux comptes de `m7` reste
+juste sur PHercParis4, 66 sur 66, aligné ou non ; mais aligner sur une seule paire, fausse sur la graine 8, côté moins, fait quitter leur
+tour à 6 surfaces lues de la tierce. `R4-P185` s'ouvre : un écart pris sur au moins cinq paires qui s'accordent ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

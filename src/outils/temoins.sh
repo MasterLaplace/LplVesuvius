@@ -1911,6 +1911,8 @@ run "l'accord aux comptes de m7 valide-t-il des surfaces sur le bon tour de Pari
 run "figure l'accord aux comptes de m7 valide-t-il des surfaces sur le bon tour de Paris4" uv run python "$ROOT/src/figures/figure_laccord_aux_comptes_de_m7_valide_t_il_des_surfaces_sur_le_bon_tour_de_paris4.py" --verifier
 run "les contradictions de la graine 8 naissent-elles au premier saut ou à un saut de deux feuilles" uv run python "$ROOT/src/nappe/les_contradictions_de_la_graine_8_naissent_elles_au_premier_saut_ou_a_un_saut_de_deux_feuilles.py" --verifier
 run "figure les contradictions de la graine 8 naissent-elles au premier saut ou à un saut de deux feuilles" uv run python "$ROOT/src/figures/figure_les_contradictions_de_la_graine_8_naissent_elles_au_premier_saut_ou_a_un_saut_de_deux_feuilles.py" --verifier
+run "aligner les comptes sur la première paire même feuille valide-t-il sur le bon tour" uv run python "$ROOT/src/nappe/aligner_les_comptes_sur_la_premiere_paire_meme_feuille_valide_t_il_sur_le_bon_tour.py" --verifier
+run "figure aligner les comptes sur la première paire même feuille valide-t-il sur le bon tour" uv run python "$ROOT/src/figures/figure_aligner_les_comptes_sur_la_premiere_paire_meme_feuille_valide_t_il_sur_le_bon_tour.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
