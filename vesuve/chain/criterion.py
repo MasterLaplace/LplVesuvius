@@ -58,18 +58,17 @@ def sheets_between(seen: np.ndarray, depths: np.ndarray, gap: float, tolerance: 
     return None if first is None or second is None else abs(second - first)
 
 
-def gaps_to(departure_points: np.ndarray, arrival_points: np.ndarray, arrival_normals: np.ndarray,
-            lateral: float) -> np.ndarray:
-    """The signed gap along the normal of each arrival point to the nearest point of the departure cloud; NaN for a point
-    with no departure point within `lateral` voxels sideways."""
+def gaps_to(cloud: np.ndarray, points: np.ndarray, point_normals: np.ndarray, lateral: float) -> np.ndarray:
+    """The signed gap along the normal of each of `points` to the nearest point of `cloud`; NaN for a point with no cloud point
+    within `lateral` voxels sideways."""
     from scipy.spatial import cKDTree
 
-    if not len(arrival_points) or not len(departure_points):
-        return np.full(len(arrival_points), np.nan)
-    _, nearest = cKDTree(departure_points).query(arrival_points)
-    delta = departure_points[nearest] - arrival_points
-    along = np.einsum("ij,ij->i", delta, arrival_normals)
-    sideways = np.linalg.norm(delta - along[:, None] * arrival_normals, axis=-1)
+    if not len(points) or not len(cloud):
+        return np.full(len(points), np.nan)
+    _, nearest = cKDTree(cloud).query(points)
+    delta = cloud[nearest] - points
+    along = np.einsum("ij,ij->i", delta, point_normals)
+    sideways = np.linalg.norm(delta - along[:, None] * point_normals, axis=-1)
     return np.where(sideways <= lateral, along, np.nan)
 
 
