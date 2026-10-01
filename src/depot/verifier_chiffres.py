@@ -3336,6 +3336,38 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 383 : LES FEUILLES DE M7 DISENT-ELLES QUE LE PREMIER SAUT DE LA SUIVIE DE LA GRAINE 4 EN FRANCHIT DEUX
+    s383 = _source(racine, "les_feuilles_de_m7_disent_elles_que_le_premier_saut_de_la_suivie_de_la_graine_4_en_franchit_deux.json")
+    if s383.exists():
+        d = json.loads(s383.read_text())
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        p2 = lambda x: f"{x / 20.0:.2f}".replace(".", ",")  # noqa: E731
+        ps = {x: d["les_sauts"][x][0] for x in ("suivie", "compagne", "tierce")}
+        nc, nt = d["les_nappes"]["compagne"], d["les_nappes"]["tierce"]
+        tous = [s_ for x in ("suivie", "compagne", "tierce") for s_ in d["les_sauts"][x]]
+        dits = [s_ for s_ in tous if s_["le_nombre_de_feuilles"] is not None]
+        un = lambda s_: s_["les_comptes"].get("1", 0)  # noqa: E731
+        f = ps["suivie"]["le_nombre_de_feuilles"]
+        ecrits = [("le verdict de 383", f"LE PREMIER SAUT DE LA SUIVIE FRANCHIT {f} FEUILLE, LES NAPPES SONT SUR LA MÊME FEUILLE : "
+                   f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"
+                   if nc["le_nombre_de_feuilles"] == 0 and nt["le_nombre_de_feuilles"] == 0 else "changé"),
+                  ("le résumé de 383", f"trois premiers sauts en franchissent une, la suivie {un(ps['suivie'])} points sur {ps['suivie']['les_mesures']}, "
+                   f"la compagne {un(ps['compagne'])} sur {ps['compagne']['les_mesures']}, la tierce {un(ps['tierce'])} sur {ps['tierce']['les_mesures']}, "
+                   "et les trois" if all(s_["le_nombre_de_feuilles"] == 1 for s_ in ps.values()) else "changé"),
+                  ("la lecture de 383", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne, en {vg(d['les_secondes'])} secondes"
+                   if not d["les_pannes"] and not d["la_lecture_de_m7"]["absents"] else "changé"),
+                  ("les nappes de 383", f"{nc['les_comptes'].get('0', 0)} des {nc['les_mesures']} points mesurés de l'une, et "
+                   f"{nt['les_comptes'].get('0', 0)} des {nt['les_mesures']} de l'autre, ne franchissent aucune feuille"),
+                  ("les sauts dits de 383", f"des {len(tous)} sauts des trois chaînes, {len(dits)} ont un nombre de feuilles dit, et les "
+                   f"{len(dits)} en franchissent une ; `369` en compte {sum(s_['le_genre'] == 'double' for s_ in tous)}"
+                   if all(s_["le_nombre_de_feuilles"] == 1 for s_ in dits) else "changé"),
+                  ("l'écart des feuilles de 383", f"les feuilles sont à {p2(ps['suivie']['lecart_median'])} à {p2(ps['tierce']['lecart_median'])}")]
+        for x in ("suivie", "compagne", "tierce"):
+            s_ = ps[x]
+            ecrits.append((f"la ligne {x} de 383", f"| premier saut de la {x} | {s_['le_genre']} | {p2(s_['lecart_median'])} pas | {s_['les_mesures']} | "
+                                                   f"{un(s_)} | {s_['les_comptes'].get('2', 0)} |"))
+        out.extend((nom_, [x_], s383.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 382 : RECOMPTER LE SAUT DE LA CHAÎNE DÉSIGNÉE LA MET-IL SUR LE BON TOUR DE PARIS4
     s382 = _source(racine, "recompter_le_saut_de_la_chaine_designee_la_met_il_sur_le_bon_tour_de_paris4.json")
     if s382.exists():

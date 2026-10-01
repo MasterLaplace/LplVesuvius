@@ -5,6 +5,13 @@ compagne et de la tierce font 1,67 et 1,76 pas et comptent 2. Cette tranche reco
 suivie tient alors les comptes avec la compagne sur 27 paires de 27 et avec la tierce sur 24 de 24, et 21 surfaces sont validées jusqu'à 8
 tours, aucune contredite : par la règle déclarée, oui, seul le seuil du saut double la séparait des deux autres.*
 
+> ⚠⚠⚠⚠ **CORRIGÉ PAR `383`, LE 2026-10-01.** Ce document conclut que la suivie « comptait un tour de moins à son premier saut ».
+> `383` compte les feuilles de `m7` que les premiers sauts franchissent : les trois en franchissent une, la suivie à 1,40 pas comme la
+> compagne et la tierce à 1,67 et 1,76 pas, et les trois nappes sont sur la même feuille. **Ce sont la compagne et la tierce qui comptaient
+> un tour de trop**, par la règle des sauts doubles de `369`. Le recompte fait bien tenir les paires, mais dans le sens de leur erreur : les
+> 21 surfaces validées sont à 1 à 7 tours de la nappe, non à 2 à 8. ⭐ La mesure de cette tranche est intacte, et la suivie n'avait pas
+> glissé.
+
 ![Avant et après le recompte, la part des paires qui tiennent les comptes dans chaque couple, et les surfaces par statut](../images/381_la_suivie_de_la_graine_4_tient_elle_les_comptes_si_son_premier_saut_est_compte_double.png)
 
 ## 0. Pourquoi cette tranche

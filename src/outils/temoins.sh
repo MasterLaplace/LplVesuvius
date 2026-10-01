@@ -1903,6 +1903,8 @@ run "la suivie de la graine 4 tient-elle les comptes si son premier saut est com
 run "figure la suivie de la graine 4 tient-elle les comptes si son premier saut est compté double" uv run python "$ROOT/src/figures/figure_la_suivie_de_la_graine_4_tient_elle_les_comptes_si_son_premier_saut_est_compte_double.py" --verifier
 run "recompter le saut de la chaîne désignée la met-il sur le bon tour de Paris4" uv run python "$ROOT/src/nappe/recompter_le_saut_de_la_chaine_designee_la_met_il_sur_le_bon_tour_de_paris4.py" --verifier
 run "figure recompter le saut de la chaîne désignée la met-il sur le bon tour de Paris4" uv run python "$ROOT/src/figures/figure_recompter_le_saut_de_la_chaine_designee_la_met_il_sur_le_bon_tour_de_paris4.py" --verifier
+run "les feuilles de m7 disent-elles que le premier saut de la suivie de la graine 4 en franchit deux" uv run python "$ROOT/src/nappe/les_feuilles_de_m7_disent_elles_que_le_premier_saut_de_la_suivie_de_la_graine_4_en_franchit_deux.py" --verifier
+run "figure les feuilles de m7 disent-elles que le premier saut de la suivie de la graine 4 en franchit deux" uv run python "$ROOT/src/figures/figure_les_feuilles_de_m7_disent_elles_que_le_premier_saut_de_la_suivie_de_la_graine_4_en_franchit_deux.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

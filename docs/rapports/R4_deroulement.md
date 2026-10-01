@@ -4840,6 +4840,12 @@ trois tiennent, la décaler d'un tour défait ses couples. `R4-P179` s'ouvre : l
 suivie de la graine 1, côté moins, que `379` accusait, et les 8 surfaces qu'il fait valider et qui sont lues sont sur le bon tour.
 `R4-P180` s'ouvre : les feuilles de `m7` franchies par le premier saut des trois chaînes de la graine 4, côté plus ?
 
+**`383` · 2026-10-01 · les feuilles de m7 disent-elles que le premier saut de la suivie de la graine 4 en franchit deux** — `R4-P180`
+
+⭐⭐⭐⭐⭐ **Non : les trois premiers sauts de la graine 4, côté plus, franchissent une feuille de `m7`** — `R4-F569`. La suivie, à 1,40 pas,
+comme la compagne et la tierce, à 1,67 et 1,76 pas, que `369` compte doubles ; les trois nappes sont sur la même feuille. Ce sont les deux
+autres qui comptaient un tour de trop : `381` est corrigé sur place (`R4-C45`). `R4-P181` s'ouvre : les sauts doubles de `369` sur PHerc0358 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

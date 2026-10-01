@@ -4,7 +4,7 @@
 
 # Les contradictions, et qui a tranché
 
-**233 disputes** que ce dépôt a eues avec lui-même, et comment chacune s'est finie. Une ligne : *A a dit · B a dit · C tranche · statut*. Les lire coûte moins cher que de les repayer.
+**234 disputes** que ce dépôt a eues avec lui-même, et comment chacune s'est finie. Une ligne : *A a dit · B a dit · C tranche · statut*. Les lire coûte moins cher que de les repayer.
 
 ## R1 — 42 lignes
 
@@ -148,7 +148,7 @@
 | `R3-C50` | `53` : garde `find -path "*rendu*"` | prenait le maillage (119 px) | composant de chemin ; `GARDER_RENDU=1` | tranché |
 | `R3-C51` | `44` : pas 0,25 = 9 nappes = presque un tour | ~10 % d'un tour par nappe ; deux nappes consécutives séparées par la circonférence | colonne, pas bande | tranché |
 
-## R4 — 44 lignes
+## R4 — 45 lignes
 
 | id | A a dit | B a dit | C tranche | statut |
 |---|---|---|---|---|
@@ -196,6 +196,7 @@
 | `R4-C42` | `HANDOFF`:567 publie **1,213** sans record (`chiffres_sans_record`) ; `HANDOFF`:3210, :3222 `cd experiments`, `cd inference_xpu` (dossiers disparus) ; `86` §4 et les fiches lient `33_incertitude_de_la_carte.md`, qui n'a jamais existé (`33` s'appelle `la_carte_nest_pas_resolue`) | — | archive gelée : notés, non corrigés | à noter |
 | `R4-C43` | `214` §6 : « le triangle SUR-DÉTERMINÉ réfute le modèle additif », pire résidu **3,6279 erreurs** sur `197-198` | `216` : ce résidu vaut **2,4281** une fois le budget d'erreur corrigé, et **4**/**19** tirages du modèle déclaré font aussi fort — la réfutation est un artefact de la formule d'erreur | les deux mesures sont justes ; c'est le DÉNOMINATEUR qui diffère, et `214` ne l'avait pas mis en procès | tranchée par `216` : `214` corrigé sur place par un renvoi, sa mesure et ses autres conclusions intactes |
 | `R4-C44` | `239` §1 : la portée est « la plus longue traversée que `235` publie », de la première à la dernière coupe au-delà du demi-feuillet, **40** rangées | `245` : entre ces deux coupes, le cumul repasse en deçà aux coupes 183 et 193 ; ce sont deux traversées, dont la plus longue dure au plus **30** rangées, et une suite de coupes à 40 les évite toutes | la garantie de `239` reste exacte pour une traversée d'au moins 40 rangées ; c'est sa prémisse qui tombe : la traversée d'où la portée vient n'en est pas une | tranchée par `245` : la portée qui voit les traversées de `235` est **29** ; `239` et `243` coupent au-delà |
+| `R4-C45` | `381` §3–4 : la suivie de la graine 4, côté plus, « comptait un tour de moins à son premier saut » ; recompté double, ce saut fait tenir ses deux couples, et **21** surfaces sont validées **jusqu'à 8 tours** | `383` : les trois premiers sauts franchissent **une** feuille de `m7`, la suivie à 1,40 pas comme la compagne et la tierce à 1,67 et 1,76 pas, et les trois nappes sont sur la même feuille ; ce sont la compagne et la tierce que `369` comptait un tour de trop | les deux mesures sont justes : le recompte fait tenir les paires ; c'est le SENS de la correction qui tombe, `381` ayant aligné la suivie sur l'erreur des deux autres | tranchée par `383` : `381` corrigé sur place par un renvoi ; ses surfaces validées sont à **1** à **7** tours, sa mesure intacte |
 
 ## R5 — 42 lignes
 

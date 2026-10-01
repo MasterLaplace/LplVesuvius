@@ -1,0 +1,390 @@
+{
+ "la_question": "Sur PHerc0358, les feuilles de m7 franchies entre la nappe et la première surface des trois chaînes de la graine 4, côté plus, disent-elles que le premier saut de la suivie, à 1,40 pas, en franchit deux comme les autres ?",
+ "le_cote": [
+  4,
+  "plus"
+ ],
+ "les_constantes": {
+  "le_pas": 20.0,
+  "le_lateral": 11.098,
+  "le_minimum_de_mesures": 50
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 2389,
+  "absents": 0,
+  "octets": 1165164101
+ },
+ "redonne_380": true,
+ "les_sauts": {
+  "suivie": [
+   {
+    "le_saut": 1,
+    "les_points": 538,
+    "les_en_face": 359,
+    "les_mesures": 358,
+    "les_comptes": {
+     "1": 357,
+     "2": 1
+    },
+    "la_part_dune_feuille": 0.9972,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 27.976,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 2,
+    "les_points": 472,
+    "les_en_face": 462,
+    "les_mesures": 462,
+    "les_comptes": {
+     "1": 441,
+     "2": 21
+    },
+    "la_part_dune_feuille": 0.9545,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 16.814,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 3,
+    "les_points": 450,
+    "les_en_face": 449,
+    "les_mesures": 448,
+    "les_comptes": {
+     "0": 5,
+     "1": 443
+    },
+    "la_part_dune_feuille": 0.9888,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 15.734,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 4,
+    "les_points": 423,
+    "les_en_face": 421,
+    "les_mesures": 421,
+    "les_comptes": {
+     "1": 421
+    },
+    "la_part_dune_feuille": 1.0,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 15.315,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 5,
+    "les_points": 434,
+    "les_en_face": 348,
+    "les_mesures": 347,
+    "les_comptes": {
+     "0": 5,
+     "1": 342
+    },
+    "la_part_dune_feuille": 0.9856,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 13.655,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 6,
+    "les_points": 399,
+    "les_en_face": 399,
+    "les_mesures": 399,
+    "les_comptes": {
+     "1": 399
+    },
+    "la_part_dune_feuille": 1.0,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 15.326,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 7,
+    "les_points": 244,
+    "les_en_face": 204,
+    "les_mesures": 203,
+    "les_comptes": {
+     "0": 1,
+     "1": 171,
+     "2": 31
+    },
+    "la_part_dune_feuille": 0.8424,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 18.327,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 8,
+    "les_points": 2,
+    "les_en_face": 2,
+    "les_mesures": 2,
+    "les_comptes": {
+     "0": 2
+    },
+    "la_part_dune_feuille": 0.0,
+    "le_nombre_de_feuilles": null,
+    "lecart_median": 0.84,
+    "le_genre": "simple"
+   }
+  ],
+  "compagne": [
+   {
+    "le_saut": 1,
+    "les_points": 442,
+    "les_en_face": 304,
+    "les_mesures": 304,
+    "les_comptes": {
+     "1": 304
+    },
+    "la_part_dune_feuille": 1.0,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 33.48,
+    "le_genre": "double"
+   },
+   {
+    "le_saut": 2,
+    "les_points": 456,
+    "les_en_face": 449,
+    "les_mesures": 447,
+    "les_comptes": {
+     "1": 439,
+     "2": 8
+    },
+    "la_part_dune_feuille": 0.9821,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 16.904,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 3,
+    "les_points": 457,
+    "les_en_face": 456,
+    "les_mesures": 455,
+    "les_comptes": {
+     "0": 7,
+     "1": 448
+    },
+    "la_part_dune_feuille": 0.9846,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 14.829,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 4,
+    "les_points": 458,
+    "les_en_face": 453,
+    "les_mesures": 453,
+    "les_comptes": {
+     "0": 3,
+     "1": 450
+    },
+    "la_part_dune_feuille": 0.9934,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 14.939,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 5,
+    "les_points": 483,
+    "les_en_face": 408,
+    "les_mesures": 407,
+    "les_comptes": {
+     "0": 4,
+     "1": 403
+    },
+    "la_part_dune_feuille": 0.9902,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 14.067,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 6,
+    "les_points": 452,
+    "les_en_face": 452,
+    "les_mesures": 452,
+    "les_comptes": {
+     "1": 452
+    },
+    "la_part_dune_feuille": 1.0,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 15.4,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 7,
+    "les_points": 270,
+    "les_en_face": 217,
+    "les_mesures": 214,
+    "les_comptes": {
+     "0": 2,
+     "1": 184,
+     "2": 28
+    },
+    "la_part_dune_feuille": 0.8598,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 16.814,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 8,
+    "les_points": 438,
+    "les_en_face": 166,
+    "les_mesures": 162,
+    "les_comptes": {
+     "0": 1,
+     "1": 102,
+     "2": 59
+    },
+    "la_part_dune_feuille": 0.6296,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 15.203,
+    "le_genre": "simple"
+   }
+  ],
+  "tierce": [
+   {
+    "le_saut": 1,
+    "les_points": 377,
+    "les_en_face": 253,
+    "les_mesures": 252,
+    "les_comptes": {
+     "1": 251,
+     "2": 1
+    },
+    "la_part_dune_feuille": 0.996,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 35.233,
+    "le_genre": "double"
+   },
+   {
+    "le_saut": 2,
+    "les_points": 347,
+    "les_en_face": 334,
+    "les_mesures": 333,
+    "les_comptes": {
+     "1": 321,
+     "2": 12
+    },
+    "la_part_dune_feuille": 0.964,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 17.556,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 3,
+    "les_points": 325,
+    "les_en_face": 322,
+    "les_mesures": 322,
+    "les_comptes": {
+     "0": 9,
+     "1": 313
+    },
+    "la_part_dune_feuille": 0.972,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 17.827,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 4,
+    "les_points": 308,
+    "les_en_face": 307,
+    "les_mesures": 307,
+    "les_comptes": {
+     "1": 307
+    },
+    "la_part_dune_feuille": 1.0,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 18.278,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 5,
+    "les_points": 320,
+    "les_en_face": 253,
+    "les_mesures": 252,
+    "les_comptes": {
+     "1": 252
+    },
+    "la_part_dune_feuille": 1.0,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 15.178,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 6,
+    "les_points": 314,
+    "les_en_face": 314,
+    "les_mesures": 314,
+    "les_comptes": {
+     "1": 314
+    },
+    "la_part_dune_feuille": 1.0,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 15.95,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 7,
+    "les_points": 179,
+    "les_en_face": 153,
+    "les_mesures": 153,
+    "les_comptes": {
+     "1": 138,
+     "2": 15
+    },
+    "la_part_dune_feuille": 0.902,
+    "le_nombre_de_feuilles": 1,
+    "lecart_median": 18.578,
+    "le_genre": "simple"
+   },
+   {
+    "le_saut": 8,
+    "les_points": 130,
+    "les_en_face": 41,
+    "les_mesures": 41,
+    "les_comptes": {
+     "0": 6,
+     "1": 33,
+     "2": 2
+    },
+    "la_part_dune_feuille": 0.8049,
+    "le_nombre_de_feuilles": null,
+    "lecart_median": 12.058,
+    "le_genre": "simple"
+   }
+  ]
+ },
+ "les_nappes": {
+  "compagne": {
+   "les_points": 593,
+   "les_en_face": 539,
+   "les_mesures": 537,
+   "les_comptes": {
+    "0": 488,
+    "1": 48,
+    "2": 1
+   },
+   "la_part_dune_feuille": 0.0894,
+   "le_nombre_de_feuilles": 0
+  },
+  "tierce": {
+   "les_points": 765,
+   "les_en_face": 679,
+   "les_mesures": 675,
+   "les_comptes": {
+    "0": 551,
+    "1": 120,
+    "2": 4
+   },
+   "la_part_dune_feuille": 0.1778,
+   "le_nombre_de_feuilles": 0
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "le premier saut de la suivie franchit 1 feuille ; les nappes de la compagne et de la tierce sont à 0 et 0 feuille de celle de la suivie ; non"
+ },
+ "les_secondes": 12.8
+}
