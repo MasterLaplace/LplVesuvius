@@ -20,7 +20,7 @@
 extern "C" {
 #endif
 
-#define VESUVE_VERSION "0.2.0"
+#define VESUVE_VERSION "0.3.0"
 
 typedef enum {
     VESUVE_OK = 0,

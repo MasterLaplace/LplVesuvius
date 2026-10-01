@@ -5,6 +5,11 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-10-01
+
+The transfer to the next winding, computed here from the published surface prediction instead of replayed from
+the research, and the correction run on it, which still gives back 163 for 41.
+
 ### Added
 - `vesuve grand-prize` computes the transfer to the next winding itself (stage TN) instead of replaying the one the
   research saved: along the normal of each point of the mesh, one point in eight, the first sheet the prediction `m7`
