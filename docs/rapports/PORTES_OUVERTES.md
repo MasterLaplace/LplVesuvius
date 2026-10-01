@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**233 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**234 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 195 portes
+## Grand Prize — 196 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -213,7 +213,8 @@
 - **R4-P176** *(le graal)* · **RÉPONDUE par `380` : oui.** Sur les onze côtés de PHerc0358 que `324` n'a pas retenus, l'accord de trois chaînes valide 25 des 106 surfaces, sur la graine 4, côté moins (19, jusqu'à 8 tours), et la graine 6, côté plus (6, jusqu'à 3 tours) ; partout où il valide, le premier saut des trois chaînes tombe entre 1,67 et 1,93 pas et est compté double (`R4-F566`). La question était : **SUR PHERC0358, L'ACCORD DE TROIS CHAÎNES VALIDE-T-IL DES SURFACES SUR LES CÔTÉS DE GRAINE QUE `324` N'A PAS RETENUS, LÀ OÙ SON SAUT NE POSE PAS AU PAS ?** La suite est `R4-P178`.
 - **R4-P177** *(le graal)* · **RÉPONDUE par `379` : oui.** Sur PHercParis4, la règle de `374` rejouée telle quelle ne valide que des surfaces sur le bon tour publié : 46 des 46 validées lues, contre 11 des 14 contredites lues (`R4-F565`). La question était : **UNE SURFACE QUE L'ACCORD DE TROIS CHAÎNES VALIDE, COMME `374` SUR PHERC0358, EST-ELLE SUR LE TOUR PUBLIÉ QUE SON COMPTE CORRIGÉ LUI DONNE, LÀ OÙ PHERCPARIS4 DONNE UNE VÉRITÉ ?** (issue #19).
 - **R4-P178** *(le graal)* · **RÉPONDUE par `381` : oui.** Recompté double, le premier saut de la suivie fait tenir ses deux couples, 27 paires sur 27 avec la compagne et 24 sur 24 avec la tierce, et 21 surfaces sont validées jusqu'à 8 tours, aucune contredite ; là où les trois couples tiennent, décaler la suivie d'un tour les défait (`R4-F567`). La question était : **SUR LA GRAINE 4, CÔTÉ PLUS, DE PHERC0358, LA SUIVIE QUE LE VOTE DÉSIGNE TIENT-ELLE LES COMPTES AVEC LES DEUX AUTRES CHAÎNES SI SON PREMIER SAUT, À 1,40 PAS, EST COMPTÉ DOUBLE COMME LES LEURS, À 1,67 ET 1,76 PAS ?** La suite est `R4-P179`.
-- **R4-P179** *(le graal)* · **SUR PHERCPARIS4, LÀ OÙ LE VOTE DÉSIGNE UNE CHAÎNE, RECOMPTER D'UN TOUR LE SEUL SAUT QUI FAIT TENIR SES DEUX COUPLES MET-IL SES SURFACES SUR LE BON TOUR PUBLIÉ ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `381` DÉSIGNE. Sur la graine 4, côté plus, de PHerc0358, un saut recompté fait tenir la chaîne que le vote désignait (`R4-F567`), mais le saut avait été choisi parce que `380` l'avait nommé : une règle qui cherche seule le saut à recompter doit être éprouvée là où une vérité existe, et `379` a laissé trois surfaces contredites fausses nées d'un saut compté double.
+- **R4-P179** *(le graal)* · **RÉPONDUE par `382` : indécidable.** La règle qui recompte le seul saut faisant tenir la chaîne désignée ne retrouve pas le recompte de `381` : sur la graine 4, côté plus, de PHerc0358, compter double le premier ou le deuxième saut de la suivie la fait tenir, à 27 et 24 paires sur 27 et 24 ou à 26 et 23, et elle n'en retient aucun ; sur PHercParis4, le vote ne désigne une chaîne que sur 2 côtés sur 16, et le seul recompte retenu fait valider 8 surfaces lues, toutes sur le bon tour (`R4-F568`). La question était : **SUR PHERCPARIS4, LÀ OÙ LE VOTE DÉSIGNE UNE CHAÎNE, RECOMPTER D'UN TOUR LE SEUL SAUT QUI FAIT TENIR SES DEUX COUPLES MET-IL SES SURFACES SUR LE BON TOUR PUBLIÉ ?** La suite est `R4-P180`.
+- **R4-P180** *(le graal)* · **SUR PHERC0358, LES FEUILLES DE `m7` FRANCHIES ENTRE LA NAPPE ET LA PREMIÈRE SURFACE DES TROIS CHAÎNES DE LA GRAINE 4, CÔTÉ PLUS, DISENT-ELLES QUE LE PREMIER SAUT DE LA SUIVIE, À 1,40 PAS, EN FRANCHIT DEUX COMME LES AUTRES ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `382` DÉSIGNE. L'accord et le recompte disent qu'un saut compté double fait tenir la suivie (`R4-F567`), mais ni l'un ni l'autre ne voit ce qu'il y a entre la nappe et la surface ; `m7`, lu le long du saut, est le seul témoin indépendant sur un rouleau sans tracé.
 
 ## Progress Prizes — 19 portes
 

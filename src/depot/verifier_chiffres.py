@@ -3336,6 +3336,47 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 382 : RECOMPTER LE SAUT DE LA CHAÎNE DÉSIGNÉE LA MET-IL SUR LE BON TOUR DE PARIS4
+    s382 = _source(racine, "recompter_le_saut_de_la_chaine_designee_la_met_il_sur_le_bon_tour_de_paris4.json")
+    if s382.exists():
+        d = json.loads(s382.read_text())
+        b = d["le_bilan"]
+        cote = lambda k, r, c: next(x for x in d[k] if (x["le_rang"], x["le_cote"]) == (r, c))  # noqa: E731
+        p1, p4, z4, z7 = (cote("les_cotes_de_paris4", 1, "moins"), cote("les_cotes_de_paris4", 4, "plus"),
+                          cote("les_cotes_de_0358", 4, "plus"), cote("les_cotes_de_0358", 7, "plus"))
+        cand = lambda k: "le saut {}, de {} à {} ({} sur {}, {} sur {})".format(  # noqa: E731
+            k["le_saut"], k["de"], k["a"], *k["les_couples"]["suivie|compagne"], *k["les_couples"]["suivie|tierce"])
+        s_, t_ = b["les_surfaces_de_la_chaine"], b["les_surfaces_des_trois"]
+        huit = next((x for x in p1["les_nouvelles"] if x["la_chaine"] == "suivie" and x["le_saut"] == 8), None)
+        ecrits = [("le verdict de 382", "INDÉCIDABLE : SUR PHERC0358, LA RÈGLE NE RETROUVE PAS LE SEUL RECOMPTE DE `381`"
+                   if not d["le_controle"] and d["le_verdict"]["lissue"].startswith("indécidable : sur PHerc0358") else "changé"),
+                  ("les côtés désignés de 382", f"le vote ne désigne une chaîne que sur {b['designees']} côtés sur {b['les_cotes']}"),
+                  ("les lues de 382", f"les {t_['lues']} surfaces qu'il fait valider et qui sont lues sont sur le bon tour"
+                   if t_["lues"] == t_["sur_le_bon_tour"] else "changé"),
+                  ("la ligne graine 1 moins de 382", "| PHercParis4, graine 1, moins | suivie | 1 : le saut {}, de {} à {} ({} paires sur {}, {} sur {}) | "
+                   "le saut {} |".format(p1["le_retenu"]["le_saut"], p1["le_retenu"]["de"], p1["le_retenu"]["a"],
+                                         *p1["le_retenu"]["les_couples"]["suivie|compagne"], *p1["le_retenu"]["les_couples"]["suivie|tierce"],
+                                         p1["le_retenu"]["le_saut"])),
+                  ("la ligne graine 4 plus de Paris4 dans 382", "| PHercParis4, graine 4, plus | compagne | aucun | aucun |"
+                   if p4["la_chaine"] == "compagne" and not p4["les_candidats_qui_font_tenir"] else "changé"),
+                  ("la ligne graine 4 plus de 0358 dans 382", f"| PHerc0358, graine 4, plus | suivie | {len(z4['les_candidats_qui_font_tenir'])} : "
+                   + " ; ".join(cand(k) for k in z4["les_candidats_qui_font_tenir"]) + " | aucun |" if z4["le_retenu"] is None else "changé"),
+                  ("la ligne graine 7 plus de 0358 dans 382", f"| PHerc0358, graine 7, plus | suivie | 1 : {cand(z7['le_retenu'])} | "
+                   f"le saut {z7['le_retenu']['le_saut']} |" if z7["le_retenu"] is not None else "changé"),
+                  ("les contredites de Paris4 dans 382", f"les {p1['avant']['contredite']} surfaces contredites du côté deviennent validées, "
+                   f"et les {t_['lues']} qui sont lues sont sur le bon tour publié,"
+                   if p1["apres"]["contredite"] == 0 and p1["apres"]["validée"] == p1["avant"]["validée"] + p1["avant"]["contredite"]
+                   and huit is not None and huit["sur_le_bon_tour"] else "changé"),
+                  ("la référence de 382", "Le recompte est jugeable : la référence de la suivie est sa deuxième surface."
+                   if p1["la_reference"] == 2 and p1["jugeable"] else "changé"),
+                  ("la lue de la chaîne dans 382", f"une seule surface lue de la chaîne recomptée, sous les {d['les_constantes']['le_minimum']}"
+                   if s_["lues"] == 1 else "changé"),
+                  ("le saut de la graine 7 dans 382", "son deuxième saut, à 23,438 voxels, soit 1,17 pas,"
+                   if (z7["le_retenu"]["le_saut"], z7["le_retenu"]["de"], z7["le_retenu"]["a"]) == (2, 1, 2) else "changé"),
+                  ("les statuts de la graine 7 dans 382", f"les surfaces validées passent de {z7['avant']['validée']} à {z7['apres']['validée']} "
+                   f"et les contredites de {z7['avant']['contredite']} à {z7['apres']['contredite']}")]
+        out.extend((nom_, [x_], s382.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 381 : LA SUIVIE DE LA GRAINE 4 TIENT-ELLE LES COMPTES SI SON PREMIER SAUT EST COMPTÉ DOUBLE
     s381 = _source(racine, "la_suivie_de_la_graine_4_tient_elle_les_comptes_si_son_premier_saut_est_compte_double.json")
     if s381.exists():

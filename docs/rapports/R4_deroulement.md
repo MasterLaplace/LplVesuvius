@@ -4833,6 +4833,13 @@ besoin que le saut de `324` pose au pas. `R4-P178` s'ouvre : la suivie de la gra
 le premier saut de la suivie, à 1,40 pas, fait tenir ses deux couples et valide 21 surfaces jusqu'à 8 tours, aucune contredite ; là où les
 trois tiennent, la décaler d'un tour défait ses couples. `R4-P179` s'ouvre : le recompte éprouvé contre les tours publiés de PHercParis4 ?
 
+**`382` · 2026-10-01 · recompter le saut de la chaîne désignée la met-il sur le bon tour de Paris4** — `R4-P179`
+
+⭐⭐⭐⭐ **Indécidable : sur la graine 4 de PHerc0358, deux sauts de la suivie la font tenir, et la règle n'en retient aucun** —
+`R4-F568`. Sur PHercParis4, le vote ne désigne une chaîne que sur 2 côtés sur 16 ; le seul recompte retenu corrige le cinquième saut de la
+suivie de la graine 1, côté moins, que `379` accusait, et les 8 surfaces qu'il fait valider et qui sont lues sont sur le bon tour.
+`R4-P180` s'ouvre : les feuilles de `m7` franchies par le premier saut des trois chaînes de la graine 4, côté plus ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

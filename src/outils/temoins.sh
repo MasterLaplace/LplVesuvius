@@ -1901,6 +1901,8 @@ run "l'accord de trois chaînes valide-t-il sur les côtés que 324 n'a pas rete
 run "figure l'accord de trois chaînes valide-t-il sur les côtés que 324 n'a pas retenus" uv run python "$ROOT/src/figures/figure_laccord_de_trois_chaines_valide_t_il_sur_les_cotes_que_324_na_pas_retenus.py" --verifier
 run "la suivie de la graine 4 tient-elle les comptes si son premier saut est compté double" uv run python "$ROOT/src/nappe/la_suivie_de_la_graine_4_tient_elle_les_comptes_si_son_premier_saut_est_compte_double.py" --verifier
 run "figure la suivie de la graine 4 tient-elle les comptes si son premier saut est compté double" uv run python "$ROOT/src/figures/figure_la_suivie_de_la_graine_4_tient_elle_les_comptes_si_son_premier_saut_est_compte_double.py" --verifier
+run "recompter le saut de la chaîne désignée la met-il sur le bon tour de Paris4" uv run python "$ROOT/src/nappe/recompter_le_saut_de_la_chaine_designee_la_met_il_sur_le_bon_tour_de_paris4.py" --verifier
+run "figure recompter le saut de la chaîne désignée la met-il sur le bon tour de Paris4" uv run python "$ROOT/src/figures/figure_recompter_le_saut_de_la_chaine_designee_la_met_il_sur_le_bon_tour_de_paris4.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

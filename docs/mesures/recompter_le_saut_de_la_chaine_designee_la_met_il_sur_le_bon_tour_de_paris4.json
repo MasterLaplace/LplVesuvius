@@ -1,0 +1,9247 @@
+{
+ "la_question": "Sur PHercParis4, là où le vote désigne une chaîne, recompter d'un tour le seul saut qui fait tenir ses deux couples met-il ses surfaces sur le bon tour publié ?",
+ "les_constantes": {
+  "le_minimum": 5,
+  "la_part": 0.9,
+  "la_part_basse": 0.75
+ },
+ "le_controle": false,
+ "les_cotes_de_paris4": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 22,
+    "confirmée une fois": 2,
+    "contredite": 0,
+    "sans témoin": 0
+   },
+   "apres": {
+    "validée": 22,
+    "confirmée une fois": 2,
+    "contredite": 0,
+    "sans témoin": 0
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "les_candidats_qui_font_tenir": [
+    {
+     "le_saut": 5,
+     "de": 2,
+     "a": 1,
+     "fait_tenir": true,
+     "les_couples": {
+      "suivie|compagne": [
+       18,
+       18
+      ],
+      "suivie|tierce": [
+       20,
+       20
+      ]
+     }
+    }
+   ],
+   "le_retenu": {
+    "le_saut": 5,
+    "de": 2,
+    "a": 1,
+    "fait_tenir": true,
+    "les_couples": {
+     "suivie|compagne": [
+      18,
+      18
+     ],
+     "suivie|tierce": [
+      20,
+      20
+     ]
+    }
+   },
+   "la_reference": 2,
+   "jugeable": true,
+   "avant": {
+    "validée": 12,
+    "confirmée une fois": 0,
+    "contredite": 12,
+    "sans témoin": 0
+   },
+   "apres": {
+    "validée": 24,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 0
+   },
+   "les_nouvelles": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    }
+   ],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 23,
+    "sans témoin": 1
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 23,
+    "sans témoin": 1
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 10,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 8,
+    "confirmée une fois": 12,
+    "contredite": 0,
+    "sans témoin": 4
+   },
+   "apres": {
+    "validée": 8,
+    "confirmée une fois": 12,
+    "contredite": 0,
+    "sans témoin": 4
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 9,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 10,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 10,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 9,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 10,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 1,
+    "confirmée une fois": 4,
+    "contredite": 10,
+    "sans témoin": 9
+   },
+   "apres": {
+    "validée": 1,
+    "confirmée une fois": 4,
+    "contredite": 10,
+    "sans témoin": 9
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 2,
+    "contredite": 21,
+    "sans témoin": 1
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 2,
+    "contredite": 21,
+    "sans témoin": 1
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 10,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 10,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 11,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 3,
+    "confirmée une fois": 3,
+    "contredite": 18,
+    "sans témoin": 0
+   },
+   "apres": {
+    "validée": 3,
+    "confirmée une fois": 3,
+    "contredite": 18,
+    "sans témoin": 0
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 11,
+    "confirmée une fois": 10,
+    "contredite": 2,
+    "sans témoin": 1
+   },
+   "apres": {
+    "validée": 11,
+    "confirmée une fois": 10,
+    "contredite": 2,
+    "sans témoin": 1
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 3,
+    "confirmée une fois": 0,
+    "contredite": 21,
+    "sans témoin": 0
+   },
+   "apres": {
+    "validée": 3,
+    "confirmée une fois": 0,
+    "contredite": 21,
+    "sans témoin": 0
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 20,
+    "confirmée une fois": 0,
+    "contredite": 2,
+    "sans témoin": 2
+   },
+   "apres": {
+    "validée": 20,
+    "confirmée une fois": 0,
+    "contredite": 2,
+    "sans témoin": 2
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 3,
+    "confirmée une fois": 0,
+    "contredite": 21,
+    "sans témoin": 0
+   },
+   "apres": {
+    "validée": 3,
+    "confirmée une fois": 0,
+    "contredite": 21,
+    "sans témoin": 0
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 21,
+    "confirmée une fois": 2,
+    "contredite": 0,
+    "sans témoin": 1
+   },
+   "apres": {
+    "validée": 21,
+    "confirmée une fois": 2,
+    "contredite": 0,
+    "sans témoin": 1
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 10,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 2,
+    "confirmée une fois": 3,
+    "contredite": 12,
+    "sans témoin": 7
+   },
+   "apres": {
+    "validée": 2,
+    "confirmée une fois": 3,
+    "contredite": 12,
+    "sans témoin": 7
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 3,
+    "confirmée une fois": 2,
+    "contredite": 0,
+    "sans témoin": 13
+   },
+   "apres": {
+    "validée": 3,
+    "confirmée une fois": 2,
+    "contredite": 0,
+    "sans témoin": 13
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -7
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 1,
+    "contredite": 6,
+    "sans témoin": 17
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 1,
+    "contredite": 6,
+    "sans témoin": 17
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 4,
+    "sans témoin": 20
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 4,
+    "sans témoin": 20
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 10,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  }
+ ],
+ "les_cotes_de_0358": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 7,
+    "contredite": 9,
+    "sans témoin": 1
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 7,
+    "contredite": 9,
+    "sans témoin": 1
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "les_candidats_qui_font_tenir": [
+    {
+     "le_saut": 1,
+     "de": 1,
+     "a": 2,
+     "fait_tenir": true,
+     "les_couples": {
+      "suivie|compagne": [
+       27,
+       27
+      ],
+      "suivie|tierce": [
+       24,
+       24
+      ]
+     }
+    },
+    {
+     "le_saut": 2,
+     "de": 1,
+     "a": 2,
+     "fait_tenir": true,
+     "les_couples": {
+      "suivie|compagne": [
+       26,
+       27
+      ],
+      "suivie|tierce": [
+       23,
+       24
+      ]
+     }
+    }
+   ],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 2,
+    "contredite": 21,
+    "sans témoin": 1
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 2,
+    "contredite": 21,
+    "sans témoin": 1
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 19,
+    "confirmée une fois": 1,
+    "contredite": 4,
+    "sans témoin": 0
+   },
+   "apres": {
+    "validée": 19,
+    "confirmée une fois": 1,
+    "contredite": 4,
+    "sans témoin": 0
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 0,
+    "sans témoin": 3
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 6,
+    "confirmée une fois": 0,
+    "contredite": 11,
+    "sans témoin": 3
+   },
+   "apres": {
+    "validée": 6,
+    "confirmée une fois": 0,
+    "contredite": 11,
+    "sans témoin": 3
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 15,
+    "confirmée une fois": 2,
+    "contredite": 6,
+    "sans témoin": 1
+   },
+   "apres": {
+    "validée": 15,
+    "confirmée une fois": 2,
+    "contredite": 6,
+    "sans témoin": 1
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "les_candidats_qui_font_tenir": [
+    {
+     "le_saut": 2,
+     "de": 1,
+     "a": 2,
+     "fait_tenir": true,
+     "les_couples": {
+      "suivie|compagne": [
+       22,
+       22
+      ],
+      "suivie|tierce": [
+       24,
+       26
+      ]
+     }
+    }
+   ],
+   "le_retenu": {
+    "le_saut": 2,
+    "de": 1,
+    "a": 2,
+    "fait_tenir": true,
+    "les_couples": {
+     "suivie|compagne": [
+      22,
+      22
+     ],
+     "suivie|tierce": [
+      24,
+      26
+     ]
+    }
+   },
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 3,
+    "confirmée une fois": 1,
+    "contredite": 20,
+    "sans témoin": 0
+   },
+   "apres": {
+    "validée": 10,
+    "confirmée une fois": 9,
+    "contredite": 3,
+    "sans témoin": 2
+   },
+   "les_nouvelles": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 7,
+    "confirmée une fois": 2,
+    "contredite": 3,
+    "sans témoin": 12
+   },
+   "apres": {
+    "validée": 7,
+    "confirmée une fois": 2,
+    "contredite": 3,
+    "sans témoin": 12
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 23,
+    "sans témoin": 1
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 23,
+    "sans témoin": 1
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": null,
+   "les_candidats_qui_font_tenir": [],
+   "le_retenu": null,
+   "la_reference": null,
+   "jugeable": false,
+   "avant": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 24,
+    "sans témoin": 0
+   },
+   "apres": {
+    "validée": 0,
+    "confirmée une fois": 0,
+    "contredite": 24,
+    "sans témoin": 0
+   },
+   "les_nouvelles": [],
+   "les_surfaces": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  }
+ ],
+ "le_bilan": {
+  "les_cotes": 16,
+  "designees": 2,
+  "recomptes": 1,
+  "jugeables": 1,
+  "les_recomptes": [
+   "1 moins : suivie, saut 5, 2 en 1"
+  ],
+  "les_surfaces_de_la_chaine": {
+   "les_surfaces": 4,
+   "lues": 1,
+   "sur_le_bon_tour": 1
+  },
+  "les_surfaces_des_trois": {
+   "les_surfaces": 12,
+   "lues": 8,
+   "sur_le_bon_tour": 8
+  }
+ },
+ "le_bilan_de_0358": {
+  "les_cotes": 16,
+  "designees": 2,
+  "recomptes": 1,
+  "jugeables": 0,
+  "les_recomptes": [
+   "7 plus : suivie, saut 2, 1 en 2"
+  ],
+  "les_surfaces_de_la_chaine": {
+   "les_surfaces": 0,
+   "lues": 0,
+   "sur_le_bon_tour": 0
+  },
+  "les_surfaces_des_trois": {
+   "les_surfaces": 0,
+   "lues": 0,
+   "sur_le_bon_tour": 0
+  }
+ },
+ "le_verdict": {
+  "decidable": false,
+  "lissue": "indécidable : sur PHerc0358, la règle ne retrouve pas le seul recompte de 381"
+ }
+}
