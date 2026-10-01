@@ -3336,6 +3336,49 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 400 : DES CHAÎNES ROGNÉES LISENT-ELLES LEURS VALIDÉES SUR LE BON TOUR DE PARIS4
+    s400 = _source(racine, "des_chaines_rognees_lisent_elles_leurs_validees_sur_le_bon_tour_de_paris4.json")
+    s385b = _source(racine, "laccord_aux_comptes_de_m7_valide_t_il_des_surfaces_sur_le_bon_tour_de_paris4.json")
+    if s400.exists() and s385b.exists():
+        d = json.loads(s400.read_text())
+        d385 = json.loads(s385b.read_text())
+        b, a, ro = d["le_bilan"], d["la_reference_385"], d["les_rognages"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        t5 = [s_ for c in d385["les_cotes"] for s_ in c["les_surfaces_avec_m7"]]
+        tous = lambda f: [x_ for c in d["les_cotes"] for x_ in c[f]["les_surfaces"]]  # noqa: E731
+        lu = lambda t: (sum(1 for x_ in t if x_[4] and x_[5]), sum(1 for x_ in t if x_[4]))  # noqa: E731
+        l5 = (sum(1 for s_ in t5 if s_["lue"] and s_["sur_le_bon_tour"]), sum(1 for s_ in t5 if s_["lue"]))
+        lr, le = lu(tous("rognees")), lu(tous("entieres"))
+        sans = [c for c in d["les_cotes"] if not c["les_surfaces_rognees"]]
+        faux = [(c["le_rang"], c["le_cote"], s_["la_chaine"], s_["le_saut"], s_["le_statut"], s_["le_compte"])
+                for c in d385["les_cotes"] for s_ in c["les_surfaces_avec_m7"] if s_["lue"] and not s_["sur_le_bon_tour"]]
+        par = {(c["le_rang"], c["le_cote"]): c for c in d["les_cotes"]}
+        apres = [next(x_ for x_ in par[(f_[0], f_[1])]["rognees"]["les_surfaces"] if (x_[0], x_[1]) == (f_[2], f_[3])) for f_ in faux]
+        ecrits = [("le verdict de 400", f"ROGNÉES, {b['rognees']['sur_le_bon_tour']} DES {b['rognees']['lues']} SURFACES VALIDÉES LUES SONT SUR LE BON "
+                   f"TOUR ; COMPTÉES ENTIÈRES, {b['entieres']['sur_le_bon_tour']} DES {b['entieres']['lues']} : "
+                   f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("le chapeau de 400", f"Rognées, {b['rognees']['sur_le_bon_tour']} des {b['rognees']['lues']} surfaces validées lues sont sur le bon "
+                   f"tour ; comptées entières, {b['entieres']['sur_le_bon_tour']} des {b['entieres']['lues']}"),
+                  ("la lecture de 400", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes. {ro['rognees']} des {ro['vues']} surfaces "
+                   f"gardées sont rognées, et perdent {format(ro['mailles'], ',').replace(',', ' ')} mailles" if not d["les_pannes"] else "changé"),
+                  ("le contrôle de 400", f"Un seul côté est dans ce cas, la graine {sans[0]['le_rang']},"
+                   if len(sans) == 1 and d["le_controle"] else "changé"),
+                  ("la ligne 385 de 400", f"| `385`, non rognées | {a['validees']} | {a['contredites']} | {a['sur_le_bon_tour']} sur {a['lues']} | "
+                   f"{l5[0]} sur {l5[1]} |"),
+                  ("la ligne rognées de 400", f"| rognées | {b['rognees']['validees']} | {b['rognees']['contredites']} | {b['rognees']['sur_le_bon_tour']} "
+                   f"sur {b['rognees']['lues']} | {lr[0]} sur {lr[1]} |"),
+                  ("la ligne entières de 400", f"| rognées, comptées entières | {b['entieres']['validees']} | {b['entieres']['contredites']} | "
+                   f"{b['entieres']['sur_le_bon_tour']} sur {b['entieres']['lues']} | {le[0]} sur {le[1]} |"),
+                  ("les deux faux de 400", f"suivie de la graine {faux[0][0]}, côté {faux[0][1]}, sans témoin, au compte {faux[0][5]} et {faux[1][5]}"
+                   if len(faux) == 2 and faux[0][:3] == faux[1][:3] and {f_[3] for f_ in faux} == {6, 7} and all(f_[4] == "sans témoin" for f_ in faux)
+                   else "changé"),
+                  ("les deux corrigés de 400", f"sont rognées au compte {apres[0][2]} et"
+                   if all(x_[4] and x_[5] for x_ in apres) else "changé"),
+                  ("les contredites de 400", f"Les contredites passent de {a['contredites']} à {b['rognees']['contredites']}, ou à "
+                   f"{b['entieres']['contredites']} comptées"),
+                  ("les validées de 400", f"les validées restent à {b['rognees']['validees']}, ou {b['entieres']['validees']}")]
+        out.extend((nom_, [x_], s400.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 399 : COMPTER LA SURFACE ENTIÈRE ET ROGNER LE DÉPART GARDE-T-IL LES DEUX GAINS SUR PHERC0358
     s399 = _source(racine, "compter_la_surface_entiere_et_rogner_le_depart_garde_t_il_les_deux_gains_sur_pherc0358.json")
     s389c = _source(racine, "laccord_aux_comptes_de_m7_valide_t_il_encore_a_seize_sauts_sur_pherc0358.json")

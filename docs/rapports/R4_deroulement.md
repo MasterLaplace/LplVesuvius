@@ -4943,6 +4943,12 @@ surface entière et ne rogner que le départ du saut suivant ?
 contredites reviennent au niveau de `389` ; aucune variante de rognage ne bat `389` sur les deux tableaux. `R4-P197` s'ouvre : le
 rognage contre les tours publiés de PHercParis4 ?
 
+**`400` · 2026-10-01 · des chaînes rognées lisent-elles leurs validées sur le bon tour de paris4** — `R4-P197`
+
+⭐⭐⭐⭐ **Oui : rognées, 62 des 62 validées lues sont sur le bon tour ; comptées entières, 60 des 60** — `R4-F586`. Le rognage est sans
+tort là où la vérité est connue, et ramène sur le bon tour les deux surfaces que `385` lisait sur un mauvais. `R4-P198` s'ouvre : quel
+saut comptait une feuille de trop ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
