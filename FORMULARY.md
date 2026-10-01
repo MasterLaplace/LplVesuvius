@@ -221,7 +221,7 @@ The own sheet is the first run that starts within 12 voxels of the surface, endi
 ### [NW3] the vote of the neighbours
 
 ```math
-\mu^{(r)}_k = \begin{cases} \operatorname{med}\{\tau^{(r)}_j : j \in W_k\} & \text{if } |W_k| \ge 5 \\ \tau^{(r)}_k & \text{otherwise} \end{cases}, \qquad \tau^{(r+1)}_k = \begin{cases} \arg\min_{c \in C_k} |c - \mu^{(r)}_k| & \text{if } \min_{c \in C_k} |c - \mu^{(r)}_k| < \delta \\ \mu^{(r)}_k & \text{otherwise} \end{cases}
+\mu^{(r)}_k = \begin{cases} \mathrm{med}\{\tau^{(r)}_j : j \in W_k\} & \text{if } |W_k| \ge 5 \\ \tau^{(r)}_k & \text{otherwise} \end{cases}, \qquad \tau^{(r+1)}_k = \begin{cases} \arg\min_{c \in C_k} |c - \mu^{(r)}_k| & \text{if } \min_{c \in C_k} |c - \mu^{(r)}_k| < \delta \\ \mu^{(r)}_k & \text{otherwise} \end{cases}
 ```
 
 W_k is the set of mesh points in the three by three square of mesh cells centred on k, k included. Every point moves at once from round r to r + 1, to the sheet its own ray sees nearest to its neighbours' median within half a sheet; the vote stops when fewer than one point in a thousand moves by more than half a voxel, thirty rounds at most.
@@ -297,7 +297,7 @@ How often chance alone, one in two, would give a split at least as uneven as a m
 ### [JT1] the facing point
 
 ```math
-v_k = \operatorname*{arg\,min}_{s \in N_{64}(y_k),\ d_{\mathrm{grid}}(s, k) > 30} \lVert s - y_k \rVert, \qquad \text{near} \iff \lVert v_k - y_k \rVert < 36
+v_k = \mathop{\mathrm{arg\,min}}_{s \in N_{64}(y_k),\ d_{\mathrm{grid}}(s, k) > 30} \lVert s - y_k \rVert, \qquad \text{near} \iff \lVert v_k - y_k \rVert < 36
 ```
 
 The facing point of a point y of the produced winding is the nearest point of the segment in 3D, among the 64 nearest, that lies farther than 30 mesh cells from it on the surface: the same sheet is left out and the next turn kept. It is near when it is within half a sheet, 36 voxels.

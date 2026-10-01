@@ -111,7 +111,7 @@ FORMULARY: dict[str, Equation] = {e.id: e for e in [
        "starts from the first run after it, and from the fixed step where the ray sees none.",
        "R4-F412", "`le_transfert_retrouve_t_il_la_spire_voisine.py:191` (`la_feuille_suivante`), `247`"),
     _E("NW3", "TN", "the vote of the neighbours",
-       r"\mu^{(r)}_k = \begin{cases} \operatorname{med}\{\tau^{(r)}_j : j \in W_k\} & \text{if } |W_k| \ge 5 \\"
+       r"\mu^{(r)}_k = \begin{cases} \mathrm{med}\{\tau^{(r)}_j : j \in W_k\} & \text{if } |W_k| \ge 5 \\"
        r" \tau^{(r)}_k & \text{otherwise} \end{cases}, \qquad \tau^{(r+1)}_k = \begin{cases} \arg\min_{c \in C_k}"
        r" |c - \mu^{(r)}_k| & \text{if } \min_{c \in C_k} |c - \mu^{(r)}_k| < \delta \\ \mu^{(r)}_k & \text{otherwise}"
        r" \end{cases}",
@@ -156,7 +156,7 @@ FORMULARY: dict[str, Equation] = {e.id: e for e in [
        "rights made misses; exact and two-sided.",
        "R4-F471", "`les_gains_publies_se_distinguent_ils_du_hasard.py:78`"),
     _E("JT1", "TJ", "the facing point",
-       r"v_k = \operatorname*{arg\,min}_{s \in N_{64}(y_k),\ d_{\mathrm{grid}}(s, k) > 30} \lVert s - y_k \rVert,"
+       r"v_k = \mathop{\mathrm{arg\,min}}_{s \in N_{64}(y_k),\ d_{\mathrm{grid}}(s, k) > 30} \lVert s - y_k \rVert,"
        r" \qquad \text{near} \iff \lVert v_k - y_k \rVert < 36",
        "The facing point of a point y of the produced winding is the nearest point of the segment in 3D, among the 64 "
        "nearest, that lies farther than 30 mesh cells from it on the surface: the same sheet is left out and the next "
