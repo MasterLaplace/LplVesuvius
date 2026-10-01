@@ -213,6 +213,73 @@ def extract_correction(research: Path, output: Path) -> dict:
     return segment
 
 
+def _write_rays(out: Path, *, prediction: str, path: str, level: int, factor: int, side: float, t, seen, gi, gj,
+                shape: tuple, research_transfer: Path) -> dict:
+    """Write what the transfer to the next winding is computed from on one surface: the samples of the prediction
+    along each ray, packed one bit per sample, and where each ray sits on the transfer's grid."""
+    import numpy as np
+    out.mkdir(parents=True, exist_ok=True)
+    seen = np.asarray(seen, dtype=bool)
+    _write_array(out / "rays_seen.npy.gz", np.packbits(seen, axis=1))
+    _write_array(out / "rays_grid.npy.gz", np.stack([np.asarray(gi), np.asarray(gj)]).astype(np.int32))
+    from que_montrent_ces_deux_vues import DEMI_PAS_EN_VOXELS as half_sheet_voxels
+    from que_montrent_ces_deux_vues import PAS_EN_VOXELS as step_voxels
+    context = {"prediction": prediction, "path": path, "level": int(level), "factor": int(factor),
+               "side": "plus" if side > 0 else "minus", "samples": int(len(t)), "depth_step_voxels": float(t[1] - t[0]),
+               "step_voxels": float(step_voxels), "half_sheet_voxels": float(half_sheet_voxels),
+               "points": int(seen.shape[0]), "grid": [int(x) for x in shape],
+               "provenance": {"research_transfer": _digest(research_transfer)}}
+    _write(out / "rays.json", context)
+    return context
+
+
+def extract_rays(research: Path, output: Path) -> dict:
+    """What the transfer to the next winding reads, on the segment (`247`) and on the band (`248`, its first jump):
+    the points of the mesh, one in eight, their normals, and what the prediction `m7` sees along each normal, read
+    by the research's own reader from the research's unversioned cache of `m7` chunks.
+
+    ⚠ Only where that cache lives (`data/spire_voisine/m7`, about 1 GB): the samples are embedded so that the transfer
+    is computed anywhere, and `vesuve grand-prize --read-prediction` reads them again from the public bucket.
+    """
+    _prepare(research)
+    import numpy as np
+    # The research's own names, renamed here on the import line: this tool is one of the two places that cross the
+    # border with the research (`vesuve/research.py`), and nothing past these lines is in French.
+    from la_procedure_sans_juge_tient_elle_sur_la_bande import LE_PREMIER_SAUT as band_first_jump
+    from la_procedure_sans_juge_tient_elle_sur_la_bande import la_bande as read_the_band
+    from la_spire_voisine_est_elle_a_un_pas import LE_CACHE as cache
+    from la_spire_voisine_est_elle_a_un_pas import les_normales as surface_normals
+    from la_spire_voisine_est_elle_a_un_pas import lire_tifxyz as read_tifxyz
+    from la_spire_voisine_est_elle_a_un_pas import telecharger as download_mesh
+    from le_transfert_enchaine_tient_il_les_spires import lire_le_rayon as read_the_ray
+    from le_transfert_retrouve_t_il_la_spire_voisine import DELAI as timeout
+    from le_transfert_retrouve_t_il_la_spire_voisine import LA_MAILLE as mesh
+    from le_transfert_retrouve_t_il_la_spire_voisine import LA_PORTEE as reach
+    from le_transfert_retrouve_t_il_la_spire_voisine import LES_PREDICTIONS as predictions
+    from le_transfert_retrouve_t_il_la_spire_voisine import le_facteur as volume_to_prediction_ratio
+    from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot as bucket_reader
+    path, level = predictions["m7"]
+    factor, prediction_meta = volume_to_prediction_ratio(path, level, timeout)
+    read_chunk, _ = bucket_reader(prediction_meta, cache, "m7", path, level, timeout)
+    points, valid, _ = read_tifxyz(download_mesh(SEGMENT, cache, timeout))
+    normals, has_normal = surface_normals(points, valid)
+    on_mesh = np.zeros_like(has_normal)
+    on_mesh[::mesh, ::mesh] = True
+    ii, jj = np.nonzero(has_normal & on_mesh)
+    shape = np.full(has_normal.shape, np.nan)[::mesh, ::mesh].shape
+    t, seen = read_the_ray(points[ii, jj], normals[ii, jj], 1.0, reach, factor, prediction_meta, read_chunk)
+    segment = _write_rays(output / "correction", prediction="m7", path=path, level=level, factor=factor, side=1.0,
+                          t=t, seen=seen, gi=ii // mesh, gj=jj // mesh, shape=shape,
+                          research_transfer=cache / f"transfert_suivante_{SEGMENT}_m7_du_cote_plus.npy")
+    band = read_the_band(cache)
+    t, seen = band["lire_rayon"](band["p"], band["n"], 1.0, reach)
+    _write_rays(output.parent / BAND / "correction", prediction="m7", path=path, level=level, factor=factor, side=1.0,
+                t=t, seen=seen, gi=band["gi"], gj=band["gj"],
+                shape=band["sur_la_grille"](np.zeros(len(band["gi"]))).shape,
+                research_transfer=band_first_jump)
+    return segment
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     root = os.environ.get("VESUVE_RESEARCH")
@@ -224,6 +291,8 @@ def main() -> int:
     print(f"written: {a.output} ({len(c['provenance']['files'])} research files read)")
     k = extract_correction(a.research.resolve(), a.output)
     print(f"written: {a.output / 'correction'} ({len(k['candidates'])} candidate blocks)")
+    r = extract_rays(a.research.resolve(), a.output)
+    print(f"written: {a.output / 'correction' / 'rays.json'} ({r['points']} rays of {r['samples']} samples)")
     return 0
 
 
