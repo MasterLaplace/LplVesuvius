@@ -3336,6 +3336,54 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 384 : LES SAUTS DOUBLES DE 369 FRANCHISSENT-ILS DEUX FEUILLES DE M7 SUR PHERC0358
+    s384 = _source(racine, "les_sauts_doubles_de_369_franchissent_ils_deux_feuilles_de_m7_sur_pherc0358.json")
+    if s384.exists():
+        d = json.loads(s384.read_text())
+        g = d["les_genres"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        p2 = lambda x: f"{x / 20.0:.2f}".replace(".", ",")  # noqa: E731
+        dd, ss, nn = g["double"], g["simple"], g["nul"]
+        sauts = [(c["le_rang"], c["le_cote"], x, s_) for c in d["les_cotes"] for x in ("suivie", "compagne", "tierce") for s_ in c["les_sauts"][x]]
+        doubles = [t for t in sauts if t[3]["le_genre"] == "double"]
+        a_un = sorted(t[3]["lecart_median"] for t in doubles if t[3]["le_nombre_de_feuilles"] == 1)
+        a_deux = sorted(t[3]["lecart_median"] for t in doubles if t[3]["le_nombre_de_feuilles"] == 2)
+        a_trois = [t for t in doubles if (t[3]["le_nombre_de_feuilles"] or 0) > 2]
+        cs = [c for c in d["les_cotes"] if c["avec_369"]["validees"] or c["avec_m7"]["validees"]]
+        v369, vm7 = (sum(c[k]["validees"] for c in cs) for k in ("avec_369", "avec_m7"))
+        n369, nm7 = (sum(1 for c in cs if c[k]["validees"]) for k in ("avec_369", "avec_m7"))
+        loin = max(c["avec_m7"]["le_plus_loin"] or 0 for c in cs)
+        g7 = next(t for t in sauts if t[:3] == (7, "plus", "suivie") and t[3]["le_saut"] == 2)[3]
+        tours = lambda n: "—" if n is None else f"{n} tour{'s' if n > 1 else ''}"  # noqa: E731
+        ecrits = [("le verdict de 384", f"{dd['deux']} DES {dd['dits']} SAUTS QUE `369` COMPTE DOUBLES FRANCHISSENT DEUX FEUILLES DE `m7` : "
+                   f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"),
+                  ("le résumé de 384", f"compte doubles, {dd['une']} n'en franchissent qu'une, {dd['deux']} en franchissent deux et {dd['plus']} trois"
+                   if len(a_trois) == dd["plus"] == 1 and a_trois[0][3]["le_nombre_de_feuilles"] == 3 else "changé"),
+                  ("les nuls de 384", f"les {nn['les_sauts']} sauts nuls ne franchissent aucune feuille, et {ss['une']} des {ss['dits']} sauts simples dits"
+                   if nn["zero"] == nn["dits"] == nn["les_sauts"] else "changé"),
+                  ("les validées de 384", f"l'accord de trois chaînes valide {vm7} surfaces sur {nm7} côtés, contre {v369} sur {n369} aux comptes de `369`"),
+                  ("la lecture de 384", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, dont {d['la_lecture_de_m7']['absents']} absents du "
+                   f"dépôt, sans panne, en {vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("le contrôle de 384", f"Il tient : {ss['une']} sur {ss['dits']}, soit"),
+                  ("la part du contrôle de 384", f"  {round(100 * ss['une'] / ss['dits'])} %."),
+                  ("les premiers sauts de 384", f"sauts, entre {p2(a_un[0])} et {p2(a_un[-1])} pas"
+                   if all(t[3]["le_saut"] == 1 for t in doubles if t[3]["le_nombre_de_feuilles"] == 1) else "changé"),
+                  ("les deux feuilles de 384", "Les {} qui en franchissent deux sont à {}, {} et {} pas".format(len(a_deux), *(p2(x) for x in a_deux))),
+                  ("le saut de trois feuilles de 384", f"la suivie de la graine 3, côté plus, à {p2(a_trois[0][3]['lecart_median'])} pas"
+                   if a_trois[0][:3] == (3, "plus", "suivie") else "changé"),
+                  ("les simples de deux feuilles de 384", f"{ss['deux']} sauts simples franchissent deux feuilles, dont le deuxième de la suivie de la"
+                   if g7["le_genre"] == "simple" and g7["le_nombre_de_feuilles"] == 2 else "changé"),
+                  ("le saut de la graine 7 dans 384", f"graine 7, côté plus, à {p2(g7['lecart_median'])} pas"),
+                  ("le plus loin de 384", f"l'accord valide {vm7} surfaces sur {nm7} côtés, jusqu'à {loin} tours**")]
+        for k, nom in (("nul", "nul"), ("simple", "simple"), ("double", "double")):
+            x = g[k]
+            ecrits.append((f"la ligne {nom} de 384", f"| {nom} | {x['les_sauts']} | {x['dits']} | {x['zero']} | {x['une']} | {x['deux']} | {x['plus']} |"))
+        for c in cs:
+            a, b = c["avec_369"], c["avec_m7"]
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 384", f"| graine {c['le_rang']}, {c['le_cote']} | {a['validees']} | "
+                                                                              f"{tours(a['le_plus_loin'])} | {b['validees']} | {tours(b['le_plus_loin'])} |"))
+        out.extend((nom_, [x_], s384.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 383 : LES FEUILLES DE M7 DISENT-ELLES QUE LE PREMIER SAUT DE LA SUIVIE DE LA GRAINE 4 EN FRANCHIT DEUX
     s383 = _source(racine, "les_feuilles_de_m7_disent_elles_que_le_premier_saut_de_la_suivie_de_la_graine_4_en_franchit_deux.json")
     if s383.exists():

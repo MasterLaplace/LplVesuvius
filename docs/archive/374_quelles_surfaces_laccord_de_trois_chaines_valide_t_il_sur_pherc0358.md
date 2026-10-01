@@ -5,6 +5,11 @@ paires pour dire, surface par surface, ce que les deux autres chaînes en disent
 a une surface sur la même feuille au même compte corrigé et qu'aucune ne la contredit. Sur les 120 surfaces des trois chaînes, 25 sont
 validées, sur 3 côtés, jusqu'à 6 tours de la nappe de départ, sans tracé : par la règle déclarée, oui. Sur la graine 8, aucune.*
 
+> ⚠⚠⚠⚠ **PRÉCISÉ PAR `384`, LE 2026-10-01.** Ce document dit que la suivie de la graine 7, côté plus, « a glissé ». `384` compte les
+> feuilles de `m7` : son deuxième saut, à 1,17 pas, que `369` compte simple, en franchit deux. **La suivie n'avait pas glissé** ; elle
+> comptait un tour de moins. Aux comptes de `m7`, ce côté valide 10 surfaces, jusqu'à 7 tours, au lieu de 3 jusqu'à 1 tour. ⭐ Les autres
+> côtés de cette tranche et sa règle sont intacts.
+
 ![Côté par côté, les surfaces des trois chaînes validées, confirmées une fois, contredites ou sans témoin](../images/374_quelles_surfaces_laccord_de_trois_chaines_valide_t_il_sur_pherc0358.png)
 
 ## 0. Pourquoi cette tranche

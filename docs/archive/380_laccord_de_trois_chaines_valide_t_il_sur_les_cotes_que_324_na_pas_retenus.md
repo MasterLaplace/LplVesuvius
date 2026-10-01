@@ -6,6 +6,12 @@ lance les mêmes trois chaînes sur les seize côtés des huit graines et lit le
 tours : par la règle déclarée, oui. Partout où l'accord valide, le premier saut des trois chaînes tombe entre 1,67 et 1,93 pas et est
 compté double.*
 
+> ⚠⚠⚠⚠ **PRÉCISÉ PAR `384`, LE 2026-10-01.** Ce document compte les tours comme `369` : un saut de plus d'un pas et demi compte double.
+> `384` compte les feuilles de `m7` que chaque saut franchit : les premiers sauts des graines 4, côté moins, et 6, côté plus, comptés
+> doubles ici, n'en franchissent qu'une. **Les surfaces validées y sont donc à un tour de moins** : jusqu'à 7 tours sur la graine 4, côté
+> moins, et 2 sur la graine 6, côté plus, au lieu de 8 et 3. ⭐ Les statuts et les paires de cette tranche sont intacts ; aux comptes de
+> `m7`, la graine 4, côté plus, valide aussi 21 surfaces.
+
 ![Côté par côté, sur les seize côtés, les surfaces des trois chaînes validées, confirmées une fois, contredites ou sans témoin](../images/380_laccord_de_trois_chaines_valide_t_il_sur_les_cotes_que_324_na_pas_retenus.png)
 
 ## 0. Pourquoi cette tranche

@@ -4846,6 +4846,13 @@ suivie de la graine 1, côté moins, que `379` accusait, et les 8 surfaces qu'il
 comme la compagne et la tierce, à 1,67 et 1,76 pas, que `369` compte doubles ; les trois nappes sont sur la même feuille. Ce sont les deux
 autres qui comptaient un tour de trop : `381` est corrigé sur place (`R4-C45`). `R4-P181` s'ouvre : les sauts doubles de `369` sur PHerc0358 ?
 
+**`384` · 2026-10-01 · les sauts doubles de 369 franchissent-ils deux feuilles de m7 sur PHerc0358** — `R4-P181`
+
+⭐⭐⭐⭐⭐ **Non : 8 des 12 sauts que `369` compte doubles ne franchissent qu'une feuille de `m7`** — `R4-F570`. Là où `369` est sans
+ambiguïté, `m7` dit comme lui : 10 nuls sur 10 à zéro feuille, 163 simples sur 175 à une. Aux comptes de `m7`, l'accord valide 78 surfaces
+sur 6 côtés, jusqu'à 7 tours, contre 50 sur 5 ; `374` et `380` sont précisés sur place (`R4-C46`, `R4-C47`). `R4-P182` s'ouvre : l'accord
+aux comptes de `m7` contre les tours publiés de PHercParis4 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
