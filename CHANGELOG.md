@@ -20,6 +20,7 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 - The formulary gains the three rules of the judge: the facing point, the text correlation, the outcome.
 
 ### Fixed
+- Two formulas of `FORMULARY.md` (the vote of the neighbours, the facing point) showed 'The following macros are not allowed: operatorname' on GitHub instead of the formula; they no longer use `\operatorname`, and a test refuses it.
 - The documents of 0.3.0 said more than the facts behind the transfer. They now say that it is the position of the
   next winding point by point on one mesh cell in eight, not a whole winding surface (`R4-F412`); that 0.9214 is
   the share of the 39865 points that have a judge, of the 62815 points of the one-in-eight grid, on the segment where the rules were written, with 0.915

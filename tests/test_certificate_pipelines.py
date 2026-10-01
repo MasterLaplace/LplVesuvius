@@ -73,6 +73,13 @@ def test_the_published_formulary_is_the_one_the_code_renders():
     assert published.read_text() == formulary_as_markdown(), "FORMULARY.md is stale: `vesuve formulas --markdown`"
 
 
+def test_no_equation_uses_a_macro_that_github_refuses():
+    """GitHub's math renderer says 'The following macros are not allowed: operatorname' instead of drawing the formula."""
+    assert formulary.FORMULARY
+    for e in formulary.FORMULARY.values():
+        assert "\\operatorname" not in e.latex, f"{e.id} uses \\operatorname, which GitHub does not draw"
+
+
 def test_every_equation_reaches_github_with_its_backslashes():
     """GitHub eats Markdown escapes between `$$` (`\\{` becomes `{`), so each equation must sit verbatim in a fence."""
     import re
