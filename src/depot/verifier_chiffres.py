@@ -3336,6 +3336,31 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 390 : AU-DELÀ DU HUITIÈME SAUT, LE VOTE DÉSIGNE-T-IL UNE CHAÎNE QUI GLISSE
+    s390 = _source(racine, "au_dela_du_huitieme_saut_le_vote_designe_t_il_une_chaine_qui_glisse.json")
+    if s390.exists():
+        d = json.loads(s390.read_text())
+        cs = {(c["le_rang"], c["le_cote"]): c for c in d["les_cotes"]}
+        g4, g6 = cs[(4, "moins")], cs[(6, "moins")]
+        ps = lambda c, h: c["par_saut"][str(h)]  # noqa: E731
+        zero = lambda c, a, b: all(ps(c, h)[0] == 0 for h in range(a, b + 1))  # noqa: E731
+        cp = lambda c, k: (c["les_couples"][k]["tiennent"], c["les_couples"][k]["les_paires"])  # noqa: E731
+        ecrits = [("le verdict de 390", "LE VOTE DÉSIGNE UNE CHAÎNE SUR LES DEUX CÔTÉS : OUI" if g4["le_vote"] and g6["le_vote"] else "changé"),
+                  ("le résumé de 390", f"désigne la {g4['le_vote']} sur la graine 4, côté moins, et la {g6['le_vote']} sur la"),
+                  ("les premières contradictions de 390", "au sixième et au troisième"
+                   if (g4["le_debut"]["le_saut"], g6["le_debut"]["le_saut"]) == (6, 3) else "changé"),
+                  ("la ligne 4 moins de 390", "| graine 4, moins | {} | suivie et tierce, {} paires sur {} | saut {} | {} sur {} au saut 6, aucune du saut 7 "
+                   "au saut 10, {} sur {} au saut 11 ; {} sur {} aux sauts 12 et 13 |".format(
+                       g4["le_vote"], *cp(g4, "suivie|tierce"), g4["le_debut"]["le_saut"], *ps(g4, 6), *ps(g4, 11), *ps(g4, 12))
+                   if zero(g4, 7, 10) and ps(g4, 12) == ps(g4, 13) else "changé"),
+                  ("la ligne 6 moins de 390", "| graine 6, moins | {} | compagne et tierce, {} paires sur {} | saut {} | {} sur {} au saut 3 et {} sur {} au "
+                   "saut 4, aucune du saut 5 au saut 9 ; {} sur {} au saut 10 |".format(
+                       g6["le_vote"], *cp(g6, "compagne|tierce"), g6["le_debut"]["le_saut"], *ps(g6, 3), *ps(g6, 4), *ps(g6, 10))
+                   if zero(g6, 5, 9) else "changé"),
+                  ("l'installation de 390", "Les contradictions s'installent ensuite, à partir du douzième et du dixième saut, et ne cessent plus"
+                   if all(ps(g4, h)[0] for h in range(12, 17)) and all(ps(g6, h)[0] for h in range(10, 17)) else "changé")]
+        out.extend((nom_, [x_], s390.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 389 : L'ACCORD AUX COMPTES DE M7 VALIDE-T-IL ENCORE À SEIZE SAUTS SUR PHERC0358
     s389 = _source(racine, "laccord_aux_comptes_de_m7_valide_t_il_encore_a_seize_sauts_sur_pherc0358.json")
     if s389.exists():

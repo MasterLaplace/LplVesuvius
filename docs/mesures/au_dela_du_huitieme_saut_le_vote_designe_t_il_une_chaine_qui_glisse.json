@@ -1,0 +1,415 @@
+{
+ "la_question": "Sur PHerc0358, au-delà du huitième saut, sur les graines 4 et 6, côté moins, le vote de 372 désigne-t-il une chaîne qui glisse, et à quel saut son glissement commence-t-il ?",
+ "les_cotes": [
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_couples": {
+    "suivie|compagne": {
+     "les_paires": 0,
+     "tiennent": 0,
+     "compte": false,
+     "tient": false
+    },
+    "suivie|tierce": {
+     "les_paires": 75,
+     "tiennent": 55,
+     "compte": true,
+     "tient": false
+    },
+    "compagne|tierce": {
+     "les_paires": 0,
+     "tiennent": 0,
+     "compte": false,
+     "tient": false
+    }
+   },
+   "le_vote": null,
+   "le_debut": null,
+   "au_dela_du_huitieme": null,
+   "par_saut": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_couples": {
+    "suivie|compagne": {
+     "les_paires": 27,
+     "tiennent": 27,
+     "compte": true,
+     "tient": true
+    },
+    "suivie|tierce": {
+     "les_paires": 24,
+     "tiennent": 24,
+     "compte": true,
+     "tient": true
+    },
+    "compagne|tierce": {
+     "les_paires": 27,
+     "tiennent": 27,
+     "compte": true,
+     "tient": true
+    }
+   },
+   "le_vote": null,
+   "le_debut": null,
+   "au_dela_du_huitieme": null,
+   "par_saut": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_couples": {
+    "suivie|compagne": {
+     "les_paires": 76,
+     "tiennent": 64,
+     "compte": true,
+     "tient": false
+    },
+    "suivie|tierce": {
+     "les_paires": 75,
+     "tiennent": 74,
+     "compte": true,
+     "tient": true
+    },
+    "compagne|tierce": {
+     "les_paires": 81,
+     "tiennent": 71,
+     "compte": true,
+     "tient": false
+    }
+   },
+   "le_vote": "compagne",
+   "le_debut": {
+    "les_premieres": {
+     "suivie": [
+      6,
+      8
+     ],
+     "tierce": [
+      6,
+      9
+     ]
+    },
+    "le_saut": 6
+   },
+   "au_dela_du_huitieme": false,
+   "par_saut": {
+    "1": [
+     0,
+     6
+    ],
+    "2": [
+     0,
+     8
+    ],
+    "3": [
+     0,
+     10
+    ],
+    "4": [
+     0,
+     11
+    ],
+    "5": [
+     0,
+     9
+    ],
+    "6": [
+     2,
+     14
+    ],
+    "7": [
+     0,
+     8
+    ],
+    "8": [
+     0,
+     13
+    ],
+    "9": [
+     0,
+     12
+    ],
+    "10": [
+     0,
+     10
+    ],
+    "11": [
+     1,
+     13
+    ],
+    "12": [
+     4,
+     11
+    ],
+    "13": [
+     4,
+     11
+    ],
+    "14": [
+     4,
+     9
+    ],
+    "15": [
+     4,
+     7
+    ],
+    "16": [
+     3,
+     5
+    ]
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_couples": {
+    "suivie|compagne": {
+     "les_paires": 5,
+     "tiennent": 5,
+     "compte": true,
+     "tient": true
+    },
+    "suivie|tierce": {
+     "les_paires": 64,
+     "tiennent": 46,
+     "compte": true,
+     "tient": false
+    },
+    "compagne|tierce": {
+     "les_paires": 6,
+     "tiennent": 6,
+     "compte": true,
+     "tient": true
+    }
+   },
+   "le_vote": null,
+   "le_debut": null,
+   "au_dela_du_huitieme": null,
+   "par_saut": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_couples": {
+    "suivie|compagne": {
+     "les_paires": 82,
+     "tiennent": 66,
+     "compte": true,
+     "tient": false
+    },
+    "suivie|tierce": {
+     "les_paires": 74,
+     "tiennent": 58,
+     "compte": true,
+     "tient": false
+    },
+    "compagne|tierce": {
+     "les_paires": 80,
+     "tiennent": 77,
+     "compte": true,
+     "tient": true
+    }
+   },
+   "le_vote": "suivie",
+   "le_debut": {
+    "les_premieres": {
+     "compagne": [
+      3,
+      3
+     ],
+     "tierce": [
+      3,
+      2
+     ]
+    },
+    "le_saut": 3
+   },
+   "au_dela_du_huitieme": false,
+   "par_saut": {
+    "1": [
+     0,
+     6
+    ],
+    "2": [
+     0,
+     6
+    ],
+    "3": [
+     2,
+     10
+    ],
+    "4": [
+     4,
+     11
+    ],
+    "5": [
+     0,
+     11
+    ],
+    "6": [
+     0,
+     15
+    ],
+    "7": [
+     0,
+     11
+    ],
+    "8": [
+     0,
+     9
+    ],
+    "9": [
+     0,
+     10
+    ],
+    "10": [
+     3,
+     10
+    ],
+    "11": [
+     4,
+     10
+    ],
+    "12": [
+     3,
+     10
+    ],
+    "13": [
+     4,
+     9
+    ],
+    "14": [
+     4,
+     10
+    ],
+    "15": [
+     4,
+     10
+    ],
+    "16": [
+     4,
+     8
+    ]
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_couples": {
+    "suivie|compagne": {
+     "les_paires": 44,
+     "tiennent": 44,
+     "compte": true,
+     "tient": true
+    },
+    "suivie|tierce": {
+     "les_paires": 26,
+     "tiennent": 24,
+     "compte": true,
+     "tient": true
+    },
+    "compagne|tierce": {
+     "les_paires": 9,
+     "tiennent": 9,
+     "compte": true,
+     "tient": true
+    }
+   },
+   "le_vote": null,
+   "le_debut": null,
+   "au_dela_du_huitieme": null,
+   "par_saut": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_couples": {
+    "suivie|compagne": {
+     "les_paires": 10,
+     "tiennent": 9,
+     "compte": true,
+     "tient": true
+    },
+    "suivie|tierce": {
+     "les_paires": 10,
+     "tiennent": 10,
+     "compte": true,
+     "tient": true
+    },
+    "compagne|tierce": {
+     "les_paires": 4,
+     "tiennent": 4,
+     "compte": false,
+     "tient": false
+    }
+   },
+   "le_vote": null,
+   "le_debut": null,
+   "au_dela_du_huitieme": null,
+   "par_saut": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_couples": {
+    "suivie|compagne": {
+     "les_paires": 43,
+     "tiennent": 27,
+     "compte": true,
+     "tient": false
+    },
+    "suivie|tierce": {
+     "les_paires": 23,
+     "tiennent": 17,
+     "compte": true,
+     "tient": false
+    },
+    "compagne|tierce": {
+     "les_paires": 24,
+     "tiennent": 16,
+     "compte": true,
+     "tient": false
+    }
+   },
+   "le_vote": null,
+   "le_debut": null,
+   "au_dela_du_huitieme": null,
+   "par_saut": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_couples": {
+    "suivie|compagne": {
+     "les_paires": 54,
+     "tiennent": 30,
+     "compte": true,
+     "tient": false
+    },
+    "suivie|tierce": {
+     "les_paires": 46,
+     "tiennent": 23,
+     "compte": true,
+     "tient": false
+    },
+    "compagne|tierce": {
+     "les_paires": 40,
+     "tiennent": 28,
+     "compte": true,
+     "tient": false
+    }
+   },
+   "le_vote": null,
+   "le_debut": null,
+   "au_dela_du_huitieme": null,
+   "par_saut": null
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "au-delà du huitième saut, le vote désigne une chaîne sur 2 des 2 côtés, la compagne de la graine 4, côté moins, à partir de son saut 6, la suivie de la graine 6, côté moins, à partir de son saut 3 ; oui, une chaîne glisse"
+ }
+}

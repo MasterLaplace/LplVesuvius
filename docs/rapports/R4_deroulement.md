@@ -4884,6 +4884,12 @@ chaînes à seize sauts ?
 47 surfaces sont contredites pour 8 validées : les chaînes vont plus loin que leur accord, alors que `m7` dit encore le nombre de feuilles
 de la plupart de leurs sauts. `R4-P187` s'ouvre : le vote désigne-t-il une chaîne qui glisse au-delà du huitième saut ?
 
+**`390` · 2026-10-01 · au-delà du huitième saut, le vote désigne-t-il une chaîne qui glisse** — `R4-P187`
+
+⭐⭐⭐⭐ **Oui, sur les deux côtés : la compagne de la graine 4, côté moins, et la suivie de la graine 6, côté moins** — `R4-F576`. Leur
+première contradiction est isolée ; les contradictions ne s'installent qu'à partir du douzième et du dixième saut. La limite de `389` est
+celle d'une chaîne. `R4-P188` s'ouvre : le douzième saut de la compagne, que `m7` compte nul ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
