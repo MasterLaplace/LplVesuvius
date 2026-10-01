@@ -1895,6 +1895,8 @@ run "les nappes de départ de la graine 8 sont-elles sur des feuilles différent
 run "figure les nappes de départ de la graine 8 sont-elles sur des feuilles différentes" uv run python "$ROOT/src/figures/figure_les_nappes_de_depart_de_la_graine_8_sont_elles_sur_des_feuilles_differentes.py" --verifier
 run "les sauts de la graine 8 sont-ils à cheval plus souvent" uv run python "$ROOT/src/nappe/les_sauts_de_la_graine_8_sont_ils_a_cheval_plus_souvent.py" --verifier
 run "figure les sauts de la graine 8 sont-ils à cheval plus souvent" uv run python "$ROOT/src/figures/figure_les_sauts_de_la_graine_8_sont_ils_a_cheval_plus_souvent.py" --verifier
+run "une surface validée par trois chaînes est-elle sur le bon tour de Paris4" uv run python "$ROOT/src/nappe/une_surface_validee_par_trois_chaines_est_elle_sur_le_bon_tour_de_paris4.py" --verifier
+run "figure une surface validée par trois chaînes est-elle sur le bon tour de Paris4" uv run python "$ROOT/src/figures/figure_une_surface_validee_par_trois_chaines_est_elle_sur_le_bon_tour_de_paris4.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

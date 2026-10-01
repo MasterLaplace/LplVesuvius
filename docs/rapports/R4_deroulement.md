@@ -4815,6 +4815,12 @@ comptes s'écartent quand même. `R4-P175` s'ouvre : les sauts de la graine 8 à
 ⭐⭐⭐⭐ **Non : 10 des 46 sauts lus de la graine 8 à cheval, contre 17 des 72 sur les graines 6 et 7** — `R4-F564`. La graine 6, côté
 moins, où les trois chaînes tiennent leurs comptes, en a le plus. `R4-P176` s'ouvre : l'accord de trois chaînes sur d'autres côtés ?
 
+**`379` · 2026-10-01 · une surface validée par trois chaînes est-elle sur le bon tour de Paris4** — `R4-P177`
+
+⭐⭐⭐⭐⭐ **Oui : 46 des 46 surfaces validées lues sur le bon tour publié, contre 11 des 14 contredites** — `R4-F565`. La règle de `374`,
+rejouée sur PHercParis4 où les tours publiés donnent une vérité, ne valide que des surfaces justes, jusqu'à 6 tours de leur référence.
+`R4-P176` reste ouverte.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

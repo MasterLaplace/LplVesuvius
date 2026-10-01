@@ -3336,8 +3336,51 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 379 : UNE SURFACE VALIDÉE PAR TROIS CHAÎNES EST-ELLE SUR LE BON TOUR DE PARIS4
+    s379 = _source(racine, "une_surface_validee_par_trois_chaines_est_elle_sur_le_bon_tour_de_paris4.json")
+    if s379.exists():
+        d = json.loads(s379.read_text())
+        b, bb = d["le_bilan"], d["le_bilan_sans_correction"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        v_, c_ = b["validée"], b["contredite"]
+        lues_v = [(c["le_rang"], c["le_cote"], s) for c in d["les_cotes"] for s in c["les_surfaces"]
+                  if s["le_statut"] == "validée" and s["lue"]]
+        tours = sorted({s["le_tour"] for _, _, s in lues_v})
+        par = {}
+        for r, k, _ in lues_v:
+            par[(r, k)] = par.get((r, k), 0) + 1
+        refs = {}
+        for c in d["les_cotes"]:
+            for x, rr in c["les_retrouves"].items():
+                k0 = next((i for i, q in enumerate(rr) if len(q) == 1), None)
+                if k0 is not None:
+                    refs[(c["le_rang"], c["le_cote"], x)] = ([0] + c["les_comptes"][x])[k0]
+        loin = max(s["le_compte"] - refs[(r, k, s["la_chaine"])] for r, k, s in lues_v)
+        faux_c = [(c["le_rang"], s["la_chaine"]) for c in d["les_cotes"] for s in c["les_surfaces"]
+                  if s["le_statut"] == "contredite" and s["lue"] and not s["sur_le_bon_tour"]]
+        ordre = sorted(((r, n) for (r, k), n in par.items() if k == "moins"), key=lambda x: -x[1])
+        ecrits = [("le verdict de 379", f"{v_['sur_le_bon_tour']} DES {v_['lues']} SURFACES VALIDÉES LUES SONT SUR LE BON TOUR, CONTRE "
+                                        f"{c_['sur_le_bon_tour']} DES {c_['lues']} SURFACES CONTREDITES LUES : "
+                                        f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"),
+                  ("le résumé de 379", f"une vérité. Sur les {v_['les_surfaces']} surfaces que la règle valide, {v_['lues']} sont lues"),
+                  ("la lecture de 379", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne, en "
+                                        f"{vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("la redite de 379", "seize côtés, et la lecture de ses surfaces contre les tours publiés redonne celle de `331`"
+                   if d["redonne"] and d["les_lectures_redonnent_331"] else "changé"),
+                  ("les tours de 379", f"de `5753_{tours[-1]}` à `5753_{tours[0]}`, jusqu'à {loin} tours de leur référence"),
+                  ("les graines de 379", "viennent des côtés moins des graines " + ", ".join(f"{r} ({n})" for r, n in ordre[:-1])
+                   + f" et {ordre[-1][0]} ({ordre[-1][1]})"),
+                  ("les contredites de 379", f"{c_['sur_le_bon_tour']} des {c_['lues']} surfaces contredites lues sont aussi sur le bon tour. "
+                                             f"Les {len(faux_c)} qui ne le sont"
+                   if all(x == "suivie" for _, x in faux_c) and sorted({r for r, _ in faux_c}) == [1, 3] else "changé"),
+                  ("les lues de 379", f"{sum(1 for c in d['les_cotes'] for s in c['les_surfaces'] if s['lue'])} des"),
+                  ("sans correction dans 379", f"{bb['validée']['sur_le_bon_tour']} des {bb['validée']['lues']} surfaces validées lues")]
+        for st in ("validée", "contredite", "confirmée une fois", "sans témoin"):
+            ecrits.append((f"la ligne {st} de 379", f"| {st} | {b[st]['les_surfaces']} | {b[st]['lues']} | {b[st]['sur_le_bon_tour']} |"))
+        out.extend((nom_, [x_], s379.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 378 : LES SAUTS DE LA GRAINE 8 SONT-ILS À CHEVAL PLUS SOUVENT
-    s378 = _source(racine, "les_sauts_de_la_graine_8_sont_ils_a_cheval_plus_souvent.json")
+    s378 =_source(racine, "les_sauts_de_la_graine_8_sont_ils_a_cheval_plus_souvent.json")
     if s378.exists():
         d = json.loads(s378.read_text())
         b = d["le_bilan"]
