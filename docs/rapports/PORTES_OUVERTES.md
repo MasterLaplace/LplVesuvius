@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**258 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**259 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 220 portes
+## Grand Prize — 221 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -238,7 +238,8 @@
 - **R4-P201** *(le graal)* · **RÉPONDUE par `404` : indécidable, le témoin ne vaut pas.** 1 seul des 23 sauts d'une feuille partis du tour −6 y franchit entre 0,5 et 1,5 tour ; là où ils arrivent, le tour −7 est à 0,42-4,58 pas nominaux du tour −6 (`R4-F590`). La question était : **SUR PHERCPARIS4, LES SAUTS DE DEUX FEUILLES DE `m7` QUI PARTENT DU TOUR −6 FINISSENT-ILS UN PAS AU-DELÀ DU TOUR −7, OU SUR LUI ?**
 - **R4-P202** *(le graal)* · **RÉPONDUE par `405` : oui.** Lus au même endroit, 156 des 162 sauts d'une feuille jugés justes franchissent entre 0,5 et 1,5 tour, 149 par la lecture de `404` ; relu au même endroit, le témoin du tour −6 ne vaut toujours pas, 2 sur 20 (`R4-F591`, `R4-C49`). La question était : **SUR PHERCPARIS4, LA LECTURE DE `404` DONNE-T-ELLE UN TOUR AUX SAUTS D'UNE FEUILLE JUGÉS JUSTES DU TOUR 0 AU TOUR −6, LÀ OÙ LE TOUR D'ARRIVÉE EST RETROUVÉ ?**
 - **R4-P203** *(le graal)* · **RÉPONDUE par `406` : en partie.** 13 départs sur 18 sont sur le tour −6, contre 162 sur 162 pour le témoin ; hors de lui sur les graines 2 et 3, sur lui sur les graines 4 à 6, où le saut d'une feuille va bien au-delà du tour −7 (`R4-F592`). La question était : **SUR PHERCPARIS4, LÀ OÙ L'ARRIVÉE D'UN SAUT D'UNE FEUILLE PARTI DU TOUR −6 EST LUE, SA SURFACE DE DÉPART EST-ELLE SUR LE TOUR −6 ?**
-- **R4-P204** *(le graal)* · **SUR PHERCPARIS4, GRAINES 4 À 6, `m7` COMPTE-T-IL UNE FEUILLE ENTRE LE TOUR −6 ET LE TOUR −7 PUBLIÉS, AU MÊME ENDROIT ?** ⭐⭐⭐⭐ C'EST CE QUE `406` DÉSIGNE. Là, le départ est sur le tour −6, le tour −7 est à 0,43-0,56 pas de lui et le saut d'une feuille mesure 1,49-1,61 pas (`R4-F592`) ; compter les feuilles de `m7` entre les deux tours publiés, avec les tours consécutifs des sauts jugés justes pour témoin, dirait si c'est le tour −7 publié ou le compte de `m7` qui se trompe.
+- **R4-P204** *(le graal)* · **RÉPONDUE par `407` : non.** 4 comptes sur 9 à une feuille, les 5 autres à zéro ; témoin : 150 sur 162 entre tours consécutifs (`R4-F593`). La question était : **SUR PHERCPARIS4, GRAINES 4 À 6, `m7` COMPTE-T-IL UNE FEUILLE ENTRE LE TOUR −6 ET LE TOUR −7 PUBLIÉS, AU MÊME ENDROIT ?**
+- **R4-P205** *(le graal)* · **SUR PHERCPARIS4, LÀ OÙ `m7` COMPTE UNE FEUILLE ENTRE LES TOURS −6 ET −7, À MOINS D'UN PAS L'UN DE L'AUTRE, POURQUOI 3 SAUTS D'UNE FEUILLE MESURENT-ILS 1,51 À 1,57 PAS ?** C'EST CE QUE `407` LAISSE. Ailleurs sur les graines 4 à 6, le tour −7 est sur la feuille du tour −6 (`R4-F593`) ; ici les deux tours et `m7` s'accordent, et c'est le saut qui ne s'accorde pas avec eux.
 
 ## Progress Prizes — 19 portes
 

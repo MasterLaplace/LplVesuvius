@@ -1951,6 +1951,8 @@ run "la lecture de 404 donne-t-elle un tour aux sauts justes d'une feuille sur p
 run "figure la lecture de 404 donne-t-elle un tour aux sauts justes d'une feuille sur paris4" uv run python "$ROOT/src/figures/figure_la_lecture_de_404_donne_t_elle_un_tour_aux_sauts_justes_dune_feuille_sur_paris4.py" --verifier
 run "le départ d'un saut parti du tour moins six est-il sur ce tour sur paris4" uv run python "$ROOT/src/nappe/le_depart_dun_saut_parti_du_tour_moins_six_est_il_sur_ce_tour_sur_paris4.py" --verifier
 run "figure le départ d'un saut parti du tour moins six est-il sur ce tour sur paris4" uv run python "$ROOT/src/figures/figure_le_depart_dun_saut_parti_du_tour_moins_six_est_il_sur_ce_tour_sur_paris4.py" --verifier
+run "m7 compte-t-il une feuille entre les tours moins six et moins sept sur paris4" uv run python "$ROOT/src/nappe/m7_compte_t_il_une_feuille_entre_les_tours_moins_six_et_moins_sept_sur_paris4.py" --verifier
+run "figure m7 compte-t-il une feuille entre les tours moins six et moins sept sur paris4" uv run python "$ROOT/src/figures/figure_m7_compte_t_il_une_feuille_entre_les_tours_moins_six_et_moins_sept_sur_paris4.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

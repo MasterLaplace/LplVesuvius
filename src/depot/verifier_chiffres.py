@@ -3336,6 +3336,48 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 407 : M7 COMPTE-T-IL UNE FEUILLE ENTRE LES TOURS −6 ET −7 SUR PARIS4
+    s407 = _source(racine, "m7_compte_t_il_une_feuille_entre_les_tours_moins_six_et_moins_sept_sur_paris4.json")
+    if s407.exists():
+        d = json.loads(s407.read_text())
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        v2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        nb = lambda x: x["entre_les_tours"]["le_nombre_de_feuilles"]  # noqa: E731
+        part1 = lambda x: (x["entre_les_tours"]["les_comptes"].get("1", 0) / sum(x["entre_les_tours"]["les_comptes"].values()))  # noqa: E731
+        g = d["les_constantes"]["les_graines_de_la_cible"]
+        T = [x for x in d["les_sauts_justes"] if nb(x) is not None]
+        cible = [x for x in d["les_sauts_de_moins_six"] if x["le_nombre_de_feuilles"] == 1 and x["le_rang"] in g
+                 and x["au_depart"]["lue"] and x["au_depart"]["sur_son_tour"]]
+        C = [x for x in cible if nb(x) is not None]
+        nl = [x for x in cible if nb(x) is None]
+        zero, un = [x for x in C if nb(x) == 0], [x for x in C if nb(x) == 1]
+        un_pres = [x for x in un if abs(x["au_depart"]["lecart_du_suivant_en_pas"]) < 1.0]
+        g8 = [x for x in d["les_sauts_de_moins_six"] if x["le_nombre_de_feuilles"] == 1 and x["le_rang"] == 8 and nb(x) is not None
+              and x["au_depart"]["lue"] and x["au_depart"]["sur_son_tour"]]
+        pl = lambda xs: f"{v2(min(xs))} à {v2(max(xs))}"  # noqa: E731
+        ecrits = [("le verdict de 407", f"NON : {len(un)} COMPTES SUR {len(C)} À UNE FEUILLE ENTRE LES TOURS −6 ET −7 ; TÉMOIN "
+                   f"{sum(nb(x) == 1 for x in T)} SUR {len(T)} ; LES AUTRES À 0"
+                   if d["le_verdict"]["lissue"].endswith("; non, les autres comptes à 0") else "changé"),
+                  ("la lecture de 407", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes ; le contrôle tient sur les deux "
+                   "familles et les seize côtés" if not d["les_pannes"] and d["le_controle"] and len(d["les_cotes"]) == 16 else "changé"),
+                  ("le témoin de 407", f"entre les tours consécutifs des {len(T)} sauts jugés justes, {sum(nb(x) == 1 for x in T)} comptes disent "
+                   f"une feuille et {sum(nb(x) == 0 for x in T)} zéro." if len(T) == len(d["les_sauts_justes"])
+                   and {nb(x) for x in T} <= {0, 1} else "changé"),
+                  ("la cible de 407", f"Des {len(cible)} sauts de la"),
+                  ("les lus de 407", f"cible, {len(C)} sont lus ; le dixième n'a que {nl[0]['entre_les_tours']['les_mesures']} points mesurés."
+                   if len(nl) == 1 and len(cible) == 10 else "changé"),
+                  ("les zéros de 407", f"Les {len(zero)} autres comptes disent zéro : la part de leurs points à une feuille va de"),
+                  ("les parts de 407", f"{pl([part1(x) for x in zero]).replace(' à ', ' à ')}. Les {len(un)} comptes à une feuille ont "
+                   f"{pl([part1(x) for x in un])} de leurs points à une feuille."),
+                  ("la graine 8 de 407", f"sur la graine 8, les {len(g8)} comptes lus de sauts partis du tour −6 disent une feuille."
+                   if all(nb(x) == 1 for x in g8) else "changé"),
+                  ("les sauts à une feuille de 407", f"pourquoi {len(un_pres)} sauts d'une feuille mesurent "
+                   f"{v2(min(abs(x['au_depart']['le_saut_en_pas']) for x in un_pres))} à "
+                   f"{v2(max(abs(x['au_depart']['le_saut_en_pas']) for x in un_pres))} pas quand les deux"),
+                  ("les écarts des sauts à une feuille de 407", f"tours sont à {v2(min(abs(x['au_depart']['lecart_du_suivant_en_pas']) for x in un_pres))}-"
+                   f"{v2(max(abs(x['au_depart']['lecart_du_suivant_en_pas']) for x in un_pres))} pas l'un de l'autre.")]
+        out.extend((nom_, [x_], s407.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 406 : LE DÉPART D'UN SAUT PARTI DU TOUR −6 EST-IL SUR CE TOUR SUR PARIS4
     s406 = _source(racine, "le_depart_dun_saut_parti_du_tour_moins_six_est_il_sur_ce_tour_sur_paris4.json")
     if s406.exists():

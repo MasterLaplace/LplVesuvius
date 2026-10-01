@@ -4985,6 +4985,12 @@ partis du tour −6, le tour −7 est à 0,42 à 4,58 pas nominaux du tour −6 
 n'est pas sur le tour −6 là où l'arrivée est lue ; sur les graines 4 à 6, il y est, et le saut d'une feuille mesure 1,49-1,61 pas quand le
 tour −7 est à 0,43-0,56. `R4-P204` s'ouvre : `m7` compte-t-il une feuille entre les tours −6 et −7 publiés, au même endroit ?
 
+**`407` · 2026-10-01 · m7 compte-t-il une feuille entre les tours moins six et moins sept sur paris4** — `R4-P204`
+
+⭐⭐⭐⭐ **Non : 4 comptes sur 9 à une feuille entre les tours −6 et −7, les autres à zéro ; témoin 150 sur 162** — `R4-F593`. Sur les graines
+4 à 6, le tour −7 publié est le plus souvent sur la feuille de `m7` du tour −6 : la ligne ouverte par `R4-P201` se ferme. `R4-P205` s'ouvre ;
+`R4-P151`, l'encre de PHerc0358, est la suivante.
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
