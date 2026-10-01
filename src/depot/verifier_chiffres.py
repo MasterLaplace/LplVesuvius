@@ -3336,6 +3336,50 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 406 : LE DÉPART D'UN SAUT PARTI DU TOUR −6 EST-IL SUR CE TOUR SUR PARIS4
+    s406 = _source(racine, "le_depart_dun_saut_parti_du_tour_moins_six_est_il_sur_ce_tour_sur_paris4.json")
+    if s406.exists():
+        d = json.loads(s406.read_text())
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        v2 = lambda x: f"{x:.2f}".replace(".", ",").replace("-", "−")  # noqa: E731
+        lu = lambda x: x["au_depart"]["lue"]  # noqa: E731
+        a_ = lambda x, cle: x["au_depart"][cle]  # noqa: E731
+        T = [x for x in d["les_sauts_justes"] if lu(x)]
+        C_tous = [x for x in d["les_sauts_de_moins_six"] if x["le_nombre_de_feuilles"] == 1]
+        C = [x for x in C_tous if lu(x)]
+        D2 = [x for x in d["les_sauts_de_moins_six"] if x["le_nombre_de_feuilles"] == 2 and lu(x)]
+        w, k = sum(a_(x, "sur_son_tour") for x in T), sum(a_(x, "sur_son_tour") for x in C)
+        hors = [x for x in C if not a_(x, "sur_son_tour")]
+        sur46 = [x for x in C if a_(x, "sur_son_tour") and 4 <= x["le_rang"] <= 6]
+        longs = [x for x in sur46 if abs(a_(x, "lecart_du_suivant_en_pas")) < 1.0]
+        autres = [x for x in sur46 if abs(a_(x, "lecart_du_suivant_en_pas")) >= 1.0]
+        pl = lambda xs: f"{v2(min(xs))} à {v2(max(xs))}"  # noqa: E731
+        sj = sorted(abs(a_(x, "le_saut_en_pas")) for x in T)
+        med = (sj[len(sj) // 2] + sj[(len(sj) - 1) // 2]) / 2
+        rangs_hors = sorted({x["le_rang"] for x in hors})
+        ecrits = [("le verdict de 406", f"EN PARTIE : {k} DÉPARTS SUR {len(C)} SUR LE TOUR −6 AU MÊME ENDROIT ; TÉMOIN {w} SUR {len(T)}"
+                   if d["le_verdict"]["lissue"].endswith("; en partie") else "changé"),
+                  ("la lecture de 406", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes ; le contrôle tient sur les deux "
+                   "familles et les seize côtés" if not d["les_pannes"] and d["le_controle"] and len(d["les_cotes"]) == 16 else "changé"),
+                  ("le résumé de 406", f"Partis du tour −6, {k} départs sur {len(C)} le sont."),
+                  ("le témoin de 406", f"ses {len(T)} départs lus sont sur leur tour, à {pl([a_(x, 'lecart_du_depart_en_pas') for x in T])} pas de lui."
+                   if w == len(T) == len(d["les_sauts_justes"]) else "changé"),
+                  ("les lus de 406", f"Des {len(C_tous)} sauts d'une feuille partis du tour −6, {len(C)} sont lus."),
+                  ("les hors du tour de 406", f"Les {len(hors)} départs qui ne sont pas sur le tour −6 sont ceux des graines 2 et 3, et un de la graine"
+                   if rangs_hors == [2, 3, 5] and sum(x["le_rang"] == 5 for x in hors) == 1 else "changé"),
+                  ("les écarts des hors du tour de 406", f"Ils sont à {pl([a_(x, 'lecart_du_depart_en_pas') for x in hors])} pas du tour −6, du côté "
+                   f"opposé au tour −7. Leurs sauts mesurent {pl([abs(a_(x, 'le_saut_en_pas')) for x in hors])} pas"
+                   if all(a_(x, "lecart_du_depart_en_pas") > 0 > a_(x, "lecart_du_suivant_en_pas") for x in hors) else "changé"),
+                  ("la médiane du témoin de 406", f"médiane {v2(med)} pas."),
+                  ("les graines 4 à 6 de 406", f"Là, {len(sur46)} départs sont sur le tour −6. {len(longs)} de leurs sauts mesurent "
+                   f"{pl([abs(a_(x, 'le_saut_en_pas')) for x in longs])} pas, quand le"),
+                  ("le tour −7 des graines 4 à 6 de 406", f"tour −7 est à {pl([abs(a_(x, 'lecart_du_suivant_en_pas')) for x in longs])} pas ; le "
+                   f"dixième mesure {v2(abs(a_(autres[0], 'le_saut_en_pas')))} pas, là où le tour −7 est à "
+                   f"{v2(abs(a_(autres[0], 'lecart_du_suivant_en_pas')))} pas." if len(autres) == 1 and len(sur46) == 10 else "changé"),
+                  ("les deux feuilles de 406", f"les {len(D2)} sauts de deux feuilles partis du tour −6 partent de lui, et mesurent "
+                   f"{pl([abs(a_(x, 'le_saut_en_pas')) for x in D2])} pas." if all(a_(x, "sur_son_tour") for x in D2) else "changé")]
+        out.extend((nom_, [x_], s406.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 405 : LA LECTURE DE 404 DONNE-T-ELLE UN TOUR AUX SAUTS JUSTES D'UNE FEUILLE SUR PARIS4
     s405 = _source(racine, "la_lecture_de_404_donne_t_elle_un_tour_aux_sauts_justes_dune_feuille_sur_paris4.json")
     if s405.exists():

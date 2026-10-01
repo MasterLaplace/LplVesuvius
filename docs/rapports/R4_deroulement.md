@@ -4979,6 +4979,12 @@ partis du tour −6, le tour −7 est à 0,42 à 4,58 pas nominaux du tour −6 
 `404` ne prenait pas l'écart du tour −7 au même endroit que l'arrivée (`R4-C49`) ; relu au même endroit, son témoin ne vaut toujours pas.
 `R4-P203` s'ouvre : là où l'arrivée est lue, le départ d'un saut parti du tour −6 est-il sur le tour −6 ?
 
+**`406` · 2026-10-01 · le départ d'un saut parti du tour moins six est-il sur ce tour sur paris4** — `R4-P203`
+
+⭐⭐⭐⭐ **En partie : 13 départs sur 18 sur le tour −6, contre 162 sur 162 pour le témoin** — `R4-F592`. Sur les graines 2 et 3, le départ
+n'est pas sur le tour −6 là où l'arrivée est lue ; sur les graines 4 à 6, il y est, et le saut d'une feuille mesure 1,49-1,61 pas quand le
+tour −7 est à 0,43-0,56. `R4-P204` s'ouvre : `m7` compte-t-il une feuille entre les tours −6 et −7 publiés, au même endroit ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
