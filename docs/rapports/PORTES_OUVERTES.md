@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**231 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**232 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 193 portes
+## Grand Prize — 194 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -210,8 +210,9 @@
 - **R4-P173** *(le graal)* · **RÉPONDUE par `376` : indécidable.** Le contrôle échoue de peu : 34 des 38 paires « même feuille » au même compte sont à la même distance de leurs nappes, il en fallait 35 ; aucune des 27 paires à deux tours ou plus ne l'est, et les 27 s'écartent dans le sens de leurs comptes (`R4-F562`). La suite est `R4-P174`.
 - **R4-P174** *(le graal)* · **RÉPONDUE par `377` : en partie.** Sur la graine 8, la nappe de la tierce est à 8,83 voxels de celle de la suivie en médiane, 44 % des points en face au loin : elle est à cheval, pas à autant de tours que l'écart des comptes ; les deux autres couples sont sur la même feuille, comme les six des graines 6 et 7 (`R4-F563`). La suite est `R4-P175`.
 - **R4-P175** *(le graal)* · **RÉPONDUE par `378` : non.** 10 des 46 sauts lus de la graine 8 sont à cheval, contre 17 des 72 sur les graines 6 et 7 ; la graine 6, côté moins, où les trois chaînes tiennent leurs comptes, en a le plus, 10 sur 24 (`R4-F564`). La suite est `R4-P176`.
-- **R4-P176** *(le graal)* · **SUR PHERC0358, L'ACCORD DE TROIS CHAÎNES VALIDE-T-IL DES SURFACES SUR LES CÔTÉS DE GRAINE QUE `324` N'A PAS RETENUS, LÀ OÙ SON SAUT NE POSE PAS AU PAS ?** ⭐⭐⭐⭐⭐ C'EST CE QUE `378` DÉSIGNE. Sur les cinq côtés suivis, l'accord valide 25 surfaces sans tracé (`R4-F560`) et ce qui fait échouer la graine 8 n'est ni sa nappe ni des sauts à cheval (`R4-F563`, `R4-F564`) ; savoir s'il valide ailleurs dit s'il tient comme méthode ou seulement sur ces côtés.
+- **R4-P176** *(le graal)* · **RÉPONDUE par `380` : oui.** Sur les onze côtés de PHerc0358 que `324` n'a pas retenus, l'accord de trois chaînes valide 25 des 106 surfaces, sur la graine 4, côté moins (19, jusqu'à 8 tours), et la graine 6, côté plus (6, jusqu'à 3 tours) ; partout où il valide, le premier saut des trois chaînes tombe entre 1,67 et 1,93 pas et est compté double (`R4-F566`). La question était : **SUR PHERC0358, L'ACCORD DE TROIS CHAÎNES VALIDE-T-IL DES SURFACES SUR LES CÔTÉS DE GRAINE QUE `324` N'A PAS RETENUS, LÀ OÙ SON SAUT NE POSE PAS AU PAS ?** La suite est `R4-P178`.
 - **R4-P177** *(le graal)* · **RÉPONDUE par `379` : oui.** Sur PHercParis4, la règle de `374` rejouée telle quelle ne valide que des surfaces sur le bon tour publié : 46 des 46 validées lues, contre 11 des 14 contredites lues (`R4-F565`). La question était : **UNE SURFACE QUE L'ACCORD DE TROIS CHAÎNES VALIDE, COMME `374` SUR PHERC0358, EST-ELLE SUR LE TOUR PUBLIÉ QUE SON COMPTE CORRIGÉ LUI DONNE, LÀ OÙ PHERCPARIS4 DONNE UNE VÉRITÉ ?** (issue #19).
+- **R4-P178** *(le graal)* · **SUR LA GRAINE 4, CÔTÉ PLUS, DE PHERC0358, LA SUIVIE QUE LE VOTE DÉSIGNE TIENT-ELLE LES COMPTES AVEC LES DEUX AUTRES CHAÎNES SI SON PREMIER SAUT, À 1,40 PAS, EST COMPTÉ DOUBLE COMME LES LEURS, À 1,67 ET 1,76 PAS ?** ⭐⭐⭐⭐ C'EST CE QUE `380` DÉSIGNE. La compagne et la tierce y tiennent leurs comptes entre elles, 27 paires sur 27, et la suivie les contredit partout dès sa première surface (`R4-F566`) : savoir si elle a glissé ou si seul le seuil du saut double l'a séparée dit si l'accord peut corriger un compte au lieu de rejeter une chaîne.
 
 ## Progress Prizes — 19 portes
 

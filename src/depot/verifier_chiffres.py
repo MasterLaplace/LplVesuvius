@@ -3336,6 +3336,80 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 380 : L'ACCORD DE TROIS CHAÎNES VALIDE-T-IL SUR LES CÔTÉS QUE 324 N'A PAS RETENUS
+    s380 = _source(racine, "laccord_de_trois_chaines_valide_t_il_sur_les_cotes_que_324_na_pas_retenus.json")
+    if s380.exists():
+        d = json.loads(s380.read_text())
+        b = d["le_bilan"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        p2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        chs = ("suivie", "compagne", "tierce")
+        neufs = [c for c in d["les_cotes"] if not c["suivi_par_324"]]
+        cle = {(c["le_rang"], c["le_cote"]): c for c in neufs}
+        nval = lambda c: sum(s["le_statut"] == "validée" for s in c["les_surfaces"])  # noqa: E731
+        vides = [c for c in neufs if not any(sum(x) for x in c["les_points_par_surface"].values())]
+        premier = lambda c, x: (None if not c["les_points_par_surface"][x][0]  # noqa: E731
+                                else c["les_sauts"][x][0]["lecart_median"] / 20.0)
+        valides = sorted((c for c in neufs if nval(c)), key=lambda c: -nval(c))
+        pv = [premier(c, x) for c in valides for x in chs]
+        doubles = all(c["les_sauts"][x][0]["le_genre"] == "double" for c in valides for x in chs)
+        loin = lambda c: max(s["le_compte"] for s in c["les_surfaces"] if s["le_statut"] == "validée")  # noqa: E731
+        un, deux = valides[0], valides[1]
+        g4p, g6p, g3p = cle[(4, "plus")], cle[(6, "plus")], cle[(3, "plus")]
+        cp = lambda c, k: (c["les_couples"][k]["tiennent"], c["les_couples"][k]["les_paires"])  # noqa: E731
+        mots = {7: "sept", 11: "onze", 5: "cinq"}
+        tout_val = sum(nval(c) for c in d["les_cotes"])
+        cotes_val = sum(1 for c in d["les_cotes"] if nval(c))
+        ecrits = [("le verdict de 380", f"{b['validees']} SURFACES VALIDÉES SUR {b['les_surfaces']}, SUR {b['les_cotes_valides']} DES "
+                                        f"{b['les_cotes_neufs']} CÔTÉS QUE `324` N'A PAS RETENUS, JUSQU'À {b['le_plus_loin']} TOURS : "
+                                        f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"),
+                  ("le résumé de 380", f"Sur ces {mots[b['les_cotes_neufs']]} côtés, {b['validees']} des"),
+                  ("les côtés validés de 380", f"{b['les_surfaces']} surfaces sont validées, sur la graine {un['le_rang']}, côté "
+                                               f"{un['le_cote']}, jusqu'à {loin(un)} tours de la nappe de départ, et sur la graine "
+                                               f"{deux['le_rang']}, côté {deux['le_cote']}, jusqu'à {loin(deux)}"),
+                  ("les premiers sauts de 380", f"le premier saut des trois chaînes tombe entre {p2(min(pv))} et {p2(max(pv))} pas"
+                   if doubles else "changé"),
+                  ("les premiers sauts comptés doubles dans 380", f"sauts des trois chaînes y font de {p2(min(pv))} à {p2(max(pv))} pas"
+                   if doubles else "changé"),
+                  ("la lecture de 380", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, dont {d['la_lecture_de_m7']['absents']} "
+                                        f"absents du dépôt, sans panne, en {vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("le contrôle de 380", "redonnent exactement ceux de `374`. Il tient." if d["redonne_374"] else "changé"),
+                  ("les couples de la graine 4, moins, dans 380",
+                   "côté moins, les trois couples tiennent leurs comptes, "
+                   + "{} paires sur {}, {} sur {} et {} sur {}".format(*cp(un, "suivie|compagne"), *cp(un, "suivie|tierce"),
+                                                                        *cp(un, "compagne|tierce"))
+                   + f", et {nval(un)} des {len(un['les_surfaces'])} surfaces sont validées,"),
+                  ("la compagne de la graine 6, plus, dans 380", "points : sa troisième surface en a "
+                   f"{g6p['les_points_par_surface']['compagne'][2]}, sa quatrième aucun."
+                   if g6p["les_points_par_surface"]["compagne"][3] == 0 else "changé"),
+                  ("la suivie de la graine 4, plus, dans 380", f"le premier saut de la suivie fait {p2(premier(g4p, 'suivie'))} pas, sous "
+                   "le seuil du double" if g4p["les_sauts"]["suivie"][0]["le_genre"] == "simple" else "changé"),
+                  ("les deux autres de la graine 4, plus, dans 380", f"tierce font {p2(premier(g4p, 'compagne'))} et "
+                   f"{p2(premier(g4p, 'tierce'))} pas."),
+                  ("le vote de la graine 4, plus, dans 380", "tiennent leurs comptes entre elles, {} paires sur {}, le vote désigne la "
+                   "suivie".format(*cp(g4p, "compagne|tierce")) if g4p["le_vote"] == "suivie" and not nval(g4p) else "changé"),
+                  ("les côtés vides de 380", f"⚠ Sur {mots[len(vides)]} des {mots[b['les_cotes_neufs']]} côtés, les graines 1, 2 et 5 et "
+                   "la graine 3, côté moins, aucune des trois chaînes ne pose un seul point"
+                   if {(c["le_rang"], c["le_cote"]) for c in vides} == {(r, k) for r in (1, 2, 5) for k in ("plus", "moins")} | {(3, "moins")}
+                   else "changé"),
+                  ("le plan des côtés vides de 380", "Ce sont les côtés où `324` ne trouvait pas de plan, au plus "
+                   + vg(max(c["ce_que_324_disait"]["la_part_du_plan"] for c in vides)).replace(".", ",")),
+                  ("la graine 3, plus, dans 380", "3, côté plus, la compagne ne pose aucun point ; la suivie et la tierce tiennent "
+                   "{} paires sur {}, sans troisième témoin.".format(*cp(g3p, "suivie|tierce"))
+                   if not any(g3p["les_points_par_surface"]["compagne"]) else "changé"),
+                  ("le total de 380", f"il valide désormais des surfaces sur {mots[cotes_val]} côtés, {tout_val} en tout.")]
+        for c in neufs:
+            if c in vides:
+                continue
+            n = {k: sum(s["le_statut"] == k for s in c["les_surfaces"]) for k in ("validée", "confirmée une fois", "contredite", "sans témoin")}
+            sauts = " ; ".join("aucun point" if premier(c, x) is None else p2(premier(c, x)) for x in chs)
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 380",
+                           f"| graine {c['le_rang']}, {c['le_cote']} | {n['validée']} | {n['confirmée une fois']} | {n['contredite']} | "
+                           f"{n['sans témoin']} | {sauts} |"))
+        ecrits.append(("la ligne des côtés vides de 380", f"| graines 1, 2 et 5, et graine 3, moins | 0 | 0 | 0 | "
+                                                          f"{sum(len(c['les_surfaces']) for c in vides)} | aucun point |"))
+        out.extend((nom_, [x_], s380.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 379 : UNE SURFACE VALIDÉE PAR TROIS CHAÎNES EST-ELLE SUR LE BON TOUR DE PARIS4
     s379 = _source(racine, "une_surface_validee_par_trois_chaines_est_elle_sur_le_bon_tour_de_paris4.json")
     if s379.exists():

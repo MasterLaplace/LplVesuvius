@@ -4821,6 +4821,12 @@ moins, où les trois chaînes tiennent leurs comptes, en a le plus. `R4-P176` s'
 rejouée sur PHercParis4 où les tours publiés donnent une vérité, ne valide que des surfaces justes, jusqu'à 6 tours de leur référence.
 `R4-P176` reste ouverte.
 
+**`380` · 2026-10-01 · l'accord de trois chaînes valide-t-il sur les côtés que 324 n'a pas retenus** — `R4-P176`
+
+⭐⭐⭐⭐⭐ **Oui : 25 des 106 surfaces des onze côtés neufs validées, sur 2 côtés, jusqu'à 8 tours** — `R4-F566`. Sur la graine 4, côté
+moins, et la graine 6, côté plus, le premier saut des trois chaînes tombe entre 1,67 et 1,93 pas et est compté double : l'accord n'a pas
+besoin que le saut de `324` pose au pas. `R4-P178` s'ouvre : la suivie de la graine 4, côté plus, comptée double à son premier saut ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

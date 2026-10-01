@@ -138,16 +138,19 @@ def le_verdict(d: dict) -> dict:
     return {"decidable": True, "h": h, "h0": h0, "lissue": f"{tete} ; {suite}"}
 
 
-def les_chaines_de_0358(relancer0=None, avec_la_spire: bool = False, chainer=None) -> tuple[list[dict], object, dict]:
+def les_chaines_de_0358(relancer0=None, avec_la_spire: bool = False, chainer=None,
+                        cotes=None) -> tuple[list[dict], object, dict]:
     """Les chaînes relancées de PHerc0358 que `331` suit, une par côté de graine dont le saut de `324` pose au pas, avec le lecteur de
     `m7` qui les a lues et ses statistiques de lecture. Sorti de la mesure de `331` pour `354`, qui y porte le compte de `345`. Avec
-    `chainer(nappe, relancer, sauter, lire_valeurs)`, écrit pour `356`, la chaîne est construite par l'appelant depuis les mêmes nappes."""
+    `chainer(nappe, relancer, sauter, lire_valeurs)`, écrit pour `356`, la chaîne est construite par l'appelant depuis les mêmes nappes.
+    Avec `cotes`, écrit pour `380`, les côtés (rang, nom) chaînés sont ceux-là au lieu de ceux dont le saut de `324` pose au pas."""
     from le_transfert_retrouve_t_il_la_spire_voisine import lecteur_du_depot, lire_les_valeurs
 
     from zarr_depth import BUCKET, array_meta
 
     d324 = json.loads(m328.CE_QUE_324_A_PUBLIE.read_text())
-    a_suivre = {(c["le_rang"], c["le_cote"]) for c in d324["les_cotes"]["PHerc0358"] if c["le_saut"]["pose_au_pas"]}
+    a_suivre = ({(c["le_rang"], c["le_cote"]) for c in d324["les_cotes"]["PHerc0358"] if c["le_saut"]["pose_au_pas"]} if cotes is None
+                else set(cotes))
     pred0 = array_meta(f"{BUCKET}/{m299.LA_PREDICTION_0358}", 0, 120.0)
     lire0, stats0 = lecteur_du_depot(pred0, m300.LE_CACHE_M7, "m7_L0", m299.LA_PREDICTION_0358, 0)
     lv0 = lambda idx: lire_les_valeurs(idx, pred0, lire0)  # noqa: E731
