@@ -5,6 +5,20 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 
 ## [Unreleased]
 
+### Added
+- `vesuve grand-prize` gains stage TJ, the judge of the text of the produced winding (`296`, `R4-F477`). From the two
+  embedded meshes it measures where the segment passes over the winding produced from it: the share of each of the 340
+  candidate blocks within half a sheet of a facing point (median 0.0222), and the six blocks to judge, chosen outside
+  the band the research looked at by eye. It says that it claims nothing elsewhere. Given `--ink-readings DIR`
+  (`calibration.npy`, and `produced_<row>_<column>.npy` for each judged block: the ink as `scrollprize/ink_canonical_2um`
+  read it), it reads the published ink map (2 MB) and reports the correlation of the reading with the map at the facing
+  point, against two controls, and the outcome. On the research's readings it gives back 0.8331, 0.1166 and 0.1037
+  on the same six blocks, after a calibration at 0.9593. Without readings the stage says so, says that vesuve does not
+  run the ink model itself, and names what the machine lacks to produce them (torch, the model's file); a folder that
+  lacks a reading, or holds one that is not a 2-D array, is named, and the pipeline goes on. Elsewhere than within half
+  a sheet of a facing point the judge claims nothing.
+- The formulary gains the three rules of the judge: the facing point, the text correlation, the outcome.
+
 ## [0.3.0] - 2026-10-01
 
 The transfer to the next winding, computed here from the published surface prediction instead of replayed from
