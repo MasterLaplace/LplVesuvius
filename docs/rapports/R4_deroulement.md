@@ -4810,6 +4810,11 @@ départ de la graine 8 sur des feuilles différentes ?
 à 8,83 voxels de celle de la suivie en médiane, 44 % des points au loin ; la suivie et la compagne partent de la même feuille, et leurs
 comptes s'écartent quand même. `R4-P175` s'ouvre : les sauts de la graine 8 à cheval plus souvent ?
 
+**`378` · 2026-10-01 · les sauts de la graine 8 sont-ils à cheval plus souvent** — `R4-P175`
+
+⭐⭐⭐⭐ **Non : 10 des 46 sauts lus de la graine 8 à cheval, contre 17 des 72 sur les graines 6 et 7** — `R4-F564`. La graine 6, côté
+moins, où les trois chaînes tiennent leurs comptes, en a le plus. `R4-P176` s'ouvre : l'accord de trois chaînes sur d'autres côtés ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

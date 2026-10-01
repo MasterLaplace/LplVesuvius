@@ -3336,8 +3336,33 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 378 : LES SAUTS DE LA GRAINE 8 SONT-ILS À CHEVAL PLUS SOUVENT
+    s378 = _source(racine, "les_sauts_de_la_graine_8_sont_ils_a_cheval_plus_souvent.json")
+    if s378.exists():
+        d = json.loads(s378.read_text())
+        b = d["le_bilan"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        g8, t = b["la_graine_8"], b["les_temoins"]
+        lignes, parts = [], {}
+        for c in d["les_cotes"]:
+            xs = [s["a_cheval"] for v_ in c["les_chaines"].values() for s in v_ if s["a_cheval"] is not None]
+            parts[(c["le_rang"], c["le_cote"])] = (sum(xs), len(xs))
+            lignes.append((f"la ligne {c['le_rang']} {c['le_cote']} de 378", f"| graine {c['le_rang']}, {c['le_cote']} | {len(xs)} | {sum(xs)} |"))
+        haut = max(parts, key=lambda k: parts[k][0] / parts[k][1])
+        ecrits = [("le verdict de 378", f"{g8['a_cheval']} DES {g8['lus']} SAUTS LUS DE LA GRAINE 8 SONT À CHEVAL, CONTRE {t['a_cheval']} DES "
+                                        f"{t['lus']} SUR LES GRAINES 6 ET 7 : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("la lecture de 378", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, sans panne, en {vg(d['les_secondes'])} "
+                                        "secondes" if not d["les_pannes"] else "changé"),
+                  ("le fait de 378", f"{g8['a_cheval']} des {g8['lus']} sauts lus de la" + (""
+                   if g8["a_cheval"] / g8["lus"] < t["a_cheval"] / t["lus"] else " changé")),
+                  ("les témoins de 378", f"contre {t['a_cheval']} des {t['lus']} sur les graines 6 et 7, une part un peu plus petite"
+                   if g8["a_cheval"] / g8["lus"] < t["a_cheval"] / t["lus"] else "changé"),
+                  ("la graine 6 de 378", f"graine 6, côté moins, {parts[(6, 'moins')][0]} sur {parts[(6, 'moins')][1]}"
+                   if haut == (6, "moins") else "changé")] + lignes
+        out.extend((nom_, [x_], s378.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 377 : LES NAPPES DE DÉPART DE LA GRAINE 8 SONT-ELLES SUR DES FEUILLES DIFFÉRENTES
-    s377 = _source(racine, "les_nappes_de_depart_de_la_graine_8_sont_elles_sur_des_feuilles_differentes.json")
+    s377 =_source(racine, "les_nappes_de_depart_de_la_graine_8_sont_elles_sur_des_feuilles_differentes.json")
     if s377.exists():
         d = json.loads(s377.read_text())
         b = d["le_bilan"]

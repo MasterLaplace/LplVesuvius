@@ -1,0 +1,934 @@
+{
+ "la_question": "Sur PHerc0358, les sauts des chaînes de la graine 8 sont-ils à cheval, un quart au moins de leurs points à plus d'un demi-pas de l'écart médian du saut, plus souvent que ceux des graines 6 et 7 ?",
+ "les_constantes": {
+  "le_demi_pas": 10.0,
+  "la_portee": 60.0,
+  "le_minimum_en_face": 50,
+  "la_part_a_cheval": 0.25,
+  "le_minimum": 10
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 11767,
+  "absents": 0,
+  "octets": 5797937786
+ },
+ "redonne": true,
+ "les_cotes": [
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_chaines": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "en_face": 835,
+      "lecart_median": 17.911,
+      "la_part_a_cheval": 0.0204,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 1010,
+      "lecart_median": 0.345,
+      "la_part_a_cheval": 0.0168,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 644,
+      "lecart_median": 18.773,
+      "la_part_a_cheval": 0.4565,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 4,
+      "en_face": 526,
+      "lecart_median": 12.137,
+      "la_part_a_cheval": 0.3764,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 5,
+      "en_face": 936,
+      "lecart_median": 4.48,
+      "la_part_a_cheval": 0.1282,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 767,
+      "lecart_median": 17.657,
+      "la_part_a_cheval": 0.3872,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 7,
+      "en_face": 998,
+      "lecart_median": 10.305,
+      "la_part_a_cheval": 0.2375,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 1066,
+      "lecart_median": 15.464,
+      "la_part_a_cheval": 0.0469,
+      "a_cheval": false
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "en_face": 910,
+      "lecart_median": 17.564,
+      "la_part_a_cheval": 0.0198,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 855,
+      "lecart_median": 0.851,
+      "la_part_a_cheval": 0.3427,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 3,
+      "en_face": 587,
+      "lecart_median": 17.59,
+      "la_part_a_cheval": 0.3816,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 4,
+      "en_face": 832,
+      "lecart_median": 11.663,
+      "la_part_a_cheval": 0.2163,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 889,
+      "lecart_median": 15.398,
+      "la_part_a_cheval": 0.1012,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 866,
+      "lecart_median": 12.813,
+      "la_part_a_cheval": 0.2206,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 1057,
+      "lecart_median": 17.541,
+      "la_part_a_cheval": 0.1504,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 677,
+      "lecart_median": 19.477,
+      "la_part_a_cheval": 0.0753,
+      "a_cheval": false
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "en_face": 557,
+      "lecart_median": 18.739,
+      "la_part_a_cheval": 0.2083,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 717,
+      "lecart_median": 17.96,
+      "la_part_a_cheval": 0.4114,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 3,
+      "en_face": 728,
+      "lecart_median": 10.731,
+      "la_part_a_cheval": 0.3599,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 4,
+      "en_face": 942,
+      "lecart_median": 15.221,
+      "la_part_a_cheval": 0.0902,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 842,
+      "lecart_median": 12.052,
+      "la_part_a_cheval": 0.3848,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 6,
+      "en_face": 1055,
+      "lecart_median": 15.702,
+      "la_part_a_cheval": 0.0389,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 695,
+      "lecart_median": 13.377,
+      "la_part_a_cheval": 0.4647,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 8,
+      "en_face": 696,
+      "lecart_median": 30.021,
+      "la_part_a_cheval": 0.4971,
+      "a_cheval": true
+     }
+    ]
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_chaines": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "en_face": 542,
+      "lecart_median": 15.639,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 403,
+      "lecart_median": 23.438,
+      "la_part_a_cheval": 0.1663,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 471,
+      "lecart_median": 12.061,
+      "la_part_a_cheval": 0.1571,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 388,
+      "lecart_median": 17.822,
+      "la_part_a_cheval": 0.0026,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 296,
+      "lecart_median": 17.407,
+      "la_part_a_cheval": 0.0068,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 280,
+      "lecart_median": 15.955,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 156,
+      "lecart_median": 16.409,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 151,
+      "lecart_median": 14.98,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "en_face": 499,
+      "lecart_median": 14.719,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 327,
+      "lecart_median": 16.777,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 235,
+      "lecart_median": 11.284,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 171,
+      "lecart_median": 14.994,
+      "la_part_a_cheval": 0.1754,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 114,
+      "lecart_median": 16.613,
+      "la_part_a_cheval": 0.0175,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 107,
+      "lecart_median": 20.974,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 116,
+      "lecart_median": 19.082,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 121,
+      "lecart_median": 18.58,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "en_face": 488,
+      "lecart_median": 15.687,
+      "la_part_a_cheval": 0.0492,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 211,
+      "lecart_median": 12.518,
+      "la_part_a_cheval": 0.0095,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 274,
+      "lecart_median": 11.005,
+      "la_part_a_cheval": 0.438,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 4,
+      "en_face": 665,
+      "lecart_median": 11.24,
+      "la_part_a_cheval": 0.3549,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 5,
+      "en_face": 611,
+      "lecart_median": 17.317,
+      "la_part_a_cheval": 0.0115,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 506,
+      "lecart_median": 13.789,
+      "la_part_a_cheval": 0.1008,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 427,
+      "lecart_median": 14.229,
+      "la_part_a_cheval": 0.0164,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 165,
+      "lecart_median": 16.089,
+      "la_part_a_cheval": 0.3333,
+      "a_cheval": true
+     }
+    ]
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_chaines": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "en_face": 643,
+      "lecart_median": 17.381,
+      "la_part_a_cheval": 0.0047,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 610,
+      "lecart_median": 18.995,
+      "la_part_a_cheval": 0.0115,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 443,
+      "lecart_median": 13.452,
+      "la_part_a_cheval": 0.0068,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 264,
+      "lecart_median": 21.23,
+      "la_part_a_cheval": 0.2917,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 5,
+      "en_face": 267,
+      "lecart_median": 16.584,
+      "la_part_a_cheval": 0.206,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 149,
+      "lecart_median": 13.794,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 126,
+      "lecart_median": 14.919,
+      "la_part_a_cheval": 0.0079,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 139,
+      "lecart_median": 18.3,
+      "la_part_a_cheval": 0.4101,
+      "a_cheval": true
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "en_face": 592,
+      "lecart_median": 17.155,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 641,
+      "lecart_median": 19.068,
+      "la_part_a_cheval": 0.014,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 651,
+      "lecart_median": 12.792,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 600,
+      "lecart_median": 14.895,
+      "la_part_a_cheval": 0.0033,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 551,
+      "lecart_median": 14.389,
+      "la_part_a_cheval": 0.0018,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 462,
+      "lecart_median": 13.031,
+      "la_part_a_cheval": 0.0043,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 307,
+      "lecart_median": 17.352,
+      "la_part_a_cheval": 0.0195,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 249,
+      "lecart_median": 12.477,
+      "la_part_a_cheval": 0.004,
+      "a_cheval": false
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "en_face": 588,
+      "lecart_median": 16.722,
+      "la_part_a_cheval": 0.0136,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 565,
+      "lecart_median": 19.955,
+      "la_part_a_cheval": 0.0195,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 470,
+      "lecart_median": 13.997,
+      "la_part_a_cheval": 0.017,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 140,
+      "lecart_median": 13.425,
+      "la_part_a_cheval": 0.1,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 177,
+      "lecart_median": 12.902,
+      "la_part_a_cheval": 0.5198,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 6,
+      "en_face": 375,
+      "lecart_median": 14.821,
+      "la_part_a_cheval": 0.0133,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 171,
+      "lecart_median": 13.506,
+      "la_part_a_cheval": 0.0585,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 156,
+      "lecart_median": 18.775,
+      "la_part_a_cheval": 0.5256,
+      "a_cheval": true
+     }
+    ]
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_chaines": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "en_face": 399,
+      "lecart_median": 11.158,
+      "la_part_a_cheval": 0.0075,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 160,
+      "lecart_median": 15.58,
+      "la_part_a_cheval": 0.0187,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 144,
+      "lecart_median": 11.277,
+      "la_part_a_cheval": 0.0139,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 131,
+      "lecart_median": 15.454,
+      "la_part_a_cheval": 0.0153,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 144,
+      "lecart_median": 15.961,
+      "la_part_a_cheval": 0.5139,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 6,
+      "en_face": 235,
+      "lecart_median": 19.368,
+      "la_part_a_cheval": 0.3787,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 7,
+      "en_face": 388,
+      "lecart_median": 17.138,
+      "la_part_a_cheval": 0.4021,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 8,
+      "en_face": 282,
+      "lecart_median": 16.155,
+      "la_part_a_cheval": 0.0816,
+      "a_cheval": false
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "en_face": 651,
+      "lecart_median": 11.98,
+      "la_part_a_cheval": 0.0829,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 524,
+      "lecart_median": 14.57,
+      "la_part_a_cheval": 0.6317,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 3,
+      "en_face": 697,
+      "lecart_median": 13.851,
+      "la_part_a_cheval": 0.0445,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 323,
+      "lecart_median": 13.873,
+      "la_part_a_cheval": 0.1146,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 116,
+      "lecart_median": 26.579,
+      "la_part_a_cheval": 0.3966,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 6,
+      "en_face": 158,
+      "lecart_median": 13.517,
+      "la_part_a_cheval": 0.038,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 121,
+      "lecart_median": 14.225,
+      "la_part_a_cheval": 0.0826,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 71,
+      "lecart_median": 14.911,
+      "la_part_a_cheval": 0.3099,
+      "a_cheval": true
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "en_face": 589,
+      "lecart_median": 15.937,
+      "la_part_a_cheval": 0.073,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 178,
+      "lecart_median": 14.598,
+      "la_part_a_cheval": 0.0225,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 148,
+      "lecart_median": 13.638,
+      "la_part_a_cheval": 0.0,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 148,
+      "lecart_median": 13.463,
+      "la_part_a_cheval": 0.0135,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 103,
+      "lecart_median": 14.637,
+      "la_part_a_cheval": 0.1942,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 503,
+      "lecart_median": 14.2,
+      "la_part_a_cheval": 0.0994,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 111,
+      "lecart_median": 18.047,
+      "la_part_a_cheval": 0.0811,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 0,
+      "lecart_median": null,
+      "la_part_a_cheval": null,
+      "a_cheval": null
+     }
+    ]
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_chaines": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "en_face": 457,
+      "lecart_median": 16.111,
+      "la_part_a_cheval": 0.1969,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 2,
+      "en_face": 313,
+      "lecart_median": 21.175,
+      "la_part_a_cheval": 0.0767,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 157,
+      "lecart_median": 12.878,
+      "la_part_a_cheval": 0.1465,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 356,
+      "lecart_median": 12.17,
+      "la_part_a_cheval": 0.1039,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 282,
+      "lecart_median": 16.009,
+      "la_part_a_cheval": 0.0603,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 240,
+      "lecart_median": 14.667,
+      "la_part_a_cheval": 0.1542,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 390,
+      "lecart_median": 16.708,
+      "la_part_a_cheval": 0.0974,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 468,
+      "lecart_median": 2.469,
+      "la_part_a_cheval": 0.4444,
+      "a_cheval": true
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "en_face": 32,
+      "lecart_median": 20.58,
+      "la_part_a_cheval": null,
+      "a_cheval": null
+     },
+     {
+      "le_saut": 2,
+      "en_face": 70,
+      "lecart_median": 0.751,
+      "la_part_a_cheval": 0.3,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 3,
+      "en_face": 109,
+      "lecart_median": 14.435,
+      "la_part_a_cheval": 0.2294,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 401,
+      "lecart_median": 15.667,
+      "la_part_a_cheval": 0.0499,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 592,
+      "lecart_median": 17.558,
+      "la_part_a_cheval": 0.1959,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 517,
+      "lecart_median": 15.448,
+      "la_part_a_cheval": 0.0464,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 457,
+      "lecart_median": 0.906,
+      "la_part_a_cheval": 0.4311,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 8,
+      "en_face": 299,
+      "lecart_median": 32.052,
+      "la_part_a_cheval": 0.1371,
+      "a_cheval": false
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "en_face": 631,
+      "lecart_median": 11.852,
+      "la_part_a_cheval": 0.3233,
+      "a_cheval": true
+     },
+     {
+      "le_saut": 2,
+      "en_face": 640,
+      "lecart_median": 13.791,
+      "la_part_a_cheval": 0.1031,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 3,
+      "en_face": 375,
+      "lecart_median": 19.976,
+      "la_part_a_cheval": 0.088,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 4,
+      "en_face": 491,
+      "lecart_median": 13.101,
+      "la_part_a_cheval": 0.0692,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 5,
+      "en_face": 392,
+      "lecart_median": 11.591,
+      "la_part_a_cheval": 0.1071,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 6,
+      "en_face": 291,
+      "lecart_median": 16.078,
+      "la_part_a_cheval": 0.0412,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 7,
+      "en_face": 188,
+      "lecart_median": 14.785,
+      "la_part_a_cheval": 0.0426,
+      "a_cheval": false
+     },
+     {
+      "le_saut": 8,
+      "en_face": 268,
+      "lecart_median": 7.982,
+      "la_part_a_cheval": 0.194,
+      "a_cheval": false
+     }
+    ]
+   }
+  }
+ ],
+ "le_bilan": {
+  "la_graine_8": {
+   "lus": 46,
+   "a_cheval": 10
+  },
+  "les_temoins": {
+   "lus": 72,
+   "a_cheval": 17
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "10 des 46 sauts lus de la graine 8 sont à cheval, contre 17 des 72 sur les graines 6 et 7 ; non"
+ },
+ "les_secondes": 132.1
+}
