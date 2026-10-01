@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**256 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**257 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 218 portes
+## Grand Prize — 219 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -236,7 +236,8 @@
 - **R4-P199** *(le graal)* · **RÉPONDUE par `402` : non (relecture).** Les chaînes rognées font 25 sauts de plusieurs feuilles sur 315 comptés, contre 18 sur 343 pour `389`, et 7 sauts nuls contre 31 (`R4-F588`). La question était : **SUR PHERC0358, À SEIZE SAUTS, LES CHAÎNES ROGNÉES FONT-ELLES MOINS DE SAUTS DE PLUS D'UNE FEUILLE DE `m7` QUE LES CHAÎNES DE `389` ?**
 - **R4-P200** *(le graal)* · **RÉPONDUE par `403` : indécidable.** Un seul saut jugé de plusieurs feuilles dans les deux familles, celui de `385`, 2 feuilles pour 3 tours ; les chaînes rognées n'en ont aucun, leurs 93 sauts jugés comptent une feuille pour un tour, et leurs 7 sauts de plusieurs feuilles sont là où aucun tour n'est retrouvé (`R4-F589`). La question était : **SUR PHERCPARIS4, LES SAUTS QUE `m7` COMPTE DE DEUX FEUILLES, ROGNÉS OU NON, FRANCHISSENT-ILS DEUX TOURS PUBLIÉS ?**
 - **R4-P201** *(le graal)* · **RÉPONDUE par `404` : indécidable, le témoin ne vaut pas.** 1 seul des 23 sauts d'une feuille partis du tour −6 y franchit entre 0,5 et 1,5 tour ; là où ils arrivent, le tour −7 est à 0,42-4,58 pas nominaux du tour −6 (`R4-F590`). La question était : **SUR PHERCPARIS4, LES SAUTS DE DEUX FEUILLES DE `m7` QUI PARTENT DU TOUR −6 FINISSENT-ILS UN PAS AU-DELÀ DU TOUR −7, OU SUR LUI ?**
-- **R4-P202** *(le graal)* · **SUR PHERCPARIS4, LA LECTURE DE `404` DONNE-T-ELLE UN TOUR AUX SAUTS D'UNE FEUILLE JUGÉS JUSTES DU TOUR 0 AU TOUR −6, LÀ OÙ LE TOUR D'ARRIVÉE EST RETROUVÉ ?** ⭐⭐⭐⭐ C'EST CE QUE `404` DÉSIGNE. Au tour −6, le témoin ne vaut pas (`R4-F590`) ; la même lecture, essayée là où le tour d'arrivée est connu, dirait si la faute est au tour −7 publié ou à la lecture elle-même.
+- **R4-P202** *(le graal)* · **RÉPONDUE par `405` : oui.** Lus au même endroit, 156 des 162 sauts d'une feuille jugés justes franchissent entre 0,5 et 1,5 tour, 149 par la lecture de `404` ; relu au même endroit, le témoin du tour −6 ne vaut toujours pas, 2 sur 20 (`R4-F591`, `R4-C49`). La question était : **SUR PHERCPARIS4, LA LECTURE DE `404` DONNE-T-ELLE UN TOUR AUX SAUTS D'UNE FEUILLE JUGÉS JUSTES DU TOUR 0 AU TOUR −6, LÀ OÙ LE TOUR D'ARRIVÉE EST RETROUVÉ ?**
+- **R4-P203** *(le graal)* · **SUR PHERCPARIS4, LÀ OÙ L'ARRIVÉE D'UN SAUT D'UNE FEUILLE PARTI DU TOUR −6 EST LUE, SA SURFACE DE DÉPART EST-ELLE SUR LE TOUR −6 ?** ⭐⭐⭐⭐ C'EST CE QUE `405` DÉSIGNE. La lecture compte juste là où les tours sont connus (`R4-F591`), mais sur les graines 4 à 6 ces sauts arrivent à 1,58-1,74 pas du tour −6, plus loin que deux tours consécutifs ; lire leur départ au même endroit, avec les sauts jugés justes pour témoin, dirait si la faute est au tour −7 publié ou aux sauts eux-mêmes.
 
 ## Progress Prizes — 19 portes
 

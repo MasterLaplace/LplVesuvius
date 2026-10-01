@@ -5,6 +5,12 @@ retrouvé : l'écart de leur surface d'arrivée au tour −6, rapporté à l'éc
 d'une feuille partis du même tour servent de témoin, et le témoin ne vaut pas : un seul sur 23 franchit entre 0,5 et 1,5 tour. Là où
 arrivent ces sauts, le tour −7 est à 0,42 à 4,58 pas nominaux du tour −6. Par la règle déclarée, c'est indécidable.*
 
+> ⚠⚠⚠⚠ **CORRIGÉ PAR `405`, LE 2026-10-01.** Ce document dit lire l'écart du tour −7 « au même endroit » que l'arrivée. Son
+> code prend la médiane des écarts de l'arrivée sur les sommets du tour −6 qui lui font face, mais celle du tour −7 sur **tous** les
+> sommets du tour −6 de la boîte qui font face au tour −7. Les écarts du tour −7 publiés ici ne sont donc pas pris là où arrivent les
+> sauts. Relu au même endroit, le témoin ne vaut toujours pas, 2 sauts d'une feuille sur 20, et là où le tour d'arrivée est connu la
+> lecture compte juste (`R4-F591`, `R4-C49`). ⭐ Les chaînes, les comptes de `m7` et le verdict, indécidable, tiennent.
+
 ![Chaque saut parti du tour −6, placé par l'écart du tour −7 et par l'écart de son arrivée au tour −6](../images/404_un_saut_de_deux_feuilles_parti_du_tour_moins_six_finit_il_au_dela_du_suivant_sur_paris4.png)
 
 ## 0. Pourquoi cette tranche

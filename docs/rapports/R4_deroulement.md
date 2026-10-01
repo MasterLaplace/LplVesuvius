@@ -4973,6 +4973,12 @@ sauts jugés comptent une feuille pour un tour ; leurs 7 sauts de plusieurs feui
 partis du tour −6, le tour −7 est à 0,42 à 4,58 pas nominaux du tour −6 ; la lecture qui le prend pour unité ne sépare rien.
 `R4-P202` s'ouvre : la même lecture donne-t-elle un tour là où le tour d'arrivée est retrouvé ?
 
+**`405` · 2026-10-01 · la lecture de 404 donne-t-elle un tour aux sauts justes d'une feuille sur paris4** — `R4-P202`
+
+⭐⭐⭐⭐ **Oui : lus au même endroit, 156 des 162 sauts d'une feuille jugés justes sont à un tour, 149 par la lecture de `404`** — `R4-F591`.
+`404` ne prenait pas l'écart du tour −7 au même endroit que l'arrivée (`R4-C49`) ; relu au même endroit, son témoin ne vaut toujours pas.
+`R4-P203` s'ouvre : là où l'arrivée est lue, le départ d'un saut parti du tour −6 est-il sur le tour −6 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

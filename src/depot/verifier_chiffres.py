@@ -3336,6 +3336,59 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 405 : LA LECTURE DE 404 DONNE-T-ELLE UN TOUR AUX SAUTS JUSTES D'UNE FEUILLE SUR PARIS4
+    s405 = _source(racine, "la_lecture_de_404_donne_t_elle_un_tour_aux_sauts_justes_dune_feuille_sur_paris4.json")
+    if s405.exists():
+        d = json.loads(s405.read_text())
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        v2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        plage = lambda xs: f"{v2(min(xs))}-{v2(max(xs))}"  # noqa: E731
+        c = d["les_constantes"]
+        dans = lambda k: c["le_bas"] <= k < c["le_haut"]  # noqa: E731
+        J, S6 = d["les_sauts_justes"], d["les_sauts_de_moins_six"]
+        k_ = lambda x, l: x[l]["les_tours_franchis"]  # noqa: E731
+        a = [x for x in J if x["au_meme_endroit"]["lue"]]
+        b = [x for x in J if x["la_lecture_de_404"]["lue"]]
+        a_in, b_in = sum(dans(k_(x, "au_meme_endroit")) for x in a), sum(dans(k_(x, "la_lecture_de_404")) for x in b)
+        rates = [x for x in a if not dans(k_(x, "au_meme_endroit"))]
+        milieu = [x for x in a if -5 <= x["le_depart"] <= -1]
+        pire = max(b, key=lambda x: k_(x, "la_lecture_de_404"))
+        ordinaux = {1: "premier", 2: "deuxième", 3: "troisième", 4: "quatrième", 5: "cinquième", 6: "sixième", 7: "septième", 8: "huitième"}
+        un6 = [x for x in S6 if x["le_nombre_de_feuilles"] == 1 and x["au_meme_endroit"]["lue"]]
+        un6_404 = [x for x in S6 if x["le_nombre_de_feuilles"] == 1 and x["la_lecture_de_404"]["lue"]]
+        deux6 = [x for x in S6 if x["le_nombre_de_feuilles"] == 2 and x["au_meme_endroit"]["lue"]]
+        loin = [x for x in un6 if 4 <= x["le_rang"] <= 6 and k_(x, "au_meme_endroit") >= c["le_haut"]]
+        ecart = lambda x, cle: abs(x["au_meme_endroit"][cle])  # noqa: E731
+        consecutifs = [ecart(x, "lecart_du_suivant_en_pas") for x in a]
+        ecrits = [("le verdict de 405", f"OUI : {a_in} SAUTS JUGÉS JUSTES SUR {len(a)} À UN TOUR AU MÊME ENDROIT, {b_in} PAR LA LECTURE DE `404`"
+                   if d["le_verdict"]["lissue"].endswith("au même endroit : oui ; lecture de 404 : oui") else "changé"),
+                  ("la lecture de 405", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes ; le contrôle tient sur les deux "
+                   "familles et les seize côtés" if not d["les_pannes"] and d["le_controle"] and len(d["les_cotes"]) == 16 else "changé"),
+                  ("le résumé de 405", f"Lus au même endroit, {a_in} des {len(J)} sauts franchissent entre"),
+                  ("la lecture de 404 dans le résumé de 405", f"0,5 et 1,5 tour ; par la lecture de `404`, {b_in}."),
+                  ("les sauts justes de 405", f"Les {len(J)} sauts jugés justes sont lus par les deux" if len(a) == len(b) == len(J) else "changé"),
+                  ("les ratés de 405", f"Au même endroit, {a_in} franchissent entre {vg(c['le_bas'])} et {vg(c['le_haut'])} tour, et les "
+                   f"{len(rates)} autres partent tous du tour 0. Des tours −1 à −5, les {len(milieu)}"
+                   if all(x["le_depart"] == 0 for x in rates) and all(dans(k_(x, "au_meme_endroit")) for x in milieu) else "changé"),
+                  ("le coût du défaut de 404", f"Par la lecture de `404`, {b_in} : le défaut en coûte {a_in - b_in}, dont "
+                   f"{v2(k_(pire, 'la_lecture_de_404'))} tours pour le"),
+                  ("le pire saut de 404", f"{ordinaux[pire['le_saut']]} saut de la {pire['la_chaine']} de la graine {pire['le_rang']}, du tour "
+                   f"{pire['le_depart']} au tour {pire['le_depart'] - 1}, que la lecture au même endroit lit à {v2(k_(pire, 'au_meme_endroit'))}."),
+                  ("les tours consécutifs de 405", f"tours consécutifs y sont à {plage(consecutifs)} pas nominaux l'un de l'autre."),
+                  ("le témoin relu de 405", f"{sum(dans(k_(x, 'au_meme_endroit')) for x in un6)} des {len(un6)} sauts d'une feuille lus "
+                   f"franchissent entre {vg(c['le_bas'])} et"),
+                  ("les graines 4 à 6 de 405", f"{vg(c['le_haut'])} tour, contre {sum(dans(k_(x, 'la_lecture_de_404')) for x in un6_404)} sur "
+                   f"{len(un6_404)} dans `404`. Sur les graines 4 à 6, {len(loin)} d'entre eux franchissent "
+                   f"{v2(min(k_(x, 'au_meme_endroit') for x in loin))} à {v2(max(k_(x, 'au_meme_endroit') for x in loin))} tours : le tour −7 "
+                   f"y est à {plage([ecart(x, 'lecart_du_suivant_en_pas') for x in loin])}"),
+                  ("les arrivées de 405", f"pas du tour −6, et leurs arrivées à {plage([ecart(x, 'lecart_au_depart_en_pas') for x in loin])} pas."),
+                  ("les deux feuilles relues de 405", f"relus au même endroit, les {len(deux6)} sauts de deux feuilles partis du tour −6 franchissent "
+                   f"{', '.join(v2(x) for x in sorted(k_(y, 'au_meme_endroit') for y in deux6)[:-1])} et"),
+                  ("plus loin que les tours consécutifs de 405", f"−6 arrive à {plage([ecart(x, 'lecart_au_depart_en_pas') for x in loin])} pas "
+                   "de lui, plus loin que tout écart de deux tours consécutifs lu sur les sauts justes"
+                   if min(ecart(x, "lecart_au_depart_en_pas") for x in loin) > max(consecutifs) else "changé")]
+        out.extend((nom_, [x_], s405.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 404 : UN SAUT DE DEUX FEUILLES PARTI DU TOUR −6 FINIT-IL AU-DELÀ DU SUIVANT SUR PARIS4
     s404 = _source(racine, "un_saut_de_deux_feuilles_parti_du_tour_moins_six_finit_il_au_dela_du_suivant_sur_paris4.json")
     if s404.exists():
