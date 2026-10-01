@@ -106,6 +106,15 @@ request, with warnings treated as errors.
   transfers the research saved on the segment and on the band, point for point within a millionth of a voxel, and
   the shares on the right winding `247` published (0.9214 with the vote, 0.9119 without, 0.7613 for a fixed step).
   `--read-prediction` reads the samples again from the public prediction.
+- The chain of windings grown from the prediction `m7` (`vesuve/chain/`: the criterion that needs no referent, the
+  regrowth by one mesh, the chain) is replayed on PHercParis4, seeds 1 to 8, both sides, eight jumps: it gives back the
+  chain the research published jump by jump (where each surface comes from, its points, whether the criterion holds
+  it), the strict reading against the published windings finds 27 of the 28 judged jumps right on seeds 4 to 8
+  (`R4-F551`), and on seeds 4 and 7 its surfaces are the research's, point for point (`tests/test_chain_validation.py`,
+  with `VESUVE_RESEARCH`, `VESUVE_DATA` and `VESUVE_HEAVY=1`, about five minutes). It is a library: no pipeline stage or
+  command runs it yet. Where its criterion was not validated is in its report (`vesuve/chain/report.py`): PHercParis4
+  seeds 1 to 3, where the published windings overlap and it holds 17 of 21 wrong jumps (`R4-F538`), and PHerc0358,
+  where nothing but the criterion judges the chain (`R4-F552`).
 - The correction of the transfer is replayed from the embedded step tables. It gives back what `275` and `281`
   published block by block (340 and 84 blocks), and the corrected transfer it writes corrects the same points as
   the one the research saved, to within a millionth of a voxel. The judges only score: replaced by noise, they change the counts and not one corrected point.
