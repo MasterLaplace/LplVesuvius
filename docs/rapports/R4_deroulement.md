@@ -4859,6 +4859,12 @@ aux comptes de `m7` contre les tours publiés de PHercParis4 ?
 Les contredites tombent de 152 à 81 ; 21 des 26 sauts que `369` compte doubles ne franchissent qu'une feuille. C'est la règle de compte que
 le logiciel peut porter. `R4-P183` s'ouvre : où naissent les contradictions de la graine 8 de PHerc0358 ?
 
+**`386` · 2026-10-01 · les contradictions de la graine 8 naissent-elles au premier saut ou à un saut de deux feuilles** — `R4-P183`
+
+⭐⭐⭐⭐ **Au premier saut : 5 couples sur 6, aucun après un saut de deux** — `R4-F572`. Les premières surfaces des trois chaînes ne sont pas
+sur la même feuille. Côté moins, elles suivent pourtant les mêmes feuilles à des écarts de comptes constants qui s'accordent (2, 1 et 3).
+`R4-P184` s'ouvre : aligner les comptes sur la première paire même feuille ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

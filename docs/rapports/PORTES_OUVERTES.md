@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**237 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**238 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 199 portes
+## Grand Prize — 200 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -217,7 +217,8 @@
 - **R4-P180** *(le graal)* · **RÉPONDUE par `383` : non.** Les trois premiers sauts de la graine 4, côté plus, franchissent une feuille de `m7` : la suivie 357 points sur 358, la compagne 304 sur 304, la tierce 251 sur 252, et les trois nappes sont sur la même feuille ; la suivie avait le bon compte, et la compagne et la tierce un tour de trop (`R4-F569`). La question était : **SUR PHERC0358, LES FEUILLES DE `m7` FRANCHIES ENTRE LA NAPPE ET LA PREMIÈRE SURFACE DES TROIS CHAÎNES DE LA GRAINE 4, CÔTÉ PLUS, DISENT-ELLES QUE LE PREMIER SAUT DE LA SUIVIE, À 1,40 PAS, EN FRANCHIT DEUX COMME LES AUTRES ?** La suite est `R4-P181`.
 - **R4-P181** *(le graal)* · **RÉPONDUE par `384` : non.** Des 12 sauts que `369` compte doubles sur PHerc0358, 8 ne franchissent qu'une feuille de `m7`, 3 deux et 1 trois ; aux comptes de `m7`, l'accord de trois chaînes valide 78 surfaces sur 6 côtés, jusqu'à 7 tours, contre 50 sur 5 aux comptes de `369` (`R4-F570`). La question était : **SUR PHERC0358, LES SAUTS QUE `369` COMPTE DOUBLES FRANCHISSENT-ILS DEUX FEUILLES DE `m7`, ET QUE DEVIENNENT LES COMPTES DES SURFACES QUE L'ACCORD DE TROIS CHAÎNES VALIDE ?** La suite est `R4-P182`.
 - **R4-P182** *(le graal)* · **RÉPONDUE par `385` : oui.** Sur PHercParis4, aux comptes de `m7`, l'accord de trois chaînes valide 160 surfaces au lieu de 109, et les 58 lues sont toutes sur le bon tour publié, contre 46 sur 46 ; les contredites tombent de 152 à 81 (`R4-F571`). La question était : **SUR PHERCPARIS4, L'ACCORD DE TROIS CHAÎNES AUX COMPTES DE `m7` VALIDE-T-IL DES SURFACES SUR LE BON TOUR PUBLIÉ, ET AUTANT QU'AUX COMPTES DE `369` ?** La suite est `R4-P183`.
-- **R4-P183** *(le graal)* · **SUR LA GRAINE 8 DE PHERC0358, OÙ L'ACCORD DE TROIS CHAÎNES AUX COMPTES DE `m7` NE VALIDE TOUJOURS RIEN, LES PAIRES QUI SE CONTREDISENT LE FONT-ELLES DÈS LE PREMIER SAUT, OU À PARTIR D'UN SAUT QUE `m7` COMPTE DEUX ?** ⭐⭐⭐⭐ C'EST CE QUE `385` DÉSIGNE. Aux comptes de `m7`, l'accord choisit le bon tour sur PHercParis4 (`R4-F571`) et valide sur six côtés de PHerc0358 (`R4-F570`) ; la graine 8, où ni la nappe ni les sauts à cheval n'expliquaient l'échec (`R4-F563`, `R4-F564`), reste le côté où il ne valide rien.
+- **R4-P183** *(le graal)* · **RÉPONDUE par `386` : dès le premier saut.** Sur les 6 couples de la graine 8, 5 se contredisent dès leurs premières surfaces, aucun après un saut que `m7` compte deux ; côté moins, les trois chaînes suivent les mêmes feuilles à des écarts de comptes constants, 2, 1 et 3, qui s'accordent (`R4-F572`). La question était : **SUR LA GRAINE 8 DE PHERC0358, OÙ L'ACCORD DE TROIS CHAÎNES AUX COMPTES DE `m7` NE VALIDE TOUJOURS RIEN, LES PAIRES QUI SE CONTREDISENT LE FONT-ELLES DÈS LE PREMIER SAUT, OU À PARTIR D'UN SAUT QUE `m7` COMPTE DEUX ?** La suite est `R4-P184`.
+- **R4-P184** *(le graal)* · **LÀ OÙ DEUX CHAÎNES NE POSENT PAS LEUR PREMIÈRE SURFACE SUR LA MÊME FEUILLE, ALIGNER LEURS COMPTES SUR LEUR PREMIÈRE PAIRE MÊME FEUILLE FAIT-IL VALIDER DES SURFACES SUR LE BON TOUR DE PHERCPARIS4, ET QUE DONNE-T-IL SUR LA GRAINE 8 DE PHERC0358 ?** ⭐⭐⭐⭐ C'EST CE QUE `386` DÉSIGNE. Sur la graine 8, côté moins, les chaînes suivent les mêmes feuilles à des écarts constants qui s'accordent (`R4-F572`) : compter depuis la nappe de chaque chaîne suppose qu'elles partent de la même feuille, ce que la graine 8 dément.
 
 ## Progress Prizes — 19 portes
 

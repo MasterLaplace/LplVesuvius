@@ -3336,6 +3336,37 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 386 : LES CONTRADICTIONS DE LA GRAINE 8 NAISSENT-ELLES AU PREMIER SAUT OU À UN SAUT DE DEUX FEUILLES
+    s386 = _source(racine, "les_contradictions_de_la_graine_8_naissent_elles_au_premier_saut_ou_a_un_saut_de_deux_feuilles.json")
+    if s386.exists():
+        d = json.loads(s386.read_text())
+        b = d["le_bilan"]
+        cs = {(c["le_cote"], c["le_couple"]): c for c in d["les_couples"]}
+        mots = {5: "5", 6: "6"}
+        nes = [c for c in d["les_couples"] if c["la_naissance"]]
+        unun = [c for c in nes if (c["la_naissance"]["le_saut_suivi"], c["la_naissance"]["le_saut_compagnon"]) == (1, 1)
+                and not c["la_naissance"]["meme_feuille"] and c["la_naissance"]["lecart_des_comptes"] == 0]
+        ecart = lambda k, e: sum(x[2] == e for x in cs[("moins", k)]["les_ecarts_ensuite"])  # noqa: E731
+        n_ = lambda k: len(cs[("moins", k)]["les_ecarts_ensuite"])  # noqa: E731
+        ecrits = [("le verdict de 386", f"{b['au_premier_saut']} COUPLES SUR {b['avec_une_naissance']} SE CONTREDISENT DÈS LE PREMIER SAUT, "
+                   f"AUCUN APRÈS UN SAUT DE DEUX : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}" if b["apres_un_saut_de_deux"] == 0
+                   else "changé"),
+                  ("le résumé de 386", f"couples, {b['au_premier_saut']} se contredisent dès leurs premières surfaces"),
+                  ("le nombre de couples de 386", f"première paire qui se contredit. Sur les {b['les_couples']}"),
+                  ("les premières surfaces de 386", f"Dans {len(unun)} des {b['au_premier_saut']} couples qui naissent là, la paire de"),
+                  ("les écarts constants de 386", f"suivie compte 2 de plus que la compagne sur {ecart('suivie|compagne', 2)} paires de "
+                   f"{n_('suivie|compagne')}, 1 de moins que la tierce sur {ecart('suivie|tierce', -1)} de {n_('suivie|tierce')}, et la "
+                   f"compagne 3 de moins que la tierce sur"),
+                  ("le dernier écart de 386", f"{ecart('compagne|tierce', -3)} de {n_('compagne|tierce')} ; les trois écarts s'accordent, 2 et 1 font 3."),
+                  ("l'écart du côté plus dans 386", "le long des paires" if min(x[2] for x in cs[("plus", "suivie|compagne")]["les_ecarts_ensuite"]) == 0
+                   and max(x[2] for x in cs[("plus", "suivie|compagne")]["les_ecarts_ensuite"]) == 6 else "changé")]
+        for c in d["les_couples"]:
+            n = c["la_naissance"]
+            nais = "aucune" if n is None else f"({n['le_saut_suivi']}, {n['le_saut_compagnon']})" + (", au premier saut" if n["au_premier_saut"] else "")
+            ecrits.append((f"la ligne {c['le_cote']} {c['le_couple']} de 386", f"| {c['le_cote']} | {c['le_couple'].replace('|', ' et ')} | "
+                                                                              f"{c['les_paires']} | {c['contredisent']} | {nais} |"))
+        out.extend((nom_, [x_], s386.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 385 : L'ACCORD AUX COMPTES DE M7 VALIDE-T-IL DES SURFACES SUR LE BON TOUR DE PARIS4
     s385 = _source(racine, "laccord_aux_comptes_de_m7_valide_t_il_des_surfaces_sur_le_bon_tour_de_paris4.json")
     if s385.exists():
