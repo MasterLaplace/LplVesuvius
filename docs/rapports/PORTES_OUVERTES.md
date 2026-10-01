@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**247 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**248 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 209 portes
+## Grand Prize — 210 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -227,7 +227,8 @@
 - **R4-P190** *(le graal)* · **RÉPONDUE par `393` : non.** Les sauts nuls de `m7` franchis ont une part de points à une feuille de 0,24 à 0,43, les restés de 0,03 à 0,48 ; 2 seulement des 31 sauts nuls ont moins d'un dixième de leurs points à une feuille, les autres sont des mélanges (`R4-F579`). La question était : **SUR PHERC0358, LES SAUTS NULS DE `m7` QUI FRANCHISSENT UNE FEUILLE SE DISTINGUENT-ILS DES AUTRES PAR LA PART DE LEURS POINTS QUI EN FRANCHISSENT UNE ?** La suite est `R4-P191`.
 - **R4-P191** *(le graal)* · **RÉPONDUE par `394` : indécidable.** Sur 88 sauts jugés, 2 seulement sont des mélanges, dont 1 faux ; les 86 sauts nets sont tous justes (`R4-F580`). PHercParis4 a des feuilles trop nettes pour juger les mélanges. La question était : **SUR PHERCPARIS4, LES SAUTS DONT LE COMPTE MAJORITAIRE DE `m7` EST PORTÉ PAR MOINS DES DEUX TIERS DES POINTS DONNENT-ILS DES COMPTES FAUX PLUS SOUVENT QUE LES AUTRES ?**
 - **R4-P192** *(le graal)* · **RÉPONDUE par `395` : non.** Rendre leur genre aux 23 mélanges dont le poids change fait passer les surfaces contredites de 161 à 196 et les validées de 89 à 81 (`R4-F581`). La question était : **SUR PHERC0358, À SEIZE SAUTS, L'ACCORD QUI REND AUX SAUTS MÉLANGÉS DE `m7` LE POIDS DE LEUR GENRE DE `369` VALIDE-T-IL AUTANT DE SURFACES EN SE CONTREDISANT MOINS ?**
-- **R4-P193** *(le graal)* · **SUR PHERC0358, LES POINTS D'UN SAUT MÉLANGÉ DE `m7` QUI FRANCHISSENT UNE FEUILLE ET CEUX QUI N'EN FRANCHISSENT AUCUNE OCCUPENT-ILS DEUX PLAGES SÉPARÉES DE LA SURFACE, COMME UNE SURFACE À CHEVAL, OU SONT-ILS ENTREMÊLÉS ?** ⭐⭐⭐⭐ C'EST CE QUE `395` DÉSIGNE. Le compte majoritaire de `m7` reste le meilleur compte connu (`R4-F581`), mais 96 des 343 sauts comptés sont des mélanges ; deux plages diraient une surface à cheval à scinder, des points entremêlés un compte bruité.
+- **R4-P193** *(le graal)* · **RÉPONDUE par `396` : oui.** Sur 95 mélanges jugés, 95 sont en deux plages et 0 entremêlés ; le compte le plus bas est toujours celui des points restés le plus près de la surface de départ (`R4-F582`). La question était : **SUR PHERC0358, LES POINTS D'UN SAUT MÉLANGÉ DE `m7` QUI FRANCHISSENT UNE FEUILLE ET CEUX QUI N'EN FRANCHISSENT AUCUNE OCCUPENT-ILS DEUX PLAGES SÉPARÉES DE LA SURFACE, COMME UNE SURFACE À CHEVAL, OU SONT-ILS ENTREMÊLÉS ?**
+- **R4-P194** *(le graal)* · **SUR PHERC0358, UNE CHAÎNE QUI RETIRE DE CHAQUE SURFACE LA PLAGE RESTÉE SUR LA SURFACE D'OÙ ELLE PART A-T-ELLE MOINS DE SAUTS MÉLANGÉS, ET L'ACCORD S'Y CONTREDIT-IL MOINS ?** ⭐⭐⭐⭐ C'EST CE QUE `396` DÉSIGNE. Un mélange de `m7` est une surface à cheval, dont la plage à zéro feuille n'a pas quitté la surface de départ (`R4-F582`) ; la retirer avant le saut suivant scinde la surface au lieu de corriger le compte.
 
 ## Progress Prizes — 19 portes
 

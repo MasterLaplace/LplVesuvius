@@ -4920,6 +4920,12 @@ leur genre de `369` ?
 reste le meilleur compte connu, mélanges compris ; le genre ne voit pas non plus les sauts nuls qui franchissent une feuille. `R4-P193`
 s'ouvre : les points d'un mélange forment-ils deux plages, comme une surface à cheval ?
 
+**`396` · 2026-10-01 · les points d'un saut mélangé de m7 forment-ils deux plages sur pherc0358** — `R4-P193`
+
+⭐⭐⭐⭐ **Oui : 95 des 95 mélanges jugés sont en deux plages** — `R4-F582`. Dans un mélange de zéro et une feuille, la plage à zéro n'a pas
+quitté la surface de départ (0,02 pas, contre 0,69) : c'est la surface qui est à cheval, pas le compte qui se trompe. `R4-P194` s'ouvre :
+une chaîne qui retire cette plage avant le saut suivant ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

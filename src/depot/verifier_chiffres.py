@@ -3336,6 +3336,39 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 396 : LES POINTS D'UN SAUT MÉLANGÉ DE M7 FORMENT-ILS DEUX PLAGES SUR PHERC0358
+    s396 = _source(racine, "les_points_dun_saut_melange_de_m7_forment_ils_deux_plages_sur_pherc0358.json")
+    if s396.exists():
+        import statistics as _st
+        d = json.loads(s396.read_text())
+        b = d["le_bilan"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        p2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        ju = [m_ for m_ in d["les_melanges"] if m_["juge"]]
+        nj = [m_ for m_ in d["les_melanges"] if not m_["juge"]]
+        sep = sorted(m_["la_separation"] for m_ in ju)
+        nets = [m_["la_separation"] for m_ in d["les_nets"] if m_["juge"]]
+        bas = sum(1 for m_ in ju if m_["les_ecarts_en_pas"][str(m_["les_deux_comptes"][0])] < m_["les_ecarts_en_pas"][str(m_["les_deux_comptes"][1])])
+
+        def _ligne(nom, deux):
+            g = [m_ for m_ in ju if m_["les_deux_comptes"] == list(deux)]
+            e0 = _st.median(m_["les_ecarts_en_pas"][str(deux[0])] for m_ in g)
+            e1 = _st.median(m_["les_ecarts_en_pas"][str(deux[1])] for m_ in g)
+            n_ = sum(1 for m_ in g if m_["les_ecarts_en_pas"][str(deux[0])] < m_["les_ecarts_en_pas"][str(deux[1])])
+            return f"| {nom} | {len(g)} | {p2(e0)} pas | {p2(e1)} pas | {n_} sur {len(g)} |"
+        ecrits = [("le verdict de 396", f"SUR {b['juges']} MÉLANGES JUGÉS, {b['en_plages']} SONT EN DEUX PLAGES ET {b['entremeles']} ENTREMÊLÉS : "
+                   f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"),
+                  ("la lecture de 396", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("les jugés de 396", f"{b['juges']} des {b['melanges']} mélanges sont jugés"),
+                  ("le non jugé de 396", f"n'a que {nj[0]['les_points'][str(nj[0]['les_deux_comptes'][0])]} points à" if len(nj) == 1 else "changé"),
+                  ("la séparation de 396", f"Leur séparation va de {p2(sep[0])} à {p2(sep[-1])}, avec une médiane de {p2(_st.median(sep))}"),
+                  ("le bas de 396", f"et dans les {bas} le compte le" if bas == len(ju) else "changé"),
+                  ("la ligne zéro-un de 396", _ligne("zéro et une feuille", (0, 1))),
+                  ("la ligne un-deux de 396", _ligne("une et deux feuilles", (1, 2))),
+                  ("les nets de 396", f"Les {len(nets)} sauts nets dont le compte minoritaire a au moins 20 points"),
+                  ("la médiane des nets de 396", f"séparation médiane de {p2(_st.median(nets))}. Ce qui fait un mélange")]
+        out.extend((nom_, [x_], s396.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 395 : RENDRE AUX MÉLANGES DE M7 LE POIDS DE LEUR GENRE CONTREDIT-IL MOINS SUR PHERC0358
     s395 = _source(racine, "rendre_aux_melanges_de_m7_le_poids_de_leur_genre_contredit_il_moins_sur_pherc0358.json")
     if s395.exists():

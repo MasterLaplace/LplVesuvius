@@ -1,0 +1,9354 @@
+{
+ "la_question": "Sur PHerc0358, les points d'un saut mélangé de m7 qui franchissent une feuille et ceux qui n'en franchissent aucune occupent-ils deux plages séparées de la surface, ou sont-ils entremêlés ?",
+ "les_constantes": {
+  "les_voisins": 6,
+  "le_minimum_par_compte": 20,
+  "en_plages": 0.5,
+  "entremele": 0.2,
+  "la_part": 0.75,
+  "le_minimum": 10
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 41657,
+  "absents": 183,
+  "octets": 18832443810
+ },
+ "redonne_395": true,
+ "les_melanges": [
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 1,
+   "le_nombre_de_feuilles": 3,
+   "les_comptes": {
+    "1": 13,
+    "2": 71,
+    "3": 142,
+    "4": 32
+   },
+   "les_deux_comptes": [
+    2,
+    3
+   ],
+   "les_points": {
+    "2": 71,
+    "3": 142
+   },
+   "juge": true,
+   "la_separation": 0.6846,
+   "les_ecarts_en_pas": {
+    "2": 1.969,
+    "3": 2.607
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 357,
+    "1": 344,
+    "2": 157,
+    "3": 27,
+    "4": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 357,
+    "1": 344
+   },
+   "juge": true,
+   "la_separation": 0.7098,
+   "les_ecarts_en_pas": {
+    "0": 0.021,
+    "1": 0.531
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 448,
+    "1": 559,
+    "2": 22,
+    "3": 4
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 448,
+    "1": 559
+   },
+   "juge": true,
+   "la_separation": 0.8172,
+   "les_ecarts_en_pas": {
+    "0": 0.019,
+    "1": 0.542
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 30,
+    "1": 139,
+    "2": 553,
+    "3": 96,
+    "4": 17
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 139,
+    "2": 553
+   },
+   "juge": true,
+   "la_separation": 0.6599,
+   "les_ecarts_en_pas": {
+    "1": 0.891,
+    "2": 1.219
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 144,
+    "1": 560,
+    "2": 350,
+    "3": 6
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 560,
+    "2": 350
+   },
+   "juge": true,
+   "la_separation": 0.8242,
+   "les_ecarts_en_pas": {
+    "1": 0.691,
+    "2": 1.249
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "1": 274,
+    "2": 360,
+    "3": 84
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 274,
+    "2": 360
+   },
+   "juge": true,
+   "la_separation": 0.7754,
+   "les_ecarts_en_pas": {
+    "1": 0.932,
+    "2": 1.373
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 42,
+    "1": 83,
+    "2": 33,
+    "3": 56,
+    "4": 5
+   },
+   "les_deux_comptes": [
+    1,
+    3
+   ],
+   "les_points": {
+    "1": 83,
+    "3": 56
+   },
+   "juge": true,
+   "la_separation": 0.9332,
+   "les_ecarts_en_pas": {
+    "1": 0.548,
+    "3": 2.073
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 17,
+    "1": 22,
+    "2": 36,
+    "3": 3
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 22,
+    "2": 36
+   },
+   "juge": true,
+   "la_separation": 0.8681,
+   "les_ecarts_en_pas": {
+    "1": 0.732,
+    "2": 1.176
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 1,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "1": 58,
+    "2": 174,
+    "3": 84,
+    "4": 19,
+    "5": 1
+   },
+   "les_deux_comptes": [
+    2,
+    3
+   ],
+   "les_points": {
+    "2": 174,
+    "3": 84
+   },
+   "juge": true,
+   "la_separation": 0.515,
+   "les_ecarts_en_pas": {
+    "2": 1.92,
+    "3": 2.224
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 134,
+    "1": 238,
+    "2": 215,
+    "3": 45,
+    "4": 25,
+    "5": 2
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 238,
+    "2": 215
+   },
+   "juge": true,
+   "la_separation": 0.7821,
+   "les_ecarts_en_pas": {
+    "1": 0.604,
+    "2": 1.075
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 546,
+    "1": 240,
+    "2": 122,
+    "3": 53,
+    "4": 10,
+    "5": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 546,
+    "1": 240
+   },
+   "juge": true,
+   "la_separation": 0.8363,
+   "les_ecarts_en_pas": {
+    "0": 0.016,
+    "1": 0.661
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 215,
+    "1": 356,
+    "2": 201,
+    "3": 20,
+    "4": 13,
+    "5": 7
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 215,
+    "1": 356
+   },
+   "juge": true,
+   "la_separation": 0.7822,
+   "les_ecarts_en_pas": {
+    "0": 0.022,
+    "1": 0.645
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 70,
+    "1": 473,
+    "2": 337,
+    "3": 32,
+    "4": 2
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 473,
+    "2": 337
+   },
+   "juge": true,
+   "la_separation": 0.7754,
+   "les_ecarts_en_pas": {
+    "1": 0.714,
+    "2": 1.261
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 109,
+    "1": 286,
+    "2": 131,
+    "3": 82,
+    "4": 34,
+    "5": 3
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 286,
+    "2": 131
+   },
+   "juge": true,
+   "la_separation": 0.653,
+   "les_ecarts_en_pas": {
+    "1": 0.846,
+    "2": 1.308
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 270,
+    "1": 142,
+    "2": 57,
+    "3": 33,
+    "4": 10,
+    "5": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 270,
+    "1": 142
+   },
+   "juge": true,
+   "la_separation": 0.6882,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.712
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 207,
+    "1": 191,
+    "2": 33,
+    "3": 11
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 207,
+    "1": 191
+   },
+   "juge": true,
+   "la_separation": 0.7289,
+   "les_ecarts_en_pas": {
+    "0": 0.02,
+    "1": 0.689
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 1,
+    "1": 102,
+    "2": 59
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 102,
+    "2": 59
+   },
+   "juge": true,
+   "la_separation": 0.6699,
+   "les_ecarts_en_pas": {
+    "1": 0.709,
+    "2": 0.771
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 27,
+    "1": 26,
+    "2": 4
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 27,
+    "1": 26
+   },
+   "juge": true,
+   "la_separation": 0.5617,
+   "les_ecarts_en_pas": {
+    "0": 0.035,
+    "1": 0.884
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 1,
+    "1": 160,
+    "2": 96,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 160,
+    "2": 96
+   },
+   "juge": true,
+   "la_separation": 0.7593,
+   "les_ecarts_en_pas": {
+    "1": 0.858,
+    "2": 1.338
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 155,
+    "1": 238,
+    "2": 144,
+    "3": 17,
+    "4": 36,
+    "5": 15
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 155,
+    "1": 238
+   },
+   "juge": true,
+   "la_separation": 0.814,
+   "les_ecarts_en_pas": {
+    "0": 0.018,
+    "1": 0.64
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 39,
+    "1": 724,
+    "2": 325,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 724,
+    "2": 325
+   },
+   "juge": true,
+   "la_separation": 0.768,
+   "les_ecarts_en_pas": {
+    "1": 0.714,
+    "2": 1.176
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 191,
+    "1": 609,
+    "2": 140,
+    "3": 29,
+    "4": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 191,
+    "1": 609
+   },
+   "juge": true,
+   "la_separation": 0.8311,
+   "les_ecarts_en_pas": {
+    "0": 0.014,
+    "1": 0.69
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 309,
+    "1": 525
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 309,
+    "1": 525
+   },
+   "juge": true,
+   "la_separation": 0.8575,
+   "les_ecarts_en_pas": {
+    "0": 0.016,
+    "1": 0.506
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 180,
+    "2": 104,
+    "3": 7
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 180,
+    "2": 104
+   },
+   "juge": true,
+   "la_separation": 0.7808,
+   "les_ecarts_en_pas": {
+    "1": 0.902,
+    "2": 1.27
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 101,
+    "1": 311,
+    "2": 113,
+    "3": 20,
+    "4": 5,
+    "5": 2
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 311,
+    "2": 113
+   },
+   "juge": true,
+   "la_separation": 0.7151,
+   "les_ecarts_en_pas": {
+    "1": 0.724,
+    "2": 1.175
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 161,
+    "1": 388,
+    "2": 84,
+    "3": 57,
+    "4": 54,
+    "5": 3
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 161,
+    "1": 388
+   },
+   "juge": true,
+   "la_separation": 0.7924,
+   "les_ecarts_en_pas": {
+    "0": 0.02,
+    "1": 0.624
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 9,
+    "1": 186,
+    "2": 34,
+    "3": 96,
+    "4": 56
+   },
+   "les_deux_comptes": [
+    1,
+    3
+   ],
+   "les_points": {
+    "1": 186,
+    "3": 96
+   },
+   "juge": true,
+   "la_separation": 0.9948,
+   "les_ecarts_en_pas": {
+    "1": 0.762,
+    "3": 1.997
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 413,
+    "1": 284,
+    "2": 29,
+    "3": 15,
+    "4": 4
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 413,
+    "1": 284
+   },
+   "juge": true,
+   "la_separation": 0.8635,
+   "les_ecarts_en_pas": {
+    "0": 0.016,
+    "1": 0.692
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 218,
+    "1": 556,
+    "2": 135,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 218,
+    "1": 556
+   },
+   "juge": true,
+   "la_separation": 0.7715,
+   "les_ecarts_en_pas": {
+    "0": 0.021,
+    "1": 0.755
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 75,
+    "1": 363,
+    "2": 330,
+    "3": 84,
+    "4": 3
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 363,
+    "2": 330
+   },
+   "juge": true,
+   "la_separation": 0.6674,
+   "les_ecarts_en_pas": {
+    "1": 0.783,
+    "2": 1.284
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 184,
+    "1": 317,
+    "2": 105,
+    "3": 84,
+    "4": 20
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 184,
+    "1": 317
+   },
+   "juge": true,
+   "la_separation": 0.7657,
+   "les_ecarts_en_pas": {
+    "0": 0.023,
+    "1": 0.612
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 304,
+    "1": 622,
+    "2": 128
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 304,
+    "1": 622
+   },
+   "juge": true,
+   "la_separation": 0.8838,
+   "les_ecarts_en_pas": {
+    "0": 0.014,
+    "1": 0.708
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 257,
+    "2": 180
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 257,
+    "2": 180
+   },
+   "juge": true,
+   "la_separation": 0.7487,
+   "les_ecarts_en_pas": {
+    "1": 1.154,
+    "2": 1.537
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 194,
+    "1": 370,
+    "2": 200,
+    "3": 50
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 370,
+    "2": 200
+   },
+   "juge": true,
+   "la_separation": 0.7117,
+   "les_ecarts_en_pas": {
+    "1": 0.862,
+    "2": 1.38
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 152,
+    "1": 271,
+    "2": 191,
+    "3": 14
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 271,
+    "2": 191
+   },
+   "juge": true,
+   "la_separation": 0.9325,
+   "les_ecarts_en_pas": {
+    "1": 0.63,
+    "2": 1.537
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 151,
+    "1": 504,
+    "2": 260,
+    "3": 32
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 504,
+    "2": 260
+   },
+   "juge": true,
+   "la_separation": 0.7957,
+   "les_ecarts_en_pas": {
+    "1": 0.784,
+    "2": 1.405
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 357,
+    "1": 663,
+    "2": 13
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 357,
+    "1": 663
+   },
+   "juge": true,
+   "la_separation": 0.8396,
+   "les_ecarts_en_pas": {
+    "0": 0.014,
+    "1": 0.526
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 176,
+    "1": 452,
+    "2": 227,
+    "3": 4
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 452,
+    "2": 227
+   },
+   "juge": true,
+   "la_separation": 0.6993,
+   "les_ecarts_en_pas": {
+    "1": 0.839,
+    "2": 1.211
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 34,
+    "1": 560,
+    "2": 330,
+    "3": 22,
+    "4": 2
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 560,
+    "2": 330
+   },
+   "juge": true,
+   "la_separation": 0.808,
+   "les_ecarts_en_pas": {
+    "1": 0.832,
+    "2": 1.29
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 117,
+    "1": 314,
+    "2": 154,
+    "3": 55,
+    "4": 10
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 314,
+    "2": 154
+   },
+   "juge": true,
+   "la_separation": 0.7747,
+   "les_ecarts_en_pas": {
+    "1": 0.722,
+    "2": 1.319
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 50,
+    "2": 37,
+    "3": 3,
+    "4": 3
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 50,
+    "2": 37
+   },
+   "juge": true,
+   "la_separation": 0.7095,
+   "les_ecarts_en_pas": {
+    "1": 1.032,
+    "2": 1.207
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 124,
+    "1": 291,
+    "2": 244,
+    "3": 77,
+    "4": 33,
+    "5": 5
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 291,
+    "2": 244
+   },
+   "juge": true,
+   "la_separation": 0.8371,
+   "les_ecarts_en_pas": {
+    "1": 0.773,
+    "2": 1.372
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 172,
+    "1": 300,
+    "2": 113,
+    "3": 33,
+    "4": 7,
+    "5": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 172,
+    "1": 300
+   },
+   "juge": true,
+   "la_separation": 0.7475,
+   "les_ecarts_en_pas": {
+    "0": 0.02,
+    "1": 0.607
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 589,
+    "1": 488,
+    "2": 42,
+    "3": 9
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 589,
+    "1": 488
+   },
+   "juge": true,
+   "la_separation": 0.8521,
+   "les_ecarts_en_pas": {
+    "0": 0.018,
+    "1": 0.588
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 151,
+    "1": 471,
+    "2": 197,
+    "3": 60,
+    "4": 8
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 471,
+    "2": 197
+   },
+   "juge": true,
+   "la_separation": 0.7538,
+   "les_ecarts_en_pas": {
+    "1": 0.834,
+    "2": 1.56
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 450,
+    "1": 620,
+    "2": 34
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 450,
+    "1": 620
+   },
+   "juge": true,
+   "la_separation": 0.9045,
+   "les_ecarts_en_pas": {
+    "0": 0.016,
+    "1": 0.642
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 172,
+    "1": 341,
+    "2": 164,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 172,
+    "1": 341
+   },
+   "juge": true,
+   "la_separation": 0.8865,
+   "les_ecarts_en_pas": {
+    "0": 0.016,
+    "1": 0.677
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 9,
+    "1": 446,
+    "2": 365,
+    "3": 80,
+    "4": 5
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 446,
+    "2": 365
+   },
+   "juge": true,
+   "la_separation": 0.8055,
+   "les_ecarts_en_pas": {
+    "1": 0.811,
+    "2": 1.604
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 3,
+    "1": 249,
+    "2": 235,
+    "3": 89,
+    "4": 16
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 249,
+    "2": 235
+   },
+   "juge": true,
+   "la_separation": 0.6526,
+   "les_ecarts_en_pas": {
+    "1": 1.027,
+    "2": 1.438
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 409,
+    "1": 555,
+    "2": 55,
+    "3": 13
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 409,
+    "1": 555
+   },
+   "juge": true,
+   "la_separation": 0.8614,
+   "les_ecarts_en_pas": {
+    "0": 0.019,
+    "1": 0.7
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 557,
+    "1": 295,
+    "2": 74,
+    "3": 27,
+    "4": 7,
+    "5": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 557,
+    "1": 295
+   },
+   "juge": true,
+   "la_separation": 0.8615,
+   "les_ecarts_en_pas": {
+    "0": 0.018,
+    "1": 0.743
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 145,
+    "1": 251,
+    "2": 188,
+    "3": 58,
+    "4": 13,
+    "5": 4
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 251,
+    "2": 188
+   },
+   "juge": true,
+   "la_separation": 0.6597,
+   "les_ecarts_en_pas": {
+    "1": 0.734,
+    "2": 1.188
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 18,
+    "1": 424,
+    "2": 288,
+    "3": 5
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 424,
+    "2": 288
+   },
+   "juge": true,
+   "la_separation": 0.818,
+   "les_ecarts_en_pas": {
+    "1": 0.685,
+    "2": 1.181
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 239,
+    "1": 455,
+    "2": 84,
+    "3": 8
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 239,
+    "1": 455
+   },
+   "juge": true,
+   "la_separation": 0.9134,
+   "les_ecarts_en_pas": {
+    "0": 0.018,
+    "1": 0.941
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 386,
+    "2": 187,
+    "3": 54,
+    "4": 27,
+    "5": 8
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 386,
+    "2": 187
+   },
+   "juge": true,
+   "la_separation": 0.8514,
+   "les_ecarts_en_pas": {
+    "1": 0.838,
+    "2": 1.354
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 166,
+    "1": 286,
+    "2": 249,
+    "3": 64
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 286,
+    "2": 249
+   },
+   "juge": true,
+   "la_separation": 0.6707,
+   "les_ecarts_en_pas": {
+    "1": 0.752,
+    "2": 1.256
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 320,
+    "1": 452,
+    "2": 51,
+    "3": 14,
+    "4": 3
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 320,
+    "1": 452
+   },
+   "juge": true,
+   "la_separation": 0.7193,
+   "les_ecarts_en_pas": {
+    "0": 0.022,
+    "1": 0.592
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 235,
+    "1": 327,
+    "2": 209,
+    "3": 5
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 235,
+    "1": 327
+   },
+   "juge": true,
+   "la_separation": 0.913,
+   "les_ecarts_en_pas": {
+    "0": 0.016,
+    "1": 0.676
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 3,
+    "1": 272,
+    "2": 360,
+    "3": 142,
+    "4": 9
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 272,
+    "2": 360
+   },
+   "juge": true,
+   "la_separation": 0.8518,
+   "les_ecarts_en_pas": {
+    "1": 0.725,
+    "2": 1.613
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 29,
+    "1": 368,
+    "2": 380,
+    "3": 51,
+    "4": 3
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 368,
+    "2": 380
+   },
+   "juge": true,
+   "la_separation": 0.6666,
+   "les_ecarts_en_pas": {
+    "1": 1.016,
+    "2": 1.381
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 473,
+    "1": 399,
+    "2": 122,
+    "3": 11
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 473,
+    "1": 399
+   },
+   "juge": true,
+   "la_separation": 0.8858,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.669
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 23,
+    "1": 177,
+    "2": 263
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 177,
+    "2": 263
+   },
+   "juge": true,
+   "la_separation": 0.8428,
+   "les_ecarts_en_pas": {
+    "1": 0.945,
+    "2": 1.327
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 189,
+    "1": 216
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 189,
+    "1": 216
+   },
+   "juge": true,
+   "la_separation": 0.8285,
+   "les_ecarts_en_pas": {
+    "0": 0.018,
+    "1": 0.722
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 239,
+    "1": 446,
+    "2": 41,
+    "3": 11,
+    "4": 5,
+    "5": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 239,
+    "1": 446
+   },
+   "juge": true,
+   "la_separation": 0.8305,
+   "les_ecarts_en_pas": {
+    "0": 0.023,
+    "1": 0.607
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 206,
+    "1": 138,
+    "2": 79,
+    "3": 23,
+    "4": 4
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 206,
+    "1": 138
+   },
+   "juge": true,
+   "la_separation": 0.811,
+   "les_ecarts_en_pas": {
+    "0": 0.025,
+    "1": 0.718
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 60,
+    "1": 109,
+    "2": 121,
+    "3": 23
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 109,
+    "2": 121
+   },
+   "juge": true,
+   "la_separation": 0.6397,
+   "les_ecarts_en_pas": {
+    "1": 0.906,
+    "2": 1.391
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 68,
+    "1": 46,
+    "2": 56,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    0,
+    2
+   ],
+   "les_points": {
+    "0": 68,
+    "2": 56
+   },
+   "juge": true,
+   "la_separation": 0.9946,
+   "les_ecarts_en_pas": {
+    "0": 0.021,
+    "2": 1.287
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 363,
+    "1": 194,
+    "2": 27,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 363,
+    "1": 194
+   },
+   "juge": true,
+   "la_separation": 0.827,
+   "les_ecarts_en_pas": {
+    "0": 0.023,
+    "1": 0.657
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 199,
+    "1": 73,
+    "2": 56,
+    "3": 22,
+    "4": 13,
+    "5": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 199,
+    "1": 73
+   },
+   "juge": true,
+   "la_separation": 0.7124,
+   "les_ecarts_en_pas": {
+    "0": 0.026,
+    "1": 0.88
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 94,
+    "1": 80,
+    "2": 12,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 94,
+    "1": 80
+   },
+   "juge": true,
+   "la_separation": 0.8217,
+   "les_ecarts_en_pas": {
+    "0": 0.018,
+    "1": 0.815
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "1": 125,
+    "2": 181,
+    "3": 79,
+    "4": 17,
+    "5": 3
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 125,
+    "2": 181
+   },
+   "juge": true,
+   "la_separation": 0.6158,
+   "les_ecarts_en_pas": {
+    "1": 0.892,
+    "2": 1.487
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 210,
+    "1": 245,
+    "2": 186,
+    "3": 8
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 210,
+    "1": 245
+   },
+   "juge": true,
+   "la_separation": 0.772,
+   "les_ecarts_en_pas": {
+    "0": 0.025,
+    "1": 0.889
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 57,
+    "1": 147,
+    "2": 105,
+    "3": 12
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 147,
+    "2": 105
+   },
+   "juge": true,
+   "la_separation": 0.8699,
+   "les_ecarts_en_pas": {
+    "1": 0.921,
+    "2": 1.301
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 100,
+    "1": 125,
+    "2": 3
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 100,
+    "1": 125
+   },
+   "juge": true,
+   "la_separation": 0.8507,
+   "les_ecarts_en_pas": {
+    "0": 0.018,
+    "1": 0.841
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 73,
+    "1": 66,
+    "2": 64,
+    "3": 3,
+    "4": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 73,
+    "1": 66
+   },
+   "juge": true,
+   "la_separation": 0.957,
+   "les_ecarts_en_pas": {
+    "0": 0.016,
+    "1": 0.967
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 54,
+    "1": 149,
+    "2": 52,
+    "3": 10
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 54,
+    "1": 149
+   },
+   "juge": true,
+   "la_separation": 0.7678,
+   "les_ecarts_en_pas": {
+    "0": 0.053,
+    "1": 0.649
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 46,
+    "1": 39,
+    "2": 35,
+    "3": 9,
+    "4": 6
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 46,
+    "1": 39
+   },
+   "juge": true,
+   "la_separation": 0.5279,
+   "les_ecarts_en_pas": {
+    "0": 0.054,
+    "1": 0.563
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 51,
+    "1": 54,
+    "2": 60,
+    "3": 7,
+    "4": 2,
+    "5": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 54,
+    "2": 60
+   },
+   "juge": true,
+   "la_separation": 0.7501,
+   "les_ecarts_en_pas": {
+    "1": 0.654,
+    "2": 1.381
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 64,
+    "1": 154,
+    "2": 55,
+    "3": 22,
+    "4": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 64,
+    "1": 154
+   },
+   "juge": true,
+   "la_separation": 0.7101,
+   "les_ecarts_en_pas": {
+    "0": 0.03,
+    "1": 0.871
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 89,
+    "1": 204,
+    "2": 116,
+    "3": 24,
+    "4": 8,
+    "5": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 204,
+    "2": 116
+   },
+   "juge": true,
+   "la_separation": 0.6765,
+   "les_ecarts_en_pas": {
+    "1": 0.783,
+    "2": 1.375
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 91,
+    "1": 89,
+    "2": 36,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 91,
+    "1": 89
+   },
+   "juge": true,
+   "la_separation": 0.7385,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.653
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 262,
+    "1": 237,
+    "2": 149
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 262,
+    "1": 237
+   },
+   "juge": true,
+   "la_separation": 0.8643,
+   "les_ecarts_en_pas": {
+    "0": 0.015,
+    "1": 0.789
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 50,
+    "1": 13,
+    "2": 71,
+    "3": 16
+   },
+   "les_deux_comptes": [
+    0,
+    2
+   ],
+   "les_points": {
+    "0": 50,
+    "2": 71
+   },
+   "juge": true,
+   "la_separation": 0.9944,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "2": 1.528
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 29,
+    "1": 59,
+    "2": 11
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 29,
+    "1": 59
+   },
+   "juge": true,
+   "la_separation": 0.8898,
+   "les_ecarts_en_pas": {
+    "0": 0.014,
+    "1": 0.846
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 146,
+    "1": 161,
+    "2": 93,
+    "3": 10,
+    "4": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 146,
+    "1": 161
+   },
+   "juge": true,
+   "la_separation": 0.847,
+   "les_ecarts_en_pas": {
+    "0": 0.036,
+    "1": 0.785
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 281,
+    "1": 177,
+    "2": 70,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 281,
+    "1": 177
+   },
+   "juge": true,
+   "la_separation": 0.928,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.696
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 18,
+    "1": 150,
+    "2": 79,
+    "3": 8
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 150,
+    "2": 79
+   },
+   "juge": true,
+   "la_separation": 0.7996,
+   "les_ecarts_en_pas": {
+    "1": 0.866,
+    "2": 1.227
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 104,
+    "1": 153
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 104,
+    "1": 153
+   },
+   "juge": true,
+   "la_separation": 0.8807,
+   "les_ecarts_en_pas": {
+    "0": 0.025,
+    "1": 0.795
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 17,
+    "1": 17,
+    "2": 34,
+    "3": 5,
+    "4": 1
+   },
+   "les_deux_comptes": [
+    0,
+    2
+   ],
+   "les_points": {
+    "0": 17,
+    "2": 34
+   },
+   "juge": false,
+   "la_separation": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 61,
+    "1": 22,
+    "2": 2,
+    "3": 8
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 61,
+    "1": 22
+   },
+   "juge": true,
+   "la_separation": 0.6283,
+   "les_ecarts_en_pas": {
+    "0": 0.02,
+    "1": 0.678
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 57,
+    "1": 94,
+    "2": 9
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 57,
+    "1": 94
+   },
+   "juge": true,
+   "la_separation": 0.72,
+   "les_ecarts_en_pas": {
+    "0": 0.024,
+    "1": 0.739
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 299,
+    "1": 169,
+    "2": 59,
+    "3": 4
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 299,
+    "1": 169
+   },
+   "juge": true,
+   "la_separation": 0.9068,
+   "les_ecarts_en_pas": {
+    "0": 0.015,
+    "1": 0.702
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 4,
+    "1": 28,
+    "2": 170,
+    "3": 100,
+    "4": 2
+   },
+   "les_deux_comptes": [
+    2,
+    3
+   ],
+   "les_points": {
+    "2": 170,
+    "3": 100
+   },
+   "juge": true,
+   "la_separation": 0.6479,
+   "les_ecarts_en_pas": {
+    "2": 1.602,
+    "3": 1.649
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 238,
+    "1": 226,
+    "2": 8
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 238,
+    "1": 226
+   },
+   "juge": true,
+   "la_separation": 0.8357,
+   "les_ecarts_en_pas": {
+    "0": 0.018,
+    "1": 0.63
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 48,
+    "1": 91,
+    "2": 3,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 48,
+    "1": 91
+   },
+   "juge": true,
+   "la_separation": 0.7736,
+   "les_ecarts_en_pas": {
+    "0": 0.022,
+    "1": 0.549
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 194,
+    "1": 151,
+    "2": 9
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 194,
+    "1": 151
+   },
+   "juge": true,
+   "la_separation": 0.8708,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.807
+   }
+  }
+ ],
+ "les_nets": [
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 312,
+    "1": 84,
+    "2": 20,
+    "3": 10,
+    "4": 1,
+    "5": 3
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 312,
+    "1": 84
+   },
+   "juge": true,
+   "la_separation": 0.7099,
+   "les_ecarts_en_pas": {
+    "0": 0.021,
+    "1": 0.613
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 26,
+    "1": 951,
+    "2": 162
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 951,
+    "2": 162
+   },
+   "juge": true,
+   "la_separation": 0.905,
+   "les_ecarts_en_pas": {
+    "1": 0.598,
+    "2": 1.227
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 11,
+    "1": 1062,
+    "2": 87
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1062,
+    "2": 87
+   },
+   "juge": true,
+   "la_separation": 0.6252,
+   "les_ecarts_en_pas": {
+    "1": 0.687,
+    "2": 0.839
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 602,
+    "1": 191,
+    "2": 60,
+    "3": 5
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 602,
+    "1": 191
+   },
+   "juge": true,
+   "la_separation": 0.7945,
+   "les_ecarts_en_pas": {
+    "0": 0.015,
+    "1": 0.608
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 15,
+    "1": 976,
+    "2": 121
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 976,
+    "2": 121
+   },
+   "juge": true,
+   "la_separation": 0.809,
+   "les_ecarts_en_pas": {
+    "1": 0.626,
+    "2": 1.17
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 34,
+    "1": 872,
+    "2": 60,
+    "3": 5
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 872,
+    "2": 60
+   },
+   "juge": true,
+   "la_separation": 0.5062,
+   "les_ecarts_en_pas": {
+    "1": 0.697,
+    "2": 1.069
+   }
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 116,
+    "1": 725,
+    "2": 112,
+    "3": 8
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 116,
+    "1": 725
+   },
+   "juge": true,
+   "la_separation": 0.881,
+   "les_ecarts_en_pas": {
+    "0": 0.031,
+    "1": 0.776
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 441,
+    "2": 21
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 441,
+    "2": 21
+   },
+   "juge": true,
+   "la_separation": 0.8009,
+   "les_ecarts_en_pas": {
+    "1": 0.83,
+    "2": 1.232
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 1,
+    "1": 171,
+    "2": 31
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 171,
+    "2": 31
+   },
+   "juge": true,
+   "la_separation": 0.6587,
+   "les_ecarts_en_pas": {
+    "1": 0.855,
+    "2": 1.139
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 2,
+    "1": 184,
+    "2": 28
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 184,
+    "2": 28
+   },
+   "juge": true,
+   "la_separation": 0.727,
+   "les_ecarts_en_pas": {
+    "1": 0.8,
+    "2": 1.162
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 20,
+    "1": 283,
+    "2": 25
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 283,
+    "2": 25
+   },
+   "juge": true,
+   "la_separation": 0.6963,
+   "les_ecarts_en_pas": {
+    "1": 0.639,
+    "2": 1.083
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 283,
+    "2": 69,
+    "3": 14
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 283,
+    "2": 69
+   },
+   "juge": true,
+   "la_separation": 0.9566,
+   "les_ecarts_en_pas": {
+    "1": 1.969,
+    "2": 1.696
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 11,
+    "1": 278,
+    "2": 74
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 278,
+    "2": 74
+   },
+   "juge": true,
+   "la_separation": 0.8408,
+   "les_ecarts_en_pas": {
+    "1": 0.727,
+    "2": 1.012
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 6,
+    "1": 306,
+    "2": 63
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 306,
+    "2": 63
+   },
+   "juge": true,
+   "la_separation": 0.8266,
+   "les_ecarts_en_pas": {
+    "1": 0.903,
+    "2": 1.339
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 16,
+    "1": 1022,
+    "2": 40,
+    "3": 3
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1022,
+    "2": 40
+   },
+   "juge": true,
+   "la_separation": 0.4744,
+   "les_ecarts_en_pas": {
+    "1": 0.643,
+    "2": 1.039
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 4,
+    "1": 1103,
+    "2": 47
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1103,
+    "2": 47
+   },
+   "juge": true,
+   "la_separation": 0.6251,
+   "les_ecarts_en_pas": {
+    "1": 0.638,
+    "2": 1.241
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 79,
+    "1": 738,
+    "2": 127
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 738,
+    "2": 127
+   },
+   "juge": true,
+   "la_separation": 0.7273,
+   "les_ecarts_en_pas": {
+    "1": 0.63,
+    "2": 0.996
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 1092,
+    "2": 38,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1092,
+    "2": 38
+   },
+   "juge": true,
+   "la_separation": 0.6395,
+   "les_ecarts_en_pas": {
+    "1": 0.927,
+    "2": 1.252
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 15,
+    "1": 1124,
+    "2": 27
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1124,
+    "2": 27
+   },
+   "juge": true,
+   "la_separation": 0.5326,
+   "les_ecarts_en_pas": {
+    "1": 0.782,
+    "2": 1.122
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 13,
+    "1": 893,
+    "2": 252,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 893,
+    "2": 252
+   },
+   "juge": true,
+   "la_separation": 0.9115,
+   "les_ecarts_en_pas": {
+    "1": 0.688,
+    "2": 1.046
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 8,
+    "1": 414,
+    "2": 25
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 414,
+    "2": 25
+   },
+   "juge": true,
+   "la_separation": 0.7708,
+   "les_ecarts_en_pas": {
+    "1": 0.686,
+    "2": 1.009
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 11,
+    "1": 293,
+    "2": 39
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 293,
+    "2": 39
+   },
+   "juge": true,
+   "la_separation": 0.6476,
+   "les_ecarts_en_pas": {
+    "1": 0.904,
+    "2": 1.107
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 44,
+    "1": 901,
+    "2": 59
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 901,
+    "2": 59
+   },
+   "juge": true,
+   "la_separation": 0.6632,
+   "les_ecarts_en_pas": {
+    "1": 0.666,
+    "2": 1.179
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 26,
+    "1": 589,
+    "2": 151
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 589,
+    "2": 151
+   },
+   "juge": true,
+   "la_separation": 0.8151,
+   "les_ecarts_en_pas": {
+    "1": 0.675,
+    "2": 1.081
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 17,
+    "1": 1044,
+    "2": 53
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1044,
+    "2": 53
+   },
+   "juge": true,
+   "la_separation": 0.447,
+   "les_ecarts_en_pas": {
+    "1": 0.879,
+    "2": 1.067
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 36,
+    "1": 1090,
+    "2": 27
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 36,
+    "1": 1090
+   },
+   "juge": true,
+   "la_separation": 0.3573,
+   "les_ecarts_en_pas": {
+    "0": 0.037,
+    "1": 0.526
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 21,
+    "1": 1108,
+    "2": 10
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 21,
+    "1": 1108
+   },
+   "juge": true,
+   "la_separation": 0.2486,
+   "les_ecarts_en_pas": {
+    "0": 0.254,
+    "1": 0.715
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 41,
+    "1": 918,
+    "2": 170
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 918,
+    "2": 170
+   },
+   "juge": true,
+   "la_separation": 0.9054,
+   "les_ecarts_en_pas": {
+    "1": 0.763,
+    "2": 1.043
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 14,
+    "1": 281,
+    "2": 69
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 281,
+    "2": 69
+   },
+   "juge": true,
+   "la_separation": 0.844,
+   "les_ecarts_en_pas": {
+    "1": 0.713,
+    "2": 1.013
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 33,
+    "1": 953,
+    "2": 82,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 953,
+    "2": 82
+   },
+   "juge": true,
+   "la_separation": 0.5545,
+   "les_ecarts_en_pas": {
+    "1": 0.683,
+    "2": 1.075
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 8,
+    "1": 1123,
+    "2": 20
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1123,
+    "2": 20
+   },
+   "juge": true,
+   "la_separation": 0.6907,
+   "les_ecarts_en_pas": {
+    "1": 0.659,
+    "2": 1.065
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 14,
+    "1": 981,
+    "2": 177
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 981,
+    "2": 177
+   },
+   "juge": true,
+   "la_separation": 0.854,
+   "les_ecarts_en_pas": {
+    "1": 0.63,
+    "2": 1.004
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 27,
+    "1": 522,
+    "2": 165,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 522,
+    "2": 165
+   },
+   "juge": true,
+   "la_separation": 0.8228,
+   "les_ecarts_en_pas": {
+    "1": 0.662,
+    "2": 1.114
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 5,
+    "1": 1000,
+    "2": 97,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1000,
+    "2": 97
+   },
+   "juge": true,
+   "la_separation": 0.6893,
+   "les_ecarts_en_pas": {
+    "1": 0.949,
+    "2": 1.383
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 19,
+    "1": 1104,
+    "2": 38
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1104,
+    "2": 38
+   },
+   "juge": true,
+   "la_separation": 0.5875,
+   "les_ecarts_en_pas": {
+    "1": 0.524,
+    "2": 1.024
+   }
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 23,
+    "1": 918,
+    "2": 40
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 918,
+    "2": 40
+   },
+   "juge": true,
+   "la_separation": 0.8936,
+   "les_ecarts_en_pas": {
+    "1": 0.708,
+    "2": 1.391
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 7,
+    "1": 1044,
+    "2": 82,
+    "3": 9
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1044,
+    "2": 82
+   },
+   "juge": true,
+   "la_separation": 0.7262,
+   "les_ecarts_en_pas": {
+    "1": 0.946,
+    "2": 1.001
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 28,
+    "1": 1037,
+    "2": 91,
+    "3": 10
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1037,
+    "2": 91
+   },
+   "juge": true,
+   "la_separation": 0.6795,
+   "les_ecarts_en_pas": {
+    "1": 0.597,
+    "2": 0.939
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 1,
+    "1": 1069,
+    "2": 80
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1069,
+    "2": 80
+   },
+   "juge": true,
+   "la_separation": 0.6476,
+   "les_ecarts_en_pas": {
+    "1": 0.739,
+    "2": 1.106
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 14,
+    "1": 1098,
+    "2": 29
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1098,
+    "2": 29
+   },
+   "juge": true,
+   "la_separation": 0.6375,
+   "les_ecarts_en_pas": {
+    "1": 0.735,
+    "2": 1.209
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 756,
+    "1": 303,
+    "2": 21
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 756,
+    "1": 303
+   },
+   "juge": true,
+   "la_separation": 0.8399,
+   "les_ecarts_en_pas": {
+    "0": 0.015,
+    "1": 0.523
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 55,
+    "1": 177,
+    "2": 740,
+    "3": 69
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 177,
+    "2": 740
+   },
+   "juge": true,
+   "la_separation": 0.7599,
+   "les_ecarts_en_pas": {
+    "1": 0.949,
+    "2": 1.198
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 179,
+    "1": 827,
+    "2": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 179,
+    "1": 827
+   },
+   "juge": true,
+   "la_separation": 0.8902,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.532
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 27,
+    "1": 1062,
+    "2": 69,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1062,
+    "2": 69
+   },
+   "juge": true,
+   "la_separation": 0.6864,
+   "les_ecarts_en_pas": {
+    "1": 0.654,
+    "2": 0.976
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 92,
+    "1": 34
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 92,
+    "1": 34
+   },
+   "juge": true,
+   "la_separation": 0.7402,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.439
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 10,
+    "1": 1105,
+    "2": 31,
+    "3": 2,
+    "4": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1105,
+    "2": 31
+   },
+   "juge": true,
+   "la_separation": 0.5306,
+   "les_ecarts_en_pas": {
+    "1": 0.809,
+    "2": 1.17
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 5,
+    "1": 1025,
+    "2": 106,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1025,
+    "2": 106
+   },
+   "juge": true,
+   "la_separation": 0.4999,
+   "les_ecarts_en_pas": {
+    "1": 0.753,
+    "2": 1.146
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 50,
+    "1": 833,
+    "2": 168,
+    "3": 15
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 833,
+    "2": 168
+   },
+   "juge": true,
+   "la_separation": 0.819,
+   "les_ecarts_en_pas": {
+    "1": 0.546,
+    "2": 1.148
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 1,
+    "1": 835,
+    "2": 119,
+    "3": 5
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 835,
+    "2": 119
+   },
+   "juge": true,
+   "la_separation": 0.8769,
+   "les_ecarts_en_pas": {
+    "1": 0.775,
+    "2": 1.512
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 855,
+    "2": 271
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 855,
+    "2": 271
+   },
+   "juge": true,
+   "la_separation": 0.6925,
+   "les_ecarts_en_pas": {
+    "1": 0.854,
+    "2": 1.057
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 1125,
+    "1": 31,
+    "2": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 1125,
+    "1": 31
+   },
+   "juge": true,
+   "la_separation": 0.5529,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.686
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 31,
+    "1": 1072,
+    "2": 15
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 31,
+    "1": 1072
+   },
+   "juge": true,
+   "la_separation": 0.4142,
+   "les_ecarts_en_pas": {
+    "0": 0.045,
+    "1": 0.772
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 35,
+    "1": 862,
+    "2": 8,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 35,
+    "1": 862
+   },
+   "juge": true,
+   "la_separation": 0.7971,
+   "les_ecarts_en_pas": {
+    "0": 0.04,
+    "1": 0.703
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 27,
+    "1": 772,
+    "2": 19
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 27,
+    "1": 772
+   },
+   "juge": true,
+   "la_separation": 0.4417,
+   "les_ecarts_en_pas": {
+    "0": 0.026,
+    "1": 0.751
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 37,
+    "1": 815
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 37,
+    "1": 815
+   },
+   "juge": true,
+   "la_separation": 0.8754,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.907
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 6,
+    "1": 800,
+    "2": 193
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 800,
+    "2": 193
+   },
+   "juge": true,
+   "la_separation": 0.6723,
+   "les_ecarts_en_pas": {
+    "1": 0.831,
+    "2": 1.073
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 180,
+    "1": 745,
+    "2": 86,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 180,
+    "1": 745
+   },
+   "juge": true,
+   "la_separation": 0.7927,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.61
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 10,
+    "1": 865,
+    "2": 130
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 865,
+    "2": 130
+   },
+   "juge": true,
+   "la_separation": 0.7923,
+   "les_ecarts_en_pas": {
+    "1": 0.71,
+    "2": 1.319
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 152,
+    "1": 825,
+    "2": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 152,
+    "1": 825
+   },
+   "juge": true,
+   "la_separation": 0.8236,
+   "les_ecarts_en_pas": {
+    "0": 0.022,
+    "1": 0.681
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 2,
+    "1": 1024,
+    "2": 90
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1024,
+    "2": 90
+   },
+   "juge": true,
+   "la_separation": 0.9255,
+   "les_ecarts_en_pas": {
+    "1": 0.854,
+    "2": 1.489
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 363,
+    "1": 743,
+    "2": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 363,
+    "1": 743
+   },
+   "juge": true,
+   "la_separation": 0.8665,
+   "les_ecarts_en_pas": {
+    "0": 0.015,
+    "1": 0.693
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 6,
+    "1": 1016,
+    "2": 111
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1016,
+    "2": 111
+   },
+   "juge": true,
+   "la_separation": 0.6006,
+   "les_ecarts_en_pas": {
+    "1": 0.856,
+    "2": 1.134
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 95,
+    "1": 421,
+    "2": 67,
+    "3": 18,
+    "4": 3,
+    "5": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 95,
+    "1": 421
+   },
+   "juge": true,
+   "la_separation": 0.8766,
+   "les_ecarts_en_pas": {
+    "0": 0.018,
+    "1": 0.839
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 18,
+    "1": 475,
+    "2": 39,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 475,
+    "2": 39
+   },
+   "juge": true,
+   "la_separation": 0.5731,
+   "les_ecarts_en_pas": {
+    "1": 0.779,
+    "2": 1.033
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "0": 18,
+    "1": 25,
+    "2": 266,
+    "3": 21,
+    "4": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 25,
+    "2": 266
+   },
+   "juge": true,
+   "la_separation": 0.811,
+   "les_ecarts_en_pas": {
+    "1": 0.673,
+    "2": 1.392
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 20,
+    "1": 906,
+    "2": 107,
+    "3": 10
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 906,
+    "2": 107
+   },
+   "juge": true,
+   "la_separation": 0.739,
+   "les_ecarts_en_pas": {
+    "1": 0.717,
+    "2": 1.343
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 204,
+    "1": 713,
+    "2": 54,
+    "3": 11,
+    "4": 3
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 204,
+    "1": 713
+   },
+   "juge": true,
+   "la_separation": 0.8504,
+   "les_ecarts_en_pas": {
+    "0": 0.019,
+    "1": 0.689
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 21,
+    "1": 1027,
+    "2": 46,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 1027,
+    "2": 46
+   },
+   "juge": true,
+   "la_separation": 0.8033,
+   "les_ecarts_en_pas": {
+    "1": 0.773,
+    "2": 1.214
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 7,
+    "1": 908,
+    "2": 142
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 908,
+    "2": 142
+   },
+   "juge": true,
+   "la_separation": 0.8332,
+   "les_ecarts_en_pas": {
+    "1": 0.753,
+    "2": 1.188
+   }
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 320,
+    "1": 664,
+    "2": 9
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 320,
+    "1": 664
+   },
+   "juge": true,
+   "la_separation": 0.9399,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.801
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 34,
+    "1": 437
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 34,
+    "1": 437
+   },
+   "juge": true,
+   "la_separation": 0.6652,
+   "les_ecarts_en_pas": {
+    "0": 0.038,
+    "1": 0.616
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 100,
+    "2": 33
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 100,
+    "2": 33
+   },
+   "juge": true,
+   "la_separation": 0.7733,
+   "les_ecarts_en_pas": {
+    "1": 1.435,
+    "2": 1.341
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "1": 36,
+    "2": 85
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 36,
+    "2": 85
+   },
+   "juge": true,
+   "la_separation": 0.7843,
+   "les_ecarts_en_pas": {
+    "1": 1.784,
+    "2": 1.856
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 116,
+    "2": 40
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 116,
+    "2": 40
+   },
+   "juge": true,
+   "la_separation": 0.7606,
+   "les_ecarts_en_pas": {
+    "1": 1.408,
+    "2": 1.363
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 2,
+   "les_comptes": {
+    "1": 45,
+    "2": 153
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 45,
+    "2": 153
+   },
+   "juge": true,
+   "la_separation": 0.6781,
+   "les_ecarts_en_pas": {
+    "1": 1.653,
+    "2": 1.683
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 48,
+    "1": 467,
+    "2": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 48,
+    "1": 467
+   },
+   "juge": true,
+   "la_separation": 0.6637,
+   "les_ecarts_en_pas": {
+    "0": 0.03,
+    "1": 0.718
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 8,
+    "1": 128,
+    "2": 30
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 128,
+    "2": 30
+   },
+   "juge": true,
+   "la_separation": 0.6627,
+   "les_ecarts_en_pas": {
+    "1": 0.741,
+    "2": 1.487
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 18,
+    "1": 601,
+    "2": 29
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 601,
+    "2": 29
+   },
+   "juge": true,
+   "la_separation": 0.4166,
+   "les_ecarts_en_pas": {
+    "1": 0.737,
+    "2": 0.972
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 13,
+    "1": 390,
+    "2": 36,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 390,
+    "2": 36
+   },
+   "juge": true,
+   "la_separation": 0.8285,
+   "les_ecarts_en_pas": {
+    "1": 0.661,
+    "2": 1.432
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 3,
+    "1": 206,
+    "2": 49,
+    "3": 8
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 206,
+    "2": 49
+   },
+   "juge": true,
+   "la_separation": 0.6603,
+   "les_ecarts_en_pas": {
+    "1": 0.774,
+    "2": 1.603
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 12,
+    "1": 441,
+    "2": 26
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 441,
+    "2": 26
+   },
+   "juge": true,
+   "la_separation": 0.4005,
+   "les_ecarts_en_pas": {
+    "1": 0.685,
+    "2": 1.09
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 15,
+    "1": 827,
+    "2": 26,
+    "3": 3
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 827,
+    "2": 26
+   },
+   "juge": true,
+   "la_separation": 0.3066,
+   "les_ecarts_en_pas": {
+    "1": 0.76,
+    "2": 1.036
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 616,
+    "2": 93
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 616,
+    "2": 93
+   },
+   "juge": true,
+   "la_separation": 0.862,
+   "les_ecarts_en_pas": {
+    "1": 0.811,
+    "2": 1.24
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 713,
+    "2": 42
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 713,
+    "2": 42
+   },
+   "juge": true,
+   "la_separation": 0.7545,
+   "les_ecarts_en_pas": {
+    "1": 1.092,
+    "2": 1.434
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 2,
+    "1": 655,
+    "2": 144,
+    "3": 11
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 655,
+    "2": 144
+   },
+   "juge": true,
+   "la_separation": 0.8216,
+   "les_ecarts_en_pas": {
+    "1": 0.717,
+    "2": 1.213
+   }
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 4,
+    "1": 702,
+    "2": 97,
+    "3": 2,
+    "4": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 702,
+    "2": 97
+   },
+   "juge": true,
+   "la_separation": 0.8223,
+   "les_ecarts_en_pas": {
+    "1": 0.779,
+    "2": 1.374
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 132,
+    "2": 24
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 132,
+    "2": 24
+   },
+   "juge": true,
+   "la_separation": 0.6127,
+   "les_ecarts_en_pas": {
+    "1": 0.685,
+    "2": 1.068
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 13,
+    "1": 225,
+    "2": 39,
+    "3": 2,
+    "4": 2
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 225,
+    "2": 39
+   },
+   "juge": true,
+   "la_separation": 0.6328,
+   "les_ecarts_en_pas": {
+    "1": 0.786,
+    "2": 1.082
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 146,
+    "1": 33,
+    "2": 5,
+    "3": 5
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 146,
+    "1": 33
+   },
+   "juge": true,
+   "la_separation": 0.5197,
+   "les_ecarts_en_pas": {
+    "0": 0.035,
+    "1": 0.517
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 33,
+    "1": 612,
+    "2": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 33,
+    "1": 612
+   },
+   "juge": true,
+   "la_separation": 0.8485,
+   "les_ecarts_en_pas": {
+    "0": 0.05,
+    "1": 0.6
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 15,
+    "1": 646,
+    "2": 48
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 646,
+    "2": 48
+   },
+   "juge": true,
+   "la_separation": 0.7169,
+   "les_ecarts_en_pas": {
+    "1": 0.677,
+    "2": 1.142
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 32,
+    "1": 271,
+    "2": 17
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 32,
+    "1": 271
+   },
+   "juge": true,
+   "la_separation": 0.7678,
+   "les_ecarts_en_pas": {
+    "0": 0.046,
+    "1": 0.713
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 21,
+    "1": 511,
+    "2": 69,
+    "3": 7
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 511,
+    "2": 69
+   },
+   "juge": true,
+   "la_separation": 0.6182,
+   "les_ecarts_en_pas": {
+    "1": 0.749,
+    "2": 1.19
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 25,
+    "1": 101,
+    "2": 3
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 25,
+    "1": 101
+   },
+   "juge": true,
+   "la_separation": 0.8804,
+   "les_ecarts_en_pas": {
+    "0": 0.016,
+    "1": 0.77
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 46,
+    "1": 446,
+    "2": 29,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 46,
+    "1": 446
+   },
+   "juge": true,
+   "la_separation": 0.6271,
+   "les_ecarts_en_pas": {
+    "0": 0.103,
+    "1": 0.712
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 7,
+    "1": 358,
+    "2": 90,
+    "3": 3
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 358,
+    "2": 90
+   },
+   "juge": true,
+   "la_separation": 0.926,
+   "les_ecarts_en_pas": {
+    "1": 0.724,
+    "2": 1.585
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "1": 266,
+    "2": 43
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 266,
+    "2": 43
+   },
+   "juge": true,
+   "la_separation": 0.6769,
+   "les_ecarts_en_pas": {
+    "1": 1.024,
+    "2": 1.408
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 13,
+    "1": 321,
+    "2": 27
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 321,
+    "2": 27
+   },
+   "juge": true,
+   "la_separation": 0.8632,
+   "les_ecarts_en_pas": {
+    "1": 0.599,
+    "2": 1.228
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 8,
+    "1": 241,
+    "2": 33,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 241,
+    "2": 33
+   },
+   "juge": true,
+   "la_separation": 0.6968,
+   "les_ecarts_en_pas": {
+    "1": 0.784,
+    "2": 1.087
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 46,
+    "1": 204,
+    "2": 35,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 46,
+    "1": 204
+   },
+   "juge": true,
+   "la_separation": 0.7236,
+   "les_ecarts_en_pas": {
+    "0": 0.037,
+    "1": 0.756
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 20,
+    "1": 343,
+    "2": 19
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 20,
+    "1": 343
+   },
+   "juge": true,
+   "la_separation": 0.5866,
+   "les_ecarts_en_pas": {
+    "0": 0.249,
+    "1": 0.84
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 49,
+    "1": 449,
+    "2": 133,
+    "3": 2
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 449,
+    "2": 133
+   },
+   "juge": true,
+   "la_separation": 0.8362,
+   "les_ecarts_en_pas": {
+    "1": 0.739,
+    "2": 1.057
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 24,
+    "1": 107,
+    "2": 3
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 24,
+    "1": 107
+   },
+   "juge": true,
+   "la_separation": 0.9536,
+   "les_ecarts_en_pas": {
+    "0": 0.025,
+    "1": 0.664
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 55,
+    "1": 389,
+    "2": 35,
+    "3": 3,
+    "5": 1
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 55,
+    "1": 389
+   },
+   "juge": true,
+   "la_separation": 0.6946,
+   "les_ecarts_en_pas": {
+    "0": 0.028,
+    "1": 0.79
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 17,
+    "1": 471,
+    "2": 78,
+    "3": 5
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 471,
+    "2": 78
+   },
+   "juge": true,
+   "la_separation": 0.7489,
+   "les_ecarts_en_pas": {
+    "1": 0.812,
+    "2": 1.544
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 2,
+    "1": 254,
+    "2": 23
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 254,
+    "2": 23
+   },
+   "juge": true,
+   "la_separation": 0.6299,
+   "les_ecarts_en_pas": {
+    "1": 0.678,
+    "2": 1.084
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 0,
+   "les_comptes": {
+    "0": 156,
+    "1": 67,
+    "2": 2
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 156,
+    "1": 67
+   },
+   "juge": true,
+   "la_separation": 0.8496,
+   "les_ecarts_en_pas": {
+    "0": 0.017,
+    "1": 0.626
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 1,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 177,
+    "1": 479,
+    "2": 39,
+    "3": 3,
+    "4": 3,
+    "5": 3
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 177,
+    "1": 479
+   },
+   "juge": true,
+   "la_separation": 0.776,
+   "les_ecarts_en_pas": {
+    "0": 0.025,
+    "1": 0.64
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 2,
+    "1": 620,
+    "2": 45
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 620,
+    "2": 45
+   },
+   "juge": true,
+   "la_separation": 0.8493,
+   "les_ecarts_en_pas": {
+    "1": 0.671,
+    "2": 1.587
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 5,
+    "1": 360,
+    "2": 57
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 360,
+    "2": 57
+   },
+   "juge": true,
+   "la_separation": 0.7635,
+   "les_ecarts_en_pas": {
+    "1": 0.981,
+    "2": 1.369
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 2,
+    "1": 465,
+    "2": 28
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 465,
+    "2": 28
+   },
+   "juge": true,
+   "la_separation": 0.7386,
+   "les_ecarts_en_pas": {
+    "1": 0.652,
+    "2": 1.188
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 30,
+    "1": 347,
+    "2": 14
+   },
+   "les_deux_comptes": [
+    0,
+    1
+   ],
+   "les_points": {
+    "0": 30,
+    "1": 347
+   },
+   "juge": true,
+   "la_separation": 0.404,
+   "les_ecarts_en_pas": {
+    "0": 0.051,
+    "1": 0.581
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 3,
+    "1": 252,
+    "2": 32,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 252,
+    "2": 32
+   },
+   "juge": true,
+   "la_separation": 0.6198,
+   "les_ecarts_en_pas": {
+    "1": 0.782,
+    "2": 1.086
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 8,
+    "1": 601,
+    "2": 41,
+    "3": 1
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 601,
+    "2": 41
+   },
+   "juge": true,
+   "la_separation": 0.5296,
+   "les_ecarts_en_pas": {
+    "1": 0.791,
+    "2": 1.057
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 8,
+    "1": 478,
+    "2": 56
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 478,
+    "2": 56
+   },
+   "juge": true,
+   "la_separation": 0.5619,
+   "les_ecarts_en_pas": {
+    "1": 0.751,
+    "2": 1.155
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 7,
+    "1": 372,
+    "2": 83
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 372,
+    "2": 83
+   },
+   "juge": true,
+   "la_separation": 0.712,
+   "les_ecarts_en_pas": {
+    "1": 0.715,
+    "2": 1.063
+   }
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "les_comptes": {
+    "0": 8,
+    "1": 137,
+    "2": 20
+   },
+   "les_deux_comptes": [
+    1,
+    2
+   ],
+   "les_points": {
+    "1": 137,
+    "2": 20
+   },
+   "juge": true,
+   "la_separation": 0.6631,
+   "les_ecarts_en_pas": {
+    "1": 0.781,
+    "2": 1.281
+   }
+  }
+ ],
+ "le_bilan": {
+  "melanges": 96,
+  "juges": 95,
+  "en_plages": 95,
+  "entremeles": 0,
+  "entre_les_deux": 0
+ },
+ "le_plus_entremele": {
+  "le_rang": 3,
+  "le_cote": "plus",
+  "la_chaine": "tierce",
+  "le_saut": 1,
+  "la_separation": 0.515,
+  "les_deux_comptes": [
+   2,
+   3
+  ],
+  "les_cases": [
+   [
+    21,
+    32,
+    2
+   ],
+   [
+    22,
+    31,
+    2
+   ],
+   [
+    22,
+    32,
+    2
+   ],
+   [
+    22,
+    33,
+    2
+   ],
+   [
+    23,
+    16,
+    3
+   ],
+   [
+    23,
+    29,
+    2
+   ],
+   [
+    23,
+    30,
+    2
+   ],
+   [
+    23,
+    38,
+    4
+   ],
+   [
+    24,
+    30,
+    3
+   ],
+   [
+    24,
+    38,
+    4
+   ],
+   [
+    24,
+    39,
+    3
+   ],
+   [
+    24,
+    40,
+    3
+   ],
+   [
+    25,
+    37,
+    4
+   ],
+   [
+    25,
+    38,
+    4
+   ],
+   [
+    25,
+    39,
+    3
+   ],
+   [
+    25,
+    40,
+    3
+   ],
+   [
+    26,
+    29,
+    3
+   ],
+   [
+    26,
+    30,
+    3
+   ],
+   [
+    26,
+    37,
+    4
+   ],
+   [
+    26,
+    38,
+    4
+   ],
+   [
+    26,
+    39,
+    3
+   ],
+   [
+    26,
+    40,
+    3
+   ],
+   [
+    27,
+    20,
+    3
+   ],
+   [
+    27,
+    30,
+    3
+   ],
+   [
+    27,
+    35,
+    3
+   ],
+   [
+    27,
+    36,
+    4
+   ],
+   [
+    27,
+    37,
+    4
+   ],
+   [
+    27,
+    38,
+    4
+   ],
+   [
+    27,
+    39,
+    4
+   ],
+   [
+    27,
+    40,
+    4
+   ],
+   [
+    28,
+    15,
+    2
+   ],
+   [
+    28,
+    17,
+    2
+   ],
+   [
+    28,
+    18,
+    2
+   ],
+   [
+    28,
+    19,
+    2
+   ],
+   [
+    28,
+    21,
+    2
+   ],
+   [
+    28,
+    24,
+    2
+   ],
+   [
+    28,
+    28,
+    3
+   ],
+   [
+    28,
+    31,
+    3
+   ],
+   [
+    28,
+    32,
+    3
+   ],
+   [
+    28,
+    35,
+    4
+   ],
+   [
+    28,
+    38,
+    5
+   ],
+   [
+    28,
+    39,
+    4
+   ],
+   [
+    29,
+    18,
+    2
+   ],
+   [
+    29,
+    19,
+    2
+   ],
+   [
+    29,
+    20,
+    2
+   ],
+   [
+    29,
+    25,
+    3
+   ],
+   [
+    29,
+    28,
+    3
+   ],
+   [
+    29,
+    31,
+    3
+   ],
+   [
+    29,
+    32,
+    2
+   ],
+   [
+    29,
+    35,
+    3
+   ],
+   [
+    29,
+    36,
+    4
+   ],
+   [
+    30,
+    14,
+    2
+   ],
+   [
+    30,
+    15,
+    2
+   ],
+   [
+    30,
+    18,
+    2
+   ],
+   [
+    30,
+    20,
+    2
+   ],
+   [
+    30,
+    25,
+    3
+   ],
+   [
+    30,
+    27,
+    4
+   ],
+   [
+    30,
+    31,
+    2
+   ],
+   [
+    30,
+    32,
+    2
+   ],
+   [
+    31,
+    14,
+    2
+   ],
+   [
+    31,
+    16,
+    2
+   ],
+   [
+    31,
+    18,
+    2
+   ],
+   [
+    31,
+    25,
+    4
+   ],
+   [
+    31,
+    26,
+    3
+   ],
+   [
+    31,
+    27,
+    3
+   ],
+   [
+    31,
+    28,
+    2
+   ],
+   [
+    31,
+    30,
+    3
+   ],
+   [
+    31,
+    31,
+    2
+   ],
+   [
+    31,
+    33,
+    3
+   ],
+   [
+    31,
+    36,
+    3
+   ],
+   [
+    32,
+    15,
+    2
+   ],
+   [
+    32,
+    17,
+    1
+   ],
+   [
+    32,
+    20,
+    3
+   ],
+   [
+    32,
+    23,
+    4
+   ],
+   [
+    32,
+    24,
+    4
+   ],
+   [
+    32,
+    25,
+    3
+   ],
+   [
+    32,
+    26,
+    3
+   ],
+   [
+    32,
+    28,
+    2
+   ],
+   [
+    32,
+    29,
+    2
+   ],
+   [
+    32,
+    31,
+    2
+   ],
+   [
+    32,
+    32,
+    2
+   ],
+   [
+    32,
+    33,
+    3
+   ],
+   [
+    32,
+    34,
+    3
+   ],
+   [
+    32,
+    35,
+    3
+   ],
+   [
+    32,
+    36,
+    3
+   ],
+   [
+    32,
+    37,
+    3
+   ],
+   [
+    33,
+    16,
+    2
+   ],
+   [
+    33,
+    27,
+    3
+   ],
+   [
+    33,
+    28,
+    3
+   ],
+   [
+    33,
+    30,
+    2
+   ],
+   [
+    33,
+    31,
+    2
+   ],
+   [
+    33,
+    32,
+    2
+   ],
+   [
+    33,
+    34,
+    3
+   ],
+   [
+    33,
+    36,
+    3
+   ],
+   [
+    33,
+    38,
+    2
+   ],
+   [
+    33,
+    39,
+    2
+   ],
+   [
+    34,
+    15,
+    2
+   ],
+   [
+    34,
+    24,
+    3
+   ],
+   [
+    34,
+    25,
+    3
+   ],
+   [
+    34,
+    26,
+    2
+   ],
+   [
+    34,
+    27,
+    3
+   ],
+   [
+    34,
+    28,
+    3
+   ],
+   [
+    34,
+    30,
+    2
+   ],
+   [
+    34,
+    31,
+    3
+   ],
+   [
+    34,
+    32,
+    2
+   ],
+   [
+    34,
+    33,
+    2
+   ],
+   [
+    34,
+    34,
+    3
+   ],
+   [
+    34,
+    38,
+    2
+   ],
+   [
+    34,
+    41,
+    2
+   ],
+   [
+    34,
+    42,
+    2
+   ],
+   [
+    34,
+    43,
+    2
+   ],
+   [
+    34,
+    46,
+    2
+   ],
+   [
+    35,
+    15,
+    2
+   ],
+   [
+    35,
+    19,
+    2
+   ],
+   [
+    35,
+    21,
+    3
+   ],
+   [
+    35,
+    25,
+    3
+   ],
+   [
+    35,
+    26,
+    2
+   ],
+   [
+    35,
+    27,
+    2
+   ],
+   [
+    35,
+    28,
+    2
+   ],
+   [
+    35,
+    29,
+    3
+   ],
+   [
+    35,
+    30,
+    3
+   ],
+   [
+    35,
+    31,
+    3
+   ],
+   [
+    35,
+    32,
+    2
+   ],
+   [
+    35,
+    34,
+    3
+   ],
+   [
+    35,
+    35,
+    3
+   ],
+   [
+    35,
+    36,
+    3
+   ],
+   [
+    35,
+    37,
+    2
+   ],
+   [
+    35,
+    38,
+    2
+   ],
+   [
+    35,
+    39,
+    2
+   ],
+   [
+    35,
+    40,
+    2
+   ],
+   [
+    35,
+    42,
+    2
+   ],
+   [
+    35,
+    43,
+    2
+   ],
+   [
+    35,
+    44,
+    2
+   ],
+   [
+    35,
+    45,
+    2
+   ],
+   [
+    35,
+    47,
+    2
+   ],
+   [
+    36,
+    15,
+    2
+   ],
+   [
+    36,
+    16,
+    2
+   ],
+   [
+    36,
+    17,
+    2
+   ],
+   [
+    36,
+    20,
+    3
+   ],
+   [
+    36,
+    21,
+    4
+   ],
+   [
+    36,
+    22,
+    3
+   ],
+   [
+    36,
+    24,
+    3
+   ],
+   [
+    36,
+    25,
+    3
+   ],
+   [
+    36,
+    26,
+    3
+   ],
+   [
+    36,
+    27,
+    2
+   ],
+   [
+    36,
+    29,
+    3
+   ],
+   [
+    36,
+    30,
+    3
+   ],
+   [
+    36,
+    31,
+    3
+   ],
+   [
+    36,
+    32,
+    2
+   ],
+   [
+    36,
+    33,
+    3
+   ],
+   [
+    36,
+    35,
+    2
+   ],
+   [
+    36,
+    37,
+    2
+   ],
+   [
+    36,
+    38,
+    2
+   ],
+   [
+    36,
+    39,
+    2
+   ],
+   [
+    36,
+    41,
+    2
+   ],
+   [
+    36,
+    42,
+    2
+   ],
+   [
+    37,
+    16,
+    2
+   ],
+   [
+    37,
+    19,
+    3
+   ],
+   [
+    37,
+    20,
+    3
+   ],
+   [
+    37,
+    24,
+    3
+   ],
+   [
+    37,
+    26,
+    3
+   ],
+   [
+    37,
+    27,
+    3
+   ],
+   [
+    37,
+    28,
+    3
+   ],
+   [
+    37,
+    29,
+    2
+   ],
+   [
+    37,
+    31,
+    2
+   ],
+   [
+    37,
+    36,
+    2
+   ],
+   [
+    37,
+    37,
+    2
+   ],
+   [
+    37,
+    39,
+    2
+   ],
+   [
+    37,
+    40,
+    2
+   ],
+   [
+    37,
+    41,
+    2
+   ],
+   [
+    38,
+    20,
+    3
+   ],
+   [
+    38,
+    21,
+    3
+   ],
+   [
+    38,
+    22,
+    2
+   ],
+   [
+    38,
+    24,
+    3
+   ],
+   [
+    38,
+    27,
+    3
+   ],
+   [
+    38,
+    28,
+    2
+   ],
+   [
+    38,
+    30,
+    2
+   ],
+   [
+    38,
+    33,
+    3
+   ],
+   [
+    38,
+    36,
+    2
+   ],
+   [
+    38,
+    37,
+    2
+   ],
+   [
+    38,
+    38,
+    2
+   ],
+   [
+    38,
+    39,
+    2
+   ],
+   [
+    38,
+    40,
+    2
+   ],
+   [
+    38,
+    47,
+    1
+   ],
+   [
+    39,
+    20,
+    3
+   ],
+   [
+    39,
+    21,
+    3
+   ],
+   [
+    39,
+    22,
+    2
+   ],
+   [
+    39,
+    23,
+    2
+   ],
+   [
+    39,
+    25,
+    3
+   ],
+   [
+    39,
+    26,
+    3
+   ],
+   [
+    39,
+    28,
+    2
+   ],
+   [
+    39,
+    32,
+    2
+   ],
+   [
+    39,
+    33,
+    2
+   ],
+   [
+    39,
+    37,
+    2
+   ],
+   [
+    39,
+    38,
+    2
+   ],
+   [
+    39,
+    39,
+    2
+   ],
+   [
+    39,
+    40,
+    2
+   ],
+   [
+    39,
+    42,
+    2
+   ],
+   [
+    40,
+    18,
+    3
+   ],
+   [
+    40,
+    19,
+    3
+   ],
+   [
+    40,
+    20,
+    3
+   ],
+   [
+    40,
+    21,
+    3
+   ],
+   [
+    40,
+    22,
+    2
+   ],
+   [
+    40,
+    23,
+    2
+   ],
+   [
+    40,
+    25,
+    3
+   ],
+   [
+    40,
+    26,
+    2
+   ],
+   [
+    40,
+    27,
+    2
+   ],
+   [
+    40,
+    30,
+    2
+   ],
+   [
+    40,
+    31,
+    2
+   ],
+   [
+    40,
+    33,
+    2
+   ],
+   [
+    40,
+    34,
+    2
+   ],
+   [
+    40,
+    36,
+    2
+   ],
+   [
+    40,
+    37,
+    2
+   ],
+   [
+    40,
+    38,
+    2
+   ],
+   [
+    40,
+    39,
+    2
+   ],
+   [
+    41,
+    19,
+    2
+   ],
+   [
+    41,
+    20,
+    2
+   ],
+   [
+    41,
+    21,
+    2
+   ],
+   [
+    41,
+    22,
+    2
+   ],
+   [
+    41,
+    23,
+    2
+   ],
+   [
+    41,
+    25,
+    2
+   ],
+   [
+    41,
+    26,
+    2
+   ],
+   [
+    41,
+    27,
+    2
+   ],
+   [
+    41,
+    28,
+    2
+   ],
+   [
+    41,
+    29,
+    2
+   ],
+   [
+    41,
+    30,
+    2
+   ],
+   [
+    41,
+    31,
+    3
+   ],
+   [
+    41,
+    33,
+    2
+   ],
+   [
+    41,
+    34,
+    2
+   ],
+   [
+    41,
+    35,
+    2
+   ],
+   [
+    41,
+    36,
+    2
+   ],
+   [
+    41,
+    37,
+    2
+   ],
+   [
+    41,
+    38,
+    1
+   ],
+   [
+    41,
+    39,
+    1
+   ],
+   [
+    41,
+    40,
+    1
+   ],
+   [
+    41,
+    42,
+    1
+   ],
+   [
+    41,
+    43,
+    1
+   ],
+   [
+    42,
+    19,
+    2
+   ],
+   [
+    42,
+    20,
+    2
+   ],
+   [
+    42,
+    21,
+    2
+   ],
+   [
+    42,
+    22,
+    2
+   ],
+   [
+    42,
+    24,
+    2
+   ],
+   [
+    42,
+    25,
+    2
+   ],
+   [
+    42,
+    27,
+    2
+   ],
+   [
+    42,
+    28,
+    2
+   ],
+   [
+    42,
+    32,
+    2
+   ],
+   [
+    42,
+    33,
+    2
+   ],
+   [
+    42,
+    34,
+    3
+   ],
+   [
+    42,
+    35,
+    2
+   ],
+   [
+    42,
+    36,
+    2
+   ],
+   [
+    42,
+    37,
+    1
+   ],
+   [
+    42,
+    38,
+    1
+   ],
+   [
+    42,
+    39,
+    2
+   ],
+   [
+    42,
+    41,
+    1
+   ],
+   [
+    42,
+    42,
+    1
+   ],
+   [
+    43,
+    19,
+    2
+   ],
+   [
+    43,
+    20,
+    2
+   ],
+   [
+    43,
+    21,
+    2
+   ],
+   [
+    43,
+    22,
+    2
+   ],
+   [
+    43,
+    23,
+    2
+   ],
+   [
+    43,
+    25,
+    2
+   ],
+   [
+    43,
+    26,
+    2
+   ],
+   [
+    43,
+    27,
+    2
+   ],
+   [
+    43,
+    28,
+    2
+   ],
+   [
+    43,
+    29,
+    1
+   ],
+   [
+    43,
+    32,
+    1
+   ],
+   [
+    43,
+    34,
+    2
+   ],
+   [
+    43,
+    35,
+    2
+   ],
+   [
+    43,
+    36,
+    1
+   ],
+   [
+    43,
+    37,
+    1
+   ],
+   [
+    43,
+    38,
+    1
+   ],
+   [
+    44,
+    20,
+    2
+   ],
+   [
+    44,
+    21,
+    2
+   ],
+   [
+    44,
+    23,
+    2
+   ],
+   [
+    44,
+    25,
+    2
+   ],
+   [
+    44,
+    26,
+    2
+   ],
+   [
+    44,
+    27,
+    2
+   ],
+   [
+    44,
+    28,
+    2
+   ],
+   [
+    44,
+    29,
+    1
+   ],
+   [
+    44,
+    31,
+    1
+   ],
+   [
+    44,
+    32,
+    1
+   ],
+   [
+    44,
+    33,
+    3
+   ],
+   [
+    44,
+    34,
+    2
+   ],
+   [
+    44,
+    35,
+    2
+   ],
+   [
+    44,
+    36,
+    1
+   ],
+   [
+    44,
+    37,
+    1
+   ],
+   [
+    45,
+    20,
+    2
+   ],
+   [
+    45,
+    22,
+    2
+   ],
+   [
+    45,
+    23,
+    2
+   ],
+   [
+    45,
+    24,
+    2
+   ],
+   [
+    45,
+    25,
+    2
+   ],
+   [
+    45,
+    26,
+    2
+   ],
+   [
+    45,
+    27,
+    2
+   ],
+   [
+    45,
+    28,
+    1
+   ],
+   [
+    45,
+    30,
+    1
+   ],
+   [
+    45,
+    31,
+    1
+   ],
+   [
+    45,
+    32,
+    1
+   ],
+   [
+    45,
+    33,
+    1
+   ],
+   [
+    45,
+    34,
+    1
+   ],
+   [
+    45,
+    35,
+    2
+   ],
+   [
+    45,
+    36,
+    1
+   ],
+   [
+    46,
+    21,
+    2
+   ],
+   [
+    46,
+    22,
+    1
+   ],
+   [
+    46,
+    23,
+    2
+   ],
+   [
+    46,
+    24,
+    2
+   ],
+   [
+    46,
+    25,
+    2
+   ],
+   [
+    46,
+    26,
+    1
+   ],
+   [
+    46,
+    27,
+    1
+   ],
+   [
+    46,
+    28,
+    1
+   ],
+   [
+    46,
+    30,
+    1
+   ],
+   [
+    46,
+    31,
+    1
+   ],
+   [
+    46,
+    32,
+    1
+   ],
+   [
+    46,
+    35,
+    1
+   ],
+   [
+    47,
+    21,
+    1
+   ],
+   [
+    47,
+    24,
+    1
+   ],
+   [
+    47,
+    25,
+    1
+   ],
+   [
+    47,
+    26,
+    1
+   ],
+   [
+    47,
+    27,
+    1
+   ],
+   [
+    47,
+    28,
+    1
+   ],
+   [
+    47,
+    29,
+    1
+   ],
+   [
+    47,
+    31,
+    1
+   ],
+   [
+    48,
+    21,
+    1
+   ],
+   [
+    48,
+    22,
+    1
+   ],
+   [
+    48,
+    28,
+    1
+   ],
+   [
+    48,
+    29,
+    1
+   ],
+   [
+    48,
+    30,
+    2
+   ],
+   [
+    48,
+    31,
+    1
+   ],
+   [
+    49,
+    19,
+    1
+   ],
+   [
+    49,
+    20,
+    1
+   ],
+   [
+    49,
+    27,
+    1
+   ],
+   [
+    49,
+    28,
+    1
+   ],
+   [
+    49,
+    29,
+    1
+   ],
+   [
+    50,
+    20,
+    1
+   ],
+   [
+    50,
+    23,
+    1
+   ],
+   [
+    50,
+    29,
+    1
+   ],
+   [
+    50,
+    30,
+    1
+   ]
+  ]
+ },
+ "le_plus_separe": {
+  "le_rang": 4,
+  "le_cote": "moins",
+  "la_chaine": "compagne",
+  "le_saut": 11,
+  "la_separation": 0.9948,
+  "les_deux_comptes": [
+   1,
+   3
+  ],
+  "les_cases": [
+   [
+    11,
+    19,
+    4
+   ],
+   [
+    11,
+    20,
+    4
+   ],
+   [
+    11,
+    21,
+    3
+   ],
+   [
+    11,
+    23,
+    3
+   ],
+   [
+    11,
+    24,
+    3
+   ],
+   [
+    13,
+    21,
+    3
+   ],
+   [
+    13,
+    23,
+    3
+   ],
+   [
+    13,
+    24,
+    3
+   ],
+   [
+    13,
+    25,
+    3
+   ],
+   [
+    14,
+    21,
+    3
+   ],
+   [
+    14,
+    24,
+    3
+   ],
+   [
+    14,
+    25,
+    3
+   ],
+   [
+    15,
+    20,
+    3
+   ],
+   [
+    15,
+    21,
+    3
+   ],
+   [
+    15,
+    22,
+    3
+   ],
+   [
+    15,
+    25,
+    3
+   ],
+   [
+    16,
+    17,
+    3
+   ],
+   [
+    16,
+    23,
+    3
+   ],
+   [
+    16,
+    25,
+    3
+   ],
+   [
+    16,
+    34,
+    3
+   ],
+   [
+    17,
+    17,
+    3
+   ],
+   [
+    17,
+    18,
+    3
+   ],
+   [
+    17,
+    22,
+    3
+   ],
+   [
+    17,
+    23,
+    3
+   ],
+   [
+    17,
+    24,
+    3
+   ],
+   [
+    17,
+    34,
+    3
+   ],
+   [
+    18,
+    18,
+    3
+   ],
+   [
+    18,
+    32,
+    4
+   ],
+   [
+    18,
+    34,
+    3
+   ],
+   [
+    19,
+    24,
+    4
+   ],
+   [
+    19,
+    27,
+    4
+   ],
+   [
+    19,
+    28,
+    4
+   ],
+   [
+    19,
+    32,
+    4
+   ],
+   [
+    19,
+    33,
+    3
+   ],
+   [
+    19,
+    34,
+    3
+   ],
+   [
+    20,
+    20,
+    3
+   ],
+   [
+    20,
+    24,
+    4
+   ],
+   [
+    20,
+    26,
+    4
+   ],
+   [
+    20,
+    27,
+    4
+   ],
+   [
+    20,
+    28,
+    4
+   ],
+   [
+    20,
+    34,
+    3
+   ],
+   [
+    20,
+    35,
+    3
+   ],
+   [
+    21,
+    19,
+    3
+   ],
+   [
+    21,
+    20,
+    3
+   ],
+   [
+    21,
+    22,
+    3
+   ],
+   [
+    21,
+    23,
+    4
+   ],
+   [
+    21,
+    24,
+    4
+   ],
+   [
+    21,
+    25,
+    4
+   ],
+   [
+    21,
+    27,
+    4
+   ],
+   [
+    21,
+    28,
+    4
+   ],
+   [
+    21,
+    40,
+    1
+   ],
+   [
+    22,
+    18,
+    3
+   ],
+   [
+    22,
+    20,
+    3
+   ],
+   [
+    22,
+    21,
+    3
+   ],
+   [
+    22,
+    22,
+    3
+   ],
+   [
+    22,
+    23,
+    4
+   ],
+   [
+    22,
+    24,
+    4
+   ],
+   [
+    22,
+    25,
+    4
+   ],
+   [
+    22,
+    26,
+    4
+   ],
+   [
+    22,
+    27,
+    4
+   ],
+   [
+    22,
+    28,
+    4
+   ],
+   [
+    22,
+    42,
+    1
+   ],
+   [
+    23,
+    19,
+    3
+   ],
+   [
+    23,
+    20,
+    3
+   ],
+   [
+    23,
+    21,
+    3
+   ],
+   [
+    23,
+    22,
+    3
+   ],
+   [
+    23,
+    23,
+    4
+   ],
+   [
+    23,
+    24,
+    4
+   ],
+   [
+    23,
+    25,
+    4
+   ],
+   [
+    23,
+    26,
+    4
+   ],
+   [
+    23,
+    28,
+    4
+   ],
+   [
+    23,
+    29,
+    4
+   ],
+   [
+    23,
+    30,
+    3
+   ],
+   [
+    23,
+    35,
+    3
+   ],
+   [
+    23,
+    36,
+    3
+   ],
+   [
+    23,
+    43,
+    1
+   ],
+   [
+    24,
+    19,
+    3
+   ],
+   [
+    24,
+    20,
+    3
+   ],
+   [
+    24,
+    21,
+    3
+   ],
+   [
+    24,
+    23,
+    4
+   ],
+   [
+    24,
+    24,
+    4
+   ],
+   [
+    24,
+    25,
+    4
+   ],
+   [
+    24,
+    26,
+    4
+   ],
+   [
+    24,
+    27,
+    4
+   ],
+   [
+    24,
+    28,
+    4
+   ],
+   [
+    24,
+    29,
+    4
+   ],
+   [
+    24,
+    30,
+    3
+   ],
+   [
+    24,
+    31,
+    4
+   ],
+   [
+    24,
+    35,
+    3
+   ],
+   [
+    24,
+    43,
+    1
+   ],
+   [
+    25,
+    19,
+    4
+   ],
+   [
+    25,
+    20,
+    4
+   ],
+   [
+    25,
+    21,
+    4
+   ],
+   [
+    25,
+    22,
+    4
+   ],
+   [
+    25,
+    23,
+    4
+   ],
+   [
+    25,
+    24,
+    4
+   ],
+   [
+    25,
+    25,
+    4
+   ],
+   [
+    25,
+    26,
+    4
+   ],
+   [
+    25,
+    27,
+    4
+   ],
+   [
+    25,
+    28,
+    4
+   ],
+   [
+    25,
+    29,
+    3
+   ],
+   [
+    25,
+    30,
+    2
+   ],
+   [
+    25,
+    35,
+    3
+   ],
+   [
+    25,
+    43,
+    1
+   ],
+   [
+    26,
+    19,
+    3
+   ],
+   [
+    26,
+    20,
+    4
+   ],
+   [
+    26,
+    21,
+    4
+   ],
+   [
+    26,
+    22,
+    4
+   ],
+   [
+    26,
+    23,
+    4
+   ],
+   [
+    26,
+    24,
+    3
+   ],
+   [
+    26,
+    25,
+    3
+   ],
+   [
+    26,
+    26,
+    4
+   ],
+   [
+    26,
+    27,
+    4
+   ],
+   [
+    26,
+    28,
+    3
+   ],
+   [
+    26,
+    29,
+    3
+   ],
+   [
+    26,
+    30,
+    3
+   ],
+   [
+    26,
+    39,
+    2
+   ],
+   [
+    26,
+    43,
+    0
+   ],
+   [
+    27,
+    18,
+    3
+   ],
+   [
+    27,
+    19,
+    3
+   ],
+   [
+    27,
+    20,
+    4
+   ],
+   [
+    27,
+    21,
+    3
+   ],
+   [
+    27,
+    22,
+    3
+   ],
+   [
+    27,
+    23,
+    3
+   ],
+   [
+    27,
+    24,
+    3
+   ],
+   [
+    27,
+    25,
+    3
+   ],
+   [
+    27,
+    26,
+    2
+   ],
+   [
+    27,
+    28,
+    3
+   ],
+   [
+    27,
+    29,
+    3
+   ],
+   [
+    27,
+    30,
+    3
+   ],
+   [
+    27,
+    31,
+    2
+   ],
+   [
+    27,
+    35,
+    3
+   ],
+   [
+    27,
+    39,
+    2
+   ],
+   [
+    27,
+    43,
+    0
+   ],
+   [
+    28,
+    18,
+    3
+   ],
+   [
+    28,
+    24,
+    3
+   ],
+   [
+    28,
+    25,
+    2
+   ],
+   [
+    28,
+    26,
+    2
+   ],
+   [
+    28,
+    27,
+    4
+   ],
+   [
+    28,
+    28,
+    4
+   ],
+   [
+    28,
+    29,
+    3
+   ],
+   [
+    28,
+    34,
+    3
+   ],
+   [
+    28,
+    35,
+    3
+   ],
+   [
+    28,
+    42,
+    1
+   ],
+   [
+    28,
+    43,
+    1
+   ],
+   [
+    28,
+    44,
+    1
+   ],
+   [
+    29,
+    20,
+    3
+   ],
+   [
+    29,
+    21,
+    3
+   ],
+   [
+    29,
+    24,
+    3
+   ],
+   [
+    29,
+    25,
+    2
+   ],
+   [
+    29,
+    26,
+    3
+   ],
+   [
+    29,
+    27,
+    3
+   ],
+   [
+    29,
+    28,
+    3
+   ],
+   [
+    29,
+    29,
+    4
+   ],
+   [
+    29,
+    33,
+    2
+   ],
+   [
+    29,
+    34,
+    3
+   ],
+   [
+    29,
+    41,
+    1
+   ],
+   [
+    29,
+    42,
+    1
+   ],
+   [
+    30,
+    20,
+    3
+   ],
+   [
+    30,
+    24,
+    3
+   ],
+   [
+    30,
+    25,
+    3
+   ],
+   [
+    30,
+    26,
+    3
+   ],
+   [
+    30,
+    27,
+    3
+   ],
+   [
+    30,
+    28,
+    3
+   ],
+   [
+    30,
+    29,
+    3
+   ],
+   [
+    30,
+    32,
+    3
+   ],
+   [
+    30,
+    33,
+    2
+   ],
+   [
+    30,
+    40,
+    1
+   ],
+   [
+    30,
+    41,
+    1
+   ],
+   [
+    30,
+    43,
+    1
+   ],
+   [
+    31,
+    20,
+    3
+   ],
+   [
+    31,
+    21,
+    3
+   ],
+   [
+    31,
+    25,
+    3
+   ],
+   [
+    31,
+    26,
+    3
+   ],
+   [
+    31,
+    29,
+    3
+   ],
+   [
+    31,
+    32,
+    2
+   ],
+   [
+    31,
+    37,
+    2
+   ],
+   [
+    31,
+    39,
+    1
+   ],
+   [
+    31,
+    40,
+    1
+   ],
+   [
+    31,
+    41,
+    1
+   ],
+   [
+    31,
+    42,
+    1
+   ],
+   [
+    32,
+    20,
+    2
+   ],
+   [
+    32,
+    21,
+    2
+   ],
+   [
+    32,
+    22,
+    2
+   ],
+   [
+    32,
+    25,
+    3
+   ],
+   [
+    32,
+    26,
+    3
+   ],
+   [
+    32,
+    31,
+    2
+   ],
+   [
+    32,
+    37,
+    1
+   ],
+   [
+    32,
+    38,
+    1
+   ],
+   [
+    32,
+    39,
+    1
+   ],
+   [
+    32,
+    40,
+    1
+   ],
+   [
+    32,
+    41,
+    1
+   ],
+   [
+    32,
+    42,
+    1
+   ],
+   [
+    33,
+    20,
+    2
+   ],
+   [
+    33,
+    21,
+    2
+   ],
+   [
+    33,
+    30,
+    2
+   ],
+   [
+    33,
+    31,
+    2
+   ],
+   [
+    33,
+    38,
+    1
+   ],
+   [
+    33,
+    40,
+    1
+   ],
+   [
+    33,
+    41,
+    1
+   ],
+   [
+    33,
+    42,
+    1
+   ],
+   [
+    34,
+    19,
+    2
+   ],
+   [
+    34,
+    20,
+    2
+   ],
+   [
+    34,
+    27,
+    2
+   ],
+   [
+    34,
+    28,
+    2
+   ],
+   [
+    34,
+    30,
+    2
+   ],
+   [
+    34,
+    31,
+    1
+   ],
+   [
+    34,
+    32,
+    1
+   ],
+   [
+    34,
+    33,
+    1
+   ],
+   [
+    34,
+    35,
+    2
+   ],
+   [
+    34,
+    38,
+    1
+   ],
+   [
+    34,
+    39,
+    1
+   ],
+   [
+    34,
+    41,
+    1
+   ],
+   [
+    34,
+    42,
+    1
+   ],
+   [
+    35,
+    19,
+    2
+   ],
+   [
+    35,
+    22,
+    1
+   ],
+   [
+    35,
+    23,
+    1
+   ],
+   [
+    35,
+    24,
+    1
+   ],
+   [
+    35,
+    27,
+    2
+   ],
+   [
+    35,
+    28,
+    2
+   ],
+   [
+    35,
+    29,
+    2
+   ],
+   [
+    35,
+    30,
+    1
+   ],
+   [
+    35,
+    31,
+    1
+   ],
+   [
+    35,
+    32,
+    1
+   ],
+   [
+    35,
+    33,
+    1
+   ],
+   [
+    35,
+    40,
+    1
+   ],
+   [
+    35,
+    41,
+    1
+   ],
+   [
+    35,
+    42,
+    1
+   ],
+   [
+    36,
+    21,
+    1
+   ],
+   [
+    36,
+    22,
+    1
+   ],
+   [
+    36,
+    23,
+    1
+   ],
+   [
+    36,
+    24,
+    1
+   ],
+   [
+    36,
+    25,
+    1
+   ],
+   [
+    36,
+    26,
+    1
+   ],
+   [
+    36,
+    28,
+    2
+   ],
+   [
+    36,
+    29,
+    2
+   ],
+   [
+    36,
+    30,
+    1
+   ],
+   [
+    36,
+    31,
+    1
+   ],
+   [
+    36,
+    33,
+    1
+   ],
+   [
+    36,
+    34,
+    1
+   ],
+   [
+    36,
+    41,
+    1
+   ],
+   [
+    37,
+    22,
+    1
+   ],
+   [
+    37,
+    23,
+    1
+   ],
+   [
+    37,
+    24,
+    1
+   ],
+   [
+    37,
+    25,
+    1
+   ],
+   [
+    37,
+    26,
+    1
+   ],
+   [
+    37,
+    29,
+    2
+   ],
+   [
+    37,
+    30,
+    1
+   ],
+   [
+    37,
+    31,
+    1
+   ],
+   [
+    37,
+    32,
+    1
+   ],
+   [
+    37,
+    33,
+    1
+   ],
+   [
+    37,
+    34,
+    1
+   ],
+   [
+    37,
+    35,
+    1
+   ],
+   [
+    38,
+    21,
+    1
+   ],
+   [
+    38,
+    22,
+    1
+   ],
+   [
+    38,
+    23,
+    1
+   ],
+   [
+    38,
+    24,
+    1
+   ],
+   [
+    38,
+    26,
+    1
+   ],
+   [
+    38,
+    27,
+    1
+   ],
+   [
+    38,
+    28,
+    1
+   ],
+   [
+    38,
+    29,
+    1
+   ],
+   [
+    38,
+    30,
+    1
+   ],
+   [
+    38,
+    31,
+    1
+   ],
+   [
+    38,
+    32,
+    1
+   ],
+   [
+    38,
+    33,
+    1
+   ],
+   [
+    38,
+    34,
+    1
+   ],
+   [
+    38,
+    35,
+    1
+   ],
+   [
+    39,
+    21,
+    1
+   ],
+   [
+    39,
+    22,
+    1
+   ],
+   [
+    39,
+    23,
+    1
+   ],
+   [
+    39,
+    24,
+    1
+   ],
+   [
+    39,
+    25,
+    1
+   ],
+   [
+    39,
+    26,
+    1
+   ],
+   [
+    39,
+    27,
+    1
+   ],
+   [
+    39,
+    28,
+    2
+   ],
+   [
+    39,
+    29,
+    1
+   ],
+   [
+    39,
+    30,
+    1
+   ],
+   [
+    39,
+    31,
+    1
+   ],
+   [
+    39,
+    32,
+    1
+   ],
+   [
+    39,
+    33,
+    1
+   ],
+   [
+    39,
+    34,
+    1
+   ],
+   [
+    39,
+    36,
+    1
+   ],
+   [
+    39,
+    44,
+    1
+   ],
+   [
+    40,
+    21,
+    1
+   ],
+   [
+    40,
+    22,
+    1
+   ],
+   [
+    40,
+    23,
+    1
+   ],
+   [
+    40,
+    24,
+    1
+   ],
+   [
+    40,
+    25,
+    1
+   ],
+   [
+    40,
+    26,
+    1
+   ],
+   [
+    40,
+    27,
+    1
+   ],
+   [
+    40,
+    28,
+    1
+   ],
+   [
+    40,
+    30,
+    1
+   ],
+   [
+    40,
+    31,
+    1
+   ],
+   [
+    40,
+    32,
+    1
+   ],
+   [
+    40,
+    33,
+    1
+   ],
+   [
+    40,
+    34,
+    1
+   ],
+   [
+    40,
+    35,
+    1
+   ],
+   [
+    40,
+    36,
+    1
+   ],
+   [
+    41,
+    25,
+    1
+   ],
+   [
+    41,
+    26,
+    1
+   ],
+   [
+    41,
+    27,
+    1
+   ],
+   [
+    41,
+    28,
+    1
+   ],
+   [
+    41,
+    29,
+    1
+   ],
+   [
+    41,
+    30,
+    1
+   ],
+   [
+    41,
+    31,
+    1
+   ],
+   [
+    41,
+    32,
+    1
+   ],
+   [
+    41,
+    33,
+    1
+   ],
+   [
+    41,
+    34,
+    1
+   ],
+   [
+    41,
+    35,
+    1
+   ],
+   [
+    41,
+    36,
+    1
+   ],
+   [
+    41,
+    42,
+    1
+   ],
+   [
+    42,
+    26,
+    1
+   ],
+   [
+    42,
+    27,
+    1
+   ],
+   [
+    42,
+    28,
+    1
+   ],
+   [
+    42,
+    29,
+    1
+   ],
+   [
+    42,
+    30,
+    1
+   ],
+   [
+    42,
+    31,
+    1
+   ],
+   [
+    42,
+    33,
+    1
+   ],
+   [
+    42,
+    34,
+    1
+   ],
+   [
+    42,
+    35,
+    1
+   ],
+   [
+    42,
+    36,
+    1
+   ],
+   [
+    42,
+    37,
+    1
+   ],
+   [
+    43,
+    26,
+    1
+   ],
+   [
+    43,
+    27,
+    1
+   ],
+   [
+    43,
+    29,
+    1
+   ],
+   [
+    43,
+    30,
+    1
+   ],
+   [
+    43,
+    31,
+    1
+   ],
+   [
+    43,
+    32,
+    1
+   ],
+   [
+    43,
+    33,
+    1
+   ],
+   [
+    43,
+    34,
+    1
+   ],
+   [
+    43,
+    35,
+    1
+   ],
+   [
+    43,
+    36,
+    1
+   ],
+   [
+    43,
+    37,
+    1
+   ],
+   [
+    44,
+    27,
+    1
+   ],
+   [
+    44,
+    28,
+    1
+   ],
+   [
+    44,
+    29,
+    1
+   ],
+   [
+    44,
+    30,
+    1
+   ],
+   [
+    44,
+    31,
+    1
+   ],
+   [
+    44,
+    32,
+    1
+   ],
+   [
+    44,
+    33,
+    1
+   ],
+   [
+    44,
+    34,
+    1
+   ],
+   [
+    44,
+    35,
+    1
+   ],
+   [
+    44,
+    36,
+    1
+   ],
+   [
+    44,
+    37,
+    1
+   ],
+   [
+    45,
+    28,
+    1
+   ],
+   [
+    45,
+    29,
+    1
+   ],
+   [
+    45,
+    30,
+    1
+   ],
+   [
+    45,
+    31,
+    1
+   ],
+   [
+    45,
+    33,
+    1
+   ],
+   [
+    45,
+    34,
+    1
+   ],
+   [
+    45,
+    35,
+    1
+   ],
+   [
+    45,
+    37,
+    1
+   ],
+   [
+    46,
+    29,
+    1
+   ],
+   [
+    46,
+    30,
+    1
+   ],
+   [
+    46,
+    31,
+    1
+   ],
+   [
+    46,
+    32,
+    1
+   ],
+   [
+    46,
+    33,
+    1
+   ],
+   [
+    46,
+    34,
+    1
+   ],
+   [
+    47,
+    29,
+    1
+   ],
+   [
+    47,
+    30,
+    1
+   ],
+   [
+    47,
+    31,
+    1
+   ],
+   [
+    47,
+    32,
+    1
+   ],
+   [
+    47,
+    33,
+    1
+   ],
+   [
+    47,
+    38,
+    0
+   ],
+   [
+    48,
+    29,
+    1
+   ],
+   [
+    48,
+    31,
+    1
+   ],
+   [
+    48,
+    32,
+    1
+   ],
+   [
+    48,
+    33,
+    1
+   ],
+   [
+    48,
+    38,
+    0
+   ],
+   [
+    49,
+    31,
+    1
+   ],
+   [
+    49,
+    32,
+    1
+   ],
+   [
+    49,
+    33,
+    1
+   ],
+   [
+    50,
+    30,
+    1
+   ],
+   [
+    50,
+    31,
+    1
+   ],
+   [
+    51,
+    32,
+    1
+   ],
+   [
+    53,
+    33,
+    1
+   ],
+   [
+    54,
+    36,
+    0
+   ],
+   [
+    55,
+    36,
+    0
+   ],
+   [
+    57,
+    36,
+    0
+   ],
+   [
+    61,
+    37,
+    0
+   ],
+   [
+    62,
+    37,
+    0
+   ]
+  ]
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "sur 95 mélanges jugés, 95 sont en deux plages et 0 entremêlés ; oui, les mélanges sont des surfaces à cheval"
+ },
+ "les_secondes": 232.6
+}

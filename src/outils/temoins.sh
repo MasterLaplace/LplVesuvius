@@ -1929,6 +1929,8 @@ run "les sauts mélangés de m7 se trompent-ils plus souvent sur paris4" uv run 
 run "figure les sauts mélangés de m7 se trompent-ils plus souvent sur paris4" uv run python "$ROOT/src/figures/figure_les_sauts_melanges_de_m7_se_trompent_ils_plus_souvent_sur_paris4.py" --verifier
 run "rendre aux mélanges de m7 le poids de leur genre contredit-il moins sur pherc0358" uv run python "$ROOT/src/nappe/rendre_aux_melanges_de_m7_le_poids_de_leur_genre_contredit_il_moins_sur_pherc0358.py" --verifier
 run "figure rendre aux mélanges de m7 le poids de leur genre contredit-il moins sur pherc0358" uv run python "$ROOT/src/figures/figure_rendre_aux_melanges_de_m7_le_poids_de_leur_genre_contredit_il_moins_sur_pherc0358.py" --verifier
+run "les points d'un saut mélangé de m7 forment-ils deux plages sur pherc0358" uv run python "$ROOT/src/nappe/les_points_dun_saut_melange_de_m7_forment_ils_deux_plages_sur_pherc0358.py" --verifier
+run "figure les points d'un saut mélangé de m7 forment-ils deux plages sur pherc0358" uv run python "$ROOT/src/figures/figure_les_points_dun_saut_melange_de_m7_forment_ils_deux_plages_sur_pherc0358.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier
