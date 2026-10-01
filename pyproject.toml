@@ -4,7 +4,7 @@
 # CUDA) is a separate group, because three pipelines out of four give their verdict without it and say so.
 [project]
 name = "vesuve"
-version = "0.3.0"
+version = "0.4.0"
 description = "One program, one pipeline per Vesuvius Challenge prize, built on what LplVesuvius validated"
 requires-python = ">=3.11"
 dependencies = [

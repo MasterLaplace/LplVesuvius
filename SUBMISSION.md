@@ -1,6 +1,6 @@
 # Submission: September 2026 Progress Prizes
 
-**vesuve 0.3.0** is one Docker image with one pipeline per prize, built on a
+**vesuve 0.4.0** is one Docker image with one pipeline per prize, built on a
 series of dated research slices, 402 so far. Its main result this month: on a published PHercParis4 segment, it
 corrects the transfer from one winding to the next without a human. It takes the right decision four times as often
 as the wrong one (163 against 41, sign test p = 2e-18), and the judges are used only to score. Of what that
