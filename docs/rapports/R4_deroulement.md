@@ -4961,6 +4961,12 @@ ne fait pas ce saut et descend d'un tour à chaque saut : le rognage a changé l
 `R4-F588`. Sur PHerc0358, le rognage ôte les sauts nuls et ajoute des sauts de plusieurs feuilles, sur les côtés où `397` se contredit plus.
 `R4-P200` s'ouvre : un saut de deux feuilles de `m7` franchit-il deux tours sur PHercParis4 ?
 
+**`403` · 2026-10-01 · un saut que m7 compte de deux feuilles franchit-il deux tours sur paris4** — `R4-P200`
+
+⭐⭐⭐⭐ **Indécidable : un seul saut jugé de plusieurs feuilles, celui de `385` ; les chaînes rognées n'en ont aucun** — `R4-F589`. Leurs 93
+sauts jugés comptent une feuille pour un tour ; leurs 7 sauts de plusieurs feuilles sont sur les côtés plus, sans tour, ou partent du tour −6.
+`R4-P201` s'ouvre : les sauts de deux feuilles partis du tour −6 finissent-ils un pas au-delà du tour −7 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

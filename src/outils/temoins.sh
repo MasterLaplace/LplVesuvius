@@ -1943,6 +1943,8 @@ run "quel saut de la suivie de la graine 7 comptait-il de trop sur paris4" uv ru
 run "figure quel saut de la suivie de la graine 7 comptait-il de trop sur paris4" uv run python "$ROOT/src/figures/figure_quel_saut_de_la_suivie_de_la_graine_7_comptait_il_de_trop_sur_paris4.py" --verifier
 run "les chaînes rognées font-elles moins de sauts de plusieurs feuilles sur pherc0358" uv run python "$ROOT/src/nappe/les_chaines_rognees_font_elles_moins_de_sauts_de_plusieurs_feuilles_sur_pherc0358.py" --verifier
 run "figure les chaînes rognées font-elles moins de sauts de plusieurs feuilles sur pherc0358" uv run python "$ROOT/src/figures/figure_les_chaines_rognees_font_elles_moins_de_sauts_de_plusieurs_feuilles_sur_pherc0358.py" --verifier
+run "un saut que m7 compte de deux feuilles franchit-il deux tours sur paris4" uv run python "$ROOT/src/nappe/un_saut_que_m7_compte_de_deux_feuilles_franchit_il_deux_tours_sur_paris4.py" --verifier
+run "figure un saut que m7 compte de deux feuilles franchit-il deux tours sur paris4" uv run python "$ROOT/src/figures/figure_un_saut_que_m7_compte_de_deux_feuilles_franchit_il_deux_tours_sur_paris4.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

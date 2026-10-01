@@ -3336,6 +3336,42 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 403 : UN SAUT QUE M7 COMPTE DE DEUX FEUILLES FRANCHIT-IL DEUX TOURS SUR PARIS4
+    s403 = _source(racine, "un_saut_que_m7_compte_de_deux_feuilles_franchit_il_deux_tours_sur_paris4.json")
+    if s403.exists():
+        d = json.loads(s403.read_text())
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        p, tb = d["les_sauts_de_plusieurs_feuilles"], d["les_tableaux"]
+        sauts = lambda f, cote=None: [(c, s) for c in d["les_cotes"] if cote in (None, c["le_cote"])  # noqa: E731
+                                      for x in c[f].values() for s in x["les_sauts"]]
+        non_juges = lambda f, cote=None: [(c, s) for c, s in sauts(f, cote) if s["dit"] is None  # noqa: E731
+                                          and (s["le_nombre_de_feuilles"] or 0) >= 2]
+        tours = lambda f, cote=None: [t for c in d["les_cotes"] if cote in (None, c["le_cote"]) for x in c[f].values()  # noqa: E731
+                                      for t in x["les_tours"][1:]]
+        depuis_6 = lambda f: sum(1 for c in d["les_cotes"] for x in c[f].values() for s in x["les_sauts"]  # noqa: E731
+                                 if s["dit"] is None and (s["le_nombre_de_feuilles"] or 0) >= 2 and x["les_tours"][s["le_saut"] - 1] == [-6])
+        seul = p[0] if len(p) == 1 else None
+        ligne = lambda nom, f, j: (f"| {nom} | {sum(tb[f].values())} | {tb[f].get('1|1', 0)} | {j} | {len(non_juges(f))} |")  # noqa: E731
+        sur_7 = {f: sum(t == [-7] for t in tours(f)) for f in ("385", "rognees")}
+        ecrits = [("le verdict de 403", f"INDÉCIDABLE : {len(p)} SAUT JUGÉ DE PLUSIEURS FEUILLES, MOINS DE {d['les_constantes']['le_minimum']}"
+                   if not d["le_verdict"]["decidable"] and seul else "changé"),
+                  ("la lecture de 403", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes ; le contrôle tient sur les seize côtés"
+                   if not d["les_pannes"] and d["redonne_400"] and len(d["les_cotes"]) == 16 else "changé"),
+                  ("la ligne 385 de 403", ligne("`385`", "385", f"1 : {seul['le_nombre_de_feuilles']} feuilles pour {seul['les_tours']} tours")
+                   if seul and seul["les_familles"] == ["385"] else "changé"),
+                  ("la ligne rognée de 403", ligne("rognées", "rognees", sum("rognees" in x["les_familles"] for x in p))),
+                  ("les rognées de 403", f"Leurs {sum(tb['rognees'].values())} sauts jugés comptent"
+                   if tb["rognees"].get("1|1", 0) == sum(tb["rognees"].values()) else "changé"),
+                  ("les non jugés de 403", f"Des {len(non_juges('rognees'))} sauts rognés de plusieurs feuilles, "
+                   f"{len(non_juges('rognees', 'plus'))} sont sur des"),
+                  ("les côtés plus de 403", f"aucune des {len(tours('rognees', 'plus'))} surfaces rognées de ces côtés ne retrouve un tour. "
+                   f"Les {depuis_6('rognees')} autres partent du tour −6" if not any(tours("rognees", "plus")) else "changé"),
+                  ("le tour −7 de 403", "Or une seule surface de chaque famille retrouve le tour −7" if sur_7 == {"385": 1, "rognees": 1}
+                   else "changé"),
+                  ("la répartition de 385 dans 403", f"même répartition : {len(non_juges('385', 'plus'))} sauts sur les côtés plus, "
+                   f"{len(non_juges('385', 'moins'))} au-delà du tour −6.")]
+        out.extend((nom_, [x_], s403.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 402 : LES CHAÎNES ROGNÉES FONT-ELLES MOINS DE SAUTS DE PLUSIEURS FEUILLES SUR PHERC0358
     s402 = _source(racine, "les_chaines_rognees_font_elles_moins_de_sauts_de_plusieurs_feuilles_sur_pherc0358.json")
     s397c = _source(racine, "une_chaine_qui_rogne_la_plage_retombee_se_contredit_elle_moins_sur_pherc0358.json")
