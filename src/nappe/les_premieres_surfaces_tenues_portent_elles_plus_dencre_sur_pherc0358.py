@@ -387,19 +387,29 @@ def le_cote_que_lencre_choisit(en_plus: dict, en_moins: dict) -> str | None:
     return "plus" if a > b else "moins"
 
 
-def lordre_des_lectures(noms: list[str], cotes: dict, t2_tient: bool | None) -> list[tuple[str, str]]:
-    """Les lectures (surface, côté), dans l'ordre : les nappes de départ du côté qui décide ; si T2 tient, H et R de ce côté ; puis
-    l'autre côté de tout ce qui a été lu. `t2_tient` à None : T2 n'est pas encore lu, seules les nappes viennent."""
+def lordre_des_lectures(noms: list[str], cotes: dict, t2_tient: bool | None) -> list[tuple[str, str, float]]:
+    """Les lectures (surface, côté, décalage), dans l'ordre où L, qui décide, s'obtient le plus tôt : les nappes de départ à leur place
+    des deux côtés ; si T2 tient, H et R à leur place des deux côtés ; puis les jumeaux de tout ce qui a été lu, qui ne servent qu'à D,
+    rapporté. `t2_tient` à None : T2 n'est pas encore lu, seules les nappes viennent. Une surface sans côté par la graine est lue des deux
+    côtés à sa place, et n'a pas de jumeau."""
     n = [x for x in noms if x.startswith("N_")]
     hr = [x for x in noms if x[:2] in ("H_", "R_")]
-    out = [(x, cotes[x]["par_la_graine"]) for x in n]
-    if t2_tient is None:
+
+    def places(xs):
+        out = []
+        for x in xs:
+            c = cotes[x]["par_la_graine"]
+            out += [(x, c, 0.0), (x, lautre(c), 0.0)] if c is not None else [(x, "plus", 0.0), (x, "moins", 0.0)]
         return out
+
+    def jumeaux(xs):
+        return [(x, c, LE_DEMI_PAS) for x in xs if (c := cotes[x]["par_la_graine"]) is not None] + \
+               [(x, lautre(c), LE_DEMI_PAS) for x in xs if (c := cotes[x]["par_la_graine"]) is not None]
+
+    if t2_tient is None:
+        return places(n)
     lus = n + (hr if t2_tient else [])
-    if t2_tient:
-        out += [(x, cotes[x]["par_la_graine"]) for x in hr if cotes[x]["par_la_graine"] is not None]
-    out += [(x, lautre(cotes[x]["par_la_graine"])) for x in lus if cotes[x]["par_la_graine"] is not None]
-    return [(x, c) for x, c in out if c is not None]
+    return (places(hr) if t2_tient else []) + jumeaux(lus)
 
 
 def une_lecture(nom: str, decalage: float, cote: str) -> int:
@@ -430,7 +440,8 @@ def une_lecture(nom: str, decalage: float, cote: str) -> int:
 
 
 def encre() -> int:
-    """T2 d'abord : les nappes de départ et leurs jumeaux ; H et R seulement si T2 tient. Chaque lecture dans son propre processus."""
+    """T2 d'abord, sur L : les nappes de départ à leur place des deux côtés ; H et R seulement si T2 tient ; les jumeaux à la fin. Chaque
+    lecture dans son propre processus."""
     plan = json.loads((LE_DOSSIER / "plan.json").read_text())
     if not plan["le_controle"]:
         print("le contrôle des statuts de 354 échoue : rien n'est lu", flush=True)
@@ -439,17 +450,15 @@ def encre() -> int:
     cotes = les_cotes(les_nappes(plan), le_sens_de_409())
     (LE_DOSSIER / "cotes.json").write_text(json.dumps(cotes, ensure_ascii=False, indent=1) + "\n")
 
-    def lire(paires):
-        for nom, cote in paires:
-            for dec in (0.0, LE_DEMI_PAS):
-                if le_fichier(nom, dec, cote).exists():
-                    continue
-                subprocess.run([sys.executable, __file__, "--une-lecture", nom, "--decalage", str(dec), "--cote", cote], check=True)
+    def lire(triples):
+        for nom, cote, dec in triples:
+            if le_fichier(nom, dec, cote).exists():
+                continue
+            subprocess.run([sys.executable, __file__, "--une-lecture", nom, "--decalage", str(dec), "--cote", cote], check=True)
 
     lire(lordre_des_lectures(plan["les_surfaces"], cotes, None))
-    dn = [le_d(*les_deux(n, cotes[n]["par_la_graine"])) for n in plan["les_surfaces"] if n.startswith("N_")]
-    t2 = sum(x is not None and x > 0 for x in dn) >= LE_MINIMUM_DE_T2
-    print(json.dumps({"t2": "tient" if t2 else "ne tient pas"}), flush=True)
+    t2 = sum(x["net"] for x in les_contrastes(plan)["N"]) >= LE_MINIMUM_DE_T2
+    print(json.dumps({"t2_de_l": "tient" if t2 else "ne tient pas"}), flush=True)
     lire(lordre_des_lectures(plan["les_surfaces"], cotes, t2))
     return 0
 
@@ -689,11 +698,14 @@ def verifier() -> int:
     noms = ["H_6_moins_1", "N_6", "N_7", "R_7_plus_1"]
     cc = {"H_6_moins_1": {"par_la_graine": "moins"}, "N_6": {"par_la_graine": "moins"}, "N_7": {"par_la_graine": "plus"},
           "R_7_plus_1": {"par_la_graine": None}}
-    v("★★★★ l'ordre : les nappes du côté qui décide d'abord ; H et R seulement si T2 tient ; puis l'autre côté de ce qui est lu",
-      lordre_des_lectures(noms, cc, None) == [("N_6", "moins"), ("N_7", "plus")]
-      and lordre_des_lectures(noms, cc, True) == [("N_6", "moins"), ("N_7", "plus"), ("H_6_moins_1", "moins"),
-                                                  ("N_6", "plus"), ("N_7", "moins"), ("H_6_moins_1", "plus")]
-      and lordre_des_lectures(noms, cc, False) == [("N_6", "moins"), ("N_7", "plus"), ("N_6", "plus"), ("N_7", "moins")],
+    j = LE_DEMI_PAS
+    v("★★★★ l'ordre : les nappes à leur place des deux côtés ; H et R à leur place seulement si T2 tient ; les jumeaux à la fin",
+      lordre_des_lectures(noms, cc, None) == [("N_6", "moins", 0.0), ("N_6", "plus", 0.0), ("N_7", "plus", 0.0), ("N_7", "moins", 0.0)]
+      and lordre_des_lectures(noms, cc, True) == [("H_6_moins_1", "moins", 0.0), ("H_6_moins_1", "plus", 0.0),
+                                                  ("R_7_plus_1", "plus", 0.0), ("R_7_plus_1", "moins", 0.0),
+                                                  ("N_6", "moins", j), ("N_7", "plus", j), ("H_6_moins_1", "moins", j),
+                                                  ("N_6", "plus", j), ("N_7", "moins", j), ("H_6_moins_1", "plus", j)]
+      and lordre_des_lectures(noms, cc, False) == [("N_6", "moins", j), ("N_7", "plus", j), ("N_6", "plus", j), ("N_7", "moins", j)],
       str(lordre_des_lectures(noms, cc, True)))
 
     for e_ in echecs:
