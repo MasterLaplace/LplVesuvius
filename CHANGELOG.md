@@ -5,6 +5,11 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-10-01
+
+The judge of the text of the produced winding as a stage of the grand prize, and the chain of windings grown from the
+surface prediction as a library; nothing that existed changes its name, its output or its exit code.
+
 ### Added
 - `vesuve grand-prize` gains stage TJ, the judge of the text of the produced winding (`296`, `R4-F477`). From the two
   embedded meshes it measures where the segment passes over the winding produced from it: the share of each of the 340
@@ -18,6 +23,14 @@ field or an exit code that changes is a breaking change once 1.0 is out.
   lacks a reading, or holds one that is not a 2-D array, is named, and the pipeline goes on. Elsewhere than within half
   a sheet of a facing point the judge claims nothing.
 - The formulary gains the three rules of the judge: the facing point, the text correlation, the outcome.
+- `vesuve.chain`, the chain of windings grown from the surface prediction `m7` (slices 345, 352, 356, 365): the criterion
+  that needs no referent (a jump is held if at least three quarters of its counted points cross one sheet and fewer
+  than 50 cross none, `R4-F531`, `R4-F538`), the jump and the growth from a seed, the regrowth of a held winding by one
+  mesh (`R4-F551`), the chain that keeps, regrows or relaunches at each jump, the strict reading against the published
+  windings, the seeds, a reader of `m7`, and a report of where the criterion was not validated. On PHercParis4, seeds 1
+  to 8, it gives back the chain the research published jump by jump, 27 of the 28 judged jumps right on seeds 4 to 8, and
+  the research's surfaces point for point on seeds 4 and 7. It is a library: no stage or command exposes it yet, and it
+  does not read the bucket for a segment's mesh.
 
 ### Fixed
 - Reading the public prediction along the rays is faster: the chunks the samples fall in are found by sorting one integer key per chunk instead of sorting rows (1.5 s to 0.11 s on two million samples), with the same chunks and the same samples.
@@ -30,14 +43,6 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 - The network test of `--read-prediction` compared the first 300 rays of the mesh, of which 13 see a sheet. It now
   reads 100 rays spread over the segment that each see one, and the README says that the whole reading has not been
   compared with the embedded samples.
-- `vesuve.chain`, the chain of windings grown from the surface prediction `m7` (slices 345, 352, 356, 365): the criterion
-  that needs no referent (a jump is held if at least three quarters of its counted points cross one sheet and fewer
-  than 50 cross none, `R4-F531`, `R4-F538`), the jump and the growth from a seed, the regrowth of a held winding by one
-  mesh (`R4-F551`), the chain that keeps, regrows or relaunches at each jump, the strict reading against the published
-  windings, the seeds, a reader of `m7`, and a report of where the criterion was not validated. On PHercParis4, seeds 1
-  to 8, it gives back the chain the research published jump by jump, 27 of the 28 judged jumps right on seeds 4 to 8, and
-  the research's surfaces point for point on seeds 4 and 7. It is a library: no stage or command exposes it yet, and it
-  does not read the bucket for a segment's mesh.
 
 ## [0.3.0] - 2026-10-01
 
