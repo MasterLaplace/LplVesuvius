@@ -4878,6 +4878,12 @@ feuille là où les tours publiés les lisent : l'écart majoritaire n'y décale
 graine 8, côté moins, et en retire 6 à la graine 6, côté plus. La piste de l'alignement s'arrête, faute de vérité. `R4-P186` s'ouvre : des
 chaînes à seize sauts ?
 
+**`389` · 2026-10-01 · l'accord aux comptes de m7 valide-t-il encore à seize sauts sur PHerc0358** — `R4-P186`
+
+⭐⭐⭐⭐ **Oui : 8 surfaces validées au-delà du huitième saut, sur 3 côtés, jusqu'à 10 tours** — `R4-F575`. Mais au-delà du huitième saut,
+47 surfaces sont contredites pour 8 validées : les chaînes vont plus loin que leur accord, alors que `m7` dit encore le nombre de feuilles
+de la plupart de leurs sauts. `R4-P187` s'ouvre : le vote désigne-t-il une chaîne qui glisse au-delà du huitième saut ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

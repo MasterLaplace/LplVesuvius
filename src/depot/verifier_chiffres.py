@@ -3336,6 +3336,35 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 389 : L'ACCORD AUX COMPTES DE M7 VALIDE-T-IL ENCORE À SEIZE SAUTS SUR PHERC0358
+    s389 = _source(racine, "laccord_aux_comptes_de_m7_valide_t_il_encore_a_seize_sauts_sur_pherc0358.json")
+    if s389.exists():
+        d = json.loads(s389.read_text())
+        b, h = d["le_bilan"], d["les_constantes"]["les_huit"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        cs = [c for c in d["les_cotes"] if c["le_resume"]["validees"]]
+        nb = lambda c, st, ad: sum(s_["le_statut"] == st and (s_["le_saut"] > h) == ad for s_ in c["les_surfaces"])  # noqa: E731
+        contre = sum(nb(c, "contredite", True) for c in cs)
+        seize = sum(1 for c in cs for n in c["les_sauts_portant_des_points"].values() if n == 16)
+        au_dela = [n for c in d["les_cotes"] for ns in c["les_nombres"].values() for n in ns[h:]]
+        g4 = next(c for c in cs if (c["le_rang"], c["le_cote"]) == (4, "moins"))
+        ecrits = [("le verdict de 389", f"{b['au_dela']} SURFACES VALIDÉES AU-DELÀ DU HUITIÈME SAUT, SUR {b['les_cotes_au_dela']} CÔTÉS, JUSQU'À "
+                   f"{b['le_plus_loin_au_dela']} TOURS : {d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"),
+                  ("le résumé de 389", f"il contredit {contre} surfaces pour {b['au_dela']} qu'il valide"),
+                  ("la lecture de 389", f"`m7` a été lu en {d['la_lecture_de_m7']['lus']} chunks, dont {d['la_lecture_de_m7']['absents']} absents du "
+                   f"dépôt, sans panne, en {vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("le total de 389", f"surfaces, dont {sum(nb(c, 'validée', False) for c in cs)} dans les huit premiers sauts"),
+                  ("les trois à dix tours de 389", "ont chacune une surface validée à 10 tours de la nappe"
+                   if {x for x, hh, w in g4["le_resume"]["les_validees"] if w == 10} == {"suivie", "compagne", "tierce"} else "changé"),
+                  ("les contredites au-delà de 389", f"{contre} surfaces contredites pour {b['au_dela']} validées"),
+                  ("les chaînes à seize sauts de 389", f"{seize} des {3 * len(cs)} chaînes de ces six côtés posent des points"),
+                  ("les nombres dits au-delà de 389", f"{sum(n is not None for n in au_dela)} des {len(au_dela)} sauts au-delà du huitième")]
+        for c in cs:
+            r = c["le_resume"]
+            ecrits.append((f"la ligne {c['le_rang']} {c['le_cote']} de 389", f"| graine {c['le_rang']}, {c['le_cote']} | {nb(c, 'validée', False)} | "
+                           f"{nb(c, 'validée', True)} | {nb(c, 'contredite', True)} | {r['le_plus_loin']} tours |"))
+        out.extend((nom_, [x_], s389.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 388 : UN ÉCART PRIS SUR CINQ PAIRES QUI S'ACCORDENT ALIGNE-T-IL SANS DÉPLACER UNE SURFACE LUE
     s388 = _source(racine, "un_ecart_pris_sur_cinq_paires_qui_saccordent_aligne_t_il_sans_deplacer_une_surface_lue.json")
     if s388.exists():
