@@ -13,7 +13,7 @@ import numpy as np
 from vesuve.remote_zarr import RemoteArray
 from vesuve.transport import ABSENT
 
-KEPT_CHUNKS = 64
+KEPT_CHUNKS = 16
 
 
 class PredictionReader:
