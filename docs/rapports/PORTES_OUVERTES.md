@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**253 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**254 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 215 portes
+## Grand Prize — 216 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -233,7 +233,8 @@
 - **R4-P196** *(le graal)* · **RÉPONDUE par `399` : en partie.** Comptées entières, les chaînes rognées ont 86 validées et 150 contredites, contre 89 et 161 pour `389` et 75 et 131 pour `397` ; par surface, les contredites reviennent au niveau de `389` (`R4-F585`). La question était : **SUR PHERC0358, DES CHAÎNES ROGNÉES DONT CHAQUE SAUT EST COMPTÉ SUR SA SURFACE ENTIÈRE, AVANT ROGNAGE, GARDENT-ELLES LES CONTRADICTIONS DÉFAITES PAR `397` SANS PERDRE SES VALIDÉES ?**
 - **R4-P197** *(le graal)* · **RÉPONDUE par `400` : oui.** Rognées, 62 des 62 surfaces validées lues sont sur le bon tour ; comptées entières, 60 des 60 ; les deux erreurs de `385` sont corrigées (`R4-F586`). La question était : **SUR PHERCPARIS4, DES CHAÎNES QUI ROGNENT LA PLAGE RETOMBÉE DE LEURS SURFACES LISENT-ELLES LEURS SURFACES VALIDÉES SUR LE BON TOUR AUSSI SOUVENT QUE CELLES DE `385` ?**
 - **R4-P198** *(le graal)* · **RÉPONDUE par `401` : non, la prémisse était fausse.** Le seul saut faux de la suivie de `385` est le sixième, 2 feuilles pour 3 tours ; rognée, la suivie ne fait pas ce saut (`R4-F587`, `R4-C48`). La question était : **SUR PHERCPARIS4, QUEL SAUT DE LA SUIVIE DE LA GRAINE 7, CÔTÉ MOINS, `385` COMPTAIT-IL D'UNE FEUILLE DE TROP, ET SA SURFACE ÉTAIT-ELLE À CHEVAL ?**
-- **R4-P199** *(le graal)* · **SUR PHERC0358, À SEIZE SAUTS, LES CHAÎNES ROGNÉES FONT-ELLES MOINS DE SAUTS DE PLUS D'UNE FEUILLE DE `m7` QUE LES CHAÎNES DE `389` ?** ⭐⭐⭐⭐ C'EST CE QUE `401` DÉSIGNE. Sur PHercParis4, la suivie rognée ne fait pas le triple saut que faisait celle de `385` (`R4-F587`) ; si le rognage évite les sauts de plusieurs feuilles, il doit le faire aussi sur PHerc0358.
+- **R4-P199** *(le graal)* · **RÉPONDUE par `402` : non (relecture).** Les chaînes rognées font 25 sauts de plusieurs feuilles sur 315 comptés, contre 18 sur 343 pour `389`, et 7 sauts nuls contre 31 (`R4-F588`). La question était : **SUR PHERC0358, À SEIZE SAUTS, LES CHAÎNES ROGNÉES FONT-ELLES MOINS DE SAUTS DE PLUS D'UNE FEUILLE DE `m7` QUE LES CHAÎNES DE `389` ?**
+- **R4-P200** *(le graal)* · **SUR PHERCPARIS4, LES SAUTS QUE `m7` COMPTE DE DEUX FEUILLES, ROGNÉS OU NON, FRANCHISSENT-ILS DEUX TOURS PUBLIÉS ?** ⭐⭐⭐⭐ C'EST CE QUE `402` DÉSIGNE. Sur PHerc0358, le rognage ajoute des sauts de plusieurs feuilles (`R4-F588`) ; savoir si un saut de deux feuilles de `m7` en franchit vraiment deux dit si la chaîne rognée saute une feuille ou si c'est le compte qui se trompe.
 
 ## Progress Prizes — 19 portes
 

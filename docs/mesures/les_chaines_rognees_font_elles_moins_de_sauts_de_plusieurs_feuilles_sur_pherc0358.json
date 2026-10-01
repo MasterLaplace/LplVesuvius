@@ -1,0 +1,302 @@
+{
+ "la_question": "Sur PHerc0358, à seize sauts, les chaînes rognées font-elles moins de sauts de plus d'une feuille de m7 que les chaînes de 389 ?",
+ "les_constantes": {
+  "la_moitie": 0.5,
+  "le_minimum": 10
+ },
+ "le_bilan": {
+  "389": {
+   "comptes": 343,
+   "plusieurs": 18,
+   "nuls": 31
+  },
+  "397": {
+   "comptes": 315,
+   "plusieurs": 25,
+   "nuls": 7
+  },
+  "399": {
+   "comptes": 317,
+   "plusieurs": 21,
+   "nuls": 12
+  }
+ },
+ "par_cote": {
+  "1 plus": {
+   "389": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "397": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "399": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   }
+  },
+  "1 moins": {
+   "389": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "397": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "399": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   }
+  },
+  "2 plus": {
+   "389": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "397": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "399": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   }
+  },
+  "2 moins": {
+   "389": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "397": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "399": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   }
+  },
+  "3 plus": {
+   "389": {
+    "comptes": 26,
+    "plusieurs": 5,
+    "nuls": 6
+   },
+   "397": {
+    "comptes": 32,
+    "plusieurs": 5,
+    "nuls": 1
+   },
+   "399": {
+    "comptes": 31,
+    "plusieurs": 3,
+    "nuls": 2
+   }
+  },
+  "3 moins": {
+   "389": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "397": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "399": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   }
+  },
+  "4 plus": {
+   "389": {
+    "comptes": 31,
+    "plusieurs": 0,
+    "nuls": 1
+   },
+   "397": {
+    "comptes": 30,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "399": {
+    "comptes": 30,
+    "plusieurs": 0,
+    "nuls": 0
+   }
+  },
+  "4 moins": {
+   "389": {
+    "comptes": 48,
+    "plusieurs": 0,
+    "nuls": 2
+   },
+   "397": {
+    "comptes": 42,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "399": {
+    "comptes": 43,
+    "plusieurs": 0,
+    "nuls": 0
+   }
+  },
+  "5 plus": {
+   "389": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "397": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "399": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   }
+  },
+  "5 moins": {
+   "389": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "397": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   },
+   "399": {
+    "comptes": 0,
+    "plusieurs": 0,
+    "nuls": 0
+   }
+  },
+  "6 plus": {
+   "389": {
+    "comptes": 33,
+    "plusieurs": 1,
+    "nuls": 2
+   },
+   "397": {
+    "comptes": 34,
+    "plusieurs": 1,
+    "nuls": 2
+   },
+   "399": {
+    "comptes": 34,
+    "plusieurs": 1,
+    "nuls": 2
+   }
+  },
+  "6 moins": {
+   "389": {
+    "comptes": 48,
+    "plusieurs": 3,
+    "nuls": 4
+   },
+   "397": {
+    "comptes": 47,
+    "plusieurs": 5,
+    "nuls": 1
+   },
+   "399": {
+    "comptes": 48,
+    "plusieurs": 5,
+    "nuls": 2
+   }
+  },
+  "7 plus": {
+   "389": {
+    "comptes": 44,
+    "plusieurs": 3,
+    "nuls": 1
+   },
+   "397": {
+    "comptes": 43,
+    "plusieurs": 5,
+    "nuls": 0
+   },
+   "399": {
+    "comptes": 43,
+    "plusieurs": 5,
+    "nuls": 0
+   }
+  },
+  "7 moins": {
+   "389": {
+    "comptes": 44,
+    "plusieurs": 2,
+    "nuls": 6
+   },
+   "397": {
+    "comptes": 38,
+    "plusieurs": 5,
+    "nuls": 1
+   },
+   "399": {
+    "comptes": 38,
+    "plusieurs": 3,
+    "nuls": 3
+   }
+  },
+  "8 plus": {
+   "389": {
+    "comptes": 28,
+    "plusieurs": 2,
+    "nuls": 3
+   },
+   "397": {
+    "comptes": 25,
+    "plusieurs": 2,
+    "nuls": 1
+   },
+   "399": {
+    "comptes": 25,
+    "plusieurs": 2,
+    "nuls": 1
+   }
+  },
+  "8 moins": {
+   "389": {
+    "comptes": 41,
+    "plusieurs": 2,
+    "nuls": 6
+   },
+   "397": {
+    "comptes": 24,
+    "plusieurs": 2,
+    "nuls": 1
+   },
+   "399": {
+    "comptes": 25,
+    "plusieurs": 2,
+    "nuls": 2
+   }
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "les chaînes rognées font 25 sauts de plusieurs feuilles sur 315 comptés, contre 18 sur 343 pour 389 ; non"
+ }
+}

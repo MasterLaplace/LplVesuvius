@@ -4955,6 +4955,12 @@ saut comptait une feuille de trop ?
 ne fait pas ce saut et descend d'un tour à chaque saut : le rognage a changé la chaîne, il n'a pas corrigé un compte. Bandeau sur `400`.
 `R4-P199` s'ouvre : les chaînes rognées de PHerc0358 font-elles moins de sauts de plusieurs feuilles ?
 
+**`402` · 2026-10-01 · les chaînes rognées font-elles moins de sauts de plusieurs feuilles sur pherc0358** — `R4-P199`
+
+⭐⭐⭐ **Non (relecture) : 25 sauts de plusieurs feuilles sur 315 rognés, contre 18 sur 343 pour `389` ; 7 sauts nuls contre 31** —
+`R4-F588`. Sur PHerc0358, le rognage ôte les sauts nuls et ajoute des sauts de plusieurs feuilles, sur les côtés où `397` se contredit plus.
+`R4-P200` s'ouvre : un saut de deux feuilles de `m7` franchit-il deux tours sur PHercParis4 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

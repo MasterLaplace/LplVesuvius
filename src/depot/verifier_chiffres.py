@@ -3336,6 +3336,33 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 402 : LES CHAÎNES ROGNÉES FONT-ELLES MOINS DE SAUTS DE PLUSIEURS FEUILLES SUR PHERC0358
+    s402 = _source(racine, "les_chaines_rognees_font_elles_moins_de_sauts_de_plusieurs_feuilles_sur_pherc0358.json")
+    s397c = _source(racine, "une_chaine_qui_rogne_la_plage_retombee_se_contredit_elle_moins_sur_pherc0358.json")
+    if s402.exists() and s397c.exists():
+        d = json.loads(s402.read_text())
+        b, pc = d["le_bilan"], d["par_cote"]
+        p1 = lambda x: f"{x:.1f}".replace(".", ",")  # noqa: E731
+        ligne = lambda nom, k: (f"| {nom} | {b[k]['comptes']} | {b[k]['plusieurs']} ({p1(100 * b[k]['plusieurs'] / b[k]['comptes'])} %) | "  # noqa: E731
+                                f"{b[k]['nuls']} ({p1(100 * b[k]['nuls'] / b[k]['comptes'])} %) |")
+        mo = lambda c: f"({pc[c]['389']['plusieurs']} → {pc[c]['397']['plusieurs']})"  # noqa: E731
+        _d397 = json.loads(s397c.read_text())
+        _s397 = {f"{c['le_rang']} {c['le_cote']}": (_d397["la_reference_par_cote"][f"{c['le_rang']} {c['le_cote']}"]["contredite"],
+                                                    c["les_statuts"]["contredite"]) for c in _d397["les_cotes"]}
+        ecrits = [("le verdict de 402", f"LES CHAÎNES ROGNÉES FONT {b['397']['plusieurs']} SAUTS DE PLUSIEURS FEUILLES SUR {b['397']['comptes']} "
+                   f"COMPTÉS, CONTRE {b['389']['plusieurs']} SUR {b['389']['comptes']} POUR `389` : "
+                   f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("la ligne 389 de 402", ligne("`389`", "389")),
+                  ("la ligne 397 de 402", ligne("`397`, rognées", "397")),
+                  ("la ligne 399 de 402", ligne("`399`, rognées, comptées entières", "399")),
+                  ("les nuls de 402", f"{b['389']['nuls']} à {b['397']['nuls']} ; ceux de plusieurs feuilles montent de {b['389']['plusieurs']} à "
+                   f"{b['397']['plusieurs']}"),
+                  ("les côtés de 402", f"à la graine 6, côté moins {mo('6 moins')}, à la graine 7, côté plus {mo('7 plus')}, et à la"),
+                  ("le dernier côté de 402", f"graine 7, côté moins {mo('7 moins')}"),
+                  ("les contredites de 402", "moins ({} → {} contredites), la graine 7, côté plus ({} → {}), et la graine 7, côté moins ({} → {})".format(
+                      *[c_[k] for cote in ("6 moins", "7 plus", "7 moins") for c_, k in ((_s397[cote], 0), (_s397[cote], 1))]))]
+        out.extend((nom_, [x_], s402.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 401 : QUEL SAUT DE LA SUIVIE DE LA GRAINE 7 COMPTAIT-IL DE TROP SUR PARIS4
     s401 = _source(racine, "quel_saut_de_la_suivie_de_la_graine_7_comptait_il_de_trop_sur_paris4.json")
     if s401.exists():
