@@ -67,11 +67,13 @@ DEPUIS_LA_SPIRE, DEPUIS_LA_RELANCE, DEPUIS_LA_CROISSANCE = "la spire", "la relan
 
 
 def la_chaine_mixte(nappe: dict, relancer, sauter, lire_valeurs, sauts: int = m331.LES_SAUTS, compter=m355.le_compte_de,
-                    regrandir=None) -> list[dict]:
+                    regrandir=None, rogner=None) -> list[dict]:
     """Jusqu'à `sauts` sauts ; chacun garde sa spire si le critère de `352` la tient contre la surface de départ, relance une nappe depuis
     elle sinon, et part de ce qu'il a gardé. Chaque saut porte le compte de la surface gardée, et, pour `357`, la surface d'où il part et la
     surface gardée sous les noms `le_depart` et `la_relance` que la mesure de `331` lit. Avec `regrandir(point, normale, spire, valide)`,
-    écrit pour `358`, une spire tenue est regrandie, et la surface regrandie est gardée à sa place si le critère la tient elle aussi."""
+    écrit pour `358`, une spire tenue est regrandie, et la surface regrandie est gardée à sa place si le critère la tient elle aussi. Avec
+    `rogner(depart, gardee)`, écrit pour `397`, la surface gardée est rognée avant d'être enregistrée et d'être le départ du saut suivant ;
+    les comptes enregistrés restent ceux qui l'ont fait garder."""
     surf, ok = nappe["la_nappe"], nappe["valide"]
     out = []
     for _ in range(sauts):
@@ -87,6 +89,8 @@ def la_chaine_mixte(nappe: dict, relancer, sauter, lire_valeurs, sauts: int = m3
                 f_r = compter(depart, r, lire_valeurs)
                 if r["valide"].any() and m355.tenue(f_r):
                     garde, f_g, depuis = r, f_r, DEPUIS_LA_CROISSANCE
+            if rogner is not None:
+                garde = rogner(depart, garde)
             out.append({"le_saut": s, "depuis": depuis, "le_compte_de_la_spire": f_sp, "le_compte": f_g,
                         "les_points": int(garde["valide"].sum()), "le_depart": depart, "la_relance": garde})
             surf, ok = garde["la_nappe"], garde["valide"]
@@ -98,6 +102,8 @@ def la_chaine_mixte(nappe: dict, relancer, sauter, lire_valeurs, sauts: int = m3
             break
         r = relancer(*g)
         f_r = compter(depart, r, lire_valeurs)
+        if rogner is not None and r["valide"].any():
+            r = rogner(depart, r)
         out.append({"le_saut": s, "depuis": DEPUIS_LA_RELANCE, "le_compte_de_la_spire": f_sp, "le_compte": f_r,
                     "les_points": int(r["valide"].sum()), "le_depart": depart, "la_relance": r})
         if not r["valide"].any():

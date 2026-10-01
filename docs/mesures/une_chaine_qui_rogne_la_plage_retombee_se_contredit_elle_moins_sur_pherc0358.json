@@ -1,0 +1,11767 @@
+{
+ "la_question": "Sur PHerc0358, une chaîne qui retire de chaque surface la plage restée sur la surface d'où elle part a-t-elle moins de sauts mélangés, et l'accord s'y contredit-il moins ?",
+ "les_constantes": {
+  "le_quart": 0.25,
+  "le_tiers": 0.3333
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "lus": 36034,
+  "absents": 183,
+  "octets": 16120938627
+ },
+ "la_reference": {
+  "validee": 89,
+  "contredite": 161,
+  "les_melanges": 96,
+  "les_sauts_comptes": 343
+ },
+ "la_reference_par_cote": {
+  "1 plus": {
+   "validée": 0,
+   "contredite": 0
+  },
+  "1 moins": {
+   "validée": 0,
+   "contredite": 0
+  },
+  "2 plus": {
+   "validée": 0,
+   "contredite": 0
+  },
+  "2 moins": {
+   "validée": 0,
+   "contredite": 0
+  },
+  "3 plus": {
+   "validée": 0,
+   "contredite": 22
+  },
+  "3 moins": {
+   "validée": 0,
+   "contredite": 0
+  },
+  "4 plus": {
+   "validée": 21,
+   "contredite": 0
+  },
+  "4 moins": {
+   "validée": 26,
+   "contredite": 22
+  },
+  "5 plus": {
+   "validée": 0,
+   "contredite": 0
+  },
+  "5 moins": {
+   "validée": 0,
+   "contredite": 0
+  },
+  "6 plus": {
+   "validée": 6,
+   "contredite": 21
+  },
+  "6 moins": {
+   "validée": 18,
+   "contredite": 27
+  },
+  "7 plus": {
+   "validée": 11,
+   "contredite": 3
+  },
+  "7 moins": {
+   "validée": 7,
+   "contredite": 2
+  },
+  "8 plus": {
+   "validée": 0,
+   "contredite": 24
+  },
+  "8 moins": {
+   "validée": 0,
+   "contredite": 40
+  }
+ },
+ "les_rognages": [
+  {
+   "retombees": 0,
+   "parties": 389,
+   "rognee": false
+  },
+  {
+   "retombees": 474,
+   "parties": 187,
+   "rognee": false
+  },
+  {
+   "retombees": 628,
+   "parties": 972,
+   "rognee": true
+  },
+  {
+   "retombees": 30,
+   "parties": 465,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 440,
+   "rognee": true
+  },
+  {
+   "retombees": 33,
+   "parties": 494,
+   "rognee": true
+  },
+  {
+   "retombees": 107,
+   "parties": 1665,
+   "rognee": true
+  },
+  {
+   "retombees": 84,
+   "parties": 2286,
+   "rognee": true
+  },
+  {
+   "retombees": 58,
+   "parties": 2140,
+   "rognee": true
+  },
+  {
+   "retombees": 42,
+   "parties": 1266,
+   "rognee": true
+  },
+  {
+   "retombees": 141,
+   "parties": 299,
+   "rognee": true
+  },
+  {
+   "retombees": 3,
+   "parties": 160,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 131,
+   "rognee": false
+  },
+  {
+   "retombees": 1,
+   "parties": 157,
+   "rognee": true
+  },
+  {
+   "retombees": 6,
+   "parties": 161,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 173,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 589,
+   "rognee": false
+  },
+  {
+   "retombees": 68,
+   "parties": 675,
+   "rognee": true
+  },
+  {
+   "retombees": 254,
+   "parties": 1056,
+   "rognee": true
+  },
+  {
+   "retombees": 26,
+   "parties": 838,
+   "rognee": true
+  },
+  {
+   "retombees": 14,
+   "parties": 738,
+   "rognee": true
+  },
+  {
+   "retombees": 13,
+   "parties": 554,
+   "rognee": true
+  },
+  {
+   "retombees": 150,
+   "parties": 1244,
+   "rognee": true
+  },
+  {
+   "retombees": 17,
+   "parties": 1185,
+   "rognee": true
+  },
+  {
+   "retombees": 6,
+   "parties": 240,
+   "rognee": true
+  },
+  {
+   "retombees": 29,
+   "parties": 237,
+   "rognee": true
+  },
+  {
+   "retombees": 6,
+   "parties": 194,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 212,
+   "rognee": false
+  },
+  {
+   "retombees": 2,
+   "parties": 312,
+   "rognee": true
+  },
+  {
+   "retombees": 785,
+   "parties": 1304,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 585,
+   "rognee": false
+  },
+  {
+   "retombees": 39,
+   "parties": 558,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 359,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 462,
+   "rognee": false
+  },
+  {
+   "retombees": 5,
+   "parties": 444,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 421,
+   "rognee": false
+  },
+  {
+   "retombees": 5,
+   "parties": 343,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 398,
+   "rognee": false
+  },
+  {
+   "retombees": 1,
+   "parties": 203,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 0,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 304,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 449,
+   "rognee": false
+  },
+  {
+   "retombees": 6,
+   "parties": 450,
+   "rognee": true
+  },
+  {
+   "retombees": 3,
+   "parties": 444,
+   "rognee": true
+  },
+  {
+   "retombees": 3,
+   "parties": 407,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 453,
+   "rognee": false
+  },
+  {
+   "retombees": 2,
+   "parties": 215,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 165,
+   "rognee": false
+  },
+  {
+   "retombees": 15,
+   "parties": 322,
+   "rognee": true
+  },
+  {
+   "retombees": 7,
+   "parties": 256,
+   "rognee": true
+  },
+  {
+   "retombees": 10,
+   "parties": 178,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 78,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 81,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 56,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 57,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 98,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 253,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 334,
+   "rognee": false
+  },
+  {
+   "retombees": 9,
+   "parties": 313,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 288,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 248,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 299,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 124,
+   "rognee": false
+  },
+  {
+   "retombees": 6,
+   "parties": 24,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 366,
+   "rognee": false
+  },
+  {
+   "retombees": 6,
+   "parties": 471,
+   "rognee": true
+  },
+  {
+   "retombees": 10,
+   "parties": 374,
+   "rognee": true
+  },
+  {
+   "retombees": 69,
+   "parties": 453,
+   "rognee": true
+  },
+  {
+   "retombees": 452,
+   "parties": 1037,
+   "rognee": true
+  },
+  {
+   "retombees": 232,
+   "parties": 1366,
+   "rognee": true
+  },
+  {
+   "retombees": 12,
+   "parties": 1199,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 396,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 52,
+   "rognee": true
+  },
+  {
+   "retombees": 85,
+   "parties": 87,
+   "rognee": true
+  },
+  {
+   "retombees": 18,
+   "parties": 1927,
+   "rognee": true
+  },
+  {
+   "retombees": 31,
+   "parties": 2128,
+   "rognee": true
+  },
+  {
+   "retombees": 418,
+   "parties": 2169,
+   "rognee": true
+  },
+  {
+   "retombees": 27,
+   "parties": 1752,
+   "rognee": true
+  },
+  {
+   "retombees": 25,
+   "parties": 1217,
+   "rognee": true
+  },
+  {
+   "retombees": 39,
+   "parties": 1020,
+   "rognee": true
+  },
+  {
+   "retombees": 8,
+   "parties": 362,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 403,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 378,
+   "rognee": false
+  },
+  {
+   "retombees": 5,
+   "parties": 411,
+   "rognee": true
+  },
+  {
+   "retombees": 141,
+   "parties": 380,
+   "rognee": true
+  },
+  {
+   "retombees": 3,
+   "parties": 816,
+   "rognee": true
+  },
+  {
+   "retombees": 15,
+   "parties": 712,
+   "rognee": true
+  },
+  {
+   "retombees": 10,
+   "parties": 485,
+   "rognee": true
+  },
+  {
+   "retombees": 260,
+   "parties": 477,
+   "rognee": true
+  },
+  {
+   "retombees": 6,
+   "parties": 2004,
+   "rognee": true
+  },
+  {
+   "retombees": 203,
+   "parties": 2018,
+   "rognee": true
+  },
+  {
+   "retombees": 490,
+   "parties": 2033,
+   "rognee": true
+  },
+  {
+   "retombees": 539,
+   "parties": 1454,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 924,
+   "rognee": false
+  },
+  {
+   "retombees": 15,
+   "parties": 805,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 624,
+   "rognee": true
+  },
+  {
+   "retombees": 10,
+   "parties": 330,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 417,
+   "rognee": true
+  },
+  {
+   "retombees": 10,
+   "parties": 407,
+   "rognee": true
+  },
+  {
+   "retombees": 9,
+   "parties": 455,
+   "rognee": true
+  },
+  {
+   "retombees": 8,
+   "parties": 378,
+   "rognee": true
+  },
+  {
+   "retombees": 79,
+   "parties": 429,
+   "rognee": true
+  },
+  {
+   "retombees": 10,
+   "parties": 1193,
+   "rognee": true
+  },
+  {
+   "retombees": 42,
+   "parties": 788,
+   "rognee": true
+  },
+  {
+   "retombees": 8,
+   "parties": 746,
+   "rognee": true
+  },
+  {
+   "retombees": 16,
+   "parties": 743,
+   "rognee": true
+  },
+  {
+   "retombees": 5,
+   "parties": 337,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 442,
+   "rognee": false
+  },
+  {
+   "retombees": 11,
+   "parties": 772,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 979,
+   "rognee": false
+  },
+  {
+   "retombees": 10,
+   "parties": 2141,
+   "rognee": true
+  },
+  {
+   "retombees": 546,
+   "parties": 1618,
+   "rognee": true
+  },
+  {
+   "retombees": 155,
+   "parties": 1721,
+   "rognee": true
+  },
+  {
+   "retombees": 363,
+   "parties": 2011,
+   "rognee": true
+  },
+  {
+   "retombees": 17,
+   "parties": 2205,
+   "rognee": true
+  },
+  {
+   "retombees": 629,
+   "parties": 1206,
+   "rognee": true
+  },
+  {
+   "retombees": 523,
+   "parties": 1370,
+   "rognee": true
+  },
+  {
+   "retombees": 2157,
+   "parties": 132,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 2617,
+   "rognee": false
+  },
+  {
+   "retombees": 50,
+   "parties": 2725,
+   "rognee": true
+  },
+  {
+   "retombees": 615,
+   "parties": 2422,
+   "rognee": true
+  },
+  {
+   "retombees": 10,
+   "parties": 2064,
+   "rognee": true
+  },
+  {
+   "retombees": 433,
+   "parties": 1451,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 439,
+   "rognee": false
+  },
+  {
+   "retombees": 3,
+   "parties": 856,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 2,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 281,
+   "rognee": false
+  },
+  {
+   "retombees": 9,
+   "parties": 559,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 133,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 158,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 172,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 183,
+   "rognee": false
+  },
+  {
+   "retombees": 170,
+   "parties": 70,
+   "rognee": false
+  },
+  {
+   "retombees": 423,
+   "parties": 1724,
+   "rognee": true
+  },
+  {
+   "retombees": 56,
+   "parties": 2018,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 2465,
+   "rognee": true
+  },
+  {
+   "retombees": 338,
+   "parties": 1508,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 1167,
+   "rognee": false
+  },
+  {
+   "retombees": 12,
+   "parties": 882,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 451,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 481,
+   "rognee": true
+  },
+  {
+   "retombees": 212,
+   "parties": 398,
+   "rognee": true
+  },
+  {
+   "retombees": 9,
+   "parties": 3155,
+   "rognee": true
+  },
+  {
+   "retombees": 3237,
+   "parties": 97,
+   "rognee": false
+  },
+  {
+   "retombees": 194,
+   "parties": 1097,
+   "rognee": true
+  },
+  {
+   "retombees": 22,
+   "parties": 688,
+   "rognee": true
+  },
+  {
+   "retombees": 117,
+   "parties": 630,
+   "rognee": true
+  },
+  {
+   "retombees": 7,
+   "parties": 1001,
+   "rognee": true
+  },
+  {
+   "retombees": 18,
+   "parties": 915,
+   "rognee": true
+  },
+  {
+   "retombees": 26,
+   "parties": 989,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 1464,
+   "rognee": false
+  },
+  {
+   "retombees": 52,
+   "parties": 1050,
+   "rognee": true
+  },
+  {
+   "retombees": 418,
+   "parties": 983,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 185,
+   "rognee": false
+  },
+  {
+   "retombees": 1,
+   "parties": 300,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 61,
+   "rognee": false
+  },
+  {
+   "retombees": 67,
+   "parties": 139,
+   "rognee": true
+  },
+  {
+   "retombees": 11,
+   "parties": 180,
+   "rognee": true
+  },
+  {
+   "retombees": 19,
+   "parties": 2491,
+   "rognee": true
+  },
+  {
+   "retombees": 991,
+   "parties": 765,
+   "rognee": true
+  },
+  {
+   "retombees": 416,
+   "parties": 671,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 1393,
+   "rognee": true
+  },
+  {
+   "retombees": 990,
+   "parties": 1583,
+   "rognee": true
+  },
+  {
+   "retombees": 8,
+   "parties": 828,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 592,
+   "rognee": true
+  },
+  {
+   "retombees": 23,
+   "parties": 360,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 314,
+   "rognee": true
+  },
+  {
+   "retombees": 40,
+   "parties": 242,
+   "rognee": true
+  },
+  {
+   "retombees": 12,
+   "parties": 242,
+   "rognee": true
+  },
+  {
+   "retombees": 10,
+   "parties": 212,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 195,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 179,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 113,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 123,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 1255,
+   "rognee": false
+  },
+  {
+   "retombees": 324,
+   "parties": 1182,
+   "rognee": true
+  },
+  {
+   "retombees": 613,
+   "parties": 1128,
+   "rognee": true
+  },
+  {
+   "retombees": 9,
+   "parties": 1079,
+   "rognee": true
+  },
+  {
+   "retombees": 15,
+   "parties": 722,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 407,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 130,
+   "rognee": false
+  },
+  {
+   "retombees": 3,
+   "parties": 48,
+   "rognee": true
+  },
+  {
+   "retombees": 64,
+   "parties": 83,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 848,
+   "rognee": false
+  },
+  {
+   "retombees": 9,
+   "parties": 833,
+   "rognee": true
+  },
+  {
+   "retombees": 105,
+   "parties": 780,
+   "rognee": true
+  },
+  {
+   "retombees": 170,
+   "parties": 362,
+   "rognee": true
+  },
+  {
+   "retombees": 9,
+   "parties": 125,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 112,
+   "rognee": false
+  },
+  {
+   "retombees": 56,
+   "parties": 827,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 546,
+   "rognee": false
+  },
+  {
+   "retombees": 21,
+   "parties": 450,
+   "rognee": true
+  },
+  {
+   "retombees": 30,
+   "parties": 438,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 349,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 302,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 280,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 154,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 141,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 192,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 351,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 239,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 317,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 418,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 452,
+   "rognee": false
+  },
+  {
+   "retombees": 5,
+   "parties": 287,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 297,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 499,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 331,
+   "rognee": false
+  },
+  {
+   "retombees": 2,
+   "parties": 235,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 148,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 120,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 119,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 120,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 125,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 127,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 163,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 348,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 0,
+   "rognee": false
+  },
+  {
+   "retombees": 7,
+   "parties": 493,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 201,
+   "rognee": true
+  },
+  {
+   "retombees": 218,
+   "parties": 263,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 273,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 264,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 262,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 214,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 116,
+   "rognee": false
+  },
+  {
+   "retombees": 1,
+   "parties": 153,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 118,
+   "rognee": false
+  },
+  {
+   "retombees": 14,
+   "parties": 129,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 179,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 145,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 141,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 131,
+   "rognee": false
+  },
+  {
+   "retombees": 43,
+   "parties": 164,
+   "rognee": true
+  },
+  {
+   "retombees": 6,
+   "parties": 633,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 591,
+   "rognee": false
+  },
+  {
+   "retombees": 2,
+   "parties": 479,
+   "rognee": true
+  },
+  {
+   "retombees": 80,
+   "parties": 116,
+   "rognee": true
+  },
+  {
+   "retombees": 7,
+   "parties": 310,
+   "rognee": true
+  },
+  {
+   "retombees": 83,
+   "parties": 224,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 591,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 644,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 655,
+   "rognee": false
+  },
+  {
+   "retombees": 4,
+   "parties": 598,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 549,
+   "rognee": false
+  },
+  {
+   "retombees": 3,
+   "parties": 456,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 300,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 236,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 254,
+   "rognee": true
+  },
+  {
+   "retombees": 15,
+   "parties": 339,
+   "rognee": true
+  },
+  {
+   "retombees": 20,
+   "parties": 797,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 633,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 650,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 744,
+   "rognee": false
+  },
+  {
+   "retombees": 1,
+   "parties": 731,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 786,
+   "rognee": true
+  },
+  {
+   "retombees": 10,
+   "parties": 582,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 557,
+   "rognee": false
+  },
+  {
+   "retombees": 3,
+   "parties": 463,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 286,
+   "rognee": false
+  },
+  {
+   "retombees": 107,
+   "parties": 350,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 323,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 355,
+   "rognee": false
+  },
+  {
+   "retombees": 497,
+   "parties": 817,
+   "rognee": true
+  },
+  {
+   "retombees": 117,
+   "parties": 759,
+   "rognee": true
+  },
+  {
+   "retombees": 337,
+   "parties": 1258,
+   "rognee": true
+  },
+  {
+   "retombees": 561,
+   "parties": 509,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 110,
+   "rognee": false
+  },
+  {
+   "retombees": 0,
+   "parties": 103,
+   "rognee": false
+  },
+  {
+   "retombees": 7,
+   "parties": 239,
+   "rognee": true
+  },
+  {
+   "retombees": 355,
+   "parties": 30,
+   "rognee": false
+  },
+  {
+   "retombees": 155,
+   "parties": 632,
+   "rognee": true
+  },
+  {
+   "retombees": 8,
+   "parties": 394,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 155,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 103,
+   "rognee": false
+  },
+  {
+   "retombees": 15,
+   "parties": 102,
+   "rognee": true
+  },
+  {
+   "retombees": 611,
+   "parties": 179,
+   "rognee": false
+  },
+  {
+   "retombees": 14,
+   "parties": 410,
+   "rognee": true
+  },
+  {
+   "retombees": 99,
+   "parties": 318,
+   "rognee": true
+  },
+  {
+   "retombees": 77,
+   "parties": 241,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 176,
+   "rognee": false
+  },
+  {
+   "retombees": 33,
+   "parties": 618,
+   "rognee": true
+  },
+  {
+   "retombees": 26,
+   "parties": 295,
+   "rognee": true
+  },
+  {
+   "retombees": 5,
+   "parties": 252,
+   "rognee": true
+  },
+  {
+   "retombees": 6,
+   "parties": 164,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 120,
+   "rognee": true
+  },
+  {
+   "retombees": 7,
+   "parties": 125,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 75,
+   "rognee": true
+  },
+  {
+   "retombees": 10,
+   "parties": 12,
+   "rognee": true
+  },
+  {
+   "retombees": 19,
+   "parties": 594,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 177,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 148,
+   "rognee": false
+  },
+  {
+   "retombees": 8,
+   "parties": 149,
+   "rognee": true
+  },
+  {
+   "retombees": 19,
+   "parties": 127,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 242,
+   "rognee": true
+  },
+  {
+   "retombees": 5,
+   "parties": 195,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 208,
+   "rognee": true
+  },
+  {
+   "retombees": 11,
+   "parties": 63,
+   "rognee": true
+  },
+  {
+   "retombees": 7,
+   "parties": 452,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 302,
+   "rognee": false
+  },
+  {
+   "retombees": 3,
+   "parties": 187,
+   "rognee": true
+  },
+  {
+   "retombees": 11,
+   "parties": 351,
+   "rognee": true
+  },
+  {
+   "retombees": 3,
+   "parties": 254,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 134,
+   "rognee": true
+  },
+  {
+   "retombees": 80,
+   "parties": 196,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 74,
+   "rognee": true
+  },
+  {
+   "retombees": 2,
+   "parties": 34,
+   "rognee": true
+  },
+  {
+   "retombees": 60,
+   "parties": 37,
+   "rognee": true
+  },
+  {
+   "retombees": 225,
+   "parties": 686,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 360,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 528,
+   "rognee": false
+  },
+  {
+   "retombees": 98,
+   "parties": 360,
+   "rognee": true
+  },
+  {
+   "retombees": 213,
+   "parties": 523,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 500,
+   "rognee": true
+  },
+  {
+   "retombees": 652,
+   "parties": 26,
+   "rognee": false
+  },
+  {
+   "retombees": 1,
+   "parties": 649,
+   "rognee": true
+  },
+  {
+   "retombees": 8,
+   "parties": 519,
+   "rognee": true
+  },
+  {
+   "retombees": 4,
+   "parties": 316,
+   "rognee": true
+  },
+  {
+   "retombees": 3,
+   "parties": 129,
+   "rognee": true
+  },
+  {
+   "retombees": 1,
+   "parties": 108,
+   "rognee": true
+  },
+  {
+   "retombees": 19,
+   "parties": 73,
+   "rognee": true
+  },
+  {
+   "retombees": 39,
+   "parties": 240,
+   "rognee": true
+  },
+  {
+   "retombees": 47,
+   "parties": 305,
+   "rognee": true
+  },
+  {
+   "retombees": 0,
+   "parties": 106,
+   "rognee": false
+  }
+ ],
+ "les_cotes": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 0,
+    "contredite": 0
+   },
+   "les_melanges": 0,
+   "les_sauts_comptes": 0,
+   "les_paires": {
+    "suivie|compagne": [],
+    "suivie|tierce": [],
+    "compagne|tierce": []
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 0,
+    "contredite": 0
+   },
+   "les_melanges": 0,
+   "les_sauts_comptes": 0,
+   "les_paires": {
+    "suivie|compagne": [],
+    "suivie|tierce": [],
+    "compagne|tierce": []
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 0,
+    "contredite": 0
+   },
+   "les_melanges": 0,
+   "les_sauts_comptes": 0,
+   "les_paires": {
+    "suivie|compagne": [],
+    "suivie|tierce": [],
+    "compagne|tierce": []
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 0,
+    "contredite": 0
+   },
+   "les_melanges": 0,
+   "les_sauts_comptes": 0,
+   "les_paires": {
+    "suivie|compagne": [],
+    "suivie|tierce": [],
+    "compagne|tierce": []
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 3,
+      "les_mesures": 258,
+      "les_comptes": {
+       "1": 13,
+       "2": 71,
+       "3": 142,
+       "4": 32
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "nul",
+      "le_nombre_de_feuilles": 0,
+      "les_mesures": 430,
+      "les_comptes": {
+       "0": 312,
+       "1": 84,
+       "2": 20,
+       "3": 10,
+       "4": 1,
+       "5": 3
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 763,
+      "les_comptes": {
+       "0": 5,
+       "1": 463,
+       "2": 243,
+       "3": 49,
+       "4": 3
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 462,
+      "les_comptes": {
+       "1": 462
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 437,
+      "les_comptes": {
+       "1": 437
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 239,
+      "les_comptes": {
+       "1": 177,
+       "2": 62
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 753,
+      "les_comptes": {
+       "0": 2,
+       "1": 309,
+       "2": 372,
+       "3": 62,
+       "4": 8
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1106,
+      "les_comptes": {
+       "0": 6,
+       "1": 893,
+       "2": 198,
+       "3": 9
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1188,
+      "les_comptes": {
+       "0": 7,
+       "1": 1176,
+       "2": 5
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1169,
+      "les_comptes": {
+       "0": 3,
+       "1": 1126,
+       "2": 40
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 268,
+      "les_comptes": {
+       "0": 3,
+       "1": 148,
+       "2": 102,
+       "3": 14,
+       "4": 1
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 155,
+      "les_comptes": {
+       "0": 1,
+       "1": 134,
+       "2": 20
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 125,
+      "les_comptes": {
+       "0": 1,
+       "1": 110,
+       "2": 14
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 149,
+      "les_comptes": {
+       "1": 127,
+       "2": 22
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 149,
+      "les_comptes": {
+       "0": 1,
+       "1": 148
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 171,
+      "les_comptes": {
+       "1": 162,
+       "2": 9
+      }
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 336,
+      "les_comptes": {
+       "1": 58,
+       "2": 174,
+       "3": 84,
+       "4": 19,
+       "5": 1
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 500,
+      "les_comptes": {
+       "0": 3,
+       "1": 216,
+       "2": 217,
+       "3": 54,
+       "4": 7,
+       "5": 3
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 570,
+      "les_comptes": {
+       "0": 3,
+       "1": 247,
+       "2": 238,
+       "3": 55,
+       "4": 24,
+       "5": 3
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 791,
+      "les_comptes": {
+       "0": 4,
+       "1": 776,
+       "2": 11
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 720,
+      "les_comptes": {
+       "0": 1,
+       "1": 613,
+       "2": 106
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 271,
+      "les_comptes": {
+       "1": 128,
+       "2": 129,
+       "3": 14
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 648,
+      "les_comptes": {
+       "1": 436,
+       "2": 136,
+       "3": 65,
+       "4": 11
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1158,
+      "les_comptes": {
+       "0": 2,
+       "1": 1150,
+       "2": 6
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 228,
+      "les_comptes": {
+       "0": 1,
+       "1": 223,
+       "2": 4
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 205,
+      "les_comptes": {
+       "0": 1,
+       "1": 196,
+       "2": 8
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 177,
+      "les_comptes": {
+       "0": 1,
+       "1": 176
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 211,
+      "les_comptes": {
+       "0": 2,
+       "1": 208,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 174,
+      "les_comptes": {
+       "1": 118,
+       "2": 56
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 813,
+      "les_comptes": {
+       "0": 2,
+       "1": 776,
+       "2": 34,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 578,
+      "les_comptes": {
+       "1": 577,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 544,
+      "les_comptes": {
+       "1": 518,
+       "2": 26
+      }
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 0,
+    "contredite": 5
+   },
+   "les_melanges": 8,
+   "les_sauts_comptes": 32,
+   "les_paires": {
+    "suivie|compagne": [],
+    "suivie|tierce": [
+     [
+      1,
+      1,
+      false
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      1,
+      3,
+      false
+     ],
+     [
+      1,
+      4,
+      false
+     ],
+     [
+      1,
+      6,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      false
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      2,
+      4,
+      false
+     ],
+     [
+      2,
+      6,
+      false
+     ],
+     [
+      3,
+      1,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      false
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      3,
+      6,
+      false
+     ],
+     [
+      4,
+      2,
+      false
+     ],
+     [
+      4,
+      3,
+      true
+     ],
+     [
+      4,
+      4,
+      false
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      5,
+      2,
+      false
+     ],
+     [
+      5,
+      3,
+      false
+     ],
+     [
+      5,
+      4,
+      true
+     ],
+     [
+      5,
+      5,
+      false
+     ],
+     [
+      6,
+      2,
+      true
+     ],
+     [
+      6,
+      3,
+      false
+     ],
+     [
+      6,
+      4,
+      false
+     ],
+     [
+      6,
+      5,
+      true
+     ],
+     [
+      6,
+      6,
+      false
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      7,
+      2,
+      false
+     ],
+     [
+      7,
+      5,
+      false
+     ],
+     [
+      7,
+      6,
+      true
+     ],
+     [
+      7,
+      7,
+      false
+     ],
+     [
+      7,
+      8,
+      false
+     ],
+     [
+      8,
+      2,
+      false
+     ],
+     [
+      8,
+      6,
+      false
+     ],
+     [
+      8,
+      7,
+      true
+     ],
+     [
+      8,
+      8,
+      false
+     ],
+     [
+      8,
+      9,
+      false
+     ],
+     [
+      9,
+      6,
+      false
+     ],
+     [
+      9,
+      7,
+      false
+     ],
+     [
+      9,
+      8,
+      true
+     ],
+     [
+      9,
+      9,
+      false
+     ],
+     [
+      9,
+      10,
+      false
+     ],
+     [
+      10,
+      7,
+      false
+     ],
+     [
+      10,
+      8,
+      false
+     ],
+     [
+      10,
+      9,
+      true
+     ],
+     [
+      10,
+      10,
+      false
+     ],
+     [
+      10,
+      11,
+      false
+     ],
+     [
+      11,
+      8,
+      false
+     ],
+     [
+      11,
+      9,
+      false
+     ],
+     [
+      11,
+      10,
+      true
+     ],
+     [
+      11,
+      11,
+      false
+     ],
+     [
+      11,
+      12,
+      false
+     ],
+     [
+      11,
+      13,
+      false
+     ],
+     [
+      11,
+      14,
+      false
+     ],
+     [
+      12,
+      12,
+      false
+     ],
+     [
+      12,
+      13,
+      true
+     ],
+     [
+      13,
+      13,
+      false
+     ]
+    ],
+    "compagne|tierce": []
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     3,
+     "sans témoin"
+    ],
+    [
+     "suivie",
+     2,
+     3,
+     "sans témoin"
+    ],
+    [
+     "suivie",
+     3,
+     4,
+     "contredite"
+    ],
+    [
+     "suivie",
+     4,
+     5,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     5,
+     6,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     6,
+     7,
+     "contredite"
+    ],
+    [
+     "suivie",
+     7,
+     9,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     8,
+     10,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     9,
+     11,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     10,
+     12,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     11,
+     13,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     12,
+     14,
+     "contredite"
+    ],
+    [
+     "suivie",
+     13,
+     15,
+     "sans témoin"
+    ],
+    [
+     "suivie",
+     14,
+     16,
+     "sans témoin"
+    ],
+    [
+     "suivie",
+     15,
+     17,
+     "sans témoin"
+    ],
+    [
+     "suivie",
+     16,
+     18,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     2,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     2,
+     4,
+     "contredite"
+    ],
+    [
+     "tierce",
+     3,
+     5,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     4,
+     6,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     5,
+     7,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     6,
+     9,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     7,
+     10,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     8,
+     11,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     9,
+     12,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     10,
+     13,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     11,
+     14,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     12,
+     15,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     13,
+     16,
+     "contredite"
+    ],
+    [
+     "tierce",
+     14,
+     17,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     15,
+     18,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     16,
+     19,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 0,
+    "contredite": 0
+   },
+   "les_melanges": 0,
+   "les_sauts_comptes": 0,
+   "les_paires": {
+    "suivie|compagne": [],
+    "suivie|tierce": [],
+    "compagne|tierce": []
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 358,
+      "les_comptes": {
+       "1": 357,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 462,
+      "les_comptes": {
+       "1": 441,
+       "2": 21
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 438,
+      "les_comptes": {
+       "1": 438
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 421,
+      "les_comptes": {
+       "1": 421
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 336,
+      "les_comptes": {
+       "1": 336
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 398,
+      "les_comptes": {
+       "1": 398
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 200,
+      "les_comptes": {
+       "1": 169,
+       "2": 31
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 2,
+      "les_comptes": {
+       "0": 2
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 304,
+      "les_comptes": {
+       "1": 304
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 447,
+      "les_comptes": {
+       "1": 439,
+       "2": 8
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 439,
+      "les_comptes": {
+       "0": 1,
+       "1": 438
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 441,
+      "les_comptes": {
+       "1": 441
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 402,
+      "les_comptes": {
+       "1": 402
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 453,
+      "les_comptes": {
+       "1": 453
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 209,
+      "les_comptes": {
+       "1": 181,
+       "2": 28
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 161,
+      "les_comptes": {
+       "0": 1,
+       "1": 102,
+       "2": 58
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 290,
+      "les_comptes": {
+       "0": 4,
+       "1": 261,
+       "2": 25
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 238,
+      "les_comptes": {
+       "0": 2,
+       "1": 236
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 161,
+      "les_comptes": {
+       "1": 161
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 74,
+      "les_comptes": {
+       "1": 74
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 78,
+      "les_comptes": {
+       "1": 78
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 55,
+      "les_comptes": {
+       "1": 55
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 56,
+      "les_comptes": {
+       "1": 56
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 98,
+      "les_comptes": {
+       "0": 1,
+       "1": 97
+      }
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 252,
+      "les_comptes": {
+       "1": 251,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 333,
+      "les_comptes": {
+       "1": 321,
+       "2": 12
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 307,
+      "les_comptes": {
+       "1": 307
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 288,
+      "les_comptes": {
+       "1": 288
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 248,
+      "les_comptes": {
+       "1": 248
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 299,
+      "les_comptes": {
+       "1": 298,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 124,
+      "les_comptes": {
+       "1": 113,
+       "2": 11
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 22,
+      "les_comptes": {
+       "1": 21,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 21,
+    "contredite": 0
+   },
+   "les_melanges": 1,
+   "les_sauts_comptes": 30,
+   "les_paires": {
+    "suivie|compagne": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      1,
+      3,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      2,
+      4,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      true
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      3,
+      5,
+      false
+     ],
+     [
+      4,
+      2,
+      false
+     ],
+     [
+      4,
+      3,
+      false
+     ],
+     [
+      4,
+      4,
+      true
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      5,
+      3,
+      false
+     ],
+     [
+      5,
+      4,
+      false
+     ],
+     [
+      5,
+      5,
+      true
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      6,
+      4,
+      false
+     ],
+     [
+      6,
+      5,
+      false
+     ],
+     [
+      6,
+      6,
+      true
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      7,
+      6,
+      false
+     ],
+     [
+      7,
+      7,
+      true
+     ],
+     [
+      7,
+      8,
+      false
+     ]
+    ],
+    "suivie|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      true
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      3,
+      5,
+      false
+     ],
+     [
+      4,
+      3,
+      false
+     ],
+     [
+      4,
+      4,
+      true
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      5,
+      3,
+      false
+     ],
+     [
+      5,
+      4,
+      false
+     ],
+     [
+      5,
+      5,
+      true
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      6,
+      4,
+      false
+     ],
+     [
+      6,
+      5,
+      false
+     ],
+     [
+      6,
+      6,
+      true
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      7,
+      6,
+      false
+     ],
+     [
+      7,
+      7,
+      true
+     ]
+    ],
+    "compagne|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      true
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      3,
+      5,
+      false
+     ],
+     [
+      4,
+      2,
+      false
+     ],
+     [
+      4,
+      3,
+      false
+     ],
+     [
+      4,
+      4,
+      true
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      5,
+      3,
+      false
+     ],
+     [
+      5,
+      4,
+      false
+     ],
+     [
+      5,
+      5,
+      true
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      6,
+      4,
+      false
+     ],
+     [
+      6,
+      5,
+      false
+     ],
+     [
+      6,
+      6,
+      true
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      7,
+      6,
+      false
+     ],
+     [
+      7,
+      7,
+      true
+     ],
+     [
+      7,
+      8,
+      false
+     ],
+     [
+      8,
+      8,
+      true
+     ]
+    ]
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "suivie",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "suivie",
+     3,
+     3,
+     "validée"
+    ],
+    [
+     "suivie",
+     4,
+     4,
+     "validée"
+    ],
+    [
+     "suivie",
+     5,
+     5,
+     "validée"
+    ],
+    [
+     "suivie",
+     6,
+     6,
+     "validée"
+    ],
+    [
+     "suivie",
+     7,
+     7,
+     "validée"
+    ],
+    [
+     "suivie",
+     8,
+     8,
+     "sans témoin"
+    ],
+    [
+     "suivie",
+     9,
+     9,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "compagne",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "compagne",
+     3,
+     3,
+     "validée"
+    ],
+    [
+     "compagne",
+     4,
+     4,
+     "validée"
+    ],
+    [
+     "compagne",
+     5,
+     5,
+     "validée"
+    ],
+    [
+     "compagne",
+     6,
+     6,
+     "validée"
+    ],
+    [
+     "compagne",
+     7,
+     7,
+     "validée"
+    ],
+    [
+     "compagne",
+     8,
+     8,
+     "confirmée une fois"
+    ],
+    [
+     "compagne",
+     9,
+     9,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     10,
+     10,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     11,
+     11,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     12,
+     12,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     13,
+     13,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     14,
+     14,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     15,
+     15,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     16,
+     16,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "tierce",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "tierce",
+     3,
+     3,
+     "validée"
+    ],
+    [
+     "tierce",
+     4,
+     4,
+     "validée"
+    ],
+    [
+     "tierce",
+     5,
+     5,
+     "validée"
+    ],
+    [
+     "tierce",
+     6,
+     6,
+     "validée"
+    ],
+    [
+     "tierce",
+     7,
+     7,
+     "validée"
+    ],
+    [
+     "tierce",
+     8,
+     8,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     9,
+     9,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 366,
+      "les_comptes": {
+       "1": 283,
+       "2": 69,
+       "3": 14
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 447,
+      "les_comptes": {
+       "0": 3,
+       "1": 444
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 359,
+      "les_comptes": {
+       "0": 1,
+       "1": 357,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 319,
+      "les_comptes": {
+       "1": 293,
+       "2": 26
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 763,
+      "les_comptes": {
+       "1": 497,
+       "2": 252,
+       "3": 14
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 730,
+      "les_comptes": {
+       "0": 2,
+       "1": 435,
+       "2": 188,
+       "3": 105
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1063,
+      "les_comptes": {
+       "0": 8,
+       "1": 1002,
+       "2": 50,
+       "3": 3
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 388,
+      "les_comptes": {
+       "0": 3,
+       "1": 373,
+       "2": 11,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 51,
+      "les_comptes": {
+       "0": 1,
+       "1": 49,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 36,
+      "les_comptes": {
+       "1": 36
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1166,
+      "les_comptes": {
+       "0": 2,
+       "1": 1158,
+       "2": 6
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 892,
+      "les_comptes": {
+       "1": 665,
+       "2": 225,
+       "3": 2
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1019,
+      "les_comptes": {
+       "0": 4,
+       "1": 617,
+       "2": 387,
+       "3": 8,
+       "4": 3
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1159,
+      "les_comptes": {
+       "0": 2,
+       "1": 920,
+       "2": 202,
+       "3": 35
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1118,
+      "les_comptes": {
+       "0": 4,
+       "1": 1088,
+       "2": 26
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 950,
+      "les_comptes": {
+       "0": 2,
+       "1": 932,
+       "2": 16
+      }
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 362,
+      "les_comptes": {
+       "1": 360,
+       "2": 2
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 398,
+      "les_comptes": {
+       "1": 397,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 374,
+      "les_comptes": {
+       "0": 3,
+       "1": 371
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 406,
+      "les_comptes": {
+       "0": 3,
+       "1": 399,
+       "2": 4
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 249,
+      "les_comptes": {
+       "1": 128,
+       "2": 120,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 789,
+      "les_comptes": {
+       "0": 3,
+       "1": 658,
+       "2": 102,
+       "3": 25,
+       "4": 1
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 677,
+      "les_comptes": {
+       "0": 10,
+       "1": 584,
+       "2": 82,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 471,
+      "les_comptes": {
+       "0": 2,
+       "1": 403,
+       "2": 66
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 220,
+      "les_comptes": {
+       "1": 129,
+       "2": 70,
+       "3": 16,
+       "4": 5
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1123,
+      "les_comptes": {
+       "0": 4,
+       "1": 1059,
+       "2": 55,
+       "3": 5
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 888,
+      "les_comptes": {
+       "0": 1,
+       "1": 641,
+       "2": 226,
+       "3": 20
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 961,
+      "les_comptes": {
+       "0": 4,
+       "1": 503,
+       "2": 420,
+       "3": 33,
+       "4": 1
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 946,
+      "les_comptes": {
+       "1": 877,
+       "2": 67,
+       "3": 2
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 923,
+      "les_comptes": {
+       "1": 892,
+       "2": 26,
+       "3": 5
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 767,
+      "les_comptes": {
+       "0": 2,
+       "1": 747,
+       "2": 18
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 616,
+      "les_comptes": {
+       "0": 3,
+       "1": 611,
+       "2": 2
+      }
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 328,
+      "les_comptes": {
+       "1": 326,
+       "2": 2
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 409,
+      "les_comptes": {
+       "1": 409
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 389,
+      "les_comptes": {
+       "0": 1,
+       "1": 388
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 433,
+      "les_comptes": {
+       "0": 4,
+       "1": 355,
+       "2": 74
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 369,
+      "les_comptes": {
+       "0": 3,
+       "1": 305,
+       "2": 58,
+       "3": 3
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 226,
+      "les_comptes": {
+       "1": 105,
+       "2": 65,
+       "3": 56
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1105,
+      "les_comptes": {
+       "0": 1,
+       "1": 1080,
+       "2": 22,
+       "3": 2
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 774,
+      "les_comptes": {
+       "0": 1,
+       "1": 762,
+       "2": 11
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 714,
+      "les_comptes": {
+       "0": 3,
+       "1": 604,
+       "2": 107
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 707,
+      "les_comptes": {
+       "0": 6,
+       "1": 599,
+       "2": 82,
+       "3": 20
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 322,
+      "les_comptes": {
+       "0": 3,
+       "1": 313,
+       "2": 6
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 23,
+    "contredite": 19
+   },
+   "les_melanges": 7,
+   "les_sauts_comptes": 42,
+   "les_paires": {
+    "suivie|compagne": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      1,
+      3,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      2,
+      4,
+      false
+     ],
+     [
+      3,
+      1,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      true
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      4,
+      2,
+      false
+     ],
+     [
+      4,
+      3,
+      false
+     ],
+     [
+      4,
+      4,
+      true
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      5,
+      3,
+      false
+     ],
+     [
+      5,
+      4,
+      false
+     ],
+     [
+      5,
+      5,
+      true
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      5,
+      7,
+      false
+     ],
+     [
+      5,
+      9,
+      false
+     ],
+     [
+      6,
+      4,
+      false
+     ],
+     [
+      6,
+      5,
+      false
+     ],
+     [
+      6,
+      6,
+      true
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      6,
+      8,
+      false
+     ],
+     [
+      7,
+      5,
+      false
+     ],
+     [
+      7,
+      6,
+      false
+     ],
+     [
+      7,
+      7,
+      true
+     ],
+     [
+      7,
+      8,
+      false
+     ],
+     [
+      7,
+      9,
+      false
+     ],
+     [
+      7,
+      10,
+      false
+     ],
+     [
+      8,
+      6,
+      false
+     ],
+     [
+      8,
+      7,
+      false
+     ],
+     [
+      8,
+      8,
+      true
+     ],
+     [
+      8,
+      9,
+      false
+     ],
+     [
+      8,
+      10,
+      false
+     ],
+     [
+      9,
+      8,
+      false
+     ],
+     [
+      10,
+      6,
+      false
+     ],
+     [
+      10,
+      7,
+      false
+     ],
+     [
+      10,
+      8,
+      false
+     ],
+     [
+      10,
+      9,
+      true
+     ],
+     [
+      10,
+      10,
+      false
+     ],
+     [
+      10,
+      11,
+      false
+     ],
+     [
+      11,
+      7,
+      false
+     ],
+     [
+      11,
+      8,
+      false
+     ],
+     [
+      11,
+      9,
+      false
+     ],
+     [
+      11,
+      10,
+      true
+     ],
+     [
+      11,
+      11,
+      false
+     ],
+     [
+      11,
+      12,
+      false
+     ],
+     [
+      12,
+      9,
+      false
+     ],
+     [
+      12,
+      10,
+      false
+     ],
+     [
+      12,
+      11,
+      true
+     ],
+     [
+      12,
+      12,
+      false
+     ],
+     [
+      12,
+      13,
+      false
+     ],
+     [
+      13,
+      10,
+      false
+     ],
+     [
+      13,
+      11,
+      false
+     ],
+     [
+      13,
+      12,
+      true
+     ],
+     [
+      13,
+      13,
+      false
+     ],
+     [
+      14,
+      11,
+      false
+     ],
+     [
+      14,
+      12,
+      false
+     ],
+     [
+      14,
+      13,
+      true
+     ],
+     [
+      14,
+      14,
+      false
+     ],
+     [
+      14,
+      15,
+      false
+     ],
+     [
+      15,
+      12,
+      false
+     ],
+     [
+      15,
+      13,
+      false
+     ],
+     [
+      15,
+      14,
+      true
+     ],
+     [
+      15,
+      15,
+      false
+     ],
+     [
+      15,
+      16,
+      false
+     ],
+     [
+      16,
+      13,
+      false
+     ],
+     [
+      16,
+      14,
+      false
+     ],
+     [
+      16,
+      15,
+      true
+     ],
+     [
+      16,
+      16,
+      false
+     ]
+    ],
+    "suivie|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      1,
+      3,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      2,
+      4,
+      false
+     ],
+     [
+      3,
+      1,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      true
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      4,
+      2,
+      false
+     ],
+     [
+      4,
+      3,
+      false
+     ],
+     [
+      4,
+      4,
+      true
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      5,
+      4,
+      false
+     ],
+     [
+      5,
+      5,
+      true
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      5,
+      7,
+      false
+     ],
+     [
+      6,
+      5,
+      false
+     ],
+     [
+      6,
+      6,
+      true
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      6,
+      8,
+      false
+     ],
+     [
+      7,
+      5,
+      false
+     ],
+     [
+      7,
+      6,
+      false
+     ],
+     [
+      7,
+      7,
+      true
+     ],
+     [
+      7,
+      8,
+      false
+     ],
+     [
+      7,
+      9,
+      false
+     ],
+     [
+      8,
+      6,
+      false
+     ],
+     [
+      8,
+      7,
+      false
+     ],
+     [
+      8,
+      8,
+      true
+     ],
+     [
+      8,
+      9,
+      false
+     ],
+     [
+      8,
+      10,
+      false
+     ],
+     [
+      9,
+      8,
+      false
+     ],
+     [
+      9,
+      9,
+      true
+     ],
+     [
+      9,
+      10,
+      false
+     ],
+     [
+      10,
+      6,
+      false
+     ],
+     [
+      10,
+      7,
+      false
+     ],
+     [
+      10,
+      8,
+      true
+     ],
+     [
+      10,
+      9,
+      false
+     ],
+     [
+      10,
+      10,
+      true
+     ],
+     [
+      10,
+      11,
+      false
+     ],
+     [
+      11,
+      8,
+      false
+     ],
+     [
+      11,
+      9,
+      true
+     ],
+     [
+      11,
+      10,
+      false
+     ],
+     [
+      11,
+      11,
+      true
+     ],
+     [
+      12,
+      9,
+      false
+     ],
+     [
+      12,
+      10,
+      true
+     ],
+     [
+      12,
+      11,
+      false
+     ],
+     [
+      13,
+      10,
+      false
+     ],
+     [
+      13,
+      11,
+      false
+     ],
+     [
+      14,
+      11,
+      false
+     ]
+    ],
+    "compagne|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      1,
+      3,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      2,
+      4,
+      false
+     ],
+     [
+      3,
+      1,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      true
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      4,
+      2,
+      false
+     ],
+     [
+      4,
+      3,
+      false
+     ],
+     [
+      4,
+      4,
+      true
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      5,
+      4,
+      false
+     ],
+     [
+      5,
+      5,
+      true
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      5,
+      7,
+      false
+     ],
+     [
+      6,
+      5,
+      false
+     ],
+     [
+      6,
+      6,
+      true
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      6,
+      8,
+      false
+     ],
+     [
+      7,
+      5,
+      false
+     ],
+     [
+      7,
+      6,
+      false
+     ],
+     [
+      7,
+      7,
+      true
+     ],
+     [
+      7,
+      8,
+      false
+     ],
+     [
+      7,
+      9,
+      false
+     ],
+     [
+      8,
+      6,
+      false
+     ],
+     [
+      8,
+      7,
+      false
+     ],
+     [
+      8,
+      8,
+      true
+     ],
+     [
+      8,
+      9,
+      false
+     ],
+     [
+      8,
+      10,
+      false
+     ],
+     [
+      9,
+      6,
+      false
+     ],
+     [
+      9,
+      7,
+      false
+     ],
+     [
+      9,
+      8,
+      false
+     ],
+     [
+      9,
+      9,
+      false
+     ],
+     [
+      9,
+      10,
+      true
+     ],
+     [
+      9,
+      11,
+      false
+     ],
+     [
+      10,
+      7,
+      false
+     ],
+     [
+      10,
+      8,
+      false
+     ],
+     [
+      10,
+      9,
+      false
+     ],
+     [
+      10,
+      10,
+      false
+     ],
+     [
+      10,
+      11,
+      true
+     ],
+     [
+      11,
+      9,
+      false
+     ],
+     [
+      11,
+      10,
+      true
+     ],
+     [
+      11,
+      11,
+      false
+     ],
+     [
+      12,
+      10,
+      false
+     ],
+     [
+      12,
+      11,
+      false
+     ],
+     [
+      13,
+      11,
+      false
+     ]
+    ]
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "suivie",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "suivie",
+     3,
+     3,
+     "validée"
+    ],
+    [
+     "suivie",
+     4,
+     4,
+     "validée"
+    ],
+    [
+     "suivie",
+     5,
+     5,
+     "validée"
+    ],
+    [
+     "suivie",
+     6,
+     6,
+     "validée"
+    ],
+    [
+     "suivie",
+     7,
+     7,
+     "validée"
+    ],
+    [
+     "suivie",
+     8,
+     8,
+     "validée"
+    ],
+    [
+     "suivie",
+     9,
+     9,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     10,
+     10,
+     "contredite"
+    ],
+    [
+     "suivie",
+     11,
+     11,
+     "contredite"
+    ],
+    [
+     "suivie",
+     12,
+     12,
+     "contredite"
+    ],
+    [
+     "suivie",
+     13,
+     13,
+     "contredite"
+    ],
+    [
+     "suivie",
+     14,
+     14,
+     "contredite"
+    ],
+    [
+     "suivie",
+     15,
+     15,
+     "contredite"
+    ],
+    [
+     "suivie",
+     16,
+     16,
+     "contredite"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "compagne",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "compagne",
+     3,
+     3,
+     "validée"
+    ],
+    [
+     "compagne",
+     4,
+     4,
+     "validée"
+    ],
+    [
+     "compagne",
+     5,
+     5,
+     "validée"
+    ],
+    [
+     "compagne",
+     6,
+     6,
+     "validée"
+    ],
+    [
+     "compagne",
+     7,
+     7,
+     "validée"
+    ],
+    [
+     "compagne",
+     8,
+     8,
+     "validée"
+    ],
+    [
+     "compagne",
+     9,
+     9,
+     "contredite"
+    ],
+    [
+     "compagne",
+     10,
+     10,
+     "contredite"
+    ],
+    [
+     "compagne",
+     11,
+     11,
+     "contredite"
+    ],
+    [
+     "compagne",
+     12,
+     12,
+     "contredite"
+    ],
+    [
+     "compagne",
+     13,
+     13,
+     "contredite"
+    ],
+    [
+     "compagne",
+     14,
+     14,
+     "contredite"
+    ],
+    [
+     "compagne",
+     15,
+     15,
+     "contredite"
+    ],
+    [
+     "compagne",
+     16,
+     16,
+     "contredite"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "tierce",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "tierce",
+     3,
+     3,
+     "validée"
+    ],
+    [
+     "tierce",
+     4,
+     4,
+     "validée"
+    ],
+    [
+     "tierce",
+     5,
+     5,
+     "validée"
+    ],
+    [
+     "tierce",
+     6,
+     6,
+     "validée"
+    ],
+    [
+     "tierce",
+     7,
+     7,
+     "validée"
+    ],
+    [
+     "tierce",
+     8,
+     8,
+     "contredite"
+    ],
+    [
+     "tierce",
+     9,
+     9,
+     "contredite"
+    ],
+    [
+     "tierce",
+     10,
+     10,
+     "contredite"
+    ],
+    [
+     "tierce",
+     11,
+     11,
+     "contredite"
+    ],
+    [
+     "tierce",
+     12,
+     12,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 0,
+    "contredite": 0
+   },
+   "les_melanges": 0,
+   "les_sauts_comptes": 0,
+   "les_paires": {
+    "suivie|compagne": [],
+    "suivie|tierce": [],
+    "compagne|tierce": []
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 0,
+    "contredite": 0
+   },
+   "les_melanges": 0,
+   "les_sauts_comptes": 0,
+   "les_paires": {
+    "suivie|compagne": [],
+    "suivie|tierce": [],
+    "compagne|tierce": []
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 431,
+      "les_comptes": {
+       "1": 419,
+       "2": 12
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 758,
+      "les_comptes": {
+       "1": 758
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 416,
+      "les_comptes": {
+       "1": 251,
+       "2": 165
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1140,
+      "les_comptes": {
+       "1": 1106,
+       "2": 34
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 879,
+      "les_comptes": {
+       "0": 2,
+       "1": 700,
+       "2": 176,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 801,
+      "les_comptes": {
+       "1": 489,
+       "2": 268,
+       "3": 44
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 911,
+      "les_comptes": {
+       "1": 556,
+       "2": 352,
+       "3": 3
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1164,
+      "les_comptes": {
+       "0": 2,
+       "1": 1101,
+       "2": 59,
+       "3": 2
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 869,
+      "les_comptes": {
+       "0": 2,
+       "1": 816,
+       "2": 51
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 542,
+      "les_comptes": {
+       "1": 298,
+       "2": 205,
+       "3": 39
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "nul",
+      "le_nombre_de_feuilles": 0,
+      "les_mesures": 1034,
+      "les_comptes": {
+       "0": 975,
+       "1": 59
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 987,
+      "les_comptes": {
+       "1": 185,
+       "2": 730,
+       "3": 72
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1161,
+      "les_comptes": {
+       "1": 1150,
+       "2": 11
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1034,
+      "les_comptes": {
+       "1": 1024,
+       "2": 10
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1179,
+      "les_comptes": {
+       "1": 1136,
+       "2": 43
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 801,
+      "les_comptes": {
+       "1": 801
+      }
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 424,
+      "les_comptes": {
+       "1": 424
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 852,
+      "les_comptes": {
+       "1": 852
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 2,
+      "les_comptes": {
+       "1": 2
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 275,
+      "les_comptes": {
+       "1": 261,
+       "2": 14
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 543,
+      "les_comptes": {
+       "1": 543
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 133,
+      "les_comptes": {
+       "1": 133
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 157,
+      "les_comptes": {
+       "1": 157
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 172,
+      "les_comptes": {
+       "1": 172
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 183,
+      "les_comptes": {
+       "1": 183
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "nul",
+      "le_nombre_de_feuilles": 0,
+      "les_mesures": 120,
+      "les_comptes": {
+       "0": 86,
+       "1": 34
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 809,
+      "les_comptes": {
+       "1": 527,
+       "2": 274,
+       "3": 8
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 855,
+      "les_comptes": {
+       "1": 494,
+       "2": 351,
+       "3": 10
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1157,
+      "les_comptes": {
+       "0": 1,
+       "1": 1079,
+       "2": 76,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 918,
+      "les_comptes": {
+       "0": 1,
+       "1": 810,
+       "2": 95,
+       "3": 12
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1151,
+      "les_comptes": {
+       "0": 2,
+       "1": 893,
+       "2": 246,
+       "3": 10
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 859,
+      "les_comptes": {
+       "1": 859
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 448,
+      "les_comptes": {
+       "1": 448
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 478,
+      "les_comptes": {
+       "0": 3,
+       "1": 402,
+       "2": 55,
+       "3": 18
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 219,
+      "les_comptes": {
+       "1": 210,
+       "2": 9
+      }
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 6,
+    "contredite": 27
+   },
+   "les_melanges": 6,
+   "les_sauts_comptes": 34,
+   "les_paires": {
+    "suivie|compagne": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      3,
+      2,
+      false
+     ]
+    ],
+    "suivie|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      2,
+      4,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      false
+     ],
+     [
+      3,
+      4,
+      true
+     ],
+     [
+      3,
+      5,
+      false
+     ],
+     [
+      3,
+      7,
+      false
+     ],
+     [
+      4,
+      4,
+      false
+     ],
+     [
+      4,
+      5,
+      true
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      4,
+      7,
+      false
+     ],
+     [
+      4,
+      8,
+      false
+     ],
+     [
+      5,
+      5,
+      false
+     ],
+     [
+      5,
+      6,
+      true
+     ],
+     [
+      5,
+      7,
+      true
+     ],
+     [
+      5,
+      8,
+      false
+     ],
+     [
+      5,
+      9,
+      false
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      6,
+      8,
+      true
+     ],
+     [
+      6,
+      9,
+      false
+     ],
+     [
+      7,
+      8,
+      false
+     ],
+     [
+      7,
+      9,
+      true
+     ],
+     [
+      7,
+      10,
+      false
+     ],
+     [
+      7,
+      11,
+      false
+     ],
+     [
+      8,
+      9,
+      false
+     ],
+     [
+      8,
+      10,
+      true
+     ],
+     [
+      8,
+      11,
+      false
+     ],
+     [
+      8,
+      12,
+      false
+     ],
+     [
+      9,
+      9,
+      false
+     ],
+     [
+      9,
+      10,
+      false
+     ],
+     [
+      9,
+      11,
+      true
+     ],
+     [
+      9,
+      12,
+      false
+     ],
+     [
+      9,
+      13,
+      false
+     ],
+     [
+      10,
+      9,
+      false
+     ],
+     [
+      10,
+      10,
+      false
+     ],
+     [
+      10,
+      11,
+      false
+     ],
+     [
+      10,
+      12,
+      true
+     ],
+     [
+      10,
+      13,
+      false
+     ],
+     [
+      10,
+      14,
+      false
+     ],
+     [
+      11,
+      10,
+      false
+     ],
+     [
+      11,
+      11,
+      false
+     ],
+     [
+      11,
+      12,
+      true
+     ],
+     [
+      11,
+      13,
+      false
+     ],
+     [
+      11,
+      14,
+      false
+     ],
+     [
+      12,
+      11,
+      false
+     ],
+     [
+      12,
+      12,
+      false
+     ],
+     [
+      12,
+      13,
+      false
+     ],
+     [
+      12,
+      14,
+      true
+     ],
+     [
+      12,
+      15,
+      false
+     ],
+     [
+      12,
+      16,
+      false
+     ],
+     [
+      13,
+      13,
+      false
+     ],
+     [
+      13,
+      14,
+      false
+     ],
+     [
+      13,
+      15,
+      true
+     ],
+     [
+      13,
+      16,
+      false
+     ],
+     [
+      14,
+      14,
+      false
+     ],
+     [
+      14,
+      15,
+      false
+     ],
+     [
+      14,
+      16,
+      true
+     ],
+     [
+      15,
+      15,
+      false
+     ],
+     [
+      15,
+      16,
+      false
+     ],
+     [
+      16,
+      15,
+      false
+     ],
+     [
+      16,
+      16,
+      false
+     ]
+    ],
+    "compagne|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      2,
+      4,
+      false
+     ]
+    ]
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "suivie",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "suivie",
+     3,
+     3,
+     "contredite"
+    ],
+    [
+     "suivie",
+     4,
+     4,
+     "contredite"
+    ],
+    [
+     "suivie",
+     5,
+     5,
+     "contredite"
+    ],
+    [
+     "suivie",
+     6,
+     6,
+     "contredite"
+    ],
+    [
+     "suivie",
+     7,
+     7,
+     "contredite"
+    ],
+    [
+     "suivie",
+     8,
+     8,
+     "contredite"
+    ],
+    [
+     "suivie",
+     9,
+     9,
+     "contredite"
+    ],
+    [
+     "suivie",
+     10,
+     10,
+     "contredite"
+    ],
+    [
+     "suivie",
+     11,
+     10,
+     "contredite"
+    ],
+    [
+     "suivie",
+     12,
+     12,
+     "contredite"
+    ],
+    [
+     "suivie",
+     13,
+     13,
+     "contredite"
+    ],
+    [
+     "suivie",
+     14,
+     14,
+     "contredite"
+    ],
+    [
+     "suivie",
+     15,
+     15,
+     "contredite"
+    ],
+    [
+     "suivie",
+     16,
+     16,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "compagne",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "compagne",
+     3,
+     3,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     4,
+     4,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "tierce",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "tierce",
+     3,
+     3,
+     "contredite"
+    ],
+    [
+     "tierce",
+     4,
+     4,
+     "contredite"
+    ],
+    [
+     "tierce",
+     5,
+     5,
+     "contredite"
+    ],
+    [
+     "tierce",
+     6,
+     6,
+     "contredite"
+    ],
+    [
+     "tierce",
+     7,
+     6,
+     "contredite"
+    ],
+    [
+     "tierce",
+     8,
+     7,
+     "contredite"
+    ],
+    [
+     "tierce",
+     9,
+     8,
+     "contredite"
+    ],
+    [
+     "tierce",
+     10,
+     9,
+     "contredite"
+    ],
+    [
+     "tierce",
+     11,
+     10,
+     "contredite"
+    ],
+    [
+     "tierce",
+     12,
+     11,
+     "contredite"
+    ],
+    [
+     "tierce",
+     13,
+     12,
+     "contredite"
+    ],
+    [
+     "tierce",
+     14,
+     13,
+     "contredite"
+    ],
+    [
+     "tierce",
+     15,
+     14,
+     "contredite"
+    ],
+    [
+     "tierce",
+     16,
+     15,
+     "contredite"
+    ]
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1128,
+      "les_comptes": {
+       "1": 856,
+       "2": 272
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "nul",
+      "le_nombre_de_feuilles": 0,
+      "les_mesures": 1157,
+      "les_comptes": {
+       "0": 1125,
+       "1": 31,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 732,
+      "les_comptes": {
+       "1": 309,
+       "2": 287,
+       "3": 87,
+       "4": 42,
+       "5": 7
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 678,
+      "les_comptes": {
+       "0": 4,
+       "1": 632,
+       "2": 40,
+       "3": 2
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 305,
+      "les_comptes": {
+       "0": 2,
+       "1": 168,
+       "2": 123,
+       "3": 11,
+       "4": 1
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 985,
+      "les_comptes": {
+       "1": 947,
+       "2": 30,
+       "3": 8
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 913,
+      "les_comptes": {
+       "1": 910,
+       "2": 3
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 467,
+      "les_comptes": {
+       "1": 337,
+       "2": 130
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 811,
+      "les_comptes": {
+       "1": 282,
+       "2": 398,
+       "3": 121,
+       "4": 10
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 760,
+      "les_comptes": {
+       "0": 1,
+       "1": 369,
+       "2": 293,
+       "3": 94,
+       "4": 3
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 843,
+      "les_comptes": {
+       "1": 614,
+       "2": 221,
+       "3": 8
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 179,
+      "les_comptes": {
+       "1": 177,
+       "2": 2
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 282,
+      "les_comptes": {
+       "1": 176,
+       "2": 106
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 60,
+      "les_comptes": {
+       "1": 59,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 96,
+      "les_comptes": {
+       "1": 96
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 164,
+      "les_comptes": {
+       "0": 2,
+       "1": 162
+      }
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1001,
+      "les_comptes": {
+       "1": 807,
+       "2": 194
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 670,
+      "les_comptes": {
+       "0": 3,
+       "1": 475,
+       "2": 127,
+       "3": 49,
+       "4": 14,
+       "5": 2
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 360,
+      "les_comptes": {
+       "1": 218,
+       "2": 68,
+       "3": 50,
+       "4": 22,
+       "5": 2
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 539,
+      "les_comptes": {
+       "1": 56,
+       "2": 327,
+       "3": 116,
+       "4": 35,
+       "5": 4,
+       "6": 1
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1014,
+      "les_comptes": {
+       "0": 1,
+       "1": 948,
+       "2": 65
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 814,
+      "les_comptes": {
+       "0": 1,
+       "1": 804,
+       "2": 9
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 581,
+      "les_comptes": {
+       "0": 1,
+       "1": 549,
+       "2": 31
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 327,
+      "les_comptes": {
+       "1": 326,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 300,
+      "les_comptes": {
+       "0": 2,
+       "1": 296,
+       "2": 2
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 223,
+      "les_comptes": {
+       "1": 222,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 221,
+      "les_comptes": {
+       "0": 5,
+       "1": 205,
+       "2": 11
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 195,
+      "les_comptes": {
+       "0": 2,
+       "1": 192,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 185,
+      "les_comptes": {
+       "0": 2,
+       "1": 172,
+       "2": 11
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 169,
+      "les_comptes": {
+       "0": 1,
+       "1": 168
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 107,
+      "les_comptes": {
+       "1": 107
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 122,
+      "les_comptes": {
+       "0": 1,
+       "1": 119,
+       "2": 2
+      }
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 662,
+      "les_comptes": {
+       "1": 386,
+       "2": 187,
+       "3": 54,
+       "4": 27,
+       "5": 8
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 710,
+      "les_comptes": {
+       "0": 1,
+       "1": 312,
+       "2": 311,
+       "3": 86
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 545,
+      "les_comptes": {
+       "0": 1,
+       "1": 441,
+       "2": 78,
+       "3": 22,
+       "4": 3
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 1052,
+      "les_comptes": {
+       "0": 2,
+       "1": 865,
+       "2": 183,
+       "3": 2
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 704,
+      "les_comptes": {
+       "1": 704
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 407,
+      "les_comptes": {
+       "0": 1,
+       "1": 406
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 130,
+      "les_comptes": {
+       "1": 129,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 46,
+      "les_comptes": {
+       "1": 45,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 71,
+      "les_comptes": {
+       "1": 70,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 831,
+      "les_comptes": {
+       "1": 789,
+       "2": 42
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 530,
+      "les_comptes": {
+       "0": 2,
+       "1": 408,
+       "2": 114,
+       "3": 4,
+       "4": 2
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 553,
+      "les_comptes": {
+       "1": 121,
+       "2": 344,
+       "3": 83,
+       "4": 5
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 314,
+      "les_comptes": {
+       "0": 3,
+       "1": 212,
+       "2": 49,
+       "3": 47,
+       "4": 3
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 107,
+      "les_comptes": {
+       "0": 2,
+       "1": 104,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 70,
+      "les_comptes": {
+       "1": 11,
+       "2": 43,
+       "3": 13,
+       "4": 2,
+       "5": 1
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 796,
+      "les_comptes": {
+       "0": 3,
+       "1": 197,
+       "2": 501,
+       "3": 93,
+       "4": 2
+      }
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 4,
+    "contredite": 36
+   },
+   "les_melanges": 12,
+   "les_sauts_comptes": 47,
+   "les_paires": {
+    "suivie|compagne": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      1,
+      3,
+      false
+     ],
+     [
+      2,
+      1,
+      true
+     ],
+     [
+      2,
+      2,
+      false
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      3,
+      1,
+      false
+     ],
+     [
+      3,
+      3,
+      true
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      3,
+      5,
+      false
+     ],
+     [
+      4,
+      1,
+      false
+     ],
+     [
+      4,
+      3,
+      false
+     ],
+     [
+      4,
+      4,
+      false
+     ],
+     [
+      4,
+      5,
+      true
+     ],
+     [
+      5,
+      1,
+      false
+     ],
+     [
+      5,
+      3,
+      false
+     ],
+     [
+      5,
+      4,
+      true
+     ],
+     [
+      5,
+      5,
+      false
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      6,
+      4,
+      false
+     ],
+     [
+      6,
+      5,
+      true
+     ],
+     [
+      6,
+      6,
+      false
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      7,
+      4,
+      false
+     ],
+     [
+      7,
+      5,
+      false
+     ],
+     [
+      7,
+      6,
+      true
+     ],
+     [
+      7,
+      7,
+      false
+     ],
+     [
+      7,
+      8,
+      false
+     ],
+     [
+      8,
+      5,
+      false
+     ],
+     [
+      8,
+      6,
+      false
+     ],
+     [
+      8,
+      7,
+      true
+     ],
+     [
+      8,
+      8,
+      false
+     ],
+     [
+      9,
+      7,
+      false
+     ],
+     [
+      9,
+      8,
+      false
+     ],
+     [
+      9,
+      9,
+      true
+     ],
+     [
+      9,
+      10,
+      false
+     ],
+     [
+      10,
+      9,
+      false
+     ],
+     [
+      10,
+      10,
+      false
+     ],
+     [
+      10,
+      11,
+      false
+     ],
+     [
+      10,
+      12,
+      false
+     ],
+     [
+      11,
+      11,
+      false
+     ],
+     [
+      11,
+      12,
+      true
+     ],
+     [
+      11,
+      13,
+      false
+     ],
+     [
+      11,
+      14,
+      false
+     ],
+     [
+      13,
+      12,
+      false
+     ],
+     [
+      13,
+      13,
+      false
+     ],
+     [
+      13,
+      14,
+      true
+     ],
+     [
+      13,
+      15,
+      false
+     ],
+     [
+      13,
+      16,
+      false
+     ],
+     [
+      14,
+      16,
+      false
+     ],
+     [
+      15,
+      14,
+      false
+     ],
+     [
+      15,
+      15,
+      false
+     ],
+     [
+      15,
+      16,
+      true
+     ]
+    ],
+    "suivie|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      1,
+      true
+     ],
+     [
+      2,
+      2,
+      false
+     ],
+     [
+      3,
+      1,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      false
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      3,
+      5,
+      true
+     ],
+     [
+      4,
+      1,
+      false
+     ],
+     [
+      4,
+      2,
+      true
+     ],
+     [
+      4,
+      3,
+      false
+     ],
+     [
+      4,
+      4,
+      false
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      5,
+      1,
+      false
+     ],
+     [
+      5,
+      2,
+      false
+     ],
+     [
+      5,
+      3,
+      false
+     ],
+     [
+      5,
+      4,
+      true
+     ],
+     [
+      5,
+      5,
+      false
+     ],
+     [
+      6,
+      2,
+      false
+     ],
+     [
+      6,
+      3,
+      false
+     ],
+     [
+      6,
+      4,
+      false
+     ],
+     [
+      6,
+      5,
+      true
+     ],
+     [
+      6,
+      6,
+      false
+     ],
+     [
+      6,
+      9,
+      false
+     ],
+     [
+      7,
+      4,
+      false
+     ],
+     [
+      7,
+      5,
+      false
+     ],
+     [
+      7,
+      6,
+      true
+     ],
+     [
+      7,
+      7,
+      false
+     ],
+     [
+      7,
+      8,
+      false
+     ],
+     [
+      7,
+      9,
+      false
+     ],
+     [
+      8,
+      4,
+      false
+     ],
+     [
+      8,
+      6,
+      false
+     ],
+     [
+      8,
+      7,
+      false
+     ],
+     [
+      8,
+      9,
+      false
+     ],
+     [
+      8,
+      10,
+      false
+     ],
+     [
+      9,
+      9,
+      false
+     ],
+     [
+      9,
+      10,
+      true
+     ],
+     [
+      9,
+      11,
+      false
+     ],
+     [
+      10,
+      10,
+      false
+     ],
+     [
+      10,
+      11,
+      true
+     ],
+     [
+      10,
+      12,
+      false
+     ],
+     [
+      10,
+      13,
+      true
+     ],
+     [
+      11,
+      11,
+      false
+     ],
+     [
+      11,
+      12,
+      false
+     ],
+     [
+      11,
+      13,
+      false
+     ],
+     [
+      12,
+      12,
+      true
+     ],
+     [
+      12,
+      13,
+      false
+     ],
+     [
+      13,
+      11,
+      false
+     ],
+     [
+      13,
+      12,
+      false
+     ],
+     [
+      13,
+      13,
+      false
+     ],
+     [
+      13,
+      14,
+      false
+     ],
+     [
+      15,
+      12,
+      true
+     ],
+     [
+      15,
+      13,
+      false
+     ],
+     [
+      15,
+      14,
+      true
+     ],
+     [
+      15,
+      15,
+      false
+     ],
+     [
+      15,
+      16,
+      false
+     ],
+     [
+      16,
+      15,
+      true
+     ]
+    ],
+    "compagne|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      false
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      3,
+      1,
+      false
+     ],
+     [
+      3,
+      2,
+      true
+     ],
+     [
+      3,
+      3,
+      false
+     ],
+     [
+      4,
+      1,
+      false
+     ],
+     [
+      4,
+      2,
+      false
+     ],
+     [
+      4,
+      3,
+      false
+     ],
+     [
+      4,
+      4,
+      true
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      5,
+      1,
+      false
+     ],
+     [
+      5,
+      2,
+      false
+     ],
+     [
+      5,
+      3,
+      false
+     ],
+     [
+      5,
+      4,
+      false
+     ],
+     [
+      5,
+      5,
+      true
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      5,
+      9,
+      false
+     ],
+     [
+      6,
+      4,
+      false
+     ],
+     [
+      6,
+      5,
+      false
+     ],
+     [
+      6,
+      6,
+      true
+     ],
+     [
+      6,
+      9,
+      false
+     ],
+     [
+      7,
+      5,
+      false
+     ],
+     [
+      7,
+      6,
+      false
+     ],
+     [
+      7,
+      9,
+      false
+     ],
+     [
+      7,
+      10,
+      false
+     ],
+     [
+      8,
+      6,
+      false
+     ],
+     [
+      8,
+      9,
+      true
+     ],
+     [
+      8,
+      10,
+      false
+     ],
+     [
+      9,
+      9,
+      false
+     ],
+     [
+      9,
+      10,
+      true
+     ],
+     [
+      9,
+      11,
+      false
+     ],
+     [
+      10,
+      10,
+      false
+     ],
+     [
+      10,
+      11,
+      true
+     ],
+     [
+      11,
+      11,
+      false
+     ],
+     [
+      11,
+      12,
+      false
+     ],
+     [
+      12,
+      11,
+      false
+     ],
+     [
+      12,
+      12,
+      true
+     ],
+     [
+      13,
+      12,
+      false
+     ],
+     [
+      14,
+      12,
+      false
+     ],
+     [
+      16,
+      12,
+      false
+     ],
+     [
+      16,
+      13,
+      false
+     ],
+     [
+      16,
+      14,
+      false
+     ]
+    ]
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "suivie",
+     2,
+     1,
+     "validée"
+    ],
+    [
+     "suivie",
+     3,
+     2,
+     "contredite"
+    ],
+    [
+     "suivie",
+     4,
+     3,
+     "contredite"
+    ],
+    [
+     "suivie",
+     5,
+     4,
+     "contredite"
+    ],
+    [
+     "suivie",
+     6,
+     5,
+     "contredite"
+    ],
+    [
+     "suivie",
+     7,
+     6,
+     "contredite"
+    ],
+    [
+     "suivie",
+     8,
+     7,
+     "contredite"
+    ],
+    [
+     "suivie",
+     9,
+     9,
+     "contredite"
+    ],
+    [
+     "suivie",
+     10,
+     10,
+     "contredite"
+    ],
+    [
+     "suivie",
+     11,
+     11,
+     "contredite"
+    ],
+    [
+     "suivie",
+     12,
+     12,
+     "contredite"
+    ],
+    [
+     "suivie",
+     13,
+     13,
+     "contredite"
+    ],
+    [
+     "suivie",
+     14,
+     14,
+     "sans témoin"
+    ],
+    [
+     "suivie",
+     15,
+     15,
+     "contredite"
+    ],
+    [
+     "suivie",
+     16,
+     16,
+     "contredite"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "compagne",
+     2,
+     2,
+     "contredite"
+    ],
+    [
+     "compagne",
+     3,
+     3,
+     "contredite"
+    ],
+    [
+     "compagne",
+     4,
+     5,
+     "contredite"
+    ],
+    [
+     "compagne",
+     5,
+     6,
+     "contredite"
+    ],
+    [
+     "compagne",
+     6,
+     7,
+     "contredite"
+    ],
+    [
+     "compagne",
+     7,
+     8,
+     "contredite"
+    ],
+    [
+     "compagne",
+     8,
+     9,
+     "contredite"
+    ],
+    [
+     "compagne",
+     9,
+     10,
+     "contredite"
+    ],
+    [
+     "compagne",
+     10,
+     11,
+     "confirmée une fois"
+    ],
+    [
+     "compagne",
+     11,
+     12,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     12,
+     13,
+     "contredite"
+    ],
+    [
+     "compagne",
+     13,
+     14,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     14,
+     15,
+     "contredite"
+    ],
+    [
+     "compagne",
+     15,
+     16,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     16,
+     17,
+     "contredite"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "tierce",
+     2,
+     2,
+     "contredite"
+    ],
+    [
+     "tierce",
+     3,
+     3,
+     "contredite"
+    ],
+    [
+     "tierce",
+     4,
+     4,
+     "contredite"
+    ],
+    [
+     "tierce",
+     5,
+     5,
+     "contredite"
+    ],
+    [
+     "tierce",
+     6,
+     6,
+     "contredite"
+    ],
+    [
+     "tierce",
+     7,
+     7,
+     "contredite"
+    ],
+    [
+     "tierce",
+     8,
+     8,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     9,
+     9,
+     "contredite"
+    ],
+    [
+     "tierce",
+     10,
+     10,
+     "contredite"
+    ],
+    [
+     "tierce",
+     11,
+     11,
+     "contredite"
+    ],
+    [
+     "tierce",
+     12,
+     13,
+     "contredite"
+    ],
+    [
+     "tierce",
+     13,
+     14,
+     "contredite"
+    ],
+    [
+     "tierce",
+     14,
+     15,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     15,
+     17,
+     "contredite"
+    ],
+    [
+     "tierce",
+     16,
+     19,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 541,
+      "les_comptes": {
+       "0": 1,
+       "1": 540
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 439,
+      "les_comptes": {
+       "0": 1,
+       "1": 175,
+       "2": 263
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 412,
+      "les_comptes": {
+       "1": 412
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 348,
+      "les_comptes": {
+       "1": 348
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 302,
+      "les_comptes": {
+       "1": 302
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 280,
+      "les_comptes": {
+       "1": 280
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 154,
+      "les_comptes": {
+       "1": 154
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 141,
+      "les_comptes": {
+       "1": 140,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 191,
+      "les_comptes": {
+       "1": 142,
+       "2": 49
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 351,
+      "les_comptes": {
+       "1": 351
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 236,
+      "les_comptes": {
+       "1": 67,
+       "2": 169
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 317,
+      "les_comptes": {
+       "1": 73,
+       "2": 244
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 417,
+      "les_comptes": {
+       "1": 417
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 452,
+      "les_comptes": {
+       "1": 176,
+       "2": 275,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 278,
+      "les_comptes": {
+       "1": 278
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 297,
+      "les_comptes": {
+       "1": 297
+      }
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 499,
+      "les_comptes": {
+       "1": 499
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 331,
+      "les_comptes": {
+       "1": 331
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 226,
+      "les_comptes": {
+       "0": 2,
+       "1": 224
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 140,
+      "les_comptes": {
+       "0": 2,
+       "1": 138
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 120,
+      "les_comptes": {
+       "1": 120
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 119,
+      "les_comptes": {
+       "1": 119
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 120,
+      "les_comptes": {
+       "1": 120
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 125,
+      "les_comptes": {
+       "1": 125
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 127,
+      "les_comptes": {
+       "1": 126,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 163,
+      "les_comptes": {
+       "1": 122,
+       "2": 41
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 348,
+      "les_comptes": {
+       "1": 348
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 480,
+      "les_comptes": {
+       "0": 1,
+       "1": 471,
+       "2": 8
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 198,
+      "les_comptes": {
+       "0": 1,
+       "1": 193,
+       "2": 4
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 216,
+      "les_comptes": {
+       "1": 216
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 266,
+      "les_comptes": {
+       "0": 3,
+       "1": 263
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 263,
+      "les_comptes": {
+       "1": 263
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 261,
+      "les_comptes": {
+       "1": 261
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 214,
+      "les_comptes": {
+       "1": 214
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 114,
+      "les_comptes": {
+       "1": 43,
+       "2": 71
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 149,
+      "les_comptes": {
+       "1": 149
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 116,
+      "les_comptes": {
+       "1": 114,
+       "2": 2
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 121,
+      "les_comptes": {
+       "1": 121
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 175,
+      "les_comptes": {
+       "1": 175
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 145,
+      "les_comptes": {
+       "1": 145
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 141,
+      "les_comptes": {
+       "1": 141
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 131,
+      "les_comptes": {
+       "1": 131
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 155,
+      "les_comptes": {
+       "0": 1,
+       "1": 154
+      }
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 13,
+    "contredite": 19
+   },
+   "les_melanges": 3,
+   "les_sauts_comptes": 43,
+   "les_paires": {
+    "suivie|compagne": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      1,
+      3,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      false
+     ],
+     [
+      2,
+      3,
+      true
+     ],
+     [
+      2,
+      4,
+      false
+     ],
+     [
+      3,
+      3,
+      false
+     ],
+     [
+      3,
+      4,
+      true
+     ],
+     [
+      3,
+      5,
+      false
+     ],
+     [
+      4,
+      4,
+      false
+     ],
+     [
+      4,
+      5,
+      true
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      5,
+      5,
+      false
+     ],
+     [
+      5,
+      6,
+      true
+     ],
+     [
+      5,
+      7,
+      false
+     ],
+     [
+      6,
+      6,
+      false
+     ],
+     [
+      6,
+      7,
+      true
+     ],
+     [
+      6,
+      8,
+      false
+     ],
+     [
+      7,
+      7,
+      false
+     ],
+     [
+      7,
+      8,
+      true
+     ],
+     [
+      7,
+      9,
+      false
+     ],
+     [
+      8,
+      8,
+      false
+     ],
+     [
+      8,
+      9,
+      true
+     ],
+     [
+      9,
+      10,
+      true
+     ],
+     [
+      9,
+      11,
+      false
+     ],
+     [
+      10,
+      10,
+      false
+     ],
+     [
+      10,
+      11,
+      true
+     ],
+     [
+      12,
+      10,
+      false
+     ],
+     [
+      12,
+      11,
+      true
+     ],
+     [
+      13,
+      10,
+      true
+     ],
+     [
+      13,
+      11,
+      false
+     ],
+     [
+      14,
+      8,
+      false
+     ],
+     [
+      14,
+      9,
+      true
+     ],
+     [
+      14,
+      10,
+      false
+     ],
+     [
+      15,
+      7,
+      false
+     ],
+     [
+      15,
+      8,
+      true
+     ],
+     [
+      15,
+      9,
+      false
+     ],
+     [
+      16,
+      6,
+      false
+     ],
+     [
+      16,
+      7,
+      true
+     ],
+     [
+      16,
+      8,
+      false
+     ]
+    ],
+    "suivie|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      1,
+      3,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      false
+     ],
+     [
+      2,
+      3,
+      true
+     ],
+     [
+      2,
+      4,
+      false
+     ],
+     [
+      3,
+      1,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      false
+     ],
+     [
+      3,
+      4,
+      true
+     ],
+     [
+      3,
+      5,
+      false
+     ],
+     [
+      4,
+      4,
+      false
+     ],
+     [
+      4,
+      5,
+      true
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      5,
+      5,
+      false
+     ],
+     [
+      5,
+      6,
+      true
+     ],
+     [
+      5,
+      7,
+      false
+     ],
+     [
+      6,
+      6,
+      false
+     ],
+     [
+      6,
+      7,
+      true
+     ],
+     [
+      7,
+      7,
+      false
+     ],
+     [
+      7,
+      8,
+      false
+     ],
+     [
+      8,
+      8,
+      true
+     ],
+     [
+      9,
+      8,
+      false
+     ],
+     [
+      9,
+      10,
+      true
+     ],
+     [
+      9,
+      11,
+      false
+     ],
+     [
+      10,
+      11,
+      true
+     ],
+     [
+      10,
+      12,
+      false
+     ],
+     [
+      11,
+      12,
+      false
+     ],
+     [
+      11,
+      13,
+      true
+     ],
+     [
+      11,
+      14,
+      false
+     ],
+     [
+      12,
+      10,
+      false
+     ],
+     [
+      12,
+      11,
+      true
+     ],
+     [
+      12,
+      12,
+      false
+     ],
+     [
+      13,
+      9,
+      false
+     ],
+     [
+      13,
+      10,
+      true
+     ],
+     [
+      13,
+      11,
+      false
+     ],
+     [
+      14,
+      8,
+      true
+     ],
+     [
+      14,
+      9,
+      false
+     ],
+     [
+      15,
+      7,
+      false
+     ],
+     [
+      15,
+      8,
+      false
+     ],
+     [
+      16,
+      6,
+      false
+     ],
+     [
+      16,
+      7,
+      true
+     ]
+    ],
+    "compagne|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      5,
+      5,
+      true
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      6,
+      6,
+      true
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      8,
+      8,
+      false
+     ],
+     [
+      9,
+      8,
+      true
+     ],
+     [
+      10,
+      8,
+      false
+     ],
+     [
+      10,
+      11,
+      false
+     ],
+     [
+      11,
+      11,
+      true
+     ],
+     [
+      11,
+      12,
+      false
+     ]
+    ]
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "suivie",
+     2,
+     3,
+     "validée"
+    ],
+    [
+     "suivie",
+     3,
+     4,
+     "validée"
+    ],
+    [
+     "suivie",
+     4,
+     5,
+     "validée"
+    ],
+    [
+     "suivie",
+     5,
+     6,
+     "validée"
+    ],
+    [
+     "suivie",
+     6,
+     7,
+     "validée"
+    ],
+    [
+     "suivie",
+     7,
+     8,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     8,
+     9,
+     "validée"
+    ],
+    [
+     "suivie",
+     9,
+     10,
+     "contredite"
+    ],
+    [
+     "suivie",
+     10,
+     11,
+     "contredite"
+    ],
+    [
+     "suivie",
+     11,
+     13,
+     "contredite"
+    ],
+    [
+     "suivie",
+     12,
+     15,
+     "contredite"
+    ],
+    [
+     "suivie",
+     13,
+     16,
+     "contredite"
+    ],
+    [
+     "suivie",
+     14,
+     18,
+     "contredite"
+    ],
+    [
+     "suivie",
+     15,
+     19,
+     "contredite"
+    ],
+    [
+     "suivie",
+     16,
+     20,
+     "contredite"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "compagne",
+     2,
+     2,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     3,
+     3,
+     "confirmée une fois"
+    ],
+    [
+     "compagne",
+     4,
+     4,
+     "confirmée une fois"
+    ],
+    [
+     "compagne",
+     5,
+     5,
+     "validée"
+    ],
+    [
+     "compagne",
+     6,
+     6,
+     "validée"
+    ],
+    [
+     "compagne",
+     7,
+     7,
+     "contredite"
+    ],
+    [
+     "compagne",
+     8,
+     8,
+     "contredite"
+    ],
+    [
+     "compagne",
+     9,
+     9,
+     "contredite"
+    ],
+    [
+     "compagne",
+     10,
+     10,
+     "contredite"
+    ],
+    [
+     "compagne",
+     11,
+     11,
+     "contredite"
+    ],
+    [
+     "compagne",
+     12,
+     12,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     13,
+     13,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "tierce",
+     2,
+     2,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     3,
+     3,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     4,
+     4,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     5,
+     5,
+     "validée"
+    ],
+    [
+     "tierce",
+     6,
+     6,
+     "validée"
+    ],
+    [
+     "tierce",
+     7,
+     7,
+     "contredite"
+    ],
+    [
+     "tierce",
+     8,
+     9,
+     "contredite"
+    ],
+    [
+     "tierce",
+     9,
+     10,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     10,
+     11,
+     "contredite"
+    ],
+    [
+     "tierce",
+     11,
+     12,
+     "contredite"
+    ],
+    [
+     "tierce",
+     12,
+     13,
+     "contredite"
+    ],
+    [
+     "tierce",
+     13,
+     14,
+     "contredite"
+    ],
+    [
+     "tierce",
+     14,
+     15,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     15,
+     16,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     16,
+     17,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 624,
+      "les_comptes": {
+       "1": 623,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 591,
+      "les_comptes": {
+       "1": 584,
+       "2": 6,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 473,
+      "les_comptes": {
+       "1": 465,
+       "2": 6,
+       "3": 1,
+       "4": 1
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 106,
+      "les_comptes": {
+       "1": 19,
+       "2": 42,
+       "3": 38,
+       "4": 7
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 300,
+      "les_comptes": {
+       "0": 3,
+       "1": 247,
+       "2": 47,
+       "3": 3
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 204,
+      "les_comptes": {
+       "0": 5,
+       "1": 122,
+       "2": 32,
+       "3": 44,
+       "5": 1
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 591,
+      "les_comptes": {
+       "1": 591
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 644,
+      "les_comptes": {
+       "1": 644
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 653,
+      "les_comptes": {
+       "1": 653
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 592,
+      "les_comptes": {
+       "1": 592
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 548,
+      "les_comptes": {
+       "0": 2,
+       "1": 546
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 453,
+      "les_comptes": {
+       "1": 453
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 294,
+      "les_comptes": {
+       "1": 289,
+       "2": 5
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 224,
+      "les_comptes": {
+       "0": 2,
+       "1": 220,
+       "2": 2
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 250,
+      "les_comptes": {
+       "1": 242,
+       "2": 7,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 304,
+      "les_comptes": {
+       "1": 187,
+       "2": 106,
+       "3": 11
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 788,
+      "les_comptes": {
+       "0": 1,
+       "1": 787
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 626,
+      "les_comptes": {
+       "1": 618,
+       "2": 8
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 649,
+      "les_comptes": {
+       "1": 566,
+       "2": 83
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 743,
+      "les_comptes": {
+       "1": 707,
+       "2": 36
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 726,
+      "les_comptes": {
+       "1": 550,
+       "2": 176
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 779,
+      "les_comptes": {
+       "0": 1,
+       "1": 769,
+       "2": 9
+      }
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 568,
+      "les_comptes": {
+       "0": 2,
+       "1": 563,
+       "2": 3
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 555,
+      "les_comptes": {
+       "1": 550,
+       "2": 5
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 462,
+      "les_comptes": {
+       "1": 457,
+       "2": 4,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 281,
+      "les_comptes": {
+       "1": 78,
+       "2": 195,
+       "3": 8
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 311,
+      "les_comptes": {
+       "0": 6,
+       "1": 133,
+       "2": 139,
+       "3": 30,
+       "4": 1,
+       "5": 1,
+       "6": 1
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 245,
+      "les_comptes": {
+       "1": 26,
+       "2": 112,
+       "3": 53,
+       "4": 48,
+       "5": 6
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 163,
+      "les_comptes": {
+       "1": 1,
+       "2": 132,
+       "3": 25,
+       "4": 5
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 597,
+      "les_comptes": {
+       "0": 3,
+       "1": 389,
+       "2": 162,
+       "3": 22,
+       "4": 17,
+       "5": 4
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 333,
+      "les_comptes": {
+       "1": 179,
+       "2": 83,
+       "3": 60,
+       "4": 10,
+       "5": 1
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 642,
+      "les_comptes": {
+       "0": 1,
+       "1": 490,
+       "2": 119,
+       "3": 26,
+       "4": 6
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 442,
+      "les_comptes": {
+       "0": 2,
+       "1": 349,
+       "2": 70,
+       "3": 16,
+       "4": 5
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 109,
+      "les_comptes": {
+       "1": 105,
+       "2": 4
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 103,
+      "les_comptes": {
+       "1": 83,
+       "2": 20
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 234,
+      "les_comptes": {
+       "1": 228,
+       "2": 6
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "nul",
+      "le_nombre_de_feuilles": 0,
+      "les_mesures": 379,
+      "les_comptes": {
+       "0": 356,
+       "1": 23
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 597,
+      "les_comptes": {
+       "0": 3,
+       "1": 274,
+       "2": 214,
+       "3": 102,
+       "4": 4
+      }
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 7,
+    "contredite": 4
+   },
+   "les_melanges": 8,
+   "les_sauts_comptes": 38,
+   "les_paires": {
+    "suivie|compagne": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      true
+     ],
+     [
+      3,
+      4,
+      false
+     ]
+    ],
+    "suivie|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      true
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      4,
+      4,
+      true
+     ],
+     [
+      4,
+      5,
+      true
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      5,
+      5,
+      false
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      6,
+      6,
+      true
+     ],
+     [
+      6,
+      7,
+      false
+     ]
+    ],
+    "compagne|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      4,
+      4,
+      false
+     ]
+    ]
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "suivie",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "suivie",
+     3,
+     3,
+     "validée"
+    ],
+    [
+     "suivie",
+     4,
+     5,
+     "contredite"
+    ],
+    [
+     "suivie",
+     5,
+     6,
+     "sans témoin"
+    ],
+    [
+     "suivie",
+     6,
+     7,
+     "contredite"
+    ],
+    [
+     "suivie",
+     7,
+     8,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "compagne",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "compagne",
+     3,
+     3,
+     "confirmée une fois"
+    ],
+    [
+     "compagne",
+     4,
+     4,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     5,
+     5,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     6,
+     6,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     7,
+     7,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     8,
+     8,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     9,
+     9,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     10,
+     10,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     11,
+     11,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     12,
+     12,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     13,
+     13,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     14,
+     14,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     15,
+     15,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     16,
+     16,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "tierce",
+     2,
+     2,
+     "validée"
+    ],
+    [
+     "tierce",
+     3,
+     3,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     4,
+     5,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     5,
+     7,
+     "contredite"
+    ],
+    [
+     "tierce",
+     6,
+     9,
+     "contredite"
+    ],
+    [
+     "tierce",
+     7,
+     11,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     8,
+     12,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     9,
+     13,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     10,
+     14,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     11,
+     15,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     12,
+     16,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     13,
+     17,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     14,
+     18,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     15,
+     18,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     16,
+     19,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 382,
+      "les_comptes": {
+       "1": 382
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 153,
+      "les_comptes": {
+       "1": 153
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 103,
+      "les_comptes": {
+       "1": 103
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 98,
+      "les_comptes": {
+       "1": 73,
+       "2": 25
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "nul",
+      "le_nombre_de_feuilles": 0,
+      "les_mesures": 774,
+      "les_comptes": {
+       "0": 615,
+       "1": 153,
+       "2": 5,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 389,
+      "les_comptes": {
+       "0": 5,
+       "1": 378,
+       "2": 6
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 282,
+      "les_comptes": {
+       "1": 121,
+       "2": 155,
+       "3": 6
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 227,
+      "les_comptes": {
+       "1": 120,
+       "2": 64,
+       "3": 34,
+       "4": 8,
+       "5": 1
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 173,
+      "les_comptes": {
+       "1": 166,
+       "2": 7
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 606,
+      "les_comptes": {
+       "1": 604,
+       "2": 2
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 282,
+      "les_comptes": {
+       "1": 131,
+       "2": 147,
+       "3": 4
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 241,
+      "les_comptes": {
+       "0": 3,
+       "1": 209,
+       "2": 29
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 156,
+      "les_comptes": {
+       "1": 155,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 112,
+      "les_comptes": {
+       "0": 1,
+       "1": 111
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 117,
+      "les_comptes": {
+       "1": 117
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 67,
+      "les_comptes": {
+       "1": 58,
+       "2": 7,
+       "3": 2
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 7,
+      "les_comptes": {
+       "0": 1,
+       "1": 6
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 584,
+      "les_comptes": {
+       "0": 1,
+       "1": 507,
+       "2": 69,
+       "3": 7
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 174,
+      "les_comptes": {
+       "1": 166,
+       "2": 8
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 147,
+      "les_comptes": {
+       "0": 3,
+       "1": 138,
+       "2": 5,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 135,
+      "les_comptes": {
+       "0": 1,
+       "1": 133,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 114,
+      "les_comptes": {
+       "0": 1,
+       "1": 73,
+       "2": 35,
+       "3": 4,
+       "4": 1
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 233,
+      "les_comptes": {
+       "0": 1,
+       "1": 190,
+       "2": 41,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 185,
+      "les_comptes": {
+       "0": 3,
+       "1": 149,
+       "2": 30,
+       "3": 3
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 198,
+      "les_comptes": {
+       "0": 1,
+       "1": 183,
+       "2": 12,
+       "3": 2
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 58,
+      "les_comptes": {
+       "0": 2,
+       "1": 41,
+       "2": 14,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 1,
+    "contredite": 12
+   },
+   "les_melanges": 4,
+   "les_sauts_comptes": 25,
+   "les_paires": {
+    "suivie|compagne": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      2,
+      2,
+      false
+     ],
+     [
+      3,
+      2,
+      true
+     ],
+     [
+      3,
+      3,
+      false
+     ],
+     [
+      4,
+      1,
+      false
+     ],
+     [
+      4,
+      2,
+      false
+     ],
+     [
+      4,
+      3,
+      true
+     ],
+     [
+      4,
+      4,
+      false
+     ],
+     [
+      4,
+      5,
+      false
+     ],
+     [
+      4,
+      6,
+      false
+     ],
+     [
+      5,
+      1,
+      false
+     ],
+     [
+      5,
+      2,
+      false
+     ],
+     [
+      5,
+      3,
+      true
+     ],
+     [
+      5,
+      4,
+      false
+     ],
+     [
+      5,
+      5,
+      false
+     ],
+     [
+      5,
+      6,
+      false
+     ],
+     [
+      6,
+      2,
+      true
+     ],
+     [
+      6,
+      3,
+      false
+     ],
+     [
+      6,
+      4,
+      true
+     ],
+     [
+      6,
+      5,
+      false
+     ],
+     [
+      6,
+      6,
+      true
+     ],
+     [
+      7,
+      1,
+      false
+     ],
+     [
+      7,
+      2,
+      false
+     ],
+     [
+      7,
+      5,
+      false
+     ],
+     [
+      7,
+      6,
+      true
+     ],
+     [
+      7,
+      7,
+      false
+     ],
+     [
+      8,
+      1,
+      false
+     ]
+    ],
+    "suivie|tierce": [
+     [
+      1,
+      1,
+      false
+     ],
+     [
+      2,
+      1,
+      false
+     ],
+     [
+      3,
+      1,
+      true
+     ],
+     [
+      4,
+      1,
+      false
+     ],
+     [
+      5,
+      1,
+      false
+     ],
+     [
+      5,
+      2,
+      true
+     ],
+     [
+      5,
+      3,
+      false
+     ],
+     [
+      5,
+      4,
+      false
+     ],
+     [
+      6,
+      1,
+      false
+     ],
+     [
+      7,
+      1,
+      false
+     ],
+     [
+      7,
+      2,
+      true
+     ],
+     [
+      7,
+      3,
+      false
+     ],
+     [
+      8,
+      1,
+      false
+     ],
+     [
+      8,
+      5,
+      false
+     ],
+     [
+      8,
+      7,
+      false
+     ],
+     [
+      8,
+      9,
+      false
+     ],
+     [
+      9,
+      5,
+      false
+     ],
+     [
+      9,
+      7,
+      true
+     ]
+    ],
+    "compagne|tierce": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      1,
+      3,
+      false
+     ],
+     [
+      2,
+      1,
+      true
+     ],
+     [
+      3,
+      1,
+      false
+     ],
+     [
+      6,
+      4,
+      true
+     ],
+     [
+      6,
+      7,
+      false
+     ]
+    ]
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "contredite"
+    ],
+    [
+     "suivie",
+     2,
+     2,
+     "sans témoin"
+    ],
+    [
+     "suivie",
+     3,
+     3,
+     "contredite"
+    ],
+    [
+     "suivie",
+     4,
+     4,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     5,
+     4,
+     "contredite"
+    ],
+    [
+     "suivie",
+     6,
+     5,
+     "contredite"
+    ],
+    [
+     "suivie",
+     7,
+     7,
+     "contredite"
+    ],
+    [
+     "suivie",
+     8,
+     8,
+     "sans témoin"
+    ],
+    [
+     "suivie",
+     9,
+     9,
+     "contredite"
+    ],
+    [
+     "suivie",
+     10,
+     10,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "validée"
+    ],
+    [
+     "compagne",
+     2,
+     3,
+     "contredite"
+    ],
+    [
+     "compagne",
+     3,
+     4,
+     "confirmée une fois"
+    ],
+    [
+     "compagne",
+     4,
+     5,
+     "confirmée une fois"
+    ],
+    [
+     "compagne",
+     5,
+     6,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     6,
+     7,
+     "contredite"
+    ],
+    [
+     "compagne",
+     7,
+     8,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     8,
+     9,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     9,
+     10,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "contredite"
+    ],
+    [
+     "tierce",
+     2,
+     2,
+     "contredite"
+    ],
+    [
+     "tierce",
+     3,
+     3,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     4,
+     4,
+     "contredite"
+    ],
+    [
+     "tierce",
+     5,
+     5,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     6,
+     6,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     7,
+     7,
+     "contredite"
+    ],
+    [
+     "tierce",
+     8,
+     8,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     9,
+     9,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     10,
+     10,
+     "sans témoin"
+    ]
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 440,
+      "les_comptes": {
+       "1": 347,
+       "2": 90,
+       "3": 3
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 298,
+      "les_comptes": {
+       "1": 255,
+       "2": 43
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 181,
+      "les_comptes": {
+       "0": 1,
+       "1": 167,
+       "2": 13
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 328,
+      "les_comptes": {
+       "0": 3,
+       "1": 298,
+       "2": 27
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 248,
+      "les_comptes": {
+       "1": 222,
+       "2": 26
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 128,
+      "les_comptes": {
+       "1": 122,
+       "2": 6
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 181,
+      "les_comptes": {
+       "1": 170,
+       "2": 11
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 66,
+      "les_comptes": {
+       "0": 2,
+       "1": 38,
+       "2": 24,
+       "3": 2
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 30,
+      "les_comptes": {
+       "1": 13,
+       "2": 16,
+       "3": 1
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 27,
+      "les_comptes": {
+       "1": 17,
+       "2": 2,
+       "3": 8
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": null,
+      "les_mesures": 0,
+      "les_comptes": {}
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 607,
+      "les_comptes": {
+       "0": 4,
+       "1": 545,
+       "2": 47,
+       "3": 4,
+       "4": 4,
+       "5": 3
+      }
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "double",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 351,
+      "les_comptes": {
+       "1": 65,
+       "2": 248,
+       "3": 37,
+       "4": 1
+      }
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 507,
+      "les_comptes": {
+       "1": 246,
+       "2": 231,
+       "3": 30
+      }
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 324,
+      "les_comptes": {
+       "0": 3,
+       "1": 193,
+       "2": 121,
+       "3": 7
+      }
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 492,
+      "les_comptes": {
+       "0": 1,
+       "1": 392,
+       "2": 97,
+       "3": 2
+      }
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 493,
+      "les_comptes": {
+       "1": 470,
+       "2": 23
+      }
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "nul",
+      "le_nombre_de_feuilles": 0,
+      "les_mesures": 635,
+      "les_comptes": {
+       "0": 617,
+       "1": 17,
+       "2": 1
+      }
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 629,
+      "les_comptes": {
+       "1": 547,
+       "2": 79,
+       "3": 3
+      }
+     },
+     {
+      "le_saut": 9,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 492,
+      "les_comptes": {
+       "0": 4,
+       "1": 393,
+       "2": 95
+      }
+     },
+     {
+      "le_saut": 10,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 306,
+      "les_comptes": {
+       "0": 2,
+       "1": 282,
+       "2": 22
+      }
+     },
+     {
+      "le_saut": 11,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 121,
+      "les_comptes": {
+       "1": 112,
+       "2": 9
+      }
+     },
+     {
+      "le_saut": 12,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 105,
+      "les_comptes": {
+       "0": 2,
+       "1": 103
+      }
+     },
+     {
+      "le_saut": 13,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 72,
+      "les_comptes": {
+       "0": 1,
+       "1": 71
+      }
+     },
+     {
+      "le_saut": 14,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 2,
+      "les_mesures": 203,
+      "les_comptes": {
+       "0": 2,
+       "1": 65,
+       "2": 109,
+       "3": 27
+      }
+     },
+     {
+      "le_saut": 15,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 261,
+      "les_comptes": {
+       "0": 7,
+       "1": 190,
+       "2": 55,
+       "3": 9
+      }
+     },
+     {
+      "le_saut": 16,
+      "le_genre": "simple",
+      "le_nombre_de_feuilles": 1,
+      "les_mesures": 106,
+      "les_comptes": {
+       "1": 81,
+       "2": 22,
+       "3": 3
+      }
+     }
+    ]
+   },
+   "les_statuts": {
+    "validée": 0,
+    "contredite": 9
+   },
+   "les_melanges": 4,
+   "les_sauts_comptes": 24,
+   "les_paires": {
+    "suivie|compagne": [
+     [
+      1,
+      1,
+      true
+     ],
+     [
+      2,
+      1,
+      true
+     ],
+     [
+      3,
+      1,
+      true
+     ],
+     [
+      3,
+      2,
+      true
+     ],
+     [
+      4,
+      1,
+      false
+     ],
+     [
+      4,
+      2,
+      false
+     ]
+    ],
+    "suivie|tierce": [
+     [
+      1,
+      1,
+      false
+     ],
+     [
+      1,
+      2,
+      false
+     ],
+     [
+      2,
+      2,
+      true
+     ],
+     [
+      2,
+      3,
+      false
+     ],
+     [
+      3,
+      2,
+      false
+     ],
+     [
+      3,
+      3,
+      false
+     ],
+     [
+      3,
+      4,
+      false
+     ],
+     [
+      4,
+      2,
+      false
+     ],
+     [
+      4,
+      3,
+      true
+     ],
+     [
+      4,
+      4,
+      false
+     ],
+     [
+      5,
+      3,
+      false
+     ],
+     [
+      5,
+      4,
+      true
+     ],
+     [
+      5,
+      5,
+      false
+     ],
+     [
+      5,
+      7,
+      false
+     ],
+     [
+      6,
+      4,
+      false
+     ],
+     [
+      6,
+      5,
+      true
+     ],
+     [
+      6,
+      6,
+      false
+     ],
+     [
+      6,
+      7,
+      false
+     ],
+     [
+      7,
+      4,
+      false
+     ],
+     [
+      7,
+      5,
+      false
+     ],
+     [
+      7,
+      6,
+      true
+     ],
+     [
+      7,
+      7,
+      true
+     ],
+     [
+      7,
+      8,
+      false
+     ],
+     [
+      7,
+      9,
+      false
+     ],
+     [
+      8,
+      7,
+      false
+     ],
+     [
+      8,
+      8,
+      false
+     ],
+     [
+      8,
+      9,
+      false
+     ],
+     [
+      8,
+      10,
+      false
+     ]
+    ],
+    "compagne|tierce": [
+     [
+      1,
+      1,
+      false
+     ],
+     [
+      1,
+      2,
+      false
+     ]
+    ]
+   },
+   "les_surfaces": [
+    [
+     "suivie",
+     1,
+     1,
+     "contredite"
+    ],
+    [
+     "suivie",
+     2,
+     2,
+     "contredite"
+    ],
+    [
+     "suivie",
+     3,
+     3,
+     "contredite"
+    ],
+    [
+     "suivie",
+     4,
+     4,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     5,
+     5,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     6,
+     6,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     7,
+     7,
+     "confirmée une fois"
+    ],
+    [
+     "suivie",
+     8,
+     8,
+     "contredite"
+    ],
+    [
+     "suivie",
+     9,
+     9,
+     "sans témoin"
+    ],
+    [
+     "compagne",
+     1,
+     1,
+     "contredite"
+    ],
+    [
+     "compagne",
+     2,
+     2,
+     "contredite"
+    ],
+    [
+     "compagne",
+     3,
+     3,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     1,
+     1,
+     "contredite"
+    ],
+    [
+     "tierce",
+     2,
+     3,
+     "contredite"
+    ],
+    [
+     "tierce",
+     3,
+     4,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     4,
+     5,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     5,
+     6,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     6,
+     7,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     7,
+     7,
+     "confirmée une fois"
+    ],
+    [
+     "tierce",
+     8,
+     8,
+     "contredite"
+    ],
+    [
+     "tierce",
+     9,
+     9,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     10,
+     10,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     11,
+     11,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     12,
+     12,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     13,
+     13,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     14,
+     15,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     15,
+     16,
+     "sans témoin"
+    ],
+    [
+     "tierce",
+     16,
+     17,
+     "sans témoin"
+    ]
+   ]
+  }
+ ],
+ "le_bilan": {
+  "validee": 75,
+  "contredite": 131,
+  "les_melanges": 53,
+  "les_sauts_comptes": 315,
+  "les_surfaces_vues": 324,
+  "les_surfaces_rognees": 223,
+  "les_mailles_retirees": 18808
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "rogner 223 surfaces fait passer les mélanges de 96 à 53, les contredites de 161 à 131 et les validées de 89 à 75 ; en partie"
+ },
+ "les_secondes": 234.6
+}

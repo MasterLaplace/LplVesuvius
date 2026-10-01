@@ -62,11 +62,12 @@ LA_MARGE = m365.LA_MARGE
 
 
 def la_chaine_dune_maille_de_0358(nappe: dict, relancer, sauter, lire_valeurs, marge: int = LA_MARGE,
-                                  sauts: int = m331.LES_SAUTS) -> list[dict]:
+                                  sauts: int = m331.LES_SAUTS, rogner=None) -> list[dict]:
     """La chaîne mixte de `356` sur PHerc0358, dont chaque spire tenue est regrandie à `marge` mailles des mailles semées. Avec `sauts`,
-    écrit pour `389`, la chaîne va jusqu'à ce nombre de sauts au lieu de huit."""
+    écrit pour `389`, la chaîne va jusqu'à ce nombre de sauts au lieu de huit ; avec `rogner`, écrit pour `397`, chaque surface gardée est
+    rognée comme `356` le fait."""
     regrandir = lambda p_, n_, s_, o_: m333.la_nappe_de_la_spire(s_, o_, tuple(p_), tuple(n_), lire_valeurs, marge=marge)  # noqa: E731
-    return m356.la_chaine_mixte(nappe, relancer, sauter, lire_valeurs, sauts=sauts, regrandir=regrandir)
+    return m356.la_chaine_mixte(nappe, relancer, sauter, lire_valeurs, sauts=sauts, regrandir=regrandir, rogner=rogner)
 
 
 def le_cote(c: dict) -> dict:

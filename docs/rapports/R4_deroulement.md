@@ -4926,6 +4926,11 @@ s'ouvre : les points d'un mélange forment-ils deux plages, comme une surface à
 quitté la surface de départ (0,02 pas, contre 0,69) : c'est la surface qui est à cheval, pas le compte qui se trompe. `R4-P194` s'ouvre :
 une chaîne qui retire cette plage avant le saut suivant ?
 
+**`397` · 2026-10-01 · une chaîne qui rogne la plage retombée se contredit-elle moins sur pherc0358** — `R4-P194`
+
+⭐⭐⭐ **En partie : mélanges 96 → 53, contredites 161 → 131, validées 89 → 75** — `R4-F583`. Le rognage défait les contradictions des
+côtés en désaccord, mais la graine 6, côté moins, perd 14 validées à surfaces égales. `R4-P195` s'ouvre : y a-t-elle changé de feuille ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3336,6 +3336,54 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 397 : UNE CHAÎNE QUI ROGNE LA PLAGE RETOMBÉE SE CONTREDIT-ELLE MOINS SUR PHERC0358
+    s397 = _source(racine, "une_chaine_qui_rogne_la_plage_retombee_se_contredit_elle_moins_sur_pherc0358.json")
+    s389b = _source(racine, "laccord_aux_comptes_de_m7_valide_t_il_encore_a_seize_sauts_sur_pherc0358.json")
+    if s397.exists() and s389b.exists():
+        d = json.loads(s397.read_text())
+        d389 = json.loads(s389b.read_text())
+        b, a = d["le_bilan"], d["la_reference"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        p1 = lambda x: f"{x:.1f}".replace(".", ",")  # noqa: E731
+        ch = ("suivie", "compagne", "tierce")
+        n389 = sum(len(c["les_nombres"][x]) for c in d389["les_cotes"] for x in ch)
+        nrog = sum(len(c["les_sauts"][x]) for c in d["les_cotes"] for x in ch)
+        ro = [r_ for r_ in d["les_rognages"] if r_["rognee"]]
+        part = round(100 * b["les_mailles_retirees"] / sum(r_["retombees"] + r_["parties"] for r_ in ro))
+        par = {(c["le_rang"], c["le_cote"]): c for c in d["les_cotes"]}
+        par389 = {(c["le_rang"], c["le_cote"]): c for c in d389["les_cotes"]}
+        ref = lambda k: d["la_reference_par_cote"][f"{k[0]} {k[1]}"]  # noqa: E731
+        nb = lambda c: sum(len(c["les_sauts"][x]) for x in ch)  # noqa: E731
+        nb389 = lambda c: sum(len(c["les_nombres"][x]) for x in ch)  # noqa: E731
+        g8m, g8p, g3p, g6m, g7p = (8, "moins"), (8, "plus"), (3, "plus"), (6, "moins"), (7, "plus")
+        loin = lambda srf: max((x_[2] for x_ in srf if x_[3] == "validée"), default=None)  # noqa: E731
+        loin389 = max(c["le_resume"]["le_plus_loin"] or 0 for c in d389["les_cotes"])
+        loinrog = max(loin(c["les_surfaces"]) or 0 for c in d["les_cotes"])
+        ecrits = [("le verdict de 397", f"ROGNÉES, LES CONTREDITES PASSENT DE {a['contredite']} À {b['contredite']}, LES VALIDÉES DE {a['validee']} "
+                   f"À {b['validee']} : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("le chapeau de 397", f"passer les mélanges de {a['les_melanges']} à {b['les_melanges']}, les contredites de {a['contredite']} à "
+                   f"{b['contredite']} et les validées de {a['validee']} à {b['validee']}"),
+                  ("la lecture de 397", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("les rognées de 397", f"{b['les_surfaces_rognees']} des {b['les_surfaces_vues']} surfaces gardées sont rognées, et perdent "
+                   f"{format(b['les_mailles_retirees'], ',').replace(',', ' ')} mailles, {part} %"),
+                  ("la ligne 389 de 397", f"| `389` | {n389} | {a['les_sauts_comptes']} | {a['les_melanges']} | {a['validee']} | {a['contredite']} |"),
+                  ("la ligne rognées de 397", f"| rognées | {nrog} | {b['les_sauts_comptes']} | {b['les_melanges']} | {b['validee']} | {b['contredite']} |"),
+                  ("les taux de 397", f"les contredites passent de {p1(100 * a['contredite'] / n389)} % à {p1(100 * b['contredite'] / nrog)} % et les "
+                   f"validées de {p1(100 * a['validee'] / n389)} % à {p1(100 * b['validee'] / nrog)} %"),
+                  ("la graine 8 moins de 397", f"côté moins, {ref(g8m)['contredite']} → {par[g8m]['les_statuts']['contredite']}, mais ses chaînes y "
+                   f"portent {nb(par[g8m])} surfaces au lieu de {nb389(par389[g8m])}"),
+                  ("la graine 8 plus de 397", f"côté plus, {ref(g8p)['contredite']} → {par[g8p]['les_statuts']['contredite']} ; graine 3, côté plus, "
+                   f"{ref(g3p)['contredite']} → {par[g3p]['les_statuts']['contredite']}"),
+                  ("la graine 6 de 397", f"perd {ref(g6m)['validée'] - par[g6m]['les_statuts']['validée']} validées ({ref(g6m)['validée']} → "
+                   f"{par[g6m]['les_statuts']['validée']}) et gagne {par[g6m]['les_statuts']['contredite'] - ref(g6m)['contredite']} contredites, à "
+                   f"surfaces égales" if nb(par[g6m]) == nb389(par389[g6m]) else "changé"),
+                  ("les tours de la graine 6 de 397", f"elle validait jusqu'à {par389[g6m]['le_resume']['le_plus_loin']} tours, elle ne valide\nplus qu'à "
+                   f"{loin(par[g6m]['les_surfaces'])}".split("\n")[0]),
+                  ("la graine 7 de 397", f"La graine 7, côté plus, gagne {par[g7p]['les_statuts']['validée'] - ref(g7p)['validée']} validées et "
+                   f"{par[g7p]['les_statuts']['contredite'] - ref(g7p)['contredite']} contredites"),
+                  ("le plus loin de 397", f"La surface validée la plus lointaine passe de {loin389} tours à {loinrog}")]
+        out.extend((nom_, [x_], s397.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 396 : LES POINTS D'UN SAUT MÉLANGÉ DE M7 FORMENT-ILS DEUX PLAGES SUR PHERC0358
     s396 = _source(racine, "les_points_dun_saut_melange_de_m7_forment_ils_deux_plages_sur_pherc0358.json")
     if s396.exists():
