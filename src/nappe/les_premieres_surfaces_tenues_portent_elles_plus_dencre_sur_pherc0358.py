@@ -42,7 +42,7 @@ E brut de chaque surface et de son jumeau ; la part des pixels où la probabilit
 chaque surface : le rayon d'un cylindre qui donnerait sa courbure, et le cosinus entre son creux et la direction du centre du volume,
 un axe grossier, puisque aucun axe de PHerc0358 n'est publié. Ajouté avant toute lecture, après le verdict de `409`.
 
-**L'autre sens, à la question de l'auteur** (ajouté le 2026-10-01 à 15 h 45, pendant les lectures, avant qu'une seule ne soit finie) :
+**L'autre sens, à la question de l'auteur** (ajouté le 2026-10-01 vers 15 h 38, pendant les lectures, avant qu'une seule ne soit finie) :
 l'encre elle-même dirait-elle dans quel sens lire ? Chaque surface est relue dans le sens contraire à celui de `409`, sa place seulement,
 après les lectures de la règle. **Le sens que l'encre choisit** est celui dont la part des pixels réduits au-dessus de 0,5 est la plus haute ;
 à égalité, aucun. Le même choix est fait sur le bloc étalon de `409`, où la carte publiée dit le bon sens. Rien de cela n'entre dans le
@@ -63,6 +63,7 @@ Usage :
 from __future__ import annotations
 
 import argparse
+import gc
 import json
 import math
 import subprocess
@@ -236,7 +237,9 @@ def le_sens_que_lencre_choisit(dans_le_sens: dict, dans_lautre: dict, sens: str)
 
 
 def une_lecture(nom: str, decalage: float, autre_sens: bool = False) -> int:
-    """Une surface rendue à `decalage` voxels de sa place, lue par le détecteur ; un processus par lecture."""
+    """Une surface rendue à `decalage` voxels de sa place, lue par le détecteur ; un processus par lecture. ⚠ La grille fine, ses normales
+    et le cache des morceaux sont rendus avant de charger le modèle : à 2496², gardés, ils menaient le processus à 3,36 Go de mémoire
+    anonyme pendant le chargement, figé sous le plafond de la garde."""
     import la_matiere_dit_elle_si_la_surface_est_sur_sa_feuille as mm
     import le_detecteur_de_296_lit_il_encore_lencre_de_paris4_ramenee_a_9um as m408
 
@@ -249,9 +252,11 @@ def une_lecture(nom: str, decalage: float, autre_sens: bool = False) -> int:
     rendu = round(time.monotonic() - t0, 1)
     sortie = le_fichier(nom, decalage, autre_sens)
     np.save(LE_DOSSIER / f"{nom}_couvert.npy", couvert)
+    a_cote = {"le_creux": le_creux_rapporte(s["la_nappe"], s["valide"], vol.forme), "la_couverture": round(float(couvert.mean()), 4)}
+    del p, nn, couvert, vol, s
+    gc.collect()
     r = m408.lencre(pile, sortie)
-    ligne = {"la_surface": nom, "le_decalage": decalage, "rendu_en_secondes": rendu, **r,
-             "le_creux": le_creux_rapporte(s["la_nappe"], s["valide"], vol.forme), "la_couverture": round(float(couvert.mean()), 4)}
+    ligne = {"la_surface": nom, "le_decalage": decalage, "rendu_en_secondes": rendu, **r, **a_cote}
     if autre_sens:
         ligne["lautre_sens"] = True
     with (LE_DOSSIER / "encre.out").open("a") as o:
