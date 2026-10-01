@@ -1,8 +1,8 @@
 // vesuve 0.3.0: the September 2026 Progress Prize submission, as a preprint.
 // Build from the repository root, so that the figures under examples/ resolve:
 //   typst compile --root . paper/vesuve.typ paper/vesuve.pdf
-// Every number below is carried by a registry fact of the research (R4-F...), cited where it is used, and the
-// equations are those of FORMULARY.md, which is rendered from the code.
+// The text is self-contained: every quantity is defined where it is used. The equations are those of FORMULARY.md,
+// which is rendered from the code, and every number comes from the research log on the experimental branch.
 #set document(
   title: "Correcting the transfer to the next winding without a human, and judging it by the text it carries",
   author: "Guillaume Papineau",
@@ -29,13 +29,11 @@
 
 #let um = [μm]
 #let ORCID = "0009-0006-1371-4119"
-#let fact(id) = text(size: 8.6pt, font: ("DejaVu Sans Mono", "DejaVu Sans"))[#id]
 #let caveat(body) = block(
   inset: (left: 0.8em, y: 0.5em), stroke: (left: 1.6pt + rgb("#b03030")),
   text(size: 9.4pt)[#body],
 )
 #let repo = "https://github.com/MasterLaplace/LplVesuvius"
-#let slice(n, file) = link(repo + "/blob/experimental/docs/archive/" + file)[#raw(n)]
 
 #align(center)[
   #block(width: 92%)[
@@ -90,21 +88,18 @@ finds the switch and repairs it. The Challenge's 2026 Open Problems page names s
 asks for "conservative failure detection" #footnote[#link("https://scrollprize.org/2026_open_problems")].
 
 This report describes the parts of that job that `vesuve` does without a human, on real data, and where it stops.
-Its contributions are four, each carried by a dated research slice and a registry fact:
+Its contributions are four:
 
 + a *certificate*: loops closed on a lattice of steps between neighbouring chunks say which chunks of a published
-  surface stayed on one winding (#slice("246", "246_la_couverture_sans_main.md"), #fact("R4-F410"));
-+ the *next winding*, computed from the published surface prediction `m7` rather than drawn by hand
-  (#slice("247", "247_le_transfert_retrouve_t_il_la_spire_voisine.md"), #fact("R4-F412"));
-+ a *correction* of that transfer where a point slipped, decided without a judge
-  (#slice("275", "275_la_procedure_sans_juge_tient_elle_sur_le_segment_entier.md"), #fact("R4-F456"));
+  surface stayed on one winding;
++ the *next winding*, computed from the published surface prediction rather than drawn by hand;
++ a *correction* of that next winding where a point slipped, decided without a judge;
 + a *judge by the text*: where the segment passes over the produced winding, its published ink map says what text
-  that winding must carry (#slice("296", "296_le_tour_produit_porte_t_il_le_texte_du_segment.md"),
-  #fact("R4-F477")).
+  that winding must carry.
 
-The research behind them is a series of 402 dated slices on the `experimental` branch, each asking one question,
-declaring its rule before measuring, and keeping its negative results. The program on `main` ports only what a
-slice established, and its tests replay each ported number against the research function that produced it.
+Each was established by an experiment that declared its rule before measuring, and the negative results are
+reported alongside. The program ports only what was established, and its tests replay each ported number against
+the research code that produced it.
 
 = Related work
 
@@ -143,9 +138,9 @@ pipeline writes a dated report that says where it stops (@tab-pipelines).
       computed from `m7`, and that transfer corrected without a hand; it still has to read 111 bands (24263 chunks)
       to judge the rest],
     [`progress`], [where a published segment changes winding: column 260, rows 26 to 223, where the loop's
-      cumulative closure crosses half a sheet at cuts 163, 173 and 203 (#fact("R4-F401"), #fact("R4-F406"))],
+      cumulative closure crosses half a sheet at cuts 163, 173 and 203],
     [`first-letters`], [a 4 cm² window chosen on papyrus alone, its fibre render and ink; on PHerc1447 the 2023 model
-      shows no periodic rows (#fact("R1-F20")), so it claims no letters],
+      shows no periodic rows at any angle, so it claims no letters],
     [`paris4-title`], [the last written column of the innermost band and the region after it, where an end-title
       would sit, for a papyrologist to judge],
   ),
@@ -156,40 +151,53 @@ The rest of this report follows the `grand-prize` pipeline, which carries this m
 
 = Method
 
-Distances are in voxels of 2.4 #um. The published sheet-to-sheet step is $s = 173$ #um, and half a sheet is
-$delta = "round"(s \/ (2 v)) = 36$ voxels; it is both the search range of a step and the threshold of every
-decision below (#fact("R4-F14")).
+*Terms.* A scroll is one long sheet of papyrus rolled on itself; one turn of it is a *winding*. A *surface* is a mesh
+fitted to one winding inside the tomogram, made of points $x_k$ with unit normals $n_k$. The *next winding* lies one
+turn further along the normal. A *transfer* gives each point a depth $tau_k$ along its normal, so that
+$y_k = x_k + tau_k n_k$ lies on the next winding; a point *slips* when $y_k$ lands one winding too far or too short.
+Distances are in voxels of $v = 2.4$ #um. The published sheet-to-sheet step is $s = 173$ #um, and *half a sheet*,
+$delta = "round"(s \/ (2 v)) = 36$ voxels, is both the search range and the threshold of every decision below.
 
-== Certifying where a surface stayed on one winding
+== Closed loops certify where a surface stayed on one winding
 
-The surface volume is cut into chunks. Between neighbouring chunks, a step says how far the sheet moves across their
-seam; at each seam the consensus is the median of the lines of a band that are present, if a majority of them is
-(#fact("R4-F378")). Around a loop of four chunks, two paths lead from one corner to the other:
+The surface is flattened and cut into a grid of square *chunks*, in rows $r$ and columns $c$. Where two chunks meet,
+along their *seam*, a *step* measures how far the sheet moves in depth from one chunk to the other: the depth
+profiles of the two chunks are aligned, and the offset that matches them is the step. Each seam is measured along
+$k$ independent lines; its step is the median $c(s)$ of the line estimates $hat(s)_ell (s)$ that are present, kept
+only when a majority of the $k$ lines are:
+$
+  c(s) = "median"{hat(s)_ell (s)} quad "if" \#{ell} >= floor(k \/ 2) + 1.
+$
+Write $H(r; c_0 -> c_1)$ for the sum of the steps along row $r$ from column $c_0$ to $c_1$, and $V(c; r_0 -> r_1)$
+for the sum along column $c$. Around a rectangle of chunks, two paths lead from one corner to the opposite one, and
+their difference is the *closure* of the loop:
 $
   L = H(r_0; c_0 -> c_1) + V(c_1; r_0 -> r_1) - H(r_1; c_0 -> c_1) - V(c_0; r_0 -> r_1).
 $
-A geometry closes it exactly; a surface that switched winding inside the loop leaves a whole sheet in it. Along a
-row of loops, the profile $P_j = sum_(i <= j) L_i$ must stay within half a sheet, $|P_j| < delta$ for every $j$
-(#fact("R4-F393")). Chunks enclosed by loops that close are certified; the others are named, with the bands that
-would have to be read to judge them.
+On a surface that stays on one winding the closure is zero up to the noise of the steps. A surface that switched
+winding inside the loop leaves a whole sheet in it, about $2 delta$. Along a row of loops, the cumulative closure
+$P_j = sum_(i <= j) L_i$ must stay within half a sheet, $|P_j| < delta$ for every $j$. Chunks enclosed by loops
+that pass this test are *certified*. Where seams are missing, the program lists the bands of chunks it would still
+have to measure (@fig-mask).
 
 #figure(
   image("../examples/grand-prize/chunk_mask.jpg", width: 46%),
-  caption: [The certificate of segment `20230702185753`, as `vesuve grand-prize` writes it. Green: certified chunks;
-    grey: present and not certified. Outlines: blue, the loops it would still have to read; orange, a loop whose
-    closure crosses half a sheet.],
+  caption: [The certificate of segment `20230702185753`, as `vesuve grand-prize` writes it: 6333 of 97771 chunks
+    certified. Green: certified chunks; grey: present and not certified. Outlines: blue, the loops whose seams it would
+    still have to measure; orange, a loop whose closure crosses half a sheet.],
 ) <fig-mask>
 
-== Producing the next winding
+== The next winding is the first sheet the prediction marks, settled by a vote
 
-Along the normal $n_k$ of each mesh point $x_k$, from the surface out to three steps, the prediction $P$ ($f$ times
-coarser than the scan) marks runs of samples. The centre of each run is a sheet the next winding may land on:
+The published surface prediction $P$ is a 3D map of where papyrus surfaces are, $f$ times coarser than the scan.
+Along the normal of each point, from the surface out to three steps on one side, $P$ marks runs of consecutive
+samples; the centre of each run is a sheet the next winding may land on:
 $
   C_k = { (t_a + t_(b-1)) / 2 : [a, b) "a maximal run of" P(floor((x_k + t_i n_k) / f)) > 0 },
   quad t_i = sigma i, quad 0 <= i <= floor(3 s).
 $
-The starting choice $tau_k^((0))$ is the first run after the surface's own, the run within 12 voxels of the
-surface. Then every point moves at once to the sheet its own ray sees nearest to its neighbours' median, within
+The surface's own sheet is the run within 12 voxels of it. The first choice $tau_k^((0))$ is the next run after
+that one. Then every point moves at once to the sheet its own ray sees nearest to its neighbours' median, within
 half a sheet:
 $
   mu_k^((r)) = "med"{tau_j^((r)) : j in W_k} quad "if" |W_k| >= 5, wide
@@ -199,72 +207,82 @@ $
   )
 $
 where $W_k$ is the three by three square of mesh cells centred on $k$. The vote stops when fewer than one point in
-a thousand moves by more than half a voxel, thirty rounds at most, and the transfer is $y_k = x_k + tau_k n_k$
-(#fact("R4-F412")).
+a thousand moves by more than half a voxel, thirty rounds at most.
 
-== Correcting the points that slipped, without a judge
+== A slip is corrected only when it explains a point better than noise does
 
-The depth of the sheet in every chunk is walked by least squares on the window-to-window steps $s_(i j)$ of the
-seams, once on the reference and once on the produced winding (#fact("R4-F440")):
+The correction needs no judge. First, a least-squares *walk* over the steps $s_(i j)$ of the seams gives the depth
+$D_c$ of the sheet in every chunk $c$, up to a common offset:
 $
   hat(D) = op("argmin", limits: #true)_(D, sum_c D_c = 0) sum_((i, j)) (D_j - D_i - s_(i j))^2.
 $
-A block is anchored on its neighbours only, so that its own slip cannot pull its anchor (#fact("R4-F446")):
-$a = "median" lr(\{ hat(D)^p_c - hat(D)^r_c : c in cal(N) without B \})$. The departure $x$ of each chunk from
-its anchor is noise or a slip of one winding above or below,
+It is walked twice, on the surface the transfer starts from ($hat(D)^r$) and on the produced winding ($hat(D)^p$).
+Their difference is the transfer's depth chunk by chunk. The chunks are grouped into *blocks* of 16 by 16. Each
+block is given the level it should have from its neighbours only, so that its own slip cannot pull it:
+$a = "median" lr(\{ hat(D)^p_c - hat(D)^r_c : c in cal(N) without B \})$, where $B$ is the block and $cal(N)$ its
+neighbourhood. The *departure* $x$ of a point from that level is either noise or a slip of one winding above or
+below:
 $
   x tilde w_0 cal(N)(0, sigma^2) + w_+ cal(N)(g, sigma^2) + w_- cal(N)(-g, sigma^2),
 $
-with the weights and the shared width fitted by expectation-maximisation, and the slip $g = 69.458$ voxels read
-without a judge (#fact("R4-F445")). A point is brought back by its departure, $tau_1 = tau_0 - x$, only when a slip
-explains that departure better than the noise:
+with the weights and the shared width fitted by expectation-maximisation, and the size of a slip, $g = 69.458$
+voxels, read from the data. A point is moved back by its departure, $tau_1 = tau_0 - x$, only when a slip explains
+that departure better than the noise:
 $
   max(w_+ e^(-(x - g)^2 \/ (2 sigma^2)), w_- e^(-(x + g)^2 \/ (2 sigma^2))) > w_0 e^(-x^2 \/ (2 sigma^2)).
 $
-No judge takes part in this rule (#fact("R4-F456")). The hand-drawn next winding is used only afterwards, to score.
 
-== Judging the produced winding by its text
+*How it is scored.* Only afterwards, the result is compared with the next winding as the segment's own tracer drew
+it by hand, alone and completed by three neighbouring segments; a point is scored only where these two judges agree
+within half a sheet. A moved point is *made right* when it was on the wrong winding before and on the right one
+after, and *made wrong* in the reverse case. With $a$ points made right and $b$ made wrong, the exact two-sided sign
+test asks how often chance alone, one in two, would split them at least as unevenly:
+$
+  p = min(1, 2 sum_(i <= min(a, b)) binom(a + b, i) 2^(-(a + b))).
+$
+
+== The text the produced winding carries is a judge that knows nothing of the transfer
 
 The segment makes more than one turn, so in places it passes over the very winding the transfer produced, one turn
-further along its own surface. There, its published ink map says what text the produced winding must carry: a judge
-that knows nothing of the transfer. We read the ink of the produced winding $I$ with the model that made the
-published map (`scrollprize/ink_canonical_2um`), and compare it with the published map $J$ at the counterpart
-$phi(u)$, on the mask where the segment passes within half a sheet, $M = {u : |d(u)| < delta}$:
+further along its own surface. There, its published ink map says what text the produced winding must carry. We read
+the ink of the produced winding, $I$, with the model that made the published map (`scrollprize/ink_canonical_2um`),
+and compare it with the published map $J$ at the facing point $phi(u)$, on the mask where the segment passes within
+half a sheet, $M = {u : |d(u)| < delta}$, $d$ being the distance between the two surfaces:
 $
   r = (sum_M (I - overline(I)) (J compose phi - overline(J compose phi)))
       / sqrt(sum_M (I - overline(I))^2 sum_M (J compose phi - overline(J compose phi))^2).
 $
-The six blocks were chosen from the meshes alone, before any ink was read on them.
+Three controls replace one term at a time: the text of the starting winding instead of the produced one, the facing
+point shifted by about one letter, and the winding one turn back. Six blocks were chosen from the meshes alone,
+before any ink was read on them.
 
 = Results
 
-== The next winding
+== Computed from the prediction, the next winding is right for 92 % of the points
 
 Computed from the prediction, the transfer lands on the right winding for 92.14 % of the points of the segment
 (@tab-transfer). The program gives back the research's transfer point for point, within a millionth of a voxel, on
-the segment and on the band.
+the segment and on the second band.
 
 #figure(
   table(
     columns: (1fr, auto),
     align: (left, right),
     [rule], [points on the right winding],
-    [a fixed step], [0.7613],
+    [every point moved by one fixed step], [0.7613],
     [first sheet along the normal, no vote], [0.9119],
     [first sheet along the normal, then the vote], [*0.9214*],
   ),
   caption: [Share of the transferred points of segment `20230702185753` that land on the right winding, judged by the
-    winding its tracer drew (#slice("247", "247_le_transfert_retrouve_t_il_la_spire_voisine.md"),
-    #fact("R4-F412")).],
+    winding its tracer drew by hand.],
 ) <tab-transfer>
 
-== The correction
+== The correction is right four times as often as it is wrong, and says where it does not hold
 
-On the 340 blocks of the segment that have neighbours along both axes, the correction moves 495 points: 163 misses
-become right and 41 right points become misses, a net gain of 122 (@tab-correction). The exact two-sided sign test
-gives $p = 2.04 times 10^(-18)$ on the points, and $p = 2.25 times 10^(-5)$ on the blocks, 42 up and 11 down
-(#slice("290", "290_les_gains_publies_se_distinguent_ils_du_hasard.md"), #fact("R4-F471")). Replaced by noise, the
-judges change the counts and not one corrected point: they score, they do not decide.
+On the 340 blocks of the segment that have neighbours along both axes, the correction moves 495 points: 163 are made
+right and 41 made wrong, a net gain of 122 (@tab-correction). The sign test gives $p = 2.04 times 10^(-18)$ on the
+points, and $p = 2.25 times 10^(-5)$ on the blocks, 42 up and 11 down. Replaced by noise, the judges change the
+counts and not one corrected point: they score, they do not decide.
 
 #figure(
   table(
@@ -273,14 +291,11 @@ judges change the counts and not one corrected point: they score, they do not de
     [setting], [made right], [made wrong], [sign test $p$],
     [segment, neighbours along both axes (340 blocks)], [163], [41], [$2.04 times 10^(-18)$],
     [segment, neighbours east and west only], [net +5], [], [],
-    [band `w028-037` (84 blocks)], [15], [25], [0.154],
-    [band, neighbours along both axes], [7], [5], [0.774],
+    [second band (84 blocks)], [15], [25], [0.154],
+    [second band, neighbours along both axes], [7], [5], [0.774],
   ),
-  caption: [The correction where it holds and where it does not (#slice("275",
-    "275_la_procedure_sans_juge_tient_elle_sur_le_segment_entier.md"), #slice("281",
-    "281_la_procedure_sans_juge_tient_elle_sur_la_bande.md"), #slice("291",
-    "291_la_procedure_tient_elle_sur_le_segment_avec_ses_seuls_voisins_est_et_ouest.md"), #slice("295",
-    "295_une_marche_dans_les_deux_directions_rend_elle_son_gain_a_la_bande.md")).],
+  caption: [The correction where it holds and where it does not. The second band is the published PHercParis4
+    surface `20260623142658-w028-037`.],
 ) <tab-correction>
 
 The gain has to be read at its real size. Most transferred points were already right, so over the whole segment the
@@ -288,38 +303,36 @@ share on the right winding moves from 0.9303 to 0.9334. What matters is that the
 without a judge and is right four times as often as it is wrong, which is the property a human corrector provides.
 
 The negative rows are kept on purpose. With neighbours to the east and west only, even the segment's gain falls from
-122 to 5, and the anchor carries the loss (#slice("292", "292_lancre_est_ouest_suffit_elle_a_perdre_le_gain_du_segment.md")).
-Yet giving the band's blocks neighbours to the north and south does not bring its gain back. The program therefore
-writes corrections only for blocks with neighbours along both axes, and its report says that this condition is
-necessary and not sufficient.
+122 to 5, and the level read from the neighbours carries the loss. Yet giving the second band's blocks neighbours to
+the north and south does not bring its gain back. The program therefore writes corrections only for blocks with
+neighbours along both axes, and its report says that this condition is necessary and not sufficient.
 
-== The text of the produced winding
+== The produced winding carries the segment's text, one jump further too
 
-The ink reading is first calibrated on the traced winding, where it correlates at 0.96 with the published map. On
-the produced winding, where the segment passes within half a sheet, it correlates at *0.83*, against 0.12 for the
-text of the starting winding and 0.10 for the counterpart shifted by a letter; each of the six blocks alone lies
-between 0.68 and 0.92 (@tab-ink, @fig-ink).
+The ink reading is first calibrated on the winding the tracer drew, where it correlates at 0.96 with the published
+map. On the produced winding, where the segment passes within half a sheet, it correlates at *0.83*, against 0.12 for
+the text of the starting winding and 0.10 for the shifted facing point; each of the six blocks alone lies between 0.68
+and 0.92 (@tab-ink, @fig-ink).
 
 #figure(
   table(
     columns: (auto, auto, 1fr),
     align: (left, right, left),
     [jump along the chain], [$r$], [controls],
-    [first], [*0.8331*], [0.1166 (starting text), 0.1037 (shifted counterpart)],
+    [first], [*0.8331*], [0.1166 (starting text), 0.1037 (shifted facing point)],
     [second], [*0.8749*], [0.1761, 0.0016, 0.2914 (one turn back)],
     [third], [0.4459], [0.3992 at best: undecided],
   ),
-  caption: [The text judge along the chain (#slice("296", "296_le_tour_produit_porte_t_il_le_texte_du_segment.md"),
-    #fact("R4-F477"); #slice("297", "297_le_texte_suit_il_la_chaine_au_dela_du_premier_saut.md"),
-    #fact("R4-F478")). The second and third jumps are research, not yet in the program.],
+  caption: [The text judge along a chain of windings, each produced from the previous one. The second and third jumps
+    are research, not yet in the program.],
 ) <tab-ink>
 
 #figure(
   image("../examples/grand-prize-render/next_winding_ink.jpg", width: 100%),
   caption: [Top: the ink read on the produced winding, over a 29.5 × 4.9 mm strip of row 176. Bottom: the published
     ink map where the segment passes over that winding. In amber, where the segment passes within half a sheet, the
-    only place where the comparison judges anything. This strip was looked at before the slice was written; the six
-    blocks behind the 0.83 were not.],
+    only place where the comparison judges anything. This strip was looked at before the experiment was written; the
+    six blocks behind the 0.83 were not.],
 ) <fig-ink>
 
 #caveat[The text judge sees little: a median of 2.2 % of a block lies within half a sheet of the segment. At the
@@ -328,7 +341,7 @@ third jump it separates nothing, and we report it as undecided rather than as a 
 = Reproducibility
 
 - *Published numbers, replayed.* Each port is tested against the research function that produced the number. The
-  correction gives back what slices 275 and 281 published, block by block, and the corrected transfer it writes
+  correction gives back what the research published on the segment and on the second band, block by block, and the corrected transfer it writes
   corrects the same points as the one the research saved, to within a millionth of a voxel.
 - *Inputs, made again from public data.* `vesuve grand-prize --render` renders two piles per block through
   `vc_render_tifxyz` @villa, from the published mesh and the raw scan. Over the whole segment (5 h 09 on three cores,
