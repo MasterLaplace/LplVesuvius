@@ -61,21 +61,25 @@
 #block(width: 100%, inset: (x: 1.6em))[
   #set text(size: 9.3pt)
   #set par(first-line-indent: 0em)
-  *Abstract.* Virtual unwrapping fits a surface to one sheet of a carbonised scroll inside an X-ray tomogram. When
-  the surface slips onto the neighbouring winding, a human finds the switch and repairs it; the Vesuvius Challenge
-  names these sheet switches a bottleneck and asks for conservative failure detection. We present `vesuve`, one
-  program with one pipeline per prize, and three hand-free steps it performs on a published PHercParis4 segment.
-  It *certifies* where the surface stayed on one winding, by closing loops on a lattice of steps between chunks:
-  6333 of 97771 chunks. It *produces* the next winding from the published surface prediction, by taking the first
-  sheet along each normal and letting neighbours vote: 92.14 % of the points land on the right winding, against
-  76.13 % for a fixed step. It *corrects* the points that slipped, by modelling each chunk's departure from its
-  neighbourhood as noise or a one-winding slip: 163 misses become right for 41 rights made misses (sign test
-  $p = 2.04 times 10^(-18)$), and no judge takes part in any decision. Where the segment passes over the winding
-  it produced, the published ink map says what text that winding must carry; our ink reading of the produced
-  winding correlates with it at 0.83, against 0.12 and 0.10 for two controls, and at 0.87 one jump further. On a
-  second band the correction does not hold, and the program measures that and writes nothing there. Every number
-  is replayed by a test against the research function that produced it, and the inputs of the correction are
-  rebuilt from public data byte for byte.
+  *Abstract.* Virtual unwrapping fits a surface to one sheet of a carbonised scroll inside an X-ray tomogram. One
+  turn of the rolled sheet is a *winding*. When the surface slips onto the neighbouring winding, a human finds the
+  switch and repairs it; the Vesuvius Challenge names these sheet switches a bottleneck and asks for conservative
+  failure detection. We present `vesuve`, one program with one pipeline per prize, and three steps it performs
+  without a human on a published PHercParis4 segment. It *certifies* where the surface stayed on one winding, by
+  closing loops on the depth offsets measured between square chunks of 128 voxels: 6333 of 97771 chunks. It
+  *produces* the next winding (each point moved along its normal by one turn, the *transfer*) from the published
+  surface prediction, by taking the first sheet along each normal and letting neighbours vote: 92.14 % of the
+  scored points land on the right winding, against 76.13 % when every point moves by one fixed step. It *corrects*
+  the points that slipped, by modelling each chunk's departure from its neighbourhood as noise or a one-winding
+  slip: 163 points made right for 41 made wrong, 42 blocks improved for 11 worsened (sign test
+  $p = 2.25 times 10^(-5)$ on the blocks). Over the whole segment that moves the share on the right winding from
+  0.9303 to 0.9334: a small gain, but every decision is taken without ground truth, and the winding drawn by hand is
+  used only to score. Where the segment passes over the winding it produced, the published ink map says what text
+  that winding must carry; our ink reading of the produced winding correlates with it at 0.83, against 0.12 and
+  0.10 for two controls, and at 0.87 one jump further. On a second published surface the correction does not hold
+  (15 made right for 25 made wrong), and the program measures that and writes nothing there. Every number is
+  replayed by a test against the authors' research code, public in the same repository, and the inputs of the
+  correction are rebuilt from public data byte for byte.
 ]
 
 = Introduction
@@ -98,8 +102,9 @@ Its contributions are four:
   that winding must carry.
 
 Each was established by an experiment that declared its rule before measuring, and the negative results are
-reported alongside. The program ports only what was established, and its tests replay each ported number against
-the research code that produced it.
+reported alongside. That research is public, in French, on the `experimental` branch of the same repository; the
+program, on `main`, ports only what it established, and its tests replay each ported number against the research
+code that produced it.
 
 = Related work
 
@@ -118,7 +123,8 @@ All data are public and read from the Challenge's bucket.
 - *PHercParis4, segment `20230702185753`*: its surface volume, read chunk by chunk; its published mesh; its
   published ink map; and, as the only judge, the next winding the segment's own tracer drew by hand. For rendering,
   the raw scan the segment was cut from, at 2.4 #um (`20260411134726`).
-- *The surface prediction `m7`*, sampled along the normals of the mesh. The samples are embedded (0.5 MB, one bit
+- *The published surface prediction* (model `m7`), a 3D map of where papyrus surfaces are, sampled along the
+  normals of the mesh. The samples are embedded (0.5 MB, one bit
   per sample) and can be read again from the bucket (1780 chunks, about 630 MB).
 - *PHercParis4, band `20260623142658-w028-037`*: a second surface, where the correction was measured not to hold.
 - *PHerc1447, segment `20250702235910`*, for First Letters, and the innermost published PHercParis4 bands
@@ -160,7 +166,7 @@ $delta = "round"(s \/ (2 v)) = 36$ voxels, is both the search range and the thre
 
 == Closed loops certify where a surface stayed on one winding
 
-The surface is flattened and cut into a grid of square *chunks*, in rows $r$ and columns $c$. Where two chunks meet,
+The surface is flattened and cut into a grid of square *chunks* of 128 voxels, in rows $r$ and columns $c$. Where two chunks meet,
 along their *seam*, a *step* measures how far the sheet moves in depth from one chunk to the other: the depth
 profiles of the two chunks are aligned, and the offset that matches them is the step. Each seam is measured along
 $k$ independent lines; its step is the median $c(s)$ of the line estimates $hat(s)_ell (s)$ that are present, kept
@@ -226,7 +232,7 @@ $
   x tilde w_0 cal(N)(0, sigma^2) + w_+ cal(N)(g, sigma^2) + w_- cal(N)(-g, sigma^2),
 $
 with the weights and the shared width fitted by expectation-maximisation, and the size of a slip, $g = 69.458$
-voxels, read from the data. A point is moved back by its departure, $tau_1 = tau_0 - x$, only when a slip explains
+voxels (167 #um, close to the published step of 173 #um), read from the data. A point is moved back by its departure, $tau_1 = tau_0 - x$, only when a slip explains
 that departure better than the noise:
 $
   max(w_+ e^(-(x - g)^2 \/ (2 sigma^2)), w_- e^(-(x + g)^2 \/ (2 sigma^2))) > w_0 e^(-x^2 \/ (2 sigma^2)).
@@ -290,7 +296,7 @@ counts and not one corrected point: they score, they do not decide.
     align: (left, right, right, right),
     [setting], [made right], [made wrong], [sign test $p$],
     [segment, neighbours along both axes (340 blocks)], [163], [41], [$2.04 times 10^(-18)$],
-    [segment, neighbours east and west only], [net +5], [], [],
+    [segment, neighbours east and west only], [net +5], [-], [-],
     [second band (84 blocks)], [15], [25], [0.154],
     [second band, neighbours along both axes], [7], [5], [0.774],
   ),
@@ -321,7 +327,7 @@ and 0.92 (@tab-ink, @fig-ink).
     [jump along the chain], [$r$], [controls],
     [first], [*0.8331*], [0.1166 (starting text), 0.1037 (shifted facing point)],
     [second], [*0.8749*], [0.1761, 0.0016, 0.2914 (one turn back)],
-    [third], [0.4459], [0.3992 at best: undecided],
+    [third], [0.4459], [0.3992 for the strongest control: undecided],
   ),
   caption: [The text judge along a chain of windings, each produced from the previous one. The second and third jumps
     are research, not yet in the program.],
