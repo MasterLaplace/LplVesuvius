@@ -4890,6 +4890,12 @@ de la plupart de leurs sauts. `R4-P187` s'ouvre : le vote désigne-t-il une cha�
 première contradiction est isolée ; les contradictions ne s'installent qu'à partir du douzième et du dixième saut. La limite de `389` est
 celle d'une chaîne. `R4-P188` s'ouvre : le douzième saut de la compagne, que `m7` compte nul ?
 
+**`391` · 2026-10-01 · le douzième saut de la compagne reste-t-il sur sa feuille ou m7 en manque-t-il une** — `R4-P188`
+
+⭐⭐⭐⭐ **Non : il a franchi une feuille que `m7` compte nulle** — `R4-F577`. Les voisines placent la onzième surface de la compagne de la
+graine 4, côté moins, à 11 tours et la douzième à 12, et la font avancer d'un tour à chaque saut de la dixième à la seizième : un tour perdu
+au compte, pas un glissement. `R4-P189` s'ouvre : les autres sauts que `m7` compte nuls ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

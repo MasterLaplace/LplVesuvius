@@ -1919,6 +1919,8 @@ run "l'accord aux comptes de m7 valide-t-il encore à seize sauts sur PHerc0358"
 run "figure l'accord aux comptes de m7 valide-t-il encore à seize sauts sur PHerc0358" uv run python "$ROOT/src/figures/figure_laccord_aux_comptes_de_m7_valide_t_il_encore_a_seize_sauts_sur_pherc0358.py" --verifier
 run "au-delà du huitième saut, le vote désigne-t-il une chaîne qui glisse" uv run python "$ROOT/src/nappe/au_dela_du_huitieme_saut_le_vote_designe_t_il_une_chaine_qui_glisse.py" --verifier
 run "figure au-delà du huitième saut, le vote désigne-t-il une chaîne qui glisse" uv run python "$ROOT/src/figures/figure_au_dela_du_huitieme_saut_le_vote_designe_t_il_une_chaine_qui_glisse.py" --verifier
+run "le douzième saut de la compagne reste-t-il sur sa feuille ou m7 en manque-t-il une" uv run python "$ROOT/src/nappe/le_douzieme_saut_de_la_compagne_reste_t_il_sur_sa_feuille_ou_m7_en_manque_t_il_une.py" --verifier
+run "figure le douzième saut de la compagne reste-t-il sur sa feuille ou m7 en manque-t-il une" uv run python "$ROOT/src/figures/figure_le_douzieme_saut_de_la_compagne_reste_t_il_sur_sa_feuille_ou_m7_en_manque_t_il_une.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

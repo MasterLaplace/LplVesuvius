@@ -3336,6 +3336,23 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 391 : LE DOUZIÈME SAUT DE LA COMPAGNE RESTE-T-IL SUR SA FEUILLE OU M7 EN MANQUE-T-IL UNE
+    s391 = _source(racine, "le_douzieme_saut_de_la_compagne_reste_t_il_sur_sa_feuille_ou_m7_en_manque_t_il_une.json")
+    if s391.exists():
+        d = json.loads(s391.read_text())
+        cv, cc = d["le_compte_des_voisines"], d["les_comptes_de_la_compagne"]
+        av = [a for a in d["les_avances"].values() if a is not None]
+        vz = lambda h: ", ".join(f"{y} {k}" for y, k, _ in d["les_voisines"][str(h)])  # noqa: E731
+        ecrits = [("le verdict de 391", f"LES VOISINES PLACENT LA ONZIÈME SURFACE À {cv['11']} TOURS ET LA DOUZIÈME À {cv['12']} : "
+                   f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"),
+                  ("le résumé de 391", f"Les voisines placent sa onzième surface à {cv['11']} tours et sa douzième à {cv['12']}"),
+                  ("les avances de 391", f"les voisines avancent d'un tour à chaque saut, {sum(a == 1 for a in av)} sauts sur {len(av)}"),
+                  ("la ligne 11 de 391", f"| 11 | suivie 11 et 12, tierce 12 | {cv['11']} | {cc[10]} |"
+                   if vz(11) == "suivie 11, suivie 12, tierce 12" else "changé"),
+                  ("la ligne 12 de 391", f"| 12 | suivie 12, tierce 13 | {cv['12']} | {cc[11]} |" if vz(12) == "suivie 12, tierce 13" else "changé"),
+                  ("le nul de 391", "le seul des seize que" if d["le_nombre_de_feuilles_de_m7"] == 0 else "changé")]
+        out.extend((nom_, [x_], s391.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 390 : AU-DELÀ DU HUITIÈME SAUT, LE VOTE DÉSIGNE-T-IL UNE CHAÎNE QUI GLISSE
     s390 = _source(racine, "au_dela_du_huitieme_saut_le_vote_designe_t_il_une_chaine_qui_glisse.json")
     if s390.exists():

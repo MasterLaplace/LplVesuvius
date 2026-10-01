@@ -1,0 +1,135 @@
+{
+ "la_question": "Sur la graine 4, côté moins, de PHerc0358, le douzième saut de la compagne, que m7 compte nul, la laisse-t-il sur la feuille de sa onzième surface, ou m7 manque-t-il la feuille qu'il franchit ?",
+ "le_cote": [
+  4,
+  "moins"
+ ],
+ "la_chaine": "compagne",
+ "le_saut": 12,
+ "le_nombre_de_feuilles_de_m7": 0,
+ "les_comptes_de_la_compagne": [
+  1,
+  2,
+  3,
+  4,
+  5,
+  6,
+  7,
+  8,
+  9,
+  10,
+  11,
+  11,
+  12,
+  13,
+  14,
+  15
+ ],
+ "les_voisines": {
+  "10": [
+   [
+    "suivie",
+    10,
+    10
+   ],
+   [
+    "tierce",
+    11,
+    10
+   ]
+  ],
+  "11": [
+   [
+    "suivie",
+    11,
+    11
+   ],
+   [
+    "suivie",
+    12,
+    12
+   ],
+   [
+    "tierce",
+    12,
+    11
+   ]
+  ],
+  "12": [
+   [
+    "suivie",
+    12,
+    12
+   ],
+   [
+    "tierce",
+    13,
+    12
+   ]
+  ],
+  "13": [
+   [
+    "suivie",
+    13,
+    13
+   ],
+   [
+    "tierce",
+    14,
+    13
+   ]
+  ],
+  "14": [
+   [
+    "suivie",
+    14,
+    14
+   ],
+   [
+    "tierce",
+    15,
+    14
+   ]
+  ],
+  "15": [
+   [
+    "suivie",
+    15,
+    15
+   ],
+   [
+    "tierce",
+    16,
+    15
+   ]
+  ],
+  "16": [
+   [
+    "suivie",
+    16,
+    16
+   ]
+  ]
+ },
+ "le_compte_des_voisines": {
+  "10": 10,
+  "11": 11,
+  "12": 12,
+  "13": 13,
+  "14": 14,
+  "15": 15,
+  "16": 16
+ },
+ "les_avances": {
+  "11": 1,
+  "12": 1,
+  "13": 1,
+  "14": 1,
+  "15": 1,
+  "16": 1
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "les voisines placent la onzième surface de la compagne à 11 tours et la douzième à 12 ; non, la compagne a franchi une feuille que m7 ne compte pas"
+ }
+}

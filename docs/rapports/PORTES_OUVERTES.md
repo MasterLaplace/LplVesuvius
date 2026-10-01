@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**242 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**243 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 204 portes
+## Grand Prize — 205 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -222,7 +222,8 @@
 - **R4-P185** *(le graal)* · **RÉPONDUE par `388` : oui par la règle, sans que les tours publiés aient rien à juger.** Sur PHercParis4, aucune surface lue ne quitte son tour et 66 des 66 validées lues restent sur le bon tour, mais l'écart majoritaire n'y décale qu'un côté plus ; sur PHerc0358, il fait valider 9 surfaces à la graine 8, côté moins, et en retire 6 à la graine 6, côté plus (`R4-F574`). La question était : **UN ÉCART DE COMPTES PRIS SUR AU MOINS CINQ PAIRES MÊME FEUILLE QUI S'ACCORDENT ALIGNE-T-IL LES COMPTES DE DEUX CHAÎNES SANS METTRE UNE SURFACE LUE DE PHERCPARIS4 HORS DE SON TOUR, ET QUE VALIDE-T-IL SUR LA GRAINE 8 DE PHERC0358 ?** La suite est `R4-P186`.
 - **R4-P186** *(le graal)* · **RÉPONDUE par `389` : oui.** À seize sauts, l'accord aux comptes de `m7` valide 8 surfaces au-delà du huitième saut, sur 3 côtés, jusqu'à 10 tours de la nappe, et 89 en tout ; mais au-delà du huitième saut il en contredit 47 (`R4-F575`). La question était : **SUR PHERC0358, AUX COMPTES DE `m7`, L'ACCORD DE TROIS CHAÎNES VALIDE-T-IL ENCORE DES SURFACES QUAND LES CHAÎNES SONT LANCÉES À SEIZE SAUTS AU LIEU DE HUIT ?** La suite est `R4-P187`.
 - **R4-P187** *(le graal)* · **RÉPONDUE par `390` : oui.** À seize sauts, le vote désigne la compagne de la graine 4, côté moins, et la suivie de la graine 6, côté moins ; leur première contradiction, au sixième et au troisième saut, reste isolée, et les contradictions s'installent à partir du douzième et du dixième saut (`R4-F576`). La question était : **SUR PHERC0358, AU-DELÀ DU HUITIÈME SAUT, SUR LES GRAINES 4 ET 6, CÔTÉ MOINS, LE VOTE DE `372` DÉSIGNE-T-IL UNE CHAÎNE QUI GLISSE, ET À QUEL SAUT SON GLISSEMENT COMMENCE-T-IL ?** La suite est `R4-P188`.
-- **R4-P188** *(le graal)* · **SUR LA GRAINE 4, CÔTÉ MOINS, DE PHERC0358, LE DOUZIÈME SAUT DE LA COMPAGNE, QUE `m7` COMPTE NUL, LA LAISSE-T-IL SUR LA FEUILLE DE SA ONZIÈME SURFACE, OU `m7` MANQUE-T-IL LA FEUILLE QU'IL FRANCHIT ?** ⭐⭐⭐⭐ C'EST CE QUE `390` DÉSIGNE. C'est à ce saut que les contradictions de la compagne s'installent (`R4-F576`) : savoir s'il est resté sur place ou si `m7` a manqué une feuille dit si la limite tient à la chaîne ou au compte.
+- **R4-P188** *(le graal)* · **RÉPONDUE par `391` : non.** Les surfaces voisines de la suivie et de la tierce placent la onzième surface de la compagne à 11 tours et la douzième à 12, et la font avancer d'un tour à chaque saut de la dixième à la seizième : le douzième saut a franchi une feuille que `m7` compte nulle (`R4-F577`). La question était : **SUR LA GRAINE 4, CÔTÉ MOINS, DE PHERC0358, LE DOUZIÈME SAUT DE LA COMPAGNE, QUE `m7` COMPTE NUL, LA LAISSE-T-IL SUR LA FEUILLE DE SA ONZIÈME SURFACE, OU `m7` MANQUE-T-IL LA FEUILLE QU'IL FRANCHIT ?** La suite est `R4-P189`.
+- **R4-P189** *(le graal)* · **SUR PHERC0358, LES SAUTS QUE `m7` COMPTE NULS LAISSENT-ILS LES CHAÎNES SUR LEUR FEUILLE, OU LES SURFACES VOISINES DES DEUX AUTRES CHAÎNES VOIENT-ELLES UNE FEUILLE FRANCHIE ?** ⭐⭐⭐⭐ C'EST CE QUE `391` DÉSIGNE. Sur la graine 4, côté moins, un saut compté nul a franchi une feuille (`R4-F577`) ; `384` comptait 10 sauts nuls de `369` tous à zéro feuille de `m7`, et 6 sauts simples de `369` que `m7` compte aussi nuls (`R4-F570`).
 
 ## Progress Prizes — 19 portes
 
