@@ -1,0 +1,625 @@
+{
+ "la_question": "Sur la graine 4, côté plus, de PHerc0358, la suivie que le vote désigne tient-elle les comptes avec les deux autres chaînes si son premier saut, à 1,40 pas, est compté double comme les leurs, à 1,67 et 1,76 pas ?",
+ "le_cote": [
+  4,
+  "plus"
+ ],
+ "le_premier_saut_de_la_suivie": {
+  "lecart_median": 27.976,
+  "le_genre": "simple",
+  "en_pas": 1.399
+ },
+ "redonne_380": true,
+ "avant": {
+  "les_couples": {
+   "suivie|compagne": {
+    "les_paires": 27,
+    "tiennent": 14,
+    "compte": true,
+    "tient": false
+   },
+   "suivie|tierce": {
+    "les_paires": 24,
+    "tiennent": 11,
+    "compte": true,
+    "tient": false
+   },
+   "compagne|tierce": {
+    "les_paires": 27,
+    "tiennent": 27,
+    "compte": true,
+    "tient": true
+   }
+  },
+  "le_vote": "suivie",
+  "validees": 0,
+  "le_plus_loin": null,
+  "par_statut": {
+   "validée": 0,
+   "confirmée une fois": 2,
+   "contredite": 21,
+   "sans témoin": 1
+  },
+  "les_surfaces": [
+   {
+    "la_chaine": "suivie",
+    "le_saut": 1,
+    "le_compte": 1,
+    "le_statut": "contredite",
+    "confirmee_par": [],
+    "contredite_par": [
+     "compagne",
+     "tierce"
+    ]
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 2,
+    "le_compte": 2,
+    "le_statut": "contredite",
+    "confirmee_par": [],
+    "contredite_par": [
+     "compagne",
+     "tierce"
+    ]
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 3,
+    "le_compte": 3,
+    "le_statut": "contredite",
+    "confirmee_par": [],
+    "contredite_par": [
+     "compagne",
+     "tierce"
+    ]
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 4,
+    "le_compte": 4,
+    "le_statut": "contredite",
+    "confirmee_par": [],
+    "contredite_par": [
+     "compagne",
+     "tierce"
+    ]
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 5,
+    "le_compte": 5,
+    "le_statut": "contredite",
+    "confirmee_par": [],
+    "contredite_par": [
+     "compagne",
+     "tierce"
+    ]
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 6,
+    "le_compte": 6,
+    "le_statut": "contredite",
+    "confirmee_par": [],
+    "contredite_par": [
+     "compagne",
+     "tierce"
+    ]
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 7,
+    "le_compte": 7,
+    "le_statut": "contredite",
+    "confirmee_par": [],
+    "contredite_par": [
+     "compagne",
+     "tierce"
+    ]
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 8,
+    "le_compte": 8,
+    "le_statut": "sans témoin",
+    "confirmee_par": [],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 1,
+    "le_compte": 2,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "tierce"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 2,
+    "le_compte": 3,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "tierce"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 3,
+    "le_compte": 4,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "tierce"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 4,
+    "le_compte": 5,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "tierce"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 5,
+    "le_compte": 6,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "tierce"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 6,
+    "le_compte": 7,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "tierce"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 7,
+    "le_compte": 8,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "tierce"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 8,
+    "le_compte": 9,
+    "le_statut": "confirmée une fois",
+    "confirmee_par": [
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 1,
+    "le_compte": 2,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "compagne"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 2,
+    "le_compte": 3,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "compagne"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 3,
+    "le_compte": 4,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "compagne"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 4,
+    "le_compte": 5,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "compagne"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 5,
+    "le_compte": 6,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "compagne"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 6,
+    "le_compte": 7,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "compagne"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 7,
+    "le_compte": 8,
+    "le_statut": "contredite",
+    "confirmee_par": [
+     "compagne"
+    ],
+    "contredite_par": [
+     "suivie"
+    ]
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 8,
+    "le_compte": 9,
+    "le_statut": "confirmée une fois",
+    "confirmee_par": [
+     "compagne"
+    ],
+    "contredite_par": []
+   }
+  ]
+ },
+ "apres": {
+  "les_couples": {
+   "suivie|compagne": {
+    "les_paires": 27,
+    "tiennent": 27,
+    "compte": true,
+    "tient": true
+   },
+   "suivie|tierce": {
+    "les_paires": 24,
+    "tiennent": 24,
+    "compte": true,
+    "tient": true
+   },
+   "compagne|tierce": {
+    "les_paires": 27,
+    "tiennent": 27,
+    "compte": true,
+    "tient": true
+   }
+  },
+  "le_vote": null,
+  "validees": 21,
+  "le_plus_loin": 8,
+  "par_statut": {
+   "validée": 21,
+   "confirmée une fois": 2,
+   "contredite": 0,
+   "sans témoin": 1
+  },
+  "les_surfaces": [
+   {
+    "la_chaine": "suivie",
+    "le_saut": 1,
+    "le_compte": 2,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 2,
+    "le_compte": 3,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 3,
+    "le_compte": 4,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 4,
+    "le_compte": 5,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 5,
+    "le_compte": 6,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 6,
+    "le_compte": 7,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 7,
+    "le_compte": 8,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "suivie",
+    "le_saut": 8,
+    "le_compte": 9,
+    "le_statut": "sans témoin",
+    "confirmee_par": [],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 1,
+    "le_compte": 2,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "suivie",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 2,
+    "le_compte": 3,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "suivie",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 3,
+    "le_compte": 4,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "suivie",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 4,
+    "le_compte": 5,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "suivie",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 5,
+    "le_compte": 6,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "suivie",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 6,
+    "le_compte": 7,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "suivie",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 7,
+    "le_compte": 8,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "suivie",
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "compagne",
+    "le_saut": 8,
+    "le_compte": 9,
+    "le_statut": "confirmée une fois",
+    "confirmee_par": [
+     "tierce"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 1,
+    "le_compte": 2,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "suivie"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 2,
+    "le_compte": 3,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "suivie"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 3,
+    "le_compte": 4,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "suivie"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 4,
+    "le_compte": 5,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "suivie"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 5,
+    "le_compte": 6,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "suivie"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 6,
+    "le_compte": 7,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "suivie"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 7,
+    "le_compte": 8,
+    "le_statut": "validée",
+    "confirmee_par": [
+     "compagne",
+     "suivie"
+    ],
+    "contredite_par": []
+   },
+   {
+    "la_chaine": "tierce",
+    "le_saut": 8,
+    "le_compte": 9,
+    "le_statut": "confirmée une fois",
+    "confirmee_par": [
+     "compagne"
+    ],
+    "contredite_par": []
+   }
+  ]
+ },
+ "le_controle": {
+  "4 moins": {
+   "suivie|compagne": false,
+   "suivie|tierce": false
+  },
+  "6 moins": {
+   "suivie|compagne": false,
+   "suivie|tierce": false
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "après le recompte, la suivie tient les comptes avec la compagne sur 27 paires de 27 et avec la tierce sur 24 de 24 ; oui, seul le seuil du saut double la séparait des deux autres"
+ }
+}

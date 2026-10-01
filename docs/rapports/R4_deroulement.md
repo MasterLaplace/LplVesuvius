@@ -4827,6 +4827,12 @@ rejouée sur PHercParis4 où les tours publiés donnent une vérité, ne valide 
 moins, et la graine 6, côté plus, le premier saut des trois chaînes tombe entre 1,67 et 1,93 pas et est compté double : l'accord n'a pas
 besoin que le saut de `324` pose au pas. `R4-P178` s'ouvre : la suivie de la graine 4, côté plus, comptée double à son premier saut ?
 
+**`381` · 2026-10-01 · la suivie de la graine 4 tient-elle les comptes si son premier saut est compté double** — `R4-P178`
+
+⭐⭐⭐⭐⭐ **Oui : 27 paires sur 27 avec la compagne et 24 sur 24 avec la tierce** — `R4-F567`. Sur la graine 4, côté plus, recompter double
+le premier saut de la suivie, à 1,40 pas, fait tenir ses deux couples et valide 21 surfaces jusqu'à 8 tours, aucune contredite ; là où les
+trois tiennent, la décaler d'un tour défait ses couples. `R4-P179` s'ouvre : le recompte éprouvé contre les tours publiés de PHercParis4 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3336,6 +3336,41 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 381 : LA SUIVIE DE LA GRAINE 4 TIENT-ELLE LES COMPTES SI SON PREMIER SAUT EST COMPTÉ DOUBLE
+    s381 = _source(racine, "la_suivie_de_la_graine_4_tient_elle_les_comptes_si_son_premier_saut_est_compte_double.json")
+    if s381.exists():
+        d = json.loads(s381.read_text())
+        av, ap, ps = d["avant"], d["apres"], d["le_premier_saut_de_la_suivie"]
+        f2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        cp = lambda r, k: (r["les_couples"][k]["tiennent"], r["les_couples"][k]["les_paires"])  # noqa: E731
+        sc, st, ct = (cp(ap, k) for k in ("suivie|compagne", "suivie|tierce", "compagne|tierce"))
+        val = [s_ for s_ in ap["les_surfaces"] if s_["le_statut"] == "validée"]
+        sept = all(sorted(s_["le_saut"] for s_ in val if s_["la_chaine"] == x) == list(range(1, 8)) for x in ("suivie", "compagne", "tierce"))
+        huit = {s_["la_chaine"]: s_["le_statut"] for s_ in ap["les_surfaces"] if s_["le_saut"] == 8}
+        ecrits = [("le verdict de 381", f"APRÈS LE RECOMPTE, LA SUIVIE TIENT LES COMPTES SUR {sc[0]} PAIRES DE {sc[1]} ET {st[0]} DE {st[1]} : "
+                                        f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"),
+                  ("le résumé de 381", f"suivie tient alors les comptes avec la compagne sur {sc[0]} paires de {sc[1]} et avec la tierce sur "
+                                       f"{st[0]} de {st[1]}, et {ap['validees']} surfaces sont validées jusqu'à {ap['le_plus_loin']}"),
+                  ("le premier saut de 381", f"le premier saut de la suivie, à {ps['lecart_median']:g} voxels".replace(".", ",")
+                   if ps["le_genre"] == "simple" else "changé"),
+                  ("le premier saut en pas de 381", f"son premier saut fait {f2(ps['en_pas'])} pas et compte 1"),
+                  ("la relecture de 381", "les couples que `380` publie sur ce côté." if d["redonne_380"] else "changé"),
+                  ("le contrôle de 381", "d'un tour les comptes de la suivie défait ses deux couples. Il tient"
+                   if sorted(d["le_controle"]) == ["4 moins", "6 moins"] and not any(any(x.values()) for x in d["le_controle"].values())
+                   else "changé"),
+                  ("les validées de 381", f"trois couples tiennent les comptes, le vote ne désigne plus aucune chaîne, et {ap['validees']} des "
+                   f"{len(ap['les_surfaces'])} surfaces sont validées, les sept premières de"
+                   if sept and ap["le_vote"] is None and all(t == n for t, n in (sc, st, ct)) else "changé"),
+                  ("les contredites de 381", f"Avant, aucune ne l'était et {av['par_statut']['contredite']} étaient contredites ; après, "
+                   "aucune ne l'est." if av["validees"] == 0 and ap["par_statut"]["contredite"] == 0 else "changé"),
+                  ("les huitièmes de 381", "celle de la suivie n'a pas de témoin, celles de la compagne et de la tierce ne"
+                   if huit == {"suivie": "sans témoin", "compagne": "confirmée une fois", "tierce": "confirmée une fois"} else "changé"),
+                  ("le résumé avant de 381", "elles, {} paires sur {}, et la suivie les tient avec elles sur {} paires de {} et {} de {}".format(
+                      *cp(av, "compagne|tierce"), *cp(av, "suivie|compagne"), *cp(av, "suivie|tierce")))]
+        for k, nom in (("suivie|compagne", "suivie et compagne"), ("suivie|tierce", "suivie et tierce"), ("compagne|tierce", "compagne et tierce")):
+            ecrits.append((f"la ligne {nom} de 381", "| {} | {} sur {} | {} sur {} |".format(nom, *cp(av, k), *cp(ap, k))))
+        out.extend((nom_, [x_], s381.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 380 : L'ACCORD DE TROIS CHAÎNES VALIDE-T-IL SUR LES CÔTÉS QUE 324 N'A PAS RETENUS
     s380 = _source(racine, "laccord_de_trois_chaines_valide_t_il_sur_les_cotes_que_324_na_pas_retenus.json")
     if s380.exists():
