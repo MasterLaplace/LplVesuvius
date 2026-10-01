@@ -1,10 +1,12 @@
 # Submission: September 2026 Progress Prizes
 
-**vesuve 0.2.0** is one Docker image with one pipeline per prize, built on a series of dated research slices,
-295 so far. Its main result this month: on a published PHercParis4 segment, it corrects the transfer from one
-winding to the next without a human. It takes the right decision four times as often as the wrong one (163 against
-41, sign test p = 2e-18), and the judges are used only to score. It also makes the inputs of that correction
-itself, from the published mesh and the raw scan, and gets the research's corrected transfer back byte for byte. And
+**vesuve**, on `main` (0.2.0 and what came after it), is one Docker image with one pipeline per prize, built on a
+series of dated research slices, 402 so far. Its main result this month: on a published PHercParis4 segment, it
+corrects the transfer from one winding to the next without a human. It takes the right decision four times as often
+as the wrong one (163 against 41, sign test p = 2e-18), and the judges are used only to score. It also computes
+everything that correction reads: the transfer itself, from the published surface prediction `m7`, within a millionth
+of a voxel of the research's; and the step tables, from the published mesh and the raw scan, which give the
+research's corrected transfer back byte for byte. And
 where it can be checked, the winding it produces carries the right text: the ink read on it matches the ink the segment
 itself carries at that place, 0.83 against 0.12 and 0.10 for two controls. On a band where the same procedure does
 not hold, the program measures that and writes nothing.
@@ -20,7 +22,9 @@ Every number below links to the file that produces it. The research lives on the
 - **PHercParis4, segment `20230702185753`**: its surface volume
   (`2.4um-0.22m-78keV-volume-20260411134726.zarr`), read chunk by chunk from the public bucket; its published mesh;
   its published ink map; the next winding that the segment's own tracer drew by hand, used as the judge; and, for
-  `--render`, the raw scan the segment was cut from (`volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr`).
+  `--render`, the raw scan the segment was cut from (`volumes/20260411134726-2.400um-0.2m-78keV-masked.zarr`); and the
+  published surface prediction `m7`, sampled along the normals of the mesh (embedded, or read again from the bucket
+  with `--read-prediction`).
 - **PHercParis4, band `20260623142658-w028-037`**: where the correction was measured not to hold.
 - **PHerc1447, segment `20250702235910`**, for First Letters, and the innermost published PHercParis4 bands
   (`w010-027`) for the title search.
@@ -36,6 +40,12 @@ program does two parts of that job without a human, on real data:
   (24263 chunks) it would still have to read to judge the rest
   ([`246`](https://github.com/MasterLaplace/LplVesuvius/blob/experimental/docs/archive/246_la_couverture_sans_main.md),
   fact `R4-F410`; replayed by `tests/test_embedded_data.py`).
+- **It produces the next winding.** Along the normal of each point of the mesh, it takes the first sheet the published
+  prediction `m7` marks after the surface's own, then lets the neighbours vote: 0.9214 of the points land on the right
+  winding, against 0.7613 for a fixed step
+  ([`247`](https://github.com/MasterLaplace/LplVesuvius/blob/experimental/docs/archive/247_le_transfert_retrouve_t_il_la_spire_voisine.md),
+  fact `R4-F412`). The program gives back the research's transfer point for point, within a millionth of a voxel, on
+  the segment and on the band, and the correction run on it gives back 163 for 41 (`tests/test_next_winding.py`).
 - **It corrects the transfer to the next winding where a point slipped.** It walks the sheet on the reference and on
   the produced winding, anchors their difference on the neighbouring blocks, and brings a point back by one winding
   when a slip explains its departure better than the noise. On 340 blocks it corrects 495 points: 163 misses become
@@ -54,7 +64,11 @@ program does two parts of that job without a human, on real data:
   against **0.12** for the text of the starting winding and **0.10** for the counterpart shifted by a letter; each
   block alone lies between 0.68 and 0.92
   ([`296`](https://github.com/MasterLaplace/LplVesuvius/blob/experimental/docs/archive/296_le_tour_produit_porte_t_il_le_texte_du_segment.md), fact `R4-F477`).
-  The reading is first calibrated on the traced winding: 0.96 against the published map.
+  The reading is first calibrated on the traced winding: 0.96 against the published map. One jump further along the
+  chain, the text still follows: 0.87, against 0.29 at best for three controls
+  ([`297`](https://github.com/MasterLaplace/LplVesuvius/blob/experimental/docs/archive/297_le_texte_suit_il_la_chaine_au_dela_du_premier_saut.md),
+  fact `R4-F478`); one more jump and it decides nothing, 0.45 against 0.40. This judge is research, not yet in the
+  program.
 
   ![Our ink reading of the produced winding, above the published ink where the segment passes over it](examples/grand-prize-render/next_winding_ink.jpg)
 
@@ -91,7 +105,8 @@ without a judge and is right far more often than wrong, which is the property a 
 - **The published numbers, replayed.** Each port is tested against the research function that produced the
   number. The correction gives back what `275` and `281` published, block by block, and the corrected transfer it
   writes corrects the same points as the one the research saved, to within a millionth of a voxel
-  (`tests/test_correction.py`).
+  (`tests/test_correction.py`). The transfer it computes from the prediction is the one the research saved, and a rule
+  broken on purpose loses the right winding (`tests/test_next_winding.py`).
 - **The inputs, made again from public data.** `vesuve grand-prize --render` renders two piles per block through
   `vc_render_tifxyz`, from the published mesh and the raw scan, and reads the step tables from them. Over the whole
   segment (5 h 09 on three cores, 288 GB read) its 680 tables equal the research's seam for seam, 334 171 seams with
@@ -150,4 +165,4 @@ The research is a series of dated slices. Each asks one question and answers it 
 
 The slices of this submission: `244` and `246` for the certificate, `247` and `248` for the transfer and its judges,
 `260` to `265` for the walk, the anchor and the decision, `275` for the whole segment, `281` and `291` to `295` for
-where it does not hold, `290` for the sign test, `296` for the ink of the produced winding.
+where it does not hold, `290` for the sign test, `296` and `297` for the ink of the produced windings.
