@@ -70,4 +70,4 @@ l'ont fait échouer : les sauts non jugés mis à zéro, et les valeurs de trois
 ## 7. Ce qui reste
 
 `R4-P201`, ouverte ici : sur PHercParis4, les sauts de deux feuilles qui partent du tour −6 finissent-ils un pas au-delà du tour −7, ou
-sur lui ? Les sauts d'une feuille qui partent du même tour servent de témoin. `R4-P151`, l'encre, reste en attente de l'auteur.
+sur lui ? Les sauts d'une feuille qui partent du même tour servent de témoin. `R4-P151`, l'encre de PHerc0358, est la suivante.

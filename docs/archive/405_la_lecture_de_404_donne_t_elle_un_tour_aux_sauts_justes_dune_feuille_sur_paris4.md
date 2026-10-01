@@ -80,5 +80,5 @@ valeurs au-delà de l'axe dessinées sans marque, et les colonnes rangées par s
 ## 7. Ce qui reste
 
 `R4-P203`, ouverte ici : sur PHercParis4, là où l'arrivée d'un saut d'une feuille parti du tour −6 est lue, sa surface de départ est-elle
-sur le tour −6 ? Les sauts jugés justes, dont le départ retrouve son tour, servent de témoin. `R4-P151`, l'encre, reste en attente de
-l'auteur.
+sur le tour −6 ? Les sauts jugés justes, dont le départ retrouve son tour, servent de témoin. `R4-P151`, l'encre de PHerc0358, est
+la suivante.

@@ -72,4 +72,4 @@ feuilles mêlés au panneau de gauche, et retirés de celui de droite.
 ## 7. Ce qui reste
 
 `R4-P204`, ouverte ici : sur PHercParis4, graines 4 à 6, `m7` compte-t-il une feuille entre le tour −6 et le tour −7 publiés, au même
-endroit ? Les tours consécutifs des sauts jugés justes servent de témoin. `R4-P151`, l'encre, reste en attente de l'auteur.
+endroit ? Les tours consécutifs des sauts jugés justes servent de témoin. `R4-P151`, l'encre de PHerc0358, est la suivante.

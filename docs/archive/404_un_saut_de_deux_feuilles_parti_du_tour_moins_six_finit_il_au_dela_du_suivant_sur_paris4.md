@@ -90,5 +90,5 @@ entre 1 et 2 tours, et la borne haute du témoin portée à 2 dans son décompte
 ## 7. Ce qui reste
 
 `R4-P202`, ouverte ici : sur PHercParis4, la lecture de `404` donne-t-elle un tour aux sauts d'une feuille jugés justes du tour 0 au tour
-−6, là où le tour d'arrivée est retrouvé ? Elle dirait si la faute est au tour −7 publié ou à la lecture. `R4-P151`, l'encre, reste en
-attente de l'auteur.
+−6, là où le tour d'arrivée est retrouvé ? Elle dirait si la faute est au tour −7 publié ou à la lecture. `R4-P151`, l'encre de PHerc0358, est
+la suivante.
