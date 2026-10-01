@@ -292,6 +292,38 @@ How often chance alone, one in two, would give a split at least as uneven as a m
 
 *Fact* `R4-F471` · *source* `les_gains_publies_se_distinguent_ils_du_hasard.py:78` · **procedure rule**
 
+## TJ: judging the produced winding by its text
+
+### [JT1] the facing point
+
+```math
+v_k = \operatorname*{arg\,min}_{s \in N_{64}(y_k),\ d_{\mathrm{grid}}(s, k) > 30} \lVert s - y_k \rVert, \qquad \text{near} \iff \lVert v_k - y_k \rVert < 36
+```
+
+The facing point of a point y of the produced winding is the nearest point of the segment in 3D, among the 64 nearest, that lies farther than 30 mesh cells from it on the surface: the same sheet is left out and the next turn kept. It is near when it is within half a sheet, 36 voxels.
+
+*Fact* `R4-F477` · *source* `le_tour_produit_porte_t_il_le_texte_du_segment.py` (`les_vis_a_vis`), `296` · **procedure rule**
+
+### [JT2] the text correlation
+
+```math
+r = \frac{\sum_{p \in M} (I_p - \bar I)(J_{\varphi(p)} - \bar J)}{\sqrt{\sum_{p \in M} (I_p - \bar I)^2 \sum_{p \in M} (J_{\varphi(p)} - \bar J)^2}}
+```
+
+I is our reading of the produced winding, reduced 8 times; J is the published ink map; phi sends a pixel to the pixel of the facing point; M is the pixels where both are known and the facing point is near. The controls replace J by the map under the block itself, and by the map shifted by 64 pixels.
+
+*Fact* `R4-F477` · *source* `le_tour_produit_porte_t_il_le_texte_du_segment.py` (`correlation`), `296` · **procedure rule**
+
+### [JT3] the outcome
+
+```math
+\text{carries} \iff r_{\mathrm{calibration}} \ge 0.8,\ |M| \ge 10\,000,\ r > \max(r_{\mathrm{under}}, r_{\mathrm{shifted}})
+```
+
+The produced winding carries the segment's text where it passes over it when the reading finds the published map on the reference (0.8 at least), at least 10000 pixels are judged, and the correlation beats both controls; it does not when a control equals or exceeds it; the outcome is undecidable otherwise.
+
+*Fact* `R4-F477` · *source* `le_tour_produit_porte_t_il_le_texte_du_segment.py` (`le_verdict`), `296` · **procedure rule**
+
 ## E8: the ink, the measuring rule
 
 ### [F31] the Fresnel number

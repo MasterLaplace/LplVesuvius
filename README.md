@@ -15,10 +15,13 @@ by one winding when a slip explains its departure better than the noise does. On
 validated, that turns 163 misses into right points for 41 right points turned into misses (`docs/archive/275`). On a
 band where it was not, it says so and writes nothing.
 
-The transfer it corrects is computed here, from the published surface prediction `m7`: along the normal of each point of
-the segment's mesh, the first sheet after the segment's own, then a vote of the neighbours (`docs/archive/247`). That
-lands on the right winding for 0.9214 of the points where a fixed step lands for 0.7613, and it gives back the
-transfer the research saved, point for point.
+The transfer it corrects is computed here, from the samples of the published surface prediction `m7` (embedded, or read
+again with `--read-prediction`): along the normal of each point of
+the segment's mesh, one cell in eight, the first sheet after the segment's own, then a vote of the neighbours
+(`docs/archive/247`). That gives a depth at each of those points, not a whole winding surface. On the segment, where the
+rules were written, it lands on the right winding for 0.9214 of the 39865 points that have a judge (of the 62815 points of the one-in-eight grid), where a
+fixed step lands for 0.7613; on the central slice of a band where they were not, 0.915 against 0.8208
+(`docs/archive/247`, `R4-F413`). It gives back the transfer the research saved, point for point.
 
 ## Two branches
 
@@ -61,7 +64,7 @@ Measured on real data. The reports are in [`examples/`](examples/README.md).
 
 | prize | command | what it writes | where it stops, and why |
 |---|---|---|---|
-| **Grand Prize** | `vesuve grand-prize` | a per-chunk certificate mask, the certified surface as tifxyz with `approval.tif`, the published ink map under the mask, and the transfer to the next winding corrected without a hand (`corrected_transfer.npy`, `correction.json`) | one published segment: 6333 of 97771 chunks certified. To judge the rest it still has to read 111 bands (24263 chunks, about 21 min at 16 threads). The correction gains 122 points net on 340 blocks (sign test p = 2.04e-18). By default it replays the step tables the research rendered; `--render` makes them here, which needs `vc_render_tifxyz` and about 320 GB read from the raw scan. Over the whole segment it made the same 680 tables and the same corrected transfer, byte for byte, in 5 h on three cores ([`examples/grand-prize-render/`](examples/grand-prize-render/report.md)). There is no `column_NN.tifxyz` because columns need legible ink |
+| **Grand Prize** | `vesuve grand-prize` | a per-chunk certificate mask, the certified surface as tifxyz with `approval.tif`, the published ink map under the mask, and the transfer to the next winding corrected without a hand (`corrected_transfer.npy`, `correction.json`) | one published segment: 6333 of 97771 chunks certified. To judge the rest it still has to read 111 bands (24263 chunks, about 21 min at 16 threads). The correction gains 122 points net on 340 blocks (sign test p = 2.04e-18). By default it replays the step tables the research rendered; `--render` makes them here, which needs `vc_render_tifxyz` and about 320 GB read from the raw scan. Over the whole segment it made the same 680 tables and the same corrected transfer, byte for byte, in 5 h on three cores ([`examples/grand-prize-render/`](examples/grand-prize-render/report.md)). There is no `column_NN.tifxyz` because columns need legible ink. Stage TJ says where the segment passes over the winding it produced (a median of 0.0222 of a block) and, given ink readings, judges the text there; it claims nothing elsewhere |
 | **Progress** | `vesuve progress` | where a published segment changes winding | column 260, rows 26 to 223, crossing half a sheet at cuts 163, 173 and 203. It cannot tell a misread column from material that really diverges |
 | **First Letters** | `vesuve first-letters` | a 4 cm² window chosen on papyrus alone, the fibre render, a view without the model, the model's ink, row witnesses, a 1 cm scale bar | on PHerc1447 the 2023 model shows no periodic rows at any angle (`R1-F20`), so it claims no letters |
 | **Paris 4 title** | `vesuve paris4-title` | the last written column of the innermost band, and the region after it where an end-title would sit | on the well-registered revision it finds a short last column whose lines fill the top fifth. Nobody has read the crops yet |
@@ -104,8 +107,17 @@ request, with warnings treated as errors.
   round.
 - The transfer to the next winding is computed from the embedded samples of the prediction. It gives back the
   transfers the research saved on the segment and on the band, point for point within a millionth of a voxel, and
-  the shares on the right winding `247` published (0.9214 with the vote, 0.9119 without, 0.7613 for a fixed step).
-  `--read-prediction` reads the samples again from the public prediction.
+  the shares on the right winding `247` published, over the 39865 points that have a judge (0.9214 with the vote, 0.9119 without, 0.7613 for a fixed step).
+  `--read-prediction` reads the samples again from the public prediction. That this reading gives back the embedded
+  samples is checked, with `VESUVE_NETWORK=1`, on 100 rays spread over the segment that each see a sheet, not on every
+  ray; the whole reading has not been compared with the embedded samples.
+- The judge of the text of the produced winding (`296`) measures, from the two embedded meshes, where the segment
+  passes over the winding produced from it: the six blocks it would read, and their near shares (0.7511 down to
+  0.6476), are the research's, and so is the median of the 340 blocks, 0.0222. Given the research's readings of the ink
+  it gives back 0.8331 against 0.1166 and 0.1037 on the same six blocks, after a calibration at 0.9593 (`R4-F477`;
+  `tests/test_ink_judge.py`, with `VESUVE_RESEARCH` and `VESUVE_DATA`). It does not read the ink with
+  `scrollprize/ink_canonical_2um` itself (1.55 GB, torch): `--ink-readings DIR` takes the readings, and without them
+  the stage gives the coverage and says that no text is judged.
 - The chain of windings grown from the prediction `m7` (`vesuve/chain/`: the criterion that needs no referent, the
   regrowth by one mesh, the chain) is replayed on PHercParis4, seeds 1 to 8, both sides, eight jumps: it gives back the
   chain the research published jump by jump (where each surface comes from, its points, whether the criterion holds

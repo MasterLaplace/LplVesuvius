@@ -6,6 +6,28 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 ## [Unreleased]
 
 ### Added
+- `vesuve grand-prize` gains stage TJ, the judge of the text of the produced winding (`296`, `R4-F477`). From the two
+  embedded meshes it measures where the segment passes over the winding produced from it: the share of each of the 340
+  candidate blocks within half a sheet of a facing point (median 0.0222), and the six blocks to judge, chosen outside
+  the band the research looked at by eye. It says that it claims nothing elsewhere. Given `--ink-readings DIR`
+  (`calibration.npy`, and `produced_<row>_<column>.npy` for each judged block: the ink as `scrollprize/ink_canonical_2um`
+  read it), it reads the published ink map (2 MB) and reports the correlation of the reading with the map at the facing
+  point, against two controls, and the outcome. On the research's readings it gives back 0.8331, 0.1166 and 0.1037
+  on the same six blocks, after a calibration at 0.9593. Without readings the stage says so, says that vesuve does not
+  run the ink model itself, and names what the machine lacks to produce them (torch, the model's file); a folder that
+  lacks a reading, or holds one that is not a 2-D array, is named, and the pipeline goes on. Elsewhere than within half
+  a sheet of a facing point the judge claims nothing.
+- The formulary gains the three rules of the judge: the facing point, the text correlation, the outcome.
+
+### Fixed
+- The documents of 0.3.0 said more than the facts behind the transfer. They now say that it is the position of the
+  next winding point by point on one mesh cell in eight, not a whole winding surface (`R4-F412`); that 0.9214 is
+  the share of the 39865 points that have a judge, of the 62815 points of the one-in-eight grid, on the segment where the rules were written, with 0.915
+  against 0.8208 on the central slice of the band where they were not (`R4-F413`); and what the correction is handed
+  ready-made (the judges, the candidate blocks and, by default, the step tables and the samples of the prediction).
+- The network test of `--read-prediction` compared the first 300 rays of the mesh, of which 13 see a sheet. It now
+  reads 100 rays spread over the segment that each see one, and the README says that the whole reading has not been
+  compared with the embedded samples.
 - `vesuve.chain`, the chain of windings grown from the surface prediction `m7` (slices 345, 352, 356, 365): the criterion
   that needs no referent (a jump is held if at least three quarters of its counted points cross one sheet and fewer
   than 50 cross none, `R4-F531`, `R4-F538`), the jump and the growth from a seed, the regrowth of a held winding by one

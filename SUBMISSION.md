@@ -3,10 +3,13 @@
 **vesuve 0.3.0** is one Docker image with one pipeline per prize, built on a
 series of dated research slices, 402 so far. Its main result this month: on a published PHercParis4 segment, it
 corrects the transfer from one winding to the next without a human. It takes the right decision four times as often
-as the wrong one (163 against 41, sign test p = 2e-18), and the judges are used only to score. It also computes
-everything that correction reads: the transfer itself, from the published surface prediction `m7`, within a millionth
-of a voxel of the research's; and the step tables, from the published mesh and the raw scan, which give the
-research's corrected transfer back byte for byte. And
+as the wrong one (163 against 41, sign test p = 2e-18), and the judges are used only to score. Of what that
+correction reads, the program computes two things. It computes the transfer itself from the samples of the
+published surface prediction `m7`: the position of the next winding point by point, on one mesh cell in eight, not a whole winding
+surface (`R4-F412`), within a millionth of a voxel of the research's. And, with `--render`, it computes the step
+tables from the published mesh and the raw scan, which give the research's corrected transfer back byte for byte. The
+rest is delivered ready-made: the judges, the candidate blocks and, by default, the step tables and the samples of
+the prediction along each normal (`--read-prediction` reads those again from the public prediction). And
 where it can be checked, the winding it produces carries the right text: the ink read on it matches the ink the segment
 itself carries at that place, 0.83 against 0.12 and 0.10 for two controls. On a band where the same procedure does
 not hold, the program measures that and writes nothing.
@@ -43,11 +46,14 @@ program does two parts of that job without a human, on real data:
   (24263 chunks) it would still have to read to judge the rest
   ([`246`](https://github.com/MasterLaplace/LplVesuvius/blob/experimental/docs/archive/246_la_couverture_sans_main.md),
   fact `R4-F410`; replayed by `tests/test_embedded_data.py`).
-- **It produces the next winding.** Along the normal of each point of the mesh, it takes the first sheet the published
-  prediction `m7` marks after the surface's own, then lets the neighbours vote: 0.9214 of the points land on the right
-  winding, against 0.7613 for a fixed step
+- **It produces the next winding's position, point by point.** Along the normal of each point of the mesh, one cell in
+  eight, it takes the first sheet the published prediction `m7` marks after the surface's own, then lets the neighbours
+  vote. That gives a depth at each of those points, not a whole winding surface. On the segment, where the rules were
+  written, 0.9214 of the 39865 points that have a judge (of the 62815 points of the one-in-eight grid) land on the right winding, against 0.7613 for a
+  fixed step
   ([`247`](https://github.com/MasterLaplace/LplVesuvius/blob/experimental/docs/archive/247_le_transfert_retrouve_t_il_la_spire_voisine.md),
-  fact `R4-F412`). The program gives back the research's transfer point for point, within a millionth of a voxel, on
+  fact `R4-F412`). On the central slice of the band `w028-037`, where they were not, 0.915 against 0.8208 (fact
+  `R4-F413`). The program gives back the research's transfer point for point, within a millionth of a voxel, on
   the segment and on the band, and the correction run on it gives back 163 for 41 (`tests/test_next_winding.py`).
 - **It corrects the transfer to the next winding where a point slipped.** It walks the sheet on the reference and on
   the produced winding, anchors their difference on the neighbouring blocks, and brings a point back by one winding
