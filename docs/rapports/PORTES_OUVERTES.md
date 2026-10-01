@@ -4,9 +4,9 @@
 
 # Les portes ouvertes, classées par prix
 
-**270 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**271 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
-## First Letters — 11 portes
+## First Letters — 12 portes
 
 - **R1-P01** · **La mesure qui manque au second papier** : scorer la case vide au régime du prix contre les étiquettes du témoin de production, sur `0500P2`, avec le recalage affine de `75` §C1 (Dice 0,971) et la tuile de **66 px** (pas 256) que ce pas exige (`72` §3). ⚠ La sortie déclarée de `C` : si l'AUC native à 9,362 ne se sépare pas de 0,5 avec 40 tuiles, la règle ne lit pas à ce régime, et on juge par la typographie (`45`) et le juge vierge (`09`).
 - **R1-P02** · Le juge de `09` sur `data/jeu_du_juge/` (18 tuiles, consigne, clé à part) : **un acte humain**, pas une tâche de code — la session qui a rendu les cartes est disqualifiée.
@@ -19,6 +19,7 @@
 - **R4-P208** · **L, LE CONTRASTE DES DEUX SENS DE LECTURE DE `410`, DÉPASSE-T-IL CELUI D'UN ORDRE DE COUCHES MÉLANGÉ, ET RESTE-T-IL PRÈS DE ZÉRO SUR DU PAPYRUS CONNU VIERGE ?** ⭐⭐⭐⭐⭐ `aviad12g/vesuvius-depth-order-control` montre qu'un détecteur publié à 9,6 µm allume plus de pixels sur un ordre mélangé que sur le vrai, sur 10 segments sur 10, et que l'ordre inverse peut en allumer plus que l'ordre juste : un contraste entre deux ordres peut naître sans encre. `lightsgoblack/ink-placebo-check` donne du papyrus vierge connu sur deux segments de PHerc1667 (w018, w023). Sans ces deux témoins, L ne prouve pas l'encre.
 - **R4-P209** · **LE DÉTECTEUR ENTRAÎNÉ À 9 µm (`scrollprize/ink_9um`, en partie sur des segments natifs à 9,362 µm de PHerc0139) LIT-IL L'ÉTALON DE PHERCPARIS4 AU NIVEAU 2, PUIS LES SURFACES DE `354` SUR PHERC0358 À LEUR RÉSOLUTION, AVEC LES TÉMOINS DE `R4-P208` ?** ⭐⭐⭐⭐ First Letters : 50 000 $ par rouleau, 10 lettres dans 4 cm² produites par programme ; PHerc0358 est éligible et aucune encre n'y est publiée. ⚠ Son « pas d'encre » sort vers 0,25, par le lissage de ses étiquettes.
 - **R4-P210** · **L'OMBILIC DE PHERC0358 POSÉ À LA MAIN PAR LA COMMUNAUTÉ (`first-letters-scan-atlas`, avec les normales de Lasagna) DIT-IL DE QUEL CÔTÉ DE CHAQUE SURFACE DE `354` EST L'AXE, ET L'ORDRE DE LECTURE QUE L'ENCRE PRÉFÈRE (`R4-F596`) EST-IL LE MÊME POUR TOUTES LES FEUILLES ORIENTÉES PAR LUI ?** ⭐⭐⭐⭐⭐ La courbure ne le dit pas sur 6 mm (`410`, amendement de `2e87989b`) ; le signe de L change entre feuilles parallèles d'une même graine. Un axe donne l'ordre sans l'encre.
+- **R4-P217** · **SUR LES SCANS À 2,403 µm ET 77 keV DE PHERC1203 ET DE PHERC0846A, TOUS DEUX ÉLIGIBLES AU PRIX FIRST LETTERS, LE DÉTECTEUR DE `296` — QUI LIT PHERCPARIS4 À 0,9593 SUR UN SCAN À 2,400 µm ET 78 keV — LIT-IL DES LETTRES SUR UNE SURFACE POSÉE SUR UNE FEUILLE ?** ⭐⭐⭐⭐⭐ First Letters : 50 000 $ par rouleau pour 10 lettres dans 4 cm², jusqu'au 2027-06-25. Ces deux scans couvrent tout le diamètre (63,7 et 71,1 mm) sur 36,4 mm de hauteur. Les relevés publics des rouleaux éligibles ont lu des scans à 9 µm avec des détecteurs à 9 µm, sans lettre. ⚠ Les prédictions de surface `m7` et les 22 segments auto-grown de PHerc1203 sont sur ses scans à 9 µm : il faut des surfaces dans le scan à 2,4 µm, par recalage ou par croissance.
 
 ## Grand Prize — 227 portes
 
