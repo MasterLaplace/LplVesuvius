@@ -20,6 +20,7 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 - The formulary gains the three rules of the judge: the facing point, the text correlation, the outcome.
 
 ### Fixed
+- Reading the public prediction along the rays is faster: the chunks the samples fall in are found by sorting one integer key per chunk instead of sorting rows (1.5 s to 0.11 s on two million samples), with the same chunks and the same samples.
 - Two formulas of `FORMULARY.md` (the vote of the neighbours, the facing point) showed 'The following macros are not allowed: operatorname' on GitHub instead of the formula; they no longer use `\operatorname`, and a test refuses it.
 - The documents of 0.3.0 said more than the facts behind the transfer. They now say that it is the position of the
   next winding point by point on one mesh cell in eight, not a whole winding surface (`R4-F412`); that 0.9214 is
