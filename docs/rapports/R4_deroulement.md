@@ -4997,6 +4997,12 @@ tour −7 est à 0,43-0,56. `R4-P204` s'ouvre : `m7` compte-t-il une feuille ent
 L'attente de `R4-P151`, que l'auteur n'avait jamais demandée, est levée le même jour. `R4-P206` s'ouvre : dans quel sens empiler les
 couches de PHerc0358, fixé sur PHercParis4 à 9,6 µm par la courbure de la feuille ?
 
+**`409` · 2026-10-01 · le rendu de pherc0358 lit-il l'encre de paris4, et dans quel sens** — `R4-P206`
+
+⭐⭐⭐⭐⭐ **Vers le creux : 0,8162 contre 0,1083 pour le témoin ; vers la bosse, −0,0777** — `R4-F595`. Le rendu qui lira PHerc0358,
+appliqué au bloc étalon depuis le niveau 2 de PHercParis4, lit l'encre quand les couches croissent vers le creux de la feuille. La marge
+sur le seuil de 0,8 est mince. `R4-P151` se lit maintenant sur PHerc0358 (`410`).
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

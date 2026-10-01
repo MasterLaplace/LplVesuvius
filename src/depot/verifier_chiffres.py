@@ -3336,6 +3336,28 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 409 : LE RENDU DE PHERC0358 LIT-IL L'ENCRE DE PARIS4, ET DANS QUEL SENS
+    s409 = _source(racine, "le_rendu_de_pherc0358_lit_il_lencre_de_paris4_et_dans_quel_sens.json")
+    if s409.exists():
+        d = json.loads(s409.read_text())
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        c_, b_ = d["les_lectures"]["creux"], d["les_lectures"]["bosse"]
+        r_ = d["le_plan"]["le_rendu_en_secondes"]
+        t_ = {t["le_sens"]: t["les_secondes"] for t in d["les_temps"]}
+        ecrits = [("le verdict de 409", f"VERS LE CREUX, {vg(c_['la_correlation'])} CONTRE {vg(c_['le_temoin'])} POUR LE TÉMOIN ; VERS LA BOSSE, "
+                   f"{vg(b_['la_correlation'])} : LE SENS EST FIXÉ, VERS LE CREUX" if d["le_verdict"].get("le_sens") == "creux" else "changé"),
+                  ("le résumé de 409", f"Vers le creux, la lecture s'accorde à {vg(c_['la_correlation'])} avec la carte d'encre publiée,"),
+                  ("la suite du résumé de 409", f"contre {vg(c_['le_temoin'])} pour le témoin ; vers la bosse, {vg(b_['la_correlation'])}."),
+                  ("la ligne vers le creux de 409", f"| vers le creux | {vg(c_['la_correlation'])} | {vg(c_['le_temoin'])} |"),
+                  ("la ligne vers la bosse de 409", f"| vers la bosse | {vg(b_['la_correlation'])} | {vg(b_['le_temoin'])} |"),
+                  ("la surface de 409", f"Sa couche de la surface s'accorde à {vg(d['la_surface_contre_408'])} avec celle de la pile de"),
+                  ("le rendu de 409", f"une pile de 2048 × 2048 se rend en {vg(r_['creux'])} secondes ; la lecture vers le creux a pris "
+                   f"{vg(t_['creux'])} secondes sur l'iGPU, vers la"),
+                  ("la lecture vers la bosse de 409", f"bosse {vg(t_['bosse'])}."),
+                  ("les morceaux de 409", f"les {d['le_plan']['les_morceaux']['deja']} morceaux du niveau 2 que les deux piles lisent étaient déjà sur le disque."
+                   if not d["le_plan"]["les_morceaux"].get("tire") else "changé")]
+        out.extend((nom_, [x_], s409.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 408 : LE DÉTECTEUR DE 296 LIT-IL ENCORE L'ENCRE DE PARIS4 RAMENÉE À 9 µm
     s408 = _source(racine, "le_detecteur_de_296_lit_il_encore_lencre_de_paris4_ramenee_a_9um.json")
     if s408.exists():

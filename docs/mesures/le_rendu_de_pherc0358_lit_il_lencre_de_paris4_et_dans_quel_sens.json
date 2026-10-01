@@ -1,0 +1,62 @@
+{
+ "la_question": "Le rendu qui lira PHerc0358, appliqué au bloc étalon de PHercParis4 depuis son niveau de 9,6 µm, lit-il l'encre, et dans quel sens des couches ?",
+ "les_constantes": {
+  "le_niveau": 2,
+  "le_facteur": 4,
+  "le_seuil": 0.8,
+  "le_plancher": 0.5
+ },
+ "le_plan": {
+  "le_sens_du_creux": -1.0,
+  "les_morceaux": {
+   "deja": 90,
+   "tire": 0,
+   "absent": 0
+  },
+  "le_rendu_en_secondes": {
+   "creux": 156.4,
+   "bosse": 169.1
+  },
+  "la_couverture": 1.0
+ },
+ "les_lectures": {
+  "creux": {
+   "la_correlation": 0.8162,
+   "le_temoin": 0.1083,
+   "les_pixels": 65536
+  },
+  "bosse": {
+   "la_correlation": -0.0777,
+   "le_temoin": -0.1347,
+   "les_pixels": 65536
+  }
+ },
+ "la_surface_contre_408": 0.9434,
+ "les_temps": [
+  {
+   "le_sens": "creux",
+   "la_sortie": "encre_creux.npy",
+   "appareil": "xpu",
+   "les_secondes": 559.8,
+   "la_forme": [
+    2048,
+    2048
+   ]
+  },
+  {
+   "le_sens": "bosse",
+   "la_sortie": "encre_bosse.npy",
+   "appareil": "xpu",
+   "les_secondes": 314.5,
+   "la_forme": [
+    2048,
+    2048
+   ]
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "vers le creux, 0,8162 ; vers la bosse, -0,0777 ; témoins 0,1083 et -0,1347 ; le sens est fixé : vers le creux",
+  "le_sens": "creux"
+ }
+}
