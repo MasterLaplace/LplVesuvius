@@ -3336,6 +3336,33 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 394 : LES SAUTS MÉLANGÉS DE M7 SE TROMPENT-ILS PLUS SOUVENT SUR PARIS4
+    s394 = _source(racine, "les_sauts_melanges_de_m7_se_trompent_ils_plus_souvent_sur_paris4.json")
+    if s394.exists():
+        d = json.loads(s394.read_text())
+        m_, n_ = d["le_bilan"]["melanges"], d["le_bilan"]["nets"]
+        ss = d["les_sauts"]
+        faux = [s_ for s_ in ss if not s_["juste"]]
+        f0 = faux[0] if len(faux) == 1 else None
+        mel = [s_ for s_ in ss if s_["la_part_majoritaire"] < 2 / 3]
+        autre = [s_ for s_ in mel if s_["juste"]]
+        ecrits = [("le verdict de 394", d["le_verdict"]["lissue"].upper()),
+                  ("le chapeau de 394", f"Sur {len(ss)} sauts jugés, {m_['juges']} seulement sont des mélanges, dont {m_['faux']} faux ;"),
+                  ("les nets de 394", f"les {n_['juges']} sauts nets sont tous justes" if n_["faux"] == 0 else "changé"),
+                  ("le fait de 394", f"Sur PHercParis4, les {n_['juges']} sauts nets de `m7` sont justes" if n_["faux"] == 0 else "changé"),
+                  ("la ligne des nets de 394", f"| nets, part majoritaire d'au moins deux tiers | {n_['juges']} | {n_['faux']} |"),
+                  ("la ligne des mélanges de 394", f"| mélanges, part majoritaire sous deux tiers | {m_['juges']} | {m_['faux']} |"),
+                  ("le haut de 394", f"{sum(1 for s_ in ss if s_['la_part_majoritaire'] >= 0.975)} des {len(ss)} sauts jugés ont au moins 97,5 %"),
+                  ("le simple de 394", f"et {sum(1 for s_ in ss if s_['le_nombre_de_feuilles'] == 1 and s_['les_tours'] == 1)} franchissent une "
+                   f"feuille et un tour"),
+                  ("le faux de 394", f"de la suivie de la graine {f0['le_rang']} : {f0['les_comptes'][str(f0['le_nombre_de_feuilles'])]} de ses "
+                   f"{sum(f0['les_comptes'].values())}" if f0 and f0["la_chaine"] == "suivie" and f0["le_saut"] == 6 else "changé"),
+                  ("le second de 394", f"{f0['les_comptes'].get(str(f0['les_tours']), 0)} en comptent {f0['les_tours']} ; les tours en disent "
+                   f"{f0['les_tours']}" if f0 else "changé"),
+                  ("l'autre mélange de 394", f"le septième saut de la compagne de la graine {autre[0]['le_rang']}, est"
+                   if len(autre) == 1 and autre[0]["la_chaine"] == "compagne" and autre[0]["le_saut"] == 7 else "changé")]
+        out.extend((nom_, [x_], s394.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 393 : LES SAUTS NULS QUI FRANCHISSENT UNE FEUILLE SE DISTINGUENT-ILS PAR LEURS POINTS
     s393 = _source(racine, "les_sauts_nuls_qui_franchissent_une_feuille_se_distinguent_ils_par_leurs_points.json")
     if s393.exists():

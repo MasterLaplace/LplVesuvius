@@ -1925,6 +1925,8 @@ run "les sauts que m7 compte nuls laissent-ils les chaînes sur leur feuille" uv
 run "figure les sauts que m7 compte nuls laissent-ils les chaînes sur leur feuille" uv run python "$ROOT/src/figures/figure_les_sauts_que_m7_compte_nuls_laissent_ils_les_chaines_sur_leur_feuille.py" --verifier
 run "les sauts nuls qui franchissent une feuille se distinguent-ils par leurs points" uv run python "$ROOT/src/nappe/les_sauts_nuls_qui_franchissent_une_feuille_se_distinguent_ils_par_leurs_points.py" --verifier
 run "figure les sauts nuls qui franchissent une feuille se distinguent-ils par leurs points" uv run python "$ROOT/src/figures/figure_les_sauts_nuls_qui_franchissent_une_feuille_se_distinguent_ils_par_leurs_points.py" --verifier
+run "les sauts mélangés de m7 se trompent-ils plus souvent sur paris4" uv run python "$ROOT/src/nappe/les_sauts_melanges_de_m7_se_trompent_ils_plus_souvent_sur_paris4.py" --verifier
+run "figure les sauts mélangés de m7 se trompent-ils plus souvent sur paris4" uv run python "$ROOT/src/figures/figure_les_sauts_melanges_de_m7_se_trompent_ils_plus_souvent_sur_paris4.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

@@ -4908,6 +4908,12 @@ fait perdre un tour à la suite de sa chaîne ; le contrôle tient, 165 des 205 
 de `m7` est presque toujours un mélange : 2 des 31 seulement sont nets. `R4-P191` s'ouvre : les mélanges se trompent-ils plus souvent, contre
 les tours publiés de PHercParis4 ?
 
+**`394` · 2026-10-01 · les sauts mélangés de m7 se trompent-ils plus souvent sur paris4** — `R4-P191`
+
+⭐⭐⭐⭐ **Indécidable : 2 mélanges seulement sur 88 sauts jugés, mais les 86 sauts nets sont tous justes** — `R4-F580`. Le seul compte faux
+de `m7` sur PHercParis4 est un mélange, dont le second compte est le bon. `R4-P192` s'ouvre : rendre aux mélanges de PHerc0358 le poids de
+leur genre de `369` ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
