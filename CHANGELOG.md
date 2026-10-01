@@ -5,6 +5,16 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 
 ## [Unreleased]
 
+### Fixed
+- The documents of 0.3.0 said more than the facts behind the transfer. They now say that it is the position of the
+  next winding point by point on one mesh cell in eight, not a whole winding surface (`R4-F412`); that 0.9214 is
+  the share of the 39865 points that have a judge, of the 62815 points of the one-in-eight grid, on the segment where the rules were written, with 0.915
+  against 0.8208 on the central slice of the band where they were not (`R4-F413`); and what the correction is handed
+  ready-made (the judges, the candidate blocks and, by default, the step tables and the samples of the prediction).
+- The network test of `--read-prediction` compared the first 300 rays of the mesh, of which 13 see a sheet. It now
+  reads 100 rays spread over the segment that each see one, and the README says that the whole reading has not been
+  compared with the embedded samples.
+
 ## [0.3.0] - 2026-10-01
 
 The transfer to the next winding, computed here from the published surface prediction instead of replayed from

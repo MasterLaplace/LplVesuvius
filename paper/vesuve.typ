@@ -67,9 +67,11 @@
   failure detection. We present `vesuve`, one program with one pipeline per prize, and three steps it performs
   without a human on a published PHercParis4 segment. It *certifies* where the surface stayed on one winding, by
   closing loops on the depth offsets measured between square chunks of 128 voxels: 6333 of 97771 chunks. It
-  *produces* the next winding (each point moved along its normal by one turn, the *transfer*) from the published
-  surface prediction, by taking the first sheet along each normal and letting neighbours vote: 92.14 % of the
-  scored points land on the right winding, against 76.13 % when every point moves by one fixed step. It *corrects*
+  *produces* the next winding's position (the *transfer*: each point moved along its normal by one turn, at one point
+  of the mesh in eight, so not a whole winding surface) from the published surface prediction, by taking the first
+  sheet along each normal and letting neighbours vote. On the segment where these rules were written, 92.14 % of the
+  39865 scored points land on the right winding, against 76.13 % when every point moves by one fixed step; on the
+  central slice of a second published surface, where they were not, 91.5 % against 82.08 %. It *corrects*
   the points that slipped, by modelling each chunk's departure from its neighbourhood as noise or a one-winding
   slip: 163 points made right for 41 made wrong, 42 blocks improved for 11 worsened (sign test
   $p = 2.25 times 10^(-5)$ on the blocks). Over the whole segment that moves the share on the right winding from
@@ -288,10 +290,13 @@ before any ink was read on them.
 
 = Results
 
-== Computed from the prediction, the next winding is right for 92 % of the points
+== Computed from the prediction, the next winding is right for 92 % of the scored points, and for 91.5 % where the rules were not written
 
-Computed from the prediction, the transfer lands on the right winding for 92.14 % of the points of the segment
-(@tab-transfer). The program gives back the research's transfer point for point, within a millionth of a voxel, on
+Computed from the prediction, the transfer lands on the right winding for 92.14 % of the 39865 points of the segment
+that have a judge, out of the 62815 points of the grid of one point in eight (@tab-transfer). It gives a depth at each
+of those points, not a whole winding surface. The rules were written on this segment. On the central slice of the
+second band, where they were not, the same rules land on 91.5 % of the points, against 82.08 % for a fixed step. The
+program gives back the research's transfer point for point, within a millionth of a voxel, on
 the segment and on the second band.
 
 #figure(
@@ -303,8 +308,8 @@ the segment and on the second band.
     [first sheet along the normal, no vote], [0.9119],
     [first sheet along the normal, then the vote], [*0.9214*],
   ),
-  caption: [Share of the transferred points of segment `20230702185753` that land on the right winding, judged by the
-    winding its tracer drew by hand.],
+  caption: [Among the 39865 points of segment `20230702185753` that have a judge, the share that land on the right
+    winding, judged by the winding its tracer drew by hand.],
 ) <tab-transfer>
 
 == The correction is right four times as often as it is wrong, and says where it does not hold

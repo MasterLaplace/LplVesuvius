@@ -3,8 +3,9 @@
 At one point of the surface in eight along each grid axis, the prediction (`m7`) is sampled along the point's normal,
 from the surface out to three steps. Its sheets are the runs of samples it marks; the next winding starts from the
 centre of the first run after the surface's own, and the neighbours then vote it onto a sheet the ray sees. This is the
-rule of `247`, which `248` repeats jump after jump: it lands on the right winding for 0.9214 of the points of segment
-`20230702185753` where a fixed step lands for 0.7613 (`R4-F412`), and holds on the band `w028-037` (`R4-F413`).
+rule of `247`, which `248` repeats jump after jump: on segment `20230702185753`, where its rules were written, it lands
+on the right winding for 0.9214 of the 39865 points that have a judge, of the 62815 points of the one-in-eight grid, where a fixed step lands for 0.7613
+(`R4-F412`); on the central slice of the band `w028-037`, where they were not, for 0.915 against 0.8208 (`R4-F413`).
 
 Ported from `le_transfert_retrouve_t_il_la_spire_voisine.py` (`les_echantillons_longs`, `la_feuille_suivante`,
 `les_centres`, `le_consensus`, `le_vote_itere`) and `le_transfert_enchaine_tient_il_les_spires.py` (`lire_le_rayon`) on

@@ -257,10 +257,36 @@ def test_each_rule_is_the_research_s(produced):
     assert np.array_equal(ours_vote, theirs_vote) and ours_changes == theirs_changes
 
 
+SPOT_CHECK_RAYS = 100
+
+
+def rays_that_see_something(rays, count: int = SPOT_CHECK_RAYS) -> np.ndarray:
+    """`count` rays spread evenly over the rays whose embedded samples mark at least one sheet: reading the first rays
+    of the mesh compares mostly empty prediction with empty prediction (13 of the first 300 see anything)."""
+    seeing = np.flatnonzero(rays.seen.any(axis=1))
+    return seeing[np.linspace(0, len(seeing) - 1, count).round().astype(np.intp)]
+
+
+@pytest.mark.parametrize("name", [SEGMENT, BAND])
+def test_the_spot_check_rays_all_see_something_and_cover_the_surface(name):
+    r = embedded.rays(name)
+    chosen = rays_that_see_something(r)
+    seeing = np.flatnonzero(r.seen.any(axis=1))
+    assert len(seeing) > 10 * SPOT_CHECK_RAYS
+    assert len(np.unique(chosen)) == SPOT_CHECK_RAYS
+    assert r.seen[chosen].any(axis=1).all()
+    assert chosen[0] == seeing[0] and chosen[-1] == seeing[-1]
+    assert np.ptp(r.rows[chosen]) > 0.5 * np.ptp(r.rows) and np.ptp(r.columns[chosen]) > 0.5 * np.ptp(r.columns)
+
+
 @network
 def test_the_samples_read_from_the_bucket_are_the_embedded_ones(tmp_path):
     """The rays rebuilt from the published mesh sit where the embedded ones sit, and the public prediction read along
-    them gives back the embedded samples."""
+    spread rays that really see a sheet gives back the embedded samples.
+
+    Downloads the mesh (55 MB) and the prediction chunks under 100 rays: about 100 chunks, or a few times more where a
+    ray crosses a chunk boundary, of the 1780 the whole segment needs (about 630 MB). An estimate, not a measure: about
+    90 MB in all, perhaps a few times more."""
     from vesuve.remote import Remote
     from vesuve.transfer import surfaces
     from vesuve.transport import Transport
@@ -271,7 +297,7 @@ def test_the_samples_read_from_the_bucket_are_the_embedded_ones(tmp_path):
         points, valid, _ = surfaces.read_points(mesh)
         p, n, gi, gj, shape = nw.rays_of_mesh(points, valid)
         assert np.array_equal(gi, r.rows) and np.array_equal(gj, r.columns) and shape == r.grid
-        some = slice(0, 300)
+        some = rays_that_see_something(r)
         assert np.array_equal(nw.read_samples(nw.prediction(transport, r), p[some], n[some], r), r.seen[some])
     finally:
         transport.close()
