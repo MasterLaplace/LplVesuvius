@@ -2,7 +2,8 @@
 
 ⚠⚠ **Ce que cette figure doit rendre évident.** Trois rangées sur un même axe de D, l'encre de la surface moins celle de son jumeau à un
 demi-pas : les nappes de départ (le témoin T2, à droite de zéro s'il tient), les surfaces tenues H, les surfaces refusées R avec leur
-médiane. Si le critère dit vrai, les points de H sont à droite de tous ceux de R.
+médiane. Si le critère dit vrai, les points de H sont à droite de tous ceux de R. Chaque surface est lue du côté du creux de la
+nappe de départ de sa graine, la règle amendée de `410`.
 
   uv run python src/figures/figure_les_premieres_surfaces_tenues_portent_elles_plus_dencre_sur_pherc0358.py \\
       --sortie docs/images/410_les_premieres_surfaces_tenues_portent_elles_plus_dencre_sur_pherc0358.png
@@ -85,11 +86,10 @@ def la_liste(d: dict, g: str) -> str:
 
 def la_bande(d: dict) -> tuple[str, ...]:
     un = f"LE VERDICT DÉCLARÉ : {d['le_verdict']['lissue']}"
-    creux = [t["le_creux"] for t in d.get("les_temps", []) if t.get("le_decalage") == 0.0 and "le_creux" in t and not t.get("lautre_sens")]
-    vers = sum(c["le_cosinus_vers_le_centre"] > 0 for c in creux)
-    rayon = float(np.median([c["le_rayon_dun_cylindre_en_voxels"] for c in creux if c["le_rayon_dun_cylindre_en_voxels"]])) if creux else None
-    deux = (f"rapporté à côté, qui ne décide rien : le creux regarde le centre du volume sur {vers} des {len(creux)} surfaces lues ; "
-            f"rayon médian d'un cylindre, {le_nombre(None if rayon is None else round(rayon, 1))} voxels")
+    ch = d.get("le_choix_de_lencre") or {}
+    premiere = (d.get("la_regle_ecrite_dabord") or {}).get("le_verdict", {}).get("lissue", "non lue").rpartition(" ; ")[2]
+    deux = (f"rapporté à côté, qui ne décide rien : l'encre choisit le côté de la graine sur {ch.get('celui_de_la_graine', 0)} des "
+            f"{ch.get('lues', 0)} surfaces lues des deux côtés ; la règle écrite d'abord, chaque surface vers son propre creux, dit : {premiere}")
     trois = "⚠ ce qui n'est PAS établi : que des lettres soient lisibles ; ce que vaut le critère au-delà des deux premiers sauts."
     return un, deux, trois
 
@@ -106,7 +106,7 @@ def dessiner(d: dict, sortie: Path):
         poses.append((x, y, texte, fonte))
 
     ecrire(50, 18, le_titre(d), gros, ENCRE)
-    ecrire(50, 44, "D = encre de la surface − encre de son jumeau à un demi-pas, sur les mêmes pixels ; détecteur de 296, couches vers le creux",
+    ecrire(50, 44, "D = encre de la surface − encre de son jumeau à un demi-pas ; détecteur de 296, couches vers le creux de la nappe de départ de la graine",
            petit, GRIS)
     art.rectangle(LE_CADRE, outline=TRAIT)
     lo, hi = lechelle(d)
@@ -163,9 +163,8 @@ def verifier(sortie: Path, mesure: Path = LA_MESURE) -> int:
              "les_lectures": {"N": [lu("N_6", 0.04), lu("N_7", 0.02), lu("N_8", -0.01)],
                               "H": [lu("H_6_moins_1", 0.1), lu("H_8_plus_1", 0.09)],
                               "R": [lu(f"R_{i}", x) for i, x in enumerate([-0.02, 0.0, 0.01, 0.02, 0.03, 0.04, 0.05, None])]},
-             "les_temps": [{"le_decalage": 0.0, "le_creux": {"le_cosinus_vers_le_centre": c, "le_rayon_dun_cylindre_en_voxels": 300.0}}
-                           for c in (0.9, -0.2, 0.7)]
-             + [{"le_decalage": 0.0, "lautre_sens": True, "le_creux": {"le_cosinus_vers_le_centre": 0.9, "le_rayon_dun_cylindre_en_voxels": 1.0}}]}
+             "le_choix_de_lencre": {"celui_de_la_graine": 2, "lues": 3},
+             "la_regle_ecrite_dabord": {"le_verdict": {"lissue": "D de H : 0,01 ; 0,02 ; D de R : de 0 à 0,05 ; T2 : 3 sur 3 ; non"}}}
     mesures = [("l'essai", essai)] + ([("la mesure", lire(mesure))] if mesure.exists() else [])
     for quoi, d in mesures:
         tmp = sortie.parent / ".sonde_410.png"
@@ -196,7 +195,8 @@ def verifier(sortie: Path, mesure: Path = LA_MESURE) -> int:
     v("★★★ le titre LIT la mesure", le_titre(essai) == "410 SUR PHERC0358 : D DE H : 0,1 ; 0,09 ; D DE R : DE -0,02 À 0,05 ; T2 : 3 SUR 3 ; OUI")
     v("★★★★ la médiane de R est au D médian des R lus", te["mediane"] == la_position(0.02, *lechelle(essai)), str(te["mediane"]))
     v("★★★★ une lecture qui manque est dite non lue", la_liste(essai, "R").endswith("· non lues : 1"))
-    v("★★★★ la bande compte les creux tournés vers le centre", "sur 2 des 3 surfaces lues" in la_bande(essai)[1], la_bande(essai)[1])
+    v("★★★★ la bande compte les choix de l'encre et dit la règle écrite d'abord",
+      "sur 2 des 3 surfaces lues des deux côtés" in la_bande(essai)[1] and la_bande(essai)[1].endswith("dit : non"), la_bande(essai)[1])
 
     for e in echecs:
         print(f"  ÉCHEC {e}")
