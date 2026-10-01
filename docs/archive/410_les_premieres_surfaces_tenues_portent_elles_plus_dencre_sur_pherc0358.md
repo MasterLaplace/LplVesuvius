@@ -88,7 +88,7 @@ trancher, et un refus a deux causes qu'elle ne départage pas. `R4-P151` n'est p
   `R_6_moins_2`, à un et deux sauts, du côté « moins ». Des feuilles voisines d'un même rouleau portent leur recto du même côté : un L
   qui serait de l'encre ne devrait pas changer de signe.
 - **Sur les seuls sauts 1**, la même règle dit en partie, et 2 échanges sur 4 donnent non.
-- **D au jumeau**, par la graine et par chaque surface, attend les lectures des jumeaux, qui tournent encore.
+- **D au jumeau**, par la graine et par chaque surface, n'est pas lu : les lectures des jumeaux ont été arrêtées le 2026-10-01 à 22 h 31, après 9 sur 26, pour rendre la machine au travail du prix. D compare du papyrus à du vide (§2) et ne décidait rien ; une reprise sauterait les lectures déjà sur le disque.
 - **T2 tel qu'écrit d'abord**, D au côté de la graine : 2 nappes sur 3 positives (0,00504, −0,00805, 0,00602).
 
 ## 7. Ce que cette tranche ne dit pas
