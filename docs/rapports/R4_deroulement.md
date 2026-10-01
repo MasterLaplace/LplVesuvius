@@ -4902,6 +4902,12 @@ au compte, pas un glissement. `R4-P189` s'ouvre : les autres sauts que `m7` comp
 fait perdre un tour à la suite de sa chaîne ; le contrôle tient, 165 des 205 sauts d'une feuille avancent d'un tour chez les voisines.
 `R4-P190` s'ouvre : ce qui distingue ces 4 sauts dans le compte de `m7` ?
 
+**`393` · 2026-10-01 · les sauts nuls qui franchissent une feuille se distinguent-ils par leurs points** — `R4-P190`
+
+⭐⭐⭐ **Non : la part de points à une feuille va de 0,24 à 0,43 chez les franchis, de 0,03 à 0,48 chez les restés** — `R4-F579`. Un saut nul
+de `m7` est presque toujours un mélange : 2 des 31 seulement sont nets. `R4-P191` s'ouvre : les mélanges se trompent-ils plus souvent, contre
+les tours publiés de PHercParis4 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

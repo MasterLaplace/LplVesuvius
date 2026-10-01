@@ -1923,6 +1923,8 @@ run "le douzième saut de la compagne reste-t-il sur sa feuille ou m7 en manque-
 run "figure le douzième saut de la compagne reste-t-il sur sa feuille ou m7 en manque-t-il une" uv run python "$ROOT/src/figures/figure_le_douzieme_saut_de_la_compagne_reste_t_il_sur_sa_feuille_ou_m7_en_manque_t_il_une.py" --verifier
 run "les sauts que m7 compte nuls laissent-ils les chaînes sur leur feuille" uv run python "$ROOT/src/nappe/les_sauts_que_m7_compte_nuls_laissent_ils_les_chaines_sur_leur_feuille.py" --verifier
 run "figure les sauts que m7 compte nuls laissent-ils les chaînes sur leur feuille" uv run python "$ROOT/src/figures/figure_les_sauts_que_m7_compte_nuls_laissent_ils_les_chaines_sur_leur_feuille.py" --verifier
+run "les sauts nuls qui franchissent une feuille se distinguent-ils par leurs points" uv run python "$ROOT/src/nappe/les_sauts_nuls_qui_franchissent_une_feuille_se_distinguent_ils_par_leurs_points.py" --verifier
+run "figure les sauts nuls qui franchissent une feuille se distinguent-ils par leurs points" uv run python "$ROOT/src/figures/figure_les_sauts_nuls_qui_franchissent_une_feuille_se_distinguent_ils_par_leurs_points.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

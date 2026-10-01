@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**244 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**245 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 206 portes
+## Grand Prize — 207 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -224,7 +224,8 @@
 - **R4-P187** *(le graal)* · **RÉPONDUE par `390` : oui.** À seize sauts, le vote désigne la compagne de la graine 4, côté moins, et la suivie de la graine 6, côté moins ; leur première contradiction, au sixième et au troisième saut, reste isolée, et les contradictions s'installent à partir du douzième et du dixième saut (`R4-F576`). La question était : **SUR PHERC0358, AU-DELÀ DU HUITIÈME SAUT, SUR LES GRAINES 4 ET 6, CÔTÉ MOINS, LE VOTE DE `372` DÉSIGNE-T-IL UNE CHAÎNE QUI GLISSE, ET À QUEL SAUT SON GLISSEMENT COMMENCE-T-IL ?** La suite est `R4-P188`.
 - **R4-P188** *(le graal)* · **RÉPONDUE par `391` : non.** Les surfaces voisines de la suivie et de la tierce placent la onzième surface de la compagne à 11 tours et la douzième à 12, et la font avancer d'un tour à chaque saut de la dixième à la seizième : le douzième saut a franchi une feuille que `m7` compte nulle (`R4-F577`). La question était : **SUR LA GRAINE 4, CÔTÉ MOINS, DE PHERC0358, LE DOUZIÈME SAUT DE LA COMPAGNE, QUE `m7` COMPTE NUL, LA LAISSE-T-IL SUR LA FEUILLE DE SA ONZIÈME SURFACE, OU `m7` MANQUE-T-IL LA FEUILLE QU'IL FRANCHIT ?** La suite est `R4-P189`.
 - **R4-P189** *(le graal)* · **RÉPONDUE par `392` : oui, tout juste.** Des 20 sauts nuls de `m7` dont l'avance est dite, 15 laissent la chaîne sur sa feuille, 4 en franchissent une que `m7` ne compte pas et 1 recule (`R4-F578`). La question était : **SUR PHERC0358, LES SAUTS QUE `m7` COMPTE NULS LAISSENT-ILS LES CHAÎNES SUR LEUR FEUILLE, OU LES SURFACES VOISINES DES DEUX AUTRES CHAÎNES VOIENT-ELLES UNE FEUILLE FRANCHIE ?** La suite est `R4-P190`.
-- **R4-P190** *(le graal)* · **SUR PHERC0358, LES SAUTS NULS DE `m7` QUI FRANCHISSENT UNE FEUILLE SE DISTINGUENT-ILS DES AUTRES PAR LA PART DE LEURS POINTS QUI EN FRANCHISSENT UNE ?** ⭐⭐⭐⭐ C'EST CE QUE `392` DÉSIGNE. Un saut nul de `m7` sur cinq franchit une feuille (`R4-F578`) ; si la part de ses points qui en franchissent une le trahit, une règle de compte meilleure que le compte majoritaire le rattrape.
+- **R4-P190** *(le graal)* · **RÉPONDUE par `393` : non.** Les sauts nuls de `m7` franchis ont une part de points à une feuille de 0,24 à 0,43, les restés de 0,03 à 0,48 ; 2 seulement des 31 sauts nuls ont moins d'un dixième de leurs points à une feuille, les autres sont des mélanges (`R4-F579`). La question était : **SUR PHERC0358, LES SAUTS NULS DE `m7` QUI FRANCHISSENT UNE FEUILLE SE DISTINGUENT-ILS DES AUTRES PAR LA PART DE LEURS POINTS QUI EN FRANCHISSENT UNE ?** La suite est `R4-P191`.
+- **R4-P191** *(le graal)* · **SUR PHERCPARIS4, LES SAUTS DONT LE COMPTE MAJORITAIRE DE `m7` EST PORTÉ PAR MOINS DES DEUX TIERS DES POINTS DONNENT-ILS DES COMPTES FAUX PLUS SOUVENT QUE LES AUTRES ?** ⭐⭐⭐⭐ C'EST CE QUE `393` DÉSIGNE. Sur PHerc0358, un saut nul de `m7` est presque toujours un mélange (`R4-F579`) ; PHercParis4 a des tours publiés, qui disent saut par saut si le compte est juste.
 
 ## Progress Prizes — 19 portes
 

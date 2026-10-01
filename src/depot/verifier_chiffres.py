@@ -3336,6 +3336,30 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 393 : LES SAUTS NULS QUI FRANCHISSENT UNE FEUILLE SE DISTINGUENT-ILS PAR LEURS POINTS
+    s393 = _source(racine, "les_sauts_nuls_qui_franchissent_une_feuille_se_distinguent_ils_par_leurs_points.json")
+    if s393.exists():
+        import statistics as _st
+        d = json.loads(s393.read_text())
+        r, f, u = d["le_bilan"]["restes"], d["le_bilan"]["franchis"], d["le_bilan"]["dune_feuille"]
+        p2 = lambda x: f"{x:.2f}".replace(".", ",")  # noqa: E731
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        nuls = d["les_sauts_nuls"]
+        nets = [s_ for s_ in nuls if s_["la_part_dune_feuille"] is not None and s_["la_part_dune_feuille"] < 0.1]
+        zs = [s_["les_comptes"].get("0", 0) / s_["les_mesures"] for s_ in nuls if s_["la_part_dune_feuille"] is not None
+              and s_["la_part_dune_feuille"] >= 0.1]
+        ecrits = [("le verdict de 393", f"LES SAUTS FRANCHIS ONT UNE PART D'UNE FEUILLE DE {p2(f[0])} À {p2(f[-1])}, LES SAUTS RESTÉS DE {p2(r[0])} "
+                   f"À {p2(r[-1])} : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("les nets de 393", f"{len(nets)} seulement des {len(nuls)} ont moins d'un dixième de leurs points à une feuille"),
+                  ("le chevauchement de 393", f"{sum(1 for x in r if x >= f[0])} des {len(r)} restés ont une part d'au moins {p2(f[0])}, et "
+                   f"{sum(1 for x in r if x > f[-1])} une part plus forte que le plus fort des franchis"),
+                  ("le mélange de 393", f"le zéro l'emporte avec {round(100 * min(zs))} à {round(100 * max(zs))} % des points, contre une médiane de "
+                   f"{round(100 * _st.median(u))} % de points"),
+                  ("la lecture de 393", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("la ligne restés de 393", f"| restés sur leur feuille | {len(r)} | {p2(r[0])} à {p2(r[-1])} |"),
+                  ("la ligne franchis de 393", f"| franchissant une feuille | {len(f)} | {p2(f[0])} à {p2(f[-1])} |")]
+        out.extend((nom_, [x_], s393.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 392 : LES SAUTS QUE M7 COMPTE NULS LAISSENT-ILS LES CHAÎNES SUR LEUR FEUILLE
     s392 = _source(racine, "les_sauts_que_m7_compte_nuls_laissent_ils_les_chaines_sur_leur_feuille.json")
     if s392.exists():
