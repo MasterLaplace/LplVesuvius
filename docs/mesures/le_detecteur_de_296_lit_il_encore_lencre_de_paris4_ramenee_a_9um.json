@@ -1,0 +1,77 @@
+{
+ "la_question": "Le détecteur d'encre de 296 lit-il encore l'encre de PHercParis4 quand son bloc étalon est ramené à 9,6 µm ?",
+ "les_constantes": {
+  "les_facteurs": [
+   4,
+   2
+  ],
+  "le_facteur_qui_decide": 4,
+  "le_controle": 0.9593,
+  "le_seuil": 0.8,
+  "le_plancher": 0.5,
+  "le_decalage": 64,
+  "les_couches": [
+   23,
+   85
+  ]
+ },
+ "le_controle": {
+  "la_correlation": 0.9593,
+  "le_temoin": 0.0814,
+  "les_pixels": 65536
+ },
+ "les_lectures": {
+  "4": {
+   "la_correlation": 0.869,
+   "le_temoin": 0.0554,
+   "les_pixels": 65536
+  },
+  "2": {
+   "la_correlation": 0.9408,
+   "le_temoin": 0.0564,
+   "les_pixels": 65536
+  }
+ },
+ "la_lecture_inverse": {
+  "la_correlation": -0.0261,
+  "le_temoin": 0.0483,
+  "les_pixels": 65536
+ },
+ "les_temps": [
+  {
+   "le_facteur": 4,
+   "la_sortie": "etalon_ramene_4.npy",
+   "appareil": "xpu",
+   "les_secondes": 346.5,
+   "la_forme": [
+    2048,
+    2048
+   ]
+  },
+  {
+   "le_facteur": 2,
+   "la_sortie": "etalon_ramene_2.npy",
+   "appareil": "xpu",
+   "les_secondes": 301.9,
+   "la_forme": [
+    2048,
+    2048
+   ]
+  },
+  {
+   "le_facteur": 4,
+   "inverse": true,
+   "la_sortie": "etalon_ramene_4_inverse.npy",
+   "appareil": "xpu",
+   "les_secondes": 309.0,
+   "la_forme": [
+    2048,
+    2048
+   ]
+  }
+ ],
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "à 9,6 µm, corrélation 0,869 contre 0,0554 pour le témoin ; à 2,4 µm, 0,9593 ; oui"
+ }
+}

@@ -4991,6 +4991,12 @@ tour −7 est à 0,43-0,56. `R4-P204` s'ouvre : `m7` compte-t-il une feuille ent
 4 à 6, le tour −7 publié est le plus souvent sur la feuille de `m7` du tour −6 : la ligne ouverte par `R4-P201` se ferme. `R4-P205` s'ouvre ;
 `R4-P151`, l'encre de PHerc0358, est la suivante.
 
+**`408` · 2026-10-01 · le détecteur de 296 lit-il encore l'encre de paris4 ramenée à 9 µm** — `R4-P151`
+
+⭐⭐⭐⭐⭐ **Oui : 0,869 contre 0,0554 pour le témoin, à 9,6 µm ; mais dans un seul sens des couches, −0,0261 dans l'autre** — `R4-F594`.
+L'attente de `R4-P151`, que l'auteur n'avait jamais demandée, est levée le même jour. `R4-P206` s'ouvre : dans quel sens empiler les
+couches de PHerc0358, fixé sur PHercParis4 à 9,6 µm par la courbure de la feuille ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3336,6 +3336,27 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 408 : LE DÉTECTEUR DE 296 LIT-IL ENCORE L'ENCRE DE PARIS4 RAMENÉE À 9 µm
+    s408 = _source(racine, "le_detecteur_de_296_lit_il_encore_lencre_de_paris4_ramenee_a_9um.json")
+    if s408.exists():
+        d = json.loads(s408.read_text())
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        c0, l2, l4 = d["le_controle"], d["les_lectures"]["2"], d["les_lectures"]["4"]
+        t4 = next((t for t in d["les_temps"] if t["le_facteur"] == 4 and not t.get("inverse")), None)
+        ecrits = [("le verdict de 408", f"OUI : À 9,6 µm, CORRÉLATION {vg(l4['la_correlation'])} CONTRE {vg(l4['le_temoin'])} POUR LE TÉMOIN ; "
+                   f"À 2,4 µm, {vg(c0['la_correlation'])}" if d["le_verdict"]["lissue"].endswith("; oui") else "changé"),
+                  ("le résumé de 408", f"Sa lecture s'accorde encore à {vg(l4['la_correlation'])} avec la carte d'encre publiée, contre "
+                   f"{vg(l4['le_temoin'])} pour le témoin décalé ; à pleine résolution, {vg(c0['la_correlation'])}."),
+                  ("le temps de 408", f"Une lecture à 9,6 µm a pris {vg(t4['les_secondes'])} secondes sur l'iGPU." if t4 else "changé"),
+                  ("la ligne à 2,4 µm de 408", f"| 2,4 µm (`296`) | {vg(c0['la_correlation'])} | {vg(c0['le_temoin'])} |"),
+                  ("la ligne à 4,8 µm de 408", f"| 4,8 µm | {vg(l2['la_correlation'])} | {vg(l2['le_temoin'])} |"),
+                  ("la ligne à 9,6 µm de 408", f"| 9,6 µm | {vg(l4['la_correlation'])} | {vg(l4['le_temoin'])} |"),
+                  ("la perte de 408", f"L'accord perd {vg(round(c0['la_correlation'] - l4['la_correlation'], 2))} de 2,4 à 9,6 µm.")]
+        inv = d.get("la_lecture_inverse")
+        if inv is not None:
+            ecrits.append(("l'ordre inverse de 408", f"| 9,6 µm, couches dans l'ordre inverse | {vg(inv['la_correlation'])} | {vg(inv['le_temoin'])} |"))
+        out.extend((nom_, [x_], s408.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 407 : M7 COMPTE-T-IL UNE FEUILLE ENTRE LES TOURS −6 ET −7 SUR PARIS4
     s407 = _source(racine, "m7_compte_t_il_une_feuille_entre_les_tours_moins_six_et_moins_sept_sur_paris4.json")
     if s407.exists():
