@@ -14,6 +14,7 @@ The stages, in the order of `213` §2 and `244` §5:
     E4 the lattice      the steps of the bands, published or read here
     E6 the certificate  the hand-free procedure, and the per-chunk mask
     E7 the judge        (option) the material peak of the certified chunks, without ground truth
+    N  the next winding the transfer to the next winding, computed from what the prediction sees along each normal
     TR the tables       (option) the step tables of the correction, made here: mirror, render, steps
     T  the transfer     the hand-free correction of the transfer to the next winding, where it was validated
     E8 the ink          the published ink map, under the mask
@@ -37,6 +38,7 @@ from vesuve.remote import Remote, Unavailable
 from vesuve.remote_zarr import BUCKET, RemoteArray
 from vesuve.report import MET, NOT_MEASURED, NOT_MET, Report
 from vesuve.transfer import correction, rendering, surfaces
+from vesuve.transfer import next_winding as nw
 from vesuve.transfer.tables import TableMaker
 from vesuve.transport import Transport
 
@@ -46,22 +48,43 @@ CONTROL_BAND = "20260623142658-w028-037"  # where the correction was measured to
 THRESHOLD = 0.05       # the sign test's threshold (`290`)
 
 
-def _correct(name: str, tables: dict | None = None) -> dict:
+def _correct(name: str, tables: dict | None = None, transfer: np.ndarray | None = None) -> dict:
     k = embedded.correction(name)
-    got = correction.correct_segment(k["transfer"], k["judges"], k["tables"] if tables is None else tables,
-                                     k["candidates"], k["context"]["slip_voxels"], k["surfaces"])
+    got = correction.correct_segment(k["transfer"] if transfer is None else transfer, k["judges"],
+                                     k["tables"] if tables is None else tables, k["candidates"],
+                                     k["context"]["slip_voxels"], k["surfaces"])
     return {**got, "context": k["context"]}
 
 
+def _produce_transfer(name: str, remote, transport, read_prediction: bool, threads: int) -> dict:
+    """The transfer to the next winding computed here, from the embedded samples of the prediction or, with
+    `read_prediction`, from the public prediction read along the normals of the published mesh."""
+    from dataclasses import replace
+
+    rays = embedded.rays(name)
+    source = f"the samples of `{rays.prediction}` the research read along each normal, embedded"
+    if read_prediction:
+        k = embedded.correction(name)
+        points, valid, _ = surfaces.read_points(remote.tifxyz_folder(k["context"]["render"]["mesh"]))
+        p, n, rows, columns, shape = nw.rays_of_mesh(points, valid)
+        if shape != rays.grid or not (np.array_equal(rows, rays.rows) and np.array_equal(columns, rays.columns)):
+            raise ValueError(f"the published mesh gives a {shape} grid of {len(rows)} points, the embedded rays a "
+                             f"{rays.grid} grid of {len(rays.rows)}")
+        rays = replace(rays, seen=nw.read_samples(nw.prediction(transport, rays), p, n, rays, threads))
+        source = f"`{rays.path}`, read here along the normals of the published mesh"
+    return {"rays": rays, "source": source, **nw.produce(rays)}
+
+
 def _make_tables(segment: str, cache: Path, remote, transport, journal, rows: int | None, keep_piles: bool,
-                 threads: int, table_workers: int) -> dict:
+                 threads: int, table_workers: int, transfer: np.ndarray | None = None) -> dict:
     """The two surfaces, then the piles and the step tables of every candidate block, under `cache/render/`."""
     k = embedded.correction(segment)
     rc = k["context"].get("render")
     if rc is None:
         raise FileNotFoundError(f"segment {segment} embeds no render inputs")
     work = Path(cache) / "render" / segment
-    made = surfaces.the_two_surfaces(remote.tifxyz_folder(rc["mesh"]), k["transfer"], work / "surfaces", rc["mesh_step"])
+    made = surfaces.the_two_surfaces(remote.tifxyz_folder(rc["mesh"]), k["transfer"] if transfer is None else transfer,
+                                     work / "surfaces", rc["mesh_step"])
     maker = TableMaker(work, {"reference": made["reference"], "produced": made["produced"]}, k["candidates"],
                        f"{BUCKET}/{rc['raw_volume']}", transport, journal, keep_piles=keep_piles, threads=threads,
                        table_workers=table_workers)
@@ -114,7 +137,7 @@ def _certify(s, fresh):
 def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-prize"), cache: Path = Path("cache"),
         read: bool = False, rounds: int = 6, threads: int = 16, readings=(), judge: int = 0, ink: bool = True,
         surface: bool = True, render: bool = False, render_rows: int | None = None, keep_piles: bool = False,
-        table_workers: int = 2, journal=None) -> Report:
+        table_workers: int = 2, read_prediction: bool = False, journal=None) -> Report:
     s = embedded.segment(segment)
     ctx = s["context"]
     r = Report("grand-prize", {"segment": segment, "scroll": ctx["scroll"], "read": read, "rounds": rounds,
@@ -249,7 +272,40 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                        rule=("`src/tracecheck/tracecheck.py:204`: the material peak of each chunk must fall on the traced "
                              "layer; a gap beyond the half sheet (36 voxels, 86.4 µm) says the surface left its sheet"))
 
-    transfer, made = None, None
+    transfer, made, produced, control_produced = None, None, None, None
+    with r.stage("N", "the next winding, computed here", "B4") as e:
+        try:
+            produced = _produce_transfer(segment, remote, transport, read_prediction, threads)
+        except FileNotFoundError as x:
+            e.skip(f"no samples of the prediction are embedded for this segment ({x}); the correction replays the "
+                   f"research's transfer")
+        except (Unavailable, RuntimeError, ValueError) as x:
+            e.partial(f"the transfer could not be computed here: {x}")
+        if produced is not None:
+            rays, kept = produced["rays"], embedded.correction(segment)
+            judge = kept["judges"][0]
+            gap = float(np.nanmax(np.abs(produced["transfer"] - kept["transfer"])))
+            fixed = nw.grid_of(rays)(np.full(produced["points"], rays.side * rays.step))
+            e.record("NW1", produced["points"], samples=int(rays.seen.shape[1]), prediction=rays.prediction)
+            e.record("NW2", produced["without_next_sheet"],
+                     what="rays that see no next sheet: they start from the step")
+            e.record("NW3", produced["rounds"], changes_per_round=produced["changes"])
+            same_nan = bool(np.array_equal(np.isnan(produced["transfer"]), np.isnan(kept["transfer"])))
+            e.note(prediction=rays.prediction, side="plus" if rays.side > 0 else "minus", where_the_samples_come_from=
+                   produced["source"], points=produced["points"], without_next_sheet=produced["without_next_sheet"],
+                   vote_rounds=produced["rounds"],
+                   same_as_the_research_transfer=same_nan and gap < 1e-6, largest_difference_voxels=gap,
+                   share_on_the_right_winding={
+                       "judge": "the segment's own next layer, for scoring only (`247`)",
+                       "next_sheet_then_vote": nw.share_on_the_right_winding(produced["transfer"], judge,
+                                                                             rays.half_sheet),
+                       "fixed_step": nw.share_on_the_right_winding(fixed, judge, rays.half_sheet)})
+            if not same_nan or gap >= 1e-6:
+                e.partial(f"the transfer computed here differs from the research's by up to {gap:.3g} voxels")
+            try:
+                control_produced = nw.produce(embedded.rays(CONTROL_BAND))["transfer"]
+            except FileNotFoundError:
+                control_produced = None
     with r.stage("TR", "the step tables, made here", "B4") as e:
         if not render:
             e.skip("the correction replays the tables of the research's renders; --render makes them here")
@@ -259,7 +315,7 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
         else:
             try:
                 made = _make_tables(segment, cache, remote, transport, journal, render_rows, keep_piles, threads,
-                                    table_workers)
+                                    table_workers, produced["transfer"] if produced else None)
             except (FileNotFoundError, Unavailable) as x:
                 e.partial(f"the tables could not be made: {x}")
             if made is not None:
@@ -271,7 +327,7 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                               f"{rep['rows']} done")
     with r.stage("T", "the transfer to the next winding", "B4") as e:
         try:
-            got = _correct(segment, made["tables"] if made else None)
+            got = _correct(segment, made["tables"] if made else None, produced["transfer"] if produced else None)
         except FileNotFoundError as x:
             e.skip(f"no correction inputs are embedded for this segment ({x})")
             got = None
@@ -290,7 +346,7 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
             np.save(output / "corrected_transfer.npy", got["claimed"])
             summary = _summary(got)
             try:
-                control = _summary(_correct(CONTROL_BAND))
+                control = _summary(_correct(CONTROL_BAND, transfer=control_produced))
             except FileNotFoundError:
                 control = None
             (output / "correction.json").write_text(json.dumps(
@@ -301,7 +357,8 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
             e.note(corrected_transfer="corrected_transfer.npy", details="correction.json",
                    what_the_transfer_is=(f"the distance from each point of the segment's mesh (one point every 8 grid "
                                          f"cells) to the next winding, in voxels along the normal, side {kc['side']}, "
-                                         f"transferred by `{kc['prediction']}` (`248`); NaN where there is no point"),
+                                         f"from `{kc['prediction']}` (`247`); NaN where there is no point"),
+                   whose_transfer=("computed here in stage N" if produced else "the research's, embedded"),
                    blocks=p["blocks"], corrected_points=p["corrected_points"],
                    misses_made_right=p["misses_made_right"], rights_made_misses=p["rights_made_misses"],
                    net_gain=p["net_gain"], share_before=p["before"], share_after=p["after"],

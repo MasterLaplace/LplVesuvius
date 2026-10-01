@@ -8,6 +8,8 @@ function that applied it, and a broken rule (a fixed step, no vote) loses the ri
 """
 from __future__ import annotations
 
+import json
+
 import numpy as np
 import pytest
 
@@ -15,6 +17,7 @@ from conftest import network, research
 from vesuve import embedded
 from vesuve.transfer import correction
 from vesuve.transfer import next_winding as nw
+from vesuve.transport import InMemoryTransport
 
 SEGMENT, BAND = "20230702185753", "20260623142658-w028-037"
 
@@ -97,6 +100,44 @@ def test_the_consensus_needs_a_majority():
     assert nw.consensus(g)[1, 1] == 1.0          # five of nine seen: median of 1, 1, 1, 2, 2
     g[1, 1] = np.nan
     assert np.isnan(nw.consensus(g)[1, 1])       # four of nine: no majority
+
+
+def _grand_prize_offline(tmp_path, monkeypatch, **options) -> dict:
+    from vesuve.grand_prize.pipeline import run
+    monkeypatch.setattr("vesuve.grand_prize.pipeline.Transport", lambda **_: InMemoryTransport({}))
+    run(output=tmp_path, cache=tmp_path / "cache", ink=False, surface=False, **options)
+    return {s["id"]: s for s in json.loads((tmp_path / "report.json").read_text())["stages"]}
+
+
+def test_the_grand_prize_computes_the_transfer_then_corrects_it(tmp_path, monkeypatch):
+    stages = _grand_prize_offline(tmp_path, monkeypatch)
+    n, t = stages["N"], stages["T"]
+    assert n["state"] == "done" and n["outputs"]["same_as_the_research_transfer"] is True
+    assert n["outputs"]["share_on_the_right_winding"]["next_sheet_then_vote"] == 0.9214
+    assert n["outputs"]["share_on_the_right_winding"]["fixed_step"] == 0.7613
+    assert [q["id"] for q in n["equations"]] == ["NW1", "NW2", "NW3"]
+    assert t["outputs"]["whose_transfer"] == "computed here in stage N" and t["outputs"]["net_gain"] == 122
+
+
+def test_the_correction_runs_on_the_transfer_stage_n_computed(tmp_path, monkeypatch):
+    """Wired, not only reported: a transfer computed differently (here, the fixed step) changes what the correction
+    finds, and stage N says it differs from the research's."""
+    real = nw.produce
+
+    def fixed_step(rays):
+        got = real(rays)
+        return {**got, "transfer": nw.grid_of(rays)(np.full(rays.seen.shape[0], rays.side * rays.step))}
+    monkeypatch.setattr("vesuve.grand_prize.pipeline.nw.produce", fixed_step)
+    stages = _grand_prize_offline(tmp_path, monkeypatch)
+    assert stages["N"]["state"] == "partial" and "differs from the research's" in stages["N"]["reason"]
+    assert stages["T"]["outputs"]["net_gain"] != 122
+
+
+def test_without_the_network_reading_the_prediction_is_partial_and_the_correction_says_whose_transfer(tmp_path,
+                                                                                                      monkeypatch):
+    stages = _grand_prize_offline(tmp_path, monkeypatch, read_prediction=True)
+    assert stages["N"]["state"] == "partial" and "could not be computed here" in stages["N"]["reason"]
+    assert stages["T"]["outputs"]["whose_transfer"] == "the research's, embedded"
 
 
 @research

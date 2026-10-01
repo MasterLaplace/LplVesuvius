@@ -21,7 +21,7 @@ from vesuve import core
 @dataclass(frozen=True)
 class Equation:
     id: str
-    stage: str      # the pipeline stage where it serves: E2, B, E4, E5, E6, E7, TR, T, E8
+    stage: str      # the pipeline stage where it serves: E2, B, E4, E5, E6, E7, N, TR, T, E8
     name: str
     latex: str
     statement: str  # what it says, in one sentence
@@ -96,6 +96,30 @@ FORMULARY: dict[str, Equation] = {e.id: e for e in [
        r"c' = \max\!\left(0, \frac{c - 1/\sqrt n}{1 - 1/\sqrt n}\right)",
        "Zero on pure noise, one on a perfect rotation.", "R4-F100", "`151` [F17]",
        core.corrected_coherence),
+    _E("NW1", "N", "the sheets along a normal",
+       r"C_k = \left\{ \frac{t_a + t_{b-1}}{2} \ :\ [a, b) \text{ a maximal run of } P\!\left(\left\lfloor"
+       r" \frac{x_k + t_i\, n_k}{f} \right\rfloor\right) > 0 \right\}, \quad t_i = \sigma\, i, \quad"
+       r" 0 \le i \le \lfloor 3 s \rfloor",
+       "Along the normal of each point of the mesh, from the surface out to three steps on side sigma, the prediction "
+       "(f times coarser than the scan) marks runs of samples; the centre of each run is a sheet the next winding may "
+       "land on.",
+       "R4-F412", "`le_transfert_retrouve_t_il_la_spire_voisine.py:220` (`les_centres`), `247`"),
+    _E("NW2", "N", "the next sheet",
+       r"\tau^{(0)}_k = \frac{t_a + t_{b-1}}{2} \ \text{for the first run with } a \ge b^{\circ}"
+       r" \ \text{(or } |t_a| > 12 \text{ without an own run)}, \quad \text{else } \tau^{(0)}_k = \sigma s",
+       "The own sheet is the first run that starts within 12 voxels of the surface, ending at b°; the next winding "
+       "starts from the first run after it, and from the fixed step where the ray sees none.",
+       "R4-F412", "`le_transfert_retrouve_t_il_la_spire_voisine.py:191` (`la_feuille_suivante`), `247`"),
+    _E("NW3", "N", "the vote of the neighbours",
+       r"\mu_k = \operatorname{med}\{\tau_j : j \in W_k\} \ \text{if}\ \#\{j \in W_k\ \text{seen}\} \ge 5,"
+       r" \ \text{else } \mu_k = \tau_k, \qquad"
+       r" \tau_k \leftarrow \begin{cases} \arg\min_{c \in C_k} |c - \mu_k| & \text{if } \min_{c \in C_k} |c - \mu_k|"
+       r" < \delta \\ \mu_k & \text{otherwise} \end{cases}",
+       "Each point aims at the median of the three by three meshes around it, and takes the sheet its own ray sees "
+       "nearest to that aim within half a sheet; repeated until fewer than one point in a thousand changes, thirty "
+       "rounds at most.",
+       "R4-F412", "`le_transfert_retrouve_t_il_la_spire_voisine.py:233` (`le_vote_itere`), `247`; chained on the band, "
+       "`248` (`R4-F413`, `R4-F414`)"),
     _E("F4w", "TR", "the window-to-window step",
        r"s = -\left(k^\star + \frac{c_{k^\star-1} - c_{k^\star+1}}{2\,(c_{k^\star-1} - 2\,c_{k^\star} + c_{k^\star+1})}"
        r"\right), \quad c_k = \frac{\langle a_{[k]}, b_{[k]} \rangle}{\lVert a_{[k]} \rVert\, \lVert b_{[k]} \rVert},"

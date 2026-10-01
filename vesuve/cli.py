@@ -54,6 +54,7 @@ def formulary_as_markdown() -> str:
              "of the research producer; the others are procedure rules, in Python.", ""]
     stages = {"E2": "E2: the scale", "B": "B: the budget of a sheet trace", "E4": "E4: the lattice",
               "E5": "E5: the holes", "E6": "E6: the certificate", "E7": "E7: judging without ground truth",
+              "N": "N: computing the next winding",
               "TR": "TR: making the step tables of the correction",
               "T": "T: correcting the transfer to the next winding",
               "E8": "E8: the ink, the measuring rule"}
@@ -74,7 +75,7 @@ def _grand_prize(a, journal) -> int:
     r = run(a.segment, Path(a.output), Path(a.cache), read=a.read, rounds=a.rounds, threads=a.threads,
             readings=[Path(x) for x in a.readings], judge=a.judge, ink=not a.no_ink, surface=not a.no_surface,
             render=a.render, render_rows=a.render_rows, keep_piles=a.keep_piles, table_workers=a.table_workers,
-            journal=journal)
+            read_prediction=a.read_prediction, journal=journal)
     return 2 if r.stopped else 0
 
 
@@ -138,7 +139,10 @@ def main(argv=None) -> int:
     what_it_does = {  # what each verb does to the world: what it reads, writes, and how long it takes
         "grand-prize": "Replays the certificate of the embedded segment, offline, in about ten seconds; reads from the "
                        "public bucket the ink map (2 MB) and the surface (55 MB), unless --no-ink and --no-surface; "
-                       "with --read, reads the bands asked for (about 21 min for 24263 chunks at 16 threads). With "
+                       "with --read, reads the bands asked for (about 21 min for 24263 chunks at 16 threads). It "
+                       "computes the transfer to the next winding from the embedded samples of the prediction; with "
+                       "--read-prediction, it reads them again from the public prediction (1780 chunks, about "
+                       "630 MB). With "
                        "--render, makes the step tables of the correction here: it needs vc_render_tifxyz, downloads "
                        "the raw scan one row of blocks at a time and renders two piles per block, which takes hours "
                        "and needs about 40 GB free under --cache. Writes into --output. Exits 0 at the end, 2 if it "
@@ -174,6 +178,8 @@ def main(argv=None) -> int:
     g.add_argument("--judge", type=int, default=0, help="judge N certified chunks read from the bucket")
     g.add_argument("--no-ink", action="store_true", help="do not overlay the published ink map")
     g.add_argument("--no-surface", action="store_true", help="do not write the certified surface (55 MB read)")
+    g.add_argument("--read-prediction", action="store_true",
+                   help="compute the transfer to the next winding from the public prediction m7 (about 630 MB)")
     g.add_argument("--render", action="store_true", help="make the step tables of the correction here (hours)")
     g.add_argument("--render-rows", type=int, default=None, help="with --render, stop after N rows of blocks")
     g.add_argument("--keep-piles", action="store_true", help="with --render, keep the rendered piles (237 MB each)")
