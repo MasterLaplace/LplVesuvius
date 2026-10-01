@@ -3336,6 +3336,43 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 395 : RENDRE AUX MÉLANGES DE M7 LE POIDS DE LEUR GENRE CONTREDIT-IL MOINS SUR PHERC0358
+    s395 = _source(racine, "rendre_aux_melanges_de_m7_le_poids_de_leur_genre_contredit_il_moins_sur_pherc0358.json")
+    if s395.exists():
+        import collections as _co
+        d = json.loads(s395.read_text())
+        b, gn = d["le_bilan"], d["le_genre_des_nuls"]
+        a_, g_ = b["aux_comptes_de_m7"], b["au_genre"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        tous = [s_ for c in d["les_cotes"] for x in ("suivie", "compagne", "tierce") for s_ in c["les_sauts"][x]]
+        comptes = [s_ for s_ in tous if s_["le_nombre_de_feuilles"] is not None]
+        ch = _co.Counter((s_["le_nombre_de_feuilles"], s_["le_genre"]) for c in d["les_cotes"] for s_ in c["les_changes"])
+        par = {(c["le_rang"], c["le_cote"]): c for c in d["les_cotes"]}
+        g3, g7 = par[(3, "plus")], par[(7, "plus")]
+        s7 = g7["les_sauts"]["suivie"][1]
+        ecrits = [("le verdict de 395", f"AU GENRE, LES CONTREDITES PASSENT DE {a_['contredite']} À {g_['contredite']} ET LES VALIDÉES DE "
+                   f"{a_['validée']} À {g_['validée']} : {d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("le chapeau de 395", f"passer les surfaces contredites de {a_['contredite']} à {g_['contredite']} et les validées de "
+                   f"{a_['validée']} à {g_['validée']}"),
+                  ("la lecture de 395", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("les mélanges de 395", f"{b['les_melanges']} des {len(comptes)} sauts que `m7` compte sont des mélanges. {b['les_changes']} changent"),
+                  ("les changés de 395", f"{ch[(0, 'simple')]} que `m7` compte nuls et que `369` dit simples, {ch[(2, 'simple')]} que"),
+                  ("le double de 395", f"{ch[(3, 'double')]} de trois feuilles que `369` dit double"),
+                  ("la ligne m7 de 395", f"| aux comptes de `m7` | {a_['validée']} | {a_['contredite']} |"),
+                  ("la ligne genre de 395", f"| mélanges au genre de `369` | {g_['validée']} | {g_['contredite']} |"),
+                  ("la graine 3 de 395", f"({g3['aux_comptes_de_m7']['contredite']} → {g3['au_genre']['contredite']}), où rien n'est validé"
+                   if not g3["aux_comptes_de_m7"]["validée"] else "changé"),
+                  ("la graine 7 de 395", f"perd {g7['aux_comptes_de_m7']['validée'] - g7['au_genre']['validée']} validées "
+                   f"({g7['aux_comptes_de_m7']['validée']} → {g7['au_genre']['validée']}) et gagne "
+                   f"{g7['au_genre']['contredite'] - g7['aux_comptes_de_m7']['contredite']} contredites ({g7['aux_comptes_de_m7']['contredite']} → "
+                   f"{g7['au_genre']['contredite']})"),
+                  ("le saut de 395", f"avec {s7['les_comptes'].get('2', 0)} de ses {sum(s7['les_comptes'].values())} points"
+                   if s7["le_nombre_de_feuilles"] == 2 and s7["le_genre"] == "simple" else "changé"),
+                  ("les nuls de 395", f"Des {sum(gn['franchis'].values())} sauts nuls que `392` dit franchis, {gn['franchis'].get('nul', 0)} sont nuls"),
+                  ("les restés de 395", f"des {sum(gn['restes'].values())} qu'il dit restés, {gn['restes'].get('simple', 0)} sont simples"),
+                  ("la part de 395", f"pourquoi ils sont {round(100 * b['les_melanges'] / len(comptes))} % des sauts comptés")]
+        out.extend((nom_, [x_], s395.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 394 : LES SAUTS MÉLANGÉS DE M7 SE TROMPENT-ILS PLUS SOUVENT SUR PARIS4
     s394 = _source(racine, "les_sauts_melanges_de_m7_se_trompent_ils_plus_souvent_sur_paris4.json")
     if s394.exists():

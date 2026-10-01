@@ -4914,6 +4914,12 @@ les tours publiés de PHercParis4 ?
 de `m7` sur PHercParis4 est un mélange, dont le second compte est le bon. `R4-P192` s'ouvre : rendre aux mélanges de PHerc0358 le poids de
 leur genre de `369` ?
 
+**`395` · 2026-10-01 · rendre aux mélanges de m7 le poids de leur genre contredit-il moins sur pherc0358** — `R4-P192`
+
+⭐⭐⭐⭐ **Non : au genre, les contredites passent de 161 à 196 et les validées de 89 à 81** — `R4-F581`. Le compte majoritaire de `m7`
+reste le meilleur compte connu, mélanges compris ; le genre ne voit pas non plus les sauts nuls qui franchissent une feuille. `R4-P193`
+s'ouvre : les points d'un mélange forment-ils deux plages, comme une surface à cheval ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

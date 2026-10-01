@@ -1,0 +1,195 @@
+"""Sur PHerc0358, à seize sauts : côté par côté, les surfaces validées et contredites aux comptes de m7, et quand les mélanges reprennent le poids de leur genre de 369.
+
+⚠⚠ **Ce que cette figure doit rendre évident.** Deux panneaux, les validées à gauche et les contredites à droite ; une rangée par côté qui
+porte des surfaces jugées ; dans chaque rangée, la barre bleue aux comptes de `m7` et la barre orange au genre. Si le genre aide, les barres
+orange s'allongent à gauche et raccourcissent à droite.
+
+  uv run python src/figures/figure_rendre_aux_melanges_de_m7_le_poids_de_leur_genre_contredit_il_moins_sur_pherc0358.py \\
+      --sortie docs/images/395_rendre_aux_melanges_de_m7_le_poids_de_leur_genre_contredit_il_moins_sur_pherc0358.png
+
+⚠ Tout vient de la mesure de `395`.
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+sys.path[:0] = [str(p) for p in Path(__file__).resolve().parents[1].iterdir() if p.is_dir()]
+
+from figure_commune import (glyphes_manquants, police,  # noqa: E402
+                            textes_debordants, textes_hors_cadre, textes_qui_se_recouvrent)
+
+from PIL import Image, ImageDraw  # noqa: E402
+
+RACINE = Path(__file__).resolve().parents[2]
+LA_MESURE = RACINE / "docs" / "mesures" / "rendre_aux_melanges_de_m7_le_poids_de_leur_genre_contredit_il_moins_sur_pherc0358.json"
+
+FOND = (250, 249, 246)
+ENCRE = (28, 30, 34)
+GRIS = (140, 143, 148)
+TRAIT = (215, 213, 208)
+BANDE = (236, 234, 228)
+ALERTE = (176, 92, 42)
+BLEU = (58, 88, 120)
+ORANGE = (214, 150, 76)
+L_, H_ = 1200, 640
+LA_BANDE = 520
+LES_PANNEAUX = (("validée", "surfaces validées", 220, 560), ("contredite", "surfaces contredites", 720, 1060))
+HAUT = 120
+RANGEE = 36
+EPAISSEUR = 12
+
+
+def lire(chemin: Path = LA_MESURE) -> dict:
+    return json.loads(chemin.read_text())
+
+
+def les_rangees(d: dict) -> list[dict]:
+    """Les côtés qui portent au moins une surface validée ou contredite dans l'un des deux accords, dans l'ordre de la mesure."""
+    return [c for c in d["les_cotes"] if any(c[a][k] for a in ("aux_comptes_de_m7", "au_genre") for k in ("validée", "contredite"))]
+
+
+def le_titre(d: dict) -> str:
+    v = d["le_verdict"]
+    if not v.get("decidable"):
+        return v["lissue"].upper()
+    b = d["le_bilan"]
+    return (f"au genre, les contredites passent de {b['aux_comptes_de_m7']['contredite']} à {b['au_genre']['contredite']} : "
+            f"{v['lissue'].rpartition(' ; ')[2]}").upper()
+
+
+def la_bande(d: dict) -> tuple[str, ...]:
+    un = f"LE VERDICT DÉCLARÉ : {d['le_verdict']['lissue']}"
+    g = d["le_genre_des_nuls"]
+    deux = (f"rapporté à côté, qui ne décide rien : pour 369, {g['franchis'].get('nul', 0)} des {sum(g['franchis'].values())} sauts nuls "
+            f"franchis sont nuls aussi, et {g['restes'].get('simple', 0)} des {sum(g['restes'].values())} restés sont simples")
+    trois = "⚠ ce qui n'est PAS établi : si une surface validée est sur la bonne feuille ; PHerc0358 n'a pas de tours publiés."
+    return un, deux, trois
+
+
+def dessiner(d: dict, sortie: Path):
+    img = Image.new("RGB", (L_, H_), FOND)
+    art = ImageDraw.Draw(img)
+    gros, moyen, petit = police(16, 14, 11)
+    poses: list[tuple[int, int, str, object]] = []
+    cadres = [(50, 70, 1150, 500)]
+    traces = {"barres": [], "rectangles": []}
+
+    def ecrire(x, y, texte, fonte, fill):
+        art.text((x, y), texte, font=fonte, fill=fill)
+        poses.append((x, y, texte, fonte))
+
+    ecrire(50, 20, le_titre(d), gros, ENCRE)
+    ecrire(50, 46, "côté par côté : aux comptes de m7 en bleu, les mélanges au poids de leur genre de 369 en orange", petit, GRIS)
+    x0, y0, x1, y1 = cadres[0]
+    art.rectangle([x0, y0, x1, y1], outline=TRAIT)
+    rangees = les_rangees(d)
+    plus = max((c[a][k] for c in rangees for a in ("aux_comptes_de_m7", "au_genre") for k in ("validée", "contredite")), default=1) or 1
+    for cle, nom, g, dr in LES_PANNEAUX:
+        ecrire(g, HAUT - 34, nom, moyen, ENCRE)
+        art.line([g, HAUT - 10, g, HAUT + len(rangees) * RANGEE], fill=GRIS)
+    for i, c in enumerate(rangees):
+        y = HAUT + i * RANGEE
+        ecrire(70, y + 6, f"graine {c['le_rang']}, {c['le_cote']}", petit, ENCRE)
+        for cle, _, g, dr in LES_PANNEAUX:
+            for j, (accord, couleur) in enumerate((("aux_comptes_de_m7", BLEU), ("au_genre", ORANGE))):
+                m = c[accord][cle]
+                yy = y + 2 + j * (EPAISSEUR + 2)
+                fin = g + round(m / plus * (dr - g))
+                if m:
+                    art.rectangle([g + 1, yy, fin, yy + EPAISSEUR], fill=couleur)
+                    traces["rectangles"].append((g + 1, fin, yy, yy + EPAISSEUR))
+                traces["barres"].append((c["le_rang"], c["le_cote"], cle, accord, m, fin, couleur))
+                ecrire(fin + 6, yy - 1, str(m), petit, ENCRE)
+
+    art.rectangle([0, LA_BANDE, L_, H_], fill=BANDE)
+    un, deux, trois = la_bande(d)
+    ecrire(50, LA_BANDE + 10, un, petit, ENCRE)
+    ecrire(50, LA_BANDE + 28, deux, petit, ENCRE)
+    ecrire(50, LA_BANDE + 56, trois, moyen, ALERTE)
+
+    sortie.parent.mkdir(parents=True, exist_ok=True)
+    img.save(sortie)
+    return sortie, poses, cadres, traces
+
+
+def verifier(sortie: Path, mesure: Path = LA_MESURE) -> int:
+    echecs, faits = [], 0
+
+    def v(nom, ok, detail=""):
+        nonlocal faits
+        faits += 1
+        try:
+            res = ok() if callable(ok) else ok
+        except Exception as exc:  # noqa: BLE001
+            echecs.append(f"{nom} — LEVÉE {type(exc).__name__}: {exc}")
+            return
+        if not res:
+            echecs.append(f"{nom}{(' — ' + detail) if detail else ''}")
+
+    d = lire(mesure)
+    tmp = sortie.parent / ".sonde_395.png"
+    try:
+        _, poses, cadres, traces = dessiner(d, tmp)
+    except Exception as exc:  # noqa: BLE001
+        print(f"  ÉCHEC ★★★★ le rendu lève {type(exc).__name__}: {exc}")
+        print(f"{Path(__file__).name}   DES SONDES ONT ÉCHOUÉ (1 failures, 1 checks)")
+        return 1
+    autre = json.loads(json.dumps(d))
+    autre["le_bilan"]["au_genre"]["contredite"] = 7
+    autre["le_verdict"] = {"decidable": True, "lissue": "x ; oui"}
+    v("★★★ le titre LIT la mesure", le_titre(autre) == f"AU GENRE, LES CONTREDITES PASSENT DE {d['le_bilan']['aux_comptes_de_m7']['contredite']} À 7 : OUI",
+      le_titre(autre))
+    v("★★★★ aucun texte ne déborde de la toile", not textes_debordants(poses, L_), str(textes_debordants(poses, L_))[:200])
+    v("★★★★ aucun texte ne sort de son cadre", not textes_hors_cadre(poses, cadres), str(textes_hors_cadre(poses, cadres))[:200])
+    v("★★★★ aucun texte n'en recouvre un autre", not textes_qui_se_recouvrent(poses), str(textes_qui_se_recouvrent(poses))[:200])
+    v("★★★★ aucun cadre ne passe sous la bande du verdict", all(y1 < LA_BANDE for _, _, _, y1 in cadres))
+    manquants = sorted({x for _, _, t, _ in poses for x in glyphes_manquants(t)})
+    v("★★★★ aucun glyphe n'est absent de la police déployée", not manquants, str(manquants))
+    for accord in ("aux_comptes_de_m7", "au_genre"):
+        for cle in ("validée", "contredite"):
+            v(f"★★★★ les barres {cle}s de l'accord {accord} somment au bilan",
+              sum(b[4] for b in traces["barres"] if b[2] == cle and b[3] == accord) == d["le_bilan"][accord][cle])
+    v("★★★★ aucun côté qui porte une surface n'est omis",
+      len({(b[0], b[1]) for b in traces["barres"]}) == sum(1 for c in d["les_cotes"] if any(c[a][k] for a in ("aux_comptes_de_m7", "au_genre")
+                                                                                           for k in ("validée", "contredite"))))
+    v("★★★★ m7 en bleu, genre en orange", all(f == (BLEU if a == "aux_comptes_de_m7" else ORANGE) for *_, a, _, _, f in
+                                              [(b[0], b[1], b[2], b[3], b[4], b[5], b[6]) for b in traces["barres"]]))
+    x0, y0, x1, y1 = cadres[0]
+    dehors = [r for r in traces["rectangles"] if not (x0 < r[0] and r[1] < x1 and y0 < r[2] and r[3] < y1)]
+    v("★★★★ rien ne sort de son cadre", not dehors, str(dehors[:3]))
+    g = d["le_genre_des_nuls"]
+    v("★★★★ la bande rapporte le genre des nuls", f"{g['franchis'].get('nul', 0)} des {sum(g['franchis'].values())} sauts nuls franchis"
+      in la_bande(d)[1])
+    v("★★★★ la bande porte le verdict entier", la_bande(d)[0] == f"LE VERDICT DÉCLARÉ : {d['le_verdict']['lissue']}")
+    v("★★★★ elle porte ce qui n'est PAS établi", any("n'est PAS établi" in t_ for _, _, t_, _ in poses))
+    octets = tmp.read_bytes()
+    dessiner(d, tmp)
+    v("★★★★ le rendu est reproductible bit pour bit", tmp.read_bytes() == octets)
+    tmp.unlink(missing_ok=True)
+
+    for e_ in echecs:
+        print(f"  ÉCHEC {e_}")
+    print(f"{Path(__file__).name}   {'ALL PASS' if not echecs else 'DES SONDES ONT ÉCHOUÉ'} "
+          f"({len(echecs)} failures, {faits} checks)")
+    return 1 if echecs else 0
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
+    p.add_argument("--sortie", type=Path, default=RACINE / "docs" / "images"
+                   / "395_rendre_aux_melanges_de_m7_le_poids_de_leur_genre_contredit_il_moins_sur_pherc0358.png")
+    p.add_argument("--mesure", type=Path, default=LA_MESURE)
+    p.add_argument("--verifier", action="store_true")
+    a = p.parse_args()
+    if a.verifier:
+        return verifier(a.sortie, a.mesure)
+    chemin, *_ = dessiner(lire(a.mesure), a.sortie)
+    print(f"écrit : {chemin}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
