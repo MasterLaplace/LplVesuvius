@@ -292,8 +292,35 @@ def dans_le_volume(coords: np.ndarray, forme: tuple) -> np.ndarray:
     return ((coords >= 0.0) & (coords <= f - 1.0)).all(axis=(1, 2))
 
 
+LE_DECALAGE_DES_CLES = 1 << 20
+
+
 def les_morceaux_complets(coords: np.ndarray, taille: tuple) -> set:
-    """Tous les morceaux que l'interpolation touche : pour chaque échantillon, le cube de ses huit voisins."""
+    """Tous les morceaux que l'interpolation touche : pour chaque échantillon, le cube de ses huit voisins.
+
+    ⚠ Les trois indices d'un morceau sont rangés dans une seule clé entière de 63 bits avant le tri. `np.unique(axis=0)` trie des
+    lignes, et ce tri faisait à lui seul le coût du rendu de `409` : 40 à 65 secondes pour 32 lignes de 2048 pixels. Un indice hors
+    de ±2²⁰ (une coordonnée non finie) repasse par le tri des lignes, qui rend le même ensemble qu'avant."""
+    D, M = LE_DECALAGE_DES_CLES, (1 << 21) - 1
+    t = np.asarray(taille)
+    cles = []
+    for pas in range(0, len(coords), 4096):
+        b = np.floor(coords[pas:pas + 4096].reshape(-1, 3)).astype(np.int64)
+        lo, hi = b // t + D, (b + 1) // t + D
+        if not ((lo >= 0) & (hi <= M)).all():
+            return les_morceaux_complets_par_lignes(coords, taille)
+        for z in (lo, hi):
+            for y in (lo, hi):
+                for x in (lo, hi):
+                    cles.append(np.unique((z[:, 0] << 42) | (y[:, 1] << 21) | x[:, 2]))
+    if not cles:
+        return set()
+    u = np.unique(np.concatenate(cles))
+    return set(zip(((u >> 42) - D).tolist(), (((u >> 21) & M) - D).tolist(), ((u & M) - D).tolist()))
+
+
+def les_morceaux_complets_par_lignes(coords: np.ndarray, taille: tuple) -> set:
+    """La première écriture de `les_morceaux_complets`, par tri des lignes : la référence de sa sonde, et son repli."""
     out = set()
     t = np.asarray(taille)
     for pas in range(0, len(coords), 4096):
@@ -901,6 +928,16 @@ def verifier() -> int:
     c = np.array([[[15.5, 3.0, 3.0]]])
     mc = les_morceaux_complets(c, (16, 16, 16))
     v("★★★ un échantillon à la frontière d'un morceau lit aussi le suivant", (0, 0, 0) in mc and (1, 0, 0) in mc)
+    hasard = np.random.default_rng(409)
+    cc = np.concatenate([hasard.uniform(-40.0, 90.0, (5000, 7, 3)), np.full((1, 7, 3), 47.999), np.full((1, 7, 3), -16.0)])
+    v("★★★★ la clé entière rend le même ensemble que le tri des lignes, indices négatifs et frontières compris",
+      les_morceaux_complets(cc, (16, 8, 32)) == les_morceaux_complets_par_lignes(cc, (16, 8, 32))
+      and all(type(i) is int for k in les_morceaux_complets(cc, (16, 8, 32)) for i in k))
+    cn = cc.copy()
+    cn[3, 2, 1] = np.nan
+    v("★★★★ une coordonnée non finie repasse par le tri des lignes",
+      les_morceaux_complets(cn, (16, 8, 32)) == les_morceaux_complets_par_lignes(cn, (16, 8, 32)))
+    v("★★★ aucun échantillon, aucun morceau", les_morceaux_complets(np.empty((0, 7, 3)), (16, 16, 16)) == set())
     meta = {"shape": [20, 20, 20], "chunks": [16] * 3, "fill_value": 0, "compressor": None}
     vv = LesMorceaux("abs", None, 0, meta=meta, source=lambda *a: (None, "absent"), dossier=tmp)
     v("★★★ un morceau absent de la source vaut le remplissage", vv.tirer(0, 0, 0) == "absent"
