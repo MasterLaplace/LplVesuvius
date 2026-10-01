@@ -4896,6 +4896,12 @@ celle d'une chaîne. `R4-P188` s'ouvre : le douzième saut de la compagne, que `
 graine 4, côté moins, à 11 tours et la douzième à 12, et la font avancer d'un tour à chaque saut de la dixième à la seizième : un tour perdu
 au compte, pas un glissement. `R4-P189` s'ouvre : les autres sauts que `m7` compte nuls ?
 
+**`392` · 2026-10-01 · les sauts que m7 compte nuls laissent-ils les chaînes sur leur feuille** — `R4-P189`
+
+⭐⭐⭐⭐ **Oui, tout juste : 15 des 20 sauts nuls de `m7` restent sur leur feuille, 4 en franchissent une** — `R4-F578`. Un saut nul sur cinq
+fait perdre un tour à la suite de sa chaîne ; le contrôle tient, 165 des 205 sauts d'une feuille avancent d'un tour chez les voisines.
+`R4-P190` s'ouvre : ce qui distingue ces 4 sauts dans le compte de `m7` ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

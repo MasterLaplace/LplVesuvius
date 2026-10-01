@@ -3336,6 +3336,29 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 392 : LES SAUTS QUE M7 COMPTE NULS LAISSENT-ILS LES CHAÎNES SUR LEUR FEUILLE
+    s392 = _source(racine, "les_sauts_que_m7_compte_nuls_laissent_ils_les_chaines_sur_leur_feuille.json")
+    if s392.exists():
+        d = json.loads(s392.read_text())
+        b = d["le_bilan"]
+        cl = lambda n: {int(a): m for a, m in b[n]["par_avance"].items()}  # noqa: E731
+        ligne = lambda n: (b[n]["les_sauts"], b[n]["dits"], sum(m for a, m in cl(n).items() if a <= -1), cl(n).get(0, 0), cl(n).get(1, 0),  # noqa: E731
+                           sum(m for a, m in cl(n).items() if a >= 2))
+        franchis = sorted((s_["le_rang"], s_["le_cote"], s_["la_chaine"], s_["le_saut"]) for s_ in d["les_sauts"]
+                          if s_["le_nombre_de_feuilles"] == 0 and s_["lavance"] == 1)
+        z = ligne("0")
+        ecrits = [("le verdict de 392", f"{z[3]} DES {z[1]} SAUTS NULS DE `m7` LAISSENT LA CHAÎNE SUR SA FEUILLE, {z[4]} EN FRANCHISSENT UNE : "
+                   f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"),
+                  ("le résumé de 392", f"Des {z[1]} sauts nuls de `m7` dont l'avance est dite, {z[3]} laissent la chaîne sur sa feuille, {z[4]} en"),
+                  ("le contrôle de 392", f"{cl('1').get(1, 0)} des {b['1']['dits']} sauts d'une feuille avancent d'un tour chez les voisines"),
+                  ("les quatre de 392", "le douzième saut de la compagne de la graine 4, côté moins, celui de `391`, le"
+                   if franchis == [(4, "moins", "compagne", 12), (6, "moins", "suivie", 5), (6, "moins", "tierce", 10), (8, "moins", "compagne", 2)]
+                   else "changé"),
+                  ("les doubles de 392", f"avancent de deux tours chez les voisines sur {cl('2').get(2, 0)} des {b['2']['dits']}")]
+        for n in ("0", "1", "2"):
+            ecrits.append((f"la ligne {n} de 392", "| {} | {} | {} | {} | {} | {} | {} |".format(n, *ligne(n))))
+        out.extend((nom_, [x_], s392.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 391 : LE DOUZIÈME SAUT DE LA COMPAGNE RESTE-T-IL SUR SA FEUILLE OU M7 EN MANQUE-T-IL UNE
     s391 = _source(racine, "le_douzieme_saut_de_la_compagne_reste_t_il_sur_sa_feuille_ou_m7_en_manque_t_il_une.json")
     if s391.exists():

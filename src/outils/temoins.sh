@@ -1921,6 +1921,8 @@ run "au-delà du huitième saut, le vote désigne-t-il une chaîne qui glisse" u
 run "figure au-delà du huitième saut, le vote désigne-t-il une chaîne qui glisse" uv run python "$ROOT/src/figures/figure_au_dela_du_huitieme_saut_le_vote_designe_t_il_une_chaine_qui_glisse.py" --verifier
 run "le douzième saut de la compagne reste-t-il sur sa feuille ou m7 en manque-t-il une" uv run python "$ROOT/src/nappe/le_douzieme_saut_de_la_compagne_reste_t_il_sur_sa_feuille_ou_m7_en_manque_t_il_une.py" --verifier
 run "figure le douzième saut de la compagne reste-t-il sur sa feuille ou m7 en manque-t-il une" uv run python "$ROOT/src/figures/figure_le_douzieme_saut_de_la_compagne_reste_t_il_sur_sa_feuille_ou_m7_en_manque_t_il_une.py" --verifier
+run "les sauts que m7 compte nuls laissent-ils les chaînes sur leur feuille" uv run python "$ROOT/src/nappe/les_sauts_que_m7_compte_nuls_laissent_ils_les_chaines_sur_leur_feuille.py" --verifier
+run "figure les sauts que m7 compte nuls laissent-ils les chaînes sur leur feuille" uv run python "$ROOT/src/figures/figure_les_sauts_que_m7_compte_nuls_laissent_ils_les_chaines_sur_leur_feuille.py" --verifier
 run "surveiller une unite" bash "$ROOT/src/outils/surveiller_lunite.sh" --verifier
 run "etalonner les bornes" bash "$ROOT/src/outils/etalonner_les_bornes.sh" --verifier
 run "le debinage (H2)"        uv run python "$ROOT/src/encre/le_debinage_rend_il_quelque_chose.py" --verifier

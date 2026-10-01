@@ -1,0 +1,2595 @@
+{
+ "la_question": "Sur PHerc0358, les sauts que m7 compte nuls laissent-ils les chaînes sur leur feuille, ou les surfaces voisines des deux autres chaînes voient-elles une feuille franchie ?",
+ "les_constantes": {
+  "la_part": 0.75,
+  "la_part_basse": 0.25,
+  "le_minimum": 5
+ },
+ "les_sauts": [
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 2,
+   "lavance": -1
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 3
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 1
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 2
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -2
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -1
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 0
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 0
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 0
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 2
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -2
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 2
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 3
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 2
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 0
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 2
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 2
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 2
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 2,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 3
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 0,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 0,
+   "lavance": -1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 2,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -2
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -2
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 7
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 6
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 5
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -3
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "suivie",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 2
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 2,
+   "lavance": 2
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 13,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 14,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 15,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "compagne",
+   "le_saut": 16,
+   "le_nombre_de_feuilles": 1,
+   "lavance": null
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 2,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -2
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 3,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 4,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 5,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 6,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 7,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 8,
+   "le_nombre_de_feuilles": 0,
+   "lavance": 0
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 9,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 10,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 2
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 11,
+   "le_nombre_de_feuilles": 1,
+   "lavance": 1
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "la_chaine": "tierce",
+   "le_saut": 12,
+   "le_nombre_de_feuilles": 1,
+   "lavance": -1
+  }
+ ],
+ "le_bilan": {
+  "0": {
+   "les_sauts": 31,
+   "dits": 20,
+   "par_avance": {
+    "-1": 1,
+    "0": 15,
+    "1": 4
+   }
+  },
+  "1": {
+   "les_sauts": 271,
+   "dits": 205,
+   "par_avance": {
+    "-3": 1,
+    "-2": 5,
+    "-1": 7,
+    "0": 8,
+    "1": 165,
+    "2": 13,
+    "3": 3,
+    "5": 1,
+    "6": 1,
+    "7": 1
+   }
+  },
+  "2": {
+   "les_sauts": 16,
+   "dits": 14,
+   "par_avance": {
+    "-1": 1,
+    "0": 1,
+    "1": 3,
+    "2": 9
+   }
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "sur 20 sauts nuls de m7 dont l'avance est dite, 15 laissent la chaîne sur sa feuille et 4 en franchissent une ; oui, ils laissent les chaînes sur leur feuille"
+ }
+}
