@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**250 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**251 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 8 portes
 
@@ -17,7 +17,7 @@
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 
-## Grand Prize — 212 portes
+## Grand Prize — 213 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -230,7 +230,8 @@
 - **R4-P193** *(le graal)* · **RÉPONDUE par `396` : oui.** Sur 95 mélanges jugés, 95 sont en deux plages et 0 entremêlés ; le compte le plus bas est toujours celui des points restés le plus près de la surface de départ (`R4-F582`). La question était : **SUR PHERC0358, LES POINTS D'UN SAUT MÉLANGÉ DE `m7` QUI FRANCHISSENT UNE FEUILLE ET CEUX QUI N'EN FRANCHISSENT AUCUNE OCCUPENT-ILS DEUX PLAGES SÉPARÉES DE LA SURFACE, COMME UNE SURFACE À CHEVAL, OU SONT-ILS ENTREMÊLÉS ?**
 - **R4-P194** *(le graal)* · **RÉPONDUE par `397` : en partie.** Rogner 223 surfaces fait passer les mélanges de 96 à 53, les contredites de 161 à 131 et les validées de 89 à 75 (`R4-F583`). La question était : **SUR PHERC0358, UNE CHAÎNE QUI RETIRE DE CHAQUE SURFACE LA PLAGE RESTÉE SUR LA SURFACE D'OÙ ELLE PART A-T-ELLE MOINS DE SAUTS MÉLANGÉS, ET L'ACCORD S'Y CONTREDIT-IL MOINS ?**
 - **R4-P195** *(le graal)* · **RÉPONDUE par `398` : oui, mêmes feuilles.** Sur 45 surfaces rognées comparées, 40 sont sur une feuille de `389`, dont 21 avec un autre compte, et 5 hors de ses feuilles ; la compagne rognée compte une feuille de trop (`R4-F584`). La question était : **SUR LA GRAINE 6, CÔTÉ MOINS, DE PHERC0358, LES SURFACES DES CHAÎNES ROGNÉES SONT-ELLES SUR LES MÊMES FEUILLES QUE CELLES DES CHAÎNES DE `389`, OU LE ROGNAGE LES FAIT-IL CHANGER DE FEUILLE ?**
-- **R4-P196** *(le graal)* · **SUR PHERC0358, DES CHAÎNES ROGNÉES DONT CHAQUE SAUT EST COMPTÉ SUR SA SURFACE ENTIÈRE, AVANT ROGNAGE, GARDENT-ELLES LES CONTRADICTIONS DÉFAITES PAR `397` SANS PERDRE SES VALIDÉES ?** ⭐⭐⭐⭐ C'EST CE QUE `398` DÉSIGNE. Le rognage ne déplace pas les chaînes, il change leurs comptes (`R4-F584`) ; compter la surface entière et ne rogner que le départ du saut suivant sépare les deux effets.
+- **R4-P196** *(le graal)* · **RÉPONDUE par `399` : en partie.** Comptées entières, les chaînes rognées ont 86 validées et 150 contredites, contre 89 et 161 pour `389` et 75 et 131 pour `397` ; par surface, les contredites reviennent au niveau de `389` (`R4-F585`). La question était : **SUR PHERC0358, DES CHAÎNES ROGNÉES DONT CHAQUE SAUT EST COMPTÉ SUR SA SURFACE ENTIÈRE, AVANT ROGNAGE, GARDENT-ELLES LES CONTRADICTIONS DÉFAITES PAR `397` SANS PERDRE SES VALIDÉES ?**
+- **R4-P197** *(le graal)* · **SUR PHERCPARIS4, DES CHAÎNES QUI ROGNENT LA PLAGE RETOMBÉE DE LEURS SURFACES LISENT-ELLES LEURS SURFACES VALIDÉES SUR LE BON TOUR AUSSI SOUVENT QUE CELLES DE `385` ?** ⭐⭐⭐⭐ C'EST CE QUE `399` DÉSIGNE. Sur PHerc0358, aucune variante de rognage ne bat `389` sur les deux tableaux (`R4-F585`), et seuls des tours publiés départagent ; PHercParis4 en a.
 
 ## Progress Prizes — 19 portes
 

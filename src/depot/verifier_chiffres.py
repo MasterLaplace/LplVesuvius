@@ -3336,6 +3336,44 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 399 : COMPTER LA SURFACE ENTIÈRE ET ROGNER LE DÉPART GARDE-T-IL LES DEUX GAINS SUR PHERC0358
+    s399 = _source(racine, "compter_la_surface_entiere_et_rogner_le_depart_garde_t_il_les_deux_gains_sur_pherc0358.json")
+    s389c = _source(racine, "laccord_aux_comptes_de_m7_valide_t_il_encore_a_seize_sauts_sur_pherc0358.json")
+    if s399.exists() and s389c.exists():
+        d = json.loads(s399.read_text())
+        d389 = json.loads(s389c.read_text())
+        b, a, r = d["le_bilan"], d["389"], d["397"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        p1 = lambda x: f"{x:.1f}".replace(".", ",")  # noqa: E731
+        ch = ("suivie", "compagne", "tierce")
+        n389 = sum(len(c["les_nombres"][x]) for c in d389["les_cotes"] for x in ch)
+        n = sum(len(c["les_sauts"][x]) for c in d["les_cotes"] for x in ch)
+        st = {f"{c['le_rang']} {c['le_cote']}": c["les_statuts"] for c in d["les_cotes"]}
+        s3, s4 = d["les_statuts_389"], d["les_statuts_397"]
+        nb = {f"{c['le_rang']} {c['le_cote']}": sum(len(c["les_sauts"][x]) for x in ch) for c in d["les_cotes"]}
+        nb389 = {f"{c['le_rang']} {c['le_cote']}": sum(len(c["les_nombres"][x]) for x in ch) for c in d389["les_cotes"]}
+        loin = max(x_[2] for c in d["les_cotes"] for x_ in c["les_surfaces"] if x_[3] == "validée")
+        ligne = lambda nom, nn, v_, c_: f"| {nom} | {nn} | {v_} | {c_} | {p1(100 * v_ / nn)} % | {p1(100 * c_ / nn)} % |"  # noqa: E731
+        ecrits = [("le verdict de 399", f"COMPTÉES ENTIÈRES : {b['validee']} VALIDÉES ET {b['contredite']} CONTREDITES, CONTRE {a['validee']} ET "
+                   f"{a['contredite']} POUR `389` ET {r['validee']} ET {r['contredite']} POUR `397` : "
+                   f"{d['le_verdict']['lissue'].rpartition(' ; ')[2].upper()}"),
+                  ("le chapeau de 399", f"alors {b['contredite']} contredites et {b['validee']} validées, contre {a['contredite']} et {a['validee']} pour "
+                   f"`389` et {r['contredite']} et {r['validee']} pour `397`"),
+                  ("la lecture de 399", f"`m7` a été lu sans panne, en {vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("la ligne 389 de 399", ligne("`389`", n389, a["validee"], a["contredite"])),
+                  ("la ligne 397 de 399", ligne("`397`, rognées", n, r["validee"], r["contredite"])),
+                  ("la ligne entières de 399", ligne("rognées, comptées entières", n, b["validee"], b["contredite"])),
+                  ("la graine 6 de 399", f"{st['6 moins']['validée']} validées ({s3['6 moins']['validée']} pour `389`, {s4['6 moins']['validée']} pour `397`)"),
+                  ("la graine 7 de 399", f"monte à {st['7 plus']['validée']} ({s3['7 plus']['validée']} et {s4['7 plus']['validée']})"),
+                  ("la graine 3 de 399", f"contredites ({s3['3 plus']['contredite']} et {s4['3 plus']['contredite']})"
+                   if st["3 plus"]["contredite"] == s3["3 plus"]["contredite"] else "changé"),
+                  ("la graine 8 de 399", f"garde {st['8 moins']['contredite']} contredites"),
+                  ("les surfaces de la graine 8 de 399", f"sur {nb['8 moins']} surfaces au lieu de {nb389['8 moins']}"),
+                  ("les montées de 399", f"graine 6, côté plus ({s3['6 plus']['contredite']} → {st['6 plus']['contredite']}) et à la graine 7, côté"),
+                  ("la montée de la graine 7 de 399", f"plus ({s3['7 plus']['contredite']} → {st['7 plus']['contredite']})"),
+                  ("le plus loin de 399", f"La surface validée la plus lointaine est à {loin} tours")]
+        out.extend((nom_, [x_], s399.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 398 : LE ROGNAGE FAIT-IL CHANGER DE FEUILLE LES CHAÎNES DE LA GRAINE 6
     s398 = _source(racine, "le_rognage_fait_il_changer_de_feuille_les_chaines_de_la_graine_6.json")
     if s398.exists():
@@ -3364,7 +3402,7 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                   ("la suivie de 398", "garde les comptes de `389` jusqu'à son huitième saut"
                    if [s_["la_classe"] for s_ in cl["suivie"][:9]] == ["meme_feuille_meme_compte"] * 8 + ["meme_feuille_autre_compte"]
                    and cl["suivie"][4]["les_sauts_de_389"] == [6] else "changé"),
-                  ("les validées de 398", f"Des {len(va)} surfaces que `389` validait, {len(meme)} ont une surface rognée sur leur\nfeuille".split("\n")[0]),
+                  ("les validées de 398", f"Des {len(va)} surfaces que `389` validait, {len(meme)} ont une surface rognée sur leur"),
                   ("les autres de 398", f"au même compte, {len(autre)} à un autre compte, et {len(va) - len(meme) - len(autre)} aucune"),
                   ("les quatre de 398", "Les 4 sont les cinquième à huitième surfaces de la compagne"
                    if sorted((s_["la_chaine"], s_["le_saut_de_389"]) for s_ in autre) == [("compagne", h) for h in (5, 6, 7, 8)] else "changé")]
@@ -3411,8 +3449,8 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                   ("la graine 6 de 397", f"perd {ref(g6m)['validée'] - par[g6m]['les_statuts']['validée']} validées ({ref(g6m)['validée']} → "
                    f"{par[g6m]['les_statuts']['validée']}) et gagne {par[g6m]['les_statuts']['contredite'] - ref(g6m)['contredite']} contredites, à "
                    f"surfaces égales" if nb(par[g6m]) == nb389(par389[g6m]) else "changé"),
-                  ("les tours de la graine 6 de 397", f"elle validait jusqu'à {par389[g6m]['le_resume']['le_plus_loin']} tours, elle ne valide\nplus qu'à "
-                   f"{loin(par[g6m]['les_surfaces'])}".split("\n")[0]),
+                  ("les tours de la graine 6 de 397", f"elle validait jusqu'à {par389[g6m]['le_resume']['le_plus_loin']} tours, elle ne valide"),
+                  ("le tour restant de la graine 6 de 397", f"plus qu'à {loin(par[g6m]['les_surfaces'])}."),
                   ("la graine 7 de 397", f"La graine 7, côté plus, gagne {par[g7p]['les_statuts']['validée'] - ref(g7p)['validée']} validées et "
                    f"{par[g7p]['les_statuts']['contredite'] - ref(g7p)['contredite']} contredites"),
                   ("le plus loin de 397", f"La surface validée la plus lointaine passe de {loin389} tours à {loinrog}")]

@@ -4937,6 +4937,12 @@ côtés en désaccord, mais la graine 6, côté moins, perd 14 validées à surf
 rognée compte une feuille de trop dès sa troisième surface, et ce sont ses quatre validées qui manquent. `R4-P196` s'ouvre : compter la
 surface entière et ne rogner que le départ du saut suivant ?
 
+**`399` · 2026-10-01 · compter la surface entière et rogner le départ garde-t-il les deux gains sur pherc0358** — `R4-P196`
+
+⭐⭐⭐ **En partie : 86 validées et 150 contredites, contre 89 et 161 pour `389` et 75 et 131 pour `397`** — `R4-F585`. Par surface, les
+contredites reviennent au niveau de `389` ; aucune variante de rognage ne bat `389` sur les deux tableaux. `R4-P197` s'ouvre : le
+rognage contre les tours publiés de PHercParis4 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
