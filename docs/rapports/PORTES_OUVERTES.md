@@ -4,9 +4,9 @@
 
 # Les portes ouvertes, classées par prix
 
-**263 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**270 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
-## First Letters — 10 portes
+## First Letters — 11 portes
 
 - **R1-P01** · **La mesure qui manque au second papier** : scorer la case vide au régime du prix contre les étiquettes du témoin de production, sur `0500P2`, avec le recalage affine de `75` §C1 (Dice 0,971) et la tuile de **66 px** (pas 256) que ce pas exige (`72` §3). ⚠ La sortie déclarée de `C` : si l'AUC native à 9,362 ne se sépare pas de 0,5 avec 40 tuiles, la règle ne lit pas à ce régime, et on juge par la typographie (`45`) et le juge vierge (`09`).
 - **R1-P02** · Le juge de `09` sur `data/jeu_du_juge/` (18 tuiles, consigne, clé à part) : **un acte humain**, pas une tâche de code — la session qui a rendu les cartes est disqualifiée.
@@ -18,8 +18,9 @@
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
 - **R4-P208** · **L, LE CONTRASTE DES DEUX SENS DE LECTURE DE `410`, DÉPASSE-T-IL CELUI D'UN ORDRE DE COUCHES MÉLANGÉ, ET RESTE-T-IL PRÈS DE ZÉRO SUR DU PAPYRUS CONNU VIERGE ?** ⭐⭐⭐⭐⭐ `aviad12g/vesuvius-depth-order-control` montre qu'un détecteur publié à 9,6 µm allume plus de pixels sur un ordre mélangé que sur le vrai, sur 10 segments sur 10, et que l'ordre inverse peut en allumer plus que l'ordre juste : un contraste entre deux ordres peut naître sans encre. `lightsgoblack/ink-placebo-check` donne du papyrus vierge connu sur deux segments de PHerc1667 (w018, w023). Sans ces deux témoins, L ne prouve pas l'encre.
 - **R4-P209** · **LE DÉTECTEUR ENTRAÎNÉ À 9 µm (`scrollprize/ink_9um`, en partie sur des segments natifs à 9,362 µm de PHerc0139) LIT-IL L'ÉTALON DE PHERCPARIS4 AU NIVEAU 2, PUIS LES SURFACES DE `354` SUR PHERC0358 À LEUR RÉSOLUTION, AVEC LES TÉMOINS DE `R4-P208` ?** ⭐⭐⭐⭐ First Letters : 50 000 $ par rouleau, 10 lettres dans 4 cm² produites par programme ; PHerc0358 est éligible et aucune encre n'y est publiée. ⚠ Son « pas d'encre » sort vers 0,25, par le lissage de ses étiquettes.
+- **R4-P210** · **L'OMBILIC DE PHERC0358 POSÉ À LA MAIN PAR LA COMMUNAUTÉ (`first-letters-scan-atlas`, avec les normales de Lasagna) DIT-IL DE QUEL CÔTÉ DE CHAQUE SURFACE DE `354` EST L'AXE, ET L'ORDRE DE LECTURE QUE L'ENCRE PRÉFÈRE (`R4-F596`) EST-IL LE MÊME POUR TOUTES LES FEUILLES ORIENTÉES PAR LUI ?** ⭐⭐⭐⭐⭐ La courbure ne le dit pas sur 6 mm (`410`, amendement de `2e87989b`) ; le signe de L change entre feuilles parallèles d'une même graine. Un axe donne l'ordre sans l'encre.
 
-## Grand Prize — 222 portes
+## Grand Prize — 227 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -243,6 +244,11 @@
 - **R4-P204** *(le graal)* · **RÉPONDUE par `407` : non.** 4 comptes sur 9 à une feuille, les 5 autres à zéro ; témoin : 150 sur 162 entre tours consécutifs (`R4-F593`). La question était : **SUR PHERCPARIS4, GRAINES 4 À 6, `m7` COMPTE-T-IL UNE FEUILLE ENTRE LE TOUR −6 ET LE TOUR −7 PUBLIÉS, AU MÊME ENDROIT ?**
 - **R4-P205** *(le graal)* · **SUR PHERCPARIS4, LÀ OÙ `m7` COMPTE UNE FEUILLE ENTRE LES TOURS −6 ET −7, À MOINS D'UN PAS L'UN DE L'AUTRE, POURQUOI 3 SAUTS D'UNE FEUILLE MESURENT-ILS 1,51 À 1,57 PAS ?** C'EST CE QUE `407` LAISSE. Ailleurs sur les graines 4 à 6, le tour −7 est sur la feuille du tour −6 (`R4-F593`) ; ici les deux tours et `m7` s'accordent, et c'est le saut qui ne s'accorde pas avec eux.
 - **R4-P206** *(le graal)* · **RÉPONDUE par `409` : oui, vers le creux.** 0,8162 contre 0,1083 pour le témoin quand les couches croissent vers le creux de la feuille ; −0,0777 vers la bosse (`R4-F595`). La question était : **LE RENDU QUI LIRA PHERC0358, APPLIQUÉ À PHERCPARIS4 DEPUIS SON NIVEAU DE 9,6 µm, LIT-IL L'ENCRE DU BLOC ÉTALON, ET DANS QUEL SENS DES COUCHES RAPPORTÉ À LA COURBURE DE LA FEUILLE ?**
+- **R4-P211** *(le référent)* · **L'ACCORD DE TROIS CHAÎNES AUX COMPTES DE `m7` (`R4-F571`), QUI CHOISIT LE BON TOUR SANS RÉFÉRENT, JUGE-T-IL LES TOURS D'UN AJUSTEMENT DE SPIRALE (villa, Lasagna), LÀ OÙ PERSONNE N'A TRACÉ DE FIBRES ?** ⭐⭐⭐⭐⭐ L'équipe évalue ses spirales sur des fibres tenues à l'écart, vérifiées à la main, parce qu'une annotation « même tour ou tour différent » est plus dure à vérifier (annonce du 2026-09-14). PHerc0358 a les entrées du flux de spirale (ombilic, normales, pistes).
+- **R4-P212** *(le référent)* · **LE SCORE DE `scrollreading/pipeline9` (l'aire couverte moins la distance 3D maximale entre paires de patches) ET SES PATCHES DÉFECTUEUX DONNENT-ILS, SUR LES SURFACES DES CHAÎNES DE PHERC0358, UN SECOND AVIS PUREMENT GÉOMÉTRIQUE, INDÉPENDANT DE `m7`, QUI S'ACCORDE AVEC LE CRITÈRE DE `352` ?** ⭐⭐⭐⭐ Deux juges sans référent qui ne partagent rien valent plus qu'un.
+- **R4-P213** · **UNE PRÉDICTION DE SURFACE MEILLEURE QUE `m7` (l'élève à 9 µm distillé d'un maître à 2 µm de `socratic_method`, Dice 0,713 contre 0,561) CHANGE-T-ELLE LES COMPTES DE FEUILLES, ET LE CRITÈRE DE `352` TIENT-IL PLUS DE SAUTS JUSTES AVEC ELLE ?** ⭐⭐⭐⭐ Tout le compte repose sur `m7` ; ses taches croissent avec la compression de la feuille, selon le même dépôt.
+- **R4-P214** *(le graal)* · **LES 3 MAILLAGES COMMUNAUTAIRES DE PHERC0358 (`pscamillo/vesuvius-eligible-meshes`, 9,2 cm², sans lettre vue par `ink_9um` ni par Hecate) RECOUPENT-ILS NOS CHAÎNES, ET LE CRITÈRE ET L'ACCORD DE TROIS CHAÎNES LES TIENNENT-ILS ?** ⭐⭐⭐⭐ Les premières surfaces de PHerc0358 posées par d'autres que nous : un recoupement est un juge que personne n'a réglé sur nos chaînes.
+- **R4-P215** *(le graal)* · **LA SECONDE SURFACE QUE LE CRITÈRE TIENT SUR PHERC0358, `H_8_plus_1`, PEUT-ELLE ÊTRE REGRANDIE, PAR LA RÈGLE D'UNE MAILLE DE `365`, ASSEZ POUR PASSER LE PLANCHER DE LECTURE DE `410` (891 PIXELS RÉDUITS POUR 1000), SANS QUE LE CRITÈRE CESSE DE LA TENIR ?** ⭐⭐⭐ Avec une seule surface tenue lue, `410` ne pouvait pas trancher.
 
 ## Progress Prizes — 20 portes
 
@@ -272,7 +278,7 @@
 - **R1-P07** · Une surface en travers de **Scroll 1** — où le modèle marche — pour la thèse forte du témoin négatif (`46` §7). Le dépôt a la surface sur `1447` où le modèle est inerte, et rien sur Paris4.
 - **R1-P08** · La région du titre elle-même, à 2,4 µm, avec le juge et le témoin.
 
-## Tous les prix — 9 portes
+## Tous les prix — 10 portes
 
 - **R6-P01** *(ne pas redécouvrir)* · **Lire et citer les lauréats** : W. Stevens (déroulage par patches, août 2026), B. Hamm (labels plus proches de la vraie surface), D. Russo (14 checkpoints à 9 µm), pscamillo (profondeur du modèle 9 µm), Miller & Müller (First Letters sur `0826`, échecs publiés) — aucun n'est dans `tools/repos.tsv` ni cité (`PRIX.md` §4).
 - **R6-P02** *(ne pas redécouvrir)* · **Cloner `vesuvius-repro` (TAUIL)** et récupérer le PDF OverthINKingSegmenter (`66` §5).
@@ -283,3 +289,4 @@
 - **R6-P07** *(ne pas redécouvrir)* · **La littérature académique** : Obuchowski 1997 (ROC groupées), analyse de documents, hallucination des modèles vision-langage (`66` §5) ; les emprunts de `69` §5 (InSAR, Wu & Zhong, Li et al. 2006) restent des références nommées, aucune n'a été mise en œuvre.
 - **R6-P08** *(ne pas redécouvrir)* · **Le second papier** (encre et régime de scan : `08`, `10`, `58`, `59`, `68` §3–4) et **la note courte des négatifs** (`17`, `26`, `36`, `37`, `62`) — `70` §3.
 - **R6-P09** *(ne pas redécouvrir)* · **Le niveau 2 de `espacement_spires.py`** contredit par `winding-ruler` (−10,3 %) : outil vivant, à repasser au niveau 1 (`67` §4, `70` §4).
+- **R4-P216** *(ne pas redécouvrir)* · **LE VOLUME DE PHERC0358 COMPRESSÉ PAR `volcomp` (DCT, 31 fois à q8) REDONNE-T-IL LES PROFILS DE FEUILLES ET L'ENCRE QUE DONNE LE VOLUME BRUT : LES COMPTES DE `m7`, LE CRITÈRE DE `354`, ET L'ÉTALON DE PHERCPARIS4 À 0,869 ?** ⭐⭐⭐ Le réseau plafonne à 1-2 Mo/s par connexion sur S3 ; un miroir compressé de PHerc0358 existe. La compression est avec perte.
