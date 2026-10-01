@@ -4,9 +4,9 @@
 
 # Les portes ouvertes, classées par prix
 
-**260 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**263 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
-## First Letters — 8 portes
+## First Letters — 10 portes
 
 - **R1-P01** · **La mesure qui manque au second papier** : scorer la case vide au régime du prix contre les étiquettes du témoin de production, sur `0500P2`, avec le recalage affine de `75` §C1 (Dice 0,971) et la tuile de **66 px** (pas 256) que ce pas exige (`72` §3). ⚠ La sortie déclarée de `C` : si l'AUC native à 9,362 ne se sépare pas de 0,5 avec 40 tuiles, la règle ne lit pas à ce régime, et on juge par la typographie (`45`) et le juge vierge (`09`).
 - **R1-P02** · Le juge de `09` sur `data/jeu_du_juge/` (18 tuiles, consigne, clé à part) : **un acte humain**, pas une tâche de code — la session qui a rendu les cartes est disqualifiée.
@@ -16,6 +16,8 @@
 - **R1-P06** · Un modèle spécifique au rouleau, ou de l'encre visible sans modèle : ni l'un ni l'autre exploré.
 - **R3-P11** · Le d′ et l'écart entre résolutions (`16`) ne se comparent pas ; un instrument commun aux résolutions du corpus n'existe pas.
 - **R3-P12** · `PHerc0172` a 92 % de lisibilité et pas de `representations/` : l'expérience aval qui l'utiliserait attend une prédiction (`48`).
+- **R4-P208** · **L, LE CONTRASTE DES DEUX SENS DE LECTURE DE `410`, DÉPASSE-T-IL CELUI D'UN ORDRE DE COUCHES MÉLANGÉ, ET RESTE-T-IL PRÈS DE ZÉRO SUR DU PAPYRUS CONNU VIERGE ?** ⭐⭐⭐⭐⭐ `aviad12g/vesuvius-depth-order-control` montre qu'un détecteur publié à 9,6 µm allume plus de pixels sur un ordre mélangé que sur le vrai, sur 10 segments sur 10, et que l'ordre inverse peut en allumer plus que l'ordre juste : un contraste entre deux ordres peut naître sans encre. `lightsgoblack/ink-placebo-check` donne du papyrus vierge connu sur deux segments de PHerc1667 (w018, w023). Sans ces deux témoins, L ne prouve pas l'encre.
+- **R4-P209** · **LE DÉTECTEUR ENTRAÎNÉ À 9 µm (`scrollprize/ink_9um`, en partie sur des segments natifs à 9,362 µm de PHerc0139) LIT-IL L'ÉTALON DE PHERCPARIS4 AU NIVEAU 2, PUIS LES SURFACES DE `354` SUR PHERC0358 À LEUR RÉSOLUTION, AVEC LES TÉMOINS DE `R4-P208` ?** ⭐⭐⭐⭐ First Letters : 50 000 $ par rouleau, 10 lettres dans 4 cm² produites par programme ; PHerc0358 est éligible et aucune encre n'y est publiée. ⚠ Son « pas d'encre » sort vers 0,25, par le lissage de ses étiquettes.
 
 ## Grand Prize — 222 portes
 
@@ -242,7 +244,7 @@
 - **R4-P205** *(le graal)* · **SUR PHERCPARIS4, LÀ OÙ `m7` COMPTE UNE FEUILLE ENTRE LES TOURS −6 ET −7, À MOINS D'UN PAS L'UN DE L'AUTRE, POURQUOI 3 SAUTS D'UNE FEUILLE MESURENT-ILS 1,51 À 1,57 PAS ?** C'EST CE QUE `407` LAISSE. Ailleurs sur les graines 4 à 6, le tour −7 est sur la feuille du tour −6 (`R4-F593`) ; ici les deux tours et `m7` s'accordent, et c'est le saut qui ne s'accorde pas avec eux.
 - **R4-P206** *(le graal)* · **RÉPONDUE par `409` : oui, vers le creux.** 0,8162 contre 0,1083 pour le témoin quand les couches croissent vers le creux de la feuille ; −0,0777 vers la bosse (`R4-F595`). La question était : **LE RENDU QUI LIRA PHERC0358, APPLIQUÉ À PHERCPARIS4 DEPUIS SON NIVEAU DE 9,6 µm, LIT-IL L'ENCRE DU BLOC ÉTALON, ET DANS QUEL SENS DES COUCHES RAPPORTÉ À LA COURBURE DE LA FEUILLE ?**
 
-## Progress Prizes — 19 portes
+## Progress Prizes — 20 portes
 
 - **R1-P12** · La table de qualité de toutes les traces publiées (`22` Q3) : l'outil existe, elle n'est publiée que pour `PHerc1447`.
 - **R1-P13** · Le recalage rigide 3D des fragments étiquetés (`Frag1`–`3`) pour comparer la même surface aux deux énergies avec étiquettes (`58` §8 quater) — un lot à soi, avec sa propre source d'erreur.
@@ -263,6 +265,7 @@
 - **R5-P05** · Les **batteries en shell ne sont pas jugées** (`61` §4) ; le lanceur en compte quelques-unes.
 - **R5-P06** · `valider_blocs.py` attend **un maillage assez petit** pour que les deux méthodes passent (`56` C) : tant qu'il n'y en a pas, son 0,00025 est une valeur de bloc et pas une validation.
 - **R5-P07** · Le **palier release** (`56` C) : le piège du skill — *le palier que personne ne construit pourrit* — est traité pour `lplv`, pas vérifié pour le reste.
+- **R4-P207** · **SUR SWITCHBENCH (`lightsgoblack/scroll-audits`), LES 213 SAUTS DE FEUILLE NÉS D'EUX-MÊMES DANS 237 PATCHES AUTO-GROWN DE PHERCPARIS4, SUR LE SCAN `20260411134726` QUE NOUS LISONS, LE COMPTE DES FEUILLES DE `m7` LÈVE-T-IL UNE ALARME À MOINS D'UN MILLIMÈTRE DE CHACUN, ET AVEC COMBIEN DE FAUSSES ALARMES POUR 100 MM DE TRACE SÛRE ?** ⭐⭐⭐⭐⭐ C'est un juge externe du critère de `352`, construit par la communauté sans nous. Le meilleur détecteur classé, `tifxyz-doctor`, en retrouve 24 sur 213 (11 %), dont 2 des 122 sauts graduels, pour 0,43 fausse alarme par 100 mm (classement lu le 2026-10-01). ⚠ Les étiquettes : 10 sur 12 réelles à un contrôle humain à l'aveugle.
 
 ## Titre de Paris 4 — 2 portes
 
