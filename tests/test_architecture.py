@@ -35,7 +35,7 @@ def test_a_prize_never_imports_another_prize():
 
 
 def test_the_shared_modules_import_no_prize():
-    for folder in ("lattice", "render"):
+    for folder in ("lattice", "render", "chain"):
         for f in (PACKAGE / folder).glob("*.py"):
             for m in _imports(f):
                 assert not any(m.startswith(f"vesuve.{p}") for p in PRIZES), f"{f.name} imports {m}"
