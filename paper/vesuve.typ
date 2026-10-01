@@ -174,23 +174,29 @@ only when a majority of the $k$ lines are:
 $
   c(s) = "median"{hat(s)_ell (s)} quad "if" \#{ell} >= floor(k \/ 2) + 1.
 $
+In words: a seam gets a step only if more than half of its lines could be measured, and then the median, so that a
+single bad line cannot move it.
 Write $H(r; c_0 -> c_1)$ for the sum of the steps along row $r$ from column $c_0$ to $c_1$, and $V(c; r_0 -> r_1)$
 for the sum along column $c$. Around a rectangle of chunks, two paths lead from one corner to the opposite one, and
 their difference is the *closure* of the loop:
 $
   L = H(r_0; c_0 -> c_1) + V(c_1; r_0 -> r_1) - H(r_1; c_0 -> c_1) - V(c_0; r_0 -> r_1).
 $
-On a surface that stays on one winding the closure is zero up to the noise of the steps. A surface that switched
+Both paths go from the corner $(r_0, c_0)$ to the corner $(r_1, c_1)$, one by the top row then the right column, the
+other by the left column then the bottom row, so on a surface that stays on one winding they must arrive at the same
+depth: the closure is zero up to the noise of the steps. A surface that switched
 winding inside the loop leaves a whole sheet in it, about $2 delta$. Along a row of loops, the cumulative closure
-$P_j = sum_(i <= j) L_i$ must stay within half a sheet, $|P_j| < delta$ for every $j$. Chunks enclosed by loops
+$P_j = sum_(i <= j) L_i$, the closures of the first $j$ loops added up, must stay within half a sheet,
+$|P_j| < delta$ for every $j$: a whole sheet would push it beyond. Chunks enclosed by loops
 that pass this test are *certified*. Where seams are missing, the program lists the bands of chunks it would still
 have to measure (@fig-mask).
 
 #figure(
-  image("../examples/grand-prize/chunk_mask.jpg", width: 46%),
-  caption: [The certificate of segment `20230702185753`, as `vesuve grand-prize` writes it: 6333 of 97771 chunks
-    certified. Green: certified chunks; grey: present and not certified. Outlines: blue, the loops whose seams it would
-    still have to measure; orange, a loop whose closure crosses half a sheet.],
+  placement: auto,
+  image("../examples/progress/ink_and_suspect_region.jpg", width: 52%),
+  caption: [The published ink map of segment `20230702185753`, its Greek text in white, with what `vesuve` writes
+    over it. Green: chunks certified on one winding. Orange: chunks enclosed by a loop whose closure crosses half a
+    sheet, where the surface changes winding (column 260, rows 26 to 223).],
 ) <fig-mask>
 
 == The next winding is the first sheet the prediction marks, settled by a vote
@@ -200,8 +206,12 @@ Along the normal of each point, from the surface out to three steps on one side,
 samples; the centre of each run is a sheet the next winding may land on:
 $
   C_k = { (t_a + t_(b-1)) / 2 : [a, b) "a maximal run of" P(floor((x_k + t_i n_k) / f)) > 0 },
-  quad t_i = sigma i, quad 0 <= i <= floor(3 s).
+  quad t_i = e i, quad 0 <= i <= floor(3 s).
 $
+In words: we walk along the normal one voxel at a time, $t_i$ being the depth of the $i$-th sample and $e = plus.minus 1$
+the side of the surface the next winding lies on; we read the prediction at each sample (dividing by $f$ converts scan
+voxels into prediction voxels); every stretch of samples where it says "papyrus" is one sheet, and $C_k$ is the list
+of the depths of their centres.
 The surface's own sheet is the run within 12 voxels of it. The first choice $tau_k^((0))$ is the next run after
 that one. Then every point moves at once to the sheet its own ray sees nearest to its neighbours' median, within
 half a sheet:
@@ -212,8 +222,12 @@ $
     mu_k^((r)) & "otherwise",
   )
 $
-where $W_k$ is the three by three square of mesh cells centred on $k$. The vote stops when fewer than one point in
-a thousand moves by more than half a voxel, thirty rounds at most.
+where $W_k$ is the three by three square of mesh cells centred on $k$ and $r$ counts the rounds. In words: each
+round, every point looks at the median depth its neighbours chose ($mu_k$); if one of the sheets its own ray sees is
+within half a sheet of that median, it moves to the nearest such sheet, otherwise it takes the median itself. An
+isolated point that jumped to the wrong sheet is thus pulled back by its neighbours, while a whole region keeps its
+own choice. The vote stops when fewer than one point in a thousand moves by more than half a voxel, thirty rounds at
+most.
 
 == A slip is corrected only when it explains a point better than noise does
 
@@ -222,7 +236,9 @@ $D_c$ of the sheet in every chunk $c$, up to a common offset:
 $
   hat(D) = op("argmin", limits: #true)_(D, sum_c D_c = 0) sum_((i, j)) (D_j - D_i - s_(i j))^2.
 $
-It is walked twice, on the surface the transfer starts from ($hat(D)^r$) and on the produced winding ($hat(D)^p$).
+In words: we look for one depth per chunk such that the difference between two neighbouring chunks matches the step
+measured on their seam as well as possible; the constraint $sum_c D_c = 0$ only fixes the arbitrary offset. It is
+walked twice, on the surface the transfer starts from ($hat(D)^r$) and on the produced winding ($hat(D)^p$).
 Their difference is the transfer's depth chunk by chunk. The chunks are grouped into *blocks* of 16 by 16. Each
 block is given the level it should have from its neighbours only, so that its own slip cannot pull it:
 $a = "median" lr(\{ hat(D)^p_c - hat(D)^r_c : c in cal(N) without B \})$, where $B$ is the block and $cal(N)$ its
@@ -231,12 +247,18 @@ below:
 $
   x tilde w_0 cal(N)(0, sigma^2) + w_+ cal(N)(g, sigma^2) + w_- cal(N)(-g, sigma^2),
 $
-with the weights and the shared width fitted by expectation-maximisation, and the size of a slip, $g = 69.458$
+where $cal(N)(m, sigma^2)$ is a normal distribution of mean $m$ and width $sigma$: the departures of points that did
+not slip scatter around 0, those of points that slipped one winding too far around $+g$, and one winding too short
+around $-g$; $w_0$, $w_+$ and $w_-$ are the shares of the three groups. The weights and the shared width are fitted by
+expectation-maximisation, and the size of a slip, $g = 69.458$
 voxels (167 #um, close to the published step of 173 #um), read from the data. A point is moved back by its departure, $tau_1 = tau_0 - x$, only when a slip explains
 that departure better than the noise:
 $
   max(w_+ e^(-(x - g)^2 \/ (2 sigma^2)), w_- e^(-(x + g)^2 \/ (2 sigma^2))) > w_0 e^(-x^2 \/ (2 sigma^2)).
 $
+In words: each side of the inequality is how likely the observed departure is under one explanation; a point is
+moved only if "it slipped" is more likely than "it is noise", and it is moved by exactly its departure, back onto
+the level its neighbours give.
 
 *How it is scored.* Only afterwards, the result is compared with the next winding as the segment's own tracer drew
 it by hand, alone and completed by three neighbouring segments; a point is scored only where these two judges agree
@@ -258,7 +280,9 @@ $
   r = (sum_M (I - overline(I)) (J compose phi - overline(J compose phi)))
       / sqrt(sum_M (I - overline(I))^2 sum_M (J compose phi - overline(J compose phi))^2).
 $
-Three controls replace one term at a time: the text of the starting winding instead of the produced one, the facing
+This is the ordinary correlation coefficient between the two ink images over the mask: 1 when they rise and fall
+together, 0 when they are unrelated; $overline(I)$ and $overline(J compose phi)$ are their means over $M$. Three
+controls replace one term at a time: the text of the starting winding instead of the produced one, the facing
 point shifted by about one letter, and the winding one turn back. Six blocks were chosen from the meshes alone,
 before any ink was read on them.
 
