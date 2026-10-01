@@ -45,23 +45,33 @@ def _read_array(path: Path) -> np.ndarray:
     return np.load(io.BytesIO(gzip.decompress(path.read_bytes())), allow_pickle=False)
 
 
+def rays_from(directory: Path):
+    """The rays written under `directory` by `tools/extract_from_research.py`: the prediction's samples along the
+    normal of each point, one bit per sample, where each point sits on the transfer's grid, and how they were read."""
+    from vesuve.transfer.next_winding import REACH_IN_STEPS, Rays
+
+    ctx = _read(directory / "rays.json")
+    side = 1.0 if ctx["side"] == "plus" else -1.0
+    expected = int(np.floor(REACH_IN_STEPS * ctx["step_voxels"] / abs(ctx["depth_step_voxels"]))) + 1
+    if ctx["samples"] != expected:
+        raise ValueError(f"{directory / 'rays.json'}: {ctx['samples']} samples, where {REACH_IN_STEPS:g} steps of "
+                         f"{ctx['step_voxels']:g} voxels at {abs(ctx['depth_step_voxels']):g} voxel give {expected}")
+    rows, columns = _read_array(directory / "rays_grid.npy.gz")
+    seen = np.unpackbits(_read_array(directory / "rays_seen.npy.gz"), axis=1, count=ctx["samples"]).astype(bool)
+    depths = side * abs(ctx["depth_step_voxels"]) * np.arange(ctx["samples"], dtype=float)
+    return Rays(depths=depths, seen=seen, rows=rows.astype(np.intp), columns=columns.astype(np.intp),
+                grid=tuple(ctx["grid"]), side=side, step=ctx["step_voxels"], half_sheet=ctx["half_sheet_voxels"],
+                prediction=ctx["prediction"], path=ctx["path"], level=ctx["level"], factor=ctx["factor"])
+
+
 @lru_cache(maxsize=2)
 def rays(name: str):
     """What the transfer to the next winding is computed from on an embedded surface: the prediction's samples along
     the normal of each point of the transfer's mesh (`247`, `248`), read by the research from `m7`."""
-    from vesuve.transfer.next_winding import Rays, depths
-
     d = ROOT / name / "correction"
     if not (d / "rays.json").exists():
         raise FileNotFoundError(f"segment {name} embeds no rays (looked in {d})")
-    ctx = _read(d / "rays.json")
-    rows, columns = _read_array(d / "rays_grid.npy.gz")
-    seen = np.unpackbits(_read_array(d / "rays_seen.npy.gz"), axis=1, count=ctx["samples"]).astype(bool)
-    side = 1.0 if ctx["side"] == "plus" else -1.0
-    t = depths(side, (ctx["samples"] - 1) * ctx["depth_step_voxels"])
-    return Rays(depths=t, seen=seen, rows=rows.astype(np.intp), columns=columns.astype(np.intp),
-                grid=tuple(ctx["grid"]), side=side, step=ctx["step_voxels"], half_sheet=ctx["half_sheet_voxels"],
-                prediction=ctx["prediction"], path=ctx["path"], level=ctx["level"], factor=ctx["factor"])
+    return rays_from(d)
 
 
 @lru_cache(maxsize=2)

@@ -243,8 +243,8 @@ def extract_rays(research: Path, output: Path) -> dict:
     """
     _prepare(research)
     import numpy as np
-    # The research's own names, renamed here on the import line: this tool is one of the two places that cross the
-    # border with the research (`vesuve/research.py`), and nothing past these lines is in French.
+    # The research's own names, renamed here on the import line, and the keys of what it returns, unpacked once: this
+    # tool is one of the two places that cross the border with the research (`vesuve/research.py`).
     from la_procedure_sans_juge_tient_elle_sur_la_bande import LE_PREMIER_SAUT as band_first_jump
     from la_procedure_sans_juge_tient_elle_sur_la_bande import la_bande as read_the_band
     from la_spire_voisine_est_elle_a_un_pas import LE_CACHE as cache
@@ -272,10 +272,11 @@ def extract_rays(research: Path, output: Path) -> dict:
                           t=t, seen=seen, gi=ii // mesh, gj=jj // mesh, shape=shape,
                           research_transfer=cache / f"transfert_suivante_{SEGMENT}_m7_du_cote_plus.npy")
     band = read_the_band(cache)
-    t, seen = band["lire_rayon"](band["p"], band["n"], 1.0, reach)
+    read_band_ray, on_band_grid = band["lire_rayon"], band["sur_la_grille"]
+    band_points, band_normals, band_rows, band_columns = band["p"], band["n"], band["gi"], band["gj"]
+    t, seen = read_band_ray(band_points, band_normals, 1.0, reach)
     _write_rays(output.parent / BAND / "correction", prediction="m7", path=path, level=level, factor=factor, side=1.0,
-                t=t, seen=seen, gi=band["gi"], gj=band["gj"],
-                shape=band["sur_la_grille"](np.zeros(len(band["gi"]))).shape,
+                t=t, seen=seen, gi=band_rows, gj=band_columns, shape=on_band_grid(np.zeros(len(band_rows))).shape,
                 research_transfer=band_first_jump)
     return segment
 
@@ -291,6 +292,9 @@ def main() -> int:
     print(f"written: {a.output} ({len(c['provenance']['files'])} research files read)")
     k = extract_correction(a.research.resolve(), a.output)
     print(f"written: {a.output / 'correction'} ({len(k['candidates'])} candidate blocks)")
+    if not (a.research / "data" / "spire_voisine" / "m7").is_dir():
+        print(f"rays skipped: the research's cache of m7 chunks is not under {a.research / 'data'} (about 1 GB)")
+        return 0
     r = extract_rays(a.research.resolve(), a.output)
     print(f"written: {a.output / 'correction' / 'rays.json'} ({r['points']} rays of {r['samples']} samples)")
     return 0

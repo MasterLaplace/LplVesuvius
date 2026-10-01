@@ -18,6 +18,7 @@ from dataclasses import dataclass
 import numpy as np
 
 from vesuve.remote_zarr import BUCKET, RemoteArray
+from vesuve.transport import ABSENT
 
 MESH = 8               # one point in eight along each grid axis
 OWN_SHEET = 12.0       # voxels: a run starting this close to the surface is the surface's own sheet
@@ -129,18 +130,17 @@ def _padded(centres: list[np.ndarray]) -> np.ndarray:
     return out
 
 
-def vote(centres: list[np.ndarray], start: np.ndarray, rays: Rays, rounds: int = VOTE_ROUNDS,
-         voters: np.ndarray | None = None) -> tuple[np.ndarray, list[int]]:
-    """Each point aims at the consensus of its neighbours, and takes the sheet its ray sees nearest to that aim when it
-    lies within half a sheet; otherwise it keeps the aim. Returns the final depths and the points changed per round.
-    With `voters`, only the marked points enter their neighbours' consensus."""
+def vote(centres: list[np.ndarray], start: np.ndarray, rays: Rays,
+         rounds: int = VOTE_ROUNDS) -> tuple[np.ndarray, list[int]]:
+    """Every point of the mesh aims at the consensus of the points around it, all at once from the previous round's
+    depths, and takes the sheet its ray sees nearest to that aim when it lies within half a sheet; otherwise it keeps
+    the aim. Returns the final depths and the points that moved by more than half a voxel, per round."""
     on_grid = grid_of(rays)
     table = _padded(centres)
     current = np.asarray(start, dtype=float).copy()
     changes = []
     for _ in range(rounds):
-        votes = current if voters is None else np.where(voters, current, np.nan)
-        aim = consensus(on_grid(votes))[rays.rows, rays.columns]
+        aim = consensus(on_grid(current))[rays.rows, rays.columns]
         aim = np.where(np.isfinite(aim), aim, current)
         distance = np.abs(table - aim[:, None])
         nearest = np.argmin(np.where(np.isnan(distance), np.inf, distance), axis=1)
@@ -154,13 +154,21 @@ def vote(centres: list[np.ndarray], start: np.ndarray, rays: Rays, rounds: int =
     return current, changes
 
 
+def own_sheet_seen(t: np.ndarray, seen: np.ndarray, own: float = OWN_SHEET) -> np.ndarray:
+    """Whether each ray sees the surface's own sheet: a run that starts within `own` voxels of it, on the side read."""
+    near = np.abs(t) <= own
+    starts = seen & ~np.concatenate([np.zeros((seen.shape[0], 1), dtype=bool), seen[:, :-1]], axis=1)
+    return (starts & near[None, :]).any(axis=1)
+
+
 def produce(rays: Rays) -> dict:
-    """The transfer to the next winding on the transfer's grid, NaN where there is no point, with how the vote went
-    and how many rays saw no next sheet (they start from the fixed step)."""
+    """The transfer to the next winding on the transfer's grid, NaN where there is no point, with how the vote went,
+    how many rays see the surface's own sheet, and how many saw no next sheet (they start from the fixed step)."""
     following = next_sheet(rays.depths, rays.seen)
     start = np.where(np.isfinite(following), following, rays.side * rays.step)
     depth, changes = vote(sheet_centres(rays.depths, rays.seen), start, rays)
     return {"transfer": grid_of(rays)(depth), "rounds": len(changes), "changes": changes,
+            "own_sheet_seen": int(own_sheet_seen(rays.depths, rays.seen).sum()),
             "without_next_sheet": int(np.isnan(following).sum()), "points": int(rays.seen.shape[0])}
 
 
@@ -188,23 +196,23 @@ def read_samples(array: RemoteArray, points: np.ndarray, normals_: np.ndarray, r
                      / rays.factor).astype(np.int64)
     flat = index.reshape(-1, 3)
     shape, chunks = np.asarray(array.shape), np.asarray(array.chunks)
-    inside = np.all((flat >= 0) & (flat < shape), axis=1)
+    inside = np.flatnonzero(np.all((flat >= 0) & (flat < shape), axis=1))
     values = np.zeros(len(flat), dtype=bool)
-    keys = flat // chunks
-    groups: dict[tuple, list[int]] = {}
-    for i in np.flatnonzero(inside):
-        groups.setdefault(tuple(int(x) for x in keys[i]), []).append(i)
+    keys, which = np.unique(flat[inside] // chunks, axis=0, return_inverse=True)
+    order = np.argsort(which.ravel(), kind="stable")
+    members_of = np.split(inside[order], np.flatnonzero(np.diff(which.ravel()[order])) + 1)
 
-    def read_one(key):
+    def read_one(k: int):
+        key = tuple(int(x) for x in keys[k])
         got = array.chunk(*key)
         if got.block is None:
-            if got.reason == "absent from the bucket":
+            if got.reason == ABSENT:
                 return
             raise RuntimeError(f"chunk {key} of {rays.prediction} could not be read: {got.reason}")
-        members = np.asarray(groups[key])
-        local = flat[members] - np.asarray(key) * chunks
+        members = members_of[k]
+        local = flat[members] - keys[k] * chunks
         values[members] = got.block[local[:, 0], local[:, 1], local[:, 2]] > 0
 
     with ThreadPoolExecutor(max_workers=threads) as pool:
-        list(pool.map(read_one, groups))
+        list(pool.map(read_one, range(len(keys))))
     return values.reshape(index.shape[:2])

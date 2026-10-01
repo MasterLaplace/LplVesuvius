@@ -196,7 +196,7 @@ Zero on pure noise, one on a perfect rotation.
 
 *Fact* `R4-F100` · *source* `151` [F17] · **C core**
 
-## N: computing the next winding
+## TN: computing the next winding
 
 ### [NW1] the sheets along a normal
 
@@ -221,10 +221,10 @@ The own sheet is the first run that starts within 12 voxels of the surface, endi
 ### [NW3] the vote of the neighbours
 
 ```math
-\mu_k = \operatorname{med}\{\tau_j : j \in W_k\} \ \text{if}\ \#\{j \in W_k\ \text{seen}\} \ge 5, \ \text{else } \mu_k = \tau_k, \qquad \tau_k \leftarrow \begin{cases} \arg\min_{c \in C_k} |c - \mu_k| & \text{if } \min_{c \in C_k} |c - \mu_k| < \delta \\ \mu_k & \text{otherwise} \end{cases}
+\mu^{(r)}_k = \begin{cases} \operatorname{med}\{\tau^{(r)}_j : j \in W_k\} & \text{if } |W_k| \ge 5 \\ \tau^{(r)}_k & \text{otherwise} \end{cases}, \qquad \tau^{(r+1)}_k = \begin{cases} \arg\min_{c \in C_k} |c - \mu^{(r)}_k| & \text{if } \min_{c \in C_k} |c - \mu^{(r)}_k| < \delta \\ \mu^{(r)}_k & \text{otherwise} \end{cases}
 ```
 
-Each point aims at the median of the three by three meshes around it, and takes the sheet its own ray sees nearest to that aim within half a sheet; repeated until fewer than one point in a thousand changes, thirty rounds at most.
+W_k is the set of mesh points in the three by three square of mesh cells centred on k, k included. Every point moves at once from round r to r + 1, to the sheet its own ray sees nearest to its neighbours' median within half a sheet; the vote stops when fewer than one point in a thousand moves by more than half a voxel, thirty rounds at most.
 
 *Fact* `R4-F412` · *source* `le_transfert_retrouve_t_il_la_spire_voisine.py:233` (`le_vote_itere`), `247`; chained on the band, `248` (`R4-F413`, `R4-F414`) · **procedure rule**
 

@@ -54,7 +54,7 @@ def formulary_as_markdown() -> str:
              "of the research producer; the others are procedure rules, in Python.", ""]
     stages = {"E2": "E2: the scale", "B": "B: the budget of a sheet trace", "E4": "E4: the lattice",
               "E5": "E5: the holes", "E6": "E6: the certificate", "E7": "E7: judging without ground truth",
-              "N": "N: computing the next winding",
+              "TN": "TN: computing the next winding",
               "TR": "TR: making the step tables of the correction",
               "T": "T: correcting the transfer to the next winding",
               "E8": "E8: the ink, the measuring rule"}
@@ -142,7 +142,7 @@ def main(argv=None) -> int:
                        "with --read, reads the bands asked for (about 21 min for 24263 chunks at 16 threads). It "
                        "computes the transfer to the next winding from the embedded samples of the prediction; with "
                        "--read-prediction, it reads them again from the public prediction (1780 chunks, about "
-                       "630 MB). With "
+                       "630 MB) along the normals of the published mesh (55 MB, read even with --no-surface). With "
                        "--render, makes the step tables of the correction here: it needs vc_render_tifxyz, downloads "
                        "the raw scan one row of blocks at a time and renders two piles per block, which takes hours "
                        "and needs about 40 GB free under --cache. Writes into --output. Exits 0 at the end, 2 if it "
@@ -179,7 +179,8 @@ def main(argv=None) -> int:
     g.add_argument("--no-ink", action="store_true", help="do not overlay the published ink map")
     g.add_argument("--no-surface", action="store_true", help="do not write the certified surface (55 MB read)")
     g.add_argument("--read-prediction", action="store_true",
-                   help="compute the transfer to the next winding from the public prediction m7 (about 630 MB)")
+                   help="compute the transfer to the next winding from the public prediction m7 (about 630 MB, and the "
+                        "mesh, 55 MB)")
     g.add_argument("--render", action="store_true", help="make the step tables of the correction here (hours)")
     g.add_argument("--render-rows", type=int, default=None, help="with --render, stop after N rows of blocks")
     g.add_argument("--keep-piles", action="store_true", help="with --render, keep the rendered piles (237 MB each)")

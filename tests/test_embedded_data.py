@@ -5,7 +5,7 @@ import importlib.util
 import json
 from pathlib import Path
 
-from conftest import MEASURES, RESEARCH, research
+from conftest import MEASURES, RESEARCH, network, research
 from vesuve import embedded
 from vesuve.lattice import certificate as cert
 from vesuve.research import to_english
@@ -62,15 +62,20 @@ def test_the_embedded_correction_inputs_equal_a_fresh_extraction(tmp_path):
     m.extract_correction(RESEARCH, out)
     for name in (m.SEGMENT, m.BAND):
         fresh, kept = out.parent / name / "correction", embedded.ROOT / name / "correction"
-        written_by_the_correction = sorted(p.name for p in kept.iterdir() if not p.name.startswith("rays"))
+        written_by_the_correction = sorted(p.name for p in kept.iterdir() if p.name not in RAYS)
         assert sorted(p.name for p in fresh.iterdir()) == written_by_the_correction
         for f in fresh.iterdir():
             assert f.read_bytes() == (kept / f.name).read_bytes(), f"{name}/correction/{f.name} is stale"
 
 
+RAYS = ("rays.json", "rays_grid.npy.gz", "rays_seen.npy.gz")
+
+
 @research
+@network
 def test_the_embedded_rays_equal_a_fresh_extraction(tmp_path):
-    """Only where the research's cache of `m7` chunks lives (about 1 GB): the samples are read again from it."""
+    """Only where the research's cache of `m7` chunks lives (about 1 GB): the samples are read again from it. The
+    research's reader asks the bucket for the shapes of the prediction and of the scan, hence the network."""
     import pytest
     if not (RESEARCH / "data" / "spire_voisine" / "m7").is_dir():
         pytest.skip(f"the research's cache of m7 chunks is not under {RESEARCH / 'data'}")
@@ -81,6 +86,7 @@ def test_the_embedded_rays_equal_a_fresh_extraction(tmp_path):
     m.extract_rays(RESEARCH, out)
     for name in (m.SEGMENT, m.BAND):
         fresh, kept = out.parent / name / "correction", embedded.ROOT / name / "correction"
-        assert sorted(p.name for p in fresh.iterdir()) == ["rays.json", "rays_grid.npy.gz", "rays_seen.npy.gz"]
+        assert sorted(p.name for p in fresh.iterdir()) == list(RAYS)
+        assert sorted(p.name for p in kept.iterdir() if p.name.startswith("rays")) == list(RAYS)
         for f in fresh.iterdir():
             assert f.read_bytes() == (kept / f.name).read_bytes(), f"{name}/correction/{f.name} is stale"

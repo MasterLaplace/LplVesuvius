@@ -14,7 +14,7 @@ The stages, in the order of `213` §2 and `244` §5:
     E4 the lattice      the steps of the bands, published or read here
     E6 the certificate  the hand-free procedure, and the per-chunk mask
     E7 the judge        (option) the material peak of the certified chunks, without ground truth
-    N  the next winding the transfer to the next winding, computed from what the prediction sees along each normal
+    TN the next winding the transfer to the next winding, computed from what the prediction sees along each normal
     TR the tables       (option) the step tables of the correction, made here: mirror, render, steps
     T  the transfer     the hand-free correction of the transfer to the next winding, where it was validated
     E8 the ink          the published ink map, under the mask
@@ -56,6 +56,14 @@ def _correct(name: str, tables: dict | None = None, transfer: np.ndarray | None 
     return {**got, "context": k["context"]}
 
 
+def _same_transfer(ours: np.ndarray, theirs: np.ndarray) -> tuple[bool, float]:
+    """Whether two transfers are the same: the same points, and every depth within a millionth of a voxel."""
+    if ours.shape != theirs.shape or not np.array_equal(np.isnan(ours), np.isnan(theirs)):
+        return False, float("inf")
+    gap = float(np.nanmax(np.abs(ours - theirs))) if np.isfinite(theirs).any() else 0.0
+    return gap < 1e-6, gap
+
+
 def _produce_transfer(name: str, remote, transport, read_prediction: bool, threads: int) -> dict:
     """The transfer to the next winding computed here, from the embedded samples of the prediction or, with
     `read_prediction`, from the public prediction read along the normals of the published mesh."""
@@ -70,7 +78,12 @@ def _produce_transfer(name: str, remote, transport, read_prediction: bool, threa
         if shape != rays.grid or not (np.array_equal(rows, rays.rows) and np.array_equal(columns, rays.columns)):
             raise ValueError(f"the published mesh gives a {shape} grid of {len(rows)} points, the embedded rays a "
                              f"{rays.grid} grid of {len(rays.rows)}")
-        rays = replace(rays, seen=nw.read_samples(nw.prediction(transport, rays), p, n, rays, threads))
+        prediction = nw.prediction(transport, rays)
+        volume = RemoteArray(f"{BUCKET}/{k['context']['render']['raw_volume']}", transport, 0)
+        ratios = [v / q for v, q in zip(volume.shape, prediction.shape)]
+        if any(abs(x - rays.factor) > 0.01 * rays.factor for x in ratios):
+            raise ValueError(f"the scan is {ratios} times the prediction along (z, y, x), the rays say {rays.factor}")
+        rays = replace(rays, seen=nw.read_samples(prediction, p, n, rays, threads))
         source = f"`{rays.path}`, read here along the normals of the published mesh"
     return {"rays": rays, "source": source, **nw.produce(rays)}
 
@@ -272,8 +285,8 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                        rule=("`src/tracecheck/tracecheck.py:204`: the material peak of each chunk must fall on the traced "
                              "layer; a gap beyond the half sheet (36 voxels, 86.4 µm) says the surface left its sheet"))
 
-    transfer, made, produced, control_produced = None, None, None, None
-    with r.stage("N", "the next winding, computed here", "B4") as e:
+    transfer, made, produced, same, control_produced = None, None, None, False, None
+    with r.stage("TN", "the next winding, computed here", "B4") as e:
         try:
             produced = _produce_transfer(segment, remote, transport, read_prediction, threads)
         except FileNotFoundError as x:
@@ -283,29 +296,34 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
             e.partial(f"the transfer could not be computed here: {x}")
         if produced is not None:
             rays, kept = produced["rays"], embedded.correction(segment)
-            judge = kept["judges"][0]
-            gap = float(np.nanmax(np.abs(produced["transfer"] - kept["transfer"])))
+            next_layer = kept["judges"][0]
+            same, gap = _same_transfer(produced["transfer"], kept["transfer"])
             fixed = nw.grid_of(rays)(np.full(produced["points"], rays.side * rays.step))
             e.record("NW1", produced["points"], samples=int(rays.seen.shape[1]), prediction=rays.prediction)
             e.record("NW2", produced["without_next_sheet"],
                      what="rays that see no next sheet: they start from the step")
             e.record("NW3", produced["rounds"], changes_per_round=produced["changes"])
-            same_nan = bool(np.array_equal(np.isnan(produced["transfer"]), np.isnan(kept["transfer"])))
+            control_same = None
+            try:
+                control = nw.produce(embedded.rays(CONTROL_BAND))["transfer"]
+                control_same, _ = _same_transfer(control, embedded.correction(CONTROL_BAND)["transfer"])
+                control_produced = control if control_same else None
+            except FileNotFoundError:
+                pass
             e.note(prediction=rays.prediction, side="plus" if rays.side > 0 else "minus", where_the_samples_come_from=
-                   produced["source"], points=produced["points"], without_next_sheet=produced["without_next_sheet"],
-                   vote_rounds=produced["rounds"],
-                   same_as_the_research_transfer=same_nan and gap < 1e-6, largest_difference_voxels=gap,
+                   produced["source"], points=produced["points"],
+                   own_sheet_seen_within_12_voxels={"rays": produced["own_sheet_seen"],
+                                                    "share": round(produced["own_sheet_seen"] / produced["points"], 4)},
+                   without_next_sheet=produced["without_next_sheet"], vote_rounds=produced["rounds"],
+                   same_as_the_research_transfer=same, largest_difference_voxels=gap,
+                   control_band_same_as_the_research_transfer=control_same,
                    share_on_the_right_winding={
                        "judge": "the segment's own next layer, for scoring only (`247`)",
-                       "next_sheet_then_vote": nw.share_on_the_right_winding(produced["transfer"], judge,
+                       "next_sheet_then_vote": nw.share_on_the_right_winding(produced["transfer"], next_layer,
                                                                              rays.half_sheet),
-                       "fixed_step": nw.share_on_the_right_winding(fixed, judge, rays.half_sheet)})
-            if not same_nan or gap >= 1e-6:
+                       "fixed_step": nw.share_on_the_right_winding(fixed, next_layer, rays.half_sheet)})
+            if not same:
                 e.partial(f"the transfer computed here differs from the research's by up to {gap:.3g} voxels")
-            try:
-                control_produced = nw.produce(embedded.rays(CONTROL_BAND))["transfer"]
-            except FileNotFoundError:
-                control_produced = None
     with r.stage("TR", "the step tables, made here", "B4") as e:
         if not render:
             e.skip("the correction replays the tables of the research's renders; --render makes them here")
@@ -327,7 +345,9 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                               f"{rep['rows']} done")
     with r.stage("T", "the transfer to the next winding", "B4") as e:
         try:
-            got = _correct(segment, made["tables"] if made else None, produced["transfer"] if produced else None)
+            # The embedded tables were rendered from the research's transfer: they describe that transfer only.
+            ours = produced is not None and (made is not None or same)
+            got = _correct(segment, made["tables"] if made else None, produced["transfer"] if ours else None)
         except FileNotFoundError as x:
             e.skip(f"no correction inputs are embedded for this segment ({x})")
             got = None
@@ -358,7 +378,10 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                    what_the_transfer_is=(f"the distance from each point of the segment's mesh (one point every 8 grid "
                                          f"cells) to the next winding, in voxels along the normal, side {kc['side']}, "
                                          f"from `{kc['prediction']}` (`247`); NaN where there is no point"),
-                   whose_transfer=("computed here in stage N" if produced else "the research's, embedded"),
+                   whose_transfer=("computed here in stage TN" if ours else
+                                   "the research's, embedded: the transfer computed in stage TN differs from the one "
+                                   "the embedded step tables were rendered from, and --render makes tables for it"
+                                   if produced is not None else "the research's, embedded"),
                    blocks=p["blocks"], corrected_points=p["corrected_points"],
                    misses_made_right=p["misses_made_right"], rights_made_misses=p["rights_made_misses"],
                    net_gain=p["net_gain"], share_before=p["before"], share_after=p["after"],
