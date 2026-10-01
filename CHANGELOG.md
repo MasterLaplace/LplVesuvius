@@ -6,16 +6,21 @@ field or an exit code that changes is a breaking change once 1.0 is out.
 ## [Unreleased]
 
 ### Added
-- `vesuve grand-prize` computes the transfer to the next winding itself (stage N) instead of replaying the one the
+- `vesuve grand-prize` computes the transfer to the next winding itself (stage TN) instead of replaying the one the
   research saved: along the normal of each point of the mesh, one point in eight, the first sheet the prediction `m7`
   marks after the surface's own, then a vote of the neighbours, the rule of `247` (`R4-F412`). On segment
   `20230702185753` and on the band `w028-037` it gives back the research's transfers point for point within a millionth
   of a voxel, and on the segment the shares on the right winding `247` published: 0.9214, against 0.7613 for a fixed
   step. The correction then runs on the transfer computed here, and gives back 163 for 41.
+- The correction runs on that transfer only where its step tables describe it: the embedded tables were rendered from
+  the research's transfer. Where the transfer computed here differs, stage T corrects the research's transfer and says
+  so, until `--render` makes tables for the other one; the control band follows the same rule.
 - The samples of the prediction along each normal are embedded for the segment and the band (0.5 MB, one bit per
   sample), so the transfer is computed offline; `--read-prediction` reads them again from the public prediction
-  (1780 chunks, about 630 MB). The report of stage N says where the samples come from, how many rays see no next sheet
-  and start from the fixed step, and whether the result is the research's.
+  (1780 chunks, about 630 MB) along the normals of the published mesh (55 MB), after checking that the scan is the
+  ratio of the prediction the samples assume. The report of stage TN says where the samples come from, how many rays
+  see the surface's own sheet within 12 voxels on the side read (41791 of 62815 on the segment), how many see no next
+  sheet and start from the fixed step, and whether the result is the research's, on the segment and on the band.
 - The formulary gains the three rules of the transfer: the sheets along a normal, the next sheet, the vote.
 
 ## [0.2.0] - 2026-09-28
