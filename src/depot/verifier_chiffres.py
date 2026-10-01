@@ -3336,6 +3336,35 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 385 : L'ACCORD AUX COMPTES DE M7 VALIDE-T-IL DES SURFACES SUR LE BON TOUR DE PARIS4
+    s385 = _source(racine, "laccord_aux_comptes_de_m7_valide_t_il_des_surfaces_sur_le_bon_tour_de_paris4.json")
+    if s385.exists():
+        d = json.loads(s385.read_text())
+        a, b, g = d["avec_m7"], d["avec_369"], d["les_genres"]
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        va, vb = a["validée"], b["validée"]
+        ecrits = [("le verdict de 385", f"AUX COMPTES DE `m7`, {va['sur_le_bon_tour']} DES {va['lues']} SURFACES VALIDÉES LUES SONT SUR LE BON "
+                   f"TOUR, CONTRE {vb['sur_le_bon_tour']} DES {vb['lues']} : {d['le_verdict']['lissue'].rpartition(' ; ')[2].partition(',')[0].upper()}"),
+                  ("le résumé de 385", f"aux comptes de `m7`. L'accord y valide {va['les_surfaces']} surfaces au lieu de {vb['les_surfaces']} ; les "
+                   f"{va['lues']} qui sont lues"),
+                  ("le résumé de 385, la suite", f"tour, contre {vb['sur_le_bon_tour']} sur {vb['lues']} aux comptes de `369`"),
+                  ("la lecture de 385", f"`m7` a été lu en {d['la_lecture_de_m7']['PHercParis4']['lus']} chunks, sans panne, en "
+                   f"{vg(d['les_secondes'])} secondes" if not d["les_pannes"] else "changé"),
+                  ("le contrôle de 385", f"Il tient : {g['simple']['une']} sur {g['simple']['dits']}."),
+                  ("la redite de 385", "surface redonnent ce que `379` publie." if d["redonne_379"] else "changé"),
+                  ("les contredites de 385", f"Les contredites tombent de {b['contredite']['les_surfaces']} à {a['contredite']['les_surfaces']}, "
+                   f"et les deux qui restent lues sont aussi sur" if a["contredite"]["lues"] == a["contredite"]["sur_le_bon_tour"] == 2 else "changé"),
+                  ("les doubles de 385", f"en franchissent deux et {g['double']['plus']} trois. Les {g['nul']['les_sauts']} sauts nuls ne franchissent "
+                   "aucune feuille." if g["nul"]["zero"] == g["nul"]["les_sauts"] else "changé"),
+                  ("les doubles d'une feuille de 385", f"ne franchissent qu'une feuille** : {g['double']['une']} sur {g['double']['dits']}, contre "
+                   f"{g['double']['deux']} qui"),
+                  ("les non lues de 385", f"{va['les_surfaces'] - va['lues']} des {va['les_surfaces']} ne sont pas lues")]
+        for st, nom in (("validée", "validée"), ("contredite", "contredite"), ("confirmée une fois", "confirmée une fois"), ("sans témoin", "sans témoin")):
+            x, y = b[st], a[st]
+            ecrits.append((f"la ligne {nom} de 385", f"| {nom} | {x['les_surfaces']} | {x['lues']} | {x['sur_le_bon_tour']} | {y['les_surfaces']} | "
+                                                     f"{y['lues']} | {y['sur_le_bon_tour']} |"))
+        out.extend((nom_, [x_], s385.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 384 : LES SAUTS DOUBLES DE 369 FRANCHISSENT-ILS DEUX FEUILLES DE M7 SUR PHERC0358
     s384 = _source(racine, "les_sauts_doubles_de_369_franchissent_ils_deux_feuilles_de_m7_sur_pherc0358.json")
     if s384.exists():

@@ -1,0 +1,10161 @@
+{
+ "la_question": "Sur PHercParis4, l'accord de trois chaînes aux comptes de m7 valide-t-il des surfaces sur le bon tour publié, et autant qu'aux comptes de 369 ?",
+ "les_constantes": {
+  "le_pas": 18.021,
+  "la_part": 0.9,
+  "la_part_basse": 0.75,
+  "le_minimum": 10,
+  "la_part_du_controle": 0.75
+ },
+ "les_pannes": [],
+ "la_lecture_de_m7": {
+  "PHercParis4": {
+   "lus": 35964,
+   "absents": 0,
+   "octets": 16159032056
+  }
+ },
+ "redonne_379": true,
+ "les_cotes": [
+  {
+   "le_rang": 1,
+   "le_cote": "plus",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1156,
+      "les_comptes": {
+       "1": 1156
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 391,
+      "les_comptes": {
+       "1": 391
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 424,
+      "les_comptes": {
+       "1": 424
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 437,
+      "les_comptes": {
+       "1": 436,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 395,
+      "les_comptes": {
+       "1": 395
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 434,
+      "les_comptes": {
+       "1": 434
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 443,
+      "les_comptes": {
+       "1": 443
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 308,
+      "les_comptes": {
+       "1": 308
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 717,
+      "les_comptes": {
+       "1": 717
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 789,
+      "les_comptes": {
+       "1": 789
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 881,
+      "les_comptes": {
+       "1": 881
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 670,
+      "les_comptes": {
+       "1": 670
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 645,
+      "les_comptes": {
+       "1": 645
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 664,
+      "les_comptes": {
+       "1": 664
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 521,
+      "les_comptes": {
+       "1": 521
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 454,
+      "les_comptes": {
+       "1": 454
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1183,
+      "les_comptes": {
+       "1": 1183
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1152,
+      "les_comptes": {
+       "1": 1152
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1195,
+      "les_comptes": {
+       "1": 1195
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1189,
+      "les_comptes": {
+       "1": 1180,
+       "2": 9
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 788,
+      "les_comptes": {
+       "0": 113,
+       "1": 675
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1159,
+      "les_comptes": {
+       "0": 1,
+       "1": 1122,
+       "2": 36
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 1197,
+      "les_comptes": {
+       "1": 1197
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 1181,
+      "les_comptes": {
+       "1": 1181
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 1,
+   "le_cote": "moins",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     6,
+     7,
+     8,
+     9
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 705,
+      "les_comptes": {
+       "1": 704,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 440,
+      "les_comptes": {
+       "1": 440
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 358,
+      "les_comptes": {
+       "1": 358
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 316,
+      "les_comptes": {
+       "1": 316
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "double",
+      "les_mesures": 155,
+      "les_comptes": {
+       "1": 155
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 193,
+      "les_comptes": {
+       "1": 193
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 207,
+      "les_comptes": {
+       "1": 207
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 236,
+      "les_comptes": {
+       "1": 236
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 669,
+      "les_comptes": {
+       "1": 669
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 717,
+      "les_comptes": {
+       "0": 2,
+       "1": 715
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 520,
+      "les_comptes": {
+       "0": 4,
+       "1": 515,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 554,
+      "les_comptes": {
+       "0": 2,
+       "1": 552
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 420,
+      "les_comptes": {
+       "0": 7,
+       "1": 413
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 431,
+      "les_comptes": {
+       "0": 8,
+       "1": 423
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 313,
+      "les_comptes": {
+       "1": 313
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 276,
+      "les_comptes": {
+       "1": 276
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1044,
+      "les_comptes": {
+       "1": 1044
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 772,
+      "les_comptes": {
+       "1": 772
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 592,
+      "les_comptes": {
+       "1": 592
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 630,
+      "les_comptes": {
+       "1": 630
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 506,
+      "les_comptes": {
+       "0": 1,
+       "1": 505
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 450,
+      "les_comptes": {
+       "1": 450
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 345,
+      "les_comptes": {
+       "1": 345
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 308,
+      "les_comptes": {
+       "1": 308
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "plus",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "tierce": [
+     2,
+     3,
+     4,
+     5,
+     6,
+     8,
+     9,
+     10
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 672,
+      "les_comptes": {
+       "0": 7,
+       "1": 665
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 687,
+      "les_comptes": {
+       "1": 686,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 572,
+      "les_comptes": {
+       "1": 572
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 734,
+      "les_comptes": {
+       "1": 734
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 783,
+      "les_comptes": {
+       "1": 783
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 746,
+      "les_comptes": {
+       "1": 746
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 560,
+      "les_comptes": {
+       "1": 560
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 537,
+      "les_comptes": {
+       "0": 3,
+       "1": 534
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1113,
+      "les_comptes": {
+       "1": 1113
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 989,
+      "les_comptes": {
+       "1": 989
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "double",
+      "les_mesures": 445,
+      "les_comptes": {
+       "1": 445
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 678,
+      "les_comptes": {
+       "1": 678
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 768,
+      "les_comptes": {
+       "1": 768
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 710,
+      "les_comptes": {
+       "1": 708,
+       "2": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 613,
+      "les_comptes": {
+       "1": 608,
+       "2": 5
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 472,
+      "les_comptes": {
+       "0": 2,
+       "1": 470
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "les_mesures": 491,
+      "les_comptes": {
+       "1": 491
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 506,
+      "les_comptes": {
+       "1": 506
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 593,
+      "les_comptes": {
+       "1": 593
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 503,
+      "les_comptes": {
+       "1": 503
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 491,
+      "les_comptes": {
+       "1": 491
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "double",
+      "les_mesures": 440,
+      "les_comptes": {
+       "1": 440
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 359,
+      "les_comptes": {
+       "1": 359
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 272,
+      "les_comptes": {
+       "1": 272
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 2,
+   "le_cote": "moins",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     3,
+     4,
+     5,
+     7,
+     8,
+     9,
+     10
+    ],
+    "compagne": [
+     1,
+     3,
+     4,
+     5,
+     7,
+     8,
+     9,
+     10
+    ],
+    "tierce": [
+     1,
+     3,
+     4,
+     5,
+     7,
+     8,
+     9,
+     10
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 575,
+      "les_comptes": {
+       "1": 575
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "double",
+      "les_mesures": 444,
+      "les_comptes": {
+       "1": 444
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 470,
+      "les_comptes": {
+       "1": 470
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 323,
+      "les_comptes": {
+       "1": 323
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "double",
+      "les_mesures": 82,
+      "les_comptes": {
+       "1": 82
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 104,
+      "les_comptes": {
+       "1": 104
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 102,
+      "les_comptes": {
+       "1": 102
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 271,
+      "les_comptes": {
+       "1": 271
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 322,
+      "les_comptes": {
+       "1": 322
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "double",
+      "les_mesures": 177,
+      "les_comptes": {
+       "1": 177
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 141,
+      "les_comptes": {
+       "1": 141
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 108,
+      "les_comptes": {
+       "1": 108
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "double",
+      "les_mesures": 65,
+      "les_comptes": {
+       "1": 65
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 105,
+      "les_comptes": {
+       "1": 105
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 108,
+      "les_comptes": {
+       "1": 108
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 88,
+      "les_comptes": {
+       "1": 88
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 563,
+      "les_comptes": {
+       "1": 563
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "double",
+      "les_mesures": 491,
+      "les_comptes": {
+       "1": 491
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 460,
+      "les_comptes": {
+       "1": 460
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 327,
+      "les_comptes": {
+       "1": 327
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "double",
+      "les_mesures": 69,
+      "les_comptes": {
+       "1": 69
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 135,
+      "les_comptes": {
+       "1": 135
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 165,
+      "les_comptes": {
+       "1": 164,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 305,
+      "les_comptes": {
+       "1": 305
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "plus",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     5,
+     6,
+     7,
+     8,
+     9
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 372,
+      "les_comptes": {
+       "1": 372
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 277,
+      "les_comptes": {
+       "1": 277
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 376,
+      "les_comptes": {
+       "1": 376
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 398,
+      "les_comptes": {
+       "1": 398
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 348,
+      "les_comptes": {
+       "1": 348
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 427,
+      "les_comptes": {
+       "1": 427
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 455,
+      "les_comptes": {
+       "1": 455
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 422,
+      "les_comptes": {
+       "1": 422
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 946,
+      "les_comptes": {
+       "1": 946
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "double",
+      "les_mesures": 624,
+      "les_comptes": {
+       "1": 624
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 690,
+      "les_comptes": {
+       "1": 690
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 509,
+      "les_comptes": {
+       "1": 509
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 402,
+      "les_comptes": {
+       "1": 402
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 244,
+      "les_comptes": {
+       "1": 244
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 179,
+      "les_comptes": {
+       "0": 1,
+       "1": 178
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 259,
+      "les_comptes": {
+       "1": 259
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 525,
+      "les_comptes": {
+       "1": 525
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 691,
+      "les_comptes": {
+       "1": 691
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 759,
+      "les_comptes": {
+       "1": 759
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "double",
+      "les_mesures": 496,
+      "les_comptes": {
+       "1": 495,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 720,
+      "les_comptes": {
+       "1": 720
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 490,
+      "les_comptes": {
+       "1": 489,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 534,
+      "les_comptes": {
+       "1": 534
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 427,
+      "les_comptes": {
+       "0": 2,
+       "1": 425
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 3,
+   "le_cote": "moins",
+   "les_comptes_de_369": {
+    "suivie": [
+     2,
+     3,
+     4,
+     6,
+     7,
+     8,
+     9,
+     10
+    ],
+    "compagne": [
+     2,
+     3,
+     4,
+     6,
+     7,
+     9,
+     10,
+     11
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "les_mesures": 697,
+      "les_comptes": {
+       "1": 697
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 680,
+      "les_comptes": {
+       "0": 1,
+       "1": 679
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 532,
+      "les_comptes": {
+       "1": 532
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "double",
+      "les_mesures": 79,
+      "les_comptes": {
+       "1": 79
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 333,
+      "les_comptes": {
+       "1": 333
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 320,
+      "les_comptes": {
+       "1": 289,
+       "2": 31
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 271,
+      "les_comptes": {
+       "0": 3,
+       "1": 268
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 166,
+      "les_comptes": {
+       "0": 1,
+       "1": 165
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "double",
+      "les_mesures": 562,
+      "les_comptes": {
+       "1": 562
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 461,
+      "les_comptes": {
+       "1": 461
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 313,
+      "les_comptes": {
+       "1": 313
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "double",
+      "les_mesures": 76,
+      "les_comptes": {
+       "1": 76
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 132,
+      "les_comptes": {
+       "1": 132
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "double",
+      "les_mesures": 100,
+      "les_comptes": {
+       "1": 55,
+       "2": 45
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 294,
+      "les_comptes": {
+       "1": 294
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 169,
+      "les_comptes": {
+       "0": 1,
+       "1": 168
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 337,
+      "les_comptes": {
+       "1": 337
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 362,
+      "les_comptes": {
+       "1": 362
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 283,
+      "les_comptes": {
+       "1": 283
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 122,
+      "les_comptes": {
+       "1": 122
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 88,
+      "les_comptes": {
+       "1": 88
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 299,
+      "les_comptes": {
+       "1": 272,
+       "2": 27
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 296,
+      "les_comptes": {
+       "1": 296
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 162,
+      "les_comptes": {
+       "1": 162
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "plus",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     3,
+     4,
+     5,
+     6,
+     7,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     3,
+     4,
+     5,
+     6,
+     7,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 824,
+      "les_comptes": {
+       "0": 231,
+       "1": 351,
+       "2": 153,
+       "3": 65,
+       "4": 24
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "double",
+      "les_mesures": 732,
+      "les_comptes": {
+       "0": 5,
+       "1": 200,
+       "2": 344,
+       "3": 139,
+       "4": 44
+      },
+      "le_nombre_de_feuilles": 2
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1090,
+      "les_comptes": {
+       "0": 193,
+       "1": 843,
+       "2": 23,
+       "3": 23,
+       "4": 8
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1164,
+      "les_comptes": {
+       "0": 23,
+       "1": 1110,
+       "2": 31
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 898,
+      "les_comptes": {
+       "0": 366,
+       "1": 532
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1157,
+      "les_comptes": {
+       "0": 1,
+       "1": 1061,
+       "2": 95
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "nul",
+      "les_mesures": 893,
+      "les_comptes": {
+       "0": 607,
+       "1": 238,
+       "2": 45,
+       "3": 3
+      },
+      "le_nombre_de_feuilles": 0
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 625,
+      "les_comptes": {
+       "0": 96,
+       "1": 326,
+       "2": 203
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1113,
+      "les_comptes": {
+       "0": 29,
+       "1": 988,
+       "2": 92,
+       "3": 4
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 668,
+      "les_comptes": {
+       "0": 78,
+       "1": 300,
+       "2": 186,
+       "3": 104
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1122,
+      "les_comptes": {
+       "0": 7,
+       "1": 1032,
+       "2": 83
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 583,
+      "les_comptes": {
+       "0": 15,
+       "1": 566,
+       "2": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 317,
+      "les_comptes": {
+       "0": 102,
+       "1": 148,
+       "2": 67
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1136,
+      "les_comptes": {
+       "0": 5,
+       "1": 994,
+       "2": 137
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 1130,
+      "les_comptes": {
+       "0": 21,
+       "1": 1038,
+       "2": 71
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 172,
+      "les_comptes": {
+       "0": 6,
+       "1": 166
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 858,
+      "les_comptes": {
+       "0": 199,
+       "1": 472,
+       "2": 168,
+       "3": 13,
+       "4": 5,
+       "5": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "nul",
+      "les_mesures": 917,
+      "les_comptes": {
+       "0": 525,
+       "1": 379,
+       "2": 13
+      },
+      "le_nombre_de_feuilles": 0
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1113,
+      "les_comptes": {
+       "0": 30,
+       "1": 1013,
+       "2": 70
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1161,
+      "les_comptes": {
+       "0": 17,
+       "1": 1144
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 1195,
+      "les_comptes": {
+       "1": 1136,
+       "2": 59
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1198,
+      "les_comptes": {
+       "1": 1191,
+       "2": 7
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 694,
+      "les_comptes": {
+       "0": 143,
+       "1": 551
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 1159,
+      "les_comptes": {
+       "1": 1119,
+       "2": 40
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 4,
+   "le_cote": "moins",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     9
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     9
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1181,
+      "les_comptes": {
+       "0": 4,
+       "1": 1152,
+       "2": 25
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1189,
+      "les_comptes": {
+       "0": 3,
+       "1": 1186
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1196,
+      "les_comptes": {
+       "0": 6,
+       "1": 1190
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1200,
+      "les_comptes": {
+       "0": 4,
+       "1": 1196
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 1197,
+      "les_comptes": {
+       "1": 1197
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1200,
+      "les_comptes": {
+       "0": 2,
+       "1": 1198
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 1200,
+      "les_comptes": {
+       "1": 1200
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 844,
+      "les_comptes": {
+       "0": 1,
+       "1": 787,
+       "2": 56
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1153,
+      "les_comptes": {
+       "0": 9,
+       "1": 1119,
+       "2": 25
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1175,
+      "les_comptes": {
+       "1": 1175
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1190,
+      "les_comptes": {
+       "0": 1,
+       "1": 1142,
+       "2": 47
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1179,
+      "les_comptes": {
+       "0": 34,
+       "1": 1116,
+       "2": 27,
+       "3": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 1174,
+      "les_comptes": {
+       "0": 25,
+       "1": 1147,
+       "2": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1145,
+      "les_comptes": {
+       "0": 27,
+       "1": 1117,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 792,
+      "les_comptes": {
+       "0": 220,
+       "1": 478,
+       "2": 94
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "double",
+      "les_mesures": 65,
+      "les_comptes": {
+       "1": 64,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1137,
+      "les_comptes": {
+       "0": 9,
+       "1": 1053,
+       "2": 75
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1188,
+      "les_comptes": {
+       "0": 5,
+       "1": 1183
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1191,
+      "les_comptes": {
+       "0": 12,
+       "1": 1179
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1197,
+      "les_comptes": {
+       "0": 6,
+       "1": 1191
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 1173,
+      "les_comptes": {
+       "0": 1,
+       "1": 1120,
+       "2": 52
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1198,
+      "les_comptes": {
+       "0": 1,
+       "1": 1197
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 1183,
+      "les_comptes": {
+       "1": 1156,
+       "2": 27
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "double",
+      "les_mesures": 1107,
+      "les_comptes": {
+       "1": 847,
+       "2": 260
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "plus",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     7,
+     8,
+     9
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 872,
+      "les_comptes": {
+       "0": 12,
+       "1": 836,
+       "2": 24
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 515,
+      "les_comptes": {
+       "0": 32,
+       "1": 199,
+       "2": 284
+      },
+      "le_nombre_de_feuilles": 2
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1190,
+      "les_comptes": {
+       "0": 20,
+       "1": 1166,
+       "2": 4
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 837,
+      "les_comptes": {
+       "0": 176,
+       "1": 609,
+       "2": 47,
+       "3": 5
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 1002,
+      "les_comptes": {
+       "0": 129,
+       "1": 700,
+       "2": 173
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 718,
+      "les_comptes": {
+       "0": 241,
+       "1": 309,
+       "2": 72,
+       "3": 61,
+       "4": 33,
+       "5": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 478,
+      "les_comptes": {
+       "0": 137,
+       "1": 185,
+       "2": 110,
+       "3": 29,
+       "4": 17
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 1160,
+      "les_comptes": {
+       "0": 9,
+       "1": 1130,
+       "2": 21
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 748,
+      "les_comptes": {
+       "0": 13,
+       "1": 734,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 520,
+      "les_comptes": {
+       "0": 11,
+       "1": 509
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 472,
+      "les_comptes": {
+       "0": 18,
+       "1": 381,
+       "2": 73
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 450,
+      "les_comptes": {
+       "0": 17,
+       "1": 398,
+       "2": 35
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 395,
+      "les_comptes": {
+       "0": 12,
+       "1": 373,
+       "2": 10
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 282,
+      "les_comptes": {
+       "0": 116,
+       "1": 165,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 955,
+      "les_comptes": {
+       "0": 234,
+       "1": 694,
+       "2": 26,
+       "3": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 999,
+      "les_comptes": {
+       "0": 318,
+       "1": 659,
+       "2": 17,
+       "3": 5
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1160,
+      "les_comptes": {
+       "0": 7,
+       "1": 1095,
+       "2": 58
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 654,
+      "les_comptes": {
+       "0": 118,
+       "1": 266,
+       "2": 228,
+       "3": 42
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1146,
+      "les_comptes": {
+       "0": 13,
+       "1": 1118,
+       "2": 15
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 821,
+      "les_comptes": {
+       "0": 16,
+       "1": 793,
+       "2": 12
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 393,
+      "les_comptes": {
+       "0": 81,
+       "1": 220,
+       "2": 82,
+       "3": 10
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 849,
+      "les_comptes": {
+       "0": 21,
+       "1": 329,
+       "2": 341,
+       "3": 133,
+       "4": 25
+      },
+      "le_nombre_de_feuilles": 2
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 881,
+      "les_comptes": {
+       "0": 27,
+       "1": 487,
+       "2": 367
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 1145,
+      "les_comptes": {
+       "0": 1,
+       "1": 1044,
+       "2": 100
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 5,
+   "le_cote": "moins",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     9
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     9
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1176,
+      "les_comptes": {
+       "1": 1174,
+       "2": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1182,
+      "les_comptes": {
+       "1": 1182
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1197,
+      "les_comptes": {
+       "1": 1197
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1078,
+      "les_comptes": {
+       "1": 1078
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 993,
+      "les_comptes": {
+       "1": 993
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 865,
+      "les_comptes": {
+       "1": 865
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 751,
+      "les_comptes": {
+       "1": 749,
+       "2": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "double",
+      "les_mesures": 297,
+      "les_comptes": {
+       "1": 47,
+       "2": 198,
+       "3": 52
+      },
+      "le_nombre_de_feuilles": 2
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1173,
+      "les_comptes": {
+       "0": 1,
+       "1": 1172
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1176,
+      "les_comptes": {
+       "1": 1176
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 749,
+      "les_comptes": {
+       "0": 1,
+       "1": 748
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 658,
+      "les_comptes": {
+       "0": 7,
+       "1": 651
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 602,
+      "les_comptes": {
+       "0": 6,
+       "1": 596
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 564,
+      "les_comptes": {
+       "0": 4,
+       "1": 560
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 435,
+      "les_comptes": {
+       "1": 433,
+       "2": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 184,
+      "les_comptes": {
+       "0": 4,
+       "1": 180
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1161,
+      "les_comptes": {
+       "1": 1146,
+       "2": 15
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1184,
+      "les_comptes": {
+       "0": 1,
+       "1": 1183
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1194,
+      "les_comptes": {
+       "1": 1144,
+       "2": 50
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 904,
+      "les_comptes": {
+       "0": 87,
+       "1": 809,
+       "2": 8
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 1176,
+      "les_comptes": {
+       "0": 19,
+       "1": 1149,
+       "2": 8
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1181,
+      "les_comptes": {
+       "0": 23,
+       "1": 1158
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 887,
+      "les_comptes": {
+       "0": 31,
+       "1": 778,
+       "2": 78
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 513,
+      "les_comptes": {
+       "0": 11,
+       "1": 493,
+       "2": 9
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "plus",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     9
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1196,
+      "les_comptes": {
+       "1": 1195,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 632,
+      "les_comptes": {
+       "0": 105,
+       "1": 208,
+       "2": 230,
+       "3": 89
+      },
+      "le_nombre_de_feuilles": 2
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 874,
+      "les_comptes": {
+       "0": 16,
+       "1": 806,
+       "2": 52
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 692,
+      "les_comptes": {
+       "0": 22,
+       "1": 634,
+       "2": 36
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 419,
+      "les_comptes": {
+       "0": 5,
+       "1": 404,
+       "2": 10
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 282,
+      "les_comptes": {
+       "1": 151,
+       "2": 126,
+       "3": 5
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 1090,
+      "les_comptes": {
+       "0": 233,
+       "1": 823,
+       "2": 34
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 891,
+      "les_comptes": {
+       "0": 296,
+       "1": 569,
+       "2": 20,
+       "3": 5,
+       "4": 1
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1191,
+      "les_comptes": {
+       "1": 1153,
+       "2": 38
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 613,
+      "les_comptes": {
+       "0": 79,
+       "1": 328,
+       "2": 176,
+       "3": 30
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 859,
+      "les_comptes": {
+       "0": 26,
+       "1": 505,
+       "2": 289,
+       "3": 21,
+       "4": 18
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1112,
+      "les_comptes": {
+       "0": 6,
+       "1": 1049,
+       "2": 57
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 825,
+      "les_comptes": {
+       "0": 64,
+       "1": 711,
+       "2": 48,
+       "3": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1054,
+      "les_comptes": {
+       "0": 88,
+       "1": 512,
+       "2": 445,
+       "3": 9
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 1170,
+      "les_comptes": {
+       "0": 1,
+       "1": 1119,
+       "2": 50
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 931,
+      "les_comptes": {
+       "0": 85,
+       "1": 393,
+       "2": 453
+      },
+      "le_nombre_de_feuilles": 2
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1186,
+      "les_comptes": {
+       "1": 1183,
+       "2": 3
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1157,
+      "les_comptes": {
+       "0": 15,
+       "1": 1108,
+       "2": 34
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 489,
+      "les_comptes": {
+       "0": 119,
+       "1": 218,
+       "2": 128,
+       "3": 24
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1137,
+      "les_comptes": {
+       "0": 14,
+       "1": 1113,
+       "2": 10
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 1124,
+      "les_comptes": {
+       "0": 9,
+       "1": 975,
+       "2": 139,
+       "3": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 669,
+      "les_comptes": {
+       "0": 240,
+       "1": 240,
+       "2": 132,
+       "3": 57
+      },
+      "le_nombre_de_feuilles": null
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 1147,
+      "les_comptes": {
+       "0": 4,
+       "1": 1020,
+       "2": 123
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 1054,
+      "les_comptes": {
+       "0": 49,
+       "1": 965,
+       "2": 40
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 6,
+   "le_cote": "moins",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     8,
+     10
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     8,
+     11
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1174,
+      "les_comptes": {
+       "0": 1,
+       "1": 1173
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1196,
+      "les_comptes": {
+       "1": 1176,
+       "2": 20
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1177,
+      "les_comptes": {
+       "0": 5,
+       "1": 1171,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1094,
+      "les_comptes": {
+       "0": 4,
+       "1": 1089,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 1036,
+      "les_comptes": {
+       "0": 10,
+       "1": 1026
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 830,
+      "les_comptes": {
+       "0": 8,
+       "1": 821,
+       "3": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "double",
+      "les_mesures": 317,
+      "les_comptes": {
+       "1": 16,
+       "2": 227,
+       "3": 73,
+       "4": 1
+      },
+      "le_nombre_de_feuilles": 2
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "double",
+      "les_mesures": 269,
+      "les_comptes": {
+       "1": 27,
+       "2": 103,
+       "3": 128,
+       "4": 10,
+       "5": 1
+      },
+      "le_nombre_de_feuilles": 3
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1180,
+      "les_comptes": {
+       "0": 1,
+       "1": 1179
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1192,
+      "les_comptes": {
+       "1": 1183,
+       "2": 9
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1158,
+      "les_comptes": {
+       "0": 14,
+       "1": 1051,
+       "2": 92,
+       "3": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1189,
+      "les_comptes": {
+       "0": 41,
+       "1": 1148
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 920,
+      "les_comptes": {
+       "0": 240,
+       "1": 680
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1190,
+      "les_comptes": {
+       "0": 20,
+       "1": 1165,
+       "2": 5
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 872,
+      "les_comptes": {
+       "0": 2,
+       "1": 856,
+       "2": 14
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 922,
+      "les_comptes": {
+       "1": 889,
+       "2": 33
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1194,
+      "les_comptes": {
+       "1": 1194
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1194,
+      "les_comptes": {
+       "1": 1130,
+       "2": 64
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 888,
+      "les_comptes": {
+       "0": 147,
+       "1": 717,
+       "2": 23,
+       "3": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 1182,
+      "les_comptes": {
+       "0": 39,
+       "1": 1133,
+       "2": 10
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 1180,
+      "les_comptes": {
+       "0": 25,
+       "1": 1135,
+       "2": 20
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 872,
+      "les_comptes": {
+       "0": 6,
+       "1": 856,
+       "2": 9,
+       "3": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 531,
+      "les_comptes": {
+       "1": 489,
+       "2": 42
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 564,
+      "les_comptes": {
+       "1": 484,
+       "2": 80
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 11,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "plus",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 878,
+      "les_comptes": {
+       "0": 14,
+       "1": 779,
+       "2": 85
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 516,
+      "les_comptes": {
+       "0": 23,
+       "1": 312,
+       "2": 120,
+       "3": 59,
+       "4": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1092,
+      "les_comptes": {
+       "0": 9,
+       "1": 890,
+       "2": 193
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 784,
+      "les_comptes": {
+       "0": 183,
+       "1": 468,
+       "2": 132,
+       "3": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 837,
+      "les_comptes": {
+       "0": 3,
+       "1": 833,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 708,
+      "les_comptes": {
+       "0": 4,
+       "1": 703,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 589,
+      "les_comptes": {
+       "0": 40,
+       "1": 318,
+       "2": 226,
+       "3": 5
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 1160,
+      "les_comptes": {
+       "0": 1,
+       "1": 876,
+       "2": 283
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 697,
+      "les_comptes": {
+       "0": 11,
+       "1": 660,
+       "2": 26
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "nul",
+      "les_mesures": 352,
+      "les_comptes": {
+       "0": 182,
+       "1": 146,
+       "2": 21,
+       "4": 3
+      },
+      "le_nombre_de_feuilles": 0
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 1165,
+      "les_comptes": {
+       "0": 6,
+       "1": 1158,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 986,
+      "les_comptes": {
+       "0": 13,
+       "1": 973
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 637,
+      "les_comptes": {
+       "1": 352,
+       "2": 272,
+       "3": 13
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 1189,
+      "les_comptes": {
+       "0": 3,
+       "1": 1183,
+       "2": 3
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 1179,
+      "les_comptes": {
+       "0": 16,
+       "1": 1163
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 1184,
+      "les_comptes": {
+       "0": 5,
+       "1": 1179
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 468,
+      "les_comptes": {
+       "0": 15,
+       "1": 453
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 530,
+      "les_comptes": {
+       "0": 15,
+       "1": 515
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 556,
+      "les_comptes": {
+       "0": 1,
+       "1": 555
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 590,
+      "les_comptes": {
+       "0": 5,
+       "1": 585
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 647,
+      "les_comptes": {
+       "0": 4,
+       "1": 641,
+       "2": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 642,
+      "les_comptes": {
+       "0": 2,
+       "1": 640
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 693,
+      "les_comptes": {
+       "0": 2,
+       "1": 691
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 729,
+      "les_comptes": {
+       "0": 2,
+       "1": 726,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 5,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 7,
+   "le_cote": "moins",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     7,
+     8,
+     9
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     7,
+     8,
+     9
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 793,
+      "les_comptes": {
+       "0": 106,
+       "1": 638,
+       "2": 43,
+       "3": 6
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 718,
+      "les_comptes": {
+       "0": 7,
+       "1": 596,
+       "2": 115
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 719,
+      "les_comptes": {
+       "0": 5,
+       "1": 713,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 630,
+      "les_comptes": {
+       "0": 4,
+       "1": 626
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 420,
+      "les_comptes": {
+       "0": 5,
+       "1": 415
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "double",
+      "les_mesures": 166,
+      "les_comptes": {
+       "2": 105,
+       "3": 60,
+       "4": 1
+      },
+      "le_nombre_de_feuilles": 2
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 30,
+      "les_comptes": {
+       "1": 30
+      },
+      "le_nombre_de_feuilles": null
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 56,
+      "les_comptes": {
+       "1": 56
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 670,
+      "les_comptes": {
+       "0": 10,
+       "1": 658,
+       "2": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 532,
+      "les_comptes": {
+       "0": 12,
+       "1": 520
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 436,
+      "les_comptes": {
+       "0": 4,
+       "1": 432
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 418,
+      "les_comptes": {
+       "0": 1,
+       "1": 417
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 323,
+      "les_comptes": {
+       "1": 323
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 273,
+      "les_comptes": {
+       "0": 1,
+       "1": 272
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 255,
+      "les_comptes": {
+       "0": 4,
+       "1": 251
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 233,
+      "les_comptes": {
+       "1": 233
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 402,
+      "les_comptes": {
+       "0": 4,
+       "1": 398
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 0,
+      "les_comptes": {},
+      "le_nombre_de_feuilles": null
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": false,
+     "le_tour": -7
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "suivie",
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "validée",
+     "confirmee_par": [
+      "compagne",
+      "suivie"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "plus",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     4,
+     5,
+     6,
+     7,
+     8,
+     9
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 688,
+      "les_comptes": {
+       "0": 31,
+       "1": 649,
+       "2": 8
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 638,
+      "les_comptes": {
+       "0": 12,
+       "1": 625,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 594,
+      "les_comptes": {
+       "0": 18,
+       "1": 530,
+       "2": 46
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 592,
+      "les_comptes": {
+       "0": 26,
+       "1": 566
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 585,
+      "les_comptes": {
+       "0": 25,
+       "1": 560
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 587,
+      "les_comptes": {
+       "0": 11,
+       "1": 576
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 546,
+      "les_comptes": {
+       "0": 8,
+       "1": 538
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 553,
+      "les_comptes": {
+       "0": 5,
+       "1": 548
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 1069,
+      "les_comptes": {
+       "0": 28,
+       "1": 915,
+       "2": 119,
+       "3": 7
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 812,
+      "les_comptes": {
+       "0": 228,
+       "1": 483,
+       "2": 99,
+       "3": 2
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 980,
+      "les_comptes": {
+       "0": 223,
+       "1": 357,
+       "2": 383,
+       "3": 17
+      },
+      "le_nombre_de_feuilles": 2
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 647,
+      "les_comptes": {
+       "0": 1,
+       "1": 646
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 254,
+      "les_comptes": {
+       "1": 254
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 274,
+      "les_comptes": {
+       "1": 274
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 307,
+      "les_comptes": {
+       "1": 307
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 327,
+      "les_comptes": {
+       "1": 327
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 660,
+      "les_comptes": {
+       "0": 43,
+       "1": 617
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 504,
+      "les_comptes": {
+       "0": 14,
+       "1": 490
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 410,
+      "les_comptes": {
+       "0": 16,
+       "1": 394
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 453,
+      "les_comptes": {
+       "0": 15,
+       "1": 434,
+       "2": 4
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 437,
+      "les_comptes": {
+       "0": 11,
+       "1": 422,
+       "2": 4
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 435,
+      "les_comptes": {
+       "0": 16,
+       "1": 418,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 440,
+      "les_comptes": {
+       "0": 19,
+       "1": 421
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 449,
+      "les_comptes": {
+       "0": 22,
+       "1": 427
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [
+      "suivie"
+     ],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie",
+      "tierce"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 9,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "compagne"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  },
+  {
+   "le_rang": 8,
+   "le_cote": "moins",
+   "les_comptes_de_369": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     4,
+     6,
+     7,
+     8,
+     9,
+     10
+    ]
+   },
+   "les_comptes_de_m7": {
+    "suivie": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "compagne": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ],
+    "tierce": [
+     1,
+     2,
+     3,
+     4,
+     5,
+     6,
+     7,
+     8
+    ]
+   },
+   "les_sauts": {
+    "suivie": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 517,
+      "les_comptes": {
+       "1": 331,
+       "2": 107,
+       "3": 48,
+       "4": 30,
+       "5": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 1133,
+      "les_comptes": {
+       "1": 1133
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 982,
+      "les_comptes": {
+       "1": 982
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 694,
+      "les_comptes": {
+       "1": 694
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 548,
+      "les_comptes": {
+       "0": 1,
+       "1": 547
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 476,
+      "les_comptes": {
+       "0": 2,
+       "1": 474
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 352,
+      "les_comptes": {
+       "1": 352
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 0,
+      "les_comptes": {},
+      "le_nombre_de_feuilles": null
+     }
+    ],
+    "compagne": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 593,
+      "les_comptes": {
+       "1": 582,
+       "2": 11
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 400,
+      "les_comptes": {
+       "1": 400
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "simple",
+      "les_mesures": 377,
+      "les_comptes": {
+       "1": 377
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "simple",
+      "les_mesures": 46,
+      "les_comptes": {
+       "1": 46
+      },
+      "le_nombre_de_feuilles": null
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 300,
+      "les_comptes": {
+       "0": 2,
+       "1": 298
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 314,
+      "les_comptes": {
+       "1": 314
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 292,
+      "les_comptes": {
+       "1": 292
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 112,
+      "les_comptes": {
+       "0": 6,
+       "1": 77,
+       "2": 29
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ],
+    "tierce": [
+     {
+      "le_saut": 1,
+      "le_genre": "simple",
+      "les_mesures": 258,
+      "les_comptes": {
+       "0": 5,
+       "1": 252,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 2,
+      "le_genre": "simple",
+      "les_mesures": 177,
+      "les_comptes": {
+       "0": 1,
+       "1": 166,
+       "2": 10
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 3,
+      "le_genre": "double",
+      "les_mesures": 131,
+      "les_comptes": {
+       "1": 128,
+       "2": 3
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 4,
+      "le_genre": "double",
+      "les_mesures": 81,
+      "les_comptes": {
+       "1": 81
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 5,
+      "le_genre": "simple",
+      "les_mesures": 98,
+      "les_comptes": {
+       "1": 98
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 6,
+      "le_genre": "simple",
+      "les_mesures": 299,
+      "les_comptes": {
+       "1": 299
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 7,
+      "le_genre": "simple",
+      "les_mesures": 296,
+      "les_comptes": {
+       "1": 296
+      },
+      "le_nombre_de_feuilles": 1
+     },
+     {
+      "le_saut": 8,
+      "le_genre": "simple",
+      "les_mesures": 104,
+      "les_comptes": {
+       "1": 103,
+       "2": 1
+      },
+      "le_nombre_de_feuilles": 1
+     }
+    ]
+   },
+   "les_surfaces_avec_m7": [
+    {
+     "la_chaine": "suivie",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "tierce"
+     ],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "suivie",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -4
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "compagne",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "tierce"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 1,
+     "le_compte": 1,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": 0
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 2,
+     "le_compte": 2,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -1
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 3,
+     "le_compte": 3,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -2
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 4,
+     "le_compte": 4,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -3
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 5,
+     "le_compte": 5,
+     "le_statut": "contredite",
+     "confirmee_par": [],
+     "contredite_par": [
+      "suivie"
+     ],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 6,
+     "le_compte": 6,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -5
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 7,
+     "le_compte": 7,
+     "le_statut": "sans témoin",
+     "confirmee_par": [],
+     "contredite_par": [],
+     "lue": true,
+     "sur_le_bon_tour": true,
+     "le_tour": -6
+    },
+    {
+     "la_chaine": "tierce",
+     "le_saut": 8,
+     "le_compte": 8,
+     "le_statut": "confirmée une fois",
+     "confirmee_par": [
+      "compagne"
+     ],
+     "contredite_par": [],
+     "lue": false,
+     "sur_le_bon_tour": null,
+     "le_tour": null
+    }
+   ]
+  }
+ ],
+ "les_genres": {
+  "nul": {
+   "les_sauts": 3,
+   "dits": 3,
+   "zero": 3,
+   "une": 0,
+   "deux": 0,
+   "plus": 0
+  },
+  "simple": {
+   "les_sauts": 349,
+   "dits": 344,
+   "zero": 0,
+   "une": 339,
+   "deux": 5,
+   "plus": 0
+  },
+  "double": {
+   "les_sauts": 26,
+   "dits": 26,
+   "zero": 0,
+   "une": 21,
+   "deux": 4,
+   "plus": 1
+  }
+ },
+ "avec_369": {
+  "validée": {
+   "les_surfaces": 109,
+   "lues": 46,
+   "sur_le_bon_tour": 46
+  },
+  "contredite": {
+   "les_surfaces": 152,
+   "lues": 14,
+   "sur_le_bon_tour": 11
+  },
+  "confirmée une fois": {
+   "les_surfaces": 41,
+   "lues": 13,
+   "sur_le_bon_tour": 10
+  },
+  "sans témoin": {
+   "les_surfaces": 76,
+   "lues": 29,
+   "sur_le_bon_tour": 22
+  }
+ },
+ "avec_m7": {
+  "validée": {
+   "les_surfaces": 160,
+   "lues": 58,
+   "sur_le_bon_tour": 58
+  },
+  "contredite": {
+   "les_surfaces": 81,
+   "lues": 2,
+   "sur_le_bon_tour": 2
+  },
+  "confirmée une fois": {
+   "les_surfaces": 60,
+   "lues": 13,
+   "sur_le_bon_tour": 13
+  },
+  "sans témoin": {
+   "les_surfaces": 77,
+   "lues": 29,
+   "sur_le_bon_tour": 27
+  }
+ },
+ "le_verdict": {
+  "decidable": true,
+  "lissue": "aux comptes de m7, 58 des 58 surfaces validées lues sont sur le bon tour, contre 46 des 46 aux comptes de 369 ; oui, l'accord aux comptes de m7 choisit le bon tour, et autant"
+ },
+ "les_secondes": 510.7
+}

@@ -4853,6 +4853,12 @@ ambiguïté, `m7` dit comme lui : 10 nuls sur 10 à zéro feuille, 163 simples s
 sur 6 côtés, jusqu'à 7 tours, contre 50 sur 5 ; `374` et `380` sont précisés sur place (`R4-C46`, `R4-C47`). `R4-P182` s'ouvre : l'accord
 aux comptes de `m7` contre les tours publiés de PHercParis4 ?
 
+**`385` · 2026-10-01 · l'accord aux comptes de m7 valide-t-il des surfaces sur le bon tour de Paris4** — `R4-P182`
+
+⭐⭐⭐⭐⭐ **Oui : aux comptes de `m7`, 58 des 58 surfaces validées lues sur le bon tour publié, et 160 validées au lieu de 109** — `R4-F571`.
+Les contredites tombent de 152 à 81 ; 21 des 26 sauts que `369` compte doubles ne franchissent qu'une feuille. C'est la règle de compte que
+le logiciel peut porter. `R4-P183` s'ouvre : où naissent les contradictions de la graine 8 de PHerc0358 ?
+
 ## 4. Le tableau des statuts
 
 | statut | faits |
