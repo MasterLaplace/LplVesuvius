@@ -15,10 +15,13 @@ by one winding when a slip explains its departure better than the noise does. On
 validated, that turns 163 misses into right points for 41 right points turned into misses (`docs/archive/275`). On a
 band where it was not, it says so and writes nothing.
 
-The transfer it corrects is computed here, from the published surface prediction `m7`: along the normal of each point of
-the segment's mesh, the first sheet after the segment's own, then a vote of the neighbours (`docs/archive/247`). That
-lands on the right winding for 0.9214 of the points where a fixed step lands for 0.7613, and it gives back the
-transfer the research saved, point for point.
+The transfer it corrects is computed here, from the samples of the published surface prediction `m7` (embedded, or read
+again with `--read-prediction`): along the normal of each point of
+the segment's mesh, one cell in eight, the first sheet after the segment's own, then a vote of the neighbours
+(`docs/archive/247`). That gives a depth at each of those points, not a whole winding surface. On the segment, where the
+rules were written, it lands on the right winding for 0.9214 of the 39865 points that have a judge (of the 62815 points of the one-in-eight grid), where a
+fixed step lands for 0.7613; on the central slice of a band where they were not, 0.915 against 0.8208
+(`docs/archive/247`, `R4-F413`). It gives back the transfer the research saved, point for point.
 
 ## Two branches
 
@@ -104,8 +107,10 @@ request, with warnings treated as errors.
   round.
 - The transfer to the next winding is computed from the embedded samples of the prediction. It gives back the
   transfers the research saved on the segment and on the band, point for point within a millionth of a voxel, and
-  the shares on the right winding `247` published (0.9214 with the vote, 0.9119 without, 0.7613 for a fixed step).
-  `--read-prediction` reads the samples again from the public prediction.
+  the shares on the right winding `247` published, over the 39865 points that have a judge (0.9214 with the vote, 0.9119 without, 0.7613 for a fixed step).
+  `--read-prediction` reads the samples again from the public prediction. That this reading gives back the embedded
+  samples is checked, with `VESUVE_NETWORK=1`, on 100 rays spread over the segment that each see a sheet, not on every
+  ray; the whole reading has not been compared with the embedded samples.
 - The judge of the text of the produced winding (`296`) measures, from the two embedded meshes, where the segment
   passes over the winding produced from it: the six blocks it would read, and their near shares (0.7511 down to
   0.6476), are the research's, and so is the median of the 340 blocks, 0.0222. Given the research's readings of the ink
