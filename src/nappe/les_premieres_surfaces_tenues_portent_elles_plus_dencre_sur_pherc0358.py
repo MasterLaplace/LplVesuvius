@@ -42,6 +42,12 @@ E brut de chaque surface et de son jumeau ; la part des pixels où la probabilit
 chaque surface : le rayon d'un cylindre qui donnerait sa courbure, et le cosinus entre son creux et la direction du centre du volume,
 un axe grossier, puisque aucun axe de PHerc0358 n'est publié. Ajouté avant toute lecture, après le verdict de `409`.
 
+**L'autre sens, à la question de l'auteur** (ajouté le 2026-10-01 à 15 h 45, pendant les lectures, avant qu'une seule ne soit finie) :
+l'encre elle-même dirait-elle dans quel sens lire ? Chaque surface est relue dans le sens contraire à celui de `409`, sa place seulement,
+après les lectures de la règle. **Le sens que l'encre choisit** est celui dont la part des pixels réduits au-dessus de 0,5 est la plus haute ;
+à égalité, aucun. Le même choix est fait sur le bloc étalon de `409`, où la carte publiée dit le bon sens. Rien de cela n'entre dans le
+verdict.
+
 ⚠⚠ CE QUE CETTE TRANCHE NE DIRA PAS : si les lettres sont lisibles ; ce que vaut le critère au-delà des deux premiers sauts ; une surface
 de 6 mm porte au plus quelques lettres, et peut n'en porter aucune.
 
@@ -50,6 +56,7 @@ Usage :
     uv run python src/nappe/les_premieres_surfaces_tenues_portent_elles_plus_dencre_sur_pherc0358.py --preparer
     uv run --project src/xpu --with albumentations --with zarr --with tqdm --with numcodecs --with imagecodecs \\
         python src/nappe/les_premieres_surfaces_tenues_portent_elles_plus_dencre_sur_pherc0358.py --encre
+    (même environnement) python src/nappe/les_premieres_surfaces_tenues_portent_elles_plus_dencre_sur_pherc0358.py --encre-autre-sens
     uv run python src/nappe/les_premieres_surfaces_tenues_portent_elles_plus_dencre_sur_pherc0358.py \\
         --json docs/mesures/les_premieres_surfaces_tenues_portent_elles_plus_dencre_sur_pherc0358.json
 """
@@ -210,23 +217,43 @@ def preparer() -> int:
     return 0 if controle else 1
 
 
-def une_lecture(nom: str, decalage: float) -> int:
+def le_fichier(nom: str, decalage: float, autre_sens: bool = False) -> Path:
+    """La lecture d'une surface : à sa place ou en jumeau, dans le sens de `409` ou dans l'autre."""
+    return LE_DOSSIER / f"{nom}_{'jumeau' if decalage else 'surface'}{'_autre_sens' if autre_sens else ''}.npy"
+
+
+def le_sens_de_lecture(autre_sens: bool) -> str:
+    s = json.loads(CE_QUE_409_A_PUBLIE.read_text())["le_verdict"]["le_sens"]
+    return {"creux": "bosse", "bosse": "creux"}[s] if autre_sens else s
+
+
+def le_sens_que_lencre_choisit(dans_le_sens: dict, dans_lautre: dict, sens: str) -> str | None:
+    """Rapporté à côté : le sens dont la part haute est la plus grande ; None à égalité ou si une lecture manque."""
+    a, b = dans_le_sens.get("la_part_haute"), dans_lautre.get("la_part_haute")
+    if a is None or b is None or a == b:
+        return None
+    return sens if a > b else {"creux": "bosse", "bosse": "creux"}[sens]
+
+
+def une_lecture(nom: str, decalage: float, autre_sens: bool = False) -> int:
     """Une surface rendue à `decalage` voxels de sa place, lue par le détecteur ; un processus par lecture."""
     import la_matiere_dit_elle_si_la_surface_est_sur_sa_feuille as mm
     import le_detecteur_de_296_lit_il_encore_lencre_de_paris4_ramenee_a_9um as m408
 
     s = np.load(LE_DOSSIER / f"{nom}.npz")
     p, nn, couvert = la_grille_fine(s["la_nappe"], s["valide"])
-    nn = les_normales_orientees(s["la_nappe"], s["valide"], nn, json.loads(CE_QUE_409_A_PUBLIE.read_text())["le_verdict"]["le_sens"])
+    nn = les_normales_orientees(s["la_nappe"], s["valide"], nn, le_sens_de_lecture(autre_sens))
     vol = mm.LesMorceaux("PHerc0358", mm.LES_VOLUMES["PHerc0358"]["url"], 0)
     t0 = time.monotonic()
     pile = m409.rendre(p, nn, couvert, decalage, LE_PIXEL_UM / LE_VOXEL_UM, lambda c: mm.les_profils(vol, c))
     rendu = round(time.monotonic() - t0, 1)
-    sortie = LE_DOSSIER / f"{nom}_{'jumeau' if decalage else 'surface'}.npy"
+    sortie = le_fichier(nom, decalage, autre_sens)
     np.save(LE_DOSSIER / f"{nom}_couvert.npy", couvert)
     r = m408.lencre(pile, sortie)
     ligne = {"la_surface": nom, "le_decalage": decalage, "rendu_en_secondes": rendu, **r,
              "le_creux": le_creux_rapporte(s["la_nappe"], s["valide"], vol.forme), "la_couverture": round(float(couvert.mean()), 4)}
+    if autre_sens:
+        ligne["lautre_sens"] = True
     with (LE_DOSSIER / "encre.out").open("a") as o:
         o.write(json.dumps(ligne, ensure_ascii=False) + "\n")
     print(json.dumps(ligne, ensure_ascii=False), flush=True)
@@ -243,7 +270,7 @@ def encre() -> int:
     def lire(noms):
         for nom in noms:
             for dec in (0.0, LE_DEMI_PAS):
-                sortie = LE_DOSSIER / f"{nom}_{'jumeau' if dec else 'surface'}.npy"
+                sortie = le_fichier(nom, dec)
                 if sortie.exists():
                     continue
                 subprocess.run([sys.executable, __file__, "--une-lecture", nom, "--decalage", str(dec)], check=True)
@@ -255,6 +282,36 @@ def encre() -> int:
         return 0
     lire([n for n in plan["les_surfaces"] if n[:2] in ("H_", "R_")])
     return 0
+
+
+def encre_autre_sens() -> int:
+    """Rapporté à côté : chaque surface lue à sa place dans l'autre sens, après les lectures de la règle."""
+    plan = json.loads((LE_DOSSIER / "plan.json").read_text())
+    for nom in plan["les_surfaces"]:
+        if not le_fichier(nom, 0.0).exists() or le_fichier(nom, 0.0, True).exists():
+            continue
+        subprocess.run([sys.executable, __file__, "--une-lecture", nom, "--decalage", "0.0", "--autre-sens"], check=True)
+    return 0
+
+
+def lautre_sens(plan: dict, sens: str) -> dict:
+    """Rapporté à côté : pour chaque surface lue dans les deux sens, l'encre de chacun et le sens qu'elle choisit ; et le même choix sur
+    le bloc étalon de `409`, où la carte publiée dit le bon sens."""
+    out = []
+    for nom in plan["les_surfaces"]:
+        if not le_fichier(nom, 0.0, True).exists():
+            continue
+        couvert = np.load(LE_DOSSIER / f"{nom}_couvert.npy")
+        a, b = (lencre_dune_lecture(np.load(le_fichier(nom, 0.0, x)), couvert) for x in (False, True))
+        out.append({"la_surface": nom, "dans_le_sens_de_409": a, "dans_lautre": b, "lencre_choisit": le_sens_que_lencre_choisit(a, b, sens)})
+    etalon = None
+    if all((m409.LE_DOSSIER / f).exists() for f in ("encre_creux.npy", "encre_bosse.npy", "couvert.npy")):
+        cv = np.load(m409.LE_DOSSIER / "couvert.npy")
+        e = {s_: lencre_dune_lecture(np.load(m409.LE_DOSSIER / f"encre_{s_}.npy"), cv) for s_ in ("creux", "bosse")}
+        etalon = {"vers_le_creux": e["creux"], "vers_la_bosse": e["bosse"],
+                  "lencre_choisit": le_sens_que_lencre_choisit(e["creux"], e["bosse"], "creux")}
+    return {"les_surfaces": out, "letalon": etalon,
+            "daccord_avec_409": sum(x["lencre_choisit"] == sens for x in out), "lues": len(out)}
 
 
 def les_deux(nom: str) -> tuple[dict, dict]:
@@ -279,6 +336,7 @@ def mesurer() -> dict:
          "le_plan": plan, "le_controle": plan["le_controle"], "t1": d408["le_verdict"]["lissue"].endswith("; oui") and "le_sens" in d409["le_verdict"],
          "le_sens": d409["le_verdict"].get("le_sens"),
          "les_lectures": lectures,
+         "lautre_sens": lautre_sens(plan, d409["le_verdict"].get("le_sens")),
          "les_temps": [json.loads(l) for l in (LE_DOSSIER / "encre.out").read_text().splitlines()] if (LE_DOSSIER / "encre.out").exists() else []}
     d["le_verdict"] = le_verdict(d)
     return d
@@ -364,6 +422,15 @@ def verifier() -> int:
       not le_verdict(d_([0.1, 0.09], r8, n=(0.1, -0.1, None)))["decidable"] and not le_verdict(d_([0.1, 0.09], r8, t1=False))["decidable"]
       and not le_verdict(d_([0.1, 0.09], r8, ok_=False))["decidable"] and not le_verdict(d_([0.1, None], r8))["decidable"])
 
+    v("★★★★ la lecture de la règle garde son nom ; celle de l'autre sens en porte la marque",
+      le_fichier("N_6", 0.0).name == "N_6_surface.npy" and le_fichier("N_6", LE_DEMI_PAS).name == "N_6_jumeau.npy"
+      and le_fichier("N_6", 0.0, True).name == "N_6_surface_autre_sens.npy")
+    v("★★★★ l'encre choisit le sens à la part haute la plus grande, aucun à égalité ou si une lecture manque",
+      le_sens_que_lencre_choisit({"la_part_haute": 0.2}, {"la_part_haute": 0.05}, "creux") == "creux"
+      and le_sens_que_lencre_choisit({"la_part_haute": 0.05}, {"la_part_haute": 0.2}, "creux") == "bosse"
+      and le_sens_que_lencre_choisit({"la_part_haute": 0.1}, {"la_part_haute": 0.1}, "creux") is None
+      and le_sens_que_lencre_choisit({"la_part_haute": None}, {"la_part_haute": 0.1}, "creux") is None)
+
     for e_ in echecs:
         print(f"  ÉCHEC {e_}")
     print(f"{Path(__file__).name}   {'ALL PASS' if not echecs else 'DES SONDES ONT ÉCHOUÉ'} "
@@ -378,6 +445,8 @@ def main() -> int:
     p.add_argument("--encre", action="store_true", help="T2, puis H et R si T2 tient, sur l'iGPU")
     p.add_argument("--une-lecture", default=None, help="une surface, dans son propre processus")
     p.add_argument("--decalage", type=float, default=0.0)
+    p.add_argument("--autre-sens", action="store_true", help="la lecture dans le sens contraire à celui de 409, rapportée à côté")
+    p.add_argument("--encre-autre-sens", action="store_true", help="chaque surface relue dans l'autre sens, après la règle")
     p.add_argument("--json", type=Path, default=None)
     a = p.parse_args()
     if a.verifier:
@@ -385,7 +454,9 @@ def main() -> int:
     if a.preparer:
         return preparer()
     if a.une_lecture:
-        return une_lecture(a.une_lecture, a.decalage)
+        return une_lecture(a.une_lecture, a.decalage, a.autre_sens)
+    if a.encre_autre_sens:
+        return encre_autre_sens()
     if a.encre:
         return encre()
     d = mesurer()
