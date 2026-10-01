@@ -15,6 +15,11 @@ by one winding when a slip explains its departure better than the noise does. On
 validated, that turns 163 misses into right points for 41 right points turned into misses (`docs/archive/275`). On a
 band where it was not, it says so and writes nothing.
 
+The transfer it corrects is computed here, from the published surface prediction `m7`: along the normal of each point of
+the segment's mesh, the first sheet after the segment's own, then a vote of the neighbours (`docs/archive/247`). That
+lands on the right winding for 0.9214 of the points where a fixed step lands for 0.7613, and it gives back the
+transfer the research saved, point for point.
+
 ## Two branches
 
 - **`main`** is this program: what the research validated, ported, tested and released.
@@ -97,6 +102,10 @@ request, with warnings treated as errors.
 - The hand-free procedure is replayed from 112 published bands. It gives back the published journal entry
   by entry, the same 111 requests and 6333 covered chunks, then twelve fabricated footprints, round after
   round.
+- The transfer to the next winding is computed from the embedded samples of the prediction. It gives back the
+  transfers the research saved on the segment and on the band, point for point within a millionth of a voxel, and
+  the shares on the right winding `247` published (0.9214 with the vote, 0.9119 without, 0.7613 for a fixed step).
+  `--read-prediction` reads the samples again from the public prediction.
 - The correction of the transfer is replayed from the embedded step tables. It gives back what `275` and `281`
   published block by block (340 and 84 blocks), and the corrected transfer it writes corrects the same points as
   the one the research saved, to within a millionth of a voxel. The judges only score: replaced by noise, they change the counts and not one corrected point.
@@ -113,8 +122,8 @@ Every test was probed by breaking the rule it guards, and each one turned red.
 - **Read text.** It claims no letter, no title, no word. It says where to look and what its witnesses are
   worth.
 - **Unroll a scroll or generate a surface.** The segment, its surface volume and every ink map it reads
-  were made by the Vesuvius Challenge team, and the transfer to the next winding comes from the research's
-  chain. What it adds is a verdict on them: which chunks stayed on one winding, where a published segment
+  were made by the Vesuvius Challenge team, and the transfer to the next winding follows their surface
+  prediction. What it adds is a verdict on them: which chunks stayed on one winding, where a published segment
   changed winding, which points of the transfer slipped by one winding and where they belong, where to look for
   a title.
 - **Claim a correction outside the conditions it was validated under.** A block is corrected only when it has
@@ -134,7 +143,7 @@ Every test was probed by breaking the rule it guards, and each one turned red.
 | `vesuve/` | the Python package: shared services, then one package per prize |
 | `vesuve/research.py` | the one place where the research's French keys become this program's names |
 | `vesuve/data/` | what the pipelines need from the research tree, extracted by `tools/extract_from_research.py` |
-| `vesuve/transfer/` | the hand-free correction of the transfer to the next winding |
+| `vesuve/transfer/` | the transfer to the next winding, computed from the prediction, and its hand-free correction |
 | `tests/` | the tests. Parity tests run against a working copy of `experimental` (`VESUVE_RESEARCH`), heavy data (`VESUVE_DATA`) and the network (`VESUVE_NETWORK=1`), and are skipped with the reason when those are missing |
 | `examples/` | a dated run of the four pipelines, reports and previews |
 | `CONTRIBUTING.md` | how a change goes in: issue, branch, pull request, changelog, version |
