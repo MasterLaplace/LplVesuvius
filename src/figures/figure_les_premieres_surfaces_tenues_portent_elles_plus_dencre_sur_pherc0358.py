@@ -82,20 +82,25 @@ def le_titre(d: dict) -> str:
 
 
 def la_liste(d: dict, g: str) -> str:
-    lus = sorted(((n, v) for n, v in les_d(d, g) if v is not None), key=lambda x: -x[1])
-    manquent = [n for n, v in les_d(d, g) if v is None]
-    t = " · ".join(f"{n[2:]} {le_nombre(v)}" for n, v in lus)
-    return t + (f" · non lues : {len(manquent)}" if manquent else "") if lus else f"non lues : {len(manquent)}"
+    """Les valeurs lues, de la plus haute à la plus basse ; puis les surfaces lues mais sous le plancher de pixels, et celles non lues."""
+    ent = d["ce_qui_decide"]["les_lectures"][g]
+    lus = sorted(((x["la_surface"], x["la_valeur"]) for x in ent if x["la_valeur"] is not None), key=lambda x: -x[1])
+    sous = [x["la_surface"][2:] for x in ent if x["la_valeur"] is None and x.get("lue") is not False]
+    manquent = [x for x in ent if x.get("lue") is False]
+    t = [" · ".join(f"{n[2:]} {le_nombre(v)}" for n, v in lus)] if lus else []
+    t += [f"sous le plancher : {', '.join(sous)}"] if sous else []
+    t += [f"non lues : {len(manquent)}"] if manquent else []
+    return " · ".join(t)
 
 
 def la_bande(d: dict) -> tuple[str, ...]:
     un = f"LE VERDICT DÉCLARÉ : {d['le_verdict']['lissue']}"
     ch = d.get("le_choix_de_lencre") or {}
-    issue = lambda k: (d.get(k) or {}).get("le_verdict", {}).get("lissue", "non lue").rpartition(" ; ")[2]  # noqa: E731
+    issue = lambda k: (d.get(k) or {}).get("le_verdict", {}).get("lissue", "non lue").rpartition(" ; ")[2].split(",")[0]  # noqa: E731
     deux = (f"rapporté à côté, qui ne décide rien : l'encre choisit le côté de la graine sur {ch.get('celui_de_la_graine', 0)} des "
             f"{ch.get('lues', 0)} surfaces ; D au jumeau dit, par la graine : {issue('la_regle_amendee_une_fois')}, "
             f"par chaque surface : {issue('la_regle_ecrite_dabord')}")
-    trois = "⚠ ce qui n'est PAS établi : que des lettres soient lisibles ; ce que vaut le critère au-delà des deux premiers sauts."
+    trois = "⚠ ce qui n'est PAS établi : que L soit de l'encre, un ordre inverse peut allumer sans encre (#31) ; des lettres lisibles."
     return un, deux, trois
 
 
@@ -203,7 +208,10 @@ def verifier(sortie: Path, mesure: Path = LA_MESURE) -> int:
     (sortie.parent / ".sonde_410.png").unlink(missing_ok=True)
     v("★★★ le titre LIT la mesure", le_titre(essai) == "410 SUR PHERC0358 : D DE H : 0,1 ; 0,09 ; D DE R : DE -0,02 À 0,05 ; T2 : 3 SUR 3 ; OUI")
     v("★★★★ la médiane de R est au D médian des R lus", te["mediane"] == la_position(0.02, *lechelle(essai)), str(te["mediane"]))
-    v("★★★★ une lecture qui manque est dite non lue", la_liste(essai, "R").endswith("· non lues : 1"))
+    v("★★★★ une surface sous le plancher est dite sous le plancher, une lecture qui manque non lue",
+      la_liste(essai, "R").endswith("· sous le plancher : 7") and la_liste(
+          {"ce_qui_decide": {"les_lectures": {"R": [{"la_surface": "R_1", "la_valeur": None, "lue": False}]}}}, "R") == "non lues : 1",
+      la_liste(essai, "R"))
     v("★★★★ la bande compte les choix de l'encre et dit la règle écrite d'abord",
       "sur 2 des 3 surfaces" in la_bande(essai)[1] and la_bande(essai)[1].endswith("par la graine : en partie, par chaque surface : non"),
       la_bande(essai)[1])

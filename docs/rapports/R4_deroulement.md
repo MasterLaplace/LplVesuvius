@@ -5003,6 +5003,14 @@ couches de PHerc0358, fixé sur PHercParis4 à 9,6 µm par la courbure de la feu
 appliqué au bloc étalon depuis le niveau 2 de PHercParis4, lit l'encre quand les couches croissent vers le creux de la feuille. La marge
 sur le seuil de 0,8 est mince. `R4-P151` se lit maintenant sur PHerc0358 (`410`).
 
+**`410` · 2026-10-01 · les premières surfaces tenues portent-elles plus d'encre sur pherc0358** — `R4-P151`
+
+⭐⭐⭐⭐ **En partie, sans preuve d'encre : L de la surface tenue 0,00733, des refusées 0,00117 à 0,01425 ; T2 3 sur 3** — `R4-F596`.
+La règle, commitée avant toute lecture, a été amendée deux fois à l'aveugle : le côté de lecture par la graine, puis L, le contraste des
+deux ordres, après une relecture par une autre session. Une seule surface tenue passe le plancher ; aucun pixel au-dessus de 0,5 sur 12
+surfaces sur 13. Trois portes s'ouvrent depuis les outils publics de la communauté : `R4-P207` (SwitchBench), `R4-P208` (un ordre
+mélangé et du papyrus vierge), `R4-P209` (un détecteur entraîné à 9 µm).
+
 ## 4. Le tableau des statuts
 
 | statut | faits |

@@ -3336,6 +3336,34 @@ def collecter(racine: Path) -> list[tuple[str, list[str], str]]:
                                f"{f_(x_['la_part_sur_la_meme_feuille_que_le_saut_precedent'])} |"))
             out.extend((nom, [x_], s297.name) for nom, x_ in ecrits)
 
+    # ⭐⭐⭐⭐⭐ LA TRANCHE 410 : LES PREMIÈRES SURFACES TENUES PORTENT-ELLES PLUS D'ENCRE SUR PHERC0358
+    s410 = _source(racine, "les_premieres_surfaces_tenues_portent_elles_plus_dencre_sur_pherc0358.json")
+    if s410.exists():
+        d = json.loads(s410.read_text())
+        vg = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+        lec = d["ce_qui_decide"]["les_lectures"]
+        cv = {}
+        for t_ in d["les_temps"]:
+            cv.setdefault(t_["la_surface"], t_.get("la_couverture"))
+        groupe = {"N": "départ", "H": "tenue", "R": "refusée"}
+        ecrits = [("le verdict de 410", f"**{d['le_verdict']['lissue'].upper()}**" if d["le_verdict"].get("decidable") else "changé")]
+        for g in ("N", "H", "R"):
+            for x in lec[g]:
+                nom = x["la_surface"]
+                if x["la_valeur"] is None:
+                    ligne = f"| `{nom}` | {groupe[g]} | {vg(cv[nom])} | {x['les_pixels']} | sous le plancher | — | — |"
+                else:
+                    ligne = (f"| `{nom}` | {groupe[g]} | {vg(cv[nom])} | {x['les_pixels']} | {vg(x['la_valeur'])} | "
+                             f"{vg(x['lerreur_type'])} | {'oui' if x['net'] else 'non'} |")
+                ecrits.append((f"la ligne de {nom} dans 410", ligne))
+        loi = d["le_verdict"].get("la_loi_sous_lechange", {})
+        ecrits.append(("la loi sous l'échange de 410", f"la règle donne oui {loi.get('oui')}, en partie {loi.get('en partie')}, non {loi.get('non')}"))
+        e_ = d["le_choix_de_lencre"]["letalon"]
+        ecrits.append(("l'étalon de 410", f"le bon ordre donne {vg(e_['vers_le_creux']['lencre'])} et"))
+        ecrits.append(("l'étalon inverse de 410", f"de 0,5, l'autre {vg(e_['vers_la_bosse']['lencre'])} et"))
+        ecrits.append(("le L de l'étalon de 410", f"**L de l'étalon : {vg(round(abs(e_['vers_le_creux']['lencre'] - e_['vers_la_bosse']['lencre']), 5))}**"))
+        out.extend((nom_, [x_], s410.name) for nom_, x_ in ecrits)
+
     # ⭐⭐⭐⭐⭐ LA TRANCHE 409 : LE RENDU DE PHERC0358 LIT-IL L'ENCRE DE PARIS4, ET DANS QUEL SENS
     s409 = _source(racine, "le_rendu_de_pherc0358_lit_il_lencre_de_paris4_et_dans_quel_sens.json")
     if s409.exists():
