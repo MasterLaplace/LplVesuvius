@@ -11,6 +11,9 @@ where it can be checked, the winding it produces carries the right text: the ink
 itself carries at that place, 0.83 against 0.12 and 0.10 for two controls. On a band where the same procedure does
 not hold, the program measures that and writes nothing.
 
+The same submission as a six-page preprint, with its method and equations: [`paper/vesuve.pdf`](paper/vesuve.pdf),
+built with Typst from [`paper/vesuve.typ`](paper/vesuve.typ).
+
 Every number below links to the file that produces it. The research lives on the
 [`experimental`](https://github.com/MasterLaplace/LplVesuvius/tree/experimental) branch, in French; this branch,
 `main`, is the program, in English.
