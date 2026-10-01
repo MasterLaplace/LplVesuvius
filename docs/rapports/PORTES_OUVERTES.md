@@ -4,7 +4,7 @@
 
 # Les portes ouvertes, classées par prix
 
-**271 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
+**272 portes** que les six campagnes laissent. Le classement est celui du rapport qui la laisse ; une porte sans prix est une porte que personne n'a classée, et elle est gardée telle quelle.
 
 ## First Letters — 11 portes
 
@@ -20,7 +20,7 @@
 - **R4-P209** · **LE DÉTECTEUR ENTRAÎNÉ À 9 µm (`scrollprize/ink_9um`, en partie sur des segments natifs à 9,362 µm de PHerc0139) LIT-IL L'ÉTALON DE PHERCPARIS4 AU NIVEAU 2, PUIS LES SURFACES DE `354` SUR PHERC0358 À LEUR RÉSOLUTION, AVEC LES TÉMOINS DE `R4-P208` ?** ⭐⭐⭐⭐ First Letters : 50 000 $ par rouleau, 10 lettres dans 4 cm² produites par programme ; PHerc0358 est éligible et aucune encre n'y est publiée. ⚠ Son « pas d'encre » sort vers 0,25, par le lissage de ses étiquettes.
 - **R4-P210** · **L'OMBILIC DE PHERC0358 POSÉ À LA MAIN PAR LA COMMUNAUTÉ (`first-letters-scan-atlas`, avec les normales de Lasagna) DIT-IL DE QUEL CÔTÉ DE CHAQUE SURFACE DE `354` EST L'AXE, ET L'ORDRE DE LECTURE QUE L'ENCRE PRÉFÈRE (`R4-F596`) EST-IL LE MÊME POUR TOUTES LES FEUILLES ORIENTÉES PAR LUI ?** ⭐⭐⭐⭐⭐ La courbure ne le dit pas sur 6 mm (`410`, amendement de `2e87989b`) ; le signe de L change entre feuilles parallèles d'une même graine. Un axe donne l'ordre sans l'encre.
 
-## Grand Prize — 228 portes
+## Grand Prize — 229 portes
 
 - **R1-P09** *(la règle qui valide)* · Si `Frag1` était dans l'entraînement du modèle (`63` §3) : invérifiable depuis les métadonnées, **décidable par la mesure** en scorant les deux segments de Scroll 1 (`72` §4).
 - **R1-P10** *(la règle qui valide)* · Le fold du modèle GP (`66` §3) : tant qu'il n'est pas fait, tout résultat d'encre porte une réserve.
@@ -250,6 +250,7 @@
 - **R4-P214** *(le graal)* · **LES 3 MAILLAGES COMMUNAUTAIRES DE PHERC0358 (`pscamillo/vesuvius-eligible-meshes`, 9,2 cm², sans lettre vue par `ink_9um` ni par Hecate) RECOUPENT-ILS NOS CHAÎNES, ET LE CRITÈRE ET L'ACCORD DE TROIS CHAÎNES LES TIENNENT-ILS ?** ⭐⭐⭐⭐ Les premières surfaces de PHerc0358 posées par d'autres que nous : un recoupement est un juge que personne n'a réglé sur nos chaînes.
 - **R4-P215** *(le graal)* · **LA SECONDE SURFACE QUE LE CRITÈRE TIENT SUR PHERC0358, `H_8_plus_1`, PEUT-ELLE ÊTRE REGRANDIE, PAR LA RÈGLE D'UNE MAILLE DE `365`, ASSEZ POUR PASSER LE PLANCHER DE LECTURE DE `410` (891 PIXELS RÉDUITS POUR 1000), SANS QUE LE CRITÈRE CESSE DE LA TENIR ?** ⭐⭐⭐ Avec une seule surface tenue lue, `410` ne pouvait pas trancher.
 - **R4-P217** · **SUR LES SCANS À 2,403 µm ET 77 keV DE PHERC1203 ET DE PHERC0846A, TOUS DEUX ÉLIGIBLES AU PRIX FIRST LETTERS, LE DÉTECTEUR DE `296` — QUI LIT PHERCPARIS4 À 0,9593 SUR UN SCAN À 2,400 µm ET 78 keV — LIT-IL DES LETTRES SUR UNE SURFACE POSÉE SUR UNE FEUILLE ?** ⭐⭐⭐⭐⭐ First Letters : 50 000 $ par rouleau pour 10 lettres dans 4 cm², jusqu'au 2027-06-25. Ces deux scans couvrent tout le diamètre (63,7 et 71,1 mm) sur 36,4 mm de hauteur. Les relevés publics des rouleaux éligibles ont lu des scans à 9 µm avec des détecteurs à 9 µm, sans lettre. ⚠ Corrigé le 2026-10-01 : la prédiction `m7` est publiée DANS le repère de ces deux scans, sur la grille de leur niveau 2 (`<scan>-surface-20260413222639-surface-m7-L2-th0.2.zarr`, formes (3785, 6624, 6624) et (3785, 7397, 7397)) ; des nappes s'y tirent sans recalage. Les 22 segments auto-grown et la prédiction Lasagna de PHerc1203 sont sur son scan à 9,362 µm seulement. ⭐⭐⭐⭐⭐ Pour le Grand Prix, PHerc1203 y est éligible : cette porte dit si son encre se voit, donc s'il reste la cible de #13.
+- **R4-P218** *(le graal)* · **SUR PHERC1203, ÉLIGIBLE AU GRAND PRIX 2027 ET SANS TRACÉ HUMAIN, LE TOUR SUIVANT QUE LE TRANSFERT DE `247`/`248` PRODUIT DEPUIS UNE DES 22 SURFACES POUSSÉES PAR `vc_grow_seg_from_seed` TOMBE-T-IL SUR UNE AUTRE DE CES SURFACES, LÀ OÙ ELLE PASSE À MOINS D'UN PAS ET DEMI, MIEUX QUE LE DÉCALAGE FIXE D'UN PAS ?** ⭐⭐⭐⭐⭐ Le Grand Prix paie un rouleau entier déroulé avec au plus 8 heures humaines ; le transfert multiplie une surface en tours, et n'a jamais tourné sur un rouleau éligible depuis une surface que personne n'a posée (#13). Les surfaces automatiques sont à la fois le départ et le juge. ⚠ Une feuille qu'aucune surface ne couvre peut s'intercaler : seul un passage à moins d'un pas et demi décide.
 
 ## Progress Prizes — 20 portes
 
