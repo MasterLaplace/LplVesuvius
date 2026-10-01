@@ -64,7 +64,7 @@ Measured on real data. The reports are in [`examples/`](examples/README.md).
 
 | prize | command | what it writes | where it stops, and why |
 |---|---|---|---|
-| **Grand Prize** | `vesuve grand-prize` | a per-chunk certificate mask, the certified surface as tifxyz with `approval.tif`, the published ink map under the mask, and the transfer to the next winding corrected without a hand (`corrected_transfer.npy`, `correction.json`) | one published segment: 6333 of 97771 chunks certified. To judge the rest it still has to read 111 bands (24263 chunks, about 21 min at 16 threads). The correction gains 122 points net on 340 blocks (sign test p = 2.04e-18). By default it replays the step tables the research rendered; `--render` makes them here, which needs `vc_render_tifxyz` and about 320 GB read from the raw scan. Over the whole segment it made the same 680 tables and the same corrected transfer, byte for byte, in 5 h on three cores ([`examples/grand-prize-render/`](examples/grand-prize-render/report.md)). There is no `column_NN.tifxyz` because columns need legible ink |
+| **Grand Prize** | `vesuve grand-prize` | a per-chunk certificate mask, the certified surface as tifxyz with `approval.tif`, the published ink map under the mask, and the transfer to the next winding corrected without a hand (`corrected_transfer.npy`, `correction.json`) | one published segment: 6333 of 97771 chunks certified. To judge the rest it still has to read 111 bands (24263 chunks, about 21 min at 16 threads). The correction gains 122 points net on 340 blocks (sign test p = 2.04e-18). By default it replays the step tables the research rendered; `--render` makes them here, which needs `vc_render_tifxyz` and about 320 GB read from the raw scan. Over the whole segment it made the same 680 tables and the same corrected transfer, byte for byte, in 5 h on three cores ([`examples/grand-prize-render/`](examples/grand-prize-render/report.md)). There is no `column_NN.tifxyz` because columns need legible ink. Stage TJ says where the segment passes over the winding it produced (a median of 0.0222 of a block) and, given ink readings, judges the text there; it claims nothing elsewhere |
 | **Progress** | `vesuve progress` | where a published segment changes winding | column 260, rows 26 to 223, crossing half a sheet at cuts 163, 173 and 203. It cannot tell a misread column from material that really diverges |
 | **First Letters** | `vesuve first-letters` | a 4 cm² window chosen on papyrus alone, the fibre render, a view without the model, the model's ink, row witnesses, a 1 cm scale bar | on PHerc1447 the 2023 model shows no periodic rows at any angle (`R1-F20`), so it claims no letters |
 | **Paris 4 title** | `vesuve paris4-title` | the last written column of the innermost band, and the region after it where an end-title would sit | on the well-registered revision it finds a short last column whose lines fill the top fifth. Nobody has read the crops yet |
@@ -111,6 +111,13 @@ request, with warnings treated as errors.
   `--read-prediction` reads the samples again from the public prediction. That this reading gives back the embedded
   samples is checked, with `VESUVE_NETWORK=1`, on 100 rays spread over the segment that each see a sheet, not on every
   ray; the whole reading has not been compared with the embedded samples.
+- The judge of the text of the produced winding (`296`) measures, from the two embedded meshes, where the segment
+  passes over the winding produced from it: the six blocks it would read, and their near shares (0.7511 down to
+  0.6476), are the research's, and so is the median of the 340 blocks, 0.0222. Given the research's readings of the ink
+  it gives back 0.8331 against 0.1166 and 0.1037 on the same six blocks, after a calibration at 0.9593 (`R4-F477`;
+  `tests/test_ink_judge.py`, with `VESUVE_RESEARCH` and `VESUVE_DATA`). It does not read the ink with
+  `scrollprize/ink_canonical_2um` itself (1.55 GB, torch): `--ink-readings DIR` takes the readings, and without them
+  the stage gives the coverage and says that no text is judged.
 - The correction of the transfer is replayed from the embedded step tables. It gives back what `275` and `281`
   published block by block (340 and 84 blocks), and the corrected transfer it writes corrects the same points as
   the one the research saved, to within a millionth of a voxel. The judges only score: replaced by noise, they change the counts and not one corrected point.

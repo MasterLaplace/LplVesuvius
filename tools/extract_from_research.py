@@ -281,6 +281,30 @@ def extract_rays(research: Path, output: Path) -> dict:
     return segment
 
 
+def extract_ink_judge(research: Path, output: Path) -> dict:
+    """What the judge of the text of the produced winding (`296`) reads from the meshes: the segment reduced and the
+    produced winding, as the research rendered them for the step tables of `275` (one mesh point every 160 voxels).
+
+    The ink readings and the published map are not embedded: the readings weigh 16 MB a block, and the map is public.
+    """
+    import numpy as np
+    import tifffile
+    out = output / "ink_judge"
+    out.mkdir(parents=True, exist_ok=True)
+    context = {"provenance": {}}
+    for role, surface in (("reference", "le_segment_reduit"), ("produced", "la_spire_produite")):
+        folder = research / "data" / "rendu_spire_voisine" / surface / "maillage"
+        points = np.stack([tifffile.imread(folder / f"{c}.tif") for c in "xyz"], axis=-1).astype(np.float32)
+        _write_array(out / f"{role}_mesh.npy.gz", points)
+        scale = json.loads((folder / "meta.json").read_text())["scale"][0]
+        context.setdefault("spacing_voxels", 1.0 / scale)
+        assert context["spacing_voxels"] == 1.0 / scale, "the two meshes must share their spacing"
+        context[f"{role}_shape"] = [int(x) for x in points.shape[:2]]
+        context["provenance"][role] = {f"{c}.tif": _digest(folder / f"{c}.tif") for c in "xyz"}
+    _write(out / "meshes.json", context)
+    return context
+
+
 def main() -> int:
     p = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     root = os.environ.get("VESUVE_RESEARCH")
@@ -292,11 +316,16 @@ def main() -> int:
     print(f"written: {a.output} ({len(c['provenance']['files'])} research files read)")
     k = extract_correction(a.research.resolve(), a.output)
     print(f"written: {a.output / 'correction'} ({len(k['candidates'])} candidate blocks)")
-    if not (a.research / "data" / "spire_voisine" / "m7").is_dir():
+    if (a.research / "data" / "rendu_spire_voisine" / "la_spire_produite" / "maillage").is_dir():
+        m = extract_ink_judge(a.research.resolve(), a.output)
+        print(f"written: {a.output / 'ink_judge'} (meshes of {m['reference_shape']} and {m['produced_shape']} points)")
+    else:
+        print(f"ink judge meshes skipped: no rendu_spire_voisine meshes under {a.research / 'data'}")
+    if (a.research / "data" / "spire_voisine" / "m7").is_dir():
+        r = extract_rays(a.research.resolve(), a.output)
+        print(f"written: {a.output / 'correction' / 'rays.json'} ({r['points']} rays of {r['samples']} samples)")
+    else:
         print(f"rays skipped: the research's cache of m7 chunks is not under {a.research / 'data'} (about 1 GB)")
-        return 0
-    r = extract_rays(a.research.resolve(), a.output)
-    print(f"written: {a.output / 'correction' / 'rays.json'} ({r['points']} rays of {r['samples']} samples)")
     return 0
 
 

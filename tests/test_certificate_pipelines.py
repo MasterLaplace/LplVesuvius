@@ -24,7 +24,7 @@ def test_the_grand_prize_offline_returns_its_certificate_and_says_what_it_does_n
     r = grand_prize(output=tmp_path, cache=tmp_path / "cache")
     d = json.loads((tmp_path / "report.json").read_text())
     stages = {s["id"]: s for s in d["stages"]}
-    assert [s["id"] for s in d["stages"]] == ["E0", "E1", "E2", "B", "E4", "E4L", "E6", "E7", "TN", "TR", "T", "E8", "E9"]
+    assert [s["id"] for s in d["stages"]] == ["E0", "E1", "E2", "B", "E4", "E4L", "E6", "E7", "TN", "TR", "T", "TJ", "E8", "E9"]
     assert stages["E2"]["equations"][0]["value"] == 36
     assert round(min(q["value"] for q in stages["B"]["equations"] if q["id"] == "N5"), 2) == 112.08
     assert round(next(q["value"] for q in stages["B"]["equations"] if q["id"] == "N7"), 4) == 2.3394  # R4-F343

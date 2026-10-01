@@ -90,3 +90,20 @@ def test_the_embedded_rays_equal_a_fresh_extraction(tmp_path):
         assert sorted(p.name for p in kept.iterdir() if p.name.startswith("rays")) == list(RAYS)
         for f in fresh.iterdir():
             assert f.read_bytes() == (kept / f.name).read_bytes(), f"{name}/correction/{f.name} is stale"
+
+
+@research
+def test_the_embedded_meshes_of_the_text_judge_equal_a_fresh_extraction(tmp_path):
+    """Only where the research's rendered meshes live (`data/rendu_spire_voisine`, 1.7 MB of meshes among 223 GB)."""
+    import pytest
+    if not (RESEARCH / "data" / "rendu_spire_voisine" / "la_spire_produite" / "maillage").is_dir():
+        pytest.skip(f"the research's rendered meshes are not under {RESEARCH / 'data'}")
+    spec = importlib.util.spec_from_file_location("extract", HERE / "tools" / "extract_from_research.py")
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    m.extract_ink_judge(RESEARCH, tmp_path)
+    fresh, kept = tmp_path / "ink_judge", embedded.ROOT / m.SEGMENT / "ink_judge"
+    assert sorted(p.name for p in fresh.iterdir()) == sorted(p.name for p in kept.iterdir()) == [
+        "meshes.json", "produced_mesh.npy.gz", "reference_mesh.npy.gz"]
+    for f in fresh.iterdir():
+        assert f.read_bytes() == (kept / f.name).read_bytes(), f"ink_judge/{f.name} is stale"

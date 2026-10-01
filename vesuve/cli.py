@@ -57,6 +57,7 @@ def formulary_as_markdown() -> str:
               "TN": "TN: computing the next winding",
               "TR": "TR: making the step tables of the correction",
               "T": "T: correcting the transfer to the next winding",
+              "TJ": "TJ: judging the produced winding by its text",
               "E8": "E8: the ink, the measuring rule"}
     for key, title in stages.items():
         es = [e for e in FORMULARY.values() if e.stage == key]
@@ -75,7 +76,8 @@ def _grand_prize(a, journal) -> int:
     r = run(a.segment, Path(a.output), Path(a.cache), read=a.read, rounds=a.rounds, threads=a.threads,
             readings=[Path(x) for x in a.readings], judge=a.judge, ink=not a.no_ink, surface=not a.no_surface,
             render=a.render, render_rows=a.render_rows, keep_piles=a.keep_piles, table_workers=a.table_workers,
-            read_prediction=a.read_prediction, journal=journal)
+            read_prediction=a.read_prediction, ink_readings=Path(a.ink_readings) if a.ink_readings else None,
+            journal=journal)
     return 2 if r.stopped else 0
 
 
@@ -142,7 +144,11 @@ def main(argv=None) -> int:
                        "with --read, reads the bands asked for (about 21 min for 24263 chunks at 16 threads). It "
                        "computes the transfer to the next winding from the embedded samples of the prediction; with "
                        "--read-prediction, it reads them again from the public prediction (1780 chunks, about "
-                       "630 MB) along the normals of the published mesh (55 MB, read even with --no-surface). With "
+                       "630 MB) along the normals of the published mesh (55 MB, read even with --no-surface). It "
+                       "measures, from the two embedded meshes, the share of the segment where the judge of the text "
+                       "can see the produced winding (a few seconds); with --ink-readings, it reads the published ink "
+                       "map (2 MB, read even with --no-ink) and judges the text of the produced winding on the readings "
+                       "of the folder (it does not run the ink model itself). With "
                        "--render, makes the step tables of the correction here: it needs vc_render_tifxyz, downloads "
                        "the raw scan one row of blocks at a time and renders two piles per block, which takes hours "
                        "and needs about 40 GB free under --cache. Writes into --output. Exits 0 at the end, 2 if it "
@@ -181,6 +187,10 @@ def main(argv=None) -> int:
     g.add_argument("--read-prediction", action="store_true",
                    help="compute the transfer to the next winding from the public prediction m7 (about 630 MB, and the "
                         "mesh, 55 MB)")
+    g.add_argument("--ink-readings", default=None, metavar="DIR",
+                   help="judge the text of the produced winding on the ink readings of DIR: calibration.npy (the "
+                        "calibration block read on the reference) and produced_<row>_<column>.npy for each of the six "
+                        "blocks the coverage names, 2048 x 2048 arrays from scrollprize/ink_canonical_2um")
     g.add_argument("--render", action="store_true", help="make the step tables of the correction here (hours)")
     g.add_argument("--render-rows", type=int, default=None, help="with --render, stop after N rows of blocks")
     g.add_argument("--keep-piles", action="store_true", help="with --render, keep the rendered piles (237 MB each)")

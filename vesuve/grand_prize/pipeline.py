@@ -17,6 +17,7 @@ The stages, in the order of `213` §2 and `244` §5:
     TN the next winding the transfer to the next winding, computed from what the prediction sees along each normal
     TR the tables       (option) the step tables of the correction, made here: mirror, render, steps
     T  the transfer     the hand-free correction of the transfer to the next winding, where it was validated
+    TJ the text        the share of the segment where its published ink judges the produced winding, and (option) that judgement
     E8 the ink          the published ink map, under the mask
     E9 the packaging    the mask, the certified surface and its `approval.tif`, and what is not produced
 """
@@ -38,6 +39,7 @@ from vesuve.remote import Remote, Unavailable
 from vesuve.remote_zarr import BUCKET, RemoteArray
 from vesuve.report import MET, NOT_MEASURED, NOT_MET, Report
 from vesuve.transfer import correction, rendering, surfaces
+from vesuve.transfer import ink_judge as ij
 from vesuve.transfer import next_winding as nw
 from vesuve.transfer.tables import TableMaker
 from vesuve.transport import Transport
@@ -147,10 +149,69 @@ def _certify(s, fresh):
     return certify_segment(s["context"]["segment"], fresh)[1]
 
 
+WHERE_THE_JUDGE_SEES = ("the judge exists only where the segment passes over the winding produced from it, within half a "
+                        "sheet of a facing point of the segment; elsewhere it claims nothing: not the produced winding "
+                        "where the segment does not pass over it, not another winding, not another scroll, and it "
+                        "reads no text. The correlation reported beyond half a sheet is a measure, not a judgement: "
+                        "the research did not take it as one")
+
+
+def _judge_the_text(e, segment: str, cache: Path, remote, ink_readings: Path | None) -> None:
+    """Stage TJ: what the judge of the text of the produced winding (`296`) can see, from the two embedded meshes; and,
+    given the ink readings of the judged blocks, its judgement."""
+    try:
+        meshes, candidates = embedded.ink_judge_meshes(segment), embedded.correction(segment)["candidates"]
+    except FileNotFoundError as x:
+        e.skip(f"the inputs of the judge of the text are not embedded for this segment ({x})")
+        return
+    seen = ij.coverage(meshes, candidates)
+    blocks = [tuple(b) for b in seen["judged_blocks"]]
+    e.record("JT1", seen["blocks_with_any_near_share"], what="blocks with a facing point within half a sheet",
+             blocks_examined=seen["blocks_examined"], median_near_share=seen["median_near_share"])
+    e.note(blocks_examined=seen["blocks_examined"], median_near_share=seen["median_near_share"],
+           blocks_with_a_near_share_of_half_or_more=seen["blocks_with_a_near_share_of_half_or_more"],
+           blocks_with_any_near_share=seen["blocks_with_any_near_share"], judged_blocks=seen["judged_blocks"],
+           judged_near_shares=seen["judged_near_shares"], excluded_blocks=sorted(map(list, ij.EXCLUDED_BLOCKS)),
+           where_it_judges=WHERE_THE_JUDGE_SEES)
+    if ink_readings is None:
+        why = ij.why_the_model_cannot_read(cache)
+        e.partial("no text is judged: no ink readings were given (--ink-readings DIR). vesuve does not read the ink with "
+                  f"{ij.MODEL} itself: read the judged blocks with it and give the folder" +
+                  (f" (on this machine: {why})" if why else ""))
+        return
+    try:
+        calibration, readings = ij.load_readings(ink_readings, blocks)
+    except (OSError, ValueError) as x:
+        e.partial(f"no text is judged: {x}")
+        return
+    try:
+        published = images.read_image(remote.fetch(published_ink_map_path(embedded.segment(segment)["context"])))
+    except Unavailable as x:
+        e.partial(f"no text is judged: the published ink map could not be obtained: {x}")
+        return
+    except OSError as x:
+        e.partial(f"no text is judged: the published ink map cannot be read: {x}")
+        return
+    judged = ij.judge(meshes, published.astype(np.float32), calibration, readings, blocks)
+    near = judged["pooled"]["within_half_a_sheet"]
+    e.record("JT2", near.get("facing"), pixels=near.get("pixels"), control_under_the_block=near.get("control_under_the_block"),
+             control_shifted=near.get("control_shifted"))
+    e.record("JT3", judged["outcome"], calibration=judged["calibration"]["correlation"], decidable=judged["decidable"])
+    e.note(readings=str(ink_readings), calibration=judged["calibration"], blocks=judged["blocks"], pooled=judged["pooled"],
+           outcome=judged["outcome"], decidable=judged["decidable"],
+           what_it_says=("the correlation of our reading of the produced winding with the published ink map at its facing "
+                         "point, within half a sheet, against two controls on the same pixels: whether the produced "
+                         "winding carries the segment's text there, not what the text reads. `beyond` is the same "
+                         "measure where the facing point is farther than half a sheet: not a judgement"))
+    if not judged["decidable"]:
+        e.partial(judged["outcome"])
+
+
 def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-prize"), cache: Path = Path("cache"),
         read: bool = False, rounds: int = 6, threads: int = 16, readings=(), judge: int = 0, ink: bool = True,
         surface: bool = True, render: bool = False, render_rows: int | None = None, keep_piles: bool = False,
-        table_workers: int = 2, read_prediction: bool = False, journal=None) -> Report:
+        table_workers: int = 2, read_prediction: bool = False, ink_readings: Path | None = None,
+        journal=None) -> Report:
     s = embedded.segment(segment)
     ctx = s["context"]
     r = Report("grand-prize", {"segment": segment, "scroll": ctx["scroll"], "read": read, "rounds": rounds,
@@ -397,6 +458,9 @@ def run(segment: str = "20230702185753", output: Path = Path("outputs/grand-priz
                        "`vc_render_tifxyz` from about 50 GB of chunks); --render makes them here"))
             if summary["undecided"]:
                 e.partial(f"{len(summary['undecided'])} blocks are left undecided")
+
+    with r.stage("TJ", "the text of the produced winding", "B4") as e:
+        _judge_the_text(e, segment, cache, remote, ink_readings)
 
     with r.stage("E8", "the ink, the measuring rule", "B3") as e:
         if not ink:

@@ -21,7 +21,7 @@ from vesuve import core
 @dataclass(frozen=True)
 class Equation:
     id: str
-    stage: str      # the pipeline stage where it serves: E2, B, E4, E5, E6, E7, TN, TR, T, E8
+    stage: str      # the pipeline stage where it serves: E2, B, E4, E5, E6, E7, TN, TR, T, TJ, E8
     name: str
     latex: str
     statement: str  # what it says, in one sentence
@@ -155,6 +155,27 @@ FORMULARY: dict[str, Equation] = {e.id: e for e in [
        "How often chance alone, one in two, would give a split at least as uneven as a misses made right against b "
        "rights made misses; exact and two-sided.",
        "R4-F471", "`les_gains_publies_se_distinguent_ils_du_hasard.py:78`"),
+    _E("JT1", "TJ", "the facing point",
+       r"v_k = \operatorname*{arg\,min}_{s \in N_{64}(y_k),\ d_{\mathrm{grid}}(s, k) > 30} \lVert s - y_k \rVert,"
+       r" \qquad \text{near} \iff \lVert v_k - y_k \rVert < 36",
+       "The facing point of a point y of the produced winding is the nearest point of the segment in 3D, among the 64 "
+       "nearest, that lies farther than 30 mesh cells from it on the surface: the same sheet is left out and the next "
+       "turn kept. It is near when it is within half a sheet, 36 voxels.",
+       "R4-F477", "`le_tour_produit_porte_t_il_le_texte_du_segment.py` (`les_vis_a_vis`), `296`"),
+    _E("JT2", "TJ", "the text correlation",
+       r"r = \frac{\sum_{p \in M} (I_p - \bar I)(J_{\varphi(p)} - \bar J)}"
+       r"{\sqrt{\sum_{p \in M} (I_p - \bar I)^2 \sum_{p \in M} (J_{\varphi(p)} - \bar J)^2}}",
+       "I is our reading of the produced winding, reduced 8 times; J is the published ink map; phi sends a pixel to the "
+       "pixel of the facing point; M is the pixels where both are known and the facing point is near. The controls "
+       "replace J by the map under the block itself, and by the map shifted by 64 pixels.",
+       "R4-F477", "`le_tour_produit_porte_t_il_le_texte_du_segment.py` (`correlation`), `296`"),
+    _E("JT3", "TJ", "the outcome",
+       r"\text{carries} \iff r_{\mathrm{calibration}} \ge 0.8,\ |M| \ge 10\,000,\ r > \max(r_{\mathrm{under}},"
+       r" r_{\mathrm{shifted}})",
+       "The produced winding carries the segment's text where it passes over it when the reading finds the published "
+       "map on the reference (0.8 at least), at least 10000 pixels are judged, and the correlation beats both "
+       "controls; it does not when a control equals or exceeds it; the outcome is undecidable otherwise.",
+       "R4-F477", "`le_tour_produit_porte_t_il_le_texte_du_segment.py` (`le_verdict`), `296`"),
     _E("F31", "E8", "the Fresnel number", r"F = \frac{\sqrt{\lambda D}}{p}, \qquad \lambda = \frac{hc}{E}",
        "The width of the first fringe in pixels: 0.39 for the prize scrolls, 0.74 in production.",
        "R6-F08", "`src/encre/nombre_de_fresnel.py:142`", core.fresnel_number),

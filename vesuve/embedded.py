@@ -75,6 +75,21 @@ def rays(name: str):
 
 
 @lru_cache(maxsize=2)
+def ink_judge_meshes(name: str):
+    """What the judge of the text of the produced winding (`296`) reads from the surfaces: the reference and the
+    produced winding on the same mesh grid, as the research rendered them for the step tables of `275`."""
+    from vesuve.transfer.ink_judge import Meshes, validity
+
+    d = ROOT / name / "ink_judge"
+    if not (d / "meshes.json").exists():
+        raise FileNotFoundError(f"segment {name} embeds no meshes for the judge of the text (looked in {d})")
+    ctx = _read(d / "meshes.json")
+    reference, produced = (_read_array(d / f"{role}_mesh.npy.gz").astype(np.float64) for role in ("reference", "produced"))
+    return Meshes(reference=reference, reference_valid=validity(reference), produced=produced,
+                  produced_valid=validity(produced), spacing=ctx["spacing_voxels"])
+
+
+@lru_cache(maxsize=2)
 def correction(name: str) -> dict:
     """What the hand-free correction reads on an embedded surface: the transfer to the next winding, the judges (for
     scoring only), the step tables of the reference and of the produced winding, the candidate blocks and the slip of
