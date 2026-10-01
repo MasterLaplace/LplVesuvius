@@ -59,6 +59,27 @@ surface sans côté, donc indécidable. Les trois nappes de départ se lisent de
 faites avant l'amendement sont de ce côté, et gardées. **Chaque surface et son jumeau sont aussi lus de l'autre côté**, après les
 lectures qui décident : la règle écrite d'abord, le côté de la graine et le choix de l'encre sont ainsi rapportés tous les trois.
 
+⚠⚠⚠ **AMENDÉ UNE SECONDE FOIS le 2026-10-01 vers 16 h 45, après une relecture à l'aveugle par une autre session, avant qu'une seule
+valeur d'encre de PHerc0358 ne soit regardée.** Ce qui était su alors : T2 tel qu'écrit tient (au moins 2 nappes sur 3 à D > 0), sans
+qu'aucune valeur ne soit vue. La relecture a montré trois défauts de D que la règle ne pouvait pas voir :
+- **le côté** repose sur la courbure de trois nappes de départ dont la flèche (5 à 13 voxels) est du même ordre que leurs ondulations :
+  leur signe n'est pas plus sûr que celui des surfaces que l'amendement écarte ;
+- **le jumeau** est entre deux feuilles : D compare du papyrus à du vide, et un détecteur qui répond à la texture du papyrus donne D > 0
+  sur toute surface posée sur une feuille, avec ou sans encre ;
+- **T2** passe une fois sur deux sur du bruit pur (au moins 2 sur 3 d'un signe symétrique), et aucune grandeur de bruit n'est dite.
+**La mesure qui décide est désormais L**, le contraste des deux sens à la même place : l'encre lue les couches croissant d'un côté,
+moins celle lue de l'autre, en valeur absolue. Sur le bloc étalon, le bon sens lit les lettres et l'autre non, mais tous deux répondent à
+peu près autant au papyrus sans encre (0,167 et 0,201 hors des lettres) : L s'approche de zéro sur du papyrus nu comme sur du vide, et
+ne dépend pas du côté choisi. **Le masque** : les pixels réduits entièrement couverts, érodés de 16 pixels réduits, une demi-tuile du
+détecteur, pour que le bord de la surface, où la pile vaut zéro, ne contamine rien. **Le plancher** : une surface de moins de 1000 pixels
+réduits sous ce masque sort de son groupe ; un groupe vide rend le verdict indécidable. **Le bruit** : l'erreur type de L entre blocs de
+32 pixels réduits, une tuile ; L est **net** s'il dépasse deux erreurs types. **T2** : L net sur au moins 2 des 3 nappes de départ.
+**La règle** sur L est celle d'avant, H contre R. Rapportés à côté, sans rien décider : la loi de la règle sous l'échange de H et R sur
+les valeurs lues (la part des oui, des en partie et des non) ; la même règle sur les seuls sauts 1 ; D au côté de la graine, et D au
+côté de chaque surface, chacun avec sa règle telle qu'écrite ; le choix de l'encre. ⚠ Écrit d'avance : avec deux surfaces tenues, un
+« non » est bien plus probable qu'un « oui » sous le seul hasard, et un refus a deux causes, une surface hors de toute feuille, ou sur
+une feuille qui n'est pas la suivante ; un « non » ne tranche pas entre les deux.
+
 ⚠⚠ CE QUE CETTE TRANCHE NE DIRA PAS : si les lettres sont lisibles ; ce que vaut le critère au-delà des deux premiers sauts ; une surface
 de 6 mm porte au plus quelques lettres, et peut n'en porter aucune.
 
@@ -142,6 +163,8 @@ def les_normales_du_cote(nn: np.ndarray, cote: str) -> np.ndarray:
 
 def le_cote_du_creux(a: float, sens: str) -> str:
     """Le côté de la grille vers lequel croissent les couches : celui où la surface se creuse si `409` fixe le creux, l'autre sinon."""
+    if a == 0:
+        return None
     creux = "plus" if a > 0 else "moins"
     return creux if sens == "creux" else lautre(creux)
 
@@ -156,7 +179,7 @@ def les_cotes(nappes: dict, sens: str) -> dict:
         a0, nm0, _ = geo[f"N_{nom.split('_')[1]}"]
         pr = float(nm @ nm0)
         cote_n = le_cote_du_creux(a0, sens)
-        par_la_graine = None if abs(pr) < LE_PRODUIT_MINIMUM else (cote_n if pr > 0 else lautre(cote_n))
+        par_la_graine = None if cote_n is None or abs(pr) < LE_PRODUIT_MINIMUM else (cote_n if pr > 0 else lautre(cote_n))
         out[nom] = {"par_la_graine": par_la_graine, "par_la_surface": le_cote_du_creux(a, sens),
                     "le_produit_des_normales": round(pr, 4), "le_coefficient": a}
     return out
@@ -202,6 +225,88 @@ def le_d(lecture: dict, jumeau: dict) -> float | None:
     if lecture["lencre"] is None or jumeau["lencre"] is None:
         return None
     return round(lecture["lencre"] - jumeau["lencre"], 5)
+
+
+LA_MARGE_DU_DETECTEUR = 16
+LE_PLANCHER_DE_PIXELS = 1000
+LE_BLOC_DE_BRUIT = 32
+LE_MINIMUM_DE_BLOCS = 4
+LE_SEUIL_DE_BRUIT = 2.0
+
+
+def le_masque(couvert: np.ndarray) -> np.ndarray:
+    """Les pixels réduits entièrement couverts, érodés d'une demi-tuile du détecteur : loin du bord, où la pile vaut zéro."""
+    from scipy.ndimage import binary_erosion
+
+    c = m296.reduire(couvert.astype(np.float32)) >= 1.0 - 1e-9
+    return binary_erosion(c, iterations=LA_MARGE_DU_DETECTEUR, border_value=0)
+
+
+def lecart_par_blocs(diff: np.ndarray, masque: np.ndarray) -> dict:
+    """La moyenne de `diff` sous `masque`, et son erreur type entre blocs de 32 pixels réduits couverts au quart au moins ; None sous
+    4 blocs."""
+    moyennes = []
+    for y in range(0, diff.shape[0], LE_BLOC_DE_BRUIT):
+        for x in range(0, diff.shape[1], LE_BLOC_DE_BRUIT):
+            m = masque[y:y + LE_BLOC_DE_BRUIT, x:x + LE_BLOC_DE_BRUIT]
+            if m.sum() >= LE_BLOC_DE_BRUIT ** 2 // 4:
+                moyennes.append(float(diff[y:y + LE_BLOC_DE_BRUIT, x:x + LE_BLOC_DE_BRUIT][m].mean()))
+    se = float(np.std(moyennes, ddof=1) / np.sqrt(len(moyennes))) if len(moyennes) >= LE_MINIMUM_DE_BLOCS else None
+    return {"la_moyenne": round(float(diff[masque].mean()), 5), "lerreur_type": None if se is None else round(se, 5),
+            "les_blocs": len(moyennes)}
+
+
+def le_contraste_des_cartes(une: np.ndarray, autre: np.ndarray, couvert: np.ndarray) -> dict:
+    """L de deux lectures de la même place : |moyenne de (une − autre)| réduites 8 fois, sous le masque érodé ; None sous le plancher.
+    Net si L dépasse deux erreurs types entre blocs."""
+    m = le_masque(couvert)
+    a, b = m296.reduire(une), m296.reduire(autre)
+    h, w = min(a.shape[0], b.shape[0], m.shape[0]), min(a.shape[1], b.shape[1], m.shape[1])
+    a, b, m = a[:h, :w], b[:h, :w], m[:h, :w] & np.isfinite(a[:h, :w]) & np.isfinite(b[:h, :w])
+    n = int(m.sum())
+    if n < LE_PLANCHER_DE_PIXELS:
+        return {"les_pixels": n, "la_valeur": None, "net": False}
+    e = lecart_par_blocs(a - b, m)
+    v = abs(e["la_moyenne"])
+    return {"les_pixels": n, "la_valeur": round(v, 5), "la_difference": e["la_moyenne"], "lerreur_type": e["lerreur_type"],
+            "les_blocs": e["les_blocs"], "net": e["lerreur_type"] is not None and v > LE_SEUIL_DE_BRUIT * e["lerreur_type"]}
+
+
+def la_suite(vh: list[float], vr: list[float]) -> str:
+    return "oui" if min(vh) > max(vr) else "non" if max(vh) <= float(np.median(vr)) else "en partie"
+
+
+def la_loi_sous_lechange(vh: list[float], vr: list[float]) -> dict:
+    """La part des oui, des en partie et des non quand les étiquettes H et R sont échangées de toutes les façons, sur les valeurs lues."""
+    from itertools import combinations
+
+    tous = vh + vr
+    issues = [la_suite([tous[i] for i in c], [tous[i] for i in range(len(tous)) if i not in c])
+              for c in combinations(range(len(tous)), len(vh))]
+    return {k: f"{issues.count(k)} sur {len(issues)}" for k in ("oui", "en partie", "non")}
+
+
+def le_verdict_du_contraste(d: dict) -> dict:
+    """Le verdict de la mesure qui décide, L, après le second amendement."""
+    if not d.get("le_controle"):
+        return {"decidable": False, "lissue": "indécidable : les chaînes reconstruites ne redonnent pas les statuts de 354"}
+    if not d.get("t1"):
+        return {"decidable": False, "lissue": "indécidable : T1 ne tient pas, le détecteur ne lit pas à 9,6 µm (408) ou le sens n'est pas fixé (409)"}
+    lec = d["ce_qui_decide"]["les_lectures"]
+    k = sum(x["net"] for x in lec["N"])
+    t2 = f"T2 : {k} sur {len(lec['N'])}"
+    if k < LE_MINIMUM_DE_T2:
+        return {"decidable": False, "lissue": f"{t2} ; indécidable, le détecteur ne lit rien de net sur les nappes de départ"}
+    manque = [x["la_surface"] for g in ("H", "R") for x in lec[g] if x.get("lue") is False]
+    if manque:
+        return {"decidable": False, "lissue": f"{t2} ; indécidable, une lecture de H ou de R manque"}
+    vh = [x["la_valeur"] for x in lec["H"] if x["la_valeur"] is not None]
+    vr = [x["la_valeur"] for x in lec["R"] if x["la_valeur"] is not None]
+    if not vh or not vr:
+        return {"decidable": False, "lissue": f"{t2} ; indécidable, H ou R n'a aucune surface au-dessus du plancher"}
+    f = lambda x: f"{x:g}".replace(".", ",")  # noqa: E731
+    tete = f"L de H : {' ; '.join(f(x) for x in vh)} ; L de R : de {f(min(vr))} à {f(max(vr))} ; {t2}"
+    return {"decidable": True, "lissue": f"{tete} ; {la_suite(vh, vr)}", "la_loi_sous_lechange": la_loi_sous_lechange(vh, vr)}
 
 
 def le_verdict(d: dict) -> dict:
@@ -392,6 +497,34 @@ def les_lectures_par(plan: dict, cotes: dict, regle: str) -> dict:
     return out
 
 
+def les_contrastes(plan: dict) -> dict:
+    """L de chaque surface lue des deux côtés à sa place ; `lue` à False si une des deux lectures manque."""
+    out = {"H": [], "R": [], "N": []}
+    for nom in plan["les_surfaces"]:
+        if not all(le_fichier(nom, 0.0, c).exists() for c in LES_COTES):
+            out[nom[0]].append({"la_surface": nom, "lue": False, "la_valeur": None, "net": False})
+            continue
+        couvert = np.load(LE_DOSSIER / f"{nom}_couvert.npy")
+        x = le_contraste_des_cartes(np.load(le_fichier(nom, 0.0, "plus")), np.load(le_fichier(nom, 0.0, "moins")), couvert)
+        out[nom[0]].append({"la_surface": nom, "lue": True, **x})
+    return out
+
+
+def les_d_par_blocs(plan: dict, cotes: dict) -> list[dict]:
+    """Rapporté à côté : D au côté de la graine des nappes de départ, sous le masque érodé, avec son erreur type entre blocs."""
+    out = []
+    for nom in plan["les_surfaces"]:
+        c = cotes[nom]["par_la_graine"]
+        if not nom.startswith("N_") or c is None or not all(le_fichier(nom, dec, c).exists() for dec in (0.0, LE_DEMI_PAS)):
+            continue
+        m = le_masque(np.load(LE_DOSSIER / f"{nom}_couvert.npy"))
+        a, b = m296.reduire(np.load(le_fichier(nom, 0.0, c))), m296.reduire(np.load(le_fichier(nom, LE_DEMI_PAS, c)))
+        h, w = min(a.shape[0], b.shape[0], m.shape[0]), min(a.shape[1], b.shape[1], m.shape[1])
+        mk = m[:h, :w] & np.isfinite(a[:h, :w]) & np.isfinite(b[:h, :w])
+        out.append({"la_surface": nom, "les_pixels": int(mk.sum()), **(lecart_par_blocs(a[:h, :w] - b[:h, :w], mk) if mk.sum() else {})})
+    return out
+
+
 def mesurer() -> dict:
     plan = json.loads((LE_DOSSIER / "plan.json").read_text())
     d408, d409 = json.loads(CE_QUE_408_A_PUBLIE.read_text()), json.loads(CE_QUE_409_A_PUBLIE.read_text())
@@ -405,9 +538,19 @@ def mesurer() -> dict:
          "les_lectures": les_lectures_par(plan, cotes, "par_la_graine"),
          "le_choix_de_lencre": le_choix_de_lencre(plan, cotes),
          "les_temps": [json.loads(l) for l in (LE_DOSSIER / "encre.out").read_text().splitlines()] if (LE_DOSSIER / "encre.out").exists() else []}
-    d["le_verdict"] = le_verdict(d)
+    une_fois = d.pop("les_lectures")
+    d["la_regle_amendee_une_fois"] = {"les_lectures": une_fois, "le_verdict": le_verdict({**d, "les_lectures": une_fois})}
     premiere = {**d, "les_lectures": les_lectures_par(plan, cotes, "par_la_surface")}
     d["la_regle_ecrite_dabord"] = {"les_lectures": premiere["les_lectures"], "le_verdict": le_verdict(premiere)}
+    d["ce_qui_decide"] = {"la_mesure": "L, le contraste des deux sens à la même place, sous le masque érodé",
+                          "les_lectures": les_contrastes(plan)}
+    d["le_verdict"] = le_verdict_du_contraste(d)
+    lec = d["ce_qui_decide"]["les_lectures"]
+    s1 = [x for x in lec["R"] if x["la_surface"].endswith("_1") and x["la_valeur"] is not None]
+    vh = [x["la_valeur"] for x in lec["H"] if x["la_valeur"] is not None]
+    d["les_seuls_sauts_1"] = ({"la_suite": la_suite(vh, [x["la_valeur"] for x in s1]), "les_r": [x["la_surface"] for x in s1],
+                               "la_loi_sous_lechange": la_loi_sous_lechange(vh, [x["la_valeur"] for x in s1])} if vh and s1 else None)
+    d["la_force_de_t2_tel_quecrit"] = {x["la_surface"]: x for x in les_d_par_blocs(plan, cotes)}
     return d
 
 
@@ -503,6 +646,38 @@ def verifier() -> int:
     v("★★★★ indécidable si T2 a moins de 2 nappes à D positif, sans T1, sans contrôle, ou si une lecture manque",
       not le_verdict(d_([0.1, 0.09], r8, n=(0.1, -0.1, None)))["decidable"] and not le_verdict(d_([0.1, 0.09], r8, t1=False))["decidable"]
       and not le_verdict(d_([0.1, 0.09], r8, ok_=False))["decidable"] and not le_verdict(d_([0.1, None], r8))["decidable"])
+
+    cv2 = np.zeros((800, 800), bool)
+    cv2[:, :400] = True
+    mq = le_masque(cv2)
+    v("★★★★ le masque érode d'une demi-tuile : à 16 pixels réduits du bord de la surface, rien n'est gardé",
+      mq.shape == (100, 100) and not mq[:, 34:].any() and mq[20:80, 16:34].all() and not mq[:16].any(), str(mq.sum()))
+    gen = np.random.default_rng(410)
+    bruit = gen.normal(0.0, 0.05, (2048, 2048)).astype(np.float32)
+    couv = np.ones((2048, 2048), bool)
+    par_tuile = lambda: np.kron(gen.normal(0.0, 0.02, (8, 8)), np.ones((256, 256))).astype(np.float32)  # noqa: E731
+    nul = le_contraste_des_cartes(bruit + 0.3 + par_tuile(), np.roll(bruit, 640, axis=1) + 0.3 + par_tuile(), couv)
+    lettres = le_contraste_des_cartes(bruit + 0.3 + (np.arange(2048)[None, :] % 256 < 64) * 0.4, bruit + 0.3, couv)
+    v("★★★★ L : deux lectures qui ne diffèrent que par le bruit ne sont pas nettes ; des lettres lues d'un seul côté le sont",
+      not nul["net"] and nul["la_valeur"] > 0 and lettres["net"] and abs(lettres["la_valeur"] - 0.1) < 0.01, f"{nul} {lettres}")
+    v("★★★★ sous le plancher de pixels, L n'est pas lu", le_contraste_des_cartes(bruit, bruit, np.pad(np.ones((300, 300), bool), (0, 1748)))["la_valeur"] is None)
+    v("★★★★ L ne dépend pas du côté : échanger les deux lectures rend la même valeur",
+      le_contraste_des_cartes(bruit + 0.3, bruit + 0.3 + (np.arange(2048)[None, :] % 256 < 64) * 0.4, couv)["la_valeur"] == lettres["la_valeur"])
+    loi = la_loi_sous_lechange([0.1, 0.09], [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08])
+    v("★★★★ la loi sous l'échange : 1 oui sur 45 pour deux contre huit, et les trois issues font 45",
+      loi["oui"] == "1 sur 45" and sum(int(x.split()[0]) for x in loi.values()) == 45, str(loi))
+    lc = lambda n, x, net=True: {"la_surface": n, "lue": True, "la_valeur": x, "net": net}  # noqa: E731
+    dc = lambda h, r, n=(True, True, False): {"le_controle": True, "t1": True, "ce_qui_decide": {"les_lectures": {  # noqa: E731
+        "H": [lc(f"H_{i}", x) for i, x in enumerate(h)], "R": [lc(f"R_{i}", x) for i, x in enumerate(r)],
+        "N": [lc(f"N_{i}", 0.1, b) for i, b in enumerate(n)]}}}
+    r8_ = [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08]
+    v("★★★★ le verdict de L : la règle d'avant ; T2 compte les nappes nettes ; une surface sous le plancher sort de son groupe",
+      le_verdict_du_contraste(dc([0.1, 0.09], r8_))["lissue"] == "L de H : 0,1 ; 0,09 ; L de R : de 0,01 à 0,08 ; T2 : 2 sur 3 ; oui"
+      and not le_verdict_du_contraste(dc([0.1, 0.09], r8_, n=(True, False, False)))["decidable"]
+      and le_verdict_du_contraste(dc([0.1, None], r8_))["lissue"].endswith("; en partie") is False
+      and le_verdict_du_contraste(dc([0.1, None], r8_))["lissue"].startswith("L de H : 0,1 ; L de R")
+      and not le_verdict_du_contraste(dc([None, None], r8_))["decidable"])
+    v("★★★ une courbure nulle n'a pas de côté", le_cote_du_creux(0.0, "creux") is None)
 
     v("★★★★ chaque lecture porte sa place et son côté dans son nom",
       le_fichier("N_6", 0.0, "moins").name == "N_6_surface_moins.npy" and le_fichier("N_6", LE_DEMI_PAS, "plus").name == "N_6_jumeau_plus.npy")
