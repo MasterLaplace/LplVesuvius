@@ -1,0 +1,13 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "vesuve"
+abstract: "One program, one pipeline per Vesuvius Challenge prize, built on what the LplVesuvius research validated."
+version: "0.4.0"
+date-released: "2026-10-01"
+authors:
+  - family-names: "MasterLaplace"
+    alias: "MasterLaplace"
+    orcid: "https://orcid.org/0009-0006-1371-4119"
+    website: "https://github.com/MasterLaplace"
+repository-code: "https://github.com/MasterLaplace/LplVesuvius"
+license: MIT
